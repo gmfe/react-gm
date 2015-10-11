@@ -1,0 +1,18 @@
+
+.gm-grid{
+
+}
+.gm-grid td>button{
+    margin: 0 5px;
+}
+.gm-grid td>button:first-child{
+    margin-left: 0;
+}
+.gm-grid td>button:last-child{
+    margin-right: 0;
+}
+
+
+.gm-grid .pagination{
+    margin: 0;
+}
