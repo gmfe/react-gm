@@ -5,7 +5,8 @@ var webpack = require('webpack');
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry: {
-        bundle: './index'
+        bundle: './index',
+        'demo.bundle': './demo'
     },
     output: {
         path: path.join(__dirname, ''),
