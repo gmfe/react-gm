@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import  Grid from './grid.component.js';
+import  Grid from './lib/grid.component.js';
 
 
 //let onClick = (() => console.log(arguments));
