@@ -9,9 +9,20 @@ let onClick = function () {
 
 };
 
+let isShow = function () {
+    console.log(arguments);
+    return false;
+};
+
+let renderId = function (value, elist) {
+    console.log(arguments);
+    return 2;
+};
+
 let gridData = {
+    //enableSelect: true,
     columns: [
-        {field: 'id', name: 'id', style: 'color: red;'},
+        {field: 'id', name: 'id', render: renderId},
         {field: 'name', name: '名字'},
         {field: 'age', name: '年龄'},
         {field: 'gender', name: '性别'},
@@ -20,11 +31,21 @@ let gridData = {
     actions: [{
         text: '删除1',
         className: 'btn-primary',
-        click: onClick
+        click: onClick,
+        isShow: isShow
     }, {
-        text: '删除2'
+        text: '删除2',
+        click: onClick
     }],
-    data: [{
+    //batchs: [{
+    //    text: '批量操作',
+    //    className: 'btn-primary',
+    //    click: onClick
+    //}, {
+    //    text: 'adsf',
+    //    click: onClick
+    //}],
+    list: [{
         id: 1,
         name: '偶们啊啊发骚发所发生的',
         age: '10',
@@ -37,16 +58,15 @@ let gridData = {
         gender: 1,
         isOk: true
     }],
-    getData: function () {
-        return getData();
-    },
     pagination: {
-        total: 100,
-        index: 10,
+        total: 80,
+        index: 2,
         size: 10
+    },
+    toPage: function (page) {
+        console.log(page);
     }
 };
-
 
 
 function getData() {
@@ -81,6 +101,6 @@ function getData() {
 
 ReactDOM.render((
     <div>
-        <Grid gridData={gridData}></Grid>
+        <Grid data={gridData}></Grid>
     </div>
 ), document.getElementById('grid-container'));

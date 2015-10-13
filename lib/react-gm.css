@@ -11,8 +11,19 @@
 .gm-grid td>button:last-child{
     margin-right: 0;
 }
-
+.gm-grid-select{
+    width: 30px;
+}
 
 .gm-grid .pagination{
     margin: 0;
+}
+
+.gm-grid .gm-pagination-text{
+    line-height: 30px;
+    margin-right: 10px;
+}
+
+.gm-grid-batch button{
+    margin-right: 10px;
 }
