@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"));
 	else
 		root["ReactGM"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -62,19 +62,30 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _gridComponentJs = __webpack_require__(3);
+	var _gridComponentJs = __webpack_require__(4);
 
 	var _gridComponentJs2 = _interopRequireDefault(_gridComponentJs);
 
-	var _paginationComponentJs = __webpack_require__(1);
+	var _paginationComponentJs = __webpack_require__(2);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
+	var _paginationTextComponentJs = __webpack_require__(3);
+
+	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
+
 	exports.Grid = _gridComponentJs2['default'];
 	exports.Pagination = _paginationComponentJs2['default'];
+	exports.PaginationText = _paginationTextComponentJs2['default'];
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85,7 +96,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-	var _react = __webpack_require__(2);
+	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -93,7 +104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    displayName: "Pagination",
 
 	    propTypes: {
-	        paginationData: _react2["default"].PropTypes.shape({
+	        data: _react2["default"].PropTypes.shape({
 	            total: _react2["default"].PropTypes.number.isRequired,
 	            index: _react2["default"].PropTypes.number.isRequired,
 	            size: _react2["default"].PropTypes.number.isRequired
@@ -101,13 +112,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        toPage: _react2["default"].PropTypes.func.isRequired
 	    },
 	    render: function render() {
-	        var paginationData = this.props.paginationData;
+	        var data = this.props.data;
 
 	        var offset = 2,
 	            pages = [],
-	            count = Math.ceil(paginationData.total / paginationData.size),
-	            begin = Math.max(paginationData.index - offset, 1),
-	            end = Math.min(paginationData.index + offset, count);
+	            count = Math.ceil(data.total / data.size),
+	            begin = Math.max(data.index - offset, 1),
+	            end = Math.min(data.index + offset, count);
 
 	        if (count > offset * 2 + 1) {
 	            if (begin === 1) {
@@ -129,10 +140,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: "pagination pagination-sm", onClick: this._onPage.bind(this) },
 	                _react2["default"].createElement(
 	                    "li",
-	                    { className: paginationData.index === 1 ? 'disabled' : '' },
+	                    { className: data.index === 1 ? 'disabled' : '' },
 	                    _react2["default"].createElement(
 	                        "a",
-	                        { href: "javascript:;", "data-page": paginationData.index - 1 },
+	                        { href: "javascript:;", "data-page": data.index - 1 },
 	                        "上一页"
 	                    )
 	                ),
@@ -157,7 +168,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                pages.map(function (page) {
 	                    return _react2["default"].createElement(
 	                        "li",
-	                        { className: paginationData.index === page ? 'active' : '' },
+	                        { className: data.index === page ? 'active' : '' },
 	                        _react2["default"].createElement(
 	                            "a",
 	                            {
@@ -186,10 +197,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                ) : '',
 	                _react2["default"].createElement(
 	                    "li",
-	                    { className: paginationData.index === count ? 'disabled' : '' },
+	                    { className: data.index === count ? 'disabled' : '' },
 	                    _react2["default"].createElement(
 	                        "a",
-	                        { href: "javascript:;", "data-page": paginationData.index + 1 },
+	                        { href: "javascript:;", "data-page": data.index + 1 },
 	                        "下一页"
 	                    )
 	                )
@@ -198,13 +209,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    _onPage: function _onPage(event) {
 	        var page = event.target.getAttribute('data-page'),
-	            paginationData = this.props.paginationData,
-	            count = Math.ceil(paginationData.total / paginationData.size);
-	        if (!page || page == paginationData.index || page < 1 || page > count) {
+	            data = this.props.data,
+	            count = Math.ceil(data.total / data.size),
+	            toPage = this.props.toPage;
+	        if (!page || page == data.index || page < 1 || page > count) {
 	            return;
 	        }
 
-	        console.log(page);
+	        toPage(page);
 	    }
 	});
 
@@ -212,13 +224,54 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 2 */
-/***/ function(module, exports) {
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var PaginationText = _react2["default"].createClass({
+	    displayName: "PaginationText",
+
+	    propTypes: {
+	        data: _react2["default"].PropTypes.shape({
+	            total: _react2["default"].PropTypes.number.isRequired,
+	            index: _react2["default"].PropTypes.number.isRequired,
+	            size: _react2["default"].PropTypes.number.isRequired
+	        }),
+	        toPage: _react2["default"].PropTypes.func.isRequired
+	    },
+	    render: function render() {
+	        var data = this.props.data;
+
+	        return _react2["default"].createElement(
+	            "div",
+	            { className: "gm-pagination-text" },
+	            "显示第 ",
+	            data.index * data.size + 1,
+	            " 到 ",
+	            Math.min(data.total, data.index * data.size + data.size),
+	            " 行，一共 ",
+	            data.total,
+	            " 行记录"
+	        );
+	    }
+	});
+
+	exports["default"] = PaginationText;
+	module.exports = exports["default"];
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -229,66 +282,109 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _paginationComponentJs = __webpack_require__(1);
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _paginationComponentJs = __webpack_require__(2);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
-	var _react = __webpack_require__(2);
+	var _paginationTextComponentJs = __webpack_require__(3);
 
-	var _react2 = _interopRequireDefault(_react);
+	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
 	var GridHead = _react2['default'].createClass({
 	    displayName: 'GridHead',
 
 	    render: function render() {
-	        var columns = this.props.columns;
-	        var actions = this.props.actions;
+	        var data = this.props.data;
 	        return _react2['default'].createElement(
 	            'thead',
 	            null,
 	            _react2['default'].createElement(
 	                'tr',
 	                null,
-	                columns.map(function (col) {
+	                data.enableSelect ? _react2['default'].createElement(
+	                    'th',
+	                    { className: 'gm-grid-select' },
+	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: this._onSelect.bind(this) })
+	                ) : '',
+	                data.columns.map(function (col) {
 	                    return _react2['default'].createElement(
 	                        'th',
 	                        null,
 	                        col.name
 	                    );
 	                }),
-	                actions.length > 0 ? _react2['default'].createElement(
+	                data.actions.length > 0 ? _react2['default'].createElement(
 	                    'th',
 	                    null,
 	                    '操作'
 	                ) : ''
 	            )
 	        );
+	    },
+	    _onSelect: function _onSelect(event) {
+	        var onSelect = this.props.onSelect;
+	        onSelect(event.target.checked);
 	    }
 	});
 
 	var Grid = _react2['default'].createClass({
 	    displayName: 'Grid',
 
+	    _processData: function _processData(data) {
+	        data = Object.assign({
+	            enableSelect: false,
+	            actions: [],
+	            batchs: [],
+	            list: [],
+	            toPage: function toPage() {}
+	        }, data);
+	        data.actions.forEach(function (action) {
+	            action.isShow = action.isShow || function () {
+	                return true;
+	            };
+	        });
+
+	        data.list.forEach(function (elist) {
+	            elist.___select = false;
+	        });
+	        return data;
+	    },
 	    render: function render() {
 	        var t = this;
-	        var gridData = this.props.gridData;
-	        var actions = gridData.actions;
+	        var data = this._processData(this.props.data);
+	        var actions = data.actions;
+	        var batchs = data.batchs;
 
-	        var tableBody = gridData.data.map(function (eData, index) {
-	            var tds = gridData.columns.map(function (col) {
+	        var tableBody = data.list.map(function (elist, index) {
+	            var tds = data.columns.map(function (col) {
 	                // 转换成字符串，避免 true false 没显示
-	                return _react2['default'].createElement(
-	                    'td',
-	                    null,
-	                    '' + eData[col.field]
-	                );
+	                if (col.render) {
+	                    return _react2['default'].createElement(
+	                        'td',
+	                        null,
+	                        '' + col.render(elist[col.field], elist)
+	                    );
+	                } else {
+	                    return _react2['default'].createElement(
+	                        'td',
+	                        null,
+	                        '' + elist[col.field]
+	                    );
+	                }
 	            });
 
 	            var buttons = actions.map(function (action) {
 	                var classes = 'btn btn-default btn-xs ' + action.className;
+	                if (action.isShow(elist, index) === false) {
+	                    classes += ' hidden';
+	                }
 	                return _react2['default'].createElement(
 	                    'button',
-	                    { onClick: t._onActions.bind(t, eData, index, action),
+	                    { onClick: t._onActions.bind(t, elist, index, action),
 	                        className: classes },
 	                    action.text
 	                );
@@ -297,6 +393,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return _react2['default'].createElement(
 	                'tr',
 	                null,
+	                data.enableSelect ? _react2['default'].createElement(
+	                    'td',
+	                    null,
+	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: t._onSelect.bind(t) })
+	                ) : '',
 	                tds,
 	                actions.length > 0 ? _react2['default'].createElement(
 	                    'td',
@@ -306,13 +407,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	            );
 	        });
 
+	        var batchButtons = batchs.map(function (batch) {
+	            var classes = 'btn btn-default btn-sm ' + batch.className;
+	            return _react2['default'].createElement(
+	                'button',
+	                { onClick: t._onBatchs.bind(t, batch), className: classes },
+	                batch.text
+	            );
+	        });
+
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'gm-grid' },
 	            _react2['default'].createElement(
 	                'table',
 	                { className: 'table table-striped table-hover table-condensed table-bordered' },
-	                _react2['default'].createElement(GridHead, { columns: gridData.columns, actions: gridData.actions }),
+	                _react2['default'].createElement(GridHead, { data: data, onSelect: t._onSelectAll.bind(t) }),
 	                _react2['default'].createElement(
 	                    'tbody',
 	                    null,
@@ -324,17 +434,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: 'gm-grid-foot clearfix' },
 	                _react2['default'].createElement(
 	                    'div',
+	                    { className: 'pull-left gm-grid-batch' },
+	                    data.enableSelect ? batchButtons : ''
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
 	                    { className: 'pull-right' },
-	                    _react2['default'].createElement(_paginationComponentJs2['default'], { paginationData: gridData.pagination, onPage: t._onPage.bind(this) })
+	                    _react2['default'].createElement(_paginationComponentJs2['default'], { data: data.pagination, toPage: t._onToPage.bind(this) })
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'pull-right' },
+	                    _react2['default'].createElement(_paginationTextComponentJs2['default'], { data: data.pagination })
 	                )
 	            )
 	        );
 	    },
-	    _onActions: function _onActions(eData, index, action) {
-	        console.log(arguments);
-	        action.click(eData, index);
+	    _onActions: function _onActions(elist, index, action) {
+	        action.click(elist, index);
 	    },
-	    _onPage: function _onPage() {}
+	    _onBatchs: function _onBatchs(batch) {
+	        var lists = [];
+	        batch.click(lists);
+	    },
+	    _onSelect: function _onSelect() {
+	        // TODO 还没搞清楚如何设计
+	    },
+	    _onSelectAll: function _onSelectAll() {
+	        // TODO 还没有搞清楚如何设计
+	    },
+	    _onToPage: function _onToPage(page) {
+	        this.props.data.toPage(page);
+	    }
 	});
 
 	exports['default'] = Grid;

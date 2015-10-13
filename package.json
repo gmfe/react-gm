@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build": "webpack lib/index.js dist/react-gm.js --config webpack.config.development.js"
+    "build": "webpack lib/index.js dist/react-gm.js --config webpack.config.development.js",
+    "build-gm": "webpack lib/gm.js dist/gm.js --config webpack.config.development.js"
   },
   "repository": {
     "type": "git",

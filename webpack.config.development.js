@@ -8,11 +8,18 @@ var reactExternal = {
     commonjs: 'react',
     amd: 'react'
 };
+var momentExternal = {
+    root: 'moment',
+    commonjs2: 'moment',
+    commonjs: 'moment',
+    amd: 'moment'
+}
 
 module.exports = {
     externals: {
         'react': reactExternal,
-        'react-native': reactExternal
+        'react-native': reactExternal,
+        'moment': momentExternal
     },
     module: {
         loaders: [
