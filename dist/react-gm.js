@@ -74,6 +74,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
+	__webpack_require__(5);
+
 	exports.Grid = _gridComponentJs2['default'];
 	exports.Pagination = _paginationComponentJs2['default'];
 	exports.PaginationText = _paginationTextComponentJs2['default'];
@@ -137,7 +139,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            { className: "gm-pagination" },
 	            _react2["default"].createElement(
 	                "ul",
-	                { className: "pagination pagination-sm", onClick: this._onPage.bind(this) },
+	                { className: "pagination pagination-sm", onClick: this.onPage },
 	                _react2["default"].createElement(
 	                    "li",
 	                    { className: data.index === 1 ? 'disabled' : '' },
@@ -207,7 +209,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            )
 	        );
 	    },
-	    _onPage: function _onPage(event) {
+	    onPage: function onPage(event) {
 	        var page = event.target.getAttribute('data-page'),
 	            data = this.props.data,
 	            count = Math.ceil(data.total / data.size),
@@ -247,8 +249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            total: _react2["default"].PropTypes.number.isRequired,
 	            index: _react2["default"].PropTypes.number.isRequired,
 	            size: _react2["default"].PropTypes.number.isRequired
-	        }),
-	        toPage: _react2["default"].PropTypes.func.isRequired
+	        })
 	    },
 	    render: function render() {
 	        var data = this.props.data;
@@ -308,7 +309,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                data.enableSelect ? _react2['default'].createElement(
 	                    'th',
 	                    { className: 'gm-grid-select' },
-	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: this._onSelect.bind(this) })
+	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: this.onSelect })
 	                ) : '',
 	                data.columns.map(function (col) {
 	                    return _react2['default'].createElement(
@@ -325,7 +326,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            )
 	        );
 	    },
-	    _onSelect: function _onSelect(event) {
+	    onSelect: function onSelect(event) {
 	        var onSelect = this.props.onSelect;
 	        onSelect(event.target.checked);
 	    }
@@ -334,7 +335,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Grid = _react2['default'].createClass({
 	    displayName: 'Grid',
 
-	    _processData: function _processData(data) {
+	    processData: function processData(data) {
 	        data = Object.assign({
 	            enableSelect: false,
 	            actions: [],
@@ -355,7 +356,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    render: function render() {
 	        var t = this;
-	        var data = this._processData(this.props.data);
+	        var data = this.processData(this.props.data);
 	        var actions = data.actions;
 	        var batchs = data.batchs;
 
@@ -384,7 +385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	                return _react2['default'].createElement(
 	                    'button',
-	                    { onClick: t._onActions.bind(t, elist, index, action),
+	                    { onClick: t.onActions.bind(t, elist, index, action),
 	                        className: classes },
 	                    action.text
 	                );
@@ -396,7 +397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                data.enableSelect ? _react2['default'].createElement(
 	                    'td',
 	                    null,
-	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: t._onSelect.bind(t) })
+	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: t.onSelect.bind(t) })
 	                ) : '',
 	                tds,
 	                actions.length > 0 ? _react2['default'].createElement(
@@ -411,7 +412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var classes = 'btn btn-default btn-sm ' + batch.className;
 	            return _react2['default'].createElement(
 	                'button',
-	                { onClick: t._onBatchs.bind(t, batch), className: classes },
+	                { onClick: t.onBatchs.bind(t, batch), className: classes },
 	                batch.text
 	            );
 	        });
@@ -422,7 +423,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _react2['default'].createElement(
 	                'table',
 	                { className: 'table table-striped table-hover table-condensed table-bordered' },
-	                _react2['default'].createElement(GridHead, { data: data, onSelect: t._onSelectAll.bind(t) }),
+	                _react2['default'].createElement(GridHead, { data: data, onSelect: t.onSelectAll }),
 	                _react2['default'].createElement(
 	                    'tbody',
 	                    null,
@@ -440,7 +441,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2['default'].createElement(
 	                    'div',
 	                    { className: 'pull-right' },
-	                    _react2['default'].createElement(_paginationComponentJs2['default'], { data: data.pagination, toPage: t._onToPage.bind(this) })
+	                    _react2['default'].createElement(_paginationComponentJs2['default'], { data: data.pagination, toPage: t.onToPage })
 	                ),
 	                _react2['default'].createElement(
 	                    'div',
@@ -450,26 +451,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	            )
 	        );
 	    },
-	    _onActions: function _onActions(elist, index, action) {
+	    onActions: function onActions(elist, index, action) {
 	        action.click(elist, index);
 	    },
-	    _onBatchs: function _onBatchs(batch) {
+	    onBatchs: function onBatchs(batch) {
 	        var lists = [];
 	        batch.click(lists);
 	    },
-	    _onSelect: function _onSelect() {
+	    onSelect: function onSelect() {
 	        // TODO 还没搞清楚如何设计
 	    },
-	    _onSelectAll: function _onSelectAll() {
+	    onSelectAll: function onSelectAll() {
 	        // TODO 还没有搞清楚如何设计
 	    },
-	    _onToPage: function _onToPage(page) {
+	    onToPage: function onToPage(page) {
 	        this.props.data.toPage(page);
 	    }
 	});
 
 	exports['default'] = Grid;
 	module.exports = exports['default'];
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ])
