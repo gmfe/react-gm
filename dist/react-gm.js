@@ -337,7 +337,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    processData: function processData(data) {
 	        data = Object.assign({
-	            enableSelect: false,
+	            enableSelect: false, // 和 batchs 配合用
+	            enablePagination: false, // 和 pagination toPage 配合用
+	            enablePaginationText: false,
 	            actions: [],
 	            batchs: [],
 	            list: [],
@@ -354,9 +356,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	        return data;
 	    },
+	    getInitialState: function getInitialState() {
+	        return {
+	            data: this.processData(this.props.data)
+	        };
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            data: this.processData(nextProps.data)
+	        });
+	    },
 	    render: function render() {
 	        var t = this;
-	        var data = this.processData(this.props.data);
+	        var data = this.state.data;
 	        var actions = data.actions;
 	        var batchs = data.batchs;
 
@@ -397,7 +409,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                data.enableSelect ? _react2['default'].createElement(
 	                    'td',
 	                    null,
-	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: t.onSelect.bind(t) })
+	                    _react2['default'].createElement('input', { type: 'checkbox', checked: elist.___select, onClick: t.onSelect.bind(t, elist) })
 	                ) : '',
 	                tds,
 	                actions.length > 0 ? _react2['default'].createElement(
@@ -461,17 +473,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	        action.click(elist, index);
 	    },
 	    onBatchs: function onBatchs(batch) {
-	        var lists = [];
-	        batch.click(lists);
+	        var lists = this.state.data.list.filter(function (elist) {
+	            return elist.___select;
+	        });
+	        if (lists.length > 0) {
+	            batch.click(lists);
+	        }
 	    },
-	    onSelect: function onSelect() {
-	        // TODO 还没搞清楚如何设计
+	    onSelect: function onSelect(elist, event) {
+	        elist.___select = event.target.checked;
+	        this.setState({
+	            list: this.state.data.list
+	        });
 	    },
-	    onSelectAll: function onSelectAll() {
-	        // TODO 还没有搞清楚如何设计
+	    onSelectAll: function onSelectAll(bool) {
+	        this.setState({
+	            list: this.state.data.list.map(function (elist) {
+	                elist.___select = bool;
+	            })
+	        });
 	    },
 	    onToPage: function onToPage(page) {
-	        this.props.data.toPage(page);
+	        this.state.data.toPage(page);
 	    }
 	});
 
