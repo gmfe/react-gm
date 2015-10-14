@@ -417,6 +417,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	            );
 	        });
 
+	        var pagination = _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'pull-right' },
+	                _react2['default'].createElement(_paginationComponentJs2['default'], { data: data.pagination, toPage: t.onToPage })
+	            ),
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'pull-right' },
+	                _react2['default'].createElement(_paginationTextComponentJs2['default'], { data: data.pagination })
+	            )
+	        );
+
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'gm-grid' },
@@ -438,16 +453,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    { className: 'pull-left gm-grid-batch' },
 	                    data.enableSelect ? batchButtons : ''
 	                ),
-	                _react2['default'].createElement(
-	                    'div',
-	                    { className: 'pull-right' },
-	                    _react2['default'].createElement(_paginationComponentJs2['default'], { data: data.pagination, toPage: t.onToPage })
-	                ),
-	                _react2['default'].createElement(
-	                    'div',
-	                    { className: 'pull-right' },
-	                    _react2['default'].createElement(_paginationTextComponentJs2['default'], { data: data.pagination })
-	                )
+	                data.pagination ? pagination : ''
 	            )
 	        );
 	    },

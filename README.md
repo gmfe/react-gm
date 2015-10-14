@@ -3,13 +3,20 @@
 文档暂时没有，有接口使用问题直接找liyatang。
 有需求随时提
 
+# 安装
+`npm install --save-dev react-gm`
+
+or
+
+`bower install -D react-gm`
+
 # 准备
 
 `npm install`
 
 # 开发
 
-lib 是源代码，打包成webpack
+lib 是源代码，通过webpack打包到dist
 
 `npm start` 启动服务开发。
 
@@ -19,14 +26,25 @@ lib 是源代码，打包成webpack
 
 # 发布到npm
 
-记得修改package.json
+记得修改 package.json 的 version
 
 `npm login`
 
 `npm publish`
 
+更新版本发布重复以上操作
+
 **but**
 
 目前关联了账号，只能找liyatang发布。o(╯□╰)o
+
+# 发布到bower
+
+和npm不一样，bower通过更新Tag来达到版本更新。
+
+`git tag -a 1.3.0`
+
+`git push --tags`
+
 
 # 最后，多多交流

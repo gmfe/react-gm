@@ -20,7 +20,9 @@ let renderId = function (value, elist) {
 };
 
 let gridData = {
-    //enableSelect: true,
+    enableSelect: true,
+    enablePagination: true,
+    enablePaginationText: true,
     columns: [
         {field: 'id', name: 'id', render: renderId},
         {field: 'name', name: '名字'},
@@ -37,14 +39,15 @@ let gridData = {
         text: '删除2',
         click: onClick
     }],
-    //batchs: [{
-    //    text: '批量操作',
-    //    className: 'btn-primary',
-    //    click: onClick
-    //}, {
-    //    text: 'adsf',
-    //    click: onClick
-    //}],
+    // 依赖 enableSelect:true
+    batchs: [{
+        text: '批量操作',
+        className: 'btn-primary',
+        click: onClick
+    }, {
+        text: 'adsf',
+        click: onClick
+    }],
     list: [{
         id: 1,
         name: '偶们啊啊发骚发所发生的',
