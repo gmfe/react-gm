@@ -114,7 +114,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        toPage: _react2["default"].PropTypes.func.isRequired
 	    },
 	    render: function render() {
-	        var data = this.props.data;
+	        var data = Object.assign({}, this.props.data);
+
 	        data.index = data.offset / data.limit + 1;
 
 	        var offset = 2,
@@ -344,6 +345,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            enableSelect: false, // 和 batchs 配合用
 	            enablePagination: false, // 和 pagination toPage 配合用
 	            enablePaginationText: false,
+	            loading: false,
 	            actions: [],
 	            batchs: [],
 	            list: [],
@@ -376,53 +378,76 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var actions = data.actions;
 	        var batchs = data.batchs;
 
-	        var tableBody = data.list.map(function (elist, index) {
-	            var tds = data.columns.map(function (col) {
-	                // 转换成字符串，避免 true false 没显示
-	                if (col.render) {
-	                    return _react2['default'].createElement(
-	                        'td',
-	                        null,
-	                        '' + col.render(elist[col.field], elist)
-	                    );
-	                } else {
-	                    return _react2['default'].createElement(
-	                        'td',
-	                        null,
-	                        '' + elist[col.field]
-	                    );
-	                }
-	            });
-
-	            var buttons = actions.map(function (action) {
-	                var classes = 'btn btn-default btn-xs ' + action.className;
-	                if (action.isShow(elist, index) === false) {
-	                    classes += ' hidden';
-	                }
-	                return _react2['default'].createElement(
-	                    'button',
-	                    { onClick: t.onActions.bind(t, elist, index, action),
-	                        className: classes },
-	                    action.text
-	                );
-	            });
-
-	            return _react2['default'].createElement(
+	        var tableBody;
+	        if (data.loading) {
+	            tableBody = _react2['default'].createElement(
 	                'tr',
 	                null,
-	                data.enableSelect ? _react2['default'].createElement(
+	                _react2['default'].createElement(
 	                    'td',
-	                    null,
-	                    _react2['default'].createElement('input', { type: 'checkbox', checked: elist.___select, onClick: t.onSelect.bind(t, elist) })
-	                ) : '',
-	                tds,
-	                actions.length > 0 ? _react2['default'].createElement(
-	                    'td',
-	                    null,
-	                    buttons
-	                ) : ''
+	                    { colSpan: '99', className: 'text-center' },
+	                    _react2['default'].createElement('i', { className: 'fa fa-spin fa-spinner fa-pulse' })
+	                )
 	            );
-	        });
+	        } else if (data.list.length === 0) {
+	            tableBody = _react2['default'].createElement(
+	                'tr',
+	                null,
+	                _react2['default'].createElement(
+	                    'td',
+	                    { colSpan: '99', className: 'text-center' },
+	                    '无'
+	                )
+	            );
+	        } else if (data.list.length > 0) {
+	            tableBody = data.list.map(function (elist, index) {
+	                var tds = data.columns.map(function (col) {
+	                    // 转换成字符串，避免 true false 没显示
+	                    if (col.render) {
+	                        return _react2['default'].createElement(
+	                            'td',
+	                            null,
+	                            '' + col.render(elist[col.field], elist)
+	                        );
+	                    } else {
+	                        return _react2['default'].createElement(
+	                            'td',
+	                            null,
+	                            '' + elist[col.field]
+	                        );
+	                    }
+	                });
+
+	                var buttons = actions.map(function (action) {
+	                    var classes = 'btn btn-default btn-xs ' + action.className;
+	                    if (action.isShow(elist, index) === false) {
+	                        classes += ' hidden';
+	                    }
+	                    return _react2['default'].createElement(
+	                        'button',
+	                        { onClick: t.onActions.bind(t, elist, index, action),
+	                            className: classes },
+	                        action.text
+	                    );
+	                });
+
+	                return _react2['default'].createElement(
+	                    'tr',
+	                    null,
+	                    data.enableSelect ? _react2['default'].createElement(
+	                        'td',
+	                        null,
+	                        _react2['default'].createElement('input', { type: 'checkbox', checked: elist.___select, onClick: t.onSelect.bind(t, elist) })
+	                    ) : '',
+	                    tds,
+	                    actions.length > 0 ? _react2['default'].createElement(
+	                        'td',
+	                        null,
+	                        buttons
+	                    ) : ''
+	                );
+	            });
+	        }
 
 	        var batchButtons = batchs.map(function (batch) {
 	            var classes = 'btn btn-default btn-sm ' + batch.className;

@@ -23,6 +23,7 @@ let gridData = {
     enableSelect: true,
     enablePagination: true,
     enablePaginationText: true,
+    //loading: true,
     columns: [
         {field: 'id', name: 'id', render: renderId},
         {field: 'name', name: '名字'},
@@ -48,19 +49,20 @@ let gridData = {
         text: 'adsf',
         click: onClick
     }],
-    list: [{
-        id: 1,
-        name: '偶们啊啊发骚发所发生的',
-        age: '10',
-        gender: 1,
-        isOk: false
-    }, {
-        id: 1,
-        name: 'haha',
-        age: '15',
-        gender: 1,
-        isOk: true
-    }],
+    list: [],
+    //list: [{
+    //    id: 1,
+    //    name: '偶们啊啊发骚发所发生的',
+    //    age: '10',
+    //    gender: 1,
+    //    isOk: false
+    //}, {
+    //    id: 1,
+    //    name: 'haha',
+    //    age: '15',
+    //    gender: 1,
+    //    isOk: true
+    //}],
     pagination: {
         count: 80,
         offset: 10,
