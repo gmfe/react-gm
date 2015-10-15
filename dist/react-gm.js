@@ -107,25 +107,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    propTypes: {
 	        data: _react2["default"].PropTypes.shape({
-	            total: _react2["default"].PropTypes.number.isRequired,
-	            index: _react2["default"].PropTypes.number.isRequired,
-	            size: _react2["default"].PropTypes.number.isRequired
+	            count: _react2["default"].PropTypes.number.isRequired,
+	            offset: _react2["default"].PropTypes.number.isRequired,
+	            limit: _react2["default"].PropTypes.number.isRequired
 	        }),
 	        toPage: _react2["default"].PropTypes.func.isRequired
 	    },
 	    render: function render() {
 	        var data = this.props.data;
+	        data.index = data.offset / data.limit + 1;
 
 	        var offset = 2,
 	            pages = [],
-	            count = Math.ceil(data.total / data.size),
+	            all = Math.ceil(data.count / data.limit),
 	            begin = Math.max(data.index - offset, 1),
-	            end = Math.min(data.index + offset, count);
+	            end = Math.min(data.index + offset, all);
 
-	        if (count > offset * 2 + 1) {
+	        if (all > offset * 2 + 1) {
 	            if (begin === 1) {
 	                end += offset;
-	            } else if (end === count) {
+	            } else if (end === all) {
 	                begin -= offset;
 	            }
 	        }
@@ -179,7 +180,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        )
 	                    );
 	                }),
-	                end <= count - 2 ? _react2["default"].createElement(
+	                end <= all - 2 ? _react2["default"].createElement(
 	                    "li",
 	                    { className: "disabled" },
 	                    _react2["default"].createElement(
@@ -188,18 +189,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        "..."
 	                    )
 	                ) : '',
-	                end <= count - 1 ? _react2["default"].createElement(
+	                end <= all - 1 ? _react2["default"].createElement(
 	                    "li",
 	                    null,
 	                    _react2["default"].createElement(
 	                        "a",
-	                        { href: "javascript:;", "data-page": count },
-	                        count
+	                        { href: "javascript:;", "data-page": all },
+	                        all
 	                    )
 	                ) : '',
 	                _react2["default"].createElement(
 	                    "li",
-	                    { className: data.index === count ? 'disabled' : '' },
+	                    { className: data.index === all ? 'disabled' : '' },
 	                    _react2["default"].createElement(
 	                        "a",
 	                        { href: "javascript:;", "data-page": data.index + 1 },
@@ -210,15 +211,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	    },
 	    onPage: function onPage(event) {
-	        var page = event.target.getAttribute('data-page'),
+	        var page = ~ ~event.target.getAttribute('data-page'),
 	            data = this.props.data,
-	            count = Math.ceil(data.total / data.size),
+	            count = Math.ceil(data.count / data.limit),
 	            toPage = this.props.toPage;
 	        if (!page || page == data.index || page < 1 || page > count) {
 	            return;
 	        }
 
-	        toPage(page);
+	        toPage({
+	            offset: (page - 1) * data.limit,
+	            limit: data.limit
+	        }, page);
 	    }
 	});
 
@@ -246,9 +250,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    propTypes: {
 	        data: _react2["default"].PropTypes.shape({
-	            total: _react2["default"].PropTypes.number.isRequired,
-	            index: _react2["default"].PropTypes.number.isRequired,
-	            size: _react2["default"].PropTypes.number.isRequired
+	            count: _react2["default"].PropTypes.number.isRequired,
+	            offset: _react2["default"].PropTypes.number.isRequired,
+	            limit: _react2["default"].PropTypes.number.isRequired
 	        })
 	    },
 	    render: function render() {
@@ -258,11 +262,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            "div",
 	            { className: "gm-pagination-text" },
 	            "显示第 ",
-	            data.index * data.size + 1,
+	            data.offset + 1,
 	            " 到 ",
-	            Math.min(data.total, data.index * data.size + data.size),
+	            Math.min(data.count, data.offset + data.limit - 1),
 	            " 行，一共 ",
-	            data.total,
+	            data.count,
 	            " 行记录"
 	        );
 	    }
@@ -432,16 +436,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var pagination = _react2['default'].createElement(
 	            'div',
 	            null,
-	            _react2['default'].createElement(
+	            data.enablePagination ? _react2['default'].createElement(
 	                'div',
 	                { className: 'pull-right' },
 	                _react2['default'].createElement(_paginationComponentJs2['default'], { data: data.pagination, toPage: t.onToPage })
-	            ),
-	            _react2['default'].createElement(
+	            ) : '',
+	            data.enablePaginationText ? _react2['default'].createElement(
 	                'div',
 	                { className: 'pull-right' },
 	                _react2['default'].createElement(_paginationTextComponentJs2['default'], { data: data.pagination })
-	            )
+	            ) : ''
 	        );
 
 	        return _react2['default'].createElement(
@@ -493,8 +497,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            })
 	        });
 	    },
-	    onToPage: function onToPage(page) {
-	        this.state.data.toPage(page);
+	    onToPage: function onToPage(page, index) {
+	        this.state.data.toPage(page, index);
 	    }
 	});
 

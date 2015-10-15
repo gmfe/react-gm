@@ -62,12 +62,12 @@ let gridData = {
         isOk: true
     }],
     pagination: {
-        total: 80,
-        index: 2,
-        size: 10
+        count: 80,
+        offset: 10,
+        limit: 10
     },
     toPage: function (page) {
-        console.log(page);
+        console.log(arguments);
     }
 };
 
