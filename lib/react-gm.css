@@ -51,4 +51,9 @@
 
 .gm-droper-input[type="file"]{
     display: none;
+}}
+
+/*form*/
+.gm-invalid{
+    border-color: #a94442;
 }

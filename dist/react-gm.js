@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"));
+		module.exports = factory(require("react"), require("underscore"), require("react-dom"), require("jquery"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react"], factory);
+		define(["react", "underscore", "react-dom", "jquery"], factory);
 	else if(typeof exports === 'object')
-		exports["ReactGM"] = factory(require("react"));
+		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("jquery"));
 	else
-		root["ReactGM"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
+		root["ReactGM"] = factory(root["React"], root["underscore"], root["ReactDOM"], root["jquery"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -62,28 +62,47 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _gridComponentJs = __webpack_require__(5);
+	var _gridComponentJs = __webpack_require__(8);
 
 	var _gridComponentJs2 = _interopRequireDefault(_gridComponentJs);
 
-	var _paginationComponentJs = __webpack_require__(2);
+	var _paginationComponentJs = __webpack_require__(4);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
-	var _paginationTextComponentJs = __webpack_require__(3);
+	var _paginationTextComponentJs = __webpack_require__(5);
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
-	var _droperComponentJs = __webpack_require__(4);
+	var _formerComponentJs = __webpack_require__(7);
 
-	var _droperComponentJs2 = _interopRequireDefault(_droperComponentJs);
+	var _formerComponentJs2 = _interopRequireDefault(_formerComponentJs);
 
-	__webpack_require__(6);
+	var _validateJs = __webpack_require__(6);
 
-	exports.Grid = _gridComponentJs2['default'];
-	exports.Pagination = _paginationComponentJs2['default'];
-	exports.PaginationText = _paginationTextComponentJs2['default'];
-	exports.Droper = _droperComponentJs2['default'];
+	var _validateJs2 = _interopRequireDefault(_validateJs);
+
+	var _validateMixinJs = __webpack_require__(9);
+
+	var _validateMixinJs2 = _interopRequireDefault(_validateMixinJs);
+
+	var _gmJs = __webpack_require__(3);
+
+	var _gmJs2 = _interopRequireDefault(_gmJs);
+
+	__webpack_require__(10);
+
+	var ReactGM = {
+	    Grid: _gridComponentJs2['default'],
+	    Pagination: _paginationComponentJs2['default'],
+	    PaginationText: _paginationTextComponentJs2['default'],
+	    Former: _formerComponentJs2['default'],
+	    Validate: _validateJs2['default'],
+	    ValidateMixin: _validateMixinJs2['default']
+	};
+
+	exports.GM = _gmJs2['default'];
+	exports['default'] = ReactGM;
 
 /***/ },
 /* 1 */
@@ -93,6 +112,129 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 2 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 实现观麦库，和业务无关的收归在GM
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var fetch = window.fetch,
+	    FormData = window.FormData,
+	    Promise = window.FormData,
+	    $ = window.$;
+
+	/*****Request begin*****/
+	var processRequestResponse = function processRequestResponse(promise, url) {
+	    var color = 'color: red;';
+	    return promise.then(function (res) {
+	        return res.json();
+	    }).then(function (json) {
+	        if (json.code === 0) {
+	            return json.data;
+	        } else {
+	            console.log('%c*** request url: %s、code: %s、msg: %s', color, url, json.code, json.msg);
+	            return Promise.reject(json.msg || '位置错误');
+	        }
+	    })['catch'](function (reason) {
+	        console.log('%c*** Request catch %s', color, reason);
+	    });
+	};
+
+	var Request = function Request(url, options) {
+	    this._data = {};
+	    this.url = url;
+	    this.options = Object.assign({
+	        method: 'get',
+	        credentials: 'include' // 需要设置才能获取cookie
+	    }, options);
+	};
+	Request.prototype = {
+	    data: function data(_data) {
+	        this._data = _data || {};
+	        return this;
+	    },
+	    get: function get() {
+	        var param = $.param(this._data);
+	        var newUrl = this.url + (this.url.indexOf('?') > -1 ? '&' : '?') + param;
+
+	        return processRequestResponse(fetch(newUrl, this.options));
+	    },
+	    post: function post() {
+	        var data = this._data;
+	        var formData = new FormData();
+	        for (var e in data) {
+	            formData.append(e, data[e]);
+	        }
+	        this.options.method = 'post';
+	        this.option.body = formData;
+	        return processRequestResponse(fetch(this.url, this.options));
+	    }
+	};
+
+	var RequestFactory = function RequestFactory(url, options) {
+	    return new Request(url, options);
+	};
+
+	/*****Request end*****/
+
+	var $tipsContainer = null;
+	var Tips = function Tips(word) {
+	    if (!$tipsContainer) {
+	        $tipsContainer = $('');
+	    }
+	};
+
+	var format = function format(str, data) {
+	    var result = str;
+	    if (arguments.length < 2) {
+	        return result;
+	    }
+
+	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
+	        var keys = arguments[1].split('.');
+	        var r = null;
+	        _underscore2['default'].each(keys, function (value, index) {
+	            if (index) {
+	                r = r[value];
+	            } else {
+	                r = data[value];
+	            }
+	        });
+	        return r;
+	    });
+	    return result;
+	};
+
+	/*
+	 * Cookit 见 https://github.com/js-cookie/js-cookie/
+	 * */
+
+	/*
+	 * 约定 json 格式 code:0 data:{} msg:''。
+	 * code===0成功则返回data 失败返回msg
+	 * Request(url).data({}).get().then();
+	 *
+	 * */
+	var GM = {
+	    Request: RequestFactory,
+	    format: format
+	};
+
+	module.exports = GM;
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -164,7 +306,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { href: "javascript:;", "data-page": "1" },
 	                        "1"
 	                    )
-	                ) : null,
+	                ) : undefined,
 	                begin >= 3 ? _react2["default"].createElement(
 	                    "li",
 	                    { className: "disabled" },
@@ -173,7 +315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { href: "javascript:;" },
 	                        "..."
 	                    )
-	                ) : null,
+	                ) : undefined,
 	                pages.map(function (page, i) {
 	                    return _react2["default"].createElement(
 	                        "li",
@@ -194,7 +336,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { href: "javascript:;" },
 	                        "..."
 	                    )
-	                ) : null,
+	                ) : undefined,
 	                end <= all - 1 ? _react2["default"].createElement(
 	                    "li",
 	                    null,
@@ -203,7 +345,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { href: "javascript:;", "data-page": all },
 	                        all
 	                    )
-	                ) : null,
+	                ) : undefined,
 	                _react2["default"].createElement(
 	                    "li",
 	                    { className: data.index === all ? 'disabled' : '' },
@@ -236,7 +378,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -282,232 +424,339 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	var _underscore = __webpack_require__(2);
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var React = __webpack_require__(1);
+	var _gmJs = __webpack_require__(3);
 
-	var Droper = (function (_React$Component) {
-	    _inherits(Droper, _React$Component);
+	var _gmJs2 = _interopRequireDefault(_gmJs);
 
-	    function Droper(props, context) {
-	        _classCallCheck(this, Droper);
+	// 以下是可重复的，比如 *6-16：检测是否为6到16位任意字符
+	// *：任何字符
+	// n：数字
+	// s：字符
+	// l：字母
+	// nl: 数字和字母
+	// zh: 中文
 
-	        _get(Object.getPrototypeOf(Droper.prototype), 'constructor', this).call(this, props, context);
-	        this.onClick = this.onClick.bind(this);
-	        this.onDragEnter = this.onDragEnter.bind(this);
-	        this.onDragLeave = this.onDragLeave.bind(this);
-	        this.onDragOver = this.onDragOver.bind(this);
-	        this.onDrop = this.onDrop.bind(this);
+	// 以下是某具体类型
+	// p：邮政编码
+	// m：手机号码
+	// e：email
+	// url：网址
+	//
+	// regex
 
-	        this.state = {
-	            isDragActive: false
-	        };
+	// 有些特别的字符需要转换。后续维护增加
+	var specialKeyMap = {
+	    '*': '\\*'
+	};
+
+	var ruleKeyTipMap = {
+	    'def': '请填写正确的信息！',
+	    'w': {},
+	    reck: '两次输入的内容不一致！',
+	    ok: '通过信息验证！'
+	};
+	var ruleKeyMap = {};
+	var noRangeRuleKeys = [];
+
+	var ruleToInfo = function ruleToInfo(rule) {
+	    var info = {};
+
+	    var ruleStr = _underscore2['default'].map(_underscore2['default'].keys(ruleKeyMap), function (value) {
+	        return specialKeyMap[value] ? specialKeyMap[value] : value;
+	    }).join('|');
+	    var regExp = new RegExp('^(' + ruleStr + ')((\\d*)(-(\\d*))?)?$');
+
+	    rule.replace(regExp, function () {
+	        info.type = arguments[1];
+	        info.min = arguments[3];
+	        info.max = arguments[5];
+	    });
+	    return info;
+	};
+
+	var ValidateTip = function ValidateTip(rule) {
+	    if (_underscore2['default'].isRegExp(rule)) {
+	        return ruleKeyTipMap.def;
 	    }
 
-	    _createClass(Droper, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.enterCounter = 0;
+	    var info = ruleToInfo(rule);
+
+	    if (noRangeRuleKeys.indexOf(info.type) === -1) {
+	        if (info.max) {
+	            return _gmJs2['default'].format(ruleKeyTipMap.w[info.type][2], info);
+	        } else if (info.min) {
+	            return _gmJs2['default'].format(ruleKeyTipMap.w[info.type][1], info);
 	        }
-	    }, {
-	        key: 'accept',
-	        value: function accept(file, acceptedFiles) {
-	            if (file && acceptedFiles) {
-	                var _ret = (function () {
-	                    var acceptedFilesArray = acceptedFiles.split(',');
-	                    var fileName = file.name || '';
-	                    var mimeType = file.type || '';
-	                    var baseMimeType = mimeType.replace(/\/.*$/, '');
+	        return ruleKeyTipMap.w[info.type][0];
+	    }
+	    return ruleKeyTipMap.w[info.type] || ruleKeyTipMap.def;
+	};
 
-	                    return {
-	                        v: acceptedFilesArray.some(function (type) {
-	                            var validType = type.trim();
-	                            if (validType.charAt(0) === '.') {
-	                                return fileName.toLowerCase().endsWith(validType.toLowerCase());
-	                            } else if (/\/\*$/.test(validType)) {
-	                                // This is something like a image/* mime type
-	                                return baseMimeType === validType.replace(/\/.*$/, '');
-	                            }
-	                            return mimeType === validType;
-	                        })
-	                    };
-	                })();
+	var Validate = function Validate(rule, value, tip) {
+	    var result;
+	    tip = tip || false;
+	    if (_underscore2['default'].isRegExp(rule)) {
+	        result = rule.test(value);
+	    } else {
+	        var info = ruleToInfo(rule);
 
-	                if (typeof _ret === 'object') return _ret.v;
-	            }
-	            return true;
-	        }
-	    }, {
-	        key: 'allFilesAccepted',
-	        value: function allFilesAccepted(files) {
-	            var _this = this;
-
-	            return files.every(function (file) {
-	                return _this.accept(file, _this.props.accept);
-	            });
-	        }
-	    }, {
-	        key: 'onDragEnter',
-	        value: function onDragEnter(e) {
-	            e.preventDefault();
-
-	            ++this.enterCounter;
-
-	            // This is tricky. During the drag even the dataTransfer.files is null
-	            // But Chrome implements some drag store, which is accesible via dataTransfer.items
-	            var dataTransferItems = e.dataTransfer && e.dataTransfer.items ? e.dataTransfer.items : [];
-
-	            // Now we need to convert the DataTransferList to Array
-	            var itemsArray = Array.prototype.slice.call(dataTransferItems);
-	            var allFilesAccepted = this.allFilesAccepted(itemsArray);
-
-	            this.setState({
-	                isDragActive: allFilesAccepted,
-	                isDragReject: !allFilesAccepted
-	            });
-
-	            if (this.props.onDragEnter) {
-	                this.props.onDragEnter(e);
-	            }
-	        }
-	    }, {
-	        key: 'onDragOver',
-	        value: function onDragOver(e) {
-	            e.preventDefault();
-	        }
-	    }, {
-	        key: 'onDragLeave',
-	        value: function onDragLeave(e) {
-	            e.preventDefault();
-
-	            if (--this.enterCounter > 0) {
-	                return;
-	            }
-
-	            this.setState({
-	                isDragActive: false,
-	                isDragReject: false
-	            });
-
-	            if (this.props.onDragLeave) {
-	                this.props.onDragLeave(e);
-	            }
-	        }
-	    }, {
-	        key: 'onDrop',
-	        value: function onDrop(e) {
-	            e.preventDefault();
-
-	            // Reset the counter along with the drag on a drop.
-	            this.enterCounter = 0;
-
-	            this.setState({
-	                isDragActive: false,
-	                isDragReject: false
-	            });
-
-	            var droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
-	            var max = this.props.multiple ? droppedFiles.length : 1;
-	            var files = [];
-
-	            for (var i = 0; i < max; i++) {
-	                var file = droppedFiles[i];
-	                file.preview = window.URL.createObjectURL(file);
-	                files.push(file);
-	            }
-
-	            if (this.props.onDrop) {
-	                this.props.onDrop(files, e);
-	            }
-
-	            if (this.allFilesAccepted(files)) {
-	                if (this.props.onDropAccepted) {
-	                    this.props.onDropAccepted(files, e);
-	                }
+	        var regs = ['^', ruleKeyMap[info.type] || info.type];
+	        if (noRangeRuleKeys.indexOf(info.type) === -1) {
+	            if (info.min === undefined) {
+	                regs = regs.concat(['+']);
 	            } else {
-	                if (this.props.onDropRejected) {
-	                    this.props.onDropRejected(files, e);
-	                }
+	                regs = regs.concat(['{', info.min, ',', info.max === undefined ? '' : info.max, '}']);
 	            }
 	        }
-	    }, {
-	        key: 'onClick',
-	        value: function onClick() {
-	            if (!this.props.disableClick) {
-	                this.open();
-	            }
-	        }
-	    }, {
-	        key: 'open',
-	        value: function open() {
-	            var fileInput = this.refs.fileInput;
-	            fileInput.value = null;
-	            fileInput.click();
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var className = 'gm-droper ';
-	            className += this.props.className ? this.props.className : ' gm-droper-default ';
+	        result = new RegExp(regs.concat(['$']).join('')).test(value);
+	    }
 
-	            return React.createElement(
-	                'div',
-	                {
-	                    className: className,
-	                    onClick: this.onClick,
-	                    onDragEnter: this.onDragEnter,
-	                    onDragOver: this.onDragOver,
-	                    onDragLeave: this.onDragLeave,
-	                    onDrop: this.onDrop
-	                },
-	                this.props.children,
-	                React.createElement('input', {
-	                    type: 'file',
-	                    ref: 'fileInput',
-	                    className: 'gm-droper-input',
-	                    multiple: this.props.multiple,
-	                    accept: this.props.accept,
-	                    onChange: this.onDrop
-	                })
-	            );
-	        }
-	    }]);
-
-	    return Droper;
-	})(React.Component);
-
-	Droper.defaultProps = {
-	    disableClick: false,
-	    multiple: true
+	    return result ? true : tip ? ValidateTip(rule) : false;
+	};
+	Validate.factory = function (rule, factory) {
+	    var config = _underscore2['default'].extend({
+	        range: false
+	    }, factory());
+	    ruleKeyTipMap.w[rule] = config.tip;
+	    ruleKeyMap[rule] = config.rule;
+	    if (config.range === false) {
+	        noRangeRuleKeys.push(rule);
+	    }
 	};
 
-	Droper.propTypes = {
-	    onDrop: React.PropTypes.func,
-	    onDropAccepted: React.PropTypes.func,
-	    onDropRejected: React.PropTypes.func,
-	    onDragEnter: React.PropTypes.func,
-	    onDragLeave: React.PropTypes.func,
+	// 内置校验
+	Validate.factory('*', function () {
+	    return {
+	        range: true,
+	        rule: '[\\w\\W]',
+	        tip: ['不能为空！', '请填写至少{min}位任意字符！', '请填写{min}到{max}位任意字符！']
+	    };
+	});
+	Validate.factory('n', function () {
+	    return {
+	        range: true,
+	        rule: '\\d',
+	        tip: ['请填写数字！', '请填写至少{min}位数字！', '请填写{min}到{max}位数字！']
+	    };
+	});
+	Validate.factory('s', function () {
+	    return {
+	        range: true,
+	        rule: '[\\u4E00-\\u9FA5\\uf900-\\ufa2d\\w\\.\\s]',
+	        tip: ['不能输入特殊字符！', '请填写至少{min}位字符！', '请填写{min}到{max}位字符！']
+	    };
+	});
+	Validate.factory('l', function () {
+	    return {
+	        range: true,
+	        rule: '[a-zA-Z]',
+	        tip: ['请填写字母！', '请填写至少{min}位字母！', '请填写{min}到{max}位字母！']
+	    };
+	});
+	Validate.factory('nl', function () {
+	    return {
+	        range: true,
+	        rule: '[a-zA-Z0-9]',
+	        tip: ['请填写字母或数字！', '请填写至少{min}位字母或数字！', '请填写{min}到{max}位字母或数字！']
+	    };
+	});
+	Validate.factory('zh', function () {
+	    return {
+	        range: true,
+	        rule: '[\\u4e00-\\u9fa5]',
+	        tip: ['请填写汉字！', '请填写至少{min}位汉字！', '请填写{min}到{max}位汉字！']
+	    };
+	});
+	Validate.factory('p', function () {
+	    return {
+	        rule: '[0-9]{6}',
+	        tip: '请填写邮政编码'
+	    };
+	});
+	Validate.factory('m', function () {
+	    return {
+	        rule: '13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}',
+	        tip: '请填写手机号码'
+	    };
+	});
+	Validate.factory('e', function () {
+	    return {
+	        rule: '\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*',
+	        tip: '请填写邮件地址'
+	    };
+	});
+	Validate.factory('url', function () {
+	    return {
+	        rule: '(\\w+:\\/\\/)?\\w+(\\.\\w+)+.*',
+	        tip: '请填写网址'
+	    };
+	});
 
-	    disableClick: React.PropTypes.bool,
-	    multiple: React.PropTypes.bool,
-	    accept: React.PropTypes.string
-	};
-
-	module.exports = Droper;
+	exports['default'] = Validate;
+	module.exports = exports['default'];
 
 /***/ },
-/* 5 */
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Form = _react2['default'].createClass({
+	    displayName: 'Form',
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            onSubmit: function onSubmit() {}
+	        };
+	    },
+	    render: function render() {
+	        return _react2['default'].createElement(
+	            'form',
+	            _extends({}, this.props, { onSubmit: this.onSubmit, noValidate: true }),
+	            this.props.children
+	        );
+	    },
+	    onSubmit: function onSubmit(event) {
+	        event.preventDefault();
+	        this.props.onSubmit(event);
+	    }
+	});
+
+	var FieldMixin = {
+	    beforeField: function beforeField() {
+	        var label = this.props.label || this.props.name;
+	        // id 经常会频繁切换，估不换。
+	        var id = this.___filed_id || 'formerId' + (Math.random() + '').slice(2);
+	        this.___filed_id = id;
+
+	        var props = Object.assign({
+	            id: id,
+	            className: 'form-control'
+	        }, this.props);
+	        if (props.className.indexOf('form-control') === -1) {
+	            props.className = 'form-control ' + props.className;
+	        }
+
+	        return {
+	            label: label,
+	            props: props
+	        };
+	    }
+	};
+
+	var Input = _react2['default'].createClass({
+	    displayName: 'Input',
+
+	    mixins: [FieldMixin],
+	    render: function render() {
+	        var field = Object.assign(this.beforeField(), {
+	            value: '',
+	            type: 'text'
+	        }, this.props);
+
+	        // 注意，input不能有children，否则很奇怪。
+	        var _field$props = field.props;
+	        var children = _field$props.children;
+
+	        var other = _objectWithoutProperties(_field$props, ['children']);
+
+	        return _react2['default'].createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2['default'].createElement(
+	                'label',
+	                { htmlFor: field.props.id },
+	                field.label
+	            ),
+	            _react2['default'].createElement('input', other),
+	            this.props.children
+	        );
+	    }
+	});
+
+	var Select = _react2['default'].createClass({
+	    displayName: 'Select',
+
+	    mixins: [FieldMixin],
+	    render: function render() {
+	        var field = Object.assign(this.beforeField(), {
+	            value: '',
+	            options: []
+	        }, this.props);
+
+	        var options = field.props.options.map(function (ele, i) {
+	            if (typeof ele !== 'object') {
+	                ele = {
+	                    value: ele,
+	                    text: ele
+	                };
+	            }
+	            return _react2['default'].createElement(
+	                'option',
+	                { key: i, value: ele.value },
+	                ele.text
+	            );
+	        });
+
+	        delete field.props.options;
+	        return _react2['default'].createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2['default'].createElement(
+	                'label',
+	                { htmlFor: field.props.id },
+	                field.label
+	            ),
+	            _react2['default'].createElement(
+	                'select',
+	                field.props,
+	                options,
+	                this.props.children
+	            )
+	        );
+	    }
+	});
+
+	var Former = Form;
+	Object.assign(Former, {
+	    Input: Input,
+	    Select: Select
+	});
+
+	exports['default'] = Former;
+	module.exports = exports['default'];
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -522,11 +771,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _paginationComponentJs = __webpack_require__(2);
+	var _paginationComponentJs = __webpack_require__(4);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
-	var _paginationTextComponentJs = __webpack_require__(3);
+	var _paginationTextComponentJs = __webpack_require__(5);
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
@@ -545,7 +794,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    'th',
 	                    { className: 'gm-grid-select' },
 	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: this.onSelect })
-	                ) : null,
+	                ) : undefined,
 	                data.columns.map(function (col, i) {
 	                    return _react2['default'].createElement(
 	                        'th',
@@ -557,7 +806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    'th',
 	                    null,
 	                    '操作'
-	                ) : null
+	                ) : undefined
 	            )
 	        );
 	    },
@@ -668,13 +917,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        'td',
 	                        null,
 	                        _react2['default'].createElement('input', { type: 'checkbox', checked: elist.___select, onClick: t.onSelect.bind(t, elist) })
-	                    ) : null,
+	                    ) : undefined,
 	                    tds,
 	                    actions.length > 0 ? _react2['default'].createElement(
 	                        'td',
 	                        null,
 	                        buttons
-	                    ) : null
+	                    ) : undefined
 	                );
 	            });
 	        }
@@ -695,12 +944,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'div',
 	                { className: 'pull-right' },
 	                _react2['default'].createElement(_paginationComponentJs2['default'], { data: data.pagination, toPage: t.onToPage })
-	            ) : null,
+	            ) : undefined,
 	            data.enablePaginationText ? _react2['default'].createElement(
 	                'div',
 	                { className: 'pull-right' },
 	                _react2['default'].createElement(_paginationTextComponentJs2['default'], { data: data.pagination })
-	            ) : null
+	            ) : undefined
 	        );
 
 	        return _react2['default'].createElement(
@@ -722,9 +971,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2['default'].createElement(
 	                    'div',
 	                    { className: 'pull-left gm-grid-batch' },
-	                    data.enableSelect ? batchButtons : null
+	                    data.enableSelect ? batchButtons : undefined
 	                ),
-	                data.pagination ? pagination : null
+	                data.pagination ? pagination : undefined
 	            )
 	        );
 	    },
@@ -761,10 +1010,152 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 6 */
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(11);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _validateJs = __webpack_require__(6);
+
+	var _validateJs2 = _interopRequireDefault(_validateJs);
+
+	var _jquery = __webpack_require__(12);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var className = {
+	    error: 'gm-invalid'
+	};
+
+	// 因为对validate的用法没有规定，可以onChange验证，可以onBlur验证，或者其他的，需要在这里补充使用场景。
+	var expectEvent = ['onChange', 'onBlur', 'onFocus'];
+
+	var nameRule = function nameRule(list, obj) {
+	    if (obj.props && obj.props.name !== undefined) {
+	        var rule;
+	        _underscore2['default'].find(expectEvent, function (eventName) {
+	            if (obj.props[eventName]) {
+	                rule = obj.props[eventName].___validate_rule;
+	                return true;
+	            }
+	        });
+	        if (rule) {
+	            list.push({
+	                name: obj.props.name,
+	                rule: rule
+	            });
+	        }
+	    } else if (obj.props && obj.props.children && _underscore2['default'].isArray(obj.props.children)) {
+	        _underscore2['default'].each(obj.props.children, function (value) {
+	            nameRule(list, value);
+	        });
+	    } else if (obj.props && obj.props.children && _underscore2['default'].isObject(obj.props.children)) {
+	        nameRule(list, obj.props.children);
+	    }
+	};
+
+	var toNameRuleList = function toNameRuleList(ref) {
+	    var list = [];
+	    nameRule(list, ref);
+	    return list;
+	};
+
+	var doValidate = function doValidate(options, rule, target) {
+	    var value = target.value;
+	    var name = target.name;
+
+	    var result = (0, _validateJs2['default'])(rule, value, true);
+	    options.tip[name] = result;
+
+	    if (result === true) {
+	        (0, _jquery2['default'])(target).removeClass(className.error);
+	    } else {
+	        (0, _jquery2['default'])(target).addClass(className.error);
+	    }
+	};
+
+	var ValidateMixin = function ValidateMixin() {
+	    var options = {
+	        tip: {}
+	    };
+
+	    return {
+	        validate: function validate(rule, next) {
+	            var t = this;
+
+	            var func = function func(event) {
+	                doValidate(options, rule, event.target);
+	                t.setState(t.state);
+
+	                if (next) {
+	                    next.apply(t, arguments, options.tip[event.target.name]);
+	                }
+	            };
+	            func.___validate_rule = rule;
+
+	            return func;
+	        },
+	        validateAll: function validateAll(formRef) {
+	            var t = this;
+	            var list = toNameRuleList(formRef);
+	            var form = _reactDom2['default'].findDOMNode(formRef);
+
+	            _underscore2['default'].each(list, function (elist) {
+	                doValidate(options, elist.rule, form[elist.name]);
+	            });
+	            t.setState(t.state);
+	        },
+	        validateTip: function validateTip(name) {
+	            if (name) {
+	                return options.tip[name];
+	            }
+	            return _underscore2['default'].map(_underscore2['default'].filter(options.tip, function (v, k) {
+	                return k !== true;
+	            }), function (v) {
+	                return v;
+	            });
+	        }
+	    };
+	};
+
+	exports['default'] = ValidateMixin;
+	module.exports = exports['default'];
+
+/***/ },
+/* 10 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
 
 /***/ }
 /******/ ])

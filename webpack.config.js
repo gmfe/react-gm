@@ -10,6 +10,12 @@ var reactExternal = {
     commonjs: 'react',
     amd: 'react'
 };
+var reactDOMExternal = {
+    root: 'ReactDOM',
+    commonjs2: 'react-dom',
+    commonjs: 'react-dom',
+    amd: 'react-dom'
+};
 var momentExternal = {
     root: 'moment',
     commonjs2: 'moment',
@@ -17,12 +23,29 @@ var momentExternal = {
     amd: 'moment'
 };
 
+var undescoreExternal = {
+    root: 'underscore',
+    commonjs2: 'underscore',
+    commonjs: 'underscore',
+    amd: 'underscore'
+};
+
+var jqueryExternal = {
+    root: 'jquery',
+    commonjs2: 'jquery',
+    commonjs: 'jquery',
+    amd: 'jquery'
+};
+
 module.exports = {
     entry: './lib/index',
     externals: {
         'react': reactExternal,
+        'react-dom': reactDOMExternal,
         'react-native': reactExternal,
-        'moment': momentExternal
+        'moment': momentExternal,
+        'underscore': undescoreExternal,
+        'jquery': jqueryExternal
     },
     module: {
         loaders: [

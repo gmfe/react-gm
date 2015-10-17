@@ -1,21 +1,25 @@
 import React from 'react';
+import Addons from 'react/addons';
 import ReactDOM from 'react-dom';
 import Grid from './lib/grid.component.js';
 import Droper from './lib/droper.component.js';
+import Former from './lib/form.component.js';
+import ValidationMixin from './lib/validation.mixin.js';
+import Validation, {ValidationTip} from './lib/validation.js';
 
-//let onClick = (() => console.log(arguments));
-let onClick = function () {
+
+var onClick = function () {
     console.log(arguments);
 
 };
 
-let isShow = function () {
-    console.log(arguments);
+var isShow = function () {
+    //console.log(arguments);
     return false;
 };
 
-let renderId = function (value, elist) {
-    console.log(arguments);
+var renderId = function (value, elist) {
+    //console.log(arguments);
     return 2;
 };
 
@@ -107,3 +111,69 @@ ReactDOM.render((
         <DroperWrap></DroperWrap>
     </div>
 ), document.getElementById('uploader-container'));
+
+
+var onSubmit = function (event) {
+    console.log('app onsubmit');
+    debugger;
+};
+
+var FormerDom = React.createClass({
+    mixins: [React.addons.LinkedStateMixin, ValidateMixin()],
+    getInitialState: function () {
+        return {
+            input: 'adf',
+            value: '2',
+            list: [{
+                value: '0',
+                text: 'adf'
+            }, {
+                value: '2',
+                text: '234'
+            }]
+        }
+    },
+    onChange:function(){
+        console.log(arguments);
+    },
+    onSubmit: function () {
+        this.validateAll(this.refs.myForm);
+    },
+    render: function () {
+        return (
+            <div>
+                <Former ref="myForm" className="" onSubmit={this.onSubmit}>
+                    <Former.Input name="name" onChange={this.validate('*', this.onChange)} >
+                        <div className="text-danger">{this.validateTip('name')}</div>
+                    </Former.Input>
+
+                    <Former.Select name="gender2" value={this.state.value} options={this.state.list} onChange={this.validate('*')}>
+                        <option value="">do</option>
+                    </Former.Select>
+                    <div className="form-group">
+                        <input type="text" className="form-control" name="height" onChange={this.validate('s3-5')}/>
+                        <div className="text-danger">{this.validateTip('height')}</div>
+                    </div>
+
+                    <div className="form-group">
+                        <button className="btn btn-default" type="submit">submit</button>
+                    </div>
+                </Former>
+                <div>
+                    {this.validateTip()}
+                </div>
+            </div>
+        );
+    }
+});
+
+ReactDOM.render(<FormerDom></FormerDom> , document.getElementById('form-container'));
+
+console.log(Validate('*', 'a', true));
+console.log(Validate('*2', 'a', true));
+console.log(Validate('n', 'a', true));
+console.log(Validate('n2', 'a', true));
+console.log(Validate('s', 'a', true));
+console.log(Validate('s2', 'a', true));
+console.log(Validate('zh', 'ad2fAf', true));
+console.log(Validate('zh3', '你好', true));
