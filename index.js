@@ -20,10 +20,10 @@ let renderId = function (value, elist) {
 };
 
 let gridData = {
-    enableSelect: true,
+    //enableSelect: true,
     enablePagination: true,
     enablePaginationText: true,
-    //loading: true,
+    loading: true,
     columns: [
         {field: 'id', name: 'id', render: renderId},
         {field: 'name', name: '名字'},
@@ -75,7 +75,8 @@ let gridData = {
 
 
 function getData() {
-    $.when({
+    return {
+        loading: false,
         list: [{
             id: 1,
             name: '1123',
@@ -101,11 +102,30 @@ function getData() {
             gender: 2,
             isOk: false
         }]
-    });
+    };
 }
+
+var GridWrap = React.createClass({
+    getInitialState: function () {
+        return gridData;
+    },
+    render: function () {
+        return (
+            <div>
+                <Grid data={this.state}></Grid>
+            </div>
+        )
+    },
+    componentDidMount: function () {
+        var t = this;
+        setTimeout(function () {
+            t.setState(getData());
+        }, 2000);
+    }
+});
 
 ReactDOM.render((
     <div>
-        <Grid data={gridData}></Grid>
+        <GridWrap></GridWrap>
     </div>
 ), document.getElementById('grid-container'));

@@ -169,10 +169,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        "..."
 	                    )
 	                ) : '',
-	                pages.map(function (page) {
+	                pages.map(function (page, i) {
 	                    return _react2["default"].createElement(
 	                        "li",
-	                        { className: data.index === page ? 'active' : '' },
+	                        { key: i, className: data.index === page ? 'active' : '' },
 	                        _react2["default"].createElement(
 	                            "a",
 	                            {
@@ -315,11 +315,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    'th',
 	                    { className: 'gm-grid-select' },
 	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: this.onSelect })
-	                ) : '',
-	                data.columns.map(function (col) {
+	                ) : null,
+	                data.columns.map(function (col, i) {
 	                    return _react2['default'].createElement(
 	                        'th',
-	                        null,
+	                        { key: i },
 	                        col.name
 	                    );
 	                }),
@@ -401,31 +401,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	            );
 	        } else if (data.list.length > 0) {
 	            tableBody = data.list.map(function (elist, index) {
-	                var tds = data.columns.map(function (col) {
+	                var tds = data.columns.map(function (col, i) {
 	                    // 转换成字符串，避免 true false 没显示
 	                    if (col.render) {
 	                        return _react2['default'].createElement(
 	                            'td',
-	                            null,
+	                            { key: i },
 	                            '' + col.render(elist[col.field], elist)
 	                        );
 	                    } else {
 	                        return _react2['default'].createElement(
 	                            'td',
-	                            null,
+	                            { key: i },
 	                            '' + elist[col.field]
 	                        );
 	                    }
 	                });
 
-	                var buttons = actions.map(function (action) {
+	                var buttons = actions.map(function (action, i) {
 	                    var classes = 'btn btn-default btn-xs ' + action.className;
 	                    if (action.isShow(elist, index) === false) {
 	                        classes += ' hidden';
 	                    }
 	                    return _react2['default'].createElement(
 	                        'button',
-	                        { onClick: t.onActions.bind(t, elist, index, action),
+	                        { key: i, onClick: t.onActions.bind(t, elist, index, action),
 	                            className: classes },
 	                        action.text
 	                    );
@@ -433,12 +433,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                return _react2['default'].createElement(
 	                    'tr',
-	                    null,
+	                    { key: index },
 	                    data.enableSelect ? _react2['default'].createElement(
 	                        'td',
 	                        null,
 	                        _react2['default'].createElement('input', { type: 'checkbox', checked: elist.___select, onClick: t.onSelect.bind(t, elist) })
-	                    ) : '',
+	                    ) : null,
 	                    tds,
 	                    actions.length > 0 ? _react2['default'].createElement(
 	                        'td',
@@ -449,11 +449,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	        }
 
-	        var batchButtons = batchs.map(function (batch) {
+	        var batchButtons = batchs.map(function (batch, i) {
 	            var classes = 'btn btn-default btn-sm ' + batch.className;
 	            return _react2['default'].createElement(
 	                'button',
-	                { onClick: t.onBatchs.bind(t, batch), className: classes },
+	                { key: i, onClick: t.onBatchs.bind(t, batch), className: classes },
 	                batch.text
 	            );
 	        });
