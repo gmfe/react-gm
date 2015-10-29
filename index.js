@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import  Grid from './lib/grid.component.js';
-
+import Grid from './lib/grid.component.js';
+import Droper from './lib/droper.component.js';
 
 //let onClick = (() => console.log(arguments));
 let onClick = function () {
@@ -83,24 +83,6 @@ function getData() {
             age: '10',
             gender: 1,
             isOk: false
-        }, {
-            id: 1,
-            name: 'haha',
-            age: '15',
-            gender: 1,
-            isOk: true
-        }, {
-            id: 1,
-            name: '有引号"有引号',
-            age: '20',
-            gender: 1,
-            isOk: false
-        }, {
-            id: 1,
-            name: '有逗号,有逗号',
-            age: '25',
-            gender: 2,
-            isOk: false
         }]
     };
 }
@@ -120,7 +102,7 @@ var GridWrap = React.createClass({
         var t = this;
         setTimeout(function () {
             t.setState(getData());
-        }, 2000);
+        }, 1000);
     }
 });
 
@@ -129,3 +111,26 @@ ReactDOM.render((
         <GridWrap></GridWrap>
     </div>
 ), document.getElementById('grid-container'));
+
+
+var DroperWrap = React.createClass({
+    render: function () {
+        return (
+            <div>
+                <Droper onDrop={this.handleDrop} accept="image/*"></Droper>
+                <Droper className="gm-droper-block" onDrop={this.handleDrop} accept=".xlsx">
+                    <button className="btn btn-default">upload</button>
+                </Droper>
+            </div>
+        );
+    },
+    handleDrop: function () {
+        console.log(arguments);
+    }
+});
+
+ReactDOM.render((
+    <div>
+        <DroperWrap></DroperWrap>
+    </div>
+), document.getElementById('uploader-container'));
