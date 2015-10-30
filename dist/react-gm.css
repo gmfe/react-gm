@@ -45,6 +45,10 @@
     border-radius: 5px;
 }
 
+.gm-droper-block{
+    display: inline-block;
+}
+
 .gm-droper-input[type="file"]{
     display: none;
 }
