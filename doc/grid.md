@@ -5,7 +5,7 @@ import 'react-gm.css';
 grid 组件需要引入样式
 
 # 表现
-
+<img src="https://raw.githubusercontent.com/gmfe/react-gm/master/doc/grid.png" />
 
 # 使用
 
