@@ -19,17 +19,15 @@ let renderId = function (value, elist) {
     return 2;
 };
 
-let gridData = {
-    //enableSelect: true,
+var gridData = {
+    enableSelect: true,
     enablePagination: true,
     enablePaginationText: true,
-    loading: true,
+    loading: false,
     columns: [
         {field: 'id', name: 'id', render: renderId},
         {field: 'name', name: '名字'},
-        {field: 'age', name: '年龄'},
-        {field: 'gender', name: '性别'},
-        {field: 'isOk', name: '是否'}
+        {field: 'age', name: '年龄'}
     ],
     actions: [{
         text: '删除1',
@@ -49,20 +47,15 @@ let gridData = {
         text: 'adsf',
         click: onClick
     }],
-    list: [],
-    //list: [{
-    //    id: 1,
-    //    name: '偶们啊啊发骚发所发生的',
-    //    age: '10',
-    //    gender: 1,
-    //    isOk: false
-    //}, {
-    //    id: 1,
-    //    name: 'haha',
-    //    age: '15',
-    //    gender: 1,
-    //    isOk: true
-    //}],
+    list: [{
+        id: 1,
+        name: '偶们啊啊发骚发所发生的',
+        age: '10'
+    }, {
+        id: 1,
+        name: 'haha',
+        age: '15'
+    }],
     pagination: {
         count: 80,
         offset: 10,
@@ -72,20 +65,6 @@ let gridData = {
         console.log(arguments);
     }
 };
-
-
-function getData() {
-    return {
-        loading: false,
-        list: [{
-            id: 1,
-            name: '1123',
-            age: '10',
-            gender: 1,
-            isOk: false
-        }]
-    };
-}
 
 var GridWrap = React.createClass({
     getInitialState: function () {
@@ -97,12 +76,6 @@ var GridWrap = React.createClass({
                 <Grid data={this.state}></Grid>
             </div>
         )
-    },
-    componentDidMount: function () {
-        var t = this;
-        setTimeout(function () {
-            t.setState(getData());
-        }, 1000);
     }
 });
 
@@ -118,7 +91,7 @@ var DroperWrap = React.createClass({
         return (
             <div>
                 <Droper onDrop={this.handleDrop} accept="image/*"></Droper>
-                <Droper className="gm-droper-block" onDrop={this.handleDrop} accept=".xlsx">
+                <Droper className="gm-droper-wrap" onDrop={this.handleDrop} accept=".xlsx">
                     <button className="btn btn-default">upload</button>
                 </Droper>
             </div>
