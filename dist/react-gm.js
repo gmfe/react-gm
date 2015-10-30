@@ -159,7 +159,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { href: "javascript:;", "data-page": "1" },
 	                        "1"
 	                    )
-	                ) : '',
+	                ) : null,
 	                begin >= 3 ? _react2["default"].createElement(
 	                    "li",
 	                    { className: "disabled" },
@@ -168,7 +168,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { href: "javascript:;" },
 	                        "..."
 	                    )
-	                ) : '',
+	                ) : null,
 	                pages.map(function (page, i) {
 	                    return _react2["default"].createElement(
 	                        "li",
@@ -189,7 +189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { href: "javascript:;" },
 	                        "..."
 	                    )
-	                ) : '',
+	                ) : null,
 	                end <= all - 1 ? _react2["default"].createElement(
 	                    "li",
 	                    null,
@@ -198,7 +198,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { href: "javascript:;", "data-page": all },
 	                        all
 	                    )
-	                ) : '',
+	                ) : null,
 	                _react2["default"].createElement(
 	                    "li",
 	                    { className: data.index === all ? 'disabled' : '' },
@@ -327,7 +327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    'th',
 	                    null,
 	                    '操作'
-	                ) : ''
+	                ) : null
 	            )
 	        );
 	    },
@@ -444,7 +444,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        'td',
 	                        null,
 	                        buttons
-	                    ) : ''
+	                    ) : null
 	                );
 	            });
 	        }
@@ -465,12 +465,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'div',
 	                { className: 'pull-right' },
 	                _react2['default'].createElement(_paginationComponentJs2['default'], { data: data.pagination, toPage: t.onToPage })
-	            ) : '',
+	            ) : null,
 	            data.enablePaginationText ? _react2['default'].createElement(
 	                'div',
 	                { className: 'pull-right' },
 	                _react2['default'].createElement(_paginationTextComponentJs2['default'], { data: data.pagination })
-	            ) : ''
+	            ) : null
 	        );
 
 	        return _react2['default'].createElement(
@@ -492,9 +492,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2['default'].createElement(
 	                    'div',
 	                    { className: 'pull-left gm-grid-batch' },
-	                    data.enableSelect ? batchButtons : ''
+	                    data.enableSelect ? batchButtons : null
 	                ),
-	                data.pagination ? pagination : ''
+	                data.pagination ? pagination : null
 	            )
 	        );
 	    },
