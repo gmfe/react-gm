@@ -7,7 +7,6 @@ import Former from './lib/former.component.js';
 import ValidateMixin from './lib/validate.mixin.js';
 import Validate, {ValidateTip} from './lib/validate.js';
 
-
 var onClick = function () {
     console.log(arguments);
 
@@ -137,7 +136,7 @@ var FormerDom = React.createClass({
         console.log(arguments);
     },
     onSubmit: function () {
-        this.validateAll(this.refs.myForm);
+        console.log(this.validateAll(this.refs.myForm));
     },
     render: function () {
         return (

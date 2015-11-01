@@ -30,7 +30,6 @@ js
 - react
 - react-dom
 - underscore
-- jquery
 
 css
 - bootstrap

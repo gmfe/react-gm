@@ -30,13 +30,6 @@ var undescoreExternal = {
     amd: 'underscore'
 };
 
-var jqueryExternal = {
-    root: 'jquery',
-    commonjs2: 'jquery',
-    commonjs: 'jquery',
-    amd: 'jquery'
-};
-
 module.exports = {
     entry: './lib/index',
     externals: {
@@ -44,8 +37,7 @@ module.exports = {
         'react-dom': reactDOMExternal,
         'react-native': reactExternal,
         'moment': momentExternal,
-        'underscore': undescoreExternal,
-        'jquery': jqueryExternal
+        'underscore': undescoreExternal
     },
     module: {
         loaders: [

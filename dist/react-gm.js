@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("underscore"), require("react-dom"), require("jquery"));
+		module.exports = factory(require("react"), require("underscore"), require("react-dom"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "underscore", "react-dom", "jquery"], factory);
+		define(["react", "underscore", "react-dom"], factory);
 	else if(typeof exports === 'object')
-		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("jquery"));
+		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"));
 	else
-		root["ReactGM"] = factory(root["React"], root["underscore"], root["ReactDOM"], root["jquery"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__) {
+		root["ReactGM"] = factory(root["React"], root["underscore"], root["ReactDOM"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_12__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -66,11 +66,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gridComponentJs2 = _interopRequireDefault(_gridComponentJs);
 
-	var _paginationComponentJs = __webpack_require__(4);
+	var _paginationComponentJs = __webpack_require__(3);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
-	var _paginationTextComponentJs = __webpack_require__(5);
+	var _paginationTextComponentJs = __webpack_require__(4);
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
@@ -90,9 +90,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validateMixinJs2 = _interopRequireDefault(_validateMixinJs);
 
-	var _gmJs = __webpack_require__(3);
+	var _utilJs = __webpack_require__(5);
 
-	var _gmJs2 = _interopRequireDefault(_gmJs);
+	var _utilJs2 = _interopRequireDefault(_utilJs);
 
 	__webpack_require__(11);
 
@@ -101,12 +101,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Pagination: _paginationComponentJs2['default'],
 	    PaginationText: _paginationTextComponentJs2['default'],
 	    Former: _formerComponentJs2['default'],
+	    ValidateMixin: _validateMixinJs2['default'],
 	    Validate: _validateJs2['default'],
-	    ValidateMixin: _validateMixinJs2['default']
+	    Util: _utilJs2['default']
 	};
 
-	exports.GM = _gmJs2['default'];
 	exports['default'] = ReactGM;
+	module.exports = exports['default'];
 
 /***/ },
 /* 1 */
@@ -122,123 +123,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 实现观麦库，和业务无关的收归在GM
-	'use strict';
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var fetch = window.fetch,
-	    FormData = window.FormData,
-	    Promise = window.FormData,
-	    $ = window.$;
-
-	/*****Request begin*****/
-	var processRequestResponse = function processRequestResponse(promise, url) {
-	    var color = 'color: red;';
-	    return promise.then(function (res) {
-	        return res.json();
-	    }).then(function (json) {
-	        if (json.code === 0) {
-	            return json.data;
-	        } else {
-	            console.log('%c*** request url: %s、code: %s、msg: %s', color, url, json.code, json.msg);
-	            return Promise.reject(json.msg || '位置错误');
-	        }
-	    })['catch'](function (reason) {
-	        console.log('%c*** Request catch %s', color, reason);
-	    });
-	};
-
-	var Request = function Request(url, options) {
-	    this._data = {};
-	    this.url = url;
-	    this.options = Object.assign({
-	        method: 'get',
-	        credentials: 'include' // 需要设置才能获取cookie
-	    }, options);
-	};
-	Request.prototype = {
-	    data: function data(_data) {
-	        this._data = _data || {};
-	        return this;
-	    },
-	    get: function get() {
-	        var param = $.param(this._data);
-	        var newUrl = this.url + (this.url.indexOf('?') > -1 ? '&' : '?') + param;
-
-	        return processRequestResponse(fetch(newUrl, this.options));
-	    },
-	    post: function post() {
-	        var data = this._data;
-	        var formData = new FormData();
-	        for (var e in data) {
-	            formData.append(e, data[e]);
-	        }
-	        this.options.method = 'post';
-	        this.option.body = formData;
-	        return processRequestResponse(fetch(this.url, this.options));
-	    }
-	};
-
-	var RequestFactory = function RequestFactory(url, options) {
-	    return new Request(url, options);
-	};
-
-	/*****Request end*****/
-
-	var $tipsContainer = null;
-	var Tips = function Tips(word) {
-	    if (!$tipsContainer) {
-	        $tipsContainer = $('');
-	    }
-	};
-
-	var format = function format(str, data) {
-	    var result = str;
-	    if (arguments.length < 2) {
-	        return result;
-	    }
-
-	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
-	        var keys = arguments[1].split('.');
-	        var r = null;
-	        _underscore2['default'].each(keys, function (value, index) {
-	            if (index) {
-	                r = r[value];
-	            } else {
-	                r = data[value];
-	            }
-	        });
-	        return r;
-	    });
-	    return result;
-	};
-
-	/*
-	 * Cookit 见 https://github.com/js-cookie/js-cookie/
-	 * */
-
-	/*
-	 * 约定 json 格式 code:0 data:{} msg:''。
-	 * code===0成功则返回data 失败返回msg
-	 * Request(url).data({}).get().then();
-	 *
-	 * */
-	var GM = {
-	    Request: RequestFactory,
-	    format: format
-	};
-
-	module.exports = GM;
-
-/***/ },
-/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -382,7 +266,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -428,6 +312,62 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var format = function format(str, data) {
+	    var result = str;
+	    if (arguments.length < 2) {
+	        return result;
+	    }
+
+	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
+	        var keys = arguments[1].split('.');
+	        var r = null;
+	        _underscore2['default'].each(keys, function (value, index) {
+	            if (index) {
+	                r = r[value];
+	            } else {
+	                r = data[value];
+	            }
+	        });
+	        return r;
+	    });
+	    return result;
+	};
+
+	/*
+	 * Cookit 见 https://github.com/js-cookie/js-cookie/
+	 * */
+
+	/*
+	 * 约定 json 格式 code:0 data:{} msg:''。
+	 * code===0成功则返回data 失败返回msg
+	 * Request(url).data({}).get().then();
+	 *
+	 * */
+
+	var Util = {
+	    //Request: RequestFactory,
+	    format: format
+	};
+
+	exports['default'] = Util;
+	module.exports = exports['default'];
+
+/***/ },
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -443,11 +383,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _gmJs = __webpack_require__(3);
+	var _utilJs = __webpack_require__(5);
 
-	var _gmJs2 = _interopRequireDefault(_gmJs);
+	var _utilJs2 = _interopRequireDefault(_utilJs);
 
-	// 以下是可重复的，比如 *6-16：检测是否为6到16位任意字符
+	// 以下是可重复的
 	// *：任何字符
 	// n：数字
 	// s：字符
@@ -460,8 +400,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	// m：手机号码
 	// e：email
 	// url：网址
-	//
-	// regex
 
 	// 有些特别的字符需要转换。后续维护增加
 	var specialKeyMap = {
@@ -483,12 +421,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var ruleStr = _underscore2['default'].map(_underscore2['default'].keys(ruleKeyMap), function (value) {
 	        return specialKeyMap[value] ? specialKeyMap[value] : value;
 	    }).join('|');
-	    var regExp = new RegExp('^(' + ruleStr + ')((\\d*)(-(\\d*))?)?$');
+	    var regExp = new RegExp('^(' + ruleStr + ')((\\d*)((-)(\\d*))?)?$');
 
 	    rule.replace(regExp, function () {
 	        info.type = arguments[1];
 	        info.min = arguments[3];
-	        info.max = arguments[5];
+	        info.cross = arguments[4];
+	        info.max = arguments[6];
 	    });
 	    return info;
 	};
@@ -502,9 +441,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (noRangeRuleKeys.indexOf(info.type) === -1) {
 	        if (info.max) {
-	            return _gmJs2['default'].format(ruleKeyTipMap.w[info.type][2], info);
+	            return _utilJs2['default'].format(ruleKeyTipMap.w[info.type][3], info);
+	        } else if (info.cross) {
+	            return _utilJs2['default'].format(ruleKeyTipMap.w[info.type][2], info);
 	        } else if (info.min) {
-	            return _gmJs2['default'].format(ruleKeyTipMap.w[info.type][1], info);
+	            return _utilJs2['default'].format(ruleKeyTipMap.w[info.type][1], info);
 	        }
 	        return ruleKeyTipMap.w[info.type][0];
 	    }
@@ -523,6 +464,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (noRangeRuleKeys.indexOf(info.type) === -1) {
 	            if (info.min === undefined) {
 	                regs = regs.concat(['+']);
+	            } else if (!info.cross) {
+	                regs = regs.concat(['{', info.min, '}']);
 	            } else {
 	                regs = regs.concat(['{', info.min, ',', info.max === undefined ? '' : info.max, '}']);
 	            }
@@ -548,42 +491,42 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return {
 	        range: true,
 	        rule: '[\\w\\W]',
-	        tip: ['不能为空！', '请填写至少{min}位任意字符！', '请填写{min}到{max}位任意字符！']
+	        tip: ['不能为空！', '请填写{min}位任意字符！', '请填写至少{min}位任意字符！', '请填写{min}到{max}位任意字符！']
 	    };
 	});
 	Validate.factory('n', function () {
 	    return {
 	        range: true,
 	        rule: '\\d',
-	        tip: ['请填写数字！', '请填写至少{min}位数字！', '请填写{min}到{max}位数字！']
+	        tip: ['请填写数字！', '请填写{min}位数字！', '请填写至少{min}位数字！', '请填写{min}到{max}位数字！']
 	    };
 	});
 	Validate.factory('s', function () {
 	    return {
 	        range: true,
 	        rule: '[\\u4E00-\\u9FA5\\uf900-\\ufa2d\\w\\.\\s]',
-	        tip: ['不能输入特殊字符！', '请填写至少{min}位字符！', '请填写{min}到{max}位字符！']
+	        tip: ['不能输入特殊字符！', '请填写{min}位字符！', '请填写至少{min}位字符！', '请填写{min}到{max}位字符！']
 	    };
 	});
 	Validate.factory('l', function () {
 	    return {
 	        range: true,
 	        rule: '[a-zA-Z]',
-	        tip: ['请填写字母！', '请填写至少{min}位字母！', '请填写{min}到{max}位字母！']
+	        tip: ['请填写字母！', '请填写{min}位字母！', '请填写至少{min}位字母！', '请填写{min}到{max}位字母！']
 	    };
 	});
 	Validate.factory('nl', function () {
 	    return {
 	        range: true,
 	        rule: '[a-zA-Z0-9]',
-	        tip: ['请填写字母或数字！', '请填写至少{min}位字母或数字！', '请填写{min}到{max}位字母或数字！']
+	        tip: ['请填写字母或数字！', '请填写{min}位字母或数字！', '请填写至少{min}位字母或数字！', '请填写{min}到{max}位字母或数字！']
 	    };
 	});
 	Validate.factory('zh', function () {
 	    return {
 	        range: true,
 	        rule: '[\\u4e00-\\u9fa5]',
-	        tip: ['请填写汉字！', '请填写至少{min}位汉字！', '请填写{min}到{max}位汉字！']
+	        tip: ['请填写汉字！', '请填写{min}位汉字！', '请填写至少{min}位汉字！', '请填写{min}到{max}位汉字！']
 	    };
 	});
 	Validate.factory('p', function () {
@@ -1000,11 +943,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _paginationComponentJs = __webpack_require__(4);
+	var _paginationComponentJs = __webpack_require__(3);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
-	var _paginationTextComponentJs = __webpack_require__(5);
+	var _paginationTextComponentJs = __webpack_require__(4);
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
@@ -1266,10 +1209,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
-	var _jquery = __webpack_require__(13);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
 	var className = {
 	    error: 'gm-invalid'
 	};
@@ -1315,9 +1254,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    options.tip[name] = result;
 
 	    if (result === true) {
-	        (0, _jquery2['default'])(target).removeClass(className.error);
+	        target.className = _underscore2['default'].without(target.className.split(' '), className.error).join(' ');
 	    } else {
-	        (0, _jquery2['default'])(target).addClass(className.error);
+	        target.className = _underscore2['default'].union(target.className.split(' '), [className.error]).join(' ');
 	    }
 	};
 
@@ -1332,7 +1271,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var func = function func(event) {
 	                doValidate(options, rule, event.target);
-	                t.setState(t.state);
+	                t.setState({});
 
 	                if (next) {
 	                    next.apply(t, arguments, options.tip[event.target.name]);
@@ -1343,6 +1282,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return func;
 	        },
 	        validateAll: function validateAll(formRef) {
+	            if (!formRef) {
+	                return false;
+	            }
 	            var t = this;
 	            var list = toNameRuleList(formRef);
 	            var form = _reactDom2['default'].findDOMNode(formRef);
@@ -1350,14 +1292,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _underscore2['default'].each(list, function (elist) {
 	                doValidate(options, elist.rule, form[elist.name]);
 	            });
-	            t.setState(t.state);
+	            t.setState({});
+	            return t.validateTip().length === 0;
 	        },
 	        validateTip: function validateTip(name) {
 	            if (name) {
 	                return options.tip[name];
 	            }
-	            return _underscore2['default'].map(_underscore2['default'].filter(options.tip, function (v, k) {
-	                return k !== true;
+	            return _underscore2['default'].map(_underscore2['default'].filter(options.tip, function (v) {
+	                return v !== true;
 	            }), function (v) {
 	                return v;
 	            });
@@ -1379,12 +1322,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
-
-/***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
 
 /***/ }
 /******/ ])
