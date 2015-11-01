@@ -3,9 +3,9 @@ import Addons from 'react/addons';
 import ReactDOM from 'react-dom';
 import Grid from './lib/grid.component.js';
 import Droper from './lib/droper.component.js';
-import Former from './lib/form.component.js';
-import ValidationMixin from './lib/validation.mixin.js';
-import Validation, {ValidationTip} from './lib/validation.js';
+import Former from './lib/former.component.js';
+import ValidateMixin from './lib/validate.mixin.js';
+import Validate, {ValidateTip} from './lib/validate.js';
 
 
 var onClick = function () {

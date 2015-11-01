@@ -31,7 +31,7 @@
 .gm-grid-batch button {
     margin-right: 10px;
 }
-
+/*droper*/
 .gm-droper {
 
 }
@@ -51,7 +51,7 @@
 
 .gm-droper-input[type="file"]{
     display: none;
-}}
+}
 
 /*form*/
 .gm-invalid{
