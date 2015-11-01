@@ -170,10 +170,6 @@ var FormerDom = React.createClass({
 ReactDOM.render(<FormerDom></FormerDom> , document.getElementById('form-container'));
 
 console.log(Validate('*', 'a', true));
-console.log(Validate('*2', 'a', true));
-console.log(Validate('n', 'a', true));
-console.log(Validate('n2', 'a', true));
-console.log(Validate('s', 'a', true));
-console.log(Validate('s2', 'a', true));
-console.log(Validate('zh', 'ad2fAf', true));
-console.log(Validate('zh3', '你好', true));
+console.log(Validate('*3', 'aaaa', true));
+console.log(Validate('*3-', 'aa', true));
+console.log(Validate('*3-5', 'a', true));

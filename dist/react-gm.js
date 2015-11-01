@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("jquery"));
 	else
 		root["ReactGM"] = factory(root["React"], root["underscore"], root["ReactDOM"], root["jquery"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -62,7 +62,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _gridComponentJs = __webpack_require__(8);
+	var _gridComponentJs = __webpack_require__(9);
 
 	var _gridComponentJs2 = _interopRequireDefault(_gridComponentJs);
 
@@ -74,7 +74,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
-	var _formerComponentJs = __webpack_require__(7);
+	var _droperComponentJs = __webpack_require__(7);
+
+	var _droperComponentJs2 = _interopRequireDefault(_droperComponentJs);
+
+	var _formerComponentJs = __webpack_require__(8);
 
 	var _formerComponentJs2 = _interopRequireDefault(_formerComponentJs);
 
@@ -82,7 +86,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
-	var _validateMixinJs = __webpack_require__(9);
+	var _validateMixinJs = __webpack_require__(10);
 
 	var _validateMixinJs2 = _interopRequireDefault(_validateMixinJs);
 
@@ -90,7 +94,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gmJs2 = _interopRequireDefault(_gmJs);
 
-	__webpack_require__(10);
+	__webpack_require__(11);
 
 	var ReactGM = {
 	    Grid: _gridComponentJs2['default'],
@@ -616,6 +620,231 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(1);
+
+	var Droper = (function (_React$Component) {
+	    _inherits(Droper, _React$Component);
+
+	    function Droper(props, context) {
+	        _classCallCheck(this, Droper);
+
+	        _get(Object.getPrototypeOf(Droper.prototype), 'constructor', this).call(this, props, context);
+	        this.onClick = this.onClick.bind(this);
+	        this.onDragEnter = this.onDragEnter.bind(this);
+	        this.onDragLeave = this.onDragLeave.bind(this);
+	        this.onDragOver = this.onDragOver.bind(this);
+	        this.onDrop = this.onDrop.bind(this);
+
+	        this.state = {
+	            isDragActive: false
+	        };
+	    }
+
+	    _createClass(Droper, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.enterCounter = 0;
+	        }
+	    }, {
+	        key: 'accept',
+	        value: function accept(file, acceptedFiles) {
+	            if (file && acceptedFiles) {
+	                var _ret = (function () {
+	                    var acceptedFilesArray = acceptedFiles.split(',');
+	                    var fileName = file.name || '';
+	                    var mimeType = file.type || '';
+	                    var baseMimeType = mimeType.replace(/\/.*$/, '');
+
+	                    return {
+	                        v: acceptedFilesArray.some(function (type) {
+	                            var validType = type.trim();
+	                            if (validType.charAt(0) === '.') {
+	                                return fileName.toLowerCase().endsWith(validType.toLowerCase());
+	                            } else if (/\/\*$/.test(validType)) {
+	                                // This is something like a image/* mime type
+	                                return baseMimeType === validType.replace(/\/.*$/, '');
+	                            }
+	                            return mimeType === validType;
+	                        })
+	                    };
+	                })();
+
+	                if (typeof _ret === 'object') return _ret.v;
+	            }
+	            return true;
+	        }
+	    }, {
+	        key: 'allFilesAccepted',
+	        value: function allFilesAccepted(files) {
+	            var _this = this;
+
+	            return files.every(function (file) {
+	                return _this.accept(file, _this.props.accept);
+	            });
+	        }
+	    }, {
+	        key: 'onDragEnter',
+	        value: function onDragEnter(e) {
+	            e.preventDefault();
+
+	            ++this.enterCounter;
+
+	            // This is tricky. During the drag even the dataTransfer.files is null
+	            // But Chrome implements some drag store, which is accesible via dataTransfer.items
+	            var dataTransferItems = e.dataTransfer && e.dataTransfer.items ? e.dataTransfer.items : [];
+
+	            // Now we need to convert the DataTransferList to Array
+	            var itemsArray = Array.prototype.slice.call(dataTransferItems);
+	            var allFilesAccepted = this.allFilesAccepted(itemsArray);
+
+	            this.setState({
+	                isDragActive: allFilesAccepted,
+	                isDragReject: !allFilesAccepted
+	            });
+
+	            if (this.props.onDragEnter) {
+	                this.props.onDragEnter(e);
+	            }
+	        }
+	    }, {
+	        key: 'onDragOver',
+	        value: function onDragOver(e) {
+	            e.preventDefault();
+	        }
+	    }, {
+	        key: 'onDragLeave',
+	        value: function onDragLeave(e) {
+	            e.preventDefault();
+
+	            if (--this.enterCounter > 0) {
+	                return;
+	            }
+
+	            this.setState({
+	                isDragActive: false,
+	                isDragReject: false
+	            });
+
+	            if (this.props.onDragLeave) {
+	                this.props.onDragLeave(e);
+	            }
+	        }
+	    }, {
+	        key: 'onDrop',
+	        value: function onDrop(e) {
+	            e.preventDefault();
+
+	            // Reset the counter along with the drag on a drop.
+	            this.enterCounter = 0;
+
+	            this.setState({
+	                isDragActive: false,
+	                isDragReject: false
+	            });
+
+	            var droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
+	            var max = this.props.multiple ? droppedFiles.length : 1;
+	            var files = [];
+
+	            for (var i = 0; i < max; i++) {
+	                var file = droppedFiles[i];
+	                file.preview = window.URL.createObjectURL(file);
+	                files.push(file);
+	            }
+
+	            if (this.props.onDrop) {
+	                this.props.onDrop(files, e);
+	            }
+
+	            if (this.allFilesAccepted(files)) {
+	                if (this.props.onDropAccepted) {
+	                    this.props.onDropAccepted(files, e);
+	                }
+	            } else {
+	                if (this.props.onDropRejected) {
+	                    this.props.onDropRejected(files, e);
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'onClick',
+	        value: function onClick() {
+	            if (!this.props.disableClick) {
+	                this.open();
+	            }
+	        }
+	    }, {
+	        key: 'open',
+	        value: function open() {
+	            var fileInput = this.refs.fileInput;
+	            fileInput.value = null;
+	            fileInput.click();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var className = 'gm-droper ';
+	            className += this.props.className ? this.props.className : ' gm-droper-default ';
+
+	            return React.createElement(
+	                'div',
+	                {
+	                    className: className,
+	                    onClick: this.onClick,
+	                    onDragEnter: this.onDragEnter,
+	                    onDragOver: this.onDragOver,
+	                    onDragLeave: this.onDragLeave,
+	                    onDrop: this.onDrop
+	                },
+	                this.props.children,
+	                React.createElement('input', {
+	                    type: 'file',
+	                    ref: 'fileInput',
+	                    className: 'gm-droper-input',
+	                    multiple: this.props.multiple,
+	                    accept: this.props.accept,
+	                    onChange: this.onDrop
+	                })
+	            );
+	        }
+	    }]);
+
+	    return Droper;
+	})(React.Component);
+
+	Droper.defaultProps = {
+	    disableClick: false,
+	    multiple: true
+	};
+
+	Droper.propTypes = {
+	    onDrop: React.PropTypes.func,
+	    onDropAccepted: React.PropTypes.func,
+	    onDropRejected: React.PropTypes.func,
+	    onDragEnter: React.PropTypes.func,
+	    onDragLeave: React.PropTypes.func,
+
+	    disableClick: React.PropTypes.bool,
+	    multiple: React.PropTypes.bool,
+	    accept: React.PropTypes.string
+	};
+
+	module.exports = Droper;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
@@ -756,7 +985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1010,7 +1239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1025,7 +1254,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(11);
+	var _reactDom = __webpack_require__(12);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -1037,7 +1266,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
-	var _jquery = __webpack_require__(12);
+	var _jquery = __webpack_require__(13);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -1140,22 +1369,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
+	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 12 */
 /***/ function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
 
 /***/ }
 /******/ ])
