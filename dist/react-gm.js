@@ -1058,20 +1058,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        return _react2['default'].createElement(
 	                            'td',
 	                            { key: i },
-	                            '' + col.render(elist[col.field], elist)
+	                            col.render(elist[col.field], elist)
 	                        );
 	                    } else {
 	                        return _react2['default'].createElement(
 	                            'td',
 	                            { key: i },
-	                            '' + elist[col.field]
+	                            elist[col.field]
 	                        );
 	                    }
 	                });
 
 	                var buttons = actions.map(function (action, i) {
 	                    var classes = 'btn btn-default btn-xs ' + action.className;
-	                    if (action.isShow(elist, index) === false) {
+	                    if (!!action.isShow(elist, index) === false) {
 	                        classes += ' hidden';
 	                    }
 	                    return _react2['default'].createElement(
