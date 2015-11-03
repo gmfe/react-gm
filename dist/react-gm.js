@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"));
 	else
 		root["ReactGM"] = factory(root["React"], root["underscore"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_12__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_8__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -62,39 +62,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _gridComponentJs = __webpack_require__(9);
+	var _gridComponentJs = __webpack_require__(10);
 
 	var _gridComponentJs2 = _interopRequireDefault(_gridComponentJs);
 
-	var _paginationComponentJs = __webpack_require__(3);
+	var _paginationComponentJs = __webpack_require__(4);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
-	var _paginationTextComponentJs = __webpack_require__(4);
+	var _paginationTextComponentJs = __webpack_require__(5);
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
-	var _droperComponentJs = __webpack_require__(7);
+	var _droperComponentJs = __webpack_require__(3);
 
 	var _droperComponentJs2 = _interopRequireDefault(_droperComponentJs);
 
-	var _formerComponentJs = __webpack_require__(8);
+	var _formerComponentJs = __webpack_require__(9);
 
 	var _formerComponentJs2 = _interopRequireDefault(_formerComponentJs);
 
-	var _validateJs = __webpack_require__(6);
+	var _validateJs = __webpack_require__(7);
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
-	var _validateMixinJs = __webpack_require__(10);
+	var _validateMixinJs = __webpack_require__(12);
 
 	var _validateMixinJs2 = _interopRequireDefault(_validateMixinJs);
 
-	var _utilJs = __webpack_require__(5);
+	var _utilJs = __webpack_require__(6);
 
 	var _utilJs2 = _interopRequireDefault(_utilJs);
 
-	__webpack_require__(11);
+	var _importLeadComponentJs = __webpack_require__(11);
+
+	var _importLeadComponentJs2 = _interopRequireDefault(_importLeadComponentJs);
+
+	__webpack_require__(13);
 
 	var ReactGM = {
 	    Grid: _gridComponentJs2['default'],
@@ -103,6 +107,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Former: _formerComponentJs2['default'],
 	    ValidateMixin: _validateMixinJs2['default'],
 	    Validate: _validateJs2['default'],
+	    ImportLead: _importLeadComponentJs2['default'],
+	    Droper: _droperComponentJs2['default'],
 	    Util: _utilJs2['default']
 	};
 
@@ -123,448 +129,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var Pagination = _react2["default"].createClass({
-	    displayName: "Pagination",
-
-	    propTypes: {
-	        data: _react2["default"].PropTypes.shape({
-	            count: _react2["default"].PropTypes.number.isRequired,
-	            offset: _react2["default"].PropTypes.number.isRequired,
-	            limit: _react2["default"].PropTypes.number.isRequired
-	        }),
-	        toPage: _react2["default"].PropTypes.func.isRequired
-	    },
-	    render: function render() {
-	        var data = Object.assign({}, this.props.data);
-
-	        data.index = data.offset / data.limit + 1;
-
-	        var offset = 2,
-	            pages = [],
-	            all = Math.ceil(data.count / data.limit),
-	            begin = Math.max(data.index - offset, 1),
-	            end = Math.min(data.index + offset, all);
-
-	        if (all > offset * 2 + 1) {
-	            if (begin === 1) {
-	                end += offset;
-	            } else if (end === all) {
-	                begin -= offset;
-	            }
-	        }
-
-	        for (var i = begin; i <= end; i++) {
-	            pages.push(i);
-	        }
-
-	        return _react2["default"].createElement(
-	            "div",
-	            { className: "gm-pagination" },
-	            _react2["default"].createElement(
-	                "ul",
-	                { className: "pagination pagination-sm", onClick: this.onPage },
-	                _react2["default"].createElement(
-	                    "li",
-	                    { className: data.index === 1 ? 'disabled' : '' },
-	                    _react2["default"].createElement(
-	                        "a",
-	                        { href: "javascript:;", "data-page": data.index - 1 },
-	                        "上一页"
-	                    )
-	                ),
-	                begin >= 2 ? _react2["default"].createElement(
-	                    "li",
-	                    null,
-	                    _react2["default"].createElement(
-	                        "a",
-	                        { href: "javascript:;", "data-page": "1" },
-	                        "1"
-	                    )
-	                ) : undefined,
-	                begin >= 3 ? _react2["default"].createElement(
-	                    "li",
-	                    { className: "disabled" },
-	                    _react2["default"].createElement(
-	                        "a",
-	                        { href: "javascript:;" },
-	                        "..."
-	                    )
-	                ) : undefined,
-	                pages.map(function (page, i) {
-	                    return _react2["default"].createElement(
-	                        "li",
-	                        { key: i, className: data.index === page ? 'active' : '' },
-	                        _react2["default"].createElement(
-	                            "a",
-	                            {
-	                                href: "javascript:;", "data-page": page },
-	                            page
-	                        )
-	                    );
-	                }),
-	                end <= all - 2 ? _react2["default"].createElement(
-	                    "li",
-	                    { className: "disabled" },
-	                    _react2["default"].createElement(
-	                        "a",
-	                        { href: "javascript:;" },
-	                        "..."
-	                    )
-	                ) : undefined,
-	                end <= all - 1 ? _react2["default"].createElement(
-	                    "li",
-	                    null,
-	                    _react2["default"].createElement(
-	                        "a",
-	                        { href: "javascript:;", "data-page": all },
-	                        all
-	                    )
-	                ) : undefined,
-	                _react2["default"].createElement(
-	                    "li",
-	                    { className: data.index === all ? 'disabled' : '' },
-	                    _react2["default"].createElement(
-	                        "a",
-	                        { href: "javascript:;", "data-page": data.index + 1 },
-	                        "下一页"
-	                    )
-	                )
-	            )
-	        );
-	    },
-	    onPage: function onPage(event) {
-	        var page = ~ ~event.target.getAttribute('data-page'),
-	            data = this.props.data,
-	            count = Math.ceil(data.count / data.limit),
-	            toPage = this.props.toPage;
-	        if (!page || page == data.index || page < 1 || page > count) {
-	            return;
-	        }
-
-	        toPage({
-	            offset: (page - 1) * data.limit,
-	            limit: data.limit
-	        }, page);
-	    }
-	});
-
-	exports["default"] = Pagination;
-	module.exports = exports["default"];
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var PaginationText = _react2["default"].createClass({
-	    displayName: "PaginationText",
-
-	    propTypes: {
-	        data: _react2["default"].PropTypes.shape({
-	            count: _react2["default"].PropTypes.number.isRequired,
-	            offset: _react2["default"].PropTypes.number.isRequired,
-	            limit: _react2["default"].PropTypes.number.isRequired
-	        })
-	    },
-	    render: function render() {
-	        var data = this.props.data;
-
-	        return _react2["default"].createElement(
-	            "div",
-	            { className: "gm-pagination-text" },
-	            "显示第 ",
-	            data.offset + 1,
-	            " 到 ",
-	            Math.min(data.count, data.offset + data.limit - 1),
-	            " 行，一共 ",
-	            data.count,
-	            " 行记录"
-	        );
-	    }
-	});
-
-	exports["default"] = PaginationText;
-	module.exports = exports["default"];
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var format = function format(str, data) {
-	    var result = str;
-	    if (arguments.length < 2) {
-	        return result;
-	    }
-
-	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
-	        var keys = arguments[1].split('.');
-	        var r = null;
-	        _underscore2['default'].each(keys, function (value, index) {
-	            if (index) {
-	                r = r[value];
-	            } else {
-	                r = data[value];
-	            }
-	        });
-	        return r;
-	    });
-	    return result;
-	};
-
-	/*
-	 * Cookit 见 https://github.com/js-cookie/js-cookie/
-	 * */
-
-	/*
-	 * 约定 json 格式 code:0 data:{} msg:''。
-	 * code===0成功则返回data 失败返回msg
-	 * Request(url).data({}).get().then();
-	 *
-	 * */
-
-	var Util = {
-	    //Request: RequestFactory,
-	    format: format
-	};
-
-	exports['default'] = Util;
-	module.exports = exports['default'];
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var _utilJs = __webpack_require__(5);
-
-	var _utilJs2 = _interopRequireDefault(_utilJs);
-
-	// 以下是可重复的
-	// *：任何字符
-	// n：数字
-	// s：字符
-	// l：字母
-	// nl: 数字和字母
-	// zh: 中文
-
-	// 以下是某具体类型
-	// p：邮政编码
-	// m：手机号码
-	// e：email
-	// url：网址
-
-	// 有些特别的字符需要转换。后续维护增加
-	var specialKeyMap = {
-	    '*': '\\*'
-	};
-
-	var ruleKeyTipMap = {
-	    'def': '请填写正确的信息！',
-	    'w': {},
-	    reck: '两次输入的内容不一致！',
-	    ok: '通过信息验证！'
-	};
-	var ruleKeyMap = {};
-	var noRangeRuleKeys = [];
-
-	var ruleToInfo = function ruleToInfo(rule) {
-	    var info = {};
-
-	    var ruleStr = _underscore2['default'].map(_underscore2['default'].keys(ruleKeyMap), function (value) {
-	        return specialKeyMap[value] ? specialKeyMap[value] : value;
-	    }).join('|');
-	    var regExp = new RegExp('^(' + ruleStr + ')((\\d*)((-)(\\d*))?)?$');
-
-	    rule.replace(regExp, function () {
-	        info.type = arguments[1];
-	        info.min = arguments[3];
-	        info.cross = arguments[4];
-	        info.max = arguments[6];
-	    });
-	    return info;
-	};
-
-	var ValidateTip = function ValidateTip(rule) {
-	    if (_underscore2['default'].isRegExp(rule)) {
-	        return ruleKeyTipMap.def;
-	    }
-
-	    var info = ruleToInfo(rule);
-
-	    if (noRangeRuleKeys.indexOf(info.type) === -1) {
-	        if (info.max) {
-	            return _utilJs2['default'].format(ruleKeyTipMap.w[info.type][3], info);
-	        } else if (info.cross) {
-	            return _utilJs2['default'].format(ruleKeyTipMap.w[info.type][2], info);
-	        } else if (info.min) {
-	            return _utilJs2['default'].format(ruleKeyTipMap.w[info.type][1], info);
-	        }
-	        return ruleKeyTipMap.w[info.type][0];
-	    }
-	    return ruleKeyTipMap.w[info.type] || ruleKeyTipMap.def;
-	};
-
-	var Validate = function Validate(rule, value, tip) {
-	    var result;
-	    tip = tip || false;
-	    if (_underscore2['default'].isRegExp(rule)) {
-	        result = rule.test(value);
-	    } else {
-	        var info = ruleToInfo(rule);
-
-	        var regs = ['^', ruleKeyMap[info.type] || info.type];
-	        if (noRangeRuleKeys.indexOf(info.type) === -1) {
-	            if (info.min === undefined) {
-	                regs = regs.concat(['+']);
-	            } else if (!info.cross) {
-	                regs = regs.concat(['{', info.min, '}']);
-	            } else {
-	                regs = regs.concat(['{', info.min, ',', info.max === undefined ? '' : info.max, '}']);
-	            }
-	        }
-	        result = new RegExp(regs.concat(['$']).join('')).test(value);
-	    }
-
-	    return result ? true : tip ? ValidateTip(rule) : false;
-	};
-	Validate.factory = function (rule, factory) {
-	    var config = _underscore2['default'].extend({
-	        range: false
-	    }, factory());
-	    ruleKeyTipMap.w[rule] = config.tip;
-	    ruleKeyMap[rule] = config.rule;
-	    if (config.range === false) {
-	        noRangeRuleKeys.push(rule);
-	    }
-	};
-
-	// 内置校验
-	Validate.factory('*', function () {
-	    return {
-	        range: true,
-	        rule: '[\\w\\W]',
-	        tip: ['不能为空！', '请填写{min}位任意字符！', '请填写至少{min}位任意字符！', '请填写{min}到{max}位任意字符！']
-	    };
-	});
-	Validate.factory('n', function () {
-	    return {
-	        range: true,
-	        rule: '\\d',
-	        tip: ['请填写数字！', '请填写{min}位数字！', '请填写至少{min}位数字！', '请填写{min}到{max}位数字！']
-	    };
-	});
-	Validate.factory('s', function () {
-	    return {
-	        range: true,
-	        rule: '[\\u4E00-\\u9FA5\\uf900-\\ufa2d\\w\\.\\s]',
-	        tip: ['不能输入特殊字符！', '请填写{min}位字符！', '请填写至少{min}位字符！', '请填写{min}到{max}位字符！']
-	    };
-	});
-	Validate.factory('l', function () {
-	    return {
-	        range: true,
-	        rule: '[a-zA-Z]',
-	        tip: ['请填写字母！', '请填写{min}位字母！', '请填写至少{min}位字母！', '请填写{min}到{max}位字母！']
-	    };
-	});
-	Validate.factory('nl', function () {
-	    return {
-	        range: true,
-	        rule: '[a-zA-Z0-9]',
-	        tip: ['请填写字母或数字！', '请填写{min}位字母或数字！', '请填写至少{min}位字母或数字！', '请填写{min}到{max}位字母或数字！']
-	    };
-	});
-	Validate.factory('zh', function () {
-	    return {
-	        range: true,
-	        rule: '[\\u4e00-\\u9fa5]',
-	        tip: ['请填写汉字！', '请填写{min}位汉字！', '请填写至少{min}位汉字！', '请填写{min}到{max}位汉字！']
-	    };
-	});
-	Validate.factory('p', function () {
-	    return {
-	        rule: '[0-9]{6}',
-	        tip: '请填写邮政编码'
-	    };
-	});
-	Validate.factory('m', function () {
-	    return {
-	        rule: '13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}',
-	        tip: '请填写手机号码'
-	    };
-	});
-	Validate.factory('e', function () {
-	    return {
-	        rule: '\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*',
-	        tip: '请填写邮件地址'
-	    };
-	});
-	Validate.factory('url', function () {
-	    return {
-	        rule: '(\\w+:\\/\\/)?\\w+(\\.\\w+)+.*',
-	        tip: '请填写网址'
-	    };
-	});
-	Validate.factory('num', function () {
-	    return {
-	        rule: '[+-]?((\\d+.\\d+)|(\\d+))',
-	        tip: '请填写数字！'
-	    };
-	});
-
-	exports['default'] = Validate;
-	module.exports = exports['default'];
-
-/***/ },
-/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -789,7 +353,455 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Droper;
 
 /***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Pagination = _react2["default"].createClass({
+	    displayName: "Pagination",
+
+	    propTypes: {
+	        data: _react2["default"].PropTypes.shape({
+	            count: _react2["default"].PropTypes.number.isRequired,
+	            offset: _react2["default"].PropTypes.number.isRequired,
+	            limit: _react2["default"].PropTypes.number.isRequired
+	        }),
+	        toPage: _react2["default"].PropTypes.func.isRequired
+	    },
+	    render: function render() {
+	        var data = Object.assign({}, this.props.data);
+
+	        data.index = data.offset / data.limit + 1;
+
+	        var offset = 2,
+	            pages = [],
+	            all = Math.ceil(data.count / data.limit),
+	            begin = Math.max(data.index - offset, 1),
+	            end = Math.min(data.index + offset, all);
+
+	        if (all > offset * 2 + 1) {
+	            if (begin === 1) {
+	                end += offset;
+	            } else if (end === all) {
+	                begin -= offset;
+	            }
+	        }
+
+	        for (var i = begin; i <= end; i++) {
+	            pages.push(i);
+	        }
+
+	        return _react2["default"].createElement(
+	            "div",
+	            { className: "gm-pagination" },
+	            _react2["default"].createElement(
+	                "ul",
+	                { className: "pagination pagination-sm", onClick: this.onPage },
+	                _react2["default"].createElement(
+	                    "li",
+	                    { className: data.index === 1 ? 'disabled' : '' },
+	                    _react2["default"].createElement(
+	                        "a",
+	                        { href: "javascript:;", "data-page": data.index - 1 },
+	                        "上一页"
+	                    )
+	                ),
+	                begin >= 2 ? _react2["default"].createElement(
+	                    "li",
+	                    null,
+	                    _react2["default"].createElement(
+	                        "a",
+	                        { href: "javascript:;", "data-page": "1" },
+	                        "1"
+	                    )
+	                ) : undefined,
+	                begin >= 3 ? _react2["default"].createElement(
+	                    "li",
+	                    { className: "disabled" },
+	                    _react2["default"].createElement(
+	                        "a",
+	                        { href: "javascript:;" },
+	                        "..."
+	                    )
+	                ) : undefined,
+	                pages.map(function (page, i) {
+	                    return _react2["default"].createElement(
+	                        "li",
+	                        { key: i, className: data.index === page ? 'active' : '' },
+	                        _react2["default"].createElement(
+	                            "a",
+	                            {
+	                                href: "javascript:;", "data-page": page },
+	                            page
+	                        )
+	                    );
+	                }),
+	                end <= all - 2 ? _react2["default"].createElement(
+	                    "li",
+	                    { className: "disabled" },
+	                    _react2["default"].createElement(
+	                        "a",
+	                        { href: "javascript:;" },
+	                        "..."
+	                    )
+	                ) : undefined,
+	                end <= all - 1 ? _react2["default"].createElement(
+	                    "li",
+	                    null,
+	                    _react2["default"].createElement(
+	                        "a",
+	                        { href: "javascript:;", "data-page": all },
+	                        all
+	                    )
+	                ) : undefined,
+	                _react2["default"].createElement(
+	                    "li",
+	                    { className: data.index === all ? 'disabled' : '' },
+	                    _react2["default"].createElement(
+	                        "a",
+	                        { href: "javascript:;", "data-page": data.index + 1 },
+	                        "下一页"
+	                    )
+	                )
+	            )
+	        );
+	    },
+	    onPage: function onPage(event) {
+	        var page = ~ ~event.target.getAttribute('data-page'),
+	            data = this.props.data,
+	            count = Math.ceil(data.count / data.limit),
+	            toPage = this.props.toPage;
+	        if (!page || page == data.index || page < 1 || page > count) {
+	            return;
+	        }
+
+	        toPage({
+	            offset: (page - 1) * data.limit,
+	            limit: data.limit
+	        }, page);
+	    }
+	});
+
+	exports["default"] = Pagination;
+	module.exports = exports["default"];
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var PaginationText = _react2["default"].createClass({
+	    displayName: "PaginationText",
+
+	    propTypes: {
+	        data: _react2["default"].PropTypes.shape({
+	            count: _react2["default"].PropTypes.number.isRequired,
+	            offset: _react2["default"].PropTypes.number.isRequired,
+	            limit: _react2["default"].PropTypes.number.isRequired
+	        })
+	    },
+	    render: function render() {
+	        var data = this.props.data;
+
+	        return _react2["default"].createElement(
+	            "div",
+	            { className: "gm-pagination-text" },
+	            "显示第 ",
+	            data.offset + 1,
+	            " 到 ",
+	            Math.min(data.count, data.offset + data.limit - 1),
+	            " 行，一共 ",
+	            data.count,
+	            " 行记录"
+	        );
+	    }
+	});
+
+	exports["default"] = PaginationText;
+	module.exports = exports["default"];
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var format = function format(str, data) {
+	    var result = str;
+	    if (arguments.length < 2) {
+	        return result;
+	    }
+
+	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
+	        var keys = arguments[1].split('.');
+	        var r = null;
+	        _underscore2['default'].each(keys, function (value, index) {
+	            if (index) {
+	                r = r[value];
+	            } else {
+	                r = data[value];
+	            }
+	        });
+	        return r;
+	    });
+	    return result;
+	};
+
+	/*
+	 * Cookit 见 https://github.com/js-cookie/js-cookie/
+	 * */
+
+	/*
+	 * 约定 json 格式 code:0 data:{} msg:''。
+	 * code===0成功则返回data 失败返回msg
+	 * Request(url).data({}).get().then();
+	 *
+	 * */
+
+	var Util = {
+	    //Request: RequestFactory,
+	    format: format
+	};
+
+	exports['default'] = Util;
+	module.exports = exports['default'];
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _utilJs = __webpack_require__(6);
+
+	var _utilJs2 = _interopRequireDefault(_utilJs);
+
+	// 以下是可重复的
+	// *：任何字符
+	// n：数字
+	// s：字符
+	// l：字母
+	// nl: 数字和字母
+	// zh: 中文
+
+	// 以下是某具体类型
+	// p：邮政编码
+	// m：手机号码
+	// e：email
+	// url：网址
+
+	// 有些特别的字符需要转换。后续维护增加
+	var specialKeyMap = {
+	    '*': '\\*'
+	};
+
+	var ruleKeyTipMap = {
+	    'def': '请填写正确的信息！',
+	    'w': {},
+	    reck: '两次输入的内容不一致！',
+	    ok: '通过信息验证！'
+	};
+	var ruleKeyMap = {};
+	var noRangeRuleKeys = [];
+
+	var ruleToInfo = function ruleToInfo(rule) {
+	    var info = {};
+
+	    var ruleStr = _underscore2['default'].map(_underscore2['default'].keys(ruleKeyMap), function (value) {
+	        return specialKeyMap[value] ? specialKeyMap[value] : value;
+	    }).join('|');
+	    var regExp = new RegExp('^(' + ruleStr + ')((\\d*)((-)(\\d*))?)?$');
+
+	    rule.replace(regExp, function () {
+	        info.type = arguments[1];
+	        info.min = arguments[3];
+	        info.cross = arguments[4];
+	        info.max = arguments[6];
+	    });
+	    return info;
+	};
+
+	var ValidateTip = function ValidateTip(rule) {
+	    if (_underscore2['default'].isRegExp(rule)) {
+	        return ruleKeyTipMap.def;
+	    }
+
+	    var info = ruleToInfo(rule);
+
+	    if (noRangeRuleKeys.indexOf(info.type) === -1) {
+	        if (info.max) {
+	            return _utilJs2['default'].format(ruleKeyTipMap.w[info.type][3], info);
+	        } else if (info.cross) {
+	            return _utilJs2['default'].format(ruleKeyTipMap.w[info.type][2], info);
+	        } else if (info.min) {
+	            return _utilJs2['default'].format(ruleKeyTipMap.w[info.type][1], info);
+	        }
+	        return ruleKeyTipMap.w[info.type][0];
+	    }
+	    return ruleKeyTipMap.w[info.type] || ruleKeyTipMap.def;
+	};
+
+	var Validate = function Validate(rule, value, tip) {
+	    var result;
+	    tip = tip || false;
+	    if (_underscore2['default'].isRegExp(rule)) {
+	        result = rule.test(value);
+	    } else {
+	        var info = ruleToInfo(rule);
+
+	        var regs = ['^', ruleKeyMap[info.type] || info.type];
+	        if (noRangeRuleKeys.indexOf(info.type) === -1) {
+	            if (info.min === undefined) {
+	                regs = regs.concat(['+']);
+	            } else if (!info.cross) {
+	                regs = regs.concat(['{', info.min, '}']);
+	            } else {
+	                regs = regs.concat(['{', info.min, ',', info.max === undefined ? '' : info.max, '}']);
+	            }
+	        }
+	        result = new RegExp(regs.concat(['$']).join('')).test(value);
+	    }
+
+	    return result ? true : tip ? ValidateTip(rule) : false;
+	};
+	Validate.factory = function (rule, factory) {
+	    var config = _underscore2['default'].extend({
+	        range: false
+	    }, factory());
+	    ruleKeyTipMap.w[rule] = config.tip;
+	    ruleKeyMap[rule] = config.rule;
+	    if (config.range === false) {
+	        noRangeRuleKeys.push(rule);
+	    }
+	};
+
+	// 内置校验
+	Validate.factory('*', function () {
+	    return {
+	        range: true,
+	        rule: '[\\w\\W]',
+	        tip: ['不能为空！', '请填写{min}位任意字符！', '请填写至少{min}位任意字符！', '请填写{min}到{max}位任意字符！']
+	    };
+	});
+	Validate.factory('n', function () {
+	    return {
+	        range: true,
+	        rule: '\\d',
+	        tip: ['请填写数字！', '请填写{min}位数字！', '请填写至少{min}位数字！', '请填写{min}到{max}位数字！']
+	    };
+	});
+	Validate.factory('s', function () {
+	    return {
+	        range: true,
+	        rule: '[\\u4E00-\\u9FA5\\uf900-\\ufa2d\\w\\.\\s]',
+	        tip: ['不能输入特殊字符！', '请填写{min}位字符！', '请填写至少{min}位字符！', '请填写{min}到{max}位字符！']
+	    };
+	});
+	Validate.factory('l', function () {
+	    return {
+	        range: true,
+	        rule: '[a-zA-Z]',
+	        tip: ['请填写字母！', '请填写{min}位字母！', '请填写至少{min}位字母！', '请填写{min}到{max}位字母！']
+	    };
+	});
+	Validate.factory('nl', function () {
+	    return {
+	        range: true,
+	        rule: '[a-zA-Z0-9]',
+	        tip: ['请填写字母或数字！', '请填写{min}位字母或数字！', '请填写至少{min}位字母或数字！', '请填写{min}到{max}位字母或数字！']
+	    };
+	});
+	Validate.factory('zh', function () {
+	    return {
+	        range: true,
+	        rule: '[\\u4e00-\\u9fa5]',
+	        tip: ['请填写汉字！', '请填写{min}位汉字！', '请填写至少{min}位汉字！', '请填写{min}到{max}位汉字！']
+	    };
+	});
+	Validate.factory('p', function () {
+	    return {
+	        rule: '[0-9]{6}',
+	        tip: '请填写邮政编码'
+	    };
+	});
+	Validate.factory('m', function () {
+	    return {
+	        rule: '13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}',
+	        tip: '请填写手机号码'
+	    };
+	});
+	Validate.factory('e', function () {
+	    return {
+	        rule: '\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*',
+	        tip: '请填写邮件地址'
+	    };
+	});
+	Validate.factory('url', function () {
+	    return {
+	        rule: '(\\w+:\\/\\/)?\\w+(\\.\\w+)+.*',
+	        tip: '请填写网址'
+	    };
+	});
+	Validate.factory('num', function () {
+	    return {
+	        rule: '[+-]?((\\d+.\\d+)|(\\d+))',
+	        tip: '请填写数字！'
+	    };
+	});
+
+	exports['default'] = Validate;
+	module.exports = exports['default'];
+
+/***/ },
 /* 8 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
+
+/***/ },
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -934,7 +946,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -949,11 +961,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _paginationComponentJs = __webpack_require__(3);
+	var _paginationComponentJs = __webpack_require__(4);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
-	var _paginationTextComponentJs = __webpack_require__(4);
+	var _paginationTextComponentJs = __webpack_require__(5);
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
@@ -1188,7 +1200,172 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 10 */
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(8);
+	var _ = __webpack_require__(2);
+	var Droper = __webpack_require__(3);
+
+	var ImportLead = React.createClass({
+	    displayName: 'ImportLead',
+
+	    render: function render() {
+	        var _this = this;
+
+	        var t = this;
+	        var data = _.extend({ columns: [], list: [] }, t.props.data);
+	        var tips = t.props.tips || [];
+
+	        var tipsMap = {};
+
+	        var lineMap = _.map(data.list, function () {
+	            return false;
+	        });
+
+	        _.each(tips, function (tip, index) {
+	            tipsMap[tip.index] = tipsMap[tip.index] || {};
+	            tip._index = index;
+	            tipsMap[tip.index][tip.field] = tip;
+
+	            if (!tip.modifyed) {
+	                lineMap[tip.index] = true;
+	            }
+	        });
+
+	        var tableBody = data.list.map(function (elist, index) {
+
+	            var tds = data.columns.map(function (col, i) {
+	                var tip = tipsMap[index] && tipsMap[index][col.field];
+	                return tip ? React.createElement(
+	                    'td',
+	                    { key: i, className: tip.modifyed ? "gm-bg-info" : "gm-bg-invalid" },
+	                    React.createElement('input', { type: 'text', value: elist[col.field],
+	                        onChange: t.handleEdit.bind(t, index, col.field, tip._index) }),
+	                    React.createElement(
+	                        'small',
+	                        { className: 'gm-import-lead-tip badge' },
+	                        React.createElement(
+	                            'i',
+	                            null,
+	                            tip.msg
+	                        )
+	                    )
+	                ) : React.createElement(
+	                    'td',
+	                    { key: i },
+	                    elist[col.field]
+	                );
+	            });
+
+	            return React.createElement(
+	                'tr',
+	                { key: index },
+	                tds
+	            );
+	        });
+
+	        var canSubmit = _.filter(tips, function (value) {
+	            return value.modifyed === true;
+	        }).length === tips.length;
+
+	        return React.createElement(
+	            'div',
+	            { className: 'gm-import-lead' },
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        Droper,
+	                        { className: 'gm-droper-wrap', onDrop: this.handleDrop },
+	                        React.createElement(
+	                            'button',
+	                            { className: 'btn btn-primary btn-sm' },
+	                            '上传xlsx'
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'button',
+	                        { type: 'submit', disabled: !canSubmit, className: 'btn btn-primary btn-sm',
+	                            onSubmit: this.handleSubmit },
+	                        '提交'
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'gm-import-line clearfix' },
+	                    lineMap.map(function (v, i) {
+	                        return React.createElement('div', { key: i, className: v ? "tip" : "", onClick: _this.handleLine.bind(_this, i) });
+	                    })
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'gm-import-lead-content', ref: 'content' },
+	                data ? React.createElement(
+	                    'table',
+	                    { className: 'table table-condensed table-bordered', ref: 'table' },
+	                    React.createElement(
+	                        'thead',
+	                        null,
+	                        React.createElement(
+	                            'tr',
+	                            null,
+	                            data.columns.map(function (col, i) {
+	                                return React.createElement(
+	                                    'th',
+	                                    { key: i },
+	                                    col.name
+	                                );
+	                            })
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'tbody',
+	                        null,
+	                        tableBody
+	                    )
+	                ) : undefined
+	            )
+	        );
+	    },
+	    handleEdit: function handleEdit(index, field, i, event) {
+	        var t = this;
+	        if (t.props.onEdit) {
+	            t.props.onEdit(index, field, event.target.value, i);
+	        }
+	    },
+	    handleSubmit: function handleSubmit(event) {
+	        var t = this;
+	        event.preventDefault();
+	        if (t.props.onSubmit) {
+	            t.props.onSubmit();
+	        }
+	    },
+	    handleLine: function handleLine(index) {
+	        var t = this;
+	        var content = ReactDOM.findDOMNode(t.refs.content);
+	        var table = ReactDOM.findDOMNode(t.refs.table);
+	        content.scrollTop = index / t.props.data.list.length * table.offsetHeight;
+	    },
+	    handleDrop: function handleDrop(files) {
+	        var t = this;
+	        if (files[0] && t.props.onDrop) {
+	            t.props.onDrop(files[0]);
+	        }
+	    }
+	});
+
+	module.exports = ImportLead;
+
+/***/ },
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1203,7 +1380,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(12);
+	var _reactDom = __webpack_require__(8);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -1211,7 +1388,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validateJs = __webpack_require__(6);
+	var _validateJs = __webpack_require__(7);
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
@@ -1318,16 +1495,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 12 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
 
 /***/ }
 /******/ ])

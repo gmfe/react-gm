@@ -3,13 +3,14 @@ var webpack = require('webpack');
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
-    entry: [
-        'webpack-hot-middleware/client',
-        './index'
-    ],
+    entry: {
+        'client': 'webpack-hot-middleware/client',
+        'index': './index',
+        'import.lead': './import.lead'
+    },
     output: {
         path: path.join(__dirname, ''),
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         publicPath: '/static'
     },
     plugins: [
