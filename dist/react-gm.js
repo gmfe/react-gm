@@ -553,6 +553,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        tip: '请填写网址'
 	    };
 	});
+	Validate.factory('num', function () {
+	    return {
+	        rule: '[+-]?((\\d+.\\d+)|(\\d+))',
+	        tip: '请填写数字！'
+	    };
+	});
 
 	exports['default'] = Validate;
 	module.exports = exports['default'];
