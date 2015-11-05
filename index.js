@@ -6,6 +6,7 @@ import Droper from './lib/droper.component.js';
 import Former from './lib/former.component.js';
 import ValidateMixin from './lib/validate.mixin.js';
 import Validate, {ValidateTip} from './lib/validate.js';
+import Util from './lib/util.js';
 
 var onClick = function () {
     console.log(arguments);
@@ -132,7 +133,7 @@ var FormerDom = React.createClass({
             }]
         }
     },
-    onChange:function(){
+    onChange: function () {
         console.log(arguments);
     },
     onSubmit: function () {
@@ -142,15 +143,18 @@ var FormerDom = React.createClass({
         return (
             <div>
                 <Former ref="myForm" className="" onSubmit={this.onSubmit}>
-                    <Former.Input name="name" onChange={this.validate('*', this.onChange)} >
+                    <Former.Input name="name" onChange={this.validate('*', this.onChange)}>
                         <div className="text-danger">{this.validateTip('name')}</div>
                     </Former.Input>
 
-                    <Former.Select name="gender2" value={this.state.value} options={this.state.list} onChange={this.validate('*')}>
+                    <Former.Select name="gender2" value={this.state.value} options={this.state.list}
+                                   onChange={this.validate('*')}>
                         <option value="">do</option>
                     </Former.Select>
+
                     <div className="form-group">
                         <input type="text" className="form-control" name="height" onChange={this.validate('s3-5')}/>
+
                         <div className="text-danger">{this.validateTip('height')}</div>
                     </div>
 
@@ -158,6 +162,7 @@ var FormerDom = React.createClass({
                         <button className="btn btn-default" type="submit">submit</button>
                     </div>
                 </Former>
+
                 <div>
                     {this.validateTip()}
                 </div>
@@ -166,9 +171,16 @@ var FormerDom = React.createClass({
     }
 });
 
-ReactDOM.render(<FormerDom></FormerDom> , document.getElementById('form-container'));
+ReactDOM.render(<FormerDom></FormerDom>, document.getElementById('form-container'));
 
 console.log(Validate('*', 'a', true));
 console.log(Validate('*3', 'aaaa', true));
 console.log(Validate('*3-', 'aa', true));
 console.log(Validate('*3-5', 'a', true));
+
+
+Util.Request('xxxxx').data({}).get();
+console.log(Util.format('hello {name}', {name: 'liyatang'}));
+console.log(Util.param({
+    a: 1, b: 2, c: 3
+}));
