@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"));
 	else
 		root["ReactGM"] = factory(root["React"], root["underscore"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_8__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_9__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -62,7 +62,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _gridComponentJs = __webpack_require__(10);
+	var _gridComponentJs = __webpack_require__(11);
 
 	var _gridComponentJs2 = _interopRequireDefault(_gridComponentJs);
 
@@ -78,15 +78,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _droperComponentJs2 = _interopRequireDefault(_droperComponentJs);
 
-	var _formerComponentJs = __webpack_require__(9);
+	var _formerComponentJs = __webpack_require__(10);
 
 	var _formerComponentJs2 = _interopRequireDefault(_formerComponentJs);
 
-	var _validateJs = __webpack_require__(7);
+	var _validateJs = __webpack_require__(8);
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
-	var _validateMixinJs = __webpack_require__(12);
+	var _validateMixinJs = __webpack_require__(15);
 
 	var _validateMixinJs2 = _interopRequireDefault(_validateMixinJs);
 
@@ -94,11 +94,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utilJs2 = _interopRequireDefault(_utilJs);
 
-	var _importLeadComponentJs = __webpack_require__(11);
+	var _importLeadComponentJs = __webpack_require__(12);
 
 	var _importLeadComponentJs2 = _interopRequireDefault(_importLeadComponentJs);
 
-	__webpack_require__(13);
+	__webpack_require__(16);
 
 	var ReactGM = {
 	    Grid: _gridComponentJs2['default'],
@@ -548,9 +548,33 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _utilRequestJs = __webpack_require__(14);
+
+	var _utilRequestJs2 = _interopRequireDefault(_utilRequestJs);
+
+	var _utilParamJs = __webpack_require__(7);
+
+	var _utilParamJs2 = _interopRequireDefault(_utilParamJs);
+
+	var _utilFormatJs = __webpack_require__(13);
+
+	var _utilFormatJs2 = _interopRequireDefault(_utilFormatJs);
+
+	var Util = {
+	    Request: _utilRequestJs2['default'],
+	    format: _utilFormatJs2['default'],
+	    param: _utilParamJs2['default']
+	};
+
+	module.exports = Util;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -558,48 +582,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var format = function format(str, data) {
-	    var result = str;
-	    if (arguments.length < 2) {
-	        return result;
-	    }
-
-	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
-	        var keys = arguments[1].split('.');
-	        var r = null;
-	        _underscore2['default'].each(keys, function (value, index) {
-	            if (index) {
-	                r = r[value];
-	            } else {
-	                r = data[value];
-	            }
-	        });
-	        return r;
-	    });
-	    return result;
+	var param = function param(obj) {
+	    // encodeURIComponent
+	    return _underscore2['default'].map(obj, function (v, k) {
+	        return [encodeURIComponent(k), '=', encodeURIComponent(v)].join('');
+	    }).join('&').replace(/%20/g, "+");
 	};
 
-	/*
-	 * Cookit 见 https://github.com/js-cookie/js-cookie/
-	 * */
-
-	/*
-	 * 约定 json 格式 code:0 data:{} msg:''。
-	 * code===0成功则返回data 失败返回msg
-	 * Request(url).data({}).get().then();
-	 *
-	 * */
-
-	var Util = {
-	    //Request: RequestFactory,
-	    format: format
-	};
-
-	exports['default'] = Util;
-	module.exports = exports['default'];
+	module.exports = param;
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -795,13 +788,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_9__;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -946,7 +939,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1200,13 +1193,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(8);
+	var ReactDOM = __webpack_require__(9);
 	var _ = __webpack_require__(2);
 	var Droper = __webpack_require__(3);
 
@@ -1365,7 +1358,119 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ImportLead;
 
 /***/ },
-/* 12 */
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var format = function format(str, data) {
+	    var result = str;
+	    if (arguments.length < 2) {
+	        return result;
+	    }
+
+	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
+	        var keys = arguments[1].split('.');
+	        var r = null;
+	        _underscore2['default'].each(keys, function (value, index) {
+	            if (index) {
+	                r = r[value];
+	            } else {
+	                r = data[value];
+	            }
+	        });
+	        return r;
+	    });
+	    return result;
+	};
+
+	module.exports = format;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _paramJs = __webpack_require__(7);
+
+	var _paramJs2 = _interopRequireDefault(_paramJs);
+
+	var processRequestResponse = function processRequestResponse(promise, url) {
+	    var color = 'color: #8a6d3b;';
+	    return promise.then(function (res) {
+	        return res.json();
+	    }).then(function (json) {
+	        if (json.code === 0) {
+	            return json.data;
+	        } else {
+	            console.log('%c*** Request url: %s、code: %s、msg: %s', color, url, json.code, json.msg);
+	            return Promise.reject(json.msg || '位置错误');
+	        }
+	    })['catch'](function (reason) {
+	        console.log('%c*** Request catch %s', color, reason);
+	        // reason 是个对象。目前先给字符串。吧。后续有需要在扩展
+	        return Promise.reject('' + reason);
+	    });
+	};
+
+	var Request = function Request(url, options) {
+	    this._data = {};
+	    this.url = url;
+	    this.options = Object.assign({
+	        method: 'get',
+	        credentials: 'include' // 需要设置才能获取cookie
+	    }, options);
+	};
+	Request.prototype = {
+	    data: function data(_data) {
+	        this._data = _data || {};
+	        return this;
+	    },
+	    json: function json(data) {
+	        this._data = JSON.stringify(data);
+	        return this;
+	    },
+	    get: function get() {
+	        var p = (0, _paramJs2['default'])(this._data);
+	        var newUrl = this.url + (this.url.indexOf('?') > -1 ? '&' : '?') + p;
+
+	        return processRequestResponse(fetch(newUrl, this.options), this.url);
+	    },
+	    post: function post() {
+	        var data = this._data;
+	        var body;
+	        // 兼容传json string 的情况
+	        if (toString.call(data) === '[object Object]') {
+	            body = new FormData();
+	            for (var e in data) {
+	                body.append(e, data[e]);
+	            }
+	        } else {
+	            body = data;
+	        }
+	        this.options.method = 'post';
+	        this.options.body = body;
+	        return processRequestResponse(fetch(this.url, this.options), this.url);
+	    }
+	};
+
+	var RequestFactory = function RequestFactory(url, options) {
+	    return new Request(url, options);
+	};
+
+	module.exports = RequestFactory;
+
+/***/ },
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1380,7 +1485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(8);
+	var _reactDom = __webpack_require__(9);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -1388,7 +1493,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validateJs = __webpack_require__(7);
+	var _validateJs = __webpack_require__(8);
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
@@ -1495,7 +1600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 13 */
+/* 16 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

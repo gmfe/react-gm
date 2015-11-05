@@ -1,4 +1,4 @@
-# 哎
+# DOC
 
 [Grid](https://github.com/gmfe/react-gm/issues/1)
 
@@ -34,5 +34,8 @@ js
 css
 - bootstrap
 - font-awesome
+
+# 参与
+[传送门](./README.dev.md)
 
 # 最后，多多交流，多多贡献
