@@ -1292,8 +1292,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    ),
 	                    React.createElement(
 	                        'button',
-	                        { type: 'submit', disabled: !canSubmit, className: 'btn btn-primary btn-sm',
-	                            onSubmit: this.handleSubmit },
+	                        { disabled: !canSubmit, className: 'btn btn-primary btn-sm', onClick: this.handleSubmit },
 	                        '提交'
 	                    )
 	                ),
