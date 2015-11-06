@@ -1404,16 +1404,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _paramJs2 = _interopRequireDefault(_paramJs);
 
-	var processRequestResponse = function processRequestResponse(promise, url) {
+		var _underscore = __webpack_require__(2);
+
+		var _underscore2 = _interopRequireDefault(_underscore);
+
+		var processRequestResponse = function processRequestResponse(promise, url, sucCode) {
 	    var color = 'color: #8a6d3b;';
 	    return promise.then(function (res) {
 	        return res.json();
 	    }).then(function (json) {
-	        if (json.code === 0) {
-	            return json.data;
+			if (sucCode.indexOf(json.code) > -1) {
+				return json;
 	        } else {
 	            console.log('%c*** Request url: %s、code: %s、msg: %s', color, url, json.code, json.msg);
-	            return Promise.reject(json.msg || '位置错误');
+				return Promise.reject(json.msg || '未知错误');
 	        }
 	    })['catch'](function (reason) {
 	        console.log('%c*** Request catch %s', color, reason);
@@ -1425,12 +1429,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Request = function Request(url, options) {
 	    this._data = {};
 	    this.url = url;
+		this.sucCode = [0];
 	    this.options = Object.assign({
 	        method: 'get',
 	        credentials: 'include' // 需要设置才能获取cookie
 	    }, options);
 	};
 	Request.prototype = {
+		code: function code(codes) {
+			if (_underscore2['default'].isArray(codes)) {
+				this.sucCode.concat(codes);
+			} else {
+				this.sucCode.push(codes);
+			}
+			return this;
+		},
 	    data: function data(_data) {
 	        this._data = _data || {};
 	        return this;
@@ -1443,7 +1456,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var p = (0, _paramJs2['default'])(this._data);
 	        var newUrl = this.url + (this.url.indexOf('?') > -1 ? '&' : '?') + p;
 
-	        return processRequestResponse(fetch(newUrl, this.options), this.url);
+			return processRequestResponse(fetch(newUrl, this.options), this.url, this.sucCode);
 	    },
 	    post: function post() {
 	        var data = this._data;
@@ -1459,7 +1472,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        this.options.method = 'post';
 	        this.options.body = body;
-	        return processRequestResponse(fetch(this.url, this.options), this.url);
+			return processRequestResponse(fetch(this.url, this.options), this.url, this.sucCode);
 	    }
 	};
 
