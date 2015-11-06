@@ -119,40 +119,23 @@ var onSubmit = function (event) {
 };
 
 var FormerDom = React.createClass({
-    mixins: [React.addons.LinkedStateMixin, ValidateMixin()],
-    getInitialState: function () {
-        return {
-            input: 'adf',
-            value: '2',
-            list: [{
-                value: '0',
-                text: 'adf'
-            }, {
-                value: '2',
-                text: '234'
-            }]
-        }
-    },
+    mixins: [ValidateMixin()],
     onChange: function () {
         console.log(arguments);
     },
-    onSubmit: function () {
-        console.log(this.validateAll(this.refs.myForm));
-    },
     render: function () {
         return (
-            <div>
-                <Former ref="myForm" className="" onSubmit={this.onSubmit}>
-                    <Former.Input name="name" onChange={this.validate('*', this.onChange)}>
-                        <div className="text-danger">{this.validateTip('name')}</div>
-                    </Former.Input>
+            <div style={{width: 300}}>
+                <form ref="myForm" onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                        <label>email</label>
+                        <input type="text" className="form-control" name="email" onChange={this.validate('e')}/>
 
-                    <Former.Select name="gender2" value={this.state.value} options={this.state.list}
-                                   onChange={this.validate('*')}>
-                        <option value="">do</option>
-                    </Former.Select>
+                        <div className="text-danger">{this.validateTip('email')}</div>
+                    </div>
 
                     <div className="form-group">
+                        <label>三到5位任意字符</label>
                         <input type="text" className="form-control" name="height" onChange={this.validate('s3-5')}/>
 
                         <div className="text-danger">{this.validateTip('height')}</div>
@@ -161,13 +144,17 @@ var FormerDom = React.createClass({
                     <div className="form-group">
                         <button className="btn btn-default" type="submit">submit</button>
                     </div>
-                </Former>
+                </form>
 
                 <div>
                     {this.validateTip()}
                 </div>
             </div>
         );
+    },
+    onSubmit: function (event) {
+        event.preventDefault();
+        console.log(this.validateAll(this.refs.myForm));
     }
 });
 
