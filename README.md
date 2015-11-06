@@ -8,9 +8,9 @@
 
 [Former](https://github.com/gmfe/react-gm/issues/3) *(alpha)*
 
-[Validate](https://github.com/gmfe/react-gm/issues/5) *(alpha)*
+[Validate](https://github.com/gmfe/react-gm/issues/5)
 
-[ValidateMixin](https://github.com/gmfe/react-gm/issues/6) *(alpha)*
+[ValidateMixin](https://github.com/gmfe/react-gm/issues/6)
 
 其他文档暂时没有，有接口使用问题直接找liyatang。
 有需求随时提
