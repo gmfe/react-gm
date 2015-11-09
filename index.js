@@ -9,6 +9,9 @@ import ValidateMixin from './lib/validate.mixin.js';
 import Validate, {ValidateTip} from './lib/validate.js';
 import Util from './lib/util.js';
 import Storage from './lib/storage.component.js';
+import {Popover} from 'react-bootstrap';
+import Calendar from './lib/calendar.component.js';
+import DatePicker from './lib/datepicker.component.js';
 
 var onClick = function () {
     console.log(arguments);
@@ -185,10 +188,65 @@ console.log(Validate('*3-', 'aa', true));
 console.log(Validate('*3-5', 'a', true));
 
 
-Util.Request('xxxxx').data({}).get();
+Util.Request('xxxxx').data({}).get().then(function (data) {
+    console.log(data)
+}, function (reason) {
+    console.log(reason);
+});
 console.log(Util.format('hello {name}', {name: 'liyatang'}));
 console.log(Util.param({
     a: 1, b: 2, c: 3
 }));
 
 window.Storage = Storage;
+
+
+
+var DatePickerWrap = React.createClass({
+    getInitialState: function () {
+        return {
+            date: new Date()
+        };
+    },
+    render: function () {
+        return (
+            <div>
+                <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName="" target={() => this.refs.target}>
+                    <span ref="target">{this.state.date + ''}</span>
+                </DatePicker>
+            </div>
+        );
+    },
+    handleChange: function (date) {
+        this.setState({
+            date: date
+        });
+    }
+});
+
+ReactDOM.render(<DatePickerWrap></DatePickerWrap>, document.getElementById('datepicker-container'));
+
+
+var CalendarWrap = React.createClass({
+    getInitialState: function () {
+        return {
+            selected: new Date()
+        };
+    },
+    render: function () {
+        return (
+            <div>
+                <Calendar selected={this.state.selected} onSelect={this.handleSelect}>
+                </Calendar>
+            </div>
+        );
+    },
+    handleSelect: function (date) {
+        this.setState({
+            selected: date
+        });
+        console.log(arguments);
+    }
+});
+
+ReactDOM.render(<CalendarWrap></CalendarWrap>, document.getElementById('calendar-container'));

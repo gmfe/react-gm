@@ -30,6 +30,13 @@ var undescoreExternal = {
     amd: 'underscore'
 };
 
+var reactBootstrapExternal = {
+    root: 'react-bootstrap',
+    commonjs2: 'react-bootstrap',
+    commonjs: 'react-bootstrap',
+    amd: 'react-bootstrap'
+};
+
 module.exports = {
     entry: './lib/index',
     externals: {
@@ -37,7 +44,8 @@ module.exports = {
         'react-dom': reactDOMExternal,
         'react-native': reactExternal,
         'moment': momentExternal,
-        'underscore': undescoreExternal
+        'underscore': undescoreExternal,
+        'react-bootstrap': reactBootstrapExternal
     },
     module: {
         loaders: [

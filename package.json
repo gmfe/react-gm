@@ -2,7 +2,17 @@
   "name": "react-gm",
   "version": "1.4.21",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "style": "lib/react-gm.css",
+  "keywords": [
+    "react",
+    "react-gm",
+    "grid",
+    "drop",
+    "validate",
+    "datepicker",
+    "react-component"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -35,6 +45,7 @@
     "jquery": "^2.1.4",
     "path": "^0.12.7",
     "react": "^0.14.0",
+    "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.0",
     "style-loader": "^0.12.4",
     "underscore": "^1.8.3",
