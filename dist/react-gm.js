@@ -922,8 +922,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _react2['default'].createElement(
 	                'select',
 	                field.props,
-	                options,
-	                this.props.children
+					this.props.children,
+					options
 	            )
 	        );
 	    }
@@ -1206,6 +1206,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ImportLead = React.createClass({
 	    displayName: 'ImportLead',
 
+		getInitialState: function getInitialState() {
+			return {
+				selectedFile: null
+			};
+		},
 	    render: function render() {
 	        var _this = this;
 
@@ -1265,6 +1270,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return value.modifyed === true;
 	        }).length === tips.length;
 
+			var filename = t.state.selectedFile ? t.state.selectedFile.name : '';
+
+			var fileTempUrl = t.props.fileTempUrl;
+
 	        return React.createElement(
 	            'div',
 	            { className: 'gm-import-lead' },
@@ -1276,7 +1285,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    null,
 	                    React.createElement(
 	                        Droper,
-	                        { className: 'gm-droper-wrap', onDrop: this.handleDrop },
+							{className: 'gm-droper-wrap', onDrop: this.handleDrop, accept: '.xlsx'},
 	                        React.createElement(
 	                            'button',
 	                            { className: 'btn btn-primary btn-sm' },
@@ -1288,6 +1297,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        'button',
 	                        { disabled: !canSubmit, className: 'btn btn-primary btn-sm', onClick: this.handleSubmit },
 	                        '提交'
+						),
+						'    ',
+						fileTempUrl ? React.createElement(
+							'a',
+							{href: fileTempUrl, target: 'blank'},
+							'上传模板下载'
+						) : undefined,
+						React.createElement(
+							'div',
+							null,
+							filename
 	                    )
 	                ),
 	                React.createElement(
@@ -1349,6 +1369,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    handleDrop: function handleDrop(files) {
 	        var t = this;
+			t.setState({
+				selectedFile: files[0]
+			});
 	        if (files[0] && t.props.onDrop) {
 	            t.props.onDrop(files[0]);
 	        }

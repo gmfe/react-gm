@@ -236,7 +236,8 @@ var ImportLeadWrap = React.createClass({
 
         return (
             <div style={{height: 600}}>
-                <ImportLead data={data} tips={tips} onEdit={this.handleEdit}></ImportLead>
+                <ImportLead data={data} tips={tips} fileTempUrl="http://www.baidu.com"
+                            onEdit={this.handleEdit}></ImportLead>
             </div>
         );
     },
