@@ -922,8 +922,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _react2['default'].createElement(
 	                'select',
 	                field.props,
-					this.props.children,
-					options
+	                this.props.children,
+	                options
 	            )
 	        );
 	    }
@@ -1171,11 +1171,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	            batch.click(lists);
 	        }
 	    },
+	    notifySelect: function notifySelect(list) {
+	        var select = this.state.data.select;
+	        if (select) {
+	            select(this.state.data.list.filter(function (elist) {
+	                return elist.___select;
+	            }));
+	        }
+	    },
 	    onSelect: function onSelect(elist, event) {
 	        elist.___select = event.target.checked;
 	        this.setState({
 	            list: this.state.data.list
 	        });
+	        this.notifySelect();
 	    },
 	    onSelectAll: function onSelectAll(bool) {
 	        this.setState({
@@ -1183,6 +1192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                elist.___select = bool;
 	            })
 	        });
+	        this.notifySelect();
 	    },
 	    onToPage: function onToPage(page, index) {
 	        this.state.data.toPage(page, index);
@@ -1206,11 +1216,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ImportLead = React.createClass({
 	    displayName: 'ImportLead',
 
-		getInitialState: function getInitialState() {
-			return {
-				selectedFile: null
-			};
-		},
+	    getInitialState: function getInitialState() {
+	        return {
+	            selectedFile: null
+	        };
+	    },
 	    render: function render() {
 	        var _this = this;
 
@@ -1270,9 +1280,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return value.modifyed === true;
 	        }).length === tips.length;
 
-			var filename = t.state.selectedFile ? t.state.selectedFile.name : '';
+	        var filename = t.state.selectedFile ? t.state.selectedFile.name : '';
 
-			var fileTempUrl = t.props.fileTempUrl;
+	        var fileTempUrl = t.props.fileTempUrl;
 
 	        return React.createElement(
 	            'div',
@@ -1285,7 +1295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    null,
 	                    React.createElement(
 	                        Droper,
-							{className: 'gm-droper-wrap', onDrop: this.handleDrop, accept: '.xlsx'},
+	                        { className: 'gm-droper-wrap', onDrop: this.handleDrop, accept: '.xlsx' },
 	                        React.createElement(
 	                            'button',
 	                            { className: 'btn btn-primary btn-sm' },
@@ -1297,17 +1307,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        'button',
 	                        { disabled: !canSubmit, className: 'btn btn-primary btn-sm', onClick: this.handleSubmit },
 	                        '提交'
-						),
-						'    ',
-						fileTempUrl ? React.createElement(
-							'a',
-							{href: fileTempUrl, target: 'blank'},
-							'上传模板下载'
-						) : undefined,
-						React.createElement(
-							'div',
-							null,
-							filename
+	                    ),
+	                    '    ',
+	                    fileTempUrl ? React.createElement(
+	                        'a',
+	                        { href: fileTempUrl, target: 'blank' },
+	                        '上传模板下载'
+	                    ) : undefined,
+	                    React.createElement(
+	                        'div',
+	                        null,
+	                        filename
 	                    )
 	                ),
 	                React.createElement(
@@ -1369,9 +1379,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    handleDrop: function handleDrop(files) {
 	        var t = this;
-			t.setState({
-				selectedFile: files[0]
-			});
+	        t.setState({
+	            selectedFile: files[0]
+	        });
 	        if (files[0] && t.props.onDrop) {
 	            t.props.onDrop(files[0]);
 	        }
@@ -1427,20 +1437,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _paramJs2 = _interopRequireDefault(_paramJs);
 
-		var _underscore = __webpack_require__(2);
+	var _underscore = __webpack_require__(2);
 
-		var _underscore2 = _interopRequireDefault(_underscore);
+	var _underscore2 = _interopRequireDefault(_underscore);
 
-		var processRequestResponse = function processRequestResponse(promise, url, sucCode) {
+	var processRequestResponse = function processRequestResponse(promise, url, sucCode) {
 	    var color = 'color: #8a6d3b;';
 	    return promise.then(function (res) {
 	        return res.json();
 	    }).then(function (json) {
-			if (sucCode.indexOf(json.code) > -1) {
-				return json;
+	        if (sucCode.indexOf(json.code) > -1) {
+	            return json;
 	        } else {
 	            console.log('%c*** Request url: %s、code: %s、msg: %s', color, url, json.code, json.msg);
-				return Promise.reject(json.msg || '未知错误');
+	            return Promise.reject(json.msg || '未知错误');
 	        }
 	    })['catch'](function (reason) {
 	        console.log('%c*** Request catch %s', color, reason);
@@ -1452,21 +1462,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Request = function Request(url, options) {
 	    this._data = {};
 	    this.url = url;
-		this.sucCode = [0];
+	    this.sucCode = [0];
 	    this.options = Object.assign({
 	        method: 'get',
 	        credentials: 'include' // 需要设置才能获取cookie
 	    }, options);
 	};
 	Request.prototype = {
-		code: function code(codes) {
-			if (_underscore2['default'].isArray(codes)) {
-				this.sucCode.concat(codes);
-			} else {
-				this.sucCode.push(codes);
-			}
-			return this;
-		},
+	    code: function code(codes) {
+	        if (_underscore2['default'].isArray(codes)) {
+	            this.sucCode.concat(codes);
+	        } else {
+	            this.sucCode.push(codes);
+	        }
+	        return this;
+	    },
 	    data: function data(_data) {
 	        this._data = _data || {};
 	        return this;
@@ -1479,7 +1489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var p = (0, _paramJs2['default'])(this._data);
 	        var newUrl = this.url + (this.url.indexOf('?') > -1 ? '&' : '?') + p;
 
-			return processRequestResponse(fetch(newUrl, this.options), this.url, this.sucCode);
+	        return processRequestResponse(fetch(newUrl, this.options), this.url, this.sucCode);
 	    },
 	    post: function post() {
 	        var data = this._data;
@@ -1495,7 +1505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        this.options.method = 'post';
 	        this.options.body = body;
-			return processRequestResponse(fetch(this.url, this.options), this.url, this.sucCode);
+	        return processRequestResponse(fetch(this.url, this.options), this.url, this.sucCode);
 	    }
 	};
 
