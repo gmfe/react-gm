@@ -65,6 +65,9 @@ var gridData = {
         offset: 10,
         limit: 10
     },
+    select: function () {
+        console.log(arguments);
+    },
     toPage: function (page) {
         console.log(arguments);
     }
