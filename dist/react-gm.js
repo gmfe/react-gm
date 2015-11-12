@@ -967,11 +967,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
 	var GridHead = _react2['default'].createClass({
 	    displayName: 'GridHead',
 
 	    render: function render() {
 	        var data = this.props.data;
+
+	        var isSelectAll = _underscore2['default'].filter(data.list, function (value) {
+	            return value._gm_select;
+	        }).length === data.list.length;
+
 	        return _react2['default'].createElement(
 	            'thead',
 	            null,
@@ -981,7 +990,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                data.enableSelect ? _react2['default'].createElement(
 	                    'th',
 	                    { className: 'gm-grid-select' },
-	                    _react2['default'].createElement('input', { type: 'checkbox', onClick: this.onSelect })
+	                    _react2['default'].createElement('input', { type: 'checkbox', checked: isSelectAll, onClick: this.onSelect })
 	                ) : undefined,
 	                data.columns.map(function (col, i) {
 	                    return _react2['default'].createElement(
