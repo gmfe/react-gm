@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'underscore';
 import Addons from 'react/addons';
 import ReactDOM from 'react-dom';
 import Grid from './lib/grid.component.js';
@@ -7,6 +8,7 @@ import Former from './lib/former.component.js';
 import ValidateMixin from './lib/validate.mixin.js';
 import Validate, {ValidateTip} from './lib/validate.js';
 import Util from './lib/util.js';
+import Storage from './lib/storage.component.js';
 
 var onClick = function () {
     console.log(arguments);
@@ -23,59 +25,67 @@ var renderId = function (value, elist) {
     return 2;
 };
 
-var gridData = {
-    enableSelect: true,
-    enablePagination: true,
-    enablePaginationText: true,
-    loading: false,
-    columns: [
-        {field: 'id', name: 'id', render: renderId},
-        {field: 'name', name: '名字'},
-        {field: 'age', name: '年龄'}
-    ],
-    actions: [{
-        text: '删除1',
-        className: 'btn-primary',
-        click: onClick,
-        isShow: isShow
-    }, {
-        text: '删除2',
-        click: onClick
-    }],
-    // 依赖 enableSelect:true
-    batchs: [{
-        text: '批量操作',
-        className: 'btn-primary',
-        click: onClick
-    }, {
-        text: 'adsf',
-        click: onClick
-    }],
-    list: [{
-        id: 1,
-        name: '偶们啊啊发骚发所发生的',
-        age: '10'
-    }, {
-        id: 1,
-        name: 'haha',
-        age: '15'
-    }],
-    pagination: {
-        count: 80,
-        offset: 10,
-        limit: 10
-    },
-    select: function () {
-        console.log(arguments);
-    },
-    toPage: function (page) {
-        console.log(arguments);
-    }
-};
 
 var GridWrap = React.createClass({
     getInitialState: function () {
-        return gridData;
+        return {
+            enableSelect: true,
+            enablePagination: true,
+            enablePaginationText: true,
+            loading: false,
+            columns: [
+                {field: 'id', name: 'id', render: renderId},
+                {field: 'name', name: '名字'},
+                {field: 'age', name: '年龄'}
+            ],
+            actions: [{
+                text: '删除1',
+                className: 'btn-primary',
+                click: onClick,
+                isShow: isShow
+            }, {
+                text: '删除2',
+                click: onClick
+            }],
+            // 依赖 enableSelect:true
+            batchs: [{
+                text: '批量操作',
+                className: 'btn-primary',
+                click: onClick
+            }, {
+                text: 'adsf',
+                click: onClick
+            }],
+            list: [{
+                id: 1,
+                name: '偶们啊啊发骚发所发生的',
+                age: '10'
+            }, {
+                id: 1,
+                name: 'haha',
+                age: '15'
+            }],
+            pagination: {
+                count: 80,
+                offset: 10,
+                limit: 10
+            },
+            select: this.onSelect,
+            selectAll: this.onSelectAll,
+            toPage: function (page) {
+                console.log(arguments);
+            }
+        };
+    },
+    onSelect: function (index) {
+        this.state.list[index]._gm_select = !this.state.list[index]._gm_select;
+        this.setState(this.state);
+    },
+    onSelectAll: function (bool) {
+        _.each(this.state.list, function (value) {
+            value._gm_select = bool;
+        });
+        this.setState(this.state);
     },
     render: function () {
         return (
@@ -83,6 +93,12 @@ var GridWrap = React.createClass({
                 <Grid data={this.state}></Grid>
             </div>
         )
+    },
+    componentDidMount: function () {
+        var t = this;
+        setTimeout(function () {
+            t.setState(t.state);
+        }, 3000);
     }
 });
 
@@ -174,3 +190,5 @@ console.log(Util.format('hello {name}', {name: 'liyatang'}));
 console.log(Util.param({
     a: 1, b: 2, c: 3
 }));
+
+window.Storage = Storage;

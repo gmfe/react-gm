@@ -86,7 +86,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
-	var _validateMixinJs = __webpack_require__(15);
+	var _validateMixinJs = __webpack_require__(16);
 
 	var _validateMixinJs2 = _interopRequireDefault(_validateMixinJs);
 
@@ -98,7 +98,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _importLeadComponentJs2 = _interopRequireDefault(_importLeadComponentJs);
 
-	__webpack_require__(16);
+	var _storageComponentJs = __webpack_require__(13);
+
+	var _storageComponentJs2 = _interopRequireDefault(_storageComponentJs);
+
+	__webpack_require__(17);
 
 	var ReactGM = {
 	    Grid: _gridComponentJs2['default'],
@@ -109,7 +113,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Validate: _validateJs2['default'],
 	    ImportLead: _importLeadComponentJs2['default'],
 	    Droper: _droperComponentJs2['default'],
-	    Util: _utilJs2['default']
+	    Util: _utilJs2['default'],
+	    Storage: _storageComponentJs2['default']
 	};
 
 	exports['default'] = ReactGM;
@@ -550,7 +555,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utilRequestJs = __webpack_require__(14);
+	var _utilRequestJs = __webpack_require__(15);
 
 	var _utilRequestJs2 = _interopRequireDefault(_utilRequestJs);
 
@@ -558,7 +563,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utilParamJs2 = _interopRequireDefault(_utilParamJs);
 
-	var _utilFormatJs = __webpack_require__(13);
+	var _utilFormatJs = __webpack_require__(14);
 
 	var _utilFormatJs2 = _interopRequireDefault(_utilFormatJs);
 
@@ -1011,6 +1016,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            actions: [],
 	            batchs: [],
 	            list: [],
+	            select: function select() {},
+	            selectAll: function selectAll() {},
 	            toPage: function toPage() {}
 	        }, data);
 	        data.actions.forEach(function (action) {
@@ -1020,14 +1027,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 
 	        data.list.forEach(function (elist) {
-	            elist.___select = false;
+	            elist._gm_select = elist._gm_select === undefined ? false : elist._gm_select;
 	        });
 	        return data;
-	    },
-	    getInitialState: function getInitialState() {
-	        return {
-	            data: this.processData(this.props.data)
-	        };
 	    },
 	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	        this.setState({
@@ -1036,7 +1038,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    render: function render() {
 	        var t = this;
-	        var data = this.state.data;
+	        var data = this.processData(this.props.data);
 	        var actions = data.actions;
 	        var batchs = data.batchs;
 
@@ -1099,7 +1101,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    data.enableSelect ? _react2['default'].createElement(
 	                        'td',
 	                        null,
-	                        _react2['default'].createElement('input', { type: 'checkbox', checked: elist.___select, onClick: t.onSelect.bind(t, elist) })
+	                        _react2['default'].createElement('input', { type: 'checkbox', checked: elist._gm_select, onClick: t.onSelect.bind(t, index) })
 	                    ) : undefined,
 	                    tds,
 	                    actions.length > 0 ? _react2['default'].createElement(
@@ -1164,35 +1166,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	        action.click(elist, index);
 	    },
 	    onBatchs: function onBatchs(batch) {
-	        var lists = this.state.data.list.filter(function (elist) {
-	            return elist.___select;
+	        var lists = this.props.data.list.filter(function (elist) {
+	            return elist._gm_select;
 	        });
 	        if (lists.length > 0) {
 	            batch.click(lists);
 	        }
 	    },
-	    notifySelect: function notifySelect(list) {
-	        var select = this.state.data.select;
-	        if (select) {
-	            select(this.state.data.list.filter(function (elist) {
-	                return elist.___select;
-	            }));
-	        }
-	    },
-	    onSelect: function onSelect(elist, event) {
-	        elist.___select = event.target.checked;
-	        this.setState({
-	            list: this.state.data.list
-	        });
-	        this.notifySelect();
+	    onSelect: function onSelect(index) {
+	        this.props.data.select(index);
 	    },
 	    onSelectAll: function onSelectAll(bool) {
-	        this.setState({
-	            list: this.state.data.list.map(function (elist) {
-	                elist.___select = bool;
-	            })
-	        });
-	        this.notifySelect();
+	        this.props.data.selectAll(bool);
 	    },
 	    onToPage: function onToPage(page, index) {
 	        this.state.data.toPage(page, index);
@@ -1398,6 +1383,85 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var PropTypes = _react2['default'].PropTypes;
+
+	var prefix = '_react-gm_';
+
+	var Storage = _react2['default'].createClass({
+	    displayName: 'Storage',
+
+	    statics: {
+	        set: function set(key, value) {
+	            localStorage.setItem(prefix + key, JSON.stringify(value));
+	        },
+	        get: function get(key) {
+	            var v = localStorage.getItem(prefix + key);
+	            return v ? JSON.parse(v) : v;
+	        },
+	        remove: function remove(key) {
+	            localStorage.removeItem(prefix + key);
+	        },
+	        clear: function clear() {
+	            localStorage.clear();
+	        },
+	        getAll: function getAll() {
+	            var result = {};
+	            var key;
+	            for (var i = 0; i < localStorage.length; i++) {
+	                key = localStorage.key(i);
+	                if (key.startsWith(prefix)) {
+	                    key = key.slice(prefix.length);
+	                    result[key] = Storage.get(key);
+	                }
+	            }
+	            return _underscore2['default'].keys(result) ? result : null;
+	        }
+	    },
+	    propTypes: {
+	        name: PropTypes.string.isRequired,
+	        value: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array]),
+	        autoSave: PropTypes.bool
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            useRaw: false,
+	            autoSave: true
+	        };
+	    },
+	    save: function save() {
+	        Storage.set(this.props.name, value);
+	    },
+	    componentWillUpdate: function componentWillUpdate() {
+	        if (this.props.autoSave) {
+	            this.save();
+	        }
+	    },
+	    componentWillMount: function componentWillMount() {
+	        this.save();
+	    },
+	    render: function render() {
+	        return null;
+	    }
+	});
+
+	module.exports = Storage;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
@@ -1426,7 +1490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = format;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1516,7 +1580,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = RequestFactory;
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1646,7 +1710,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
