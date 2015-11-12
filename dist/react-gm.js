@@ -977,9 +977,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    render: function render() {
 	        var data = this.props.data;
 
-	        var isSelectAll = _underscore2['default'].filter(data.list, function (value) {
-	            return value._gm_select;
-	        }).length === data.list.length;
+	        var isSelectAll = false;
+	        if (data.list.length > 0) {
+	            isSelectAll = _underscore2['default'].filter(data.list, function (value) {
+	                return value._gm_select;
+	            }).length === data.list.length;
+	        }
 
 	        return _react2['default'].createElement(
 	            'thead',
@@ -990,7 +993,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                data.enableSelect ? _react2['default'].createElement(
 	                    'th',
 	                    { className: 'gm-grid-select' },
-	                    _react2['default'].createElement('input', { type: 'checkbox', defaultChecked: isSelectAll, onClick: this.onSelect })
+	                    _react2['default'].createElement('input', { type: 'checkbox', checked: isSelectAll,
+	                        onChange: this.onSelect })
 	                ) : undefined,
 	                data.columns.map(function (col, i) {
 	                    return _react2['default'].createElement(
@@ -1110,7 +1114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    data.enableSelect ? _react2['default'].createElement(
 	                        'td',
 	                        null,
-	                        _react2['default'].createElement('input', { type: 'checkbox', checked: elist._gm_select, onClick: t.onSelect.bind(t, index) })
+	                        _react2['default'].createElement('input', { type: 'checkbox', checked: elist._gm_select, onChange: t.onSelect.bind(t, index) })
 	                    ) : undefined,
 	                    tds,
 	                    actions.length > 0 ? _react2['default'].createElement(
