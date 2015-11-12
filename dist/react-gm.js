@@ -990,7 +990,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                data.enableSelect ? _react2['default'].createElement(
 	                    'th',
 	                    { className: 'gm-grid-select' },
-	                    _react2['default'].createElement('input', { type: 'checkbox', checked: isSelectAll, onClick: this.onSelect })
+	                    _react2['default'].createElement('input', { type: 'checkbox', defaultChecked: isSelectAll, onClick: this.onSelect })
 	                ) : undefined,
 	                data.columns.map(function (col, i) {
 	                    return _react2['default'].createElement(
