@@ -986,7 +986,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                data.columns.map(function (col, i) {
 	                    return _react2['default'].createElement(
 	                        'th',
-	                        { key: i },
+	                        { key: i, style: col.style },
 	                        col.name
 	                    );
 	                }),

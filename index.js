@@ -35,7 +35,7 @@ var GridWrap = React.createClass({
             loading: false,
             columns: [
                 {field: 'id', name: 'id', render: renderId},
-                {field: 'name', name: '名字'},
+                {field: 'name', name: '名字', style: {width: 100}},
                 {field: 'age', name: '年龄'}
             ],
             actions: [{
