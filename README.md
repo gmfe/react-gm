@@ -12,6 +12,10 @@
 
 [ValidateMixin](https://github.com/gmfe/react-gm/issues/6)
 
+Util
+- [Request](https://github.com/gmfe/react-gm/issues/7)
+- [format](https://github.com/gmfe/react-gm/issues/8)
+
 其他文档暂时没有，有接口使用问题直接找liyatang。
 有需求随时提
 
