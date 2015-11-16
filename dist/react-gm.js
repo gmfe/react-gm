@@ -110,6 +110,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _datepickerComponentJs2 = _interopRequireDefault(_datepickerComponentJs);
 
+	var _datepickerComponentJs3 = _interopRequireDefault(_datepickerComponentJs);
+
 	__webpack_require__(20);
 
 	var ReactGM = {
@@ -119,6 +121,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Former: _formerComponentJs2['default'],
 	    Calendar: _calendarComponentJs2['default'],
 	    DatePicker: _datepickerComponentJs2['default'],
+	    DateRangePicker: _datepickerComponentJs3['default'],
 	    ValidateMixin: _validateMixinJs2['default'],
 	    Validate: _validateJs2['default'],
 	    ImportLead: _importLeadComponentJs2['default'],

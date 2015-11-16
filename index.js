@@ -12,6 +12,7 @@ import Storage from './lib/storage.component.js';
 import {Popover} from 'react-bootstrap';
 import Calendar from './lib/calendar.component.js';
 import DatePicker from './lib/datepicker.component.js';
+import DateRangePicker from './lib/daterangepicker.component.js';
 
 var onClick = function () {
     console.log(arguments);
@@ -202,31 +203,6 @@ window.Storage = Storage;
 
 
 
-var DatePickerWrap = React.createClass({
-    getInitialState: function () {
-        return {
-            date: new Date()
-        };
-    },
-    render: function () {
-        return (
-            <div>
-                <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName="" target={() => this.refs.target}>
-                    <span ref="target">{this.state.date + ''}</span>
-                </DatePicker>
-            </div>
-        );
-    },
-    handleChange: function (date) {
-        this.setState({
-            date: date
-        });
-    }
-});
-
-ReactDOM.render(<DatePickerWrap></DatePickerWrap>, document.getElementById('datepicker-container'));
-
-
 var CalendarWrap = React.createClass({
     getInitialState: function () {
         return {
@@ -250,3 +226,57 @@ var CalendarWrap = React.createClass({
 });
 
 ReactDOM.render(<CalendarWrap></CalendarWrap>, document.getElementById('calendar-container'));
+var DatePickerWrap = React.createClass({
+    getInitialState: function () {
+        return {
+            date: new Date()
+        };
+    },
+    render: function () {
+        return (
+            <div>
+                <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName="" target={() => this.refs.target}>
+                </DatePicker>
+            </div>
+        );
+        //return (
+        //    <div>
+        //        <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName="" target={() => this.refs.target}>
+        //            <span ref="target">{this.state.date + ''}</span>
+        //        </DatePicker>
+        //    </div>
+        //);
+    },
+    handleChange: function (date) {
+        this.setState({
+            date: date
+        });
+    }
+});
+
+ReactDOM.render(<DatePickerWrap></DatePickerWrap>, document.getElementById('datepicker-container'));
+
+
+var DaterangepickerWrap = React.createClass({
+    getInitialState: function () {
+        return {
+            begin: new Date(),
+            end: new Date()
+        };
+    },
+    render: function () {
+        return (
+            <div>
+                <DateRangePicker begin={this.state.begin} end={this.state.end} onChange={this.handleChange}></DateRangePicker>
+            </div>
+        );
+    },
+    handleChange: function (begin, end) {
+        this.setState({
+            begin: begin,
+            end: end
+        });
+    }
+});
+
+ReactDOM.render(<DaterangepickerWrap></DaterangepickerWrap>, document.getElementById('daterangepicker-container'));
