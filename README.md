@@ -8,6 +8,10 @@
 
 [Former](https://github.com/gmfe/react-gm/issues/3) *(alpha)*
 
+[Calendar](https://github.com/gmfe/react-gm/issues/9)
+
+[DatePicker & DateRangePicker](https://github.com/gmfe/react-gm/issues/10)*(alpha)*
+
 [Validate](https://github.com/gmfe/react-gm/issues/5)
 
 [ValidateMixin](https://github.com/gmfe/react-gm/issues/6)
