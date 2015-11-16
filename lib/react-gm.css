@@ -1,4 +1,3 @@
-
 .gm-grid {
 
 }
@@ -225,12 +224,15 @@
 .gm-datepicker-popover.popover {
     padding: 0;
 }
-.gm-datepicker-popover.bottom{
+
+.gm-datepicker-popover.bottom {
     margin-top: 5px;
 }
-.gm-datepicker-popover.bottom .arrow{
+
+.gm-datepicker-popover.bottom .arrow {
     top: -7px;
 }
+
 .gm-datepicker-popover .popover-content {
     padding: 0;
 }

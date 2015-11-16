@@ -1,4 +1,3 @@
-
 .gm-grid {
 
 }
@@ -31,6 +30,7 @@
 .gm-grid-batch button {
     margin-right: 10px;
 }
+
 /*droper*/
 .gm-droper {
 
@@ -45,29 +45,32 @@
     border-radius: 5px;
 }
 
-.gm-droper-wrap{
+.gm-droper-wrap {
     display: inline-block;
 }
 
-.gm-droper-input[type="file"]{
+.gm-droper-input[type="file"] {
     display: none;
 }
 
-.gm-import-lead{
+.gm-import-lead {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
-.gm-import-lead table td input{
+
+.gm-import-lead table td input {
     width: 100%;
     border: none;
     background-color: transparent;
 }
-.gm-import-lead table td{
-    padding: 0!important;
+
+.gm-import-lead table td {
+    padding: 0 !important;
 }
-.gm-import-line{
+
+.gm-import-line {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 5px;
@@ -76,34 +79,179 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.gm-import-line div{
+
+.gm-import-line div {
     float: left;
     width: 20px;
     height: 20px;
     border: 1px solid white;
     background-color: #f7f7f9;
 }
-.gm-import-line div.tip{
+
+.gm-import-line div.tip {
     background-color: #ffd3cf;
 }
-.gm-import-lead-content{
+
+.gm-import-lead-content {
     flex: 1;
     overflow-y: auto;
 }
-.gm-import-lead-tip{
+
+.gm-import-lead-tip {
     display: none;
     position: absolute;
 }
-.gm-import-lead table td:hover .gm-import-lead-tip{
+
+.gm-import-lead table td:hover .gm-import-lead-tip {
     display: block;
 }
 
-.gm-bg-info{
-    background-color: #d9edf7!important;
+/*gm-calendar*/
+.gm-calendar {
+    width: 198px;
+    overflow: hidden;
+    border: 1px solid #aeaeae;
+    border-radius: 4px;
+    position: relative;
+    background: white;
 }
-.gm-bg-invalid{
-    background-color: #ffd3cf!important;
+
+.gm-calendar-head {
+    background-color: #f0f0f0;
 }
-.gm-invalid{
-    border-color: #a94442!important;
+
+.gm-calendar-head-title {
+
+    font-weight: bold;
+    line-height: 24px;
 }
+
+.gm-calendar-head-pre, .gm-calendar-head-next {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+}
+
+.gm-calendar-head-pre:hover, .gm-calendar-head-next:hover {
+    background-color: #f0f0f0;
+}
+
+.gm-calendar-head-month {
+    cursor: pointer;
+}
+
+.gm-calendar-week {
+    background-color: #f0f0f0;
+}
+
+.gm-calendar-content {
+}
+
+.gm-calendar-months {
+
+    position: absolute;
+    top: 24px;
+    border: 1px solid #aeaeae;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    background: white; /* display: none; */
+}
+
+.gm-calendar-month {
+
+    width: 56px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    text-align: center;
+    margin: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gm-calendar-month:hover {
+    background-color: #f0f0f0;
+}
+
+.gm-calendar-day-name {
+    color: black;
+    display: inline-block;
+    width: 24px;
+    line-height: 24px;
+    text-align: center;
+    margin: 2px;
+}
+
+.gm-calendar-day {
+    color: black;
+    display: inline-block;
+    width: 24px;
+    line-height: 24px;
+    text-align: center;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.gm-calendar-day:hover {
+    background-color: #f0f0f0;
+}
+
+.gm-calendar-day-old {
+    color: #999999;
+}
+
+.gm-calendar-day-new {
+    color: #999999;
+}
+
+.gm-calendar-active {
+    background-color: #337ab7;
+    color: white;
+}
+
+.gm-calendar-active:hover {
+    background-color: #337ab7;
+    color: white;
+}
+
+/*datepicker*/
+.gm-datepicker {
+
+}
+
+.gm-datepicker-popover.popover {
+    padding: 0;
+}
+
+.gm-datepicker-popover.bottom {
+    margin-top: 5px;
+}
+
+.gm-datepicker-popover.bottom .arrow {
+    top: -7px;
+}
+
+.gm-datepicker-popover .popover-content {
+    padding: 0;
+}
+
+.gm-datepicker-popover .gm-calendar {
+    border: none;
+    border-radius: 6px;
+}
+
+/*global*/
+.gm-bg-info {
+    background-color: #d9edf7 !important;
+}
+
+.gm-bg-invalid {
+    background-color: #ffd3cf !important;
+}
+
+.gm-invalid {
+    border-color: #a94442 !important;
+}
+
