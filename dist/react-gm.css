@@ -218,7 +218,7 @@
 
 /*datepicker*/
 .gm-datepicker {
-
+    display: inline-block;
 }
 
 .gm-datepicker-popover.popover {
