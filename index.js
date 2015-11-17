@@ -6,7 +6,7 @@ import Grid from './lib/grid.component.js';
 import Droper from './lib/droper.component.js';
 import Former from './lib/former.component.js';
 import ValidateMixin from './lib/validate.mixin.js';
-import Validate, {ValidateTip} from './lib/validate.js';
+import Validate from './lib/validate.js';
 import Util from './lib/util.js';
 import Storage from './lib/storage.component.js';
 import {Popover} from 'react-bootstrap';

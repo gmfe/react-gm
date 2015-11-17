@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
 		root["ReactGM"] = factory(root["React"], root["underscore"], root["ReactDOM"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_21__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_13__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -62,43 +62,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _gridComponentJs = __webpack_require__(15);
+	var _gridComponentJs = __webpack_require__(17);
 
 	var _gridComponentJs2 = _interopRequireDefault(_gridComponentJs);
 
-	var _paginationComponentJs = __webpack_require__(6);
+	var _paginationComponentJs = __webpack_require__(7);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
-	var _paginationTextComponentJs = __webpack_require__(7);
+	var _paginationTextComponentJs = __webpack_require__(8);
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
-	var _droperComponentJs = __webpack_require__(5);
+	var _droperComponentJs = __webpack_require__(6);
 
 	var _droperComponentJs2 = _interopRequireDefault(_droperComponentJs);
 
-	var _formerComponentJs = __webpack_require__(14);
+	var _formerComponentJs = __webpack_require__(16);
 
 	var _formerComponentJs2 = _interopRequireDefault(_formerComponentJs);
 
-	var _validateJs = __webpack_require__(11);
+	var _validateJs = __webpack_require__(12);
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
-	var _validateMixinJs = __webpack_require__(19);
+	var _validateMixinJs = __webpack_require__(21);
 
 	var _validateMixinJs2 = _interopRequireDefault(_validateMixinJs);
 
-	var _utilJs = __webpack_require__(8);
+	var _utilJs = __webpack_require__(9);
 
 	var _utilJs2 = _interopRequireDefault(_utilJs);
 
-	var _importLeadComponentJs = __webpack_require__(16);
+	var _importLeadComponentJs = __webpack_require__(18);
 
 	var _importLeadComponentJs2 = _interopRequireDefault(_importLeadComponentJs);
 
-	var _storageComponentJs = __webpack_require__(17);
+	var _storageComponentJs = __webpack_require__(19);
 
 	var _storageComponentJs2 = _interopRequireDefault(_storageComponentJs);
 
@@ -106,13 +106,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendarComponentJs2 = _interopRequireDefault(_calendarComponentJs);
 
-	var _datepickerComponentJs = __webpack_require__(13);
+	var _datepickerComponentJs = __webpack_require__(14);
 
 	var _datepickerComponentJs2 = _interopRequireDefault(_datepickerComponentJs);
 
-	var _datepickerComponentJs3 = _interopRequireDefault(_datepickerComponentJs);
+	var _daterangepickerComponent = __webpack_require__(15);
 
-	__webpack_require__(20);
+	var _daterangepickerComponent2 = _interopRequireDefault(_daterangepickerComponent);
+
+	__webpack_require__(22);
 
 	var ReactGM = {
 	    Grid: _gridComponentJs2['default'],
@@ -121,7 +123,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Former: _formerComponentJs2['default'],
 	    Calendar: _calendarComponentJs2['default'],
 	    DatePicker: _datepickerComponentJs2['default'],
-	    DateRangePicker: _datepickerComponentJs3['default'],
+	    DateRangePicker: _daterangepickerComponent2['default'],
 	    ValidateMixin: _validateMixinJs2['default'],
 	    Validate: _validateJs2['default'],
 	    ImportLead: _importLeadComponentJs2['default'],
@@ -157,13 +159,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(12);
+	var _moment = __webpack_require__(5);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -337,10 +343,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	});
 
-	module.exports = Calendar;
+	exports['default'] = Calendar;
+	module.exports = exports['default'];
 
 /***/ },
 /* 5 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
+
+/***/ },
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -565,7 +578,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Droper;
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -709,7 +722,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -755,22 +768,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utilRequestJs = __webpack_require__(18);
+	var _utilRequestJs = __webpack_require__(20);
 
 	var _utilRequestJs2 = _interopRequireDefault(_utilRequestJs);
 
-	var _utilParamJs = __webpack_require__(10);
+	var _utilParamJs = __webpack_require__(11);
 
 	var _utilParamJs2 = _interopRequireDefault(_utilParamJs);
 
-	var _utilFormatJs = __webpack_require__(9);
+	var _utilFormatJs = __webpack_require__(10);
 
 	var _utilFormatJs2 = _interopRequireDefault(_utilFormatJs);
 
@@ -780,13 +797,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    param: _utilParamJs2['default']
 	};
 
-	module.exports = Util;
+	exports['default'] = Util;
+	module.exports = exports['default'];
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -815,28 +837,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return result;
 	};
 
-	module.exports = format;
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var param = function param(obj) {
-	    // encodeURIComponent
-	    return _underscore2['default'].map(obj, function (v, k) {
-	        return [encodeURIComponent(k), '=', encodeURIComponent(v)].join('');
-	    }).join('&').replace(/%20/g, "+");
-	};
-
-	module.exports = param;
+	exports['default'] = format;
+	module.exports = exports['default'];
 
 /***/ },
 /* 11 */
@@ -854,7 +856,33 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _utilJs = __webpack_require__(8);
+	var param = function param(obj) {
+	    // encodeURIComponent
+	    return _underscore2['default'].map(obj, function (v, k) {
+	        return [encodeURIComponent(k), '=', encodeURIComponent(v)].join('');
+	    }).join('&').replace(/%20/g, "+");
+	};
+
+	exports['default'] = param;
+	module.exports = exports['default'];
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _utilJs = __webpack_require__(9);
 
 	var _utilJs2 = _interopRequireDefault(_utilJs);
 
@@ -1035,16 +1063,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -1056,11 +1088,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _moment = __webpack_require__(12);
+	var _moment = __webpack_require__(5);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(21);
+	var _reactBootstrap = __webpack_require__(13);
 
 	var _calendarComponentJs = __webpack_require__(4);
 
@@ -1112,10 +1144,109 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	});
 
-	module.exports = DatePicker;
+	exports['default'] = DatePicker;
+	module.exports = exports['default'];
 
 /***/ },
-/* 14 */
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(3);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _moment = __webpack_require__(5);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _reactBootstrap = __webpack_require__(13);
+
+	var _calendarComponentJs = __webpack_require__(4);
+
+	var _calendarComponentJs2 = _interopRequireDefault(_calendarComponentJs);
+
+	var DateRangePicker = _react2['default'].createClass({
+	    displayName: 'DateRangePicker',
+
+	    propTypes: {
+	        begin: _react2['default'].PropTypes.object.isRequired,
+	        end: _react2['default'].PropTypes.object.isRequired,
+	        onChange: _react2['default'].PropTypes.func.isRequired,
+	        inputClassName: _react2['default'].PropTypes.string,
+	        target: _react2['default'].PropTypes.func
+	    },
+	    getInitialState: function getInitialState() {
+	        return {
+	            id: '_gm_datepicker_id' + (Math.random() + '').slice(2)
+	        };
+	    },
+	    renderPopover: function renderPopover() {
+	        return _react2['default'].createElement(
+	            _reactBootstrap.Popover,
+	            { id: this.state.id, className: 'gm-datepicker-popover gm-daterangepicker-popover' },
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'gm-daterangepicker-cell' },
+	                _react2['default'].createElement(_calendarComponentJs2['default'], { selected: this.props.begin, onSelect: this.handleSelect.bind(this, 'begin') })
+	            ),
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'gm-daterangepicker-cell' },
+	                _react2['default'].createElement(_calendarComponentJs2['default'], { selected: this.props.end, onSelect: this.handleSelect.bind(this, 'end') })
+	            )
+	        );
+	    },
+	    handleSelect: function handleSelect(type, date) {
+	        if (type === 'end') {
+	            if (this.refs.target) {
+	                this.refs.target.click();
+	            } else {
+	                this.props.target().click();
+	            }
+	        }
+
+	        if (type === 'begin') {
+	            this.props.onChange(date, this.props.end);
+	        } else {
+	            this.props.onChange(this.props.begin, date);
+	        }
+	    },
+	    handleChange: function handleChange() {
+	        // empty
+	    },
+	    render: function render() {
+	        var value = (0, _moment2['default'])(this.props.begin).format('YYYY-MM-DD') + ' ~ ' + (0, _moment2['default'])(this.props.end).format('YYYY-MM-DD');
+
+	        return _react2['default'].createElement(
+	            'div',
+	            { className: 'gm-datepicker gm-daterangepicker' },
+	            _react2['default'].createElement(
+	                _reactBootstrap.OverlayTrigger,
+	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopover() },
+	                this.props.children ? this.props.children : _react2['default'].createElement('input', { type: 'text', className: this.props.inputClassName, ref: 'target',
+	                    value: value, onChange: this.handleChange })
+	            )
+	        );
+	    }
+	});
+
+	exports['default'] = DateRangePicker;
+	module.exports = exports['default'];
+
+/***/ },
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1260,7 +1391,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1275,11 +1406,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _paginationComponentJs = __webpack_require__(6);
+	var _paginationComponentJs = __webpack_require__(7);
 
 	var _paginationComponentJs2 = _interopRequireDefault(_paginationComponentJs);
 
-	var _paginationTextComponentJs = __webpack_require__(7);
+	var _paginationTextComponentJs = __webpack_require__(8);
 
 	var _paginationTextComponentJs2 = _interopRequireDefault(_paginationTextComponentJs);
 
@@ -1517,15 +1648,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(3);
 	var _ = __webpack_require__(2);
-	var Droper = __webpack_require__(5);
+	var Droper = __webpack_require__(6);
 
 	var ImportLead = React.createClass({
 	    displayName: 'ImportLead',
@@ -1702,13 +1836,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	});
 
-	module.exports = ImportLead;
+	exports['default'] = ImportLead;
+	module.exports = exports['default'];
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -1781,21 +1920,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	});
 
-	module.exports = Storage;
+	exports['default'] = Storage;
+	module.exports = exports['default'];
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _paramJs = __webpack_require__(10);
+	var _paramJs = __webpack_require__(11);
 
 	var _paramJs2 = _interopRequireDefault(_paramJs);
 
-	var _formatJs = __webpack_require__(9);
+	var _formatJs = __webpack_require__(10);
 
 	var _formatJs2 = _interopRequireDefault(_formatJs);
 
@@ -1878,10 +2022,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return new Request(url, options);
 	};
 
-	module.exports = RequestFactory;
+	exports['default'] = RequestFactory;
+	module.exports = exports['default'];
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1904,7 +2049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validateJs = __webpack_require__(11);
+	var _validateJs = __webpack_require__(12);
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
@@ -2011,16 +2156,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 21 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_21__;
 
 /***/ }
 /******/ ])
