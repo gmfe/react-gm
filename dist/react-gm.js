@@ -62,7 +62,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _gridComponentJs = __webpack_require__(17);
+	var _gridComponentJs = __webpack_require__(18);
 
 	var _gridComponentJs2 = _interopRequireDefault(_gridComponentJs);
 
@@ -78,7 +78,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _droperComponentJs2 = _interopRequireDefault(_droperComponentJs);
 
-	var _formerComponentJs = __webpack_require__(16);
+	var _formerComponentJs = __webpack_require__(17);
 
 	var _formerComponentJs2 = _interopRequireDefault(_formerComponentJs);
 
@@ -86,7 +86,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validateJs2 = _interopRequireDefault(_validateJs);
 
-	var _validateMixinJs = __webpack_require__(21);
+	var _validateMixinJs = __webpack_require__(22);
 
 	var _validateMixinJs2 = _interopRequireDefault(_validateMixinJs);
 
@@ -94,11 +94,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utilJs2 = _interopRequireDefault(_utilJs);
 
-	var _importLeadComponentJs = __webpack_require__(18);
+	var _importLeadComponentJs = __webpack_require__(19);
 
 	var _importLeadComponentJs2 = _interopRequireDefault(_importLeadComponentJs);
 
-	var _storageComponentJs = __webpack_require__(19);
+	var _storageComponentJs = __webpack_require__(20);
 
 	var _storageComponentJs2 = _interopRequireDefault(_storageComponentJs);
 
@@ -106,15 +106,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendarComponentJs2 = _interopRequireDefault(_calendarComponentJs);
 
-	var _datepickerComponentJs = __webpack_require__(14);
+	var _datepickerComponentJs = __webpack_require__(15);
 
 	var _datepickerComponentJs2 = _interopRequireDefault(_datepickerComponentJs);
 
-	var _daterangepickerComponent = __webpack_require__(15);
+	var _daterangepickerComponent = __webpack_require__(16);
 
 	var _daterangepickerComponent2 = _interopRequireDefault(_daterangepickerComponent);
 
-	__webpack_require__(22);
+	var _animationiconComponent = __webpack_require__(14);
+
+	var _animationiconComponent2 = _interopRequireDefault(_animationiconComponent);
+
+	__webpack_require__(23);
 
 	var ReactGM = {
 	    Grid: _gridComponentJs2['default'],
@@ -124,6 +128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Calendar: _calendarComponentJs2['default'],
 	    DatePicker: _datepickerComponentJs2['default'],
 	    DateRangePicker: _daterangepickerComponent2['default'],
+	    AnimationIcon: _animationiconComponent2['default'],
 	    ValidateMixin: _validateMixinJs2['default'],
 	    Validate: _validateJs2['default'],
 	    ImportLead: _importLeadComponentJs2['default'],
@@ -779,7 +784,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utilRequestJs = __webpack_require__(20);
+	var _utilRequestJs = __webpack_require__(21);
 
 	var _utilRequestJs2 = _interopRequireDefault(_utilRequestJs);
 
@@ -1084,6 +1089,99 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var AnimationIcon = _react2['default'].createClass({
+	    displayName: 'AnimationIcon',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            state: this.props.state ? this.props.state : 'rolling',
+	            rolling: true
+	        };
+	    },
+	    render: function render() {
+	        var iconState = this.state.state;
+	        var pathDOMClass = 'roll';
+	        var polylineDOMClass = '';
+	        var gDOMClass = '';
+	        var svgDOMClass = '';
+	        var circleDOMClass = '';
+
+	        switch (iconState) {
+	            case 'success':
+	                svgDOMClass = 'animation-icon';
+	                pathDOMClass = 'hide-path success';
+	                polylineDOMClass = 'show';
+	                gDOMClass = '';
+	                circleDOMClass = 'show-circle success';
+	                break;
+	            case 'error':
+	                svgDOMClass = 'animation-icon';
+	                pathDOMClass = 'hide-path';
+	                polylineDOMClass = '';
+	                gDOMClass = 'show';
+	                circleDOMClass = 'show-circle error';
+	                break;
+	            default:
+	                svgDOMClass = 'animation-icon roll';
+	                pathDOMClass = '';
+	                polylineDOMClass = '';
+	                gDOMClass = '';
+	                break;
+	        }
+
+	        return _react2['default'].createElement(
+	            'svg',
+	            { className: svgDOMClass, version: '1.1', viewBox: '0 0 100 100', 'enable-background': 'new 0 0 100 100' },
+	            _react2['default'].createElement('circle', { className: circleDOMClass, cx: '50', cy: '50', r: '43' }),
+	            _react2['default'].createElement('path', { className: pathDOMClass, d: 'M75.201,15.155C68.119,10.024,59.413,7,50,7C31.591,7,15.885,18.568,9.753,34.831' }),
+	            _react2['default'].createElement('polyline', { className: polylineDOMClass, points: '9.756,34.833 46.189,65.404 75.199,15.158' }),
+	            _react2['default'].createElement(
+	                'g',
+	                { className: gDOMClass },
+	                _react2['default'].createElement('line', { x1: '31.209', y1: '31.209', x2: '68.791', y2: '68.791' }),
+	                _react2['default'].createElement('line', { x1: '31.209', y1: '68.791', x2: '68.791', y2: '31.209' })
+	            )
+	        );
+	    },
+	    componentDidMount: function componentDidMount() {
+	        setInterval((function () {
+	            if (this.props.state === 'success') {
+	                return this.setState({
+	                    state: 'success'
+	                });
+	            }
+	            if (this.props.state === 'error') {
+	                return this.setState({
+	                    state: 'error'
+	                });
+	            }
+
+	            this.setState({
+	                state: 'rolling'
+	            });
+	        }).bind(this), 500);
+	    }
+	});
+
+	exports['default'] = AnimationIcon;
+	module.exports = exports['default'];
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactDom = __webpack_require__(3);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
@@ -1148,7 +1246,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1189,54 +1287,60 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    getInitialState: function getInitialState() {
 	        return {
-	            id: '_gm_datepicker_id' + (Math.random() + '').slice(2)
+	            beginId: '_gm_datepicker_id' + (Math.random() + '').slice(2),
+	            endId: '_gm_datepicker_id' + (Math.random() + '').slice(2)
 	        };
 	    },
-	    renderPopover: function renderPopover() {
-	        return _react2['default'].createElement(
-	            _reactBootstrap.Popover,
-	            { id: this.state.id, className: 'gm-datepicker-popover gm-daterangepicker-popover' },
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'gm-daterangepicker-cell' },
-	                _react2['default'].createElement(_calendarComponentJs2['default'], { selected: this.props.begin, onSelect: this.handleSelect.bind(this, 'begin') })
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'gm-daterangepicker-cell' },
-	                _react2['default'].createElement(_calendarComponentJs2['default'], { selected: this.props.end, onSelect: this.handleSelect.bind(this, 'end') })
-	            )
-	        );
-	    },
 	    handleSelect: function handleSelect(type, date) {
-	        if (type === 'end') {
-	            if (this.refs.target) {
-	                this.refs.target.click();
-	            } else {
-	                this.props.target().click();
-	            }
-	        }
-
 	        if (type === 'begin') {
 	            this.props.onChange(date, this.props.end);
 	        } else {
 	            this.props.onChange(this.props.begin, date);
 	        }
+	        this.refs.endTarget.click();
 	    },
-	    handleChange: function handleChange() {
-	        // empty
+	    renderPopoverBegin: function renderPopoverBegin() {
+	        return _react2['default'].createElement(
+	            _reactBootstrap.Popover,
+	            { id: this.state.beginId, className: 'gm-datepicker-popover' },
+	            _react2['default'].createElement(_calendarComponentJs2['default'], { selected: this.props.begin, onSelect: this.handleSelect.bind(this, 'begin') })
+	        );
+	    },
+	    renderPopoverEnd: function renderPopoverEnd() {
+	        return _react2['default'].createElement(
+	            _reactBootstrap.Popover,
+	            { id: this.state.endId, className: 'gm-datepicker-popover' },
+	            _react2['default'].createElement(_calendarComponentJs2['default'], { selected: this.props.end, onSelect: this.handleSelect.bind(this, 'end') })
+	        );
 	    },
 	    render: function render() {
-	        var value = (0, _moment2['default'])(this.props.begin).format('YYYY-MM-DD') + ' ~ ' + (0, _moment2['default'])(this.props.end).format('YYYY-MM-DD');
-
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'gm-datepicker gm-daterangepicker' },
 	            _react2['default'].createElement(
 	                _reactBootstrap.OverlayTrigger,
-	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopover() },
-	                this.props.children ? this.props.children : _react2['default'].createElement('input', { type: 'text', className: this.props.inputClassName, ref: 'target',
-	                    value: value, onChange: this.handleChange })
+	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverBegin() },
+	                _react2['default'].createElement(
+	                    'div',
+	                    { ref: 'beginTarget' },
+	                    _react2['default'].createElement('input', { type: 'text', className: this.props.inputClassName,
+	                        value: (0, _moment2['default'])(this.props.begin).format('YYYY-MM-DD'), onChange: this.handleChange })
+	                )
+	            ),
+	            _react2['default'].createElement(
+	                'span',
+	                null,
+	                ' ~ '
+	            ),
+	            _react2['default'].createElement(
+	                _reactBootstrap.OverlayTrigger,
+	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverEnd() },
+	                _react2['default'].createElement(
+	                    'div',
+	                    { ref: 'endTarget' },
+	                    _react2['default'].createElement('input', { type: 'text', className: this.props.inputClassName,
+	                        value: (0, _moment2['default'])(this.props.end).format('YYYY-MM-DD'), onChange: this.handleChange })
+	                )
 	            )
 	        );
 	    }
@@ -1246,7 +1350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1391,7 +1495,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1648,7 +1752,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1840,7 +1944,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1924,7 +2028,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2026,7 +2130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2156,7 +2260,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
