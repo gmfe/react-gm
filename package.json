@@ -43,6 +43,7 @@
     "gulp-sequence": "^0.4.1",
     "gulp-watch": "^4.3.5",
     "jquery": "^2.1.4",
+    "moment": "^2.10.6",
     "path": "^0.12.7",
     "react": "^0.14.0",
     "react-bootstrap": "^0.27.3",
