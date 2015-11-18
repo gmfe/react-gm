@@ -182,7 +182,7 @@ var FormerDom = React.createClass({
     }
 });
 
-ReactDOM.render(<FormerDom></FormerDom>, document.getElementById('form-container'));
+ReactDOM.render(<FormerDom />, document.getElementById('form-container'));
 
 console.log(Validate('*', 'a', true));
 console.log(Validate('*3', 'aaaa', true));
