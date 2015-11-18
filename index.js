@@ -267,7 +267,7 @@ var DaterangepickerWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <DateRangePicker begin={this.state.begin} end={this.state.end} onChange={this.handleChange} />
+                <DateRangePicker begin={this.state.begin} end={this.state.end} onChange={this.handleChange} inputClassName="form-control input-sm" />
             </div>
         );
     },

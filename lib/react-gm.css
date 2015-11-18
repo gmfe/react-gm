@@ -243,18 +243,21 @@
 }
 
 /*daterangepicker*/
-.gm-daterangepicker-popover{
-    max-width: none;
-}
-.gm-daterangepicker input[type="text"]{
-    min-width: 180px;
-}
-.gm-daterangepicker-cell{
+.gm-daterangepicker>div{
     display: inline-block;
 }
-.gm-daterangepicker-cell:first-child{
-    margin-right: 10px;
-}
+/*.gm-daterangepicker-popover{*/
+    /*max-width: none;*/
+/*}*/
+/*.gm-daterangepicker input[type="text"]{*/
+    /*min-width: 180px;*/
+/*}*/
+/*.gm-daterangepicker-cell{*/
+    /*display: inline-block;*/
+/*}*/
+/*.gm-daterangepicker-cell:first-child{*/
+    /*margin-right: 10px;*/
+/*}*/
 
 /*global*/
 .gm-bg-info {
