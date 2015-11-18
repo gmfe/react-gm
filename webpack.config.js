@@ -4,48 +4,14 @@ var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var reactExternal = {
-    root: 'React',
-    commonjs2: 'react',
-    commonjs: 'react',
-    amd: 'react'
-};
-var reactDOMExternal = {
-    root: 'ReactDOM',
-    commonjs2: 'react-dom',
-    commonjs: 'react-dom',
-    amd: 'react-dom'
-};
-var momentExternal = {
-    root: 'moment',
-    commonjs2: 'moment',
-    commonjs: 'moment',
-    amd: 'moment'
-};
-
-var undescoreExternal = {
-    root: 'underscore',
-    commonjs2: 'underscore',
-    commonjs: 'underscore',
-    amd: 'underscore'
-};
-
-var reactBootstrapExternal = {
-    root: 'react-bootstrap',
-    commonjs2: 'react-bootstrap',
-    commonjs: 'react-bootstrap',
-    amd: 'react-bootstrap'
-};
-
 module.exports = {
     entry: './lib/index',
     externals: {
-        'react': reactExternal,
-        'react-dom': reactDOMExternal,
-        'react-native': reactExternal,
-        'moment': momentExternal,
-        'underscore': undescoreExternal,
-        'react-bootstrap': reactBootstrapExternal
+        'react': 'react',
+        'react-dom': 'react-dom',
+        'moment': 'moment',
+        'underscore': 'underscore',
+        'react-bootstrap': 'react-bootstrap'
     },
     module: {
         loaders: [
