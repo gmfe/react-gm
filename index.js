@@ -95,7 +95,7 @@ var GridWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <Grid data={this.state}></Grid>
+                <Grid data={this.state} />
             </div>
         )
     },
@@ -109,7 +109,7 @@ var GridWrap = React.createClass({
 
 ReactDOM.render((
     <div>
-        <GridWrap></GridWrap>
+        <GridWrap />
     </div>
 ), document.getElementById('grid-container'));
 
@@ -118,7 +118,7 @@ var DroperWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <Droper onDrop={this.handleDrop} accept="image/*"></Droper>
+                <Droper onDrop={this.handleDrop} accept="image/*" />
                 <Droper className="gm-droper-wrap" onDrop={this.handleDrop} accept=".xlsx">
                     <button className="btn btn-default">upload</button>
                 </Droper>
@@ -132,7 +132,7 @@ var DroperWrap = React.createClass({
 
 ReactDOM.render((
     <div>
-        <DroperWrap></DroperWrap>
+        <DroperWrap />
     </div>
 ), document.getElementById('uploader-container'));
 
@@ -213,8 +213,7 @@ var CalendarWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <Calendar selected={this.state.selected} onSelect={this.handleSelect}>
-                </Calendar>
+                <Calendar selected={this.state.selected} onSelect={this.handleSelect} />
             </div>
         );
     },
@@ -226,7 +225,7 @@ var CalendarWrap = React.createClass({
     }
 });
 
-ReactDOM.render(<CalendarWrap></CalendarWrap>, document.getElementById('calendar-container'));
+ReactDOM.render(<CalendarWrap />, document.getElementById('calendar-container'));
 var DatePickerWrap = React.createClass({
     getInitialState: function () {
         return {
@@ -236,8 +235,7 @@ var DatePickerWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName="" target={() => this.refs.target}>
-                </DatePicker>
+                <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName="" target={() => this.refs.target} />
                 <span>inline-block</span>
             </div>
         );
@@ -256,7 +254,7 @@ var DatePickerWrap = React.createClass({
     }
 });
 
-ReactDOM.render(<DatePickerWrap></DatePickerWrap>, document.getElementById('datepicker-container'));
+ReactDOM.render(<DatePickerWrap />, document.getElementById('datepicker-container'));
 
 
 var DaterangepickerWrap = React.createClass({
@@ -269,7 +267,7 @@ var DaterangepickerWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <DateRangePicker begin={this.state.begin} end={this.state.end} onChange={this.handleChange}></DateRangePicker>
+                <DateRangePicker begin={this.state.begin} end={this.state.end} onChange={this.handleChange} />
             </div>
         );
     },
@@ -281,7 +279,7 @@ var DaterangepickerWrap = React.createClass({
     }
 });
 
-ReactDOM.render(<DaterangepickerWrap></DaterangepickerWrap>, document.getElementById('daterangepicker-container'));
+ReactDOM.render(<DaterangepickerWrap />, document.getElementById('daterangepicker-container'));
 
 var AnimationIconWrap = React.createClass({
     getInitialState() {
