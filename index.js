@@ -13,6 +13,7 @@ import {Popover} from 'react-bootstrap';
 import Calendar from './lib/calendar.component.js';
 import DatePicker from './lib/datepicker.component.js';
 import DateRangePicker from './lib/daterangepicker.component.js';
+import AnimationIcon from './lib/animationicon.component.js';
 
 var onClick = function () {
     console.log(arguments);
@@ -281,3 +282,33 @@ var DaterangepickerWrap = React.createClass({
 });
 
 ReactDOM.render(<DaterangepickerWrap></DaterangepickerWrap>, document.getElementById('daterangepicker-container'));
+
+var AnimationIconWrap = React.createClass({
+    getInitialState() {
+        return {
+            animationIcon: 'rolling'
+        }
+    },
+    render() {
+        return (
+            <div>
+                <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'success' } />
+                <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'error' } />
+                <p />
+                <button className='btn btn-white' onClick={this.handleChangeAnimationIconState}>
+                { this.state.animationIcon === 'rolling' ? '停止' : '复原' }
+                </button>
+            </div>
+        )
+    },
+    handleChangeAnimationIconState() {
+        this.setState({
+            animationIcon: this.state.animationIcon === 'rolling' ? 'stop' : 'rolling'
+        })
+    }
+});
+
+ReactDOM.render(
+    <AnimationIconWrap />,
+    document.getElementById('animation-icon')
+);
