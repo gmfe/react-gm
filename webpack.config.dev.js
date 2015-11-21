@@ -4,9 +4,16 @@ var webpack = require('webpack');
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry: {
-        'client': 'webpack-hot-middleware/client',
-        'index': './index',
-        'import.lead': './import.lead'
+        'index': [
+            'webpack/hot/dev-server',
+            'webpack-dev-server/client?http://localhost:3000',
+            './index'
+        ],
+        'import.lead': [
+            'webpack/hot/dev-server',
+            'webpack-dev-server/client?http://localhost:3000',
+            './import.lead'
+        ]
     },
     output: {
         path: path.join(__dirname, ''),
