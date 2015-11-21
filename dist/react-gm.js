@@ -1131,7 +1131,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return _react2['default'].createElement(
 	            'svg',
-	            { className: svgDOMClass, version: '1.1', viewBox: '0 0 100 100', 'enable-background': 'new 0 0 100 100' },
+	            { className: svgDOMClass, version: '1.1', viewBox: '0 0 100 100' },
 	            _react2['default'].createElement('circle', { className: circleDOMClass, cx: '50', cy: '50', r: '43' }),
 	            _react2['default'].createElement('path', { className: pathDOMClass, d: 'M75.201,15.155C68.119,10.024,59.413,7,50,7C31.591,7,15.885,18.568,9.753,34.831' }),
 	            _react2['default'].createElement('polyline', { className: polylineDOMClass, points: '9.756,34.833 46.189,65.404 75.199,15.158' }),
@@ -1144,22 +1144,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	    },
 	    componentDidMount: function componentDidMount() {
-	        setInterval((function () {
-	            if (this.props.state === 'success') {
-	                return this.setState({
-	                    state: 'success'
-	                });
+	        this.startInterval();
+	    },
+	    startInterval: function startInterval() {
+	        var checkState = setInterval((function () {
+	            switch (this.props.state) {
+	                case 'success':
+	                    clearInterval(checkState);
+	                    this.setState({
+	                        state: 'success'
+	                    });
+	                    break;
+	                case 'error':
+	                    clearInterval(checkState);
+	                    this.setState({
+	                        state: 'error'
+	                    });
+	                    break;
+	                default:
+	                    this.setState({
+	                        state: 'rolling'
+	                    });
+	                    break;
 	            }
-	            if (this.props.state === 'error') {
-	                return this.setState({
-	                    state: 'error'
-	                });
-	            }
-
-	            this.setState({
-	                state: 'rolling'
-	            });
 	        }).bind(this), 500);
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        nextProps.state === 'rolling' && this.startInterval();
 	    }
 	});
 
@@ -1313,6 +1324,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _react2['default'].createElement(_calendarComponentJs2['default'], { selected: this.props.end, onSelect: this.handleSelect.bind(this, 'end') })
 	        );
 	    },
+	    handleChange: function handleChange() {},
 	    render: function render() {
 	        return _react2['default'].createElement(
 	            'div',
