@@ -8,11 +8,6 @@ module.exports = {
             'webpack/hot/dev-server',
             'webpack-dev-server/client?http://localhost:3000',
             './index'
-        ],
-        'import.lead': [
-            'webpack/hot/dev-server',
-            'webpack-dev-server/client?http://localhost:3000',
-            './import.lead'
         ]
     },
     output: {

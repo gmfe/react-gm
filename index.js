@@ -15,6 +15,8 @@ import DatePicker from './lib/datepicker.component.js';
 import DateRangePicker from './lib/daterangepicker.component.js';
 import AnimationIcon from './lib/animationicon.component.js';
 
+import './import.lead';
+
 var onClick = function () {
     console.log(arguments);
 
