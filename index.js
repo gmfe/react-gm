@@ -15,7 +15,14 @@ import DatePicker from './lib/datepicker.component.js';
 import DateRangePicker from './lib/daterangepicker.component.js';
 import AnimationIcon from './lib/animationicon.component.js';
 
-import './import.lead';
+//import './import.lead';
+
+setTimeout(function () {
+    require.ensure(['./import.lead'], (require) => {
+        var Profile = require('./import.lead');
+    });
+}, 2000);
+
 
 var onClick = function () {
     console.log(arguments);

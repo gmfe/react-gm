@@ -1,4 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 /npm-debug.log
+/webpack-assets.js
 .idea
 node_modules/

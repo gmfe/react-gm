@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/gmfe/react-gm#readme",
   "devDependencies": {
+    "assets-webpack-plugin": "^3.2.0",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
@@ -39,6 +40,7 @@
     "css-loader": "^0.19.0",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.8.2",
+    "file-loader": "^0.8.4",
     "font-awesome": "^4.4.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",

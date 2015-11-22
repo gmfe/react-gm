@@ -56,7 +56,11 @@
 <div id="import-lead-container">
 
 </div>
-
-<script src="static/index.bundle.js"></script>
+<script>
+    document.write('<script src="webpack-assets.js?v=' + Math.random() + '"><\/script>');
+</script>
+<script>
+    document.write('<script src="' + window.WEBPACK_ASSETS['index'].js + '"><\/script>');
+</script>
 </body>
 </html>
