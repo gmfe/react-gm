@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validateMixin = __webpack_require__(22);
+	var _validateMixin = __webpack_require__(23);
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
@@ -116,7 +116,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _animationicon2 = _interopRequireDefault(_animationicon);
 
-	__webpack_require__(23);
+	var _tip = __webpack_require__(21);
+
+	var _tip2 = _interopRequireDefault(_tip);
+
+	__webpack_require__(24);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -133,8 +137,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Validate: _validate2.default,
 	    ImportLead: _importLeadComponent2.default,
 	    Droper: _droperComponent2.default,
-	    Util: _util2.default,
-	    Storage: _storageComponent2.default
+	    Storage: _storageComponent2.default,
+	    Tip: _tip2.default,
+	    Util: _util2.default
 	};
 
 	exports.default = ReactGM;
@@ -782,7 +787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _request = __webpack_require__(21);
+	var _request = __webpack_require__(22);
 
 	var _request2 = _interopRequireDefault(_request);
 
@@ -2035,6 +2040,170 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(3);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var tipContainerId = '_gm_tips_container' + (Math.random() + '').slice(2);
+	var tipsContainer = document.getElementById(tipContainerId);
+	if (!tipsContainer) {
+	    tipsContainer = document.createElement('div');
+	    tipsContainer.className = 'gm-tips';
+	    tipsContainer.id = tipContainerId;
+	    document.body.appendChild(tipsContainer);
+	}
+
+	var TipStatic = {
+	    tip: function tip(options) {
+	        var _b_onClose = options.onClose;
+	        var div = document.createElement('div');
+	        div.className = 'gm-tips-cell';
+	        tipsContainer.appendChild(div);
+
+	        options.onClose = function () {
+	            tipsContainer.removeChild(div);
+	            if (_b_onClose) {
+	                _b_onClose();
+	            }
+	        };
+	        _reactDom2.default.render(_react2.default.createElement(TipOverlay, options), div);
+	    },
+	    success: function success(options) {
+	        options.type = 'success';
+	        TipStatic.tip(options);
+	    },
+	    info: function info(options) {
+	        options.type = 'info';
+	        TipStatic.tip(options);
+	    },
+	    warning: function warning(options) {
+	        options.type = 'warning';
+	        TipStatic.tip(options);
+	    },
+	    danger: function danger(options) {
+	        options.type = 'danger';
+	        TipStatic.tip(options);
+	    }
+	};
+
+	var TipOverlay = _react2.default.createClass({
+	    displayName: 'TipOverlay',
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            time: 3000
+	        };
+	    },
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            { ref: 'tipOverlay', className: 'animated fadeInRight' },
+	            _react2.default.createElement(
+	                Tip,
+	                { key: 'tip', title: this.props.title, type: this.props.type,
+	                    onClose: this.handleClose },
+	                this.props.text
+	            )
+	        );
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var t = this;
+	        if (t.props.time) {
+	            t.timer = setTimeout(function () {
+	                t.fadeOut();
+	            }, t.props.time);
+	        }
+	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	        clearTimeout(this.timer);
+	    },
+	    handleClose: function handleClose() {
+	        this.fadeOut();
+	    },
+	    fadeOut: function fadeOut() {
+	        var t = this;
+	        if (!t.hasClosed) {
+	            t.hasClosed = true;
+	            t.props.onClose();
+	        }
+	    }
+	});
+
+	var Tip = _react2.default.createClass({
+	    displayName: 'Tip',
+
+	    statics: TipStatic,
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            title: '',
+	            type: 'info',
+	            onClose: function onClose() {}
+	        };
+	    },
+	    render: function render() {
+	        var iconClassName = {
+	            success: 'fa-check-circle',
+	            info: 'fa-info-circle',
+	            warning: 'fa-question-circle',
+	            danger: 'fa-exclamation-circle'
+	        };
+
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'gm-tip panel panel-default' },
+	            _react2.default.createElement(
+	                'button',
+	                { type: 'button', className: 'close', onClick: this.handleClose },
+	                _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    '×'
+	                )
+	            ),
+	            _react2.default.createElement('i', { className: "fa fa-2x text-" + this.props.type + ' ' + iconClassName[this.props.type] }),
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'panel-body' },
+	                this.props.title ? _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'strong',
+	                        null,
+	                        this.props.title
+	                    )
+	                ) : undefined,
+	                this.props.children
+	            )
+	        );
+	    },
+	    handleClose: function handleClose() {
+	        this.props.onClose();
+	    }
+	});
+
+	exports.default = Tip;
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _param = __webpack_require__(11);
 
 	var _param2 = _interopRequireDefault(_param);
@@ -2127,7 +2296,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2256,7 +2425,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

@@ -259,6 +259,38 @@
     /*margin-right: 10px;*/
 /*}*/
 
+/*gm-tip  */
+.gm-tip{
+    position: relative;
+    display: inline-block;
+    min-width: 250px;
+    cursor: pointer;
+}
+.gm-tip .panel-body{
+    padding-left: 50px;
+}
+.gm-tip .close{
+    margin-right: 5px;
+}
+.gm-tip i{
+    top: 50%;
+    position: absolute;
+    margin-top: -0.5em;
+    margin-left: 15px;
+}
+
+/*gm-tips*/
+.gm-tips{
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 9999;
+    max-width: 450px;
+}
+.gm-tips-cell{
+
+float: right;clear: both;}
+
 /*global*/
 .gm-bg-info {
     background-color: #d9edf7 !important;
@@ -271,6 +303,30 @@
 .gm-invalid {
     border-color: #a94442 !important;
 }
+
+/*animatre lite*/
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+@-webkit-keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.fadeInRight {
+    animation-name: fadeInRight;
+    animation-duration: .5s;
+}
+
+
 
 @keyframes svgRoll {
     from { transform: rotate(0deg) }

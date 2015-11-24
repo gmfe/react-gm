@@ -14,6 +14,7 @@ import Calendar from './lib/calendar.component.js';
 import DatePicker from './lib/datepicker.component.js';
 import DateRangePicker from './lib/daterangepicker.component.js';
 import AnimationIcon from './lib/animationicon.component.js';
+import Tip from './lib/tip.component';
 
 //import './import.lead';
 
@@ -24,6 +25,40 @@ setTimeout(function () {
 }, 2000);
 
 
+// tip
+console.log(React.addons);
+
+setTimeout(function () {
+    Tip.success({
+        text: '打发打发打发打发打发打发打发打发打发打发打发打发打发打发打发打发',
+        time: 0
+    });
+}, 1000);
+
+var TipWrap = React.createClass({
+    getInitialState: function () {
+        return {};
+    },
+    render: function () {
+        return (
+            <div>
+                <Tip type="success">啊啊啊</Tip>
+                <Tip type="info">啊啊啊</Tip>
+                <Tip type="warning">啊啊啊</Tip>
+                <Tip type="danger">啊啊啊</Tip>
+                <Tip type="success" title="错误">啊啊啊</Tip>
+            </div>
+        );
+    }
+});
+ReactDOM.render((
+    <div>
+        <TipWrap />
+    </div>
+), document.getElementById('tip-container'));
+
+
+// grid
 var onClick = function () {
     console.log(arguments);
 
@@ -104,7 +139,7 @@ var GridWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <Grid data={this.state} />
+                <Grid data={this.state}/>
             </div>
         )
     },
@@ -127,7 +162,7 @@ var DroperWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <Droper onDrop={this.handleDrop} accept="image/*" />
+                <Droper onDrop={this.handleDrop} accept="image/*"/>
                 <Droper className="gm-droper-wrap" onDrop={this.handleDrop} accept=".xlsx">
                     <button className="btn btn-default">upload</button>
                 </Droper>
@@ -212,7 +247,6 @@ console.log(Util.param({
 window.Storage = Storage;
 
 
-
 var CalendarWrap = React.createClass({
     getInitialState: function () {
         return {
@@ -222,7 +256,7 @@ var CalendarWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <Calendar selected={this.state.selected} onSelect={this.handleSelect} />
+                <Calendar selected={this.state.selected} onSelect={this.handleSelect}/>
             </div>
         );
     },
@@ -244,7 +278,8 @@ var DatePickerWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName="" target={() => this.refs.target} />
+                <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName=""
+                            target={() => this.refs.target}/>
                 <span>inline-block</span>
             </div>
         );
@@ -276,7 +311,8 @@ var DaterangepickerWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <DateRangePicker begin={this.state.begin} end={this.state.end} onChange={this.handleChange} inputClassName="form-control input-sm" />
+                <DateRangePicker begin={this.state.begin} end={this.state.end} onChange={this.handleChange}
+                                 inputClassName="form-control input-sm"/>
             </div>
         );
     },
@@ -299,11 +335,11 @@ var AnimationIconWrap = React.createClass({
     render() {
         return (
             <div>
-                <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'success' } />
-                <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'error' } />
+                <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'success' }/>
+                <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'error' }/>
                 <p />
                 <button className='btn btn-white' onClick={this.handleChangeAnimationIconState}>
-                { this.state.animationIcon === 'rolling' ? '停止' : '复原' }
+                    { this.state.animationIcon === 'rolling' ? '停止' : '复原' }
                 </button>
             </div>
         )
