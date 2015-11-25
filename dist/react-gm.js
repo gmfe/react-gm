@@ -1152,16 +1152,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.startInterval();
 	    },
 	    startInterval: function startInterval() {
-	        var checkState = setInterval((function () {
+	        function animationLifeCircle() {
 	            switch (this.props.state) {
 	                case 'success':
-	                    clearInterval(checkState);
 	                    this.setState({
 	                        state: 'success'
 	                    });
 	                    break;
 	                case 'error':
-	                    clearInterval(checkState);
 	                    this.setState({
 	                        state: 'error'
 	                    });
@@ -1170,9 +1168,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    this.setState({
 	                        state: 'rolling'
 	                    });
+	                    setTimeout(animationLifeCircle.bind(this), 500);
 	                    break;
 	            }
-	        }).bind(this), 500);
+	        }
+
+	        setTimeout(animationLifeCircle.bind(this), 500);
 	    },
 	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	        nextProps.state === 'rolling' && this.startInterval();
