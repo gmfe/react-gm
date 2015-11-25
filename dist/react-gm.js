@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validateMixin = __webpack_require__(23);
+	var _validateMixin = __webpack_require__(24);
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
@@ -96,7 +96,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _importLeadComponent2 = _interopRequireDefault(_importLeadComponent);
 
-	var _storageComponent = __webpack_require__(20);
+	var _storageComponent = __webpack_require__(21);
 
 	var _storageComponent2 = _interopRequireDefault(_storageComponent);
 
@@ -116,11 +116,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _animationicon2 = _interopRequireDefault(_animationicon);
 
-	var _tip = __webpack_require__(21);
+	var _tip = __webpack_require__(22);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	__webpack_require__(24);
+	var _nprogress = __webpack_require__(20);
+
+	var _nprogress2 = _interopRequireDefault(_nprogress);
+
+	__webpack_require__(25);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -139,6 +143,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Droper: _droperComponent2.default,
 	    Storage: _storageComponent2.default,
 	    Tip: _tip2.default,
+	    NProgress: _nprogress2.default,
 	    Util: _util2.default
 	};
 
@@ -787,7 +792,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _request = __webpack_require__(22);
+	var _request = __webpack_require__(23);
 
 	var _request2 = _interopRequireDefault(_request);
 
@@ -1961,6 +1966,94 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(3);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var containerId = '_gm_nprogress_container' + (Math.random() + '').slice(2);
+	var container = document.getElementById(containerId);
+	if (!container) {
+	    container = document.createElement('div');
+	    container.className = 'gm-nprogress-container';
+	    container.id = containerId;
+	    document.body.appendChild(container);
+	}
+
+	var NProgressStatics = {
+	    start: function start() {
+	        _reactDom2.default.unmountComponentAtNode(container);
+	        _reactDom2.default.render(_react2.default.createElement(NProgress, null), container);
+	    },
+	    done: function done() {
+	        _reactDom2.default.render(_react2.default.createElement(NProgress, { precent: 100 }), container);
+	        setTimeout(function () {
+	            _reactDom2.default.unmountComponentAtNode(container);
+	        }, 250);
+	    }
+	};
+
+	var NProgress = _react2.default.createClass({
+	    displayName: 'NProgress',
+
+	    statics: NProgressStatics,
+	    getInitialState: function getInitialState() {
+	        return {
+	            precent: 0
+	        };
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        if (nextProps.precent) {
+	            clearTimeout(this.timer);
+	            this.setState({
+	                precent: nextProps.precent
+	            });
+	        }
+	    },
+	    render: function render() {
+	        var percent = 100 - this.state.precent;
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'gm-nprogress', style: { transform: "translate3d(-" + percent + "%, 0px, 0px)" } },
+	            _react2.default.createElement('div', { className: 'gm-nprogress-head' })
+	        );
+	    },
+	    componentDidMount: function componentDidMount() {
+	        this.doInc();
+	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	        clearTimeout(this.timer);
+	    },
+	    doInc: function doInc() {
+	        var t = this;
+	        t.timer = setTimeout(function () {
+	            t.setState({
+	                precent: t.state.precent + (100 - t.state.precent) * 0.2
+	            });
+	            if (t.state.precent < 90) {
+	                t.doInc();
+	            }
+	        }, 150);
+	    }
+	});
+
+	exports.default = NProgress;
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
@@ -2031,7 +2124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2063,7 +2156,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    document.body.appendChild(tipsContainer);
 	}
 
-	var TipStatic = {
+	var TipStatics = {
 	    tip: function tip(options) {
 	        var _b_onClose = options.onClose;
 	        var div = document.createElement('div');
@@ -2080,19 +2173,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    success: function success(options) {
 	        options.type = 'success';
-	        TipStatic.tip(options);
+	        TipStatics.tip(options);
 	    },
 	    info: function info(options) {
 	        options.type = 'info';
-	        TipStatic.tip(options);
+	        TipStatics.tip(options);
 	    },
 	    warning: function warning(options) {
 	        options.type = 'warning';
-	        TipStatic.tip(options);
+	        TipStatics.tip(options);
 	    },
 	    danger: function danger(options) {
 	        options.type = 'danger';
-	        TipStatic.tip(options);
+	        TipStatics.tip(options);
 	    }
 	};
 
@@ -2142,7 +2235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Tip = _react2.default.createClass({
 	    displayName: 'Tip',
 
-	    statics: TipStatic,
+	    statics: TipStatics,
 	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            title: '',
@@ -2195,7 +2288,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2296,7 +2389,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2425,7 +2518,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

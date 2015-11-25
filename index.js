@@ -15,6 +15,7 @@ import DatePicker from './lib/datepicker.component.js';
 import DateRangePicker from './lib/daterangepicker.component.js';
 import AnimationIcon from './lib/animationicon.component.js';
 import Tip from './lib/tip.component';
+import NProgress from './lib/nprogress.component';
 
 //import './import.lead';
 
@@ -26,15 +27,6 @@ setTimeout(function () {
 
 
 // tip
-console.log(React.addons);
-
-setTimeout(function () {
-    Tip.success({
-        text: '打发打发打发打发打发打发打发打发打发打发打发打发打发打发打发打发',
-        time: 0
-    });
-}, 1000);
-
 var TipWrap = React.createClass({
     getInitialState: function () {
         return {};
@@ -42,6 +34,9 @@ var TipWrap = React.createClass({
     render: function () {
         return (
             <div>
+                <div>
+                    <button className="btn btn-primary" onClick={this.handleClick}>showTip</button>
+                </div>
                 <Tip type="success">啊啊啊</Tip>
                 <Tip type="info">啊啊啊</Tip>
                 <Tip type="warning">啊啊啊</Tip>
@@ -49,6 +44,15 @@ var TipWrap = React.createClass({
                 <Tip type="success" title="错误">啊啊啊</Tip>
             </div>
         );
+    },
+    handleClick: function () {
+        Tip.success({
+            text: '需要用户自行关闭的',
+            time: 0
+        });
+        Tip.info({
+            text: '提示啦,提示啦'
+        });
     }
 });
 ReactDOM.render((
@@ -57,6 +61,31 @@ ReactDOM.render((
     </div>
 ), document.getElementById('tip-container'));
 
+
+// nprogress
+var NProgressWrap = React.createClass({
+    render: function () {
+        return (
+            <div>
+                <button className="btn btn-primary" onClick={this.handleStart}>start</button>
+                <button className="btn btn-primary" onClick={this.handleEnd}>end</button>
+
+            </div>
+        )
+    },
+    handleStart: function () {
+        NProgress.start();
+    },
+    handleEnd: function () {
+        NProgress.done();
+    }
+});
+
+ReactDOM.render(
+    <div>
+        <NProgressWrap></NProgressWrap>
+    </div>
+, document.getElementById('nprogress-container'));
 
 // grid
 var onClick = function () {
