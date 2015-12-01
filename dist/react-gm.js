@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validateMixin = __webpack_require__(25);
+	var _validateMixin = __webpack_require__(26);
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
@@ -96,7 +96,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _importLeadComponent2 = _interopRequireDefault(_importLeadComponent);
 
-	var _storageComponent = __webpack_require__(22);
+	var _storageComponent = __webpack_require__(23);
 
 	var _storageComponent2 = _interopRequireDefault(_storageComponent);
 
@@ -116,15 +116,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _animationicon2 = _interopRequireDefault(_animationicon);
 
-	var _tip = __webpack_require__(23);
+	var _tip = __webpack_require__(24);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(21);
+	var _nprogress = __webpack_require__(22);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	__webpack_require__(26);
+	var _messagebox = __webpack_require__(21);
+
+	__webpack_require__(27);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -144,6 +146,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Storage: _storageComponent2.default,
 	    Tip: _tip2.default,
 	    NProgress: _nprogress2.default,
+	    showMessageBox: _messagebox.showMessageBox,
+	    MessageBoxIcon: _messagebox.MessageBoxIcon,
+	    MessageBoxType: _messagebox.MessageBoxType,
 	    Util: _util2.default
 	};
 
@@ -792,7 +797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _request = __webpack_require__(24);
+	var _request = __webpack_require__(25);
 
 	var _request2 = _interopRequireDefault(_request);
 
@@ -2003,6 +2008,223 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(3);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MessageBoxIcon = {
+	    Success: 'Success',
+	    Info: 'Info',
+	    Error: 'Error',
+	    Warning: 'Warning',
+	    Question: 'Question',
+	    None: 'None'
+	};
+
+	var MessageBoxType = {
+	    OKCancel: 'OKCancel',
+	    YesNo: 'YesNo',
+	    OK: 'OK'
+	};
+
+	var MessageBox = _react2.default.createClass({
+	    displayName: 'MessageBox',
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            icon: MessageBoxIcon.None,
+	            text: 'Hello, world!',
+	            title: '',
+	            type: MessageBoxType.OK
+	        };
+	    },
+	    render: function render() {
+
+	        var thisProps = this.props;
+	        var buttonArea = null;
+	        var iconArea = null;
+	        var title;
+
+	        switch (thisProps.type) {
+	            case MessageBoxType.OKCancel:
+	                buttonArea = _react2.default.createElement(
+	                    'div',
+	                    { className: 'modal-actions' },
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn-link modal-action', onClick: this.handleClickBtn.bind(this, false) },
+	                        '取消'
+	                    ),
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn-link modal-action', onClick: this.handleClickBtn.bind(this, true) },
+	                        '确定'
+	                    )
+	                );
+	                break;
+	            case MessageBoxType.YesNo:
+	                buttonArea = _react2.default.createElement(
+	                    'div',
+	                    { className: 'modal-actions' },
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn-link modal-action', onClick: this.handleClickBtn.bind(this, false) },
+	                        '否'
+	                    ),
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn-link modal-action', onClick: this.handleClickBtn.bind(this, true) },
+	                        '是'
+	                    )
+	                );
+	                break;
+	            default:
+	                buttonArea = _react2.default.createElement(
+	                    'div',
+	                    { className: 'modal-actions' },
+	                    _react2.default.createElement(
+	                        'button',
+	                        {
+	                            className: 'button btn-link modal-action-single',
+	                            onClick: this.handleClickBtn.bind(this, true)
+	                        },
+	                        '确定'
+	                    )
+	                );
+	                break;
+	        }
+
+	        if (!thisProps.title) {
+	            switch (thisProps.icon) {
+	                case MessageBoxIcon.Success:
+	                    title = '成功';break;
+	                case MessageBoxIcon.Info:
+	                    title = '提示';break;
+	                case MessageBoxIcon.Error:
+	                    title = '错误';break;
+	                case MessageBoxIcon.Warning:
+	                    title = '警告';break;
+	                case MessageBoxIcon.Question:
+	                    title = '问题';break;
+	                case MessageBoxIcon.None:
+	                    title = '消息';break;
+
+	                default:
+	                    title = thisProps.title;break;
+	            }
+	        }
+
+	        switch (thisProps.icon) {
+	            case MessageBoxIcon.Success:
+	                iconArea = _react2.default.createElement('span', { className: 'icon ico-check-circle text-success' });
+	                break;
+	            case MessageBoxIcon.Info:
+	                iconArea = _react2.default.createElement('span', { className: 'icon ico-info-circle text-info' });
+	                break;
+	            case MessageBoxIcon.Error:
+	                iconArea = _react2.default.createElement('span', { className: 'icon ico-times-circle text-danger' });
+	                break;
+	            case MessageBoxIcon.Warning:
+	                iconArea = _react2.default.createElement('span', { className: 'icon ico-warning text-warning' });
+	                break;
+	            case MessageBoxIcon.Question:
+	                iconArea = _react2.default.createElement('span', { className: 'icon ico-question-circle text-primary' });
+	                break;
+
+	            default:
+	                iconArea = null;
+	                break;
+	        }
+
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'modal', style: { display: 'block' } },
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'modal-dialog modal-sm' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'modal-content' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'modal-header' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'modal-title' },
+	                            title
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'modal-body' },
+	                        _react2.default.createElement(
+	                            'center',
+	                            null,
+	                            iconArea ? _react2.default.createElement(
+	                                'p',
+	                                { style: { fontSize: 40 } },
+	                                iconArea
+	                            ) : null,
+	                            _react2.default.createElement(
+	                                'p',
+	                                null,
+	                                thisProps.text
+	                            )
+	                        )
+	                    ),
+	                    buttonArea
+	                )
+	            )
+	        );
+	    },
+	    handleClickBtn: function handleClickBtn(action) {
+	        this.props.resolve(action);
+	    }
+	});
+
+	var showMessageBox = function showMessageBox(_ref) {
+	    var icon = _ref.icon;
+	    var text = _ref.text;
+	    var title = _ref.title;
+	    var btnType = _ref.btnType;
+
+	    var wrap = document.createElement('div');
+	    var backDrop = document.createElement('div');
+	    var promise;
+
+	    backDrop.className = 'modal-backdrop fade in';
+
+	    promise = new Promise(function (resolve, reject) {
+	        document.body.appendChild(wrap);
+	        document.body.appendChild(backDrop);
+	        _reactDom2.default.render(_react2.default.createElement(MessageBox, { icon: icon, text: text, title: title, type: btnType, resolve: resolve }), wrap);
+	    });
+
+	    return promise.then(function (action) {
+	        _reactDom2.default.unmountComponentAtNode(wrap);
+	        wrap.remove();
+	        backDrop.remove();
+	        return action ? Promise.resolve() : Promise.reject();
+	    });
+	};
+
+	module.exports = {
+	    showMessageBox: showMessageBox,
+	    MessageBoxIcon: MessageBoxIcon,
+	    MessageBoxType: MessageBoxType
+	};
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
@@ -2086,7 +2308,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2169,7 +2391,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2333,7 +2555,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2467,7 +2689,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2596,7 +2818,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
