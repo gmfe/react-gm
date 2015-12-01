@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_13__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_14__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -60,7 +60,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _gridComponent = __webpack_require__(18);
+	var _gridComponent = __webpack_require__(19);
 
 	var _gridComponent2 = _interopRequireDefault(_gridComponent);
 
@@ -76,15 +76,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _droperComponent2 = _interopRequireDefault(_droperComponent);
 
-	var _formerComponent = __webpack_require__(17);
+	var _formerComponent = __webpack_require__(18);
 
 	var _formerComponent2 = _interopRequireDefault(_formerComponent);
 
-	var _validate = __webpack_require__(12);
+	var _validate = __webpack_require__(13);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validateMixin = __webpack_require__(24);
+	var _validateMixin = __webpack_require__(25);
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
@@ -92,11 +92,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _util2 = _interopRequireDefault(_util);
 
-	var _importLeadComponent = __webpack_require__(19);
+	var _importLeadComponent = __webpack_require__(20);
 
 	var _importLeadComponent2 = _interopRequireDefault(_importLeadComponent);
 
-	var _storageComponent = __webpack_require__(21);
+	var _storageComponent = __webpack_require__(22);
 
 	var _storageComponent2 = _interopRequireDefault(_storageComponent);
 
@@ -104,27 +104,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
 
-	var _datepickerComponent = __webpack_require__(15);
+	var _datepickerComponent = __webpack_require__(16);
 
 	var _datepickerComponent2 = _interopRequireDefault(_datepickerComponent);
 
-	var _daterangepicker = __webpack_require__(16);
+	var _daterangepicker = __webpack_require__(17);
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _animationicon = __webpack_require__(14);
+	var _animationicon = __webpack_require__(15);
 
 	var _animationicon2 = _interopRequireDefault(_animationicon);
 
-	var _tip = __webpack_require__(22);
+	var _tip = __webpack_require__(23);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(20);
+	var _nprogress = __webpack_require__(21);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	__webpack_require__(25);
+	__webpack_require__(26);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -792,9 +792,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _request = __webpack_require__(23);
+	var _request = __webpack_require__(24);
 
 	var _request2 = _interopRequireDefault(_request);
+
+	var _request3 = __webpack_require__(12);
+
+	var _request4 = _interopRequireDefault(_request3);
 
 	var _param = __webpack_require__(11);
 
@@ -808,6 +812,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Util = {
 	    Request: _request2.default,
+	    RequestInterceptor: _request4.default,
 	    format: _format2.default,
 	    param: _param2.default
 	};
@@ -880,6 +885,45 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var RequestInterceptor = (function () {
+	    var interceptors = []; // [{request: function(){}, response: function(){}, responseError: function(){}}]
+	    var id = 0;
+
+	    return {
+	        add: function add(interceptor) {
+	            interceptor.__id = id++;
+	            interceptors.push(interceptor);
+	            return interceptor.__id;
+	        },
+	        remove: function remove(interceptorId) {
+	            interceptors = _underscore2.default.filter(interceptors, function (value) {
+	                return value.__id !== interceptorId;
+	            });
+	        },
+	        getInterceptors: function getInterceptors() {
+	            return interceptors;
+	        }
+	    };
+	})();
+
+	exports.default = RequestInterceptor;
+
+/***/ },
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1074,13 +1118,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Validate;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1183,7 +1227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = AnimationIcon;
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1204,7 +1248,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(13);
+	var _reactBootstrap = __webpack_require__(14);
 
 	var _calendarComponent = __webpack_require__(4);
 
@@ -1261,7 +1305,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1282,7 +1326,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(13);
+	var _reactBootstrap = __webpack_require__(14);
 
 	var _calendarComponent = __webpack_require__(4);
 
@@ -1365,7 +1409,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DateRangePicker;
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1507,7 +1551,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Former;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1763,7 +1807,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Grid;
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1954,7 +1998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ImportLead;
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2042,7 +2086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2125,7 +2169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2289,7 +2333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2310,15 +2354,45 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
+	var _request = __webpack_require__(12);
+
+	var _request2 = _interopRequireDefault(_request);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var processRequestResponse = function processRequestResponse(promise, url, sucCode) {
+	var processRequest = function processRequest() {
+	    // 先啥也不做
+	    var interceptors = _request2.default.getInterceptors();
+	    _underscore2.default.each(interceptors, function (value) {
+	        if (value.request) {
+	            value.request();
+	        }
+	    });
+	};
+
+	var processResponse = function processResponse(promise, url, sucCode) {
 	    var color = 'color: #8a6d3b;';
+	    var interceptors = _request2.default.getInterceptors();
+
 	    return promise.then(function (res) {
 	        if (res.ok) {
 	            return res.json();
 	        }
 	        return Promise.reject((0, _format2.default)('服务器错误 {status} {statusText}', res));
+	    }).then(function (json) {
+	        _underscore2.default.each(interceptors, function (value) {
+	            if (value.response) {
+	                value.response();
+	            }
+	        });
+	        return json;
+	    }, function (reason) {
+	        _underscore2.default.each(interceptors, function (value) {
+	            if (value.responseError) {
+	                value.responseError();
+	            }
+	        });
+	        return Promise.reject(reason);
 	    }).then(function (json) {
 	        if (sucCode.indexOf(json.code) > -1) {
 	            return json;
@@ -2363,7 +2437,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var p = (0, _param2.default)(this._data);
 	        var newUrl = this.url + (this.url.indexOf('?') > -1 ? '&' : '?') + p;
 
-	        return processRequestResponse(fetch(newUrl, this.options), this.url, this.sucCode);
+	        processRequest();
+	        return processResponse(fetch(newUrl, this.options), this.url, this.sucCode);
 	    },
 	    post: function post() {
 	        var data = this._data;
@@ -2379,7 +2454,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        this.options.method = 'post';
 	        this.options.body = body;
-	        return processRequestResponse(fetch(this.url, this.options), this.url, this.sucCode);
+
+	        processRequest();
+	        return processResponse(fetch(this.url, this.options), this.url, this.sucCode);
 	    }
 	};
 
@@ -2390,7 +2467,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2411,7 +2488,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validate = __webpack_require__(12);
+	var _validate = __webpack_require__(13);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
@@ -2519,7 +2596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

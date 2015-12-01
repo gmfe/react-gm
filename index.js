@@ -264,6 +264,21 @@ console.log(Validate('*3-', 'aa', true));
 console.log(Validate('*3-5', 'a', true));
 
 
+var interceptorId = Util.RequestInterceptor.add({
+    request: function () {
+        NProgress.start();
+        console.log('request Interceptor');
+    },
+    response: function () {
+        NProgress.done();
+        console.log('response Interceptor');
+    },
+    responseError: function () {
+        NProgress.done();
+        console.log('responseError Interceptor');
+    }
+});
+
 Util.Request('xxxxx').data({}).get().then(function (data) {
     console.log(data)
 }, function (reason) {
