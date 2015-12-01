@@ -16,6 +16,7 @@ import DateRangePicker from './lib/daterangepicker.component.js';
 import AnimationIcon from './lib/animationicon.component.js';
 import Tip from './lib/tip.component';
 import NProgress from './lib/nprogress.component';
+import { showMessageBox, MessageBoxIcon, MessageBoxType } from './lib/messagebox.component'
 
 //import './import.lead';
 
@@ -384,3 +385,64 @@ ReactDOM.render(
     <AnimationIconWrap />,
     document.getElementById('animation-icon')
 );
+
+var MsgBoxWrap = React.createClass({
+    getInitialState() {
+        return {
+            icon: MessageBoxIcon.None,
+            type: MessageBoxType.OK
+        };
+    },
+    render() {
+        return (
+            <div>
+                <div className="row">
+                    <div className="col-xs-4">
+                        按钮类型
+                        <br/>
+                        <select className="form-control" value={this.state.type} ref='btnType' onChange={this.handleChangeState}>
+                            <option value={MessageBoxType.OK}>确认</option>
+                            <option value={MessageBoxType.OKCancel}>确认与取消</option>
+                            <option value={MessageBoxType.YesNo}>是与否</option>
+                        </select>
+                        <br/>
+                        图标类型
+                        <br/>
+                        <select className="form-control" value={this.state.icon} ref='btnIcon' onChange={this.handleChangeState}>
+                            <option value={MessageBoxIcon.Success}>成功</option>
+                            <option value={MessageBoxIcon.Info}>消息</option>
+                            <option value={MessageBoxIcon.Error}>错误</option>
+                            <option value={MessageBoxIcon.Warning}>警告</option>
+                            <option value={MessageBoxIcon.Question}>问题</option>
+                            <option value={MessageBoxIcon.None}>无</option>
+                        </select>
+                        <br/>
+                        <button className='btn btn-default' onClick={this.handleClickBtn}>show msgBox</button>
+                    </div>
+                </div>
+            </div>
+        )
+    },
+    handleChangeState(btnType) {
+        this.setState({
+            btnType: this.refs.btnType.value,
+            icon: this.refs.btnIcon.value
+        })
+    },
+    handleClickBtn() {
+        showMessageBox({
+            icon: this.state.icon,
+            text: '今天下午4点下班',
+            type: this.state.type
+        }).then(function() {
+            console.log('ok...');
+        }, function() {
+            console.log('cancel...');
+        })
+    }
+});
+
+ReactDOM.render(
+    <MsgBoxWrap />,
+    document.getElementById('msgbox-container')
+)
