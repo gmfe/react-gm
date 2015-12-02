@@ -265,21 +265,27 @@ console.log(Validate('*3-5', 'a', true));
 
 
 var interceptorId = Util.RequestInterceptor.add({
-    request: function () {
+    request: function (config) {
         NProgress.start();
-        console.log('request Interceptor');
+        console.log('request Interceptor', config);
+
+        // 修改相关的信息
+        config.url = 'asdf';
+        config.data.name = '111';
+
+        return config;
     },
-    response: function () {
+    response: function (json) {
         NProgress.done();
         console.log('response Interceptor');
     },
-    responseError: function () {
+    responseError: function (reason) {
         NProgress.done();
-        console.log('responseError Interceptor');
+        console.log('responseError Interceptor', reason);
     }
 });
 
-Util.Request('xxxxx').data({}).get().then(function (data) {
+Util.Request('xxxxx').data({name: 'haha'}).get().then(function (data) {
     console.log(data)
 }, function (reason) {
     console.log(reason);
