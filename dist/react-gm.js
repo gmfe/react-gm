@@ -56,10 +56,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
 	var _gridComponent = __webpack_require__(19);
 
 	var _gridComponent2 = _interopRequireDefault(_gridComponent);
@@ -152,7 +148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Util: _util2.default
 	};
 
-	exports.default = ReactGM;
+	module.exports = ReactGM;
 
 /***/ },
 /* 1 */
