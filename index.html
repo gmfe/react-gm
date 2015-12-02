@@ -2,75 +2,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>React-GM Demo</title>
+    <meta property="og:image" content="logo.png" />
+    <link rel="shortcut icon" href="logo.png" />
+    <link rel="bookmark" href="logo.png" type="image/x-icon"　/>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="logo.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="logo.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="logo.png" />
+    <link rel="shortcut icon" href="logo.png" />
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="node_modules/gm-iconfont/style.css">
     <link rel="stylesheet" href="lib/react-gm.css"/>
 </head>
 <body>
-<h1>Tip</h1>
-
-<div id="tip-container"></div>
-
-<h1>NProgress</h1>
-<div id="nprogress-container"></div>
-
-<hr/>
-
-<h1>表格Grid组件</h1>
-
-<div id="grid-container"></div>
-
-<hr/>
-
-<h1>calendar</h1>
-
-<div id="calendar-container"></div>
-
-<hr/>
-
-<h1>DatePicker</h1>
-
-<div id="datepicker-container"></div>
-
-<h1>DateRangePicker</h1>
-
-<div id="daterangepicker-container"></div>
-
-<hr/>
-
-<h1>Droper</h1>
-
-<div id="uploader-container"></div>
-
-<hr/>
-
-<h1>Form组件</h1>
-
-<div id="form-container"></div>
-
-<hr>
-
-<h1>animation icon</h1>
-
-<div id="animation-icon"></div>
-
-<h1>导入引导</h1>
-<div id="import-lead-container"></div>
-
-<h1>MessageBox</h1>
-<div id='msgbox-container'></div>
-
-<h1>Icon</h1>
-<div id='icon-container'>
-	<span class="icon ico-wechat-pay"></span>
-</div>
-
-<script>
-    document.write('<script src="webpack-assets.js?v=' + Math.random() + '"><\/script>');
-</script>
-<script>
-    document.write('<script src="' + window.WEBPACK_ASSETS['index'].js + '"><\/script>');
-</script>
+    <div class="container">
+        <div class="page-header">
+            <h1>React-GM <small>一些简单的组件库</small></h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Tip</h3>
+                <div id="tip-container"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>NProgress</h3>
+                <div id="nprogress-container"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>表格Grid组件</h3>
+                <div id="grid-container"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>calendar</h3>
+                <div id="calendar-container"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>DatePicker</h3>
+                <div id="datepicker-container"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>DateRangePicker</h3>
+                <div id="daterangepicker-container"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Droper</h3>
+                <div id="uploader-container"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Form组件</h3>
+                <div id="form-container"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>animation icon</h3>
+                <div id="animation-icon"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>导入引导</h3>
+                <div id="import-lead-container"></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>MessageBox</h3>
+                <div id='msgbox-container'></div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>toolkit</h3>
+                <div id='toolkit-container'></div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <hr>
+        <div class="container">
+            <p class="text-muted">React-GM组件库</p>
+        </div>
+    </footer>
+   <script>
+   document.write('<script src="webpack-assets.js?v=' + Math.random() + '"><\/script>');
+   </script>
+   <script>
+   document.write('<script src="' + window.WEBPACK_ASSETS['index'].js + '"><\/script>');
+   </script>
 </body>
 </html>

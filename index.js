@@ -16,7 +16,8 @@ import DateRangePicker from './lib/daterangepicker.component.js';
 import AnimationIcon from './lib/animationicon.component.js';
 import Tip from './lib/tip.component';
 import NProgress from './lib/nprogress.component';
-import { showMessageBox, MessageBoxIcon, MessageBoxType } from './lib/messagebox.component'
+import { showMessageBox, MessageBoxIcon, MessageBoxType } from './lib/messagebox.component';
+import { Hr, IconInput } from './lib/toolkit.component';
 
 //import './import.lead';
 
@@ -389,7 +390,7 @@ var AnimationIconWrap = React.createClass({
                 <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'success' }/>
                 <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'error' }/>
                 <p />
-                <button className='btn btn-white' onClick={this.handleChangeAnimationIconState}>
+                <button className='btn btn-default' onClick={this.handleChangeAnimationIconState}>
                     { this.state.animationIcon === 'rolling' ? '停止' : '复原' }
                 </button>
             </div>
@@ -422,20 +423,20 @@ var MsgBoxWrap = React.createClass({
                         按钮类型
                         <br/>
                         <select className="form-control" value={this.state.type} ref='btnType' onChange={this.handleChangeState}>
-                            <option value={MessageBoxType.OK}>确认</option>
-                            <option value={MessageBoxType.OKCancel}>确认与取消</option>
-                            <option value={MessageBoxType.YesNo}>是与否</option>
+                            <option value={MessageBoxType.OK}>OK</option>
+                            <option value={MessageBoxType.OKCancel}>OKCancel</option>
+                            <option value={MessageBoxType.YesNo}>YesNo</option>
                         </select>
                         <br/>
                         图标类型
                         <br/>
                         <select className="form-control" value={this.state.icon} ref='btnIcon' onChange={this.handleChangeState}>
-                            <option value={MessageBoxIcon.Success}>成功</option>
-                            <option value={MessageBoxIcon.Info}>消息</option>
-                            <option value={MessageBoxIcon.Error}>错误</option>
-                            <option value={MessageBoxIcon.Warning}>警告</option>
-                            <option value={MessageBoxIcon.Question}>问题</option>
-                            <option value={MessageBoxIcon.None}>无</option>
+                            <option value={MessageBoxIcon.Success}>Success</option>
+                            <option value={MessageBoxIcon.Info}>Info</option>
+                            <option value={MessageBoxIcon.Error}>Error</option>
+                            <option value={MessageBoxIcon.Warning}>Warning</option>
+                            <option value={MessageBoxIcon.Question}>Question</option>
+                            <option value={MessageBoxIcon.None}>None</option>
                         </select>
                         <br/>
                         <button className='btn btn-default' onClick={this.handleClickBtn}>show msgBox</button>
@@ -444,9 +445,9 @@ var MsgBoxWrap = React.createClass({
             </div>
         )
     },
-    handleChangeState(btnType) {
+    handleChangeState() {
         this.setState({
-            btnType: this.refs.btnType.value,
+            type: this.refs.btnType.value,
             icon: this.refs.btnIcon.value
         })
     },
@@ -454,7 +455,7 @@ var MsgBoxWrap = React.createClass({
         showMessageBox({
             icon: this.state.icon,
             text: '今天下午4点下班',
-            type: this.state.type
+            btnType: this.state.type
         }).then(function() {
             console.log('ok...');
         }, function() {
@@ -466,4 +467,30 @@ var MsgBoxWrap = React.createClass({
 ReactDOM.render(
     <MsgBoxWrap />,
     document.getElementById('msgbox-container')
+)
+
+var ToolKitWrap = React.createClass({
+    render() {
+        return (
+            <div>
+                IconInput
+                <br />
+                <IconInput type='text' icon='user' value='asdasd' />
+                <p />
+                <IconInput type='password' icon='lock' value='asdasd' />
+                <p />
+                <div className="row">
+                    <div className="col-xs-4">
+                    Hr with text
+                    <Hr>hello</Hr>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+});
+
+ReactDOM.render(
+    <ToolKitWrap />,
+    document.getElementById('toolkit-container')
 )
