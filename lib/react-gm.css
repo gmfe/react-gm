@@ -134,6 +134,7 @@
 
 .gm-calendar-head-pre:hover, .gm-calendar-head-next:hover {
     background-color: #f0f0f0;
+    text-decoration: none;
 }
 
 .gm-calendar-head-month {

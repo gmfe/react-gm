@@ -41,7 +41,7 @@ js
 
 css
 - bootstrap
-- font-awesome
+- [gm-iconfont](https://github.com/gmfe)
 
 # 参与
 [传送门](./README.dev.md)

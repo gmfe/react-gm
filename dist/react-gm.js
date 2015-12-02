@@ -274,7 +274,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'a',
 	                { href: 'javascript:;', className: 'gm-calendar-head-pre pull-left',
 	                    onClick: this.handleChangeMonth.bind(this, month - 1) },
-	                _react2.default.createElement('i', { className: 'fa fa-caret-left fa-lg' })
+	                _react2.default.createElement('i', { className: 'icon ico-chevron-left' })
 	            ),
 	            _react2.default.createElement(
 	                'span',
@@ -298,7 +298,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { href: 'javascript:;', className: 'gm-calendar-head-next pull-right',
 	                    onClick: this.handleChangeMonth.bind(this, month + 1) },
 	                _react2.default.createElement('i', {
-	                    className: 'fa fa-caret-right fa-lg' })
+	                    className: 'icon ico-chevron-right' })
 	            )
 	        );
 	    },
@@ -919,8 +919,48 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return value.__id !== interceptorId;
 	            });
 	        },
-	        getInterceptors: function getInterceptors() {
-	            return interceptors;
+
+	        // 私有方法,谁用谁死
+	        interceptor: {
+	            request: function request(config) {
+	                var promise = Promise.resolve(config);
+	                _underscore2.default.each(interceptors, function (value) {
+	                    if (value.request) {
+	                        promise = promise.then(function (_config) {
+	                            // 如果request不按规范来,啥也不做. 则默认放回 config
+	                            return value.request(_config) || config;
+	                        });
+	                    }
+	                });
+
+	                return promise;
+	            },
+	            response: function response(json) {
+	                var promise = Promise.resolve(json);
+	                _underscore2.default.each(interceptors, function (value) {
+	                    if (value.response) {
+	                        promise = promise.then(function (json) {
+	                            // 如果response不按规范来,啥也不做. 则默认放回json
+	                            return value.response(json) || json;
+	                        });
+	                    }
+	                });
+
+	                return promise;
+	            },
+	            responseError: function responseError(reason) {
+	                var promise = Promise.reject(reason);
+	                _underscore2.default.each(interceptors, function (value) {
+	                    if (value.responseError) {
+	                        promise = promise.catch(function (reason) {
+	                            // 如果responseError不按规范来,啥也不做. reason
+	                            return value.responseError(reason) || reason;
+	                        });
+	                    }
+	                });
+
+	                return promise;
+	            }
 	        }
 	    };
 	})();
@@ -1675,7 +1715,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement(
 	                    'td',
 	                    { colSpan: '99', className: 'text-center' },
-	                    _react2.default.createElement('i', { className: 'fa fa-spin fa-spinner fa-pulse' })
+	                    _react2.default.createElement('i', { className: 'icon icon-spin ico-spinner2' })
 	                )
 	            );
 	        } else if (data.list.length === 0) {
@@ -2512,10 +2552,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    render: function render() {
 	        var iconClassName = {
-	            success: 'fa-check-circle',
-	            info: 'fa-info-circle',
-	            warning: 'fa-question-circle',
-	            danger: 'fa-exclamation-circle'
+	            success: 'ico-success-circle',
+	            info: 'ico-info-circle',
+	            warning: 'ico-exclamation-circle',
+	            danger: 'ico-fail-circle'
 	        };
 
 	        return _react2.default.createElement(
@@ -2530,7 +2570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    '×'
 	                )
 	            ),
-	            _react2.default.createElement('i', { className: "fa fa-2x text-" + this.props.type + ' ' + iconClassName[this.props.type] }),
+	            _react2.default.createElement('i', { className: "icon icon-2x text-" + this.props.type + ' ' + iconClassName[this.props.type] }),
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'panel-body' },
@@ -2582,40 +2622,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var processRequest = function processRequest() {
-	    // 先啥也不做
-	    var interceptors = _request2.default.getInterceptors();
-	    _underscore2.default.each(interceptors, function (value) {
-	        if (value.request) {
-	            value.request();
-	        }
-	    });
+	var processRequest = function processRequest(config) {
+	    return _request2.default.interceptor.request(config);
 	};
 
 	var processResponse = function processResponse(promise, url, sucCode) {
 	    var color = 'color: #8a6d3b;';
-	    var interceptors = _request2.default.getInterceptors();
 
 	    return promise.then(function (res) {
 	        if (res.ok) {
 	            return res.json();
 	        }
 	        return Promise.reject((0, _format2.default)('服务器错误 {status} {statusText}', res));
-	    }).then(function (json) {
-	        _underscore2.default.each(interceptors, function (value) {
-	            if (value.response) {
-	                value.response();
-	            }
-	        });
-	        return json;
-	    }, function (reason) {
-	        _underscore2.default.each(interceptors, function (value) {
-	            if (value.responseError) {
-	                value.responseError();
-	            }
-	        });
-	        return Promise.reject(reason);
-	    }).then(function (json) {
+	    }).then(_request2.default.interceptor.response, _request2.default.interceptor.responseError).then(function (json) {
 	        if (sucCode.indexOf(json.code) > -1) {
 	            return json;
 	        } else {
@@ -2651,34 +2670,53 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._data = _data || {};
 	        return this;
 	    },
-	    json: function json(data) {
-	        this._data = JSON.stringify(data);
+	    json: function json(_data) {
+	        this._data = JSON.stringify(_data);
 	        return this;
 	    },
+	    beforeRequest: function beforeRequest() {
+	        var t = this;
+	        return processRequest({
+	            url: t.url,
+	            data: t._data,
+	            sucCode: t.sucCode,
+	            options: t.options
+	        }).then(function (d) {
+	            t.url = d.url;
+	            t._data = d.data;
+	            t.sucCode = d.sucCode;
+	            t.options = d.options;
+	            return d;
+	        });
+	    },
 	    get: function get() {
-	        var p = (0, _param2.default)(this._data);
-	        var newUrl = this.url + (this.url.indexOf('?') > -1 ? '&' : '?') + p;
+	        var t = this;
 
-	        processRequest();
-	        return processResponse(fetch(newUrl, this.options), this.url, this.sucCode);
+	        return t.beforeRequest().then(function () {
+	            var p = (0, _param2.default)(t._data);
+	            var newUrl = t.url + (t.url.indexOf('?') > -1 ? '&' : '?') + p;
+	            return processResponse(fetch(newUrl, t.options), t.url, t.sucCode);
+	        });
 	    },
 	    post: function post() {
-	        var data = this._data;
+	        var t = this;
+	        var data = t._data;
 	        var body;
-	        // 兼容传json string 的情况
-	        if (toString.call(data) === '[object Object]') {
-	            body = new FormData();
-	            for (var e in data) {
-	                body.append(e, data[e]);
-	            }
-	        } else {
-	            body = data;
-	        }
-	        this.options.method = 'post';
-	        this.options.body = body;
+	        t.options.method = 'post';
 
-	        processRequest();
-	        return processResponse(fetch(this.url, this.options), this.url, this.sucCode);
+	        return t.beforeRequest().then(function () {
+	            // 兼容传json string 的情况
+	            if (toString.call(data) === '[object Object]') {
+	                body = new FormData();
+	                for (var e in data) {
+	                    body.append(e, data[e]);
+	                }
+	            } else {
+	                body = data;
+	            }
+	            t.options.body = body;
+	            return processResponse(fetch(t.url, t.options), t.url, t.sucCode);
+	        });
 	    }
 	};
 

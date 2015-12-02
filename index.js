@@ -111,7 +111,7 @@ var GridWrap = React.createClass({
             enableSelect: true,
             enablePagination: true,
             enablePaginationText: true,
-            loading: false,
+            loading: true,
             columns: [
                 {field: 'id', name: 'id', render: renderId},
                 {field: 'name', name: '名字', style: {width: 100}},
