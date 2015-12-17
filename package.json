@@ -1,6 +1,6 @@
 {
   "name": "react-gm",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "",
   "main": "lib/index.js",
   "style": "lib/react-gm.css",
