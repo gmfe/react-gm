@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_14__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -60,15 +60,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gridComponent2 = _interopRequireDefault(_gridComponent);
 
-	var _paginationComponent = __webpack_require__(7);
+	var _paginationComponent = __webpack_require__(8);
 
 	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
 
-	var _paginationTextComponent = __webpack_require__(8);
+	var _paginationTextComponent = __webpack_require__(9);
 
 	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
 
-	var _droperComponent = __webpack_require__(6);
+	var _droperComponent = __webpack_require__(7);
 
 	var _droperComponent2 = _interopRequireDefault(_droperComponent);
 
@@ -76,23 +76,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _formerComponent2 = _interopRequireDefault(_formerComponent);
 
-	var _validate = __webpack_require__(13);
+	var _validate = __webpack_require__(14);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validateMixin = __webpack_require__(26);
+	var _validateMixin = __webpack_require__(28);
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
-	var _util = __webpack_require__(9);
+	var _util = __webpack_require__(10);
 
 	var _util2 = _interopRequireDefault(_util);
 
-	var _importLeadComponent = __webpack_require__(20);
+	var _importLeadComponent = __webpack_require__(21);
 
 	var _importLeadComponent2 = _interopRequireDefault(_importLeadComponent);
 
-	var _storageComponent = __webpack_require__(23);
+	var _storageComponent = __webpack_require__(24);
 
 	var _storageComponent2 = _interopRequireDefault(_storageComponent);
 
@@ -100,33 +100,37 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
 
-	var _datepickerComponent = __webpack_require__(16);
+	var _datepickerComponent = __webpack_require__(15);
 
 	var _datepickerComponent2 = _interopRequireDefault(_datepickerComponent);
 
-	var _daterangepicker = __webpack_require__(17);
+	var _daterangepicker = __webpack_require__(16);
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _animationicon = __webpack_require__(15);
-
-	var _animationicon2 = _interopRequireDefault(_animationicon);
-
-	var _tip = __webpack_require__(24);
+	var _tip = __webpack_require__(25);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(22);
+	var _nprogress = __webpack_require__(23);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	var _messagebox = __webpack_require__(21);
+	var _messagebox = __webpack_require__(22);
 
-	__webpack_require__(27);
+	var _hr = __webpack_require__(20);
+
+	var _hr2 = _interopRequireDefault(_hr);
+
+	var _dialog = __webpack_require__(17);
+
+	var _dialog2 = _interopRequireDefault(_dialog);
+
+	__webpack_require__(29);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ReactGM = {
+	module.exports = {
 	    Grid: _gridComponent2.default,
 	    Pagination: _paginationComponent2.default,
 	    PaginationText: _paginationTextComponent2.default,
@@ -134,7 +138,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Calendar: _calendarComponent2.default,
 	    DatePicker: _datepickerComponent2.default,
 	    DateRangePicker: _daterangepicker2.default,
-	    AnimationIcon: _animationicon2.default,
 	    ValidateMixin: _validateMixin2.default,
 	    Validate: _validate2.default,
 	    ImportLead: _importLeadComponent2.default,
@@ -142,13 +145,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Storage: _storageComponent2.default,
 	    Tip: _tip2.default,
 	    NProgress: _nprogress2.default,
+	    Hr: _hr2.default,
+	    Dialog: _dialog2.default,
 	    showMessageBox: _messagebox.showMessageBox,
 	    MessageBoxIcon: _messagebox.MessageBoxIcon,
 	    MessageBoxType: _messagebox.MessageBoxType,
 	    Util: _util2.default
 	};
-
-	module.exports = ReactGM;
 
 /***/ },
 /* 1 */
@@ -368,13 +371,29 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 6 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
-	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -382,9 +401,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var React = __webpack_require__(1);
-
-	var Droper = (function (_React$Component) {
+	var Droper = function (_React$Component) {
 	    _inherits(Droper, _React$Component);
 
 	    function Droper(props, context) {
@@ -413,7 +430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'accept',
 	        value: function accept(file, acceptedFiles) {
 	            if (file && acceptedFiles) {
-	                var _ret = (function () {
+	                var _ret = function () {
 	                    var acceptedFilesArray = acceptedFiles.split(',');
 	                    var fileName = file.name || '';
 	                    var mimeType = file.type || '';
@@ -431,7 +448,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            return mimeType === validType;
 	                        })
 	                    };
-	                })();
+	                }();
 
 	                if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	            }
@@ -550,7 +567,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var className = 'gm-droper ';
 	            className += this.props.className ? this.props.className : ' gm-droper-default ';
 
-	            return React.createElement(
+	            return _react2.default.createElement(
 	                'div',
 	                {
 	                    className: className,
@@ -561,7 +578,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    onDrop: this.onDrop
 	                },
 	                this.props.children,
-	                React.createElement('input', {
+	                _react2.default.createElement('input', {
 	                    type: 'file',
 	                    ref: 'fileInput',
 	                    className: 'gm-droper-input',
@@ -574,7 +591,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }]);
 
 	    return Droper;
-	})(React.Component);
+	}(_react2.default.Component);
 
 	Droper.defaultProps = {
 	    disableClick: false,
@@ -582,21 +599,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	Droper.propTypes = {
-	    onDrop: React.PropTypes.func,
-	    onDropAccepted: React.PropTypes.func,
-	    onDropRejected: React.PropTypes.func,
-	    onDragEnter: React.PropTypes.func,
-	    onDragLeave: React.PropTypes.func,
+	    onDrop: _react2.default.PropTypes.func,
+	    onDropAccepted: _react2.default.PropTypes.func,
+	    onDropRejected: _react2.default.PropTypes.func,
+	    onDragEnter: _react2.default.PropTypes.func,
+	    onDragLeave: _react2.default.PropTypes.func,
 
-	    disableClick: React.PropTypes.bool,
-	    multiple: React.PropTypes.bool,
-	    accept: React.PropTypes.string
+	    disableClick: _react2.default.PropTypes.bool,
+	    multiple: _react2.default.PropTypes.bool,
+	    accept: _react2.default.PropTypes.string
 	};
 
-	module.exports = Droper;
+	exports.default = Droper;
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -739,7 +756,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Pagination;
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -784,7 +801,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = PaginationText;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -793,35 +810,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _request = __webpack_require__(25);
+	var _request = __webpack_require__(26);
 
 	var _request2 = _interopRequireDefault(_request);
 
-	var _request3 = __webpack_require__(12);
+	var _request3 = __webpack_require__(13);
 
 	var _request4 = _interopRequireDefault(_request3);
 
-	var _param = __webpack_require__(11);
+	var _param = __webpack_require__(12);
 
 	var _param2 = _interopRequireDefault(_param);
 
-	var _format = __webpack_require__(10);
+	var _format = __webpack_require__(11);
 
 	var _format2 = _interopRequireDefault(_format);
 
+	var _visibilitycheck = __webpack_require__(27);
+
+	var _visibilitycheck2 = _interopRequireDefault(_visibilitycheck);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Util = {
+	exports.default = {
 	    Request: _request2.default,
 	    RequestInterceptor: _request4.default,
 	    format: _format2.default,
-	    param: _param2.default
+	    param: _param2.default,
+	    visibility: _visibilitycheck2.default
 	};
 
-	exports.default = Util;
-
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -860,7 +880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = format;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -885,7 +905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = param;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -900,7 +920,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var RequestInterceptor = (function () {
+	var RequestInterceptor = function () {
 	    var interceptors = []; // [{request: function(){}, response: function(){}, responseError: function(){}}]
 	    var id = 0;
 
@@ -959,12 +979,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    };
-	})();
+	}();
 
 	exports.default = RequestInterceptor;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -977,7 +997,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _util = __webpack_require__(9);
+	var _util = __webpack_require__(10);
 
 	var _util2 = _interopRequireDefault(_util);
 
@@ -1159,116 +1179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Validate;
 
 /***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
-
-/***/ },
 /* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var AnimationIcon = _react2.default.createClass({
-	    displayName: 'AnimationIcon',
-	    getInitialState: function getInitialState() {
-	        return {
-	            state: this.props.state ? this.props.state : 'rolling',
-	            rolling: true
-	        };
-	    },
-	    render: function render() {
-	        var iconState = this.state.state;
-	        var pathDOMClass = 'roll';
-	        var polylineDOMClass = '';
-	        var gDOMClass = '';
-	        var svgDOMClass = '';
-	        var circleDOMClass = '';
-
-	        switch (iconState) {
-	            case 'success':
-	                svgDOMClass = 'animation-icon';
-	                pathDOMClass = 'hide-path success';
-	                polylineDOMClass = 'show';
-	                gDOMClass = '';
-	                circleDOMClass = 'show-circle success';
-	                break;
-	            case 'error':
-	                svgDOMClass = 'animation-icon';
-	                pathDOMClass = 'hide-path';
-	                polylineDOMClass = '';
-	                gDOMClass = 'show';
-	                circleDOMClass = 'show-circle error';
-	                break;
-	            default:
-	                svgDOMClass = 'animation-icon roll';
-	                pathDOMClass = '';
-	                polylineDOMClass = '';
-	                gDOMClass = '';
-	                break;
-	        }
-
-	        return _react2.default.createElement(
-	            'svg',
-	            { className: svgDOMClass, version: '1.1', viewBox: '0 0 100 100' },
-	            _react2.default.createElement('circle', { className: circleDOMClass, cx: '50', cy: '50', r: '43' }),
-	            _react2.default.createElement('path', { className: pathDOMClass, d: 'M75.201,15.155C68.119,10.024,59.413,7,50,7C31.591,7,15.885,18.568,9.753,34.831' }),
-	            _react2.default.createElement('polyline', { className: polylineDOMClass, points: '9.756,34.833 46.189,65.404 75.199,15.158' }),
-	            _react2.default.createElement(
-	                'g',
-	                { className: gDOMClass },
-	                _react2.default.createElement('line', { x1: '31.209', y1: '31.209', x2: '68.791', y2: '68.791' }),
-	                _react2.default.createElement('line', { x1: '31.209', y1: '68.791', x2: '68.791', y2: '31.209' })
-	            )
-	        );
-	    },
-	    componentDidMount: function componentDidMount() {
-	        this.startInterval();
-	    },
-	    startInterval: function startInterval() {
-	        function animationLifeCircle() {
-	            switch (this.props.state) {
-	                case 'success':
-	                    this.setState({
-	                        state: 'success'
-	                    });
-	                    break;
-	                case 'error':
-	                    this.setState({
-	                        state: 'error'
-	                    });
-	                    break;
-	                default:
-	                    this.setState({
-	                        state: 'rolling'
-	                    });
-	                    setTimeout(animationLifeCircle.bind(this), 500);
-	                    break;
-	            }
-	        }
-
-	        setTimeout(animationLifeCircle.bind(this), 500);
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        nextProps.state === 'rolling' && this.startInterval();
-	    }
-	});
-
-	exports.default = AnimationIcon;
-
-/***/ },
-/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1289,7 +1200,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(14);
+	var _reactBootstrap = __webpack_require__(6);
 
 	var _calendarComponent = __webpack_require__(4);
 
@@ -1346,7 +1257,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1367,7 +1278,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(14);
+	var _reactBootstrap = __webpack_require__(6);
 
 	var _calendarComponent = __webpack_require__(4);
 
@@ -1450,12 +1361,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DateRangePicker;
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -1465,9 +1374,142 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(3);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactBootstrap = __webpack_require__(6);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+	var dialogContainerId = '_gm_dialog_container' + (Math.random() + '').slice(2);
+	var dialogContainer = document.getElementById(dialogContainerId);
+	if (!dialogContainer) {
+	    dialogContainer = document.createElement('div');
+	    dialogContainer.className = 'gm-container-dialog';
+	    dialogContainer.id = dialogContainerId;
+	    document.body.appendChild(dialogContainer);
+	}
+
+	var D = _react2.default.createClass({
+	    displayName: 'D',
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            title: '提示',
+	            onCancle: function onCancle() {},
+	            onOK: function onOK() {}
+	        };
+	    },
+	    getInitialState: function getInitialState() {
+	        return {
+	            show: true
+	        };
+	    },
+	    handleCancle: function handleCancle() {
+	        this.setState({
+	            show: false
+	        });
+	        this.props.onCancle();
+	    },
+	    handleOk: function handleOk() {
+	        this.setState({
+	            show: false
+	        });
+	        this.props.onOK();
+	    },
+	    handleEnter: function handleEnter(event) {
+	        if (event.keyCode === 13) {
+	            this.handleOk();
+	        }
+	    },
+	    render: function render() {
+	        return _react2.default.createElement(
+	            _reactBootstrap.Modal,
+	            { show: this.state.show, onHide: this.handleCancle, bsSize: 'sm' },
+	            _react2.default.createElement(
+	                _reactBootstrap.Modal.Header,
+	                { closeButton: true },
+	                this.props.title
+	            ),
+	            _react2.default.createElement(
+	                _reactBootstrap.Modal.Body,
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'text-center' },
+	                    this.props.children,
+	                    this.props.type === 'prompt' && _react2.default.createElement('input', { type: 'text', style: { display: 'block', width: '100%' }, onKeyDown: this.handleEnter })
+	                ),
+	                _react2.default.createElement('div', { className: 'gap10' }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'text-right' },
+	                    this.props.type !== 'alert' && _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn btn-default', onClick: this.handleCancle },
+	                        '取消'
+	                    ),
+	                    _react2.default.createElement('div', { className: 'gap10' }),
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn btn-primary', onClick: this.handleOk },
+	                        '确定'
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	var Dialog = {
+	    alert: function alert(options) {
+	        options.type = 'alert';
+	        return Dialog.dialog(options);
+	    },
+	    confirm: function confirm(options) {
+	        options.type = 'confirm';
+	        return Dialog.dialog(options);
+	    },
+	    prompt: function prompt(options) {
+	        options.type = 'prompt';
+	        return Dialog.dialog(options);
+	    },
+	    dialog: function dialog(options) {
+	        return new Promise(function (resolve, reject) {
+	            var div = document.createElement('div');
+	            dialogContainer.appendChild(div);
+	            options.onOK = function (value) {
+	                return resolve(value);
+	            };
+	            options.onCancle = function () {
+	                return reject();
+	            };
+	            _reactDom2.default.render(_react2.default.createElement(D, options), div);
+	        });
+	    }
+	};
+
+	exports.default = Dialog;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Form = _react2.default.createClass({
 	    displayName: 'Form',
@@ -1605,11 +1647,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _paginationComponent = __webpack_require__(7);
+	var _paginationComponent = __webpack_require__(8);
 
 	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
 
-	var _paginationTextComponent = __webpack_require__(8);
+	var _paginationTextComponent = __webpack_require__(9);
 
 	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
 
@@ -1851,17 +1893,68 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Hr = _react2.default.createClass({
+	    displayName: "Hr",
+	    render: function render() {
+	        return _react2.default.createElement(
+	            "div",
+	            { className: "gm-divider clearfix" },
+	            _react2.default.createElement(
+	                "div",
+	                { className: "gm-divider-content" },
+	                typeof this.props.children === 'string' ? _react2.default.createElement(
+	                    "h4",
+	                    null,
+	                    this.props.children
+	                ) : this.props.children
+	            )
+	        );
+	    }
+	});
+
+	exports.default = Hr;
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(3);
-	var _ = __webpack_require__(2);
-	var Droper = __webpack_require__(6);
 
-	var ImportLead = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(3);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _droper = __webpack_require__(7);
+
+	var _droper2 = _interopRequireDefault(_droper);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ImportLead = _react2.default.createClass({
 	    displayName: 'ImportLead',
 
 	    getInitialState: function getInitialState() {
@@ -1873,16 +1966,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = this;
 
 	        var t = this;
-	        var data = _.extend({ columns: [], list: [] }, t.props.data);
+	        var data = _underscore2.default.extend({ columns: [], list: [] }, t.props.data);
 	        var tips = t.props.tips || [];
 
 	        var tipsMap = {};
 
-	        var lineMap = _.map(data.list, function () {
+	        var lineMap = _underscore2.default.map(data.list, function () {
 	            return false;
 	        });
 
-	        _.each(tips, function (tip, index) {
+	        _underscore2.default.each(tips, function (tip, index) {
 	            tipsMap[tip.index] = tipsMap[tip.index] || {};
 	            tip._index = index;
 	            tipsMap[tip.index][tip.field] = tip;
@@ -1896,35 +1989,35 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var tds = data.columns.map(function (col, i) {
 	                var tip = tipsMap[index] && tipsMap[index][col.field];
-	                return tip ? React.createElement(
+	                return tip ? _react2.default.createElement(
 	                    'td',
 	                    { key: i, className: tip.modifyed ? "gm-bg-info" : "gm-bg-invalid" },
-	                    React.createElement('input', { type: 'text', value: elist[col.field],
+	                    _react2.default.createElement('input', { type: 'text', value: elist[col.field],
 	                        onChange: t.handleEdit.bind(t, index, col.field, tip._index) }),
-	                    React.createElement(
+	                    _react2.default.createElement(
 	                        'small',
 	                        { className: 'gm-import-lead-tip badge' },
-	                        React.createElement(
+	                        _react2.default.createElement(
 	                            'i',
 	                            null,
 	                            tip.msg
 	                        )
 	                    )
-	                ) : React.createElement(
+	                ) : _react2.default.createElement(
 	                    'td',
 	                    { key: i },
 	                    elist[col.field]
 	                );
 	            });
 
-	            return React.createElement(
+	            return _react2.default.createElement(
 	                'tr',
 	                { key: index },
 	                tds
 	            );
 	        });
 
-	        var canSubmit = _.filter(tips, function (value) {
+	        var canSubmit = _underscore2.default.filter(tips, function (value) {
 	            return value.modifyed === true;
 	        }).length === tips.length;
 
@@ -1932,64 +2025,64 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var fileTempUrl = t.props.fileTempUrl;
 
-	        return React.createElement(
+	        return _react2.default.createElement(
 	            'div',
 	            { className: 'gm-import-lead' },
-	            React.createElement(
+	            _react2.default.createElement(
 	                'div',
 	                null,
-	                React.createElement(
+	                _react2.default.createElement(
 	                    'div',
 	                    null,
-	                    React.createElement(
-	                        Droper,
+	                    _react2.default.createElement(
+	                        _droper2.default,
 	                        { className: 'gm-droper-wrap', onDrop: this.handleDrop, accept: '.xlsx' },
-	                        React.createElement(
+	                        _react2.default.createElement(
 	                            'button',
 	                            { className: 'btn btn-primary btn-sm' },
 	                            '上传xlsx'
 	                        )
 	                    ),
 	                    '    ',
-	                    React.createElement(
+	                    _react2.default.createElement(
 	                        'button',
 	                        { disabled: !canSubmit, className: 'btn btn-primary btn-sm', onClick: this.handleSubmit },
 	                        '提交'
 	                    ),
 	                    '    ',
-	                    fileTempUrl ? React.createElement(
+	                    fileTempUrl ? _react2.default.createElement(
 	                        'a',
 	                        { href: fileTempUrl, target: 'blank' },
 	                        '上传模板下载'
 	                    ) : undefined,
-	                    React.createElement(
+	                    _react2.default.createElement(
 	                        'div',
 	                        null,
 	                        filename
 	                    )
 	                ),
-	                React.createElement(
+	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'gm-import-line clearfix' },
 	                    lineMap.map(function (v, i) {
-	                        return React.createElement('div', { key: i, className: v ? "tip" : "", onClick: _this.handleLine.bind(_this, i) });
+	                        return _react2.default.createElement('div', { key: i, className: v ? "tip" : "", onClick: _this.handleLine.bind(_this, i) });
 	                    })
 	                )
 	            ),
-	            React.createElement(
+	            _react2.default.createElement(
 	                'div',
 	                { className: 'gm-import-lead-content', ref: 'content' },
-	                data ? React.createElement(
+	                data ? _react2.default.createElement(
 	                    'table',
 	                    { className: 'table table-condensed table-bordered', ref: 'table' },
-	                    React.createElement(
+	                    _react2.default.createElement(
 	                        'thead',
 	                        null,
-	                        React.createElement(
+	                        _react2.default.createElement(
 	                            'tr',
 	                            null,
 	                            data.columns.map(function (col, i) {
-	                                return React.createElement(
+	                                return _react2.default.createElement(
 	                                    'th',
 	                                    { key: i },
 	                                    col.name
@@ -1997,7 +2090,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            })
 	                        )
 	                    ),
-	                    React.createElement(
+	                    _react2.default.createElement(
 	                        'tbody',
 	                        null,
 	                        tableBody
@@ -2021,8 +2114,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    handleLine: function handleLine(index) {
 	        var t = this;
-	        var content = ReactDOM.findDOMNode(t.refs.content);
-	        var table = ReactDOM.findDOMNode(t.refs.table);
+	        var content = _reactDom2.default.findDOMNode(t.refs.content);
+	        var table = _reactDom2.default.findDOMNode(t.refs.table);
 	        content.scrollTop = index / t.props.data.list.length * table.offsetHeight;
 	    },
 	    handleDrop: function handleDrop(files) {
@@ -2039,7 +2132,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ImportLead;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2135,7 +2228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                break;
 	        }
 
-	        if (!thisProps.title) {
+	        if (!thisProps.title.trim()) {
 	            switch (thisProps.icon) {
 	                case MessageBoxIcon.Success:
 	                    title = '成功';break;
@@ -2151,8 +2244,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    title = '消息';break;
 
 	                default:
-	                    title = thisProps.title;break;
+	                    throw new Error('Unknow Icon Variable');
 	            }
+	        } else {
+	            title = thisProps.title.trim();
 	        }
 
 	        switch (thisProps.icon) {
@@ -2256,7 +2351,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2344,7 +2439,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2427,7 +2522,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2443,10 +2538,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _reactDom = __webpack_require__(3);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2591,7 +2682,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2600,11 +2691,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _param = __webpack_require__(11);
+	var _param = __webpack_require__(12);
 
 	var _param2 = _interopRequireDefault(_param);
 
-	var _format = __webpack_require__(10);
+	var _format = __webpack_require__(11);
 
 	var _format2 = _interopRequireDefault(_format);
 
@@ -2612,7 +2703,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _request = __webpack_require__(12);
+	var _request = __webpack_require__(13);
 
 	var _request2 = _interopRequireDefault(_request);
 
@@ -2650,13 +2741,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.sucCode = [0];
 	    this.options = Object.assign({
 	        method: 'get',
+	        headers: {
+	            'Accept': 'application/json'
+	        },
 	        credentials: 'include' // 需要设置才能获取cookie
 	    }, options);
 	};
 	Request.prototype = {
 	    code: function code(codes) {
 	        if (_underscore2.default.isArray(codes)) {
-	            this.sucCode.concat(codes);
+	            this.sucCode = this.sucCode.concat(codes);
 	        } else {
 	            this.sucCode.push(codes);
 	        }
@@ -2723,7 +2817,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 26 */
+/* 27 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (dom) {
+
+	    var topInRange = false;
+	    var leftInRange = false;
+
+	    // dom各边距离 窗口顶边、左边的距离
+	    var BCR = dom.getBoundingClientRect();
+
+	    if (BCR.top < window.innerHeight && BCR.bottom > 0) topInRange = true;
+
+	    if (BCR.left < window.innerHeight && BCR.right > 0) leftInRange = true;
+
+	    return topInRange && leftInRange;
+	};
+
+/***/ },
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2744,7 +2863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validate = __webpack_require__(13);
+	var _validate = __webpack_require__(14);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
@@ -2852,7 +2971,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

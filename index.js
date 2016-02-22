@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'underscore';
-import Addons from 'react/addons';
 import ReactDOM from 'react-dom';
 import Grid from './lib/grid.component.js';
 import Droper from './lib/droper.component.js';
@@ -13,20 +12,12 @@ import {Popover} from 'react-bootstrap';
 import Calendar from './lib/calendar.component.js';
 import DatePicker from './lib/datepicker.component.js';
 import DateRangePicker from './lib/daterangepicker.component.js';
-import AnimationIcon from './lib/animationicon.component.js';
 import Tip from './lib/tip.component';
 import NProgress from './lib/nprogress.component';
 import { showMessageBox, MessageBoxIcon, MessageBoxType } from './lib/messagebox.component';
-import { Hr, IconInput } from './lib/toolkit.component';
-
-//import './import.lead';
-
-setTimeout(function () {
-    require.ensure(['./import.lead'], (require) => {
-        var Profile = require('./import.lead');
-    });
-}, 2000);
-
+import Dialog from './lib/dialog.component';
+import './import.lead';
+import './lib/css/react-gm.less';
 
 // tip
 var TipWrap = React.createClass({
@@ -73,7 +64,7 @@ var NProgressWrap = React.createClass({
                 <button className="btn btn-primary" onClick={this.handleEnd}>end</button>
 
             </div>
-        )
+        );
     },
     handleStart: function () {
         NProgress.start();
@@ -87,7 +78,7 @@ ReactDOM.render(
     <div>
         <NProgressWrap></NProgressWrap>
     </div>
-, document.getElementById('nprogress-container'));
+    , document.getElementById('nprogress-container'));
 
 // grid
 var onClick = function () {
@@ -172,7 +163,7 @@ var GridWrap = React.createClass({
             <div>
                 <Grid data={this.state}/>
             </div>
-        )
+        );
     },
     componentDidMount: function () {
         var t = this;
@@ -205,11 +196,7 @@ var DroperWrap = React.createClass({
     }
 });
 
-ReactDOM.render((
-    <div>
-        <DroperWrap />
-    </div>
-), document.getElementById('uploader-container'));
+ReactDOM.render(<DroperWrap />, document.getElementById('uploader-container'));
 
 
 var onSubmit = function (event) {
@@ -287,7 +274,7 @@ var interceptorId = Util.RequestInterceptor.add({
 });
 
 Util.Request('xxxxx').data({name: 'haha'}).get().then(function (data) {
-    console.log(data)
+    console.log(data);
 }, function (reason) {
     console.log(reason);
 });
@@ -378,35 +365,6 @@ var DaterangepickerWrap = React.createClass({
 
 ReactDOM.render(<DaterangepickerWrap />, document.getElementById('daterangepicker-container'));
 
-var AnimationIconWrap = React.createClass({
-    getInitialState() {
-        return {
-            animationIcon: 'rolling'
-        }
-    },
-    render() {
-        return (
-            <div>
-                <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'success' }/>
-                <AnimationIcon state={ this.state.animationIcon === 'rolling' ? 'rolling' : 'error' }/>
-                <p />
-                <button className='btn btn-default' onClick={this.handleChangeAnimationIconState}>
-                    { this.state.animationIcon === 'rolling' ? '停止' : '复原' }
-                </button>
-            </div>
-        )
-    },
-    handleChangeAnimationIconState() {
-        this.setState({
-            animationIcon: this.state.animationIcon === 'rolling' ? 'stop' : 'rolling'
-        })
-    }
-});
-
-ReactDOM.render(
-    <AnimationIconWrap />,
-    document.getElementById('animation-icon')
-);
 
 var MsgBoxWrap = React.createClass({
     getInitialState() {
@@ -422,7 +380,8 @@ var MsgBoxWrap = React.createClass({
                     <div className="col-xs-4">
                         按钮类型
                         <br/>
-                        <select className="form-control" value={this.state.type} ref='btnType' onChange={this.handleChangeState}>
+                        <select className="form-control" value={this.state.type} ref='btnType'
+                                onChange={this.handleChangeState}>
                             <option value={MessageBoxType.OK}>OK</option>
                             <option value={MessageBoxType.OKCancel}>OKCancel</option>
                             <option value={MessageBoxType.YesNo}>YesNo</option>
@@ -430,7 +389,8 @@ var MsgBoxWrap = React.createClass({
                         <br/>
                         图标类型
                         <br/>
-                        <select className="form-control" value={this.state.icon} ref='btnIcon' onChange={this.handleChangeState}>
+                        <select className="form-control" value={this.state.icon} ref='btnIcon'
+                                onChange={this.handleChangeState}>
                             <option value={MessageBoxIcon.Success}>Success</option>
                             <option value={MessageBoxIcon.Info}>Info</option>
                             <option value={MessageBoxIcon.Error}>Error</option>
@@ -443,54 +403,75 @@ var MsgBoxWrap = React.createClass({
                     </div>
                 </div>
             </div>
-        )
+        );
     },
     handleChangeState() {
         this.setState({
             type: this.refs.btnType.value,
             icon: this.refs.btnIcon.value
-        })
+        });
     },
     handleClickBtn() {
         showMessageBox({
             icon: this.state.icon,
             text: '今天下午4点下班',
             btnType: this.state.type
-        }).then(function() {
+        }).then(function () {
             console.log('ok...');
-        }, function() {
+        }, function () {
             console.log('cancel...');
-        })
+        });
     }
 });
 
 ReactDOM.render(
     <MsgBoxWrap />,
     document.getElementById('msgbox-container')
-)
+);
 
-var ToolKitWrap = React.createClass({
-    render() {
+var DialogWrap = React.createClass({
+    getInitialState(){
+        return {
+            show: true
+        };
+    },
+    handleAlert(){
+        Dialog.alert({
+            children: 'adsf'
+        }).then(() => {
+            console.log('resolve');
+        });
+    },
+    handleConfirm(){
+        Dialog.confirm({
+            children: 'asdf',
+            title: 'title'
+        }).then(() => {
+            console.log('resolve');
+        }, () => {
+            console.log('reject');
+        });
+    },
+    handlePrompt(){
+        Dialog.prompt({
+            children: 'sssss',
+            title: 'title',
+            value: 123
+        }).then(value => {
+            console.log('resolve', value);
+        }, () => {
+            console.log('reject');
+        });
+    },
+    render: function () {
         return (
             <div>
-                IconInput
-                <br />
-                <IconInput type='text' icon='user' value='asdasd' />
-                <p />
-                <IconInput type='password' icon='lock' value='asdasd' />
-                <p />
-                <div className="row">
-                    <div className="col-xs-4">
-                    Hr with text
-                    <Hr>hello</Hr>
-                    </div>
-                </div>
+                <button className="btn btn-default" onClick={this.handleAlert}>alert</button>
+                <button className="btn btn-default" onClick={this.handleConfirm}>confirm</button>
+                <button className="btn btn-default" onClick={this.handlePrompt}>prompt</button>
             </div>
-        )
+        );
     }
 });
 
-ReactDOM.render(
-    <ToolKitWrap />,
-    document.getElementById('toolkit-container')
-)
+ReactDOM.render(<DialogWrap />, document.getElementById('dialog-container'));

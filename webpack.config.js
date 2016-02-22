@@ -1,5 +1,3 @@
-'use strict';
-
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -13,12 +11,6 @@ module.exports = {
         'underscore': 'underscore',
         'react-bootstrap': 'react-bootstrap'
     },
-    module: {
-        loaders: [
-            {test: /\.js$/, loader: 'babel?presets[]=react,presets[]=es2015', exclude: /node_modules/},
-            { test : /\.css$/, loader: ExtractTextPlugin.extract('style', 'css') }
-        ]
-    },
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'react-gm.js',
@@ -26,7 +18,7 @@ module.exports = {
         libraryTarget: 'umd'
     },
     resolve: {
-        extensions: ['', '.js', '.css']
+        extensions: ['', '.js', '.css', '.less']
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
@@ -34,5 +26,15 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('development')
         }),
         new ExtractTextPlugin('react-gm.css')
-    ]
+    ],
+    module: {
+        loaders: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel?presets[]=react,presets[]=es2015',
+        }, {
+            test: /\.(css|less)$/,
+            loader: ExtractTextPlugin.extract('style', 'css!less')
+        }]
+    },
 };
