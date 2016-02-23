@@ -12,74 +12,16 @@
     <link rel="shortcut icon" href="logo.png"/>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="node_modules/gm-iconfont/style.css">
+    <style>
+        html, body, #appContainer{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
-<div class="padding10">
-    <div class="page-header">
-        <h1>React-GM
-            <small>一些简单的组件库</small>
-        </h1>
-    </div>
-    <div>
-        <h3>Modal</h3>
-        <div id="dialog-container"></div>
-    </div>
-
-    <hr>
-    <div>
-        <h3>Tip</h3>
-        <div id="tip-container"></div>
-    </div>
-    <hr/>
-    <div>
-        <h3>NProgress</h3>
-        <div id="nprogress-container"></div>
-    </div>
-    <hr/>
-    <div>
-        <h3>表格Grid组件</h3>
-        <div id="grid-container"></div>
-    </div>
-    <hr/>
-    <div>
-        <h3>calendar</h3>
-        <div id="calendar-container"></div>
-    </div>
-    <hr/>
-    <div>
-        <h3>DatePicker</h3>
-        <div id="datepicker-container"></div>
-    </div>
-    <hr/>
-    <div>
-        <h3>DateRangePicker</h3>
-        <div id="daterangepicker-container"></div>
-    </div>
-    <hr/>
-    <div>
-        <h3>Droper</h3>
-        <div id="uploader-container"></div>
-    </div>
-    <hr/>
-    <div>
-        <h3>Form组件</h3>
-        <div id="form-container"></div>
-    </div>
-    <hr/>
-    <div>
-        <h3>导入引导</h3>
-        <div id="import-lead-container"></div>
-    </div>
-    <hr/>
-    <div>
-        <h3>MessageBox</h3>
-        <div id='msgbox-container'></div>
-    </div>
-</div>
-<footer class="padding10">
-    <hr>
-    <p class="text-muted">React-GM组件库</p>
-</footer>
+<div id="appContainer"></div>
 <script>
     document.write('<script src="webpack-assets.js?v=' + Math.random() + '"><\/script>');
 </script>

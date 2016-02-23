@@ -1,0 +1,48 @@
+.gm-navigation {
+  color: #666;
+  border-right: 1px solid @borderColor;
+  width: 100%;
+  height: 100%;
+  background: #e9ebec;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.gm-navigation ul {
+  padding: 0;
+  margin: 0;
+}
+
+.gm-navigation li {
+  list-style: none;
+  margin: 0;
+
+}
+
+.gm-navigation-cell {
+  line-height: 40px;
+}
+
+.gm-navigation-cell.current .gm-navigation-title, .gm-navigation-cell .gm-navigation-title:hover{
+  background: #ced1d4;
+}
+
+.gm-navigation-title{
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.gm-navigation-level1 {
+  position: relative;
+}
+
+.gm-navigation .gm-navigation-level2 .gm-navigation-title {
+  padding-left: 25px;
+}
+
+.gm-navigation-icon {
+  position: absolute;
+  top: 1.5em;
+  margin-top: -.5em;
+  right: 10px;
+}

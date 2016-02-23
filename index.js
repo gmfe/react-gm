@@ -16,8 +16,12 @@ import Tip from './lib/tip.component';
 import NProgress from './lib/nprogress.component';
 import { showMessageBox, MessageBoxIcon, MessageBoxType } from './lib/messagebox.component';
 import Dialog from './lib/dialog.component';
-import './import.lead';
+import Navigation from './lib/navigation.component';
+import Layout from './lib/layout';
+import Flex from './lib/flex';
+import ImportLeadWrap from './import.lead';
 import './lib/css/react-gm.less';
+
 
 // tip
 var TipWrap = React.createClass({
@@ -48,11 +52,6 @@ var TipWrap = React.createClass({
         });
     }
 });
-ReactDOM.render((
-    <div>
-        <TipWrap />
-    </div>
-), document.getElementById('tip-container'));
 
 
 // nprogress
@@ -74,16 +73,9 @@ var NProgressWrap = React.createClass({
     }
 });
 
-ReactDOM.render(
-    <div>
-        <NProgressWrap></NProgressWrap>
-    </div>
-    , document.getElementById('nprogress-container'));
-
 // grid
 var onClick = function () {
     console.log(arguments);
-
 };
 
 var isShow = function () {
@@ -173,13 +165,6 @@ var GridWrap = React.createClass({
     }
 });
 
-ReactDOM.render((
-    <div>
-        <GridWrap />
-    </div>
-), document.getElementById('grid-container'));
-
-
 var DroperWrap = React.createClass({
     render: function () {
         return (
@@ -195,9 +180,6 @@ var DroperWrap = React.createClass({
         console.log(arguments);
     }
 });
-
-ReactDOM.render(<DroperWrap />, document.getElementById('uploader-container'));
-
 
 var onSubmit = function (event) {
     console.log('app onsubmit');
@@ -243,8 +225,6 @@ var FormerDom = React.createClass({
         console.log(this.validateAll(this.refs.myForm));
     }
 });
-
-ReactDOM.render(<FormerDom />, document.getElementById('form-container'));
 
 console.log(Validate('*', 'a', true));
 console.log(Validate('*3', 'aaaa', true));
@@ -307,7 +287,6 @@ var CalendarWrap = React.createClass({
     }
 });
 
-ReactDOM.render(<CalendarWrap />, document.getElementById('calendar-container'));
 var DatePickerWrap = React.createClass({
     getInitialState: function () {
         return {
@@ -337,8 +316,6 @@ var DatePickerWrap = React.createClass({
     }
 });
 
-ReactDOM.render(<DatePickerWrap />, document.getElementById('datepicker-container'));
-
 
 var DaterangepickerWrap = React.createClass({
     getInitialState: function () {
@@ -362,8 +339,6 @@ var DaterangepickerWrap = React.createClass({
         });
     }
 });
-
-ReactDOM.render(<DaterangepickerWrap />, document.getElementById('daterangepicker-container'));
 
 
 var MsgBoxWrap = React.createClass({
@@ -424,11 +399,6 @@ var MsgBoxWrap = React.createClass({
     }
 });
 
-ReactDOM.render(
-    <MsgBoxWrap />,
-    document.getElementById('msgbox-container')
-);
-
 var DialogWrap = React.createClass({
     getInitialState(){
         return {
@@ -474,4 +444,134 @@ var DialogWrap = React.createClass({
     }
 });
 
-ReactDOM.render(<DialogWrap />, document.getElementById('dialog-container'));
+var navData = [{
+    key: 1,
+    title: '导航一',
+    open: false, // option
+    sub: [{
+        key: 11,
+        title: '选项1-1'
+    }]
+}, {
+    key: 2,
+    title: '导航二'
+}, {
+    key: 3,
+    title: '导航三',
+    sub: [{
+        key: 31,
+        title: '选项3-1'
+    }, {
+        key: 32,
+        title: '选项3-2'
+    }]
+}, {
+    key: 4,
+    title: '导航四'
+}];
+
+var NavigationWrap = React.createClass({
+    getInitialState(){
+        return {
+            select: 11
+        };
+    },
+    render(){
+        return (
+            <Navigation data={navData} select={this.state.select}>asdf</Navigation>
+        );
+    },
+    componentDidMount(){
+        setTimeout(() => {
+            this.setState({
+                select: 32
+            });
+        }, 3000);
+        setTimeout(() => {
+            this.setState({
+                select: 4
+            });
+        }, 5000);
+    }
+});
+
+var FlexWrap = React.createClass({
+    render(){
+        return (
+            <Layout wrap>
+                <Flex style={{width: 200}}>1</Flex>
+                <Flex flex>1</Flex>
+                <Flex flex>1</Flex>
+                <Flex flex>1</Flex>
+                <Flex flex>1</Flex>
+                <Flex flex>1</Flex>
+                <Flex flex>1</Flex>
+            </Layout>
+        );
+    }
+});
+
+const App = React.createClass({
+    render(){
+        return (
+            <Layout column className="gm-app">
+                <Flex className="gm-app-top text-right gm-whiteframe1">
+                    React-GM
+                </Flex>
+                <Flex flex className="gm-app-center">
+                    <Layout row alignStretch className="gm-app">
+                        <Flex className="gm-app-left">
+                            <NavigationWrap className="gm-whiteframe1"></NavigationWrap>
+                        </Flex>
+                        <Flex flex className="gm-app-content gm-padding10">
+                            <h1>Flex</h1>
+                            <FlexWrap></FlexWrap>
+                            <hr/>
+                            <h1>Tip</h1>
+                            <TipWrap></TipWrap>
+                            <hr/>
+                            <h1>Dialog</h1>
+                            <DialogWrap></DialogWrap>
+                            <hr/>
+                            <h1>NProgress</h1>
+                            <NProgressWrap></NProgressWrap>
+                            <hr/>
+                            <h1>Grid</h1>
+                            <GridWrap></GridWrap>
+                            <hr/>
+                            <h1>Droper</h1>
+                            <DroperWrap></DroperWrap>
+                            <hr/>
+                            <h1>Former</h1>
+                            <FormerDom></FormerDom>
+                            <hr/>
+                            <h1>Calendar</h1>
+                            <CalendarWrap></CalendarWrap>
+                            <hr/>
+                            <h1>DatePicker</h1>
+                            <DatePickerWrap></DatePickerWrap>
+                            <h1>Daterangepicker</h1>
+                            <DaterangepickerWrap></DaterangepickerWrap>
+                            <hr/>
+                            <h1>MsgBox</h1>
+                            <MsgBoxWrap></MsgBoxWrap>
+                            <hr/>
+                            <h1>Dialog</h1>
+                            <DialogWrap></DialogWrap>
+                            <hr/>
+                            <h1>ImportLead</h1>
+                            <ImportLeadWrap></ImportLeadWrap>
+                            <div className="gm-padding10">
+                                <p className="text-muted">React-GM组件库</p>
+                            </div>
+                        </Flex>
+                    </Layout>
+                </Flex>
+            </Layout>
+        );
+    }
+});
+
+ReactDOM.render(
+    <App></App>
+    , document.getElementById('appContainer'));

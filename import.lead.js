@@ -253,5 +253,4 @@ var ImportLeadWrap = React.createClass({
     }
 });
 
-
-ReactDOM.render(<ImportLeadWrap></ImportLeadWrap>, document.getElementById('import-lead-container'));
+export default ImportLeadWrap;
