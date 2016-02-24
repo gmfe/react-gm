@@ -45,6 +45,7 @@
   overflow-y: auto;
 }
 
+// bg
 .gm-back-bg {
   background-color: @backBg !important;
 }
@@ -53,11 +54,18 @@
   background-color: @bg !important;
 }
 
+// whiteframe1
 .gm-whiteframe1 {
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
 }
 
 // gap
+.gm-gap5 {
+  display: inline-block;
+  height: 5px;
+  width: 5px;
+}
+
 .gm-gap10 {
   display: inline-block;
   height: 10px;
@@ -70,8 +78,48 @@
   width: 15px;
 }
 
+.gm-padding5 {
+  padding: 5px;
+}
+
 .gm-padding10 {
   padding: 10px;
+}
+
+.gm-padding15 {
+  padding: 15px;
+}
+
+.gm-margin5 {
+  margin: 5px;
+}
+
+.gm-margin10 {
+  margin: 10px;
+}
+
+.gm-margin15 {
+  margin: 15px;
+}
+
+.gm-border {
+  border: 1px solid @borderColor;
+}
+
+.gm-borderBottom {
+  border-bottom: 1px solid @borderColor;
+}
+
+.gm-borderRight {
+  border-right: 1px solid @borderColor;
+}
+
+.gm-borderTop {
+  border-top: 1px solid @borderColor;
+}
+
+.gm-borderLeft {
+  border-left: 1px solid @borderColor;
 }
 
 // modal 全局修改
@@ -129,85 +177,4 @@
 .fadeInRight {
   animation-name: fadeInRight;
   animation-duration: .5s;
-}
-
-/* modal-action */
-
-.modal-actions:before, .modal-actions:after {
-  content: " ";
-  display: table
-}
-
-.modal-actions:after {
-  clear: both
-}
-
-.modal-action-single {
-  float: left;
-  width: 100%;
-  padding: 15px;
-  border: solid #e5e5e5;
-  border-width: 1px 0 0;
-  outline: none;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.modal-action {
-  float: left;
-  width: 50%;
-  padding: 15px;
-  border: solid #e5e5e5;
-  border-width: 1px 0 0;
-  outline: none
-}
-
-.modal-action + .modal-action {
-  border-left-width: 1px
-}
-
-.modal-action:first-child {
-  border-bottom-left-radius: 5px
-}
-
-.modal-action:last-child {
-  border-bottom-right-radius: 5px
-}
-
-.modal-action:hover, .modal-action:focus, .modal-action:active,
-.modal-action-single:hover, .modal-action-single:focus, .modal-action-single:active {
-  text-decoration: none;
-  background-color: #f5f5f5;
-  border-color: #e5e5e5
-}
-
-.input-with-icon {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.input-with-icon > .form-control {
-  padding-left: 30px;
-}
-
-.input-with-icon > .icon {
-  position: absolute;
-  top: 7px;
-  left: 10px;
-  color: #555;
-}
-
-.input-with-icon > .icon:before {
-  position: relative;
-  top: 2px;
-  display: inline-block;
-  font-size: 100%;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }

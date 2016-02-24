@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
+		module.exports = factory(require("react"), require("underscore"), require("react-dom"), require("react-bootstrap"), require("moment"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "underscore", "react-dom", "moment", "react-bootstrap"], factory);
+		define(["react", "underscore", "react-dom", "react-bootstrap", "moment"], factory);
 	else if(typeof exports === 'object')
-		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
+		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("react-bootstrap"), require("moment"));
 	else
-		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__) {
+		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["react-bootstrap"], root["moment"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -56,77 +56,87 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _gridComponent = __webpack_require__(19);
+	var _gridComponent = __webpack_require__(21);
 
 	var _gridComponent2 = _interopRequireDefault(_gridComponent);
 
-	var _paginationComponent = __webpack_require__(8);
+	var _paginationComponent = __webpack_require__(9);
 
 	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
 
-	var _paginationTextComponent = __webpack_require__(9);
+	var _paginationTextComponent = __webpack_require__(10);
 
 	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
 
-	var _droperComponent = __webpack_require__(7);
+	var _droperComponent = __webpack_require__(8);
 
 	var _droperComponent2 = _interopRequireDefault(_droperComponent);
 
-	var _formerComponent = __webpack_require__(18);
+	var _formerComponent = __webpack_require__(20);
 
 	var _formerComponent2 = _interopRequireDefault(_formerComponent);
 
-	var _validate = __webpack_require__(14);
+	var _validate = __webpack_require__(15);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validateMixin = __webpack_require__(28);
+	var _validateMixin = __webpack_require__(31);
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
-	var _util = __webpack_require__(10);
+	var _util = __webpack_require__(11);
 
 	var _util2 = _interopRequireDefault(_util);
 
-	var _importLeadComponent = __webpack_require__(21);
+	var _importLeadComponent = __webpack_require__(23);
 
 	var _importLeadComponent2 = _interopRequireDefault(_importLeadComponent);
 
-	var _storageComponent = __webpack_require__(24);
+	var _storageComponent = __webpack_require__(27);
 
 	var _storageComponent2 = _interopRequireDefault(_storageComponent);
 
-	var _calendarComponent = __webpack_require__(4);
+	var _calendarComponent = __webpack_require__(5);
 
 	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
 
-	var _datepickerComponent = __webpack_require__(15);
+	var _datepickerComponent = __webpack_require__(16);
 
 	var _datepickerComponent2 = _interopRequireDefault(_datepickerComponent);
 
-	var _daterangepicker = __webpack_require__(16);
+	var _daterangepicker = __webpack_require__(17);
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(25);
+	var _tip = __webpack_require__(28);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(23);
+	var _nprogress = __webpack_require__(26);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	var _messagebox = __webpack_require__(22);
-
-	var _hr = __webpack_require__(20);
+	var _hr = __webpack_require__(22);
 
 	var _hr2 = _interopRequireDefault(_hr);
 
-	var _dialog = __webpack_require__(17);
+	var _dialog = __webpack_require__(18);
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	__webpack_require__(29);
+	var _navigation = __webpack_require__(25);
+
+	var _navigation2 = _interopRequireDefault(_navigation);
+
+	var _layout = __webpack_require__(24);
+
+	var _layout2 = _interopRequireDefault(_layout);
+
+	var _flex = __webpack_require__(19);
+
+	var _flex2 = _interopRequireDefault(_flex);
+
+	__webpack_require__(32);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -147,9 +157,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    NProgress: _nprogress2.default,
 	    Hr: _hr2.default,
 	    Dialog: _dialog2.default,
-	    showMessageBox: _messagebox.showMessageBox,
-	    MessageBoxIcon: _messagebox.MessageBoxIcon,
-	    MessageBoxType: _messagebox.MessageBoxType,
+	    Navigation: _navigation2.default,
+	    Layout: _layout2.default,
+	    Flex: _flex2.default,
 	    Util: _util2.default
 	};
 
@@ -173,6 +183,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 4 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ },
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -185,7 +201,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(5);
+	var _moment = __webpack_require__(7);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -364,19 +380,67 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Calendar;
 
 /***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
-
-/***/ },
 /* 6 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
 
 /***/ },
 /* 7 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -613,7 +677,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Droper;
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -756,7 +820,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Pagination;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -801,7 +865,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = PaginationText;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -810,23 +874,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _request = __webpack_require__(26);
+	var _request = __webpack_require__(29);
 
 	var _request2 = _interopRequireDefault(_request);
 
-	var _request3 = __webpack_require__(13);
+	var _request3 = __webpack_require__(14);
 
 	var _request4 = _interopRequireDefault(_request3);
 
-	var _param = __webpack_require__(12);
+	var _param = __webpack_require__(13);
 
 	var _param2 = _interopRequireDefault(_param);
 
-	var _format = __webpack_require__(11);
+	var _format = __webpack_require__(12);
 
 	var _format2 = _interopRequireDefault(_format);
 
-	var _visibilitycheck = __webpack_require__(27);
+	var _visibilitycheck = __webpack_require__(30);
 
 	var _visibilitycheck2 = _interopRequireDefault(_visibilitycheck);
 
@@ -841,7 +905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -880,7 +944,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = format;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -905,7 +969,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = param;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -984,7 +1048,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestInterceptor;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -997,7 +1061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _util = __webpack_require__(10);
+	var _util = __webpack_require__(11);
 
 	var _util2 = _interopRequireDefault(_util);
 
@@ -1179,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Validate;
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1196,13 +1260,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _moment = __webpack_require__(5);
+	var _moment = __webpack_require__(7);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(6);
+	var _reactBootstrap = __webpack_require__(4);
 
-	var _calendarComponent = __webpack_require__(4);
+	var _calendarComponent = __webpack_require__(5);
 
 	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
 
@@ -1257,7 +1321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1274,13 +1338,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _moment = __webpack_require__(5);
+	var _moment = __webpack_require__(7);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(6);
+	var _reactBootstrap = __webpack_require__(4);
 
-	var _calendarComponent = __webpack_require__(4);
+	var _calendarComponent = __webpack_require__(5);
 
 	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
 
@@ -1361,7 +1425,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DateRangePicker;
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1378,7 +1442,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactBootstrap = __webpack_require__(6);
+	var _reactBootstrap = __webpack_require__(4);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1440,7 +1504,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    this.props.children,
 	                    this.props.type === 'prompt' && _react2.default.createElement('input', { type: 'text', style: { display: 'block', width: '100%' }, onKeyDown: this.handleEnter })
 	                ),
-	                _react2.default.createElement('div', { className: 'gap10' }),
+	                _react2.default.createElement('div', { className: 'gm-gap10' }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'text-right' },
@@ -1449,7 +1513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { className: 'btn btn-default', onClick: this.handleCancle },
 	                        '取消'
 	                    ),
-	                    _react2.default.createElement('div', { className: 'gap10' }),
+	                    _react2.default.createElement('div', { className: 'gm-gap10' }),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: 'btn btn-primary', onClick: this.handleOk },
@@ -1492,7 +1556,48 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Dialog;
 
 /***/ },
-/* 18 */
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(6);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Flex = _react2.default.createClass({
+	    displayName: 'Flex',
+	    render: function render() {
+	        var cn = (0, _classnames2.default)({
+	            'gm-flex': this.props.flex
+	        });
+
+	        cn += ' ' + (this.props.className || '');
+
+	        return _react2.default.createElement(
+	            'div',
+	            _extends({}, this.props, { className: cn }),
+	            this.props.children
+	        );
+	    }
+	});
+
+	exports.default = Flex;
+
+/***/ },
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1634,7 +1739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Former;
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1647,11 +1752,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _paginationComponent = __webpack_require__(8);
+	var _paginationComponent = __webpack_require__(9);
 
 	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
 
-	var _paginationTextComponent = __webpack_require__(9);
+	var _paginationTextComponent = __webpack_require__(10);
 
 	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
 
@@ -1890,7 +1995,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Grid;
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1910,7 +2015,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    render: function render() {
 	        return _react2.default.createElement(
 	            "div",
-	            { className: "gm-divider clearfix" },
+	            { className: "gm-divider" },
 	            _react2.default.createElement(
 	                "div",
 	                { className: "gm-divider-content" },
@@ -1927,7 +2032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Hr;
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1948,7 +2053,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _droper = __webpack_require__(7);
+	var _droper = __webpack_require__(8);
 
 	var _droper2 = _interopRequireDefault(_droper);
 
@@ -2132,226 +2237,181 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ImportLead;
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(3);
+	var _classnames = __webpack_require__(6);
 
-	var _reactDom2 = _interopRequireDefault(_reactDom);
+	var _classnames2 = _interopRequireDefault(_classnames);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var MessageBoxIcon = {
-	    Success: 'Success',
-	    Info: 'Info',
-	    Error: 'Error',
-	    Warning: 'Warning',
-	    Question: 'Question',
-	    None: 'None'
-	};
-
-	var MessageBoxType = {
-	    OKCancel: 'OKCancel',
-	    YesNo: 'YesNo',
-	    OK: 'OK'
-	};
-
-	var MessageBox = _react2.default.createClass({
-	    displayName: 'MessageBox',
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            icon: MessageBoxIcon.None,
-	            text: 'Hello, world!',
-	            title: '',
-	            type: MessageBoxType.OK
-	        };
-	    },
+	var Layout = _react2.default.createClass({
+	    displayName: 'Layout',
 	    render: function render() {
+	        var cn = (0, _classnames2.default)({
+	            'gm-layout': true,
 
-	        var thisProps = this.props;
-	        var buttonArea = null;
-	        var iconArea = null;
-	        var title;
+	            'gm-layout-row': this.props.row,
+	            'gm-layout-column': this.props.column,
 
-	        switch (thisProps.type) {
-	            case MessageBoxType.OKCancel:
-	                buttonArea = _react2.default.createElement(
-	                    'div',
-	                    { className: 'modal-actions' },
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: 'btn-link modal-action', onClick: this.handleClickBtn.bind(this, false) },
-	                        '取消'
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: 'btn-link modal-action', onClick: this.handleClickBtn.bind(this, true) },
-	                        '确定'
-	                    )
-	                );
-	                break;
-	            case MessageBoxType.YesNo:
-	                buttonArea = _react2.default.createElement(
-	                    'div',
-	                    { className: 'modal-actions' },
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: 'btn-link modal-action', onClick: this.handleClickBtn.bind(this, false) },
-	                        '否'
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: 'btn-link modal-action', onClick: this.handleClickBtn.bind(this, true) },
-	                        '是'
-	                    )
-	                );
-	                break;
-	            default:
-	                buttonArea = _react2.default.createElement(
-	                    'div',
-	                    { className: 'modal-actions' },
-	                    _react2.default.createElement(
-	                        'button',
-	                        {
-	                            className: 'button btn-link modal-action-single',
-	                            onClick: this.handleClickBtn.bind(this, true)
-	                        },
-	                        '确定'
-	                    )
-	                );
-	                break;
-	        }
+	            'gm-layout-wrap': this.props.wrap,
+	            'gm-layout-nowrap': this.props.nowrap,
 
-	        if (!thisProps.title.trim()) {
-	            switch (thisProps.icon) {
-	                case MessageBoxIcon.Success:
-	                    title = '成功';break;
-	                case MessageBoxIcon.Info:
-	                    title = '提示';break;
-	                case MessageBoxIcon.Error:
-	                    title = '错误';break;
-	                case MessageBoxIcon.Warning:
-	                    title = '警告';break;
-	                case MessageBoxIcon.Question:
-	                    title = '问题';break;
-	                case MessageBoxIcon.None:
-	                    title = '消息';break;
+	            'gm-layout-justify-start': this.props.justifyStart,
+	            'gm-layout-justify-end': this.props.justifyEnd,
+	            'gm-layout-justify-center': this.props.justifyCenter,
+	            'gm-layout-justify-between': this.props.justifyBetween,
+	            'gm-layout-justify-around': this.props.justifyAround,
 
-	                default:
-	                    throw new Error('Unknow Icon Variable');
-	            }
-	        } else {
-	            title = thisProps.title.trim();
-	        }
+	            'gm-layout-align-start': this.props.alignStart,
+	            'gm-layout-align-end': this.props.alignEnd,
+	            'gm-layout-align-center': this.props.alignCenter,
+	            'gm-layout-align-baseline': this.props.alignBaseline,
+	            'gm-layout-align-stretch': this.props.alignStretch
+	        });
 
-	        switch (thisProps.icon) {
-	            case MessageBoxIcon.Success:
-	                iconArea = _react2.default.createElement('span', { className: 'icon ico-check-circle text-success' });
-	                break;
-	            case MessageBoxIcon.Info:
-	                iconArea = _react2.default.createElement('span', { className: 'icon ico-info-circle text-info' });
-	                break;
-	            case MessageBoxIcon.Error:
-	                iconArea = _react2.default.createElement('span', { className: 'icon ico-times-circle text-danger' });
-	                break;
-	            case MessageBoxIcon.Warning:
-	                iconArea = _react2.default.createElement('span', { className: 'icon ico-warning text-warning' });
-	                break;
-	            case MessageBoxIcon.Question:
-	                iconArea = _react2.default.createElement('span', { className: 'icon ico-question-circle text-primary' });
-	                break;
-
-	            default:
-	                iconArea = null;
-	                break;
-	        }
+	        cn += ' ' + (this.props.className || '');
 
 	        return _react2.default.createElement(
 	            'div',
-	            { className: 'modal', style: { display: 'block' } },
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'modal-dialog modal-sm' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'modal-content' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'modal-header' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            { className: 'modal-title' },
-	                            title
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'modal-body' },
-	                        _react2.default.createElement(
-	                            'center',
-	                            null,
-	                            iconArea ? _react2.default.createElement(
-	                                'p',
-	                                { style: { fontSize: 40 } },
-	                                iconArea
-	                            ) : null,
-	                            _react2.default.createElement(
-	                                'p',
-	                                null,
-	                                thisProps.text
-	                            )
-	                        )
-	                    ),
-	                    buttonArea
-	                )
-	            )
+	            _extends({}, this.props, { className: cn }),
+	            this.props.children
 	        );
-	    },
-	    handleClickBtn: function handleClickBtn(action) {
-	        this.props.resolve(action);
 	    }
 	});
 
-	var showMessageBox = function showMessageBox(_ref) {
-	    var icon = _ref.icon;
-	    var text = _ref.text;
-	    var title = _ref.title;
-	    var btnType = _ref.btnType;
-
-	    var wrap = document.createElement('div');
-	    var backDrop = document.createElement('div');
-	    var promise;
-
-	    backDrop.className = 'modal-backdrop fade in';
-
-	    promise = new Promise(function (resolve, reject) {
-	        document.body.appendChild(wrap);
-	        document.body.appendChild(backDrop);
-	        _reactDom2.default.render(_react2.default.createElement(MessageBox, { icon: icon, text: text, title: title, type: btnType, resolve: resolve }), wrap);
-	    });
-
-	    return promise.then(function (action) {
-	        _reactDom2.default.unmountComponentAtNode(wrap);
-	        wrap.remove();
-	        backDrop.remove();
-	        return action ? Promise.resolve() : Promise.reject();
-	    });
-	};
-
-	module.exports = {
-	    showMessageBox: showMessageBox,
-	    MessageBoxIcon: MessageBoxIcon,
-	    MessageBoxType: MessageBoxType
-	};
+	exports.default = Layout;
 
 /***/ },
-/* 23 */
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _reactBootstrap = __webpack_require__(4);
+
+	var _classnames = __webpack_require__(6);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Navigation = _react2.default.createClass({
+	    displayName: 'Navigation',
+	    getInitialState: function getInitialState() {
+	        return {
+	            data: this.props.data,
+	            select: this.props.select
+	        };
+	    },
+	    processData: function processData() {
+	        var _this = this;
+
+	        return _underscore2.default.map(this.state.data, function (value) {
+	            value.open = value.open || false;
+	            if (value.sub) {
+	                _underscore2.default.map(value.sub, function (val) {
+	                    val.open = val.open || false;
+	                    if (val.key === _this.state.select) {
+	                        value.open = true;
+	                    }
+	                });
+	            }
+	            return value;
+	        });
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            select: nextProps.select
+	        });
+	    },
+	    render: function render() {
+	        var _this2 = this;
+
+	        var data = this.processData();
+	        return _react2.default.createElement(
+	            'div',
+	            { className: (0, _classnames2.default)("gm-navigation", this.props.className) },
+	            _react2.default.createElement(
+	                'ul',
+	                null,
+	                _underscore2.default.map(data, function (value) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: value.key,
+	                            className: "gm-navigation-cell gm-navigation-level1" + _this2.getCurrentClassName(value.key),
+	                            onClick: _this2.handleToggle.bind(_this2, value) },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'gm-navigation-title' },
+	                            value.title
+	                        ),
+	                        value.sub && _react2.default.createElement('span', {
+	                            className: "glyphicon gm-navigation-icon " + (value.open ? 'glyphicon-menu-up' : ' glyphicon-menu-down') }),
+	                        value.sub && _react2.default.createElement(
+	                            _reactBootstrap.Collapse,
+	                            { 'in': value.open },
+	                            _react2.default.createElement(
+	                                'ul',
+	                                { className: 'gm-navigation-cell gm-navigation-level2' },
+	                                _underscore2.default.map(value.sub, function (val) {
+	                                    return _react2.default.createElement(
+	                                        'li',
+	                                        { key: val.key,
+	                                            className: "gm-navigation-cell gm-navigation-sub-cell" + _this2.getCurrentClassName(val.key) },
+	                                        _react2.default.createElement(
+	                                            'div',
+	                                            { className: 'gm-navigation-title' },
+	                                            value.title
+	                                        )
+	                                    );
+	                                })
+	                            )
+	                        )
+	                    );
+	                })
+	            )
+	        );
+	    },
+	    handleToggle: function handleToggle(value) {
+	        // 先这样恶心处理吧
+	        value.open = !value.open;
+	        this.setState(this.state);
+	    },
+	    getCurrentClassName: function getCurrentClassName(key) {
+	        return this.state.select === key ? ' current ' : ' ';
+	    }
+	});
+
+	exports.default = Navigation;
+
+/***/ },
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2439,7 +2499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 24 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2522,7 +2582,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 25 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2682,7 +2742,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 26 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2691,11 +2751,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _param = __webpack_require__(12);
+	var _param = __webpack_require__(13);
 
 	var _param2 = _interopRequireDefault(_param);
 
-	var _format = __webpack_require__(11);
+	var _format = __webpack_require__(12);
 
 	var _format2 = _interopRequireDefault(_format);
 
@@ -2703,7 +2763,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _request = __webpack_require__(13);
+	var _request = __webpack_require__(14);
 
 	var _request2 = _interopRequireDefault(_request);
 
@@ -2817,7 +2877,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 27 */
+/* 30 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2842,7 +2902,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 28 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2863,7 +2923,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validate = __webpack_require__(14);
+	var _validate = __webpack_require__(15);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
@@ -2971,7 +3031,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 29 */
+/* 32 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

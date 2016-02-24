@@ -14,7 +14,6 @@ import DatePicker from './lib/datepicker.component.js';
 import DateRangePicker from './lib/daterangepicker.component.js';
 import Tip from './lib/tip.component';
 import NProgress from './lib/nprogress.component';
-import { showMessageBox, MessageBoxIcon, MessageBoxType } from './lib/messagebox.component';
 import Dialog from './lib/dialog.component';
 import Navigation from './lib/navigation.component';
 import Layout from './lib/layout';
@@ -340,65 +339,6 @@ var DaterangepickerWrap = React.createClass({
     }
 });
 
-
-var MsgBoxWrap = React.createClass({
-    getInitialState() {
-        return {
-            icon: MessageBoxIcon.None,
-            type: MessageBoxType.OK
-        };
-    },
-    render() {
-        return (
-            <div>
-                <div className="row">
-                    <div className="col-xs-4">
-                        按钮类型
-                        <br/>
-                        <select className="form-control" value={this.state.type} ref='btnType'
-                                onChange={this.handleChangeState}>
-                            <option value={MessageBoxType.OK}>OK</option>
-                            <option value={MessageBoxType.OKCancel}>OKCancel</option>
-                            <option value={MessageBoxType.YesNo}>YesNo</option>
-                        </select>
-                        <br/>
-                        图标类型
-                        <br/>
-                        <select className="form-control" value={this.state.icon} ref='btnIcon'
-                                onChange={this.handleChangeState}>
-                            <option value={MessageBoxIcon.Success}>Success</option>
-                            <option value={MessageBoxIcon.Info}>Info</option>
-                            <option value={MessageBoxIcon.Error}>Error</option>
-                            <option value={MessageBoxIcon.Warning}>Warning</option>
-                            <option value={MessageBoxIcon.Question}>Question</option>
-                            <option value={MessageBoxIcon.None}>None</option>
-                        </select>
-                        <br/>
-                        <button className='btn btn-default' onClick={this.handleClickBtn}>show msgBox</button>
-                    </div>
-                </div>
-            </div>
-        );
-    },
-    handleChangeState() {
-        this.setState({
-            type: this.refs.btnType.value,
-            icon: this.refs.btnIcon.value
-        });
-    },
-    handleClickBtn() {
-        showMessageBox({
-            icon: this.state.icon,
-            text: '今天下午4点下班',
-            btnType: this.state.type
-        }).then(function () {
-            console.log('ok...');
-        }, function () {
-            console.log('cancel...');
-        });
-    }
-});
-
 var DialogWrap = React.createClass({
     getInitialState(){
         return {
@@ -478,7 +418,7 @@ var NavigationWrap = React.createClass({
     },
     render(){
         return (
-            <Navigation data={navData} select={this.state.select}>asdf</Navigation>
+            <Navigation className="gm-whiteframe1" data={navData} select={this.state.select}>asdf</Navigation>
         );
     },
     componentDidMount(){
@@ -521,7 +461,7 @@ const App = React.createClass({
                 <Flex flex className="gm-app-center">
                     <Layout row alignStretch className="gm-app">
                         <Flex className="gm-app-left">
-                            <NavigationWrap className="gm-whiteframe1"></NavigationWrap>
+                            <NavigationWrap></NavigationWrap>
                         </Flex>
                         <Flex flex className="gm-app-content gm-padding10">
                             <h1>Flex</h1>
@@ -552,9 +492,6 @@ const App = React.createClass({
                             <DatePickerWrap></DatePickerWrap>
                             <h1>Daterangepicker</h1>
                             <DaterangepickerWrap></DaterangepickerWrap>
-                            <hr/>
-                            <h1>MsgBox</h1>
-                            <MsgBoxWrap></MsgBoxWrap>
                             <hr/>
                             <h1>Dialog</h1>
                             <DialogWrap></DialogWrap>
