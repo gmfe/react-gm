@@ -2323,6 +2323,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Navigation = _react2.default.createClass({
 	    displayName: 'Navigation',
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            data: [],
+	            select: null,
+	            onSelect: function onSelect() {}
+	        };
+	    },
 	    getInitialState: function getInitialState() {
 	        return {
 	            data: this.props.data,
@@ -2364,11 +2371,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    return _react2.default.createElement(
 	                        'li',
 	                        { key: value.key,
-	                            className: "gm-navigation-cell gm-navigation-level1" + _this2.getCurrentClassName(value.key),
-	                            onClick: _this2.handleToggle.bind(_this2, value) },
+	                            className: "gm-navigation-cell gm-navigation-level1" + _this2.getCurrentClassName(value.key) },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'gm-navigation-title' },
+	                            { className: 'gm-navigation-title', onClick: _this2.handleClick.bind(_this2, value) },
 	                            value.title
 	                        ),
 	                        value.sub && _react2.default.createElement('span', {
@@ -2386,8 +2392,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                            className: "gm-navigation-cell gm-navigation-sub-cell" + _this2.getCurrentClassName(val.key) },
 	                                        _react2.default.createElement(
 	                                            'div',
-	                                            { className: 'gm-navigation-title' },
-	                                            value.title
+	                                            { className: 'gm-navigation-title', onClick: _this2.handleClick.bind(_this2, val) },
+	                                            val.title
 	                                        )
 	                                    );
 	                                })
@@ -2397,6 +2403,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	                })
 	            )
 	        );
+	    },
+	    handleClick: function handleClick(value) {
+	        if (value.sub) {
+	            this.handleToggle(value);
+	        } else {
+	            this.handleSelect(value);
+	        }
+	    },
+	    handleSelect: function handleSelect(value) {
+	        this.setState({
+	            select: value.key
+	        });
+	        this.props.onSelect(value.key);
 	    },
 	    handleToggle: function handleToggle(value) {
 	        // 先这样恶心处理吧

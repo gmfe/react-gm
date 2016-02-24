@@ -425,33 +425,6 @@
   flex: 1;
   box-sizing: border-box;
 }
-.gm-app {
-  height: 100%;
-  overflow: hidden;
-}
-.gm-app-top {
-  background: #34383c;
-  color: white;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 10px;
-}
-.gm-app-center {
-  height: 100%;
-  overflow: hidden;
-  padding-bottom: 40px;
-}
-.gm-app-left,
-.gm-app-right {
-  height: 100%;
-}
-.gm-app-left {
-  width: 200px;
-}
-.gm-app-content {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
 .gm-back-bg {
   background-color: #ECECEC !important;
 }
