@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>React-GM Demo</title>
     <meta property="og:image" content="logo.png"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="shortcut icon" href="logo.png"/>
     <link rel="bookmark" href="logo.png" type="image/x-icon" 　/>
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="logo.png"/>
@@ -13,10 +16,63 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="node_modules/gm-iconfont/style.css">
     <style>
-        html, body, #appContainer{
+        html, body, #appContainer {
             width: 100%;
             height: 100%;
             overflow: hidden;
+        }
+
+        .gm-app {
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gm-app-top {
+            background: #34383c;
+            color: white;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+        }
+
+        .gm-app-top-navigation-btn {
+            display: none;
+        }
+
+        .gm-app-center {
+            height: 100%;
+            overflow: hidden;
+            padding-bottom: 40px;
+        }
+
+        .gm-app-left, .gm-app-right {
+            height: 100%;
+        }
+
+        .gm-app-left {
+            width: 200px;
+        }
+
+        .gm-app-content {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 970px) {
+            .gm-app-top-navigation-btn {
+                display: block;
+            }
+
+            .gm-app-left {
+                position: absolute;
+                z-index: 1000;
+                left: -220px;
+            }
+
+            .gm-app-left.current {
+                left: 0px;
+            }
         }
     </style>
 </head>

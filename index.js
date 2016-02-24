@@ -404,6 +404,27 @@ var navData = [{
     }, {
         key: 32,
         title: '选项3-2'
+    }, {
+        key: 33,
+        title: '选项3-2'
+    }, {
+        key: 34,
+        title: '选项3-2'
+    }, {
+        key: 35,
+        title: '选项3-2'
+    }, {
+        key: 36,
+        title: '选项3-2'
+    }, {
+        key: 37,
+        title: '选项3-2'
+    }, {
+        key: 38,
+        title: '选项3-2'
+    }, {
+        key: 39,
+        title: '选项3-2'
     }]
 }, {
     key: 4,
@@ -452,15 +473,24 @@ var FlexWrap = React.createClass({
 });
 
 const App = React.createClass({
+    getInitialState(){
+        return {
+            left: false
+        };
+    },
     render(){
         return (
             <Layout column className="gm-app">
-                <Flex className="gm-app-top text-right gm-whiteframe1">
-                    React-GM
+                <Flex className="gm-app-top gm-whiteframe1">
+                    <div className="gm-app-top-navigation-btn" onClick={this.handleToggleLeft}>
+                        <button className="btn btn-link"><span className="glyphicon glyphicon-menu-hamburger"></span>
+                        </button>
+                    </div>
+                    <div className="pull-right">React-GM</div>
                 </Flex>
                 <Flex flex className="gm-app-center">
                     <Layout row alignStretch className="gm-app">
-                        <Flex className="gm-app-left">
+                        <Flex className={"gm-app-left " + (this.state.left && 'current')}>
                             <NavigationWrap></NavigationWrap>
                         </Flex>
                         <Flex flex className="gm-app-content gm-padding10">
@@ -506,6 +536,11 @@ const App = React.createClass({
                 </Flex>
             </Layout>
         );
+    },
+    handleToggleLeft(){
+        this.setState({
+            left: !this.state.left
+        });
     }
 });
 
