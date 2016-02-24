@@ -25,7 +25,10 @@ module.exports = {
             processOutput: function (assets) {
                 return 'window.WEBPACK_ASSETS = ' + JSON.stringify(assets);
             }
-        })
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('development')
+        }),
     ],
     module: {
         loaders: [{
