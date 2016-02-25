@@ -16,7 +16,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pre": "npm install",
-    "start": "npm install; webpack-dev-server --config webpack.config.dev.js --inline --hot --progress --colors --port 3000",
+    "start": "webpack-dev-server --config webpack.config.dev.js --inline --hot --progress --colors --port 3000",
     "deploy": "npm install; npm run build && npm run build:min",
     "build": "webpack",
     "build:min": "webpack --config webpack.config.min.js"
