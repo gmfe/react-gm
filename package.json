@@ -51,6 +51,7 @@
     "gulp-sequence": "^0.4.1",
     "gulp-watch": "^4.3.5",
     "less": "^2.6.0",
+    "less-loader": "^2.2.2",
     "moment": "^2.10.6",
     "path": "^0.12.7",
     "postcss-loader": "^0.8.1",
