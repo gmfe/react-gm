@@ -280,10 +280,10 @@
   border: none;
 }
 .gm-navigation {
-  color: #666;
+  color: #e1e3e8;
   border-right: 1px solid #ddd;
   width: 100%;
-  background: #e9ebec;
+  background: #3A3F48;
   overflow-x: hidden;
   overflow-y: auto;
   padding-bottom: 40px;
@@ -300,7 +300,7 @@
   line-height: 40px;
 }
 .gm-navigation-cell.current .gm-navigation-title, .gm-navigation-cell .gm-navigation-title:hover {
-  background: #ced1d4;
+  background: #0080BB;
 }
 .gm-navigation-title {
   padding: 0 10px;
@@ -311,12 +311,6 @@
 }
 .gm-navigation .gm-navigation-level2 .gm-navigation-title {
   padding-left: 25px;
-}
-.gm-navigation-icon {
-  position: absolute;
-  top: 1.5em;
-  margin-top: -0.5em;
-  right: 10px;
 }
 .gm-flex {
   display: -webkit-box;
@@ -443,6 +437,11 @@
       -ms-flex-align: stretch;
               -ms-grid-row-align: stretch;
           align-items: stretch;
+}
+html, body {
+  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
 .gm-back-bg {
   background-color: #ECECEC !important;

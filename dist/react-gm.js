@@ -60,11 +60,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gridComponent2 = _interopRequireDefault(_gridComponent);
 
-	var _paginationComponent = __webpack_require__(8);
+	var _paginationComponent = __webpack_require__(9);
 
 	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
 
-	var _paginationTextComponent = __webpack_require__(9);
+	var _paginationTextComponent = __webpack_require__(10);
 
 	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
 
@@ -76,7 +76,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _formerComponent2 = _interopRequireDefault(_formerComponent);
 
-	var _validate = __webpack_require__(10);
+	var _validate = __webpack_require__(11);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
@@ -96,11 +96,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
 
-	var _datepickerComponent = __webpack_require__(17);
+	var _datepickerComponent = __webpack_require__(18);
 
 	var _datepickerComponent2 = _interopRequireDefault(_datepickerComponent);
 
-	var _daterangepicker = __webpack_require__(18);
+	var _daterangepicker = __webpack_require__(19);
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
@@ -116,7 +116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _hr2 = _interopRequireDefault(_hr);
 
-	var _dialog = __webpack_require__(19);
+	var _dialog = __webpack_require__(20);
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
@@ -124,11 +124,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _flex = __webpack_require__(20);
+	var _flex = __webpack_require__(8);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
-	var _gmUtil = __webpack_require__(13);
+	var _gmUtil = __webpack_require__(14);
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
@@ -621,6 +621,98 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(12);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Flex = _react2.default.createClass({
+	    displayName: 'Flex',
+
+	    propTypes: {
+	        flex: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.bool]),
+	        auto: _react2.default.PropTypes.string,
+	        width: _react2.default.PropTypes.string,
+	        height: _react2.default.PropTypes.string,
+	        row: _react2.default.PropTypes.bool,
+	        column: _react2.default.PropTypes.bool,
+	        wrap: _react2.default.PropTypes.bool,
+	        nowrap: _react2.default.PropTypes.bool,
+	        justifyStart: _react2.default.PropTypes.bool,
+	        justifyEnd: _react2.default.PropTypes.bool,
+	        justifyCenter: _react2.default.PropTypes.bool,
+	        justifyBetween: _react2.default.PropTypes.bool,
+	        justifyAround: _react2.default.PropTypes.bool,
+	        alignStart: _react2.default.PropTypes.bool,
+	        alignEnd: _react2.default.PropTypes.bool,
+	        alignCenter: _react2.default.PropTypes.bool,
+	        alignBaseline: _react2.default.PropTypes.bool,
+	        alignStretch: _react2.default.PropTypes.bool
+	    },
+	    render: function render() {
+	        var cn = (0, _classnames2.default)({
+	            'gm-flex': true,
+
+	            'gm-flex-auto': this.props.auto,
+	            'gm-flex-none': this.props.width || this.props.height,
+
+	            'gm-flex-row': this.props.row,
+	            'gm-flex-column': this.props.column,
+
+	            'gm-flex-wrap': this.props.wrap,
+	            'gm-flex-nowrap': this.props.nowrap,
+
+	            'gm-flex-justify-start': this.props.justifyStart,
+	            'gm-flex-justify-end': this.props.justifyEnd,
+	            'gm-flex-justify-center': this.props.justifyCenter,
+	            'gm-flex-justify-between': this.props.justifyBetween,
+	            'gm-flex-justify-around': this.props.justifyAround,
+
+	            'gm-flex-align-start': this.props.alignStart,
+	            'gm-flex-align-end': this.props.alignEnd,
+	            'gm-flex-align-center': this.props.alignCenter,
+	            'gm-flex-align-baseline': this.props.alignBaseline,
+	            'gm-flex-align-stretch': this.props.alignStretch
+	        }, this.props.className);
+
+	        var style = Object.assign({}, this.props.style);
+	        if (this.props.flex) {
+	            style.flex = typeof this.props.flex === 'boolean' ? 1 : this.props.flex;
+	        }
+	        if (this.props.height) {
+	            style.height = this.props.height;
+	        }
+	        if (this.props.width) {
+	            style.width = this.props.width;
+	        }
+
+	        return _react2.default.createElement(
+	            'div',
+	            _extends({}, this.props, { className: cn, style: style }),
+	            this.props.children
+	        );
+	    }
+	});
+
+	exports.default = Flex;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -761,7 +853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Pagination;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -806,7 +898,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = PaginationText;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -819,7 +911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _gmUtil = __webpack_require__(13);
+	var _gmUtil = __webpack_require__(14);
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
@@ -1001,7 +1093,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Validate;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -1047,7 +1139,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if ("function" === 'function' && _typeof(__webpack_require__(16)) === 'object' && __webpack_require__(16)) {
+		} else if ("function" === 'function' && _typeof(__webpack_require__(17)) === 'object' && __webpack_require__(17)) {
 			// register as 'classnames', consistent with npm package name
 			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
@@ -1058,7 +1150,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	})();
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1097,7 +1189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = format;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1106,15 +1198,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _request2 = _interopRequireDefault(_request);
 
-	var _requestInterceptor = __webpack_require__(15);
+	var _requestInterceptor = __webpack_require__(16);
 
 	var _requestInterceptor2 = _interopRequireDefault(_requestInterceptor);
 
-	var _param = __webpack_require__(14);
+	var _param = __webpack_require__(15);
 
 	var _param2 = _interopRequireDefault(_param);
 
-	var _format = __webpack_require__(12);
+	var _format = __webpack_require__(13);
 
 	var _format2 = _interopRequireDefault(_format);
 
@@ -1133,7 +1225,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1158,7 +1250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = param;
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1236,7 +1328,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestInterceptor;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -1244,7 +1336,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1322,7 +1414,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1426,7 +1518,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DateRangePicker;
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1555,98 +1647,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	exports.default = Dialog;
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _classnames = __webpack_require__(11);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Flex = _react2.default.createClass({
-	    displayName: 'Flex',
-
-	    propTypes: {
-	        flex: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.bool]),
-	        auto: _react2.default.PropTypes.string,
-	        width: _react2.default.PropTypes.string,
-	        height: _react2.default.PropTypes.string,
-	        row: _react2.default.PropTypes.bool,
-	        column: _react2.default.PropTypes.bool,
-	        wrap: _react2.default.PropTypes.bool,
-	        nowrap: _react2.default.PropTypes.bool,
-	        justifyStart: _react2.default.PropTypes.bool,
-	        justifyEnd: _react2.default.PropTypes.bool,
-	        justifyCenter: _react2.default.PropTypes.bool,
-	        justifyBetween: _react2.default.PropTypes.bool,
-	        justifyAround: _react2.default.PropTypes.bool,
-	        alignStart: _react2.default.PropTypes.bool,
-	        alignEnd: _react2.default.PropTypes.bool,
-	        alignCenter: _react2.default.PropTypes.bool,
-	        alignBaseline: _react2.default.PropTypes.bool,
-	        alignStretch: _react2.default.PropTypes.bool
-	    },
-	    render: function render() {
-	        var cn = (0, _classnames2.default)({
-	            'gm-flex': true,
-
-	            'gm-flex-auto': this.props.auto,
-	            'gm-flex-none': this.props.width || this.props.height,
-
-	            'gm-flex-row': this.props.row,
-	            'gm-flex-column': this.props.column,
-
-	            'gm-flex-wrap': this.props.wrap,
-	            'gm-flex-nowrap': this.props.nowrap,
-
-	            'gm-flex-justify-start': this.props.justifyStart,
-	            'gm-flex-justify-end': this.props.justifyEnd,
-	            'gm-flex-justify-center': this.props.justifyCenter,
-	            'gm-flex-justify-between': this.props.justifyBetween,
-	            'gm-flex-justify-around': this.props.justifyAround,
-
-	            'gm-flex-align-start': this.props.alignStart,
-	            'gm-flex-align-end': this.props.alignEnd,
-	            'gm-flex-align-center': this.props.alignCenter,
-	            'gm-flex-align-baseline': this.props.alignBaseline,
-	            'gm-flex-align-stretch': this.props.alignStretch
-	        }, this.props.className);
-
-	        var style = Object.assign({}, this.props.style);
-	        if (this.props.flex) {
-	            style.flex = typeof this.props.flex === 'boolean' ? 1 : this.props.flex;
-	        }
-	        if (this.props.height) {
-	            style.height = this.props.height;
-	        }
-	        if (this.props.width) {
-	            style.width = this.props.width;
-	        }
-
-	        return _react2.default.createElement(
-	            'div',
-	            _extends({}, this.props, { className: cn, style: style }),
-	            this.props.children
-	        );
-	    }
-	});
-
-	exports.default = Flex;
 
 /***/ },
 /* 21 */
@@ -1804,11 +1804,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _paginationComponent = __webpack_require__(8);
+	var _paginationComponent = __webpack_require__(9);
 
 	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
 
-	var _paginationTextComponent = __webpack_require__(9);
+	var _paginationTextComponent = __webpack_require__(10);
 
 	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
 
@@ -2308,9 +2308,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactBootstrap = __webpack_require__(4);
 
-	var _classnames = __webpack_require__(11);
+	var _classnames = __webpack_require__(12);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _flex = __webpack_require__(8);
+
+	var _flex2 = _interopRequireDefault(_flex);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2366,12 +2370,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { key: value.key,
 	                            className: "gm-navigation-cell gm-navigation-level1" + _this2.getCurrentClassName(value.key) },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'gm-navigation-title', onClick: _this2.handleClick.bind(_this2, value) },
-	                            value.title
+	                            _flex2.default,
+	                            { alignCenter: true, className: 'gm-navigation-title' },
+	                            _react2.default.createElement(
+	                                _flex2.default,
+	                                { flex: true, onClick: _this2.handleClick.bind(_this2, value) },
+	                                value.title
+	                            ),
+	                            value.sub && _react2.default.createElement('span', {
+	                                className: "fa gm-navigation-icon " + (value.open ? 'fa-angle-up' : ' fa-angle-down') })
 	                        ),
-	                        value.sub && _react2.default.createElement('span', {
-	                            className: "glyphicon gm-navigation-icon " + (value.open ? 'glyphicon-menu-up' : ' glyphicon-menu-down') }),
 	                        value.sub && _react2.default.createElement(
 	                            _reactBootstrap.Collapse,
 	                            { 'in': value.open },
@@ -2385,7 +2393,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                            className: "gm-navigation-cell gm-navigation-sub-cell" + _this2.getCurrentClassName(val.key) },
 	                                        _react2.default.createElement(
 	                                            'div',
-	                                            { className: 'gm-navigation-title', onClick: _this2.handleClick.bind(_this2, val) },
+	                                            { className: 'gm-navigation-title',
+	                                                onClick: _this2.handleClick.bind(_this2, val) },
 	                                            val.title
 	                                        )
 	                                    );
@@ -2775,7 +2784,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validate = __webpack_require__(10);
+	var _validate = __webpack_require__(11);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
@@ -2892,11 +2901,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _param = __webpack_require__(14);
+	var _param = __webpack_require__(15);
 
 	var _param2 = _interopRequireDefault(_param);
 
-	var _format = __webpack_require__(12);
+	var _format = __webpack_require__(13);
 
 	var _format2 = _interopRequireDefault(_format);
 
@@ -2904,7 +2913,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _request = __webpack_require__(15);
+	var _request = __webpack_require__(16);
 
 	var _request2 = _interopRequireDefault(_request);
 

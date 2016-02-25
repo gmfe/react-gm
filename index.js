@@ -20,7 +20,6 @@ import Flex from './lib/flex';
 import ImportLeadWrap from './import.lead';
 import './lib/css/react-gm.less';
 
-
 // tip
 var TipWrap = React.createClass({
     getInitialState: function () {
