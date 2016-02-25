@@ -37,8 +37,15 @@
 .gm-import-lead {
   width: 100%;
   height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .gm-import-lead table td input {
   width: 100%;
@@ -68,7 +75,10 @@
   background-color: #ffd3cf;
 }
 .gm-import-lead-content {
-  flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   overflow-y: auto;
 }
 .gm-import-lead-tip {
@@ -93,14 +103,12 @@
   font-weight: bold;
   line-height: 24px;
 }
-.gm-calendar-head-pre,
-.gm-calendar-head-next {
+.gm-calendar-head-pre, .gm-calendar-head-next {
   width: 24px;
   height: 24px;
   border-radius: 4px;
 }
-.gm-calendar-head-pre:hover,
-.gm-calendar-head-next:hover {
+.gm-calendar-head-pre:hover, .gm-calendar-head-next:hover {
   background-color: #f0f0f0;
   text-decoration: none;
 }
@@ -222,6 +230,7 @@
   clear: both;
 }
 .gm-nprogress {
+  -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
   height: 2px;
   background: #29d;
@@ -235,7 +244,8 @@
   height: 100%;
   box-shadow: 0 0 10px #29d, 0 0 5px #29d;
   opacity: 1.0;
-  transform: rotate(3deg) translate(0px, -4px);
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+          transform: rotate(3deg) translate(0px, -4px);
 }
 .gm-nprogress-container {
   position: fixed;
@@ -273,10 +283,10 @@
   color: #666;
   border-right: 1px solid #ddd;
   width: 100%;
-  height: 100%;
   background: #e9ebec;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-bottom: 40px;
 }
 .gm-navigation ul {
   padding: 0;
@@ -289,8 +299,7 @@
 .gm-navigation-cell {
   line-height: 40px;
 }
-.gm-navigation-cell.current .gm-navigation-title,
-.gm-navigation-cell .gm-navigation-title:hover {
+.gm-navigation-cell.current .gm-navigation-title, .gm-navigation-cell .gm-navigation-title:hover {
   background: #ced1d4;
 }
 .gm-navigation-title {
@@ -309,7 +318,7 @@
   margin-top: -0.5em;
   right: 10px;
 }
-.gm-layout {
+.gm-flex {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -317,113 +326,123 @@
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-align-content: stretch;
-  -ms-flex-line-pack: stretch;
-  align-content: stretch;
+      -ms-flex-line-pack: stretch;
+          align-content: stretch;
   -webkit-box-align: stretch;
   -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  box-sizing: border-box;
 }
-.gm-layout.gm-layout-row {
+.gm-flex-auto {
+  -webkit-box-flex: 1;
+  -webkit-flex: auto;
+      -ms-flex: auto;
+          flex: auto;
+}
+.gm-flex-none {
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none;
+}
+.gm-flex.gm-flex-row {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
-.gm-layout.gm-layout-column {
+.gm-flex.gm-flex-column {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
-.gm-layout.gm-layout-wrap {
-  -webkit-box-lines: multiple;
+.gm-flex.gm-flex-wrap {
   -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
 }
-.gm-layout.gm-layout-nowrap {
-  -webkit-box-lines: single;
+.gm-flex.gm-flex-nowrap {
   -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
 }
-.gm-layout.gm-layout-justify-start {
+.gm-flex.gm-flex-justify-start {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
-.gm-layout.gm-layout-justify-end {
+.gm-flex.gm-flex-justify-end {
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
-.gm-layout.gm-layout-justify-center {
+.gm-flex.gm-flex-justify-center {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
-.gm-layout.gm-layout-justify-between {
+.gm-flex.gm-flex-justify-between {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
-.gm-layout.gm-layout-justify-around {
+.gm-flex.gm-flex-justify-around {
   -webkit-justify-content: space-around;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
 }
-.gm-layout.gm-layout-align-start {
+.gm-flex.gm-flex-align-start {
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
+      -ms-flex-align: start;
+              -ms-grid-row-align: flex-start;
+          align-items: flex-start;
 }
-.gm-layout.gm-layout-align-end {
+.gm-flex.gm-flex-align-end {
   -webkit-box-align: end;
   -webkit-align-items: flex-end;
-  -ms-flex-align: end;
-  align-items: flex-end;
+      -ms-flex-align: end;
+              -ms-grid-row-align: flex-end;
+          align-items: flex-end;
 }
-.gm-layout.gm-layout-align-center {
+.gm-flex.gm-flex-align-center {
   -webkit-box-align: center;
   -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
+          align-items: center;
 }
-.gm-layout.gm-layout-align-baseline {
+.gm-flex.gm-flex-align-baseline {
   -webkit-box-align: baseline;
   -webkit-align-items: baseline;
-  -ms-flex-align: baseline;
-  align-items: baseline;
+      -ms-flex-align: baseline;
+              -ms-grid-row-align: baseline;
+          align-items: baseline;
 }
-.gm-layout.gm-layout-align-stretch {
+.gm-flex.gm-flex-align-stretch {
   -webkit-box-align: stretch;
   -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-}
-.gm-flex {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  flex: 1;
-  box-sizing: border-box;
+      -ms-flex-align: stretch;
+              -ms-grid-row-align: stretch;
+          align-items: stretch;
 }
 .gm-back-bg {
   background-color: #ECECEC !important;
@@ -509,20 +528,26 @@
 }
 /*animatre lite*/
 .animated {
-  animation-duration: 1s;
-  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
 }
 @-webkit-keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translate3d(100%, 0, 0);
+    -webkit-transform: translate3d(100%, 0, 0);
+            transform: translate3d(100%, 0, 0);
   }
   to {
     opacity: 1;
-    transform: none;
+    -webkit-transform: none;
+            transform: none;
   }
 }
 .fadeInRight {
-  animation-name: fadeInRight;
-  animation-duration: .5s;
+  -webkit-animation-name: fadeInRight;
+          animation-name: fadeInRight;
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
 }

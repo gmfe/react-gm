@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("react-bootstrap"), require("moment"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["react-bootstrap"], root["moment"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_6__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -60,15 +60,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gridComponent2 = _interopRequireDefault(_gridComponent);
 
-	var _paginationComponent = __webpack_require__(9);
+	var _paginationComponent = __webpack_require__(8);
 
 	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
 
-	var _paginationTextComponent = __webpack_require__(10);
+	var _paginationTextComponent = __webpack_require__(9);
 
 	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
 
-	var _droperComponent = __webpack_require__(8);
+	var _droperComponent = __webpack_require__(7);
 
 	var _droperComponent2 = _interopRequireDefault(_droperComponent);
 
@@ -76,15 +76,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _formerComponent2 = _interopRequireDefault(_formerComponent);
 
-	var _validate = __webpack_require__(15);
+	var _validate = __webpack_require__(14);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validateMixin = __webpack_require__(31);
+	var _validateMixin = __webpack_require__(30);
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
-	var _util = __webpack_require__(11);
+	var _util = __webpack_require__(10);
 
 	var _util2 = _interopRequireDefault(_util);
 
@@ -92,7 +92,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _importLeadComponent2 = _interopRequireDefault(_importLeadComponent);
 
-	var _storageComponent = __webpack_require__(27);
+	var _storageComponent = __webpack_require__(26);
 
 	var _storageComponent2 = _interopRequireDefault(_storageComponent);
 
@@ -108,11 +108,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(28);
+	var _tip = __webpack_require__(27);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(26);
+	var _nprogress = __webpack_require__(25);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
@@ -124,19 +124,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _navigation = __webpack_require__(25);
+	var _navigation = __webpack_require__(24);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
-
-	var _layout = __webpack_require__(24);
-
-	var _layout2 = _interopRequireDefault(_layout);
 
 	var _flex = __webpack_require__(19);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
-	__webpack_require__(32);
+	__webpack_require__(31);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -158,7 +154,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Hr: _hr2.default,
 	    Dialog: _dialog2.default,
 	    Navigation: _navigation2.default,
-	    Layout: _layout2.default,
 	    Flex: _flex2.default,
 	    Util: _util2.default
 	};
@@ -201,7 +196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(7);
+	var _moment = __webpack_require__(6);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -381,66 +376,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2016 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-	/* global define */
-
-	(function () {
-		'use strict';
-
-		var hasOwn = {}.hasOwnProperty;
-
-		function classNames () {
-			var classes = [];
-
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
-
-				var argType = typeof arg;
-
-				if (argType === 'string' || argType === 'number') {
-					classes.push(arg);
-				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
-				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
-						}
-					}
-				}
-			}
-
-			return classes.join(' ');
-		}
-
-		if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else if (true) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else {
-			window.classNames = classNames;
-		}
-	}());
-
+	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
 
 /***/ },
 /* 7 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
-
-/***/ },
-/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -677,7 +618,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Droper;
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -820,7 +761,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Pagination;
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -865,7 +806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = PaginationText;
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -874,23 +815,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _request = __webpack_require__(29);
+	var _request = __webpack_require__(28);
 
 	var _request2 = _interopRequireDefault(_request);
 
-	var _request3 = __webpack_require__(14);
+	var _request3 = __webpack_require__(13);
 
 	var _request4 = _interopRequireDefault(_request3);
 
-	var _param = __webpack_require__(13);
+	var _param = __webpack_require__(12);
 
 	var _param2 = _interopRequireDefault(_param);
 
-	var _format = __webpack_require__(12);
+	var _format = __webpack_require__(11);
 
 	var _format2 = _interopRequireDefault(_format);
 
-	var _visibilitycheck = __webpack_require__(30);
+	var _visibilitycheck = __webpack_require__(29);
 
 	var _visibilitycheck2 = _interopRequireDefault(_visibilitycheck);
 
@@ -905,7 +846,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -944,7 +885,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = format;
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -969,7 +910,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = param;
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1048,7 +989,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestInterceptor;
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1061,7 +1002,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _util = __webpack_require__(11);
+	var _util = __webpack_require__(10);
 
 	var _util2 = _interopRequireDefault(_util);
 
@@ -1243,6 +1184,60 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Validate;
 
 /***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1260,7 +1255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _moment = __webpack_require__(7);
+	var _moment = __webpack_require__(6);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -1338,7 +1333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _moment = __webpack_require__(7);
+	var _moment = __webpack_require__(6);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -1571,7 +1566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(6);
+	var _classnames = __webpack_require__(15);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1579,16 +1574,67 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Flex = _react2.default.createClass({
 	    displayName: 'Flex',
+
+	    propTypes: {
+	        flex: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.bool]),
+	        auto: _react2.default.PropTypes.string,
+	        width: _react2.default.PropTypes.string,
+	        height: _react2.default.PropTypes.string,
+	        row: _react2.default.PropTypes.bool,
+	        column: _react2.default.PropTypes.bool,
+	        wrap: _react2.default.PropTypes.bool,
+	        nowrap: _react2.default.PropTypes.bool,
+	        justifyStart: _react2.default.PropTypes.bool,
+	        justifyEnd: _react2.default.PropTypes.bool,
+	        justifyCenter: _react2.default.PropTypes.bool,
+	        justifyBetween: _react2.default.PropTypes.bool,
+	        justifyAround: _react2.default.PropTypes.bool,
+	        alignStart: _react2.default.PropTypes.bool,
+	        alignEnd: _react2.default.PropTypes.bool,
+	        alignCenter: _react2.default.PropTypes.bool,
+	        alignBaseline: _react2.default.PropTypes.bool,
+	        alignStretch: _react2.default.PropTypes.bool
+	    },
 	    render: function render() {
 	        var cn = (0, _classnames2.default)({
-	            'gm-flex': this.props.flex
-	        });
+	            'gm-flex': true,
 
-	        cn += ' ' + (this.props.className || '');
+	            'gm-flex-auto': this.props.auto,
+	            'gm-flex-none': this.props.width || this.props.height,
+
+	            'gm-flex-row': this.props.row,
+	            'gm-flex-column': this.props.column,
+
+	            'gm-flex-wrap': this.props.wrap,
+	            'gm-flex-nowrap': this.props.nowrap,
+
+	            'gm-flex-justify-start': this.props.justifyStart,
+	            'gm-flex-justify-end': this.props.justifyEnd,
+	            'gm-flex-justify-center': this.props.justifyCenter,
+	            'gm-flex-justify-between': this.props.justifyBetween,
+	            'gm-flex-justify-around': this.props.justifyAround,
+
+	            'gm-flex-align-start': this.props.alignStart,
+	            'gm-flex-align-end': this.props.alignEnd,
+	            'gm-flex-align-center': this.props.alignCenter,
+	            'gm-flex-align-baseline': this.props.alignBaseline,
+	            'gm-flex-align-stretch': this.props.alignStretch
+	        }, this.props.className);
+
+	        var style = Object.assign({}, this.props.style);
+	        if (this.props.flex) {
+	            style.flex = typeof this.props.flex === 'boolean' ? 1 : this.props.flex;
+	        }
+	        if (this.props.height) {
+	            style.height = this.props.height;
+	        }
+	        if (this.props.width) {
+	            style.width = this.props.width;
+	        }
 
 	        return _react2.default.createElement(
 	            'div',
-	            _extends({}, this.props, { className: cn }),
+	            _extends({}, this.props, { className: cn, style: style }),
 	            this.props.children
 	        );
 	    }
@@ -1752,11 +1798,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _paginationComponent = __webpack_require__(9);
+	var _paginationComponent = __webpack_require__(8);
 
 	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
 
-	var _paginationTextComponent = __webpack_require__(10);
+	var _paginationTextComponent = __webpack_require__(9);
 
 	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
 
@@ -2053,7 +2099,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _droper = __webpack_require__(8);
+	var _droper = __webpack_require__(7);
 
 	var _droper2 = _interopRequireDefault(_droper);
 
@@ -2246,65 +2292,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _classnames = __webpack_require__(6);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Layout = _react2.default.createClass({
-	    displayName: 'Layout',
-	    render: function render() {
-	        var cn = (0, _classnames2.default)({
-	            'gm-layout': true,
-
-	            'gm-layout-row': this.props.row,
-	            'gm-layout-column': this.props.column,
-
-	            'gm-layout-wrap': this.props.wrap,
-	            'gm-layout-nowrap': this.props.nowrap,
-
-	            'gm-layout-justify-start': this.props.justifyStart,
-	            'gm-layout-justify-end': this.props.justifyEnd,
-	            'gm-layout-justify-center': this.props.justifyCenter,
-	            'gm-layout-justify-between': this.props.justifyBetween,
-	            'gm-layout-justify-around': this.props.justifyAround,
-
-	            'gm-layout-align-start': this.props.alignStart,
-	            'gm-layout-align-end': this.props.alignEnd,
-	            'gm-layout-align-center': this.props.alignCenter,
-	            'gm-layout-align-baseline': this.props.alignBaseline,
-	            'gm-layout-align-stretch': this.props.alignStretch
-	        });
-
-	        cn += ' ' + (this.props.className || '');
-
-	        return _react2.default.createElement(
-	            'div',
-	            _extends({}, this.props, { className: cn }),
-	            this.props.children
-	        );
-	    }
-	});
-
-	exports.default = Layout;
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -2315,7 +2302,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactBootstrap = __webpack_require__(4);
 
-	var _classnames = __webpack_require__(6);
+	var _classnames = __webpack_require__(15);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -2430,7 +2417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Navigation;
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2518,7 +2505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2601,7 +2588,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2761,7 +2748,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2770,11 +2757,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _param = __webpack_require__(13);
+	var _param = __webpack_require__(12);
 
 	var _param2 = _interopRequireDefault(_param);
 
-	var _format = __webpack_require__(12);
+	var _format = __webpack_require__(11);
 
 	var _format2 = _interopRequireDefault(_format);
 
@@ -2782,7 +2769,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _request = __webpack_require__(14);
+	var _request = __webpack_require__(13);
 
 	var _request2 = _interopRequireDefault(_request);
 
@@ -2896,7 +2883,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2921,7 +2908,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2942,7 +2929,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validate = __webpack_require__(15);
+	var _validate = __webpack_require__(14);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
@@ -3050,7 +3037,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

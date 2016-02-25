@@ -1,7 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var AssetsPlugin = require('assets-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
+var precss = require('precss');
 
 module.exports = {
     devtool: 'eval',
@@ -37,7 +38,10 @@ module.exports = {
             loader: 'babel?presets[]=react,presets[]=es2015',
         }, {
             test: /\.(css|less)$/,
-            loader: 'style!css!less'
+            loader: 'style!css!postcss!less'
         }]
+    },
+    postcss: function () {
+        return [autoprefixer, precss];
     }
 };

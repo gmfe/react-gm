@@ -16,7 +16,6 @@ import Tip from './lib/tip.component';
 import NProgress from './lib/nprogress.component';
 import Dialog from './lib/dialog.component';
 import Navigation from './lib/navigation.component';
-import Layout from './lib/layout';
 import Flex from './lib/flex';
 import ImportLeadWrap from './import.lead';
 import './lib/css/react-gm.less';
@@ -459,15 +458,17 @@ var NavigationWrap = React.createClass({
 var FlexWrap = React.createClass({
     render(){
         return (
-            <Layout wrap>
-                <Flex style={{width: 200}}>1</Flex>
-                <Flex flex>1</Flex>
-                <Flex flex>1</Flex>
-                <Flex flex>1</Flex>
-                <Flex flex>1</Flex>
-                <Flex flex>1</Flex>
-                <Flex flex>1</Flex>
-            </Layout>
+            <Flex column height="200px">
+                <Flex>top</Flex>
+                <Flex flex>
+                    <Flex>
+                        <Flex style={{background: 'red'}}>
+                            <div style={{background: 'yellow'}}>left1</div>
+                        </Flex>
+                    </Flex>
+                    <Flex flex>content</Flex>
+                </Flex>
+            </Flex>
         );
     }
 });
@@ -480,61 +481,60 @@ const App = React.createClass({
     },
     render(){
         return (
-            <Layout column className="gm-app">
+            <Flex column height="100%" className="gm-app">
                 <Flex className="gm-app-top gm-whiteframe1">
                     <div className="gm-app-top-navigation-btn" onClick={this.handleToggleLeft}>
                         <button className="btn btn-link"><span className="glyphicon glyphicon-menu-hamburger"></span>
                         </button>
                     </div>
-                    <div className="pull-right">React-GM</div>
+                    <Flex flex></Flex>
+                    <div>React-GM</div>
                 </Flex>
-                <Flex flex className="gm-app-center">
-                    <Layout row alignStretch className="gm-app">
-                        <Flex className={"gm-app-left " + (this.state.left && 'current')}>
-                            <NavigationWrap></NavigationWrap>
-                        </Flex>
-                        <Flex flex className="gm-app-content gm-padding10">
-                            <h1>Flex</h1>
-                            <FlexWrap></FlexWrap>
-                            <hr/>
-                            <h1>Tip</h1>
-                            <TipWrap></TipWrap>
-                            <hr/>
-                            <h1>Dialog</h1>
-                            <DialogWrap></DialogWrap>
-                            <hr/>
-                            <h1>NProgress</h1>
-                            <NProgressWrap></NProgressWrap>
-                            <hr/>
-                            <h1>Grid</h1>
-                            <GridWrap></GridWrap>
-                            <hr/>
-                            <h1>Droper</h1>
-                            <DroperWrap></DroperWrap>
-                            <hr/>
-                            <h1>Former</h1>
-                            <FormerDom></FormerDom>
-                            <hr/>
-                            <h1>Calendar</h1>
-                            <CalendarWrap></CalendarWrap>
-                            <hr/>
-                            <h1>DatePicker</h1>
-                            <DatePickerWrap></DatePickerWrap>
-                            <h1>Daterangepicker</h1>
-                            <DaterangepickerWrap></DaterangepickerWrap>
-                            <hr/>
-                            <h1>Dialog</h1>
-                            <DialogWrap></DialogWrap>
-                            <hr/>
-                            <h1>ImportLead</h1>
-                            <ImportLeadWrap></ImportLeadWrap>
-                            <div className="gm-padding10">
-                                <p className="text-muted">React-GM组件库</p>
-                            </div>
-                        </Flex>
-                    </Layout>
+                <Flex flex row>
+                    <Flex width="200px" className={"gm-app-left " + (this.state.left && 'current')}>
+                        <NavigationWrap></NavigationWrap>
+                    </Flex>
+                    <Flex column flex className="gm-app-content gm-padding10">
+                        <h1>Flex</h1>
+                        <FlexWrap></FlexWrap>
+                        <hr/>
+                        <h1>Tip</h1>
+                        <TipWrap></TipWrap>
+                        <hr/>
+                        <h1>Dialog</h1>
+                        <DialogWrap></DialogWrap>
+                        <hr/>
+                        <h1>NProgress</h1>
+                        <NProgressWrap></NProgressWrap>
+                        <hr/>
+                        <h1>Grid</h1>
+                        <GridWrap></GridWrap>
+                        <hr/>
+                        <h1>Droper</h1>
+                        <DroperWrap></DroperWrap>
+                        <hr/>
+                        <h1>Former</h1>
+                        <FormerDom></FormerDom>
+                        <hr/>
+                        <h1>Calendar</h1>
+                        <CalendarWrap></CalendarWrap>
+                        <hr/>
+                        <h1>DatePicker</h1>
+                        <DatePickerWrap></DatePickerWrap>
+                        <h1>Daterangepicker</h1>
+                        <DaterangepickerWrap></DaterangepickerWrap>
+                        <hr/>
+                        <h1>Dialog</h1>
+                        <DialogWrap></DialogWrap>
+                        <hr/>
+                        <h1>ImportLead</h1>
+                        <ImportLeadWrap></ImportLeadWrap>
+                        <div className="gm-padding10">
+                            <p className="text-muted">React-GM组件库</p>
+                        </div>
+                    </Flex>
                 </Flex>
-            </Layout>
+            </Flex>
         );
     },
     handleToggleLeft(){
