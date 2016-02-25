@@ -6,7 +6,7 @@ import Droper from './lib/droper.component.js';
 import Former from './lib/former.component.js';
 import ValidateMixin from './lib/validate.mixin.js';
 import Validate from './lib/validate.js';
-import Util from './lib/util.js';
+import Util from 'gm-util';
 import Storage from './lib/storage.component.js';
 import {Popover} from 'react-bootstrap';
 import Calendar from './lib/calendar.component.js';
