@@ -306,6 +306,9 @@
   padding: 0 10px;
   cursor: pointer;
 }
+.gm-navigation-title a, .gm-navigation-title a:hover {
+  text-decoration: none;
+}
 .gm-navigation-level1 {
   position: relative;
 }
