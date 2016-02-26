@@ -2363,37 +2363,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	            { className: (0, _classnames2.default)("gm-navigation", this.props.className) },
 	            _react2.default.createElement(
 	                'ul',
-	                null,
+	                { className: 'gm-navigation-level1' },
 	                _underscore2.default.map(data, function (value) {
 	                    return _react2.default.createElement(
 	                        'li',
-	                        { key: value.key,
-	                            className: "gm-navigation-cell gm-navigation-level1" + _this2.getCurrentClassName(value.key) },
+	                        { key: value.key },
 	                        _react2.default.createElement(
 	                            _flex2.default,
-	                            { alignCenter: true, className: 'gm-navigation-title' },
+	                            { alignCenter: true, className: "gm-navigation-title" + _this2.getCurrentClassName(value.key) },
 	                            _react2.default.createElement(
 	                                _flex2.default,
 	                                { flex: true, onClick: _this2.handleClick.bind(_this2, value) },
 	                                value.title
 	                            ),
 	                            value.sub && _react2.default.createElement('span', {
-	                                className: "fa gm-navigation-icon " + (value.open ? 'fa-angle-up' : ' fa-angle-down') })
+	                                className: "fa " + (value.open ? 'fa-angle-up' : ' fa-angle-down') })
 	                        ),
 	                        value.sub && _react2.default.createElement(
 	                            _reactBootstrap.Collapse,
 	                            { 'in': value.open },
 	                            _react2.default.createElement(
 	                                'ul',
-	                                { className: 'gm-navigation-cell gm-navigation-level2' },
+	                                { className: 'gm-navigation-level2' },
 	                                _underscore2.default.map(value.sub, function (val) {
 	                                    return _react2.default.createElement(
 	                                        'li',
-	                                        { key: val.key,
-	                                            className: "gm-navigation-cell gm-navigation-sub-cell" + _this2.getCurrentClassName(val.key) },
+	                                        { key: val.key },
 	                                        _react2.default.createElement(
 	                                            'div',
-	                                            { className: 'gm-navigation-title',
+	                                            {
+	                                                className: "gm-navigation-title" + _this2.getCurrentClassName(val.key),
 	                                                onClick: _this2.handleClick.bind(_this2, val) },
 	                                            val.title
 	                                        )
