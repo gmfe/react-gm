@@ -2001,6 +2001,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'div',
 	            { className: 'gm-grid' },
 	            _react2.default.createElement(
+	                'div',
+	                { className: 'gm-grid-top gm-marginBottom5' },
+	                data.enableSelect ? _react2.default.createElement(
+	                    'div',
+	                    { className: 'gm-grid-batch' },
+	                    batchButtons
+	                ) : undefined
+	            ),
+	            _react2.default.createElement(
 	                'table',
 	                { className: 'table table-striped table-hover table-condensed table-bordered' },
 	                _react2.default.createElement(GridHead, { data: data, onSelect: t.onSelectAll }),
@@ -2013,11 +2022,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'gm-grid-foot clearfix' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'pull-left gm-grid-batch' },
-	                    data.enableSelect ? batchButtons : undefined
-	                ),
+	                _react2.default.createElement('div', { className: 'pull-left gm-grid-batch' }),
 	                data.pagination ? pagination : undefined
 	            )
 	        );

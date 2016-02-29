@@ -338,6 +338,12 @@
           align-items: stretch;
   box-sizing: border-box;
 }
+.gm-flex-flex {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
 .gm-flex-auto {
   -webkit-box-flex: 1;
   -webkit-flex: auto;
@@ -467,6 +473,9 @@ html, body {
   height: 15px;
   width: 15px;
 }
+.gm-padding0 {
+  padding: 0;
+}
 .gm-padding5 {
   padding: 5px;
 }
@@ -476,6 +485,51 @@ html, body {
 .gm-padding15 {
   padding: 15px;
 }
+.gm-paddingTop5 {
+  padding-top: 5px;
+}
+.gm-paddingTop10 {
+  padding-top: 10px;
+}
+.gm-paddingTop15 {
+  padding-top: 15px;
+}
+.gm-paddingBottom5 {
+  padding-bottom: 5px;
+}
+.gm-paddingBottom10 {
+  padding-bottom: 10px;
+}
+.gm-paddingBottom15 {
+  padding-bottom: 15px;
+}
+.gm-paddingLR5 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.gm-paddingLR10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.gm-paddingLR15 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.gm-paddingTB5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.gm-paddingTB10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.gm-paddingTB15 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.gm-margin0 {
+  margin: 0;
+}
 .gm-margin5 {
   margin: 5px;
 }
@@ -484,6 +538,48 @@ html, body {
 }
 .gm-margin15 {
   margin: 15px;
+}
+.gm-marginTop5 {
+  margin-top: 5px;
+}
+.gm-marginTop10 {
+  margin-top: 10px;
+}
+.gm-marginTop15 {
+  margin-top: 15px;
+}
+.gm-marginBottom5 {
+  margin-bottom: 5px;
+}
+.gm-marginBottom10 {
+  margin-bottom: 10px;
+}
+.gm-marginBottom15 {
+  margin-bottom: 15px;
+}
+.gm-marginTB5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.gm-marginTB10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.gm-marginTB15 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.gm-marginLR5 {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.gm-marginLR10 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.gm-marginLR15 {
+  margin-left: 15px;
+  margin-right: 15px;
 }
 .gm-border {
   border: 1px solid #ddd;
@@ -499,6 +595,15 @@ html, body {
 }
 .gm-borderLeft {
   border-left: 1px solid #ddd;
+}
+.gm-block {
+  display: block;
+}
+.gm-inline-block {
+  display: inline-block;
+}
+.gm-inline {
+  display: inline;
 }
 .modal-backdrop.in {
   opacity: .2;
