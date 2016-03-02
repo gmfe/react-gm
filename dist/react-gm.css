@@ -444,6 +444,55 @@
               -ms-grid-row-align: stretch;
           align-items: stretch;
 }
+.gm-time-span {
+  width: 296px;
+  overflow: hidden;
+  display: inline-block;
+  border: 1px solid #aeaeae;
+  border-radius: 4px;
+  background: white;
+  position: relative;
+}
+.gm-time-span-cell {
+  color: black;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  height: 25px;
+  width: 45px;
+  line-height: 25px;
+  border-radius: 4px;
+  margin: 2px;
+}
+.gm-time-span-cell:hover {
+  background-color: #f0f0f0;
+}
+.gm-time-span-cell.active {
+  background-color: #337ab7;
+  color: white;
+}
+.gm-time-span-picker {
+  display: inline-block;
+}
+.gm-time-span-picker-popover {
+  max-width: 320px;
+}
+.gm-time-span-picker-popover.popover {
+  padding: 0;
+}
+.gm-time-span-picker-popover.bottom {
+  margin-top: 5px;
+}
+.gm-time-span-picker-popover.bottom .arrow {
+  top: -7px;
+}
+.gm-time-span-picker-popover .popover-content {
+  padding: 0;
+}
+.gm-time-span-picker-popover .gm-time-span {
+  border: none;
+  border-radius: 6px;
+}
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
   font-weight: 400;

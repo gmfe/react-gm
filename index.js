@@ -18,7 +18,11 @@ import Dialog from './lib/dialog.component';
 import Navigation from './lib/navigation.component';
 import Flex from './lib/flex';
 import ImportLeadWrap from './import.lead';
+import TimeSpan from './lib/timespan.component';
+import TimeSpanPicker from './lib/timespanpicker.component';
+import moment from 'moment';
 import './lib/css/react-gm.less';
+
 
 // tip
 var TipWrap = React.createClass({
@@ -41,12 +45,13 @@ var TipWrap = React.createClass({
     },
     handleClick: function () {
         Tip.success({
-            text: '需要用户自行关闭的',
+            children: '需要用户自行关闭的',
             time: 0
         });
         Tip.info({
-            text: '提示啦,提示啦'
+            children: '提示啦,提示啦'
         });
+        Tip.info('提示啦，提示啦');
     }
 });
 
@@ -307,6 +312,7 @@ var DatePickerWrap = React.createClass({
         //);
     },
     handleChange: function (date) {
+        console.log(date);
         this.setState({
             date: date
         });
@@ -472,6 +478,28 @@ var FlexWrap = React.createClass({
     }
 });
 
+var TimeSpanPickerWrap = React.createClass({
+    handleChange(date){
+        console.log(date);
+    },
+    render(){
+        return (
+            <div>
+                <div>
+                    <TimeSpan min={null} max={moment().endOf('day').toDate()}
+                              selected={moment().startOf('day').toDate()} onChange={this.handleChange}
+                              onSelect={this.handleChange}></TimeSpan>
+                </div>
+                <div>
+                    <TimeSpanPicker min={moment().startOf('day').toDate()} max={moment().endOf('day').toDate()}
+                                    date={moment().startOf('day').toDate()} onChange={this.handleChange}
+                                    onChange={this.handleChange}></TimeSpanPicker>
+                </div>
+            </div>
+        );
+    }
+});
+
 const App = React.createClass({
     getInitialState(){
         return {
@@ -494,6 +522,8 @@ const App = React.createClass({
                         <NavigationWrap></NavigationWrap>
                     </Flex>
                     <Flex column flex className="gm-app-content gm-padding10">
+                        <h1>TimeSpanPicker</h1>
+                        <TimeSpanPickerWrap></TimeSpanPickerWrap>
                         <h1>Flex</h1>
                         <FlexWrap></FlexWrap>
                         <hr/>
