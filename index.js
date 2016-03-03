@@ -271,7 +271,7 @@ window.Storage = Storage;
 var CalendarWrap = React.createClass({
     getInitialState: function () {
         return {
-            selected: new Date()
+            selected: null
         };
     },
     render: function () {
@@ -286,13 +286,21 @@ var CalendarWrap = React.createClass({
             selected: date
         });
         console.log(arguments);
+    },
+    componentDidMount(){
+        //setTimeout(() => {
+        //    this.setState({
+        //        selected: undefined
+        //    });
+        //}, 5000);
     }
 });
 
 var DatePickerWrap = React.createClass({
     getInitialState: function () {
         return {
-            date: new Date()
+            //date: new Date()
+            date: null
         };
     },
     render: function () {
@@ -522,6 +530,14 @@ const App = React.createClass({
                         <NavigationWrap></NavigationWrap>
                     </Flex>
                     <Flex column flex className="gm-app-content gm-padding10">
+                        <h1>Calendar</h1>
+                        <CalendarWrap></CalendarWrap>
+                        <hr/>
+                        <h1>DatePicker</h1>
+                        <DatePickerWrap></DatePickerWrap>
+                        <h1>Daterangepicker</h1>
+                        <DaterangepickerWrap></DaterangepickerWrap>
+                        <hr/>
                         <h1>TimeSpanPicker</h1>
                         <TimeSpanPickerWrap></TimeSpanPickerWrap>
                         <h1>Flex</h1>
@@ -544,14 +560,6 @@ const App = React.createClass({
                         <hr/>
                         <h1>Former</h1>
                         <FormerDom></FormerDom>
-                        <hr/>
-                        <h1>Calendar</h1>
-                        <CalendarWrap></CalendarWrap>
-                        <hr/>
-                        <h1>DatePicker</h1>
-                        <DatePickerWrap></DatePickerWrap>
-                        <h1>Daterangepicker</h1>
-                        <DaterangepickerWrap></DaterangepickerWrap>
                         <hr/>
                         <h1>Dialog</h1>
                         <DialogWrap></DialogWrap>

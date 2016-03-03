@@ -257,14 +257,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            selected: new Date(),
 	            onSelect: function onSelect() {}
 	        };
 	    },
 	    getInitialState: function getInitialState() {
+	        // 规避  moment(undefined) 有效  moment(null) 无效的场景，统一成null 处理
 	        return {
-	            selected: this.props.selected, // 调用方的时间
-	            moment: (0, _moment2.default)(this.props.selected), // 日历内的时间
+	            selected: this.props.selected ? this.props.selected : null, // 调用方的时间
+	            moment: this.props.selected ? (0, _moment2.default)(this.props.selected) : (0, _moment2.default)(), // 日历内的时间
 	            isSelectMonth: false,
 	            weekDays: ['日', '一', '二', '三', '四', '五', '六']
 	        };
@@ -954,7 +954,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            "显示第 ",
 	            data.offset + 1,
 	            " 到 ",
-	            Math.min(data.count, data.offset + data.limit - 1),
+	            Math.min(data.count, data.offset + data.limit),
 	            " 行，一共 ",
 	            data.count,
 	            " 行记录"
@@ -1472,7 +1472,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    displayName: 'DatePicker',
 
 	    propTypes: {
-	        date: _react2.default.PropTypes.object.isRequired,
+	        date: _react2.default.PropTypes.object,
 	        onChange: _react2.default.PropTypes.func.isRequired,
 	        inputClassName: _react2.default.PropTypes.string,
 	        target: _react2.default.PropTypes.func
@@ -1508,7 +1508,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _reactBootstrap.OverlayTrigger,
 	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopover() },
 	                this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, ref: 'target',
-	                    value: (0, _moment2.default)(this.props.date).format('YYYY-MM-DD'), onChange: this.handleChange })
+	                    value: this.props.date && (0, _moment2.default)(this.props.date).format('YYYY-MM-DD'), onChange: this.handleChange })
 	            )
 	        );
 	    }
