@@ -1508,7 +1508,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _reactBootstrap.OverlayTrigger,
 	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopover() },
 	                this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, ref: 'target',
-	                    value: this.props.date && (0, _moment2.default)(this.props.date).format('YYYY-MM-DD'), onChange: this.handleChange })
+	                    value: this.props.date && (0, _moment2.default)(this.props.date).format('YYYY-MM-DD'),
+	                    onChange: this.handleChange })
 	            )
 	        );
 	    }
@@ -3146,7 +3147,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return promise.then(function (res) {
 	        if (res.ok) {
-	            return res.json();
+	            var ct = res.headers.get('content-type');
+	            // 后台可能会有登录拦截，返回登录页面
+	            if (ct.indexOf('text/html') > -1) {
+	                return res.text().then(function (html) {
+	                    if (html.indexOf('title>登陆</title') > -1) {
+	                        return Promise.reject('请登录!');
+	                    }
+	                    return Promise.reject('未知错误！！！！！');
+	                });
+	            } else {
+	                return res.json();
+	            }
 	        }
 	        return Promise.reject((0, _format2.default)('服务器错误 {status} {statusText}', res));
 	    }).then(function (json) {

@@ -240,7 +240,7 @@ var interceptorId = Util.RequestInterceptor.add({
         console.log('request Interceptor', config);
 
         // 修改相关的信息
-        config.url = 'asdf';
+        config.url = '/station/';
         config.data.name = '111';
 
         return config;
@@ -255,7 +255,7 @@ var interceptorId = Util.RequestInterceptor.add({
     }
 });
 
-Util.Request('xxxxx').data({name: 'haha'}).get().then(function (data) {
+Util.Request('/station/').data({name: 'haha'}).get().then(function (data) {
     console.log(data);
 }, function (reason) {
     console.log(reason);

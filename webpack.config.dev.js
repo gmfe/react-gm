@@ -42,5 +42,13 @@ module.exports = {
     },
     postcss: function () {
         return [autoprefixer, precss];
+    },
+    devServer: {
+        proxy: {
+            "/station/*": {
+                "target": "http://localhost:8570",
+                "secure": false
+            }
+        }
     }
 };

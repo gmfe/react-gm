@@ -1,6 +1,6 @@
 {
   "name": "react-gm",
-  "version": "1.7.18",
+  "version": "1.7.19",
   "description": "",
   "main": "lib/index.js",
   "style": "lib/react-gm.css",
@@ -46,7 +46,7 @@
     "file-loader": "^0.8.4",
     "font-awesome": "^4.5.0",
     "gm-iconfont": "^1.0.1",
-    "gm-util": "^1.0.2",
+    "gm-util": "^1.0.3",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
     "gulp-sequence": "^0.4.1",
