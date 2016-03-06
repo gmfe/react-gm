@@ -306,7 +306,7 @@ var DatePickerWrap = React.createClass({
     render: function () {
         return (
             <div>
-                <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName=""
+                <DatePicker date={this.state.date} placeholder="adfasdf" onChange={this.handleChange} inputClassName=""
                             target={() => this.refs.target}/>
                 <span>inline-block</span>
             </div>

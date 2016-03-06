@@ -1497,8 +1497,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        this.props.onChange(date);
 	    },
-	    handleChange: function handleChange() {
-	        // empty
+	    handleChange: function handleChange(event) {
+	        // 只允许合法的指传递出去
+	        if (/\d\d\d\d-\d\d-\d\d/.test(event.target.value)) {
+	            this.props.onChange((0, _moment2.default)(event.target.value).toDate());
+	        } else {
+	            this.props.onChange(null);
+	        }
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -1507,7 +1512,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _react2.default.createElement(
 	                _reactBootstrap.OverlayTrigger,
 	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopover() },
-	                this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, ref: 'target',
+	                this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, placeholder: this.props.placeholder, ref: 'target',
 	                    value: this.props.date && (0, _moment2.default)(this.props.date).format('YYYY-MM-DD'),
 	                    onChange: this.handleChange })
 	            )
