@@ -1512,7 +1512,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _react2.default.createElement(
 	                _reactBootstrap.OverlayTrigger,
 	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopover() },
-	                this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, placeholder: this.props.placeholder, ref: 'target',
+	                this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, placeholder: this.props.placeholder,
+	                    ref: 'target',
 	                    value: this.props.date && (0, _moment2.default)(this.props.date).format('YYYY-MM-DD'),
 	                    onChange: this.handleChange })
 	            )
@@ -2228,6 +2229,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var ImportLead = _react2.default.createClass({
 	    displayName: 'ImportLead',
 
+	    propTypes: {
+	        data: _react2.default.PropTypes.object,
+	        tips: _react2.default.PropTypes.array,
+	        onEdit: _react2.default.PropTypes.func,
+	        fileTempUrl: _react2.default.PropTypes.string,
+	        disableEdit: _react2.default.PropTypes.bool,
+	        unLine: _react2.default.PropTypes.bool
+	    },
 	    getInitialState: function getInitialState() {
 	        return {
 	            selectedFile: null
@@ -2263,7 +2272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return tip ? _react2.default.createElement(
 	                    'td',
 	                    { key: i, className: tip.modifyed ? "gm-bg-info" : "gm-bg-invalid" },
-	                    _react2.default.createElement('input', { type: 'text', value: elist[col.field],
+	                    _react2.default.createElement('input', { disabled: t.props.disableEdit, type: 'text', value: elist[col.field],
 	                        onChange: t.handleEdit.bind(t, index, col.field, tip._index) }),
 	                    _react2.default.createElement(
 	                        'small',
@@ -2332,7 +2341,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        filename
 	                    )
 	                ),
-	                _react2.default.createElement(
+	                !t.props.unLine && _react2.default.createElement(
 	                    'div',
 	                    { className: 'gm-import-line clearfix' },
 	                    lineMap.map(function (v, i) {

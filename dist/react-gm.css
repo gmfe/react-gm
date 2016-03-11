@@ -54,6 +54,7 @@
 }
 .gm-import-lead table td {
   padding: 0 !important;
+  position: relative;
 }
 .gm-import-line {
   border: 1px solid #ddd;
@@ -84,6 +85,7 @@
 .gm-import-lead-tip {
   display: none;
   position: absolute;
+  z-index: 2;
 }
 .gm-import-lead table td:hover .gm-import-lead-tip {
   display: block;
@@ -497,6 +499,12 @@ html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
+}
+.gm-text-red {
+  color: red;
+}
+.gm-text-desc {
+  color: #777;
 }
 .gm-back-bg {
   background-color: #ECECEC !important;
