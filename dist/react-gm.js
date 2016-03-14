@@ -2155,7 +2155,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.props.data.selectAll(bool);
 	    },
 	    onToPage: function onToPage(page, index) {
-	        this.state.data.toPage(page, index);
+	        this.props.data.toPage(page, index);
 	    }
 	});
 
