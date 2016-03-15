@@ -18,6 +18,9 @@ import Dialog from './lib/dialog.component';
 import Navigation from './lib/navigation.component';
 import Flex from './lib/flex';
 import ImportLeadWrap from './import.lead';
+import TimeSpan from './lib/timespan.component';
+import TimeSpanPicker from './lib/timespanpicker.component';
+import moment from 'moment';
 import './lib/css/react-gm.less';
 
 
@@ -42,12 +45,13 @@ var TipWrap = React.createClass({
     },
     handleClick: function () {
         Tip.success({
-            text: '需要用户自行关闭的',
+            children: '需要用户自行关闭的',
             time: 0
         });
         Tip.info({
-            text: '提示啦,提示啦'
+            children: '提示啦,提示啦'
         });
+        Tip.info('提示啦，提示啦');
     }
 });
 
@@ -236,7 +240,7 @@ var interceptorId = Util.RequestInterceptor.add({
         console.log('request Interceptor', config);
 
         // 修改相关的信息
-        config.url = 'asdf';
+        config.url = '/station/';
         config.data.name = '111';
 
         return config;
@@ -251,7 +255,7 @@ var interceptorId = Util.RequestInterceptor.add({
     }
 });
 
-Util.Request('xxxxx').data({name: 'haha'}).get().then(function (data) {
+Util.Request('/station/').data({name: 'haha'}).get().then(function (data) {
     console.log(data);
 }, function (reason) {
     console.log(reason);
@@ -267,7 +271,7 @@ window.Storage = Storage;
 var CalendarWrap = React.createClass({
     getInitialState: function () {
         return {
-            selected: new Date()
+            selected: null
         };
     },
     render: function () {
@@ -282,19 +286,27 @@ var CalendarWrap = React.createClass({
             selected: date
         });
         console.log(arguments);
+    },
+    componentDidMount(){
+        //setTimeout(() => {
+        //    this.setState({
+        //        selected: undefined
+        //    });
+        //}, 5000);
     }
 });
 
 var DatePickerWrap = React.createClass({
     getInitialState: function () {
         return {
-            date: new Date()
+            //date: new Date()
+            date: null
         };
     },
     render: function () {
         return (
             <div>
-                <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName=""
+                <DatePicker date={this.state.date} placeholder="adfasdf" onChange={this.handleChange} inputClassName=""
                             target={() => this.refs.target}/>
                 <span>inline-block</span>
             </div>
@@ -308,6 +320,7 @@ var DatePickerWrap = React.createClass({
         //);
     },
     handleChange: function (date) {
+        console.log(date);
         this.setState({
             date: date
         });
@@ -473,6 +486,28 @@ var FlexWrap = React.createClass({
     }
 });
 
+var TimeSpanPickerWrap = React.createClass({
+    handleChange(date){
+        console.log(date);
+    },
+    render(){
+        return (
+            <div>
+                <div>
+                    <TimeSpan min={null} max={moment().endOf('day').toDate()}
+                              selected={moment().startOf('day').toDate()} onChange={this.handleChange}
+                              onSelect={this.handleChange}></TimeSpan>
+                </div>
+                <div>
+                    <TimeSpanPicker min={moment().startOf('day').toDate()} max={moment().endOf('day').toDate()}
+                                    date={moment().startOf('day').toDate()} onChange={this.handleChange}
+                                    onChange={this.handleChange}></TimeSpanPicker>
+                </div>
+            </div>
+        );
+    }
+});
+
 const App = React.createClass({
     getInitialState(){
         return {
@@ -495,6 +530,16 @@ const App = React.createClass({
                         <NavigationWrap></NavigationWrap>
                     </Flex>
                     <Flex column flex className="gm-app-content gm-padding10">
+                        <h1>Calendar</h1>
+                        <CalendarWrap></CalendarWrap>
+                        <hr/>
+                        <h1>DatePicker</h1>
+                        <DatePickerWrap></DatePickerWrap>
+                        <h1>Daterangepicker</h1>
+                        <DaterangepickerWrap></DaterangepickerWrap>
+                        <hr/>
+                        <h1>TimeSpanPicker</h1>
+                        <TimeSpanPickerWrap></TimeSpanPickerWrap>
                         <h1>Flex</h1>
                         <FlexWrap></FlexWrap>
                         <hr/>
@@ -515,14 +560,6 @@ const App = React.createClass({
                         <hr/>
                         <h1>Former</h1>
                         <FormerDom></FormerDom>
-                        <hr/>
-                        <h1>Calendar</h1>
-                        <CalendarWrap></CalendarWrap>
-                        <hr/>
-                        <h1>DatePicker</h1>
-                        <DatePickerWrap></DatePickerWrap>
-                        <h1>Daterangepicker</h1>
-                        <DaterangepickerWrap></DaterangepickerWrap>
                         <hr/>
                         <h1>Dialog</h1>
                         <DialogWrap></DialogWrap>

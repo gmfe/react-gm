@@ -234,9 +234,10 @@ var ImportLeadWrap = React.createClass({
         var data = this.state.data;
         var tips = this.state.tips;
 
+        // 外层容器需提供高度。 ImportLead 会撑满
         return (
             <div style={{height: 600}}>
-                <ImportLead data={data} tips={tips} fileTempUrl="http://www.baidu.com"
+                <ImportLead unline disableEdit data={data} tips={tips} fileTempUrl="http://www.baidu.com"
                             onEdit={this.handleEdit}></ImportLead>
             </div>
         );
@@ -248,7 +249,9 @@ var ImportLeadWrap = React.createClass({
             t.setState(t.state);
         }, 5000);
     },
-    handleEdit: function () {
+    handleEdit: function (i, field, value, tipsI) {
+        // i 是数据的索引， field 对应具体字段，value是修改后的指， tipsI 是提示的索引
+        // 提供这些信息主要是让应用修改数据和提示。
         console.log(arguments);
     }
 });
