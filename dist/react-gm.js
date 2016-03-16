@@ -3215,7 +3215,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return this;
 	    },
 	    data: function data(_data) {
-	        this._data = _data || {};
+	        // 过滤null  undefined 只Object 类型。
+	        this._data = Object.assign({}, _data);
+	        if (toString.call(this._data) === '[object Object]') {
+	            this._data = _underscore2.default.pick(this._data, function (value) {
+	                return value !== null && value !== undefined;
+	            });
+	        }
 	        return this;
 	    },
 	    json: function json(_data) {
