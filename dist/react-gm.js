@@ -56,7 +56,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _gridComponent = __webpack_require__(23);
+	var _gridComponent = __webpack_require__(24);
 
 	var _gridComponent2 = _interopRequireDefault(_gridComponent);
 
@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _droperComponent2 = _interopRequireDefault(_droperComponent);
 
-	var _formerComponent = __webpack_require__(22);
+	var _formerComponent = __webpack_require__(23);
 
 	var _formerComponent2 = _interopRequireDefault(_formerComponent);
 
@@ -80,15 +80,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validateMixin = __webpack_require__(31);
+	var _validateMixin = __webpack_require__(32);
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
-	var _importLeadComponent = __webpack_require__(25);
+	var _importLeadComponent = __webpack_require__(26);
 
 	var _importLeadComponent2 = _interopRequireDefault(_importLeadComponent);
 
-	var _storageComponent = __webpack_require__(28);
+	var _storageComponent = __webpack_require__(29);
 
 	var _storageComponent2 = _interopRequireDefault(_storageComponent);
 
@@ -104,15 +104,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(30);
+	var _tip = __webpack_require__(31);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(27);
+	var _nprogress = __webpack_require__(28);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	var _hr = __webpack_require__(24);
+	var _hr = __webpack_require__(25);
 
 	var _hr2 = _interopRequireDefault(_hr);
 
@@ -120,7 +120,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _navigation = __webpack_require__(26);
+	var _navigation = __webpack_require__(27);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
@@ -132,15 +132,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _timespanpicker = __webpack_require__(29);
+	var _timespanpicker = __webpack_require__(30);
 
 	var _timespanpicker2 = _interopRequireDefault(_timespanpicker);
+
+	var _dropselect = __webpack_require__(22);
+
+	var _dropselect2 = _interopRequireDefault(_dropselect);
 
 	var _gmUtil = __webpack_require__(15);
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
-	__webpack_require__(34);
+	__webpack_require__(35);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -165,6 +169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Flex: _flex2.default,
 	    TimeSpan: _timespan2.default,
 	    TimeSpanPicker: _timespanpicker2.default,
+	    DropSelect: _dropselect2.default,
 	    Util: _gmUtil2.default
 	};
 
@@ -1297,7 +1302,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _request = __webpack_require__(32);
+	var _request = __webpack_require__(33);
 
 	var _request2 = _interopRequireDefault(_request);
 
@@ -1313,7 +1318,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _format2 = _interopRequireDefault(_format);
 
-	var _visibilitycheck = __webpack_require__(33);
+	var _visibilitycheck = __webpack_require__(34);
 
 	var _visibilitycheck2 = _interopRequireDefault(_visibilitycheck);
 
@@ -1768,6 +1773,197 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(3);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DropSelect = function (_React$Component) {
+	    _inherits(DropSelect, _React$Component);
+
+	    function DropSelect(props) {
+	        _classCallCheck(this, DropSelect);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DropSelect).call(this, props));
+
+	        _this.state = {};
+	        _this.documentClickHandler = _this.documentClickHandler.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(DropSelect, [{
+	        key: 'processData',
+	        value: function processData(data) {
+	            return Object.assign({
+	                loading: false,
+	                show: false,
+	                actions: [],
+	                list: [],
+	                columns: []
+	            }, data);
+	        }
+	    }, {
+	        key: 'documentClickHandler',
+	        value: function documentClickHandler(e) {
+	            var thisDom = _reactDom2.default.findDOMNode(this.refs.selectPanel);
+
+	            if (!thisDom.contains(e.target)) {
+	                this.props.onHide();
+	            }
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            document.removeEventListener("click", this.documentClickHandler);
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            document.addEventListener("click", this.documentClickHandler);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var thisProps = this.props,
+	                show = thisProps.show;
+
+	            var _processData = this.processData(this.props.data);
+
+	            var loading = _processData.loading;
+	            var list = _processData.list;
+	            var columns = _processData.columns;
+	            var actions = _processData.actions;
+
+	            var coolList = void 0;
+
+	            var coolTitle = columns.map(function (col) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'gm-ellipsis', key: col.field },
+	                    col.name
+	                );
+	            });
+
+	            if (loading) {
+	                coolList = _react2.default.createElement(
+	                    'li',
+	                    { className: 'gm-dropselect-item' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        ' '
+	                    ),
+	                    _react2.default.createElement('i', { className: 'icon icon-spin ico-spinner2' })
+	                );
+	            } else {
+	                coolList = list.map(function (rowData) {
+	                    var row = columns.map(function (col) {
+	                        var field = col.field,
+	                            value = rowData[field];
+	                        if (col.render) {
+	                            var val = col.render(value);
+	                            return _react2.default.createElement(
+	                                'div',
+	                                { className: 'gm-ellipsis', style: { flex: '1' }, key: value + field, title: val },
+	                                val
+	                            );
+	                        } else {
+	                            return _react2.default.createElement(
+	                                'div',
+	                                { className: 'gm-ellipsis', key: value + field, title: value },
+	                                value
+	                            );
+	                        }
+	                    });
+
+	                    var actionDom = actions.map(function (action, index) {
+	                        return _react2.default.createElement(
+	                            'button',
+	                            { className: action.className,
+	                                onClick: action.onClick.bind(null, rowData),
+	                                key: index },
+	                            action.text
+	                        );
+	                    });
+
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { className: 'gm-dropselect-item', key: rowData.id },
+	                        row,
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            actionDom
+	                        )
+	                    );
+	                });
+	            }
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: thisProps.className, ref: 'selectPanel' },
+	                thisProps.children,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'gm-dropselect-wrap' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'gm-dropselect-list-wrap', style: { display: show ? 'block' : 'none' } },
+	                        _react2.default.createElement(
+	                            'ul',
+	                            { className: 'gm-dropselect-list' },
+	                            _react2.default.createElement(
+	                                'li',
+	                                { className: 'gm-dropselect-item gm-dropselect-title' },
+	                                coolTitle,
+	                                !!actions.length && _react2.default.createElement(
+	                                    'div',
+	                                    null,
+	                                    '操作'
+	                                )
+	                            ),
+	                            coolList
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DropSelect;
+	}(_react2.default.Component);
+
+	DropSelect.propTypes = {
+	    show: _react2.default.PropTypes.bool,
+	    loading: _react2.default.PropTypes.bool,
+	    data: _react2.default.PropTypes.object
+	};
+
+	exports.default = DropSelect;
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1901,7 +2097,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Former;
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2162,7 +2358,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Grid;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2199,7 +2395,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Hr;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2412,7 +2608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ImportLead;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2554,7 +2750,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Navigation;
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2642,7 +2838,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2725,7 +2921,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2816,7 +3012,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpanPicker;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2996,7 +3192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3125,7 +3321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3286,7 +3482,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3311,7 +3507,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

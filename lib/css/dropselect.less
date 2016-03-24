@@ -1,0 +1,64 @@
+.gm-dropselect-wrap {
+  height: 0;
+  overflow: visible;
+  position: relative;
+  z-index: 10000;
+}
+
+.gm-dropselect-wrap .gm-dropselect-list-wrap {
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+  box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  border: 1px solid rgba(6, 6, 6, 0.13);
+  border-top: none;
+  position: absolute;
+  width: 100%;
+  cursor: default;
+  max-height: 230px;
+  overflow-y: auto;
+}
+
+.gm-dropselect-list li:not(.gm-dropselect-title):hover {
+  background-color: #A8B1B5;
+  color: #fff;
+}
+
+.gm-dropselect-list-wrap .gm-dropselect-list {
+  margin-bottom: 0;
+  list-style: none;
+  padding: 0px;
+}
+
+.gm-dropselect-list-wrap .gm-dropselect-item {
+  line-height: 32px;
+  font-size: 14px
+}
+
+.gm-dropselect-list-wrap .gm-dropselect-list .gm-dropselect-title {
+  overflow: hidden;
+  font-weight: bold;
+  background-color: #E4E4E4;
+}
+
+.gm-dropselect-list-wrap .gm-dropselect-list li {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e9ebec;
+}
+
+.gm-dropselect-list-wrap .gm-dropselect-list li div {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.gm-ellipsis {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
