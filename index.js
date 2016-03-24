@@ -20,6 +20,7 @@ import Flex from './lib/flex';
 import ImportLeadWrap from './import.lead';
 import TimeSpan from './lib/timespan.component';
 import TimeSpanPicker from './lib/timespanpicker.component';
+import DropSelect from './lib/dropselect.component';
 import moment from 'moment';
 import './lib/css/react-gm.less';
 
@@ -508,6 +509,135 @@ var TimeSpanPickerWrap = React.createClass({
     }
 });
 
+const DropSelectWrap = React.createClass({
+    getInitialState(){
+        return {
+            show: false,
+            coolData: {
+                list: [],
+                actions: [{
+                    className: "btn btn-sm btn-info",
+                    text: <i className="fa fa-check"></i>,
+                    onClick: function (col) {
+                        console.log(col, 'onclick');
+                    }
+                }, {
+                    className: "btn btn-sm btn-danger",
+                    text: '删除',
+                    onClick: function (col) {
+                        console.log(col, 'onclick');
+                    }
+                }],
+                columns: [{
+                    field: 'id',
+                    name: '序号',
+                    render: function (value) {
+                        return 'D00' + value;
+                    }
+                }, {
+                    field: 'name',
+                    name: '商品名'
+                }, {
+                    field: 'price',
+                    name: '成本价'
+                }],
+                loading: true
+            }
+        }
+    },
+    componentDidMount(){
+        const me = this;
+        setTimeout(function () {
+            me.setState({
+                coolData: {
+                    list: [{
+                        id: '0001',
+                        name: '大白菜',
+                        price: 22.12
+                    }, {
+                        id: '0002',
+                        name: '大白菜',
+                        price: 22.12
+                    }, {
+                        id: '0003',
+                        name: '大白菜',
+                        price: 22.12
+                    }, {
+                        id: '0004',
+                        name: '大白菜',
+                        price: 22.12
+                    }, {
+                        id: '0005',
+                        name: '大白菜',
+                        price: 22.12
+                    }, {
+                        id: '00015',
+                        name: '大白菜',
+                        price: 22.12
+                    }, {
+                        id: '00013',
+                        name: '大白菜',
+                        price: 22.12
+                    }, {
+                        id: '000143',
+                        name: '大白菜',
+                        price: 22.12
+                    }],
+                    columns: [{
+                        field: 'id',
+                        name: '序号',
+                        render: function (value) {
+                            return 'D00' + value;
+                        }
+                    }, {
+                        field: 'name',
+                        name: '商品名'
+                    }, {
+                        field: 'price',
+                        name: '成本价'
+                    }],
+                    actions: [{
+                        className: "btn btn-sm btn-info",
+                        text: <i className="fa fa-check"></i>,
+                        onClick: function (col) {
+                            console.log(col, 'onclick');
+                        }
+                    }, {
+                        className: "btn btn-sm btn-danger",
+                        text: '删除',
+                        onClick: function (col) {
+                            console.log(col, 'onclick');
+                        }
+                    }],
+                    loading: false
+                }
+            })
+        }, 2000)
+    },
+    onFocus(){
+        this.setState({
+            show: true
+        });
+    },
+    onHide(){
+        this.setState({
+            show: false
+        });
+    },
+
+    render(){
+        return (
+            <div style={{width: '400px'}}>
+                <DropSelect show={this.state.show}
+                            data={this.state.coolData}
+                            onHide={this.onHide}>
+                    <input className="form-control" onFocus={this.onFocus}/>
+                </DropSelect>
+            </div>
+        )
+    }
+});
+
 const App = React.createClass({
     getInitialState(){
         return {
@@ -533,6 +663,8 @@ const App = React.createClass({
                         <h1>Calendar</h1>
                         <CalendarWrap></CalendarWrap>
                         <hr/>
+                        <h1>DropSelect</h1>
+                        <DropSelectWrap></DropSelectWrap>
                         <h1>DatePicker</h1>
                         <DatePickerWrap></DatePickerWrap>
                         <h1>Daterangepicker</h1>
