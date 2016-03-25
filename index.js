@@ -668,7 +668,7 @@ var AdvanceSelectComponent = React.createClass({
             <div>
                 <button className="btn btn-default btn-primary btn-sm" onClick={this.changeList}>改变list</button>&nbsp;&nbsp;
                 <button className="btn btn-default btn-primary btn-sm" onClick={this.changeValue}>改变value</button>&nbsp;&nbsp;
-                <AdvanceSelect list={this.state.list} value={this.state.value}
+                <AdvanceSelect list={this.state.list} value={this.state.value} inputClassName="input-sm" inputStyleName={{}}
                                onValueChange={this.onValueChange} onFilterData={this.onFilterData}/>
             </div>
         );

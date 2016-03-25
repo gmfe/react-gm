@@ -56,7 +56,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _gridComponent = __webpack_require__(24);
+	var _gridComponent = __webpack_require__(25);
 
 	var _gridComponent2 = _interopRequireDefault(_gridComponent);
 
@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _droperComponent2 = _interopRequireDefault(_droperComponent);
 
-	var _formerComponent = __webpack_require__(23);
+	var _formerComponent = __webpack_require__(24);
 
 	var _formerComponent2 = _interopRequireDefault(_formerComponent);
 
@@ -80,15 +80,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validateMixin = __webpack_require__(32);
+	var _validateMixin = __webpack_require__(33);
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
-	var _importLeadComponent = __webpack_require__(26);
+	var _importLeadComponent = __webpack_require__(27);
 
 	var _importLeadComponent2 = _interopRequireDefault(_importLeadComponent);
 
-	var _storageComponent = __webpack_require__(29);
+	var _storageComponent = __webpack_require__(30);
 
 	var _storageComponent2 = _interopRequireDefault(_storageComponent);
 
@@ -96,31 +96,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
 
-	var _datepickerComponent = __webpack_require__(19);
+	var _datepickerComponent = __webpack_require__(20);
 
 	var _datepickerComponent2 = _interopRequireDefault(_datepickerComponent);
 
-	var _daterangepicker = __webpack_require__(20);
+	var _daterangepicker = __webpack_require__(21);
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(31);
+	var _tip = __webpack_require__(32);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(28);
+	var _nprogress = __webpack_require__(29);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	var _hr = __webpack_require__(25);
+	var _hr = __webpack_require__(26);
 
 	var _hr2 = _interopRequireDefault(_hr);
 
-	var _dialog = __webpack_require__(21);
+	var _dialog = __webpack_require__(22);
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _navigation = __webpack_require__(27);
+	var _navigation = __webpack_require__(28);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
@@ -132,11 +132,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _timespanpicker = __webpack_require__(30);
+	var _timespanpicker = __webpack_require__(31);
 
 	var _timespanpicker2 = _interopRequireDefault(_timespanpicker);
 
-	var _dropselect = __webpack_require__(22);
+	var _dropselect = __webpack_require__(23);
 
 	var _dropselect2 = _interopRequireDefault(_dropselect);
 
@@ -144,7 +144,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
-	__webpack_require__(35);
+	var _advanceselect = __webpack_require__(19);
+
+	var _advanceselect2 = _interopRequireDefault(_advanceselect);
+
+	__webpack_require__(36);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -170,7 +174,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    TimeSpan: _timespan2.default,
 	    TimeSpanPicker: _timespanpicker2.default,
 	    DropSelect: _dropselect2.default,
-	    Util: _gmUtil2.default
+	    Util: _gmUtil2.default,
+	    AdvanceSelect: _advanceselect2.default
 	};
 
 /***/ },
@@ -1302,7 +1307,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _request = __webpack_require__(33);
+	var _request = __webpack_require__(34);
 
 	var _request2 = _interopRequireDefault(_request);
 
@@ -1318,7 +1323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _format2 = _interopRequireDefault(_format);
 
-	var _visibilitycheck = __webpack_require__(34);
+	var _visibilitycheck = __webpack_require__(35);
 
 	var _visibilitycheck2 = _interopRequireDefault(_visibilitycheck);
 
@@ -1457,6 +1462,308 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AdvanceSelect = _react2.default.createClass({
+	    displayName: 'AdvanceSelect',
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            onValueChange: null,
+	            onFilterData: null,
+	            inputClassName: 'form-control',
+	            inputStyleName: {}
+	        };
+	    },
+
+	    getInitialState: function getInitialState() {
+	        var propsData = this.processInitData();
+	        return Object.assign({}, propsData, { opened: false });
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        document.addEventListener('click', this._close);
+	    },
+
+	    componentWillUnmount: function componentWillUnmount() {
+	        document.removeEventListener('click', this._close);
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            list: nextProps.list,
+	            selectedIndex: this.getValueAndIndex(nextProps).selectedIndex,
+	            inputValue: this.getValueAndIndex(nextProps).inputValue,
+	            selectedValue: this.getValueAndIndex(nextProps).selectedValue
+	        });
+	    },
+
+	    processInitData: function processInitData() {
+	        var self = this;
+	        var p = self.props;
+	        var list = p.list || [],
+	            value = p.value,
+	            id = p.id;
+	        var selectedValue = "",
+	            inputValue = "",
+	            selectedIndex = 0;
+	        var keys = {
+	            ESC: 27,
+	            TAB: 9,
+	            RETURN: 13,
+	            LEFT: 37,
+	            UP: 38,
+	            RIGHT: 39,
+	            DOWN: 40,
+	            ENTER: 13,
+	            SHIFT: 16
+	        };
+
+	        if (0 != list.length) {
+	            selectedValue = list[0].value;
+	            inputValue = list[0].name;
+	            if (value) {
+	                list.forEach(function (data, index) {
+	                    if (data.value == value) {
+	                        selectedValue = value;
+	                        selectedIndex = index;
+	                        inputValue = data.name;
+	                        return;
+	                    }
+	                });
+	            }
+	        };
+
+	        return {
+	            id: id,
+	            list: list,
+	            selectedValue: selectedValue,
+	            selectedIndex: selectedIndex,
+	            inputValue: inputValue,
+	            keys: keys
+	        };
+	    },
+
+	    getValueAndIndex: function getValueAndIndex(nextProps) {
+	        var list = nextProps.list;
+	        var selectedValue = "",
+	            inputValue = "",
+	            selectedIndex = 0;
+	        if (0 != list.length) {
+	            selectedValue = list[0].value;
+	            inputValue = list[0].name;
+	            if (nextProps.value) {
+	                list.forEach(function (data, index) {
+	                    if (data.value == nextProps.value) {
+	                        selectedValue = nextProps.value;
+	                        selectedIndex = index;
+	                        inputValue = data.name;
+	                        return;
+	                    }
+	                });
+	            }
+	        };
+	        return { inputValue: inputValue, selectedIndex: selectedIndex, selectedValue: selectedValue };
+	    },
+
+	    render: function render() {
+	        var _this = this;
+
+	        var list = this.state.list,
+	            selectedIndex = this.state.selectedIndex,
+	            inputValue = this.state.inputValue;
+	        var inputClass = "gm-input " + this.props.inputClassName;
+	        var inputStyle = this.props.inputStyleName;
+	        var optionList = list.map(function (data, i) {
+	            return _react2.default.createElement(
+	                'li',
+	                { className: selectedIndex == i ? "option-item option-hover option-selected" : "option-item",
+	                    value: data.value, key: data.value, onClick: _this.selectOption.bind(_this, data, i) },
+	                data.name
+	            );
+	        });
+
+	        return _react2.default.createElement(
+	            'div',
+	            { className: this.state.opened ? "gm-select gm-open" : "gm-select" },
+	            _react2.default.createElement('div', { className: 'gm-arrow', onClick: this.handleArrow }),
+	            _react2.default.createElement(
+	                'ul',
+	                { className: 'gm-dropdown' },
+	                optionList
+	            ),
+	            _react2.default.createElement('input', { id: this.state.id, ref: 'input', type: 'text', className: inputClass, style: inputStyle, value: inputValue,
+	                onChange: this.changeInputValue, onKeyUp: this._keyup, onKeyDown: this._keydown, onClick: this._open })
+	        );
+	    },
+
+	    handleArrow: function handleArrow(event) {
+	        if (0 == this.state.list.length) {
+	            this.setState({
+	                inputValue: this.props.list ? this.props.list[0].name : ""
+	            });
+	            this._filter("");
+	        }
+	        this.setState({
+	            opened: !this.state.opened
+	        });
+	        event.nativeEvent.stopImmediatePropagation();
+	    },
+
+	    _open: function _open(event) {
+	        this.refs.input.select();
+
+	        this.setState({
+	            opened: true
+	        });
+	        event.nativeEvent.stopImmediatePropagation();
+	    },
+
+	    _close: function _close() {
+	        this.setState({
+	            opened: false
+	        });
+	    },
+
+	    changeInputValue: function changeInputValue() {
+	        this.setState({
+	            inputValue: this.refs.input.value
+	        });
+	    },
+
+	    selectOption: function selectOption(data, index) {
+	        var inputValue = data.name;
+
+	        if (inputValue != this.refs.input.value && this.props.onValueChange) {
+	            this.props.onValueChange(this.state.id, data.value);
+	        };
+
+	        this.setState({
+	            inputValue: inputValue,
+	            selectedIndex: index,
+	            selectedValue: data.value,
+	            opened: false
+	        });
+	    },
+
+	    _keyup: function _keyup(event) {
+	        var keys = this.state.keys;
+	        switch (event.which) {
+	            case keys.ESC:
+	                this._close;
+	                break;
+
+	            case keys.ENTER:
+	            case keys.UP:
+	            case keys.DOWN:
+	            case keys.LEFT:
+	            case keys.RIGHT:
+	            case keys.TAB:
+	            case keys.SHIFT:
+	                break;
+
+	            default:
+	                this._filter(event.target.value);
+	                break;
+	        }
+	    },
+
+	    _keydown: function _keydown(event) {
+	        if (this.state.opened) {
+	            var keys = this.state.keys,
+	                index = this.state.selectedIndex;
+	            switch (event.which) {
+
+	                case keys.UP:
+	                    this._move('up', index);
+	                    break;
+
+	                case keys.DOWN:
+	                    this._move('down', index);
+	                    break;
+
+	                case keys.TAB:
+	                    this._enter(index);
+	                    break;
+
+	                case keys.ENTER:
+	                    this._enter(index);
+	                    break;
+
+	                default:
+	                    break;
+	            }
+	        } else {
+	            this.setState({
+	                opened: true
+	            });
+	        }
+	    },
+
+	    _enter: function _enter(index) {
+	        if (this.state.list[index].name != this.refs.input.value && this.props.onValueChange) {
+	            this.props.onValueChange(this.state.id, this.state.list[index].value);
+	        };
+	        this.setState({
+	            inputValue: this.state.list[index].name,
+	            selectedIndex: index,
+	            selectedValue: this.state.list[index].value,
+	            opened: false
+	        });
+	    },
+
+	    _move: function _move(dir, i) {
+
+	        var index = i,
+	            total = this.state.list.length;
+
+	        switch (dir) {
+	            case 'up':
+	                index--;
+	                index < 0 && (index = 0);
+	                break;
+
+	            case 'down':
+	                index++;
+	                index >= total && (index = total - 1);
+	                break;
+	        }
+
+	        this.setState({
+	            selectedIndex: index
+	        });
+	    },
+
+	    _filter: function _filter(search) {
+	        if (this.props.onFilterData) {
+	            this.setState({
+	                list: this.props.onFilterData(search)
+	            });
+	        }
+	    }
+
+	});
+
+	exports.default = AdvanceSelect;
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactDom = __webpack_require__(3);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
@@ -1529,7 +1836,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1633,7 +1940,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DateRangePicker;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1764,7 +2071,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Dialog;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1847,7 +2154,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var columns = _processData.columns;
 	            var actions = _processData.actions;
 
-	            var coolList = void 0;
+	            var coolList = undefined;
 
 	            var coolTitle = columns.map(function (col) {
 	                return _react2.default.createElement(
@@ -1955,7 +2262,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DropSelect;
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2097,7 +2404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Former;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2358,7 +2665,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Grid;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2395,7 +2702,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Hr;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2608,7 +2915,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ImportLead;
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2750,7 +3057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Navigation;
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2838,7 +3145,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2921,7 +3228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3012,7 +3319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpanPicker;
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3192,7 +3499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3321,7 +3628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3482,7 +3789,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3507,7 +3814,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
