@@ -11,7 +11,8 @@ module.exports = {
         'react-dom': 'react-dom',
         'moment': 'moment',
         'underscore': 'underscore',
-        'react-bootstrap': 'react-bootstrap'
+        'react-bootstrap': 'react-bootstrap',
+        'pinyin': 'pinyin'
     },
     output: {
         path: path.join(__dirname, 'dist'),

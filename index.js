@@ -23,7 +23,8 @@ import TimeSpanPicker from './lib/timespanpicker.component';
 import DropSelect from './lib/dropselect.component';
 import moment from 'moment';
 import './lib/css/react-gm.less';
-
+import AdvanceSelect from './lib/advanceselect.component';
+import pinYin from 'pinyin';
 
 // tip
 var TipWrap = React.createClass({
@@ -635,6 +636,80 @@ const DropSelectWrap = React.createClass({
                 </DropSelect>
             </div>
         )
+    },
+});
+
+var AdvanceSelectComponent = React.createClass({
+    getInitialState(){
+        let selectList = [
+            {value: 0, name:'FE'},
+            {value: 1, name:'测试'},
+            {value: 2, name:'美丽-2'},
+            {value: 3, name:'美丽-3'},
+            {value: 4, name:'漂亮——1'},
+            {value: 5, name:'阿姐说饭卡卢萨卡是否快乐阿三开发饭卡是'},
+            {value: 6, name:'sz-罗湖'},
+            {value: 7, name:'gd-广州'},
+            {value: 8, name:'test'},
+            {value: 9, name:'110'},
+            {value: 10, name:'美丽-119'},
+            {value: 11, name:'美丽-wqeqw'},
+            {value: 12, name:'美丽_adsdasd'},
+            {value: 13, name:'美丽 asdasd'}
+        ];
+        return {
+            list: selectList,
+            value: 10
+        }
+    },
+    render(){
+
+        return(
+            <div>
+                <button className="btn btn-default btn-primary btn-sm" onClick={this.changeList}>改变list</button>&nbsp;&nbsp;
+                <button className="btn btn-default btn-primary btn-sm" onClick={this.changeValue}>改变value</button>&nbsp;&nbsp;
+                <AdvanceSelect list={this.state.list} value={this.state.value}
+                               onValueChange={this.onValueChange} onFilterData={this.onFilterData}/>
+            </div>
+        );
+    },
+    onValueChange(id, value){
+        console.log(id, value);
+    },
+    onFilterData(filterData){
+        let needle = filterData.trim().toLowerCase(),
+            items = this.state.list;
+        let newItems = items.filter(function(data){
+            let dataName = data.name.toString().trim().toLowerCase();
+            return dataName.indexOf(needle) != -1
+                || this.matchingPinYin(dataName, {style: pinYin.STYLE_NORMAL}).indexOf(needle) != -1
+                || this.matchingPinYin(dataName, {style: pinYin.STYLE_FIRST_LETTER}).indexOf(needle) != -1;
+        }.bind(this));
+        return newItems;
+    },
+    matchingPinYin(name, style = {style: pinYin.STYLE_NORMAL}){
+        let pinyin = "", reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+        for(let i=0; i<name.length; i++){
+            let val = name.substr(i, 1);
+            if (!reg.test(val)) {
+                pinyin += val;
+            }else {
+                pinyin += pinYin(val, style)[0];
+            }
+        }
+        return pinyin;
+    },
+    changeList(){
+        let changeList = [];
+        for(var i=5; i<50; i++){
+            changeList.push({value: i, name: i});
+        }
+        this.setState({
+            list: changeList
+        });
+    },
+    changeValue(){
+        this.setState({value: 20});
     }
 });
 
@@ -660,6 +735,8 @@ const App = React.createClass({
                         <NavigationWrap></NavigationWrap>
                     </Flex>
                     <Flex column flex className="gm-app-content gm-padding10">
+                        <h1>AdvanceSelect</h1>
+                        <AdvanceSelectComponent />
                         <h1>Calendar</h1>
                         <CalendarWrap></CalendarWrap>
                         <hr/>
