@@ -1536,7 +1536,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }
 	                });
 	            }
-	        };
+	        }
 
 	        return {
 	            id: id,
@@ -1566,7 +1566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }
 	                });
 	            }
-	        };
+	        }
 	        return { inputValue: inputValue, selectedIndex: selectedIndex, selectedValue: selectedValue };
 	    },
 
@@ -1582,7 +1582,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return _react2.default.createElement(
 	                'li',
 	                { className: selectedIndex == i ? "option-item option-hover option-selected" : "option-item",
-	                    value: data.value, key: data.value, onClick: _this.selectOption.bind(_this, data, i) },
+	                    value: data.value, key: data.value,
+	                    onClick: _this.selectOption.bind(_this, data, i) },
 	                data.name
 	            );
 	        });
@@ -1596,8 +1597,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: 'gm-dropdown' },
 	                optionList
 	            ),
-	            _react2.default.createElement('input', { id: this.state.id, ref: 'input', type: 'text', className: inputClass, style: inputStyle, value: inputValue,
-	                onChange: this.changeInputValue, onKeyUp: this._keyup, onKeyDown: this._keydown, onClick: this._open })
+	            _react2.default.createElement('input', { id: this.state.id, ref: 'input', type: 'text', className: inputClass, style: inputStyle,
+	                value: inputValue,
+	                onChange: this.changeInputValue, onKeyUp: this._keyup, onKeyDown: this._keydown,
+	                onClick: this._open })
 	        );
 	    },
 
@@ -1640,7 +1643,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        if (inputValue != this.refs.input.value && this.props.onValueChange) {
 	            this.props.onValueChange(this.state.id, data.value);
-	        };
+	        }
 
 	        this.setState({
 	            inputValue: inputValue,
@@ -1654,7 +1657,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var keys = this.state.keys;
 	        switch (event.which) {
 	            case keys.ESC:
-	                this._close;
+	                this._close();
 	                break;
 
 	            case keys.ENTER:
@@ -1707,7 +1710,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _enter: function _enter(index) {
 	        if (this.state.list[index].name != this.refs.input.value && this.props.onValueChange) {
 	            this.props.onValueChange(this.state.id, this.state.list[index].value);
-	        };
+	        }
 	        this.setState({
 	            inputValue: this.state.list[index].name,
 	            selectedIndex: index,
@@ -2154,7 +2157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var columns = _processData.columns;
 	            var actions = _processData.actions;
 
-	            var coolList = undefined;
+	            var coolList = void 0;
 
 	            var coolTitle = columns.map(function (col) {
 	                return _react2.default.createElement(
@@ -2184,7 +2187,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            var val = col.render(value);
 	                            return _react2.default.createElement(
 	                                'div',
-	                                { className: 'gm-ellipsis', style: { flex: '1' }, key: value + field, title: val },
+	                                { className: 'gm-ellipsis', style: { flex: '1' }, key: value + field,
+	                                    title: val },
 	                                val
 	                            );
 	                        } else {
@@ -2738,7 +2742,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        onEdit: _react2.default.PropTypes.func,
 	        fileTempUrl: _react2.default.PropTypes.string,
 	        disableEdit: _react2.default.PropTypes.bool,
-	        unLine: _react2.default.PropTypes.bool
+	        unLine: _react2.default.PropTypes.bool,
+	        disableSubmit: _react2.default.PropTypes.bool
 	    },
 	    getInitialState: function getInitialState() {
 	        return {
@@ -2775,7 +2780,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return tip ? _react2.default.createElement(
 	                    'td',
 	                    { key: i, className: tip.modifyed ? "gm-bg-info" : "gm-bg-invalid" },
-	                    _react2.default.createElement('input', { disabled: t.props.disableEdit, type: 'text', value: elist[col.field],
+	                    t.props.disableEdit ? elist[col.field] : _react2.default.createElement('input', { type: 'text', value: elist[col.field],
 	                        onChange: t.handleEdit.bind(t, index, col.field, tip._index) }),
 	                    _react2.default.createElement(
 	                        'small',
@@ -2827,9 +2832,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        )
 	                    ),
 	                    '    ',
-	                    _react2.default.createElement(
+	                    !t.props.disableSubmit && _react2.default.createElement(
 	                        'button',
-	                        { disabled: !canSubmit, className: 'btn btn-primary btn-sm', onClick: this.handleSubmit },
+	                        { disabled: !canSubmit, className: 'btn btn-primary btn-sm',
+	                            onClick: this.handleSubmit },
 	                        '提交'
 	                    ),
 	                    '    ',
