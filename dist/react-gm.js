@@ -310,7 +310,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'a',
 	                { href: 'javascript:;', className: 'gm-calendar-head-pre pull-left',
 	                    onClick: this.handleChangeMonth.bind(this, month - 1) },
-	                _react2.default.createElement('i', { className: 'icon ico-chevron-left' })
+	                _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-left' })
 	            ),
 	            _react2.default.createElement(
 	                'span',
@@ -333,8 +333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                'a',
 	                { href: 'javascript:;', className: 'gm-calendar-head-next pull-right',
 	                    onClick: this.handleChangeMonth.bind(this, month + 1) },
-	                _react2.default.createElement('i', {
-	                    className: 'icon ico-chevron-right' })
+	                _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-right' })
 	            )
 	        );
 	    },
@@ -2176,7 +2175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        null,
 	                        ' '
 	                    ),
-	                    _react2.default.createElement('i', { className: 'icon icon-spin ico-spinner2' })
+	                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-refresh' })
 	                );
 	            } else {
 	                coolList = list.map(function (rowData) {
@@ -2527,7 +2526,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement(
 	                    'td',
 	                    { colSpan: '99', className: 'text-center' },
-	                    _react2.default.createElement('i', { className: 'icon icon-spin ico-spinner2' })
+	                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-refresh' })
 	                )
 	            );
 	        } else if (data.list.length === 0) {
@@ -3009,7 +3008,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                value.title
 	                            ),
 	                            value.sub && _react2.default.createElement('span', {
-	                                className: "fa " + (value.open ? 'fa-angle-up' : ' fa-angle-down') })
+	                                className: "glyphicon " + (value.open ? 'glyphicon-chevron-up' : ' glyphicon-chevron-down') })
 	                        ),
 	                        value.sub && _react2.default.createElement(
 	                            _reactBootstrap.Collapse,
@@ -3462,10 +3461,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    render: function render() {
 	        var iconClassName = {
-	            success: 'ico-success-circle',
-	            info: 'ico-info-circle',
-	            warning: 'ico-exclamation-circle',
-	            danger: 'ico-fail-circle'
+	            success: 'glyphicon glyphicon-ok-sign',
+	            info: 'glyphicon glyphicon-info-sign',
+	            warning: 'glyphicon glyphicon-exclamation-sign',
+	            danger: 'glyphicon glyphicon-remove-sign'
 	        };
 
 	        return _react2.default.createElement(
@@ -3480,7 +3479,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    '×'
 	                )
 	            ),
-	            _react2.default.createElement('i', { className: "icon icon-2x text-" + this.props.type + ' ' + iconClassName[this.props.type] }),
+	            _react2.default.createElement('i', { className: "text-" + this.props.type + ' ' + iconClassName[this.props.type] }),
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'panel-body' },
