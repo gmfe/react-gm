@@ -518,7 +518,7 @@ const DropSelectWrap = React.createClass({
                 list: [],
                 actions: [{
                     className: "btn btn-sm btn-info",
-                    text: <i className="fa fa-check"></i>,
+                    text: <i className="glyphicon glyphicon-ok"></i>,
                     onClick: function (col) {
                         console.log(col, 'onclick');
                     }
@@ -544,7 +544,7 @@ const DropSelectWrap = React.createClass({
                 }],
                 loading: true
             }
-        }
+        };
     },
     componentDidMount(){
         const me = this;
@@ -599,7 +599,7 @@ const DropSelectWrap = React.createClass({
                     }],
                     actions: [{
                         className: "btn btn-sm btn-info",
-                        text: <i className="fa fa-check"></i>,
+                        text: <i className="glyphicon glyphicon-ok"></i>,
                         onClick: function (col) {
                             console.log(col, 'onclick');
                         }
@@ -612,8 +612,8 @@ const DropSelectWrap = React.createClass({
                     }],
                     loading: false
                 }
-            })
-        }, 2000)
+            });
+        }, 2000);
     },
     onFocus(){
         this.setState({
@@ -635,7 +635,7 @@ const DropSelectWrap = React.createClass({
                     <input className="form-control" onFocus={this.onFocus}/>
                 </DropSelect>
             </div>
-        )
+        );
     },
 });
 
@@ -660,7 +660,7 @@ var AdvanceSelectComponent = React.createClass({
         return {
             list: selectList,
             value: 10
-        }
+        };
     },
     render(){
 
