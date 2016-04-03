@@ -10,7 +10,7 @@
 
 [Calendar](https://github.com/gmfe/react-gm/issues/9)
 
-[DatePicker & DateRangePicker](https://github.com/gmfe/react-gm/issues/10)*(alpha)*
+[DatePicker & DateRangePicker](https://github.com/gmfe/react-gm/issues/10)
 
 [Validate](https://github.com/gmfe/react-gm/issues/5)
 
@@ -24,24 +24,21 @@ Util
 有需求随时提
 
 
-
 # 安装
 `npm install --save-dev react-gm`
-
-or
-
-`bower install -D react-gm`
 
 # 依赖
 
 js
 - react
 - react-dom
+- react-bootstrap
 - underscore
+- classnames
+- moment
 
 css
 - bootstrap
-- [gm-iconfont](https://github.com/gmfe)
 
 # 参与
 [传送门](./README.dev.md)
