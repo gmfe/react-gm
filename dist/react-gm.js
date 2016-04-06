@@ -3008,7 +3008,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                value.title
 	                            ),
 	                            value.sub && _react2.default.createElement('span', {
-	                                className: "glyphicon " + (value.open ? 'glyphicon-chevron-up' : ' glyphicon-chevron-down') })
+	                                className: "glyphicon " + (value.open ? 'glyphicon-menu-up' : ' glyphicon-menu-down') })
 	                        ),
 	                        value.sub && _react2.default.createElement(
 	                            _reactBootstrap.Collapse,
