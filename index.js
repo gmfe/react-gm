@@ -734,7 +734,7 @@ const App = React.createClass({
                     <Flex width="200px" className={"gm-app-left " + (this.state.left && 'current')}>
                         <NavigationWrap></NavigationWrap>
                     </Flex>
-                    <Flex column flex className="gm-app-content gm-padding10">
+                    <Flex column flex className="gm-app-content gm-padding10 gm-block">
                         <h1>AdvanceSelect</h1>
                         <AdvanceSelectComponent />
                         <h1>Calendar</h1>
