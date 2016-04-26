@@ -1,5 +1,6 @@
-# DOC
+[![npm version](https://badge.fury.io/js/react-gm.svg)](https://badge.fury.io/js/react-gm)
 
+# DOC
 [Grid](https://github.com/gmfe/react-gm/issues/1)
 
 [Pagination && PaginationText](https://github.com/gmfe/react-gm/issues/4)
