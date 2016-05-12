@@ -1490,6 +1490,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var AdvanceSelect = _react2.default.createClass({
 	    displayName: 'AdvanceSelect',
 
+	    propTypes: {
+	        list: _react2.default.PropTypes.array.isRequired, //格式[{value:"XXX",name:"XXX"}]
+	        title: _react2.default.PropTypes.string, //输入框为空时默认显示的样式
+	        value: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
+	        inputStyleName: _react2.default.PropTypes.object, //自定义的样式
+	        id: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number])
+	    },
+
 	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            onValueChange: null,
@@ -1542,9 +1550,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            SHIFT: 16
 	        };
 
+	        //默认选择值
 	        if (0 != list.length) {
 	            selectedValue = list[0].value;
-	            inputValue = list[0].name;
+	            inputValue = "";
 	            if (value) {
 	                list.forEach(function (data, index) {
 	                    if (data.value == value) {
@@ -1574,7 +1583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            selectedIndex = 0;
 	        if (0 != list.length) {
 	            selectedValue = list[0].value;
-	            inputValue = list[0].name;
+	            // inputValue = list[0].name;
 	            if (nextProps.value) {
 	                list.forEach(function (data, index) {
 	                    if (data.value == nextProps.value) {
@@ -1616,7 +1625,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: 'gm-dropdown' },
 	                optionList
 	            ),
-	            _react2.default.createElement('input', { id: this.state.id, ref: 'input', type: 'text', className: inputClass, style: inputStyle,
+	            _react2.default.createElement('input', { id: this.state.id, ref: 'input', type: 'text', placeholder: this.props.title,
+	                className: inputClass, style: inputStyle,
 	                value: inputValue,
 	                onChange: this.changeInputValue, onKeyUp: this._keyup, onKeyDown: this._keydown,
 	                onClick: this._open })
