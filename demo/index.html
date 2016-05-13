@@ -7,8 +7,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="shortcut icon" href="logo.png"/>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
     <style>
         html, body, #appContainer {
             width: 100%;
@@ -61,7 +60,7 @@
 <body>
 <div id="appContainer"></div>
 <script>
-    document.write('<script src="webpack-assets.js?v=' + Math.random() + '"><\/script>');
+    document.write('<script src="../build/webpack-assets.js?v=' + Math.random() + '"><\/script>');
 </script>
 <script>
     document.write('<script src="' + window.WEBPACK_ASSETS['index'].js + '"><\/script>');

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Grid from './lib/grid.component.js';
-import Droper from './lib/droper.component.js';
-import ImportLead from './lib/import.lead.component.js';
+import Grid from './../lib/grid.component.js';
+import Droper from './../lib/droper.component.js';
+import ImportLead from './../lib/import.lead.component.js';
 import _ from 'underscore';
 
 var gridData = {

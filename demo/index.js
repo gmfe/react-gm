@@ -1,29 +1,28 @@
 import React from 'react';
 import _ from 'underscore';
 import ReactDOM from 'react-dom';
-import Grid from './lib/grid.component.js';
-import Droper from './lib/droper.component.js';
-import Former from './lib/former.component.js';
-import ValidateMixin from './lib/validate.mixin.js';
-import Validate from './lib/validate.js';
-import Util from 'gm-util';
-import Storage from './lib/storage.component.js';
-import {Popover} from 'react-bootstrap';
-import Calendar from './lib/calendar.component.js';
-import DatePicker from './lib/datepicker.component.js';
-import DateRangePicker from './lib/daterangepicker.component.js';
-import Tip from './lib/tip.component';
-import NProgress from './lib/nprogress.component';
-import Dialog from './lib/dialog.component';
-import Navigation from './lib/navigation.component';
-import Flex from './lib/flex';
-import ImportLeadWrap from './import.lead';
-import TimeSpan from './lib/timespan.component';
-import TimeSpanPicker from './lib/timespanpicker.component';
-import DropSelect from './lib/dropselect.component';
+import {
+    Grid,
+    Droper,
+    Validate,
+    ValidateMixin,
+    Util,
+    Storage,
+    Calendar,
+    DatePicker,
+    DateRangePicker,
+    Tip,
+    NProgress,
+    Dialog,
+    Navigation,
+    Flex,
+    TimeSpan,
+    TimeSpanPicker,
+    DropSelect,
+    AdvanceSelect
+} from '../lib/index';
+import ImportLeadWrap from './import.lead.js';
 import moment from 'moment';
-import './lib/css/react-gm.less';
-import AdvanceSelect from './lib/advanceselect.component';
 import pinYin from 'pinyin';
 
 // tip
@@ -87,7 +86,7 @@ var isShow = function () {
     return false;
 };
 
-var renderId = function (value, elist) {
+var renderId = function () {
     //console.log(arguments);
     return 2;
 };
@@ -139,14 +138,17 @@ var GridWrap = React.createClass({
             },
             select: this.onSelect,
             selectAll: this.onSelectAll,
-            toPage: function (page) {
+            toPage: function () {
                 console.log(arguments);
             }
         };
     },
     onSelect: function (index) {
-        this.state.list[index]._gm_select = !this.state.list[index]._gm_select;
-        this.setState(this.state);
+        const list = this.state.list;
+        list[index]._gm_select = !this.state.list[index]._gm_select;
+        this.setState({
+            list
+        });
     },
     onSelectAll: function (bool) {
         _.each(this.state.list, function (value) {
@@ -184,11 +186,6 @@ var DroperWrap = React.createClass({
         console.log(arguments);
     }
 });
-
-var onSubmit = function (event) {
-    console.log('app onsubmit');
-    debugger;
-};
 
 var FormerDom = React.createClass({
     mixins: [ValidateMixin()],
@@ -235,27 +232,26 @@ console.log(Validate('*3', 'aaaa', true));
 console.log(Validate('*3-', 'aa', true));
 console.log(Validate('*3-5', 'a', true));
 
-
-var interceptorId = Util.RequestInterceptor.add({
-    request: function (config) {
-        NProgress.start();
-        console.log('request Interceptor', config);
-
-        // 修改相关的信息
-        config.url = '/station/';
-        config.data.name = '111';
-
-        return config;
-    },
-    response: function (json) {
-        NProgress.done();
-        console.log('response Interceptor');
-    },
-    responseError: function (reason) {
-        NProgress.done();
-        console.log('responseError Interceptor', reason);
-    }
-});
+// var interceptorId = Util.RequestInterceptor.add({
+//     request: function (config) {
+//         NProgress.start();
+//         console.log('request Interceptor', config);
+//
+//         // 修改相关的信息
+//         config.url = '/station/';
+//         config.data.name = '111';
+//
+//         return config;
+//     },
+//     response: function (json) {
+//         NProgress.done();
+//         console.log('response Interceptor');
+//     },
+//     responseError: function (reason) {
+//         NProgress.done();
+//         console.log('responseError Interceptor', reason);
+//     }
+// });
 
 Util.Request('/station/').data({name: 'haha'}).get().then(function (data) {
     console.log(data);
@@ -400,7 +396,7 @@ var DialogWrap = React.createClass({
 
 var navData = [{
     key: 1,
-    title: '导航一',
+    title: '组件列表',
     open: false, // option
     sub: [{
         key: 11,
@@ -420,24 +416,6 @@ var navData = [{
         title: '选项3-2'
     }, {
         key: 33,
-        title: '选项3-2'
-    }, {
-        key: 34,
-        title: '选项3-2'
-    }, {
-        key: 35,
-        title: '选项3-2'
-    }, {
-        key: 36,
-        title: '选项3-2'
-    }, {
-        key: 37,
-        title: '选项3-2'
-    }, {
-        key: 38,
-        title: '选项3-2'
-    }, {
-        key: 39,
         title: '选项3-2'
     }]
 }, {
@@ -502,7 +480,7 @@ var TimeSpanPickerWrap = React.createClass({
                 </div>
                 <div>
                     <TimeSpanPicker min={moment().startOf('day').toDate()} max={moment().endOf('day').toDate()}
-                                    date={moment().startOf('day').toDate()} onChange={this.handleChange}
+                                    date={moment().startOf('day').toDate()}
                                     onChange={this.handleChange}></TimeSpanPicker>
                 </div>
             </div>
@@ -636,26 +614,26 @@ const DropSelectWrap = React.createClass({
                 </DropSelect>
             </div>
         );
-    },
+    }
 });
 
 var AdvanceSelectComponent = React.createClass({
     getInitialState(){
         let selectList = [
-            {value: 0, name:'FE'},
-            {value: 1, name:'测试'},
-            {value: 2, name:'美丽-2'},
-            {value: 3, name:'美丽-3'},
-            {value: 4, name:'漂亮——1'},
-            {value: 5, name:'阿姐说饭卡卢萨卡是否快乐阿三开发饭卡是'},
-            {value: 6, name:'sz-罗湖'},
-            {value: 7, name:'gd-广州'},
-            {value: 8, name:'test'},
-            {value: 9, name:'110'},
-            {value: 10, name:'美丽-119'},
-            {value: 11, name:'美丽-wqeqw'},
-            {value: 12, name:'美丽_adsdasd'},
-            {value: 13, name:'美丽 asdasd'}
+            {value: 0, name: 'FE'},
+            {value: 1, name: '测试'},
+            {value: 2, name: '美丽-2'},
+            {value: 3, name: '美丽-3'},
+            {value: 4, name: '漂亮——1'},
+            {value: 5, name: '阿姐说饭卡卢萨卡是否快乐阿三开发饭卡是'},
+            {value: 6, name: 'sz-罗湖'},
+            {value: 7, name: 'gd-广州'},
+            {value: 8, name: 'test'},
+            {value: 9, name: '110'},
+            {value: 10, name: '美丽-119'},
+            {value: 11, name: '美丽-wqeqw'},
+            {value: 12, name: '美丽_adsdasd'},
+            {value: 13, name: '美丽 asdasd'}
         ];
         return {
             list: selectList,
@@ -664,11 +642,14 @@ var AdvanceSelectComponent = React.createClass({
     },
     render(){
 
-        return(
+        return (
             <div>
-                <button className="btn btn-default btn-primary btn-sm" onClick={this.changeList}>改变list</button>&nbsp;&nbsp;
-                <button className="btn btn-default btn-primary btn-sm" onClick={this.changeValue}>改变value</button>&nbsp;&nbsp;
-                <AdvanceSelect list={this.state.list} value={this.state.value} title="这是测试" inputClassName="input-sm" inputStyleName={{}}
+                <button className="btn btn-default btn-primary btn-sm" onClick={this.changeList}>改变list</button>
+                &nbsp;&nbsp;
+                <button className="btn btn-default btn-primary btn-sm" onClick={this.changeValue}>改变value</button>
+                &nbsp;&nbsp;
+                <AdvanceSelect list={this.state.list} value={this.state.value} title="这是测试" inputClassName="input-sm"
+                               inputStyleName={{}}
                                onValueChange={this.onValueChange} onFilterData={this.onFilterData}/>
             </div>
         );
@@ -679,21 +660,21 @@ var AdvanceSelectComponent = React.createClass({
     onFilterData(filterData){
         let needle = filterData.trim().toLowerCase(),
             items = this.state.list;
-        let newItems = items.filter(function(data){
+        let newItems = items.filter(function (data) {
             let dataName = data.name.toString().trim().toLowerCase();
-            return dataName.indexOf(needle) != -1
-                || this.matchingPinYin(dataName, {style: pinYin.STYLE_NORMAL}).indexOf(needle) != -1
-                || this.matchingPinYin(dataName, {style: pinYin.STYLE_FIRST_LETTER}).indexOf(needle) != -1;
+            return dataName.indexOf(needle) !== -1
+                || this.matchingPinYin(dataName, {style: pinYin.STYLE_NORMAL}).indexOf(needle) !== -1
+                || this.matchingPinYin(dataName, {style: pinYin.STYLE_FIRST_LETTER}).indexOf(needle) !== -1;
         }.bind(this));
         return newItems;
     },
     matchingPinYin(name, style = {style: pinYin.STYLE_NORMAL}){
         let pinyin = "", reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
-        for(let i=0; i<name.length; i++){
+        for (let i = 0; i < name.length; i++) {
             let val = name.substr(i, 1);
             if (!reg.test(val)) {
                 pinyin += val;
-            }else {
+            } else {
                 pinyin += pinYin(val, style)[0];
             }
         }
@@ -701,7 +682,7 @@ var AdvanceSelectComponent = React.createClass({
     },
     changeList(){
         let changeList = [];
-        for(var i=5; i<50; i++){
+        for (var i = 5; i < 50; i++) {
             changeList.push({value: i, name: i});
         }
         this.setState({
