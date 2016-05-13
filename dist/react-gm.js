@@ -1,12 +1,12 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("underscore"), require("react-dom"), require("react-bootstrap"), require("moment"));
+		module.exports = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "underscore", "react-dom", "react-bootstrap", "moment"], factory);
+		define(["react", "underscore", "react-dom", "moment", "react-bootstrap"], factory);
 	else if(typeof exports === 'object')
-		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("react-bootstrap"), require("moment"));
+		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
-		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["react-bootstrap"], root["moment"]);
+		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -56,25 +56,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _gridComponent = __webpack_require__(25);
+	var _grid = __webpack_require__(25);
 
-	var _gridComponent2 = _interopRequireDefault(_gridComponent);
+	var _grid2 = _interopRequireDefault(_grid);
 
-	var _paginationComponent = __webpack_require__(11);
+	var _pagination = __webpack_require__(11);
 
-	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
+	var _pagination2 = _interopRequireDefault(_pagination);
 
-	var _paginationTextComponent = __webpack_require__(12);
+	var _paginationText = __webpack_require__(12);
 
-	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
+	var _paginationText2 = _interopRequireDefault(_paginationText);
 
-	var _droperComponent = __webpack_require__(9);
+	var _droper = __webpack_require__(9);
 
-	var _droperComponent2 = _interopRequireDefault(_droperComponent);
+	var _droper2 = _interopRequireDefault(_droper);
 
-	var _formerComponent = __webpack_require__(24);
+	var _former = __webpack_require__(24);
 
-	var _formerComponent2 = _interopRequireDefault(_formerComponent);
+	var _former2 = _interopRequireDefault(_former);
 
 	var _validate = __webpack_require__(14);
 
@@ -84,21 +84,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validateMixin2 = _interopRequireDefault(_validateMixin);
 
-	var _importLeadComponent = __webpack_require__(27);
+	var _importLead = __webpack_require__(27);
 
-	var _importLeadComponent2 = _interopRequireDefault(_importLeadComponent);
+	var _importLead2 = _interopRequireDefault(_importLead);
 
-	var _storageComponent = __webpack_require__(30);
+	var _storage = __webpack_require__(30);
 
-	var _storageComponent2 = _interopRequireDefault(_storageComponent);
+	var _storage2 = _interopRequireDefault(_storage);
 
-	var _calendarComponent = __webpack_require__(6);
+	var _calendar = __webpack_require__(6);
 
-	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
+	var _calendar2 = _interopRequireDefault(_calendar);
 
-	var _datepickerComponent = __webpack_require__(20);
+	var _datepicker = __webpack_require__(20);
 
-	var _datepickerComponent2 = _interopRequireDefault(_datepickerComponent);
+	var _datepicker2 = _interopRequireDefault(_datepicker);
 
 	var _daterangepicker = __webpack_require__(21);
 
@@ -153,18 +153,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = {
-	    Grid: _gridComponent2.default,
-	    Pagination: _paginationComponent2.default,
-	    PaginationText: _paginationTextComponent2.default,
-	    Former: _formerComponent2.default,
-	    Calendar: _calendarComponent2.default,
-	    DatePicker: _datepickerComponent2.default,
+	    Grid: _grid2.default,
+	    Pagination: _pagination2.default,
+	    PaginationText: _paginationText2.default,
+	    Former: _former2.default,
+	    Calendar: _calendar2.default,
+	    DatePicker: _datepicker2.default,
 	    DateRangePicker: _daterangepicker2.default,
 	    ValidateMixin: _validateMixin2.default,
 	    Validate: _validate2.default,
-	    ImportLead: _importLeadComponent2.default,
-	    Droper: _droperComponent2.default,
-	    Storage: _storageComponent2.default,
+	    ImportLead: _importLead2.default,
+	    Droper: _droper2.default,
+	    Storage: _storage2.default,
 	    Tip: _tip2.default,
 	    NProgress: _nprogress2.default,
 	    Hr: _hr2.default,
@@ -222,7 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(5);
+	var _moment = __webpack_require__(4);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -971,7 +971,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            data = this.props.data,
 	            count = Math.ceil(data.count / data.limit),
 	            toPage = this.props.toPage;
-	        if (!page || page == data.index || page < 1 || page > count) {
+	        if (!page || page === data.index || page < 1 || page > count) {
 	            return;
 	        }
 
@@ -1043,11 +1043,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(3);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _moment = __webpack_require__(5);
+	var _moment = __webpack_require__(4);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -1058,8 +1054,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _classnames = __webpack_require__(7);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
-
-	var _reactBootstrap = __webpack_require__(4);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1481,10 +1475,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var AdvanceSelect = _react2.default.createClass({
@@ -1551,12 +1541,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 
 	        //默认选择值
-	        if (0 != list.length) {
+	        if (0 !== list.length) {
 	            selectedValue = list[0].value;
 	            inputValue = "";
 	            if (value) {
 	                list.forEach(function (data, index) {
-	                    if (data.value == value) {
+	                    if (data.value === value) {
 	                        selectedValue = value;
 	                        selectedIndex = index;
 	                        inputValue = data.name;
@@ -1581,12 +1571,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var selectedValue = "",
 	            inputValue = "",
 	            selectedIndex = 0;
-	        if (0 != list.length) {
+	        if (0 !== list.length) {
 	            selectedValue = list[0].value;
 	            // inputValue = list[0].name;
 	            if (nextProps.value) {
 	                list.forEach(function (data, index) {
-	                    if (data.value == nextProps.value) {
+	                    if (data.value === nextProps.value) {
 	                        selectedValue = nextProps.value;
 	                        selectedIndex = index;
 	                        inputValue = data.name;
@@ -1609,7 +1599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var optionList = list.map(function (data, i) {
 	            return _react2.default.createElement(
 	                'li',
-	                { className: selectedIndex == i ? "option-item option-hover option-selected" : "option-item",
+	                { className: selectedIndex === i ? "option-item option-hover option-selected" : "option-item",
 	                    value: data.value, key: data.value,
 	                    onClick: _this.selectOption.bind(_this, data, i) },
 	                data.name
@@ -1634,7 +1624,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    handleArrow: function handleArrow(event) {
-	        if (0 == this.state.list.length) {
+	        if (0 === this.state.list.length) {
 	            this.setState({
 	                inputValue: this.props.list ? this.props.list[0].name : ""
 	            });
@@ -1670,7 +1660,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    selectOption: function selectOption(data, index) {
 	        var inputValue = data.name;
 
-	        if (inputValue != this.refs.input.value && this.props.onValueChange) {
+	        if (inputValue !== this.refs.input.value && this.props.onValueChange) {
 	            this.props.onValueChange(this.state.id, data.value);
 	        }
 
@@ -1737,7 +1727,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    _enter: function _enter(index) {
-	        if (this.state.list[index].name != this.refs.input.value && this.props.onValueChange) {
+	        if (this.state.list[index].name !== this.refs.input.value && this.props.onValueChange) {
 	            this.props.onValueChange(this.state.id, this.state.list[index].value);
 	        }
 	        this.setState({
@@ -1796,19 +1786,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(3);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _moment = __webpack_require__(5);
+	var _moment = __webpack_require__(4);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(4);
+	var _reactBootstrap = __webpack_require__(5);
 
-	var _calendarComponent = __webpack_require__(6);
+	var _calendar = __webpack_require__(6);
 
-	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
+	var _calendar2 = _interopRequireDefault(_calendar);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1830,7 +1816,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _react2.default.createElement(
 	            _reactBootstrap.Popover,
 	            { id: this.state.id, className: 'gm-datepicker-popover' },
-	            _react2.default.createElement(_calendarComponent2.default, { selected: this.props.date, onSelect: this.handleSelect })
+	            _react2.default.createElement(_calendar2.default, { selected: this.props.date, onSelect: this.handleSelect })
 	        );
 	    },
 	    handleSelect: function handleSelect(date) {
@@ -1881,19 +1867,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(3);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _moment = __webpack_require__(5);
+	var _moment = __webpack_require__(4);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(4);
+	var _reactBootstrap = __webpack_require__(5);
 
-	var _calendarComponent = __webpack_require__(6);
+	var _calendar = __webpack_require__(6);
 
-	var _calendarComponent2 = _interopRequireDefault(_calendarComponent);
+	var _calendar2 = _interopRequireDefault(_calendar);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1925,14 +1907,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _react2.default.createElement(
 	            _reactBootstrap.Popover,
 	            { id: this.state.beginId, className: 'gm-datepicker-popover' },
-	            _react2.default.createElement(_calendarComponent2.default, { selected: this.props.begin, onSelect: this.handleSelect.bind(this, 'begin') })
+	            _react2.default.createElement(_calendar2.default, { selected: this.props.begin, onSelect: this.handleSelect.bind(this, 'begin') })
 	        );
 	    },
 	    renderPopoverEnd: function renderPopoverEnd() {
 	        return _react2.default.createElement(
 	            _reactBootstrap.Popover,
 	            { id: this.state.endId, className: 'gm-datepicker-popover' },
-	            _react2.default.createElement(_calendarComponent2.default, { selected: this.props.end, onSelect: this.handleSelect.bind(this, 'end') })
+	            _react2.default.createElement(_calendar2.default, { selected: this.props.end, onSelect: this.handleSelect.bind(this, 'end') })
 	        );
 	    },
 	    handleChange: function handleChange() {},
@@ -1989,7 +1971,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactBootstrap = __webpack_require__(4);
+	var _reactBootstrap = __webpack_require__(5);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2450,13 +2432,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _paginationComponent = __webpack_require__(11);
+	var _pagination = __webpack_require__(11);
 
-	var _paginationComponent2 = _interopRequireDefault(_paginationComponent);
+	var _pagination2 = _interopRequireDefault(_pagination);
 
-	var _paginationTextComponent = __webpack_require__(12);
+	var _paginationText = __webpack_require__(12);
 
-	var _paginationTextComponent2 = _interopRequireDefault(_paginationTextComponent);
+	var _paginationText2 = _interopRequireDefault(_paginationText);
 
 	var _underscore = __webpack_require__(2);
 
@@ -2634,12 +2616,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            data.enablePagination ? _react2.default.createElement(
 	                'div',
 	                { className: 'pull-right' },
-	                _react2.default.createElement(_paginationComponent2.default, { data: data.pagination, toPage: t.onToPage })
+	                _react2.default.createElement(_pagination2.default, { data: data.pagination, toPage: t.onToPage })
 	            ) : undefined,
 	            data.enablePaginationText ? _react2.default.createElement(
 	                'div',
 	                { className: 'pull-right' },
-	                _react2.default.createElement(_paginationTextComponent2.default, { data: data.pagination })
+	                _react2.default.createElement(_paginationText2.default, { data: data.pagination })
 	            ) : undefined
 	        );
 
@@ -2967,7 +2949,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _reactBootstrap = __webpack_require__(4);
+	var _reactBootstrap = __webpack_require__(5);
 
 	var _classnames = __webpack_require__(7);
 
@@ -3245,7 +3227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	    },
 	    save: function save() {
-	        Storage.set(this.props.name, value);
+	        Storage.set(this.props.name, this.props.value);
 	    },
 	    componentWillUpdate: function componentWillUpdate() {
 	        if (this.props.autoSave) {
@@ -3276,15 +3258,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(3);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _moment = __webpack_require__(5);
+	var _moment = __webpack_require__(4);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(4);
+	var _reactBootstrap = __webpack_require__(5);
 
 	var _timespan = __webpack_require__(13);
 
@@ -3542,10 +3520,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
 
 	var _reactDom = __webpack_require__(3);
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'underscore';
 import ReactDOM from 'react-dom';
+import {Router, Route, IndexRoute, hashHistory, Link} from 'react-router';
 import {
     Grid,
     Droper,
@@ -24,6 +25,96 @@ import {
 import ImportLeadWrap from './import.lead.js';
 import moment from 'moment';
 import pinYin from 'pinyin';
+
+import './index.less';
+
+const LayoutWrap = React.createClass({
+    render(){
+        return (
+            <div>
+                <h1>Flex</h1>
+                <FlexWrap></FlexWrap>
+            </div>
+        );
+    }
+});
+
+const DataWrap = React.createClass({
+    render(){
+        return (
+            <div>
+                <h1>Grid</h1>
+                <GridWrap></GridWrap>
+                <h1>ImportLead</h1>
+                <ImportLeadWrap></ImportLeadWrap>
+            </div>
+        );
+    }
+});
+
+const UploadWrap = React.createClass({
+    render(){
+        return (
+            <div>
+                <h1>Droper</h1>
+                <DroperWrap></DroperWrap>
+            </div>
+        );
+    }
+});
+
+const OverlayWrap = React.createClass({
+    render(){
+        return (
+            <div>
+                <h1>Tip</h1>
+                <TipWrap></TipWrap>
+                <hr/>
+                <h1>Dialog</h1>
+                <DialogWrap></DialogWrap>
+                <hr/>
+                <h1>NProgress</h1>
+                <NProgressWrap></NProgressWrap>
+            </div>
+        );
+    }
+});
+
+const DateWrap = React.createClass({
+    render(){
+        return (
+            <div>
+                <h1>Calendar</h1>
+                <CalendarWrap></CalendarWrap>
+                <hr/>
+                <h1>DropSelect</h1>
+                <DropSelectWrap></DropSelectWrap>
+                <h1>DatePicker</h1>
+                <DatePickerWrap></DatePickerWrap>
+                <h1>Daterangepicker</h1>
+                <DaterangepickerWrap></DaterangepickerWrap>
+                <hr/>
+                <h1>TimeSpanPicker</h1>
+                <TimeSpanPickerWrap></TimeSpanPickerWrap>
+                <div style={{height: 500}}></div>
+            </div>
+        );
+    }
+});
+
+const FormWrap = React.createClass({
+    render(){
+        return (
+            <div>
+                <h1>AdvanceSelect</h1>
+                <AdvanceSelectComponent />
+                <hr/>
+                <h1>Former</h1>
+                <FormerDom></FormerDom>
+            </div>
+        );
+    }
+});
 
 // tip
 var TipWrap = React.createClass({
@@ -394,60 +485,6 @@ var DialogWrap = React.createClass({
     }
 });
 
-var navData = [{
-    key: 1,
-    title: '组件列表',
-    open: false, // option
-    sub: [{
-        key: 11,
-        title: '选项1-1'
-    }]
-}, {
-    key: 2,
-    title: '导航二'
-}, {
-    key: 3,
-    title: '导航三',
-    sub: [{
-        key: 31,
-        title: '选项3-1'
-    }, {
-        key: 32,
-        title: '选项3-2'
-    }, {
-        key: 33,
-        title: '选项3-2'
-    }]
-}, {
-    key: 4,
-    title: '导航四'
-}];
-
-var NavigationWrap = React.createClass({
-    getInitialState(){
-        return {
-            select: 11
-        };
-    },
-    render(){
-        return (
-            <Navigation className="gm-whiteframe1" data={navData} select={this.state.select}>asdf</Navigation>
-        );
-    },
-    componentDidMount(){
-        setTimeout(() => {
-            this.setState({
-                select: 32
-            });
-        }, 3000);
-        setTimeout(() => {
-            this.setState({
-                select: 4
-            });
-        }, 5000);
-    }
-});
-
 var FlexWrap = React.createClass({
     render(){
         return (
@@ -694,6 +731,68 @@ var AdvanceSelectComponent = React.createClass({
     }
 });
 
+const Home = React.createClass({
+    render(){
+        return (
+            <div className="b-home">
+                <div>
+                    <img src="./logo.png" alt=""/>
+                    <span className="gm-text-desc">+</span>
+                    <img src="./react.svg" alt=""/>
+                    <span className="gm-text-desc">+</span>
+                    <img src="./chrome.jpeg" alt=""/>
+                </div>
+                <div>致力于快速搭建项目，像搭积木一样</div>
+                <hr/>
+                <div>
+                    <h4>Link</h4>
+                    <a href="http://v3.bootcss.com/" target="_blank">bootstrap</a>
+                    <br/>
+                    <a href="http://react-bootstrap.github.io/" target="_blank">react-bootstrap</a>
+                </div>
+            </div>
+        );
+    }
+});
+
+var navData = [{
+    key: 'shouye',
+    title: <Link to="/">首页</Link>
+}, {
+    key: 'zujian',
+    title: '组件',
+    open: true,
+    sub: [{
+        key: 'overlay',
+        title: <Link to="/overlay">浮层</Link>
+    }, {
+        key: 'date',
+        title: <Link to="/date">时间</Link>
+    }, {
+        key: 'layout',
+        title: <Link to="/layout">布局</Link>
+    }, {
+        key: 'data',
+        title: <Link to="/data">数据</Link>
+    }, {
+        key: 'form',
+        title: <Link to="/form">表单</Link>
+    }]
+}];
+
+var NavigationWrap = React.createClass({
+    getInitialState(){
+        return {
+            select: 11
+        };
+    },
+    render(){
+        return (
+            <Navigation className="gm-whiteframe1" data={navData} select={this.state.select}/>
+        );
+    }
+});
+
 const App = React.createClass({
     getInitialState(){
         return {
@@ -716,49 +815,7 @@ const App = React.createClass({
                         <NavigationWrap></NavigationWrap>
                     </Flex>
                     <Flex column flex className="gm-app-content gm-padding10 gm-block">
-                        <h1>AdvanceSelect</h1>
-                        <AdvanceSelectComponent />
-                        <h1>Calendar</h1>
-                        <CalendarWrap></CalendarWrap>
-                        <hr/>
-                        <h1>DropSelect</h1>
-                        <DropSelectWrap></DropSelectWrap>
-                        <h1>DatePicker</h1>
-                        <DatePickerWrap></DatePickerWrap>
-                        <h1>Daterangepicker</h1>
-                        <DaterangepickerWrap></DaterangepickerWrap>
-                        <hr/>
-                        <h1>TimeSpanPicker</h1>
-                        <TimeSpanPickerWrap></TimeSpanPickerWrap>
-                        <h1>Flex</h1>
-                        <FlexWrap></FlexWrap>
-                        <hr/>
-                        <h1>Tip</h1>
-                        <TipWrap></TipWrap>
-                        <hr/>
-                        <h1>Dialog</h1>
-                        <DialogWrap></DialogWrap>
-                        <hr/>
-                        <h1>NProgress</h1>
-                        <NProgressWrap></NProgressWrap>
-                        <hr/>
-                        <h1>Grid</h1>
-                        <GridWrap></GridWrap>
-                        <hr/>
-                        <h1>Droper</h1>
-                        <DroperWrap></DroperWrap>
-                        <hr/>
-                        <h1>Former</h1>
-                        <FormerDom></FormerDom>
-                        <hr/>
-                        <h1>Dialog</h1>
-                        <DialogWrap></DialogWrap>
-                        <hr/>
-                        <h1>ImportLead</h1>
-                        <ImportLeadWrap></ImportLeadWrap>
-                        <div className="gm-padding10">
-                            <p className="text-muted">React-GM组件库</p>
-                        </div>
+                        {this.props.children}
                     </Flex>
                 </Flex>
             </Flex>
@@ -771,6 +828,22 @@ const App = React.createClass({
     }
 });
 
-ReactDOM.render(
-    <App></App>
-    , document.getElementById('appContainer'));
+const Root = React.createClass({
+    render(){
+        return (
+            <Router history={hashHistory}>
+                <Route path="/" component={App}>
+                    <IndexRoute component={Home}></IndexRoute>
+                    <Route path="form" component={FormWrap}></Route>
+                    <Route path="date" component={DateWrap}></Route>
+                    <Route path="overlay" component={OverlayWrap}></Route>
+                    <Route path="upload" component={UploadWrap}></Route>
+                    <Route path="layout" component={LayoutWrap}></Route>
+                    <Route path="data" component={DataWrap}></Route>
+                </Route>
+            </Router>
+        );
+    }
+});
+
+ReactDOM.render(<Root></Root>, document.getElementById('appContainer'));

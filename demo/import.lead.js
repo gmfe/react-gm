@@ -1,9 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Grid from './../lib/grid.component.js';
-import Droper from './../lib/droper.component.js';
-import ImportLead from './../lib/import.lead.component.js';
-import _ from 'underscore';
+import ImportLead from './../lib/component/import.lead.js';
 
 var gridData = {
     loading: false,
@@ -252,7 +248,7 @@ var ImportLeadWrap = React.createClass({
     handleEdit: function (i, field, value, tipsI) {
         // i 是数据的索引， field 对应具体字段，value是修改后的指， tipsI 是提示的索引
         // 提供这些信息主要是让应用修改数据和提示。
-        console.log(arguments);
+        console.log(i, field, value, tipsI);
     }
 });
 
