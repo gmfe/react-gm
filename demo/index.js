@@ -3,11 +3,11 @@ import _ from 'underscore';
 import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, hashHistory, Link} from 'react-router';
 import {
+    Util,
     Grid,
     Droper,
     Validate,
     ValidateMixin,
-    Util,
     Storage,
     Calendar,
     DatePicker,
@@ -20,7 +20,8 @@ import {
     TimeSpan,
     TimeSpanPicker,
     DropSelect,
-    AdvanceSelect
+    AdvanceSelect,
+    Switch
 } from '../lib/index';
 import ImportLeadWrap from './import.lead.js';
 import moment from 'moment';
@@ -103,6 +104,11 @@ const DateWrap = React.createClass({
 });
 
 const FormWrap = React.createClass({
+    getInitialState(){
+        return {
+            checked: false
+        };
+    },
     render(){
         return (
             <div>
@@ -111,8 +117,32 @@ const FormWrap = React.createClass({
                 <hr/>
                 <h1>Former</h1>
                 <FormerDom></FormerDom>
+                <h1>Switch</h1>
+                <div>
+                    <Switch
+                        defaultChecked={true}
+                        checkedChildren={"是"}
+                        unCheckedChildren={"否"}
+                    ></Switch>
+                    <Switch
+                        checked={this.state.checked}
+                        checkedChildren={"是"}
+                        unCheckedChildren={"否"}
+                        onChange={this.handleChange}
+                    ></Switch>
+                    <Switch
+                        disabled
+                        checkedChildren={"yes"}
+                        unCheckedChildren={"no"}
+                    ></Switch>
+                </div>
             </div>
         );
+    },
+    handleChange(){
+        this.setState({
+            checked: !this.state.checked
+        });
     }
 });
 
