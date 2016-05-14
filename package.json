@@ -56,9 +56,9 @@
     "pinyin": "^2.7.1",
     "postcss-loader": "^0.8.1",
     "precss": "^1.4.0",
-    "react": "^0.14.0",
+    "react": "^15.0.2",
     "react-bootstrap": "^0.27.3",
-    "react-dom": "^0.14.0",
+    "react-dom": "^15.0.2",
     "react-router": "^2.4.0",
     "style-loader": "^0.12.4",
     "underscore": "^1.8.3",
@@ -66,5 +66,13 @@
     "webpack-dev-middleware": "^1.2.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.2.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "moment": "^2.13.0",
+    "react": "^15.0.2",
+    "react-bootstrap": "^0.27.3",
+    "react-dom": "^15.0.2",
+    "underscore": "^1.8.3"
   }
 }
