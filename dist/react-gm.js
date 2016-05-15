@@ -2668,6 +2668,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            )
 	        );
 	    },
+	    componentDidMount: function componentDidMount() {
+	        console.error('Grid are deprecated! Replace with Sheet!');
+	    },
+
 	    onActions: function onActions(elist, index, action) {
 	        action.click(elist, index);
 	    },
@@ -3381,7 +3385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: (0, _classnames2.default)("gm-sheet", this.props.className) },
 	                select && batchs ? _react2.default.createElement(
 	                    'div',
-	                    { className: 'gm-grid-top gm-marginBottom5' },
+	                    { className: 'gm-marginBottom5' },
 	                    batchs.props.children
 	                ) : undefined,
 	                _react2.default.createElement(
@@ -3395,7 +3399,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            null,
 	                            select ? _react2.default.createElement(
 	                                'th',
-	                                { className: 'gm-grid-select' },
+	                                { className: 'gm-sheet-select' },
 	                                _react2.default.createElement('input', { type: 'checkbox', checked: isSelectAll,
 	                                    onChange: this.handleSelectAll.bind(this, select) })
 	                            ) : undefined,
@@ -3461,7 +3465,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'gm-grid-foot clearfix' },
+	                    { className: 'clearfix' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'pull-right' },
