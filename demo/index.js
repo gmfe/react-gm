@@ -52,7 +52,7 @@ const DataWrap = React.createClass({
             <div>
                 <h1>Sheet</h1>
                 <SheetWrap></SheetWrap>
-                <h1>Grid</h1>
+                <h1>Grid(Deprecated)</h1>
                 <GridWrap></GridWrap>
                 <h1>ImportLead</h1>
                 <ImportLeadWrap></ImportLeadWrap>
