@@ -847,6 +847,28 @@
     transform: scale(1);
   }
 }
+.gm-sheet td > button {
+  margin: 0 5px;
+}
+.gm-sheet td > button:first-child {
+  margin-left: 0;
+}
+.gm-sheet td > button:last-child {
+  margin-right: 0;
+}
+.gm-sheet-select {
+  width: 30px;
+}
+.gm-sheet .pagination {
+  margin: 0;
+}
+.gm-sheet .gm-pagination-text {
+  line-height: 30px;
+  margin-right: 10px;
+}
+.gm-sheet-batch button {
+  margin-right: 10px;
+}
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
   font-weight: 400;
@@ -912,6 +934,24 @@ html, body {
 .gm-paddingBottom15 {
   padding-bottom: 15px;
 }
+.gm-paddingLeft5 {
+  padding-left: 5px;
+}
+.gm-paddingLeft10 {
+  padding-left: 10px;
+}
+.gm-paddingLeft15 {
+  padding-left: 15px;
+}
+.gm-paddingRight5 {
+  padding-right: 5px;
+}
+.gm-paddingRight10 {
+  padding-right: 10px;
+}
+.gm-paddingRight15 {
+  padding-right: 15px;
+}
 .gm-paddingLR5 {
   padding-left: 5px;
   padding-right: 5px;
@@ -965,6 +1005,24 @@ html, body {
 }
 .gm-marginBottom15 {
   margin-bottom: 15px;
+}
+.gm-marginLeft5 {
+  margin-left: 5px;
+}
+.gm-marginLeft10 {
+  margin-left: 10px;
+}
+.gm-marginLeft15 {
+  margin-left: 15px;
+}
+.gm-marginRight5 {
+  margin-right: 5px;
+}
+.gm-marginRight10 {
+  margin-right: 10px;
+}
+.gm-marginRight15 {
+  margin-right: 15px;
 }
 .gm-marginTB5 {
   margin-top: 5px;
