@@ -2,22 +2,19 @@
 
 `npm install`
 
+
 # 开发
 
-lib 是源代码，通过webpack打包到dist
+src 是源代码，通过webpack打包到dist
 
 `npm start` 启动服务开发。
 
 # 发布
 
-`npm run deploy`
+前提把本地代码都commit
+`npm run publishpatch`
+（会自动打包，发布到npm，同步到cnpm）
 
-# 发布到npm
+# 推送到gh-pages
 
-`npm version patch`
-
-`npm login` 如果登录则忽略
-
-`npm publish`
-`cnpm sync react-gm` 同步到淘宝源
-
+`npm run ghpages`

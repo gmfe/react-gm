@@ -1,5 +1,5 @@
 import React from 'react';
-import ImportLead from './../lib/component/import.lead.js';
+import ImportLead from '../src/component/import.lead.js';
 
 var gridData = {
     loading: false,

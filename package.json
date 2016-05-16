@@ -14,7 +14,7 @@
     "react-component"
   ],
   "scripts": {
-    "precommit": "eslint ./lib/ ./demo/;",
+    "precommit": "eslint ./src/ ./demo/;",
     "pre": "npm install",
     "clear": "rm -rf build; mkdir build;",
     "start": "npm run clear; NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --inline --hot --progress --colors --port 3000",

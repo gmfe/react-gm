@@ -26,7 +26,7 @@ import {
     DropSelect,
     AdvanceSelect,
     Switch
-} from '../lib/index';
+} from '../src/index';
 import ImportLeadWrap from './import.lead.js';
 import moment from 'moment';
 import pinYin from 'pinyin';

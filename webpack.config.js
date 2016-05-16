@@ -5,7 +5,7 @@ var autoprefixer = require('autoprefixer');
 var precss = require('precss');
 
 module.exports = {
-    entry: './lib/index',
+    entry: './src/index',
     externals: {
         'react': 'react',
         'react-dom': 'react-dom',
