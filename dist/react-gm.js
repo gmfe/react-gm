@@ -1114,9 +1114,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    propTypes: {
 	        flex: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.bool]),
-	        auto: _react2.default.PropTypes.string,
-	        width: _react2.default.PropTypes.string,
-	        height: _react2.default.PropTypes.string,
+	        auto: _react2.default.PropTypes.bool,
+	        none: _react2.default.PropTypes.bool,
+	        width: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
+	        height: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
 	        row: _react2.default.PropTypes.bool,
 	        column: _react2.default.PropTypes.bool,
 	        wrap: _react2.default.PropTypes.bool,
@@ -1137,7 +1138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'gm-flex': true,
 
 	            'gm-flex-auto': this.props.auto,
-	            'gm-flex-none': this.props.width || this.props.height,
+	            'gm-flex-none': this.props.none || this.props.width || this.props.height,
 
 	            'gm-flex-row': this.props.row,
 	            'gm-flex-column': this.props.column,
