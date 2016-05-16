@@ -17,4 +17,4 @@ src 是源代码，通过webpack打包到dist
 
 # 推送到gh-pages
 
-`npm run ghpages`
+`npm run gh-pages`
