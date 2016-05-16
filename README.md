@@ -1,32 +1,16 @@
 [![npm version](https://badge.fury.io/js/react-gm.svg)](https://badge.fury.io/js/react-gm)
 
 # DOC
-[Grid](https://github.com/gmfe/react-gm/issues/1)
-
-[Pagination && PaginationText](https://github.com/gmfe/react-gm/issues/4)
-
-[Droper](https://github.com/gmfe/react-gm/issues/2)
-
-[Former](https://github.com/gmfe/react-gm/issues/3) *(alpha)*
-
-[Calendar](https://github.com/gmfe/react-gm/issues/9)
-
-[DatePicker & DateRangePicker](https://github.com/gmfe/react-gm/issues/10)
-
-[Validate](https://github.com/gmfe/react-gm/issues/5)
-
-[ValidateMixin](https://github.com/gmfe/react-gm/issues/6)
+组件
+[https://github.com/gmfe/react-gm/wiki](https://github.com/gmfe/react-gm/wiki)
 
 Util
-- [Request](https://github.com/gmfe/react-gm/issues/7)
-- [format](https://github.com/gmfe/react-gm/issues/8)
+[https://github.com/gmfe/gm-util](https://github.com/gmfe/gm-util)
 
-其他文档暂时没有，有接口使用问题直接找liyatang。
-有需求随时提
-
+有其他文档需求则提issue
 
 # 安装
-`npm install --save-dev react-gm`
+`npm install react-gm -D`
 
 # 依赖
 
