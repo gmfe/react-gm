@@ -31,6 +31,7 @@ import ImportLeadWrap from './import.lead.js';
 import moment from 'moment';
 import pinYin from 'pinyin';
 
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.less';
 
 const {SheetColumn, SheetAction, SheetSelect, SheetBatchAction} = Sheet;

@@ -15,7 +15,7 @@ module.exports = {
         ]
     },
     output: {
-        path: path.join(__dirname, ''),
+        path: path.join(__dirname, 'build'),
         filename: '[name].[hash].bundle.js',
         publicPath: '/react-gm/build/'
     },
@@ -32,6 +32,9 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             loader: 'babel'
+        }, {
+            test: /(fontawesome-webfont|glyphicons-halflings-regular)\.(woff|woff2|ttf|eot|svg)($|\?)/,
+            loader: 'url?limit=1024&name=fonts/[name].[hash].[ext]'
         }, {
             test: /\.(css|less)$/,
             loader: 'style!css!postcss!less'
