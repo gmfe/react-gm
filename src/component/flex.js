@@ -4,9 +4,10 @@ import classNames from 'classnames';
 var Flex = React.createClass({
     propTypes: {
         flex: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.bool]),
-        auto: React.PropTypes.string,
-        width: React.PropTypes.string,
-        height: React.PropTypes.string,
+        auto: React.PropTypes.bool,
+        none: React.PropTypes.bool,
+        width: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+        height: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
         row: React.PropTypes.bool,
         column: React.PropTypes.bool,
         wrap: React.PropTypes.bool,
@@ -27,7 +28,7 @@ var Flex = React.createClass({
             'gm-flex': true,
 
             'gm-flex-auto': this.props.auto,
-            'gm-flex-none': this.props.width || this.props.height,
+            'gm-flex-none': this.props.none || this.props.width || this.props.height,
 
             'gm-flex-row': this.props.row,
             'gm-flex-column': this.props.column,
@@ -49,7 +50,7 @@ var Flex = React.createClass({
         }, this.props.className);
 
         let style = Object.assign({}, this.props.style);
-        if(this.props.flex){
+        if (this.props.flex) {
             style.flex = (typeof this.props.flex === 'boolean') ? 1 : this.props.flex;
         }
         if (this.props.height) {

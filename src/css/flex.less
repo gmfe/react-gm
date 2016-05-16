@@ -1,14 +1,3 @@
-
-.gm-flex {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-content: stretch;
-  align-items: stretch;
-  box-sizing: border-box;
-}
-
 .gm-flex-flex {
   flex: 1;
 }
@@ -21,58 +10,68 @@
   flex: none;
 }
 
-.gm-flex.gm-flex-row {
+.gm-flex {
+  display: flex;
   flex-direction: row;
-}
-
-.gm-flex.gm-flex-column {
-  flex-direction: column;
-}
-
-.gm-flex.gm-flex-wrap {
-  flex-wrap: wrap;
-}
-
-.gm-flex.gm-flex-nowrap {
   flex-wrap: nowrap;
-}
-
-.gm-flex.gm-flex-justify-start {
   justify-content: flex-start;
-}
-
-.gm-flex.gm-flex-justify-end {
-  justify-content: flex-end;
-}
-
-.gm-flex.gm-flex-justify-center {
-  justify-content: center;
-}
-
-.gm-flex.gm-flex-justify-between {
-  justify-content: space-between;
-}
-
-.gm-flex.gm-flex-justify-around {
-  justify-content: space-around;
-}
-
-.gm-flex.gm-flex-align-start {
-  align-items: flex-start;
-}
-
-.gm-flex.gm-flex-align-end {
-  align-items: flex-end;
-}
-
-.gm-flex.gm-flex-align-center {
-  align-items: center;
-}
-
-.gm-flex.gm-flex-align-baseline {
-  align-items: baseline;
-}
-
-.gm-flex.gm-flex-align-stretch {
+  align-content: stretch;
   align-items: stretch;
+  box-sizing: border-box;
+
+  &.gm-flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  &.gm-flex-nowrap {
+    flex-wrap: nowrap;
+  }
+
+  &.gm-flex-row {
+    flex-direction: row;
+  }
+
+  &.gm-flex-column {
+    flex-direction: column;
+  }
+
+  &.gm-flex-justify-start {
+    justify-content: flex-start;
+  }
+
+  &.gm-flex-justify-end {
+    justify-content: flex-end;
+  }
+
+  &.gm-flex-justify-center {
+    justify-content: center;
+  }
+
+  &.gm-flex-justify-between {
+    justify-content: space-between;
+  }
+
+  &.gm-flex-justify-around {
+    justify-content: space-around;
+  }
+
+  &.gm-flex-align-start {
+    align-items: flex-start;
+  }
+
+  &.gm-flex-align-end {
+    align-items: flex-end;
+  }
+
+  &.gm-flex-align-center {
+    align-items: center;
+  }
+
+  &.gm-flex-align-baseline {
+    align-items: baseline;
+  }
+
+  &.gm-flex-align-stretch {
+    align-items: stretch;
+  }
 }
