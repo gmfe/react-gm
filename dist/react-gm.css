@@ -82,7 +82,7 @@
           flex: 1;
   overflow-y: auto;
 }
-.gm-import-lead-tip {
+.gm-import-lead .gm-import-lead-tip {
   display: none;
   position: absolute;
   z-index: 2;

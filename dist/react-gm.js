@@ -56,103 +56,103 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _gmUtil = __webpack_require__(10);
+	var _gmUtil = __webpack_require__(7);
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
-	var _grid = __webpack_require__(25);
+	var _grid = __webpack_require__(28);
 
 	var _grid2 = _interopRequireDefault(_grid);
 
-	var _pagination = __webpack_require__(8);
+	var _pagination = __webpack_require__(9);
 
 	var _pagination2 = _interopRequireDefault(_pagination);
 
-	var _pagination3 = __webpack_require__(9);
+	var _pagination3 = __webpack_require__(10);
 
 	var _pagination4 = _interopRequireDefault(_pagination3);
 
-	var _droper = __webpack_require__(11);
+	var _droper = __webpack_require__(14);
 
 	var _droper2 = _interopRequireDefault(_droper);
 
-	var _former = __webpack_require__(24);
+	var _former = __webpack_require__(27);
 
 	var _former2 = _interopRequireDefault(_former);
 
-	var _validate = __webpack_require__(14);
+	var _validate = __webpack_require__(17);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validate3 = __webpack_require__(35);
+	var _validate3 = __webpack_require__(38);
 
 	var _validate4 = _interopRequireDefault(_validate3);
 
-	var _import = __webpack_require__(27);
+	var _import = __webpack_require__(30);
 
 	var _import2 = _interopRequireDefault(_import);
 
-	var _storage = __webpack_require__(31);
+	var _storage = __webpack_require__(34);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
-	var _calendar = __webpack_require__(7);
+	var _calendar = __webpack_require__(8);
 
 	var _calendar2 = _interopRequireDefault(_calendar);
 
-	var _datepicker = __webpack_require__(20);
+	var _datepicker = __webpack_require__(23);
 
 	var _datepicker2 = _interopRequireDefault(_datepicker);
 
-	var _daterangepicker = __webpack_require__(21);
+	var _daterangepicker = __webpack_require__(24);
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(34);
+	var _tip = __webpack_require__(37);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(29);
+	var _nprogress = __webpack_require__(32);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	var _hr = __webpack_require__(26);
+	var _hr = __webpack_require__(29);
 
 	var _hr2 = _interopRequireDefault(_hr);
 
-	var _dialog = __webpack_require__(22);
+	var _dialog = __webpack_require__(25);
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _navigation = __webpack_require__(28);
+	var _navigation = __webpack_require__(31);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _flex = __webpack_require__(12);
+	var _flex = __webpack_require__(15);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
-	var _timespan = __webpack_require__(13);
+	var _timespan = __webpack_require__(16);
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _timespanpicker = __webpack_require__(33);
+	var _timespanpicker = __webpack_require__(36);
 
 	var _timespanpicker2 = _interopRequireDefault(_timespanpicker);
 
-	var _dropselect = __webpack_require__(23);
+	var _dropselect = __webpack_require__(26);
 
 	var _dropselect2 = _interopRequireDefault(_dropselect);
 
-	var _advanceselect = __webpack_require__(19);
+	var _advanceselect = __webpack_require__(22);
 
 	var _advanceselect2 = _interopRequireDefault(_advanceselect);
 
-	var _switch = __webpack_require__(32);
+	var _switch = __webpack_require__(35);
 
 	var _switch2 = _interopRequireDefault(_switch);
 
-	var _sheet = __webpack_require__(30);
+	var _sheet = __webpack_require__(33);
 
 	var _sheet2 = _interopRequireDefault(_sheet);
 
@@ -277,6 +277,47 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _request = __webpack_require__(20);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	var _requestInterceptor = __webpack_require__(13);
+
+	var _requestInterceptor2 = _interopRequireDefault(_requestInterceptor);
+
+	var _param = __webpack_require__(12);
+
+	var _param2 = _interopRequireDefault(_param);
+
+	var _format = __webpack_require__(11);
+
+	var _format2 = _interopRequireDefault(_format);
+
+	var _visibilitycheck = __webpack_require__(21);
+
+	var _visibilitycheck2 = _interopRequireDefault(_visibilitycheck);
+
+	var _is = __webpack_require__(19);
+
+	var _is2 = _interopRequireDefault(_is);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = {
+	    Request: _request2.default,
+	    RequestInterceptor: _requestInterceptor2.default,
+	    format: _format2.default,
+	    param: _param2.default,
+	    visibility: _visibilitycheck2.default,
+	    is: _is2.default
+	};
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -467,7 +508,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Calendar;
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -609,7 +650,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Pagination;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -653,48 +694,149 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = PaginationText;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _request = __webpack_require__(37);
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
-	var _request2 = _interopRequireDefault(_request);
+	var _underscore = __webpack_require__(2);
 
-	var _requestInterceptor = __webpack_require__(17);
-
-	var _requestInterceptor2 = _interopRequireDefault(_requestInterceptor);
-
-	var _param = __webpack_require__(16);
-
-	var _param2 = _interopRequireDefault(_param);
-
-	var _format = __webpack_require__(15);
-
-	var _format2 = _interopRequireDefault(_format);
-
-	var _visibilitycheck = __webpack_require__(38);
-
-	var _visibilitycheck2 = _interopRequireDefault(_visibilitycheck);
-
-	var _is = __webpack_require__(36);
-
-	var _is2 = _interopRequireDefault(_is);
+	var _underscore2 = _interopRequireDefault(_underscore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = {
-	    Request: _request2.default,
-	    RequestInterceptor: _requestInterceptor2.default,
-	    format: _format2.default,
-	    param: _param2.default,
-	    visibility: _visibilitycheck2.default,
-	    is: _is2.default
+	var format = function format(str, data) {
+	    var result = str;
+	    if (arguments.length < 2) {
+	        return result;
+	    }
+
+	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
+	        var keys = arguments[1].split('.');
+	        var r = null;
+	        _underscore2.default.each(keys, function (value, index) {
+	            if (index) {
+	                r = r[value];
+	            } else {
+	                r = data[value];
+	            }
+	        });
+	        return r;
+	    });
+	    return result;
 	};
 
+	exports.default = format;
+
 /***/ },
-/* 11 */
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var param = function param(obj) {
+	    // encodeURIComponent
+	    return _underscore2.default.map(obj, function (v, k) {
+	        return [encodeURIComponent(k), '=', encodeURIComponent(v)].join('');
+	    }).join('&').replace(/%20/g, "+");
+	};
+
+	exports.default = param;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var RequestInterceptor = function () {
+	    var interceptors = []; // [{request: function(){}, response: function(){}, responseError: function(){}}]
+	    var id = 0;
+
+	    return {
+	        add: function add(interceptor) {
+	            interceptor.__id = id++;
+	            interceptors.push(interceptor);
+	            return interceptor.__id;
+	        },
+	        remove: function remove(interceptorId) {
+	            interceptors = _underscore2.default.filter(interceptors, function (value) {
+	                return value.__id !== interceptorId;
+	            });
+	        },
+
+	        // 私有方法,谁用谁死
+	        interceptor: {
+	            request: function request(config) {
+	                var promise = Promise.resolve(config);
+	                _underscore2.default.each(interceptors, function (value) {
+	                    if (value.request) {
+	                        promise = promise.then(function (_config) {
+	                            // 如果request不按规范来,啥也不做. 则默认放回 config
+	                            return value.request(_config) || config;
+	                        });
+	                    }
+	                });
+
+	                return promise;
+	            },
+	            response: function response(json, config) {
+	                var promise = Promise.resolve(json);
+	                _underscore2.default.each(interceptors, function (value) {
+	                    if (value.response) {
+	                        promise = promise.then(function (json) {
+	                            // 如果response不按规范来,啥也不做. 则默认放回json
+	                            return value.response(json, config) || json;
+	                        });
+	                    }
+	                });
+	                return promise;
+	            },
+	            responseError: function responseError(reason, config) {
+	                var promise = Promise.reject(reason);
+	                _underscore2.default.each(interceptors, function (value) {
+	                    if (value.responseError) {
+	                        promise = promise.catch(function (reason) {
+	                            // 如果responseError不按规范来,啥也不做. reason
+	                            return Promise.reject(value.responseError(reason, config) || reason);
+	                        });
+	                    }
+	                });
+
+	                return promise;
+	            }
+	        }
+	    };
+	}();
+
+	exports.default = RequestInterceptor;
+
+/***/ },
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -711,7 +853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _gmUtil = __webpack_require__(10);
+	var _gmUtil = __webpack_require__(7);
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
@@ -946,7 +1088,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Droper;
 
 /***/ },
-/* 12 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1038,7 +1180,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Flex;
 
 /***/ },
-/* 13 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1125,7 +1267,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpan;
 
 /***/ },
-/* 14 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1138,7 +1280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _gmUtil = __webpack_require__(10);
+	var _gmUtil = __webpack_require__(7);
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
@@ -1320,148 +1462,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Validate;
 
 /***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var format = function format(str, data) {
-	    var result = str;
-	    if (arguments.length < 2) {
-	        return result;
-	    }
-
-	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
-	        var keys = arguments[1].split('.');
-	        var r = null;
-	        _underscore2.default.each(keys, function (value, index) {
-	            if (index) {
-	                r = r[value];
-	            } else {
-	                r = data[value];
-	            }
-	        });
-	        return r;
-	    });
-	    return result;
-	};
-
-	exports.default = format;
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var param = function param(obj) {
-	    // encodeURIComponent
-	    return _underscore2.default.map(obj, function (v, k) {
-	        return [encodeURIComponent(k), '=', encodeURIComponent(v)].join('');
-	    }).join('&').replace(/%20/g, "+");
-	};
-
-	exports.default = param;
-
-/***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var RequestInterceptor = function () {
-	    var interceptors = []; // [{request: function(){}, response: function(){}, responseError: function(){}}]
-	    var id = 0;
-
-	    return {
-	        add: function add(interceptor) {
-	            interceptor.__id = id++;
-	            interceptors.push(interceptor);
-	            return interceptor.__id;
-	        },
-	        remove: function remove(interceptorId) {
-	            interceptors = _underscore2.default.filter(interceptors, function (value) {
-	                return value.__id !== interceptorId;
-	            });
-	        },
-
-	        // 私有方法,谁用谁死
-	        interceptor: {
-	            request: function request(config) {
-	                var promise = Promise.resolve(config);
-	                _underscore2.default.each(interceptors, function (value) {
-	                    if (value.request) {
-	                        promise = promise.then(function (_config) {
-	                            // 如果request不按规范来,啥也不做. 则默认放回 config
-	                            return value.request(_config) || config;
-	                        });
-	                    }
-	                });
-
-	                return promise;
-	            },
-	            response: function response(json, config) {
-	                var promise = Promise.resolve(json);
-	                _underscore2.default.each(interceptors, function (value) {
-	                    if (value.response) {
-	                        promise = promise.then(function (json) {
-	                            // 如果response不按规范来,啥也不做. 则默认放回json
-	                            return value.response(json, config) || json;
-	                        });
-	                    }
-	                });
-	                return promise;
-	            },
-	            responseError: function responseError(reason, config) {
-	                var promise = Promise.reject(reason);
-	                _underscore2.default.each(interceptors, function (value) {
-	                    if (value.responseError) {
-	                        promise = promise.catch(function (reason) {
-	                            // 如果responseError不按规范来,啥也不做. reason
-	                            return Promise.reject(value.responseError(reason, config) || reason);
-	                        });
-	                    }
-	                });
-
-	                return promise;
-	            }
-	        }
-	    };
-	}();
-
-	exports.default = RequestInterceptor;
-
-/***/ },
 /* 18 */
 /***/ function(module, exports) {
 
@@ -1471,6 +1471,210 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 19 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var is = {};
+
+	is.weixin = function () {
+	    return (/MicroMessenger/i.test(navigator.userAgent)
+	    );
+	};
+
+	exports.default = is;
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _param = __webpack_require__(12);
+
+	var _param2 = _interopRequireDefault(_param);
+
+	var _format = __webpack_require__(11);
+
+	var _format2 = _interopRequireDefault(_format);
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _request = __webpack_require__(13);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var processRequest = function processRequest(config) {
+	    return _request2.default.interceptor.request(config);
+	};
+
+	var processResponse = function processResponse(promise, url, sucCode, config) {
+	    var color = 'color: #8a6d3b;';
+
+	    return promise.then(function (res) {
+	        if (res.ok) {
+	            var ct = res.headers.get('content-type');
+	            // 后台可能会有登录拦截，返回登录页面
+	            if (ct.indexOf('text/html') > -1) {
+	                return res.text().then(function (html) {
+	                    if (html.indexOf('title>登陆</title') > -1) {
+	                        return Promise.reject('请登录!');
+	                    }
+	                    return Promise.reject('未知错误！！！！！');
+	                });
+	            } else {
+	                return res.json();
+	            }
+	        }
+	        return Promise.reject((0, _format2.default)('服务器错误 {status} {statusText}', res));
+	    }).then(function (json) {
+	        return _request2.default.interceptor.response(json, config);
+	    }, function (reason) {
+	        return Promise.reject(_request2.default.interceptor.responseError(reason, config));
+	    }).then(function (json) {
+	        if (sucCode.indexOf(json.code) > -1) {
+	            return json;
+	        } else {
+	            console.log('%c*** Request url: %s、code: %s、msg: %s', color, url, json.code, json.msg);
+	            return Promise.reject(json.msg || '未知错误');
+	        }
+	    }).catch(function (reason) {
+	        console.log('%c*** Request catch %s', color, reason);
+	        // reason 是个对象。目前先给字符串。吧。后续有需要在扩展
+	        return Promise.reject('' + reason);
+	    });
+	};
+
+	var Request = function Request(url, options) {
+	    this._data = {};
+	    this.url = url;
+	    this.sucCode = [0];
+	    this.options = Object.assign({
+	        method: 'get',
+	        headers: {
+	            'Accept': 'application/json'
+	        },
+	        credentials: 'include' // 需要设置才能获取cookie
+	    }, options);
+	};
+	Request.prototype = {
+	    code: function code(codes) {
+	        if (_underscore2.default.isArray(codes)) {
+	            this.sucCode = this.sucCode.concat(codes);
+	        } else {
+	            this.sucCode.push(codes);
+	        }
+	        return this;
+	    },
+	    data: function data(_data) {
+	        // 过滤null  undefined 只Object 类型。
+	        this._data = Object.assign({}, _data);
+	        if (toString.call(this._data) === '[object Object]') {
+	            this._data = _underscore2.default.pick(this._data, function (value) {
+	                return value !== null && value !== undefined;
+	            });
+	        }
+	        return this;
+	    },
+	    json: function json(_data) {
+	        this._data = JSON.stringify(_data);
+	        return this;
+	    },
+	    _getConfig: function _getConfig() {
+	        var t = this;
+	        return {
+	            url: t.url,
+	            data: t._data,
+	            sucCode: t.sucCode,
+	            options: t.options
+	        };
+	    },
+	    _setConfig: function _setConfig(d) {
+	        var t = this;
+	        t.url = d.url;
+	        t._data = d.data;
+	        t.sucCode = d.sucCode;
+	        t.options = d.options;
+	    },
+	    _beforeRequest: function _beforeRequest() {
+	        var t = this;
+	        return processRequest(t._getConfig()).then(t._setConfig.bind(t));
+	    },
+	    get: function get() {
+	        var t = this;
+
+	        return t._beforeRequest().then(function () {
+	            var p = (0, _param2.default)(t._data);
+	            var newUrl = t.url + (t.url.indexOf('?') > -1 ? '&' : '?') + p;
+	            return processResponse(fetch(newUrl, t.options), t.url, t.sucCode, t._getConfig());
+	        });
+	    },
+	    post: function post() {
+	        var t = this;
+	        var data = t._data;
+	        var body;
+	        t.options.method = 'post';
+
+	        return t._beforeRequest().then(function () {
+	            // 兼容传[json string] [formData] 的情况,暂时这两种. 其他的看情况
+	            if (toString.call(data) === '[object Object]') {
+	                body = new FormData();
+	                for (var e in data) {
+	                    body.append(e, data[e]);
+	                }
+	            } else {
+	                body = data;
+	            }
+	            t.options.body = body;
+	            return processResponse(fetch(t.url, t.options), t.url, t.sucCode, t._getConfig());
+	        });
+	    }
+	};
+
+	var RequestFactory = function RequestFactory(url, options) {
+	    return new Request(url, options);
+	};
+
+	exports.default = RequestFactory;
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (dom) {
+
+	    var topInRange = false;
+	    var leftInRange = false;
+
+	    // dom各边距离 窗口顶边、左边的距离
+	    var BCR = dom.getBoundingClientRect();
+
+	    if (BCR.top < window.innerHeight && BCR.bottom > 0) topInRange = true;
+
+	    if (BCR.left < window.innerHeight && BCR.right > 0) leftInRange = true;
+
+	    return topInRange && leftInRange;
+	};
+
+/***/ },
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1781,7 +1985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = AdvanceSelect;
 
 /***/ },
-/* 20 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1800,7 +2004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactBootstrap = __webpack_require__(6);
 
-	var _calendar = __webpack_require__(7);
+	var _calendar = __webpack_require__(8);
 
 	var _calendar2 = _interopRequireDefault(_calendar);
 
@@ -1862,7 +2066,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 21 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1881,7 +2085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactBootstrap = __webpack_require__(6);
 
-	var _calendar = __webpack_require__(7);
+	var _calendar = __webpack_require__(8);
 
 	var _calendar2 = _interopRequireDefault(_calendar);
 
@@ -1962,7 +2166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DateRangePicker;
 
 /***/ },
-/* 22 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2093,7 +2297,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Dialog;
 
 /***/ },
-/* 23 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2285,7 +2489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DropSelect;
 
 /***/ },
-/* 24 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2427,7 +2631,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Former;
 
 /***/ },
-/* 25 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2440,11 +2644,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pagination = __webpack_require__(8);
+	var _pagination = __webpack_require__(9);
 
 	var _pagination2 = _interopRequireDefault(_pagination);
 
-	var _paginationText = __webpack_require__(9);
+	var _paginationText = __webpack_require__(10);
 
 	var _paginationText2 = _interopRequireDefault(_paginationText);
 
@@ -2697,7 +2901,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Grid;
 
 /***/ },
-/* 26 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2734,7 +2938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Hr;
 
 /***/ },
-/* 27 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2755,7 +2959,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _droper = __webpack_require__(11);
+	var _droper = __webpack_require__(14);
 
 	var _droper2 = _interopRequireDefault(_droper);
 
@@ -2949,7 +3153,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ImportLead;
 
 /***/ },
-/* 28 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2972,7 +3176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(12);
+	var _flex = __webpack_require__(15);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -3091,7 +3295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Navigation;
 
 /***/ },
-/* 29 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3179,7 +3383,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 30 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3196,11 +3400,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pagination = __webpack_require__(8);
+	var _pagination = __webpack_require__(9);
 
 	var _pagination2 = _interopRequireDefault(_pagination);
 
-	var _paginationText = __webpack_require__(9);
+	var _paginationText = __webpack_require__(10);
 
 	var _paginationText2 = _interopRequireDefault(_paginationText);
 
@@ -3515,7 +3719,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Sheet;
 
 /***/ },
-/* 31 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3598,7 +3802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 32 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3704,7 +3908,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Switch;
 
 /***/ },
-/* 33 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3723,7 +3927,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactBootstrap = __webpack_require__(6);
 
-	var _timespan = __webpack_require__(13);
+	var _timespan = __webpack_require__(16);
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
@@ -3791,7 +3995,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpanPicker;
 
 /***/ },
-/* 34 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3971,7 +4175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 35 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3988,7 +4192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validate = __webpack_require__(14);
+	var _validate = __webpack_require__(17);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
@@ -4094,210 +4298,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	exports.default = ValidateMixin;
-
-/***/ },
-/* 36 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var is = {};
-
-	is.weixin = function () {
-	    return (/MicroMessenger/i.test(navigator.userAgent)
-	    );
-	};
-
-	exports.default = is;
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _param = __webpack_require__(16);
-
-	var _param2 = _interopRequireDefault(_param);
-
-	var _format = __webpack_require__(15);
-
-	var _format2 = _interopRequireDefault(_format);
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var _request = __webpack_require__(17);
-
-	var _request2 = _interopRequireDefault(_request);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var processRequest = function processRequest(config) {
-	    return _request2.default.interceptor.request(config);
-	};
-
-	var processResponse = function processResponse(promise, url, sucCode, config) {
-	    var color = 'color: #8a6d3b;';
-
-	    return promise.then(function (res) {
-	        if (res.ok) {
-	            var ct = res.headers.get('content-type');
-	            // 后台可能会有登录拦截，返回登录页面
-	            if (ct.indexOf('text/html') > -1) {
-	                return res.text().then(function (html) {
-	                    if (html.indexOf('title>登陆</title') > -1) {
-	                        return Promise.reject('请登录!');
-	                    }
-	                    return Promise.reject('未知错误！！！！！');
-	                });
-	            } else {
-	                return res.json();
-	            }
-	        }
-	        return Promise.reject((0, _format2.default)('服务器错误 {status} {statusText}', res));
-	    }).then(function (json) {
-	        return _request2.default.interceptor.response(json, config);
-	    }, function (reason) {
-	        return Promise.reject(_request2.default.interceptor.responseError(reason, config));
-	    }).then(function (json) {
-	        if (sucCode.indexOf(json.code) > -1) {
-	            return json;
-	        } else {
-	            console.log('%c*** Request url: %s、code: %s、msg: %s', color, url, json.code, json.msg);
-	            return Promise.reject(json.msg || '未知错误');
-	        }
-	    }).catch(function (reason) {
-	        console.log('%c*** Request catch %s', color, reason);
-	        // reason 是个对象。目前先给字符串。吧。后续有需要在扩展
-	        return Promise.reject('' + reason);
-	    });
-	};
-
-	var Request = function Request(url, options) {
-	    this._data = {};
-	    this.url = url;
-	    this.sucCode = [0];
-	    this.options = Object.assign({
-	        method: 'get',
-	        headers: {
-	            'Accept': 'application/json'
-	        },
-	        credentials: 'include' // 需要设置才能获取cookie
-	    }, options);
-	};
-	Request.prototype = {
-	    code: function code(codes) {
-	        if (_underscore2.default.isArray(codes)) {
-	            this.sucCode = this.sucCode.concat(codes);
-	        } else {
-	            this.sucCode.push(codes);
-	        }
-	        return this;
-	    },
-	    data: function data(_data) {
-	        // 过滤null  undefined 只Object 类型。
-	        this._data = Object.assign({}, _data);
-	        if (toString.call(this._data) === '[object Object]') {
-	            this._data = _underscore2.default.pick(this._data, function (value) {
-	                return value !== null && value !== undefined;
-	            });
-	        }
-	        return this;
-	    },
-	    json: function json(_data) {
-	        this._data = JSON.stringify(_data);
-	        return this;
-	    },
-	    _getConfig: function _getConfig() {
-	        var t = this;
-	        return {
-	            url: t.url,
-	            data: t._data,
-	            sucCode: t.sucCode,
-	            options: t.options
-	        };
-	    },
-	    _setConfig: function _setConfig(d) {
-	        var t = this;
-	        t.url = d.url;
-	        t._data = d.data;
-	        t.sucCode = d.sucCode;
-	        t.options = d.options;
-	    },
-	    _beforeRequest: function _beforeRequest() {
-	        var t = this;
-	        return processRequest(t._getConfig()).then(t._setConfig.bind(t));
-	    },
-	    get: function get() {
-	        var t = this;
-
-	        return t._beforeRequest().then(function () {
-	            var p = (0, _param2.default)(t._data);
-	            var newUrl = t.url + (t.url.indexOf('?') > -1 ? '&' : '?') + p;
-	            return processResponse(fetch(newUrl, t.options), t.url, t.sucCode, t._getConfig());
-	        });
-	    },
-	    post: function post() {
-	        var t = this;
-	        var data = t._data;
-	        var body;
-	        t.options.method = 'post';
-
-	        return t._beforeRequest().then(function () {
-	            // 兼容传[json string] [formData] 的情况,暂时这两种. 其他的看情况
-	            if (toString.call(data) === '[object Object]') {
-	                body = new FormData();
-	                for (var e in data) {
-	                    body.append(e, data[e]);
-	                }
-	            } else {
-	                body = data;
-	            }
-	            t.options.body = body;
-	            return processResponse(fetch(t.url, t.options), t.url, t.sucCode, t._getConfig());
-	        });
-	    }
-	};
-
-	var RequestFactory = function RequestFactory(url, options) {
-	    return new Request(url, options);
-	};
-
-	exports.default = RequestFactory;
-
-/***/ },
-/* 38 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	exports.default = function (dom) {
-
-	    var topInRange = false;
-	    var leftInRange = false;
-
-	    // dom各边距离 窗口顶边、左边的距离
-	    var BCR = dom.getBoundingClientRect();
-
-	    if (BCR.top < window.innerHeight && BCR.bottom > 0) topInRange = true;
-
-	    if (BCR.left < window.innerHeight && BCR.right > 0) leftInRange = true;
-
-	    return topInRange && leftInRange;
-	};
 
 /***/ },
 /* 39 */
