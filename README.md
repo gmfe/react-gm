@@ -4,11 +4,7 @@
 [http://gmfe.github.io/react-gm/demo/index.html](http://gmfe.github.io/react-gm/demo/index.html)
 
 # DOC
-组件
 [https://github.com/gmfe/react-gm/wiki](https://github.com/gmfe/react-gm/wiki)
-
-Util
-[https://github.com/gmfe/gm-util](https://github.com/gmfe/gm-util)
 
 有其他文档需求则提issue
 

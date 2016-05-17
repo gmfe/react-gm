@@ -21,7 +21,7 @@
     "deploy": "npm install;npm run build && npm run build:min",
     "build": "NODE_ENV=production webpack",
     "build:min": "NODE_ENV=production webpack --config webpack.config.min.js",
-    "publishpatch": "npm run deploy; git add --all; git commit -m 'c'; npm version patch; git push origin master:master; npm publish; npm publish --registry='https://registry.npmjs.org'; cnpm sync react-gm; npm version;",
+    "publishpatch": "npm run deploy; git add --all; git commit -m 'c'; npm version patch; git push origin master:master; npm publish --registry='https://registry.npmjs.org'; cnpm sync react-gm; npm version;",
     "gh-pages": "git branch -D gh-pages; git checkout -b gh-pages; webpack --config webpack.config.dev.js; rm -rf .gitignore; git add --all; git commit -m 'page'; git push origin :gh-pages; git push origin HEAD:gh-pages; git checkout master;"
   },
   "repository": {
@@ -48,7 +48,7 @@
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.4",
-    "gm-util": "^2.0.1",
+    "gm-util": "^2.0.2",
     "husky": "^0.11.4",
     "less": "^2.6.0",
     "less-loader": "^2.2.2",
