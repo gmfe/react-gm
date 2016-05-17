@@ -1551,9 +1551,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return Promise.reject(json.msg || '未知错误');
 	        }
 	    }).catch(function (reason) {
-	        console.log('%c*** Request catch %s', color, reason);
-	        // reason 是个对象。目前先给字符串。吧。后续有需要在扩展
-	        return Promise.reject('' + reason);
+	        // reason 有点复杂，各种实现，碰到一个解决一个吧
+	        if (toString.call(reason) === '[object Promise]') {
+	            return reason.catch(function (rea) {
+	                console.error('%c*** Request catch %s', color, rea);
+	                // reason 是个对象。目前先给字符串。吧。后续有需要在扩展
+	                return Promise.reject('' + rea);
+	            });
+	        } else {
+	            console.error('%c*** Request catch %s', color, reason);
+	            // reason 是个对象。目前先给字符串。吧。后续有需要在扩展
+	            return Promise.reject('' + reason);
+	        }
 	    });
 	};
 
