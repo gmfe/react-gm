@@ -2240,7 +2240,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.setState({
 	            show: false
 	        });
-	        this.props.onOK();
+	        if (this.props.type === 'prompt') {
+	            this.props.onOK(this.refs.input.value);
+	        } else {
+	            this.props.onOK();
+	        }
 	    },
 	    handleEnter: function handleEnter(event) {
 	        if (event.keyCode === 13) {
@@ -2261,9 +2265,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                null,
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'text-center' },
+	                    null,
 	                    this.props.children,
-	                    this.props.type === 'prompt' && _react2.default.createElement('input', { type: 'text', style: { display: 'block', width: '100%' }, onKeyDown: this.handleEnter })
+	                    this.props.type === 'prompt' && _react2.default.createElement('input', { autoFocus: true, ref: 'input', type: 'text', style: { display: 'block', width: '100%' },
+	                        onKeyDown: this.handleEnter })
 	                ),
 	                _react2.default.createElement('div', { className: 'gm-gap10' }),
 	                _react2.default.createElement(
