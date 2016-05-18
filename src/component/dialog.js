@@ -36,7 +36,11 @@ const D = React.createClass({
         this.setState({
             show: false
         });
-        this.props.onOK();
+        if (this.props.type === 'prompt') {
+            this.props.onOK(this.refs.input.value);
+        } else {
+            this.props.onOK();
+        }
     },
     handleEnter(event){
         if (event.keyCode === 13) {
@@ -50,10 +54,11 @@ const D = React.createClass({
                     {this.props.title}
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="text-center">
+                    <div>
                         {this.props.children}
                         {this.props.type === 'prompt' && (
-                            <input type="text" style={{display: 'block', width: '100%'}} onKeyDown={this.handleEnter}/>
+                            <input autoFocus ref="input" type="text" style={{display: 'block', width: '100%'}}
+                                   onKeyDown={this.handleEnter}/>
                         )}
                     </div>
                     <div className="gm-gap10"></div>
