@@ -2195,6 +2195,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -2216,25 +2218,64 @@ return /******/ (function(modules) { // webpackBootstrap
 	    document.body.appendChild(dialogContainer);
 	}
 
-	var D = _react2.default.createClass({
-	    displayName: 'D',
+	var DialogStatics = {
+	    alert: function alert(options) {
+	        options.type = 'alert';
+	        return DialogStatics.dialog(options);
+	    },
+	    confirm: function confirm(options) {
+	        options.type = 'confirm';
+	        return DialogStatics.dialog(options);
+	    },
+	    prompt: function prompt(options) {
+	        options.type = 'prompt';
+	        return DialogStatics.dialog(options);
+	    },
+	    dialog: function dialog(options) {
+	        return new Promise(function (resolve, reject) {
+	            var div = document.createElement('div');
+	            dialogContainer.appendChild(div);
+	            options.onOK = function (value) {
+	                return resolve(value);
+	            };
+	            options.onCancel = function () {
+	                return reject();
+	            };
+	            _reactDom2.default.render(_react2.default.createElement(Dialog, _extends({ show: true }, options)), div);
+	        });
+	    }
+	};
+
+	var Dialog = _react2.default.createClass({
+	    displayName: 'Dialog',
+
+	    statics: DialogStatics,
 	    getDefaultProps: function getDefaultProps() {
 	        return {
+	            show: false,
 	            title: '提示',
-	            onCancle: function onCancle() {},
-	            onOK: function onOK() {}
+	            onCancel: function onCancel() {},
+	            onOK: function onOK() {},
+	            bsSize: 'sm'
 	        };
 	    },
 	    getInitialState: function getInitialState() {
 	        return {
-	            show: true
+	            show: this.props.show
 	        };
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        if ('show' in nextProps) {
+	            this.setState({
+	                show: nextProps.show
+	            });
+	        }
 	    },
 	    handleCancle: function handleCancle() {
 	        this.setState({
 	            show: false
 	        });
-	        this.props.onCancle();
+	        this.props.onCancel();
 	    },
 	    handleOk: function handleOk() {
 	        this.setState({
@@ -2254,7 +2295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    render: function render() {
 	        return _react2.default.createElement(
 	            _reactBootstrap.Modal,
-	            { show: this.state.show, onHide: this.handleCancle, bsSize: 'sm' },
+	            { show: this.state.show, onHide: this.handleCancle, bsSize: this.props.bsSize },
 	            _react2.default.createElement(
 	                _reactBootstrap.Modal.Header,
 	                { closeButton: true },
@@ -2290,34 +2331,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	    }
 	});
-
-	var Dialog = {
-	    alert: function alert(options) {
-	        options.type = 'alert';
-	        return Dialog.dialog(options);
-	    },
-	    confirm: function confirm(options) {
-	        options.type = 'confirm';
-	        return Dialog.dialog(options);
-	    },
-	    prompt: function prompt(options) {
-	        options.type = 'prompt';
-	        return Dialog.dialog(options);
-	    },
-	    dialog: function dialog(options) {
-	        return new Promise(function (resolve, reject) {
-	            var div = document.createElement('div');
-	            dialogContainer.appendChild(div);
-	            options.onOK = function (value) {
-	                return resolve(value);
-	            };
-	            options.onCancle = function () {
-	                return reject();
-	            };
-	            _reactDom2.default.render(_react2.default.createElement(D, options), div);
-	        });
-	    }
-	};
 
 	exports.default = Dialog;
 
