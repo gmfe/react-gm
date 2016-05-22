@@ -579,7 +579,9 @@ var DaterangepickerWrap = React.createClass({
 var DialogWrap = React.createClass({
     getInitialState(){
         return {
-            show: true
+            show: false,
+            show2: false,
+            bsSize: 'sm'
         };
     },
     handleAlert(){
@@ -587,6 +589,8 @@ var DialogWrap = React.createClass({
             children: 'adsf'
         }).then(() => {
             console.log('resolve');
+        }, () => {
+            console.log('reject');
         });
     },
     handleConfirm(){
@@ -610,12 +614,50 @@ var DialogWrap = React.createClass({
             console.log('reject');
         });
     },
+    handleComponent(){
+        this.setState({
+            show: !this.state.show
+        });
+    },
+    handleComponentSize(bsSize){
+        console.log(bsSize);
+        this.setState({
+            show2: !this.state.show2,
+            bsSize
+        });
+    },
     render: function () {
         return (
             <div>
-                <button className="btn btn-default" onClick={this.handleAlert}>alert</button>
-                <button className="btn btn-default" onClick={this.handleConfirm}>confirm</button>
-                <button className="btn btn-default" onClick={this.handlePrompt}>prompt</button>
+                <div>
+                    <button className="btn btn-default" onClick={this.handleAlert}>alert</button>
+                    <button className="btn btn-default" onClick={this.handleConfirm}>confirm</button>
+                    <button className="btn btn-default" onClick={this.handlePrompt}>prompt</button>
+                </div>
+                <div>
+                    <button className="btn btn-default" onClick={this.handleComponent}>toggle Component</button>
+                </div>
+                <div>
+                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'lg')}>toggle
+                        Component
+                        size lg
+                    </button>
+                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'md')}>toggle
+                        Component
+                        size md
+                    </button>
+                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'sm')}>toggle
+                        Component
+                        size sm(default)
+                    </button>
+                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'xs')}>toggle
+                        Component
+                        size xs
+                    </button>
+                </div>
+                <Dialog show={this.state.show} onCancel={this.handleComponent}>asdfa</Dialog>
+                <Dialog show={this.state.show2} bsSize={this.state.bsSize}
+                        onCancel={this.handleComponentSize.bind(this, this.state.bsSize)}>bsSize {this.state.bsSize}</Dialog>
             </div>
         );
     }

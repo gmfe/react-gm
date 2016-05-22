@@ -11,26 +11,60 @@ if (!dialogContainer) {
     document.body.appendChild(dialogContainer);
 }
 
-const D = React.createClass({
+const DialogStatics = {
+    alert(options){
+        options.type = 'alert';
+        return DialogStatics.dialog(options);
+    },
+    confirm(options){
+        options.type = 'confirm';
+        return DialogStatics.dialog(options);
+    },
+    prompt(options){
+        options.type = 'prompt';
+        return DialogStatics.dialog(options);
+    },
+    dialog(options){
+        return new Promise((resolve, reject) => {
+            let div = document.createElement('div');
+            dialogContainer.appendChild(div);
+            options.onOK = value => resolve(value);
+            options.onCancel = () => reject();
+            ReactDOM.render(<Dialog show={true} {...options} />, div);
+        });
+    }
+};
+
+const Dialog = React.createClass({
+    statics: DialogStatics,
     getDefaultProps(){
         return {
+            show: false,
             title: '提示',
-            onCancle: () => {
+            onCancel: () => {
             },
             onOK: () => {
-            }
+            },
+            bsSize: 'sm'
         };
     },
     getInitialState(){
         return {
-            show: true
+            show: this.props.show
         };
+    },
+    componentWillReceiveProps(nextProps){
+        if ('show' in nextProps) {
+            this.setState({
+                show: nextProps.show
+            });
+        }
     },
     handleCancle(){
         this.setState({
             show: false
         });
-        this.props.onCancle();
+        this.props.onCancel();
     },
     handleOk(){
         this.setState({
@@ -49,7 +83,7 @@ const D = React.createClass({
     },
     render(){
         return (
-            <Modal show={this.state.show} onHide={this.handleCancle} bsSize="sm">
+            <Modal show={this.state.show} onHide={this.handleCancle} bsSize={this.props.bsSize}>
                 <Modal.Header closeButton>
                     {this.props.title}
                 </Modal.Header>
@@ -75,28 +109,5 @@ const D = React.createClass({
     }
 });
 
-let Dialog = {
-    alert(options){
-        options.type = 'alert';
-        return Dialog.dialog(options);
-    },
-    confirm(options){
-        options.type = 'confirm';
-        return Dialog.dialog(options);
-    },
-    prompt(options){
-        options.type = 'prompt';
-        return Dialog.dialog(options);
-    },
-    dialog(options){
-        return new Promise((resolve, reject) => {
-            let div = document.createElement('div');
-            dialogContainer.appendChild(div);
-            options.onOK = value => resolve(value);
-            options.onCancle = () => reject();
-            ReactDOM.render(<D {...options} />, div);
-        });
-    }
-};
 
 export default Dialog;
