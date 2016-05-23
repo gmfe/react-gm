@@ -68,7 +68,7 @@ class Sheet extends React.Component {
                 }).length === list.length;
         }
 
-        const children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
+        const children = typeof this.props.children === 'function' ? this.props.children : [this.props.children];
 
         let columns = [], actions = false, batchs = false, others = [], pagination, paginationText;
 
@@ -128,7 +128,7 @@ class Sheet extends React.Component {
                                 </td>
                             ) : undefined}
                             {_.map(columns, (v, i) => {
-                                if (toString.call(v.props.children) === '[object Function]') {
+                                if (typeof v.props.children === 'function') {
                                     return <td key={i}>{v.props.children(value[v.props.field], i)}</td>;
                                 } else {
                                     return <td key={i}>{value[v.props.field]}</td>;
