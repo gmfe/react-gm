@@ -3595,7 +3595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }).length === list.length;
 	            }
 
-	            var children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
+	            var children = typeof this.props.children === 'function' ? this.props.children : [this.props.children];
 
 	            var columns = [],
 	                actions = false,
@@ -3682,7 +3682,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                        onChange: _this6.handleSelect.bind(_this6, select) })
 	                                ) : undefined,
 	                                _underscore2.default.map(columns, function (v, i) {
-	                                    if (toString.call(v.props.children) === '[object Function]') {
+	                                    if (typeof v.props.children === 'function') {
 	                                        return _react2.default.createElement(
 	                                            'td',
 	                                            { key: i },
