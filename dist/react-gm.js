@@ -3686,7 +3686,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                        return _react2.default.createElement(
 	                                            'td',
 	                                            { key: i },
-	                                            v.props.children(value[v.props.field], i)
+	                                            v.props.children(value[v.props.field], index)
 	                                        );
 	                                    } else {
 	                                        return _react2.default.createElement(
