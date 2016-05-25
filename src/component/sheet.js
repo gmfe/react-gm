@@ -68,7 +68,7 @@ class Sheet extends React.Component {
                 }).length === list.length;
         }
 
-        const children = typeof this.props.children === 'function' ? this.props.children : [this.props.children];
+        const children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
 
         let columns = [], actions = false, batchs = false, others = [], pagination, paginationText;
 
