@@ -3595,7 +3595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }).length === list.length;
 	            }
 
-	            var children = typeof this.props.children === 'function' ? this.props.children : [this.props.children];
+	            var children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
 
 	            var columns = [],
 	                actions = false,
