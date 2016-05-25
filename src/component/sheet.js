@@ -129,7 +129,7 @@ class Sheet extends React.Component {
                             ) : undefined}
                             {_.map(columns, (v, i) => {
                                 if (typeof v.props.children === 'function') {
-                                    return <td key={i}>{v.props.children(value[v.props.field], i)}</td>;
+                                    return <td key={i}>{v.props.children(value[v.props.field], index)}</td>;
                                 } else {
                                     return <td key={i}>{value[v.props.field]}</td>;
                                 }
