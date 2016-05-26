@@ -1503,6 +1503,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var setPromiseTimeout = function setPromiseTimeout(promise, ms) {
+	    if (ms === false) {
+	        return promise;
+	    }
+	    return new Promise(function (resolve, reject) {
+	        setTimeout(function () {
+	            reject('request timeout');
+	        }, ms);
+	        promise.then(resolve, reject);
+	    });
+	};
+
 	var processRequest = function processRequest(config) {
 	    return _RequestInterceptor2.default.interceptor.request(config);
 	};
@@ -1510,7 +1522,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var processResponse = function processResponse(promise, url, sucCode, config) {
 	    var color = 'color: #8a6d3b;';
 
-	    return promise.then(function (res) {
+	    return setPromiseTimeout(promise, config.options.timeout).then(function (res) {
 	        if (res.ok) {
 	            var ct = res.headers.get('content-type');
 	            // 后台可能会有登录拦截，返回登录页面
@@ -1558,6 +1570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.url = url;
 	    this.sucCode = [0];
 	    this.options = Object.assign({
+	        timeout: 10000, // number or false
 	        method: 'get',
 	        headers: {
 	            'Accept': 'application/json'
@@ -1572,6 +1585,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        } else {
 	            this.sucCode.push(codes);
 	        }
+	        return this;
+	    },
+	    timeout: function timeout(_timeout) {
+	        Object.assign(this.options, {
+	            timeout: _timeout
+	        });
 	        return this;
 	    },
 	    data: function data(_data) {
