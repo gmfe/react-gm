@@ -465,8 +465,8 @@ console.log(Validate('*3-5', 'a', true));
 //         console.log('request Interceptor', config);
 //
 //         // 修改相关的信息
-//         config.url = '/station/';
-//         config.data.name = '111';
+//         // config.url = '/testmodify/';
+//         // config.data.name = '111';
 //
 //         return config;
 //     },
@@ -480,7 +480,7 @@ console.log(Validate('*3-5', 'a', true));
 //     }
 // });
 
-Util.Request('/station/').data({name: 'haha'}).get().then(function (data) {
+Util.Request('/test/').data({name: 'haha'}).get().then(function (data) {
     console.log(data);
 }, function (reason) {
     console.log(reason);
