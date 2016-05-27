@@ -45,7 +45,9 @@ const Dialog = React.createClass({
             },
             onOK: () => {
             },
-            bsSize: 'sm'
+            bsSize: 'sm',
+            noCancel: false, // 由于涉及原因只能这样搞了，传true 来屏蔽按钮
+            noOK: false
         };
     },
     getInitialState(){
@@ -97,11 +99,13 @@ const Dialog = React.createClass({
                     </div>
                     <div className="gm-gap10"></div>
                     <div className="text-right">
-                        {this.props.type !== 'alert' && (
+                        {(this.props.type !== 'alert' && !this.props.noCancel) && (
                             <button className="btn btn-default" onClick={this.handleCancle}>取消</button>
                         )}
                         <div className="gm-gap10"></div>
-                        <button className="btn btn-primary" onClick={this.handleOk}>确定</button>
+                        {!this.props.noOK && (
+                            <button className="btn btn-primary" onClick={this.handleOk}>确定</button>
+                        )}
                     </div>
                 </Modal.Body>
             </Modal>
