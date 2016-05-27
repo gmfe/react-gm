@@ -2275,7 +2275,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            title: '提示',
 	            onCancel: function onCancel() {},
 	            onOK: function onOK() {},
-	            bsSize: 'sm'
+	            bsSize: 'sm',
+	            noCancel: false, // 由于涉及原因只能这样搞了，传true 来屏蔽按钮
+	            noOK: false
 	        };
 	    },
 	    getInitialState: function getInitialState() {
@@ -2334,13 +2336,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'text-right' },
-	                    this.props.type !== 'alert' && _react2.default.createElement(
+	                    this.props.type !== 'alert' && !this.props.noCancel && _react2.default.createElement(
 	                        'button',
 	                        { className: 'btn btn-default', onClick: this.handleCancle },
 	                        '取消'
 	                    ),
 	                    _react2.default.createElement('div', { className: 'gm-gap10' }),
-	                    _react2.default.createElement(
+	                    !this.props.noOK && _react2.default.createElement(
 	                        'button',
 	                        { className: 'btn btn-primary', onClick: this.handleOk },
 	                        '确定'
