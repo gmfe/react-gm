@@ -141,8 +141,8 @@ const FormWrap = React.createClass({
                     ></Switch>
                     <Switch
                         disabled
-                        checkedChildren={"yes"}
-                        unCheckedChildren={"no"}
+                        checkedChildren={"YES"}
+                        unCheckedChildren={"NO"}
                     ></Switch>
                 </div>
             </div>
