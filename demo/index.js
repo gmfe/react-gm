@@ -712,6 +712,9 @@ const DropSelectWrap = React.createClass({
                 actions: [{
                     className: "btn btn-sm btn-info",
                     text: <i className="glyphicon glyphicon-ok"></i>,
+                    getDisabled: (value, i) => {
+                        return i % 2;
+                    },
                     onClick: function (col) {
                         console.log(col, 'onclick');
                     }
@@ -741,9 +744,10 @@ const DropSelectWrap = React.createClass({
     },
     componentDidMount(){
         const me = this;
-        setTimeout(function () {
+        setTimeout(() => {
             me.setState({
-                coolData: {
+                coolData: Object.assign(this.state.coolData, {
+                    loading: false,
                     list: [{
                         id: '0001',
                         name: '大白菜',
@@ -780,35 +784,8 @@ const DropSelectWrap = React.createClass({
                         id: '000143',
                         name: '大白菜',
                         price: 22.12
-                    }],
-                    columns: [{
-                        field: 'id',
-                        name: '序号',
-                        render: function (value) {
-                            return 'D00' + value;
-                        }
-                    }, {
-                        field: 'name',
-                        name: '商品名'
-                    }, {
-                        field: 'price',
-                        name: '成本价'
-                    }],
-                    actions: [{
-                        className: "btn btn-sm btn-info",
-                        text: <i className="glyphicon glyphicon-ok"></i>,
-                        onClick: function (col) {
-                            console.log(col, 'onclick');
-                        }
-                    }, {
-                        className: "btn btn-sm btn-danger",
-                        text: '删除',
-                        onClick: function (col) {
-                            console.log(col, 'onclick');
-                        }
-                    }],
-                    loading: false
-                }
+                    }]
+                })
             });
         }, 2000);
     },

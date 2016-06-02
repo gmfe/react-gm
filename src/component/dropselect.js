@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import _ from 'underscore';
 
 class DropSelect extends React.Component {
     constructor(props) {
@@ -51,7 +50,7 @@ class DropSelect extends React.Component {
                 <li className="gm-dropselect-item"><span>&nbsp;</span><i className="glyphicon glyphicon-refresh"></i>
                 </li>;
         } else {
-            coolList = list.map(rowData => {
+            coolList = list.map((rowData, rowIndex) => {
                 const row = columns.map(col => {
                     const field = col.field, value = rowData[field];
                     if (col.render) {
@@ -63,13 +62,11 @@ class DropSelect extends React.Component {
                     }
                 });
                 const actionDom = actions.map((action, index) => {
-                    let actionStatus = false;
-                    if (_.isArray(rowData.actionStatus)) {
-                        actionStatus = (1 === rowData.actionStatus[index]) ? true : false;
-                    }
+                    console.log(action);
+                    const disabled = action.getDisabled ? action.getDisabled(rowData, rowIndex) : false;
                     return <button className={action.className}
                                    onClick={action.onClick.bind(null, rowData)}
-                                   disabled={actionStatus}
+                                   disabled={disabled}
                                    key={index}>{action.text}</button>;
                 });
 
