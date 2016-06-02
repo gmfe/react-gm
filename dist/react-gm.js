@@ -2461,7 +2461,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-refresh' })
 	                );
 	            } else {
-	                coolList = list.map(function (rowData) {
+	                coolList = list.map(function (rowData, rowIndex) {
 	                    var row = columns.map(function (col) {
 	                        var field = col.field,
 	                            value = rowData[field];
@@ -2481,12 +2481,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            );
 	                        }
 	                    });
-
 	                    var actionDom = actions.map(function (action, index) {
+	                        console.log(action);
+	                        var disabled = action.getDisabled ? action.getDisabled(rowData, rowIndex) : false;
 	                        return _react2.default.createElement(
 	                            'button',
 	                            { className: action.className,
 	                                onClick: action.onClick.bind(null, rowData),
+	                                disabled: disabled,
 	                                key: index },
 	                            action.text
 	                        );
