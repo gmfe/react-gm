@@ -747,7 +747,8 @@ const DropSelectWrap = React.createClass({
                     list: [{
                         id: '0001',
                         name: '大白菜',
-                        price: 22.12
+                        price: 22.12,
+                        actionStatus: [0]
                     }, {
                         id: '0002',
                         name: '大白菜',
@@ -755,11 +756,13 @@ const DropSelectWrap = React.createClass({
                     }, {
                         id: '0003',
                         name: '大白菜',
-                        price: 22.12
+                        price: 22.12,
+                        actionStatus: [0, 1]
                     }, {
                         id: '0004',
                         name: '大白菜',
-                        price: 22.12
+                        price: 22.12,
+                        actionStatus: [1, 0]
                     }, {
                         id: '0005',
                         name: '大白菜',
@@ -771,7 +774,8 @@ const DropSelectWrap = React.createClass({
                     }, {
                         id: '00013',
                         name: '大白菜',
-                        price: 22.12
+                        price: 22.12,
+                        actionStatus: [1, 1]
                     }, {
                         id: '000143',
                         name: '大白菜',

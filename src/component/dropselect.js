@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import _ from 'underscore';
 
 class DropSelect extends React.Component {
     constructor(props) {
@@ -61,10 +62,14 @@ class DropSelect extends React.Component {
                         return <div className="gm-ellipsis" key={value + field} title={value}>{value}</div>;
                     }
                 });
-
                 const actionDom = actions.map((action, index) => {
+                    let actionStatus = false;
+                    if (_.isArray(rowData.actionStatus)) {
+                        actionStatus = (1 === rowData.actionStatus[index]) ? true : false;
+                    }
                     return <button className={action.className}
                                    onClick={action.onClick.bind(null, rowData)}
+                                   disabled={actionStatus}
                                    key={index}>{action.text}</button>;
                 });
 
