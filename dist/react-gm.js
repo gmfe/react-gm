@@ -3661,7 +3661,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	SearchSelect.propTypes = {
-	    selected: _react.PropTypes.any.isRequired,
+	    selected: _react.PropTypes.any,
 	    list: _react.PropTypes.array.isRequired,
 	    onSearch: _react.PropTypes.func.isRequired,
 	    onSelect: _react.PropTypes.func.isRequired,
