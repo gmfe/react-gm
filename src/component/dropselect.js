@@ -62,7 +62,6 @@ class DropSelect extends React.Component {
                     }
                 });
                 const actionDom = actions.map((action, index) => {
-                    console.log(action);
                     const disabled = action.getDisabled ? action.getDisabled(rowData, rowIndex) : false;
                     return <button className={action.className}
                                    onClick={action.onClick.bind(null, rowData)}

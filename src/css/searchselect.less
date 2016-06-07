@@ -1,0 +1,46 @@
+.gm-search-select {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  .gm-search-select-input {
+    padding: 6px 12px;
+    input {
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      width: 100%;
+      outline: none;
+    }
+    .selected {
+      outline: 1px solid #ccc;
+      padding: 0 5px;
+      margin-right: 12px;
+      .close {
+        right: -5px;
+        line-height: .9;
+      }
+    }
+  }
+
+  .list-group {
+    position: absolute;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+
+    .list-group-item {
+      padding: 6px 12px;
+      &:first-child {
+        border-top: none;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+}

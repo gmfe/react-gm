@@ -25,6 +25,7 @@ import {
     TimeSpanPicker,
     DropSelect,
     AdvanceSelect,
+    SearchSelect,
     Switch
 } from '../src/index';
 import ImportLeadWrap from './import.lead.js';
@@ -97,8 +98,6 @@ const DateWrap = React.createClass({
                 <h1>Calendar</h1>
                 <CalendarWrap></CalendarWrap>
                 <hr/>
-                <h1>DropSelect</h1>
-                <DropSelectWrap></DropSelectWrap>
                 <h1>DatePicker</h1>
                 <DatePickerWrap></DatePickerWrap>
                 <h1>Daterangepicker</h1>
@@ -109,6 +108,55 @@ const DateWrap = React.createClass({
                 <div style={{height: 500}}></div>
             </div>
         );
+    }
+});
+
+var searchSelectData = [
+    {value: 0, name: '我们'},
+    {value: 1, name: '1'},
+    {value: 2, name: '2我们'},
+    {value: 3, name: '3我们'},
+    {value: 4, name: '4我们'},
+    {value: 5, name: '5我们'},
+    {value: 6, name: '6我们'},
+    {value: 7, name: '7我们'},
+    {value: 8, name: '8我们'},
+    {value: 9, name: '9你们'},
+    {value: 10, name: '10哦'},
+    {value: 11, name: 'no'}
+];
+
+var SearchSelectWrap = React.createClass({
+    getInitialState(){
+        return {
+            selected: null,
+            value: '',
+            list: []
+        };
+    },
+    render(){
+        return (
+            <div>
+                <SearchSelect
+                    multiple
+                    selected={this.state.selected}
+                    onSelect={this.handleSelect}
+                    list={this.state.list}
+                    onSearch={this.handleSearch}
+                    placeholder="搜索"
+                ></SearchSelect>
+            </div>
+        );
+    },
+    handleSelect(selected){
+        this.setState({
+            selected
+        });
+    },
+    handleSearch(value){
+        this.setState({
+            list: _.filter(searchSelectData, v => v.name.indexOf(value) > -1)
+        });
     }
 });
 
@@ -124,6 +172,11 @@ const FormWrap = React.createClass({
                 <h1>AdvanceSelect</h1>
                 <AdvanceSelectComponent />
                 <hr/>
+                <h1>DropSelect</h1>
+                <DropSelectWrap></DropSelectWrap>
+                <hr/>
+                <h1>SearchSelect</h1>
+                <SearchSelectWrap></SearchSelectWrap>
                 <h1>Former</h1>
                 <FormerDom></FormerDom>
                 <h1>Switch</h1>
