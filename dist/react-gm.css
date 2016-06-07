@@ -857,6 +857,48 @@
   line-height: 30px;
   margin-right: 10px;
 }
+.gm-search-select {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.gm-search-select .gm-search-select-input {
+  padding: 6px 12px;
+}
+.gm-search-select .gm-search-select-input input {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  width: 100%;
+  outline: none;
+}
+.gm-search-select .gm-search-select-input .selected {
+  outline: 1px solid #ccc;
+  padding: 0 5px;
+  margin-right: 12px;
+}
+.gm-search-select .gm-search-select-input .selected .close {
+  right: -5px;
+  line-height: .9;
+}
+.gm-search-select .list-group {
+  position: absolute;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 1;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.gm-search-select .list-group .list-group-item {
+  padding: 6px 12px;
+}
+.gm-search-select .list-group .list-group-item:first-child {
+  border-top: none;
+}
+.gm-search-select .list-group .list-group-item:last-child {
+  border-bottom: none;
+}
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
   font-weight: 400;
