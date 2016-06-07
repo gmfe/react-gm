@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 class SearchSelect extends React.Component {
     static propTypes = {
-        selected: PropTypes.any.isRequired,
+        selected: PropTypes.any,
         list: PropTypes.array.isRequired,
         onSearch: PropTypes.func.isRequired,
         onSelect: PropTypes.func.isRequired,
