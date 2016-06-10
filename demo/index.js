@@ -32,7 +32,7 @@ import ImportLeadWrap from './import.lead.js';
 import moment from 'moment';
 import pinYin from 'pinyin';
 
-import 'bootstrap/dist/css/bootstrap.css';
+import 'gm-bootstrap/dist/css/bootstrap.css';
 import './index.less';
 
 const {SheetColumn, SheetAction, SheetSelect, SheetBatchAction} = Sheet;
@@ -958,7 +958,7 @@ const Home = React.createClass({
                 <hr/>
                 <div>
                     <h4>Link</h4>
-                    <a href="http://v3.bootcss.com/" target="_blank">bootstrap</a>
+                    <a href="http://gmfe.github.io/gm-bootstrap/css/" target="_blank">gm-bootstrap</a>
                     <br/>
                     <a href="http://react-bootstrap.github.io/" target="_blank">react-bootstrap</a>
                 </div>
@@ -968,39 +968,34 @@ const Home = React.createClass({
 });
 
 var navData = [{
-    key: 'shouye',
+    key: '/',
     title: <Link to="/">首页</Link>
 }, {
     key: 'zujian',
     title: '组件',
     open: true,
     sub: [{
-        key: 'overlay',
+        key: '/overlay',
         title: <Link to="/overlay">浮层</Link>
     }, {
-        key: 'date',
+        key: '/date',
         title: <Link to="/date">时间</Link>
     }, {
-        key: 'layout',
+        key: '/layout',
         title: <Link to="/layout">布局</Link>
     }, {
-        key: 'data',
+        key: '/data',
         title: <Link to="/data">数据</Link>
     }, {
-        key: 'form',
+        key: '/form',
         title: <Link to="/form">表单</Link>
     }]
 }];
 
 var NavigationWrap = React.createClass({
-    getInitialState(){
-        return {
-            select: 11
-        };
-    },
     render(){
         return (
-            <Navigation className="gm-whiteframe1" data={navData} select={this.state.select}/>
+            <Navigation className="gm-whiteframe1" data={navData} select={this.props.location.pathname}/>
         );
     }
 });
@@ -1024,7 +1019,7 @@ const App = React.createClass({
                 </Flex>
                 <Flex flex row>
                     <Flex width="200px" className={"gm-app-left " + (this.state.left && 'current')}>
-                        <NavigationWrap></NavigationWrap>
+                        <NavigationWrap {...this.props}></NavigationWrap>
                     </Flex>
                     <Flex column flex className="gm-app-content gm-padding10 gm-block">
                         {this.props.children}
