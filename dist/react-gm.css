@@ -902,6 +902,37 @@
 .gm-search-select .list-group .list-group-item:last-child {
   border-bottom: none;
 }
+.gm-cascader {
+  position: relative;
+}
+.gm-cascader-overlay.popover {
+  margin-top: 5px;
+  max-width: none;
+}
+.gm-cascader-overlay .popover-content {
+  padding: 0;
+}
+.gm-cascader-overlay .arrow {
+  display: none;
+}
+.gm-cascader-overlay .gm-cascader-list {
+  height: 200px;
+}
+.gm-cascader-overlay .gm-cascader-list .list-group {
+  margin: 0;
+  border-right: 1px solid #ddd;
+  min-width: 100px;
+  overflow: auto;
+}
+.gm-cascader-overlay .gm-cascader-list .list-group:last-child {
+  border-right: none;
+}
+.gm-cascader-overlay .gm-cascader-list .list-group .list-group-item {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
   font-weight: 400;
