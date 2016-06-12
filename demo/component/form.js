@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Validate,
     ValidateMixin,
     Switch
 } from '../../src/index';
@@ -83,5 +84,10 @@ const Component = React.createClass({
         });
     }
 });
+
+console.log(Validate('*', 'a', true));
+console.log(Validate('*3', 'aaaa', true));
+console.log(Validate('*3-', 'aa', true));
+console.log(Validate('*3-5', 'a', true));
 
 export default Component;

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, hashHistory, Link} from 'react-router';
 import {
     Util,
-    Validate,
     Storage,
     Navigation,
     Flex
@@ -21,11 +20,6 @@ import Layout from './component/layout';
 import 'gm-bootstrap/dist/css/bootstrap.css';
 import './index.less';
 
-
-console.log(Validate('*', 'a', true));
-console.log(Validate('*3', 'aaaa', true));
-console.log(Validate('*3-', 'aa', true));
-console.log(Validate('*3-5', 'a', true));
 
 // var interceptorId = Util.RequestInterceptor.add({
 //     request: function (config) {
@@ -106,7 +100,7 @@ var navData = [{
         title: <Link to="/data">数据</Link>
     }, {
         key: '/select',
-        title: <Link to="/select">选择</Link>
+        title: <Link to="/select">表单-选择</Link>
     }, {
         key: '/form',
         title: <Link to="/form">表单</Link>
