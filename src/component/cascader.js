@@ -9,14 +9,21 @@ const noop = () => {
 
 class Cascader extends React.Component {
     static propTypes = {
+        // 格式 [{value: 1, name: '深圳', children: [{...}]}]
         data: PropTypes.array.isRequired,
+        // [1,2,...]
         value: PropTypes.array,
+        // 同上
         defaultValue: PropTypes.array,
-        onChange: PropTypes.func
+        // 会提供整个value回去
+        onChange: PropTypes.func,
+        // 没有this.props.children时有效
+        inputProps: PropTypes.object
     };
 
     static defaultProps = {
-        onChange: noop
+        onChange: noop,
+        inputProps: {}
     };
 
 
@@ -52,7 +59,7 @@ class Cascader extends React.Component {
 
     renderList() {
         return (
-            <Flex className="gm-cascader-list">
+            <Flex className={classNames("gm-cascader-list", this.props.className)}>
                 {_.map(this.getList(), (value, i) => (
                     <Flex column key={i} className="list-group gm-block">
                         {_.map(value, v => (
@@ -74,6 +81,9 @@ class Cascader extends React.Component {
         const selected = this.state.value;
         selected[index] = value.value;
         selected.length = index + 1;
+        this.setState({
+            selected
+        });
         this.props.onChange(selected);
     }
 
@@ -82,10 +92,26 @@ class Cascader extends React.Component {
             <Popover
                 id={this.state.id}
                 placement="bottom"
-                positionLeft={0}
-                className="gm-cascader-overlay">
+                className="gm-cascader-overlay"
+            >
                 {this.renderList()}
             </Popover>
+        );
+    }
+
+    renderChildren() {
+        let value = [];
+        if (this.state.value.length > 0) {
+            _.each(this.state.value, (v, i) => {
+                const match = _.find(i === 0 ? this.props.data : value[i - 1].children, val => {
+                    return v === val.value;
+                });
+                value.push(match);
+            });
+        }
+        return (
+            <input type="text" onChange={noop} value={_.map(value, v => v.name).join(',')} {...this.props.inputProps}
+                   className={classNames("form-control", this.props.inputProps.className)}/>
         );
     }
 
@@ -93,13 +119,13 @@ class Cascader extends React.Component {
         return (
             <div className="gm-cascader">
                 <OverlayTrigger
-                    trigger="click"
+                    trigger={"click"}
                     rootClose
                     placement="bottom"
                     container={this}
                     overlay={this.renderOverlay()}
                 >
-                    {this.props.children}
+                    {this.props.children ? this.props.children : this.renderChildren()}
                 </OverlayTrigger>
             </div>
         );

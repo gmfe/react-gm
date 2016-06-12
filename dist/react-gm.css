@@ -876,13 +876,16 @@
   outline: none;
 }
 .gm-search-select .gm-search-select-input .selected {
-  outline: 1px solid #ccc;
+  background-color: #f5f5f5;
   padding: 0 5px;
   margin-right: 12px;
+  border-radius: 4px;
 }
 .gm-search-select .gm-search-select-input .selected .close {
   right: -5px;
-  line-height: .9;
+  line-height: 1;
+  font-size: 15px;
+  padding-left: 2px;
 }
 .gm-search-select .list-group {
   position: absolute;
@@ -908,6 +911,7 @@
 .gm-cascader-overlay.popover {
   margin-top: 5px;
   max-width: none;
+  left: 0 !important;
 }
 .gm-cascader-overlay .popover-content {
   padding: 0;
@@ -932,6 +936,35 @@
   border: none;
   border-radius: 0;
   cursor: pointer;
+}
+.gm-cascader-select {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+}
+.gm-cascader-select .gm-cascader-select-input {
+  padding: 6px 12px;
+}
+.gm-cascader-select .gm-cascader-select-input input {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  width: 100%;
+  outline: none;
+  height: auto;
+}
+.gm-cascader-select .gm-cascader-select-input .selected {
+  background-color: #f5f5f5;
+  padding: 0 5px;
+  margin-right: 12px;
+  border-radius: 4px;
+}
+.gm-cascader-select .gm-cascader-select-input .selected .close {
+  right: -5px;
+  line-height: 1;
+  font-size: 15px;
+  padding-left: 2px;
 }
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;

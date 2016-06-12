@@ -19,12 +19,13 @@ import Navigation from './component/navigation';
 import Flex from './component/flex';
 import TimeSpan from './component/timespan';
 import TimeSpanPicker from './component/timespanpicker';
-import DropSelect from './component/dropselect';
-import AdvanceSelect from './component/advanceselect';
+import DropSelect from './component/drop.select';
+import AdvanceSelect from './component/advance.select';
 import SearchSelect from './component/search.select';
 import Switch from './component/switch';
 import Sheet from './component/sheet';
 import Cascader from './component/cascader';
+import CascaderSelect from './component/cascader.select';
 
 import './index.less';
 
@@ -54,6 +55,7 @@ module.exports = {
     AdvanceSelect,
     SearchSelect,
     Cascader,
+    CascaderSelect,
     Switch,
     Sheet
 };

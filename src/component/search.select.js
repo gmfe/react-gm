@@ -85,6 +85,9 @@ class SearchSelect extends React.Component {
                                 })}
                                 onClick={this.handleSelect.bind(this, value)}>
                                 {value.name}
+                                {this.state.selected.indexOf(value) > -1 ? (
+                                    <i className="glyphicon glyphicon-ok text-success pull-right"></i>
+                                ) : undefined}
                             </a>;
                         })}
                     </div>

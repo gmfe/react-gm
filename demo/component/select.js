@@ -4,7 +4,9 @@ import {
     DropSelect,
     AdvanceSelect,
     SearchSelect,
-    Cascader
+    Cascader,
+    CascaderSelect,
+    Flex
 } from '../../src/index';
 import pinYin from 'pinyin';
 import _ from 'underscore';
@@ -245,42 +247,44 @@ var SearchSelectWrap = React.createClass({
     }
 });
 
+const cascaderData = [{
+    value: '0',
+    name: '广东',
+    children: [{
+        value: '01',
+        name: '深圳深圳'
+    }, {
+        value: '02',
+        name: '广州'
+    }, {
+        value: '03',
+        name: '珠海'
+    }]
+}, {
+    value: '1',
+    name: '上海',
+    children: [{
+        value: '11',
+        name: '上海1'
+    }, {
+        value: '12',
+        name: '上海2',
+        children: [{
+            value: '121',
+            name: 'adfadf'
+        }]
+    }, {
+        value: '13',
+        name: '上海3'
+    }]
+}];
+
 class CascaderWrap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             value: ['0'],
-            data: [{
-                value: '0',
-                name: '广东',
-                children: [{
-                    value: '01',
-                    name: '深圳深圳'
-                }, {
-                    value: '02',
-                    name: '广州'
-                }, {
-                    value: '03',
-                    name: '珠海'
-                }]
-            }, {
-                value: '1',
-                name: '上海',
-                children: [{
-                    value: '11',
-                    name: '上海1'
-                }, {
-                    value: '12',
-                    name: '上海2',
-                    children: [{
-                        value: '121',
-                        name: 'adfadf'
-                    }]
-                }, {
-                    value: '13',
-                    name: '上海3'
-                }]
-            }]
+            data: cascaderData
         };
     }
 
@@ -294,12 +298,32 @@ class CascaderWrap extends React.Component {
                 value.push(match);
             });
         }
-        value = _.map(value, v => v.name).join(',');
 
         return (
-            <Cascader data={this.state.data} value={this.state.value} onChange={::this.handleChange}>
-                <input type="text" onChange={() => {}} value={value}/>
-            </Cascader>
+            <div>
+                <h3>普通用法</h3>
+                <div style={{width: '200px'}}>
+                    <Cascader data={this.state.data} value={this.state.value} onChange={::this.handleChange}
+                              inputProps={{className: 'input-sm'}}>
+                    </Cascader>
+                </div>
+
+                <h3>不提供value</h3>
+                <div style={{width: '200px'}}>
+                    <Cascader data={this.state.data} onChange={::this.handleChange}>
+                    </Cascader>
+                </div>
+
+                <h3>自定义children用法</h3>
+                <Flex>
+                    <Cascader data={this.state.data} onChange={::this.handleChange}>
+                        <div>
+                            {_.map(value, v => v.name).join(',')}
+                            <button className="btn btn-primary btn-xs">add +</button>
+                        </div>
+                    </Cascader>
+                </Flex>
+            </div>
         );
     }
 
@@ -307,6 +331,42 @@ class CascaderWrap extends React.Component {
         console.log(value);
         this.setState({
             value
+        });
+    }
+}
+
+class CascaderSelectWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: null,
+            data: cascaderData
+        };
+    }
+
+    render() {
+        return (
+            <div>
+                <h3>多选</h3>
+                <CascaderSelect
+                    multiple
+                    selectedRender={this.selectedRender}
+                    data={this.state.data}
+                    selected={this.state.selected}
+                    onSelect={::this.handleSelect}>
+                </CascaderSelect>
+            </div>
+        );
+    }
+
+    // 自定义已选择展示
+    selectedRender(value) {
+        return value[value.length - 1].name;
+    }
+
+    handleSelect(selected) {
+        this.setState({
+            selected
         });
     }
 }
@@ -362,6 +422,8 @@ const FormWrap = React.createClass({
             <div>
                 <h1>Cascader</h1>
                 <CascaderWrap></CascaderWrap>
+                <h1>CascaderSelect</h1>
+                <CascaderSelectWrap></CascaderSelectWrap>
                 <h1>AdvanceSelect</h1>
                 <AdvanceSelectComponent />
                 <hr/>

@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-bootstrap"), require("react-dom"), require("moment"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-bootstrap"], root["react-dom"], root["moment"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -60,7 +60,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
-	var _grid = __webpack_require__(30);
+	var _grid = __webpack_require__(31);
 
 	var _grid2 = _interopRequireDefault(_grid);
 
@@ -72,27 +72,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _pagination4 = _interopRequireDefault(_pagination3);
 
-	var _droper = __webpack_require__(15);
+	var _droper = __webpack_require__(16);
 
 	var _droper2 = _interopRequireDefault(_droper);
 
-	var _former = __webpack_require__(29);
+	var _former = __webpack_require__(30);
 
 	var _former2 = _interopRequireDefault(_former);
 
-	var _validate = __webpack_require__(17);
+	var _validate = __webpack_require__(18);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validate3 = __webpack_require__(41);
+	var _validate3 = __webpack_require__(42);
 
 	var _validate4 = _interopRequireDefault(_validate3);
 
-	var _import = __webpack_require__(32);
+	var _import = __webpack_require__(33);
 
 	var _import2 = _interopRequireDefault(_import);
 
-	var _storage = __webpack_require__(37);
+	var _storage = __webpack_require__(38);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
@@ -100,71 +100,75 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendar2 = _interopRequireDefault(_calendar);
 
-	var _datepicker = __webpack_require__(25);
+	var _datepicker = __webpack_require__(26);
 
 	var _datepicker2 = _interopRequireDefault(_datepicker);
 
-	var _daterangepicker = __webpack_require__(26);
+	var _daterangepicker = __webpack_require__(27);
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(40);
+	var _tip = __webpack_require__(41);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(34);
+	var _nprogress = __webpack_require__(35);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	var _hr = __webpack_require__(31);
+	var _hr = __webpack_require__(32);
 
 	var _hr2 = _interopRequireDefault(_hr);
 
-	var _dialog = __webpack_require__(27);
+	var _dialog = __webpack_require__(28);
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _navigation = __webpack_require__(33);
+	var _navigation = __webpack_require__(34);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _flex = __webpack_require__(7);
+	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
-	var _timespan = __webpack_require__(16);
+	var _timespan = __webpack_require__(17);
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _timespanpicker = __webpack_require__(39);
+	var _timespanpicker = __webpack_require__(40);
 
 	var _timespanpicker2 = _interopRequireDefault(_timespanpicker);
 
-	var _dropselect = __webpack_require__(28);
+	var _drop = __webpack_require__(29);
 
-	var _dropselect2 = _interopRequireDefault(_dropselect);
+	var _drop2 = _interopRequireDefault(_drop);
 
-	var _advanceselect = __webpack_require__(23);
+	var _advance = __webpack_require__(24);
 
-	var _advanceselect2 = _interopRequireDefault(_advanceselect);
+	var _advance2 = _interopRequireDefault(_advance);
 
-	var _search = __webpack_require__(35);
+	var _search = __webpack_require__(36);
 
 	var _search2 = _interopRequireDefault(_search);
 
-	var _switch = __webpack_require__(38);
+	var _switch = __webpack_require__(39);
 
 	var _switch2 = _interopRequireDefault(_switch);
 
-	var _sheet = __webpack_require__(36);
+	var _sheet = __webpack_require__(37);
 
 	var _sheet2 = _interopRequireDefault(_sheet);
 
-	var _cascader = __webpack_require__(24);
+	var _cascader = __webpack_require__(15);
 
 	var _cascader2 = _interopRequireDefault(_cascader);
 
-	__webpack_require__(42);
+	var _cascader3 = __webpack_require__(25);
+
+	var _cascader4 = _interopRequireDefault(_cascader3);
+
+	__webpack_require__(43);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -190,10 +194,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Flex: _flex2.default,
 	    TimeSpan: _timespan2.default,
 	    TimeSpanPicker: _timespanpicker2.default,
-	    DropSelect: _dropselect2.default,
-	    AdvanceSelect: _advanceselect2.default,
+	    DropSelect: _drop2.default,
+	    AdvanceSelect: _advance2.default,
 	    SearchSelect: _search2.default,
 	    Cascader: _cascader2.default,
+	    CascaderSelect: _cascader4.default,
 	    Switch: _switch2.default,
 	    Sheet: _sheet2.default
 	};
@@ -257,7 +262,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if ("function" === 'function' && _typeof(__webpack_require__(18)) === 'object' && __webpack_require__(18)) {
+		} else if ("function" === 'function' && _typeof(__webpack_require__(19)) === 'object' && __webpack_require__(19)) {
 			// register as 'classnames', consistent with npm package name
 			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
@@ -281,12 +286,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 6 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
-
-/***/ },
-/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -379,12 +378,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Flex;
 
 /***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
+
+/***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _Request = __webpack_require__(19);
+	var _Request = __webpack_require__(20);
 
 	var _Request2 = _interopRequireDefault(_Request);
 
@@ -400,15 +405,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _format2 = _interopRequireDefault(_format);
 
-	var _isElementInViewport = __webpack_require__(21);
+	var _isElementInViewport = __webpack_require__(22);
 
 	var _isElementInViewport2 = _interopRequireDefault(_isElementInViewport);
 
-	var _isElementOverViewport = __webpack_require__(22);
+	var _isElementOverViewport = __webpack_require__(23);
 
 	var _isElementOverViewport2 = _interopRequireDefault(_isElementOverViewport);
 
-	var _is = __webpack_require__(20);
+	var _is = __webpack_require__(21);
 
 	var _is2 = _interopRequireDefault(_is);
 
@@ -438,7 +443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(6);
+	var _moment = __webpack_require__(7);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -953,6 +958,203 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(4);
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _classnames = __webpack_require__(3);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _flex = __webpack_require__(6);
+
+	var _flex2 = _interopRequireDefault(_flex);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var noop = function noop() {};
+
+	var Cascader = function (_React$Component) {
+	    _inherits(Cascader, _React$Component);
+
+	    function Cascader(props) {
+	        _classCallCheck(this, Cascader);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Cascader).call(this, props));
+
+	        _this.state = {
+	            value: _this.props.value || [],
+	            id: '_gm_cascader_id' + (Math.random() + '').slice(2)
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Cascader, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if ('value' in nextProps) {
+	                this.setState({
+	                    value: nextProps.value || []
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'getList',
+	        value: function getList() {
+	            var result = [this.props.data];
+	            _underscore2.default.each(this.state.value, function (value, i) {
+	                var match = _underscore2.default.find(result[i], function (v) {
+	                    return v.value === value;
+	                });
+	                if (match) {
+	                    if (match.children) {
+	                        result.push(match.children);
+	                    }
+	                }
+	            });
+
+	            return result;
+	        }
+	    }, {
+	        key: 'renderList',
+	        value: function renderList() {
+	            var _this2 = this;
+
+	            return _react2.default.createElement(
+	                _flex2.default,
+	                { className: (0, _classnames2.default)("gm-cascader-list", this.props.className) },
+	                _underscore2.default.map(this.getList(), function (value, i) {
+	                    return _react2.default.createElement(
+	                        _flex2.default,
+	                        { column: true, key: i, className: 'list-group gm-block' },
+	                        _underscore2.default.map(value, function (v) {
+	                            return _react2.default.createElement(
+	                                'a',
+	                                { key: v.value,
+	                                    title: v.name,
+	                                    onClick: _this2.handleSelect.bind(_this2, v, i),
+	                                    className: (0, _classnames2.default)("list-group-item", {
+	                                        active: v.value === _this2.state.value[i]
+	                                    })
+	                                },
+	                                v.name
+	                            );
+	                        })
+	                    );
+	                })
+	            );
+	        }
+	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(value, index) {
+	            var selected = this.state.value;
+	            selected[index] = value.value;
+	            selected.length = index + 1;
+	            this.setState({
+	                selected: selected
+	            });
+	            this.props.onChange(selected);
+	        }
+	    }, {
+	        key: 'renderOverlay',
+	        value: function renderOverlay() {
+	            return _react2.default.createElement(
+	                _reactBootstrap.Popover,
+	                {
+	                    id: this.state.id,
+	                    placement: 'bottom',
+	                    className: 'gm-cascader-overlay'
+	                },
+	                this.renderList()
+	            );
+	        }
+	    }, {
+	        key: 'renderChildren',
+	        value: function renderChildren() {
+	            var _this3 = this;
+
+	            var value = [];
+	            if (this.state.value.length > 0) {
+	                _underscore2.default.each(this.state.value, function (v, i) {
+	                    var match = _underscore2.default.find(i === 0 ? _this3.props.data : value[i - 1].children, function (val) {
+	                        return v === val.value;
+	                    });
+	                    value.push(match);
+	                });
+	            }
+	            return _react2.default.createElement('input', _extends({ type: 'text', onChange: noop, value: _underscore2.default.map(value, function (v) {
+	                    return v.name;
+	                }).join(',') }, this.props.inputProps, {
+	                className: (0, _classnames2.default)("form-control", this.props.inputProps.className) }));
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-cascader' },
+	                _react2.default.createElement(
+	                    _reactBootstrap.OverlayTrigger,
+	                    {
+	                        trigger: "click",
+	                        rootClose: true,
+	                        placement: 'bottom',
+	                        container: this,
+	                        overlay: this.renderOverlay()
+	                    },
+	                    this.props.children ? this.props.children : this.renderChildren()
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Cascader;
+	}(_react2.default.Component);
+
+	Cascader.propTypes = {
+	    // 格式 [{value: 1, name: '深圳', children: [{...}]}]
+	    data: _react.PropTypes.array.isRequired,
+	    // [1,2,...]
+	    value: _react.PropTypes.array,
+	    // 同上
+	    defaultValue: _react.PropTypes.array,
+	    // 会提供整个value回去
+	    onChange: _react.PropTypes.func,
+	    // 没有this.props.children时有效
+	    inputProps: _react.PropTypes.object
+	};
+	Cascader.defaultProps = {
+	    onChange: noop,
+	    inputProps: {}
+	};
+	exports.default = Cascader;
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1196,7 +1398,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Droper;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1209,7 +1411,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(6);
+	var _moment = __webpack_require__(7);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -1283,7 +1485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpan;
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1478,7 +1680,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Validate;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -1486,7 +1688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1675,7 +1877,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RequestFactory;
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1693,7 +1895,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = is;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1708,7 +1910,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1723,7 +1925,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2034,7 +2236,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = AdvanceSelect;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2049,17 +2251,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactBootstrap = __webpack_require__(4);
-
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _classnames = __webpack_require__(3);
+	var _cascader = __webpack_require__(15);
 
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _cascader2 = _interopRequireDefault(_cascader);
 
-	var _flex = __webpack_require__(7);
+	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -2073,134 +2273,184 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var noop = function noop() {};
 
-	var Cascader = function (_React$Component) {
-	    _inherits(Cascader, _React$Component);
+	var CascaderSelect = function (_React$Component) {
+	    _inherits(CascaderSelect, _React$Component);
 
-	    function Cascader(props) {
-	        _classCallCheck(this, Cascader);
+	    _createClass(CascaderSelect, [{
+	        key: 'getPropsSelected',
+	        value: function getPropsSelected(props) {
+	            if (props.multiple) {
+	                if (props.selected) {
+	                    return props.selected;
+	                } else {
+	                    return [];
+	                }
+	            } else {
+	                if (props.selected) {
+	                    return [props.selected];
+	                } else {
+	                    return [];
+	                }
+	            }
+	        }
+	    }]);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Cascader).call(this, props));
+	    function CascaderSelect(props) {
+	        _classCallCheck(this, CascaderSelect);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CascaderSelect).call(this, props));
 
 	        _this.state = {
-	            value: _this.props.value || [],
-	            id: '_gm_cascader_id' + (Math.random() + '').slice(2)
+	            selected: _this.getPropsSelected(props),
+	            cascaderValue: []
 	        };
 	        return _this;
 	    }
 
-	    _createClass(Cascader, [{
+	    _createClass(CascaderSelect, [{
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
-	            if ('value' in nextProps) {
-	                this.setState({
-	                    value: nextProps.value || []
-	                });
-	            }
-	        }
-	    }, {
-	        key: 'getList',
-	        value: function getList() {
-	            var result = [this.props.data];
-	            _underscore2.default.each(this.state.value, function (value, i) {
-	                var match = _underscore2.default.find(result[i], function (v) {
-	                    return v.value === value;
-	                });
-	                if (match) {
-	                    if (match.children) {
-	                        result.push(match.children);
-	                    }
-	                }
+	            this.setState({
+	                selected: this.getPropsSelected(nextProps)
 	            });
-
-	            return result;
-	        }
-	    }, {
-	        key: 'renderList',
-	        value: function renderList() {
-	            var _this2 = this;
-
-	            return _react2.default.createElement(
-	                _flex2.default,
-	                { className: 'gm-cascader-list' },
-	                _underscore2.default.map(this.getList(), function (value, i) {
-	                    return _react2.default.createElement(
-	                        _flex2.default,
-	                        { column: true, key: i, className: 'list-group gm-block' },
-	                        _underscore2.default.map(value, function (v) {
-	                            return _react2.default.createElement(
-	                                'a',
-	                                { key: v.value,
-	                                    title: v.name,
-	                                    onClick: _this2.handleSelect.bind(_this2, v, i),
-	                                    className: (0, _classnames2.default)("list-group-item", {
-	                                        active: v.value === _this2.state.value[i]
-	                                    })
-	                                },
-	                                v.name
-	                            );
-	                        })
-	                    );
-	                })
-	            );
-	        }
-	    }, {
-	        key: 'handleSelect',
-	        value: function handleSelect(value, index) {
-	            var selected = this.state.value;
-	            selected[index] = value.value;
-	            selected.length = index + 1;
-	            this.props.onChange(selected);
-	        }
-	    }, {
-	        key: 'renderOverlay',
-	        value: function renderOverlay() {
-	            return _react2.default.createElement(
-	                _reactBootstrap.Popover,
-	                {
-	                    id: this.state.id,
-	                    placement: 'bottom',
-	                    positionLeft: 0,
-	                    className: 'gm-cascader-overlay' },
-	                this.renderList()
-	            );
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'gm-cascader' },
+	                { className: 'gm-cascader-select' },
 	                _react2.default.createElement(
-	                    _reactBootstrap.OverlayTrigger,
-	                    {
-	                        trigger: 'click',
-	                        rootClose: true,
-	                        placement: 'bottom',
-	                        container: this,
-	                        overlay: this.renderOverlay()
-	                    },
-	                    this.props.children
+	                    _flex2.default,
+	                    { className: 'gm-cascader-select-input' },
+	                    _underscore2.default.map(this.state.selected, function (value, i) {
+	                        return _react2.default.createElement(
+	                            _flex2.default,
+	                            { key: i, alignStart: true, className: 'selected' },
+	                            _this2.props.selectedRender ? _this2.props.selectedRender(value, i) : _underscore2.default.map(value, function (v) {
+	                                return v.name;
+	                            }).join(','),
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'button', className: 'close',
+	                                    onClick: _this2.handleClose.bind(_this2, value) },
+	                                '×'
+	                            )
+	                        );
+	                    }),
+	                    _react2.default.createElement(
+	                        _flex2.default,
+	                        { flex: true, column: true, onKeyDown: this.handleKeyDown.bind(this) },
+	                        _react2.default.createElement(_cascader2.default, { data: this.props.data,
+	                            value: this.state.cascaderValue,
+	                            onChange: this.handleChange.bind(this) })
+	                    )
 	                )
 	            );
 	        }
+	    }, {
+	        key: 'handleKeyDown',
+	        value: function handleKeyDown(event) {
+	            if (event.key === 'Backspace') {
+	                if (this.state.cascaderValue.length > 0) {
+	                    this.setState({
+	                        cascaderValue: []
+	                    });
+	                } else if (event.target.value === '') {
+	                    var selected = this.state.selected;
+	                    selected.pop();
+	                    this.doSelect(selected);
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'doSelect',
+	        value: function doSelect(selected) {
+	            if (this.props.multiple) {
+	                this.props.onSelect(selected.length === 0 ? null : selected);
+	            } else {
+	                this.props.onSelect(selected.length === 0 ? null : selected.pop());
+	            }
+	        }
+	    }, {
+	        key: 'uniq',
+	        value: function uniq(selected) {
+	            var obj = {},
+	                result = [];
+	            _underscore2.default.each(selected, function (value) {
+	                var key = _underscore2.default.map(value, function (v) {
+	                    return v.value;
+	                }).join(',');
+	                if (!obj[key]) {
+	                    result.push(value);
+	                    obj[key] = true;
+	                }
+	            });
+	            return result;
+	        }
+	    }, {
+	        key: 'handleChange',
+	        value: function handleChange(value) {
+	            var _this3 = this;
+
+	            var result = [];
+	            this.setState({
+	                cascaderValue: value
+	            });
+
+	            if (value.length > 0) {
+	                _underscore2.default.each(value, function (v, i) {
+	                    var match = _underscore2.default.find(i === 0 ? _this3.props.data : result[i - 1].children, function (val) {
+	                        return v === val.value;
+	                    });
+	                    result.push(match);
+	                });
+	            }
+
+	            if (!result[result.length - 1].children) {
+	                var n = this.state.selected.slice();
+	                n.push(result);
+	                // 过滤
+	                n = this.uniq(n);
+
+	                this.doSelect(n);
+	                this.setState({
+	                    cascaderValue: []
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'handleClose',
+	        value: function handleClose(value) {
+	            var selected = _underscore2.default.filter(this.state.selected, function (v) {
+	                return v !== value;
+	            });
+	            this.doSelect(selected);
+	        }
 	    }]);
 
-	    return Cascader;
+	    return CascaderSelect;
 	}(_react2.default.Component);
 
-	Cascader.propTypes = {
+	CascaderSelect.propTypes = {
 	    data: _react.PropTypes.array.isRequired,
-	    value: _react.PropTypes.array,
-	    defaultValue: _react.PropTypes.array,
-	    onChange: _react.PropTypes.func
+	    selected: _react.PropTypes.array,
+	    // 会提供整个value回去
+	    onSelect: _react.PropTypes.func.isRequired,
+	    multiple: _react.PropTypes.bool,
+	    placeholder: _react.PropTypes.string,
+	    selectedRender: _react.PropTypes.func
 	};
-	Cascader.defaultProps = {
-	    onChange: noop
+	CascaderSelect.defaultProps = {
+	    onSelect: noop,
+	    placeholder: ''
 	};
-	exports.default = Cascader;
+	exports.default = CascaderSelect;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2213,7 +2463,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(6);
+	var _moment = __webpack_require__(7);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -2281,7 +2531,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2294,7 +2544,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(6);
+	var _moment = __webpack_require__(7);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
@@ -2381,7 +2631,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DateRangePicker;
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2532,7 +2782,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Dialog;
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2725,7 +2975,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DropSelect;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2867,7 +3117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Former;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3137,7 +3387,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Grid;
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3174,7 +3424,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Hr;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3195,7 +3445,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _droper = __webpack_require__(15);
+	var _droper = __webpack_require__(16);
 
 	var _droper2 = _interopRequireDefault(_droper);
 
@@ -3389,7 +3639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ImportLead;
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3412,7 +3662,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(7);
+	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -3531,7 +3781,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Navigation;
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3619,7 +3869,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3638,7 +3888,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _flex = __webpack_require__(7);
+	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -3744,7 +3994,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                    disabled: _this2.state.selected.indexOf(value) > -1
 	                                }),
 	                                onClick: _this2.handleSelect.bind(_this2, value) },
-	                            value.name
+	                            value.name,
+	                            _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
 	                        );
 	                    })
 	                ) : undefined
@@ -3851,7 +4102,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = SearchSelect;
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4187,7 +4438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Sheet;
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4270,7 +4521,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4376,7 +4627,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Switch;
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4389,13 +4640,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(6);
+	var _moment = __webpack_require__(7);
 
 	var _moment2 = _interopRequireDefault(_moment);
 
 	var _reactBootstrap = __webpack_require__(4);
 
-	var _timespan = __webpack_require__(16);
+	var _timespan = __webpack_require__(17);
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
@@ -4463,7 +4714,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpanPicker;
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4643,7 +4894,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4660,7 +4911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validate = __webpack_require__(17);
+	var _validate = __webpack_require__(18);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
@@ -4768,7 +5019,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
