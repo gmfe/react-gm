@@ -1,14 +1,14 @@
 .gm-calendar {
   width: 198px;
   overflow: hidden;
-  border: 1px solid #aeaeae;
+  border: 1px solid @gm-border-color;
   border-radius: 4px;
   position: relative;
   background: white;
 }
 
 .gm-calendar-head {
-  background-color: #f0f0f0;
+  background-color: @gray-lighter;
 }
 
 .gm-calendar-head-title {
@@ -24,7 +24,7 @@
 }
 
 .gm-calendar-head-pre:hover, .gm-calendar-head-next:hover {
-  background-color: #f0f0f0;
+  background-color: @gray-lighter;
   text-decoration: none;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .gm-calendar-week {
-  background-color: #f0f0f0;
+  background-color: @gray-lighter;
 }
 
 .gm-calendar-content {
@@ -42,11 +42,11 @@
 .gm-calendar-months {
   position: absolute;
   top: 24px;
-  border: 1px solid #aeaeae;
+  border: 1px solid @gm-border-color;
   right: 5px;
   bottom: 5px;
   left: 5px;
-  background: white; /* display: none; */
+  background: white;
 }
 
 .gm-calendar-month {
@@ -62,7 +62,7 @@
 }
 
 .gm-calendar-month:hover {
-  background-color: #f0f0f0;
+  background-color: @gm-hover-bg;
 }
 
 .gm-calendar-day-name {
@@ -86,7 +86,7 @@
 }
 
 .gm-calendar-day:hover {
-  background-color: #f0f0f0;
+  background-color: @gm-hover-bg;
 }
 
 .gm-calendar-day-old {
@@ -98,11 +98,11 @@
 }
 
 .gm-calendar-active {
-  background-color: #337ab7;
+  background-color: @brand-primary;
   color: white;
 }
 
 .gm-calendar-active:hover {
-  background-color: #337ab7;
+  background-color: @brand-primary;
   color: white;
 }

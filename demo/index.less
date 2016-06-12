@@ -1,3 +1,51 @@
+html, body, #appContainer {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.gm-app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.gm-app-top {
+  background: #34383c;
+  color: white;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+}
+
+.gm-app-top-navigation-btn {
+  display: none;
+}
+
+.gm-app-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@media (max-width: 970px) {
+  .gm-app-top-navigation-btn {
+    display: block;
+  }
+
+  .gm-app-left {
+    position: absolute;
+    z-index: 1000;
+    left: -220px;
+  }
+
+  .gm-app-left.current {
+    left: 0px;
+  }
+}
+
+
 .gm-navigation a {
   color: white;
   display: block;

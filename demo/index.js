@@ -1,3 +1,6 @@
+import 'gm-bootstrap/dist/css/bootstrap.css';
+import './index.less';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, hashHistory, Link} from 'react-router';
@@ -16,10 +19,6 @@ import Overlay from './component/overlay';
 import Data from './component/data';
 import Upload from './component/upload';
 import Layout from './component/layout';
-
-import 'gm-bootstrap/dist/css/bootstrap.css';
-import './index.less';
-
 
 // var interceptorId = Util.RequestInterceptor.add({
 //     request: function (config) {

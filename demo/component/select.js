@@ -4,7 +4,6 @@ import {
     DropSelect,
     AdvanceSelect,
     SearchSelect,
-    Switch,
     Cascader
 } from '../../src/index';
 import pinYin from 'pinyin';
@@ -315,25 +314,6 @@ const FormWrap = React.createClass({
                 <SearchSelectWrap></SearchSelectWrap>
                 <h1>Former</h1>
                 <FormerDom></FormerDom>
-                <h1>Switch</h1>
-                <div>
-                    <Switch
-                        defaultChecked={true}
-                        checkedChildren={"是"}
-                        unCheckedChildren={"否"}
-                    ></Switch>
-                    <Switch
-                        checked={this.state.checked}
-                        checkedChildren={"是"}
-                        unCheckedChildren={"否"}
-                        onChange={this.handleChange}
-                    ></Switch>
-                    <Switch
-                        disabled
-                        checkedChildren={"YES"}
-                        unCheckedChildren={"NO"}
-                    ></Switch>
-                </div>
             </div>
         );
     },
