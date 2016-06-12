@@ -93,13 +93,13 @@
 .gm-calendar {
   width: 198px;
   overflow: hidden;
-  border: 1px solid #aeaeae;
+  border: 1px solid #ddd;
   border-radius: 4px;
   position: relative;
   background: white;
 }
 .gm-calendar-head {
-  background-color: #f0f0f0;
+  background-color: #eeeeee;
 }
 .gm-calendar-head-title {
   font-weight: bold;
@@ -109,26 +109,26 @@
   width: 24px;
   height: 24px;
   border-radius: 4px;
+  color: inherit;
 }
 .gm-calendar-head-pre:hover, .gm-calendar-head-next:hover {
-  background-color: #f0f0f0;
+  background-color: #eeeeee;
   text-decoration: none;
 }
 .gm-calendar-head-month {
   cursor: pointer;
 }
 .gm-calendar-week {
-  background-color: #f0f0f0;
+  background-color: #eeeeee;
 }
 .gm-calendar-months {
   position: absolute;
   top: 24px;
-  border: 1px solid #aeaeae;
+  border: 1px solid #ddd;
   right: 5px;
   bottom: 5px;
   left: 5px;
   background: white;
-  /* display: none; */
 }
 .gm-calendar-month {
   width: 56px;
@@ -141,7 +141,7 @@
   cursor: pointer;
 }
 .gm-calendar-month:hover {
-  background-color: #f0f0f0;
+  background-color: #f5f5f5;
 }
 .gm-calendar-day-name {
   color: black;
@@ -162,7 +162,7 @@
   border-radius: 4px;
 }
 .gm-calendar-day:hover {
-  background-color: #f0f0f0;
+  background-color: #f5f5f5;
 }
 .gm-calendar-day-old {
   color: #999999;
@@ -171,11 +171,11 @@
   color: #999999;
 }
 .gm-calendar-active {
-  background-color: #337ab7;
+  background-color: #6dc3ec;
   color: white;
 }
 .gm-calendar-active:hover {
-  background-color: #337ab7;
+  background-color: #6dc3ec;
   color: white;
 }
 .gm-datepicker {
@@ -451,7 +451,7 @@
   width: 296px;
   overflow: hidden;
   display: inline-block;
-  border: 1px solid #aeaeae;
+  border: 1px solid #ddd;
   border-radius: 4px;
   background: white;
   position: relative;
@@ -468,17 +468,17 @@
   margin: 2px;
 }
 .gm-time-span-cell:hover {
-  background-color: #f0f0f0;
+  background-color: #f5f5f5;
 }
 .gm-time-span-cell.active {
-  background-color: #337ab7;
+  background-color: #6dc3ec;
   color: white;
 }
 .gm-time-span-picker {
   display: inline-block;
 }
-.gm-time-span-picker-popover {
-  max-width: 320px;
+.gm-time-span-picker-popover.popover {
+  max-width: 298px;
 }
 .gm-time-span-picker-popover.popover {
   padding: 0;
@@ -505,7 +505,7 @@
 .gm-dropselect-wrap .gm-dropselect-list-wrap {
   border-radius: 0 0 4px 4px;
   overflow: hidden;
-  box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
   background-color: #fff;
   border: 1px solid rgba(6, 6, 6, 0.13);
   border-top: none;
@@ -516,13 +516,12 @@
   overflow-y: auto;
 }
 .gm-dropselect-list li:not(.gm-dropselect-title):hover {
-  background-color: #A8B1B5;
-  color: #fff;
+  background-color: #f5f5f5;
 }
 .gm-dropselect-list-wrap .gm-dropselect-list {
   margin-bottom: 0;
   list-style: none;
-  padding: 0px;
+  padding: 0;
 }
 .gm-dropselect-list-wrap .gm-dropselect-item {
   line-height: 32px;
@@ -531,7 +530,7 @@
 .gm-dropselect-list-wrap .gm-dropselect-list .gm-dropselect-title {
   overflow: hidden;
   font-weight: bold;
-  background-color: #E4E4E4;
+  background-color: #eeeeee;
 }
 .gm-dropselect-list-wrap .gm-dropselect-list li {
   overflow: hidden;
@@ -547,7 +546,7 @@
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  border-bottom: 1px solid #e9ebec;
+  border-bottom: 1px solid #ddd;
 }
 .gm-dropselect-list-wrap .gm-dropselect-list li div {
   -webkit-box-flex: 1;
@@ -610,7 +609,7 @@
   content: " ";
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid #cccccc;
+  border-top: 5px solid #ccc;
   display: block;
   width: 0;
   height: 0;
@@ -625,7 +624,7 @@
 }
 .gm-open .gm-arrow:before {
   border-top: none;
-  border-bottom: 5px solid #cccccc;
+  border-bottom: 5px solid #ccc;
 }
 .gm-focus {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
@@ -657,7 +656,7 @@
   background-color: #eee;
 }
 .option-hover {
-  background-color: #006eab;
+  background-color: #6dc3ec;
   color: #fff;
 }
 .option-item {
@@ -665,7 +664,10 @@
   border-bottom: 1px #e3e3e3 solid;
 }
 .option-item:hover {
-  background-color: #006eab;
+  background-color: #f5f5f5;
+}
+.option-hover:hover {
+  background-color: #6dc3ec;
   color: #fff;
 }
 .option-item:last-child {
@@ -675,7 +677,7 @@
   cursor: text;
   font-weight: 600;
   background: #e1e1e1;
-  border: 1px #ccc solid;
+  border: 1px solid #ccc;
   border-width: 1px 0;
 }
 .option-disabled {
@@ -694,7 +696,7 @@
   display: none;
   overflow-y: auto;
   background: #fff;
-  border: 1px solid #999999;
+  border: 1px solid #ddd;
   border-radius: 0;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   box-sizing: border-box;
@@ -760,8 +762,8 @@
           animation-name: rcSwitchOn;
 }
 .gm-switch-checked {
-  border: 1px solid #87d068;
-  background-color: #87d068;
+  border: 1px solid #34AE4B;
+  background-color: #34AE4B;
 }
 .gm-switch-checked .gm-switch-inner {
   left: 6px;
@@ -861,6 +863,7 @@
   position: relative;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: white;
 }
 .gm-search-select .gm-search-select-input {
   padding: 6px 12px;
