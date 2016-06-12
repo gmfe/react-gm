@@ -24,6 +24,7 @@ import AdvanceSelect from './component/advanceselect';
 import SearchSelect from './component/search.select';
 import Switch from './component/switch';
 import Sheet from './component/sheet';
+import Cascader from './component/cascader';
 
 import './index.less';
 
@@ -52,6 +53,7 @@ module.exports = {
     DropSelect,
     AdvanceSelect,
     SearchSelect,
+    Cascader,
     Switch,
     Sheet
 };

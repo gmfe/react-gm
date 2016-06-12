@@ -9,9 +9,6 @@ module.exports = {
     entry: {
         'index': [
             './demo/index'
-        ],
-        'import.lead': [
-            './demo/import.lead'
         ]
     },
     output: {

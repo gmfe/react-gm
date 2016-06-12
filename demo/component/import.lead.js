@@ -1,5 +1,5 @@
 import React from 'react';
-import ImportLead from '../src/component/import.lead.js';
+import {ImportLead} from '../../src/index';
 
 var gridData = {
     loading: false,
@@ -48,7 +48,39 @@ var gridData = {
         id: 2,
         name: 'haha',
         age: '15'
-    },{
+    }, {
+        id: 1,
+        name: '偶们啊啊发骚发所发生的',
+        age: '10'
+    }, {
+        id: 2,
+        name: 'haha',
+        age: '15'
+    }, {
+        id: 1,
+        name: '偶们啊啊发骚发所发生的',
+        age: '10'
+    }, {
+        id: 2,
+        name: 'haha',
+        age: '15'
+    }, {
+        id: 1,
+        name: '偶们啊啊发骚发所发生的',
+        age: '10'
+    }, {
+        id: 2,
+        name: 'haha',
+        age: '15'
+    }, {
+        id: 1,
+        name: '偶们啊啊发骚发所发生的',
+        age: '10'
+    }, {
+        id: 2,
+        name: 'haha',
+        age: '15'
+    }, {
         id: 1,
         name: '偶们啊啊发骚发所发生的',
         age: '10'
@@ -88,14 +120,6 @@ var gridData = {
         id: 2,
         name: 'haha',
         age: '15'
-    },{
-        id: 1,
-        name: '偶们啊啊发骚发所发生的',
-        age: '10'
-    }, {
-        id: 2,
-        name: 'haha',
-        age: '15'
     }, {
         id: 1,
         name: '偶们啊啊发骚发所发生的',
@@ -105,30 +129,6 @@ var gridData = {
         name: 'haha',
         age: '15'
     }, {
-        id: 1,
-        name: '偶们啊啊发骚发所发生的',
-        age: '10'
-    }, {
-        id: 2,
-        name: 'haha',
-        age: '15'
-    }, {
-        id: 1,
-        name: '偶们啊啊发骚发所发生的',
-        age: '10'
-    }, {
-        id: 2,
-        name: 'haha',
-        age: '15'
-    }, {
-        id: 1,
-        name: '偶们啊啊发骚发所发生的',
-        age: '10'
-    }, {
-        id: 2,
-        name: 'haha',
-        age: '15'
-    },{
         id: 1,
         name: '偶们啊啊发骚发所发生的',
         age: '10'
@@ -168,7 +168,7 @@ var gridData = {
         id: 2,
         name: 'haha',
         age: '15'
-    },{
+    }, {
         id: 1,
         name: '偶们啊啊发骚发所发生的',
         age: '10'
@@ -238,7 +238,7 @@ var ImportLeadWrap = React.createClass({
             </div>
         );
     },
-    componentDidMount: function(){
+    componentDidMount: function () {
         var t = this;
         setTimeout(function () {
 
