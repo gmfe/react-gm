@@ -1,3 +1,35 @@
 .gm-cascader {
+  position: relative;
+}
 
+.gm-cascader-overlay {
+  &.popover {
+    margin-top: 5px;
+    max-width: none;
+  }
+
+  .popover-content {
+    padding: 0;
+  }
+  .arrow {
+    display: none;
+  }
+  .gm-cascader-list {
+    height: 200px;
+    .list-group {
+      margin: 0;
+      border-right: 1px solid @gm-border-color;
+      min-width: 100px;
+      overflow: auto;
+      &:last-child {
+        border-right: none;
+      }
+      .list-group-item {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+      }
+    }
+  }
 }

@@ -246,10 +246,68 @@ var SearchSelectWrap = React.createClass({
 });
 
 class CascaderWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ['0'],
+            data: [{
+                value: '0',
+                name: '广东',
+                children: [{
+                    value: '01',
+                    name: '深圳深圳'
+                }, {
+                    value: '02',
+                    name: '广州'
+                }, {
+                    value: '03',
+                    name: '珠海'
+                }]
+            }, {
+                value: '1',
+                name: '上海',
+                children: [{
+                    value: '11',
+                    name: '上海1'
+                }, {
+                    value: '12',
+                    name: '上海2',
+                    children: [{
+                        value: '121',
+                        name: 'adfadf'
+                    }]
+                }, {
+                    value: '13',
+                    name: '上海3'
+                }]
+            }]
+        };
+    }
+
     render() {
+        let value = [];
+        if (this.state.value.length > 0) {
+            _.each(this.state.value, (v, i) => {
+                const match = _.find(i === 0 ? this.state.data : value[i - 1].children, val => {
+                    return v === val.value;
+                });
+                value.push(match);
+            });
+        }
+        value = _.map(value, v => v.name).join(',');
+
         return (
-            <Cascader></Cascader>
+            <Cascader data={this.state.data} value={this.state.value} onChange={::this.handleChange}>
+                <input type="text" onChange={() => {}} value={value}/>
+            </Cascader>
         );
+    }
+
+    handleChange(value) {
+        console.log(value);
+        this.setState({
+            value
+        });
     }
 }
 
