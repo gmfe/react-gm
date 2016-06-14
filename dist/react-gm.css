@@ -908,6 +908,27 @@
 .gm-cascader {
   position: relative;
 }
+.gm-cascader .gm-cascader-input {
+  position: relative;
+}
+.gm-cascader .gm-cascader-input .glyphicon {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.5em;
+  right: .5em;
+  line-height: 100%;
+  color: #ccc;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: -webkit-transform .2s ease;
+  transition: -webkit-transform .2s ease;
+  transition: transform .2s ease;
+  transition: transform .2s ease, -webkit-transform .2s ease;
+}
+.gm-cascader .gm-cascader-input .glyphicon.active {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
 .gm-cascader-overlay.popover {
   margin-top: 5px;
   max-width: none;

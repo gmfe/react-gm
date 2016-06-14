@@ -1000,7 +1000,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        _this.state = {
 	            value: _this.props.value || [],
-	            id: '_gm_cascader_id' + (Math.random() + '').slice(2)
+	            id: '_gm_cascader_id' + (Math.random() + '').slice(2),
+	            in: false
 	        };
 	        return _this;
 	    }
@@ -1085,6 +1086,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	            );
 	        }
 	    }, {
+	        key: 'handleEnter',
+	        value: function handleEnter() {
+	            console.log('enter');
+	            this.setState({
+	                in: true
+	            });
+	        }
+	    }, {
+	        key: 'handleExit',
+	        value: function handleExit() {
+	            this.setState({
+	                in: false
+	            });
+	        }
+	    }, {
 	        key: 'renderChildren',
 	        value: function renderChildren() {
 	            var _this3 = this;
@@ -1098,10 +1114,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    value.push(match);
 	                });
 	            }
-	            return _react2.default.createElement('input', _extends({ type: 'text', onChange: noop, value: _underscore2.default.map(value, function (v) {
-	                    return v.name;
-	                }).join(',') }, this.props.inputProps, {
-	                className: (0, _classnames2.default)("form-control", this.props.inputProps.className) }));
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-cascader-input' },
+	                _react2.default.createElement('i', { className: (0, _classnames2.default)("glyphicon glyphicon-menu-down", {
+	                        "active": this.state.in
+	                    }) }),
+	                _react2.default.createElement('input', _extends({ type: 'text', onChange: noop,
+	                    value: _underscore2.default.map(value, function (v) {
+	                        return v.name;
+	                    }).join(',') }, this.props.inputProps, {
+	                    className: (0, _classnames2.default)("form-control", this.props.inputProps.className) }))
+	            );
 	        }
 	    }, {
 	        key: 'render',
@@ -1116,7 +1140,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        rootClose: true,
 	                        placement: 'bottom',
 	                        container: this,
-	                        overlay: this.renderOverlay()
+	                        overlay: this.renderOverlay(),
+	                        onEnter: this.handleEnter.bind(this),
+	                        onExit: this.handleExit.bind(this)
 	                    },
 	                    this.props.children ? this.props.children : this.renderChildren()
 	                )
