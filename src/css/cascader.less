@@ -1,5 +1,22 @@
 .gm-cascader {
   position: relative;
+
+  .gm-cascader-input {
+    position: relative;
+    .glyphicon {
+      position: absolute;
+      top: 50%;
+      margin-top: -.5em;
+      right: .5em;
+      line-height: 100%;
+      color: @input-border;
+      transform: rotate(0deg);
+      transition: transform .2s ease;
+      &.active {
+        transform: rotate(180deg);
+      }
+    }
+  }
 }
 
 .gm-cascader-overlay {

@@ -31,7 +31,8 @@ class Cascader extends React.Component {
         super(props);
         this.state = {
             value: this.props.value || [],
-            id: '_gm_cascader_id' + (Math.random() + '').slice(2)
+            id: '_gm_cascader_id' + (Math.random() + '').slice(2),
+            in: false
         };
     }
 
@@ -99,6 +100,19 @@ class Cascader extends React.Component {
         );
     }
 
+    handleEnter() {
+        console.log('enter');
+        this.setState({
+            in: true
+        });
+    }
+
+    handleExit() {
+        this.setState({
+            in: false
+        });
+    }
+
     renderChildren() {
         let value = [];
         if (this.state.value.length > 0) {
@@ -110,8 +124,14 @@ class Cascader extends React.Component {
             });
         }
         return (
-            <input type="text" onChange={noop} value={_.map(value, v => v.name).join(',')} {...this.props.inputProps}
-                   className={classNames("form-control", this.props.inputProps.className)}/>
+            <div className="gm-cascader-input">
+                <i className={classNames("glyphicon glyphicon-menu-down", {
+                "active": this.state.in
+                })}></i>
+                <input type="text" onChange={noop}
+                       value={_.map(value, v => v.name).join(',')} {...this.props.inputProps}
+                       className={classNames("form-control", this.props.inputProps.className)}/>
+            </div>
         );
     }
 
@@ -124,6 +144,8 @@ class Cascader extends React.Component {
                     placement="bottom"
                     container={this}
                     overlay={this.renderOverlay()}
+                    onEnter={::this.handleEnter}
+                    onExit={::this.handleExit}
                 >
                     {this.props.children ? this.props.children : this.renderChildren()}
                 </OverlayTrigger>
