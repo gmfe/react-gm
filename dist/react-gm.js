@@ -1088,7 +1088,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'handleEnter',
 	        value: function handleEnter() {
-	            console.log('enter');
 	            this.setState({
 	                in: true
 	            });
@@ -3922,6 +3921,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
+	var _reactBootstrap = __webpack_require__(4);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3961,8 +3962,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        _this.state = {
 	            value: '',
-	            show: false,
-	            selected: _this.getPropsSelected(props)
+	            in: false,
+	            selected: _this.getPropsSelected(props),
+	            id: '_gm_search_select_id' + (Math.random() + '').slice(2)
 	        };
 	        return _this;
 	    }
@@ -3975,13 +3977,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	        }
 	    }, {
-	        key: 'render',
-	        value: function render() {
+	        key: 'renderOverlay',
+	        value: function renderOverlay() {
 	            var _this2 = this;
 
 	            return _react2.default.createElement(
+	                _reactBootstrap.Popover,
+	                {
+	                    id: this.state.id,
+	                    className: 'gm-search-select-overlay'
+	                },
+	                this.props.list.length > 0 ? _react2.default.createElement(
+	                    'div',
+	                    { className: 'list-group', style: { maxHeight: this.props.listMaxHeight } },
+	                    _underscore2.default.map(this.props.list, function (value, i) {
+	                        return _react2.default.createElement(
+	                            'a',
+	                            {
+	                                key: i,
+	                                className: (0, _classnames2.default)('list-group-item', _this2.props.inputClassName, {
+	                                    active: _this2.state.selected.indexOf(value) > -1
+	                                }),
+	                                onClick: _this2.handleSelect.bind(_this2, value) },
+	                            value.name,
+	                            _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
+	                        );
+	                    })
+	                ) : undefined
+	            );
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this3 = this;
+
+	            return _react2.default.createElement(
 	                'div',
-	                { className: 'gm-search-select', onBlur: this.handleBlur.bind(this) },
+	                { className: (0, _classnames2.default)("gm-search-select", { "gm-search-select-empty": this.props.list.length === 0 }) },
 	                _react2.default.createElement(
 	                    _flex2.default,
 	                    { className: 'gm-search-select-input' },
@@ -3993,7 +4025,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            _react2.default.createElement(
 	                                'button',
 	                                { type: 'button', className: 'close',
-	                                    onClick: _this2.handleClose.bind(_this2, value) },
+	                                    onClick: _this3.handleClose.bind(_this3, value) },
 	                                '×'
 	                            )
 	                        );
@@ -4001,31 +4033,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2.default.createElement(
 	                        _flex2.default,
 	                        { flex: true },
-	                        _react2.default.createElement('input', { type: 'text', value: this.state.value, name: 'value',
-	                            onChange: this.handleChange.bind(this), onFocus: this.handleFocus.bind(this),
-	                            onKeyDown: this.handleKeyDown.bind(this),
-	                            placeholder: this.props.placeholder })
-	                    )
-	                ),
-	                this.state.show && this.props.list.length > 0 ? _react2.default.createElement(
-	                    'div',
-	                    { className: 'list-group', style: { maxHeight: this.props.listMaxHeight } },
-	                    _underscore2.default.map(this.props.list, function (value, i) {
-	                        return _react2.default.createElement(
-	                            'a',
+	                        _react2.default.createElement(
+	                            _reactBootstrap.OverlayTrigger,
 	                            {
-	                                href: 'javascript:;',
-	                                key: i,
-	                                className: (0, _classnames2.default)('list-group-item', _this2.props.inputClassName, {
-	                                    disabled: _this2.state.selected.indexOf(value) > -1
-	                                }),
-	                                onClick: _this2.handleSelect.bind(_this2, value) },
-	                            value.name,
-	                            _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
-	                        );
-	                    })
-	                ) : undefined
+	                                trigger: 'click',
+	                                rootClose: true,
+	                                placement: 'bottom',
+	                                container: this,
+	                                overlay: this.renderOverlay(),
+	                                onEnter: this.handleEnter.bind(this),
+	                                onExit: this.handleExit.bind(this)
+	                            },
+	                            _react2.default.createElement('input', {
+	                                ref: 'target',
+	                                type: 'text',
+	                                value: this.state.value,
+	                                name: 'value',
+	                                onChange: this.handleChange.bind(this),
+	                                onKeyDown: this.handleKeyDown.bind(this),
+	                                placeholder: this.props.placeholder })
+	                        )
+	                    )
+	                )
 	            );
+	        }
+	    }, {
+	        key: 'handleEnter',
+	        value: function handleEnter() {
+	            this.setState({
+	                in: true
+	            });
+	        }
+	    }, {
+	        key: 'handleExit',
+	        value: function handleExit() {
+	            this.setState({
+	                in: false
+	            });
 	        }
 	    }, {
 	        key: 'handleKeyDown',
@@ -4060,33 +4104,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.props.onSearch('');
 	        }
 	    }, {
-	        key: 'handleFocus',
-	        value: function handleFocus() {
-	            this.setState({
-	                show: true
-	            });
-	        }
-	    }, {
-	        key: 'handleBlur',
-	        value: function handleBlur() {
-	            var _this3 = this;
-
-	            // 延迟一下，这个居然比handleSelect触发快
-	            setTimeout(function () {
-	                _this3.setState({
-	                    show: false
-	                });
-	            }, 100);
-	        }
-	    }, {
 	        key: 'handleSelect',
 	        value: function handleSelect(value, event) {
 	            event.preventDefault();
-	            this.doSelect(this.state.selected.concat(value));
+	            if (event.target.className.indexOf('active') > -1) {
+	                this.doSelect(_underscore2.default.filter(this.state.selected, function (v) {
+	                    return v !== value;
+	                }));
+	            } else {
+	                this.doSelect(this.state.selected.concat(value));
+	            }
 	            this.setState({
-	                value: '',
-	                show: false
+	                value: ''
 	            });
+	            if (this.state.in) {
+	                this.refs.target.click();
+	            }
 	        }
 	    }, {
 	        key: 'handleChange',
@@ -4096,9 +4129,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            clearTimeout(this.timer);
 	            var value = event.target.value;
 	            this.setState({
-	                value: value,
-	                show: true
+	                value: value
 	            });
+
+	            if (!this.state.in) {
+	                this.refs.target.click();
+	            }
+
 	            setTimeout(function () {
 	                _this4.props.onSearch(value);
 	            }, this.props.delay);
