@@ -101,7 +101,6 @@ class Cascader extends React.Component {
     }
 
     handleEnter() {
-        console.log('enter');
         this.setState({
             in: true
         });

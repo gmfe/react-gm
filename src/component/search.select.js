@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import _ from 'underscore';
 import Flex from './flex';
 import classNames from 'classnames';
+import {Popover, OverlayTrigger} from 'react-bootstrap';
 
 class SearchSelect extends React.Component {
     static propTypes = {
@@ -45,8 +46,9 @@ class SearchSelect extends React.Component {
 
         this.state = {
             value: '',
-            show: false,
-            selected: this.getPropsSelected(props)
+            in: false,
+            selected: this.getPropsSelected(props),
+            id: '_gm_search_select_id' + (Math.random() + '').slice(2)
         };
     }
 
@@ -56,32 +58,19 @@ class SearchSelect extends React.Component {
         });
     }
 
-    render() {
+    renderOverlay() {
         return (
-            <div className="gm-search-select" onBlur={::this.handleBlur}>
-                <Flex className="gm-search-select-input">
-                    {_.map(this.state.selected, (value, i) => (
-                        <Flex key={i} alignStart className="selected">
-                            {value.name}
-                            <button type="button" className="close"
-                                    onClick={this.handleClose.bind(this, value)}>&times;</button>
-                        </Flex>
-                    ))}
-                    <Flex flex>
-                        <input type="text" value={this.state.value} name="value"
-                               onChange={::this.handleChange} onFocus={::this.handleFocus}
-                               onKeyDown={::this.handleKeyDown}
-                               placeholder={this.props.placeholder}/>
-                    </Flex>
-                </Flex>
-                {this.state.show && this.props.list.length > 0 ? (
+            <Popover
+                id={this.state.id}
+                className="gm-search-select-overlay"
+            >
+                {this.props.list.length > 0 ? (
                     <div className="list-group" style={{maxHeight: this.props.listMaxHeight}}>
                         {_.map(this.props.list, (value, i) => {
                             return <a
-                                href="javascript:;"
                                 key={i}
                                 className={classNames('list-group-item', this.props.inputClassName, {
-                                    disabled: this.state.selected.indexOf(value) > -1
+                                    active: this.state.selected.indexOf(value) > -1
                                 })}
                                 onClick={this.handleSelect.bind(this, value)}>
                                 {value.name}
@@ -92,8 +81,56 @@ class SearchSelect extends React.Component {
                         })}
                     </div>
                 ) : undefined}
+            </Popover>
+        );
+    }
+
+    render() {
+        return (
+            <div className={classNames("gm-search-select", {"gm-search-select-empty": this.props.list.length === 0})}>
+                <Flex className="gm-search-select-input">
+                    {_.map(this.state.selected, (value, i) => (
+                        <Flex key={i} alignStart className="selected">
+                            {value.name}
+                            <button type="button" className="close"
+                                    onClick={this.handleClose.bind(this, value)}>&times;</button>
+                        </Flex>
+                    ))}
+                    <Flex flex>
+                        <OverlayTrigger
+                            trigger="click"
+                            rootClose
+                            placement="bottom"
+                            container={this}
+                            overlay={this.renderOverlay()}
+                            onEnter={::this.handleEnter}
+                            onExit={::this.handleExit}
+                        >
+                            <input
+                                ref="target"
+                                type="text"
+                                value={this.state.value}
+                                name="value"
+                                onChange={::this.handleChange}
+                                onKeyDown={::this.handleKeyDown}
+                                placeholder={this.props.placeholder}/>
+                        </OverlayTrigger>
+                    </Flex>
+                </Flex>
             </div>
         );
+    }
+
+    handleEnter() {
+        this.setState({
+            in: true
+        });
+    }
+
+    handleExit() {
+        this.setState({
+            in: false
+        });
     }
 
     handleKeyDown(event) {
@@ -121,37 +158,32 @@ class SearchSelect extends React.Component {
         this.props.onSearch('');
     }
 
-    handleFocus() {
-        this.setState({
-            show: true
-        });
-    }
-
-    handleBlur() {
-        // 延迟一下，这个居然比handleSelect触发快
-        setTimeout(() => {
-            this.setState({
-                show: false
-            });
-        }, 100);
-    }
-
     handleSelect(value, event) {
         event.preventDefault();
-        this.doSelect(this.state.selected.concat(value));
+        if (event.target.className.indexOf('active') > -1) {
+            this.doSelect(_.filter(this.state.selected, v => v !== value));
+        } else {
+            this.doSelect(this.state.selected.concat(value));
+        }
         this.setState({
-            value: '',
-            show: false
+            value: ''
         });
+        if (this.state.in) {
+            this.refs.target.click();
+        }
     }
 
     handleChange(event) {
         clearTimeout(this.timer);
         const value = event.target.value;
         this.setState({
-            value,
-            show: true
+            value
         });
+
+        if (!this.state.in) {
+            this.refs.target.click();
+        }
+
         setTimeout(() => {
             this.props.onSearch(value);
         }, this.props.delay);
