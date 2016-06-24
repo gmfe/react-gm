@@ -2780,7 +2780,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    'div',
 	                    null,
 	                    this.props.children,
-	                    this.props.type === 'prompt' && _react2.default.createElement('input', { autoFocus: true, ref: 'input', type: 'text', style: { display: 'block', width: '100%' },
+	                    this.props.type === 'prompt' && _react2.default.createElement('input', { autoFocus: true, defaultValue: this.props.promptDefaultValue, ref: 'input', type: 'text',
+	                        style: { display: 'block', width: '100%' },
 	                        onKeyDown: this.handleEnter })
 	                ),
 	                _react2.default.createElement('div', { className: 'gm-gap10' }),
