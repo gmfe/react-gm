@@ -87,7 +87,7 @@ var DialogWrap = React.createClass({
         Dialog.prompt({
             children: 'sssss',
             title: 'title',
-            value: 123
+            promptDefaultValue: 123
         }).then(value => {
             console.log('resolve', value);
         }, () => {

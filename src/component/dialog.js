@@ -93,7 +93,8 @@ const Dialog = React.createClass({
                     <div>
                         {this.props.children}
                         {this.props.type === 'prompt' && (
-                            <input autoFocus ref="input" type="text" style={{display: 'block', width: '100%'}}
+                            <input autoFocus defaultValue={this.props.promptDefaultValue} ref="input" type="text"
+                                   style={{display: 'block', width: '100%'}}
                                    onKeyDown={this.handleEnter}/>
                         )}
                     </div>
