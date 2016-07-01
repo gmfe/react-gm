@@ -30,11 +30,7 @@ const DialogStatics = {
         return new Promise((resolve, reject) => {
             let div = document.createElement('div');
             dialogContainer.appendChild(div);
-            const _OK = options.onOK;
-            options.onOK = value => {
-                resolve(value);
-                return _OK && _OK(value);
-            };
+            options.onOK = value => resolve(value);
             options.onCancel = () => reject();
             ReactDOM.render(<Dialog show={true} {...options} />, div);
         });
