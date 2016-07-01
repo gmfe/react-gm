@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Modal} from 'react-bootstrap';
 
+// 搞的复杂了，后续要补充文档
+
 let dialogContainerId = '_gm_dialog_container' + (Math.random() + '').slice(2);
 let dialogContainer = document.getElementById(dialogContainerId);
 if (!dialogContainer) {
@@ -28,7 +30,11 @@ const DialogStatics = {
         return new Promise((resolve, reject) => {
             let div = document.createElement('div');
             dialogContainer.appendChild(div);
-            options.onOK = value => resolve(value);
+            const _OK = options.onOK;
+            options.onOK = value => {
+                resolve(value);
+                return _OK && _OK(value);
+            };
             options.onCancel = () => reject();
             ReactDOM.render(<Dialog show={true} {...options} />, div);
         });
@@ -69,14 +75,12 @@ const Dialog = React.createClass({
         this.props.onCancel();
     },
     handleOk(){
-        this.setState({
-            show: false
+        const result = this.props.onOK(this.props.type === 'prompt' ? this.refs.input.value : undefined);
+        Promise.resolve(result).then(() => {
+            this.setState({
+                show: false
+            });
         });
-        if (this.props.type === 'prompt') {
-            this.props.onOK(this.refs.input.value);
-        } else {
-            this.props.onOK();
-        }
     },
     handleEnter(event){
         if (event.keyCode === 13) {

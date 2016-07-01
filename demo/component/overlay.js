@@ -87,7 +87,10 @@ var DialogWrap = React.createClass({
         Dialog.prompt({
             children: 'sssss',
             title: 'title',
-            promptDefaultValue: 123
+            promptDefaultValue: 123,
+            onOK: () => {
+                return Promise.reject();
+            }
         }).then(value => {
             console.log('resolve', value);
         }, () => {
