@@ -2679,6 +2679,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// 搞的复杂了，后续要补充文档
+
 	var dialogContainerId = '_gm_dialog_container' + (Math.random() + '').slice(2);
 	var dialogContainer = document.getElementById(dialogContainerId);
 	if (!dialogContainer) {
@@ -2705,8 +2707,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return new Promise(function (resolve, reject) {
 	            var div = document.createElement('div');
 	            dialogContainer.appendChild(div);
+	            var _OK = options.onOK;
 	            options.onOK = function (value) {
-	                return resolve(value);
+	                resolve(value);
+	                return _OK && _OK(value);
 	            };
 	            options.onCancel = function () {
 	                return reject();
@@ -2750,14 +2754,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.props.onCancel();
 	    },
 	    handleOk: function handleOk() {
-	        this.setState({
-	            show: false
+	        var _this = this;
+
+	        var result = this.props.onOK(this.props.type === 'prompt' ? this.refs.input.value : undefined);
+	        Promise.resolve(result).then(function () {
+	            _this.setState({
+	                show: false
+	            });
 	        });
-	        if (this.props.type === 'prompt') {
-	            this.props.onOK(this.refs.input.value);
-	        } else {
-	            this.props.onOK();
-	        }
 	    },
 	    handleEnter: function handleEnter(event) {
 	        if (event.keyCode === 13) {
