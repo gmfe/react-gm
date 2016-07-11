@@ -4445,7 +4445,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                    'td',
 	                                    null,
 	                                    _react2.default.createElement('input', { type: 'checkbox', checked: value._gm_select || false,
-	                                        onChange: _this6.handleSelect.bind(_this6, select) })
+	                                        onChange: _this6.handleSelect.bind(_this6, select, index) })
 	                                ) : undefined,
 	                                _underscore2.default.map(columns, function (v, i) {
 	                                    if (typeof v.props.children === 'function') {
@@ -4490,8 +4490,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }, {
 	        key: 'handleSelect',
-	        value: function handleSelect(select, event) {
-	            select.props.onSelect(event.target.checked);
+	        value: function handleSelect(select, i, event) {
+	            select.props.onSelect(event.target.checked, i);
 	        }
 	    }, {
 	        key: 'handleSelectAll',
