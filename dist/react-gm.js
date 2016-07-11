@@ -747,7 +747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	    },
 	    onPage: function onPage(event) {
-	        var page = ~ ~event.target.getAttribute('data-page'),
+	        var page = ~~event.target.getAttribute('data-page'),
 	            data = this.props.data,
 	            count = Math.ceil(data.count / data.limit),
 	            toPage = this.props.toPage;
