@@ -90,13 +90,13 @@
 .gm-calendar {
   width: 198px;
   overflow: hidden;
-  border: 1px solid #eaeaea;
+  border: 1px solid #ddd;
   border-radius: 4px;
   position: relative;
   background: white;
 }
 .gm-calendar-head {
-  background-color: #eee;
+  background-color: #eeeeee;
 }
 .gm-calendar-head-title {
   font-weight: bold;
@@ -109,19 +109,19 @@
   color: inherit;
 }
 .gm-calendar-head-pre:hover, .gm-calendar-head-next:hover {
-  background-color: #eee;
+  background-color: #eeeeee;
   text-decoration: none;
 }
 .gm-calendar-head-month {
   cursor: pointer;
 }
 .gm-calendar-week {
-  background-color: #eee;
+  background-color: #eeeeee;
 }
 .gm-calendar-months {
   position: absolute;
   top: 24px;
-  border: 1px solid #eaeaea;
+  border: 1px solid #ddd;
   right: 5px;
   bottom: 5px;
   left: 5px;
@@ -168,11 +168,11 @@
   color: #999999;
 }
 .gm-calendar-active {
-  background-color: #337ab7;
+  background-color: #6dc3ec;
   color: white;
 }
 .gm-calendar-active:hover {
-  background-color: #337ab7;
+  background-color: #6dc3ec;
   color: white;
 }
 .gm-datepicker {
@@ -180,6 +180,7 @@
 }
 .gm-datepicker-popover.popover {
   padding: 0;
+  border-radius: 4px;
 }
 .gm-datepicker-popover.bottom {
   margin-top: 5px;
@@ -192,7 +193,7 @@
 }
 .gm-datepicker-popover .gm-calendar {
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 .gm-daterangepicker > div {
   display: inline-block;
@@ -281,7 +282,7 @@
 }
 .gm-navigation {
   color: #e1e3e8;
-  border-right: 1px solid #eaeaea;
+  border-right: 1px solid #ddd;
   width: 100%;
   background: #3A3F48;
   overflow-x: hidden;
@@ -420,7 +421,7 @@
   width: 296px;
   overflow: hidden;
   display: inline-block;
-  border: 1px solid #eaeaea;
+  border: 1px solid #ddd;
   border-radius: 4px;
   background: white;
   position: relative;
@@ -440,7 +441,7 @@
   background-color: #f5f5f5;
 }
 .gm-time-span-cell.active {
-  background-color: #337ab7;
+  background-color: #6dc3ec;
   color: white;
 }
 .gm-time-span-picker {
@@ -499,7 +500,7 @@
 .gm-dropselect-list-wrap .gm-dropselect-list .gm-dropselect-title {
   overflow: hidden;
   font-weight: bold;
-  background-color: #eee;
+  background-color: #eeeeee;
 }
 .gm-dropselect-list-wrap .gm-dropselect-list li {
   overflow: hidden;
@@ -512,7 +513,7 @@
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #ddd;
 }
 .gm-dropselect-list-wrap .gm-dropselect-list li div {
   -webkit-box-flex: 1;
@@ -546,7 +547,7 @@
   appearance: none;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   width: 100%;
   box-sizing: border-box;
   padding-right: 60px;
@@ -571,7 +572,7 @@
   content: " ";
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid #cccccc;
+  border-top: 5px solid #ccc;
   display: block;
   width: 0;
   height: 0;
@@ -586,7 +587,7 @@
 }
 .gm-open .gm-arrow:before {
   border-top: none;
-  border-bottom: 5px solid #cccccc;
+  border-bottom: 5px solid #ccc;
 }
 .gm-focus {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
@@ -618,7 +619,7 @@
   background-color: #eee;
 }
 .option-hover {
-  background-color: #337ab7;
+  background-color: #6dc3ec;
   color: #fff;
 }
 .option-item {
@@ -629,7 +630,7 @@
   background-color: #f5f5f5;
 }
 .option-hover:hover {
-  background-color: #337ab7;
+  background-color: #6dc3ec;
   color: #fff;
 }
 .option-item:last-child {
@@ -639,7 +640,7 @@
   cursor: text;
   font-weight: 600;
   background: #e1e1e1;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   border-width: 1px 0;
 }
 .option-disabled {
@@ -658,7 +659,7 @@
   display: none;
   overflow-y: auto;
   background: #fff;
-  border: 1px solid #eaeaea;
+  border: 1px solid #ddd;
   border-radius: 0;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   box-sizing: border-box;
@@ -724,8 +725,8 @@
           animation-name: rcSwitchOn;
 }
 .gm-switch-checked {
-  border: 1px solid #34ae4b;
-  background-color: #34ae4b;
+  border: 1px solid #34AE4B;
+  background-color: #34AE4B;
 }
 .gm-switch-checked .gm-switch-inner {
   left: 6px;
@@ -892,7 +893,7 @@
   margin-top: -0.5em;
   right: .5em;
   line-height: 100%;
-  color: #cccccc;
+  color: #ccc;
   -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
   -webkit-transition: -webkit-transform .2s ease;
@@ -920,7 +921,7 @@
 }
 .gm-cascader-overlay .gm-cascader-list .list-group {
   margin: 0;
-  border-right: 1px solid #eaeaea;
+  border-right: 1px solid #ddd;
   min-width: 100px;
   overflow: auto;
 }
@@ -935,7 +936,7 @@
 }
 .gm-cascader-select {
   position: relative;
-  border: 1px solid #eaeaea;
+  border: 1px solid #ddd;
   border-radius: 4px;
   background-color: white;
 }
@@ -980,7 +981,7 @@ html, body {
   background-color: #ececec !important;
 }
 .gm-bg {
-  background-color: #ffffff !important;
+  background-color: #fff !important;
 }
 .gm-whiteframe1 {
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
@@ -1145,19 +1146,19 @@ html, body {
   margin-right: 15px;
 }
 .gm-border {
-  border: 1px solid #eaeaea;
+  border: 1px solid #ddd;
 }
 .gm-borderBottom {
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #ddd;
 }
 .gm-borderRight {
-  border-right: 1px solid #eaeaea;
+  border-right: 1px solid #ddd;
 }
 .gm-borderTop {
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid #ddd;
 }
 .gm-borderLeft {
-  border-left: 1px solid #eaeaea;
+  border-left: 1px solid #ddd;
 }
 .gm-block {
   display: block;

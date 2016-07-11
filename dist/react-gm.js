@@ -683,7 +683,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2.default.createElement(
 	                        'a',
 	                        { href: 'javascript:;', 'data-page': data.index - 1 },
-	                        '上一页'
+	                        '«'
 	                    )
 	                ),
 	                begin >= 2 ? _react2.default.createElement(
@@ -740,7 +740,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2.default.createElement(
 	                        'a',
 	                        { href: 'javascript:;', 'data-page': data.index + 1 },
-	                        '下一页'
+	                        '»'
 	                    )
 	                )
 	            )
