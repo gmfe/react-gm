@@ -124,7 +124,7 @@ class Sheet extends React.Component {
                             {select ? (
                                 <td>
                                     <input type="checkbox" checked={value._gm_select || false}
-                                           onChange={this.handleSelect.bind(this, select)}/>
+                                           onChange={this.handleSelect.bind(this, select, index)}/>
                                 </td>
                             ) : undefined}
                             {_.map(columns, (v, i) => {
@@ -152,8 +152,8 @@ class Sheet extends React.Component {
         );
     }
 
-    handleSelect(select, event) {
-        select.props.onSelect(event.target.checked);
+    handleSelect(select, i, event) {
+        select.props.onSelect(event.target.checked, i);
     }
 
     handleSelectAll(select, event) {
