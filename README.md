@@ -22,7 +22,7 @@ js
 - moment
 
 css
-- gm-bootstrap
+- gm-theme
 
 # 参与
 [传送门](./README.dev.md)

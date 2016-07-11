@@ -1,4 +1,4 @@
-import 'gm-bootstrap/dist/css/bootstrap.css';
+import 'gm-theme/css/bootstrap.css';
 import './index.less';
 
 import React from 'react';
@@ -19,6 +19,7 @@ import Overlay from './component/overlay';
 import Data from './component/data';
 import Upload from './component/upload';
 import Layout from './component/layout';
+import Theme from './theme';
 
 // var interceptorId = Util.RequestInterceptor.add({
 //     request: function (config) {
@@ -69,7 +70,7 @@ const Home = React.createClass({
                 <hr/>
                 <div>
                     <h4>Link</h4>
-                    <a href="http://gmfe.github.io/gm-bootstrap/css/" target="_blank">gm-bootstrap</a>
+                    <a href="https://github.com/gmfe/gm-theme" target="_blank">gm-theme</a>
                     <br/>
                     <a href="http://react-bootstrap.github.io/" target="_blank">react-bootstrap</a>
                 </div>
@@ -81,6 +82,9 @@ const Home = React.createClass({
 var navData = [{
     key: '/',
     title: <Link to="/">首页</Link>
+}, {
+    key: '/theme',
+    title: <Link to="/theme">Theme</Link>
 }, {
     key: 'zujian',
     title: '组件',
@@ -155,6 +159,7 @@ const Root = React.createClass({
             <Router history={hashHistory}>
                 <Route path="/" component={App}>
                     <IndexRoute component={Home}></IndexRoute>
+                    <Route path="theme" component={Theme}></Route>
                     <Route path="select" component={Select}></Route>
                     <Route path="form" component={Form}></Route>
                     <Route path="date" component={Date}></Route>

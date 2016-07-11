@@ -99,7 +99,7 @@
   background: white;
 }
 .gm-calendar-head {
-  background-color: #eeeeee;
+  background-color: #eee;
 }
 .gm-calendar-head-title {
   font-weight: bold;
@@ -112,14 +112,14 @@
   color: inherit;
 }
 .gm-calendar-head-pre:hover, .gm-calendar-head-next:hover {
-  background-color: #eeeeee;
+  background-color: #eee;
   text-decoration: none;
 }
 .gm-calendar-head-month {
   cursor: pointer;
 }
 .gm-calendar-week {
-  background-color: #eeeeee;
+  background-color: #eee;
 }
 .gm-calendar-months {
   position: absolute;
@@ -171,11 +171,11 @@
   color: #999999;
 }
 .gm-calendar-active {
-  background-color: #6dc3ec;
+  background-color: #337ab7;
   color: white;
 }
 .gm-calendar-active:hover {
-  background-color: #6dc3ec;
+  background-color: #337ab7;
   color: white;
 }
 .gm-datepicker {
@@ -471,7 +471,7 @@
   background-color: #f5f5f5;
 }
 .gm-time-span-cell.active {
-  background-color: #6dc3ec;
+  background-color: #337ab7;
   color: white;
 }
 .gm-time-span-picker {
@@ -530,7 +530,7 @@
 .gm-dropselect-list-wrap .gm-dropselect-list .gm-dropselect-title {
   overflow: hidden;
   font-weight: bold;
-  background-color: #eeeeee;
+  background-color: #eee;
 }
 .gm-dropselect-list-wrap .gm-dropselect-list li {
   overflow: hidden;
@@ -656,7 +656,7 @@
   background-color: #eee;
 }
 .option-hover {
-  background-color: #6dc3ec;
+  background-color: #337ab7;
   color: #fff;
 }
 .option-item {
@@ -667,7 +667,7 @@
   background-color: #f5f5f5;
 }
 .option-hover:hover {
-  background-color: #6dc3ec;
+  background-color: #337ab7;
   color: #fff;
 }
 .option-item:last-child {
@@ -762,8 +762,8 @@
           animation-name: rcSwitchOn;
 }
 .gm-switch-checked {
-  border: 1px solid #34AE4B;
-  background-color: #34AE4B;
+  border: 1px solid #34ae4b;
+  background-color: #34ae4b;
 }
 .gm-switch-checked .gm-switch-inner {
   left: 6px;
@@ -1017,10 +1017,10 @@ html, body {
   color: #777;
 }
 .gm-back-bg {
-  background-color: #ECECEC !important;
+  background-color: #ececec !important;
 }
 .gm-bg {
-  background-color: #FFFFFF !important;
+  background-color: #ffffff !important;
 }
 .gm-whiteframe1 {
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
