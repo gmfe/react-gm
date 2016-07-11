@@ -32,10 +32,10 @@ module.exports = {
             loader: 'babel'
         }, {
             test: /\.(css|less)$/,
-            loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
+            loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss!less')
         }]
     },
     postcss: function () {
-        return [autoprefixer, precss];
+        return [autoprefixer({browsers: ['iOS >= 8', 'Android >= 4.1']}), precss];
     }
 };

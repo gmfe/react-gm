@@ -34,11 +34,11 @@ module.exports = {
             loader: 'url?limit=1024&name=fonts/[name].[hash].[ext]'
         }, {
             test: /\.(css|less)$/,
-            loader: 'style!css!postcss!less'
+            loader: 'style!css?-autoprefixer!postcss!less'
         }]
     },
     postcss: function () {
-        return [autoprefixer, precss];
+        return [autoprefixer({browsers: ['iOS >= 8', 'Android >= 4.1']}), precss];
     },
     devServer: {
         proxy: {
