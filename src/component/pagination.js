@@ -37,7 +37,7 @@ var Pagination = React.createClass({
             <div className="gm-pagination">
                 <ul className="pagination pagination-sm" onClick={this.onPage}>
                     <li className={data.index === 1 ? 'disabled' : ''}>
-                        <a href="javascript:;" data-page={data.index - 1}>上一页</a>
+                        <a href="javascript:;" data-page={data.index - 1}>&laquo;</a>
                     </li>
 
                     { begin >= 2 ? (<li><a href="javascript:;" data-page="1">1</a></li>) : undefined}
@@ -50,7 +50,7 @@ var Pagination = React.createClass({
                     { end <= all - 1 ? (<li><a href="javascript:;" data-page={all}>{all}</a></li>) : undefined}
 
                     <li className={data.index === all ? 'disabled' : ''}>
-                        <a href="javascript:;" data-page={data.index + 1}>下一页</a>
+                        <a href="javascript:;" data-page={data.index + 1}>&raquo;</a>
                     </li>
                 </ul>
             </div>
