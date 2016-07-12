@@ -971,6 +971,9 @@ html, body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
+.gm-text-second {
+  color: #666;
+}
 .gm-text-red {
   color: red;
 }
