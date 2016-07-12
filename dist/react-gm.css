@@ -972,13 +972,13 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 .gm-text-second {
-  color: #666;
+  color: #555555;
 }
 .gm-text-red {
   color: red;
 }
 .gm-text-desc {
-  color: #777;
+  color: #777777;
 }
 .gm-back-bg {
   background-color: #ececec !important;
