@@ -46,6 +46,7 @@
     "css-loader": "^0.19.0",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.5",
+    "gm-bootstrap": "^1.1.1",
     "gm-util": "^2.0.6",
     "husky": "^0.11.4",
     "less": "^2.7.1",
@@ -67,8 +68,5 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.12.1"
-  },
-  "dependencies": {
-    "gm-bootstrap": "^1.1.0"
   }
 }

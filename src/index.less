@@ -1,4 +1,6 @@
-@import "css/variables";
+@import "../node_modules/gm-bootstrap/less/variables.less";
+@import "../node_modules/gm-bootstrap/less/mixins.less";
+@import "../node_modules/gm-bootstrap/less/custom.less";
 
 @import "css/grid";
 @import "css/drop";
@@ -38,7 +40,7 @@ html, body {
 
 // bg
 .gm-back-bg {
-  background-color: @gm-back-bg !important;
+  background-color: @back-body-bg !important;
 }
 
 .gm-bg {
@@ -259,23 +261,23 @@ html, body {
 
 // border
 .gm-border {
-  border: 1px solid @gm-border-color;
+  border: 1px solid @border-color;
 }
 
 .gm-borderBottom {
-  border-bottom: 1px solid @gm-border-color;
+  border-bottom: 1px solid @border-color;
 }
 
 .gm-borderRight {
-  border-right: 1px solid @gm-border-color;
+  border-right: 1px solid @border-color;
 }
 
 .gm-borderTop {
-  border-top: 1px solid @gm-border-color;
+  border-top: 1px solid @border-color;
 }
 
 .gm-borderLeft {
-  border-left: 1px solid @gm-border-color;
+  border-left: 1px solid @border-color;
 }
 
 // display
