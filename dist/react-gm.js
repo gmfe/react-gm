@@ -296,6 +296,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -306,74 +308,122 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Flex = _react2.default.createClass({
-	    displayName: 'Flex',
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-	    propTypes: {
-	        flex: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.bool]),
-	        auto: _react2.default.PropTypes.bool,
-	        none: _react2.default.PropTypes.bool,
-	        width: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
-	        height: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
-	        row: _react2.default.PropTypes.bool,
-	        column: _react2.default.PropTypes.bool,
-	        wrap: _react2.default.PropTypes.bool,
-	        nowrap: _react2.default.PropTypes.bool,
-	        justifyStart: _react2.default.PropTypes.bool,
-	        justifyEnd: _react2.default.PropTypes.bool,
-	        justifyCenter: _react2.default.PropTypes.bool,
-	        justifyBetween: _react2.default.PropTypes.bool,
-	        justifyAround: _react2.default.PropTypes.bool,
-	        alignStart: _react2.default.PropTypes.bool,
-	        alignEnd: _react2.default.PropTypes.bool,
-	        alignCenter: _react2.default.PropTypes.bool,
-	        alignBaseline: _react2.default.PropTypes.bool,
-	        alignStretch: _react2.default.PropTypes.bool
-	    },
-	    render: function render() {
-	        var cn = (0, _classnames2.default)({
-	            'gm-flex': true,
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	            'gm-flex-auto': this.props.auto,
-	            'gm-flex-none': this.props.none || this.props.width || this.props.height,
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	            'gm-flex-row': this.props.row,
-	            'gm-flex-column': this.props.column,
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	            'gm-flex-wrap': this.props.wrap,
-	            'gm-flex-nowrap': this.props.nowrap,
+	var Flex = function (_React$Component) {
+	    _inherits(Flex, _React$Component);
 
-	            'gm-flex-justify-start': this.props.justifyStart,
-	            'gm-flex-justify-end': this.props.justifyEnd,
-	            'gm-flex-justify-center': this.props.justifyCenter,
-	            'gm-flex-justify-between': this.props.justifyBetween,
-	            'gm-flex-justify-around': this.props.justifyAround,
+	    function Flex() {
+	        _classCallCheck(this, Flex);
 
-	            'gm-flex-align-start': this.props.alignStart,
-	            'gm-flex-align-end': this.props.alignEnd,
-	            'gm-flex-align-center': this.props.alignCenter,
-	            'gm-flex-align-baseline': this.props.alignBaseline,
-	            'gm-flex-align-stretch': this.props.alignStretch
-	        }, this.props.className);
-
-	        var style = Object.assign({}, this.props.style);
-	        if (this.props.flex) {
-	            style.flex = typeof this.props.flex === 'boolean' ? 1 : this.props.flex;
-	        }
-	        if (this.props.height) {
-	            style.height = this.props.height;
-	        }
-	        if (this.props.width) {
-	            style.width = this.props.width;
-	        }
-
-	        return _react2.default.createElement(
-	            'div',
-	            _extends({}, this.props, { className: cn, style: style }),
-	            this.props.children
-	        );
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Flex).apply(this, arguments));
 	    }
-	});
+
+	    _createClass(Flex, [{
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var flex = _props.flex;
+	            var auto = _props.auto;
+	            var none = _props.none;
+	            var width = _props.width;
+	            var height = _props.height;
+	            var row = _props.row;
+	            var column = _props.column;
+	            var wrap = _props.wrap;
+	            var nowrap = _props.nowrap;
+	            var justifyStart = _props.justifyStart;
+	            var justifyEnd = _props.justifyEnd;
+	            var justifyCenter = _props.justifyCenter;
+	            var justifyBetween = _props.justifyBetween;
+	            var justifyAround = _props.justifyAround;
+	            var alignStart = _props.alignStart;
+	            var alignEnd = _props.alignEnd;
+	            var alignCenter = _props.alignCenter;
+	            var alignBaseline = _props.alignBaseline;
+	            var alignStretch = _props.alignStretch;
+	            var className = _props.className;
+	            var style = _props.style;
+
+	            var rest = _objectWithoutProperties(_props, ['flex', 'auto', 'none', 'width', 'height', 'row', 'column', 'wrap', 'nowrap', 'justifyStart', 'justifyEnd', 'justifyCenter', 'justifyBetween', 'justifyAround', 'alignStart', 'alignEnd', 'alignCenter', 'alignBaseline', 'alignStretch', 'className', 'style']);
+
+	            var cn = (0, _classnames2.default)({
+	                'gm-flex': true,
+
+	                'gm-flex-flex': flex,
+	                'gm-flex-auto': auto,
+	                'gm-flex-none': none || width || height,
+
+	                'gm-flex-row': row,
+	                'gm-flex-column': column,
+
+	                'gm-flex-wrap': wrap,
+	                'gm-flex-nowrap': nowrap,
+
+	                'gm-flex-justify-start': justifyStart,
+	                'gm-flex-justify-end': justifyEnd,
+	                'gm-flex-justify-center': justifyCenter,
+	                'gm-flex-justify-between': justifyBetween,
+	                'gm-flex-justify-around': justifyAround,
+
+	                'gm-flex-align-start': alignStart,
+	                'gm-flex-align-end': alignEnd,
+	                'gm-flex-align-center': alignCenter,
+	                'gm-flex-align-baseline': alignBaseline,
+	                'gm-flex-align-stretch': alignStretch
+	            }, className);
+
+	            // TODO 有待商榷，WebkitFlex 是否会生效？
+	            var s = Object.assign({}, style);
+	            if (flex) {
+	                s.flex = typeof flex === 'boolean' ? 1 : flex;
+	                s.WebKitFlex = typeof flex === 'boolean' ? 1 : flex;
+	            }
+	            if (height) {
+	                s.height = height;
+	            }
+	            if (width) {
+	                s.width = width;
+	            }
+
+	            return _react2.default.createElement(
+	                'div',
+	                _extends({}, rest, { className: cn, style: s }),
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return Flex;
+	}(_react2.default.Component);
+
+	Flex.propTypes = {
+	    flex: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.bool]),
+	    auto: _react.PropTypes.bool,
+	    none: _react.PropTypes.bool,
+	    width: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]),
+	    height: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]),
+	    row: _react.PropTypes.bool,
+	    column: _react.PropTypes.bool,
+	    wrap: _react.PropTypes.bool,
+	    nowrap: _react.PropTypes.bool,
+	    justifyStart: _react.PropTypes.bool,
+	    justifyEnd: _react.PropTypes.bool,
+	    justifyCenter: _react.PropTypes.bool,
+	    justifyBetween: _react.PropTypes.bool,
+	    justifyAround: _react.PropTypes.bool,
+	    alignStart: _react.PropTypes.bool,
+	    alignEnd: _react.PropTypes.bool,
+	    alignCenter: _react.PropTypes.bool,
+	    alignBaseline: _react.PropTypes.bool,
+	    alignStretch: _react.PropTypes.bool
+	};
 
 	exports.default = Flex;
 
@@ -4222,6 +4272,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -4240,11 +4292,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(SheetColumn, [{
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'SheetColumn'
-	            );
+	            return _react2.default.createElement('div', null);
 	        }
 	    }]);
 
@@ -4412,9 +4460,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                    onChange: this.handleSelectAll.bind(this, select) })
 	                            ) : undefined,
 	                            _underscore2.default.map(columns, function (value, index) {
+	                                var _value$props = value.props;
+	                                var field = _value$props.field;
+	                                var name = _value$props.name;
+
+	                                var rest = _objectWithoutProperties(_value$props, ['field', 'name']);
+
 	                                return _react2.default.createElement(
 	                                    'th',
-	                                    _extends({ key: index }, value.props),
+	                                    _extends({ key: index }, rest),
 	                                    value.props.name
 	                                );
 	                            }),
@@ -4507,13 +4561,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    list: _react.PropTypes.array.isRequired,
 	    loading: _react.PropTypes.bool
 	};
+
 	Sheet.defaultProps = {
 	    list: [],
 	    loading: false
 	};
 
-
-	_underscore2.default.extend(Sheet, {
+	Object.assign(Sheet, {
 	    SheetColumn: SheetColumn,
 	    SheetAction: SheetAction,
 	    SheetSelect: SheetSelect,
@@ -4613,101 +4667,139 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(3);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-	var React = __webpack_require__(1);
-	var classNames = __webpack_require__(3);
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	function noop() {}
 
-	var Switch = React.createClass({
-	    displayName: 'Switch',
+	var Switch = function (_React$Component) {
+	    _inherits(Switch, _React$Component);
 
-	    propTypes: {
-	        className: React.PropTypes.string,
-	        checked: React.PropTypes.bool,
-	        defaultChecked: React.PropTypes.bool,
-	        disabled: React.PropTypes.bool,
-	        checkedChildren: React.PropTypes.any,
-	        unCheckedChildren: React.PropTypes.any,
-	        onChange: React.PropTypes.func
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            checkedChildren: null,
-	            unCheckedChildren: null,
-	            defaultChecked: false,
-	            onChange: noop
-	        };
-	    },
-	    getInitialState: function getInitialState() {
-	        var props = this.props;
+	    function Switch(props) {
+	        _classCallCheck(this, Switch);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Switch).call(this, props));
+
 	        var checked = false;
 	        if ('checked' in props) {
 	            checked = !!props.checked;
 	        } else {
 	            checked = !!props.defaultChecked;
 	        }
-	        return {
+	        _this.state = {
 	            checked: checked
 	        };
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        if ('checked' in nextProps) {
-	            this.setState({
-	                checked: !!nextProps.checked
-	            });
-	        }
-	    },
-	    setChecked: function setChecked(checked) {
-	        if (!('checked' in this.props)) {
-	            this.setState({
-	                checked: checked
-	            });
-	        }
-	        this.props.onChange(checked);
-	    },
-	    handleToggle: function handleToggle() {
-	        if (this.props.disabled) {
-	            return;
-	        }
-	        var checked = !this.state.checked;
-	        this.setChecked(checked);
-	    },
-	    handleMouseUp: function handleMouseUp() {
-	        if (this.refs.node) {
-	            this.refs.node.blur();
-	        }
-	    },
-	    render: function render() {
-	        var _props = this.props;
-	        var disabled = _props.disabled;
-	        var checkedChildren = _props.checkedChildren;
-	        var unCheckedChildren = _props.unCheckedChildren;
 
-	        var restProps = _objectWithoutProperties(_props, ['disabled', 'checkedChildren', 'unCheckedChildren']);
-
-	        var checked = this.state.checked;
-	        var cn = classNames('gm-switch', this.props.className, {
-	            'gm-switch-checked': checked,
-	            'gm-switch-disabled': disabled
-	        });
-	        return React.createElement(
-	            'span',
-	            _extends({}, restProps, {
-	                className: cn,
-	                tabIndex: '0',
-	                ref: 'node',
-	                onClick: this.handleToggle,
-	                onMouseUp: this.handleMouseUp }),
-	            React.createElement(
-	                'span',
-	                { className: 'gm-switch-inner' },
-	                checked ? checkedChildren : unCheckedChildren
-	            )
-	        );
+	        _this.handleToggle = _this.handleToggle.bind(_this);
+	        _this.handleMouseUp = _this.handleMouseUp.bind(_this);
+	        return _this;
 	    }
-	});
+
+	    _createClass(Switch, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if ('checked' in nextProps) {
+	                this.setState({
+	                    checked: !!nextProps.checked
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'setChecked',
+	        value: function setChecked(checked) {
+	            if (!('checked' in this.props)) {
+	                this.setState({
+	                    checked: checked
+	                });
+	            }
+	            this.props.onChange(checked);
+	        }
+	    }, {
+	        key: 'handleToggle',
+	        value: function handleToggle() {
+	            if (this.props.disabled) {
+	                return;
+	            }
+	            var checked = !this.state.checked;
+	            this.setChecked(checked);
+	        }
+	    }, {
+	        key: 'handleMouseUp',
+	        value: function handleMouseUp() {
+	            if (this.refs.node) {
+	                this.refs.node.blur();
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var className = _props.className;
+	            var checked = _props.checked;
+	            var defaultChecked = _props.defaultChecked;
+	            var onChange = _props.onChange;
+	            var disabled = _props.disabled;
+	            var checkedChildren = _props.checkedChildren;
+	            var unCheckedChildren = _props.unCheckedChildren;
+
+	            var rest = _objectWithoutProperties(_props, ['className', 'checked', 'defaultChecked', 'onChange', 'disabled', 'checkedChildren', 'unCheckedChildren']);
+
+	            var cn = (0, _classnames2.default)('gm-switch', this.props.className, {
+	                'gm-switch-checked': this.state.checked,
+	                'gm-switch-disabled': disabled
+	            });
+	            return _react2.default.createElement(
+	                'span',
+	                _extends({}, rest, {
+	                    className: cn,
+	                    tabIndex: '0',
+	                    ref: 'node',
+	                    onClick: this.handleToggle,
+	                    onMouseUp: this.handleMouseUp }),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'gm-switch-inner' },
+	                    this.state.checked ? checkedChildren : unCheckedChildren
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Switch;
+	}(_react2.default.Component);
+
+	Switch.propTypes = {
+	    className: _react.PropTypes.string,
+	    checked: _react.PropTypes.bool,
+	    defaultChecked: _react.PropTypes.bool,
+	    disabled: _react.PropTypes.bool,
+	    checkedChildren: _react.PropTypes.any,
+	    unCheckedChildren: _react.PropTypes.any,
+	    onChange: _react.PropTypes.func
+	};
+	Switch.defaultProps = {
+	    checkedChildren: null,
+	    unCheckedChildren: null,
+	    defaultChecked: false,
+	    onChange: noop
+	};
 
 	module.exports = Switch;
 
