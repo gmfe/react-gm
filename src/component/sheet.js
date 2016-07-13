@@ -97,7 +97,7 @@ class Sheet extends React.Component {
                         {batchs.props.children}
                     </div>
                 ) : undefined}
-                <table className="table table-striped table-hover table-condensed table-bordered">
+                <table className="table table-striped table-hover table-bordered">
                     <thead>
                     <tr>
                         {select ? (
