@@ -54,7 +54,7 @@ const Component = React.createClass({
     render(){
         return (
             <div>
-                <h1>Former</h1>
+                <h1>Former(alpha)</h1>
                 <FormerDom></FormerDom>
                 <h1>Switch</h1>
                 <div>

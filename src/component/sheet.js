@@ -2,62 +2,52 @@ import React, {PropTypes} from 'react';
 import Pagination from './pagination.js';
 import PaginationText from './pagination.text.js';
 import _ from 'underscore';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 class SheetColumn extends React.Component {
-    static displayName = 'SheetColumn';
-    static propTypes = {
-        field: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-    };
-
     render() {
-        return <div>SheetColumn</div>;
+        return <div/>;
     }
 }
+SheetColumn.displayName = 'SheetColumn';
+SheetColumn.propTypes = {
+    field: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+};
+
 
 class SheetAction extends React.Component {
-    static displayName = 'SheetAction';
-
     render() {
         return <div>{this.props.children}</div>;
     }
 }
+SheetAction.displayName = 'SheetAction';
+
 
 class SheetSelect extends React.Component {
-    static displayName = 'SheetSelect';
-    static propTypes = {
-        onSelect: PropTypes.func.isRequired,
-        onSelectAll: PropTypes.func.isRequired
-    };
-
     render() {
         return <div>{this.props.children}</div>;
     }
 }
+SheetSelect.displayName = 'SheetSelect';
+SheetSelect.propTypes = {
+    onSelect: PropTypes.func.isRequired,
+    onSelectAll: PropTypes.func.isRequired
+};
+
 
 class SheetBatchAction extends React.Component {
-    static displayName = 'SheetBatchAction';
-
     render() {
         return <div>{this.props.children}</div>;
     }
 }
+SheetBatchAction.displayName = 'SheetBatchAction';
+
 
 class Sheet extends React.Component {
     constructor(props) {
         super(props);
     }
-
-    static propTypes = {
-        list: PropTypes.array.isRequired,
-        loading: PropTypes.bool
-    };
-
-    static defaultProps = {
-        list: [],
-        loading: false
-    };
 
     render() {
         let select = false, isSelectAll = false, list = this.props.list || [], loading = this.props.loading;
@@ -91,7 +81,7 @@ class Sheet extends React.Component {
         });
 
         return (
-            <div className={classnames("gm-sheet", this.props.className)}>
+            <div className={classNames("gm-sheet", this.props.className)}>
                 {select && batchs ? (
                     <div className="gm-marginBottom5">
                         {batchs.props.children}
@@ -106,7 +96,13 @@ class Sheet extends React.Component {
                                        onChange={this.handleSelectAll.bind(this, select)}/>
                             </th>
                         ) : undefined}
-                        {_.map(columns, (value, index) => <th key={index} {...value.props}>{value.props.name}</th>)}
+                        {_.map(columns, (value, index) => {
+                            const {
+                                field, name, // eslint-disable-line
+                                ...rest
+                            } = value.props;
+                            return <th key={index} {...rest}>{value.props.name}</th>;
+                        })}
                         {actions ? (
                             <th>操作</th>
                         ) : undefined}
@@ -161,7 +157,17 @@ class Sheet extends React.Component {
     }
 }
 
-_.extend(Sheet, {
+Sheet.propTypes = {
+    list: PropTypes.array.isRequired,
+    loading: PropTypes.bool
+};
+
+Sheet.defaultProps = {
+    list: [],
+    loading: false
+};
+
+Object.assign(Sheet, {
     SheetColumn,
     SheetAction,
     SheetSelect,

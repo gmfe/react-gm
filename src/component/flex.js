@@ -1,67 +1,89 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 
-var Flex = React.createClass({
-    propTypes: {
-        flex: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.bool]),
-        auto: React.PropTypes.bool,
-        none: React.PropTypes.bool,
-        width: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-        height: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-        row: React.PropTypes.bool,
-        column: React.PropTypes.bool,
-        wrap: React.PropTypes.bool,
-        nowrap: React.PropTypes.bool,
-        justifyStart: React.PropTypes.bool,
-        justifyEnd: React.PropTypes.bool,
-        justifyCenter: React.PropTypes.bool,
-        justifyBetween: React.PropTypes.bool,
-        justifyAround: React.PropTypes.bool,
-        alignStart: React.PropTypes.bool,
-        alignEnd: React.PropTypes.bool,
-        alignCenter: React.PropTypes.bool,
-        alignBaseline: React.PropTypes.bool,
-        alignStretch: React.PropTypes.bool
-    },
+class Flex extends React.Component {
+
     render() {
+        const {
+            flex,
+
+            auto, none, width, height,
+
+            row, column,
+
+            wrap, nowrap,
+
+            justifyStart, justifyEnd, justifyCenter, justifyBetween, justifyAround,
+
+            alignStart, alignEnd, alignCenter, alignBaseline, alignStretch,
+
+            className, style,
+
+            ...rest
+        } = this.props;
         const cn = classNames({
             'gm-flex': true,
 
-            'gm-flex-auto': this.props.auto,
-            'gm-flex-none': this.props.none || this.props.width || this.props.height,
+            'gm-flex-flex': flex,
+            'gm-flex-auto': auto,
+            'gm-flex-none': none || width || height,
 
-            'gm-flex-row': this.props.row,
-            'gm-flex-column': this.props.column,
+            'gm-flex-row': row,
+            'gm-flex-column': column,
 
-            'gm-flex-wrap': this.props.wrap,
-            'gm-flex-nowrap': this.props.nowrap,
+            'gm-flex-wrap': wrap,
+            'gm-flex-nowrap': nowrap,
 
-            'gm-flex-justify-start': this.props.justifyStart,
-            'gm-flex-justify-end': this.props.justifyEnd,
-            'gm-flex-justify-center': this.props.justifyCenter,
-            'gm-flex-justify-between': this.props.justifyBetween,
-            'gm-flex-justify-around': this.props.justifyAround,
+            'gm-flex-justify-start': justifyStart,
+            'gm-flex-justify-end': justifyEnd,
+            'gm-flex-justify-center': justifyCenter,
+            'gm-flex-justify-between': justifyBetween,
+            'gm-flex-justify-around': justifyAround,
 
-            'gm-flex-align-start': this.props.alignStart,
-            'gm-flex-align-end': this.props.alignEnd,
-            'gm-flex-align-center': this.props.alignCenter,
-            'gm-flex-align-baseline': this.props.alignBaseline,
-            'gm-flex-align-stretch': this.props.alignStretch
-        }, this.props.className);
+            'gm-flex-align-start': alignStart,
+            'gm-flex-align-end': alignEnd,
+            'gm-flex-align-center': alignCenter,
+            'gm-flex-align-baseline': alignBaseline,
+            'gm-flex-align-stretch': alignStretch
+        }, className);
 
-        let style = Object.assign({}, this.props.style);
-        if (this.props.flex) {
-            style.flex = (typeof this.props.flex === 'boolean') ? 1 : this.props.flex;
+        // TODO 有待商榷，WebkitFlex 是否会生效？
+        let s = Object.assign({}, style);
+        if (flex) {
+            s.flex = (typeof flex === 'boolean') ? 1 : flex;
+            s.WebKitFlex = (typeof flex === 'boolean') ? 1 : flex;
         }
-        if (this.props.height) {
-            style.height = this.props.height;
+        if (height) {
+            s.height = height;
         }
-        if (this.props.width) {
-            style.width = this.props.width;
+        if (width) {
+            s.width = width;
         }
 
-        return <div {...this.props} className={cn} style={style}>{this.props.children}</div>;
+        return <div {...rest} className={cn} style={s}>{this.props.children}</div>;
     }
-});
+}
+
+Flex.propTypes = {
+    flex: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+    auto: PropTypes.bool,
+    none: PropTypes.bool,
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    row: PropTypes.bool,
+    column: PropTypes.bool,
+    wrap: PropTypes.bool,
+    nowrap: PropTypes.bool,
+    justifyStart: PropTypes.bool,
+    justifyEnd: PropTypes.bool,
+    justifyCenter: PropTypes.bool,
+    justifyBetween: PropTypes.bool,
+    justifyAround: PropTypes.bool,
+    alignStart: PropTypes.bool,
+    alignEnd: PropTypes.bool,
+    alignCenter: PropTypes.bool,
+    alignBaseline: PropTypes.bool,
+    alignStretch: PropTypes.bool
+};
 
 export default Flex;
