@@ -4398,7 +4398,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                ) : undefined,
 	                _react2.default.createElement(
 	                    'table',
-	                    { className: 'table table-striped table-hover table-condensed table-bordered' },
+	                    { className: 'table table-striped table-hover table-bordered' },
 	                    _react2.default.createElement(
 	                        'thead',
 	                        null,
