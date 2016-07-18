@@ -713,7 +713,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (begin === 1) {
 	                end += offset;
 	            } else if (end === all) {
-	                begin -= offset;
+	                begin = Math.max(begin - offset, 1);
 	            }
 	        }
 
@@ -4419,20 +4419,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	                paginationText = void 0;
 
 	            _underscore2.default.each(children, function (value) {
-	                if (value.type.displayName === SheetColumn.displayName) {
-	                    columns.push(value);
-	                } else if (value.type.displayName === SheetAction.displayName) {
-	                    actions = value;
-	                } else if (value.type.displayName === SheetSelect.displayName) {
-	                    select = value;
-	                } else if (value.type.displayName === SheetBatchAction.displayName) {
-	                    batchs = value;
-	                } else if (value.type.displayName === _pagination2.default.displayName) {
-	                    pagination = value;
-	                } else if (value.type.displayName === _paginationText2.default.displayName) {
-	                    paginationText = value;
-	                } else {
-	                    others.push(value);
+	                if (value !== null && value !== undefined) {
+	                    if (value.type.displayName === SheetColumn.displayName) {
+	                        columns.push(value);
+	                    } else if (value.type.displayName === SheetAction.displayName) {
+	                        actions = value;
+	                    } else if (value.type.displayName === SheetSelect.displayName) {
+	                        select = value;
+	                    } else if (value.type.displayName === SheetBatchAction.displayName) {
+	                        batchs = value;
+	                    } else if (value.type.displayName === _pagination2.default.displayName) {
+	                        pagination = value;
+	                    } else if (value.type.displayName === _paginationText2.default.displayName) {
+	                        paginationText = value;
+	                    } else {
+	                        others.push(value);
+	                    }
 	                }
 	            });
 
