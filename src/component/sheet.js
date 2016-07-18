@@ -63,20 +63,22 @@ class Sheet extends React.Component {
         let columns = [], actions = false, batchs = false, others = [], pagination, paginationText;
 
         _.each(children, value => {
-            if (value.type.displayName === SheetColumn.displayName) {
-                columns.push(value);
-            } else if (value.type.displayName === SheetAction.displayName) {
-                actions = value;
-            } else if (value.type.displayName === SheetSelect.displayName) {
-                select = value;
-            } else if (value.type.displayName === SheetBatchAction.displayName) {
-                batchs = value;
-            } else if (value.type.displayName === Pagination.displayName) {
-                pagination = value;
-            } else if (value.type.displayName === PaginationText.displayName) {
-                paginationText = value;
-            } else {
-                others.push(value);
+            if (value !== null && value !== undefined) {
+                if (value.type.displayName === SheetColumn.displayName) {
+                    columns.push(value);
+                } else if (value.type.displayName === SheetAction.displayName) {
+                    actions = value;
+                } else if (value.type.displayName === SheetSelect.displayName) {
+                    select = value;
+                } else if (value.type.displayName === SheetBatchAction.displayName) {
+                    batchs = value;
+                } else if (value.type.displayName === Pagination.displayName) {
+                    pagination = value;
+                } else if (value.type.displayName === PaginationText.displayName) {
+                    paginationText = value;
+                } else {
+                    others.push(value);
+                }
             }
         });
 

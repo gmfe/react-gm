@@ -25,7 +25,7 @@ var Pagination = React.createClass({
             if (begin === 1) {
                 end += offset;
             } else if (end === all) {
-                begin -= offset;
+                begin = Math.max(begin - offset, 1);
             }
         }
 

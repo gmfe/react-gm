@@ -24,8 +24,8 @@ var SheetWrap = React.createClass({
                 _gm_select: true
             }],
             pagination: {
-                count: 80,
-                offset: 10,
+                count: 60,
+                offset: 30,
                 limit: 10
             },
             loading: true
@@ -59,6 +59,7 @@ var SheetWrap = React.createClass({
                     </button>
                     <button className="btn btn-default btn-sm" onClick={this.handleBatchAction}>批量操作2</button>
                 </SheetBatchAction>
+                {null}
             </Sheet>
         );
     },
