@@ -1,16 +1,12 @@
 import React from 'react';
 
-var Pagination = React.createClass({
-    displayName: 'Pagination',
-    propTypes: {
-        data: React.PropTypes.shape({
-            count: React.PropTypes.number.isRequired,
-            offset: React.PropTypes.number.isRequired,
-            limit: React.PropTypes.number.isRequired
-        }),
-        toPage: React.PropTypes.func.isRequired
-    },
-    render: function () {
+class Pagination extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onPage = ::this.onPage;
+    }
+
+    render() {
         var data = Object.assign({}, this.props.data);
 
         data.index = data.offset / data.limit + 1;
@@ -55,8 +51,9 @@ var Pagination = React.createClass({
                 </ul>
             </div>
         );
-    },
-    onPage: function (event) {
+    }
+
+    onPage(event) {
         var page = ~~event.target.getAttribute('data-page'),
             data = this.props.data,
             count = Math.ceil(data.count / data.limit),
@@ -70,7 +67,15 @@ var Pagination = React.createClass({
             limit: data.limit
         }, page);
     }
-});
-
+}
+Pagination.displayName = 'Pagination';
+Pagination.propTypes = {
+    data: React.PropTypes.shape({
+        count: React.PropTypes.number.isRequired,
+        offset: React.PropTypes.number.isRequired,
+        limit: React.PropTypes.number.isRequired
+    }),
+    toPage: React.PropTypes.func.isRequired
+};
 
 export default Pagination;
