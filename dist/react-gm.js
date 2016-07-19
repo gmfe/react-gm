@@ -676,11 +676,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -688,129 +690,154 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Pagination = _react2.default.createClass({
-	    displayName: 'Pagination',
-	    propTypes: {
-	        data: _react2.default.PropTypes.shape({
-	            count: _react2.default.PropTypes.number.isRequired,
-	            offset: _react2.default.PropTypes.number.isRequired,
-	            limit: _react2.default.PropTypes.number.isRequired
-	        }),
-	        toPage: _react2.default.PropTypes.func.isRequired
-	    },
-	    render: function render() {
-	        var data = Object.assign({}, this.props.data);
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	        data.index = data.offset / data.limit + 1;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	        var offset = 2,
-	            pages = [],
-	            all = Math.ceil(data.count / data.limit),
-	            begin = Math.max(data.index - offset, 1),
-	            end = Math.min(data.index + offset, all);
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	        if (all > offset * 2 + 1) {
-	            if (begin === 1) {
-	                end += offset;
-	            } else if (end === all) {
-	                begin = Math.max(begin - offset, 1);
+	var Pagination = function (_React$Component) {
+	    _inherits(Pagination, _React$Component);
+
+	    function Pagination(props) {
+	        _classCallCheck(this, Pagination);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Pagination).call(this, props));
+
+	        _this.onPage = _this.onPage.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(Pagination, [{
+	        key: "render",
+	        value: function render() {
+	            var data = Object.assign({}, this.props.data);
+
+	            data.index = data.offset / data.limit + 1;
+
+	            var offset = 2,
+	                pages = [],
+	                all = Math.ceil(data.count / data.limit),
+	                begin = Math.max(data.index - offset, 1),
+	                end = Math.min(data.index + offset, all);
+
+	            if (all > offset * 2 + 1) {
+	                if (begin === 1) {
+	                    end += offset;
+	                } else if (end === all) {
+	                    begin = Math.max(begin - offset, 1);
+	                }
 	            }
-	        }
 
-	        for (var i = begin; i <= end; i++) {
-	            pages.push(i);
-	        }
+	            for (var i = begin; i <= end; i++) {
+	                pages.push(i);
+	            }
 
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-pagination' },
-	            _react2.default.createElement(
-	                'ul',
-	                { className: 'pagination pagination-sm', onClick: this.onPage },
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "gm-pagination" },
 	                _react2.default.createElement(
-	                    'li',
-	                    { className: data.index === 1 ? 'disabled' : '' },
+	                    "ul",
+	                    { className: "pagination pagination-sm", onClick: this.onPage },
 	                    _react2.default.createElement(
-	                        'a',
-	                        { href: 'javascript:;', 'data-page': data.index - 1 },
-	                        '«'
-	                    )
-	                ),
-	                begin >= 2 ? _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: 'javascript:;', 'data-page': '1' },
-	                        '1'
-	                    )
-	                ) : undefined,
-	                begin >= 3 ? _react2.default.createElement(
-	                    'li',
-	                    { className: 'disabled' },
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: 'javascript:;' },
-	                        '...'
-	                    )
-	                ) : undefined,
-	                pages.map(function (page, i) {
-	                    return _react2.default.createElement(
-	                        'li',
-	                        { key: i, className: data.index === page ? 'active' : '' },
+	                        "li",
+	                        { className: data.index === 1 ? 'disabled' : '' },
 	                        _react2.default.createElement(
-	                            'a',
-	                            {
-	                                href: 'javascript:;', 'data-page': page },
-	                            page
+	                            "a",
+	                            { href: "javascript:;", "data-page": data.index - 1 },
+	                            "«"
 	                        )
-	                    );
-	                }),
-	                end <= all - 2 ? _react2.default.createElement(
-	                    'li',
-	                    { className: 'disabled' },
+	                    ),
+	                    begin >= 2 ? _react2.default.createElement(
+	                        "li",
+	                        null,
+	                        _react2.default.createElement(
+	                            "a",
+	                            { href: "javascript:;", "data-page": "1" },
+	                            "1"
+	                        )
+	                    ) : undefined,
+	                    begin >= 3 ? _react2.default.createElement(
+	                        "li",
+	                        { className: "disabled" },
+	                        _react2.default.createElement(
+	                            "a",
+	                            { href: "javascript:;" },
+	                            "..."
+	                        )
+	                    ) : undefined,
+	                    pages.map(function (page, i) {
+	                        return _react2.default.createElement(
+	                            "li",
+	                            { key: i, className: data.index === page ? 'active' : '' },
+	                            _react2.default.createElement(
+	                                "a",
+	                                {
+	                                    href: "javascript:;", "data-page": page },
+	                                page
+	                            )
+	                        );
+	                    }),
+	                    end <= all - 2 ? _react2.default.createElement(
+	                        "li",
+	                        { className: "disabled" },
+	                        _react2.default.createElement(
+	                            "a",
+	                            { href: "javascript:;" },
+	                            "..."
+	                        )
+	                    ) : undefined,
+	                    end <= all - 1 ? _react2.default.createElement(
+	                        "li",
+	                        null,
+	                        _react2.default.createElement(
+	                            "a",
+	                            { href: "javascript:;", "data-page": all },
+	                            all
+	                        )
+	                    ) : undefined,
 	                    _react2.default.createElement(
-	                        'a',
-	                        { href: 'javascript:;' },
-	                        '...'
-	                    )
-	                ) : undefined,
-	                end <= all - 1 ? _react2.default.createElement(
-	                    'li',
-	                    null,
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: 'javascript:;', 'data-page': all },
-	                        all
-	                    )
-	                ) : undefined,
-	                _react2.default.createElement(
-	                    'li',
-	                    { className: data.index === all ? 'disabled' : '' },
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: 'javascript:;', 'data-page': data.index + 1 },
-	                        '»'
+	                        "li",
+	                        { className: data.index === all ? 'disabled' : '' },
+	                        _react2.default.createElement(
+	                            "a",
+	                            { href: "javascript:;", "data-page": data.index + 1 },
+	                            "»"
+	                        )
 	                    )
 	                )
-	            )
-	        );
-	    },
-	    onPage: function onPage(event) {
-	        var page = ~~event.target.getAttribute('data-page'),
-	            data = this.props.data,
-	            count = Math.ceil(data.count / data.limit),
-	            toPage = this.props.toPage;
-	        if (!page || page === data.index || page < 1 || page > count) {
-	            return;
+	            );
 	        }
+	    }, {
+	        key: "onPage",
+	        value: function onPage(event) {
+	            var page = ~~event.target.getAttribute('data-page'),
+	                data = this.props.data,
+	                count = Math.ceil(data.count / data.limit),
+	                toPage = this.props.toPage;
+	            if (!page || page === data.index || page < 1 || page > count) {
+	                return;
+	            }
 
-	        toPage({
-	            offset: (page - 1) * data.limit,
-	            limit: data.limit
-	        }, page);
-	    }
-	});
+	            toPage({
+	                offset: (page - 1) * data.limit,
+	                limit: data.limit
+	            }, page);
+	        }
+	    }]);
+
+	    return Pagination;
+	}(_react2.default.Component);
+
+	Pagination.displayName = 'Pagination';
+	Pagination.propTypes = {
+	    data: _react2.default.PropTypes.shape({
+	        count: _react2.default.PropTypes.number.isRequired,
+	        offset: _react2.default.PropTypes.number.isRequired,
+	        limit: _react2.default.PropTypes.number.isRequired
+	    }),
+	    toPage: _react2.default.PropTypes.func.isRequired
+	};
 
 	exports.default = Pagination;
 
@@ -824,37 +851,58 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var PaginationText = _react2.default.createClass({
-	    displayName: 'PaginationText',
-	    propTypes: {
-	        data: _react2.default.PropTypes.shape({
-	            count: _react2.default.PropTypes.number.isRequired,
-	            offset: _react2.default.PropTypes.number.isRequired,
-	            limit: _react2.default.PropTypes.number.isRequired
-	        })
-	    },
-	    render: function render() {
-	        var data = this.props.data;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-pagination-text' },
-	            '显示第 ',
-	            data.offset + 1,
-	            ' 到 ',
-	            Math.min(data.count, data.offset + data.limit),
-	            ' 行，一共 ',
-	            data.count,
-	            ' 行记录'
-	        );
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PaginationText = function (_React$Component) {
+	    _inherits(PaginationText, _React$Component);
+
+	    function PaginationText() {
+	        _classCallCheck(this, PaginationText);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(PaginationText).apply(this, arguments));
 	    }
-	});
+
+	    _createClass(PaginationText, [{
+	        key: 'render',
+	        value: function render() {
+	            var data = Object.assign({}, this.props.data);
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-pagination-text' },
+	                '显示第 ',
+	                data.offset + 1,
+	                ' 到 ',
+	                Math.min(data.count, data.offset + data.limit),
+	                ' 行，一共 ',
+	                data.count,
+	                ' 行记录'
+	            );
+	        }
+	    }]);
+
+	    return PaginationText;
+	}(_react2.default.Component);
+
+	PaginationText.displayName = 'PaginationText';
+	PaginationText.propTypes = {
+	    data: _react2.default.PropTypes.shape({
+	        count: _react2.default.PropTypes.number.isRequired,
+	        offset: _react2.default.PropTypes.number.isRequired,
+	        limit: _react2.default.PropTypes.number.isRequired
+	    })
+	};
 
 	exports.default = PaginationText;
 
