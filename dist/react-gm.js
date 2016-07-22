@@ -2874,6 +2874,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = this;
 
 	        var result = this.props.onOK(this.props.type === 'prompt' ? this.refs.input.value : undefined);
+	        if (result === false) {
+	            return;
+	        }
 	        Promise.resolve(result).then(function () {
 	            _this.setState({
 	                show: false
