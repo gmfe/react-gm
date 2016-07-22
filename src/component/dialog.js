@@ -76,6 +76,9 @@ const Dialog = React.createClass({
     },
     handleOk(){
         const result = this.props.onOK(this.props.type === 'prompt' ? this.refs.input.value : undefined);
+        if (result === false) {
+            return;
+        }
         Promise.resolve(result).then(() => {
             this.setState({
                 show: false
