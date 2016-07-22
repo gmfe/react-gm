@@ -2824,8 +2824,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return new Promise(function (resolve, reject) {
 	            var div = document.createElement('div');
 	            dialogContainer.appendChild(div);
+	            var _OK = options.onOK;
 	            options.onOK = function (value) {
-	                return resolve(value);
+	                resolve(value);
+	                return _OK && _OK(value);
 	            };
 	            options.onCancel = function () {
 	                return reject();
