@@ -68,7 +68,7 @@ const Dialog = React.createClass({
             });
         }
     },
-    handleCancle(){
+    handleCancel(){
         this.setState({
             show: false
         });
@@ -92,7 +92,7 @@ const Dialog = React.createClass({
     },
     render(){
         return (
-            <Modal show={this.state.show} onHide={this.handleCancle} bsSize={this.props.bsSize}>
+            <Modal show={this.state.show} onHide={this.handleCancel} bsSize={this.props.bsSize}>
                 <Modal.Header closeButton>
                     {this.props.title}
                 </Modal.Header>
@@ -108,7 +108,7 @@ const Dialog = React.createClass({
                     <div className="gm-gap10"></div>
                     <div className="text-right">
                         {(this.props.type !== 'alert' && !this.props.noCancel) && (
-                            <button className="btn btn-default" onClick={this.handleCancle}>取消</button>
+                            <button className="btn btn-default" onClick={this.handleCancel}>取消</button>
                         )}
                         <div className="gm-gap10"></div>
                         {!this.props.noOK && (
