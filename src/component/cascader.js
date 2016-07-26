@@ -8,25 +8,6 @@ const noop = () => {
 };
 
 class Cascader extends React.Component {
-    static propTypes = {
-        // 格式 [{value: 1, name: '深圳', children: [{...}]}]
-        data: PropTypes.array.isRequired,
-        // [1,2,...]
-        value: PropTypes.array,
-        // 同上
-        defaultValue: PropTypes.array,
-        // 会提供整个value回去
-        onChange: PropTypes.func,
-        // 没有this.props.children时有效
-        inputProps: PropTypes.object
-    };
-
-    static defaultProps = {
-        onChange: noop,
-        inputProps: {}
-    };
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -68,8 +49,8 @@ class Cascader extends React.Component {
                                title={v.name}
                                onClick={this.handleSelect.bind(this, v, i)}
                                className={classNames("list-group-item", {
-                            active: v.value === this.state.value[i]
-                            })}
+                                   active: v.value === this.state.value[i]
+                               })}
                             >{v.name}</a>
                         ))}
                     </Flex>
@@ -113,23 +94,27 @@ class Cascader extends React.Component {
     }
 
     renderChildren() {
+        const {data, valueRender, inputProps} = this.props;
         let value = [];
         if (this.state.value.length > 0) {
             _.each(this.state.value, (v, i) => {
-                const match = _.find(i === 0 ? this.props.data : value[i - 1].children, val => {
+                const match = _.find(i === 0 ? data : value[i - 1].children, val => {
                     return v === val.value;
                 });
                 value.push(match);
             });
         }
+
         return (
             <div className="gm-cascader-input">
                 <i className={classNames("glyphicon glyphicon-menu-down", {
-                "active": this.state.in
-                })}></i>
-                <input type="text" onChange={noop}
-                       value={_.map(value, v => v.name).join(',')} {...this.props.inputProps}
-                       className={classNames("form-control", this.props.inputProps.className)}/>
+                    "active": this.state.in
+                })}/>
+                <input {...inputProps}
+                       type="text"
+                       onChange={noop}
+                       value={valueRender ? valueRender(value) : _.map(value, v => v.name).join(',')}
+                       className={classNames("form-control", inputProps.className)}/>
             </div>
         );
     }
@@ -152,5 +137,25 @@ class Cascader extends React.Component {
         );
     }
 }
+
+Cascader.propTypes = {
+    // 格式 [{value: 1, name: '深圳', children: [{...}]}]
+    data: PropTypes.array.isRequired,
+    // [1,2,...]
+    value: PropTypes.array,
+    // 同上
+    defaultValue: PropTypes.array,
+    // 会提供整个value回去
+    onChange: PropTypes.func,
+    // 没有this.props.children时有效
+    inputProps: PropTypes.object,
+
+    valueRender: PropTypes.func
+};
+
+Cascader.defaultProps = {
+    onChange: noop,
+    inputProps: {}
+};
 
 export default Cascader;

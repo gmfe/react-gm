@@ -54,7 +54,7 @@ class CascaderSelect extends React.Component {
 
     render() {
         return (
-            <div className="gm-cascader-select">
+            <div className="gm-cascader-select" ref="cascaderSelect">
                 <Flex className="gm-cascader-select-input">
                     {_.map(this.state.selected, (value, i) => (
                         <Flex key={i} alignStart className="selected">
@@ -132,6 +132,10 @@ class CascaderSelect extends React.Component {
             this.setState({
                 cascaderValue: []
             });
+            // 单选完后就不继续出浮层
+            if (!this.props.multiple) {
+                this.refs.cascaderSelect.click();
+            }
         }
     }
 
