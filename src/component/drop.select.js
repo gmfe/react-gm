@@ -47,14 +47,14 @@ class DropSelect extends React.Component {
 
         if (loading) {
             coolList =
-                <li className="gm-dropselect-item"><span>&nbsp;</span><i className="glyphicon glyphicon-refresh"></i>
+                <li className="gm-dropselect-item"><span>&nbsp;</span><i className="glyphicon glyphicon-refresh"/>
                 </li>;
         } else {
             coolList = list.map((rowData, rowIndex) => {
                 const row = columns.map(col => {
                     const field = col.field, value = rowData[field];
                     if (col.render) {
-                        let val = col.render(value);
+                        let val = col.render(value, rowData, rowIndex);
                         return <div className="gm-ellipsis" style={{flex: '1'}} key={value + field}
                                     title={val}>{val}</div>;
                     } else {

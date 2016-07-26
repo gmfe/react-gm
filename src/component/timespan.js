@@ -26,7 +26,7 @@ const TimeSpan = React.createClass({
         const min = this.props.min ? moment(this.props.min) : moment().startOf('day'), max = this.props.max ? moment(this.props.max) : moment().endOf('day');
         let d = moment(min);
         let cells = [];
-        while (d < max) {
+        while (d <= max) {
             cells.push(d);
             d = moment(d + this.props.span);
         }

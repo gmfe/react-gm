@@ -1586,7 +1586,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            max = this.props.max ? (0, _moment2.default)(this.props.max) : (0, _moment2.default)().endOf('day');
 	        var d = (0, _moment2.default)(min);
 	        var cells = [];
-	        while (d < max) {
+	        while (d <= max) {
 	            cells.push(d);
 	            d = (0, _moment2.default)(d + this.props.span);
 	        }
@@ -2864,7 +2864,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	        }
 	    },
-	    handleCancle: function handleCancle() {
+	    handleCancel: function handleCancel() {
 	        this.setState({
 	            show: false
 	        });
@@ -2891,7 +2891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    render: function render() {
 	        return _react2.default.createElement(
 	            _reactBootstrap.Modal,
-	            { show: this.state.show, onHide: this.handleCancle, bsSize: this.props.bsSize },
+	            { show: this.state.show, onHide: this.handleCancel, bsSize: this.props.bsSize },
 	            _react2.default.createElement(
 	                _reactBootstrap.Modal.Header,
 	                { closeButton: true },
@@ -2914,7 +2914,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    { className: 'text-right' },
 	                    this.props.type !== 'alert' && !this.props.noCancel && _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn btn-default', onClick: this.handleCancle },
+	                        { className: 'btn btn-default', onClick: this.handleCancel },
 	                        '取消'
 	                    ),
 	                    _react2.default.createElement('div', { className: 'gm-gap10' }),
@@ -3042,7 +3042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        var field = col.field,
 	                            value = rowData[field];
 	                        if (col.render) {
-	                            var val = col.render(value);
+	                            var val = col.render(value, rowData, rowIndex);
 	                            return _react2.default.createElement(
 	                                'div',
 	                                { className: 'gm-ellipsis', style: { flex: '1' }, key: value + field,
