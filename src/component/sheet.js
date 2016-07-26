@@ -50,7 +50,7 @@ class Sheet extends React.Component {
     }
 
     render() {
-        let select = false, isSelectAll = false, list = this.props.list || [], loading = this.props.loading;
+        let select = false, isSelectAll = false, list = this.props.list || [], loading = this.props.loading, enableEmptyTip = this.props.enableEmptyTip;
 
         if (list.length > 0) {
             isSelectAll = _.filter(list, value => {
@@ -117,6 +117,12 @@ class Sheet extends React.Component {
                             </td>
                         </tr>
                     ) : undefined}
+                    {(!loading && enableEmptyTip && list.length === 0) ? (
+                        <tr>
+                            <td colSpan="99" className="text-center">没有数据
+                            </td>
+                        </tr>
+                    ) : undefined}
                     {!loading ? _.map(list, (value, index) => (
                         <tr key={index}>
                             {select ? (
@@ -161,7 +167,8 @@ class Sheet extends React.Component {
 
 Sheet.propTypes = {
     list: PropTypes.array.isRequired,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    enableEmptyTip: PropTypes.bool
 };
 
 Sheet.defaultProps = {

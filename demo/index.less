@@ -3,67 +3,26 @@
 @import "../node_modules/gm-bootstrap/less/custom.less";
 @import "../src/css/variables.less";
 
-html, body, #appContainer {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-  background-color: @gm-back-body-bg;
+h1 {
+  border-bottom: 1px solid #eee;
+  margin: 24px 0 16px;
+  padding-bottom: 0.3em;
 }
 
-.gm-app {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
+.doc-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  border-left: 1px solid @gm-border-color;
 
-.gm-app-top {
-  background: #34383c;
-  color: white;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 10px;
-}
-
-.gm-app-top-navigation-btn {
-  display: none;
-}
-
-.gm-app-content {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-@media (max-width: 970px) {
-  .gm-app-top-navigation-btn {
+  a {
     display: block;
+    padding: 2px 2px 2px 1em;
+    color: black;
   }
 
-  .gm-app-left {
-    position: absolute;
-    z-index: 1000;
-    left: -220px;
-  }
-
-  .gm-app-left.current {
-    left: 0px;
-  }
-}
-
-
-.gm-navigation a {
-  color: white;
-  display: block;
-  width: 100%;
-}
-
-.b-home {
-  img {
-    height: 100px;
-  }
-  span {
-    font-size: 30px;
-    margin: 0 10px;
+  a.doc-nav-title {
+    padding-left: 0;
   }
 }

@@ -3,15 +3,13 @@ import './index.less';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, IndexRoute, hashHistory, Link} from 'react-router';
 import {
     Util,
-    Storage,
-    Navigation,
-    Flex
+    Storage
 } from '../src/index';
+import _ from 'underscore';
 
-
+import Home from './component/home';
 import Form from './component/form';
 import Select from './component/select';
 import Date from './component/date';
@@ -54,118 +52,42 @@ console.log(Util.param({
 window.Storage = Storage;
 
 
-const Home = React.createClass({
-    render(){
+function initNav() {
+    let div = document.createElement('div');
+    div.className = 'doc-nav';
+
+    let html = '';
+    _.each(document.getElementsByTagName('h1'), ele => {
+        html += '<a class="doc-nav-title" href="#' + ele.id + '">' + ele.innerHTML + '</a>';
+        _.each(ele.parentNode.getElementsByTagName('h2'), e => {
+            html += '<a href="#' + e.id + '">' + e.innerHTML + '</a>';
+        });
+    });
+
+    div.innerHTML = html;
+    document.body.appendChild(div);
+}
+
+class App extends React.Component {
+    render() {
         return (
-            <div className="b-home">
-                <div>
-                    <img src="./images/logo.png" alt=""/>
-                    <span className="gm-text-desc">+</span>
-                    <img src="./images/react.svg" alt=""/>
-                    <span className="gm-text-desc">+</span>
-                    <img src="./images/chrome.jpeg" alt=""/>
-                </div>
-                <div>致力于快速搭建项目，像搭积木一样</div>
-                <hr/>
-                <div>
-                    <h4>Link</h4>
-                    <a href="https://github.com/gmfe/gm-bootstrap" target="_blank">gm-bootstrap</a>
-                    <br/>
-                    <a href="http://react-bootstrap.github.io/" target="_blank">react-bootstrap</a>
-                </div>
+            <div className="container">
+                <Home/>
+                <Select/>
+                <Form/>
+                <Data/>
+                <Date/>
+                <Overlay/>
+                <Upload/>
+                <Layout/>
+                <Date/>
             </div>
         );
     }
-});
 
-var navData = [{
-    key: '/',
-    title: <Link to="/">首页</Link>
-}, {
-    key: 'zujian',
-    title: '组件',
-    open: true,
-    sub: [{
-        key: '/overlay',
-        title: <Link to="/overlay">浮层</Link>
-    }, {
-        key: '/date',
-        title: <Link to="/date">时间</Link>
-    }, {
-        key: '/layout',
-        title: <Link to="/layout">布局</Link>
-    }, {
-        key: '/data',
-        title: <Link to="/data">数据</Link>
-    }, {
-        key: '/select',
-        title: <Link to="/select">表单-选择</Link>
-    }, {
-        key: '/form',
-        title: <Link to="/form">表单</Link>
-    }]
-}];
-
-var NavigationWrap = React.createClass({
-    render(){
-        return (
-            <Navigation className="gm-whiteframe1" data={navData} select={this.props.location.pathname}/>
-        );
+    componentDidMount() {
+        initNav();
     }
-});
+}
 
-const App = React.createClass({
-    getInitialState(){
-        return {
-            left: false
-        };
-    },
-    render(){
-        return (
-            <Flex column height="100%" className="gm-app">
-                <Flex className="gm-app-top gm-whiteframe1">
-                    <div className="gm-app-top-navigation-btn" onClick={this.handleToggleLeft}>
-                        <button className="btn btn-link"><span className="glyphicon glyphicon-menu-hamburger"></span>
-                        </button>
-                    </div>
-                    <Flex flex></Flex>
-                    <div>React-GM</div>
-                </Flex>
-                <Flex flex row>
-                    <Flex width="200px" className={"gm-app-left " + (this.state.left && 'current')}>
-                        <NavigationWrap {...this.props}></NavigationWrap>
-                    </Flex>
-                    <Flex column flex className="gm-app-content gm-padding10 gm-block">
-                        {this.props.children}
-                    </Flex>
-                </Flex>
-            </Flex>
-        );
-    },
-    handleToggleLeft(){
-        this.setState({
-            left: !this.state.left
-        });
-    }
-});
-
-const Root = React.createClass({
-    render(){
-        return (
-            <Router history={hashHistory}>
-                <Route path="/" component={App}>
-                    <IndexRoute component={Home}></IndexRoute>
-                    <Route path="select" component={Select}></Route>
-                    <Route path="form" component={Form}></Route>
-                    <Route path="date" component={Date}></Route>
-                    <Route path="overlay" component={Overlay}></Route>
-                    <Route path="upload" component={Upload}></Route>
-                    <Route path="layout" component={Layout}></Route>
-                    <Route path="data" component={Data}></Route>
-                </Route>
-            </Router>
-        );
-    }
-});
-
-ReactDOM.render(<Root></Root>, document.getElementById('appContainer'));
+ReactDOM.render(<App/>, document.getElementById('appContainer'));
