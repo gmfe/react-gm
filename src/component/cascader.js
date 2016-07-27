@@ -110,10 +110,10 @@ class Cascader extends React.Component {
                 <i className={classNames("glyphicon glyphicon-menu-down", {
                     "active": this.state.in
                 })}/>
-                <input type="text"
+                <input {...inputProps}
+                       type="text"
                        onChange={noop}
                        value={valueRender ? valueRender(value) : _.map(value, v => v.name).join(',')}
-                       {...inputProps}
                        className={classNames("form-control", inputProps.className)}/>
             </div>
         );
