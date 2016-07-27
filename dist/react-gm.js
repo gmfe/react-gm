@@ -1211,28 +1211,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'renderChildren',
 	        value: function renderChildren() {
-	            var _this3 = this;
+	            var _props = this.props;
+	            var data = _props.data;
+	            var valueRender = _props.valueRender;
+	            var inputProps = _props.inputProps;
 
 	            var value = [];
 	            if (this.state.value.length > 0) {
 	                _underscore2.default.each(this.state.value, function (v, i) {
-	                    var match = _underscore2.default.find(i === 0 ? _this3.props.data : value[i - 1].children, function (val) {
+	                    var match = _underscore2.default.find(i === 0 ? data : value[i - 1].children, function (val) {
 	                        return v === val.value;
 	                    });
 	                    value.push(match);
 	                });
 	            }
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'gm-cascader-input' },
 	                _react2.default.createElement('i', { className: (0, _classnames2.default)("glyphicon glyphicon-menu-down", {
 	                        "active": this.state.in
 	                    }) }),
-	                _react2.default.createElement('input', _extends({ type: 'text', onChange: noop,
-	                    value: _underscore2.default.map(value, function (v) {
+	                _react2.default.createElement('input', _extends({ type: 'text',
+	                    onChange: noop,
+	                    value: valueRender ? valueRender(value) : _underscore2.default.map(value, function (v) {
 	                        return v.name;
-	                    }).join(',') }, this.props.inputProps, {
-	                    className: (0, _classnames2.default)("form-control", this.props.inputProps.className) }))
+	                    }).join(',')
+	                }, inputProps, {
+	                    className: (0, _classnames2.default)("form-control", inputProps.className) }))
 	            );
 	        }
 	    }, {
@@ -1271,12 +1277,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // 会提供整个value回去
 	    onChange: _react.PropTypes.func,
 	    // 没有this.props.children时有效
-	    inputProps: _react.PropTypes.object
+	    inputProps: _react.PropTypes.object,
+
+	    valueRender: _react.PropTypes.func
 	};
+
 	Cascader.defaultProps = {
 	    onChange: noop,
 	    inputProps: {}
 	};
+
 	exports.default = Cascader;
 
 /***/ },
@@ -2463,7 +2473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'gm-cascader-select' },
+	                { className: 'gm-cascader-select', ref: 'cascaderSelect' },
 	                _react2.default.createElement(
 	                    _flex2.default,
 	                    { className: 'gm-cascader-select-input' },
@@ -2561,6 +2571,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.setState({
 	                    cascaderValue: []
 	                });
+	                // 单选完后就不继续出浮层
+	                if (!this.props.multiple) {
+	                    this.refs.cascaderSelect.click();
+	                }
 	            }
 	        }
 	    }, {
@@ -2864,7 +2878,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	        }
 	    },
-	    handleCancle: function handleCancle() {
+	    handleCancel: function handleCancel() {
 	        this.setState({
 	            show: false
 	        });
@@ -2891,7 +2905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    render: function render() {
 	        return _react2.default.createElement(
 	            _reactBootstrap.Modal,
-	            { show: this.state.show, onHide: this.handleCancle, bsSize: this.props.bsSize },
+	            { show: this.state.show, onHide: this.handleCancel, bsSize: this.props.bsSize },
 	            _react2.default.createElement(
 	                _reactBootstrap.Modal.Header,
 	                { closeButton: true },
@@ -2914,7 +2928,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    { className: 'text-right' },
 	                    this.props.type !== 'alert' && !this.props.noCancel && _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn btn-default', onClick: this.handleCancle },
+	                        { className: 'btn btn-default', onClick: this.handleCancel },
 	                        '取消'
 	                    ),
 	                    _react2.default.createElement('div', { className: 'gm-gap10' }),
@@ -4454,7 +4468,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var select = false,
 	                isSelectAll = false,
 	                list = this.props.list || [],
-	                loading = this.props.loading;
+	                loading = this.props.loading,
+	                enableEmptyTip = this.props.enableEmptyTip;
 
 	            if (list.length > 0) {
 	                isSelectAll = _underscore2.default.filter(list, function (value) {
@@ -4546,6 +4561,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                '加载中...'
 	                            )
 	                        ) : undefined,
+	                        !loading && enableEmptyTip && list.length === 0 ? _react2.default.createElement(
+	                            'tr',
+	                            null,
+	                            _react2.default.createElement(
+	                                'td',
+	                                { colSpan: '99', className: 'text-center' },
+	                                '没有数据'
+	                            )
+	                        ) : undefined,
 	                        !loading ? _underscore2.default.map(list, function (value, index) {
 	                            return _react2.default.createElement(
 	                                'tr',
@@ -4614,7 +4638,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	Sheet.propTypes = {
 	    list: _react.PropTypes.array.isRequired,
-	    loading: _react.PropTypes.bool
+	    loading: _react.PropTypes.bool,
+	    enableEmptyTip: _react.PropTypes.bool
 	};
 
 	Sheet.defaultProps = {
