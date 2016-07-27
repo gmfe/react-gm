@@ -218,30 +218,61 @@ class SearchSelectWrap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: null,
-            value: '',
-            list: []
+            selected: searchSelectData[2],
+            list: searchSelectData,
+
+            multipleSelected: [searchSelectData[1]]
         };
         this.handleSelect = ::this.handleSelect;
+        this.handleMultipleSelect = ::this.handleMultipleSelect;
         this.handleSearch = ::this.handleSearch;
     }
 
     render() {
         return (
             <div>
-                <SearchSelect
-                    selected={this.state.selected}
-                    onSelect={this.handleSelect}
-                    list={this.state.list}
-                    onSearch={this.handleSearch}
-                    placeholder="搜索"/>
+                <div style={{width: '300px'}}>
+                    <h3>单选版本</h3>
+                    {/*list(必须)搜索待选数据，传什么就是什么*/}
+                    {/*selected选中了什么，可为空*/}
+                    {/*onSearch(必须)，搜索触发函数，以便过滤重新得出list数据。 可以引入pinyin库来做拼音搜索*/}
+                    {/*onSelect(必须)，选中后触发，提供和selected一样的数据结构，一般直接设置selected即可*/}
+
+                    {/*delay搜索过程中延迟多少ms才出触发onSearch， 默认500*/}
+                    {/*listMaxHeight搜索待选数据的高度，默认250px*/}
+                    {/*multiple是否多选，默认false*/}
+                    {/*placeholder不用介绍了吧，默认空字符串*/}
+                    <SearchSelect
+                        list={this.state.list}
+                        selected={this.state.selected}
+                        onSearch={this.handleSearch}
+                        onSelect={this.handleSelect}
+                        placeholder="搜索"/>
+
+                    <h3>多选版本</h3>
+                    <SearchSelect
+                        list={this.state.list}
+                        selected={this.state.multipleSelected}
+                        onSearch={this.handleSearch}
+                        onSelect={this.handleMultipleSelect}
+                        multiple
+                        placeholder="搜索"/>
+                </div>
             </div>
         );
     }
 
     handleSelect(selected) {
+        console.log(selected);
         this.setState({
             selected
+        });
+    }
+
+    handleMultipleSelect(multipleSelected) {
+        console.log(multipleSelected);
+        this.setState({
+            multipleSelected
         });
     }
 
@@ -310,7 +341,7 @@ class CascaderWrap extends React.Component {
                 <h3>普通用法</h3>
                 <div style={{width: '200px'}}>
                     {/*data的格式如cascaderData，value 是值，name是值的展现，children是其下一级。*/}
-                    {/*value是一个数组，表示选中了那些数据。 ['0']则选择了广东，['0', '01']则选择了广东，深圳*/}
+                    {/*value是一个数组或者null，表示选中了那些数据。 ['0']则选择了广东，['0', '01']则选择了广东，深圳*/}
                     {/*onChange会调提供和value一样的数组*/}
                     {/*inputProps是定义里面input的props*/}
                     <Cascader data={this.state.data}
@@ -371,7 +402,7 @@ class CascaderSelectWrap extends React.Component {
         return (
             <div>
                 <h3>多选</h3>
-                {/*Cascader的多选版本，传入multiple。此组件也可以单选，不过没意义，单选用Cascader就好。*/}
+                {/*Cascader的多选版本，传入multiple。*/}
                 {/*selectedRender自定义选择后的显示，默认显示和Cascader一样*/}
                 {/*selected同Cascader的value*/}
                 {/*onSelect同Cascader的onChange*/}
@@ -383,8 +414,8 @@ class CascaderSelectWrap extends React.Component {
                     onSelect={this.handleSelect}/>
 
                 <h3>单选</h3>
+                {/*单选版本，不建议使用(怪怪的)，单选用Cascader就好。*/}
                 <CascaderSelect
-                    selectedRender={this.selectedRender}
                     data={this.state.data}
                     selected={this.state.singleSelected}
                     onSelect={this.handleSingleSelect}/>
@@ -410,13 +441,8 @@ class CascaderSelectWrap extends React.Component {
     }
 }
 
-const SelectWrap = React.createClass({
-    getInitialState(){
-        return {
-            checked: false
-        };
-    },
-    render(){
+class SelectWrap extends React.Component {
+    render() {
         return (
             <div>
                 <h1 id="select">选择</h1>
@@ -432,12 +458,7 @@ const SelectWrap = React.createClass({
                 <SearchSelectWrap/>
             </div>
         );
-    },
-    handleChange(){
-        this.setState({
-            checked: !this.state.checked
-        });
     }
-});
+}
 
 export default SelectWrap;

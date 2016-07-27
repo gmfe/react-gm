@@ -16,13 +16,12 @@
   "scripts": {
     "precommit": "eslint ./src/ ./demo/;",
     "pre": "npm install",
-    "clear": "rm -rf build; mkdir build;",
-    "start": "npm run clear; NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --inline --hot --progress --colors --port 3000",
+    "clear": "rm -rf build && mkdir build;",
+    "start": "npm run clear && NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --inline --hot --progress --colors --port 3000",
     "deploy": "npm install;npm run build && npm run build:min",
     "build": "NODE_ENV=production webpack",
     "build:min": "NODE_ENV=production webpack --config webpack.config.min.js",
-    "publishpatch": "npm run deploy; git add --all; git commit -m 'c'; npm version patch; git push origin master:master; npm publish --registry='https://registry.npmjs.org'; cnpm sync react-gm; npm version;",
-    "gh-pages": "git branch -D gh-pages; git checkout -b gh-pages; webpack --config webpack.config.dev.js; rm -rf .gitignore; git add --all; git commit -m 'page'; git push origin :gh-pages; git push origin HEAD:gh-pages; git checkout master;"
+    "publishpatch": "npm run deploy && git add --all && git commit -m 'c' && npm version patch && git push origin master:master && npm publish --registry='https://registry.npmjs.org' && cnpm sync react-gm && npm version;"
   },
   "repository": {
     "type": "git",

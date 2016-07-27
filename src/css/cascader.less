@@ -21,8 +21,9 @@
 
 .gm-cascader-overlay {
   &.popover {
-    margin-top: 5px;
+    margin-top: 1px;
     max-width: none;
+    padding: 0;
     left: 0 !important;
   }
 
@@ -36,7 +37,7 @@
     height: 200px;
     .list-group {
       margin: 0;
-      border-right: 1px solid @gm-border-color;
+      border-right: 1px solid @gm-form-border-color;
       min-width: 100px;
       overflow: auto;
       &:last-child {
@@ -54,8 +55,7 @@
 
 .gm-cascader-select {
   position: relative;
-  border: 1px solid @gm-border-color;
-  border-radius: 4px;
+  border: 1px solid @gm-form-border-color;
   background-color: white;
 
   .gm-cascader-select-input {
@@ -85,6 +85,12 @@
       .glyphicon {
         right: 0;
       }
+    }
+  }
+
+  .gm-cascader-overlay {
+    &.popover {
+      margin-top: 8px;
     }
   }
 }

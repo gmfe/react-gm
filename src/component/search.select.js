@@ -4,42 +4,23 @@ import Flex from './flex';
 import classNames from 'classnames';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 
-class SearchSelect extends React.Component {
-    static propTypes = {
-        selected: PropTypes.any,
-        list: PropTypes.array.isRequired,
-        onSearch: PropTypes.func.isRequired,
-        onSelect: PropTypes.func.isRequired,
-        delay: PropTypes.number,
-        listMaxHeight: PropTypes.string,
-        multiple: PropTypes.bool,
-        placeholder: PropTypes.string
-    };
-
-    static defaultProps = {
-        value: '',
-        listMaxHeight: '250px',
-        delay: 500,
-        multiple: false,
-        placeholder: ''
-    };
-
-    getPropsSelected(props) {
-        if (props.multiple) {
-            if (props.selected) {
-                return props.selected;
-            } else {
-                return [];
-            }
+const getPropsSelected = props => {
+    if (props.multiple) {
+        if (props.selected) {
+            return props.selected;
         } else {
-            if (props.selected) {
-                return [props.selected];
-            } else {
-                return [];
-            }
+            return [];
+        }
+    } else {
+        if (props.selected) {
+            return [props.selected];
+        } else {
+            return [];
         }
     }
+};
 
+class SearchSelect extends React.Component {
     constructor(props) {
         super(props);
         this.timer = null;
@@ -47,14 +28,14 @@ class SearchSelect extends React.Component {
         this.state = {
             value: '',
             in: false,
-            selected: this.getPropsSelected(props),
+            selected: getPropsSelected(props),
             id: '_gm_search_select_id' + (Math.random() + '').slice(2)
         };
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            selected: this.getPropsSelected(nextProps)
+            selected: getPropsSelected(nextProps)
         });
     }
 
@@ -62,8 +43,7 @@ class SearchSelect extends React.Component {
         return (
             <Popover
                 id={this.state.id}
-                className="gm-search-select-overlay"
-            >
+                className="gm-search-select-overlay">
                 {this.props.list.length > 0 ? (
                     <div className="list-group" style={{maxHeight: this.props.listMaxHeight}}>
                         {_.map(this.props.list, (value, i) => {
@@ -75,7 +55,7 @@ class SearchSelect extends React.Component {
                                 onClick={this.handleSelect.bind(this, value)}>
                                 {value.name}
                                 {this.state.selected.indexOf(value) > -1 ? (
-                                    <i className="glyphicon glyphicon-ok text-success pull-right"></i>
+                                    <i className="glyphicon glyphicon-ok text-success pull-right"/>
                                 ) : undefined}
                             </a>;
                         })}
@@ -92,7 +72,8 @@ class SearchSelect extends React.Component {
                     {_.map(this.state.selected, (value, i) => (
                         <Flex key={i} alignStart className="selected">
                             {value.name}
-                            <button type="button" className="close"
+                            <button type="button"
+                                    className="close"
                                     onClick={this.handleClose.bind(this, value)}>&times;</button>
                         </Flex>
                     ))}
@@ -104,8 +85,7 @@ class SearchSelect extends React.Component {
                             container={this}
                             overlay={this.renderOverlay()}
                             onEnter={::this.handleEnter}
-                            onExit={::this.handleExit}
-                        >
+                            onExit={::this.handleExit}>
                             <input
                                 ref="target"
                                 type="text"
@@ -189,5 +169,23 @@ class SearchSelect extends React.Component {
         }, this.props.delay);
     }
 }
+SearchSelect.propTypes = {
+    list: PropTypes.array.isRequired,
+    selected: PropTypes.any,
+    onSearch: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
+    delay: PropTypes.number,
+    listMaxHeight: PropTypes.string,
+    multiple: PropTypes.bool,
+    placeholder: PropTypes.string
+};
+
+SearchSelect.defaultProps = {
+    value: '',
+    listMaxHeight: '250px',
+    delay: 500,
+    multiple: false,
+    placeholder: ''
+};
 
 export default SearchSelect;
