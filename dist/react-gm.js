@@ -1232,12 +1232,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement('i', { className: (0, _classnames2.default)("glyphicon glyphicon-menu-down", {
 	                        "active": this.state.in
 	                    }) }),
-	                _react2.default.createElement('input', _extends({ type: 'text',
+	                _react2.default.createElement('input', _extends({}, inputProps, {
+	                    type: 'text',
 	                    onChange: noop,
 	                    value: valueRender ? valueRender(value) : _underscore2.default.map(value, function (v) {
 	                        return v.name;
-	                    }).join(',')
-	                }, inputProps, {
+	                    }).join(','),
 	                    className: (0, _classnames2.default)("form-control", inputProps.className) }))
 	            );
 	        }
