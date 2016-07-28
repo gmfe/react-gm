@@ -6,12 +6,12 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <link rel="shortcut icon" href="images/logo.png"/>
+    <link rel="shortcut icon" href="demo/images/logo.png"/>
 </head>
 <body>
-<div id="appContainer"></div>
+<div id="appContainer"/>
 <script>
-    document.write('<script src="../build/webpack-assets.js?v=' + Math.random() + '"><\/script>');
+    document.write('<script src="build/webpack-assets.js?v=' + Math.random() + '"><\/script>');
 </script>
 <script>
     document.write('<script src="' + window.WEBPACK_ASSETS['index'].js + '"><\/script>');

@@ -29,6 +29,13 @@ import CascaderSelect from './component/cascader.select';
 
 import './index.less';
 
+const {
+    SheetColumn,
+    SheetAction,
+    SheetSelect,
+    SheetBatchAction
+} = Sheet;
+
 module.exports = {
     Util,
     Grid,
@@ -57,5 +64,9 @@ module.exports = {
     Cascader,
     CascaderSelect,
     Switch,
-    Sheet
+    Sheet,
+    SheetColumn,
+    SheetAction,
+    SheetSelect,
+    SheetBatchAction
 };

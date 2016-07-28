@@ -10,7 +10,6 @@ import {
 import PinYin from 'gm-pinyin';
 import _ from 'underscore';
 
-// TODO siqi添加文档
 const DropSelectWrap = React.createClass({
     getInitialState(){
         return {
@@ -19,7 +18,7 @@ const DropSelectWrap = React.createClass({
                 list: [],
                 actions: [{
                     className: "btn btn-sm btn-info",
-                    text: <i className="glyphicon glyphicon-ok"></i>,
+                    text: <i className="glyphicon glyphicon-ok"/>,
                     getDisabled: (value, i) => {
                         return i % 2;
                     },
@@ -121,7 +120,6 @@ const DropSelectWrap = React.createClass({
     }
 });
 
-// TODO 何勇add文档
 var AdvanceSelectComponent = React.createClass({
     getInitialState(){
         let selectList = [
@@ -353,10 +351,6 @@ class CascaderWrap extends React.Component {
             <div>
                 <h3>普通用法</h3>
                 <div style={{width: '200px'}}>
-                    {/*data的格式如cascaderData，value 是值，name是值的展现，children是其下一级。*/}
-                    {/*value是一个数组或者null，表示选中了那些数据。 ['0']则选择了广东，['0', '01']则选择了广东，深圳*/}
-                    {/*onChange会调提供和value一样的数组*/}
-                    {/*inputProps是定义里面input的props*/}
                     <Cascader data={this.state.data}
                               value={this.state.value}
                               onChange={this.handleChange}
@@ -370,7 +364,6 @@ class CascaderWrap extends React.Component {
 
                 <h3>自定义value的显示</h3>
                 <Flex>
-                    {/*这非常的灵活，自定义value的显示*/}
                     <Cascader data={this.state.data}
                               valueRender={(value) => (value && value.length > 0 ? value[value.length - 1].name : '')}
                               onChange={this.handleChange}/>
@@ -378,7 +371,6 @@ class CascaderWrap extends React.Component {
 
                 <h3>自定义children</h3>
                 <Flex>
-                    {/*这非常的灵活，自定义ui，点击整个children都会出现选择浮层*/}
                     <Cascader data={this.state.data} onChange={this.handleChange}>
                         <div>
                             {_.map(value, v => v.name).join(',')}
@@ -402,7 +394,7 @@ class CascaderSelectWrap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: null,
+            selected: [[cascaderData[0], cascaderData[0].children[0]]],
             data: cascaderData,
 
             singleSelected: null
@@ -412,6 +404,7 @@ class CascaderSelectWrap extends React.Component {
     }
 
     render() {
+        console.log(this.state.selected);
         return (
             <div>
                 <h3>多选</h3>
@@ -442,12 +435,14 @@ class CascaderSelectWrap extends React.Component {
     }
 
     handleSelect(selected) {
+        console.log(selected);
         this.setState({
             selected
         });
     }
 
     handleSingleSelect(singleSelected) {
+        console.log(singleSelected);
         this.setState({
             singleSelected
         });

@@ -8,129 +8,144 @@ import {
 } from '../../src/index';
 import moment from 'moment';
 
-var CalendarWrap = React.createClass({
-    getInitialState: function () {
-        return {
+class CalendarWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             selected: null
         };
-    },
-    render: function () {
+        this.handleSelect = ::this.handleSelect;
+    }
+
+    render() {
         return (
             <div>
                 <Calendar selected={this.state.selected} onSelect={this.handleSelect}/>
             </div>
         );
-    },
-    handleSelect: function (date) {
+    }
+
+    handleSelect(date) {
         this.setState({
             selected: date
         });
         console.log(arguments);
-    },
-    componentDidMount(){
-        //setTimeout(() => {
-        //    this.setState({
-        //        selected: undefined
-        //    });
-        //}, 5000);
     }
-});
+}
 
-var DatePickerWrap = React.createClass({
-    getInitialState: function () {
-        return {
-            //date: new Date()
+class DatePickerWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             date: null
         };
-    },
-    render: function () {
+        this.handleChange = ::this.handleChange;
+    }
+
+    render() {
         return (
             <div>
-                <DatePicker date={this.state.date} placeholder="adfasdf" onChange={this.handleChange} inputClassName=""
-                            target={() => this.refs.target}/>
+                <DatePicker date={this.state.date}
+                            placeholder="adfasdf"
+                            onChange={this.handleChange}
+                            inputClassName="form-control input-sm"/>
                 <span>inline-block</span>
+                <div className="gm-padding10"></div>
+                <DatePicker date={this.state.date}
+                            onChange={this.handleChange}
+                            target={() => this.refs.target}>
+                    <span ref="target">{this.state.date ? moment(this.state.date).format('YYYY-MM-DD') : '请点击选择'}</span>
+                </DatePicker>
             </div>
         );
-        //return (
-        //    <div>
-        //        <DatePicker date={this.state.date} onChange={this.handleChange} inputClassName="" target={() => this.refs.target}>
-        //            <span ref="target">{this.state.date + ''}</span>
-        //        </DatePicker>
-        //    </div>
-        //);
-    },
-    handleChange: function (date) {
+    }
+
+    handleChange(date) {
         console.log(date);
         this.setState({
             date: date
         });
     }
-});
+}
 
 
-var DaterangepickerWrap = React.createClass({
-    getInitialState: function () {
-        return {
+class DaterangepickerWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             begin: new Date(),
             end: new Date()
         };
-    },
-    render: function () {
+        this.handleChange = ::this.handleChange;
+    }
+
+    render() {
         return (
             <div>
-                <DateRangePicker begin={this.state.begin} end={this.state.end} onChange={this.handleChange}
+                <DateRangePicker begin={this.state.begin}
+                                 end={this.state.end}
+                                 onChange={this.handleChange}
                                  inputClassName="form-control input-sm"/>
             </div>
         );
-    },
-    handleChange: function (begin, end) {
+    }
+
+    handleChange(begin, end) {
         this.setState({
             begin: begin,
             end: end
         });
     }
-});
+}
 
-var TimeSpanPickerWrap = React.createClass({
-    handleChange(date){
+class TimeSpanPickerWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = ::this.handleChange;
+
+    }
+
+    handleChange(date) {
         console.log(date);
-    },
-    render(){
-        return (
-            <div>
-                <div>
-                    <TimeSpan min={null} max={moment().endOf('day').toDate()}
-                              selected={moment().startOf('day').toDate()} onChange={this.handleChange}
-                              onSelect={this.handleChange}></TimeSpan>
-                </div>
-                <div>
-                    <TimeSpanPicker min={moment().startOf('day').toDate()} max={moment().endOf('day').toDate()}
-                                    date={moment().startOf('day').toDate()}
-                                    onChange={this.handleChange}></TimeSpanPicker>
-                </div>
-            </div>
-        );
     }
-});
 
-const Component = React.createClass({
-    render(){
+    render() {
         return (
             <div>
-                <h1>Calendar</h1>
-                <CalendarWrap></CalendarWrap>
-                <hr/>
-                <h1>DatePicker</h1>
-                <DatePickerWrap></DatePickerWrap>
-                <h1>Daterangepicker</h1>
-                <DaterangepickerWrap></DaterangepickerWrap>
-                <hr/>
-                <h1>TimeSpanPicker</h1>
-                <TimeSpanPickerWrap></TimeSpanPickerWrap>
-                <div style={{height: 500}}></div>
+                <div>
+                    <TimeSpan min={null}
+                              max={moment().endOf('day').toDate()}
+                              selected={moment().startOf('day').toDate()}
+                              onChange={this.handleChange}
+                              onSelect={this.handleChange}/>
+                </div>
+                <div>
+                    <TimeSpanPicker min={moment().startOf('day').toDate()}
+                                    max={moment().endOf('day').toDate()}
+                                    date={moment().startOf('day').toDate()}
+                                    onChange={this.handleChange}/>
+                </div>
             </div>
         );
     }
-});
+}
+
+class Component extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1 id="date">日期</h1>
+                <h2 id="Calendar">Calendar</h2>
+                <CalendarWrap/>
+                <h2 id="DatePicker">DatePicker</h2>
+                <DatePickerWrap/>
+                <h2 id="DaterangePicker">DaterangePicker</h2>
+                <DaterangepickerWrap/>
+                <h2 id="TimeSpanPicker">TimeSpanPicker</h2>
+                <TimeSpanPickerWrap/>
+            </div>
+        );
+    }
+}
 
 export default Component;

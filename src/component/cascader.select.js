@@ -6,49 +6,34 @@ import Flex from './flex';
 const noop = () => {
 };
 
-class CascaderSelect extends React.Component {
-    static propTypes = {
-        data: PropTypes.array.isRequired,
-        selected: PropTypes.array,
-        // 会提供整个value回去
-        onSelect: PropTypes.func.isRequired,
-        multiple: PropTypes.bool,
-        placeholder: PropTypes.string,
-        selectedRender: PropTypes.func
-    };
-
-    static defaultProps = {
-        onSelect: noop,
-        placeholder: ''
-    };
-
-    getPropsSelected(props) {
-        if (props.multiple) {
-            if (props.selected) {
-                return props.selected;
-            } else {
-                return [];
-            }
+const getPropsSelected = (props) => {
+    if (props.multiple) {
+        if (props.selected) {
+            return props.selected;
         } else {
-            if (props.selected) {
-                return [props.selected];
-            } else {
-                return [];
-            }
+            return [];
+        }
+    } else {
+        if (props.selected) {
+            return [props.selected];
+        } else {
+            return [];
         }
     }
+};
 
+class CascaderSelect extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: this.getPropsSelected(props),
+            selected: getPropsSelected(props),
             cascaderValue: []
         };
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            selected: this.getPropsSelected(nextProps)
+            selected: getPropsSelected(nextProps)
         });
     }
 
@@ -66,7 +51,7 @@ class CascaderSelect extends React.Component {
                     <Flex flex column onKeyDown={::this.handleKeyDown}>
                         <Cascader data={this.props.data}
                                   value={this.state.cascaderValue}
-                                  onChange={::this.handleChange}></Cascader>
+                                  onChange={::this.handleChange}/>
                     </Flex>
                 </Flex>
             </div>
@@ -144,5 +129,20 @@ class CascaderSelect extends React.Component {
         this.doSelect(selected);
     }
 }
+
+CascaderSelect.propTypes = {
+    data: PropTypes.array.isRequired,
+    selected: PropTypes.array,
+    // 会提供整个value回去
+    onSelect: PropTypes.func.isRequired,
+    multiple: PropTypes.bool,
+    placeholder: PropTypes.string,
+    selectedRender: PropTypes.func
+};
+
+CascaderSelect.defaultProps = {
+    onSelect: noop,
+    placeholder: ''
+};
 
 export default CascaderSelect;

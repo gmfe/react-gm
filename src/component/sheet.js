@@ -100,7 +100,7 @@ class Sheet extends React.Component {
                         ) : undefined}
                         {_.map(columns, (value, index) => {
                             const {
-                                field, name, // eslint-disable-line
+                                children, field, name, // eslint-disable-line
                                 ...rest
                             } = value.props;
                             return <th key={index} {...rest}>{value.props.name}</th>;
@@ -119,7 +119,8 @@ class Sheet extends React.Component {
                     ) : undefined}
                     {(!loading && enableEmptyTip && list.length === 0) ? (
                         <tr>
-                            <td colSpan="99" className="text-center">没有数据
+                            <td colSpan="99" className="text-center">
+                                {enableEmptyTip === true ? '没有数据' : enableEmptyTip}
                             </td>
                         </tr>
                     ) : undefined}
@@ -132,10 +133,14 @@ class Sheet extends React.Component {
                                 </td>
                             ) : undefined}
                             {_.map(columns, (v, i) => {
-                                if (typeof v.props.children === 'function') {
-                                    return <td key={i}>{v.props.children(value[v.props.field], index)}</td>;
+                                const {
+                                    children, field, name, // eslint-disable-line
+                                    ...rest
+                                } = v.props;
+                                if (typeof children === 'function') {
+                                    return <td key={i} {...rest}>{children(value[field], index)}</td>;
                                 } else {
-                                    return <td key={i}>{value[v.props.field]}</td>;
+                                    return <td key={i} {...rest}>{value[field]}</td>;
                                 }
                             })}
                             {actions ? (
@@ -168,7 +173,8 @@ class Sheet extends React.Component {
 Sheet.propTypes = {
     list: PropTypes.array.isRequired,
     loading: PropTypes.bool,
-    enableEmptyTip: PropTypes.bool
+    enableEmptyTip: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.element]),
+    className: PropTypes.string
 };
 
 Sheet.defaultProps = {

@@ -9,7 +9,6 @@ import {
 } from '../src/index';
 import _ from 'underscore';
 
-import Home from './component/home';
 import Form from './component/form';
 import Select from './component/select';
 import Date from './component/date';
@@ -72,7 +71,6 @@ class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <Home/>
                 <Select/>
                 <Form/>
                 <Data/>
