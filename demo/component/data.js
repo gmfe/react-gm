@@ -44,7 +44,7 @@ class SheetWrap extends React.Component {
             <div>
                 {/*{list（必填）是列表的数据，最好是数组。 当然有人没注意传了obj（非常不推荐）。因为可能会用到 list.length }*/}
                 {/*loading 为true显示loading状态，为false才会显示数据*/}
-                {/*enableEmptyTip 显示list为空的时候*/}
+                {/*enableEmptyTip 显示list为空的时候文案*/}
                 <Sheet list={list} loading={loading} enableEmptyTip>
                     {/*一般用法，提供 field要取数据的那个字段，name是表头列名*/}
                     <SheetColumn field="id" name="id"/>

@@ -4,6 +4,8 @@ import Flex from './flex';
 import classNames from 'classnames';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 
+// 略复杂了，脱离初衷，应该把单选和多选版本分开，改代码请周知
+
 const getPropsSelected = props => {
     if (props.multiple) {
         if (props.selected) {
@@ -69,14 +71,14 @@ class SearchSelect extends React.Component {
         return (
             <div className={classNames("gm-search-select", {"gm-search-select-empty": this.props.list.length === 0})}>
                 <Flex className="gm-search-select-input">
-                    {_.map(this.state.selected, (value, i) => (
+                    {this.props.multiple ? _.map(this.state.selected, (value, i) => (
                         <Flex key={i} alignStart className="selected">
                             {value.name}
                             <button type="button"
                                     className="close"
                                     onClick={this.handleClose.bind(this, value)}>&times;</button>
                         </Flex>
-                    ))}
+                    )) : undefined}
                     <Flex flex>
                         <OverlayTrigger
                             trigger="click"
@@ -146,7 +148,7 @@ class SearchSelect extends React.Component {
             this.doSelect(this.state.selected.concat(value));
         }
         this.setState({
-            value: ''
+            value: this.props.multiple ? '' : value.name
         });
         if (this.state.in) {
             this.refs.target.click();

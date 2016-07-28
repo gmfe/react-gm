@@ -54,26 +54,25 @@ const Component = React.createClass({
     render(){
         return (
             <div>
-                <h1>Former(alpha)</h1>
-                <FormerDom></FormerDom>
-                <h1>Switch</h1>
+                <h1 id="form">表单</h1>
+                <h2 id="former">Former(alpha)</h2>
+                <FormerDom/>
+                <h2 id="switch">Switch</h2>
                 <div>
+                    <div>目前Switch的长度有限，所以checkedChildren unCheckedChildren 不能太多字</div>
                     <Switch
                         defaultChecked={true}
                         checkedChildren={"是"}
-                        unCheckedChildren={"否"}
-                    ></Switch>
+                        unCheckedChildren={"否"}/>
                     <Switch
                         checked={this.state.checked}
                         checkedChildren={"是"}
                         unCheckedChildren={"否"}
-                        onChange={this.handleChange}
-                    ></Switch>
+                        onChange={this.handleChange}/>
                     <Switch
                         disabled
                         checkedChildren={"YES"}
-                        unCheckedChildren={"NO"}
-                    ></Switch>
+                        unCheckedChildren={"NO"}/>
                 </div>
             </div>
         );

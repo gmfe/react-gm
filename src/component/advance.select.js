@@ -11,7 +11,7 @@ var AdvanceSelect = React.createClass({
         inputStyleName: React.PropTypes.object, //自定义的样式
         id: React.PropTypes.oneOfType([
             React.PropTypes.string,
-            React.PropTypes.number
+            React.PropTypes.number // TODO id不能为数字
         ])
     },
 
@@ -20,7 +20,7 @@ var AdvanceSelect = React.createClass({
             onValueChange: null,
             onFilterData: null,
             inputClassName: 'form-control',
-            inputStyleName: {}
+            inputStyleName: {} // TODO style吧？为啥要styleName
         };
     },
 
@@ -30,6 +30,7 @@ var AdvanceSelect = React.createClass({
     },
 
     componentDidMount: function () {
+        console.error('AdvanceSelect are deprecated! Replace with SearchSelect!');
         document.addEventListener('click', this._close);
     },
 
