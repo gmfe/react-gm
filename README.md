@@ -1,7 +1,7 @@
 [![npm version](https://badge.fury.io/js/react-gm.svg)](https://badge.fury.io/js/react-gm)
 
 # demo
-[demo](http://gmfe.github.io/react-gm/demo/index.html)
+[demo](http://gmfe.github.io/react-gm)
 
 # DOC
 [文档](/doc/Home.md)

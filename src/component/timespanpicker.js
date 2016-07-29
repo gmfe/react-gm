@@ -1,59 +1,75 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import moment from 'moment';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 import TimeSpan from './timespan.js';
 
-var TimeSpanPicker = React.createClass({
-    propTypes: {
-        min: React.PropTypes.object,
-        max: React.PropTypes.object,
-        span: React.PropTypes.number,
-        date: React.PropTypes.object.isRequired,
-        render: React.PropTypes.func,
-        onChange: React.PropTypes.func.isRequired,
-        inputClassName: React.PropTypes.string,
-        target: React.PropTypes.func
-    },
-    getDefaultProps(){
-        return {
-            render: value => moment(value).format('HH:mm')
-        };
-    },
-    getInitialState: function () {
-        return {
+const noop = ()=> {
+};
+
+class TimeSpanPicker extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             id: '_gm_timespanpicker_id' + (Math.random() + '').slice(2)
         };
-    },
-    renderPopover: function () {
+        this.handleSelect = ::this.handleSelect;
+    }
+
+    renderPopover() {
         return (
-            <Popover id={this.state.id} className="gm-time-span-picker-popover">
-                <TimeSpan min={this.props.min} max={this.props.max} span={this.props.span} selected={this.props.date}
-                          onSelect={this.handleSelect}></TimeSpan>
+            <Popover id={this.state.id}
+                     className="gm-time-span-picker-popover">
+                <TimeSpan min={this.props.min}
+                          max={this.props.max}
+                          span={this.props.span}
+                          selected={this.props.date}
+                          onSelect={this.handleSelect}/>
             </Popover>
         );
-    },
-    handleSelect: function (date) {
+    }
+
+    handleSelect(date) {
         if (this.refs.target) {
             this.refs.target.click();
         } else {
             this.props.target().click();
         }
         this.props.onChange(date);
-    },
-    handleChange: function () {
-        // empty
-    },
-    render: function () {
+    }
+
+    render() {
         return (
             <div className="gm-time-span-picker">
-                <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopover()}>
+                <OverlayTrigger trigger="click"
+                                rootClose
+                                placement="bottom"
+                                overlay={this.renderPopover()}>
                     {this.props.children ? this.props.children :
-                        <input type="text" className={this.props.inputClassName} ref="target"
-                               value={this.props.render(this.props.date)} onChange={this.handleChange}/>}
+                        <input type="text"
+                               className={this.props.inputClassName}
+                               ref="target"
+                               value={this.props.render(this.props.date)}
+                               onChange={noop}/>}
                 </OverlayTrigger>
             </div>
         );
     }
-});
+}
+
+TimeSpanPicker.propTypes = {
+    min: PropTypes.object,
+    max: PropTypes.object,
+    span: PropTypes.number,
+    date: PropTypes.object.isRequired,
+    render: PropTypes.func,
+    onChange: PropTypes.func,
+    inputClassName: PropTypes.string,
+    target: PropTypes.func
+};
+
+TimeSpanPicker.defaultProps = {
+    render: value => moment(value).format('HH:mm'),
+    onChange: noop
+};
 
 export default TimeSpanPicker;

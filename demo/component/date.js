@@ -54,7 +54,9 @@ class DatePickerWrap extends React.Component {
                 <DatePicker date={this.state.date}
                             onChange={this.handleChange}
                             target={() => this.refs.target}>
-                    <span ref="target">{this.state.date ? moment(this.state.date).format('YYYY-MM-DD') : '请点击选择'}</span>
+                    <span ref="target">
+                        {this.state.date ? moment(this.state.date).format('YYYY-MM-DD') : '请点击选择'}
+                    </span>
                 </DatePicker>
             </div>
         );
@@ -81,12 +83,10 @@ class DaterangepickerWrap extends React.Component {
 
     render() {
         return (
-            <div>
-                <DateRangePicker begin={this.state.begin}
-                                 end={this.state.end}
-                                 onChange={this.handleChange}
-                                 inputClassName="form-control input-sm"/>
-            </div>
+            <DateRangePicker begin={this.state.begin}
+                             end={this.state.end}
+                             onChange={this.handleChange}
+                             inputClassName="form-control input-sm"/>
         );
     }
 
@@ -101,29 +101,45 @@ class DaterangepickerWrap extends React.Component {
 class TimeSpanPickerWrap extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            date: moment().startOf('day').toDate()
+        };
         this.handleChange = ::this.handleChange;
-
     }
 
     handleChange(date) {
-        console.log(date);
+        this.setState({
+            date
+        });
     }
 
     render() {
         return (
             <div>
                 <div>
-                    <TimeSpan min={null}
-                              max={moment().endOf('day').toDate()}
-                              selected={moment().startOf('day').toDate()}
-                              onChange={this.handleChange}
+                    <TimeSpan max={moment().hour(20).minute(0)}
+                              selected={this.state.date}
+                              onSelect={this.handleChange}/>
+
+                    <TimeSpan max={moment().hour(20).minute(0)}
+                              span={60 * 60 * 1000}
+                              render={value => moment(value).format('HH')}
+                              selected={this.state.date}
                               onSelect={this.handleChange}/>
                 </div>
                 <div>
-                    <TimeSpanPicker min={moment().startOf('day').toDate()}
-                                    max={moment().endOf('day').toDate()}
-                                    date={moment().startOf('day').toDate()}
-                                    onChange={this.handleChange}/>
+                    <TimeSpanPicker
+                        date={this.state.date}
+                        onChange={this.handleChange}/>
+
+                    <TimeSpanPicker
+                        date={this.state.date}
+                        target={() => this.refs.target}
+                        onChange={this.handleChange}>
+                        <span ref="target">
+                            {this.state.date ? moment(this.state.date).format('HH:mm') : '请点击选择'}
+                        </span>
+                    </TimeSpanPicker>
                 </div>
             </div>
         );

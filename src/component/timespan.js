@@ -3,49 +3,50 @@ import moment from 'moment';
 import _ from 'underscore';
 import classnames from 'classnames';
 
-const TimeSpan = React.createClass({
-    propTypes: {
-        min: React.PropTypes.object,
-        max: React.PropTypes.object,
-        span: React.PropTypes.number,
-        selected: React.PropTypes.object.isRequired,
-        render: React.PropTypes.func,
-        onSelect: React.PropTypes.func.isRequired
-    },
-    getDefaultProps(){
-        return {
-            min: moment().startOf('day').toDate(),
-            max: moment().endOf('day').toDate(),
-            span: 30 * 60 * 1000,
-            render: value => moment(value).format('HH:mm'),
-            onSelect: () => {
-            }
-        };
-    },
-    getCells(){
-        const min = this.props.min ? moment(this.props.min) : moment().startOf('day'), max = this.props.max ? moment(this.props.max) : moment().endOf('day');
-        let d = moment(min);
-        let cells = [];
-        while (d <= max) {
+class TimeSpan extends React.Component {
+    getCells() {
+        const {min, max, span} = this.props;
+        const dMax = moment(max);
+        let d = moment(min), cells = [];
+        while (d <= dMax) {
             cells.push(d);
-            d = moment(d + this.props.span);
+            d = moment(d + span);
         }
         return cells;
-    },
-    handleSelect(value){
+    }
+
+    handleSelect(value) {
         this.props.onSelect(value.toDate());
-    },
-    render(){
-        const cells = this.getCells();
+    }
+
+    render() {
+        const cells = this.getCells(), {selected, render} = this.props;
 
         return (
             <div className="gm-time-span">
                 {_.map(cells, (value, i) => <div key={i} className={classnames("gm-time-span-cell", {
-                    active: +value === +this.props.selected
-                })} onClick={this.handleSelect.bind(this, value)}>{this.props.render(value.toDate())}</div>)}
+                    active: +value === +selected
+                })} onClick={this.handleSelect.bind(this, value)}>{render(value.toDate())}</div>)}
             </div>
         );
     }
-});
+}
+
+TimeSpan.propTypes = {
+    min: React.PropTypes.object,
+    max: React.PropTypes.object,
+    span: React.PropTypes.number,
+    selected: React.PropTypes.object,
+    render: React.PropTypes.func,
+    onSelect: React.PropTypes.func
+};
+TimeSpan.defaultProps = {
+    min: moment().startOf('day').toDate(),
+    max: moment().endOf('day').toDate(),
+    span: 30 * 60 * 1000,
+    render: value => moment(value).format('HH:mm'),
+    onSelect: () => {
+    }
+};
 
 export default TimeSpan;
