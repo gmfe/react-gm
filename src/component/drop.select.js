@@ -51,14 +51,14 @@ class DropSelect extends React.Component {
                 </li>;
         } else {
             coolList = list.map((rowData, rowIndex) => {
-                const row = columns.map(col => {
+                const row = columns.map((col, index) => {
                     const field = col.field, value = rowData[field];
                     if (col.render) {
                         let val = col.render(value, rowData, rowIndex);
-                        return <div className="gm-ellipsis" style={{flex: '1'}} key={value + field}
+                        return <div className="gm-ellipsis" style={{flex: '1'}} key={index}
                                     title={val}>{val}</div>;
                     } else {
-                        return <div className="gm-ellipsis" key={value + field} title={value}>{value}</div>;
+                        return <div className="gm-ellipsis" key={index} title={value}>{value}</div>;
                     }
                 });
                 const actionDom = actions.map((action, index) => {
