@@ -90,7 +90,7 @@
 .gm-calendar {
   width: 198px;
   overflow: hidden;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 4px;
   position: relative;
   background: white;
@@ -121,7 +121,7 @@
 .gm-calendar-months {
   position: absolute;
   top: 24px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   right: 5px;
   bottom: 5px;
   left: 5px;
@@ -421,7 +421,7 @@
   width: 296px;
   overflow: hidden;
   display: inline-block;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 4px;
   background: white;
   position: relative;
@@ -624,7 +624,7 @@
 }
 .option-item {
   cursor: pointer;
-  border-bottom: 1px #e3e3e3 solid;
+  border-bottom: 1px solid #ccc;
 }
 .option-item:hover {
   background-color: #f5f5f5;
@@ -651,17 +651,16 @@
   z-index: 1;
   top: 100%;
   left: 0;
+  margin: 1px 0 0 0;
   min-width: 100%;
   max-width: 300px;
   max-height: 300px;
-  margin: 0;
   padding: 0;
   display: none;
   overflow-y: auto;
   background: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 0;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   box-sizing: border-box;
 }
 .gm-dropdown li {
@@ -823,7 +822,6 @@
 .gm-search-select {
   position: relative;
   border: 1px solid #ccc;
-  border-radius: 4px;
   background-color: white;
 }
 .gm-search-select .gm-search-select-input {
@@ -857,6 +855,7 @@
   left: 0 !important;
   top: 0;
   right: 0;
+  margin-top: 8px;
 }
 .gm-search-select .gm-search-select-overlay .arrow {
   display: none;
@@ -906,8 +905,9 @@
           transform: rotate(180deg);
 }
 .gm-cascader-overlay.popover {
-  margin-top: 5px;
+  margin-top: 1px;
   max-width: none;
+  padding: 0;
   left: 0 !important;
 }
 .gm-cascader-overlay .popover-content {
@@ -921,7 +921,7 @@
 }
 .gm-cascader-overlay .gm-cascader-list .list-group {
   margin: 0;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #ccc;
   min-width: 100px;
   overflow: auto;
 }
@@ -936,8 +936,7 @@
 }
 .gm-cascader-select {
   position: relative;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #ccc;
   background-color: white;
 }
 .gm-cascader-select .gm-cascader-select-input {
@@ -965,6 +964,9 @@
 }
 .gm-cascader-select .gm-cascader-select-input .gm-cascader-input .glyphicon {
   right: 0;
+}
+.gm-cascader-select .gm-cascader-overlay.popover {
+  margin-top: 8px;
 }
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;

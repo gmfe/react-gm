@@ -3052,21 +3052,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	                );
 	            } else {
 	                coolList = list.map(function (rowData, rowIndex) {
-	                    var row = columns.map(function (col) {
+	                    var row = columns.map(function (col, index) {
 	                        var field = col.field,
 	                            value = rowData[field];
 	                        if (col.render) {
 	                            var val = col.render(value, rowData, rowIndex);
 	                            return _react2.default.createElement(
 	                                'div',
-	                                { className: 'gm-ellipsis', style: { flex: '1' }, key: value + field,
+	                                { className: 'gm-ellipsis', style: { flex: '1' }, key: index,
 	                                    title: val },
 	                                val
 	                            );
 	                        } else {
 	                            return _react2.default.createElement(
 	                                'div',
-	                                { className: 'gm-ellipsis', key: value + field, title: value },
+	                                { className: 'gm-ellipsis', key: index, title: value },
 	                                value
 	                            );
 	                        }
@@ -4070,27 +4070,24 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var getPropsSelected = function getPropsSelected(props) {
+	    if (props.multiple) {
+	        if (props.selected) {
+	            return props.selected;
+	        } else {
+	            return [];
+	        }
+	    } else {
+	        if (props.selected) {
+	            return [props.selected];
+	        } else {
+	            return [];
+	        }
+	    }
+	};
+
 	var SearchSelect = function (_React$Component) {
 	    _inherits(SearchSelect, _React$Component);
-
-	    _createClass(SearchSelect, [{
-	        key: 'getPropsSelected',
-	        value: function getPropsSelected(props) {
-	            if (props.multiple) {
-	                if (props.selected) {
-	                    return props.selected;
-	                } else {
-	                    return [];
-	                }
-	            } else {
-	                if (props.selected) {
-	                    return [props.selected];
-	                } else {
-	                    return [];
-	                }
-	            }
-	        }
-	    }]);
 
 	    function SearchSelect(props) {
 	        _classCallCheck(this, SearchSelect);
@@ -4102,7 +4099,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.state = {
 	            value: '',
 	            in: false,
-	            selected: _this.getPropsSelected(props),
+	            selected: getPropsSelected(props),
 	            id: '_gm_search_select_id' + (Math.random() + '').slice(2)
 	        };
 	        return _this;
@@ -4112,7 +4109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            this.setState({
-	                selected: this.getPropsSelected(nextProps)
+	                selected: getPropsSelected(nextProps)
 	            });
 	        }
 	    }, {
@@ -4124,8 +4121,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _reactBootstrap.Popover,
 	                {
 	                    id: this.state.id,
-	                    className: 'gm-search-select-overlay'
-	                },
+	                    className: 'gm-search-select-overlay' },
 	                this.props.list.length > 0 ? _react2.default.createElement(
 	                    'div',
 	                    { className: 'list-group', style: { maxHeight: this.props.listMaxHeight } },
@@ -4163,7 +4159,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            value.name,
 	                            _react2.default.createElement(
 	                                'button',
-	                                { type: 'button', className: 'close',
+	                                { type: 'button',
+	                                    className: 'close',
 	                                    onClick: _this3.handleClose.bind(_this3, value) },
 	                                '×'
 	                            )
@@ -4181,8 +4178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                container: this,
 	                                overlay: this.renderOverlay(),
 	                                onEnter: this.handleEnter.bind(this),
-	                                onExit: this.handleExit.bind(this)
-	                            },
+	                                onExit: this.handleExit.bind(this) },
 	                            _react2.default.createElement('input', {
 	                                ref: 'target',
 	                                type: 'text',
@@ -4285,8 +4281,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	SearchSelect.propTypes = {
-	    selected: _react.PropTypes.any,
 	    list: _react.PropTypes.array.isRequired,
+	    selected: _react.PropTypes.any,
 	    onSearch: _react.PropTypes.func.isRequired,
 	    onSelect: _react.PropTypes.func.isRequired,
 	    delay: _react.PropTypes.number,
@@ -4294,6 +4290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    multiple: _react.PropTypes.bool,
 	    placeholder: _react.PropTypes.string
 	};
+
 	SearchSelect.defaultProps = {
 	    value: '',
 	    listMaxHeight: '250px',
@@ -4301,6 +4298,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    multiple: false,
 	    placeholder: ''
 	};
+
 	exports.default = SearchSelect;
 
 /***/ },
