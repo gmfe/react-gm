@@ -5,12 +5,13 @@ import {
     Dialog
 } from '../../src/index';
 
-// tip
-var TipWrap = React.createClass({
-    getInitialState: function () {
-        return {};
-    },
-    render: function () {
+class TipWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = ::this.handleClick;
+    }
+
+    render() {
         return (
             <div>
                 <div>
@@ -23,18 +24,21 @@ var TipWrap = React.createClass({
                 <Tip type="success" title="错误">啊啊啊</Tip>
             </div>
         );
-    },
-    handleClick: function () {
+    }
+
+    handleClick() {
         Tip.success({
             children: '需要用户自行关闭的',
-            time: 0
+            time: 0,
+            onClose: () => console.log('tip closed by user')
         });
         Tip.info({
-            children: '提示啦,提示啦'
+            children: '提示啦,提示啦',
+            onClose: () => console.log('tip closed')
         });
         Tip.info('提示啦，提示啦');
     }
-});
+}
 
 
 // nprogress
@@ -56,15 +60,22 @@ var NProgressWrap = React.createClass({
     }
 });
 
-var DialogWrap = React.createClass({
-    getInitialState(){
-        return {
+class DialogWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             show: false,
             show2: false,
             bsSize: 'sm'
         };
-    },
-    handleAlert(){
+        this.handleAlert = ::this.handleAlert;
+        this.handleConfirm = ::this.handleConfirm;
+        this.handlePrompt = ::this.handlePrompt;
+        this.handleComponent = ::this.handleComponent;
+        this.handleComponentSize = ::this.handleComponentSize;
+    }
+
+    handleAlert() {
         Dialog.alert({
             children: 'adsf'
         }).then(() => {
@@ -72,8 +83,9 @@ var DialogWrap = React.createClass({
         }, () => {
             console.log('reject');
         });
-    },
-    handleConfirm(){
+    }
+
+    handleConfirm() {
         Dialog.confirm({
             children: 'asdf',
             title: 'title'
@@ -82,8 +94,9 @@ var DialogWrap = React.createClass({
         }, () => {
             console.log('reject');
         });
-    },
-    handlePrompt(){
+    }
+
+    handlePrompt() {
         Dialog.prompt({
             children: 'sssss',
             title: 'title',
@@ -97,20 +110,23 @@ var DialogWrap = React.createClass({
         }, () => {
             console.log('reject');
         });
-    },
-    handleComponent(){
+    }
+
+    handleComponent() {
         this.setState({
             show: !this.state.show
         });
-    },
-    handleComponentSize(bsSize){
+    }
+
+    handleComponentSize(bsSize) {
         console.log(bsSize);
         this.setState({
             show2: !this.state.show2,
             bsSize
         });
-    },
-    render: function () {
+    }
+
+    render() {
         return (
             <div>
                 <div>
@@ -134,10 +150,6 @@ var DialogWrap = React.createClass({
                         Component
                         size sm(default)
                     </button>
-                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'xs')}>toggle
-                        Component
-                        size xs
-                    </button>
                 </div>
                 <Dialog show={this.state.show} onCancel={this.handleComponent}>asdfa</Dialog>
                 <Dialog show={this.state.show2} bsSize={this.state.bsSize}
@@ -145,23 +157,25 @@ var DialogWrap = React.createClass({
             </div>
         );
     }
-});
+}
 
-const Component = React.createClass({
-    render(){
+
+class Component extends React.Component {
+    render() {
         return (
             <div>
-                <h1>Tip</h1>
-                <TipWrap></TipWrap>
+                <h1 id="overlay">浮层</h1>
+                <h2 id="Tip">Tip</h2>
+                <TipWrap/>
                 <hr/>
-                <h1>Dialog</h1>
-                <DialogWrap></DialogWrap>
+                <h2 id="Dialog">Dialog</h2>
+                <DialogWrap/>
                 <hr/>
-                <h1>NProgress</h1>
-                <NProgressWrap></NProgressWrap>
+                <h2 id="NProgress">NProgress</h2>
+                <NProgressWrap/>
             </div>
         );
     }
-});
+}
 
 export default Component;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import moment from 'moment';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 import Calendar from './calendar.js';
@@ -65,11 +65,11 @@ class DateRangePicker extends React.Component {
 }
 
 DateRangePicker.propTypes = {
-    begin: React.PropTypes.object.isRequired,
-    end: React.PropTypes.object.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    inputClassName: React.PropTypes.string,
-    target: React.PropTypes.func
+    begin: PropTypes.object.isRequired,
+    end: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired,
+    inputClassName: PropTypes.string,
+    target: PropTypes.func
 };
 
 export default DateRangePicker;

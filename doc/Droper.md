@@ -1,68 +1,23 @@
-# 上传文件
-```js
-import ReactGM from 'react-gm';
-import 'react-gm.css';
+上传文件
 
-var Droper = ReactGM.Droper;
+![](http://7xlnio.com1.z0.glb.clouddn.com/16-7-31/16118211.jpg)
 
-var Upload = React.createClass({
-    render: function () {
-        return (
-            <Droper className="gm-droper-wrap" onDrop={this.handleDrop}>
-                <buttonb className="btn btn-sm">上传</buttonb>
-            </Droper>
-        )
-    },
-    handleDrop: function (files, event) {
-        ReactGM.Util.Request('xxxx/url/xxx').data({
-            file: files[0] // file key 是参数名。问后台要
-        }).post().then(function(){
-            // success
-        });
-    }
-});
+## 组件介绍
 
+### Droper
+
+- `multiple (bool)` 是否多选，默认false。 **Android微信**不支持多选，内部已经判断是微信就不开放多选功能
+- `accept (string)` 选择的类型，比如图片 `image/*`，excel `.xlsx`，具体见HTML5规范
+- `onDrop (func)` 历史原因，名字就这样定了，选择图片后触发函数
+- `classNames (string)` 如果不想用默认ui，传进来自定义
+- `children` 提供自定义选择图片的触发区域
+
+```jsx
+<Droper onDrop={this.handleDrop} accept="image/*"/>
+
+<Droper className="gm-droper-wrap" onDrop={this.handleDrop} accept=".xlsx">
+    <button className="btn btn-default">upload</button>
+</Droper>
 ```
 
-# 使用
-没什么好解释的，看代码
-```js
-/*
-Droper.propTypes = {
-    onDrop: React.PropTypes.func,
-    onDropAccepted: React.PropTypes.func,
-    onDropRejected: React.PropTypes.func,
-    onDragEnter: React.PropTypes.func,
-    onDragLeave: React.PropTypes.func,
-
-    disableClick: React.PropTypes.bool,
-    multiple: React.PropTypes.bool,
-    accept: React.PropTypes.string
-};
-
-其中accept可以是
-image/*
-.xlsx
-...等等
-
-其中gm-droper-block会包围里面的元素。 
-*/
-
-var Droper = ReactGM.Droper;
-
-var DroperWrap = React.createClass({
-    render: function () {
-        return (
-            <div>
-                <Droper onDrop={this.handleDrop} accept="image/*"></Droper>
-                <Droper className="gm-droper-wrap" onDrop={this.handleDrop} accept=".xlsx">
-                    <button className="btn btn-default">upload</button>
-                </Droper>
-            </div>
-        );
-    },
-    handleDrop: function (files, event) {
-        console.log(arguments);
-    }
-});
-```
+也许你看了源码，还有很多参数，请忽略（droper是copy过来的）

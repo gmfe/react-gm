@@ -1,19 +1,18 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Util from 'gm-util';
 
 class Droper extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.onClick = this.onClick.bind(this);
-        this.onDragEnter = this.onDragEnter.bind(this);
-        this.onDragLeave = this.onDragLeave.bind(this);
-        this.onDragOver = this.onDragOver.bind(this);
-        this.onDrop = this.onDrop.bind(this);
-
+    constructor(props) {
+        super(props);
         this.state = {
             isDragActive: false,
             isWX: Util.is.weixin()
         };
+        this.onClick = ::this.onClick;
+        this.onDragEnter = ::this.onDragEnter;
+        this.onDragLeave = ::this.onDragLeave;
+        this.onDragOver = ::this.onDragOver;
+        this.onDrop = ::this.onDrop;
     }
 
     componentDidMount() {
@@ -51,11 +50,8 @@ class Droper extends React.Component {
 
         ++this.enterCounter;
 
-        // This is tricky. During the drag even the dataTransfer.files is null
-        // But Chrome implements some drag store, which is accesible via dataTransfer.items
         var dataTransferItems = e.dataTransfer && e.dataTransfer.items ? e.dataTransfer.items : [];
 
-        // Now we need to convert the DataTransferList to Array
         var itemsArray = Array.prototype.slice.call(dataTransferItems);
         var allFilesAccepted = this.allFilesAccepted(itemsArray);
 
@@ -93,7 +89,8 @@ class Droper extends React.Component {
     onDrop(e) {
         e.preventDefault();
 
-        // Reset the counter along with the drag on a drop.
+        const {multiple, onDrop, onDropAccepted, onDropRejected} = this.props;
+
         this.enterCounter = 0;
 
         this.setState({
@@ -102,7 +99,7 @@ class Droper extends React.Component {
         });
 
         var droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
-        var max = this.props.multiple ? droppedFiles.length : 1;
+        var max = multiple ? droppedFiles.length : 1;
         var files = [];
 
         for (var i = 0; i < max; i++) {
@@ -111,25 +108,23 @@ class Droper extends React.Component {
             files.push(file);
         }
 
-        if (this.props.onDrop) {
-            this.props.onDrop(files, e);
+        if (onDrop) {
+            onDrop(files, e);
         }
 
         if (this.allFilesAccepted(files)) {
-            if (this.props.onDropAccepted) {
-                this.props.onDropAccepted(files, e);
+            if (onDropAccepted) {
+                onDropAccepted(files, e);
             }
         } else {
-            if (this.props.onDropRejected) {
-                this.props.onDropRejected(files, e);
+            if (onDropRejected) {
+                onDropRejected(files, e);
             }
         }
     }
 
     onClick() {
-        if (!this.props.disableClick) {
-            this.open();
-        }
+        this.open();
     }
 
     open() {
@@ -139,33 +134,29 @@ class Droper extends React.Component {
     }
 
     render() {
-        var className = 'gm-droper ';
-        className += (this.props.className ? this.props.className : ' gm-droper-default ');
+        const {className, children, accept, multiple} = this.props;
+        const cn = className ? className : 'gm-droper-default';
 
         return (
-            <div>
-                <div
-                    className={className}
-                    onClick={this.onClick}
-                    onDragEnter={this.onDragEnter}
-                    onDragOver={this.onDragOver}
-                    onDragLeave={this.onDragLeave}
-                    onDrop={this.onDrop}
-                >
-                    {this.props.children}
-                </div>
+            <div className="gm-droper">
+                <div className={cn}
+                     onClick={this.onClick}
+                     onDragEnter={this.onDragEnter}
+                     onDragOver={this.onDragOver}
+                     onDragLeave={this.onDragLeave}
+                     onDrop={this.onDrop}>{children}</div>
                 {this.state.isWX ? <input
                     type="file"
                     ref="fileInput"
                     className="gm-droper-input"
-                    accept={this.props.accept}
+                    accept={accept}
                     onChange={this.onDrop}
                 /> : <input
                     type="file"
                     ref="fileInput"
                     className="gm-droper-input"
-                    multiple={this.props.multiple}
-                    accept={this.props.accept}
+                    multiple={multiple}
+                    accept={accept}
                     onChange={this.onDrop}
                 />}
             </div>
@@ -174,20 +165,20 @@ class Droper extends React.Component {
 }
 
 Droper.defaultProps = {
-    disableClick: false,
-    multiple: true
+    multiple: false
 };
 
 Droper.propTypes = {
-    onDrop: React.PropTypes.func,
-    onDropAccepted: React.PropTypes.func,
-    onDropRejected: React.PropTypes.func,
-    onDragEnter: React.PropTypes.func,
-    onDragLeave: React.PropTypes.func,
+    onDrop: PropTypes.func,
+    onDropAccepted: PropTypes.func,
+    onDropRejected: PropTypes.func,
+    onDragEnter: PropTypes.func,
+    onDragLeave: PropTypes.func,
 
-    disableClick: React.PropTypes.bool,
-    multiple: React.PropTypes.bool,
-    accept: React.PropTypes.string
+    multiple: PropTypes.bool,
+    accept: PropTypes.string,
+
+    className: PropTypes.string
 };
 
 export default Droper;

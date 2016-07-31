@@ -10,7 +10,7 @@
 
 ![](http://7xlnio.com1.z0.glb.clouddn.com/16-7-29/99481028.jpg)
 
-- `data (array|isRequired)` 格式如上面的data，value 是值，name是值的展现，children是其下一级。
+- `data (array|isRequired)` 格式如上面的data，`value` 是值，`name`是值的展现，`children`是其下一级。
 - `value (array)` 一个数组或者null，表示选中了那些数据。 ['0']则选择了广东，['0', '01']则选择了广东，深圳
 - `defaultValue` 同上
 - `onChange (func)` 提供和value一样的数组
@@ -64,8 +64,8 @@ Cascader 的多选版本
 - `selected (array)` 同Cascader.value的数组版本[Cascader.value]
 - `onSelect (func|isRequired)` 提供和selected一样的数组
 - `multiple (bool)` 是否支持多选
-- `placeholder` (string)
-- `selectRender` (func) 自定义已选择ui
+- `placeholder (string)`
+- `selectRender (func)` 自定义已选择ui
 
 ```
 // 单选版本

@@ -6,10 +6,10 @@
 
 ### DatePicker
 
-- date (object) Date对象
-- onChange (func|isRequired) 选择后回调，参数是Date对象
-- inputClassName 自定义input的样子
-- target (func) 触发日期选择的目标，返回一个ref
+- `date (object)` Date对象
+- `onChange (func|isRequired)` 选择后回调，参数是Date对象
+- `inputClassName (string)` 自定义input的样子
+- `target (func)` 触发日期选择的目标，返回一个ref
 
 ```jsx
 <DatePicker date={this.state.date}
@@ -34,10 +34,17 @@
 
 ### DaterangePicker
 
-没多大区别，date 缓存 begin 和 end 而已。
+没多大区别，`date` 换成 `begin` 和 `end` 而已。
 
-- begin
-- end
-- onChange
-- inputClassName
-- target
+- `begin (object|isRequired)`
+- `end (object|isRequired)`
+- `onChange (func|isRequired)`
+- `inputClassName (string)`
+- `target (func)`
+
+```jsx
+<DateRangePicker begin={this.state.begin}
+                 end={this.state.end}
+                 onChange={this.handleChange}
+                 inputClassName="form-control input-sm"/>
+```

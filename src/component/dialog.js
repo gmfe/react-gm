@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import {Modal} from 'react-bootstrap';
+
+const noop = () => {
+};
 
 // 搞的复杂了，后续要补充文档
 
@@ -12,8 +15,8 @@ if (!dialogContainer) {
     dialogContainer.id = dialogContainerId;
     document.body.appendChild(dialogContainer);
 }
-
-const DialogStatics = {
+let DialogStatics = {};
+DialogStatics = {
     alert(options){
         options.type = 'alert';
         return DialogStatics.dialog(options);
@@ -27,6 +30,7 @@ const DialogStatics = {
         return DialogStatics.dialog(options);
     },
     dialog(options){
+        options = Object.assign({}, options, {bsSize: 'sm'});
         return new Promise((resolve, reject) => {
             let div = document.createElement('div');
             dialogContainer.appendChild(div);
@@ -41,40 +45,33 @@ const DialogStatics = {
     }
 };
 
-const Dialog = React.createClass({
-    statics: DialogStatics,
-    getDefaultProps(){
-        return {
-            show: false,
-            title: '提示',
-            onCancel: () => {
-            },
-            onOK: () => {
-            },
-            bsSize: 'sm',
-            noCancel: false, // 由于涉及原因只能这样搞了，传true 来屏蔽按钮
-            noOK: false
+class Dialog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            show: props.show
         };
-    },
-    getInitialState(){
-        return {
-            show: this.props.show
-        };
-    },
-    componentWillReceiveProps(nextProps){
+        this.handleCancel = ::this.handleCancel;
+        this.handleOk = ::this.handleOk;
+        this.handleEnter = ::this.handleEnter;
+    }
+
+    componentWillReceiveProps(nextProps) {
         if ('show' in nextProps) {
             this.setState({
                 show: nextProps.show
             });
         }
-    },
-    handleCancel(){
+    }
+
+    handleCancel() {
+        this.props.onCancel();
         this.setState({
             show: false
         });
-        this.props.onCancel();
-    },
-    handleOk(){
+    }
+
+    handleOk() {
         const result = this.props.onOK(this.props.type === 'prompt' ? this.refs.input.value : undefined);
         if (result === false) {
             return;
@@ -84,34 +81,37 @@ const Dialog = React.createClass({
                 show: false
             });
         });
-    },
-    handleEnter(event){
+    }
+
+    handleEnter(event) {
         if (event.keyCode === 13) {
             this.handleOk();
         }
-    },
-    render(){
+    }
+
+    render() {
+        const {bsSize, title, children, type, promptDefaultValue, noCancel, noOK} = this.props;
         return (
-            <Modal show={this.state.show} onHide={this.handleCancel} bsSize={this.props.bsSize}>
+            <Modal show={this.state.show} onHide={this.handleCancel} bsSize={bsSize}>
                 <Modal.Header closeButton>
-                    {this.props.title}
+                    {title}
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        {this.props.children}
-                        {this.props.type === 'prompt' && (
-                            <input autoFocus defaultValue={this.props.promptDefaultValue} ref="input" type="text"
+                        {children}
+                        {type === 'prompt' && (
+                            <input autoFocus defaultValue={promptDefaultValue} ref="input" type="text"
                                    style={{display: 'block', width: '100%'}}
                                    onKeyDown={this.handleEnter}/>
                         )}
                     </div>
                     <div className="gm-gap10"></div>
                     <div className="text-right">
-                        {(this.props.type !== 'alert' && !this.props.noCancel) && (
+                        {(type !== 'alert' && !noCancel) && (
                             <button className="btn btn-default" onClick={this.handleCancel}>取消</button>
                         )}
                         <div className="gm-gap10"></div>
-                        {!this.props.noOK && (
+                        {!noOK && (
                             <button className="btn btn-primary" onClick={this.handleOk}>确定</button>
                         )}
                     </div>
@@ -119,7 +119,28 @@ const Dialog = React.createClass({
             </Modal>
         );
     }
-});
+}
+Object.assign(Dialog, DialogStatics);
 
+Dialog.propTypes = {
+    show: PropTypes.bool.isRequired,
+    title: PropTypes.string,
+    onCancel: PropTypes.func,
+    onOK: PropTypes.func,
+    bsSize: PropTypes.string,
+    noCancel: PropTypes.bool,
+    noOK: PropTypes.bool,
+    promptDefaultValue: PropTypes.string
+};
+Dialog.defaultProps = {
+    show: false,
+    title: '提示',
+    type: 'confirm',
+    onCancel: noop,
+    onOK: noop,
+    bsSize: 'md',
+    noCancel: false, // 由于涉及原因只能这样搞了，传true 来屏蔽按钮
+    noOK: false
+};
 
 export default Dialog;

@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 
 class Flex extends React.Component {
-
     render() {
         const {
             flex,
@@ -68,8 +67,8 @@ Flex.propTypes = {
     flex: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
     auto: PropTypes.bool,
     none: PropTypes.bool,
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    width: PropTypes.string,
+    height: PropTypes.string,
     row: PropTypes.bool,
     column: PropTypes.bool,
     wrap: PropTypes.bool,

@@ -28,7 +28,7 @@ const list = [{
 
 - `list (Array|isRequired)` 是列表的数据，最好是数组。 当然有人没注意传了obj（非常不推荐）。
 - `loading (bool)` true显示loading状态，false显示数据
-- `enableEmptyTip (bool, string, element)` true则显示默认的“没有数据”文案，其他值string or element则直接显示 
+- `enableEmptyTip (bool|string|element)` true则显示默认的“没有数据”文案，其他值string or element则直接显示 
 
 ```jsx
 // 一般用法
@@ -109,7 +109,7 @@ SheetColumn的顺序决定table列的顺序
 
 行的操作。Sheet会自动放到表格最前列
 
-一但用到SheetSelect，就约定了数据eList中的_gm_select字段，_gm_select为bool是选中。
+一但用到SheetSelect，就约定了数据eList中的`_gm_select`字段，`_gm_select`为bool是选中。
 onSelect当选择一行时触发。
 onSelectAll当选择所有的时候触发。
 需要根据select事件自动修改_gm_select属性。

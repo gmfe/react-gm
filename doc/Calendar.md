@@ -6,8 +6,8 @@
 
 ### Calendar
 
-- selected (object) 一个Date对象
-- onSelect (func) 回调，提供已选对象回来
+- `selected (object)` 一个Date对象
+- `onSelect (func)` 回调，提供已选日期回来
 
 ```jsx
 class CalendarWrap extends React.Component {

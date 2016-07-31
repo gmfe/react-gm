@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
+const noop = () => {
+};
 
-var tipContainerId = '_gm_tips_container' + (Math.random() + '').slice(2);
-var tipsContainer = document.getElementById(tipContainerId);
+const tipContainerId = '_gm_tips_container' + (Math.random() + '').slice(2);
+let tipsContainer = document.getElementById(tipContainerId);
 if (!tipsContainer) {
     tipsContainer = document.createElement('div');
     tipsContainer.className = 'gm-tips';
@@ -11,10 +13,10 @@ if (!tipsContainer) {
     document.body.appendChild(tipsContainer);
 }
 
-var TipStatics = {
+const TipStatics = {
     tip: function (options) {
-        var _b_onClose = options.onClose;
-        var div = document.createElement('div');
+        const _b_onClose = options.onClose;
+        let div = document.createElement('div');
         div.className = 'gm-tips-cell';
         tipsContainer.appendChild(div);
 
@@ -64,55 +66,69 @@ var TipStatics = {
     }
 };
 
-var TipOverlay = React.createClass({
-    getDefaultProps: function () {
-        return {
-            time: 3000
-        };
-    },
-    render: function () {
+class TipOverlay extends React.Component {
+    constructor(props) {
+        super(props);
+        this.timer = null;
+        this.hasClosed = false;
+        this.handleClose = ::this.handleClose;
+    }
+
+    render() {
+        const {title, type, children} = this.props;
         return (
             <div ref="tipOverlay" className="animated fadeInRight">
-                <Tip key="tip" title={this.props.title} type={this.props.type}
-                     onClose={this.handleClose}>{this.props.children}</Tip>
+                <Tip title={title}
+                     type={type}
+                     onClose={this.handleClose}>
+                    {children}
+                </Tip>
             </div>
         );
-    },
-    componentDidMount: function () {
-        var t = this;
-        if (t.props.time) {
-            t.timer = setTimeout(function () {
-                t.fadeOut();
-            }, t.props.time);
-        }
-    },
-    componentWillUnmount: function () {
-        clearTimeout(this.timer);
-    },
-    handleClose: function () {
-        this.fadeOut();
-    },
-    fadeOut: function () {
-        var t = this;
-        if (!t.hasClosed) {
-            t.hasClosed = true;
-            t.props.onClose();
+    }
+
+    componentDidMount() {
+        const {time} = this.props;
+        if (time) {
+            this.timer = setTimeout(()=> this.fadeOut(), time);
         }
     }
-});
 
-var Tip = React.createClass({
-    statics: TipStatics,
-    getDefaultProps: function () {
-        return {
-            title: '',
-            type: 'info',
-            onClose: function () {
-            }
-        };
-    },
-    render: function () {
-        var iconClassName = {
+    componentWillUnmount() {
+        clearTimeout(this.timer);
+    }
+
+    handleClose() {
+        this.fadeOut();
+    }
+
+    fadeOut() {
+        if (!this.hasClosed) {
+            this.hasClosed = true;
+            this.props.onClose();
+        }
+    }
+}
+TipOverlay.PropTypes = {
+    title: PropTypes.string,
+    type: PropTypes.string,
+    onClose: PropTypes.func,
+    time: PropTypes.number
+};
+
+TipOverlay.defaultProps = {
+    time: 3000
+};
+
+class Tip extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleClose = ::this.handleClose;
+    }
+
+    render() {
+        const {title, type, children} = this.props;
+        const iconClassName = {
             success: 'glyphicon glyphicon-ok-sign',
             info: 'glyphicon glyphicon-info-sign',
             warning: 'glyphicon glyphicon-exclamation-sign',
@@ -121,18 +137,35 @@ var Tip = React.createClass({
 
         return (
             <div className="gm-tip panel panel-default">
-                <button type="button" className="close" onClick={this.handleClose}><span>&times;</span></button>
-                <i className={"text-" + this.props.type + ' ' + iconClassName[this.props.type]}></i>
+                <button type="button" className="close" onClick={this.handleClose}>
+                    <span>&times;</span>
+                </button>
+                <i className={"text-" + type + ' ' + iconClassName[type]}/>
                 <div className="panel-body">
-                    {this.props.title ? <div><strong>{this.props.title}</strong></div> : undefined}
-                    {this.props.children}
+                    {title ? <div><strong>{title}</strong></div> : undefined}
+                    {children}
                 </div>
             </div>
         );
-    },
-    handleClose: function () {
+    }
+
+    handleClose() {
         this.props.onClose();
     }
-});
+}
+
+Tip.propTypes = {
+    title: PropTypes.string,
+    type: PropTypes.string,
+    onClose: PropTypes.func
+};
+
+Tip.defaultProps = {
+    title: '',
+    type: 'info',
+    onClose: noop
+};
+
+Object.assign(Tip, TipStatics);
 
 export default Tip;

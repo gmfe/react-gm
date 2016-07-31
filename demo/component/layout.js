@@ -3,8 +3,8 @@ import {
     Flex
 } from '../../src/index';
 
-var FlexWrap = React.createClass({
-    render(){
+class FlexWrap extends React.Component {
+    render() {
         return (
             <Flex column height="200px">
                 <Flex>top</Flex>
@@ -19,17 +19,18 @@ var FlexWrap = React.createClass({
             </Flex>
         );
     }
-});
+}
 
-const Component = React.createClass({
-    render(){
+class Component extends React.Component {
+    render() {
         return (
             <div>
-                <h1>Flex</h1>
-                <FlexWrap></FlexWrap>
+                <h1 id="layout">布局</h1>
+                <h2 id="Flex">Flex</h2>
+                <FlexWrap/>
             </div>
         );
     }
-});
+}
 
 export default Component;
