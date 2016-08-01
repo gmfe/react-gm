@@ -7,11 +7,11 @@ class Pagination extends React.Component {
     }
 
     render() {
-        var data = Object.assign({}, this.props.data);
+        let data = Object.assign({}, this.props.data);
 
         data.index = data.offset / data.limit + 1;
 
-        var offset = 2,
+        let offset = 2,
             pages = [],
             all = Math.ceil(data.count / data.limit),
             begin = Math.max(data.index - offset, 1),
@@ -25,7 +25,7 @@ class Pagination extends React.Component {
             }
         }
 
-        for (var i = begin; i <= end; i++) {
+        for (let i = begin; i <= end; i++) {
             pages.push(i);
         }
 

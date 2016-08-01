@@ -60,19 +60,18 @@ const Component = React.createClass({
                 <h2 id="switch">Switch</h2>
                 <div>
                     <div>目前Switch的长度有限，所以checkedChildren unCheckedChildren 不能太多字</div>
-                    <Switch
-                        defaultChecked={true}
-                        checkedChildren={"是"}
-                        unCheckedChildren={"否"}/>
-                    <Switch
-                        checked={this.state.checked}
-                        checkedChildren={"是"}
-                        unCheckedChildren={"否"}
-                        onChange={this.handleChange}/>
-                    <Switch
-                        disabled
-                        checkedChildren={"YES"}
-                        unCheckedChildren={"NO"}/>
+                    <Switch defaultChecked={true}
+                            checkedChildren={"是"}
+                            unCheckedChildren={"否"}/>
+                    <Switch checked={this.state.checked}
+                            checkedChildren={"是"}
+                            unCheckedChildren={"否"}
+                            onChange={this.handleChange}/>
+                    <Switch disabled
+                            checkedChildren={"YES"}
+                            unCheckedChildren={"NO"}/>
+
+                    <Switch/>
                 </div>
             </div>
         );

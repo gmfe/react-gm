@@ -3,10 +3,7 @@ import './index.less';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-    Util,
-    Storage
-} from '../src/index';
+import {Util} from '../src/index';
 import _ from 'underscore';
 
 import Form from './component/form';
@@ -48,9 +45,6 @@ console.log(Util.param({
     a: 1, b: 2, c: 3
 }));
 
-window.Storage = Storage;
-
-
 function initNav() {
     let div = document.createElement('div');
     div.className = 'doc-nav';
@@ -71,14 +65,13 @@ class App extends React.Component {
     render() {
         return (
             <div className="container">
+                <Layout/>
                 <Select/>
-                <Form/>
                 <Data/>
                 <Date/>
                 <Overlay/>
                 <Upload/>
-                <Layout/>
-                <Date/>
+                <Form/>
             </div>
         );
     }

@@ -77,17 +77,17 @@ class Switch extends React.Component {
 }
 
 Switch.propTypes = {
-    className: PropTypes.string,
     checked: PropTypes.bool,
     defaultChecked: PropTypes.bool,
     disabled: PropTypes.bool,
     checkedChildren: PropTypes.any,
     unCheckedChildren: PropTypes.any,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    className: PropTypes.string
 };
 Switch.defaultProps = {
-    checkedChildren: null,
-    unCheckedChildren: null,
+    checkedChildren: 'ON',
+    unCheckedChildren: 'OFF',
     defaultChecked: false,
     onChange: noop
 };

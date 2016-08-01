@@ -1,15 +1,40 @@
-```javascript
-static propTypes = {
-    selected: PropTypes.any, // 已选择的
-    list: PropTypes.array.isRequired, // 待选择列表，格式靠拢select [{value: 0, name: 'aaa'}]
-    onSearch: PropTypes.func.isRequired, // 输入文字搜索时触发，会延迟 delay ms触发
-    onSelect: PropTypes.func.isRequired, // 选择的时候触发，提供所有所选择的
-    delay: PropTypes.number, 
-    listMaxHeight: PropTypes.string, // 待选择列表的高度，默认 250px
-    multiple: PropTypes.bool, // 是否支持多选，默认false
-    placeholder: PropTypes.string // 输入框的placeholder
-};
+搜索选择组件
+
+![](http://7xlnio.com1.z0.glb.clouddn.com/16-8-1/50788226.jpg)
+
+![](http://7xlnio.com1.z0.glb.clouddn.com/16-8-1/61264044.jpg)
+
+## 组件介绍
+
+### SearchSelect
+
+- `list (array|isRequired)` 搜索待选数据，是过滤后的数据
+- `selected (any)` 选中了什么，`list`中某条数据
+- `onSerch (func|isRequired)` 搜索触发函数，以便过滤重新得出`list`数据。 可以引入`gm-pinyin`库来做拼音搜索
+- `onSelect (func|isRequired)` 选中后触发，提供和`selected`一样的数据结构，一般直接设置`selected`即可
+- `delay (number)` 搜索过程中延迟多少ms才出触发`onSearch`， 默认500
+- `listMaxHeight (string)` 搜索待选数据的高度，默认250px
+- `multiple (bool)` 是否多选，默认false
+- `placeholder (string)`
+
+
+```jsx
+<div style={{width: '300px'}}>
+    <SearchSelect
+        list={this.state.list}
+        selected={this.state.selected}
+        onSearch={this.handleSearch}
+        onSelect={this.handleSelect}
+        placeholder="搜索"/>
+</div>
+
+<div style={{width: '300px'}}>
+    <SearchSelect
+        list={this.state.list}
+        selected={this.state.multipleSelected}
+        onSearch={this.handleSearch}
+        onSelect={this.handleMultipleSelect}
+        multiple
+        placeholder="搜索"/>
+</div>
 ```
-
-具体见demo
-

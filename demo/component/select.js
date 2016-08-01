@@ -230,16 +230,6 @@ class SearchSelectWrap extends React.Component {
         return (
             <div>
                 <h3>单选版本</h3>
-                list(必须)搜索待选数据，传什么就是什么
-
-                selected选中了什么，可为空
-                onSearch(必须)，搜索触发函数，以便过滤重新得出list数据。 可以引入pinyin库来做拼音搜索
-                onSelect(必须)，选中后触发，提供和selected一样的数据结构，一般直接设置selected即可
-
-                delay搜索过程中延迟多少ms才出触发onSearch， 默认500
-                listMaxHeight搜索待选数据的高度，默认250px
-                multiple是否多选，默认false
-                placeholder不用介绍了吧，默认空字符串
                 <div style={{width: '300px'}}>
                     <SearchSelect
                         list={this.state.list}
@@ -408,10 +398,6 @@ class CascaderSelectWrap extends React.Component {
         return (
             <div>
                 <h3>多选</h3>
-                {/*Cascader的多选版本，传入multiple。*/}
-                {/*selectedRender自定义选择后的显示，默认显示和Cascader一样*/}
-                {/*selected同Cascader的value*/}
-                {/*onSelect同Cascader的onChange*/}
                 <CascaderSelect
                     multiple
                     selectedRender={this.selectedRender}
@@ -420,7 +406,6 @@ class CascaderSelectWrap extends React.Component {
                     onSelect={this.handleSelect}/>
 
                 <h3>单选</h3>
-                {/*单选版本，不建议使用(怪怪的)，单选用Cascader就好。*/}
                 <CascaderSelect
                     data={this.state.data}
                     selected={this.state.singleSelected}

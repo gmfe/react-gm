@@ -1,63 +1,70 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import _ from 'underscore';
 
-var PropTypes = React.PropTypes;
+const prefix = '_react-gm_';
 
-var prefix = '_react-gm_';
-
-var Storage = React.createClass({
-    statics: {
-        set: function (key, value) {
-            localStorage.setItem(prefix + key, JSON.stringify(value));
-        },
-        get: function (key) {
-            var v = localStorage.getItem(prefix + key);
-            return v ? JSON.parse(v) : v;
-        },
-        remove: function (key) {
-            localStorage.removeItem(prefix + key);
-        },
-        clear: function () {
-            localStorage.clear();
-        },
-        getAll: function () {
-            var result = {};
-            var key;
-            for(var i = 0; i < localStorage.length ; i ++){
-                key = localStorage.key(i);
-                if(key.startsWith(prefix)){
-                    key = key.slice(prefix.length);
-                    result[key] = Storage.get(key);
-                }
+const StorageStatics = {
+    set: function (key, value) {
+        localStorage.setItem(prefix + key, JSON.stringify(value));
+    },
+    get: function (key) {
+        var v = localStorage.getItem(prefix + key);
+        return v ? JSON.parse(v) : v;
+    },
+    remove: function (key) {
+        localStorage.removeItem(prefix + key);
+    },
+    clear: function () {
+        localStorage.clear();
+    },
+    getAll: function () {
+        var result = {};
+        var key;
+        for (var i = 0; i < localStorage.length; i++) {
+            key = localStorage.key(i);
+            if (key.startsWith(prefix)) {
+                key = key.slice(prefix.length);
+                result[key] = Storage.get(key);
             }
-            return _.keys(result) ? result : null;
         }
-    },
-    propTypes: {
-        name: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array]),
-        autoSave: PropTypes.bool
-    },
-    getDefaultProps: function(){
-        return {
-            useRaw: false,
-            autoSave: true
-        };
-    },
-    save: function(){
+        return _.keys(result) ? result : null;
+    }
+};
+
+class Storage extends React.Component {
+    save() {
         Storage.set(this.props.name, this.props.value);
-    },
-    componentWillUpdate: function(){
-        if(this.props.autoSave){
+    }
+
+    componentWillUpdate() {
+        if (this.props.autoSave) {
             this.save();
         }
-    },
-    componentWillMount: function () {
+    }
+
+    componentWillMount() {
         this.save();
-    },
-    render: function () {
+    }
+
+    render() {
         return null;
     }
-});
+}
+
+Object.assign(Storage, StorageStatics);
+
+Storage.propTypes = {
+    name: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+        PropTypes.array
+    ]),
+    autoSave: PropTypes.bool
+};
+Storage.defaultProps = {
+    useRaw: false,
+    autoSave: true
+};
 
 export default Storage;
