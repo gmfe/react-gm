@@ -6,7 +6,7 @@
 
 ## Switch
 
-目前Switch的长度有限，所以checkedChildren unCheckedChildren 不能太多字
+目前Switch的长度有限，所以`checkedChildren` `unCheckedChildren` 不能太多字
 
 - `checked (bool)`
 - `defaultChecked (bool)` 少用吧，默认`false`
@@ -20,10 +20,12 @@
 <Switch defaultChecked={true}
         checkedChildren={"是"}
         unCheckedChildren={"否"}/>
+        
 <Switch checked={this.state.checked}
         checkedChildren={"是"}
         unCheckedChildren={"否"}
         onChange={this.handleChange}/>
+        
 <Switch disabled
         checkedChildren={"YES"}
         unCheckedChildren={"NO"}/>

@@ -7,7 +7,7 @@
 ### Storage
 
 - `name (string|isRequire)` 存储的key
-- `value (string, object, array)` 存储的数据，不适合存储非常复杂的东西，实际上存的是JSON.stringify(value)，只要符合JSON就可以存储。
+- `value (string, object, array)` 存储的数据，不适合存储非常复杂的东西，实际上存的是`JSON.stringify(value)`，只要符合JSON就可以存储。
 - `autoSave (bool)` 默认`true`，value变化会自动更新保存
 
 ```jsx
