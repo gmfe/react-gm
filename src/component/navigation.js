@@ -1,25 +1,22 @@
 import React from 'react';
 import _ from 'underscore';
 import {Collapse} from 'react-bootstrap';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import Flex from './flex';
 
-let Navigation = React.createClass({
-    getDefaultProps(){
-        return {
-            data: [],
-            select: null,
-            onSelect: () => {
-            }
-        };
-    },
-    getInitialState(){
-        return {
+const noop = () => {
+};
+
+class Navigation extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             data: this.props.data,
             select: this.props.select
         };
-    },
-    processData(){
+    }
+
+    processData() {
         return _.map(this.state.data, value => {
             value.open = value.open || false;
             if (value.sub) {
@@ -32,27 +29,33 @@ let Navigation = React.createClass({
             }
             return value;
         });
-    },
-    componentWillReceiveProps(nextProps){
+    }
+
+    componentWillReceiveProps(nextProps) {
         this.setState({
             select: nextProps.select
         });
-    },
+    }
+
     render() {
         const data = this.processData();
         return (
-            <div className={classnames("gm-navigation", this.props.className)}>
+            <div className={classNames("gm-navigation", this.props.className)}>
                 <ul className="gm-navigation-level1">
                     {_.map(data, value => (
                         <li key={value.key}>
-                            <Flex alignCenter className={"gm-navigation-title" + this.getCurrentClassName(value.key)}>
+                            <Flex alignCenter className={classNames("gm-navigation-title", {
+                                'current': this.state.select === value.key
+                            })}>
                                 <Flex flex onClick={this.handleClick.bind(this, value)}>{value.title}</Flex>
                                 {value.sub && (
-                                    <span
-                                        className={"glyphicon " + (value.open ? 'glyphicon-menu-up' : ' glyphicon-menu-down')}></span>
+                                    <span className={classNames("glyphicon", {
+                                        'glyphicon-menu-up': value.open,
+                                        'glyphicon-menu-down': !value.open
+                                    })}/>
                                 )}
                             </Flex>
-                            {value.sub && (
+                            {value.sub ? (
                                 <Collapse in={value.open}>
                                     <ul className="gm-navigation-level2">
                                         {_.map(value.sub, val => (
@@ -64,34 +67,35 @@ let Navigation = React.createClass({
                                         ))}
                                     </ul>
                                 </Collapse>
-                            )}
+                            ) : undefined}
                         </li>
                     ))}
                 </ul>
             </div>
         );
-    },
-    handleClick(value){
-        if (value.sub) {
-            this.handleToggle(value);
-        } else {
-            this.handleSelect(value);
-        }
-    },
-    handleSelect(value){
-        this.setState({
-            select: value.key
-        });
-        this.props.onSelect(value.key);
-    },
-    handleToggle(value){
-        // 先这样恶心处理吧
-        value.open = !value.open;
-        this.setState(this.state);
-    },
-    getCurrentClassName(key){
-        return this.state.select === key ? ' current ' : ' ';
     }
-});
+
+    componentDidMount() {
+        console.error('Navigation are deprecated!');
+    }
+
+    handleClick(value) {
+        if (value.sub) {
+            value.open = !value.open;
+            this.setState(this.state);
+        } else {
+            this.setState({
+                select: value.key
+            });
+            this.props.onSelect(value.key);
+        }
+    }
+}
+
+Navigation.defaultProps = {
+    data: [],
+    select: null,
+    onSelect: noop
+};
 
 export default Navigation;

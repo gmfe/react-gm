@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import _ from 'underscore';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 class TimeSpan extends React.Component {
     getCells() {
@@ -24,7 +24,7 @@ class TimeSpan extends React.Component {
 
         return (
             <div className="gm-time-span">
-                {_.map(cells, (value, i) => <div key={i} className={classnames("gm-time-span-cell", {
+                {_.map(cells, (value, i) => <div key={i} className={classNames("gm-time-span-cell", {
                     active: +value === +selected
                 })} onClick={this.handleSelect.bind(this, value)}>{render(value.toDate())}</div>)}
             </div>

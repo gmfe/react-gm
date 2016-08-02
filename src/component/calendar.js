@@ -1,93 +1,97 @@
 import React from 'react';
 import moment from 'moment';
+import classNames from 'classnames';
 
-var Day = React.createClass({
-    render: function () {
-        var now = this.props.nowMoment;
-        var m = this.props.moment;
-        var selected = this.props.selected;
+const noop = () => {
+};
 
-        var className = ['gm-calendar-day'];
-        if (now.month() > m.month()) {
-            className.push('gm-calendar-day-old');
-        } else if (now.month() < m.month()) {
-            className.push('gm-calendar-day-new');
-        }
+class Day extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = ::this.handleClick;
+    }
 
-        if (+selected.startOf('day') === +m.startOf('day')) {
-            className.push('gm-calendar-active');
-        }
+    render() {
+        const now = this.props.nowMoment,
+            m = this.props.moment,
+            selected = this.props.selected;
 
-        return (<span className={className.join(' ')} onClick={this.handleClick}>{m.date()}</span>);
-    },
-    handleClick: function () {
+        const cn = classNames('gm-calendar-day', {
+            'gm-calendar-day-old': now.month() > m.month(),
+            'gm-calendar-day-new': now.month() < m.month(),
+            'gm-calendar-active': +selected.startOf('day') === +m.startOf('day')
+        });
+
+        return <span className={cn} onClick={this.handleClick}>{m.date()}</span>;
+    }
+
+    handleClick() {
         this.props.onClick(this.props.moment);
     }
-});
+}
 
-var Calendar = React.createClass({
-    propTypes: {
-        selected: React.PropTypes.object,
-        onSelect: React.PropTypes.func
-    },
-    getDefaultProps: function () {
-        return {
-            onSelect: function () {
-            }
-        };
-    },
-    getInitialState: function () {
-        // 规避  moment(undefined) 有效  moment(null) 无效的场景，统一成null 处理
-        return {
+class Calendar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             selected: this.props.selected ? this.props.selected : null, // 调用方的时间
             moment: this.props.selected ? moment(this.props.selected) : moment(), // 日历内的时间
             isSelectMonth: false,
             weekDays: ['日', '一', '二', '三', '四', '五', '六']
         };
-    },
-    componentWillReceiveProps: function (nextProps) {
+        this.handleSelectMonth = ::this.handleSelectMonth;
+        this.handleSelectDay = ::this.handleSelectDay;
+    }
+
+    componentWillReceiveProps(nextProps) {
         if (nextProps.selected) {
             this.setState({
                 selected: nextProps.selected
             });
         }
-    },
-    handleChangeMonth: function (month) {
+    }
+
+    handleChangeMonth(month, event) {
+        event.preventDefault();
         this.setState({
             moment: this.state.moment.month(month),
             isSelectMonth: false
         });
-    },
-    handleSelectMonth: function () {
+    }
+
+    handleSelectMonth() {
         this.setState({
             isSelectMonth: !this.state.isSelectMonth
         });
-    },
-    handleSelectDay: function (m) {
+    }
+
+    handleSelectDay(m) {
         this.props.onSelect(m.toDate());
-    },
-    renderHead: function () {
-        var m = moment(this.state.moment);
-        var month = m.month();
+    }
+
+    renderHead() {
+        const m = moment(this.state.moment);
+        const month = m.month();
         return (
             <div className="gm-calendar-head text-center clearfix">
-                <a href="javascript:;" className="gm-calendar-head-pre pull-left"
+                <a className="gm-calendar-head-pre pull-left"
                    onClick={this.handleChangeMonth.bind(this, month - 1)}>
-                    <i className="glyphicon glyphicon-chevron-left"></i>
+                    <i className="glyphicon glyphicon-chevron-left"/>
                 </a>
-                    <span className="gm-calendar-head-title">
+                <span className="gm-calendar-head-title">
                         <span className="gm-calendar-head-month"
                               onClick={this.handleSelectMonth}>{month + 1}月</span>
                         <span>&nbsp;&nbsp;{m.year()}</span>
                     </span>
-                <a href="javascript:;" className="gm-calendar-head-next pull-right"
+                <a className="gm-calendar-head-next pull-right"
                    onClick={this.handleChangeMonth.bind(this, month + 1)}>
-                    <i className="glyphicon glyphicon-chevron-right"></i>
+                    <i className="glyphicon glyphicon-chevron-right"/>
                 </a>
             </div>
         );
-    },
-    renderWeek: function () {
+    }
+
+    renderWeek() {
         return (
             <div className="gm-calendar-week">
                 {this.state.weekDays.map(function (v, i) {
@@ -95,29 +99,42 @@ var Calendar = React.createClass({
                 })}
             </div>
         );
-    },
-    renderMonth: function () {
-        var month = this.state.moment.month();
-        var months = [];
-        var className = 'gm-calendar-month';
-        for (var i = 0; i < 12; i++) {
-            months.push((
-                <span key={i} className={i === month ? className + " gm-calendar-active": className}
-                      onClick={this.handleChangeMonth.bind(this, i)}>{i + 1}月</span>));
+    }
+
+    renderMonth() {
+        const month = this.state.moment.month();
+        let months = [];
+        for (let i = 0; i < 12; i++) {
+            const cn = classNames('gm-calendar-month', {
+                'gm-calendar-active': i === month
+            });
+            months.push(
+                <span key={i}
+                      className={cn}
+                      onClick={this.handleChangeMonth.bind(this, i)}>
+                    {i + 1}月
+                </span>
+            );
         }
         return (
             <div className="gm-calendar-months">
                 {months}
             </div>
         );
-    },
-    renderContent: function () {
-        var m = moment(this.state.moment).startOf('month').day(0).add(-1, 'day');
-        var days = [];
+    }
 
-        for (var i = 0; i < 42; i++) {
-            days.push(<Day key={i} selected={moment(this.state.selected)} nowMoment={this.state.moment}
-                           moment={moment(m.add(1, 'day'))} onClick={this.handleSelectDay}></Day>);
+    renderContent() {
+        const m = moment(this.state.moment).startOf('month').day(0).add(-1, 'day');
+        let days = [];
+
+        for (let i = 0; i < 42; i++) {
+            days.push(
+                <Day key={i}
+                     selected={moment(this.state.selected)}
+                     nowMoment={this.state.moment}
+                     moment={moment(m.add(1, 'day'))}
+                     onClick={this.handleSelectDay}/>
+            );
         }
 
         return (
@@ -125,18 +142,26 @@ var Calendar = React.createClass({
                 {days}
             </div>
         );
-    },
-    render: function () {
-        var t = this;
+    }
+
+    render() {
         return (
             <div className="gm-calendar">
-                {t.renderHead()}
-                {t.renderWeek()}
-                {t.renderContent()}
-                {t.state.isSelectMonth ? t.renderMonth() : undefined}
+                {this.renderHead()}
+                {this.renderWeek()}
+                {this.renderContent()}
+                {this.state.isSelectMonth ? this.renderMonth() : undefined}
             </div>
         );
     }
-});
+}
+
+Calendar.propTypes = {
+    selected: React.PropTypes.object,
+    onSelect: React.PropTypes.func
+};
+Calendar.defaultProps = {
+    onSelect: noop
+};
 
 export default Calendar;

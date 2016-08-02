@@ -1,31 +1,25 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'underscore';
 import Droper from './droper.js';
 
-var ImportLead = React.createClass({
-    propTypes: {
-        data: React.PropTypes.object,
-        tips: React.PropTypes.array,
-        onEdit: React.PropTypes.func,
-        fileTempUrl: React.PropTypes.string,
-        disableEdit: React.PropTypes.bool,
-        unLine: React.PropTypes.bool,
-        disableSubmit: React.PropTypes.bool
-    },
-    getInitialState: function () {
-        return {
+class ImportLead extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             selectedFile: null
         };
-    },
-    render: function () {
-        var t = this;
-        var data = _.extend({columns: [], list: []}, t.props.data);
-        var tips = t.props.tips || [];
+        this.handleSubmit = ::this.handleSubmit;
+        this.handleDrop = ::this.handleDrop;
+    }
 
-        var tipsMap = {};
+    render() {
+        const data = _.extend({columns: [], list: []}, this.props.data);
+        const tips = this.props.tips || [];
 
-        var lineMap = _.map(data.list, () => false);
+        let tipsMap = {};
+
+        let lineMap = _.map(data.list, () => false);
 
         _.each(tips, function (tip, index) {
             tipsMap[tip.index] = tipsMap[tip.index] || {};
@@ -37,22 +31,21 @@ var ImportLead = React.createClass({
             }
         });
 
-        var tableBody = data.list.map(function (elist, index) {
-
-            var tds = data.columns.map(function (col, i) {
+        const tableBody = data.list.map((eList, index) => {
+            const tds = data.columns.map((col, i) => {
                 var tip = tipsMap[index] && tipsMap[index][col.field];
                 return tip ? (
                     <td key={i} className={tip.modifyed ? "gm-bg-info" : "gm-bg-invalid"}>
-                        {t.props.disableEdit ? elist[col.field] :
-                            <input type="text" value={elist[col.field]}
-                                   onChange={t.handleEdit.bind(t, index, col.field, tip._index)}/>
-                        }
-
+                        {this.props.disableEdit ? eList[col.field] : (
+                            <input type="text"
+                                   value={eList[col.field]}
+                                   onChange={this.handleEdit.bind(this, index, col.field, tip._index)}/>
+                        )}
                         <small className="gm-import-lead-tip badge"><i>{tip.msg}</i></small>
                     </td>
                 ) : (
                     <td key={i}>
-                        {elist[col.field]}
+                        {eList[col.field]}
                     </td>
                 );
             });
@@ -66,9 +59,9 @@ var ImportLead = React.createClass({
                 return value.modifyed === true;
             }).length === tips.length;
 
-        var filename = t.state.selectedFile ? t.state.selectedFile.name : '';
+        var filename = this.state.selectedFile ? this.state.selectedFile.name : '';
 
-        var fileTempUrl = t.props.fileTempUrl;
+        var fileTempUrl = this.props.fileTempUrl;
 
         return (
             <div className="gm-import-lead">
@@ -78,7 +71,7 @@ var ImportLead = React.createClass({
                             <button className="btn btn-primary btn-sm">上传xlsx</button>
                         </Droper>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        {!t.props.disableSubmit && (
+                        {!this.props.disableSubmit && (
                             <button disabled={!canSubmit} className="btn btn-primary btn-sm"
                                     onClick={this.handleSubmit}>
                                 提交
@@ -88,10 +81,11 @@ var ImportLead = React.createClass({
                         {fileTempUrl ? (<a href={fileTempUrl} target="blank">上传模板下载</a>) : undefined}
                         <div>{filename}</div>
                     </div>
-                    {!t.props.unLine && (
+                    {!this.props.unLine && (
                         <div className="gm-import-line clearfix">
                             {lineMap.map((v, i) => (
-                                <div key={i} className={v ? "tip": ""} onClick={this.handleLine.bind(this, i)}></div>))}
+                                <div key={i} className={v ? "tip" : ""}
+                                     onClick={this.handleLine.bind(this, i)}></div>))}
                         </div>
                     )}
                 </div>
@@ -112,35 +106,45 @@ var ImportLead = React.createClass({
                 </div>
             </div>
         );
-    },
-    handleEdit: function (index, field, i, event) {
-        var t = this;
-        if (t.props.onEdit) {
-            t.props.onEdit(index, field, event.target.value, i);
-        }
-    },
-    handleSubmit: function (event) {
-        var t = this;
-        event.preventDefault();
-        if (t.props.onSubmit) {
-            t.props.onSubmit();
-        }
-    },
-    handleLine: function (index) {
-        var t = this;
-        var content = ReactDOM.findDOMNode(t.refs.content);
-        var table = ReactDOM.findDOMNode(t.refs.table);
-        content.scrollTop = index / t.props.data.list.length * table.offsetHeight;
-    },
-    handleDrop: function (files) {
-        var t = this;
-        t.setState({
-            selectedFile: files[0]
-        });
-        if (files[0] && t.props.onDrop) {
-            t.props.onDrop(files[0]);
+    }
+
+    handleEdit(index, field, i, event) {
+        if (this.props.onEdit) {
+            this.props.onEdit(index, field, event.target.value, i);
         }
     }
-});
+
+    handleSubmit(event) {
+        event.preventDefault();
+        if (this.props.onSubmit) {
+            this.props.onSubmit();
+        }
+    }
+
+    handleLine(index) {
+        let content = ReactDOM.findDOMNode(this.refs.content),
+            table = ReactDOM.findDOMNode(this.refs.table);
+        content.scrollTop = index / this.props.data.list.length * table.offsetHeight;
+    }
+
+    handleDrop(files) {
+        this.setState({
+            selectedFile: files[0]
+        });
+        if (files[0] && this.props.onDrop) {
+            this.props.onDrop(files[0]);
+        }
+    }
+}
+
+ImportLead.propTypes = {
+    data: PropTypes.object,
+    tips: PropTypes.array,
+    onEdit: PropTypes.func,
+    fileTempUrl: PropTypes.string,
+    disableEdit: PropTypes.bool,
+    unLine: PropTypes.bool,
+    disableSubmit: PropTypes.bool
+};
 
 export default ImportLead;

@@ -219,14 +219,16 @@ var tipsData = [
     {"index": 0, "msg": "这里不对啊", "field": "id"}
 ];
 
-var ImportLeadWrap = React.createClass({
-    getInitialState: function () {
-        return {
+class ImportLeadWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             data: gridData,
             tips: tipsData
         };
-    },
-    render: function () {
+    }
+
+    render() {
         var data = this.state.data;
         var tips = this.state.tips;
 
@@ -234,22 +236,24 @@ var ImportLeadWrap = React.createClass({
         return (
             <div style={{height: 600}}>
                 <ImportLead unline disableEdit data={data} tips={tips} fileTempUrl="http://www.baidu.com"
-                            onEdit={this.handleEdit}></ImportLead>
+                            onEdit={this.handleEdit}/>
             </div>
         );
-    },
-    componentDidMount: function () {
+    }
+
+    componentDidMount() {
         var t = this;
         setTimeout(function () {
 
             t.setState(t.state);
         }, 5000);
-    },
-    handleEdit: function (i, field, value, tipsI) {
+    }
+
+    handleEdit(i, field, value, tipsI) {
         // i 是数据的索引， field 对应具体字段，value是修改后的指， tipsI 是提示的索引
         // 提供这些信息主要是让应用修改数据和提示。
         console.log(i, field, value, tipsI);
     }
-});
+}
 
 export default ImportLeadWrap;

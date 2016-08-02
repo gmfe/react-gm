@@ -10,9 +10,10 @@ import {
 import PinYin from 'gm-pinyin';
 import _ from 'underscore';
 
-const DropSelectWrap = React.createClass({
-    getInitialState(){
-        return {
+class DropSelectWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             show: false,
             coolData: {
                 list: [],
@@ -48,8 +49,11 @@ const DropSelectWrap = React.createClass({
                 loading: true
             }
         };
-    },
-    componentDidMount(){
+        this.onFocus = ::this.onFocus;
+        this.onHide = ::this.onHide;
+    }
+
+    componentDidMount() {
         const me = this;
         setTimeout(() => {
             me.setState({
@@ -95,19 +99,21 @@ const DropSelectWrap = React.createClass({
                 })
             });
         }, 2000);
-    },
-    onFocus(){
+    }
+
+    onFocus() {
         this.setState({
             show: true
         });
-    },
-    onHide(){
+    }
+
+    onHide() {
         this.setState({
             show: false
         });
-    },
+    }
 
-    render(){
+    render() {
         return (
             <div style={{width: '400px'}}>
                 <DropSelect show={this.state.show}
@@ -118,10 +124,12 @@ const DropSelectWrap = React.createClass({
             </div>
         );
     }
-});
+}
 
-var AdvanceSelectComponent = React.createClass({
-    getInitialState(){
+class AdvanceSelectComponent extends React.Component {
+    constructor(props) {
+        super(props);
+
         let selectList = [
             {value: 0, name: 'FE'},
             {value: 1, name: '测试'},
@@ -138,12 +146,16 @@ var AdvanceSelectComponent = React.createClass({
             {value: 12, name: '美丽_adsdasd'},
             {value: 13, name: '美丽 asdasd'}
         ];
-        return {
+        this.state = {
             list: selectList,
             value: 10
         };
-    },
-    render(){
+        this.onFilterData = ::this.onFilterData;
+        this.changeList = ::this.changeList;
+        this.changeValue = ::this.changeValue;
+    }
+
+    render() {
 
         return (
             <div>
@@ -156,11 +168,13 @@ var AdvanceSelectComponent = React.createClass({
                                onValueChange={this.onValueChange} onFilterData={this.onFilterData}/>
             </div>
         );
-    },
-    onValueChange(id, value){
+    }
+
+    onValueChange(id, value) {
         console.log(id, value);
-    },
-    onFilterData(filterData){
+    }
+
+    onFilterData(filterData) {
         let needle = filterData.trim().toLowerCase(),
             items = this.state.list;
         let newItems = items.filter(function (data) {
@@ -170,8 +184,9 @@ var AdvanceSelectComponent = React.createClass({
                 || this.matchingPinYin(dataName, {style: PinYin.STYLE_FIRST_LETTER}).indexOf(needle) !== -1;
         }.bind(this));
         return newItems;
-    },
-    matchingPinYin(name, style = {style: PinYin.STYLE_NORMAL}){
+    }
+
+    matchingPinYin(name, style = {style: PinYin.STYLE_NORMAL}) {
         let pinyin = "", reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
         for (let i = 0; i < name.length; i++) {
             let val = name.substr(i, 1);
@@ -182,8 +197,9 @@ var AdvanceSelectComponent = React.createClass({
             }
         }
         return pinyin;
-    },
-    changeList(){
+    }
+
+    changeList() {
         let changeList = [];
         for (var i = 5; i < 50; i++) {
             changeList.push({value: i, name: i});
@@ -191,11 +207,12 @@ var AdvanceSelectComponent = React.createClass({
         this.setState({
             list: changeList
         });
-    },
-    changeValue(){
+    }
+
+    changeValue() {
         this.setState({value: 20});
     }
-});
+}
 
 var searchSelectData = [
     {value: 0, name: '我们'},

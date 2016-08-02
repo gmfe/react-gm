@@ -42,8 +42,8 @@ class TipWrap extends React.Component {
 
 
 // nprogress
-var NProgressWrap = React.createClass({
-    render: function () {
+class NProgressWrap extends React.Component {
+    render() {
         return (
             <div>
                 <button className="btn btn-primary" onClick={this.handleStart}>start</button>
@@ -51,14 +51,16 @@ var NProgressWrap = React.createClass({
 
             </div>
         );
-    },
-    handleStart: function () {
+    }
+
+    handleStart() {
         NProgress.start();
-    },
-    handleEnd: function () {
+    }
+
+    handleEnd() {
         NProgress.done();
     }
-});
+}
 
 class DialogWrap extends React.Component {
     constructor(props) {

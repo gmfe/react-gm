@@ -91,8 +91,15 @@ class Dialog extends React.Component {
 
     render() {
         const {bsSize, title, children, type, promptDefaultValue, noCancel, noOK} = this.props;
+        let modalProps = {
+            show: this.state.show,
+            ohHide: this.handleCancel
+        };
+        if (bsSize !== 'md') {
+            modalProps.bsSize = bsSize;
+        }
         return (
-            <Modal show={this.state.show} onHide={this.handleCancel} bsSize={bsSize}>
+            <Modal {...modalProps}>
                 <Modal.Header closeButton>
                     {title}
                 </Modal.Header>

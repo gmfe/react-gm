@@ -42,12 +42,18 @@ class DatePicker extends React.Component {
     render() {
         return (
             <div className="gm-datepicker">
-                <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopover()}>
-                    {this.props.children ? this.props.children :
-                        <input type="text" className={this.props.inputClassName} placeholder={this.props.placeholder}
+                <OverlayTrigger trigger="click"
+                                rootClose
+                                placement="bottom"
+                                overlay={this.renderPopover()}>
+                    {this.props.children ? this.props.children : (
+                        <input type="text"
+                               className={this.props.inputClassName}
+                               placeholder={this.props.placeholder}
                                ref="target"
-                               value={this.props.date && moment(this.props.date).format('YYYY-MM-DD')}
-                               onChange={this.handleChange}/>}
+                               value={this.props.date ? moment(this.props.date).format('YYYY-MM-DD') : ''}
+                               onChange={this.handleChange}/>
+                    )}
                 </OverlayTrigger>
             </div>
         );
