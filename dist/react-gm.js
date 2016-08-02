@@ -172,6 +172,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var SheetColumn = _sheet2.default.SheetColumn;
+	var SheetAction = _sheet2.default.SheetAction;
+	var SheetSelect = _sheet2.default.SheetSelect;
+	var SheetBatchAction = _sheet2.default.SheetBatchAction;
+
+
 	module.exports = {
 	    Util: _gmUtil2.default,
 	    Grid: _grid2.default,
@@ -200,7 +206,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Cascader: _cascader2.default,
 	    CascaderSelect: _cascader4.default,
 	    Switch: _switch2.default,
-	    Sheet: _sheet2.default
+	    Sheet: _sheet2.default,
+	    SheetColumn: SheetColumn,
+	    SheetAction: SheetAction,
+	    SheetSelect: SheetSelect,
+	    SheetBatchAction: SheetBatchAction
 	};
 
 /***/ },
@@ -407,8 +417,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    flex: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.bool]),
 	    auto: _react.PropTypes.bool,
 	    none: _react.PropTypes.bool,
-	    width: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]),
-	    height: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]),
+	    width: _react.PropTypes.string,
+	    height: _react.PropTypes.string,
 	    row: _react.PropTypes.bool,
 	    column: _react.PropTypes.bool,
 	    wrap: _react.PropTypes.bool,
@@ -491,6 +501,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -499,176 +511,232 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _moment2 = _interopRequireDefault(_moment);
 
+	var _classnames = __webpack_require__(3);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Day = _react2.default.createClass({
-	    displayName: 'Day',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	    render: function render() {
-	        var now = this.props.nowMoment;
-	        var m = this.props.moment;
-	        var selected = this.props.selected;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	        var className = ['gm-calendar-day'];
-	        if (now.month() > m.month()) {
-	            className.push('gm-calendar-day-old');
-	        } else if (now.month() < m.month()) {
-	            className.push('gm-calendar-day-new');
-	        }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	        if (+selected.startOf('day') === +m.startOf('day')) {
-	            className.push('gm-calendar-active');
-	        }
+	var noop = function noop() {};
 
-	        return _react2.default.createElement(
-	            'span',
-	            { className: className.join(' '), onClick: this.handleClick },
-	            m.date()
-	        );
-	    },
-	    handleClick: function handleClick() {
-	        this.props.onClick(this.props.moment);
+	var Day = function (_React$Component) {
+	    _inherits(Day, _React$Component);
+
+	    function Day(props) {
+	        _classCallCheck(this, Day);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Day).call(this, props));
+
+	        _this.handleClick = _this.handleClick.bind(_this);
+	        return _this;
 	    }
-	});
 
-	var Calendar = _react2.default.createClass({
-	    displayName: 'Calendar',
+	    _createClass(Day, [{
+	        key: 'render',
+	        value: function render() {
+	            var now = this.props.nowMoment,
+	                m = this.props.moment,
+	                selected = this.props.selected;
 
-	    propTypes: {
-	        selected: _react2.default.PropTypes.object,
-	        onSelect: _react2.default.PropTypes.func
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            onSelect: function onSelect() {}
-	        };
-	    },
-	    getInitialState: function getInitialState() {
-	        // 规避  moment(undefined) 有效  moment(null) 无效的场景，统一成null 处理
-	        return {
-	            selected: this.props.selected ? this.props.selected : null, // 调用方的时间
-	            moment: this.props.selected ? (0, _moment2.default)(this.props.selected) : (0, _moment2.default)(), // 日历内的时间
+	            var cn = (0, _classnames2.default)('gm-calendar-day', {
+	                'gm-calendar-day-old': now.month() > m.month(),
+	                'gm-calendar-day-new': now.month() < m.month(),
+	                'gm-calendar-active': +selected.startOf('day') === +m.startOf('day')
+	            });
+
+	            return _react2.default.createElement(
+	                'span',
+	                { className: cn, onClick: this.handleClick },
+	                m.date()
+	            );
+	        }
+	    }, {
+	        key: 'handleClick',
+	        value: function handleClick() {
+	            this.props.onClick(this.props.moment);
+	        }
+	    }]);
+
+	    return Day;
+	}(_react2.default.Component);
+
+	var Calendar = function (_React$Component2) {
+	    _inherits(Calendar, _React$Component2);
+
+	    function Calendar(props) {
+	        _classCallCheck(this, Calendar);
+
+	        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Calendar).call(this, props));
+
+	        _this2.state = {
+	            selected: _this2.props.selected ? _this2.props.selected : null, // 调用方的时间
+	            moment: _this2.props.selected ? (0, _moment2.default)(_this2.props.selected) : (0, _moment2.default)(), // 日历内的时间
 	            isSelectMonth: false,
 	            weekDays: ['日', '一', '二', '三', '四', '五', '六']
 	        };
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        if (nextProps.selected) {
+	        _this2.handleSelectMonth = _this2.handleSelectMonth.bind(_this2);
+	        _this2.handleSelectDay = _this2.handleSelectDay.bind(_this2);
+	        return _this2;
+	    }
+
+	    _createClass(Calendar, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if (nextProps.selected) {
+	                this.setState({
+	                    selected: nextProps.selected
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'handleChangeMonth',
+	        value: function handleChangeMonth(month, event) {
+	            event.preventDefault();
 	            this.setState({
-	                selected: nextProps.selected
+	                moment: this.state.moment.month(month),
+	                isSelectMonth: false
 	            });
 	        }
-	    },
-	    handleChangeMonth: function handleChangeMonth(month) {
-	        this.setState({
-	            moment: this.state.moment.month(month),
-	            isSelectMonth: false
-	        });
-	    },
-	    handleSelectMonth: function handleSelectMonth() {
-	        this.setState({
-	            isSelectMonth: !this.state.isSelectMonth
-	        });
-	    },
-	    handleSelectDay: function handleSelectDay(m) {
-	        this.props.onSelect(m.toDate());
-	    },
-	    renderHead: function renderHead() {
-	        var m = (0, _moment2.default)(this.state.moment);
-	        var month = m.month();
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-calendar-head text-center clearfix' },
-	            _react2.default.createElement(
-	                'a',
-	                { href: 'javascript:;', className: 'gm-calendar-head-pre pull-left',
-	                    onClick: this.handleChangeMonth.bind(this, month - 1) },
-	                _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-left' })
-	            ),
-	            _react2.default.createElement(
-	                'span',
-	                { className: 'gm-calendar-head-title' },
+	    }, {
+	        key: 'handleSelectMonth',
+	        value: function handleSelectMonth() {
+	            this.setState({
+	                isSelectMonth: !this.state.isSelectMonth
+	            });
+	        }
+	    }, {
+	        key: 'handleSelectDay',
+	        value: function handleSelectDay(m) {
+	            this.props.onSelect(m.toDate());
+	        }
+	    }, {
+	        key: 'renderHead',
+	        value: function renderHead() {
+	            var m = (0, _moment2.default)(this.state.moment);
+	            var month = m.month();
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-calendar-head text-center clearfix' },
 	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'gm-calendar-head-month',
-	                        onClick: this.handleSelectMonth },
-	                    month + 1,
-	                    '月'
+	                    'a',
+	                    { className: 'gm-calendar-head-pre pull-left',
+	                        onClick: this.handleChangeMonth.bind(this, month - 1) },
+	                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-left' })
 	                ),
 	                _react2.default.createElement(
 	                    'span',
-	                    null,
-	                    '  ',
-	                    m.year()
+	                    { className: 'gm-calendar-head-title' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'gm-calendar-head-month',
+	                            onClick: this.handleSelectMonth },
+	                        month + 1,
+	                        '月'
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        '  ',
+	                        m.year()
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'gm-calendar-head-next pull-right',
+	                        onClick: this.handleChangeMonth.bind(this, month + 1) },
+	                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-right' })
 	                )
-	            ),
-	            _react2.default.createElement(
-	                'a',
-	                { href: 'javascript:;', className: 'gm-calendar-head-next pull-right',
-	                    onClick: this.handleChangeMonth.bind(this, month + 1) },
-	                _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-right' })
-	            )
-	        );
-	    },
-	    renderWeek: function renderWeek() {
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-calendar-week' },
-	            this.state.weekDays.map(function (v, i) {
-	                return _react2.default.createElement(
+	            );
+	        }
+	    }, {
+	        key: 'renderWeek',
+	        value: function renderWeek() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-calendar-week' },
+	                this.state.weekDays.map(function (v, i) {
+	                    return _react2.default.createElement(
+	                        'span',
+	                        { key: i, className: 'gm-calendar-day-name' },
+	                        v
+	                    );
+	                })
+	            );
+	        }
+	    }, {
+	        key: 'renderMonth',
+	        value: function renderMonth() {
+	            var month = this.state.moment.month();
+	            var months = [];
+	            for (var i = 0; i < 12; i++) {
+	                var cn = (0, _classnames2.default)('gm-calendar-month', {
+	                    'gm-calendar-active': i === month
+	                });
+	                months.push(_react2.default.createElement(
 	                    'span',
-	                    { key: i, className: 'gm-calendar-day-name' },
-	                    v
-	                );
-	            })
-	        );
-	    },
-	    renderMonth: function renderMonth() {
-	        var month = this.state.moment.month();
-	        var months = [];
-	        var className = 'gm-calendar-month';
-	        for (var i = 0; i < 12; i++) {
-	            months.push(_react2.default.createElement(
-	                'span',
-	                { key: i, className: i === month ? className + " gm-calendar-active" : className,
-	                    onClick: this.handleChangeMonth.bind(this, i) },
-	                i + 1,
-	                '月'
-	            ));
+	                    { key: i,
+	                        className: cn,
+	                        onClick: this.handleChangeMonth.bind(this, i) },
+	                    i + 1,
+	                    '月'
+	                ));
+	            }
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-calendar-months' },
+	                months
+	            );
 	        }
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-calendar-months' },
-	            months
-	        );
-	    },
-	    renderContent: function renderContent() {
-	        var m = (0, _moment2.default)(this.state.moment).startOf('month').day(0).add(-1, 'day');
-	        var days = [];
+	    }, {
+	        key: 'renderContent',
+	        value: function renderContent() {
+	            var m = (0, _moment2.default)(this.state.moment).startOf('month').day(0).add(-1, 'day');
+	            var days = [];
 
-	        for (var i = 0; i < 42; i++) {
-	            days.push(_react2.default.createElement(Day, { key: i, selected: (0, _moment2.default)(this.state.selected), nowMoment: this.state.moment,
-	                moment: (0, _moment2.default)(m.add(1, 'day')), onClick: this.handleSelectDay }));
+	            for (var i = 0; i < 42; i++) {
+	                days.push(_react2.default.createElement(Day, { key: i,
+	                    selected: (0, _moment2.default)(this.state.selected),
+	                    nowMoment: this.state.moment,
+	                    moment: (0, _moment2.default)(m.add(1, 'day')),
+	                    onClick: this.handleSelectDay }));
+	            }
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-calendar-content' },
+	                days
+	            );
 	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-calendar' },
+	                this.renderHead(),
+	                this.renderWeek(),
+	                this.renderContent(),
+	                this.state.isSelectMonth ? this.renderMonth() : undefined
+	            );
+	        }
+	    }]);
 
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-calendar-content' },
-	            days
-	        );
-	    },
-	    render: function render() {
-	        var t = this;
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-calendar' },
-	            t.renderHead(),
-	            t.renderWeek(),
-	            t.renderContent(),
-	            t.state.isSelectMonth ? t.renderMonth() : undefined
-	        );
-	    }
-	});
+	    return Calendar;
+	}(_react2.default.Component);
+
+	Calendar.propTypes = {
+	    selected: _react2.default.PropTypes.object,
+	    onSelect: _react2.default.PropTypes.func
+	};
+	Calendar.defaultProps = {
+	    onSelect: noop
+	};
 
 	exports.default = Calendar;
 
@@ -1322,21 +1390,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Droper = function (_React$Component) {
 	    _inherits(Droper, _React$Component);
 
-	    function Droper(props, context) {
+	    function Droper(props) {
 	        _classCallCheck(this, Droper);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Droper).call(this, props, context));
-
-	        _this.onClick = _this.onClick.bind(_this);
-	        _this.onDragEnter = _this.onDragEnter.bind(_this);
-	        _this.onDragLeave = _this.onDragLeave.bind(_this);
-	        _this.onDragOver = _this.onDragOver.bind(_this);
-	        _this.onDrop = _this.onDrop.bind(_this);
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Droper).call(this, props));
 
 	        _this.state = {
 	            isDragActive: false,
 	            isWX: _gmUtil2.default.is.weixin()
 	        };
+	        _this.onClick = _this.onClick.bind(_this);
+	        _this.onDragEnter = _this.onDragEnter.bind(_this);
+	        _this.onDragLeave = _this.onDragLeave.bind(_this);
+	        _this.onDragOver = _this.onDragOver.bind(_this);
+	        _this.onDrop = _this.onDrop.bind(_this);
 	        return _this;
 	    }
 
@@ -1389,11 +1456,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            ++this.enterCounter;
 
-	            // This is tricky. During the drag even the dataTransfer.files is null
-	            // But Chrome implements some drag store, which is accesible via dataTransfer.items
 	            var dataTransferItems = e.dataTransfer && e.dataTransfer.items ? e.dataTransfer.items : [];
 
-	            // Now we need to convert the DataTransferList to Array
 	            var itemsArray = Array.prototype.slice.call(dataTransferItems);
 	            var allFilesAccepted = this.allFilesAccepted(itemsArray);
 
@@ -1434,7 +1498,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function onDrop(e) {
 	            e.preventDefault();
 
-	            // Reset the counter along with the drag on a drop.
+	            var _props = this.props;
+	            var multiple = _props.multiple;
+	            var onDrop = _props.onDrop;
+	            var onDropAccepted = _props.onDropAccepted;
+	            var onDropRejected = _props.onDropRejected;
+
+
 	            this.enterCounter = 0;
 
 	            this.setState({
@@ -1443,7 +1513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 
 	            var droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
-	            var max = this.props.multiple ? droppedFiles.length : 1;
+	            var max = multiple ? droppedFiles.length : 1;
 	            var files = [];
 
 	            for (var i = 0; i < max; i++) {
@@ -1452,26 +1522,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	                files.push(file);
 	            }
 
-	            if (this.props.onDrop) {
-	                this.props.onDrop(files, e);
+	            if (onDrop) {
+	                onDrop(files, e);
 	            }
 
 	            if (this.allFilesAccepted(files)) {
-	                if (this.props.onDropAccepted) {
-	                    this.props.onDropAccepted(files, e);
+	                if (onDropAccepted) {
+	                    onDropAccepted(files, e);
 	                }
 	            } else {
-	                if (this.props.onDropRejected) {
-	                    this.props.onDropRejected(files, e);
+	                if (onDropRejected) {
+	                    onDropRejected(files, e);
 	                }
 	            }
 	        }
 	    }, {
 	        key: 'onClick',
 	        value: function onClick() {
-	            if (!this.props.disableClick) {
-	                this.open();
-	            }
+	            this.open();
 	        }
 	    }, {
 	        key: 'open',
@@ -1483,36 +1551,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var className = 'gm-droper ';
-	            className += this.props.className ? this.props.className : ' gm-droper-default ';
+	            var _props2 = this.props;
+	            var className = _props2.className;
+	            var children = _props2.children;
+	            var accept = _props2.accept;
+	            var multiple = _props2.multiple;
+
+	            var cn = className ? className : 'gm-droper-default';
 
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'gm-droper' },
 	                _react2.default.createElement(
 	                    'div',
-	                    {
-	                        className: className,
+	                    { className: cn,
 	                        onClick: this.onClick,
 	                        onDragEnter: this.onDragEnter,
 	                        onDragOver: this.onDragOver,
 	                        onDragLeave: this.onDragLeave,
-	                        onDrop: this.onDrop
-	                    },
-	                    this.props.children
+	                        onDrop: this.onDrop },
+	                    children
 	                ),
 	                this.state.isWX ? _react2.default.createElement('input', {
 	                    type: 'file',
 	                    ref: 'fileInput',
 	                    className: 'gm-droper-input',
-	                    accept: this.props.accept,
+	                    accept: accept,
 	                    onChange: this.onDrop
 	                }) : _react2.default.createElement('input', {
 	                    type: 'file',
 	                    ref: 'fileInput',
 	                    className: 'gm-droper-input',
-	                    multiple: this.props.multiple,
-	                    accept: this.props.accept,
+	                    multiple: multiple,
+	                    accept: accept,
 	                    onChange: this.onDrop
 	                })
 	            );
@@ -1523,20 +1594,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	Droper.defaultProps = {
-	    disableClick: false,
-	    multiple: true
+	    multiple: false
 	};
 
 	Droper.propTypes = {
-	    onDrop: _react2.default.PropTypes.func,
-	    onDropAccepted: _react2.default.PropTypes.func,
-	    onDropRejected: _react2.default.PropTypes.func,
-	    onDragEnter: _react2.default.PropTypes.func,
-	    onDragLeave: _react2.default.PropTypes.func,
+	    onDrop: _react.PropTypes.func,
+	    onDropAccepted: _react.PropTypes.func,
+	    onDropRejected: _react.PropTypes.func,
+	    onDragEnter: _react.PropTypes.func,
+	    onDragLeave: _react.PropTypes.func,
 
-	    disableClick: _react2.default.PropTypes.bool,
-	    multiple: _react2.default.PropTypes.bool,
-	    accept: _react2.default.PropTypes.string
+	    multiple: _react.PropTypes.bool,
+	    accept: _react.PropTypes.string,
+
+	    className: _react.PropTypes.string
 	};
 
 	exports.default = Droper;
@@ -1550,6 +1621,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -1569,62 +1642,89 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var TimeSpan = _react2.default.createClass({
-	    displayName: 'TimeSpan',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	    propTypes: {
-	        min: _react2.default.PropTypes.object,
-	        max: _react2.default.PropTypes.object,
-	        span: _react2.default.PropTypes.number,
-	        selected: _react2.default.PropTypes.object.isRequired,
-	        render: _react2.default.PropTypes.func,
-	        onSelect: _react2.default.PropTypes.func.isRequired
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            min: (0, _moment2.default)().startOf('day').toDate(),
-	            max: (0, _moment2.default)().endOf('day').toDate(),
-	            span: 30 * 60 * 1000,
-	            render: function render(value) {
-	                return (0, _moment2.default)(value).format('HH:mm');
-	            },
-	            onSelect: function onSelect() {}
-	        };
-	    },
-	    getCells: function getCells() {
-	        var min = this.props.min ? (0, _moment2.default)(this.props.min) : (0, _moment2.default)().startOf('day'),
-	            max = this.props.max ? (0, _moment2.default)(this.props.max) : (0, _moment2.default)().endOf('day');
-	        var d = (0, _moment2.default)(min);
-	        var cells = [];
-	        while (d <= max) {
-	            cells.push(d);
-	            d = (0, _moment2.default)(d + this.props.span);
-	        }
-	        return cells;
-	    },
-	    handleSelect: function handleSelect(value) {
-	        this.props.onSelect(value.toDate());
-	    },
-	    render: function render() {
-	        var _this = this;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	        var cells = this.getCells();
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-time-span' },
-	            _underscore2.default.map(cells, function (value, i) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    { key: i, className: (0, _classnames2.default)("gm-time-span-cell", {
-	                            active: +value === +_this.props.selected
-	                        }), onClick: _this.handleSelect.bind(_this, value) },
-	                    _this.props.render(value.toDate())
-	                );
-	            })
-	        );
+	var TimeSpan = function (_React$Component) {
+	    _inherits(TimeSpan, _React$Component);
+
+	    function TimeSpan() {
+	        _classCallCheck(this, TimeSpan);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(TimeSpan).apply(this, arguments));
 	    }
-	});
+
+	    _createClass(TimeSpan, [{
+	        key: 'getCells',
+	        value: function getCells() {
+	            var _props = this.props;
+	            var min = _props.min;
+	            var max = _props.max;
+	            var span = _props.span;
+
+	            var dMax = (0, _moment2.default)(max);
+	            var d = (0, _moment2.default)(min),
+	                cells = [];
+	            while (d <= dMax) {
+	                cells.push(d);
+	                d = (0, _moment2.default)(d + span);
+	            }
+	            return cells;
+	        }
+	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(value) {
+	            this.props.onSelect(value.toDate());
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            var cells = this.getCells();var _props2 = this.props;
+	            var selected = _props2.selected;
+	            var render = _props2.render;
+
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-time-span' },
+	                _underscore2.default.map(cells, function (value, i) {
+	                    return _react2.default.createElement(
+	                        'div',
+	                        { key: i, className: (0, _classnames2.default)("gm-time-span-cell", {
+	                                active: +value === +selected
+	                            }), onClick: _this2.handleSelect.bind(_this2, value) },
+	                        render(value.toDate())
+	                    );
+	                })
+	            );
+	        }
+	    }]);
+
+	    return TimeSpan;
+	}(_react2.default.Component);
+
+	TimeSpan.propTypes = {
+	    min: _react2.default.PropTypes.object,
+	    max: _react2.default.PropTypes.object,
+	    span: _react2.default.PropTypes.number,
+	    selected: _react2.default.PropTypes.object,
+	    render: _react2.default.PropTypes.func,
+	    onSelect: _react2.default.PropTypes.func
+	};
+	TimeSpan.defaultProps = {
+	    min: (0, _moment2.default)().startOf('day').toDate(),
+	    max: (0, _moment2.default)().endOf('day').toDate(),
+	    span: 30 * 60 * 1000,
+	    render: function render(value) {
+	        return (0, _moment2.default)(value).format('HH:mm');
+	    },
+	    onSelect: function onSelect() {}
+	};
 
 	exports.default = TimeSpan;
 
@@ -2100,7 +2200,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        title: _react2.default.PropTypes.string, //输入框为空时默认显示的样式
 	        value: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
 	        inputStyleName: _react2.default.PropTypes.object, //自定义的样式
-	        id: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number])
+	        id: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number // TODO id不能为数字
+	        ])
 	    },
 
 	    getDefaultProps: function getDefaultProps() {
@@ -2108,7 +2209,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            onValueChange: null,
 	            onFilterData: null,
 	            inputClassName: 'form-control',
-	            inputStyleName: {}
+	            inputStyleName: {} // TODO style吧？为啥要styleName
 	        };
 	    },
 
@@ -2118,6 +2219,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    componentDidMount: function componentDidMount() {
+	        console.error('AdvanceSelect are deprecated! Replace with SearchSelect!');
 	        document.addEventListener('click', this._close);
 	    },
 
@@ -2425,27 +2527,24 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var noop = function noop() {};
 
+	var getPropsSelected = function getPropsSelected(props) {
+	    if (props.multiple) {
+	        if (props.selected) {
+	            return props.selected;
+	        } else {
+	            return [];
+	        }
+	    } else {
+	        if (props.selected) {
+	            return [props.selected];
+	        } else {
+	            return [];
+	        }
+	    }
+	};
+
 	var CascaderSelect = function (_React$Component) {
 	    _inherits(CascaderSelect, _React$Component);
-
-	    _createClass(CascaderSelect, [{
-	        key: 'getPropsSelected',
-	        value: function getPropsSelected(props) {
-	            if (props.multiple) {
-	                if (props.selected) {
-	                    return props.selected;
-	                } else {
-	                    return [];
-	                }
-	            } else {
-	                if (props.selected) {
-	                    return [props.selected];
-	                } else {
-	                    return [];
-	                }
-	            }
-	        }
-	    }]);
 
 	    function CascaderSelect(props) {
 	        _classCallCheck(this, CascaderSelect);
@@ -2453,7 +2552,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CascaderSelect).call(this, props));
 
 	        _this.state = {
-	            selected: _this.getPropsSelected(props),
+	            selected: getPropsSelected(props),
 	            cascaderValue: []
 	        };
 	        return _this;
@@ -2463,7 +2562,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            this.setState({
-	                selected: this.getPropsSelected(nextProps)
+	                selected: getPropsSelected(nextProps)
 	            });
 	        }
 	    }, {
@@ -2599,10 +2698,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    placeholder: _react.PropTypes.string,
 	    selectedRender: _react.PropTypes.func
 	};
+
 	CascaderSelect.defaultProps = {
 	    onSelect: noop,
 	    placeholder: ''
 	};
+
 	exports.default = CascaderSelect;
 
 /***/ },
@@ -2614,6 +2715,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -2631,58 +2734,90 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var DatePicker = _react2.default.createClass({
-	    displayName: 'DatePicker',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	    propTypes: {
-	        date: _react2.default.PropTypes.object,
-	        onChange: _react2.default.PropTypes.func.isRequired,
-	        inputClassName: _react2.default.PropTypes.string,
-	        target: _react2.default.PropTypes.func
-	    },
-	    getInitialState: function getInitialState() {
-	        return {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DatePicker = function (_React$Component) {
+	    _inherits(DatePicker, _React$Component);
+
+	    function DatePicker(props) {
+	        _classCallCheck(this, DatePicker);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatePicker).call(this, props));
+
+	        _this.state = {
 	            id: '_gm_datepicker_id' + (Math.random() + '').slice(2)
 	        };
-	    },
-	    renderPopover: function renderPopover() {
-	        return _react2.default.createElement(
-	            _reactBootstrap.Popover,
-	            { id: this.state.id, className: 'gm-datepicker-popover' },
-	            _react2.default.createElement(_calendar2.default, { selected: this.props.date, onSelect: this.handleSelect })
-	        );
-	    },
-	    handleSelect: function handleSelect(date) {
-	        if (this.refs.target) {
-	            this.refs.target.click();
-	        } else {
-	            this.props.target().click();
-	        }
-	        this.props.onChange(date);
-	    },
-	    handleChange: function handleChange(event) {
-	        // 只允许合法的指传递出去
-	        if (/\d\d\d\d-\d\d-\d\d/.test(event.target.value)) {
-	            this.props.onChange((0, _moment2.default)(event.target.value).toDate());
-	        } else {
-	            this.props.onChange(null);
-	        }
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-datepicker' },
-	            _react2.default.createElement(
-	                _reactBootstrap.OverlayTrigger,
-	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopover() },
-	                this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, placeholder: this.props.placeholder,
-	                    ref: 'target',
-	                    value: this.props.date && (0, _moment2.default)(this.props.date).format('YYYY-MM-DD'),
-	                    onChange: this.handleChange })
-	            )
-	        );
+	        _this.handleSelect = _this.handleSelect.bind(_this);
+	        _this.handleChange = _this.handleChange.bind(_this);
+	        return _this;
 	    }
-	});
+
+	    _createClass(DatePicker, [{
+	        key: 'renderPopover',
+	        value: function renderPopover() {
+	            return _react2.default.createElement(
+	                _reactBootstrap.Popover,
+	                { id: this.state.id, className: 'gm-datepicker-popover' },
+	                _react2.default.createElement(_calendar2.default, { selected: this.props.date, onSelect: this.handleSelect })
+	            );
+	        }
+	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(date) {
+	            if (this.refs.target) {
+	                this.refs.target.click();
+	            } else {
+	                this.props.target().click();
+	            }
+	            this.props.onChange(date);
+	        }
+	    }, {
+	        key: 'handleChange',
+	        value: function handleChange(event) {
+	            // 只允许合法的指传递出去
+	            if (/\d\d\d\d-\d\d-\d\d/.test(event.target.value)) {
+	                this.props.onChange((0, _moment2.default)(event.target.value).toDate());
+	            } else {
+	                this.props.onChange(null);
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-datepicker' },
+	                _react2.default.createElement(
+	                    _reactBootstrap.OverlayTrigger,
+	                    { trigger: 'click',
+	                        rootClose: true,
+	                        placement: 'bottom',
+	                        overlay: this.renderPopover() },
+	                    this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text',
+	                        className: this.props.inputClassName,
+	                        placeholder: this.props.placeholder,
+	                        ref: 'target',
+	                        value: this.props.date ? (0, _moment2.default)(this.props.date).format('YYYY-MM-DD') : '',
+	                        onChange: this.handleChange })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DatePicker;
+	}(_react2.default.Component);
+
+	DatePicker.propTypes = {
+	    date: _react.PropTypes.object,
+	    onChange: _react.PropTypes.func.isRequired,
+	    inputClassName: _react.PropTypes.string,
+	    target: _react.PropTypes.func,
+	    placeholder: _react.PropTypes.string
+	};
 
 	exports.default = DatePicker;
 
@@ -2696,6 +2831,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -2712,77 +2849,105 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var DateRangePicker = _react2.default.createClass({
-	    displayName: 'DateRangePicker',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	    propTypes: {
-	        begin: _react2.default.PropTypes.object.isRequired,
-	        end: _react2.default.PropTypes.object.isRequired,
-	        onChange: _react2.default.PropTypes.func.isRequired,
-	        inputClassName: _react2.default.PropTypes.string,
-	        target: _react2.default.PropTypes.func
-	    },
-	    getInitialState: function getInitialState() {
-	        return {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var noop = function noop() {};
+
+	var DateRangePicker = function (_React$Component) {
+	    _inherits(DateRangePicker, _React$Component);
+
+	    function DateRangePicker(props) {
+	        _classCallCheck(this, DateRangePicker);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DateRangePicker).call(this, props));
+
+	        _this.state = {
 	            beginId: '_gm_datepicker_id' + (Math.random() + '').slice(2),
 	            endId: '_gm_datepicker_id' + (Math.random() + '').slice(2)
 	        };
-	    },
-	    handleSelect: function handleSelect(type, date) {
-	        if (type === 'begin') {
-	            this.props.onChange(date, this.props.end);
-	        } else {
-	            this.props.onChange(this.props.begin, date);
-	        }
-	        this.refs.endTarget.click();
-	    },
-	    renderPopoverBegin: function renderPopoverBegin() {
-	        return _react2.default.createElement(
-	            _reactBootstrap.Popover,
-	            { id: this.state.beginId, className: 'gm-datepicker-popover' },
-	            _react2.default.createElement(_calendar2.default, { selected: this.props.begin, onSelect: this.handleSelect.bind(this, 'begin') })
-	        );
-	    },
-	    renderPopoverEnd: function renderPopoverEnd() {
-	        return _react2.default.createElement(
-	            _reactBootstrap.Popover,
-	            { id: this.state.endId, className: 'gm-datepicker-popover' },
-	            _react2.default.createElement(_calendar2.default, { selected: this.props.end, onSelect: this.handleSelect.bind(this, 'end') })
-	        );
-	    },
-	    handleChange: function handleChange() {},
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-datepicker gm-daterangepicker' },
-	            _react2.default.createElement(
-	                _reactBootstrap.OverlayTrigger,
-	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverBegin() },
-	                _react2.default.createElement(
-	                    'div',
-	                    { ref: 'beginTarget' },
-	                    _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName,
-	                        value: (0, _moment2.default)(this.props.begin).format('YYYY-MM-DD'), onChange: this.handleChange })
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'span',
-	                null,
-	                ' ~ '
-	            ),
-	            _react2.default.createElement(
-	                _reactBootstrap.OverlayTrigger,
-	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverEnd() },
-	                _react2.default.createElement(
-	                    'div',
-	                    { ref: 'endTarget' },
-	                    _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName,
-	                        value: (0, _moment2.default)(this.props.end).format('YYYY-MM-DD'), onChange: this.handleChange })
-	                )
-	            )
-	        );
+
+	        _this.handleSelect = _this.handleSelect.bind(_this);
+
+	        return _this;
 	    }
-	});
+
+	    _createClass(DateRangePicker, [{
+	        key: 'handleSelect',
+	        value: function handleSelect(type, date) {
+	            if (type === 'begin') {
+	                this.props.onChange(date, this.props.end);
+	            } else {
+	                this.props.onChange(this.props.begin, date);
+	            }
+	            this.refs.endTarget.click();
+	        }
+	    }, {
+	        key: 'renderPopoverBegin',
+	        value: function renderPopoverBegin() {
+	            return _react2.default.createElement(
+	                _reactBootstrap.Popover,
+	                { id: this.state.beginId, className: 'gm-datepicker-popover' },
+	                _react2.default.createElement(_calendar2.default, { selected: this.props.begin, onSelect: this.handleSelect.bind(this, 'begin') })
+	            );
+	        }
+	    }, {
+	        key: 'renderPopoverEnd',
+	        value: function renderPopoverEnd() {
+	            return _react2.default.createElement(
+	                _reactBootstrap.Popover,
+	                { id: this.state.endId, className: 'gm-datepicker-popover' },
+	                _react2.default.createElement(_calendar2.default, { selected: this.props.end, onSelect: this.handleSelect.bind(this, 'end') })
+	            );
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-datepicker gm-daterangepicker' },
+	                _react2.default.createElement(
+	                    _reactBootstrap.OverlayTrigger,
+	                    { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverBegin() },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { ref: 'beginTarget' },
+	                        _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName,
+	                            value: (0, _moment2.default)(this.props.begin).format('YYYY-MM-DD'), onChange: noop })
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    ' ~ '
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.OverlayTrigger,
+	                    { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverEnd() },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { ref: 'endTarget' },
+	                        _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName,
+	                            value: (0, _moment2.default)(this.props.end).format('YYYY-MM-DD'), onChange: noop })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DateRangePicker;
+	}(_react2.default.Component);
+
+	DateRangePicker.propTypes = {
+	    begin: _react.PropTypes.object.isRequired,
+	    end: _react.PropTypes.object.isRequired,
+	    onChange: _react.PropTypes.func.isRequired,
+	    inputClassName: _react.PropTypes.string,
+	    target: _react.PropTypes.func
+	};
 
 	exports.default = DateRangePicker;
 
@@ -2795,6 +2960,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -2810,6 +2977,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var noop = function noop() {};
+
 	// 搞的复杂了，后续要补充文档
 
 	var dialogContainerId = '_gm_dialog_container' + (Math.random() + '').slice(2);
@@ -2820,8 +2995,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    dialogContainer.id = dialogContainerId;
 	    document.body.appendChild(dialogContainer);
 	}
-
-	var DialogStatics = {
+	var DialogStatics = {};
+	DialogStatics = {
 	    alert: function alert(options) {
 	        options.type = 'alert';
 	        return DialogStatics.dialog(options);
@@ -2835,6 +3010,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return DialogStatics.dialog(options);
 	    },
 	    dialog: function dialog(options) {
+	        options = Object.assign({}, options, { bsSize: 'sm' });
 	        return new Promise(function (resolve, reject) {
 	            var div = document.createElement('div');
 	            dialogContainer.appendChild(div);
@@ -2851,97 +3027,146 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	};
 
-	var Dialog = _react2.default.createClass({
-	    displayName: 'Dialog',
+	var Dialog = function (_React$Component) {
+	    _inherits(Dialog, _React$Component);
 
-	    statics: DialogStatics,
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            show: false,
-	            title: '提示',
-	            onCancel: function onCancel() {},
-	            onOK: function onOK() {},
-	            bsSize: 'sm',
-	            noCancel: false, // 由于涉及原因只能这样搞了，传true 来屏蔽按钮
-	            noOK: false
+	    function Dialog(props) {
+	        _classCallCheck(this, Dialog);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Dialog).call(this, props));
+
+	        _this.state = {
+	            show: props.show
 	        };
-	    },
-	    getInitialState: function getInitialState() {
-	        return {
-	            show: this.props.show
-	        };
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        if ('show' in nextProps) {
+	        _this.handleCancel = _this.handleCancel.bind(_this);
+	        _this.handleOk = _this.handleOk.bind(_this);
+	        _this.handleEnter = _this.handleEnter.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(Dialog, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if ('show' in nextProps) {
+	                this.setState({
+	                    show: nextProps.show
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'handleCancel',
+	        value: function handleCancel() {
+	            this.props.onCancel();
 	            this.setState({
-	                show: nextProps.show
-	            });
-	        }
-	    },
-	    handleCancel: function handleCancel() {
-	        this.setState({
-	            show: false
-	        });
-	        this.props.onCancel();
-	    },
-	    handleOk: function handleOk() {
-	        var _this = this;
-
-	        var result = this.props.onOK(this.props.type === 'prompt' ? this.refs.input.value : undefined);
-	        if (result === false) {
-	            return;
-	        }
-	        Promise.resolve(result).then(function () {
-	            _this.setState({
 	                show: false
 	            });
-	        });
-	    },
-	    handleEnter: function handleEnter(event) {
-	        if (event.keyCode === 13) {
-	            this.handleOk();
 	        }
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            _reactBootstrap.Modal,
-	            { show: this.state.show, onHide: this.handleCancel, bsSize: this.props.bsSize },
-	            _react2.default.createElement(
-	                _reactBootstrap.Modal.Header,
-	                { closeButton: true },
-	                this.props.title
-	            ),
-	            _react2.default.createElement(
-	                _reactBootstrap.Modal.Body,
-	                null,
+	    }, {
+	        key: 'handleOk',
+	        value: function handleOk() {
+	            var _this2 = this;
+
+	            var result = this.props.onOK(this.props.type === 'prompt' ? this.refs.input.value : undefined);
+	            if (result === false) {
+	                return;
+	            }
+	            Promise.resolve(result).then(function () {
+	                _this2.setState({
+	                    show: false
+	                });
+	            });
+	        }
+	    }, {
+	        key: 'handleEnter',
+	        value: function handleEnter(event) {
+	            if (event.keyCode === 13) {
+	                this.handleOk();
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var bsSize = _props.bsSize;
+	            var title = _props.title;
+	            var children = _props.children;
+	            var type = _props.type;
+	            var promptDefaultValue = _props.promptDefaultValue;
+	            var noCancel = _props.noCancel;
+	            var noOK = _props.noOK;
+
+	            var modalProps = {
+	                show: this.state.show,
+	                ohHide: this.handleCancel
+	            };
+	            if (bsSize !== 'md') {
+	                modalProps.bsSize = bsSize;
+	            }
+	            return _react2.default.createElement(
+	                _reactBootstrap.Modal,
+	                modalProps,
 	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    this.props.children,
-	                    this.props.type === 'prompt' && _react2.default.createElement('input', { autoFocus: true, defaultValue: this.props.promptDefaultValue, ref: 'input', type: 'text',
-	                        style: { display: 'block', width: '100%' },
-	                        onKeyDown: this.handleEnter })
+	                    _reactBootstrap.Modal.Header,
+	                    { closeButton: true },
+	                    title
 	                ),
-	                _react2.default.createElement('div', { className: 'gm-gap10' }),
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'text-right' },
-	                    this.props.type !== 'alert' && !this.props.noCancel && _react2.default.createElement(
-	                        'button',
-	                        { className: 'btn btn-default', onClick: this.handleCancel },
-	                        '取消'
+	                    _reactBootstrap.Modal.Body,
+	                    null,
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        children,
+	                        type === 'prompt' && _react2.default.createElement('input', { autoFocus: true, defaultValue: promptDefaultValue, ref: 'input', type: 'text',
+	                            style: { display: 'block', width: '100%' },
+	                            onKeyDown: this.handleEnter })
 	                    ),
 	                    _react2.default.createElement('div', { className: 'gm-gap10' }),
-	                    !this.props.noOK && _react2.default.createElement(
-	                        'button',
-	                        { className: 'btn btn-primary', onClick: this.handleOk },
-	                        '确定'
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'text-right' },
+	                        type !== 'alert' && !noCancel && _react2.default.createElement(
+	                            'button',
+	                            { className: 'btn btn-default', onClick: this.handleCancel },
+	                            '取消'
+	                        ),
+	                        _react2.default.createElement('div', { className: 'gm-gap10' }),
+	                        !noOK && _react2.default.createElement(
+	                            'button',
+	                            { className: 'btn btn-primary', onClick: this.handleOk },
+	                            '确定'
+	                        )
 	                    )
 	                )
-	            )
-	        );
-	    }
-	});
+	            );
+	        }
+	    }]);
+
+	    return Dialog;
+	}(_react2.default.Component);
+
+	Object.assign(Dialog, DialogStatics);
+
+	Dialog.propTypes = {
+	    show: _react.PropTypes.bool.isRequired,
+	    title: _react.PropTypes.string,
+	    onCancel: _react.PropTypes.func,
+	    onOK: _react.PropTypes.func,
+	    bsSize: _react.PropTypes.string,
+	    noCancel: _react.PropTypes.bool,
+	    noOK: _react.PropTypes.bool,
+	    promptDefaultValue: _react.PropTypes.string
+	};
+	Dialog.defaultProps = {
+	    show: false,
+	    title: '提示',
+	    type: 'confirm',
+	    onCancel: noop,
+	    onOK: noop,
+	    bsSize: 'md',
+	    noCancel: false, // 由于涉及原因只能这样搞了，传true 来屏蔽按钮
+	    noOK: false
+	};
 
 	exports.default = Dialog;
 
@@ -3560,30 +3785,50 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Hr = _react2.default.createClass({
-	    displayName: "Hr",
-	    render: function render() {
-	        return _react2.default.createElement(
-	            "div",
-	            { className: "gm-divider" },
-	            _react2.default.createElement(
-	                "div",
-	                { className: "gm-divider-content" },
-	                typeof this.props.children === 'string' ? _react2.default.createElement(
-	                    "h4",
-	                    null,
-	                    this.props.children
-	                ) : this.props.children
-	            )
-	        );
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Hr = function (_React$Component) {
+	    _inherits(Hr, _React$Component);
+
+	    function Hr() {
+	        _classCallCheck(this, Hr);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Hr).apply(this, arguments));
 	    }
-	});
+
+	    _createClass(Hr, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "gm-divider" },
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "gm-divider-content" },
+	                    typeof this.props.children === 'string' ? _react2.default.createElement(
+	                        "h4",
+	                        null,
+	                        this.props.children
+	                    ) : this.props.children
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Hr;
+	}(_react2.default.Component);
 
 	exports.default = Hr;
 
@@ -3596,6 +3841,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -3615,190 +3862,214 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ImportLead = _react2.default.createClass({
-	    displayName: 'ImportLead',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	    propTypes: {
-	        data: _react2.default.PropTypes.object,
-	        tips: _react2.default.PropTypes.array,
-	        onEdit: _react2.default.PropTypes.func,
-	        fileTempUrl: _react2.default.PropTypes.string,
-	        disableEdit: _react2.default.PropTypes.bool,
-	        unLine: _react2.default.PropTypes.bool,
-	        disableSubmit: _react2.default.PropTypes.bool
-	    },
-	    getInitialState: function getInitialState() {
-	        return {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ImportLead = function (_React$Component) {
+	    _inherits(ImportLead, _React$Component);
+
+	    function ImportLead(props) {
+	        _classCallCheck(this, ImportLead);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ImportLead).call(this, props));
+
+	        _this.state = {
 	            selectedFile: null
 	        };
-	    },
-	    render: function render() {
-	        var _this = this;
+	        _this.handleSubmit = _this.handleSubmit.bind(_this);
+	        _this.handleDrop = _this.handleDrop.bind(_this);
+	        return _this;
+	    }
 
-	        var t = this;
-	        var data = _underscore2.default.extend({ columns: [], list: [] }, t.props.data);
-	        var tips = t.props.tips || [];
+	    _createClass(ImportLead, [{
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
 
-	        var tipsMap = {};
+	            var data = _underscore2.default.extend({ columns: [], list: [] }, this.props.data);
+	            var tips = this.props.tips || [];
 
-	        var lineMap = _underscore2.default.map(data.list, function () {
-	            return false;
-	        });
+	            var tipsMap = {};
 
-	        _underscore2.default.each(tips, function (tip, index) {
-	            tipsMap[tip.index] = tipsMap[tip.index] || {};
-	            tip._index = index;
-	            tipsMap[tip.index][tip.field] = tip;
+	            var lineMap = _underscore2.default.map(data.list, function () {
+	                return false;
+	            });
 
-	            if (!tip.modifyed) {
-	                lineMap[tip.index] = true;
-	            }
-	        });
+	            _underscore2.default.each(tips, function (tip, index) {
+	                tipsMap[tip.index] = tipsMap[tip.index] || {};
+	                tip._index = index;
+	                tipsMap[tip.index][tip.field] = tip;
 
-	        var tableBody = data.list.map(function (elist, index) {
+	                if (!tip.modifyed) {
+	                    lineMap[tip.index] = true;
+	                }
+	            });
 
-	            var tds = data.columns.map(function (col, i) {
-	                var tip = tipsMap[index] && tipsMap[index][col.field];
-	                return tip ? _react2.default.createElement(
-	                    'td',
-	                    { key: i, className: tip.modifyed ? "gm-bg-info" : "gm-bg-invalid" },
-	                    t.props.disableEdit ? elist[col.field] : _react2.default.createElement('input', { type: 'text', value: elist[col.field],
-	                        onChange: t.handleEdit.bind(t, index, col.field, tip._index) }),
-	                    _react2.default.createElement(
-	                        'small',
-	                        { className: 'gm-import-lead-tip badge' },
+	            var tableBody = data.list.map(function (eList, index) {
+	                var tds = data.columns.map(function (col, i) {
+	                    var tip = tipsMap[index] && tipsMap[index][col.field];
+	                    return tip ? _react2.default.createElement(
+	                        'td',
+	                        { key: i, className: tip.modifyed ? "gm-bg-info" : "gm-bg-invalid" },
+	                        _this2.props.disableEdit ? eList[col.field] : _react2.default.createElement('input', { type: 'text',
+	                            value: eList[col.field],
+	                            onChange: _this2.handleEdit.bind(_this2, index, col.field, tip._index) }),
 	                        _react2.default.createElement(
-	                            'i',
-	                            null,
-	                            tip.msg
+	                            'small',
+	                            { className: 'gm-import-lead-tip badge' },
+	                            _react2.default.createElement(
+	                                'i',
+	                                null,
+	                                tip.msg
+	                            )
 	                        )
-	                    )
-	                ) : _react2.default.createElement(
-	                    'td',
-	                    { key: i },
-	                    elist[col.field]
+	                    ) : _react2.default.createElement(
+	                        'td',
+	                        { key: i },
+	                        eList[col.field]
+	                    );
+	                });
+
+	                return _react2.default.createElement(
+	                    'tr',
+	                    { key: index },
+	                    tds
 	                );
 	            });
 
+	            var canSubmit = _underscore2.default.filter(tips, function (value) {
+	                return value.modifyed === true;
+	            }).length === tips.length;
+
+	            var filename = this.state.selectedFile ? this.state.selectedFile.name : '';
+
+	            var fileTempUrl = this.props.fileTempUrl;
+
 	            return _react2.default.createElement(
-	                'tr',
-	                { key: index },
-	                tds
-	            );
-	        });
-
-	        var canSubmit = _underscore2.default.filter(tips, function (value) {
-	            return value.modifyed === true;
-	        }).length === tips.length;
-
-	        var filename = t.state.selectedFile ? t.state.selectedFile.name : '';
-
-	        var fileTempUrl = t.props.fileTempUrl;
-
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-import-lead' },
-	            _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'gm-import-lead' },
 	                _react2.default.createElement(
 	                    'div',
 	                    null,
 	                    _react2.default.createElement(
-	                        _droper2.default,
-	                        { className: 'gm-droper-wrap', onDrop: this.handleDrop, accept: '.xlsx' },
-	                        _react2.default.createElement(
-	                            'button',
-	                            { className: 'btn btn-primary btn-sm' },
-	                            '上传xlsx'
-	                        )
-	                    ),
-	                    '    ',
-	                    !t.props.disableSubmit && _react2.default.createElement(
-	                        'button',
-	                        { disabled: !canSubmit, className: 'btn btn-primary btn-sm',
-	                            onClick: this.handleSubmit },
-	                        '提交'
-	                    ),
-	                    '    ',
-	                    fileTempUrl ? _react2.default.createElement(
-	                        'a',
-	                        { href: fileTempUrl, target: 'blank' },
-	                        '上传模板下载'
-	                    ) : undefined,
-	                    _react2.default.createElement(
 	                        'div',
 	                        null,
-	                        filename
-	                    )
-	                ),
-	                !t.props.unLine && _react2.default.createElement(
-	                    'div',
-	                    { className: 'gm-import-line clearfix' },
-	                    lineMap.map(function (v, i) {
-	                        return _react2.default.createElement('div', { key: i, className: v ? "tip" : "", onClick: _this.handleLine.bind(_this, i) });
-	                    })
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'gm-import-lead-content', ref: 'content' },
-	                data ? _react2.default.createElement(
-	                    'table',
-	                    { className: 'table table-condensed table-bordered', ref: 'table' },
-	                    _react2.default.createElement(
-	                        'thead',
-	                        null,
 	                        _react2.default.createElement(
-	                            'tr',
+	                            _droper2.default,
+	                            { className: 'gm-droper-wrap', onDrop: this.handleDrop, accept: '.xlsx' },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { className: 'btn btn-primary btn-sm' },
+	                                '上传xlsx'
+	                            )
+	                        ),
+	                        '    ',
+	                        !this.props.disableSubmit && _react2.default.createElement(
+	                            'button',
+	                            { disabled: !canSubmit, className: 'btn btn-primary btn-sm',
+	                                onClick: this.handleSubmit },
+	                            '提交'
+	                        ),
+	                        '    ',
+	                        fileTempUrl ? _react2.default.createElement(
+	                            'a',
+	                            { href: fileTempUrl, target: 'blank' },
+	                            '上传模板下载'
+	                        ) : undefined,
+	                        _react2.default.createElement(
+	                            'div',
 	                            null,
-	                            data.columns.map(function (col, i) {
-	                                return _react2.default.createElement(
-	                                    'th',
-	                                    { key: i },
-	                                    col.name
-	                                );
-	                            })
+	                            filename
 	                        )
 	                    ),
-	                    _react2.default.createElement(
-	                        'tbody',
-	                        null,
-	                        tableBody
+	                    !this.props.unLine && _react2.default.createElement(
+	                        'div',
+	                        { className: 'gm-import-line clearfix' },
+	                        lineMap.map(function (v, i) {
+	                            return _react2.default.createElement('div', { key: i, className: v ? "tip" : "",
+	                                onClick: _this2.handleLine.bind(_this2, i) });
+	                        })
 	                    )
-	                ) : undefined
-	            )
-	        );
-	    },
-	    handleEdit: function handleEdit(index, field, i, event) {
-	        var t = this;
-	        if (t.props.onEdit) {
-	            t.props.onEdit(index, field, event.target.value, i);
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'gm-import-lead-content', ref: 'content' },
+	                    data ? _react2.default.createElement(
+	                        'table',
+	                        { className: 'table table-condensed table-bordered', ref: 'table' },
+	                        _react2.default.createElement(
+	                            'thead',
+	                            null,
+	                            _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                data.columns.map(function (col, i) {
+	                                    return _react2.default.createElement(
+	                                        'th',
+	                                        { key: i },
+	                                        col.name
+	                                    );
+	                                })
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'tbody',
+	                            null,
+	                            tableBody
+	                        )
+	                    ) : undefined
+	                )
+	            );
 	        }
-	    },
-	    handleSubmit: function handleSubmit(event) {
-	        var t = this;
-	        event.preventDefault();
-	        if (t.props.onSubmit) {
-	            t.props.onSubmit();
+	    }, {
+	        key: 'handleEdit',
+	        value: function handleEdit(index, field, i, event) {
+	            if (this.props.onEdit) {
+	                this.props.onEdit(index, field, event.target.value, i);
+	            }
 	        }
-	    },
-	    handleLine: function handleLine(index) {
-	        var t = this;
-	        var content = _reactDom2.default.findDOMNode(t.refs.content);
-	        var table = _reactDom2.default.findDOMNode(t.refs.table);
-	        content.scrollTop = index / t.props.data.list.length * table.offsetHeight;
-	    },
-	    handleDrop: function handleDrop(files) {
-	        var t = this;
-	        t.setState({
-	            selectedFile: files[0]
-	        });
-	        if (files[0] && t.props.onDrop) {
-	            t.props.onDrop(files[0]);
+	    }, {
+	        key: 'handleSubmit',
+	        value: function handleSubmit(event) {
+	            event.preventDefault();
+	            if (this.props.onSubmit) {
+	                this.props.onSubmit();
+	            }
 	        }
-	    }
-	});
+	    }, {
+	        key: 'handleLine',
+	        value: function handleLine(index) {
+	            var content = _reactDom2.default.findDOMNode(this.refs.content),
+	                table = _reactDom2.default.findDOMNode(this.refs.table);
+	            content.scrollTop = index / this.props.data.list.length * table.offsetHeight;
+	        }
+	    }, {
+	        key: 'handleDrop',
+	        value: function handleDrop(files) {
+	            this.setState({
+	                selectedFile: files[0]
+	            });
+	            if (files[0] && this.props.onDrop) {
+	                this.props.onDrop(files[0]);
+	            }
+	        }
+	    }]);
+
+	    return ImportLead;
+	}(_react2.default.Component);
+
+	ImportLead.propTypes = {
+	    data: _react.PropTypes.object,
+	    tips: _react.PropTypes.array,
+	    onEdit: _react.PropTypes.func,
+	    fileTempUrl: _react.PropTypes.string,
+	    disableEdit: _react.PropTypes.bool,
+	    unLine: _react.PropTypes.bool,
+	    disableSubmit: _react.PropTypes.bool
+	};
 
 	exports.default = ImportLead;
 
@@ -3811,6 +4082,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -3832,115 +4105,139 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Navigation = _react2.default.createClass({
-	    displayName: 'Navigation',
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            data: [],
-	            select: null,
-	            onSelect: function onSelect() {}
-	        };
-	    },
-	    getInitialState: function getInitialState() {
-	        return {
-	            data: this.props.data,
-	            select: this.props.select
-	        };
-	    },
-	    processData: function processData() {
-	        var _this = this;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	        return _underscore2.default.map(this.state.data, function (value) {
-	            value.open = value.open || false;
-	            if (value.sub) {
-	                _underscore2.default.map(value.sub, function (val) {
-	                    val.open = val.open || false;
-	                    if (val.key === _this.state.select) {
-	                        value.open = true;
-	                    }
-	                });
-	            }
-	            return value;
-	        });
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        this.setState({
-	            select: nextProps.select
-	        });
-	    },
-	    render: function render() {
-	        var _this2 = this;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	        var data = this.processData();
-	        return _react2.default.createElement(
-	            'div',
-	            { className: (0, _classnames2.default)("gm-navigation", this.props.className) },
-	            _react2.default.createElement(
-	                'ul',
-	                { className: 'gm-navigation-level1' },
-	                _underscore2.default.map(data, function (value) {
-	                    return _react2.default.createElement(
-	                        'li',
-	                        { key: value.key },
-	                        _react2.default.createElement(
-	                            _flex2.default,
-	                            { alignCenter: true, className: "gm-navigation-title" + _this2.getCurrentClassName(value.key) },
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var noop = function noop() {};
+
+	var Navigation = function (_React$Component) {
+	    _inherits(Navigation, _React$Component);
+
+	    function Navigation(props) {
+	        _classCallCheck(this, Navigation);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navigation).call(this, props));
+
+	        _this.state = {
+	            data: _this.props.data,
+	            select: _this.props.select
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Navigation, [{
+	        key: 'processData',
+	        value: function processData() {
+	            var _this2 = this;
+
+	            return _underscore2.default.map(this.state.data, function (value) {
+	                value.open = value.open || false;
+	                if (value.sub) {
+	                    _underscore2.default.map(value.sub, function (val) {
+	                        val.open = val.open || false;
+	                        if (val.key === _this2.state.select) {
+	                            value.open = true;
+	                        }
+	                    });
+	                }
+	                return value;
+	            });
+	        }
+	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.setState({
+	                select: nextProps.select
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this3 = this;
+
+	            var data = this.processData();
+	            return _react2.default.createElement(
+	                'div',
+	                { className: (0, _classnames2.default)("gm-navigation", this.props.className) },
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'gm-navigation-level1' },
+	                    _underscore2.default.map(data, function (value) {
+	                        return _react2.default.createElement(
+	                            'li',
+	                            { key: value.key },
 	                            _react2.default.createElement(
 	                                _flex2.default,
-	                                { flex: true, onClick: _this2.handleClick.bind(_this2, value) },
-	                                value.title
+	                                { alignCenter: true, className: (0, _classnames2.default)("gm-navigation-title", {
+	                                        'current': _this3.state.select === value.key
+	                                    }) },
+	                                _react2.default.createElement(
+	                                    _flex2.default,
+	                                    { flex: true, onClick: _this3.handleClick.bind(_this3, value) },
+	                                    value.title
+	                                ),
+	                                value.sub && _react2.default.createElement('span', { className: (0, _classnames2.default)("glyphicon", {
+	                                        'glyphicon-menu-up': value.open,
+	                                        'glyphicon-menu-down': !value.open
+	                                    }) })
 	                            ),
-	                            value.sub && _react2.default.createElement('span', {
-	                                className: "glyphicon " + (value.open ? 'glyphicon-menu-up' : ' glyphicon-menu-down') })
-	                        ),
-	                        value.sub && _react2.default.createElement(
-	                            _reactBootstrap.Collapse,
-	                            { 'in': value.open },
-	                            _react2.default.createElement(
-	                                'ul',
-	                                { className: 'gm-navigation-level2' },
-	                                _underscore2.default.map(value.sub, function (val) {
-	                                    return _react2.default.createElement(
-	                                        'li',
-	                                        { key: val.key },
-	                                        _react2.default.createElement(
-	                                            'div',
-	                                            {
-	                                                className: "gm-navigation-title" + _this2.getCurrentClassName(val.key),
-	                                                onClick: _this2.handleClick.bind(_this2, val) },
-	                                            val.title
-	                                        )
-	                                    );
-	                                })
-	                            )
-	                        )
-	                    );
-	                })
-	            )
-	        );
-	    },
-	    handleClick: function handleClick(value) {
-	        if (value.sub) {
-	            this.handleToggle(value);
-	        } else {
-	            this.handleSelect(value);
+	                            value.sub ? _react2.default.createElement(
+	                                _reactBootstrap.Collapse,
+	                                { 'in': value.open },
+	                                _react2.default.createElement(
+	                                    'ul',
+	                                    { className: 'gm-navigation-level2' },
+	                                    _underscore2.default.map(value.sub, function (val) {
+	                                        return _react2.default.createElement(
+	                                            'li',
+	                                            { key: val.key },
+	                                            _react2.default.createElement(
+	                                                'div',
+	                                                {
+	                                                    className: "gm-navigation-title" + _this3.getCurrentClassName(val.key),
+	                                                    onClick: _this3.handleClick.bind(_this3, val) },
+	                                                val.title
+	                                            )
+	                                        );
+	                                    })
+	                                )
+	                            ) : undefined
+	                        );
+	                    })
+	                )
+	            );
 	        }
-	    },
-	    handleSelect: function handleSelect(value) {
-	        this.setState({
-	            select: value.key
-	        });
-	        this.props.onSelect(value.key);
-	    },
-	    handleToggle: function handleToggle(value) {
-	        // 先这样恶心处理吧
-	        value.open = !value.open;
-	        this.setState(this.state);
-	    },
-	    getCurrentClassName: function getCurrentClassName(key) {
-	        return this.state.select === key ? ' current ' : ' ';
-	    }
-	});
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            console.error('Navigation are deprecated!');
+	        }
+	    }, {
+	        key: 'handleClick',
+	        value: function handleClick(value) {
+	            if (value.sub) {
+	                value.open = !value.open;
+	                this.setState(this.state);
+	            } else {
+	                this.setState({
+	                    select: value.key
+	                });
+	                this.props.onSelect(value.key);
+	            }
+	        }
+	    }]);
+
+	    return Navigation;
+	}(_react2.default.Component);
+
+	Navigation.defaultProps = {
+	    data: [],
+	    select: null,
+	    onSelect: noop
+	};
 
 	exports.default = Navigation;
 
@@ -3954,6 +4251,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -3963,6 +4262,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var containerId = '_gm_nprogress_container' + (Math.random() + '').slice(2);
 	var container = document.getElementById(containerId);
@@ -3979,56 +4284,84 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _reactDom2.default.render(_react2.default.createElement(NProgress, null), container);
 	    },
 	    done: function done() {
-	        _reactDom2.default.render(_react2.default.createElement(NProgress, { precent: 100 }), container);
+	        _reactDom2.default.render(_react2.default.createElement(NProgress, { percent: 100 }), container);
 	        setTimeout(function () {
 	            _reactDom2.default.unmountComponentAtNode(container);
 	        }, 250);
 	    }
 	};
 
-	var NProgress = _react2.default.createClass({
-	    displayName: 'NProgress',
+	var NProgress = function (_React$Component) {
+	    _inherits(NProgress, _React$Component);
 
-	    statics: NProgressStatics,
-	    getInitialState: function getInitialState() {
-	        return {
-	            precent: 0
+	    function NProgress(props) {
+	        _classCallCheck(this, NProgress);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NProgress).call(this, props));
+
+	        _this.state = {
+	            percent: 0
 	        };
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        if (nextProps.precent) {
-	            clearTimeout(this.timer);
-	            this.setState({
-	                precent: nextProps.precent
-	            });
-	        }
-	    },
-	    render: function render() {
-	        var percent = 100 - this.state.precent;
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-nprogress', style: { transform: "translate3d(-" + percent + "%, 0px, 0px)" } },
-	            _react2.default.createElement('div', { className: 'gm-nprogress-head' })
-	        );
-	    },
-	    componentDidMount: function componentDidMount() {
-	        this.doInc();
-	    },
-	    componentWillUnmount: function componentWillUnmount() {
-	        clearTimeout(this.timer);
-	    },
-	    doInc: function doInc() {
-	        var t = this;
-	        t.timer = setTimeout(function () {
-	            t.setState({
-	                precent: t.state.precent + (100 - t.state.precent) * 0.2
-	            });
-	            if (t.state.precent < 90) {
-	                t.doInc();
-	            }
-	        }, 150);
+	        _this.timer = null;
+	        return _this;
 	    }
-	});
+
+	    _createClass(NProgress, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if (nextProps.percent) {
+	                clearTimeout(this.timer);
+	                this.setState({
+	                    percent: nextProps.percent
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var percent = 100 - this.state.percent;
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-nprogress', style: { transform: "translate3d(-" + percent + "%, 0px, 0px)" } },
+	                _react2.default.createElement('div', { className: 'gm-nprogress-head' })
+	            );
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.doInc();
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            clearTimeout(this.timer);
+	        }
+	    }, {
+	        key: 'doInc',
+	        value: function doInc() {
+	            var _this2 = this;
+
+	            this.timer = setTimeout(function () {
+	                var percent = _this2.state.percent;
+
+	                _this2.setState({
+	                    percent: percent + (100 - percent) * 0.2
+	                });
+	                if (percent < 90) {
+	                    _this2.doInc();
+	                }
+	            }, 150);
+	        }
+	    }]);
+
+	    return NProgress;
+	}(_react2.default.Component);
+
+	Object.assign(NProgress, NProgressStatics);
+
+	NProgress.propTypes = {
+	    percent: _react.PropTypes.number
+	};
 
 	exports.default = NProgress;
 
@@ -4069,6 +4402,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// 略复杂了，脱离初衷，应该把单选和多选版本分开，改代码请周知
 
 	var getPropsSelected = function getPropsSelected(props) {
 	    if (props.multiple) {
@@ -4152,7 +4487,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement(
 	                    _flex2.default,
 	                    { className: 'gm-search-select-input' },
-	                    _underscore2.default.map(this.state.selected, function (value, i) {
+	                    this.props.multiple ? _underscore2.default.map(this.state.selected, function (value, i) {
 	                        return _react2.default.createElement(
 	                            _flex2.default,
 	                            { key: i, alignStart: true, className: 'selected' },
@@ -4165,7 +4500,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                '×'
 	                            )
 	                        );
-	                    }),
+	                    }) : undefined,
 	                    _react2.default.createElement(
 	                        _flex2.default,
 	                        { flex: true },
@@ -4250,7 +4585,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.doSelect(this.state.selected.concat(value));
 	            }
 	            this.setState({
-	                value: ''
+	                value: this.props.multiple ? '' : value.name
 	            });
 	            if (this.state.in) {
 	                this.refs.target.click();
@@ -4529,10 +4864,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            ) : undefined,
 	                            _underscore2.default.map(columns, function (value, index) {
 	                                var _value$props = value.props;
+	                                var children = _value$props.children;
 	                                var field = _value$props.field;
 	                                var name = _value$props.name;
 
-	                                var rest = _objectWithoutProperties(_value$props, ['field', 'name']);
+	                                var rest = _objectWithoutProperties(_value$props, ['children', 'field', 'name']);
 
 	                                return _react2.default.createElement(
 	                                    'th',
@@ -4565,7 +4901,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            _react2.default.createElement(
 	                                'td',
 	                                { colSpan: '99', className: 'text-center' },
-	                                '没有数据'
+	                                enableEmptyTip === true ? '没有数据' : enableEmptyTip
 	                            )
 	                        ) : undefined,
 	                        !loading ? _underscore2.default.map(list, function (value, index) {
@@ -4579,17 +4915,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                        onChange: _this6.handleSelect.bind(_this6, select, index) })
 	                                ) : undefined,
 	                                _underscore2.default.map(columns, function (v, i) {
-	                                    if (typeof v.props.children === 'function') {
+	                                    var _v$props = v.props;
+	                                    var children = _v$props.children;
+	                                    var field = _v$props.field;
+	                                    var name = _v$props.name;
+
+	                                    var rest = _objectWithoutProperties(_v$props, ['children', 'field', 'name']);
+
+	                                    if (typeof children === 'function') {
 	                                        return _react2.default.createElement(
 	                                            'td',
-	                                            { key: i },
-	                                            v.props.children(value[v.props.field], index)
+	                                            _extends({ key: i }, rest),
+	                                            children(value[field], index)
 	                                        );
 	                                    } else {
 	                                        return _react2.default.createElement(
 	                                            'td',
-	                                            { key: i },
-	                                            value[v.props.field]
+	                                            _extends({ key: i }, rest),
+	                                            value[field]
 	                                        );
 	                                    }
 	                                }),
@@ -4637,7 +4980,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	Sheet.propTypes = {
 	    list: _react.PropTypes.array.isRequired,
 	    loading: _react.PropTypes.bool,
-	    enableEmptyTip: _react.PropTypes.bool
+	    enableEmptyTip: _react.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.string, _react.PropTypes.element]),
+	    className: _react.PropTypes.string
 	};
 
 	Sheet.defaultProps = {
@@ -4664,6 +5008,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -4674,66 +5020,89 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var PropTypes = _react2.default.PropTypes;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var prefix = '_react-gm_';
 
-	var Storage = _react2.default.createClass({
-	    displayName: 'Storage',
-
-	    statics: {
-	        set: function set(key, value) {
-	            localStorage.setItem(prefix + key, JSON.stringify(value));
-	        },
-	        get: function get(key) {
-	            var v = localStorage.getItem(prefix + key);
-	            return v ? JSON.parse(v) : v;
-	        },
-	        remove: function remove(key) {
-	            localStorage.removeItem(prefix + key);
-	        },
-	        clear: function clear() {
-	            localStorage.clear();
-	        },
-	        getAll: function getAll() {
-	            var result = {};
-	            var key;
-	            for (var i = 0; i < localStorage.length; i++) {
-	                key = localStorage.key(i);
-	                if (key.startsWith(prefix)) {
-	                    key = key.slice(prefix.length);
-	                    result[key] = Storage.get(key);
-	                }
+	var StorageStatics = {
+	    set: function set(key, value) {
+	        localStorage.setItem(prefix + key, JSON.stringify(value));
+	    },
+	    get: function get(key) {
+	        var v = localStorage.getItem(prefix + key);
+	        return v ? JSON.parse(v) : v;
+	    },
+	    remove: function remove(key) {
+	        localStorage.removeItem(prefix + key);
+	    },
+	    clear: function clear() {
+	        localStorage.clear();
+	    },
+	    getAll: function getAll() {
+	        var result = {};
+	        var key;
+	        for (var i = 0; i < localStorage.length; i++) {
+	            key = localStorage.key(i);
+	            if (key.startsWith(prefix)) {
+	                key = key.slice(prefix.length);
+	                result[key] = Storage.get(key);
 	            }
-	            return _underscore2.default.keys(result) ? result : null;
 	        }
-	    },
-	    propTypes: {
-	        name: PropTypes.string.isRequired,
-	        value: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.array]),
-	        autoSave: PropTypes.bool
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            useRaw: false,
-	            autoSave: true
-	        };
-	    },
-	    save: function save() {
-	        Storage.set(this.props.name, this.props.value);
-	    },
-	    componentWillUpdate: function componentWillUpdate() {
-	        if (this.props.autoSave) {
+	        return _underscore2.default.keys(result) ? result : null;
+	    }
+	};
+
+	var Storage = function (_React$Component) {
+	    _inherits(Storage, _React$Component);
+
+	    function Storage() {
+	        _classCallCheck(this, Storage);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Storage).apply(this, arguments));
+	    }
+
+	    _createClass(Storage, [{
+	        key: 'save',
+	        value: function save() {
+	            Storage.set(this.props.name, this.props.value);
+	        }
+	    }, {
+	        key: 'componentWillUpdate',
+	        value: function componentWillUpdate() {
+	            if (this.props.autoSave) {
+	                this.save();
+	            }
+	        }
+	    }, {
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
 	            this.save();
 	        }
-	    },
-	    componentWillMount: function componentWillMount() {
-	        this.save();
-	    },
-	    render: function render() {
-	        return null;
-	    }
-	});
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return null;
+	        }
+	    }]);
+
+	    return Storage;
+	}(_react2.default.Component);
+
+	Object.assign(Storage, StorageStatics);
+
+	Storage.propTypes = {
+	    name: _react.PropTypes.string.isRequired,
+	    value: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.object, _react.PropTypes.array]),
+	    autoSave: _react.PropTypes.bool
+	};
+	Storage.defaultProps = {
+	    useRaw: false,
+	    autoSave: true
+	};
 
 	exports.default = Storage;
 
@@ -4864,17 +5233,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	Switch.propTypes = {
-	    className: _react.PropTypes.string,
 	    checked: _react.PropTypes.bool,
 	    defaultChecked: _react.PropTypes.bool,
 	    disabled: _react.PropTypes.bool,
 	    checkedChildren: _react.PropTypes.any,
 	    unCheckedChildren: _react.PropTypes.any,
-	    onChange: _react.PropTypes.func
+	    onChange: _react.PropTypes.func,
+	    className: _react.PropTypes.string
 	};
 	Switch.defaultProps = {
-	    checkedChildren: null,
-	    unCheckedChildren: null,
+	    checkedChildren: 'ON',
+	    unCheckedChildren: 'OFF',
 	    defaultChecked: false,
 	    onChange: noop
 	};
@@ -4890,6 +5259,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -4907,64 +5278,95 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var TimeSpanPicker = _react2.default.createClass({
-	    displayName: 'TimeSpanPicker',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	    propTypes: {
-	        min: _react2.default.PropTypes.object,
-	        max: _react2.default.PropTypes.object,
-	        span: _react2.default.PropTypes.number,
-	        date: _react2.default.PropTypes.object.isRequired,
-	        render: _react2.default.PropTypes.func,
-	        onChange: _react2.default.PropTypes.func.isRequired,
-	        inputClassName: _react2.default.PropTypes.string,
-	        target: _react2.default.PropTypes.func
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            render: function render(value) {
-	                return (0, _moment2.default)(value).format('HH:mm');
-	            }
-	        };
-	    },
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	    getInitialState: function getInitialState() {
-	        return {
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var noop = function noop() {};
+
+	var TimeSpanPicker = function (_React$Component) {
+	    _inherits(TimeSpanPicker, _React$Component);
+
+	    function TimeSpanPicker(props) {
+	        _classCallCheck(this, TimeSpanPicker);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TimeSpanPicker).call(this, props));
+
+	        _this.state = {
 	            id: '_gm_timespanpicker_id' + (Math.random() + '').slice(2)
 	        };
-	    },
-	    renderPopover: function renderPopover() {
-	        return _react2.default.createElement(
-	            _reactBootstrap.Popover,
-	            { id: this.state.id, className: 'gm-time-span-picker-popover' },
-	            _react2.default.createElement(_timespan2.default, { min: this.props.min, max: this.props.max, span: this.props.span, selected: this.props.date,
-	                onSelect: this.handleSelect })
-	        );
-	    },
-	    handleSelect: function handleSelect(date) {
-	        if (this.refs.target) {
-	            this.refs.target.click();
-	        } else {
-	            this.props.target().click();
-	        }
-	        this.props.onChange(date);
-	    },
-	    handleChange: function handleChange() {
-	        // empty
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-time-span-picker' },
-	            _react2.default.createElement(
-	                _reactBootstrap.OverlayTrigger,
-	                { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopover() },
-	                this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, ref: 'target',
-	                    value: this.props.render(this.props.date), onChange: this.handleChange })
-	            )
-	        );
+	        _this.handleSelect = _this.handleSelect.bind(_this);
+	        return _this;
 	    }
-	});
+
+	    _createClass(TimeSpanPicker, [{
+	        key: 'renderPopover',
+	        value: function renderPopover() {
+	            return _react2.default.createElement(
+	                _reactBootstrap.Popover,
+	                { id: this.state.id,
+	                    className: 'gm-time-span-picker-popover' },
+	                _react2.default.createElement(_timespan2.default, { min: this.props.min,
+	                    max: this.props.max,
+	                    span: this.props.span,
+	                    selected: this.props.date,
+	                    onSelect: this.handleSelect })
+	            );
+	        }
+	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(date) {
+	            if (this.refs.target) {
+	                this.refs.target.click();
+	            } else {
+	                this.props.target().click();
+	            }
+	            this.props.onChange(date);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-time-span-picker' },
+	                _react2.default.createElement(
+	                    _reactBootstrap.OverlayTrigger,
+	                    { trigger: 'click',
+	                        rootClose: true,
+	                        placement: 'bottom',
+	                        overlay: this.renderPopover() },
+	                    this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text',
+	                        className: this.props.inputClassName,
+	                        ref: 'target',
+	                        value: this.props.render(this.props.date),
+	                        onChange: noop })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return TimeSpanPicker;
+	}(_react2.default.Component);
+
+	TimeSpanPicker.propTypes = {
+	    min: _react.PropTypes.object,
+	    max: _react.PropTypes.object,
+	    span: _react.PropTypes.number,
+	    date: _react.PropTypes.object.isRequired,
+	    render: _react.PropTypes.func,
+	    onChange: _react.PropTypes.func,
+	    inputClassName: _react.PropTypes.string,
+	    target: _react.PropTypes.func
+	};
+
+	TimeSpanPicker.defaultProps = {
+	    render: function render(value) {
+	        return (0, _moment2.default)(value).format('HH:mm');
+	    },
+	    onChange: noop
+	};
 
 	exports.default = TimeSpanPicker;
 
@@ -4978,6 +5380,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -4987,6 +5391,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var noop = function noop() {};
 
 	var tipContainerId = '_gm_tips_container' + (Math.random() + '').slice(2);
 	var tipsContainer = document.getElementById(tipContainerId);
@@ -5050,101 +5462,166 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	};
 
-	var TipOverlay = _react2.default.createClass({
-	    displayName: 'TipOverlay',
+	var TipOverlay = function (_React$Component) {
+	    _inherits(TipOverlay, _React$Component);
 
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            time: 3000
-	        };
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { ref: 'tipOverlay', className: 'animated fadeInRight' },
-	            _react2.default.createElement(
-	                Tip,
-	                { key: 'tip', title: this.props.title, type: this.props.type,
-	                    onClose: this.handleClose },
-	                this.props.children
-	            )
-	        );
-	    },
-	    componentDidMount: function componentDidMount() {
-	        var t = this;
-	        if (t.props.time) {
-	            t.timer = setTimeout(function () {
-	                t.fadeOut();
-	            }, t.props.time);
-	        }
-	    },
-	    componentWillUnmount: function componentWillUnmount() {
-	        clearTimeout(this.timer);
-	    },
-	    handleClose: function handleClose() {
-	        this.fadeOut();
-	    },
-	    fadeOut: function fadeOut() {
-	        var t = this;
-	        if (!t.hasClosed) {
-	            t.hasClosed = true;
-	            t.props.onClose();
-	        }
+	    function TipOverlay(props) {
+	        _classCallCheck(this, TipOverlay);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TipOverlay).call(this, props));
+
+	        _this.timer = null;
+	        _this.hasClosed = false;
+	        _this.handleClose = _this.handleClose.bind(_this);
+	        return _this;
 	    }
-	});
 
-	var Tip = _react2.default.createClass({
-	    displayName: 'Tip',
+	    _createClass(TipOverlay, [{
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var title = _props.title;
+	            var type = _props.type;
+	            var children = _props.children;
 
-	    statics: TipStatics,
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            title: '',
-	            type: 'info',
-	            onClose: function onClose() {}
-	        };
-	    },
-	    render: function render() {
-	        var iconClassName = {
-	            success: 'glyphicon glyphicon-ok-sign',
-	            info: 'glyphicon glyphicon-info-sign',
-	            warning: 'glyphicon glyphicon-exclamation-sign',
-	            danger: 'glyphicon glyphicon-remove-sign'
-	        };
-
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'gm-tip panel panel-default' },
-	            _react2.default.createElement(
-	                'button',
-	                { type: 'button', className: 'close', onClick: this.handleClose },
-	                _react2.default.createElement(
-	                    'span',
-	                    null,
-	                    '×'
-	                )
-	            ),
-	            _react2.default.createElement('i', { className: "text-" + this.props.type + ' ' + iconClassName[this.props.type] }),
-	            _react2.default.createElement(
+	            return _react2.default.createElement(
 	                'div',
-	                { className: 'panel-body' },
-	                this.props.title ? _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement(
-	                        'strong',
-	                        null,
-	                        this.props.title
-	                    )
-	                ) : undefined,
-	                this.props.children
-	            )
-	        );
-	    },
-	    handleClose: function handleClose() {
-	        this.props.onClose();
+	                { ref: 'tipOverlay', className: 'animated fadeInRight' },
+	                _react2.default.createElement(
+	                    Tip,
+	                    { title: title,
+	                        type: type,
+	                        onClose: this.handleClose },
+	                    children
+	                )
+	            );
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            var time = this.props.time;
+
+	            if (time) {
+	                this.timer = setTimeout(function () {
+	                    return _this2.fadeOut();
+	                }, time);
+	            }
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            clearTimeout(this.timer);
+	        }
+	    }, {
+	        key: 'handleClose',
+	        value: function handleClose() {
+	            this.fadeOut();
+	        }
+	    }, {
+	        key: 'fadeOut',
+	        value: function fadeOut() {
+	            if (!this.hasClosed) {
+	                this.hasClosed = true;
+	                this.props.onClose();
+	            }
+	        }
+	    }]);
+
+	    return TipOverlay;
+	}(_react2.default.Component);
+
+	TipOverlay.PropTypes = {
+	    title: _react.PropTypes.string,
+	    type: _react.PropTypes.string,
+	    onClose: _react.PropTypes.func,
+	    time: _react.PropTypes.number
+	};
+
+	TipOverlay.defaultProps = {
+	    time: 3000
+	};
+
+	var Tip = function (_React$Component2) {
+	    _inherits(Tip, _React$Component2);
+
+	    function Tip(props) {
+	        _classCallCheck(this, Tip);
+
+	        var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(Tip).call(this, props));
+
+	        _this3.handleClose = _this3.handleClose.bind(_this3);
+	        return _this3;
 	    }
-	});
+
+	    _createClass(Tip, [{
+	        key: 'render',
+	        value: function render() {
+	            var _props2 = this.props;
+	            var title = _props2.title;
+	            var type = _props2.type;
+	            var children = _props2.children;
+
+	            var iconClassName = {
+	                success: 'glyphicon glyphicon-ok-sign',
+	                info: 'glyphicon glyphicon-info-sign',
+	                warning: 'glyphicon glyphicon-exclamation-sign',
+	                danger: 'glyphicon glyphicon-remove-sign'
+	            };
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-tip panel panel-default' },
+	                _react2.default.createElement(
+	                    'button',
+	                    { type: 'button', className: 'close', onClick: this.handleClose },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        '×'
+	                    )
+	                ),
+	                _react2.default.createElement('i', { className: "text-" + type + ' ' + iconClassName[type] }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'panel-body' },
+	                    title ? _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'strong',
+	                            null,
+	                            title
+	                        )
+	                    ) : undefined,
+	                    children
+	                )
+	            );
+	        }
+	    }, {
+	        key: 'handleClose',
+	        value: function handleClose() {
+	            this.props.onClose();
+	        }
+	    }]);
+
+	    return Tip;
+	}(_react2.default.Component);
+
+	Tip.propTypes = {
+	    title: _react.PropTypes.string,
+	    type: _react.PropTypes.string,
+	    onClose: _react.PropTypes.func
+	};
+
+	Tip.defaultProps = {
+	    title: '',
+	    type: 'info',
+	    onClose: noop
+	};
+
+	Object.assign(Tip, TipStatics);
 
 	exports.default = Tip;
 

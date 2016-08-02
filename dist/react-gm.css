@@ -20,18 +20,18 @@
 .gm-grid-batch button {
   margin-right: 10px;
 }
-.gm-droper-default {
-  width: 100px;
-  height: 100px;
-  border-width: 2px;
-  border-color: #666;
-  border-style: dashed;
-  border-radius: 5px;
-}
-.gm-droper-wrap {
+.gm-droper {
   display: inline-block;
 }
-.gm-droper-input[type="file"] {
+.gm-droper .gm-droper-default {
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #ccc;
+}
+.gm-droper .gm-droper-wrap {
+  display: inline-block;
+}
+.gm-droper .gm-droper-input[type="file"] {
   display: none;
 }
 .gm-import-lead {
@@ -850,11 +850,10 @@
   display: none !important;
 }
 .gm-search-select .gm-search-select-overlay {
-  width: 100%;
   max-width: none;
-  left: 0 !important;
+  left: -1px !important;
   top: 0;
-  right: 0;
+  right: -1px;
   margin-top: 8px;
 }
 .gm-search-select .gm-search-select-overlay .arrow {
