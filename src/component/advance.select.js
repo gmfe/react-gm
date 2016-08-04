@@ -123,7 +123,7 @@ var AdvanceSelect = React.createClass({
         });
 
         return (
-            <div className={this.state.opened ? "gm-select gm-open" : "gm-select"}>
+            <div className={this.state.opened ? "gm-select gm-margin0 gm-open" : "gm-select gm-margin0"}>
                 <div className="gm-arrow" onClick={this.handleArrow}></div>
                 <ul className="gm-dropdown">
                     {optionList}
@@ -280,7 +280,7 @@ var AdvanceSelect = React.createClass({
     _filter: function (search) {
         if (this.props.onFilterData) {
             this.setState({
-                list: this.props.onFilterData(search)
+                list: this.props.onFilterDasta(search)
             });
         }
     }
