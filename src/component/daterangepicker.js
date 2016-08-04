@@ -48,14 +48,14 @@ class DateRangePicker extends React.Component {
             <div className="gm-datepicker gm-daterangepicker">
                 <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopoverBegin()}>
                     <div ref="beginTarget">
-                        <input type="text" className={this.props.inputClassName}
+                        <input type="text" className={this.props.inputClassName} disabled={this.props.disabled}
                                value={moment(this.props.begin).format('YYYY-MM-DD')} onChange={noop}/>
                     </div>
                 </OverlayTrigger>
                 <span> ~ </span>
                 <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopoverEnd()}>
                     <div ref="endTarget">
-                        <input type="text" className={this.props.inputClassName}
+                        <input type="text" className={this.props.inputClassName} disabled={this.props.disabled}
                                value={moment(this.props.end).format('YYYY-MM-DD')} onChange={noop}/>
                     </div>
                 </OverlayTrigger>
@@ -69,7 +69,8 @@ DateRangePicker.propTypes = {
     end: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     inputClassName: PropTypes.string,
-    target: PropTypes.func
+    target: PropTypes.func,
+    disabled: PropTypes.bool
 };
 
 export default DateRangePicker;
