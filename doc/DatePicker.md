@@ -41,10 +41,12 @@
 - `onChange (func|isRequired)`
 - `inputClassName (string)`
 - `target (func)`
+- `disabled (bool)`
 
 ```jsx
 <DateRangePicker begin={this.state.begin}
                  end={this.state.end}
+                 disabled={this.props.disabled}
                  onChange={this.handleChange}
                  inputClassName="form-control input-sm"/>
 ```
