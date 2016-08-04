@@ -51,6 +51,7 @@ class DatePicker extends React.Component {
                                className={this.props.inputClassName}
                                placeholder={this.props.placeholder}
                                ref="target"
+                               disabled={this.props.disabled}
                                value={this.props.date ? moment(this.props.date).format('YYYY-MM-DD') : ''}
                                onChange={this.handleChange}/>
                     )}
@@ -65,7 +66,8 @@ DatePicker.propTypes = {
     onChange: PropTypes.func.isRequired,
     inputClassName: PropTypes.string,
     target: PropTypes.func,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    disabled: PropTypes.bool
 };
 
 export default DatePicker;

@@ -10,6 +10,7 @@
 - `onChange (func|isRequired)` 选择后回调，参数是Date对象
 - `inputClassName (string)` 自定义input的样子
 - `target (func)` 触发日期选择的目标，返回一个ref
+- `disabled (bool)` 不可用
 
 ```jsx
 <DatePicker date={this.state.date}
@@ -41,12 +42,11 @@
 - `onChange (func|isRequired)`
 - `inputClassName (string)`
 - `target (func)`
-- `disabled (bool)`
+- `disabled (bool)` 不可用
 
 ```jsx
 <DateRangePicker begin={this.state.begin}
                  end={this.state.end}
-                 disabled={this.props.disabled}
                  onChange={this.handleChange}
                  inputClassName="form-control input-sm"/>
 ```
