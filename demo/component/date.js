@@ -98,7 +98,7 @@ class DaterangepickerWrap extends React.Component {
     }
 }
 
-class TimeSpanPickerWrap extends React.Component {
+class TimeSpanWrap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -133,6 +133,11 @@ class TimeSpanPickerWrap extends React.Component {
                         onChange={this.handleChange}/>
 
                     <TimeSpanPicker
+                        disabled={true}
+                        date={this.state.date}
+                        onChange={this.handleChange}/>
+
+                    <TimeSpanPicker
                         date={this.state.date}
                         target={() => this.refs.target}
                         onChange={this.handleChange}>
@@ -157,8 +162,8 @@ class Component extends React.Component {
                 <DatePickerWrap/>
                 <h2 id="DaterangePicker">DaterangePicker</h2>
                 <DaterangepickerWrap/>
-                <h2 id="TimeSpanPicker">TimeSpanPicker</h2>
-                <TimeSpanPickerWrap/>
+                <h2 id="TimeSpanPicker">TimeSpan</h2>
+                <TimeSpanWrap/>
             </div>
         );
     }

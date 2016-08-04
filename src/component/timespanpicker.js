@@ -38,17 +38,19 @@ class TimeSpanPicker extends React.Component {
     }
 
     render() {
+        const {children, inputClassName, disabled, render, date} = this.props;
         return (
             <div className="gm-time-span-picker">
                 <OverlayTrigger trigger="click"
                                 rootClose
                                 placement="bottom"
                                 overlay={this.renderPopover()}>
-                    {this.props.children ? this.props.children :
+                    {children ? children :
                         <input type="text"
-                               className={this.props.inputClassName}
+                               className={inputClassName}
                                ref="target"
-                               value={this.props.render(this.props.date)}
+                               disabled={disabled}
+                               value={render(date)}
                                onChange={noop}/>}
                 </OverlayTrigger>
             </div>
@@ -64,11 +66,13 @@ TimeSpanPicker.propTypes = {
     render: PropTypes.func,
     onChange: PropTypes.func,
     inputClassName: PropTypes.string,
+    disabled: PropTypes.bool,
     target: PropTypes.func
 };
 
 TimeSpanPicker.defaultProps = {
     render: value => moment(value).format('HH:mm'),
+    disabled: false,
     onChange: noop
 };
 
