@@ -195,8 +195,9 @@
   border: none;
   border-radius: 4px;
 }
-.gm-daterangepicker > div {
+.gm-daterangepicker > input {
   display: inline-block;
+  width: auto;
 }
 /*gm-tip  */
 .gm-tip {

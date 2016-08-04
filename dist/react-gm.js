@@ -2801,6 +2801,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        className: this.props.inputClassName,
 	                        placeholder: this.props.placeholder,
 	                        ref: 'target',
+	                        disabled: this.props.disabled,
 	                        value: this.props.date ? (0, _moment2.default)(this.props.date).format('YYYY-MM-DD') : '',
 	                        onChange: this.handleChange })
 	                )
@@ -2816,7 +2817,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onChange: _react.PropTypes.func.isRequired,
 	    inputClassName: _react.PropTypes.string,
 	    target: _react.PropTypes.func,
-	    placeholder: _react.PropTypes.string
+	    placeholder: _react.PropTypes.string,
+	    disabled: _react.PropTypes.bool
 	};
 
 	exports.default = DatePicker;
@@ -2871,7 +2873,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 
 	        _this.handleSelect = _this.handleSelect.bind(_this);
-
 	        return _this;
 	    }
 
@@ -2912,12 +2913,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement(
 	                    _reactBootstrap.OverlayTrigger,
 	                    { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverBegin() },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { ref: 'beginTarget' },
-	                        _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName,
-	                            value: (0, _moment2.default)(this.props.begin).format('YYYY-MM-DD'), onChange: noop })
-	                    )
+	                    _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, disabled: this.props.disabled,
+	                        value: (0, _moment2.default)(this.props.begin).format('YYYY-MM-DD'), onChange: noop })
 	                ),
 	                _react2.default.createElement(
 	                    'span',
@@ -2927,12 +2924,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement(
 	                    _reactBootstrap.OverlayTrigger,
 	                    { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverEnd() },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { ref: 'endTarget' },
-	                        _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName,
-	                            value: (0, _moment2.default)(this.props.end).format('YYYY-MM-DD'), onChange: noop })
-	                    )
+	                    _react2.default.createElement('input', { ref: 'endTarget', type: 'text', className: this.props.inputClassName,
+	                        disabled: this.props.disabled,
+	                        value: (0, _moment2.default)(this.props.end).format('YYYY-MM-DD'), onChange: noop })
 	                )
 	            );
 	        }
@@ -2946,7 +2940,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    end: _react.PropTypes.object.isRequired,
 	    onChange: _react.PropTypes.func.isRequired,
 	    inputClassName: _react.PropTypes.string,
-	    target: _react.PropTypes.func
+	    target: _react.PropTypes.func,
+	    disabled: _react.PropTypes.bool
 	};
 
 	exports.default = DateRangePicker;
