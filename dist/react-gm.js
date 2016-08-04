@@ -5328,6 +5328,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _props = this.props;
+	            var children = _props.children;
+	            var inputClassName = _props.inputClassName;
+	            var disabled = _props.disabled;
+	            var render = _props.render;
+	            var date = _props.date;
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'gm-time-span-picker' },
@@ -5337,10 +5344,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        rootClose: true,
 	                        placement: 'bottom',
 	                        overlay: this.renderPopover() },
-	                    this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text',
-	                        className: this.props.inputClassName,
+	                    children ? children : _react2.default.createElement('input', { type: 'text',
+	                        className: inputClassName,
 	                        ref: 'target',
-	                        value: this.props.render(this.props.date),
+	                        disabled: disabled,
+	                        value: render(date),
 	                        onChange: noop })
 	                )
 	            );
@@ -5358,6 +5366,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    render: _react.PropTypes.func,
 	    onChange: _react.PropTypes.func,
 	    inputClassName: _react.PropTypes.string,
+	    disabled: _react.PropTypes.bool,
 	    target: _react.PropTypes.func
 	};
 
@@ -5365,6 +5374,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    render: function render(value) {
 	        return (0, _moment2.default)(value).format('HH:mm');
 	    },
+	    disabled: false,
 	    onChange: noop
 	};
 
