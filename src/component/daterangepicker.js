@@ -15,7 +15,6 @@ class DateRangePicker extends React.Component {
         };
 
         this.handleSelect = ::this.handleSelect;
-
     }
 
     handleSelect(type, date) {
@@ -47,17 +46,14 @@ class DateRangePicker extends React.Component {
         return (
             <div className="gm-datepicker gm-daterangepicker">
                 <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopoverBegin()}>
-                    <div ref="beginTarget">
-                        <input type="text" className={this.props.inputClassName} disabled={this.props.disabled}
-                               value={moment(this.props.begin).format('YYYY-MM-DD')} onChange={noop}/>
-                    </div>
+                    <input type="text" className={this.props.inputClassName} disabled={this.props.disabled}
+                           value={moment(this.props.begin).format('YYYY-MM-DD')} onChange={noop}/>
                 </OverlayTrigger>
                 <span> ~ </span>
                 <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopoverEnd()}>
-                    <div ref="endTarget">
-                        <input type="text" className={this.props.inputClassName} disabled={this.props.disabled}
-                               value={moment(this.props.end).format('YYYY-MM-DD')} onChange={noop}/>
-                    </div>
+                    <input ref="endTarget" type="text" className={this.props.inputClassName}
+                           disabled={this.props.disabled}
+                           value={moment(this.props.end).format('YYYY-MM-DD')} onChange={noop}/>
                 </OverlayTrigger>
             </div>
         );

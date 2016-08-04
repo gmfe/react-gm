@@ -49,6 +49,11 @@ class DatePickerWrap extends React.Component {
                             placeholder="adfasdf"
                             onChange={this.handleChange}
                             inputClassName="form-control input-sm"/>
+                <DatePicker date={this.state.date}
+                            placeholder="adfasdf"
+                            disabled={true}
+                            onChange={this.handleChange}
+                            inputClassName="form-control input-sm"/>
                 <span>inline-block</span>
                 <div className="gm-padding10"></div>
                 <DatePicker date={this.state.date}
@@ -83,10 +88,18 @@ class DaterangepickerWrap extends React.Component {
 
     render() {
         return (
-            <DateRangePicker begin={this.state.begin}
-                             end={this.state.end}
-                             onChange={this.handleChange}
-                             inputClassName="form-control input-sm"/>
+            <div>
+                <DateRangePicker begin={this.state.begin}
+                                 end={this.state.end}
+                                 onChange={this.handleChange}
+                                 inputClassName="form-control input-sm"/>
+
+                <DateRangePicker begin={this.state.begin}
+                                 end={this.state.end}
+                                 onChange={this.handleChange}
+                                 disabled={true}
+                                 inputClassName="form-control input-sm"/>
+            </div>
         );
     }
 
