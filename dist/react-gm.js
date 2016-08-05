@@ -2325,7 +2325,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return _react2.default.createElement(
 	            'div',
-	            { className: this.state.opened ? "gm-select gm-open" : "gm-select" },
+	            { className: this.state.opened ? "gm-select gm-margin0 gm-open" : "gm-select gm-margin0" },
 	            _react2.default.createElement('div', { className: 'gm-arrow', onClick: this.handleArrow }),
 	            _react2.default.createElement(
 	                'ul',
@@ -2480,7 +2480,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _filter: function _filter(search) {
 	        if (this.props.onFilterData) {
 	            this.setState({
-	                list: this.props.onFilterData(search)
+	                list: this.props.onFilterDasta(search)
 	            });
 	        }
 	    }
@@ -2732,6 +2732,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendar2 = _interopRequireDefault(_calendar);
 
+	var _classnames = __webpack_require__(3);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2790,7 +2794,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'gm-datepicker' },
+	                { className: (0, _classnames2.default)("gm-datepicker", this.props.className) },
 	                _react2.default.createElement(
 	                    _reactBootstrap.OverlayTrigger,
 	                    { trigger: 'click',
@@ -2818,7 +2822,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    inputClassName: _react.PropTypes.string,
 	    target: _react.PropTypes.func,
 	    placeholder: _react.PropTypes.string,
-	    disabled: _react.PropTypes.bool
+	    disabled: _react.PropTypes.bool,
+	    className: _react.PropTypes.string
 	};
 
 	exports.default = DatePicker;
@@ -2848,6 +2853,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _calendar = __webpack_require__(9);
 
 	var _calendar2 = _interopRequireDefault(_calendar);
+
+	var _classnames = __webpack_require__(3);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2909,7 +2918,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'gm-datepicker gm-daterangepicker' },
+	                { className: (0, _classnames2.default)("gm-datepicker gm-daterangepicker", this.props.className) },
 	                _react2.default.createElement(
 	                    _reactBootstrap.OverlayTrigger,
 	                    { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverBegin() },
@@ -2941,7 +2950,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onChange: _react.PropTypes.func.isRequired,
 	    inputClassName: _react.PropTypes.string,
 	    target: _react.PropTypes.func,
-	    disabled: _react.PropTypes.bool
+	    disabled: _react.PropTypes.bool,
+	    className: _react.PropTypes.string
 	};
 
 	exports.default = DateRangePicker;
