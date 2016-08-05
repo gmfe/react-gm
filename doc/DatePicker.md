@@ -11,6 +11,7 @@
 - `inputClassName (string)` 自定义input的样子
 - `target (func)` 触发日期选择的目标，返回一个ref
 - `disabled (bool)` 不可用
+- `className (string)`
 
 ```jsx
 <DatePicker date={this.state.date}
@@ -43,6 +44,7 @@
 - `inputClassName (string)`
 - `target (func)`
 - `disabled (bool)` 不可用
+- `className (string)`
 
 ```jsx
 <DateRangePicker begin={this.state.begin}

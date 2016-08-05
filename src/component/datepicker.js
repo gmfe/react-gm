@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import moment from 'moment';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 import Calendar from './calendar.js';
+import classNames from 'classnames';
 
 class DatePicker extends React.Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class DatePicker extends React.Component {
 
     render() {
         return (
-            <div className="gm-datepicker">
+            <div className={classNames("gm-datepicker", this.props.className)}>
                 <OverlayTrigger trigger="click"
                                 rootClose
                                 placement="bottom"
@@ -67,7 +68,8 @@ DatePicker.propTypes = {
     inputClassName: PropTypes.string,
     target: PropTypes.func,
     placeholder: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    className: PropTypes.string
 };
 
 export default DatePicker;

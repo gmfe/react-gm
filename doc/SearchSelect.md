@@ -10,11 +10,11 @@
 
 - `list (array|isRequired)` 搜索待选数据，是过滤后的数据
 - `selected (any)` 选中了什么，`list`中某条数据
-- `onSerch (func|isRequired)` 搜索触发函数，以便过滤重新得出`list`数据。 可以引入`gm-pinyin`库来做拼音搜索
+- `onSearch (func|isRequired)` 搜索触发函数，以便过滤重新得出`list`数据。 可以引入`gm-pinyin`库来做拼音搜索
 - `onSelect (func|isRequired)` 选中后触发，提供和`selected`一样的数据结构，一般直接设置`selected`即可
 - `delay (number)` 搜索过程中延迟多少ms才出触发`onSearch`， 默认500
 - `listMaxHeight (string)` 搜索待选数据的高度，默认250px
-- `multiple (bool)` 是否多选，默认false
+- `multiple (bool)` 是否多选，默认false。 如果多选，则selected是数组
 - `placeholder (string)`
 
 

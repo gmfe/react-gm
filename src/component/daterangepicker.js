@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import moment from 'moment';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 import Calendar from './calendar.js';
+import classNames from 'classnames';
 
 const noop = () => {
 };
@@ -44,7 +45,7 @@ class DateRangePicker extends React.Component {
 
     render() {
         return (
-            <div className="gm-datepicker gm-daterangepicker">
+            <div className={classNames("gm-datepicker gm-daterangepicker", this.props.className)}>
                 <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopoverBegin()}>
                     <input type="text" className={this.props.inputClassName} disabled={this.props.disabled}
                            value={moment(this.props.begin).format('YYYY-MM-DD')} onChange={noop}/>
@@ -66,7 +67,8 @@ DateRangePicker.propTypes = {
     onChange: PropTypes.func.isRequired,
     inputClassName: PropTypes.string,
     target: PropTypes.func,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    className: PropTypes.string
 };
 
 export default DateRangePicker;
