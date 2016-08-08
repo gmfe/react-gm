@@ -2756,7 +2756,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            id: '_gm_datepicker_id' + (Math.random() + '').slice(2)
 	        };
 	        _this.handleSelect = _this.handleSelect.bind(_this);
-	        _this.handleChange = _this.handleChange.bind(_this);
 	        return _this;
 	    }
 
@@ -2780,16 +2779,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.props.onChange(date);
 	        }
 	    }, {
-	        key: 'handleChange',
-	        value: function handleChange(event) {
-	            // 只允许合法的指传递出去
-	            if (/\d\d\d\d-\d\d-\d\d/.test(event.target.value)) {
-	                this.props.onChange((0, _moment2.default)(event.target.value).toDate());
-	            } else {
-	                this.props.onChange(null);
-	            }
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -2797,17 +2786,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: (0, _classnames2.default)("gm-datepicker", this.props.className) },
 	                _react2.default.createElement(
 	                    _reactBootstrap.OverlayTrigger,
-	                    { trigger: 'click',
+	                    {
+	                        trigger: 'click',
 	                        rootClose: true,
 	                        placement: 'bottom',
-	                        overlay: this.renderPopover() },
-	                    this.props.children ? this.props.children : _react2.default.createElement('input', { type: 'text',
+	                        overlay: this.renderPopover()
+	                    },
+	                    this.props.children ? this.props.children : _react2.default.createElement('input', {
+	                        type: 'text',
 	                        className: this.props.inputClassName,
 	                        placeholder: this.props.placeholder,
 	                        ref: 'target',
 	                        disabled: this.props.disabled,
-	                        value: this.props.date ? (0, _moment2.default)(this.props.date).format('YYYY-MM-DD') : '',
-	                        onChange: this.handleChange })
+	                        value: this.props.date ? (0, _moment2.default)(this.props.date).format('YYYY-MM-DD') : ''
+	                    })
 	                )
 	            );
 	        }
@@ -2922,8 +2914,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement(
 	                    _reactBootstrap.OverlayTrigger,
 	                    { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverBegin() },
-	                    _react2.default.createElement('input', { type: 'text', className: this.props.inputClassName, disabled: this.props.disabled,
-	                        value: (0, _moment2.default)(this.props.begin).format('YYYY-MM-DD'), onChange: noop })
+	                    _react2.default.createElement('input', {
+	                        type: 'text',
+	                        className: this.props.inputClassName,
+	                        disabled: this.props.disabled,
+	                        value: (0, _moment2.default)(this.props.begin).format('YYYY-MM-DD'),
+	                        onChange: noop
+	                    })
 	                ),
 	                _react2.default.createElement(
 	                    'span',
@@ -2933,9 +2930,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement(
 	                    _reactBootstrap.OverlayTrigger,
 	                    { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverEnd() },
-	                    _react2.default.createElement('input', { ref: 'endTarget', type: 'text', className: this.props.inputClassName,
+	                    _react2.default.createElement('input', {
+	                        ref: 'endTarget',
+	                        type: 'text',
+	                        className: this.props.inputClassName,
 	                        disabled: this.props.disabled,
-	                        value: (0, _moment2.default)(this.props.end).format('YYYY-MM-DD'), onChange: noop })
+	                        value: (0, _moment2.default)(this.props.end).format('YYYY-MM-DD'),
+	                        onChange: noop
+	                    })
 	                )
 	            );
 	        }
