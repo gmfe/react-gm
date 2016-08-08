@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'underscore';
-import {Collapse} from 'react-bootstrap';
 import classNames from 'classnames';
 import Flex from './flex';
 
@@ -55,18 +54,16 @@ class Navigation extends React.Component {
                                     })}/>
                                 )}
                             </Flex>
-                            {value.sub ? (
-                                <Collapse in={value.open}>
-                                    <ul className="gm-navigation-level2">
-                                        {_.map(value.sub, val => (
-                                            <li key={val.key}>
-                                                <div
-                                                    className={"gm-navigation-title" + this.getCurrentClassName(val.key)}
-                                                    onClick={this.handleClick.bind(this, val)}>{val.title}</div>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </Collapse>
+                            {value.sub && value.open ? (
+                                <ul className="gm-navigation-level2">
+                                    {_.map(value.sub, val => (
+                                        <li key={val.key}>
+                                            <div
+                                                className={"gm-navigation-title" + this.getCurrentClassName(val.key)}
+                                                onClick={this.handleClick.bind(this, val)}>{val.title}</div>
+                                        </li>
+                                    ))}
+                                </ul>
                             ) : undefined}
                         </li>
                     ))}

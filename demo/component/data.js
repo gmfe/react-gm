@@ -8,7 +8,6 @@ import {
 import _ from 'underscore';
 import ImportLeadWrap from './import.lead.js';
 
-import {SplitButton, MenuItem} from 'react-bootstrap';
 const {SheetColumn, SheetAction, SheetSelect, SheetBatchAction} = Sheet;
 
 class SheetWrap extends React.Component {
@@ -68,10 +67,6 @@ class SheetWrap extends React.Component {
                                 <button className="btn btn-xs btn-default gm-marginRight5"
                                         onClick={this.handleAction.bind(this, eList, i)}>删除
                                 </button>
-                                <SplitButton bsSize="xsmall" title={'下拉框'} id="asdfas">
-                                    <MenuItem eventKey="1">Action</MenuItem>
-                                    <MenuItem eventKey="2">Another action</MenuItem>
-                                </SplitButton>
                             </div>
                         )}
                     </SheetAction>

@@ -41,7 +41,6 @@
 - `onChange (func)` 同 TimeSpan onSelect
 - `inputClassName (string)` 自定义input的className
 - `disabled (bool)` 不可编辑
-- `target (func)` 触发时间选择的目标，返回一个ref
 
 ```jsx
 <TimeSpanPicker date={this.state.date}
@@ -55,9 +54,8 @@
 ```jsx
 <TimeSpanPicker
     date={this.state.date}
-    target={() => this.refs.target}
     onChange={this.handleChange}>
-    <span ref="target">
+    <span>
         {this.state.date ? moment(this.state.date).format('HH:mm') : '请点击选择'}
     </span>
 </TimeSpanPicker>

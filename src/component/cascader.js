@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
-import {Popover, OverlayTrigger} from 'react-bootstrap';
 import _ from 'underscore';
 import classNames from 'classnames';
 import Flex from './flex';
+import Trigger from './trigger';
 
 const noop = () => {
 };
@@ -11,9 +11,7 @@ class Cascader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.value || [],
-            id: '_gm_cascader_id' + (Math.random() + '').slice(2),
-            in: false
+            value: this.props.value || []
         };
     }
 
@@ -39,7 +37,7 @@ class Cascader extends React.Component {
         return result;
     }
 
-    renderList() {
+    renderOverlay() {
         return (
             <Flex className={classNames("gm-cascader-list", this.props.className)}>
                 {_.map(this.getList(), (value, i) => (
@@ -69,30 +67,6 @@ class Cascader extends React.Component {
         this.props.onChange(selected);
     }
 
-    renderOverlay() {
-        return (
-            <Popover
-                id={this.state.id}
-                placement="bottom"
-                className="gm-cascader-overlay"
-            >
-                {this.renderList()}
-            </Popover>
-        );
-    }
-
-    handleEnter() {
-        this.setState({
-            in: true
-        });
-    }
-
-    handleExit() {
-        this.setState({
-            in: false
-        });
-    }
-
     renderChildren() {
         const {data, valueRender, inputProps} = this.props;
         let value = [];
@@ -107,9 +81,7 @@ class Cascader extends React.Component {
 
         return (
             <div className="gm-cascader-input">
-                <i className={classNames("glyphicon glyphicon-menu-down", {
-                    "active": this.state.in
-                })}/>
+                <i className={classNames('glyphicon glyphicon-menu-down', this.props.className)}/>
                 <input {...inputProps}
                        type="text"
                        onChange={noop}
@@ -121,19 +93,12 @@ class Cascader extends React.Component {
 
     render() {
         return (
-            <div className="gm-cascader">
-                <OverlayTrigger
-                    trigger={"click"}
-                    rootClose
-                    placement="bottom"
-                    container={this}
-                    overlay={this.renderOverlay()}
-                    onEnter={::this.handleEnter}
-                    onExit={::this.handleExit}
-                >
-                    {this.props.children ? this.props.children : this.renderChildren()}
-                </OverlayTrigger>
-            </div>
+            <Trigger
+                component={<div className="gm-cascader"/>}
+                popup={this.renderOverlay()}
+            >
+                {this.props.children ? this.props.children : this.renderChildren()}
+            </Trigger>
         );
     }
 }

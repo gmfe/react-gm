@@ -26,6 +26,7 @@ import Switch from './component/switch';
 import Sheet from './component/sheet';
 import Cascader from './component/cascader';
 import CascaderSelect from './component/cascader.select';
+import Trigger from './component/trigger';
 
 import './index.less';
 
@@ -68,5 +69,6 @@ module.exports = {
     SheetColumn,
     SheetAction,
     SheetSelect,
-    SheetBatchAction
+    SheetBatchAction,
+    Trigger
 };

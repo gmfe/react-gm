@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import moment from 'moment';
-import {Popover, OverlayTrigger} from 'react-bootstrap';
 import Calendar from './calendar.js';
 import classNames from 'classnames';
+import Trigger from './trigger';
 
 const noop = () => {
 };
@@ -10,43 +10,34 @@ const noop = () => {
 class DateRangePicker extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            beginId: '_gm_datepicker_id' + (Math.random() + '').slice(2),
-            endId: '_gm_datepicker_id' + (Math.random() + '').slice(2)
-        };
-
-        this.handleSelect = ::this.handleSelect;
+        this.dateRangePicker = null;
+        this.endTarget = null;
+        this.handleSelectBegin = ::this.handleSelectBegin;
+        this.handleSelectEnd = ::this.handleSelectEnd;
     }
 
-    handleSelect(type, date) {
-        if (type === 'begin') {
-            this.props.onChange(date, this.props.end);
-        } else {
-            this.props.onChange(this.props.begin, date);
-        }
-        this.refs.endTarget.click();
+    handleSelectBegin(date) {
+        this.props.onChange(date, this.props.end);
+        setTimeout(() => {
+            this.endTarget.click();
+        }, 0);
     }
 
-    renderPopoverBegin() {
-        return (
-            <Popover id={this.state.beginId} className="gm-datepicker-popover">
-                <Calendar selected={this.props.begin} onSelect={this.handleSelect.bind(this, 'begin')}/>
-            </Popover>
-        );
-    }
-
-    renderPopoverEnd() {
-        return (
-            <Popover id={this.state.endId} className="gm-datepicker-popover">
-                <Calendar selected={this.props.end} onSelect={this.handleSelect.bind(this, 'end')}/>
-            </Popover>
-        );
+    handleSelectEnd(date) {
+        this.props.onChange(this.props.begin, date);
+        setTimeout(() => {
+            this.dateRangePicker.click();
+        }, 0);
     }
 
     render() {
+        const beginPopup = <Calendar selected={this.props.begin} onSelect={this.handleSelectBegin}/>,
+            endPopup = <Calendar selected={this.props.end} onSelect={this.handleSelectEnd}/>;
         return (
-            <div className={classNames("gm-datepicker gm-daterangepicker", this.props.className)}>
-                <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopoverBegin()}>
+            <div ref={ref => {
+                this.dateRangePicker = ref;
+            }} className={classNames("gm-datepicker gm-daterangepicker", this.props.className)}>
+                <Trigger component={<div className="gm-inline-block"/>} popup={beginPopup}>
                     <input
                         type="text"
                         className={this.props.inputClassName}
@@ -54,18 +45,20 @@ class DateRangePicker extends React.Component {
                         value={moment(this.props.begin).format('YYYY-MM-DD')}
                         onChange={noop}
                     />
-                </OverlayTrigger>
+                </Trigger>
                 <span> ~ </span>
-                <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopoverEnd()}>
+                <Trigger component={<div className="gm-inline-block"/>} popup={endPopup}>
                     <input
-                        ref="endTarget"
+                        ref={ref => {
+                            this.endTarget = ref;
+                        }}
                         type="text"
                         className={this.props.inputClassName}
                         disabled={this.props.disabled}
                         value={moment(this.props.end).format('YYYY-MM-DD')}
                         onChange={noop}
                     />
-                </OverlayTrigger>
+                </Trigger>
             </div>
         );
     }

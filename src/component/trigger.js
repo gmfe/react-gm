@@ -32,9 +32,22 @@ class Trigger extends React.Component {
     }
 
     handleClick() {
-        this.setState({
-            active: true
-        });
+        const {disabled, children} = this.props;
+        // 优先获取props的disabled
+        if (disabled === true) {
+            return;
+        }
+        if (disabled === false) {
+            this.setState({
+                active: true
+            });
+        }
+        // 如果没有props disabled，判定children是否不可用状态
+        if (!children.props.disabled) {
+            this.setState({
+                active: true
+            });
+        }
     }
 
     render() {
@@ -59,9 +72,10 @@ class Trigger extends React.Component {
 }
 
 Trigger.propTypes = {
-    component: PropTypes.node,
     popup: PropTypes.node,
-    children: PropTypes.node
+    component: PropTypes.node,
+    children: PropTypes.node,
+    disabled: PropTypes.bool
 };
 
 export default Trigger;

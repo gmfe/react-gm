@@ -19,6 +19,7 @@
 - [Flex](./Flex.md)
 - [Storage](./Storage.md)
 - [Switch](./Switch.md)
+- [Trigger](./Trigger.md)
 - ImportLead TODO
 - [Util](https://github.com/gmfe/gm-util)
 

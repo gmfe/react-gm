@@ -411,7 +411,6 @@ class CascaderSelectWrap extends React.Component {
     }
 
     render() {
-        console.log(this.state.selected);
         return (
             <div>
                 <h3>多选</h3>

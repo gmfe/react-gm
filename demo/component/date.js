@@ -57,9 +57,8 @@ class DatePickerWrap extends React.Component {
                 <span>inline-block</span>
                 <div className="gm-padding10"></div>
                 <DatePicker date={this.state.date}
-                            onChange={this.handleChange}
-                            target={() => this.refs.target}>
-                    <span ref="target">
+                            onChange={this.handleChange}>
+                    <span>
                         {this.state.date ? moment(this.state.date).format('YYYY-MM-DD') : '请点击选择'}
                     </span>
                 </DatePicker>
@@ -104,6 +103,7 @@ class DaterangepickerWrap extends React.Component {
     }
 
     handleChange(begin, end) {
+        console.log(begin, end);
         this.setState({
             begin: begin,
             end: end
@@ -121,6 +121,7 @@ class TimeSpanWrap extends React.Component {
     }
 
     handleChange(date) {
+        console.log(date);
         this.setState({
             date
         });
@@ -152,9 +153,8 @@ class TimeSpanWrap extends React.Component {
 
                     <TimeSpanPicker
                         date={this.state.date}
-                        target={() => this.refs.target}
                         onChange={this.handleChange}>
-                        <span ref="target">
+                        <span>
                             {this.state.date ? moment(this.state.date).format('HH:mm') : '请点击选择'}
                         </span>
                     </TimeSpanPicker>
