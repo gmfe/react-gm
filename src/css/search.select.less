@@ -26,24 +26,13 @@
     }
   }
 
-  &.gm-search-select-empty {
-    .gm-search-select-overlay {
-      display: none !important;
-    }
-  }
-
-  .gm-search-select-overlay {
-    max-width: none;
-    left: -1px !important;
-    top: 0;
-    right: -1px;
-    margin-top: 8px;
-
-    .arrow {
-      display: none;
-    }
-    .popover-content {
-      padding: 0;
+  .gm-trigger {
+    position: static;
+    .gm-trigger-popup {
+      max-width: none;
+      left: -1px !important;
+      right: -1px;
+      width: auto;
 
       .list-group {
         width: 100%;
@@ -53,6 +42,7 @@
         margin-bottom: 0;
 
         .list-group-item {
+          cursor: pointer;
           border-bottom: none;
           border-left: none;
           border-right: none;
@@ -63,6 +53,7 @@
           }
         }
       }
+
     }
   }
 }

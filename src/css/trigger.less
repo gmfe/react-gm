@@ -1,0 +1,20 @@
+.gm-trigger {
+  position: relative;
+  .gm-trigger-popup {
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    margin-top: 2px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    overflow: auto;
+    border: 1px solid @gm-form-border-color;
+  }
+
+  &.gm-trigger-active {
+    .gm-trigger-popup {
+      visibility: visible;
+    }
+  }
+}
