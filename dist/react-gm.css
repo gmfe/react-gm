@@ -178,22 +178,9 @@
 .gm-datepicker {
   display: inline-block;
 }
-.gm-datepicker-popover.popover {
-  padding: 0;
-  border-radius: 4px;
-}
-.gm-datepicker-popover.bottom {
-  margin-top: 5px;
-}
-.gm-datepicker-popover.bottom .arrow {
-  top: -7px;
-}
-.gm-datepicker-popover .popover-content {
-  padding: 0;
-}
-.gm-datepicker-popover .gm-calendar {
+.gm-datepicker .gm-trigger .gm-trigger-popup {
   border: none;
-  border-radius: 4px;
+  width: auto;
 }
 .gm-daterangepicker > input {
   display: inline-block;
@@ -448,24 +435,9 @@
 .gm-time-span-picker {
   display: inline-block;
 }
-.gm-time-span-picker-popover.popover {
-  max-width: 298px;
-}
-.gm-time-span-picker-popover.popover {
-  padding: 0;
-}
-.gm-time-span-picker-popover.bottom {
-  margin-top: 5px;
-}
-.gm-time-span-picker-popover.bottom .arrow {
-  top: -7px;
-}
-.gm-time-span-picker-popover .popover-content {
-  padding: 0;
-}
-.gm-time-span-picker-popover .gm-time-span {
+.gm-time-span-picker .gm-trigger .gm-trigger-popup {
+  width: auto;
   border: none;
-  border-radius: 6px;
 }
 .gm-dropselect-wrap {
   height: 0;
@@ -898,31 +870,23 @@
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
-.gm-cascader-overlay.popover {
-  margin-top: 1px;
-  max-width: none;
-  padding: 0;
-  left: 0 !important;
+.gm-cascader.gm-trigger .gm-trigger-popup {
+  width: auto;
 }
-.gm-cascader-overlay .popover-content {
-  padding: 0;
-}
-.gm-cascader-overlay .arrow {
-  display: none;
-}
-.gm-cascader-overlay .gm-cascader-list {
+.gm-cascader.gm-trigger .gm-cascader-list {
   height: 200px;
+  background-color: white;
 }
-.gm-cascader-overlay .gm-cascader-list .list-group {
+.gm-cascader.gm-trigger .gm-cascader-list .list-group {
   margin: 0;
   border-right: 1px solid #ccc;
   min-width: 100px;
   overflow: auto;
 }
-.gm-cascader-overlay .gm-cascader-list .list-group:last-child {
+.gm-cascader.gm-trigger .gm-cascader-list .list-group:last-child {
   border-right: none;
 }
-.gm-cascader-overlay .gm-cascader-list .list-group .list-group-item {
+.gm-cascader.gm-trigger .gm-cascader-list .list-group .list-group-item {
   padding: 5px 10px;
   border: none;
   border-radius: 0;
@@ -959,7 +923,7 @@
 .gm-cascader-select .gm-cascader-select-input .gm-cascader-input .glyphicon {
   right: 0;
 }
-.gm-cascader-select .gm-cascader-overlay.popover {
+.gm-cascader-select .gm-trigger .gm-trigger-popup {
   margin-top: 8px;
 }
 .gm-trigger {

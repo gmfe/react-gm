@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("underscore"), require("react-dom"), require("react-bootstrap"), require("moment"));
+		module.exports = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "underscore", "react-dom", "react-bootstrap", "moment"], factory);
+		define(["react", "underscore", "react-dom", "moment", "react-bootstrap"], factory);
 	else if(typeof exports === 'object')
-		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("react-bootstrap"), require("moment"));
+		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
-		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["react-bootstrap"], root["moment"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__) {
+		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_46__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validate3 = __webpack_require__(45);
+	var _validate3 = __webpack_require__(44);
 
 	var _validate4 = _interopRequireDefault(_validate3);
 
@@ -168,7 +168,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cascader4 = _interopRequireDefault(_cascader3);
 
-	__webpack_require__(46);
+	var _trigger = __webpack_require__(5);
+
+	var _trigger2 = _interopRequireDefault(_trigger);
+
+	__webpack_require__(45);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -210,7 +214,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    SheetColumn: SheetColumn,
 	    SheetAction: SheetAction,
 	    SheetSelect: SheetSelect,
-	    SheetBatchAction: SheetBatchAction
+	    SheetBatchAction: SheetBatchAction,
+	    Trigger: _trigger2.default
 	};
 
 /***/ },
@@ -290,9 +295,135 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 5 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(4);
+
+	var _classnames = __webpack_require__(3);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _gmUtil = __webpack_require__(8);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Trigger = function (_React$Component) {
+	    _inherits(Trigger, _React$Component);
+
+	    function Trigger(props) {
+	        _classCallCheck(this, Trigger);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Trigger).call(this, props));
+
+	        _this.state = {
+	            active: false
+	        };
+	        _this.handleClick = _this.handleClick.bind(_this);
+	        _this.handleDocumentClick = _this.handleDocumentClick.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(Trigger, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            document.addEventListener('click', this.handleDocumentClick);
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            document.removeEventListener('click', this.handleDocumentClick);
+	        }
+	    }, {
+	        key: 'handleDocumentClick',
+	        value: function handleDocumentClick(event) {
+	            var target = event.target;
+	            var root = (0, _reactDom.findDOMNode)(this);
+	            if (!(0, _gmUtil.contains)(root, target)) {
+	                this.setState({
+	                    active: false
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'handleClick',
+	        value: function handleClick() {
+	            var _props = this.props;
+	            var disabled = _props.disabled;
+	            var children = _props.children;
+	            // 优先获取props的disabled
+
+	            if (disabled === true) {
+	                return;
+	            }
+	            if (disabled === false) {
+	                this.setState({
+	                    active: true
+	                });
+	            }
+	            // 如果没有props disabled，判定children是否不可用状态
+	            if (!children.props.disabled) {
+	                this.setState({
+	                    active: true
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props2 = this.props;
+	            var component = _props2.component;
+	            var children = _props2.children;
+	            var popup = _props2.popup;
+
+	            var child = _react2.default.Children.only(children);
+	            var active = this.state.active;
+
+
+	            var componentProps = Object.assign({}, component.props, {
+	                onClick: (0, _gmUtil.createChainedFunction)(component.props.onClick, this.handleClick)
+	            });
+
+	            return _react2.default.cloneElement(component, Object.assign({}, componentProps, {
+	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger', {
+	                    'gm-trigger-active': active
+	                }),
+	                children: [child, _react2.default.createElement('div', {
+	                    key: 'popup',
+	                    className: 'gm-trigger-popup'
+	                }, popup)]
+	            }));
+	        }
+	    }]);
+
+	    return Trigger;
+	}(_react2.default.Component);
+
+	Trigger.propTypes = {
+	    popup: _react.PropTypes.node,
+	    component: _react.PropTypes.node,
+	    children: _react.PropTypes.node,
+	    disabled: _react.PropTypes.bool
+	};
+
+	exports.default = Trigger;
 
 /***/ },
 /* 6 */
@@ -1153,8 +1284,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactBootstrap = __webpack_require__(5);
-
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
@@ -1166,6 +1295,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
+
+	var _trigger = __webpack_require__(5);
+
+	var _trigger2 = _interopRequireDefault(_trigger);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1186,9 +1319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Cascader).call(this, props));
 
 	        _this.state = {
-	            value: _this.props.value || [],
-	            id: '_gm_cascader_id' + (Math.random() + '').slice(2),
-	            in: false
+	            value: _this.props.value || []
 	        };
 	        return _this;
 	    }
@@ -1220,8 +1351,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return result;
 	        }
 	    }, {
-	        key: 'renderList',
-	        value: function renderList() {
+	        key: 'renderOverlay',
+	        value: function renderOverlay() {
 	            var _this2 = this;
 
 	            return _react2.default.createElement(
@@ -1260,33 +1391,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.props.onChange(selected);
 	        }
 	    }, {
-	        key: 'renderOverlay',
-	        value: function renderOverlay() {
-	            return _react2.default.createElement(
-	                _reactBootstrap.Popover,
-	                {
-	                    id: this.state.id,
-	                    placement: 'bottom',
-	                    className: 'gm-cascader-overlay'
-	                },
-	                this.renderList()
-	            );
-	        }
-	    }, {
-	        key: 'handleEnter',
-	        value: function handleEnter() {
-	            this.setState({
-	                in: true
-	            });
-	        }
-	    }, {
-	        key: 'handleExit',
-	        value: function handleExit() {
-	            this.setState({
-	                in: false
-	            });
-	        }
-	    }, {
 	        key: 'renderChildren',
 	        value: function renderChildren() {
 	            var _props = this.props;
@@ -1307,9 +1411,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'gm-cascader-input' },
-	                _react2.default.createElement('i', { className: (0, _classnames2.default)("glyphicon glyphicon-menu-down", {
-	                        "active": this.state.in
-	                    }) }),
+	                _react2.default.createElement('i', { className: (0, _classnames2.default)('glyphicon glyphicon-menu-down', this.props.className) }),
 	                _react2.default.createElement('input', _extends({}, inputProps, {
 	                    type: 'text',
 	                    onChange: noop,
@@ -1323,21 +1425,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
-	                { className: 'gm-cascader' },
-	                _react2.default.createElement(
-	                    _reactBootstrap.OverlayTrigger,
-	                    {
-	                        trigger: "click",
-	                        rootClose: true,
-	                        placement: 'bottom',
-	                        container: this,
-	                        overlay: this.renderOverlay(),
-	                        onEnter: this.handleEnter.bind(this),
-	                        onExit: this.handleExit.bind(this)
-	                    },
-	                    this.props.children ? this.props.children : this.renderChildren()
-	                )
+	                _trigger2.default,
+	                {
+	                    component: _react2.default.createElement('div', { className: 'gm-cascader' }),
+	                    popup: this.renderOverlay()
+	                },
+	                this.props.children ? this.props.children : this.renderChildren()
 	            );
 	        }
 	    }]);
@@ -2786,8 +2879,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(5);
-
 	var _calendar = __webpack_require__(9);
 
 	var _calendar2 = _interopRequireDefault(_calendar);
@@ -2795,6 +2886,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _classnames = __webpack_require__(3);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _trigger = __webpack_require__(5);
+
+	var _trigger2 = _interopRequireDefault(_trigger);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2812,51 +2907,41 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatePicker).call(this, props));
 
-	        _this.state = {
-	            id: '_gm_datepicker_id' + (Math.random() + '').slice(2)
-	        };
+	        _this.datepicker = null;
 	        _this.handleSelect = _this.handleSelect.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(DatePicker, [{
-	        key: 'renderPopover',
-	        value: function renderPopover() {
-	            return _react2.default.createElement(
-	                _reactBootstrap.Popover,
-	                { id: this.state.id, className: 'gm-datepicker-popover' },
-	                _react2.default.createElement(_calendar2.default, { selected: this.props.date, onSelect: this.handleSelect })
-	            );
-	        }
-	    }, {
 	        key: 'handleSelect',
 	        value: function handleSelect(date) {
-	            if (this.refs.target) {
-	                this.refs.target.click();
-	            } else {
-	                this.props.target().click();
-	            }
+	            var _this2 = this;
+
 	            this.props.onChange(date);
+	            setTimeout(function () {
+	                _this2.datepicker.click();
+	            }, 0);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+
+	            var popup = _react2.default.createElement(_calendar2.default, { selected: this.props.date, onSelect: this.handleSelect });
 	            return _react2.default.createElement(
 	                'div',
-	                { className: (0, _classnames2.default)("gm-datepicker", this.props.className) },
-	                _react2.default.createElement(
-	                    _reactBootstrap.OverlayTrigger,
-	                    {
-	                        trigger: 'click',
-	                        rootClose: true,
-	                        placement: 'bottom',
-	                        overlay: this.renderPopover()
+	                { ref: function ref(_ref) {
+	                        _this3.datepicker = _ref;
 	                    },
+	                    className: (0, _classnames2.default)("gm-datepicker", this.props.className)
+	                },
+	                _react2.default.createElement(
+	                    _trigger2.default,
+	                    { component: _react2.default.createElement('div', null), popup: popup },
 	                    this.props.children ? this.props.children : _react2.default.createElement('input', {
 	                        type: 'text',
 	                        className: this.props.inputClassName,
 	                        placeholder: this.props.placeholder,
-	                        ref: 'target',
 	                        disabled: this.props.disabled,
 	                        value: this.props.date ? (0, _moment2.default)(this.props.date).format('YYYY-MM-DD') : ''
 	                    })
@@ -2869,10 +2954,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	DatePicker.propTypes = {
+
 	    date: _react.PropTypes.object,
 	    onChange: _react.PropTypes.func.isRequired,
 	    inputClassName: _react.PropTypes.string,
-	    target: _react.PropTypes.func,
 	    placeholder: _react.PropTypes.string,
 	    disabled: _react.PropTypes.bool,
 	    className: _react.PropTypes.string
@@ -2900,8 +2985,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(5);
-
 	var _calendar = __webpack_require__(9);
 
 	var _calendar2 = _interopRequireDefault(_calendar);
@@ -2909,6 +2992,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _classnames = __webpack_require__(3);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _trigger = __webpack_require__(5);
+
+	var _trigger2 = _interopRequireDefault(_trigger);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2928,52 +3015,48 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DateRangePicker).call(this, props));
 
-	        _this.state = {
-	            beginId: '_gm_datepicker_id' + (Math.random() + '').slice(2),
-	            endId: '_gm_datepicker_id' + (Math.random() + '').slice(2)
-	        };
-
-	        _this.handleSelect = _this.handleSelect.bind(_this);
+	        _this.dateRangePicker = null;
+	        _this.endTarget = null;
+	        _this.handleSelectBegin = _this.handleSelectBegin.bind(_this);
+	        _this.handleSelectEnd = _this.handleSelectEnd.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(DateRangePicker, [{
-	        key: 'handleSelect',
-	        value: function handleSelect(type, date) {
-	            if (type === 'begin') {
-	                this.props.onChange(date, this.props.end);
-	            } else {
-	                this.props.onChange(this.props.begin, date);
-	            }
-	            this.refs.endTarget.click();
+	        key: 'handleSelectBegin',
+	        value: function handleSelectBegin(date) {
+	            var _this2 = this;
+
+	            this.props.onChange(date, this.props.end);
+	            setTimeout(function () {
+	                _this2.endTarget.click();
+	            }, 0);
 	        }
 	    }, {
-	        key: 'renderPopoverBegin',
-	        value: function renderPopoverBegin() {
-	            return _react2.default.createElement(
-	                _reactBootstrap.Popover,
-	                { id: this.state.beginId, className: 'gm-datepicker-popover' },
-	                _react2.default.createElement(_calendar2.default, { selected: this.props.begin, onSelect: this.handleSelect.bind(this, 'begin') })
-	            );
-	        }
-	    }, {
-	        key: 'renderPopoverEnd',
-	        value: function renderPopoverEnd() {
-	            return _react2.default.createElement(
-	                _reactBootstrap.Popover,
-	                { id: this.state.endId, className: 'gm-datepicker-popover' },
-	                _react2.default.createElement(_calendar2.default, { selected: this.props.end, onSelect: this.handleSelect.bind(this, 'end') })
-	            );
+	        key: 'handleSelectEnd',
+	        value: function handleSelectEnd(date) {
+	            var _this3 = this;
+
+	            this.props.onChange(this.props.begin, date);
+	            setTimeout(function () {
+	                _this3.dateRangePicker.click();
+	            }, 0);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this4 = this;
+
+	            var beginPopup = _react2.default.createElement(_calendar2.default, { selected: this.props.begin, onSelect: this.handleSelectBegin }),
+	                endPopup = _react2.default.createElement(_calendar2.default, { selected: this.props.end, onSelect: this.handleSelectEnd });
 	            return _react2.default.createElement(
 	                'div',
-	                { className: (0, _classnames2.default)("gm-datepicker gm-daterangepicker", this.props.className) },
+	                { ref: function ref(_ref2) {
+	                        _this4.dateRangePicker = _ref2;
+	                    }, className: (0, _classnames2.default)("gm-datepicker gm-daterangepicker", this.props.className) },
 	                _react2.default.createElement(
-	                    _reactBootstrap.OverlayTrigger,
-	                    { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverBegin() },
+	                    _trigger2.default,
+	                    { component: _react2.default.createElement('div', { className: 'gm-inline-block' }), popup: beginPopup },
 	                    _react2.default.createElement('input', {
 	                        type: 'text',
 	                        className: this.props.inputClassName,
@@ -2988,10 +3071,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    ' ~ '
 	                ),
 	                _react2.default.createElement(
-	                    _reactBootstrap.OverlayTrigger,
-	                    { trigger: 'click', rootClose: true, placement: 'bottom', overlay: this.renderPopoverEnd() },
+	                    _trigger2.default,
+	                    { component: _react2.default.createElement('div', { className: 'gm-inline-block' }), popup: endPopup },
 	                    _react2.default.createElement('input', {
-	                        ref: 'endTarget',
+	                        ref: function ref(_ref) {
+	                            _this4.endTarget = _ref;
+	                        },
 	                        type: 'text',
 	                        className: this.props.inputClassName,
 	                        disabled: this.props.disabled,
@@ -3040,7 +3125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactBootstrap = __webpack_require__(5);
+	var _reactBootstrap = __webpack_require__(46);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4160,8 +4245,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _reactBootstrap = __webpack_require__(5);
-
 	var _classnames = __webpack_require__(3);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
@@ -4251,26 +4334,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                        'glyphicon-menu-down': !value.open
 	                                    }) })
 	                            ),
-	                            value.sub ? _react2.default.createElement(
-	                                _reactBootstrap.Collapse,
-	                                { 'in': value.open },
-	                                _react2.default.createElement(
-	                                    'ul',
-	                                    { className: 'gm-navigation-level2' },
-	                                    _underscore2.default.map(value.sub, function (val) {
-	                                        return _react2.default.createElement(
-	                                            'li',
-	                                            { key: val.key },
-	                                            _react2.default.createElement(
-	                                                'div',
-	                                                {
-	                                                    className: "gm-navigation-title" + _this3.getCurrentClassName(val.key),
-	                                                    onClick: _this3.handleClick.bind(_this3, val) },
-	                                                val.title
-	                                            )
-	                                        );
-	                                    })
-	                                )
+	                            value.sub && value.open ? _react2.default.createElement(
+	                                'ul',
+	                                { className: 'gm-navigation-level2' },
+	                                _underscore2.default.map(value.sub, function (val) {
+	                                    return _react2.default.createElement(
+	                                        'li',
+	                                        { key: val.key },
+	                                        _react2.default.createElement(
+	                                            'div',
+	                                            {
+	                                                className: "gm-navigation-title" + _this3.getCurrentClassName(val.key),
+	                                                onClick: _this3.handleClick.bind(_this3, val) },
+	                                            val.title
+	                                        )
+	                                    );
+	                                })
 	                            ) : undefined
 	                        );
 	                    })
@@ -4460,7 +4539,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _trigger = __webpack_require__(44);
+	var _trigger = __webpack_require__(5);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -5325,11 +5404,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _reactBootstrap = __webpack_require__(5);
-
 	var _timespan = __webpack_require__(17);
 
 	var _timespan2 = _interopRequireDefault(_timespan);
+
+	var _trigger = __webpack_require__(5);
+
+	var _trigger2 = _interopRequireDefault(_trigger);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5349,40 +5430,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TimeSpanPicker).call(this, props));
 
-	        _this.state = {
-	            id: '_gm_timespanpicker_id' + (Math.random() + '').slice(2)
-	        };
+	        _this.timeSpanPicker = null;
 	        _this.handleSelect = _this.handleSelect.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(TimeSpanPicker, [{
-	        key: 'renderPopover',
-	        value: function renderPopover() {
-	            return _react2.default.createElement(
-	                _reactBootstrap.Popover,
-	                { id: this.state.id,
-	                    className: 'gm-time-span-picker-popover' },
-	                _react2.default.createElement(_timespan2.default, { min: this.props.min,
-	                    max: this.props.max,
-	                    span: this.props.span,
-	                    selected: this.props.date,
-	                    onSelect: this.handleSelect })
-	            );
-	        }
-	    }, {
 	        key: 'handleSelect',
 	        value: function handleSelect(date) {
-	            if (this.refs.target) {
-	                this.refs.target.click();
-	            } else {
-	                this.props.target().click();
-	            }
+	            var _this2 = this;
+
 	            this.props.onChange(date);
+	            setTimeout(function () {
+	                _this2.timeSpanPicker.click();
+	            }, 0);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+
 	            var _props = this.props;
 	            var children = _props.children;
 	            var inputClassName = _props.inputClassName;
@@ -5390,21 +5457,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var render = _props.render;
 	            var date = _props.date;
 
+	            var popup = _react2.default.createElement(_timespan2.default, {
+	                min: this.props.min,
+	                max: this.props.max,
+	                span: this.props.span,
+	                selected: this.props.date,
+	                onSelect: this.handleSelect
+	            });
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'gm-time-span-picker' },
+	                {
+	                    ref: function ref(_ref) {
+	                        _this3.timeSpanPicker = _ref;
+	                    },
+	                    className: 'gm-time-span-picker'
+	                },
 	                _react2.default.createElement(
-	                    _reactBootstrap.OverlayTrigger,
-	                    { trigger: 'click',
-	                        rootClose: true,
-	                        placement: 'bottom',
-	                        overlay: this.renderPopover() },
-	                    children ? children : _react2.default.createElement('input', { type: 'text',
+	                    _trigger2.default,
+	                    { component: _react2.default.createElement('div', null), popup: popup },
+	                    children ? children : _react2.default.createElement('input', {
+	                        type: 'text',
 	                        className: inputClassName,
 	                        ref: 'target',
 	                        disabled: disabled,
 	                        value: render(date),
-	                        onChange: noop })
+	                        onChange: noop
+	                    })
 	                )
 	            );
 	        }
@@ -5421,8 +5499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    render: _react.PropTypes.func,
 	    onChange: _react.PropTypes.func,
 	    inputClassName: _react.PropTypes.string,
-	    disabled: _react.PropTypes.bool,
-	    target: _react.PropTypes.func
+	    disabled: _react.PropTypes.bool
 	};
 
 	TimeSpanPicker.defaultProps = {
@@ -5700,121 +5777,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(4);
-
-	var _classnames = __webpack_require__(3);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	var _gmUtil = __webpack_require__(8);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Trigger = function (_React$Component) {
-	    _inherits(Trigger, _React$Component);
-
-	    function Trigger(props) {
-	        _classCallCheck(this, Trigger);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Trigger).call(this, props));
-
-	        _this.state = {
-	            active: false
-	        };
-	        _this.handleClick = _this.handleClick.bind(_this);
-	        _this.handleDocumentClick = _this.handleDocumentClick.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(Trigger, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            document.addEventListener('click', this.handleDocumentClick);
-	        }
-	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            document.removeEventListener('click', this.handleDocumentClick);
-	        }
-	    }, {
-	        key: 'handleDocumentClick',
-	        value: function handleDocumentClick(event) {
-	            var target = event.target;
-	            var root = (0, _reactDom.findDOMNode)(this);
-	            if (!(0, _gmUtil.contains)(root, target)) {
-	                this.setState({
-	                    active: false
-	                });
-	            }
-	        }
-	    }, {
-	        key: 'handleClick',
-	        value: function handleClick() {
-	            this.setState({
-	                active: true
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props;
-	            var component = _props.component;
-	            var children = _props.children;
-	            var popup = _props.popup;
-
-	            var child = _react2.default.Children.only(children);
-	            var active = this.state.active;
-
-
-	            var componentProps = Object.assign({}, component.props, {
-	                onClick: (0, _gmUtil.createChainedFunction)(component.props.onClick, this.handleClick)
-	            });
-
-	            return _react2.default.cloneElement(component, Object.assign({}, componentProps, {
-	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger', {
-	                    'gm-trigger-active': active
-	                }),
-	                children: [child, _react2.default.createElement('div', {
-	                    key: 'popup',
-	                    className: 'gm-trigger-popup'
-	                }, popup)]
-	            }));
-	        }
-	    }]);
-
-	    return Trigger;
-	}(_react2.default.Component);
-
-	Trigger.propTypes = {
-	    component: _react.PropTypes.node,
-	    popup: _react.PropTypes.node,
-	    children: _react.PropTypes.node
-	};
-
-	exports.default = Trigger;
-
-/***/ },
-/* 45 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
 	var _reactDom = __webpack_require__(4);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
@@ -5931,10 +5893,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_46__;
 
 /***/ }
 /******/ ])
