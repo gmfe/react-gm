@@ -3104,7 +3104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var modalProps = {
 	                show: this.state.show,
-	                ohHide: this.handleCancel
+	                onHide: this.handleCancel
 	            };
 	            if (bsSize !== 'md') {
 	                modalProps.bsSize = bsSize;
