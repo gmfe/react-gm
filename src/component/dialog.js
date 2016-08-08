@@ -93,7 +93,7 @@ class Dialog extends React.Component {
         const {bsSize, title, children, type, promptDefaultValue, noCancel, noOK} = this.props;
         let modalProps = {
             show: this.state.show,
-            ohHide: this.handleCancel
+            onHide: this.handleCancel
         };
         if (bsSize !== 'md') {
             modalProps.bsSize = bsSize;
