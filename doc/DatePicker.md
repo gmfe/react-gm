@@ -6,6 +6,8 @@
 
 ### DatePicker
 
+只能选择，不能编辑
+
 - `date (object)` Date对象
 - `onChange (func|isRequired)` 选择后回调，参数是Date对象
 - `inputClassName (string)` 自定义input的样子

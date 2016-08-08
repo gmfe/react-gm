@@ -47,14 +47,24 @@ class DateRangePicker extends React.Component {
         return (
             <div className={classNames("gm-datepicker gm-daterangepicker", this.props.className)}>
                 <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopoverBegin()}>
-                    <input type="text" className={this.props.inputClassName} disabled={this.props.disabled}
-                           value={moment(this.props.begin).format('YYYY-MM-DD')} onChange={noop}/>
+                    <input
+                        type="text"
+                        className={this.props.inputClassName}
+                        disabled={this.props.disabled}
+                        value={moment(this.props.begin).format('YYYY-MM-DD')}
+                        onChange={noop}
+                    />
                 </OverlayTrigger>
                 <span> ~ </span>
                 <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={this.renderPopoverEnd()}>
-                    <input ref="endTarget" type="text" className={this.props.inputClassName}
-                           disabled={this.props.disabled}
-                           value={moment(this.props.end).format('YYYY-MM-DD')} onChange={noop}/>
+                    <input
+                        ref="endTarget"
+                        type="text"
+                        className={this.props.inputClassName}
+                        disabled={this.props.disabled}
+                        value={moment(this.props.end).format('YYYY-MM-DD')}
+                        onChange={noop}
+                    />
                 </OverlayTrigger>
             </div>
         );
