@@ -2899,6 +2899,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var noop = function noop() {};
+
 	var DatePicker = function (_React$Component) {
 	    _inherits(DatePicker, _React$Component);
 
@@ -2943,7 +2945,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        className: this.props.inputClassName,
 	                        placeholder: this.props.placeholder,
 	                        disabled: this.props.disabled,
-	                        value: this.props.date ? (0, _moment2.default)(this.props.date).format('YYYY-MM-DD') : ''
+	                        value: this.props.date ? (0, _moment2.default)(this.props.date).format('YYYY-MM-DD') : '',
+	                        onChange: noop
 	                    })
 	                )
 	            );
