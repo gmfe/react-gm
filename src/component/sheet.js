@@ -85,7 +85,7 @@ class Sheet extends React.Component {
         return (
             <div className={classNames("gm-sheet", this.props.className)}>
                 {select && batchs ? (
-                    <div className="gm-marginBottom5">
+                    <div className="gm-marginBottom5 text-right">
                         {batchs.props.children}
                     </div>
                 ) : undefined}

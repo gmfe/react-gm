@@ -4664,7 +4664,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            ref: 'target',
 	                            type: 'text',
 	                            value: this.state.value,
-	                            name: 'value',
 	                            onChange: this.handleChange.bind(this),
 	                            onKeyDown: this.handleKeyDown.bind(this),
 	                            placeholder: this.props.placeholder
@@ -4978,7 +4977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: (0, _classnames2.default)("gm-sheet", this.props.className) },
 	                select && batchs ? _react2.default.createElement(
 	                    'div',
-	                    { className: 'gm-marginBottom5' },
+	                    { className: 'gm-marginBottom5 text-right' },
 	                    batchs.props.children
 	                ) : undefined,
 	                _react2.default.createElement(
