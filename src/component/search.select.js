@@ -27,7 +27,7 @@ class SearchSelect extends React.Component {
         this.timer = null;
 
         this.state = {
-            value: '',
+            value: props.selected && props.selected.name || '',
             selected: getPropsSelected(props)
         };
         this.searchSelect = null;
@@ -165,7 +165,6 @@ SearchSelect.propTypes = {
 };
 
 SearchSelect.defaultProps = {
-    value: '',
     listMaxHeight: '250px',
     delay: 500,
     multiple: false,

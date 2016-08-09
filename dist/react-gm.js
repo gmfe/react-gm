@@ -4583,7 +4583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.timer = null;
 
 	        _this.state = {
-	            value: '',
+	            value: props.selected && props.selected.name || '',
 	            selected: getPropsSelected(props)
 	        };
 	        _this.searchSelect = null;
@@ -4763,7 +4763,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	SearchSelect.defaultProps = {
-	    value: '',
 	    listMaxHeight: '250px',
 	    delay: 500,
 	    multiple: false,
