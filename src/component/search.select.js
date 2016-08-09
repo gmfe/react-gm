@@ -87,7 +87,6 @@ class SearchSelect extends React.Component {
                             ref="target"
                             type="text"
                             value={this.state.value}
-                            name="value"
                             onChange={::this.handleChange}
                             onKeyDown={::this.handleKeyDown}
                             placeholder={this.props.placeholder}
