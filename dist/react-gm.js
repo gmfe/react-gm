@@ -4667,6 +4667,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            ref: 'target',
 	                            type: 'text',
 	                            value: this.state.value,
+	                            onBlur: this.handleBlur.bind(this),
 	                            onChange: this.handleChange.bind(this),
 	                            onKeyDown: this.handleKeyDown.bind(this),
 	                            placeholder: this.props.placeholder
@@ -4674,6 +4675,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    )
 	                )
 	            );
+	        }
+	    }, {
+	        key: 'handleBlur',
+	        value: function handleBlur(event) {
+	            var _this4 = this;
+
+	            // 慎用blur，在选择的之前会出发blur
+	            event.preventDefault();
+	            var multiple = this.props.multiple;
+	            // 多选不处理
+
+	            if (!multiple) {
+	                // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
+	                setTimeout(function () {
+	                    var selected = _this4.props.selected;
+
+	                    _this4.handleChange(event, selected && selected.name || '');
+	                }, 500);
+	            }
 	        }
 	    }, {
 	        key: 'handleKeyDown',
@@ -4710,7 +4730,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'handleSelect',
 	        value: function handleSelect(value, event) {
-	            var _this4 = this;
+	            var _this5 = this;
 
 	            event.preventDefault();
 	            if (event.target.className.indexOf('active') > -1) {
@@ -4727,23 +4747,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!this.props.multiple) {
 	                // 要异步
 	                setTimeout(function () {
-	                    _this4.searchSelect.click();
+	                    _this5.searchSelect.click();
 	                }, 0);
 	            }
 	        }
 	    }, {
 	        key: 'handleChange',
-	        value: function handleChange(event) {
-	            var _this5 = this;
+	        value: function handleChange(event, v) {
+	            var _this6 = this;
 
 	            clearTimeout(this.timer);
-	            var value = event.target.value;
+	            var value = v || event.target.value;
 	            this.setState({
 	                value: value
 	            });
 
 	            setTimeout(function () {
-	                _this5.props.onSearch(value);
+	                _this6.props.onSearch(value);
 	            }, this.props.delay);
 	        }
 	    }]);

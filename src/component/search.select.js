@@ -87,6 +87,7 @@ class SearchSelect extends React.Component {
                             ref="target"
                             type="text"
                             value={this.state.value}
+                            onBlur={::this.handleBlur}
                             onChange={::this.handleChange}
                             onKeyDown={::this.handleKeyDown}
                             placeholder={this.props.placeholder}
@@ -95,6 +96,20 @@ class SearchSelect extends React.Component {
                 </Flex>
             </div>
         );
+    }
+
+    handleBlur(event) {
+        // 慎用blur，在选择的之前会出发blur
+        event.preventDefault();
+        const {multiple} = this.props;
+        // 多选不处理
+        if (!multiple) {
+            // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
+            setTimeout(() => {
+                const {selected} = this.props;
+                this.handleChange(event, selected && selected.name || '');
+            }, 500);
+        }
     }
 
     handleKeyDown(event) {
@@ -141,9 +156,9 @@ class SearchSelect extends React.Component {
         }
     }
 
-    handleChange(event) {
+    handleChange(event, v) {
         clearTimeout(this.timer);
-        const value = event.target.value;
+        const value = v || event.target.value;
         this.setState({
             value
         });

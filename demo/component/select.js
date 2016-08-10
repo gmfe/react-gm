@@ -292,7 +292,7 @@ class SearchSelectWrap extends React.Component {
         // pinyin 首字母 过滤
         this.setState({
             list: _.filter(searchSelectData, v => {
-                return _.map(PinYin(v.name, {
+                return v.name.indexOf(value) > -1 || _.map(PinYin(v.name, {
                         style: PinYin.STYLE_FIRST_LETTER
                     }), value => value[0]).join('').indexOf(value) > -1;
             })
