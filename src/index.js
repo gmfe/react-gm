@@ -22,6 +22,7 @@ import TimeSpanPicker from './component/timespanpicker';
 import DropSelect from './component/drop.select';
 import AdvanceSelect from './component/advance.select';
 import SearchSelect from './component/search.select';
+import FilterSearchSelect from './component/filter.search.select';
 import Switch from './component/switch';
 import Sheet from './component/sheet';
 import Cascader from './component/cascader';
@@ -62,6 +63,7 @@ module.exports = {
     DropSelect,
     AdvanceSelect,
     SearchSelect,
+    FilterSearchSelect,
     Cascader,
     CascaderSelect,
     Switch,

@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_46__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_47__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -60,7 +60,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
-	var _grid = __webpack_require__(33);
+	var _grid = __webpack_require__(35);
 
 	var _grid2 = _interopRequireDefault(_grid);
 
@@ -76,23 +76,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _droper2 = _interopRequireDefault(_droper);
 
-	var _former = __webpack_require__(32);
+	var _former = __webpack_require__(34);
 
 	var _former2 = _interopRequireDefault(_former);
 
-	var _validate = __webpack_require__(18);
+	var _validate = __webpack_require__(19);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validate3 = __webpack_require__(44);
+	var _validate3 = __webpack_require__(45);
 
 	var _validate4 = _interopRequireDefault(_validate3);
 
-	var _import = __webpack_require__(35);
+	var _import = __webpack_require__(37);
 
 	var _import2 = _interopRequireDefault(_import);
 
-	var _storage = __webpack_require__(40);
+	var _storage = __webpack_require__(41);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
@@ -100,31 +100,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendar2 = _interopRequireDefault(_calendar);
 
-	var _datepicker = __webpack_require__(28);
+	var _datepicker = __webpack_require__(29);
 
 	var _datepicker2 = _interopRequireDefault(_datepicker);
 
-	var _daterangepicker = __webpack_require__(29);
+	var _daterangepicker = __webpack_require__(30);
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(43);
+	var _tip = __webpack_require__(44);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(37);
+	var _nprogress = __webpack_require__(39);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	var _hr = __webpack_require__(34);
+	var _hr = __webpack_require__(36);
 
 	var _hr2 = _interopRequireDefault(_hr);
 
-	var _dialog = __webpack_require__(30);
+	var _dialog = __webpack_require__(31);
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _navigation = __webpack_require__(36);
+	var _navigation = __webpack_require__(38);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
@@ -132,31 +132,35 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _flex2 = _interopRequireDefault(_flex);
 
-	var _timespan = __webpack_require__(17);
+	var _timespan = __webpack_require__(18);
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _timespanpicker = __webpack_require__(42);
+	var _timespanpicker = __webpack_require__(43);
 
 	var _timespanpicker2 = _interopRequireDefault(_timespanpicker);
 
-	var _drop = __webpack_require__(31);
+	var _drop = __webpack_require__(32);
 
 	var _drop2 = _interopRequireDefault(_drop);
 
-	var _advance = __webpack_require__(26);
+	var _advance = __webpack_require__(27);
 
 	var _advance2 = _interopRequireDefault(_advance);
 
-	var _search = __webpack_require__(38);
+	var _search = __webpack_require__(17);
 
 	var _search2 = _interopRequireDefault(_search);
 
-	var _switch = __webpack_require__(41);
+	var _filterSearch = __webpack_require__(33);
+
+	var _filterSearch2 = _interopRequireDefault(_filterSearch);
+
+	var _switch = __webpack_require__(42);
 
 	var _switch2 = _interopRequireDefault(_switch);
 
-	var _sheet = __webpack_require__(39);
+	var _sheet = __webpack_require__(40);
 
 	var _sheet2 = _interopRequireDefault(_sheet);
 
@@ -164,7 +168,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cascader2 = _interopRequireDefault(_cascader);
 
-	var _cascader3 = __webpack_require__(27);
+	var _cascader3 = __webpack_require__(28);
 
 	var _cascader4 = _interopRequireDefault(_cascader3);
 
@@ -172,7 +176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
-	__webpack_require__(45);
+	__webpack_require__(46);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -207,6 +211,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    DropSelect: _drop2.default,
 	    AdvanceSelect: _advance2.default,
 	    SearchSelect: _search2.default,
+	    FilterSearchSelect: _filterSearch2.default,
 	    Cascader: _cascader2.default,
 	    CascaderSelect: _cascader4.default,
 	    Switch: _switch2.default,
@@ -277,7 +282,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if ("function" === 'function' && _typeof(__webpack_require__(19)) === 'object' && __webpack_require__(19)) {
+		} else if ("function" === 'function' && _typeof(__webpack_require__(20)) === 'object' && __webpack_require__(20)) {
 			// register as 'classnames', consistent with npm package name
 			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
@@ -584,7 +589,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return obj && obj.__esModule ? obj : { 'default': obj };
 	}
 
-	var _Request = __webpack_require__(20);
+	var _Request = __webpack_require__(21);
 
 	var _Request2 = _interopRequireDefault(_Request);
 
@@ -600,23 +605,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _format2 = _interopRequireDefault(_format);
 
-	var _isElementInViewport = __webpack_require__(24);
+	var _isElementInViewport = __webpack_require__(25);
 
 	var _isElementInViewport2 = _interopRequireDefault(_isElementInViewport);
 
-	var _isElementOverViewport = __webpack_require__(25);
+	var _isElementOverViewport = __webpack_require__(26);
 
 	var _isElementOverViewport2 = _interopRequireDefault(_isElementOverViewport);
 
-	var _is = __webpack_require__(23);
+	var _is = __webpack_require__(24);
 
 	var _is2 = _interopRequireDefault(_is);
 
-	var _contains = __webpack_require__(21);
+	var _contains = __webpack_require__(22);
 
 	var _contains2 = _interopRequireDefault(_contains);
 
-	var _createChainedFunction = __webpack_require__(22);
+	var _createChainedFunction = __webpack_require__(23);
 
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 
@@ -1731,6 +1736,283 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _flex = __webpack_require__(6);
+
+	var _flex2 = _interopRequireDefault(_flex);
+
+	var _classnames = __webpack_require__(3);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _trigger = __webpack_require__(5);
+
+	var _trigger2 = _interopRequireDefault(_trigger);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// 略复杂了，脱离初衷，应该把单选和多选版本分开，改代码请周知
+
+	var getPropsSelected = function getPropsSelected(props) {
+	    if (props.multiple) {
+	        if (props.selected) {
+	            return props.selected;
+	        } else {
+	            return [];
+	        }
+	    } else {
+	        if (props.selected) {
+	            return [props.selected];
+	        } else {
+	            return [];
+	        }
+	    }
+	};
+
+	var SearchSelect = function (_React$Component) {
+	    _inherits(SearchSelect, _React$Component);
+
+	    function SearchSelect(props) {
+	        _classCallCheck(this, SearchSelect);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchSelect).call(this, props));
+
+	        _this.timer = null;
+
+	        _this.state = {
+	            value: props.selected && props.selected.name || '',
+	            selected: getPropsSelected(props)
+	        };
+	        _this.searchSelect = null;
+	        return _this;
+	    }
+
+	    _createClass(SearchSelect, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.setState({
+	                selected: getPropsSelected(nextProps)
+	            });
+	        }
+	    }, {
+	        key: 'renderOverlay',
+	        value: function renderOverlay() {
+	            var _this2 = this;
+
+	            var _props = this.props;
+	            var list = _props.list;
+	            var listMaxHeight = _props.listMaxHeight;
+	            var inputClassName = _props.inputClassName;
+
+	            if (list.length === 0) {
+	                return undefined;
+	            }
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'list-group', style: { maxHeight: listMaxHeight } },
+	                _underscore2.default.map(list, function (value, i) {
+	                    return _react2.default.createElement(
+	                        'a',
+	                        {
+	                            key: i,
+	                            className: (0, _classnames2.default)('list-group-item', inputClassName, {
+	                                active: _this2.state.selected.indexOf(value) > -1
+	                            }),
+	                            onClick: _this2.handleSelect.bind(_this2, value) },
+	                        value.name,
+	                        _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
+	                    );
+	                })
+	            );
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this3 = this;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { ref: function ref(_ref) {
+	                        _this3.searchSelect = _ref;
+	                    }, className: (0, _classnames2.default)("gm-search-select", this.props.className) },
+	                _react2.default.createElement(
+	                    _flex2.default,
+	                    { className: 'gm-search-select-input' },
+	                    this.props.multiple ? _underscore2.default.map(this.state.selected, function (value, i) {
+	                        return _react2.default.createElement(
+	                            _flex2.default,
+	                            { key: i, alignStart: true, className: 'selected' },
+	                            value.name,
+	                            _react2.default.createElement(
+	                                'button',
+	                                {
+	                                    type: 'button',
+	                                    className: 'close',
+	                                    onClick: _this3.handleClose.bind(_this3, value)
+	                                },
+	                                '×'
+	                            )
+	                        );
+	                    }) : undefined,
+	                    _react2.default.createElement(
+	                        _trigger2.default,
+	                        {
+	                            component: _react2.default.createElement(_flex2.default, { flex: true }),
+	                            popup: this.renderOverlay()
+	                        },
+	                        _react2.default.createElement('input', {
+	                            ref: 'target',
+	                            type: 'text',
+	                            value: this.state.value,
+	                            onBlur: this.handleBlur.bind(this),
+	                            onChange: this.handleChange.bind(this),
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            placeholder: this.props.placeholder
+	                        })
+	                    )
+	                )
+	            );
+	        }
+	    }, {
+	        key: 'handleBlur',
+	        value: function handleBlur(event) {
+	            var _this4 = this;
+
+	            // 慎用blur，在选择的之前会出发blur
+	            event.preventDefault();
+	            var multiple = this.props.multiple;
+	            // 多选不处理
+
+	            if (!multiple) {
+	                // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
+	                setTimeout(function () {
+	                    var selected = _this4.props.selected;
+
+	                    _this4.handleChange(event, selected && selected.name || '');
+	                }, 500);
+	            }
+	        }
+	    }, {
+	        key: 'handleKeyDown',
+	        value: function handleKeyDown(event) {
+	            if (event.key === 'Backspace') {
+	                if (event.target.value === '') {
+	                    var selected = this.state.selected;
+	                    selected.pop();
+	                    this.doSelect(selected);
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'handleClose',
+	        value: function handleClose(value) {
+	            var selected = _underscore2.default.filter(this.state.selected, function (v) {
+	                return v !== value;
+	            });
+	            this.doSelect(selected);
+	        }
+
+	        // arr
+
+	    }, {
+	        key: 'doSelect',
+	        value: function doSelect(selected) {
+	            if (this.props.multiple) {
+	                this.props.onSelect(selected.length === 0 ? null : selected);
+	            } else {
+	                this.props.onSelect(selected.length === 0 ? null : selected.pop());
+	            }
+	            this.props.onSearch('');
+	        }
+	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(value, event) {
+	            var _this5 = this;
+
+	            event.preventDefault();
+	            if (event.target.className.indexOf('active') > -1) {
+	                this.doSelect(_underscore2.default.filter(this.state.selected, function (v) {
+	                    return v !== value;
+	                }));
+	            } else {
+	                this.doSelect(this.state.selected.concat(value));
+	            }
+	            this.setState({
+	                value: this.props.multiple ? '' : value.name
+	            });
+	            // 单选选后关闭
+	            if (!this.props.multiple) {
+	                // 要异步
+	                setTimeout(function () {
+	                    _this5.searchSelect.click();
+	                }, 0);
+	            }
+	        }
+	    }, {
+	        key: 'handleChange',
+	        value: function handleChange(event, v) {
+	            var _this6 = this;
+
+	            clearTimeout(this.timer);
+	            var value = v || event.target.value;
+	            this.setState({
+	                value: value
+	            });
+
+	            setTimeout(function () {
+	                _this6.props.onSearch(value);
+	            }, this.props.delay);
+	        }
+	    }]);
+
+	    return SearchSelect;
+	}(_react2.default.Component);
+
+	SearchSelect.propTypes = {
+	    list: _react.PropTypes.array.isRequired,
+	    selected: _react.PropTypes.any,
+	    onSearch: _react.PropTypes.func.isRequired,
+	    onSelect: _react.PropTypes.func.isRequired,
+	    delay: _react.PropTypes.number,
+	    listMaxHeight: _react.PropTypes.string,
+	    multiple: _react.PropTypes.bool,
+	    placeholder: _react.PropTypes.string
+	};
+
+	SearchSelect.defaultProps = {
+	    listMaxHeight: '250px',
+	    delay: 500,
+	    multiple: false,
+	    placeholder: ''
+	};
+
+	exports.default = SearchSelect;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _moment = __webpack_require__(7);
 
 	var _moment2 = _interopRequireDefault(_moment);
@@ -1832,7 +2114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpan;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2027,7 +2309,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Validate;
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -2035,7 +2317,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2227,7 +2509,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2253,7 +2535,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2277,7 +2559,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2296,7 +2578,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2313,7 +2595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2330,7 +2612,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2643,7 +2925,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = AdvanceSelect;
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2860,7 +3142,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = CascaderSelect;
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2969,7 +3251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3107,7 +3389,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DateRangePicker;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3128,7 +3410,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactBootstrap = __webpack_require__(46);
+	var _reactBootstrap = __webpack_require__(47);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3326,7 +3608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Dialog;
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3519,7 +3801,102 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DropSelect;
 
 /***/ },
-/* 32 */
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _search = __webpack_require__(17);
+
+	var _search2 = _interopRequireDefault(_search);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FilterSearchSelect = function (_React$Component) {
+	    _inherits(FilterSearchSelect, _React$Component);
+
+	    function FilterSearchSelect(props) {
+	        _classCallCheck(this, FilterSearchSelect);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FilterSearchSelect).call(this, props));
+
+	        _this.state = {
+	            query: ''
+	        };
+	        _this.handleSearch = _this.handleSearch.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(FilterSearchSelect, [{
+	        key: 'handleSearch',
+	        value: function handleSearch(query) {
+	            this.setState({
+	                query: query
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var list = _props.list;
+	            var selected = _props.selected;
+	            var onSelect = _props.onSelect;
+	            var onFilter = _props.onFilter;
+	            var delay = _props.delay;
+	            var listMaxHeight = _props.listMaxHeight;
+	            var placeholder = _props.placeholder;
+	            var query = this.state.query;
+
+	            var filterList = list;
+	            if (query) {
+	                filterList = onFilter(filterList, query);
+	            }
+	            return _react2.default.createElement(_search2.default, {
+	                list: filterList,
+	                selected: selected,
+	                onSelect: onSelect,
+	                onSearch: this.handleSearch,
+	                delay: delay,
+	                listMaxHeight: listMaxHeight,
+	                multiple: false,
+	                placeholder: placeholder
+	            });
+	        }
+	    }]);
+
+	    return FilterSearchSelect;
+	}(_react2.default.Component);
+
+	FilterSearchSelect.propTypes = {
+	    list: _react.PropTypes.array.isRequired,
+	    selected: _react.PropTypes.any,
+	    onSelect: _react.PropTypes.func.isRequired,
+	    onFilter: _react.PropTypes.func.isRequired,
+	    delay: _react.PropTypes.number,
+	    listMaxHeight: _react.PropTypes.string,
+	    placeholder: _react.PropTypes.string
+	};
+
+	exports.default = FilterSearchSelect;
+
+/***/ },
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3661,7 +4038,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Former;
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3931,7 +4308,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Grid;
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3988,7 +4365,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Hr;
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4229,7 +4606,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ImportLead;
 
 /***/ },
-/* 36 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4391,7 +4768,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Navigation;
 
 /***/ },
-/* 37 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4515,284 +4892,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	var _flex = __webpack_require__(6);
-
-	var _flex2 = _interopRequireDefault(_flex);
-
-	var _classnames = __webpack_require__(3);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	var _trigger = __webpack_require__(5);
-
-	var _trigger2 = _interopRequireDefault(_trigger);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	// 略复杂了，脱离初衷，应该把单选和多选版本分开，改代码请周知
-
-	var getPropsSelected = function getPropsSelected(props) {
-	    if (props.multiple) {
-	        if (props.selected) {
-	            return props.selected;
-	        } else {
-	            return [];
-	        }
-	    } else {
-	        if (props.selected) {
-	            return [props.selected];
-	        } else {
-	            return [];
-	        }
-	    }
-	};
-
-	var SearchSelect = function (_React$Component) {
-	    _inherits(SearchSelect, _React$Component);
-
-	    function SearchSelect(props) {
-	        _classCallCheck(this, SearchSelect);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchSelect).call(this, props));
-
-	        _this.timer = null;
-
-	        _this.state = {
-	            value: props.selected && props.selected.name || '',
-	            selected: getPropsSelected(props)
-	        };
-	        _this.searchSelect = null;
-	        return _this;
-	    }
-
-	    _createClass(SearchSelect, [{
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            this.setState({
-	                selected: getPropsSelected(nextProps)
-	            });
-	        }
-	    }, {
-	        key: 'renderOverlay',
-	        value: function renderOverlay() {
-	            var _this2 = this;
-
-	            var _props = this.props;
-	            var list = _props.list;
-	            var listMaxHeight = _props.listMaxHeight;
-	            var inputClassName = _props.inputClassName;
-
-	            if (list.length === 0) {
-	                return undefined;
-	            }
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'list-group', style: { maxHeight: listMaxHeight } },
-	                _underscore2.default.map(list, function (value, i) {
-	                    return _react2.default.createElement(
-	                        'a',
-	                        {
-	                            key: i,
-	                            className: (0, _classnames2.default)('list-group-item', inputClassName, {
-	                                active: _this2.state.selected.indexOf(value) > -1
-	                            }),
-	                            onClick: _this2.handleSelect.bind(_this2, value) },
-	                        value.name,
-	                        _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
-	                    );
-	                })
-	            );
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _this3 = this;
-
-	            return _react2.default.createElement(
-	                'div',
-	                { ref: function ref(_ref) {
-	                        _this3.searchSelect = _ref;
-	                    }, className: (0, _classnames2.default)("gm-search-select", this.props.className) },
-	                _react2.default.createElement(
-	                    _flex2.default,
-	                    { className: 'gm-search-select-input' },
-	                    this.props.multiple ? _underscore2.default.map(this.state.selected, function (value, i) {
-	                        return _react2.default.createElement(
-	                            _flex2.default,
-	                            { key: i, alignStart: true, className: 'selected' },
-	                            value.name,
-	                            _react2.default.createElement(
-	                                'button',
-	                                {
-	                                    type: 'button',
-	                                    className: 'close',
-	                                    onClick: _this3.handleClose.bind(_this3, value)
-	                                },
-	                                '×'
-	                            )
-	                        );
-	                    }) : undefined,
-	                    _react2.default.createElement(
-	                        _trigger2.default,
-	                        {
-	                            component: _react2.default.createElement(_flex2.default, { flex: true }),
-	                            popup: this.renderOverlay()
-	                        },
-	                        _react2.default.createElement('input', {
-	                            ref: 'target',
-	                            type: 'text',
-	                            value: this.state.value,
-	                            onBlur: this.handleBlur.bind(this),
-	                            onChange: this.handleChange.bind(this),
-	                            onKeyDown: this.handleKeyDown.bind(this),
-	                            placeholder: this.props.placeholder
-	                        })
-	                    )
-	                )
-	            );
-	        }
-	    }, {
-	        key: 'handleBlur',
-	        value: function handleBlur(event) {
-	            var _this4 = this;
-
-	            // 慎用blur，在选择的之前会出发blur
-	            event.preventDefault();
-	            var multiple = this.props.multiple;
-	            // 多选不处理
-
-	            if (!multiple) {
-	                // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
-	                setTimeout(function () {
-	                    var selected = _this4.props.selected;
-
-	                    _this4.handleChange(event, selected && selected.name || '');
-	                }, 500);
-	            }
-	        }
-	    }, {
-	        key: 'handleKeyDown',
-	        value: function handleKeyDown(event) {
-	            if (event.key === 'Backspace') {
-	                if (event.target.value === '') {
-	                    var selected = this.state.selected;
-	                    selected.pop();
-	                    this.doSelect(selected);
-	                }
-	            }
-	        }
-	    }, {
-	        key: 'handleClose',
-	        value: function handleClose(value) {
-	            var selected = _underscore2.default.filter(this.state.selected, function (v) {
-	                return v !== value;
-	            });
-	            this.doSelect(selected);
-	        }
-
-	        // arr
-
-	    }, {
-	        key: 'doSelect',
-	        value: function doSelect(selected) {
-	            if (this.props.multiple) {
-	                this.props.onSelect(selected.length === 0 ? null : selected);
-	            } else {
-	                this.props.onSelect(selected.length === 0 ? null : selected.pop());
-	            }
-	            this.props.onSearch('');
-	        }
-	    }, {
-	        key: 'handleSelect',
-	        value: function handleSelect(value, event) {
-	            var _this5 = this;
-
-	            event.preventDefault();
-	            if (event.target.className.indexOf('active') > -1) {
-	                this.doSelect(_underscore2.default.filter(this.state.selected, function (v) {
-	                    return v !== value;
-	                }));
-	            } else {
-	                this.doSelect(this.state.selected.concat(value));
-	            }
-	            this.setState({
-	                value: this.props.multiple ? '' : value.name
-	            });
-	            // 单选选后关闭
-	            if (!this.props.multiple) {
-	                // 要异步
-	                setTimeout(function () {
-	                    _this5.searchSelect.click();
-	                }, 0);
-	            }
-	        }
-	    }, {
-	        key: 'handleChange',
-	        value: function handleChange(event, v) {
-	            var _this6 = this;
-
-	            clearTimeout(this.timer);
-	            var value = v || event.target.value;
-	            this.setState({
-	                value: value
-	            });
-
-	            setTimeout(function () {
-	                _this6.props.onSearch(value);
-	            }, this.props.delay);
-	        }
-	    }]);
-
-	    return SearchSelect;
-	}(_react2.default.Component);
-
-	SearchSelect.propTypes = {
-	    list: _react.PropTypes.array.isRequired,
-	    selected: _react.PropTypes.any,
-	    onSearch: _react.PropTypes.func.isRequired,
-	    onSelect: _react.PropTypes.func.isRequired,
-	    delay: _react.PropTypes.number,
-	    listMaxHeight: _react.PropTypes.string,
-	    multiple: _react.PropTypes.bool,
-	    placeholder: _react.PropTypes.string
-	};
-
-	SearchSelect.defaultProps = {
-	    listMaxHeight: '250px',
-	    delay: 500,
-	    multiple: false,
-	    placeholder: ''
-	};
-
-	exports.default = SearchSelect;
-
-/***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5154,7 +5254,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Sheet;
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5262,7 +5362,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5406,7 +5506,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Switch;
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5425,7 +5525,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _timespan = __webpack_require__(17);
+	var _timespan = __webpack_require__(18);
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
@@ -5534,7 +5634,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpanPicker;
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5789,7 +5889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5806,7 +5906,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _validate = __webpack_require__(18);
+	var _validate = __webpack_require__(19);
 
 	var _validate2 = _interopRequireDefault(_validate);
 
@@ -5914,16 +6014,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_46__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_47__;
 
 /***/ }
 /******/ ])

@@ -8,6 +8,7 @@
 - [Pagination](./Pagination)
 - [Cascader](./Cascader.md)
 - [SearchSelect](./SearchSelect.md)
+- [FilterSearchSelect](./FilterSearchSelect.md)
 - [DropSelect](./DropSelect.md) @siqi
 - [Calendar](./Calendar.md)
 - [DatePicker & DateRangePicker](./DatePicker.md)

@@ -3,6 +3,7 @@ import {
     DropSelect,
     AdvanceSelect,
     SearchSelect,
+    FilterSearchSelect,
     Cascader,
     CascaderSelect,
     Flex
@@ -301,6 +302,44 @@ class SearchSelectWrap extends React.Component {
     }
 }
 
+class FilterSearchSelectWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: searchSelectData[1],
+            list: searchSelectData
+        };
+    }
+
+    render() {
+        return (
+            <div>
+                <FilterSearchSelect
+                    list={this.state.list}
+                    selected={this.state.selected}
+                    onSelect={::this.handleSelect}
+                    onFilter={::this.handleFilter}
+                />
+            </div>
+        );
+    }
+
+    handleFilter(list, query) {
+        return _.filter(list, v => {
+            return v.name.indexOf(query) > -1 || _.map(PinYin(v.name, {
+                    style: PinYin.STYLE_FIRST_LETTER
+                }), value => value[0]).join('').indexOf(query) > -1;
+        });
+    }
+
+    handleSelect(selected) {
+        console.log(selected);
+        this.setState({
+            selected
+        });
+    }
+}
+
 const cascaderData = [{
     value: '0',
     name: '广东',
@@ -465,6 +504,8 @@ class SelectWrap extends React.Component {
                 <DropSelectWrap/>
                 <h2 id="SearchSelect">SearchSelect</h2>
                 <SearchSelectWrap/>
+                <h2 id="FilterSearchSelect">FilterSearchSelect</h2>
+                <FilterSearchSelectWrap/>
             </div>
         );
     }
