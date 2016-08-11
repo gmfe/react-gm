@@ -29,6 +29,7 @@ const list = [{
 - `list (Array|isRequired)` 是列表的数据，最好是数组。 当然有人没注意传了obj（非常不推荐）。
 - `loading (bool)` true显示loading状态，false显示数据
 - `enableEmptyTip (bool|string|element)` true则显示默认的“没有数据”文案，其他值string or element则直接显示 
+- `getTrProps (func)` 自定义`tr`的props，提供`index`索引，返回 object。
 
 ```jsx
 // 一般用法

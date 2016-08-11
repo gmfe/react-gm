@@ -5166,7 +5166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        !loading ? _underscore2.default.map(list, function (value, index) {
 	                            return _react2.default.createElement(
 	                                'tr',
-	                                { key: index },
+	                                _extends({}, _this6.props.getTrProps(index), { key: index }),
 	                                select ? _react2.default.createElement(
 	                                    'td',
 	                                    null,
@@ -5240,12 +5240,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    list: _react.PropTypes.array.isRequired,
 	    loading: _react.PropTypes.bool,
 	    enableEmptyTip: _react.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.string, _react.PropTypes.element]),
-	    className: _react.PropTypes.string
+	    className: _react.PropTypes.string,
+	    getTrProps: _react.PropTypes.func
 	};
 
 	Sheet.defaultProps = {
 	    list: [],
-	    loading: false
+	    loading: false,
+	    getTrProps: function getTrProps() {
+	        return {};
+	    }
 	};
 
 	Object.assign(Sheet, {

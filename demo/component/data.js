@@ -41,7 +41,9 @@ class SheetWrap extends React.Component {
         const {list, loading} = this.state;
         return (
             <div>
-                <Sheet list={list} loading={loading} enableEmptyTip>
+                <Sheet list={list} loading={loading} enableEmptyTip getTrProps={index => {
+                    return index === 0 ? {className: 'danger'} : {};
+                }}>
                     <SheetColumn field="id" name="id"/>
                     <SheetColumn field="name" name="name" style={{
                         width: '150px'

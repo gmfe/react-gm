@@ -125,7 +125,7 @@ class Sheet extends React.Component {
                         </tr>
                     ) : undefined}
                     {!loading ? _.map(list, (value, index) => (
-                        <tr key={index}>
+                        <tr {...this.props.getTrProps(index)} key={index}>
                             {select ? (
                                 <td>
                                     <input type="checkbox" checked={value._gm_select || false}
@@ -174,12 +174,16 @@ Sheet.propTypes = {
     list: PropTypes.array.isRequired,
     loading: PropTypes.bool,
     enableEmptyTip: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.element]),
-    className: PropTypes.string
+    className: PropTypes.string,
+    getTrProps: PropTypes.func
 };
 
 Sheet.defaultProps = {
     list: [],
-    loading: false
+    loading: false,
+    getTrProps: () => {
+        return {};
+    }
 };
 
 Object.assign(Sheet, {
