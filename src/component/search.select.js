@@ -107,7 +107,7 @@ class SearchSelect extends React.Component {
             // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
             setTimeout(() => {
                 const {selected} = this.props;
-                this.handleChange(event, selected && selected.name || '');
+                this.doChange(selected && selected.name || '');
             }, 500);
         }
     }
@@ -156,16 +156,19 @@ class SearchSelect extends React.Component {
         }
     }
 
-    handleChange(event, v) {
+    doChange(value) {
         clearTimeout(this.timer);
-        const value = v || event.target.value;
         this.setState({
             value
         });
 
-        setTimeout(() => {
+        this.timer = setTimeout(() => {
             this.props.onSearch(value);
         }, this.props.delay);
+    }
+
+    handleChange(event) {
+        this.doChange(event.target.value);
     }
 }
 SearchSelect.propTypes = {

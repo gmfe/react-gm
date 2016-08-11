@@ -1897,7 +1897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                setTimeout(function () {
 	                    var selected = _this4.props.selected;
 
-	                    _this4.handleChange(event, selected && selected.name || '');
+	                    _this4.doChange(selected && selected.name || '');
 	                }, 500);
 	            }
 	        }
@@ -1958,19 +1958,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }, {
-	        key: 'handleChange',
-	        value: function handleChange(event, v) {
+	        key: 'doChange',
+	        value: function doChange(value) {
 	            var _this6 = this;
 
 	            clearTimeout(this.timer);
-	            var value = v || event.target.value;
 	            this.setState({
 	                value: value
 	            });
 
-	            setTimeout(function () {
+	            this.timer = setTimeout(function () {
 	                _this6.props.onSearch(value);
 	            }, this.props.delay);
+	        }
+	    }, {
+	        key: 'handleChange',
+	        value: function handleChange(event) {
+	            this.doChange(event.target.value);
 	        }
 	    }]);
 
