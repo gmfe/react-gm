@@ -342,23 +342,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	            active: false
 	        };
 	        _this.handleClick = _this.handleClick.bind(_this);
-	        _this.handleDocumentClick = _this.handleDocumentClick.bind(_this);
+	        _this.handleBodyClick = _this.handleBodyClick.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(Trigger, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            document.addEventListener('click', this.handleDocumentClick);
+	            document.body.addEventListener('click', this.handleBodyClick);
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
-	            document.removeEventListener('click', this.handleDocumentClick);
+	            document.body.removeEventListener('click', this.handleBodyClick);
 	        }
 	    }, {
-	        key: 'handleDocumentClick',
-	        value: function handleDocumentClick(event) {
+	        key: 'handleBodyClick',
+	        value: function handleBodyClick(event) {
 	            var target = event.target;
 	            var root = (0, _reactDom.findDOMNode)(this);
 	            if (!(0, _gmUtil.contains)(root, target)) {

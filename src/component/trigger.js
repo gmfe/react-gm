@@ -10,18 +10,18 @@ class Trigger extends React.Component {
             active: false
         };
         this.handleClick = ::this.handleClick;
-        this.handleDocumentClick = ::this.handleDocumentClick;
+        this.handleBodyClick = ::this.handleBodyClick;
     }
 
     componentDidMount() {
-        document.addEventListener('click', this.handleDocumentClick);
+        document.body.addEventListener('click', this.handleBodyClick);
     }
 
     componentWillUnmount() {
-        document.removeEventListener('click', this.handleDocumentClick);
+        document.body.removeEventListener('click', this.handleBodyClick);
     }
 
-    handleDocumentClick(event) {
+    handleBodyClick(event) {
         const target = event.target;
         const root = findDOMNode(this);
         if (!contains(root, target)) {
