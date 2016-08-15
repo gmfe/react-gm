@@ -3533,8 +3533,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var children = _props.children;
 	            var type = _props.type;
 	            var promptDefaultValue = _props.promptDefaultValue;
-	            var noCancel = _props.noCancel;
-	            var noOK = _props.noOK;
+	            var cancelBtn = _props.cancelBtn;
+	            var OKBtn = _props.OKBtn;
 
 	            var modalProps = {
 	                show: this.state.show,
@@ -3566,16 +3566,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'text-right' },
-	                        type !== 'alert' && !noCancel && _react2.default.createElement(
+	                        type !== 'alert' && cancelBtn && _react2.default.createElement(
 	                            'button',
 	                            { className: 'btn btn-default', onClick: this.handleCancel },
-	                            '取消'
+	                            cancelBtn
 	                        ),
 	                        _react2.default.createElement('div', { className: 'gm-gap10' }),
-	                        !noOK && _react2.default.createElement(
+	                        OKBtn && _react2.default.createElement(
 	                            'button',
 	                            { className: 'btn btn-primary', onClick: this.handleOk },
-	                            '确定'
+	                            OKBtn
 	                        )
 	                    )
 	                )
@@ -3594,9 +3594,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onCancel: _react.PropTypes.func,
 	    onOK: _react.PropTypes.func,
 	    bsSize: _react.PropTypes.string,
-	    noCancel: _react.PropTypes.bool,
-	    noOK: _react.PropTypes.bool,
-	    promptDefaultValue: _react.PropTypes.string
+	    promptDefaultValue: _react.PropTypes.string,
+	    cancelBtn: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.bool]),
+	    OKBtn: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.bool])
 	};
 	Dialog.defaultProps = {
 	    show: false,
@@ -3605,8 +3605,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onCancel: noop,
 	    onOK: noop,
 	    bsSize: 'md',
-	    noCancel: false, // 由于涉及原因只能这样搞了，传true 来屏蔽按钮
-	    noOK: false
+	    cancelBtn: '取消',
+	    OKBtn: '确定'
 	};
 
 	exports.default = Dialog;

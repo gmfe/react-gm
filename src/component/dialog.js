@@ -90,7 +90,7 @@ class Dialog extends React.Component {
     }
 
     render() {
-        const {bsSize, title, children, type, promptDefaultValue, noCancel, noOK} = this.props;
+        const {bsSize, title, children, type, promptDefaultValue, cancelBtn, OKBtn} = this.props;
         let modalProps = {
             show: this.state.show,
             onHide: this.handleCancel
@@ -114,12 +114,12 @@ class Dialog extends React.Component {
                     </div>
                     <div className="gm-gap10"></div>
                     <div className="text-right">
-                        {(type !== 'alert' && !noCancel) && (
-                            <button className="btn btn-default" onClick={this.handleCancel}>取消</button>
+                        {(type !== 'alert' && cancelBtn) && (
+                            <button className="btn btn-default" onClick={this.handleCancel}>{cancelBtn}</button>
                         )}
                         <div className="gm-gap10"></div>
-                        {!noOK && (
-                            <button className="btn btn-primary" onClick={this.handleOk}>确定</button>
+                        {OKBtn && (
+                            <button className="btn btn-primary" onClick={this.handleOk}>{OKBtn}</button>
                         )}
                     </div>
                 </Modal.Body>
@@ -135,9 +135,15 @@ Dialog.propTypes = {
     onCancel: PropTypes.func,
     onOK: PropTypes.func,
     bsSize: PropTypes.string,
-    noCancel: PropTypes.bool,
-    noOK: PropTypes.bool,
-    promptDefaultValue: PropTypes.string
+    promptDefaultValue: PropTypes.string,
+    cancelBtn: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.bool
+    ]),
+    OKBtn: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.bool
+    ])
 };
 Dialog.defaultProps = {
     show: false,
@@ -146,8 +152,8 @@ Dialog.defaultProps = {
     onCancel: noop,
     onOK: noop,
     bsSize: 'md',
-    noCancel: false, // 由于涉及原因只能这样搞了，传true 来屏蔽按钮
-    noOK: false
+    cancelBtn: '取消',
+    OKBtn: '确定'
 };
 
 export default Dialog;
