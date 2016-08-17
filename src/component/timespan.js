@@ -6,8 +6,8 @@ import classNames from 'classnames';
 class TimeSpan extends React.Component {
     getCells() {
         const {min, max, span} = this.props;
-        const dMax = moment(max);
-        let d = moment(min), cells = [];
+        const dMax = max ? moment(max) : moment().endOf('day');
+        let d = min ? moment(min) : moment().startOf('day'), cells = [];
         while (d <= dMax) {
             cells.push(d);
             d = moment(d + span);

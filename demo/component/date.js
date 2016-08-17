@@ -131,6 +131,9 @@ class TimeSpanWrap extends React.Component {
         return (
             <div>
                 <div>
+                    <TimeSpan max={null}
+                              selected={this.state.date}
+                              onSelect={this.handleChange}/>
                     <TimeSpan max={moment().hour(20).minute(0)}
                               selected={this.state.date}
                               onSelect={this.handleChange}/>

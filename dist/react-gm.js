@@ -2054,8 +2054,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var max = _props.max;
 	            var span = _props.span;
 
-	            var dMax = (0, _moment2.default)(max);
-	            var d = (0, _moment2.default)(min),
+	            var dMax = max ? (0, _moment2.default)(max) : (0, _moment2.default)().endOf('day');
+	            var d = min ? (0, _moment2.default)(min) : (0, _moment2.default)().startOf('day'),
 	                cells = [];
 	            while (d <= dMax) {
 	                cells.push(d);

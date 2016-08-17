@@ -110,21 +110,21 @@ SheetColumn的顺序决定table列的顺序
 
 行的操作。Sheet会自动放到表格最前列
 
-一但用到SheetSelect，就约定了数据eList中的`_gm_select`字段，`_gm_select`为bool是选中。
-onSelect当选择一行时触发。
-onSelectAll当选择所有的时候触发。
+一但用到`SheetSelect`，就约定了数据eList中的`_gm_select`字段，`_gm_select`为bool是选中。
+`onSelect`当选择一行时触发，参数为是否选中`checked`，和当前索引`index`。
+`onSelectAll`当选择所有的时候触发，参数为是否选择`checked`。
 需要根据select事件自动修改_gm_select属性。
 
 ```
 <SheetSelect onSelect={this.handleSelect} onSelectAll={this.handleSelectAll}/>
 ```
 
-### SheetBatch
+### SheetBatchAction
 
 批量操作按钮，Sheet会自动放到table的上面。
 
-当存在SheetSelect才有效。没啥功能，纯粹一个位置约定而已。
-在handleBatchAction中要自己判断哪些被选中，做想要的操作（哪些被选中其实也可以交给组件做，犹豫)
+当存在`SheetSelect`才有效。没啥功能，纯粹一个位置约定而已。
+在`handleBatchAction`中要自己判断哪些被选中，做想要的操作（哪些被选中其实也可以交给组件做，犹豫)
 
 ```jsx
 <SheetBatchAction>
@@ -136,7 +136,7 @@ onSelectAll当选择所有的时候触发。
 
 ### Pagination PaginationText
 
-如需页码传入Pagination或者PaginationText组件。 
+如需页码传入`Pagination`或者`PaginationText`组件。 
 Sheet会自动安排在页码应该什么位置。一般只用Pagination就好。
 
 ```jsx
