@@ -1873,6 +1873,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            ref: 'target',
 	                            type: 'text',
 	                            value: this.state.value,
+	                            onFocus: this.handleFocus,
 	                            onBlur: this.handleBlur.bind(this),
 	                            onChange: this.handleChange.bind(this),
 	                            onKeyDown: this.handleKeyDown.bind(this),
@@ -1881,6 +1882,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    )
 	                )
 	            );
+	        }
+	    }, {
+	        key: 'handleFocus',
+	        value: function handleFocus(event) {
+	            event.target.select();
 	        }
 	    }, {
 	        key: 'handleBlur',

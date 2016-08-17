@@ -87,6 +87,7 @@ class SearchSelect extends React.Component {
                             ref="target"
                             type="text"
                             value={this.state.value}
+                            onFocus={this.handleFocus}
                             onBlur={::this.handleBlur}
                             onChange={::this.handleChange}
                             onKeyDown={::this.handleKeyDown}
@@ -96,6 +97,10 @@ class SearchSelect extends React.Component {
                 </Flex>
             </div>
         );
+    }
+
+    handleFocus(event) {
+        event.target.select();
     }
 
     handleBlur(event) {

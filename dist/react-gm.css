@@ -1,3 +1,21 @@
+.btn.btn-plain {
+  background-color: white;
+}
+.btn.btn-plain.btn-primary {
+  color: #6dc3ec;
+}
+.btn.btn-plain.btn-success {
+  color: #34AE4B;
+}
+.btn.btn-plain.btn-info {
+  color: #8DBF31;
+}
+.btn.btn-plain.btn-warning {
+  color: #F8C243;
+}
+.btn.btn-plain.btn-danger {
+  color: #FC6265;
+}
 .gm-grid td > button {
   margin: 0 5px;
 }
