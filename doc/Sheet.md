@@ -30,6 +30,7 @@ const list = [{
 - `loading (bool)` true显示loading状态，false显示数据
 - `enableEmptyTip (bool|string|element)` true则显示默认的“没有数据”文案，其他值string or element则直接显示 
 - `getTrProps (func)` 自定义`tr`的props，提供`index`索引，返回 object。
+- `scrollX (bool)` 是否允许table横向滚动。 但是table是否具备横向滚动的条件要调用方保证
 
 ```jsx
 // 一般用法

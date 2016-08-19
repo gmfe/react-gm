@@ -5067,7 +5067,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                isSelectAll = false,
 	                list = this.props.list || [],
 	                loading = this.props.loading,
-	                enableEmptyTip = this.props.enableEmptyTip;
+	                enableEmptyTip = this.props.enableEmptyTip,
+	                scrollX = this.props.scrollX;
 
 	            if (list.length > 0) {
 	                isSelectAll = _underscore2.default.filter(list, function (value) {
@@ -5113,101 +5114,105 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    batchs.props.children
 	                ) : undefined,
 	                _react2.default.createElement(
-	                    'table',
-	                    { className: 'table table-striped table-hover table-bordered' },
+	                    'div',
+	                    { className: "gm-sheet-table" + (scrollX ? ' gm-sheet-table-scroll-x' : '') },
 	                    _react2.default.createElement(
-	                        'thead',
-	                        null,
+	                        'table',
+	                        { className: 'table table-striped table-hover table-bordered' },
 	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            select ? _react2.default.createElement(
-	                                'th',
-	                                { className: 'gm-sheet-select' },
-	                                _react2.default.createElement('input', { type: 'checkbox', checked: isSelectAll,
-	                                    onChange: this.handleSelectAll.bind(this, select) })
-	                            ) : undefined,
-	                            _underscore2.default.map(columns, function (value, index) {
-	                                var _value$props = value.props;
-	                                var children = _value$props.children;
-	                                var field = _value$props.field;
-	                                var name = _value$props.name;
-
-	                                var rest = _objectWithoutProperties(_value$props, ['children', 'field', 'name']);
-
-	                                return _react2.default.createElement(
-	                                    'th',
-	                                    _extends({ key: index }, rest),
-	                                    value.props.name
-	                                );
-	                            }),
-	                            actions ? _react2.default.createElement(
-	                                'th',
-	                                null,
-	                                '操作'
-	                            ) : undefined
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'tbody',
-	                        null,
-	                        loading ? _react2.default.createElement(
-	                            'tr',
+	                            'thead',
 	                            null,
 	                            _react2.default.createElement(
-	                                'td',
-	                                { colSpan: '99', className: 'text-center' },
-	                                '加载中...'
-	                            )
-	                        ) : undefined,
-	                        !loading && enableEmptyTip && list.length === 0 ? _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                { colSpan: '99', className: 'text-center' },
-	                                enableEmptyTip === true ? '没有数据' : enableEmptyTip
-	                            )
-	                        ) : undefined,
-	                        !loading ? _underscore2.default.map(list, function (value, index) {
-	                            return _react2.default.createElement(
 	                                'tr',
-	                                _extends({}, _this6.props.getTrProps(index), { key: index }),
+	                                null,
 	                                select ? _react2.default.createElement(
-	                                    'td',
-	                                    null,
-	                                    _react2.default.createElement('input', { type: 'checkbox', checked: value._gm_select || false,
-	                                        onChange: _this6.handleSelect.bind(_this6, select, index) })
+	                                    'th',
+	                                    { className: 'gm-sheet-select' },
+	                                    _react2.default.createElement('input', { type: 'checkbox', checked: isSelectAll,
+	                                        onChange: this.handleSelectAll.bind(this, select) })
 	                                ) : undefined,
-	                                _underscore2.default.map(columns, function (v, i) {
-	                                    var _v$props = v.props;
-	                                    var children = _v$props.children;
-	                                    var field = _v$props.field;
-	                                    var name = _v$props.name;
+	                                _underscore2.default.map(columns, function (value, index) {
+	                                    var _value$props = value.props;
+	                                    var children = _value$props.children;
+	                                    var field = _value$props.field;
+	                                    var name = _value$props.name;
 
-	                                    var rest = _objectWithoutProperties(_v$props, ['children', 'field', 'name']);
+	                                    var rest = _objectWithoutProperties(_value$props, ['children', 'field', 'name']);
 
-	                                    if (typeof children === 'function') {
-	                                        return _react2.default.createElement(
-	                                            'td',
-	                                            _extends({ key: i }, rest),
-	                                            children(value[field], index)
-	                                        );
-	                                    } else {
-	                                        return _react2.default.createElement(
-	                                            'td',
-	                                            _extends({ key: i }, rest),
-	                                            value[field]
-	                                        );
-	                                    }
+	                                    return _react2.default.createElement(
+	                                        'th',
+	                                        _extends({ key: index }, rest),
+	                                        value.props.name
+	                                    );
 	                                }),
 	                                actions ? _react2.default.createElement(
-	                                    'td',
+	                                    'th',
 	                                    null,
-	                                    actions.props.children(value, index)
+	                                    '操作'
 	                                ) : undefined
-	                            );
-	                        }) : undefined
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'tbody',
+	                            null,
+	                            loading ? _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { colSpan: '99', className: 'text-center' },
+	                                    '加载中...'
+	                                )
+	                            ) : undefined,
+	                            !loading && enableEmptyTip && list.length === 0 ? _react2.default.createElement(
+	                                'tr',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { colSpan: '99', className: 'text-center' },
+	                                    enableEmptyTip === true ? '没有数据' : enableEmptyTip
+	                                )
+	                            ) : undefined,
+	                            !loading ? _underscore2.default.map(list, function (value, index) {
+	                                return _react2.default.createElement(
+	                                    'tr',
+	                                    _extends({}, _this6.props.getTrProps(index), { key: index }),
+	                                    select ? _react2.default.createElement(
+	                                        'td',
+	                                        null,
+	                                        _react2.default.createElement('input', { type: 'checkbox', checked: value._gm_select || false,
+	                                            onChange: _this6.handleSelect.bind(_this6, select, index) })
+	                                    ) : undefined,
+	                                    _underscore2.default.map(columns, function (v, i) {
+	                                        var _v$props = v.props;
+	                                        var children = _v$props.children;
+	                                        var field = _v$props.field;
+	                                        var name = _v$props.name;
+
+	                                        var rest = _objectWithoutProperties(_v$props, ['children', 'field', 'name']);
+
+	                                        if (typeof children === 'function') {
+	                                            return _react2.default.createElement(
+	                                                'td',
+	                                                _extends({ key: i }, rest),
+	                                                children(value[field], index)
+	                                            );
+	                                        } else {
+	                                            return _react2.default.createElement(
+	                                                'td',
+	                                                _extends({ key: i }, rest),
+	                                                value[field]
+	                                            );
+	                                        }
+	                                    }),
+	                                    actions ? _react2.default.createElement(
+	                                        'td',
+	                                        null,
+	                                        actions.props.children(value, index)
+	                                    ) : undefined
+	                                );
+	                            }) : undefined
+	                        )
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -5247,7 +5252,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    loading: _react.PropTypes.bool,
 	    enableEmptyTip: _react.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.string, _react.PropTypes.element]),
 	    className: _react.PropTypes.string,
-	    getTrProps: _react.PropTypes.func
+	    getTrProps: _react.PropTypes.func,
+	    scrollX: _react.PropTypes.bool
 	};
 
 	Sheet.defaultProps = {
@@ -5255,7 +5261,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    loading: false,
 	    getTrProps: function getTrProps() {
 	        return {};
-	    }
+	    },
+	    scrollX: false
 	};
 
 	Object.assign(Sheet, {

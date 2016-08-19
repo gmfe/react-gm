@@ -50,7 +50,7 @@ class Sheet extends React.Component {
     }
 
     render() {
-        let select = false, isSelectAll = false, list = this.props.list || [], loading = this.props.loading, enableEmptyTip = this.props.enableEmptyTip;
+        let select = false, isSelectAll = false, list = this.props.list || [], loading = this.props.loading, enableEmptyTip = this.props.enableEmptyTip, scrollX = this.props.scrollX;
 
         if (list.length > 0) {
             isSelectAll = _.filter(list, value => {
@@ -89,69 +89,71 @@ class Sheet extends React.Component {
                         {batchs.props.children}
                     </div>
                 ) : undefined}
-                <table className="table table-striped table-hover table-bordered">
-                    <thead>
-                    <tr>
-                        {select ? (
-                            <th className="gm-sheet-select">
-                                <input type="checkbox" checked={isSelectAll}
-                                       onChange={this.handleSelectAll.bind(this, select)}/>
-                            </th>
-                        ) : undefined}
-                        {_.map(columns, (value, index) => {
-                            const {
-                                children, field, name, // eslint-disable-line
-                                ...rest
-                            } = value.props;
-                            return <th key={index} {...rest}>{value.props.name}</th>;
-                        })}
-                        {actions ? (
-                            <th>操作</th>
-                        ) : undefined}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {loading ? (
+                <div className={"gm-sheet-table" + (scrollX ? ' gm-sheet-table-scroll-x' : '')}>
+                    <table className="table table-striped table-hover table-bordered">
+                        <thead>
                         <tr>
-                            <td colSpan="99" className="text-center">加载中...
-                            </td>
-                        </tr>
-                    ) : undefined}
-                    {(!loading && enableEmptyTip && list.length === 0) ? (
-                        <tr>
-                            <td colSpan="99" className="text-center">
-                                {enableEmptyTip === true ? '没有数据' : enableEmptyTip}
-                            </td>
-                        </tr>
-                    ) : undefined}
-                    {!loading ? _.map(list, (value, index) => (
-                        <tr {...this.props.getTrProps(index)} key={index}>
                             {select ? (
-                                <td>
-                                    <input type="checkbox" checked={value._gm_select || false}
-                                           onChange={this.handleSelect.bind(this, select, index)}/>
-                                </td>
+                                <th className="gm-sheet-select">
+                                    <input type="checkbox" checked={isSelectAll}
+                                           onChange={this.handleSelectAll.bind(this, select)}/>
+                                </th>
                             ) : undefined}
-                            {_.map(columns, (v, i) => {
+                            {_.map(columns, (value, index) => {
                                 const {
                                     children, field, name, // eslint-disable-line
                                     ...rest
-                                } = v.props;
-                                if (typeof children === 'function') {
-                                    return <td key={i} {...rest}>{children(value[field], index)}</td>;
-                                } else {
-                                    return <td key={i} {...rest}>{value[field]}</td>;
-                                }
+                                } = value.props;
+                                return <th key={index} {...rest}>{value.props.name}</th>;
                             })}
                             {actions ? (
-                                <td>
-                                    {actions.props.children(value, index)}
-                                </td>
+                                <th>操作</th>
                             ) : undefined}
                         </tr>
-                    )) : undefined}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {loading ? (
+                            <tr>
+                                <td colSpan="99" className="text-center">加载中...
+                                </td>
+                            </tr>
+                        ) : undefined}
+                        {(!loading && enableEmptyTip && list.length === 0) ? (
+                            <tr>
+                                <td colSpan="99" className="text-center">
+                                    {enableEmptyTip === true ? '没有数据' : enableEmptyTip}
+                                </td>
+                            </tr>
+                        ) : undefined}
+                        {!loading ? _.map(list, (value, index) => (
+                            <tr {...this.props.getTrProps(index)} key={index}>
+                                {select ? (
+                                    <td>
+                                        <input type="checkbox" checked={value._gm_select || false}
+                                               onChange={this.handleSelect.bind(this, select, index)}/>
+                                    </td>
+                                ) : undefined}
+                                {_.map(columns, (v, i) => {
+                                    const {
+                                        children, field, name, // eslint-disable-line
+                                        ...rest
+                                    } = v.props;
+                                    if (typeof children === 'function') {
+                                        return <td key={i} {...rest}>{children(value[field], index)}</td>;
+                                    } else {
+                                        return <td key={i} {...rest}>{value[field]}</td>;
+                                    }
+                                })}
+                                {actions ? (
+                                    <td>
+                                        {actions.props.children(value, index)}
+                                    </td>
+                                ) : undefined}
+                            </tr>
+                        )) : undefined}
+                        </tbody>
+                    </table>
+                </div>
                 <div className="clearfix">
                     <div className="pull-right">{pagination}</div>
                     <div className="pull-right">{paginationText}</div>
@@ -175,7 +177,8 @@ Sheet.propTypes = {
     loading: PropTypes.bool,
     enableEmptyTip: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.element]),
     className: PropTypes.string,
-    getTrProps: PropTypes.func
+    getTrProps: PropTypes.func,
+    scrollX: PropTypes.bool
 };
 
 Sheet.defaultProps = {
@@ -183,7 +186,8 @@ Sheet.defaultProps = {
     loading: false,
     getTrProps: () => {
         return {};
-    }
+    },
+    scrollX: false
 };
 
 Object.assign(Sheet, {
