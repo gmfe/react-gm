@@ -1812,27 +1812,70 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var list = _props.list;
 	            var listMaxHeight = _props.listMaxHeight;
 	            var inputClassName = _props.inputClassName;
+	            var isGroupList = _props.isGroupList;
 
-	            if (list.length === 0) {
-	                return undefined;
+
+	            if (isGroupList) {
+	                // 不存在group数据
+	                if (list.length === 0) {
+	                    return undefined;
+	                }
+	                // 不存在其中一个group有数据
+	                if (!_underscore2.default.find(list, function (value) {
+	                    return (value.children || []).length > 0;
+	                })) {
+	                    return undefined;
+	                }
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'list-group', style: { maxHeight: listMaxHeight } },
+	                    _underscore2.default.map(list, function (groupList, i) {
+	                        return _react2.default.createElement(
+	                            'div',
+	                            { key: i, className: 'list-group-label' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                null,
+	                                groupList.label
+	                            ),
+	                            _underscore2.default.map(groupList.children, function (value, i) {
+	                                return _react2.default.createElement(
+	                                    'a',
+	                                    {
+	                                        key: i,
+	                                        className: (0, _classnames2.default)('list-group-item', inputClassName, {
+	                                            active: _this2.state.selected.indexOf(value) > -1
+	                                        }),
+	                                        onClick: _this2.handleSelect.bind(_this2, value) },
+	                                    value.name,
+	                                    _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
+	                                );
+	                            })
+	                        );
+	                    })
+	                );
+	            } else {
+	                if (list.length === 0) {
+	                    return undefined;
+	                }
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'list-group', style: { maxHeight: listMaxHeight } },
+	                    _underscore2.default.map(list, function (value, i) {
+	                        return _react2.default.createElement(
+	                            'a',
+	                            {
+	                                key: i,
+	                                className: (0, _classnames2.default)('list-group-item', inputClassName, {
+	                                    active: _this2.state.selected.indexOf(value) > -1
+	                                }),
+	                                onClick: _this2.handleSelect.bind(_this2, value) },
+	                            value.name,
+	                            _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
+	                        );
+	                    })
+	                );
 	            }
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'list-group', style: { maxHeight: listMaxHeight } },
-	                _underscore2.default.map(list, function (value, i) {
-	                    return _react2.default.createElement(
-	                        'a',
-	                        {
-	                            key: i,
-	                            className: (0, _classnames2.default)('list-group-item', inputClassName, {
-	                                active: _this2.state.selected.indexOf(value) > -1
-	                            }),
-	                            onClick: _this2.handleSelect.bind(_this2, value) },
-	                        value.name,
-	                        _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
-	                    );
-	                })
-	            );
 	        }
 	    }, {
 	        key: 'render',
@@ -1989,6 +2032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	SearchSelect.propTypes = {
 	    list: _react.PropTypes.array.isRequired,
+	    isGroupList: _react.PropTypes.bool,
 	    selected: _react.PropTypes.any,
 	    onSearch: _react.PropTypes.func.isRequired,
 	    onSelect: _react.PropTypes.func.isRequired,
@@ -1999,6 +2043,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	SearchSelect.defaultProps = {
+	    isGroupList: false,
 	    listMaxHeight: '250px',
 	    delay: 500,
 	    multiple: false,
@@ -3865,6 +3910,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function render() {
 	            var _props = this.props;
 	            var list = _props.list;
+	            var isGroupList = _props.isGroupList;
 	            var selected = _props.selected;
 	            var onSelect = _props.onSelect;
 	            var onFilter = _props.onFilter;
@@ -3879,6 +3925,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	            return _react2.default.createElement(_search2.default, {
 	                list: filterList,
+	                isGroupList: isGroupList,
 	                selected: selected,
 	                onSelect: onSelect,
 	                onSearch: this.handleSearch,
@@ -3895,6 +3942,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	FilterSearchSelect.propTypes = {
 	    list: _react.PropTypes.array.isRequired,
+	    isGroupList: _react.PropTypes.bool,
 	    selected: _react.PropTypes.any,
 	    onSelect: _react.PropTypes.func.isRequired,
 	    onFilter: _react.PropTypes.func.isRequired,

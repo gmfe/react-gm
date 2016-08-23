@@ -230,13 +230,38 @@ var searchSelectData = [
     {value: 11, name: 'no'}
 ];
 
+var searchSelectGroupData = [
+    {
+        label: '一组',
+        children: [
+            {value: 0, name: '我们'},
+            {value: 1, name: '1'},
+            {value: 2, name: '2我们'},
+            {value: 3, name: '3我们'},
+            {value: 4, name: '4我们'},
+            {value: 5, name: '5我们'}
+        ]
+    },
+    {
+        label: '二组',
+        children: [
+            {value: 6, name: '6我们'},
+            {value: 7, name: '7我们'},
+            {value: 8, name: '8我们'},
+            {value: 9, name: '9你们'},
+            {value: 10, name: '10哦'},
+            {value: 11, name: 'no'}
+        ]
+    }
+];
+
 class SearchSelectWrap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selected: searchSelectData[2],
             list: searchSelectData,
-
+            groupList: searchSelectGroupData,
             multipleSelected: [searchSelectData[1]]
         };
         this.handleSelect = ::this.handleSelect;
@@ -264,6 +289,16 @@ class SearchSelectWrap extends React.Component {
                         onSearch={this.handleSearch}
                         onSelect={this.handleMultipleSelect}
                         multiple
+                        placeholder="搜索"/>
+                </div>
+                <h3>按组分</h3>
+                <div style={{width: '300px'}}>
+                    <SearchSelect
+                        list={this.state.groupList}
+                        isGroupList
+                        selected={this.state.selected}
+                        onSearch={this.handleSearch}
+                        onSelect={this.handleSelect}
                         placeholder="搜索"/>
                 </div>
             </div>
@@ -307,7 +342,7 @@ class FilterSearchSelectWrap extends React.Component {
         super(props);
         this.state = {
             selected: searchSelectData[1],
-            list: searchSelectData
+            list: searchSelectGroupData
         };
     }
 
@@ -316,6 +351,7 @@ class FilterSearchSelectWrap extends React.Component {
             <div>
                 <FilterSearchSelect
                     list={this.state.list}
+                    isGroupList
                     selected={this.state.selected}
                     onSelect={::this.handleSelect}
                     onFilter={::this.handleFilter}

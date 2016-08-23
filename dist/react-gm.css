@@ -106,7 +106,7 @@
   display: block;
 }
 .gm-calendar {
-  width: 198px;
+  width: 199px;
   overflow: hidden;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -424,7 +424,7 @@
           align-items: stretch;
 }
 .gm-time-span {
-  width: 296px;
+  width: 297px;
   overflow: hidden;
   display: inline-block;
   border: 1px solid #ccc;
@@ -866,6 +866,11 @@
 }
 .gm-search-select .gm-trigger .gm-trigger-popup .list-group .list-group-item:first-child {
   border-top: none;
+}
+.gm-search-select .gm-trigger .gm-trigger-popup .list-group .list-group-label > div {
+  padding: 6px 12px;
+  border-top: 1px solid #ddd;
+  background-color: #eeeeee;
 }
 .gm-cascader {
   position: relative;

@@ -46,10 +46,18 @@
           border-bottom: none;
           border-left: none;
           border-right: none;
-          border-top: 1px solid #ddd;
+          border-top: 1px solid @gm-border-color;
           padding: 6px 12px;
           &:first-child {
             border-top: none;
+          }
+        }
+
+        .list-group-label {
+          > div {
+            padding: 6px 12px;
+            border-top: 1px solid @gm-border-color;
+            background-color: @gray-lighter;
           }
         }
       }

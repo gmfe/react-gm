@@ -8,7 +8,8 @@
 
 ### SearchSelect
 
-- `list (array|isRequired)` 搜索待选数据，是过滤后的数据
+- `list (array|isRequired)` 搜索待选数据，是过滤后的数据。结构`[{value: 1, name: 'aaaaa'}]`
+- `isGroupList (bool)` list数据是否分组数据，此时list的结构为 `[{label: '一组', children: [{value: 1, name: 'aaaaa'}]}]`
 - `selected (any)` 选中了什么，`list`中某条数据
 - `onSearch (func|isRequired)` 搜索触发函数，以便过滤重新得出`list`数据。 可以引入`gm-pinyin`库来做拼音搜索
 - `onSelect (func|isRequired)` 选中后触发，提供和`selected`一样的数据结构，一般直接设置`selected`即可

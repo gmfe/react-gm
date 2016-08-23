@@ -40,27 +40,63 @@ class SearchSelect extends React.Component {
     }
 
     renderOverlay() {
-        const {list, listMaxHeight, inputClassName} = this.props;
-        if (list.length === 0) {
-            return undefined;
+        const {list, listMaxHeight, inputClassName, isGroupList} = this.props;
+
+        if (isGroupList) {
+            // 不存在group数据
+            if (list.length === 0) {
+                return undefined;
+            }
+            // 不存在其中一个group有数据
+            if (!_.find(list, value => (value.children || []).length > 0)) {
+                return undefined;
+            }
+            return (
+                <div className="list-group" style={{maxHeight: listMaxHeight}}>
+                    {_.map(list, (groupList, i) => {
+                        return (
+                            <div key={i} className="list-group-label">
+                                <div>{groupList.label}</div>
+                                {_.map(groupList.children, (value, i) => {
+                                    return <a
+                                        key={i}
+                                        className={classNames('list-group-item', inputClassName, {
+                                            active: this.state.selected.indexOf(value) > -1
+                                        })}
+                                        onClick={this.handleSelect.bind(this, value)}>
+                                        {value.name}
+                                        {this.state.selected.indexOf(value) > -1 ? (
+                                            <i className="glyphicon glyphicon-ok text-success pull-right"/>
+                                        ) : undefined}
+                                    </a>;
+                                })}
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        } else {
+            if (list.length === 0) {
+                return undefined;
+            }
+            return (
+                <div className="list-group" style={{maxHeight: listMaxHeight}}>
+                    {_.map(list, (value, i) => {
+                        return <a
+                            key={i}
+                            className={classNames('list-group-item', inputClassName, {
+                                active: this.state.selected.indexOf(value) > -1
+                            })}
+                            onClick={this.handleSelect.bind(this, value)}>
+                            {value.name}
+                            {this.state.selected.indexOf(value) > -1 ? (
+                                <i className="glyphicon glyphicon-ok text-success pull-right"/>
+                            ) : undefined}
+                        </a>;
+                    })}
+                </div>
+            );
         }
-        return (
-            <div className="list-group" style={{maxHeight: listMaxHeight}}>
-                {_.map(list, (value, i) => {
-                    return <a
-                        key={i}
-                        className={classNames('list-group-item', inputClassName, {
-                            active: this.state.selected.indexOf(value) > -1
-                        })}
-                        onClick={this.handleSelect.bind(this, value)}>
-                        {value.name}
-                        {this.state.selected.indexOf(value) > -1 ? (
-                            <i className="glyphicon glyphicon-ok text-success pull-right"/>
-                        ) : undefined}
-                    </a>;
-                })}
-            </div>
-        );
     }
 
     render() {
@@ -178,6 +214,7 @@ class SearchSelect extends React.Component {
 }
 SearchSelect.propTypes = {
     list: PropTypes.array.isRequired,
+    isGroupList: PropTypes.bool,
     selected: PropTypes.any,
     onSearch: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
@@ -188,6 +225,7 @@ SearchSelect.propTypes = {
 };
 
 SearchSelect.defaultProps = {
+    isGroupList: false,
     listMaxHeight: '250px',
     delay: 500,
     multiple: false,
