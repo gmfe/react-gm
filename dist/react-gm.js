@@ -1956,9 +1956,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!multiple) {
 	                // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
 	                setTimeout(function () {
-	                    var selected = _this4.props.selected;
+	                    if (!_this4.______isMounted) {
+	                        var selected = _this4.props.selected;
 
-	                    _this4.doChange(selected && selected.name || '');
+	                        _this4.doChange(selected && selected.name || '');
+	                    }
 	                }, 500);
 	            }
 	        }
