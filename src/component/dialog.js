@@ -90,7 +90,7 @@ class Dialog extends React.Component {
     }
 
     render() {
-        const {bsSize, title, children, type, promptDefaultValue, cancelBtn, OKBtn} = this.props;
+        const {bsSize, title, children, type, promptDefaultValue, promptPlaceholder, cancelBtn, OKBtn} = this.props;
         let modalProps = {
             show: this.state.show,
             onHide: this.handleCancel
@@ -107,9 +107,15 @@ class Dialog extends React.Component {
                     <div>
                         {children}
                         {type === 'prompt' && (
-                            <input autoFocus defaultValue={promptDefaultValue} ref="input" type="text"
-                                   style={{display: 'block', width: '100%'}}
-                                   onKeyDown={this.handleEnter}/>
+                            <input
+                                autoFocus
+                                defaultValue={promptDefaultValue}
+                                placeholder={promptPlaceholder}
+                                ref="input"
+                                type="text"
+                                style={{display: 'block', width: '100%'}}
+                                onKeyDown={this.handleEnter}
+                            />
                         )}
                     </div>
                     <div className="gm-gap10"></div>
@@ -136,6 +142,7 @@ Dialog.propTypes = {
     onOK: PropTypes.func,
     bsSize: PropTypes.string,
     promptDefaultValue: PropTypes.string,
+    promptPlaceholder: PropTypes.string,
     cancelBtn: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.bool

@@ -17,6 +17,7 @@
 - `cancelBtn (bool|string)` 为false则不显示cancel按钮，为字符串则替换按钮文案
 - `OKBtn (bool|string)` 同上
 - `promptDefaultValue (string)` 当type为`prompt`时有效，初始化输入框
+- `promptPlaceholder (string)` 当type为`prompt`时有效，输入框的placeholder
 - `children`
 
 ```jsx

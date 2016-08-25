@@ -3600,6 +3600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var children = _props.children;
 	            var type = _props.type;
 	            var promptDefaultValue = _props.promptDefaultValue;
+	            var promptPlaceholder = _props.promptPlaceholder;
 	            var cancelBtn = _props.cancelBtn;
 	            var OKBtn = _props.OKBtn;
 
@@ -3625,9 +3626,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        'div',
 	                        null,
 	                        children,
-	                        type === 'prompt' && _react2.default.createElement('input', { autoFocus: true, defaultValue: promptDefaultValue, ref: 'input', type: 'text',
+	                        type === 'prompt' && _react2.default.createElement('input', {
+	                            autoFocus: true,
+	                            defaultValue: promptDefaultValue,
+	                            placeholder: promptPlaceholder,
+	                            ref: 'input',
+	                            type: 'text',
 	                            style: { display: 'block', width: '100%' },
-	                            onKeyDown: this.handleEnter })
+	                            onKeyDown: this.handleEnter
+	                        })
 	                    ),
 	                    _react2.default.createElement('div', { className: 'gm-gap10' }),
 	                    _react2.default.createElement(
@@ -3662,6 +3669,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onOK: _react.PropTypes.func,
 	    bsSize: _react.PropTypes.string,
 	    promptDefaultValue: _react.PropTypes.string,
+	    promptPlaceholder: _react.PropTypes.string,
 	    cancelBtn: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.bool]),
 	    OKBtn: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.bool])
 	};
