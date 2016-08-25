@@ -156,8 +156,10 @@ class SearchSelect extends React.Component {
         if (!multiple) {
             // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
             setTimeout(() => {
-                const {selected} = this.props;
-                this.doChange(selected && selected.name || '');
+                if (!this.______isMounted) {
+                    const {selected} = this.props;
+                    this.doChange(selected && selected.name || '');
+                }
             }, 500);
         }
     }
