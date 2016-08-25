@@ -1793,6 +1793,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            selected: getPropsSelected(props)
 	        };
 	        _this.searchSelect = null;
+	        _this.______isMounted = false;
 	        return _this;
 	    }
 
@@ -1802,6 +1803,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.setState({
 	                selected: getPropsSelected(nextProps)
 	            });
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.______isMounted = true;
 	        }
 	    }, {
 	        key: 'renderOverlay',
@@ -1863,14 +1869,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    { className: 'list-group', style: { maxHeight: listMaxHeight } },
 	                    _underscore2.default.map(list, function (value, i) {
 	                        return _react2.default.createElement(
-	                            'a',
+	                            _flex2.default,
 	                            {
 	                                key: i,
+	                                alignCenter: true,
 	                                className: (0, _classnames2.default)('list-group-item', inputClassName, {
 	                                    active: _this2.state.selected.indexOf(value) > -1
 	                                }),
-	                                onClick: _this2.handleSelect.bind(_this2, value) },
-	                            value.name,
+	                                onClick: _this2.handleSelect.bind(_this2, value)
+	                            },
+	                            _react2.default.createElement(
+	                                _flex2.default,
+	                                { flex: true },
+	                                value.name
+	                            ),
 	                            _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
 	                        );
 	                    })
@@ -2002,7 +2014,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!this.props.multiple) {
 	                // 要异步
 	                setTimeout(function () {
-	                    _this5.searchSelect.click();
+	                    if (!_this5.______isMounted) {
+	                        _this5.searchSelect.click();
+	                    }
 	                }, 0);
 	            }
 	        }

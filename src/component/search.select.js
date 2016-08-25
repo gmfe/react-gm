@@ -31,12 +31,17 @@ class SearchSelect extends React.Component {
             selected: getPropsSelected(props)
         };
         this.searchSelect = null;
+        this.______isMounted = false;
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
             selected: getPropsSelected(nextProps)
         });
+    }
+
+    componentWillUnmount() {
+        this.______isMounted = true;
     }
 
     renderOverlay() {
@@ -82,17 +87,21 @@ class SearchSelect extends React.Component {
             return (
                 <div className="list-group" style={{maxHeight: listMaxHeight}}>
                     {_.map(list, (value, i) => {
-                        return <a
-                            key={i}
-                            className={classNames('list-group-item', inputClassName, {
-                                active: this.state.selected.indexOf(value) > -1
-                            })}
-                            onClick={this.handleSelect.bind(this, value)}>
-                            {value.name}
-                            {this.state.selected.indexOf(value) > -1 ? (
-                                <i className="glyphicon glyphicon-ok text-success pull-right"/>
-                            ) : undefined}
-                        </a>;
+                        return (
+                            <Flex
+                                key={i}
+                                alignCenter
+                                className={classNames('list-group-item', inputClassName, {
+                                    active: this.state.selected.indexOf(value) > -1
+                                })}
+                                onClick={this.handleSelect.bind(this, value)}
+                            >
+                                <Flex flex>{value.name}</Flex>
+                                {this.state.selected.indexOf(value) > -1 ? (
+                                    <i className="glyphicon glyphicon-ok text-success pull-right"/>
+                                ) : undefined}
+                            </Flex>
+                        );
                     })}
                 </div>
             );
@@ -192,7 +201,9 @@ class SearchSelect extends React.Component {
         if (!this.props.multiple) {
             // 要异步
             setTimeout(() => {
-                this.searchSelect.click();
+                if (!this.______isMounted) {
+                    this.searchSelect.click();
+                }
             }, 0);
         }
     }

@@ -218,7 +218,7 @@ class AdvanceSelectComponent extends React.Component {
 var searchSelectData = [
     {value: 0, name: '我们'},
     {value: 1, name: '1'},
-    {value: 2, name: '2我们'},
+    {value: 2, name: '2我们我们我们我们'},
     {value: 3, name: '3我们'},
     {value: 4, name: '4我们'},
     {value: 5, name: '5我们'},
@@ -234,7 +234,7 @@ var searchSelectGroupData = [
     {
         label: '一组',
         children: [
-            {value: 0, name: '我们'},
+            {value: 0, name: '我们我们我们我们'},
             {value: 1, name: '1'},
             {value: 2, name: '2我们'},
             {value: 3, name: '3我们'},
