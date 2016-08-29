@@ -217,7 +217,9 @@ class SearchSelect extends React.Component {
         });
 
         this.timer = setTimeout(() => {
-            this.props.onSearch(value);
+            if (!this.______isMounted) {
+                this.props.onSearch(value);
+            }
         }, this.props.delay);
     }
 

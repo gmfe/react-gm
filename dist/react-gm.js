@@ -2033,7 +2033,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 
 	            this.timer = setTimeout(function () {
-	                _this6.props.onSearch(value);
+	                if (!_this6.______isMounted) {
+	                    _this6.props.onSearch(value);
+	                }
 	            }, this.props.delay);
 	        }
 	    }, {
