@@ -69,7 +69,7 @@ class SearchSelect extends React.Component {
                                             active: this.state.selected.indexOf(value) > -1
                                         })}
                                         onClick={this.handleSelect.bind(this, value)}>
-                                        {value.name}
+                                        {value.name} {value.id ? ' ( ' + value.id + ' )' : ''}
                                         {this.state.selected.indexOf(value) > -1 ? (
                                             <i className="glyphicon glyphicon-ok text-success pull-right"/>
                                         ) : undefined}
