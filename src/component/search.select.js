@@ -67,17 +67,18 @@ class SearchSelect extends React.Component {
                             <div key={i} className="list-group-label">
                                 <div>{groupList.label}</div>
                                 {_.map(groupList.children, (value, i) => {
-                                    return <a
-                                        key={i}
-                                        className={classNames('list-group-item', inputClassName, {
-                                            active: this.state.selected.indexOf(value) > -1
-                                        })}
-                                        onClick={this.handleSelect.bind(this, value)}>
-                                        {value.name}
-                                        {this.state.selected.indexOf(value) > -1 ? (
-                                            <i className="glyphicon glyphicon-ok text-success pull-right"/>
-                                        ) : undefined}
-                                    </a>;
+                                    return (
+                                        <Flex
+                                            key={i}
+                                            alignCenter
+                                            className={classNames('list-group-item', inputClassName, {
+                                                active: this.state.selected.indexOf(value) > -1
+                                            })}
+                                            onClick={this.handleSelect.bind(this, value)}
+                                        >
+                                            <Flex flex>{value.name}</Flex>
+                                        </Flex>
+                                    );
                                 })}
                             </div>
                         );
@@ -101,9 +102,6 @@ class SearchSelect extends React.Component {
                                 onClick={this.handleSelect.bind(this, value)}
                             >
                                 <Flex flex>{value.name}</Flex>
-                                {this.state.selected.indexOf(value) > -1 ? (
-                                    <i className="glyphicon glyphicon-ok text-success pull-right"/>
-                                ) : undefined}
                             </Flex>
                         );
                     })}
