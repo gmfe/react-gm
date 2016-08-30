@@ -1850,15 +1850,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            ),
 	                            _underscore2.default.map(groupList.children, function (value, i) {
 	                                return _react2.default.createElement(
-	                                    'a',
+	                                    _flex2.default,
 	                                    {
 	                                        key: i,
+	                                        alignCenter: true,
 	                                        className: (0, _classnames2.default)('list-group-item', inputClassName, {
 	                                            active: _this2.state.selected.indexOf(value) > -1
 	                                        }),
-	                                        onClick: _this2.handleSelect.bind(_this2, value) },
-	                                    value.name,
-	                                    _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
+	                                        onClick: _this2.handleSelect.bind(_this2, value)
+	                                    },
+	                                    _react2.default.createElement(
+	                                        _flex2.default,
+	                                        { flex: true },
+	                                        value.name
+	                                    )
 	                                );
 	                            })
 	                        );
@@ -1886,8 +1891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                _flex2.default,
 	                                { flex: true },
 	                                value.name
-	                            ),
-	                            _this2.state.selected.indexOf(value) > -1 ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok text-success pull-right' }) : undefined
+	                            )
 	                        );
 	                    })
 	                );
