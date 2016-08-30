@@ -1762,9 +1762,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	// 略复杂了，脱离初衷，应该把单选和多选版本分开，改代码请周知
 
+	// 在内部，this.state.selected 是个数组处理
 	var getPropsSelected = function getPropsSelected(props) {
 	    if (props.multiple) {
 	        if (props.selected) {
+	            // 此时selected是个数组
 	            return props.selected;
 	        } else {
 	            return [];
@@ -1788,10 +1790,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        _this.timer = null;
 
+	        // 单选版本才设置value
 	        _this.state = {
 	            value: props.selected && props.selected.name || '',
 	            selected: getPropsSelected(props)
 	        };
+
 	        _this.searchSelect = null;
 	        _this.______isMounted = false;
 	        return _this;
@@ -2988,7 +2992,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _filter: function _filter(search) {
 	        if (this.props.onFilterData) {
 	            this.setState({
-	                list: this.props.onFilterDasta(search)
+	                list: this.props.onFilterData(search)
 	            });
 	        }
 	    }
