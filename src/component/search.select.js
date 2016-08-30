@@ -65,7 +65,7 @@ class SearchSelect extends React.Component {
                     {_.map(list, (groupList, i) => {
                         return (
                             <div key={i} className="list-group-label">
-                                <div>{groupList.label}</div>
+                                <div className="list-group-label-item">{groupList.label}</div>
                                 {_.map(groupList.children, (value, i) => {
                                     return (
                                         <Flex
