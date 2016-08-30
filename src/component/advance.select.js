@@ -280,7 +280,7 @@ var AdvanceSelect = React.createClass({
     _filter: function (search) {
         if (this.props.onFilterData) {
             this.setState({
-                list: this.props.onFilterDasta(search)
+                list: this.props.onFilterData(search)
             });
         }
     }
