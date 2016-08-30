@@ -1845,7 +1845,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            { key: i, className: 'list-group-label' },
 	                            _react2.default.createElement(
 	                                'div',
-	                                null,
+	                                { className: 'list-group-label-item' },
 	                                groupList.label
 	                            ),
 	                            _underscore2.default.map(groupList.children, function (value, i) {
