@@ -56,7 +56,7 @@ class DropSelect extends React.Component {
                     if (col.render) {
                         let val = col.render(value, rowData, rowIndex);
                         return <div className="gm-ellipsis" style={{flex: '1'}} key={index}
-                                    title={val}>{val}</div>;
+                                    title={value}>{val}</div>;
                     } else {
                         return <div className="gm-ellipsis" key={index} title={value}>{value}</div>;
                     }

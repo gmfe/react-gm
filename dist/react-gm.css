@@ -487,6 +487,7 @@
 .gm-dropselect-list-wrap .gm-dropselect-item {
   line-height: 32px;
   font-size: 12px;
+  height: 45px;
 }
 .gm-dropselect-list-wrap .gm-dropselect-list .gm-dropselect-title {
   overflow: hidden;

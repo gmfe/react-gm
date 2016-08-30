@@ -3807,7 +3807,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            return _react2.default.createElement(
 	                                'div',
 	                                { className: 'gm-ellipsis', style: { flex: '1' }, key: index,
-	                                    title: val },
+	                                    title: value },
 	                                val
 	                            );
 	                        } else {
