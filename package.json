@@ -21,7 +21,7 @@
     "deploy": "npm install;npm run build && npm run build:min",
     "build": "NODE_ENV=production webpack",
     "build:min": "NODE_ENV=production webpack --config webpack.config.min.js",
-    "publishpatch": "npm run deploy && git add --all && git commit --amend -m 'c' && npm version patch && git push origin master:master && npm publish --registry='https://registry.npmjs.org' && cnpm sync react-gm && npm version;",
+    "publishpatch": "sh deploy/publish.sh",
     "gh-pages": "git branch -D gh-pages; git checkout -b gh-pages; webpack --config webpack.config.dev.js; rm -rf .gitignore; git add --all; git commit -m 'page'; git push origin :gh-pages; git push origin HEAD:gh-pages; git checkout master;"
   },
   "repository": {
