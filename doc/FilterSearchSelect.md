@@ -7,6 +7,9 @@ ui同SearchSelect
 ### FilterSearchSelect
 
 使用`SearchSelect`要处理原数据列表、搜索字符串（或者过滤后的数据列表）。略麻烦。
+估有FilterSearchSelect
+
+**注意，请尽量提供key**
 
 - `list (array|isRequired)` 搜索待选数据，是过滤后的数据。结构`[{value: 1, name: 'aaaaa'}]`
 - `isGroupList (bool)` list数据是否分组数据，此时list的结构为 `[{label: '一组', children: [{value: 1, name: 'aaaaa'}]}]`
@@ -21,6 +24,7 @@ ui同SearchSelect
 
 ```jsx
 <FilterSearchSelect
+    key="xxxx"
     list={this.state.list}
     selected={this.state.selected}
     onSelect={::this.handleSelect}

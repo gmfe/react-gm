@@ -10,6 +10,8 @@ SearchSelect  和 FilterSearchSelect 如果用起来发现二次进入的时候�
 
 ### SearchSelect
 
+**注意，请尽量提供key**
+
 - `list (array|isRequired)` 搜索待选数据，是过滤后的数据。结构`[{value: 1, name: 'aaaaa'}]`
 - `isGroupList (bool)` list数据是否分组数据，此时list的结构为 `[{label: '一组', children: [{value: 1, name: 'aaaaa'}]}]`
 - `selected (any)` 选中了什么，`list`中某条数据
