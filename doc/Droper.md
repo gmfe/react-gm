@@ -13,7 +13,7 @@
 - `children` 提供自定义选择图片的触发区域
 
 ```jsx
-<Droper onDrop={this.handleDrop} accept="image/*"/>
+<Droper onDrop={this.handleDrop} accept="image/jpg, image/png"/>
 
 <Droper className="gm-droper-wrap" onDrop={this.handleDrop} accept=".xlsx">
     <button className="btn btn-default">upload</button>
