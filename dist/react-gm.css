@@ -959,7 +959,7 @@
   position: relative;
 }
 .gm-trigger .gm-trigger-popup {
-  visibility: hidden;
+  display: none;
   position: absolute;
   top: 100%;
   margin-top: 2px;
@@ -970,7 +970,7 @@
   border: 1px solid #ccc;
 }
 .gm-trigger.gm-trigger-active .gm-trigger-popup {
-  visibility: visible;
+  display: block;
 }
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
