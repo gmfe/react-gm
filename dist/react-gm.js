@@ -410,10 +410,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger', {
 	                    'gm-trigger-active': active
 	                }),
-	                children: [child, _react2.default.createElement('div', {
+	                children: [child, active ? _react2.default.createElement('div', {
 	                    key: 'popup',
 	                    className: 'gm-trigger-popup'
-	                }, popup)]
+	                }, popup) : undefined]
 	            }));
 	        }
 	    }]);
