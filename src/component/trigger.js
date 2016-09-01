@@ -63,10 +63,10 @@ class Trigger extends React.Component {
             className: classNames(component.props.className, 'gm-trigger', {
                 'gm-trigger-active': active
             }),
-            children: [child, React.createElement('div', {
+            children: [child, active ? React.createElement('div', {
                 key: 'popup',
                 className: 'gm-trigger-popup'
-            }, popup)]
+            }, popup) : undefined]
         }));
     }
 }
