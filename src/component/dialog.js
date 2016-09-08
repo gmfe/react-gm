@@ -19,18 +19,21 @@ let DialogStatics = {};
 DialogStatics = {
     alert(options){
         options.type = 'alert';
+        options.bsSize = 'sm';
         return DialogStatics.dialog(options);
     },
     confirm(options){
         options.type = 'confirm';
+        options.bsSize = 'sm';
         return DialogStatics.dialog(options);
     },
     prompt(options){
         options.type = 'prompt';
+        options.bsSize = 'sm';
         return DialogStatics.dialog(options);
     },
     dialog(options){
-        options = Object.assign({}, options, {bsSize: 'sm'});
+        options = Object.assign({}, {bsSize: 'sm'}, options);
         return new Promise((resolve, reject) => {
             let div = document.createElement('div');
             dialogContainer.appendChild(div);
