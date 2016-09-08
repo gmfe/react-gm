@@ -3517,18 +3517,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	DialogStatics = {
 	    alert: function alert(options) {
 	        options.type = 'alert';
+	        options.bsSize = 'sm';
 	        return DialogStatics.dialog(options);
 	    },
 	    confirm: function confirm(options) {
 	        options.type = 'confirm';
+	        options.bsSize = 'sm';
 	        return DialogStatics.dialog(options);
 	    },
 	    prompt: function prompt(options) {
 	        options.type = 'prompt';
+	        options.bsSize = 'sm';
 	        return DialogStatics.dialog(options);
 	    },
 	    dialog: function dialog(options) {
-	        options = Object.assign({}, options, { bsSize: 'sm' });
+	        options = Object.assign({}, { bsSize: 'sm' }, options);
 	        return new Promise(function (resolve, reject) {
 	            var div = document.createElement('div');
 	            dialogContainer.appendChild(div);
