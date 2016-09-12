@@ -117,7 +117,11 @@ class SearchSelect extends React.Component {
                 return undefined;
             }
             return (
-                <div className="list-group gm-search-select-list" style={{maxHeight: listMaxHeight}}>
+                <div
+                    className="list-group gm-search-select-list"
+                    style={{maxHeight: listMaxHeight}}
+                    ref={ref => this.searchSelectList = ref}
+                >
                     {_.map(list, (value, i) => {
                         return (
                             <Flex
