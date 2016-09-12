@@ -33,6 +33,8 @@ class Trigger extends React.Component {
 
     componentWillUnmount() {
         document.body.removeEventListener('click', this.handleBodyClick);
+        // 销毁的时候要清理
+        ReactDOM.unmountComponentAtNode(this.container);
     }
 
     handleBodyClick(event) {
