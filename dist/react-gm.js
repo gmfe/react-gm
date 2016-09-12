@@ -1791,6 +1791,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(4);
+
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
@@ -1852,7 +1854,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 
 	        _this.searchSelect = null;
+	        _this.searchSelectList = null;
 	        _this.______isMounted = false;
+
+	        _this.scrollTimer = null;
+
+	        _this.handleFocus = _this.handleFocus.bind(_this);
+	        _this.handleBlur = _this.handleBlur.bind(_this);
+	        _this.handleChange = _this.handleChange.bind(_this);
+	        _this.handleKeyDown = _this.handleKeyDown.bind(_this);
 	        return _this;
 	    }
 
@@ -1867,6 +1877,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            this.______isMounted = true;
+	        }
+	    }, {
+	        key: 'doScroll',
+	        value: function doScroll() {
+	            // 滚动到选择的地方。 不知道会发生什么，尽量来做容错
+	            if (this.searchSelectList) {
+	                var ssDom = (0, _reactDom.findDOMNode)(this.searchSelectList);
+	                if (ssDom) {
+	                    // 选第一个
+	                    var activeDOM = ssDom.querySelectorAll(".list-group-item.active")[0];
+	                    if (activeDOM) {
+	                        ssDom.scrollTop = activeDOM.offsetTop;
+	                    }
+	                }
+	            }
 	        }
 	    }, {
 	        key: 'renderOverlay',
@@ -1893,7 +1918,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	                return _react2.default.createElement(
 	                    'div',
-	                    { className: 'list-group gm-search-select-list', style: { maxHeight: listMaxHeight } },
+	                    {
+	                        className: 'list-group gm-search-select-list',
+	                        style: { maxHeight: listMaxHeight },
+	                        ref: function ref(_ref) {
+	                            return _this2.searchSelectList = _ref;
+	                        }
+	                    },
 	                    _underscore2.default.map(list, function (groupList, i) {
 	                        return _react2.default.createElement(
 	                            'div',
@@ -1959,8 +1990,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.createElement(
 	                'div',
-	                { ref: function ref(_ref) {
-	                        _this3.searchSelect = _ref;
+	                { ref: function ref(_ref2) {
+	                        _this3.searchSelect = _ref2;
 	                    }, className: (0, _classnames2.default)("gm-search-select", this.props.className) },
 	                _react2.default.createElement(
 	                    _flex2.default,
@@ -1996,9 +2027,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            type: 'text',
 	                            value: this.state.value,
 	                            onFocus: this.handleFocus,
-	                            onBlur: this.handleBlur.bind(this),
-	                            onChange: this.handleChange.bind(this),
-	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            onBlur: this.handleBlur,
+	                            onChange: this.handleChange,
+	                            onKeyDown: this.handleKeyDown,
 	                            placeholder: this.props.placeholder
 	                        })
 	                    )
@@ -2008,12 +2039,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'handleFocus',
 	        value: function handleFocus(event) {
+	            var _this4 = this;
+
 	            event.target.select();
+
+	            if (this.props.isScrollToSelected) {
+	                // focus 先触发，此时浮层未出来。等个500毫秒？
+	                clearTimeout(this.scrollTimer);
+	                this.scrollTimer = setTimeout(function () {
+	                    _this4.doScroll();
+	                }, 500);
+	            }
 	        }
 	    }, {
 	        key: 'handleBlur',
 	        value: function handleBlur(event) {
-	            var _this4 = this;
+	            var _this5 = this;
 
 	            // 慎用blur，在选择的之前会出发blur
 	            event.preventDefault();
@@ -2023,10 +2064,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!multiple) {
 	                // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
 	                setTimeout(function () {
-	                    if (!_this4.______isMounted) {
-	                        var selected = _this4.props.selected;
+	                    if (!_this5.______isMounted) {
+	                        var selected = _this5.props.selected;
 
-	                        _this4.doChange(selected && selected.name || '');
+	                        _this5.doChange(selected && selected.name || '');
 	                    }
 	                }, 500);
 	            }
@@ -2066,7 +2107,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'handleSelect',
 	        value: function handleSelect(value, event) {
-	            var _this5 = this;
+	            var _this6 = this;
 
 	            event.preventDefault();
 	            if (event.target.className.indexOf('active') > -1) {
@@ -2083,8 +2124,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!this.props.multiple) {
 	                // 要异步
 	                setTimeout(function () {
-	                    if (!_this5.______isMounted) {
-	                        _this5.searchSelect.click();
+	                    if (!_this6.______isMounted) {
+	                        _this6.searchSelect.click();
 	                    }
 	                }, 0);
 	            }
@@ -2092,7 +2133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'doChange',
 	        value: function doChange(value) {
-	            var _this6 = this;
+	            var _this7 = this;
 
 	            clearTimeout(this.timer);
 	            this.setState({
@@ -2100,8 +2141,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 
 	            this.timer = setTimeout(function () {
-	                if (!_this6.______isMounted) {
-	                    _this6.props.onSearch(value);
+	                if (!_this7.______isMounted) {
+	                    _this7.props.onSearch(value);
 	                }
 	            }, this.props.delay);
 	        }
@@ -2124,7 +2165,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    delay: _react.PropTypes.number,
 	    listMaxHeight: _react.PropTypes.string,
 	    multiple: _react.PropTypes.bool,
-	    placeholder: _react.PropTypes.string
+	    placeholder: _react.PropTypes.string,
+	    isScrollToSelected: _react.PropTypes.bool
 	};
 
 	SearchSelect.defaultProps = {
@@ -4028,6 +4070,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var delay = _props.delay;
 	            var listMaxHeight = _props.listMaxHeight;
 	            var placeholder = _props.placeholder;
+	            var isScrollToSelected = _props.isScrollToSelected;
 	            var query = this.state.query;
 
 	            var filterList = list;
@@ -4043,7 +4086,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                delay: delay,
 	                listMaxHeight: listMaxHeight,
 	                multiple: false,
-	                placeholder: placeholder
+	                placeholder: placeholder,
+	                isScrollToSelected: isScrollToSelected
 	            });
 	        }
 	    }]);
@@ -4059,7 +4103,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onFilter: _react.PropTypes.func.isRequired,
 	    delay: _react.PropTypes.number,
 	    listMaxHeight: _react.PropTypes.string,
-	    placeholder: _react.PropTypes.string
+	    placeholder: _react.PropTypes.string,
+	    isScrollToSelected: _react.PropTypes.bool
 	};
 
 	exports.default = FilterSearchSelect;
