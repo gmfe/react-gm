@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import ReactDOM, {findDOMNode} from 'react-dom';
 import classNames from 'classnames';
-import {createChainedFunction, contains, getElementPosition} from 'gm-util';
+import {createChainedFunction, contains} from 'gm-util';
 
 const parent = document.createElement('div');
 parent.className = 'gm-container-trigger';
@@ -77,15 +77,14 @@ class Trigger extends React.Component {
             const {popup, target, popupProps = {}, widthFull} = this.props;
             const node = findDOMNode((target && target()) || this.trigger);
             const rect = node.getBoundingClientRect();
-            const pos = getElementPosition(node);
 
             ReactDOM.render(React.createElement('div', {
                 ...popupProps,
                 key: 'popup',
                 className: classNames('gm-trigger-popup', popupProps.className),
                 style: Object.assign({
-                    left: pos.left,
-                    top: pos.top + rect.height,
+                    left: rect.left,
+                    top: rect.top + rect.height,
                     width: widthFull ? rect.width : null
                 }, popupProps.style)
             }, popup), this.container);
