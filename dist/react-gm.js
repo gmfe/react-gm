@@ -382,10 +382,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function handleBodyClick(event) {
 	            var target = event.target;
 	            var root = (0, _reactDom.findDOMNode)(this);
-	            if (!((0, _gmUtil.contains)(root, target) || (0, _gmUtil.contains)(this.container, target))) {
-	                this.setState({
-	                    active: false
-	                });
+	            var isContains = this.props.isContains;
+	            var active = this.state.active;
+
+	            if (active) {
+	                if (!((0, _gmUtil.contains)(root, target) || (0, _gmUtil.contains)(this.container, target) || isContains && isContains(target, root, this.container))) {
+	                    this.setState({
+	                        active: false
+	                    });
+	                }
 	            }
 	        }
 	    }, {
@@ -477,7 +482,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    children: _react.PropTypes.node,
 	    disabled: _react.PropTypes.bool,
 	    target: _react.PropTypes.func,
-	    widthFull: _react.PropTypes.bool
+	    widthFull: _react.PropTypes.bool,
+	    isContains: _react.PropTypes.func
 	};
 
 	exports.default = Trigger;
