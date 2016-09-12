@@ -40,10 +40,14 @@ class Trigger extends React.Component {
     handleBodyClick(event) {
         const target = event.target;
         const root = findDOMNode(this);
-        if (!(contains(root, target) || contains(this.container, target))) {
-            this.setState({
-                active: false
-            });
+        const {isContains} = this.props;
+        const {active} = this.state;
+        if (active) {
+            if (!(contains(root, target) || contains(this.container, target) || (isContains && isContains(target, root, this.container)))) {
+                this.setState({
+                    active: false
+                });
+            }
         }
     }
 
@@ -113,7 +117,8 @@ Trigger.propTypes = {
     children: PropTypes.node,
     disabled: PropTypes.bool,
     target: PropTypes.func,
-    widthFull: PropTypes.bool
+    widthFull: PropTypes.bool,
+    isContains: PropTypes.func
 };
 
 export default Trigger;

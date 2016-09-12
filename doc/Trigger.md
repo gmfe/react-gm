@@ -8,11 +8,15 @@
 - `component (node)` 包括触发浮层的元素的父亲，一般给`div`
 - `children (node)` 必须单个元素
 - `disabled` 不会出发浮层，优先级比`popup`的 disabled 高
-- `target (node)` TODO
-- `widthFull (bool)` TODO 是否100%宽度
+- `target (node)` 浮层定位的元素，left和top由target元素决定
+- `widthFull (bool)` TODO 是否100%宽度。 默认宽度调用方控制
+- `isContains (func)` 点击出发点是否包含。true则不关闭浮层，false则关闭
 
 ```jsx
-<Trigger component={<div />} popup={popup}>
+<Trigger 
+    component={<div />} 
+    popup={popup}
+>
     {children ? children : (
         <input
             type="text"
