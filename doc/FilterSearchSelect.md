@@ -20,6 +20,7 @@ ui同SearchSelect
 - `listMaxHeight (string)` 搜索待选数据的高度，默认250px
 - `multiple (bool)` 是否多选，默认false。 如果多选，则selected是数组
 - `placeholder (string)`
+- `isScrollToSelected (bool)` focus后列表是否滚动到选择的位置
 
 
 ```jsx

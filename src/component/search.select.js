@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {findDOMNode} from 'react-dom';
 import _ from 'underscore';
 import Flex from './flex';
 import classNames from 'classnames';
@@ -35,7 +36,15 @@ class SearchSelect extends React.Component {
         };
 
         this.searchSelect = null;
+        this.searchSelectList = null;
         this.______isMounted = false;
+
+        this.scrollTimer = null;
+
+        this.handleFocus = ::this.handleFocus;
+        this.handleBlur = ::this.handleBlur;
+        this.handleChange = ::this.handleChange;
+        this.handleKeyDown = ::this.handleKeyDown;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -46,6 +55,20 @@ class SearchSelect extends React.Component {
 
     componentWillUnmount() {
         this.______isMounted = true;
+    }
+
+    doScroll() {
+        // 滚动到选择的地方。 不知道会发生什么，尽量来做容错
+        if (this.searchSelectList) {
+            const ssDom = findDOMNode(this.searchSelectList);
+            if (ssDom) {
+                // 选第一个
+                const activeDOM = ssDom.querySelectorAll(".list-group-item.active")[0];
+                if (activeDOM) {
+                    ssDom.scrollTop = activeDOM.offsetTop;
+                }
+            }
+        }
     }
 
     renderOverlay() {
@@ -61,7 +84,11 @@ class SearchSelect extends React.Component {
                 return undefined;
             }
             return (
-                <div className="list-group gm-search-select-list" style={{maxHeight: listMaxHeight}}>
+                <div
+                    className="list-group gm-search-select-list"
+                    style={{maxHeight: listMaxHeight}}
+                    ref={ref => this.searchSelectList = ref}
+                >
                     {_.map(list, (groupList, i) => {
                         return (
                             <div key={i} className="list-group-label">
@@ -137,9 +164,9 @@ class SearchSelect extends React.Component {
                             type="text"
                             value={this.state.value}
                             onFocus={this.handleFocus}
-                            onBlur={::this.handleBlur}
-                            onChange={::this.handleChange}
-                            onKeyDown={::this.handleKeyDown}
+                            onBlur={this.handleBlur}
+                            onChange={this.handleChange}
+                            onKeyDown={this.handleKeyDown}
                             placeholder={this.props.placeholder}
                         />
                     </Trigger>
@@ -150,6 +177,14 @@ class SearchSelect extends React.Component {
 
     handleFocus(event) {
         event.target.select();
+
+        if (this.props.isScrollToSelected) {
+            // focus 先触发，此时浮层未出来。等个500毫秒？
+            clearTimeout(this.scrollTimer);
+            this.scrollTimer = setTimeout(() => {
+                this.doScroll();
+            }, 500);
+        }
     }
 
     handleBlur(event) {
@@ -240,7 +275,8 @@ SearchSelect.propTypes = {
     delay: PropTypes.number,
     listMaxHeight: PropTypes.string,
     multiple: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    isScrollToSelected: PropTypes.bool
 };
 
 SearchSelect.defaultProps = {

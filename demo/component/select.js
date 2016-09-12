@@ -355,12 +355,18 @@ class FilterSearchSelectWrap extends React.Component {
                     selected={this.state.selected}
                     onSelect={::this.handleSelect}
                     onFilter={::this.handleFilter}
+                    isScrollToSelected
                 />
             </div>
         );
     }
 
     handleFilter(list, query) {
+        // 如果搜索词和选择的一样，则返回全部数据
+        if (this.state.selected && (query === this.state.selected.name)) {
+            return list;
+        }
+
         let result = [];
         _.each(list, eList => {
             const children = _.filter(eList.children, v => {
@@ -368,7 +374,7 @@ class FilterSearchSelectWrap extends React.Component {
                         style: PinYin.STYLE_FIRST_LETTER
                     }), value => value[0]).join('').indexOf(query) > -1;
             });
-            if (children) {
+            if (children && children.length > 0) {
                 result.push({
                     ...eList,
                     children
