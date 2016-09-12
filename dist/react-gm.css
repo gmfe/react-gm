@@ -196,10 +196,6 @@
 .gm-datepicker {
   display: inline-block;
 }
-.gm-datepicker .gm-trigger .gm-trigger-popup {
-  border: none;
-  width: auto;
-}
 .gm-daterangepicker > input {
   display: inline-block;
   width: auto;
@@ -452,10 +448,6 @@
 }
 .gm-time-span-picker {
   display: inline-block;
-}
-.gm-time-span-picker .gm-trigger .gm-trigger-popup {
-  width: auto;
-  border: none;
 }
 .gm-dropselect-wrap {
   height: 0;
@@ -840,23 +832,15 @@
   font-size: 15px;
   padding-left: 2px;
 }
-.gm-search-select .gm-trigger {
-  position: static;
-}
-.gm-search-select .gm-trigger .gm-trigger-popup {
-  max-width: none;
-  left: -1px !important;
-  right: -1px;
-  width: auto;
-}
-.gm-search-select .gm-trigger .gm-trigger-popup .list-group {
+.gm-search-select-list {
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 1;
   margin-bottom: 0;
+  border: 1px solid #ddd;
 }
-.gm-search-select .gm-trigger .gm-trigger-popup .list-group .list-group-item {
+.gm-search-select-list .list-group-item {
   cursor: pointer;
   border-bottom: none;
   border-left: none;
@@ -864,15 +848,15 @@
   border-top: 1px solid #ddd;
   padding: 6px 12px;
 }
-.gm-search-select .gm-trigger .gm-trigger-popup .list-group .list-group-item:first-child {
+.gm-search-select-list .list-group-item:first-child {
   border-top: none;
 }
-.gm-search-select .gm-trigger .gm-trigger-popup .list-group .list-group-label .list-group-label-item {
+.gm-search-select-list .list-group-label .list-group-label-item {
   padding: 6px 12px;
   border-top: 1px solid #ddd;
   background-color: #eeeeee;
 }
-.gm-search-select .gm-trigger .gm-trigger-popup .list-group .list-group-label .list-group-item {
+.gm-search-select-list .list-group-label .list-group-item {
   padding: 6px 26px;
 }
 .gm-cascader {
@@ -899,23 +883,23 @@
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
-.gm-cascader.gm-trigger .gm-trigger-popup {
-  width: auto;
-}
-.gm-cascader.gm-trigger .gm-cascader-list {
+.gm-cascader-list {
   height: 200px;
   background-color: white;
+  border: 1px solid #ccc;
 }
-.gm-cascader.gm-trigger .gm-cascader-list .list-group {
+.gm-cascader-list .list-group {
   margin: 0;
+  border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   min-width: 100px;
+  margin-left: -1px;
   overflow: auto;
 }
-.gm-cascader.gm-trigger .gm-cascader-list .list-group:last-child {
+.gm-cascader-list .list-group:last-child {
   border-right: none;
 }
-.gm-cascader.gm-trigger .gm-cascader-list .list-group .list-group-item {
+.gm-cascader-list .list-group .list-group-item {
   padding: 5px 10px;
   border: none;
   border-radius: 0;
@@ -952,25 +936,17 @@
 .gm-cascader-select .gm-cascader-select-input .gm-cascader-input .glyphicon {
   right: 0;
 }
-.gm-cascader-select .gm-trigger .gm-trigger-popup {
+.gm-cascader-select-list {
   margin-top: 8px;
 }
 .gm-trigger {
   position: relative;
 }
-.gm-trigger .gm-trigger-popup {
-  display: none;
+.gm-trigger-popup {
   position: absolute;
-  top: 100%;
   margin-top: 2px;
-  left: 0;
-  width: 100%;
   z-index: 1000;
   overflow: auto;
-  border: 1px solid #ccc;
-}
-.gm-trigger.gm-trigger-active .gm-trigger-popup {
-  display: block;
 }
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;

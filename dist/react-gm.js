@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_47__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_48__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -60,7 +60,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _gmUtil2 = _interopRequireDefault(_gmUtil);
 
-	var _grid = __webpack_require__(35);
+	var _grid = __webpack_require__(36);
 
 	var _grid2 = _interopRequireDefault(_grid);
 
@@ -76,7 +76,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _droper2 = _interopRequireDefault(_droper);
 
-	var _former = __webpack_require__(34);
+	var _former = __webpack_require__(35);
 
 	var _former2 = _interopRequireDefault(_former);
 
@@ -84,15 +84,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validate3 = __webpack_require__(45);
+	var _validate3 = __webpack_require__(46);
 
 	var _validate4 = _interopRequireDefault(_validate3);
 
-	var _import = __webpack_require__(37);
+	var _import = __webpack_require__(38);
 
 	var _import2 = _interopRequireDefault(_import);
 
-	var _storage = __webpack_require__(41);
+	var _storage = __webpack_require__(42);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
@@ -100,31 +100,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _calendar2 = _interopRequireDefault(_calendar);
 
-	var _datepicker = __webpack_require__(29);
+	var _datepicker = __webpack_require__(30);
 
 	var _datepicker2 = _interopRequireDefault(_datepicker);
 
-	var _daterangepicker = __webpack_require__(30);
+	var _daterangepicker = __webpack_require__(31);
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(44);
+	var _tip = __webpack_require__(45);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(39);
+	var _nprogress = __webpack_require__(40);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
-	var _hr = __webpack_require__(36);
+	var _hr = __webpack_require__(37);
 
 	var _hr2 = _interopRequireDefault(_hr);
 
-	var _dialog = __webpack_require__(31);
+	var _dialog = __webpack_require__(32);
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _navigation = __webpack_require__(38);
+	var _navigation = __webpack_require__(39);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
@@ -136,15 +136,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _timespanpicker = __webpack_require__(43);
+	var _timespanpicker = __webpack_require__(44);
 
 	var _timespanpicker2 = _interopRequireDefault(_timespanpicker);
 
-	var _drop = __webpack_require__(32);
+	var _drop = __webpack_require__(33);
 
 	var _drop2 = _interopRequireDefault(_drop);
 
-	var _advance = __webpack_require__(27);
+	var _advance = __webpack_require__(28);
 
 	var _advance2 = _interopRequireDefault(_advance);
 
@@ -152,15 +152,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _search2 = _interopRequireDefault(_search);
 
-	var _filterSearch = __webpack_require__(33);
+	var _filterSearch = __webpack_require__(34);
 
 	var _filterSearch2 = _interopRequireDefault(_filterSearch);
 
-	var _switch = __webpack_require__(42);
+	var _switch = __webpack_require__(43);
 
 	var _switch2 = _interopRequireDefault(_switch);
 
-	var _sheet = __webpack_require__(40);
+	var _sheet = __webpack_require__(41);
 
 	var _sheet2 = _interopRequireDefault(_sheet);
 
@@ -168,7 +168,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cascader2 = _interopRequireDefault(_cascader);
 
-	var _cascader3 = __webpack_require__(28);
+	var _cascader3 = __webpack_require__(29);
 
 	var _cascader4 = _interopRequireDefault(_cascader3);
 
@@ -176,7 +176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
-	__webpack_require__(46);
+	__webpack_require__(47);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -308,6 +308,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -315,6 +317,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactDom = __webpack_require__(4);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	var _classnames = __webpack_require__(3);
 
@@ -330,6 +334,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var parent = document.createElement('div');
+	parent.className = 'gm-container-trigger';
+	document.body.appendChild(parent);
+
 	var Trigger = function (_React$Component) {
 	    _inherits(Trigger, _React$Component);
 
@@ -343,6 +351,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	        _this.handleClick = _this.handleClick.bind(_this);
 	        _this.handleBodyClick = _this.handleBodyClick.bind(_this);
+
+	        _this.container = document.createElement('div');
+	        parent.appendChild(_this.container);
+
+	        _this.trigger = null;
 	        return _this;
 	    }
 
@@ -350,6 +363,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            document.body.addEventListener('click', this.handleBodyClick);
+	            this.renderPopup();
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            this.renderPopup();
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
@@ -361,7 +380,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function handleBodyClick(event) {
 	            var target = event.target;
 	            var root = (0, _reactDom.findDOMNode)(this);
-	            if (!(0, _gmUtil.contains)(root, target)) {
+	            if (!((0, _gmUtil.contains)(root, target) || (0, _gmUtil.contains)(this.container, target))) {
 	                this.setState({
 	                    active: false
 	                });
@@ -391,29 +410,57 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _props2 = this.props;
-	            var component = _props2.component;
-	            var children = _props2.children;
-	            var popup = _props2.popup;
-
-	            var child = _react2.default.Children.only(children);
+	        key: 'renderPopup',
+	        value: function renderPopup() {
 	            var active = this.state.active;
 
+	            if (active) {
+	                // 如果传则使用
+	                var _props2 = this.props;
+	                var popup = _props2.popup;
+	                var target = _props2.target;
+	                var _props2$popupProps = _props2.popupProps;
+	                var popupProps = _props2$popupProps === undefined ? {} : _props2$popupProps;
+	                var widthFull = _props2.widthFull;
+
+	                var node = (0, _reactDom.findDOMNode)(target && target() || this.trigger);
+	                var rect = node.getBoundingClientRect();
+	                var pos = (0, _gmUtil.getElementPosition)(node);
+
+	                _reactDom2.default.render(_react2.default.createElement('div', _extends({}, popupProps, {
+	                    key: 'popup',
+	                    className: (0, _classnames2.default)('gm-trigger-popup', popupProps.className),
+	                    style: Object.assign({
+	                        left: pos.left,
+	                        top: pos.top + rect.height,
+	                        width: widthFull ? rect.width : null
+	                    }, popupProps.style)
+	                }), popup), this.container);
+	            } else {
+	                _reactDom2.default.unmountComponentAtNode(this.container);
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            var _props3 = this.props;
+	            var component = _props3.component;
+	            var children = _props3.children;
+
+	            var child = _react2.default.Children.only(children);
 
 	            var componentProps = Object.assign({}, component.props, {
 	                onClick: (0, _gmUtil.createChainedFunction)(component.props.onClick, this.handleClick)
 	            });
 
 	            return _react2.default.cloneElement(component, Object.assign({}, componentProps, {
-	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger', {
-	                    'gm-trigger-active': active
-	                }),
-	                children: [child, active ? _react2.default.createElement('div', {
-	                    key: 'popup',
-	                    className: 'gm-trigger-popup'
-	                }, popup) : undefined]
+	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger'),
+	                ref: function ref(_ref) {
+	                    return _this2.trigger = _ref;
+	                },
+	                children: child
 	            }));
 	        }
 	    }]);
@@ -423,9 +470,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	Trigger.propTypes = {
 	    popup: _react.PropTypes.node,
+	    popupProps: _react.PropTypes.object,
 	    component: _react.PropTypes.node,
 	    children: _react.PropTypes.node,
-	    disabled: _react.PropTypes.bool
+	    disabled: _react.PropTypes.bool,
+	    target: _react.PropTypes.func,
+	    widthFull: _react.PropTypes.bool
 	};
 
 	exports.default = Trigger;
@@ -585,10 +635,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-
 	var _Request = __webpack_require__(21);
 
 	var _Request2 = _interopRequireDefault(_Request);
@@ -605,15 +651,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _format2 = _interopRequireDefault(_format);
 
-	var _isElementInViewport = __webpack_require__(25);
+	var _isElementInViewport = __webpack_require__(26);
 
 	var _isElementInViewport2 = _interopRequireDefault(_isElementInViewport);
 
-	var _isElementOverViewport = __webpack_require__(26);
+	var _isElementOverViewport = __webpack_require__(27);
 
 	var _isElementOverViewport2 = _interopRequireDefault(_isElementOverViewport);
 
-	var _is = __webpack_require__(24);
+	var _is = __webpack_require__(25);
 
 	var _is2 = _interopRequireDefault(_is);
 
@@ -625,16 +671,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 
+	var _getElementPosition = __webpack_require__(24);
+
+	var _getElementPosition2 = _interopRequireDefault(_getElementPosition);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	module.exports = {
-	    Request: _Request2['default'],
-	    RequestInterceptor: _RequestInterceptor2['default'],
-	    format: _format2['default'],
-	    param: _param2['default'],
-	    isElementInViewport: _isElementInViewport2['default'],
-	    isElementOverViewport: _isElementOverViewport2['default'],
-	    is: _is2['default'],
-	    contains: _contains2['default'],
-	    createChainedFunction: _createChainedFunction2['default']
+	    Request: _Request2.default,
+	    RequestInterceptor: _RequestInterceptor2.default,
+	    format: _format2.default,
+	    param: _param2.default,
+	    isElementInViewport: _isElementInViewport2.default,
+	    isElementOverViewport: _isElementOverViewport2.default,
+	    is: _is2.default,
+	    contains: _contains2.default,
+	    createChainedFunction: _createChainedFunction2.default,
+	    getElementPosition: _getElementPosition2.default
 	};
 
 /***/ },
@@ -1126,17 +1179,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var RequestInterceptor = function () {
 	    var interceptors = []; // [{request: function(){}, response: function(){}, responseError: function(){}}]
@@ -1149,7 +1200,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return interceptor.__id;
 	        },
 	        remove: function remove(interceptorId) {
-	            interceptors = _underscore2['default'].filter(interceptors, function (value) {
+	            interceptors = _underscore2.default.filter(interceptors, function (value) {
 	                return value.__id !== interceptorId;
 	            });
 	        },
@@ -1158,7 +1209,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        interceptor: {
 	            request: function request(config) {
 	                var promise = Promise.resolve(config);
-	                _underscore2['default'].each(interceptors, function (value) {
+	                _underscore2.default.each(interceptors, function (value) {
 	                    if (value.request) {
 	                        promise = promise.then(function (_config) {
 	                            // 如果request不按规范来,啥也不做. 则默认放回 config
@@ -1171,7 +1222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            },
 	            response: function response(json, config) {
 	                var promise = Promise.resolve(json);
-	                _underscore2['default'].each(interceptors, function (value) {
+	                _underscore2.default.each(interceptors, function (value) {
 	                    if (value.response) {
 	                        promise = promise.then(function (json) {
 	                            // 如果response不按规范来,啥也不做. 则默认放回json
@@ -1183,9 +1234,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            },
 	            responseError: function responseError(reason, config) {
 	                var promise = Promise.reject(reason);
-	                _underscore2['default'].each(interceptors, function (value) {
+	                _underscore2.default.each(interceptors, function (value) {
 	                    if (value.responseError) {
-	                        promise = promise['catch'](function (reason) {
+	                        promise = promise.catch(function (reason) {
 	                            // 如果responseError不按规范来,啥也不做. reason
 	                            return Promise.reject(value.responseError(reason, config) || reason);
 	                        });
@@ -1198,8 +1249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	}();
 
-	exports['default'] = RequestInterceptor;
-	module.exports = exports['default'];
+	exports.default = RequestInterceptor;
 
 /***/ },
 /* 13 */
@@ -1207,17 +1257,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var format = function format(str, data) {
 	    var result = str;
@@ -1228,7 +1276,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    result = result.replace(/\{([\d\w\.]+)\}/g, function (key) {
 	        var keys = arguments[1].split('.');
 	        var r = null;
-	        _underscore2['default'].each(keys, function (value, index) {
+	        _underscore2.default.each(keys, function (value, index) {
 	            if (index) {
 	                r = r[value];
 	            } else {
@@ -1240,8 +1288,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return result;
 	};
 
-	exports['default'] = format;
-	module.exports = exports['default'];
+	exports.default = format;
 
 /***/ },
 /* 14 */
@@ -1249,27 +1296,24 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
 
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	var param = function param(obj) {
 	    // encodeURIComponent
-	    return _underscore2['default'].map(obj, function (v, k) {
+	    return _underscore2.default.map(obj, function (v, k) {
 	        return [encodeURIComponent(k), '=', encodeURIComponent(v)].join('');
 	    }).join('&').replace(/%20/g, "+");
 	};
 
-	exports['default'] = param;
-	module.exports = exports['default'];
+	exports.default = param;
 
 /***/ },
 /* 15 */
@@ -1362,7 +1406,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.createElement(
 	                _flex2.default,
-	                { className: (0, _classnames2.default)("gm-cascader-list", this.props.className) },
+	                { className: (0, _classnames2.default)("gm-cascader-list", this.props.popupClassName, this.props.className) },
 	                _underscore2.default.map(this.getList(), function (value, i) {
 	                    return _react2.default.createElement(
 	                        _flex2.default,
@@ -1455,7 +1499,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // 没有this.props.children时有效
 	    inputProps: _react.PropTypes.object,
 
-	    valueRender: _react.PropTypes.func
+	    valueRender: _react.PropTypes.func,
+
+	    // 不对外开放
+	    popupClassName: _react.PropTypes.string
 	};
 
 	Cascader.defaultProps = {
@@ -1838,7 +1885,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	                return _react2.default.createElement(
 	                    'div',
-	                    { className: 'list-group', style: { maxHeight: listMaxHeight } },
+	                    { className: 'list-group gm-search-select-list', style: { maxHeight: listMaxHeight } },
 	                    _underscore2.default.map(list, function (groupList, i) {
 	                        return _react2.default.createElement(
 	                            'div',
@@ -1875,7 +1922,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	                return _react2.default.createElement(
 	                    'div',
-	                    { className: 'list-group', style: { maxHeight: listMaxHeight } },
+	                    { className: 'list-group gm-search-select-list', style: { maxHeight: listMaxHeight } },
 	                    _underscore2.default.map(list, function (value, i) {
 	                        return _react2.default.createElement(
 	                            _flex2.default,
@@ -1930,7 +1977,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        _trigger2.default,
 	                        {
 	                            component: _react2.default.createElement(_flex2.default, { flex: true }),
-	                            popup: this.renderOverlay()
+	                            popup: this.renderOverlay(),
+	                            target: function target() {
+	                                return _this3;
+	                            },
+	                            widthFull: true
 	                        },
 	                        _react2.default.createElement('input', {
 	                            ref: 'target',
@@ -2403,21 +2454,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
-	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { 'default': obj };
-	}
+	var _param = __webpack_require__(14);
 
-	var _paramJs = __webpack_require__(14);
+	var _param2 = _interopRequireDefault(_param);
 
-	var _paramJs2 = _interopRequireDefault(_paramJs);
+	var _format = __webpack_require__(13);
 
-	var _formatJs = __webpack_require__(13);
-
-	var _formatJs2 = _interopRequireDefault(_formatJs);
+	var _format2 = _interopRequireDefault(_format);
 
 	var _underscore = __webpack_require__(2);
 
@@ -2426,6 +2473,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _RequestInterceptor = __webpack_require__(12);
 
 	var _RequestInterceptor2 = _interopRequireDefault(_RequestInterceptor);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var setPromiseTimeout = function setPromiseTimeout(promise, ms) {
 	    if (ms === false) {
@@ -2440,7 +2489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	var processRequest = function processRequest(config) {
-	    return _RequestInterceptor2['default'].interceptor.request(config);
+	    return _RequestInterceptor2.default.interceptor.request(config);
 	};
 
 	var processResponse = function processResponse(promise, url, sucCode, config) {
@@ -2461,11 +2510,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return res.json();
 	            }
 	        }
-	        return Promise.reject((0, _formatJs2['default'])('服务器错误 {status} {statusText}', res));
+	        return Promise.reject((0, _format2.default)('服务器错误 {status} {statusText}', res));
 	    }).then(function (json) {
-	        return _RequestInterceptor2['default'].interceptor.response(json, config);
+	        return _RequestInterceptor2.default.interceptor.response(json, config);
 	    }, function (reason) {
-	        return Promise.reject(_RequestInterceptor2['default'].interceptor.responseError(reason, config));
+	        return Promise.reject(_RequestInterceptor2.default.interceptor.responseError(reason, config));
 	    }).then(function (json) {
 	        if (sucCode.indexOf(json.code) > -1) {
 	            return json;
@@ -2473,10 +2522,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            console.log('%c*** Request url: %s、code: %s、msg: %s', color, url, json.code, json.msg);
 	            return Promise.reject(json.msg || '未知错误');
 	        }
-	    })['catch'](function (reason) {
+	    }).catch(function (reason) {
 	        // reason 有点复杂，各种实现，碰到一个解决一个吧
 	        if (toString.call(reason) === '[object Promise]') {
-	            return reason['catch'](function (rea) {
+	            return reason.catch(function (rea) {
 	                console.error('%c*** Request catch %s', color, rea);
 	                // reason 是个对象。目前先给字符串。吧。后续有需要在扩展
 	                return Promise.reject('' + rea);
@@ -2504,7 +2553,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	Request.prototype = {
 	    code: function code(codes) {
-	        if (_underscore2['default'].isArray(codes)) {
+	        if (_underscore2.default.isArray(codes)) {
 	            this.sucCode = this.sucCode.concat(codes);
 	        } else {
 	            this.sucCode.push(codes);
@@ -2521,7 +2570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // 过滤null  undefined 只Object 类型。
 	        this._data = Object.assign({}, _data);
 	        if (toString.call(this._data) === '[object Object]') {
-	            this._data = _underscore2['default'].pick(this._data, function (value) {
+	            this._data = _underscore2.default.pick(this._data, function (value) {
 	                return value !== null && value !== undefined;
 	            });
 	        }
@@ -2555,7 +2604,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var t = this;
 
 	        return t._beforeRequest().then(function () {
-	            var p = (0, _paramJs2['default'])(t._data);
+	            var p = (0, _param2.default)(t._data);
 	            var newUrl = t.url + (t.url.indexOf('?') > -1 ? '&' : '?') + p;
 	            return processResponse(fetch(newUrl, t.options), t.url, t.sucCode, t._getConfig());
 	        });
@@ -2586,8 +2635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return new Request(url, options);
 	};
 
-	exports['default'] = RequestFactory;
-	module.exports = exports['default'];
+	exports.default = RequestFactory;
 
 /***/ },
 /* 22 */
@@ -2598,8 +2646,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports["default"] = contains;
-
+	exports.default = contains;
 	function contains(root, n) {
 	    var node = n;
 	    while (node) {
@@ -2610,10 +2657,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    return false;
-	}
-
-	;
-	module.exports = exports["default"];
+	};
 
 /***/ },
 /* 23 */
@@ -2624,8 +2668,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports["default"] = createChainedFunction;
-
+	exports.default = createChainedFunction;
 	function createChainedFunction() {
 	    var args = arguments;
 	    return function chainedFunction() {
@@ -2637,10 +2680,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	}
 
-	module.exports = exports["default"];
-
 /***/ },
 /* 24 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = getElementPosition;
+	function getElementPosition(element) {
+	    var top = element.offsetTop;
+	    var left = element.offsetLeft;
+	    var current = element.offsetParent;
+	    while (current !== null) {
+	        top += current.offsetTop;
+	        left += current.offsetLeft;
+	        current = current.offsetParent;
+	    }
+	    return {
+	        top: top,
+	        left: left
+	    };
+	}
+
+/***/ },
+/* 25 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2655,25 +2721,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    );
 	};
 
-	exports["default"] = is;
-	module.exports = exports["default"];
-
-/***/ },
-/* 25 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	exports["default"] = function (dom) {
-	    var rect = dom.getBoundingClientRect();
-	    return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
-	};
-
-	module.exports = exports["default"];
+	exports.default = is;
 
 /***/ },
 /* 26 */
@@ -2685,15 +2733,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	exports["default"] = function (dom) {
+	exports.default = function (dom) {
+	    var rect = dom.getBoundingClientRect();
+	    return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+	};
+
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (dom) {
 	    var rect = dom.getBoundingClientRect();
 	    return rect.bottom > 0 && rect.right > 0 && rect.left < (window.innerWidth || document.documentElement.clientWidth) && rect.top < (window.innerHeight || document.documentElement.clientHeight);
 	};
 
-	module.exports = exports["default"];
-
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3006,7 +3067,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = AdvanceSelect;
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3101,8 +3162,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            }).join(','),
 	                            _react2.default.createElement(
 	                                'button',
-	                                { type: 'button', className: 'close',
-	                                    onClick: _this2.handleClose.bind(_this2, value) },
+	                                {
+	                                    type: 'button',
+	                                    className: 'close',
+	                                    onClick: _this2.handleClose.bind(_this2, value)
+	                                },
 	                                '×'
 	                            )
 	                        );
@@ -3110,9 +3174,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2.default.createElement(
 	                        _flex2.default,
 	                        { flex: true, column: true, onKeyDown: this.handleKeyDown.bind(this) },
-	                        _react2.default.createElement(_cascader2.default, { data: this.props.data,
+	                        _react2.default.createElement(_cascader2.default, {
+	                            data: this.props.data,
 	                            value: this.state.cascaderValue,
-	                            onChange: this.handleChange.bind(this) })
+	                            onChange: this.handleChange.bind(this),
+	                            popupClassName: 'gm-cascader-select-list'
+	                        })
 	                    )
 	                )
 	            );
@@ -3223,7 +3290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = CascaderSelect;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3332,7 +3399,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3462,7 +3529,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    end: _react.PropTypes.object.isRequired,
 	    onChange: _react.PropTypes.func.isRequired,
 	    inputClassName: _react.PropTypes.string,
-	    target: _react.PropTypes.func,
 	    disabled: _react.PropTypes.bool,
 	    className: _react.PropTypes.string
 	};
@@ -3470,7 +3536,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DateRangePicker;
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3491,7 +3557,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactBootstrap = __webpack_require__(47);
+	var _reactBootstrap = __webpack_require__(48);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3700,7 +3766,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Dialog;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3893,7 +3959,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DropSelect;
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3991,7 +4057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = FilterSearchSelect;
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4133,7 +4199,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Former;
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4403,7 +4469,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Grid;
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4460,7 +4526,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Hr;
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4701,7 +4767,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ImportLead;
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4863,7 +4929,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Navigation;
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4987,7 +5053,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5360,7 +5426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Sheet;
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5468,7 +5534,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5612,7 +5678,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Switch;
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5740,7 +5806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpanPicker;
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5995,7 +6061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6120,16 +6186,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_47__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_48__;
 
 /***/ }
 /******/ ])
