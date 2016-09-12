@@ -69,7 +69,6 @@ DateRangePicker.propTypes = {
     end: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     inputClassName: PropTypes.string,
-    target: PropTypes.func,
     disabled: PropTypes.bool,
     className: PropTypes.string
 };

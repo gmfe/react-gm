@@ -1,20 +1,11 @@
 .gm-trigger {
   position: relative;
-  .gm-trigger-popup {
-    display: none;
-    position: absolute;
-    top: 100%;
-    margin-top: 2px;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    overflow: auto;
-    border: 1px solid @gm-form-border-color;
-  }
+}
 
-  &.gm-trigger-active {
-    .gm-trigger-popup {
-      display: block;
-    }
-  }
+// popup 不在trigger下
+.gm-trigger-popup {
+  position: absolute;
+  margin-top: 2px;
+  z-index: 1000;
+  overflow: auto;
 }

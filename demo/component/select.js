@@ -361,11 +361,21 @@ class FilterSearchSelectWrap extends React.Component {
     }
 
     handleFilter(list, query) {
-        return _.filter(list, v => {
-            return v.name.indexOf(query) > -1 || _.map(PinYin(v.name, {
-                    style: PinYin.STYLE_FIRST_LETTER
-                }), value => value[0]).join('').indexOf(query) > -1;
+        let result = [];
+        _.each(list, eList => {
+            const children = _.filter(eList.children, v => {
+                return v.name.indexOf(query) > -1 || _.map(PinYin(v.name, {
+                        style: PinYin.STYLE_FIRST_LETTER
+                    }), value => value[0]).join('').indexOf(query) > -1;
+            });
+            if (children) {
+                result.push({
+                    ...eList,
+                    children
+                });
+            }
         });
+        return result;
     }
 
     handleSelect(selected) {

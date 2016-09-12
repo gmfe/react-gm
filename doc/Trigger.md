@@ -8,6 +8,8 @@
 - `component (node)` 包括触发浮层的元素的父亲，一般给`div`
 - `children (node)` 必须单个元素
 - `disabled` 不会出发浮层，优先级比`popup`的 disabled 高
+- `target (node)` TODO
+- `widthFull (bool)` TODO 是否100%宽度
 
 ```jsx
 <Trigger component={<div />} popup={popup}>

@@ -44,14 +44,20 @@ class CascaderSelect extends React.Component {
                     {_.map(this.state.selected, (value, i) => (
                         <Flex key={i} alignStart className="selected">
                             {this.props.selectedRender ? this.props.selectedRender(value, i) : _.map(value, v => v.name).join(',')}
-                            <button type="button" className="close"
-                                    onClick={this.handleClose.bind(this, value)}>&times;</button>
+                            <button
+                                type="button"
+                                className="close"
+                                onClick={this.handleClose.bind(this, value)}
+                            >&times;</button>
                         </Flex>
                     ))}
                     <Flex flex column onKeyDown={::this.handleKeyDown}>
-                        <Cascader data={this.props.data}
-                                  value={this.state.cascaderValue}
-                                  onChange={::this.handleChange}/>
+                        <Cascader
+                            data={this.props.data}
+                            value={this.state.cascaderValue}
+                            onChange={::this.handleChange}
+                            popupClassName="gm-cascader-select-list"
+                        />
                     </Flex>
                 </Flex>
             </div>

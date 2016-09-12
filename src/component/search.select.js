@@ -61,7 +61,7 @@ class SearchSelect extends React.Component {
                 return undefined;
             }
             return (
-                <div className="list-group" style={{maxHeight: listMaxHeight}}>
+                <div className="list-group gm-search-select-list" style={{maxHeight: listMaxHeight}}>
                     {_.map(list, (groupList, i) => {
                         return (
                             <div key={i} className="list-group-label">
@@ -90,7 +90,7 @@ class SearchSelect extends React.Component {
                 return undefined;
             }
             return (
-                <div className="list-group" style={{maxHeight: listMaxHeight}}>
+                <div className="list-group gm-search-select-list" style={{maxHeight: listMaxHeight}}>
                     {_.map(list, (value, i) => {
                         return (
                             <Flex
@@ -129,6 +129,8 @@ class SearchSelect extends React.Component {
                     <Trigger
                         component={<Flex flex/>}
                         popup={this.renderOverlay()}
+                        target={() => this}
+                        widthFull
                     >
                         <input
                             ref="target"
