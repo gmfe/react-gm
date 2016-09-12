@@ -374,6 +374,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            document.body.removeEventListener('click', this.handleBodyClick);
+	            // 销毁的时候要清理
+	            _reactDom2.default.unmountComponentAtNode(this.container);
 	        }
 	    }, {
 	        key: 'handleBodyClick',
