@@ -1961,7 +1961,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	                return _react2.default.createElement(
 	                    'div',
-	                    { className: 'list-group gm-search-select-list', style: { maxHeight: listMaxHeight } },
+	                    {
+	                        className: 'list-group gm-search-select-list',
+	                        style: { maxHeight: listMaxHeight },
+	                        ref: function ref(_ref2) {
+	                            return _this2.searchSelectList = _ref2;
+	                        }
+	                    },
 	                    _underscore2.default.map(list, function (value, i) {
 	                        return _react2.default.createElement(
 	                            _flex2.default,
@@ -1990,8 +1996,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.createElement(
 	                'div',
-	                { ref: function ref(_ref2) {
-	                        _this3.searchSelect = _ref2;
+	                { ref: function ref(_ref3) {
+	                        _this3.searchSelect = _ref3;
 	                    }, className: (0, _classnames2.default)("gm-search-select", this.props.className) },
 	                _react2.default.createElement(
 	                    _flex2.default,
