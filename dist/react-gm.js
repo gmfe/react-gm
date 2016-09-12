@@ -432,14 +432,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                var node = (0, _reactDom.findDOMNode)(target && target() || this.trigger);
 	                var rect = node.getBoundingClientRect();
-	                var pos = (0, _gmUtil.getElementPosition)(node);
 
 	                _reactDom2.default.render(_react2.default.createElement('div', _extends({}, popupProps, {
 	                    key: 'popup',
 	                    className: (0, _classnames2.default)('gm-trigger-popup', popupProps.className),
 	                    style: Object.assign({
-	                        left: pos.left,
-	                        top: pos.top + rect.height,
+	                        left: rect.left,
+	                        top: rect.top + rect.height,
 	                        width: widthFull ? rect.width : null
 	                    }, popupProps.style)
 	                }), popup), this.container);
