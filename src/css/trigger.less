@@ -1,11 +1,12 @@
 .gm-trigger {
   position: relative;
-}
 
-// popup 不在trigger下
-.gm-trigger-popup {
-  position: fixed;
-  margin-top: 2px;
-  z-index: 1000;
-  overflow: auto;
+  .gm-trigger-popup {
+    position: absolute;
+    top: 100%;
+    margin-top: 2px;
+    left: 0;
+    z-index: 1000;
+    overflow: auto;
+  }
 }

@@ -85,7 +85,7 @@ class SearchSelect extends React.Component {
             }
             return (
                 <div
-                    className="list-group gm-search-select-list"
+                    className="list-group"
                     style={{maxHeight: listMaxHeight}}
                     ref={ref => this.searchSelectList = ref}
                 >
@@ -160,8 +160,6 @@ class SearchSelect extends React.Component {
                     <Trigger
                         component={<Flex flex/>}
                         popup={this.renderOverlay()}
-                        target={() => this}
-                        widthFull
                     >
                         <input
                             ref="target"

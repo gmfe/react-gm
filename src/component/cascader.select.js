@@ -56,7 +56,6 @@ class CascaderSelect extends React.Component {
                             data={this.props.data}
                             value={this.state.cascaderValue}
                             onChange={::this.handleChange}
-                            popupClassName="gm-cascader-select-list"
                         />
                     </Flex>
                 </Flex>

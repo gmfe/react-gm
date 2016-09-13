@@ -1,11 +1,7 @@
 import React, {PropTypes} from 'react';
-import ReactDOM, {findDOMNode} from 'react-dom';
+import {findDOMNode} from 'react-dom';
 import classNames from 'classnames';
 import {createChainedFunction, contains} from 'gm-util';
-
-const parent = document.createElement('div');
-parent.className = 'gm-container-trigger';
-document.body.appendChild(parent);
 
 class Trigger extends React.Component {
     constructor(props) {
@@ -15,39 +11,23 @@ class Trigger extends React.Component {
         };
         this.handleClick = ::this.handleClick;
         this.handleBodyClick = ::this.handleBodyClick;
-
-        this.container = document.createElement('div');
-        parent.appendChild(this.container);
-
-        this.trigger = null;
     }
 
     componentDidMount() {
         document.body.addEventListener('click', this.handleBodyClick);
-        this.renderPopup();
-    }
-
-    componentDidUpdate() {
-        this.renderPopup();
     }
 
     componentWillUnmount() {
         document.body.removeEventListener('click', this.handleBodyClick);
-        // 销毁的时候要清理
-        ReactDOM.unmountComponentAtNode(this.container);
     }
 
     handleBodyClick(event) {
         const target = event.target;
         const root = findDOMNode(this);
-        const {isContains} = this.props;
-        const {active} = this.state;
-        if (active) {
-            if (!(contains(root, target) || contains(this.container, target) || (isContains && isContains(target, root, this.container)))) {
-                this.setState({
-                    active: false
-                });
-            }
+        if (!contains(root, target)) {
+            this.setState({
+                active: false
+            });
         }
     }
 
@@ -70,32 +50,10 @@ class Trigger extends React.Component {
         }
     }
 
-    renderPopup() {
-        const {active} = this.state;
-        if (active) {
-            // 如果传则使用
-            const {popup, target, popupProps = {}, widthFull} = this.props;
-            const node = findDOMNode((target && target()) || this.trigger);
-            const rect = node.getBoundingClientRect();
-
-            ReactDOM.render(React.createElement('div', {
-                ...popupProps,
-                key: 'popup',
-                className: classNames('gm-trigger-popup', popupProps.className),
-                style: Object.assign({
-                    left: rect.left,
-                    top: rect.top + rect.height,
-                    width: widthFull ? rect.width : null
-                }, popupProps.style)
-            }, popup), this.container);
-        } else {
-            ReactDOM.unmountComponentAtNode(this.container);
-        }
-    }
-
     render() {
-        const {component, children} = this.props;
+        const {component, children, popup} = this.props;
         const child = React.Children.only(children);
+        const {active} = this.state;
 
         const componentProps = Object.assign({}, component.props, {
             onClick: createChainedFunction(component.props.onClick, this.handleClick)
@@ -103,21 +61,19 @@ class Trigger extends React.Component {
 
         return React.cloneElement(component, Object.assign({}, componentProps, {
             className: classNames(component.props.className, 'gm-trigger'),
-            ref: ref => this.trigger = ref,
-            children: child
+            children: [child, active ? React.createElement('div', {
+                key: 'popup',
+                className: 'gm-trigger-popup'
+            }, popup) : undefined]
         }));
     }
 }
 
 Trigger.propTypes = {
     popup: PropTypes.node,
-    popupProps: PropTypes.object,
     component: PropTypes.node,
     children: PropTypes.node,
-    disabled: PropTypes.bool,
-    target: PropTypes.func,
-    widthFull: PropTypes.bool,
-    isContains: PropTypes.func
+    disabled: PropTypes.bool
 };
 
 export default Trigger;
