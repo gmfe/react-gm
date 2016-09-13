@@ -308,8 +308,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -317,8 +315,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactDom = __webpack_require__(4);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	var _classnames = __webpack_require__(3);
 
@@ -334,10 +330,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var parent = document.createElement('div');
-	parent.className = 'gm-container-trigger';
-	document.body.appendChild(parent);
-
 	var Trigger = function (_React$Component) {
 	    _inherits(Trigger, _React$Component);
 
@@ -351,11 +343,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	        _this.handleClick = _this.handleClick.bind(_this);
 	        _this.handleBodyClick = _this.handleBodyClick.bind(_this);
-
-	        _this.container = document.createElement('div');
-	        parent.appendChild(_this.container);
-
-	        _this.trigger = null;
 	        return _this;
 	    }
 
@@ -363,34 +350,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            document.body.addEventListener('click', this.handleBodyClick);
-	            this.renderPopup();
-	        }
-	    }, {
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate() {
-	            this.renderPopup();
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            document.body.removeEventListener('click', this.handleBodyClick);
-	            // 销毁的时候要清理
-	            _reactDom2.default.unmountComponentAtNode(this.container);
 	        }
 	    }, {
 	        key: 'handleBodyClick',
 	        value: function handleBodyClick(event) {
 	            var target = event.target;
 	            var root = (0, _reactDom.findDOMNode)(this);
-	            var isContains = this.props.isContains;
-	            var active = this.state.active;
-
-	            if (active) {
-	                if (!((0, _gmUtil.contains)(root, target) || (0, _gmUtil.contains)(this.container, target) || isContains && isContains(target, root, this.container))) {
-	                    this.setState({
-	                        active: false
-	                    });
-	                }
+	            if (!(0, _gmUtil.contains)(root, target)) {
+	                this.setState({
+	                    active: false
+	                });
 	            }
 	        }
 	    }, {
@@ -417,45 +391,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }, {
-	        key: 'renderPopup',
-	        value: function renderPopup() {
-	            var active = this.state.active;
-
-	            if (active) {
-	                // 如果传则使用
-	                var _props2 = this.props;
-	                var popup = _props2.popup;
-	                var target = _props2.target;
-	                var _props2$popupProps = _props2.popupProps;
-	                var popupProps = _props2$popupProps === undefined ? {} : _props2$popupProps;
-	                var widthFull = _props2.widthFull;
-
-	                var node = (0, _reactDom.findDOMNode)(target && target() || this.trigger);
-	                var rect = node.getBoundingClientRect();
-
-	                _reactDom2.default.render(_react2.default.createElement('div', _extends({}, popupProps, {
-	                    key: 'popup',
-	                    className: (0, _classnames2.default)('gm-trigger-popup', popupProps.className),
-	                    style: Object.assign({
-	                        left: rect.left,
-	                        top: rect.top + rect.height,
-	                        width: widthFull ? rect.width : null
-	                    }, popupProps.style)
-	                }), popup), this.container);
-	            } else {
-	                _reactDom2.default.unmountComponentAtNode(this.container);
-	            }
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
-
-	            var _props3 = this.props;
-	            var component = _props3.component;
-	            var children = _props3.children;
+	            var _props2 = this.props;
+	            var component = _props2.component;
+	            var children = _props2.children;
+	            var popup = _props2.popup;
 
 	            var child = _react2.default.Children.only(children);
+	            var active = this.state.active;
+
 
 	            var componentProps = Object.assign({}, component.props, {
 	                onClick: (0, _gmUtil.createChainedFunction)(component.props.onClick, this.handleClick)
@@ -463,10 +408,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.cloneElement(component, Object.assign({}, componentProps, {
 	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger'),
-	                ref: function ref(_ref) {
-	                    return _this2.trigger = _ref;
-	                },
-	                children: child
+	                children: [child, active ? _react2.default.createElement('div', {
+	                    key: 'popup',
+	                    className: 'gm-trigger-popup'
+	                }, popup) : undefined]
 	            }));
 	        }
 	    }]);
@@ -476,13 +421,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	Trigger.propTypes = {
 	    popup: _react.PropTypes.node,
-	    popupProps: _react.PropTypes.object,
 	    component: _react.PropTypes.node,
 	    children: _react.PropTypes.node,
-	    disabled: _react.PropTypes.bool,
-	    target: _react.PropTypes.func,
-	    widthFull: _react.PropTypes.bool,
-	    isContains: _react.PropTypes.func
+	    disabled: _react.PropTypes.bool
 	};
 
 	exports.default = Trigger;
@@ -1413,7 +1354,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.createElement(
 	                _flex2.default,
-	                { className: (0, _classnames2.default)("gm-cascader-list", this.props.popupClassName, this.props.className) },
+	                { className: (0, _classnames2.default)("gm-cascader-list", this.props.className) },
 	                _underscore2.default.map(this.getList(), function (value, i) {
 	                    return _react2.default.createElement(
 	                        _flex2.default,
@@ -1506,10 +1447,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // 没有this.props.children时有效
 	    inputProps: _react.PropTypes.object,
 
-	    valueRender: _react.PropTypes.func,
-
-	    // 不对外开放
-	    popupClassName: _react.PropTypes.string
+	    valueRender: _react.PropTypes.func
 	};
 
 	Cascader.defaultProps = {
@@ -1918,7 +1856,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return _react2.default.createElement(
 	                    'div',
 	                    {
-	                        className: 'list-group gm-search-select-list',
+	                        className: 'list-group',
 	                        style: { maxHeight: listMaxHeight },
 	                        ref: function ref(_ref) {
 	                            return _this2.searchSelectList = _ref;
@@ -2021,11 +1959,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        _trigger2.default,
 	                        {
 	                            component: _react2.default.createElement(_flex2.default, { flex: true }),
-	                            popup: this.renderOverlay(),
-	                            target: function target() {
-	                                return _this3;
-	                            },
-	                            widthFull: true
+	                            popup: this.renderOverlay()
 	                        },
 	                        _react2.default.createElement('input', {
 	                            ref: 'target',
@@ -3232,8 +3166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        _react2.default.createElement(_cascader2.default, {
 	                            data: this.props.data,
 	                            value: this.state.cascaderValue,
-	                            onChange: this.handleChange.bind(this),
-	                            popupClassName: 'gm-cascader-select-list'
+	                            onChange: this.handleChange.bind(this)
 	                        })
 	                    )
 	                )
