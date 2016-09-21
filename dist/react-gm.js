@@ -5738,17 +5738,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _props = this.props;
-	            var on = _props.on;
-	            var off = _props.off;
-
-	            if (on.length !== off.length) {
-	                console.warn('请保证 on off 的宽度一样');
-	            }
-	        }
-	    }, {
 	        key: 'setChecked',
 	        value: function setChecked(checked) {
 	            if (!('checked' in this.props)) {
@@ -5770,15 +5759,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _props2 = this.props;
-	            var checked = _props2.checked;
-	            var onChange = _props2.onChange;
-	            var type = _props2.type;
-	            var disabled = _props2.disabled;
-	            var on = _props2.on;
-	            var off = _props2.off;
+	            var _props = this.props;
+	            var checked = _props.checked;
+	            var onChange = _props.onChange;
+	            var type = _props.type;
+	            var disabled = _props.disabled;
+	            var on = _props.on;
+	            var off = _props.off;
 
-	            var rest = _objectWithoutProperties(_props2, ['checked', 'onChange', 'type', 'disabled', 'on', 'off']);
+	            var rest = _objectWithoutProperties(_props, ['checked', 'onChange', 'type', 'disabled', 'on', 'off']);
 
 	            var cn = (0, _classnames2.default)('gm-switcher gm-switcher-' + type, this.props.className, {
 	                'gm-switcher-on': this.state.checked,
@@ -5837,14 +5826,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    type: _react.PropTypes.string, // default primary success info warning danger
 	    checked: _react.PropTypes.bool.isRequired,
 	    disabled: _react.PropTypes.bool,
-	    on: _react.PropTypes.string,
-	    off: _react.PropTypes.string,
+	    on: _react.PropTypes.any, // 请保证 on off 的宽度一样
+	    off: _react.PropTypes.any,
 	    onChange: _react.PropTypes.func
 	};
 	Switcher.defaultProps = {
 	    type: 'default',
-	    on: 'ON ',
-	    off: 'OFF',
+	    on: _react2.default.createElement(
+	        'span',
+	        null,
+	        'ON '
+	    ),
+	    off: _react2.default.createElement(
+	        'span',
+	        null,
+	        'OFF'
+	    ),
 	    onChange: noop
 	};
 

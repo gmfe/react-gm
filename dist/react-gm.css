@@ -829,11 +829,16 @@
 }
 .gm-switcher.gm-switcher-off {
   text-align: right;
+  background-color: #ccc !important;
+  border: 1px solid #ddd;
 }
 .gm-switcher.gm-switcher-disabled {
   cursor: not-allowed;
   opacity: 0.65;
   filter: alpha(opacity=65);
+}
+.gm-switcher.gm-switcher-disabled .gm-switcher-dot {
+  background-color: #eeeeee;
 }
 .gm-switcher .gm-switcher-dot {
   background-color: white;
