@@ -42,11 +42,16 @@
 
   &.gm-switcher-off {
     text-align: right;
+    background-color: #ccc !important;
+    border: 1px solid @gm-border-color;
   }
 
   &.gm-switcher-disabled {
     cursor: @cursor-disabled;
     .opacity(.65);
+    .gm-switcher-dot {
+      background-color: @gray-lighter;
+    }
   }
 
   .gm-switcher-dot {

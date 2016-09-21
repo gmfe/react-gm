@@ -24,13 +24,6 @@ class Switcher extends React.Component {
         }
     }
 
-    componentDidMount() {
-        const {on, off} = this.props;
-        if (on.length !== off.length) {
-            console.warn('请保证 on off 的宽度一样');
-        }
-    }
-
     setChecked(checked) {
         if (!('checked' in this.props)) {
             this.setState({
@@ -91,14 +84,14 @@ Switcher.propTypes = {
     type: PropTypes.string, // default primary success info warning danger
     checked: PropTypes.bool.isRequired,
     disabled: PropTypes.bool,
-    on: PropTypes.string,
-    off: PropTypes.string,
+    on: PropTypes.any, // 请保证 on off 的宽度一样
+    off: PropTypes.any,
     onChange: PropTypes.func
 };
 Switcher.defaultProps = {
     type: 'default',
-    on: 'ON ',
-    off: 'OFF',
+    on: <span>ON&nbsp;</span>,
+    off: <span>OFF</span>,
     onChange: noop
 };
 

@@ -78,99 +78,115 @@ const Component = React.createClass({
                 <h2 id="switcher">Switcher</h2>
                 <div>
                     <div>
-                        yes
+                        default
                         <Switcher
-                            checked={true}
+                            checked={this.state.checked}
                             on="是"
                             off="否"
+                            onChange={this.handleChange}
                         />
                         disabled
                         <Switcher
-                            checked={true}
+                            checked={this.state.checked}
                             disabled
                             on="是"
                             off="否"
+                            onChange={this.handleChange}
                         />
                     </div>
                     <div>
-                        no
+                        其他文案
                         <Switcher
-                            checked={false}
-                            on="是"
-                            off="否"
-                        />
-                        disabled
-                        <Switcher
-                            checked={false}
-                            disabled
-                            on="是"
-                            off="否"
-                        />
-                    </div>
-                    <div>
-                        <Switcher
-                            checked={false}
+                            checked={this.state.checked}
                             on="生效中"
                             off="失效中"
+                            onChange={this.handleChange}
                         />
                         <Switcher
-                            checked={false}
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
                         />
                     </div>
                     <div>
                         <Switcher
-                            checked={true}
+                            checked={this.state.checked}
                             on="生效中"
-                            off="生效中"
+                            off="失效中"
+                            onChange={this.handleChange}
                         />
                         <Switcher
-                            checked={true}
-                        />
-                    </div>
-                    <div>
-                        defaupt
-                        <Switcher
-                            checked={true}
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
                         />
                     </div>
                     <div>
                         primary
                         <Switcher
                             type="primary"
-                            checked={true}
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
                         />
                         <Switcher
                             disabled
                             type="primary"
-                            checked={true}
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
                         />
                     </div>
                     <div>
                         success
                         <Switcher
                             type="success"
-                            checked={false}
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
+                        />
+                        <Switcher
+                            disabled
+                            type="success"
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
                         />
                     </div>
                     <div>
                         info
                         <Switcher
                             type="info"
-                            checked={true}
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
+                        />
+                        <Switcher
+                            disabled
+                            type="success"
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
                         />
                     </div>
                     <div>
                         warning
                         <Switcher
                             type="warning"
-                            checked={false}
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
+                        />
+                        <Switcher
+                            disabled
+                            type="success"
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
                         />
                     </div>
                     <div>
                         danger
                         <Switcher
                             type="danger"
-                            checked={true}
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
+                        />
+                        <Switcher
+                            disabled
+                            type="success"
+                            checked={this.state.checked}
+                            onChange={this.handleChange}
                         />
                     </div>
                 </div>
