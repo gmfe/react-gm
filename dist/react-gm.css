@@ -792,6 +792,56 @@
             transform: scale(1);
   }
 }
+.gm-switcher {
+  display: inline-block;
+  cursor: pointer;
+  background-color: #ccc;
+  padding: 1px;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+}
+.gm-switcher.gm-switcher-default {
+  border: 1px solid #ddd;
+}
+.gm-switcher.gm-switcher-primary {
+  background-color: #6dc3ec;
+  border: 1px solid #6dc3ec;
+}
+.gm-switcher.gm-switcher-success {
+  background-color: #34AE4B;
+  border: 1px solid #34AE4B;
+}
+.gm-switcher.gm-switcher-info {
+  background-color: #8DBF31;
+  border: 1px solid #8DBF31;
+}
+.gm-switcher.gm-switcher-warning {
+  background-color: #F8C243;
+  border: 1px solid #F8C243;
+}
+.gm-switcher.gm-switcher-danger {
+  background-color: #FC6265;
+  border: 1px solid #FC6265;
+}
+.gm-switcher.gm-switcher-on {
+  text-align: left;
+}
+.gm-switcher.gm-switcher-off {
+  text-align: right;
+}
+.gm-switcher.gm-switcher-disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+}
+.gm-switcher .gm-switcher-dot {
+  background-color: white;
+  display: inline-block;
+  width: 15px;
+  height: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+}
 .gm-sheet-table-scroll-x {
   overflow-x: auto;
 }
