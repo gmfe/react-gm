@@ -1,0 +1,60 @@
+.gm-switcher {
+  display: inline-block;
+  cursor: pointer;
+  background-color: #ccc;
+  padding: 1px;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+
+  &.gm-switcher-default {
+    border: 1px solid @gm-border-color;
+  }
+
+  &.gm-switcher-primary {
+    background-color: @brand-primary;
+    border: 1px solid @brand-primary;
+  }
+
+  &.gm-switcher-success {
+    background-color: @brand-success;
+    border: 1px solid @brand-success;
+  }
+
+  &.gm-switcher-info {
+    background-color: @brand-info;
+    border: 1px solid @brand-info;
+  }
+
+  &.gm-switcher-warning {
+    background-color: @brand-warning;
+    border: 1px solid @brand-warning;
+  }
+
+  &.gm-switcher-danger {
+    background-color: @brand-danger;
+    border: 1px solid @brand-danger;
+  }
+
+  &.gm-switcher-on {
+    text-align: left;
+  }
+
+  &.gm-switcher-off {
+    text-align: right;
+  }
+
+  &.gm-switcher-disabled {
+    cursor: @cursor-disabled;
+    .opacity(.65);
+  }
+
+  .gm-switcher-dot {
+    background-color: white;
+    display: inline-block;
+    width: 15px;
+    height: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  }
+}
+

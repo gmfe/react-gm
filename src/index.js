@@ -24,6 +24,7 @@ import AdvanceSelect from './component/advance.select';
 import SearchSelect from './component/search.select';
 import FilterSearchSelect from './component/filter.search.select';
 import Switch from './component/switch';
+import Switcher from './component/switcher';
 import Sheet from './component/sheet';
 import Cascader from './component/cascader';
 import CascaderSelect from './component/cascader.select';
@@ -67,6 +68,7 @@ module.exports = {
     Cascader,
     CascaderSelect,
     Switch,
+    Switcher,
     Sheet,
     SheetColumn,
     SheetAction,

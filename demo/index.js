@@ -72,6 +72,7 @@ class App extends React.Component {
                 <Overlay/>
                 <Upload/>
                 <Form/>
+                <div style={{height: '100px'}}></div>
             </div>
         );
     }

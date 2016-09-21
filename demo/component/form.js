@@ -2,7 +2,8 @@ import React from 'react';
 import {
     Validate,
     ValidateMixin,
-    Switch
+    Switch,
+    Switcher
 } from '../../src/index';
 
 var FormerDom = React.createClass({
@@ -57,21 +58,121 @@ const Component = React.createClass({
                 <h1 id="form">表单</h1>
                 <h2 id="former">Former(alpha)</h2>
                 <FormerDom/>
-                <h2 id="switch">Switch</h2>
+                <h2 id="switch">Switch（Deprecated）</h2>
                 <div>
                     <div>目前Switch的长度有限，所以checkedChildren unCheckedChildren 不能太多字</div>
-                    <Switch defaultChecked={true}
-                            checkedChildren={"是"}
-                            unCheckedChildren={"否"}/>
-                    <Switch checked={this.state.checked}
-                            checkedChildren={"是"}
-                            unCheckedChildren={"否"}
-                            onChange={this.handleChange}/>
-                    <Switch disabled
-                            checkedChildren={"YES"}
-                            unCheckedChildren={"NO"}/>
-
-                    <Switch/>
+                    <Switch
+                        checked={this.state.checked}
+                        checkedChildren={"是"}
+                        unCheckedChildren={"否"}
+                        onChange={this.handleChange}
+                    />
+                    <Switch
+                        checked={this.state.checked}
+                        checkedChildren={"是"}
+                        unCheckedChildren={"否"}
+                        disabled
+                        onChange={this.handleChange}
+                    />
+                </div>
+                <h2 id="switcher">Switcher</h2>
+                <div>
+                    <div>
+                        yes
+                        <Switcher
+                            checked={true}
+                            on="是"
+                            off="否"
+                        />
+                        disabled
+                        <Switcher
+                            checked={true}
+                            disabled
+                            on="是"
+                            off="否"
+                        />
+                    </div>
+                    <div>
+                        no
+                        <Switcher
+                            checked={false}
+                            on="是"
+                            off="否"
+                        />
+                        disabled
+                        <Switcher
+                            checked={false}
+                            disabled
+                            on="是"
+                            off="否"
+                        />
+                    </div>
+                    <div>
+                        <Switcher
+                            checked={false}
+                            on="生效中"
+                            off="失效中"
+                        />
+                        <Switcher
+                            checked={false}
+                        />
+                    </div>
+                    <div>
+                        <Switcher
+                            checked={true}
+                            on="生效中"
+                            off="生效中"
+                        />
+                        <Switcher
+                            checked={true}
+                        />
+                    </div>
+                    <div>
+                        defaupt
+                        <Switcher
+                            checked={true}
+                        />
+                    </div>
+                    <div>
+                        primary
+                        <Switcher
+                            type="primary"
+                            checked={true}
+                        />
+                        <Switcher
+                            disabled
+                            type="primary"
+                            checked={true}
+                        />
+                    </div>
+                    <div>
+                        success
+                        <Switcher
+                            type="success"
+                            checked={false}
+                        />
+                    </div>
+                    <div>
+                        info
+                        <Switcher
+                            type="info"
+                            checked={true}
+                        />
+                    </div>
+                    <div>
+                        warning
+                        <Switcher
+                            type="warning"
+                            checked={false}
+                        />
+                    </div>
+                    <div>
+                        danger
+                        <Switcher
+                            type="danger"
+                            checked={true}
+                        />
+                    </div>
                 </div>
             </div>
         );

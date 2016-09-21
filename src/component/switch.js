@@ -30,6 +30,10 @@ class Switch extends React.Component {
         }
     }
 
+    componentDidMount() {
+        console.error('Switch are deprecated! Replace with Switcher!');
+    }
+
     setChecked(checked) {
         if (!('checked' in this.props)) {
             this.setState({
