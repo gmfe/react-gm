@@ -25,6 +25,7 @@ class FilterSearchSelect extends React.Component {
             onFilter,
             delay,
             listMaxHeight,
+            multiple,
             placeholder,
             isScrollToSelected,
             ...rest
@@ -44,7 +45,7 @@ class FilterSearchSelect extends React.Component {
                 onSearch={this.handleSearch}
                 delay={delay}
                 listMaxHeight={listMaxHeight}
-                multiple={false}
+                multiple={multiple}
                 placeholder={placeholder}
                 isScrollToSelected={isScrollToSelected}
             />
