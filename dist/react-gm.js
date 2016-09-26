@@ -4016,10 +4016,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var onFilter = _props.onFilter;
 	            var delay = _props.delay;
 	            var listMaxHeight = _props.listMaxHeight;
+	            var multiple = _props.multiple;
 	            var placeholder = _props.placeholder;
 	            var isScrollToSelected = _props.isScrollToSelected;
 
-	            var rest = _objectWithoutProperties(_props, ['list', 'isGroupList', 'selected', 'onSelect', 'onFilter', 'delay', 'listMaxHeight', 'placeholder', 'isScrollToSelected']);
+	            var rest = _objectWithoutProperties(_props, ['list', 'isGroupList', 'selected', 'onSelect', 'onFilter', 'delay', 'listMaxHeight', 'multiple', 'placeholder', 'isScrollToSelected']);
 
 	            var query = this.state.query;
 
@@ -4035,7 +4036,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                onSearch: this.handleSearch,
 	                delay: delay,
 	                listMaxHeight: listMaxHeight,
-	                multiple: false,
+	                multiple: multiple,
 	                placeholder: placeholder,
 	                isScrollToSelected: isScrollToSelected
 	            }));
