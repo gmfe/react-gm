@@ -3596,8 +3596,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            dialogContainer.appendChild(div);
 	            var _OK = options.onOK;
 	            options.onOK = function (value) {
-	                resolve(value);
-	                return _OK && _OK(value);
+	                var result = _OK && _OK(value);
+	                if (result !== false) {
+	                    resolve(value);
+	                } else if (result.then) {
+	                    // 简单判断是否promise
+	                    return result;
+	                }
+	                return result;
 	            };
 	            options.onCancel = function () {
 	                return reject();
