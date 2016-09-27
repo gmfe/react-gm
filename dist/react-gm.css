@@ -506,8 +506,9 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
 }
 .gm-ellipsis {
   display: block !important;

@@ -17,7 +17,7 @@
     "precommit": "eslint ./src/ ./demo/;",
     "pre": "npm install",
     "clear": "rm -rf build && mkdir build;",
-    "start": "npm run clear && NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --inline --hot --progress --colors --port 3000",
+    "start": "npm run clear && NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0 --inline --hot --progress --colors --port 3000",
     "deploy": "npm install;npm run build && npm run build:min",
     "build": "NODE_ENV=production webpack",
     "build:min": "NODE_ENV=production webpack --config webpack.config.min.js",
