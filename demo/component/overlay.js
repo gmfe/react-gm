@@ -103,6 +103,7 @@ class DialogWrap extends React.Component {
             children: <div>something</div>,
             onOK: () => {
                 console.log('onOK');
+                return Promise.resolve('a'); // return false
             }
         }).then(() => {
             console.log('promise resolve');
