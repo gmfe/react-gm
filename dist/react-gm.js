@@ -3627,6 +3627,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.handleCancel = _this.handleCancel.bind(_this);
 	        _this.handleOk = _this.handleOk.bind(_this);
 	        _this.handleEnter = _this.handleEnter.bind(_this);
+	        _this.______isMounted = false;
 	        return _this;
 	    }
 
@@ -3638,6 +3639,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    show: nextProps.show
 	                });
 	            }
+	        }
+	    }, {
+	        key: 'componentWillUnMount',
+	        value: function componentWillUnMount() {
+	            this.______isMounted = true;
 	        }
 	    }, {
 	        key: 'handleCancel',
@@ -3657,9 +3663,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return;
 	            }
 	            Promise.resolve(result).then(function () {
-	                _this2.setState({
-	                    show: false
-	                });
+	                if (!_this2.______isMounted) {
+	                    _this2.setState({
+	                        show: false
+	                    });
+	                }
 	            });
 	        }
 	    }, {
