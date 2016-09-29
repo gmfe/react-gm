@@ -62,6 +62,7 @@ class Dialog extends React.Component {
         this.handleCancel = ::this.handleCancel;
         this.handleOk = ::this.handleOk;
         this.handleEnter = ::this.handleEnter;
+        this.______isMounted = false;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -70,6 +71,10 @@ class Dialog extends React.Component {
                 show: nextProps.show
             });
         }
+    }
+
+    componentWillUnMount() {
+        this.______isMounted = true;
     }
 
     handleCancel() {
@@ -85,9 +90,11 @@ class Dialog extends React.Component {
             return;
         }
         Promise.resolve(result).then(() => {
-            this.setState({
-                show: false
-            });
+            if (!this.______isMounted) {
+                this.setState({
+                    show: false
+                });
+            }
         });
     }
 
