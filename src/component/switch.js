@@ -96,4 +96,4 @@ Switch.defaultProps = {
     onChange: noop
 };
 
-module.exports = Switch;
+export default Switch;

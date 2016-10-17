@@ -95,4 +95,4 @@ Switcher.defaultProps = {
     onChange: noop
 };
 
-module.exports = Switcher;
+export default Switcher;
