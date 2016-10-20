@@ -132,7 +132,7 @@ class SearchSelect extends React.Component {
                                 })}
                                 onClick={this.handleSelect.bind(this, value)}
                             >
-                                <Flex flex>{value.name}</Flex>
+                                {value.name}
                             </Flex>
                         );
                     })}
@@ -232,7 +232,7 @@ class SearchSelect extends React.Component {
 
     handleSelect(value, event) {
         event.preventDefault();
-        if (event.target.className.indexOf('active') > -1) {
+        if (this.state.selected.indexOf(value) > -1) {
             this.doSelect(_.filter(this.state.selected, v => v !== value));
         } else {
             this.doSelect(this.state.selected.concat(value));
