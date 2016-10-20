@@ -1921,11 +1921,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                }),
 	                                onClick: _this2.handleSelect.bind(_this2, value)
 	                            },
-	                            _react2.default.createElement(
-	                                _flex2.default,
-	                                { flex: true },
-	                                value.name
-	                            )
+	                            value.name
 	                        );
 	                    })
 	                );
@@ -2054,7 +2050,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var _this6 = this;
 
 	            event.preventDefault();
-	            if (event.target.className.indexOf('active') > -1) {
+	            if (this.state.selected.indexOf(value) > -1) {
 	                this.doSelect(_underscore2.default.filter(this.state.selected, function (v) {
 	                    return v !== value;
 	                }));
