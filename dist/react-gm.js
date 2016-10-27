@@ -617,6 +617,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var children = _props4.children;
 	            var popup = _props4.popup;
 	            var type = _props4.type;
+	            var right = _props4.right;
 
 	            var child = _react2.default.Children.only(children);
 	            var active = this.state.active;
@@ -636,7 +637,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger'),
 	                children: [child, active ? _react2.default.createElement('div', {
 	                    key: 'popup',
-	                    className: 'gm-trigger-popup'
+	                    className: 'gm-trigger-popup ' + (right ? 'gm-trigger-popup-right' : '')
 	                }, popup) : undefined]
 	            }));
 	        }
@@ -648,6 +649,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Trigger.propTypes = {
 	    type: _react.PropTypes.oneOf(['focus', 'click', 'hover']),
 	    popup: _react.PropTypes.node.isRequired,
+	    right: _react.PropTypes.bool,
 	    component: _react.PropTypes.node.isRequired,
 	    children: _react.PropTypes.node,
 	    disabled: _react.PropTypes.bool
