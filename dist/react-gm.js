@@ -552,8 +552,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'handleMouseEnter',
 	        value: function handleMouseEnter() {
-	            var _this2 = this;
-
 	            var _props2 = this.props;
 	            var disabled = _props2.disabled;
 	            var children = _props2.children;
@@ -566,26 +564,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	            clearTimeout(this.timer);
 
 	            if (disabled === false) {
-	                this.timer = setTimeout(function () {
-	                    _this2.setState({
-	                        active: true
-	                    });
-	                }, 500);
+	                this.setState({
+	                    active: true
+	                });
 	            }
 
 	            // 如果没有props disabled，判定children是否不可用状态
 	            if (!children.props.disabled) {
-	                this.timer = setTimeout(function () {
-	                    _this2.setState({
-	                        active: true
-	                    });
-	                }, 500);
+	                this.setState({
+	                    active: true
+	                });
 	            }
 	        }
 	    }, {
 	        key: 'handleMouseLeave',
 	        value: function handleMouseLeave() {
-	            var _this3 = this;
+	            var _this2 = this;
 
 	            var _props3 = this.props;
 	            var disabled = _props3.disabled;
@@ -600,7 +594,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            if (disabled === false) {
 	                this.timer = setTimeout(function () {
-	                    _this3.setState({
+	                    _this2.setState({
 	                        active: false
 	                    });
 	                }, 500);
@@ -609,7 +603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // 如果没有props disabled，判定children是否不可用状态
 	            if (!children.props.disabled) {
 	                this.timer = setTimeout(function () {
-	                    _this3.setState({
+	                    _this2.setState({
 	                        active: false
 	                    });
 	                }, 500);
