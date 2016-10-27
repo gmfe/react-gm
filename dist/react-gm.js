@@ -490,7 +490,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            active: false
 	        };
 	        _this.handleClick = _this.handleClick.bind(_this);
+	        _this.handleMouseEnter = _this.handleMouseEnter.bind(_this);
+	        _this.handleMouseLeave = _this.handleMouseLeave.bind(_this);
 	        _this.handleBodyClick = _this.handleBodyClick.bind(_this);
+
+	        _this.timer = null;
 	        return _this;
 	    }
 
@@ -521,38 +525,118 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var _props = this.props;
 	            var disabled = _props.disabled;
 	            var children = _props.children;
+	            var type = _props.type;
 	            // 优先获取props的disabled
 
 	            if (disabled === true) {
 	                return;
 	            }
+
+	            var active = true;
+	            if (type === 'click') {
+	                active = !this.state.active;
+	            }
+
 	            if (disabled === false) {
 	                this.setState({
-	                    active: true
+	                    active: active
 	                });
 	            }
 	            // 如果没有props disabled，判定children是否不可用状态
 	            if (!children.props.disabled) {
 	                this.setState({
-	                    active: true
+	                    active: active
 	                });
+	            }
+	        }
+	    }, {
+	        key: 'handleMouseEnter',
+	        value: function handleMouseEnter() {
+	            var _this2 = this;
+
+	            var _props2 = this.props;
+	            var disabled = _props2.disabled;
+	            var children = _props2.children;
+	            // 优先获取props的disabled
+
+	            if (disabled === true) {
+	                return;
+	            }
+
+	            clearTimeout(this.timer);
+
+	            if (disabled === false) {
+	                this.timer = setTimeout(function () {
+	                    _this2.setState({
+	                        active: true
+	                    });
+	                }, 500);
+	            }
+
+	            // 如果没有props disabled，判定children是否不可用状态
+	            if (!children.props.disabled) {
+	                this.timer = setTimeout(function () {
+	                    _this2.setState({
+	                        active: true
+	                    });
+	                }, 500);
+	            }
+	        }
+	    }, {
+	        key: 'handleMouseLeave',
+	        value: function handleMouseLeave() {
+	            var _this3 = this;
+
+	            var _props3 = this.props;
+	            var disabled = _props3.disabled;
+	            var children = _props3.children;
+	            // 优先获取props的disabled
+
+	            if (disabled === true) {
+	                return;
+	            }
+
+	            clearTimeout(this.timer);
+
+	            if (disabled === false) {
+	                this.timer = setTimeout(function () {
+	                    _this3.setState({
+	                        active: false
+	                    });
+	                }, 500);
+	            }
+
+	            // 如果没有props disabled，判定children是否不可用状态
+	            if (!children.props.disabled) {
+	                this.timer = setTimeout(function () {
+	                    _this3.setState({
+	                        active: false
+	                    });
+	                }, 500);
 	            }
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _props2 = this.props;
-	            var component = _props2.component;
-	            var children = _props2.children;
-	            var popup = _props2.popup;
+	            var _props4 = this.props;
+	            var component = _props4.component;
+	            var children = _props4.children;
+	            var popup = _props4.popup;
+	            var type = _props4.type;
 
 	            var child = _react2.default.Children.only(children);
 	            var active = this.state.active;
 
 
-	            var componentProps = Object.assign({}, component.props, {
-	                onClick: (0, _gmUtil.createChainedFunction)(component.props.onClick, this.handleClick)
-	            });
+	            var p = {};
+	            if (type === 'focus' || type === 'click') {
+	                p.onClick = (0, _gmUtil.createChainedFunction)(component.props.onClick, this.handleClick);
+	            } else if (type === 'hover') {
+	                p.onMouseEnter = (0, _gmUtil.createChainedFunction)(component.props.onMouseEnter, this.handleMouseEnter);
+	                p.onMouseLeave = (0, _gmUtil.createChainedFunction)(component.props.onMouseLeave, this.handleMouseLeave);
+	            }
+
+	            var componentProps = Object.assign({}, component.props, p);
 
 	            return _react2.default.cloneElement(component, Object.assign({}, componentProps, {
 	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger'),
@@ -568,10 +652,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	Trigger.propTypes = {
-	    popup: _react.PropTypes.node,
-	    component: _react.PropTypes.node,
+	    type: _react.PropTypes.oneOf(['focus', 'click', 'hover']),
+	    popup: _react.PropTypes.node.isRequired,
+	    component: _react.PropTypes.node.isRequired,
 	    children: _react.PropTypes.node,
 	    disabled: _react.PropTypes.bool
+	};
+
+	Trigger.defaultProps = {
+	    type: 'focus'
 	};
 
 	exports.default = Trigger;
@@ -3376,7 +3465,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	DatePicker.propTypes = {
-
 	    date: _react.PropTypes.object,
 	    onChange: _react.PropTypes.func.isRequired,
 	    inputClassName: _react.PropTypes.string,
