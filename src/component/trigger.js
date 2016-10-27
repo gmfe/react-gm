@@ -70,20 +70,16 @@ class Trigger extends React.Component {
         clearTimeout(this.timer);
 
         if (disabled === false) {
-            this.timer = setTimeout(() => {
-                this.setState({
-                    active: true
-                });
-            }, 500);
+            this.setState({
+                active: true
+            });
         }
 
         // 如果没有props disabled，判定children是否不可用状态
         if (!children.props.disabled) {
-            this.timer = setTimeout(() => {
-                this.setState({
-                    active: true
-                });
-            }, 500);
+            this.setState({
+                active: true
+            });
         }
     }
 
