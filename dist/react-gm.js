@@ -495,6 +495,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.handleBodyClick = _this.handleBodyClick.bind(_this);
 
 	        _this.timer = null;
+	        _this.refChildren = null;
 	        return _this;
 	    }
 
@@ -521,7 +522,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }, {
 	        key: 'handleClick',
-	        value: function handleClick() {
+	        value: function handleClick(event) {
 	            var _props = this.props;
 	            var disabled = _props.disabled;
 	            var children = _props.children;
@@ -534,6 +535,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var active = true;
 	            if (type === 'click') {
+	                // 如果是点击的，只有点击 children内部才改变active
+	                if (!(0, _gmUtil.contains)((0, _reactDom.findDOMNode)(this.refChildren), event.target)) {
+	                    return;
+	                }
+
 	                active = !this.state.active;
 	            }
 
@@ -612,6 +618,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+
 	            var _props4 = this.props;
 	            var component = _props4.component;
 	            var children = _props4.children;
@@ -635,7 +643,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.cloneElement(component, Object.assign({}, componentProps, {
 	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger'),
-	                children: [child, active ? _react2.default.createElement('div', {
+	                children: [_react2.default.cloneElement(child, { key: 'children', ref: function ref(_ref) {
+	                        return _this3.refChildren = _ref;
+	                    } }), active ? _react2.default.createElement('div', {
 	                    key: 'popup',
 	                    className: 'gm-trigger-popup ' + (right ? 'gm-trigger-popup-right' : '')
 	                }, popup) : undefined]
@@ -3443,7 +3453,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                },
 	                _react2.default.createElement(
 	                    _trigger2.default,
-	                    { component: _react2.default.createElement('div', null), popup: popup },
+	                    { component: _react2.default.createElement('div', null), popup: popup, type: 'click' },
 	                    this.props.children ? this.props.children : _react2.default.createElement('input', {
 	                        type: 'text',
 	                        className: this.props.inputClassName,
