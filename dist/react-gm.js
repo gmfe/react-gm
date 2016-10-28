@@ -495,7 +495,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.handleBodyClick = _this.handleBodyClick.bind(_this);
 
 	        _this.timer = null;
-	        _this.refChildren = null;
+	        _this.refPopup = null;
 	        return _this;
 	    }
 
@@ -535,8 +535,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var active = true;
 	            if (type === 'click') {
-	                // 如果是点击的，只有点击 children内部才改变active
-	                if (!(0, _gmUtil.contains)((0, _reactDom.findDOMNode)(this.refChildren), event.target)) {
+	                // 如果是点击的，点击 popup 内部不改变active
+	                if ((0, _gmUtil.contains)((0, _reactDom.findDOMNode)(this.refPopup), event.target)) {
 	                    return;
 	                }
 
@@ -643,10 +643,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.cloneElement(component, Object.assign({}, componentProps, {
 	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger'),
-	                children: [_react2.default.cloneElement(child, { key: 'children', ref: function ref(_ref) {
-	                        return _this3.refChildren = _ref;
-	                    } }), active ? _react2.default.createElement('div', {
+	                children: [child, active ? _react2.default.createElement('div', {
 	                    key: 'popup',
+	                    ref: function ref(_ref) {
+	                        return _this3.refPopup = _ref;
+	                    },
 	                    className: 'gm-trigger-popup ' + (right ? 'gm-trigger-popup-right' : '')
 	                }, popup) : undefined]
 	            }));
@@ -3453,7 +3454,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                },
 	                _react2.default.createElement(
 	                    _trigger2.default,
-	                    { component: _react2.default.createElement('div', null), popup: popup, type: 'click' },
+	                    { component: _react2.default.createElement('div', null), popup: popup },
 	                    this.props.children ? this.props.children : _react2.default.createElement('input', {
 	                        type: 'text',
 	                        className: this.props.inputClassName,
