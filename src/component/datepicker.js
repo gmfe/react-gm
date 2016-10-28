@@ -29,7 +29,7 @@ class DatePicker extends React.Component {
             }}
                  className={classNames("gm-datepicker", this.props.className)}
             >
-                <Trigger component={<div/>} popup={popup}>
+                <Trigger component={<div/>} popup={popup} type="click">
                     {this.props.children ? this.props.children : (
                         <input
                             type="text"

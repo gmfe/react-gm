@@ -15,6 +15,7 @@ class Trigger extends React.Component {
         this.handleBodyClick = ::this.handleBodyClick;
 
         this.timer = null;
+        this.refChildren = null;
     }
 
     componentDidMount() {
@@ -35,7 +36,7 @@ class Trigger extends React.Component {
         }
     }
 
-    handleClick() {
+    handleClick(event) {
         const {disabled, children, type} = this.props;
         // 优先获取props的disabled
         if (disabled === true) {
@@ -44,6 +45,11 @@ class Trigger extends React.Component {
 
         let active = true;
         if (type === 'click') {
+            // 如果是点击的，只有点击 children内部才改变active
+            if (!contains(findDOMNode(this.refChildren), event.target)) {
+                return;
+            }
+
             active = !this.state.active;
         }
 
@@ -127,10 +133,13 @@ class Trigger extends React.Component {
 
         return React.cloneElement(component, Object.assign({}, componentProps, {
             className: classNames(component.props.className, 'gm-trigger'),
-            children: [child, active ? React.createElement('div', {
-                key: 'popup',
-                className: 'gm-trigger-popup ' + (right ? 'gm-trigger-popup-right' : '')
-            }, popup) : undefined]
+            children: [
+                React.cloneElement(child, {key: 'children', ref: ref => this.refChildren = ref}),
+                active ? React.createElement('div', {
+                    key: 'popup',
+                    className: 'gm-trigger-popup ' + (right ? 'gm-trigger-popup-right' : '')
+                }, popup) : undefined
+            ]
         }));
     }
 }
