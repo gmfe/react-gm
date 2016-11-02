@@ -144,10 +144,10 @@ class Trigger extends React.Component {
 
 Trigger.propTypes = {
     type: PropTypes.oneOf(['focus', 'click', 'hover']),
-    popup: PropTypes.node.isRequired,
+    popup: PropTypes.element, // 有可能是无
     right: PropTypes.bool,
-    component: PropTypes.node.isRequired,
-    children: PropTypes.node,
+    component: PropTypes.element.isRequired,
+    children: PropTypes.element,
     disabled: PropTypes.bool
 };
 

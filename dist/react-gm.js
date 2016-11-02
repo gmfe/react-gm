@@ -659,10 +659,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	Trigger.propTypes = {
 	    type: _react.PropTypes.oneOf(['focus', 'click', 'hover']),
-	    popup: _react.PropTypes.node.isRequired,
+	    popup: _react.PropTypes.element, // 有可能是无
 	    right: _react.PropTypes.bool,
-	    component: _react.PropTypes.node.isRequired,
-	    children: _react.PropTypes.node,
+	    component: _react.PropTypes.element.isRequired,
+	    children: _react.PropTypes.element,
 	    disabled: _react.PropTypes.bool
 	};
 
@@ -5227,7 +5227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	SheetColumn.displayName = 'SheetColumn';
 	SheetColumn.propTypes = {
 	    field: _react.PropTypes.string.isRequired,
-	    name: _react.PropTypes.string.isRequired
+	    name: _react.PropTypes.oneOfType([_react.PropTypes.string.isRequired, _react.PropTypes.element.isRequired])
 	};
 
 	var SheetAction = function (_React$Component2) {

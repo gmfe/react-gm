@@ -12,7 +12,10 @@ class SheetColumn extends React.Component {
 SheetColumn.displayName = 'SheetColumn';
 SheetColumn.propTypes = {
     field: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.element.isRequired
+    ])
 };
 
 
