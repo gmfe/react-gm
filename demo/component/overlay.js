@@ -173,7 +173,6 @@ class DialogWrap extends React.Component {
     }
 }
 
-
 class Component extends React.Component {
     render() {
         return (
