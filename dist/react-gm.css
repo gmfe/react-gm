@@ -482,6 +482,9 @@
   font-size: 12px;
   height: 45px;
 }
+.gm-dropselect-list-wrap .gm-dropselect-item.active {
+  background-color: #f5f5f5;
+}
 .gm-dropselect-list-wrap .gm-dropselect-list .gm-dropselect-title {
   overflow: hidden;
   background-color: #eeeeee;
