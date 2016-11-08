@@ -52,6 +52,7 @@ class DropSelectWrap extends React.Component {
         };
         this.onFocus = ::this.onFocus;
         this.onHide = ::this.onHide;
+        this.handleEnter = ::this.handleEnter;
     }
 
     componentDidMount() {
@@ -92,10 +93,6 @@ class DropSelectWrap extends React.Component {
                         name: '大白菜',
                         price: 22.12,
                         actionStatus: [1, 1]
-                    }, {
-                        id: '000143',
-                        name: '大白菜',
-                        price: 22.12
                     }]
                 })
             });
@@ -108,6 +105,10 @@ class DropSelectWrap extends React.Component {
         });
     }
 
+    handleEnter(index) {
+        console.log(index, this.state.coolData.list[index]);
+    }
+
     onHide() {
         this.setState({
             show: false
@@ -117,9 +118,12 @@ class DropSelectWrap extends React.Component {
     render() {
         return (
             <div style={{width: '400px'}}>
-                <DropSelect show={this.state.show}
-                            data={this.state.coolData}
-                            onHide={this.onHide}>
+                <DropSelect
+                    show={this.state.show}
+                    data={this.state.coolData}
+                    onHide={this.onHide}
+                    onEnter={this.handleEnter}
+                >
                     <input className="form-control" onFocus={this.onFocus}/>
                 </DropSelect>
             </div>

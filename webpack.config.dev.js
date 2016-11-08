@@ -28,7 +28,8 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.js$/,
-            loader: 'babel'
+            loader: 'babel',
+            exclude: /dict-zi\.js/
         }, {
             test: /(fontawesome-webfont|glyphicons-halflings-regular)\.(woff|woff2|ttf|eot|svg)($|\?)/,
             loader: 'url?limit=1024&name=fonts/[name].[hash].[ext]'
