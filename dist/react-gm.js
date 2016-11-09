@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_49__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_50__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validate3 = __webpack_require__(47);
+	var _validate3 = __webpack_require__(48);
 
 	var _validate4 = _interopRequireDefault(_validate3);
 
@@ -92,7 +92,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _import2 = _interopRequireDefault(_import);
 
-	var _storage = __webpack_require__(42);
+	var _storage = __webpack_require__(43);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
@@ -108,11 +108,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(46);
+	var _tip = __webpack_require__(47);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(40);
+	var _nprogress = __webpack_require__(41);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
@@ -124,7 +124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _navigation = __webpack_require__(39);
+	var _navigation = __webpack_require__(40);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
@@ -136,7 +136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _timespanpicker = __webpack_require__(45);
+	var _timespanpicker = __webpack_require__(46);
 
 	var _timespanpicker2 = _interopRequireDefault(_timespanpicker);
 
@@ -156,15 +156,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _filterSearch2 = _interopRequireDefault(_filterSearch);
 
-	var _switch = __webpack_require__(43);
+	var _switch = __webpack_require__(44);
 
 	var _switch2 = _interopRequireDefault(_switch);
 
-	var _switcher = __webpack_require__(44);
+	var _switcher = __webpack_require__(45);
 
 	var _switcher2 = _interopRequireDefault(_switcher);
 
-	var _sheet = __webpack_require__(41);
+	var _sheet = __webpack_require__(42);
 
 	var _sheet2 = _interopRequireDefault(_sheet);
 
@@ -180,7 +180,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
-	__webpack_require__(48);
+	var _loading = __webpack_require__(39);
+
+	var _loading2 = _interopRequireDefault(_loading);
+
+	__webpack_require__(49);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -225,7 +229,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    SheetAction: SheetAction,
 	    SheetSelect: SheetSelect,
 	    SheetBatchAction: SheetBatchAction,
-	    Trigger: _trigger2.default
+	    Trigger: _trigger2.default,
+	    Loading: _loading2.default
 	};
 
 /***/ },
@@ -3640,7 +3645,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactBootstrap = __webpack_require__(49);
+	var _reactBootstrap = __webpack_require__(50);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4972,6 +4977,81 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// background-color: @brand-primary （#6dc3ec）
+	// 如果需要设置loading大小:  set size = 100  (default 50)
+	var LIMIT = 12;
+
+	var Loading = function (_React$Component) {
+	    _inherits(Loading, _React$Component);
+
+	    function Loading() {
+	        _classCallCheck(this, Loading);
+
+	        return _possibleConstructorReturn(this, (Loading.__proto__ || Object.getPrototypeOf(Loading)).apply(this, arguments));
+	    }
+
+	    _createClass(Loading, [{
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props,
+	                style = _props.style,
+	                size = _props.size;
+
+
+	            style = Object.assign({}, style, {
+	                'width': size + 'px',
+	                'height': size + 'px'
+	            });
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-loading', style: style },
+	                _underscore2.default.times(LIMIT, function (i) {
+	                    return _react2.default.createElement('div', { key: i, className: "circle" + (i + 1) + " loading-circle" });
+	                })
+	            );
+	        }
+	    }]);
+
+	    return Loading;
+	}(_react2.default.Component);
+
+	Loading.propTypes = {
+	    style: _react.PropTypes.object,
+	    size: _react.PropTypes.number
+	};
+	Loading.defaultProps = {
+	    size: 50
+	};
+	exports.default = Loading;
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
 	var _classnames = __webpack_require__(3);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
@@ -5115,7 +5195,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Navigation;
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5239,7 +5319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5610,7 +5690,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Sheet;
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5718,7 +5798,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5870,7 +5950,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Switch;
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6042,7 +6122,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Switcher;
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6170,7 +6250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpanPicker;
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6425,7 +6505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6550,16 +6630,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_49__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_50__;
 
 /***/ }
 /******/ ])
