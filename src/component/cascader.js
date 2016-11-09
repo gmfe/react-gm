@@ -37,6 +37,16 @@ class Cascader extends React.Component {
         return result;
     }
 
+    handleSelect(value, index) {
+        const selected = this.state.value;
+        selected[index] = value.value;
+        selected.length = index + 1;
+        this.setState({
+            selected
+        });
+        this.props.onChange(selected);
+    }
+
     renderOverlay() {
         return (
             <Flex className={classNames("gm-cascader-list", this.props.className)}>
@@ -57,18 +67,9 @@ class Cascader extends React.Component {
         );
     }
 
-    handleSelect(value, index) {
-        const selected = this.state.value;
-        selected[index] = value.value;
-        selected.length = index + 1;
-        this.setState({
-            selected
-        });
-        this.props.onChange(selected);
-    }
-
     renderChildren() {
         const {data, valueRender, inputProps} = this.props;
+
         let value = [];
         if (this.state.value.length > 0) {
             _.each(this.state.value, (v, i) => {
@@ -82,11 +83,13 @@ class Cascader extends React.Component {
         return (
             <div className="gm-cascader-input">
                 <i className={classNames('glyphicon glyphicon-menu-down', this.props.className)}/>
-                <input {...inputProps}
-                       type="text"
-                       onChange={noop}
-                       value={valueRender ? valueRender(value) : _.map(value, v => v.name).join(',')}
-                       className={classNames("form-control", inputProps.className)}/>
+                <input
+                    {...inputProps}
+                    type="text"
+                    onChange={noop}
+                    value={valueRender ? valueRender(value) : _.map(value, v => v.name).join(',')}
+                    className={classNames("form-control", inputProps.className)}
+                />
             </div>
         );
     }
@@ -114,7 +117,6 @@ Cascader.propTypes = {
     onChange: PropTypes.func,
     // 没有this.props.children时有效
     inputProps: PropTypes.object,
-
     valueRender: PropTypes.func
 };
 

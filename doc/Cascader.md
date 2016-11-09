@@ -35,15 +35,19 @@ const data = [{
     }]
 }];
 
-// 一般用法
-<Cascader data={this.state.data}
-          value={this.state.value}
-          onChange={this.handleChange}/>
+// 普通用法
+<Cascader
+    data={this.state.data}
+    value={this.state.value}
+    onChange={this.handleChange}
+/>
           
 // 自定义value的显示
-<Cascader data={this.state.data}
-          valueRender={(value) => (value && value.length > 0 ? value[value.length - 1].name : '')}
-          onChange={this.handleChange}/>
+<Cascader
+    data={this.state.data}
+    valueRender={(value) => (value && value.length > 0 ? value[value.length - 1].name : '')}
+    onChange={this.handleChange}
+/>
           
 // 自定义children ui，点击整个children都会出现选择浮层
 <Cascader data={this.state.data} onChange={this.handleChange}>
@@ -64,21 +68,22 @@ Cascader 的多选版本
 - `selected (array)` 同Cascader.value的数组版本[Cascader.value]
 - `onSelect (func|isRequired)` 提供和selected一样的数组
 - `multiple (bool)` 是否支持多选
-- `placeholder (string)`
 - `selectRender (func)` 自定义已选择ui
 
 ```
-// 单选版本
+// 多选版本
+<CascaderSelect
+    data={this.state.data}
+    selected={this.state.singleSelected}
+    onSelect={this.handleSingleSelect}
+/>
+
+// 多选版本
 <CascaderSelect
     multiple
     selectedRender={this.selectedRender}
     data={this.state.data}
     selected={this.state.selected}
-    onSelect={this.handleSelect}/>
-
-// 多选版本
-<CascaderSelect
-    data={this.state.data}
-    selected={this.state.singleSelected}
-    onSelect={this.handleSingleSelect}/>
+    onSelect={this.handleSelect}
+/>
 ```

@@ -4,22 +4,32 @@
 
 ### Trigger
 
-- `popup (node)` 触发浮层的元素，如果元素有disabled，则不会出发浮层
-- `component (node)` 包括触发浮层的元素的父亲，一般给`div`
-- `children (node)` 必须单个元素
-- `disabled` 不会出发浮层，优先级比`popup`的 disabled 高
+- `type (focus|click|hover)` 三种模式。 默认`focus`。 focus即获得焦点就显示popup。click即点击显示popup再点击关闭popup。hover即hover的时候关闭，其中hover关闭的时候会延迟500ms（避免鼠标移到浮层时，在目标和浮层之间的空隙时触发关闭浮层）。
+- `component (node|isRequired)` 触发浮层的元素的父亲，会创建真正的元素，一般给`<div/>`
+- `popup (node)` 浮层，如果元素有disabled，则不会触发浮层
+- `right (bool)` 和目标右对齐。
+- `top (bool)` 在目标的上方。 可和right组合用。
+- `children (node)` 必须单个元素，非string
+- `disabled` 不会触发浮层，优先级比`popup`的 disabled 高。 建议使用popup disabled属性，因为有disabled样式。
 
 ```jsx
-<Trigger component={<div />} popup={popup}>
-    {children ? children : (
-        <input
-            type="text"
-            className={inputClassName}
-            ref="target"
-            disabled={disabled}
-            value={render(date)}
-            onChange={noop}
-        />
-    )}
-</Trigger>
+class TriggerWrap extends React.Component {
+    renderPopup() {
+        return (
+            <div className="gm-border" style={{width: '200px', height: '200px', background: 'red'}}>
+                <div>popup</div>
+            </div>
+        );
+    }
+
+    render() {
+        return (
+            <div>
+                <Trigger component={<div/>} popup={this.renderPopup()}>
+                    <button className="btn btn-default">focus me default</button>
+                </Trigger>
+            </div>
+        );
+    }
+}
 ```

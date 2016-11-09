@@ -16,13 +16,18 @@ h1 {
   padding: 10px;
   border-left: 1px solid @gm-border-color;
 
+  div {
+
+  }
   a {
-    display: block;
     padding: 2px 2px 2px 1em;
     color: black;
+    &:last-child {
+      font-size: 12px;
+    }
   }
 
-  a.doc-nav-title {
+  & > a.doc-nav-title {
     padding-left: 0;
   }
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import {
     Tip,
-    NProgress,
-    Dialog
+    Trigger,
+    Dialog,
+    Flex
 } from '../../src/index';
 
 class TipWrap extends React.Component {
@@ -37,28 +38,6 @@ class TipWrap extends React.Component {
             onClose: () => console.log('tip closed')
         });
         Tip.info('提示啦，提示啦');
-    }
-}
-
-
-// nprogress
-class NProgressWrap extends React.Component {
-    render() {
-        return (
-            <div>
-                <button className="btn btn-primary" onClick={this.handleStart}>start</button>
-                <button className="btn btn-primary" onClick={this.handleEnd}>end</button>
-
-            </div>
-        );
-    }
-
-    handleStart() {
-        NProgress.start();
-    }
-
-    handleEnd() {
-        NProgress.done();
     }
 }
 
@@ -173,6 +152,64 @@ class DialogWrap extends React.Component {
     }
 }
 
+class TriggerWrap extends React.Component {
+    renderPopup() {
+        return (
+            <div className="gm-border" style={{width: '200px', height: '200px', background: 'red'}}>
+                <div>popup</div>
+            </div>
+        );
+    }
+
+    render() {
+        return (
+            <div>
+                <div>三种行为 focus click hover</div>
+                <Flex>
+                    <Trigger component={<div/>} popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me default</button>
+                    </Trigger>
+
+                    <Trigger component={<div/>} type="click" popup={this.renderPopup()}>
+                        <button className="btn btn-default">click me</button>
+                    </Trigger>
+
+                    <Trigger component={<div/>} type="hover" popup={this.renderPopup()}>
+                        <button className="btn btn-default">hover me</button>
+                    </Trigger>
+                </Flex>
+                <div>各种位置</div>
+                <Flex>
+                    <Trigger component={<div/>} popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(default)</button>
+                    </Trigger>
+
+                    <Trigger component={<div/>} right popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(right)</button>
+                    </Trigger>
+
+                    <Trigger component={<div/>} top popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(top)</button>
+                    </Trigger>
+
+                    <Trigger component={<div/>} right top popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(right top)</button>
+                    </Trigger>
+                </Flex>
+                <div>disabled</div>
+                <Flex>
+                    <Trigger component={<div/>} disabled popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(disabled)</button>
+                    </Trigger>
+                    <Trigger component={<div/>} popup={this.renderPopup()}>
+                        <button disabled className="btn btn-default">focus me(inner disabled)</button>
+                    </Trigger>
+                </Flex>
+            </div>
+        );
+    }
+}
+
 class Component extends React.Component {
     render() {
         return (
@@ -184,8 +221,8 @@ class Component extends React.Component {
                 <h2 id="Dialog">Dialog</h2>
                 <DialogWrap/>
                 <hr/>
-                <h2 id="NProgress">NProgress</h2>
-                <NProgressWrap/>
+                <h2 id="Trigger">Trigger</h2>
+                <TriggerWrap/>
             </div>
         );
     }

@@ -453,10 +453,12 @@ class CascaderWrap extends React.Component {
             <div>
                 <h3>普通用法</h3>
                 <div style={{width: '200px'}}>
-                    <Cascader data={this.state.data}
-                              value={this.state.value}
-                              onChange={this.handleChange}
-                              inputProps={{className: 'input-sm'}}/>
+                    <Cascader
+                        data={this.state.data}
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        inputProps={{className: 'input-sm'}}
+                    />
                 </div>
 
                 <h3>不提供value</h3>
@@ -466,9 +468,11 @@ class CascaderWrap extends React.Component {
 
                 <h3>自定义value的显示</h3>
                 <Flex>
-                    <Cascader data={this.state.data}
-                              valueRender={(value) => (value && value.length > 0 ? value[value.length - 1].name : '')}
-                              onChange={this.handleChange}/>
+                    <Cascader
+                        data={this.state.data}
+                        valueRender={(value) => (value && value.length > 0 ? value[value.length - 1].name : '')}
+                        onChange={this.handleChange}
+                    />
                 </Flex>
 
                 <h3>自定义children</h3>
@@ -514,13 +518,15 @@ class CascaderSelectWrap extends React.Component {
                     selectedRender={this.selectedRender}
                     data={this.state.data}
                     selected={this.state.selected}
-                    onSelect={this.handleSelect}/>
+                    onSelect={this.handleSelect}
+                />
 
                 <h3>单选</h3>
                 <CascaderSelect
                     data={this.state.data}
                     selected={this.state.singleSelected}
-                    onSelect={this.handleSingleSelect}/>
+                    onSelect={this.handleSingleSelect}
+                />
             </div>
         );
     }

@@ -13,6 +13,7 @@ import Overlay from './component/overlay';
 import Data from './component/data';
 import Upload from './component/upload';
 import Layout from './component/layout';
+import Load from './component/load';
 
 // var interceptorId = Util.RequestInterceptor.add({
 //     request: function (config) {
@@ -53,7 +54,7 @@ function initNav() {
     _.each(document.getElementsByTagName('h1'), ele => {
         html += '<a class="doc-nav-title" href="#' + ele.id + '">' + ele.innerHTML + '</a>';
         _.each(ele.parentNode.getElementsByTagName('h2'), e => {
-            html += '<a href="#' + e.id + '">' + e.innerHTML + '</a>';
+            html += '<div><a href="#' + e.id + '">' + e.innerHTML + '</a><a href="https://github.com/gmfe/react-gm/blob/master/doc/' + e.innerHTML + '.md" target="_blank">doc</a></div>';
         });
     });
 
@@ -66,6 +67,7 @@ class App extends React.Component {
         return (
             <div className="container">
                 <Layout/>
+                <Load/>
                 <Select/>
                 <Data/>
                 <Date/>

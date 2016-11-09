@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    Flex,
-    Loading
+    Flex
 } from '../../src/index';
 
 class FlexWrap extends React.Component {
@@ -22,17 +21,6 @@ class FlexWrap extends React.Component {
     }
 }
 
-const LoadingWrap = () => (
-    <div style={{
-        'display': 'inline-block',
-        'margin': '30px 0'
-    }}>
-        <Loading size={30} />
-        <Loading size={40} />
-        <Loading />
-    </div>
-);
-
 class Component extends React.Component {
     render() {
         return (
@@ -40,8 +28,6 @@ class Component extends React.Component {
                 <h1 id="layout">布局</h1>
                 <h2 id="Flex">Flex</h2>
                 <FlexWrap/>
-                <h2 id="Loading">Loading</h2>
-                <LoadingWrap/>
             </div>
         );
     }

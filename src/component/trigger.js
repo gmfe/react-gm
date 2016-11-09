@@ -117,7 +117,7 @@ class Trigger extends React.Component {
     }
 
     render() {
-        const {component, children, popup, type, right} = this.props;
+        const {component, children, popup, type, right, top} = this.props;
         const child = React.Children.only(children);
         const {active} = this.state;
 
@@ -136,7 +136,10 @@ class Trigger extends React.Component {
             children: [child, active ? React.createElement('div', {
                 key: 'popup',
                 ref: ref => this.refPopup = ref,
-                className: 'gm-trigger-popup ' + (right ? 'gm-trigger-popup-right' : '')
+                className: classNames('gm-trigger-popup ', {
+                    'gm-trigger-popup-right': right,
+                    'gm-trigger-popup-top': top
+                })
             }, popup) : undefined]
         }));
     }
@@ -144,10 +147,11 @@ class Trigger extends React.Component {
 
 Trigger.propTypes = {
     type: PropTypes.oneOf(['focus', 'click', 'hover']),
-    popup: PropTypes.element, // 有可能是无
-    right: PropTypes.bool,
     component: PropTypes.element.isRequired,
+    popup: PropTypes.element, // 有可能是无
     children: PropTypes.element,
+    right: PropTypes.bool,
+    top: PropTypes.bool,
     disabled: PropTypes.bool
 };
 

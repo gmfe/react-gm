@@ -3,8 +3,7 @@ import _ from 'underscore';
 import Cascader from './cascader';
 import Flex from './flex';
 
-const noop = () => {
-};
+// TODO 后续考虑拆开单选，多选。 耦合起来太蛋疼。
 
 const getPropsSelected = (props) => {
     if (props.multiple) {
@@ -29,38 +28,14 @@ class CascaderSelect extends React.Component {
             selected: getPropsSelected(props),
             cascaderValue: []
         };
+
+        this.refCascaderSelect = null;
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
             selected: getPropsSelected(nextProps)
         });
-    }
-
-    render() {
-        return (
-            <div className="gm-cascader-select" ref="cascaderSelect">
-                <Flex className="gm-cascader-select-input">
-                    {_.map(this.state.selected, (value, i) => (
-                        <Flex key={i} alignStart className="selected">
-                            {this.props.selectedRender ? this.props.selectedRender(value, i) : _.map(value, v => v.name).join(',')}
-                            <button
-                                type="button"
-                                className="close"
-                                onClick={this.handleClose.bind(this, value)}
-                            >&times;</button>
-                        </Flex>
-                    ))}
-                    <Flex flex column onKeyDown={::this.handleKeyDown}>
-                        <Cascader
-                            data={this.props.data}
-                            value={this.state.cascaderValue}
-                            onChange={::this.handleChange}
-                        />
-                    </Flex>
-                </Flex>
-            </div>
-        );
     }
 
     handleKeyDown(event) {
@@ -112,6 +87,7 @@ class CascaderSelect extends React.Component {
             });
         }
 
+        // 知道没有children才认为选择了
         if (!result[result.length - 1].children) {
             let n = this.state.selected.slice();
             n.push(result);
@@ -124,7 +100,7 @@ class CascaderSelect extends React.Component {
             });
             // 单选完后就不继续出浮层
             if (!this.props.multiple) {
-                this.refs.cascaderSelect.click();
+                this.refCascaderSelect.click();
             }
         }
     }
@@ -132,6 +108,32 @@ class CascaderSelect extends React.Component {
     handleClose(value) {
         const selected = _.filter(this.state.selected, v => v !== value);
         this.doSelect(selected);
+    }
+
+    render() {
+        return (
+            <div className="gm-cascader-select" ref={ref => this.refCascaderSelect = ref}>
+                <Flex className="gm-cascader-select-input">
+                    {_.map(this.state.selected, (value, i) => (
+                        <Flex key={i} alignStart className="selected">
+                            {this.props.selectedRender ? this.props.selectedRender(value, i) : _.map(value, v => v.name).join(',')}
+                            <button
+                                type="button"
+                                className="close"
+                                onClick={this.handleClose.bind(this, value)}
+                            >&times;</button>
+                        </Flex>
+                    ))}
+                    <Flex flex column onKeyDown={::this.handleKeyDown}>
+                        <Cascader
+                            data={this.props.data}
+                            value={this.state.cascaderValue}
+                            onChange={::this.handleChange}
+                        />
+                    </Flex>
+                </Flex>
+            </div>
+        );
     }
 }
 
@@ -141,13 +143,7 @@ CascaderSelect.propTypes = {
     // 会提供整个value回去
     onSelect: PropTypes.func.isRequired,
     multiple: PropTypes.bool,
-    placeholder: PropTypes.string,
     selectedRender: PropTypes.func
-};
-
-CascaderSelect.defaultProps = {
-    onSelect: noop,
-    placeholder: ''
 };
 
 export default CascaderSelect;
