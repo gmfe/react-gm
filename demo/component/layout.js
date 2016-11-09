@@ -27,8 +27,8 @@ const LoadingWrap = () => (
         'display': 'inline-block',
         'margin': '30px 0'
     }}>
-        <Loading size="30" />
-        <Loading size="40" />
+        <Loading size={30} />
+        <Loading size={40} />
         <Loading />
     </div>
 );
