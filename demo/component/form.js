@@ -3,7 +3,8 @@ import {
     Validate,
     ValidateMixin,
     Switch,
-    Switcher
+    Switcher,
+    InputNumber
 } from '../../src/index';
 
 var FormerDom = React.createClass({
@@ -49,7 +50,8 @@ var FormerDom = React.createClass({
 const Component = React.createClass({
     getInitialState(){
         return {
-            checked: false
+            checked: false,
+            inputNumberValue: ''
         };
     },
     render(){
@@ -190,12 +192,30 @@ const Component = React.createClass({
                         />
                     </div>
                 </div>
+                <h2 id="input-number">input-number</h2>
+                <div>
+                    <div>数字输入框</div>
+                    <InputNumber
+                        value={this.state.inputNumberValue}
+                        onChange={this.handleInputNumberChange}
+                        placeholder="最大1000，最小0，可保留4为小数，默认2位"
+                        max={1000}
+                        min={0}
+                        precision={4}
+                        className="form-control"
+                    />
+                </div>
             </div>
         );
     },
     handleChange(){
         this.setState({
             checked: !this.state.checked
+        });
+    },
+    handleInputNumberChange(value){
+        this.setState({
+            inputNumberValue: value
         });
     }
 });
