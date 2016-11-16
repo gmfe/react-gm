@@ -192,6 +192,7 @@ class SearchSelect extends React.Component {
     handleBlur(event) {
         // 慎用blur，在选择的之前会出发blur
         event.preventDefault();
+        const value = event.target.value;
         const {multiple} = this.props;
         // 多选不处理
         if (!multiple) {
@@ -199,7 +200,13 @@ class SearchSelect extends React.Component {
             setTimeout(() => {
                 if (!this.______isMounted) {
                     const {selected} = this.props;
-                    this.doChange(selected && selected.name || '');
+
+                    // 如果为空，则当用户取消选择
+                    if (!value) {
+                        this.doSelect([]);
+                    } else {
+                        this.doChange(selected && selected.name || '');
+                    }
                 }
             }, 500);
         }
