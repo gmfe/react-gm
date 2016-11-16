@@ -30,6 +30,7 @@ import Cascader from './component/cascader';
 import CascaderSelect from './component/cascader.select';
 import Trigger from './component/trigger';
 import Loading from './component/loading';
+import InputNumber from './component/input.number';
 
 import './index.less';
 
@@ -76,5 +77,6 @@ module.exports = {
     SheetSelect,
     SheetBatchAction,
     Trigger,
-    Loading
+    Loading,
+    InputNumber
 };
