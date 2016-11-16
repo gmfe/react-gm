@@ -2103,6 +2103,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            // 慎用blur，在选择的之前会出发blur
 	            event.preventDefault();
+	            var value = event.target.value;
 	            var multiple = this.props.multiple;
 	            // 多选不处理
 
@@ -2112,7 +2113,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    if (!_this5.______isMounted) {
 	                        var selected = _this5.props.selected;
 
-	                        _this5.doChange(selected && selected.name || '');
+	                        // 如果为空，则当用户取消选择
+
+	                        if (!value) {
+	                            _this5.doSelect([]);
+	                        } else {
+	                            _this5.doChange(selected && selected.name || '');
+	                        }
 	                    }
 	                }, 500);
 	            }
