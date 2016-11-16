@@ -16,6 +16,7 @@ class InputNumber extends React.Component {
         if (reg.test(value) || value === '') {
             const num = Number(value);
 
+
             if (max && num > max)
                 this.props.onChange(max);
             else if (min && num < min)
@@ -26,15 +27,16 @@ class InputNumber extends React.Component {
     }
 
     render() {
-        const props = this.props;
+        const {
+            precision, // eslint-disable-line
+            ...rest
+        } = this.props;
 
         return (
             <input
+                {...rest}
                 type="text"
-                value={props.value}
                 onChange={this.handleChange}
-                className={props.className}
-                placeholder={props.placeholder}
             />
         );
     }
