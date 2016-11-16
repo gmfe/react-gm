@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_50__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_51__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validate3 = __webpack_require__(48);
+	var _validate3 = __webpack_require__(49);
 
 	var _validate4 = _interopRequireDefault(_validate3);
 
@@ -92,7 +92,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _import2 = _interopRequireDefault(_import);
 
-	var _storage = __webpack_require__(43);
+	var _storage = __webpack_require__(44);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
@@ -108,11 +108,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(47);
+	var _tip = __webpack_require__(48);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
-	var _nprogress = __webpack_require__(41);
+	var _nprogress = __webpack_require__(42);
 
 	var _nprogress2 = _interopRequireDefault(_nprogress);
 
@@ -124,7 +124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _navigation = __webpack_require__(40);
+	var _navigation = __webpack_require__(41);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
@@ -136,7 +136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _timespanpicker = __webpack_require__(46);
+	var _timespanpicker = __webpack_require__(47);
 
 	var _timespanpicker2 = _interopRequireDefault(_timespanpicker);
 
@@ -156,15 +156,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _filterSearch2 = _interopRequireDefault(_filterSearch);
 
-	var _switch = __webpack_require__(44);
+	var _switch = __webpack_require__(45);
 
 	var _switch2 = _interopRequireDefault(_switch);
 
-	var _switcher = __webpack_require__(45);
+	var _switcher = __webpack_require__(46);
 
 	var _switcher2 = _interopRequireDefault(_switcher);
 
-	var _sheet = __webpack_require__(42);
+	var _sheet = __webpack_require__(43);
 
 	var _sheet2 = _interopRequireDefault(_sheet);
 
@@ -180,11 +180,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
-	var _loading = __webpack_require__(39);
+	var _loading = __webpack_require__(40);
 
 	var _loading2 = _interopRequireDefault(_loading);
 
-	__webpack_require__(49);
+	var _input = __webpack_require__(39);
+
+	var _input2 = _interopRequireDefault(_input);
+
+	__webpack_require__(50);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -230,7 +234,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    SheetSelect: SheetSelect,
 	    SheetBatchAction: SheetBatchAction,
 	    Trigger: _trigger2.default,
-	    Loading: _loading2.default
+	    Loading: _loading2.default,
+	    InputNumber: _input2.default
 	};
 
 /***/ },
@@ -3645,7 +3650,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactBootstrap = __webpack_require__(50);
+	var _reactBootstrap = __webpack_require__(51);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4961,6 +4966,97 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var InputNumber = function (_React$Component) {
+	    _inherits(InputNumber, _React$Component);
+
+	    function InputNumber(props) {
+	        _classCallCheck(this, InputNumber);
+
+	        var _this = _possibleConstructorReturn(this, (InputNumber.__proto__ || Object.getPrototypeOf(InputNumber)).call(this, props));
+
+	        _this.handleChange = _this.handleChange.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(InputNumber, [{
+	        key: "handleChange",
+	        value: function handleChange(e) {
+	            var _props = this.props,
+	                max = _props.max,
+	                min = _props.min,
+	                precision = _props.precision;
+
+	            var value = e.target.value;
+
+	            var reg = new RegExp("(^[1-9]\\d*(\\.\\d{0," + precision + "})?$)|(^0(\\.\\d{0," + precision + "})?$)");
+
+	            if (reg.test(value) || value === '') {
+	                var num = Number(value);
+
+	                if (max && num > max) this.props.onChange(max);else if (min && num < min) this.props.onChange(min);else this.props.onChange(value);
+	            }
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var _props2 = this.props,
+	                precision = _props2.precision,
+	                rest = _objectWithoutProperties(_props2, ["precision"]);
+
+	            return _react2.default.createElement("input", _extends({}, rest, {
+	                type: "text",
+	                onChange: this.handleChange
+	            }));
+	        }
+	    }]);
+
+	    return InputNumber;
+	}(_react2.default.Component);
+
+	InputNumber.propTypes = {
+	    value: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]).isRequired,
+	    max: _react2.default.PropTypes.number,
+	    min: _react2.default.PropTypes.number,
+	    precision: _react2.default.PropTypes.number, // 精确度，保留几位小数
+	    onChange: _react2.default.PropTypes.func.isRequired,
+	    placeholder: _react2.default.PropTypes.string,
+	    className: _react2.default.PropTypes.string
+	};
+
+	InputNumber.defaultProps = {
+	    precision: 2
+	};
+
+	exports.default = InputNumber;
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -5033,7 +5129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Loading;
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5195,7 +5291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Navigation;
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5319,7 +5415,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = NProgress;
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5690,7 +5786,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Sheet;
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5798,7 +5894,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5950,7 +6046,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Switch;
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6122,7 +6218,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Switcher;
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6250,7 +6346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpanPicker;
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6505,7 +6601,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6630,16 +6726,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_50__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_51__;
 
 /***/ }
 /******/ ])
