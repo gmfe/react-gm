@@ -634,7 +634,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                children = _props4.children,
 	                popup = _props4.popup,
 	                type = _props4.type,
-	                right = _props4.right;
+	                right = _props4.right,
+	                top = _props4.top;
 
 	            var child = _react2.default.Children.only(children);
 	            var active = this.state.active;
@@ -657,7 +658,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    ref: function ref(_ref) {
 	                        return _this3.refPopup = _ref;
 	                    },
-	                    className: 'gm-trigger-popup ' + (right ? 'gm-trigger-popup-right' : '')
+	                    className: (0, _classnames2.default)('gm-trigger-popup ', {
+	                        'gm-trigger-popup-right': right,
+	                        'gm-trigger-popup-top': top
+	                    })
 	                }, popup) : undefined]
 	            }));
 	        }
@@ -668,10 +672,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	Trigger.propTypes = {
 	    type: _react.PropTypes.oneOf(['focus', 'click', 'hover']),
-	    popup: _react.PropTypes.element, // 有可能是无
-	    right: _react.PropTypes.bool,
 	    component: _react.PropTypes.element.isRequired,
+	    popup: _react.PropTypes.element, // 有可能是无
 	    children: _react.PropTypes.element,
+	    right: _react.PropTypes.bool,
+	    top: _react.PropTypes.bool,
 	    disabled: _react.PropTypes.bool
 	};
 
@@ -1458,6 +1463,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return result;
 	        }
 	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(value, index) {
+	            var selected = this.state.value;
+	            selected[index] = value.value;
+	            selected.length = index + 1;
+	            this.setState({
+	                selected: selected
+	            });
+	            this.props.onChange(selected);
+	        }
+	    }, {
 	        key: 'renderOverlay',
 	        value: function renderOverlay() {
 	            var _this2 = this;
@@ -1487,23 +1503,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            );
 	        }
 	    }, {
-	        key: 'handleSelect',
-	        value: function handleSelect(value, index) {
-	            var selected = this.state.value;
-	            selected[index] = value.value;
-	            selected.length = index + 1;
-	            this.setState({
-	                selected: selected
-	            });
-	            this.props.onChange(selected);
-	        }
-	    }, {
 	        key: 'renderChildren',
 	        value: function renderChildren() {
 	            var _props = this.props,
 	                data = _props.data,
 	                valueRender = _props.valueRender,
 	                inputProps = _props.inputProps;
+
 
 	            var value = [];
 	            if (this.state.value.length > 0) {
@@ -1525,7 +1531,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    value: valueRender ? valueRender(value) : _underscore2.default.map(value, function (v) {
 	                        return v.name;
 	                    }).join(','),
-	                    className: (0, _classnames2.default)("form-control", inputProps.className) }))
+	                    className: (0, _classnames2.default)("form-control", inputProps.className)
+	                }))
 	            );
 	        }
 	    }, {
@@ -1556,7 +1563,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onChange: _react.PropTypes.func,
 	    // 没有this.props.children时有效
 	    inputProps: _react.PropTypes.object,
-
 	    valueRender: _react.PropTypes.func
 	};
 
@@ -2103,7 +2109,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            // 慎用blur，在选择的之前会出发blur
 	            event.preventDefault();
-	            var value = event.target.value;
 	            var multiple = this.props.multiple;
 	            // 多选不处理
 
@@ -2113,13 +2118,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    if (!_this5.______isMounted) {
 	                        var selected = _this5.props.selected;
 
-	                        // 如果为空，则当用户取消选择
-
-	                        if (!value) {
-	                            _this5.doSelect([]);
-	                        } else {
-	                            _this5.doChange(selected && selected.name || '');
-	                        }
+	                        _this5.doChange(selected && selected.name || '');
 	                    }
 	                }, 500);
 	            }
@@ -2191,6 +2190,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.setState({
 	                value: value
 	            });
+
+	            if (!value) {
+	                this.doSelect([]);
+	            }
 
 	            this.timer = setTimeout(function () {
 	                if (!_this7.______isMounted) {
@@ -3204,7 +3207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var noop = function noop() {};
+	// TODO 后续考虑拆开单选，多选。 耦合起来太蛋疼。
 
 	var getPropsSelected = function getPropsSelected(props) {
 	    if (props.multiple) {
@@ -3234,6 +3237,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            selected: getPropsSelected(props),
 	            cascaderValue: []
 	        };
+
+	        _this.refCascaderSelect = null;
 	        return _this;
 	    }
 
@@ -3243,47 +3248,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.setState({
 	                selected: getPropsSelected(nextProps)
 	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _this2 = this;
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'gm-cascader-select', ref: 'cascaderSelect' },
-	                _react2.default.createElement(
-	                    _flex2.default,
-	                    { className: 'gm-cascader-select-input' },
-	                    _underscore2.default.map(this.state.selected, function (value, i) {
-	                        return _react2.default.createElement(
-	                            _flex2.default,
-	                            { key: i, alignStart: true, className: 'selected' },
-	                            _this2.props.selectedRender ? _this2.props.selectedRender(value, i) : _underscore2.default.map(value, function (v) {
-	                                return v.name;
-	                            }).join(','),
-	                            _react2.default.createElement(
-	                                'button',
-	                                {
-	                                    type: 'button',
-	                                    className: 'close',
-	                                    onClick: _this2.handleClose.bind(_this2, value)
-	                                },
-	                                '\xD7'
-	                            )
-	                        );
-	                    }),
-	                    _react2.default.createElement(
-	                        _flex2.default,
-	                        { flex: true, column: true, onKeyDown: this.handleKeyDown.bind(this) },
-	                        _react2.default.createElement(_cascader2.default, {
-	                            data: this.props.data,
-	                            value: this.state.cascaderValue,
-	                            onChange: this.handleChange.bind(this)
-	                        })
-	                    )
-	                )
-	            );
 	        }
 	    }, {
 	        key: 'handleKeyDown',
@@ -3328,7 +3292,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'handleChange',
 	        value: function handleChange(value) {
-	            var _this3 = this;
+	            var _this2 = this;
 
 	            var result = [];
 	            this.setState({
@@ -3337,13 +3301,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            if (value.length > 0) {
 	                _underscore2.default.each(value, function (v, i) {
-	                    var match = _underscore2.default.find(i === 0 ? _this3.props.data : result[i - 1].children, function (val) {
+	                    var match = _underscore2.default.find(i === 0 ? _this2.props.data : result[i - 1].children, function (val) {
 	                        return v === val.value;
 	                    });
 	                    result.push(match);
 	                });
 	            }
 
+	            // 知道没有children才认为选择了
 	            if (!result[result.length - 1].children) {
 	                var n = this.state.selected.slice();
 	                n.push(result);
@@ -3356,7 +3321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                });
 	                // 单选完后就不继续出浮层
 	                if (!this.props.multiple) {
-	                    this.refs.cascaderSelect.click();
+	                    this.refCascaderSelect.click();
 	                }
 	            }
 	        }
@@ -3367,6 +3332,49 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return v !== value;
 	            });
 	            this.doSelect(selected);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this3 = this;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-cascader-select', ref: function ref(_ref) {
+	                        return _this3.refCascaderSelect = _ref;
+	                    } },
+	                _react2.default.createElement(
+	                    _flex2.default,
+	                    { className: 'gm-cascader-select-input' },
+	                    _underscore2.default.map(this.state.selected, function (value, i) {
+	                        return _react2.default.createElement(
+	                            _flex2.default,
+	                            { key: i, alignStart: true, className: 'selected' },
+	                            _this3.props.selectedRender ? _this3.props.selectedRender(value, i) : _underscore2.default.map(value, function (v) {
+	                                return v.name;
+	                            }).join(','),
+	                            _react2.default.createElement(
+	                                'button',
+	                                {
+	                                    type: 'button',
+	                                    className: 'close',
+	                                    onClick: _this3.handleClose.bind(_this3, value)
+	                                },
+	                                '\xD7'
+	                            )
+	                        );
+	                    }),
+	                    _react2.default.createElement(
+	                        _flex2.default,
+	                        { flex: true, column: true, onKeyDown: this.handleKeyDown.bind(this) },
+	                        _react2.default.createElement(_cascader2.default, {
+	                            data: this.props.data,
+	                            value: this.state.cascaderValue,
+	                            onChange: this.handleChange.bind(this)
+	                        })
+	                    )
+	                )
+	            );
 	        }
 	    }]);
 
@@ -3379,13 +3387,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // 会提供整个value回去
 	    onSelect: _react.PropTypes.func.isRequired,
 	    multiple: _react.PropTypes.bool,
-	    placeholder: _react.PropTypes.string,
 	    selectedRender: _react.PropTypes.func
-	};
-
-	CascaderSelect.defaultProps = {
-	    onSelect: noop,
-	    placeholder: ''
 	};
 
 	exports.default = CascaderSelect;

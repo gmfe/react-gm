@@ -935,6 +935,7 @@
 }
 .gm-cascader .gm-cascader-input .glyphicon {
   position: absolute;
+  font-size: 12px;
   top: 50%;
   margin-top: -0.5em;
   right: .5em;
@@ -1021,6 +1022,10 @@
 .gm-trigger .gm-trigger-popup-right {
   right: 0;
   left: auto;
+}
+.gm-trigger .gm-trigger-popup-top {
+  top: auto;
+  bottom: 100%;
 }
 .gm-loading {
   display: inline-block;
