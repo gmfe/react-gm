@@ -23,6 +23,9 @@ class InputNumber extends React.Component {
                 this.props.onChange(min);
             else
                 this.props.onChange(value);
+        } else if (/^0[1-9]/.test(value)) {
+            // 如果第一个数字是0，第二个是1-9，则选取第二个数字
+            this.props.onChange(value.substr(1));
         }
     }
 
@@ -44,12 +47,12 @@ class InputNumber extends React.Component {
 
 InputNumber.propTypes = {
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    max: React.PropTypes.number,
-    min: React.PropTypes.number,
-    precision: React.PropTypes.number, // 精确度，保留几位小数
-    onChange: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string,
-    className: React.PropTypes.string
+    max: PropTypes.number,
+    min: PropTypes.number,
+    precision: PropTypes.number, // 精确度，保留几位小数
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    className: PropTypes.string
 };
 
 InputNumber.defaultProps = {
