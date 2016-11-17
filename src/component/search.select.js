@@ -49,9 +49,11 @@ class SearchSelect extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            selected: getPropsSelected(nextProps)
-        });
+        if ('selected' in nextProps) {
+            this.setState({
+                selected: getPropsSelected(nextProps)
+            });
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -221,11 +223,11 @@ class SearchSelect extends React.Component {
         if (isGroupList) {
             // 不存在group数据
             if (list.length === 0) {
-                return undefined;
+                return null;
             }
             // 不存在其中一个group有数据
             if (!_.find(list, value => (value.children || []).length > 0)) {
-                return undefined;
+                return null;
             }
 
             let itemSequence = -1;
@@ -264,7 +266,7 @@ class SearchSelect extends React.Component {
             );
         } else {
             if (list.length === 0) {
-                return undefined;
+                return null;
             }
             return (
                 <div
@@ -294,9 +296,7 @@ class SearchSelect extends React.Component {
 
     render() {
         return (
-            <div ref={ref => {
-                this.searchSelect = ref;
-            }} className={classNames("gm-search-select", this.props.className)}>
+            <div ref={ref => this.searchSelect = ref} className={classNames("gm-search-select", this.props.className)}>
                 <Flex className="gm-search-select-input">
                     {this.props.multiple ? _.map(this.state.selected, (value, i) => (
                         <Flex key={i} alignStart className="selected">
@@ -313,7 +313,7 @@ class SearchSelect extends React.Component {
                         popup={this.renderOverlay()}
                     >
                         <input
-                            ref={ref => this.refInput = ref }
+                            ref={ref => this.refInput = ref}
                             type="text"
                             value={this.state.value}
                             onFocus={this.handleFocus}
@@ -323,6 +323,7 @@ class SearchSelect extends React.Component {
                             placeholder={this.props.placeholder}
                         />
                     </Trigger>
+                    <i className="gm-arrow-down"/>
                 </Flex>
             </div>
         );

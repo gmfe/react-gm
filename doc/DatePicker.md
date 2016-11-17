@@ -11,15 +11,40 @@
 - `date (object)` Date对象
 - `onChange (func|isRequired)` 选择后回调，参数是Date对象
 - `inputClassName (string)` 自定义input的样子
-- `disabled (bool)` 不可用
+- `placeholder (string)`
+- `disabled (bool)` 是否不可用
 - `className (string)`
+- `disabledDate (func)` 提供date参数，返回true or false
+- `min (object)` 一个Date对象，最小日期
+- `max (object)` 一个Date对象，最大日期
 
 ```jsx
+// 一般
 <DatePicker 
     date={this.state.date}
     placeholder="adfasdf"
     onChange={this.handleChange}
     inputClassName="form-control input-sm"
+/>
+
+// 不可用
+<DatePicker
+    date={this.state.date}
+    placeholder="adfasdf"
+    disabled={true}
+    onChange={this.handleChange}
+    inputClassName="form-control input-sm"
+/>
+
+// 日期范围
+<DatePicker
+    date={this.state.date}
+    placeholder="非周五"
+    onChange={this.handleChange}
+    inputClassName="form-control input-sm"
+    disabledDate={m => {
+        return moment(m).get('day') === 5;
+    }}
 />
 ```
 
@@ -48,12 +73,17 @@
 - `inputClassName (string)`
 - `disabled (bool)` 不可用
 - `className (string)`
+- `beginProps (shape)` 结构是DatePicker的 {min max disabledDate}
+- `endProps (shape)` 同上
 
 ```jsx
-<DateRangePicker 
+<DateRangePicker
     begin={this.state.begin}
     end={this.state.end}
     onChange={this.handleChange}
     inputClassName="form-control input-sm"
+    endProps={{
+        min: this.state.begin
+    }}
 />
 ```
