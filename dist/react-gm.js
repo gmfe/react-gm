@@ -5027,6 +5027,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                var num = Number(value);
 
 	                if (max && num > max) this.props.onChange(max);else if (min && num < min) this.props.onChange(min);else this.props.onChange(value);
+	            } else if (/^0[1-9]/.test(value)) {
+	                // 如果第一个数字是0，第二个是1-9，则选取第二个数字
+	                this.props.onChange(value.substr(1));
 	            }
 	        }
 	    }, {
@@ -5048,12 +5051,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	InputNumber.propTypes = {
 	    value: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]).isRequired,
-	    max: _react2.default.PropTypes.number,
-	    min: _react2.default.PropTypes.number,
-	    precision: _react2.default.PropTypes.number, // 精确度，保留几位小数
-	    onChange: _react2.default.PropTypes.func.isRequired,
-	    placeholder: _react2.default.PropTypes.string,
-	    className: _react2.default.PropTypes.string
+	    max: _react.PropTypes.number,
+	    min: _react.PropTypes.number,
+	    precision: _react.PropTypes.number, // 精确度，保留几位小数
+	    onChange: _react.PropTypes.func.isRequired,
+	    placeholder: _react.PropTypes.string,
+	    className: _react.PropTypes.string
 	};
 
 	InputNumber.defaultProps = {
