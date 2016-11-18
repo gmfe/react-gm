@@ -193,6 +193,31 @@
   background-color: #6dc3ec;
   color: white;
 }
+.gm-calendar-day-disabled {
+  background: #f5f5f5;
+  color: #999999;
+  cursor: not-allowed;
+}
+.gm-calendar-content-div .gm-calendar-day-disabled {
+  width: 28px;
+  padding: 0 2px;
+  margin: 2px 0;
+  border-radius: 0;
+}
+.gm-calendar-content-div .gm-calendar-day-disabled:first-child {
+  width: 26px;
+  padding-left: 0;
+  margin-left: 2px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.gm-calendar-content-div .gm-calendar-day-disabled:last-child {
+  width: 26px;
+  padding-right: 0;
+  margin-right: 2px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
 .gm-datepicker {
   display: inline-block;
 }
@@ -924,8 +949,7 @@
   border-color: #0080bd;
 }
 .gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-item.line-selected {
-  background-color: #6dc3ec;
-  border-color: #6dc3ec;
+  background-color: #f5f5f5;
 }
 .gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-label .list-group-label-item {
   padding: 6px 12px;
@@ -1170,6 +1194,20 @@
   40% {
     opacity: 1;
   }
+}
+.gm-arrow-down {
+  position: absolute;
+  content: " ";
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #ccc;
+  display: block;
+  width: 0;
+  height: 0;
+  top: 0;
+  right: 5px;
+  bottom: 0;
+  margin: auto 0;
 }
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
