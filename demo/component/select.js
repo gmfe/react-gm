@@ -303,7 +303,9 @@ class SearchSelectWrap extends React.Component {
                         selected={this.state.selected}
                         onSearch={this.handleSearch}
                         onSelect={this.handleSelect}
-                        placeholder="搜索"/>
+                        placeholder="搜索"
+                        isScrollToSelected
+                    />
                 </div>
             </div>
         );

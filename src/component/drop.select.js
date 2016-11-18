@@ -9,12 +9,12 @@ class DropSelect extends React.Component {
         };
 
         this.documentClickHandler = this.documentClickHandler.bind(this);
-        this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.onEscapeKeyUp = this.onEscapeKeyUp.bind(this);
     }
 
     componentDidMount() {
         document.addEventListener("click", this.documentClickHandler);
-        document.addEventListener("keydown", this.handleKeyDown);
+        document.addEventListener("keydown", this.onEscapeKeyUp);
     }
 
     componentDidUpdate() {
@@ -24,7 +24,7 @@ class DropSelect extends React.Component {
 
     componentWillUnmount() {
         document.removeEventListener("click", this.documentClickHandler);
-        document.removeEventListener("keydown", this.handleKeyDown);
+        document.removeEventListener("keydown", this.onEscapeKeyUp);
     }
 
     processData(data) {
@@ -46,7 +46,7 @@ class DropSelect extends React.Component {
         }
     }
 
-    handleKeyUp(size, e) {
+    handleKeyDown(size, e) {
         // 列表为空
         if (!size) {
             return;
@@ -78,7 +78,7 @@ class DropSelect extends React.Component {
         });
     }
 
-    handleKeyDown(e) {
+    onEscapeKeyUp(e) {
         if (e.keyCode === 27) {
             this.props.onHide();
         }
@@ -139,8 +139,7 @@ class DropSelect extends React.Component {
             <div
                 className={thisProps.className}
                 ref={ref => this.refSelectPanel = ref}
-                onKeyUp={this.handleKeyUp.bind(this, list.length)}
-                onKeyDown={this.handleKeyDown}
+                onKeyDown={this.handleKeyDown.bind(this, list.length)}
             >
                 {thisProps.children}
                 <div className="gm-dropselect-wrap">

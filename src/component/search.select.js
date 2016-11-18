@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {findDOMNode} from 'react-dom';
 import _ from 'underscore';
 import Flex from './flex';
 import classNames from 'classnames';
@@ -32,11 +31,13 @@ class SearchSelect extends React.Component {
         // 单选版本才设置value
         this.state = {
             value: props.selected && props.selected.name || '',
-            selected: getPropsSelected(props)
+            selected: getPropsSelected(props),
+            activeIndex: null  // 键盘上下键选中的index
         };
 
         this.searchSelect = null;
         this.searchSelectList = null;
+        this.refInput = null;
         this.______isMounted = false;
 
         this.scrollTimer = null;
@@ -44,13 +45,20 @@ class SearchSelect extends React.Component {
         this.handleFocus = ::this.handleFocus;
         this.handleBlur = ::this.handleBlur;
         this.handleChange = ::this.handleChange;
-        this.handleKeyDown = ::this.handleKeyDown;
+        this.getListItemCount = ::this.getListItemCount;
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
             selected: getPropsSelected(nextProps)
         });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.activeIndex !== prevState.activeIndex) {
+            const dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
+            dom && dom.scrollIntoViewIfNeeded();
+        }
     }
 
     componentWillUnmount() {
@@ -60,121 +68,12 @@ class SearchSelect extends React.Component {
     doScroll() {
         // 滚动到选择的地方。 不知道会发生什么，尽量来做容错
         if (this.searchSelectList) {
-            const ssDom = findDOMNode(this.searchSelectList);
-            if (ssDom) {
-                // 选第一个
-                const activeDOM = ssDom.querySelectorAll(".list-group-item.active")[0];
-                if (activeDOM) {
-                    ssDom.scrollTop = activeDOM.offsetTop;
-                }
+            // 选第一个
+            const activeDOM = this.searchSelectList.querySelectorAll(".list-group-item.active")[0];
+            if (activeDOM) {
+                this.searchSelectList.scrollTop = activeDOM.offsetTop;
             }
         }
-    }
-
-    renderOverlay() {
-        const {list, listMaxHeight, inputClassName, isGroupList} = this.props;
-
-        if (isGroupList) {
-            // 不存在group数据
-            if (list.length === 0) {
-                return undefined;
-            }
-            // 不存在其中一个group有数据
-            if (!_.find(list, value => (value.children || []).length > 0)) {
-                return undefined;
-            }
-            return (
-                <div
-                    className="list-group"
-                    style={{maxHeight: listMaxHeight}}
-                    ref={ref => this.searchSelectList = ref}
-                >
-                    {_.map(list, (groupList, i) => {
-                        return (
-                            <div key={i} className="list-group-label">
-                                <div className="list-group-label-item">{groupList.label}</div>
-                                {_.map(groupList.children, (value, i) => {
-                                    return (
-                                        <Flex
-                                            key={i}
-                                            alignCenter
-                                            className={classNames('list-group-item', inputClassName, {
-                                                active: this.state.selected.indexOf(value) > -1
-                                            })}
-                                            onClick={this.handleSelect.bind(this, value)}
-                                        >
-                                            <Flex flex>{value.name}</Flex>
-                                        </Flex>
-                                    );
-                                })}
-                            </div>
-                        );
-                    })}
-                </div>
-            );
-        } else {
-            if (list.length === 0) {
-                return undefined;
-            }
-            return (
-                <div
-                    className="list-group gm-search-select-list"
-                    style={{maxHeight: listMaxHeight}}
-                    ref={ref => this.searchSelectList = ref}
-                >
-                    {_.map(list, (value, i) => {
-                        return (
-                            <Flex
-                                key={i}
-                                alignCenter
-                                className={classNames('list-group-item', inputClassName, {
-                                    active: this.state.selected.indexOf(value) > -1
-                                })}
-                                onClick={this.handleSelect.bind(this, value)}
-                            >
-                                {value.name}
-                            </Flex>
-                        );
-                    })}
-                </div>
-            );
-        }
-    }
-
-    render() {
-        return (
-            <div ref={ref => {
-                this.searchSelect = ref;
-            }} className={classNames("gm-search-select", this.props.className)}>
-                <Flex className="gm-search-select-input">
-                    {this.props.multiple ? _.map(this.state.selected, (value, i) => (
-                        <Flex key={i} alignStart className="selected">
-                            {value.name}
-                            <button
-                                type="button"
-                                className="close"
-                                onClick={this.handleClose.bind(this, value)}
-                            >&times;</button>
-                        </Flex>
-                    )) : undefined}
-                    <Trigger
-                        component={<Flex flex/>}
-                        popup={this.renderOverlay()}
-                    >
-                        <input
-                            ref="target"
-                            type="text"
-                            value={this.state.value}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                            onChange={this.handleChange}
-                            onKeyDown={this.handleKeyDown}
-                            placeholder={this.props.placeholder}
-                        />
-                    </Trigger>
-                </Flex>
-            </div>
-        );
     }
 
     handleFocus(event) {
@@ -203,16 +102,49 @@ class SearchSelect extends React.Component {
                 }
             }, 500);
         }
+
+        // 失去焦点，去掉选中
+        this.setState({
+            activeIndex: null
+        });
     }
 
-    handleKeyDown(event) {
-        if (event.key === 'Backspace') {
-            if (event.target.value === '') {
-                const selected = this.state.selected;
-                selected.pop();
-                this.doSelect(selected);
+    handleKeyDown(size, event) {
+        const {keyCode}= event;
+        let activeIndex = this.state.activeIndex;
+
+        if (keyCode !== 38 && keyCode !== 40) {
+            if (event.key === 'Backspace') {
+                if (event.target.value === '') {
+                    const selected = this.state.selected;
+                    selected.pop();
+                    this.doSelect(selected);
+                }
+            } else if (keyCode === 13) { // 键盘 回车
+                const dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
+                dom.click();
+
+                !this.props.multiple && this.refInput.blur();
             }
+
+            return;
         }
+
+        if (keyCode === 38) { // 键盘 上键
+            if (activeIndex === null)
+                activeIndex = size;
+
+            activeIndex--;
+        } else if (keyCode === 40) { // 键盘 下键
+            if (activeIndex === null)
+                activeIndex = -1;
+
+            activeIndex++;
+        }
+
+        this.setState({
+            activeIndex: (size + activeIndex) % size
+        });
     }
 
     handleClose(value) {
@@ -270,6 +202,130 @@ class SearchSelect extends React.Component {
 
     handleChange(event) {
         this.doChange(event.target.value);
+    }
+
+    getListItemCount() {
+        const {list, isGroupList} = this.props;
+
+        if (isGroupList)
+            return _.reduce(list, (count, group) => {
+                return count + group.children.length;
+            }, 0);
+
+        return list.length;
+    }
+
+    renderOverlay() {
+        const {list, listMaxHeight, inputClassName, isGroupList} = this.props;
+
+        if (isGroupList) {
+            // 不存在group数据
+            if (list.length === 0) {
+                return undefined;
+            }
+            // 不存在其中一个group有数据
+            if (!_.find(list, value => (value.children || []).length > 0)) {
+                return undefined;
+            }
+
+            let itemSequence = -1;
+
+            return (
+                <div
+                    className="list-group"
+                    style={{maxHeight: listMaxHeight}}
+                    ref={ref => this.searchSelectList = ref}
+                >
+                    {_.map(list, (groupList, i) => {
+                        return (
+                            <div key={i} className="list-group-label">
+                                <div className="list-group-label-item">{groupList.label}</div>
+                                {_.map(groupList.children, (value, i) => {
+                                    itemSequence++;
+
+                                    return (
+                                        <Flex
+                                            key={i}
+                                            alignCenter
+                                            className={classNames('list-group-item', inputClassName, {
+                                                'active': this.state.selected.indexOf(value) > -1,
+                                                'line-selected': this.state.activeIndex === itemSequence
+                                            })}
+                                            onClick={this.handleSelect.bind(this, value)}
+                                        >
+                                            <Flex flex>{value.name}</Flex>
+                                        </Flex>
+                                    );
+                                })}
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        } else {
+            if (list.length === 0) {
+                return undefined;
+            }
+            return (
+                <div
+                    className="list-group gm-search-select-list"
+                    style={{maxHeight: listMaxHeight}}
+                    ref={ref => this.searchSelectList = ref}
+                >
+                    {_.map(list, (value, i) => {
+                        return (
+                            <Flex
+                                key={i}
+                                alignCenter
+                                className={classNames('list-group-item', inputClassName, {
+                                    'active': this.state.selected.indexOf(value) > -1,
+                                    'line-selected': this.state.activeIndex === i
+                                })}
+                                onClick={this.handleSelect.bind(this, value)}
+                            >
+                                {value.name}
+                            </Flex>
+                        );
+                    })}
+                </div>
+            );
+        }
+    }
+
+    render() {
+        return (
+            <div ref={ref => {
+                this.searchSelect = ref;
+            }} className={classNames("gm-search-select", this.props.className)}>
+                <Flex className="gm-search-select-input">
+                    {this.props.multiple ? _.map(this.state.selected, (value, i) => (
+                        <Flex key={i} alignStart className="selected">
+                            {value.name}
+                            <button
+                                type="button"
+                                className="close"
+                                onClick={this.handleClose.bind(this, value)}
+                            >&times;</button>
+                        </Flex>
+                    )) : undefined}
+                    <Trigger
+                        component={<Flex flex/>}
+                        popup={this.renderOverlay()}
+                    >
+                        <input
+                            ref={ref => this.refInput = ref }
+                            type="text"
+                            value={this.state.value}
+                            onFocus={this.handleFocus}
+                            onBlur={this.handleBlur}
+                            onChange={this.handleChange}
+                            onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount())}
+                            placeholder={this.props.placeholder}
+                        />
+                    </Trigger>
+                </Flex>
+            </div>
+        );
     }
 }
 SearchSelect.propTypes = {
