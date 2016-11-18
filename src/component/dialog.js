@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import {Modal} from 'react-bootstrap';
+import {Modal, Button} from 'react-bootstrap';
 
 const noop = () => {
 };
@@ -57,7 +57,8 @@ class Dialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: props.show
+            show: props.show,
+            isLoading: false
         };
         this.handleCancel = ::this.handleCancel;
         this.handleOk = ::this.handleOk;
@@ -89,12 +90,22 @@ class Dialog extends React.Component {
         if (result === false) {
             return;
         }
+
+        this.setState({
+            isLoading: true
+        });
+
         Promise.resolve(result).then(() => {
             if (!this.______isMounted) {
                 this.setState({
-                    show: false
+                    show: false,
+                    isLoading: false
                 });
             }
+        }).catch(() => {
+            this.setState({
+                isLoading: false
+            });
         });
     }
 
@@ -105,6 +116,7 @@ class Dialog extends React.Component {
     }
 
     render() {
+        const {isLoading} = this.state;
         const {bsSize, title, children, type, promptDefaultValue, promptPlaceholder, cancelBtn, OKBtn} = this.props;
         let modalProps = {
             show: this.state.show,
@@ -135,12 +147,17 @@ class Dialog extends React.Component {
                     </div>
                     <div className="gm-gap10"></div>
                     <div className="text-right">
-                        {(type !== 'alert' && cancelBtn) && (
+                        {(type !== 'alert' && cancelBtn && !isLoading) && (
                             <button className="btn btn-default" onClick={this.handleCancel}>{cancelBtn}</button>
                         )}
                         <div className="gm-gap10"></div>
                         {OKBtn && (
-                            <button className="btn btn-primary" onClick={this.handleOk}>{OKBtn}</button>
+                            <Button
+                                bsStyle="primary"
+                                disabled={isLoading}
+                                onClick={!isLoading ? this.handleOk : null}>
+                                {isLoading ? <i className="glyphicon glyphicon-refresh glyphicon-spin"/> : OKBtn}
+                            </Button>
                         )}
                     </div>
                 </Modal.Body>

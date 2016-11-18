@@ -47,6 +47,7 @@ class DialogWrap extends React.Component {
         this.state = {
             show: false,
             show2: false,
+            show3: false,
             bsSize: 'sm'
         };
         this.handleAlert = ::this.handleAlert;
@@ -54,6 +55,7 @@ class DialogWrap extends React.Component {
         this.handlePrompt = ::this.handlePrompt;
         this.handleComponent = ::this.handleComponent;
         this.handleComponentSize = ::this.handleComponentSize;
+        this.handleDialogOK = ::this.handleDialogOK;
     }
 
     handleAlert() {
@@ -89,6 +91,23 @@ class DialogWrap extends React.Component {
         });
     }
 
+    handleConfirmWithLoading() {
+        Dialog.confirm({
+            title: 'title',
+            bsSize: 'md',
+            children: <div>something</div>,
+            onOK: () => {
+                return new Promise((resove) => {
+                    setTimeout(() => {
+                        resove('a');
+                    }, 1000);
+                });
+            }
+        }).then(() => {
+            console.log('promise resolve');
+        });
+    }
+
     handlePrompt() {
         Dialog.prompt({
             children: 'sssss',
@@ -112,10 +131,29 @@ class DialogWrap extends React.Component {
     }
 
     handleComponentSize(bsSize) {
-        console.log(bsSize);
+        console.log(bsSize, this.state);
         this.setState({
             show2: !this.state.show2,
             bsSize
+        });
+    }
+
+    handleComponentSizeWithLoading(bsSize) {
+        console.log(bsSize);
+        this.setState({
+            show3: !this.state.show3,
+            bsSize
+        });
+    }
+
+    handleDialogOK() {
+        return new Promise((resove) => {
+            setTimeout(() => {
+                this.setState({
+                    show3: false
+                });
+                resove('a');
+            }, 1000);
         });
     }
 
@@ -125,28 +163,54 @@ class DialogWrap extends React.Component {
                 <div>
                     <button className="btn btn-default" onClick={this.handleAlert}>alert</button>
                     <button className="btn btn-default" onClick={this.handleConfirm}>confirm</button>
+                    <button className="btn btn-default" onClick={this.handleConfirmWithLoading}>
+                        confirm with loading state
+                    </button>
                     <button className="btn btn-default" onClick={this.handlePrompt}>prompt</button>
                 </div>
                 <div>
                     <button className="btn btn-default" onClick={this.handleComponent}>toggle Component</button>
                 </div>
                 <div>
-                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'lg')}>toggle
-                        Component
-                        size lg
+                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'lg')}>
+                        toggle Component size lg
                     </button>
-                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'md')}>toggle
-                        Component
-                        size md
+                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'md')}>
+                        toggle Component size md
                     </button>
-                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'sm')}>toggle
-                        Component
-                        size sm(default)
+                    <button className="btn btn-default" onClick={this.handleComponentSize.bind(this, 'sm')}>
+                        toggle Component size sm(default)
                     </button>
                 </div>
-                <Dialog show={this.state.show} onCancel={this.handleComponent}>asdfa</Dialog>
-                <Dialog show={this.state.show2} bsSize={this.state.bsSize}
-                        onCancel={this.handleComponentSize.bind(this, this.state.bsSize)}>bsSize {this.state.bsSize}</Dialog>
+                <div>
+                    <button
+                        className="btn btn-default"
+                        onClick={this.handleComponentSizeWithLoading.bind(this, 'md')}
+                    >
+                        toggle Component with loading state
+                    </button>
+                </div>
+                <Dialog
+                    show={this.state.show}
+                    onCancel={this.handleComponent}
+                >
+                    asdfa
+                </Dialog>
+                <Dialog
+                    show={this.state.show2}
+                    bsSize={this.state.bsSize}
+                    onCancel={this.handleComponentSize.bind(this, this.state.bsSize)}
+                >
+                    bsSize {this.state.bsSize}
+                </Dialog>
+                <Dialog
+                    show={this.state.show3}
+                    bsSize={this.state.bsSize}
+                    onCancel={this.handleComponentSizeWithLoading.bind(this, this.state.bsSize)}
+                    onOK={this.handleDialogOK}
+                >
+                    bsSize {this.state.bsSize}
+                </Dialog>
             </div>
         );
     }

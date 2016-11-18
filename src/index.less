@@ -2,7 +2,6 @@
 @import "../node_modules/gm-bootstrap/less/mixins.less";
 @import "../node_modules/gm-bootstrap/less/custom.less";
 @import "css/variables";
-
 @import "css/grid";
 @import "css/droper";
 @import "css/import.lead.less";
@@ -39,6 +38,7 @@ html, body {
 .gm-text-second {
   color: @gm-text-second-color;
 }
+
 .gm-text-red {
   color: red;
 }
@@ -357,4 +357,31 @@ html, body {
 .fadeInRight {
   animation-name: fadeInRight;
   animation-duration: .5s;
+}
+
+.glyphicon-spin {
+  -webkit-animation: spin 1000ms infinite linear;
+  animation: spin 1000ms infinite linear;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
 }
