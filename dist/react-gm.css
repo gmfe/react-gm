@@ -919,6 +919,14 @@
 .gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-item:first-child {
   border-top: none;
 }
+.gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-item.active.line-selected {
+  background-color: #0080bd;
+  border-color: #0080bd;
+}
+.gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-item.line-selected {
+  background-color: #6dc3ec;
+  border-color: #6dc3ec;
+}
 .gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-label .list-group-label-item {
   padding: 6px 12px;
   border-top: 1px solid #ddd;

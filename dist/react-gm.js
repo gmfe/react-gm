@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_51__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_51__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -128,7 +128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _flex = __webpack_require__(5);
+	var _flex = __webpack_require__(4);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -176,7 +176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cascader4 = _interopRequireDefault(_cascader3);
 
-	var _trigger = __webpack_require__(6);
+	var _trigger = __webpack_require__(5);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -309,12 +309,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 4 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
-
-/***/ },
-/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -456,7 +450,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Flex;
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -471,7 +465,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(4);
+	var _reactDom = __webpack_require__(6);
 
 	var _classnames = __webpack_require__(3);
 
@@ -685,6 +679,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	exports.default = Trigger;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
 
 /***/ },
 /* 7 */
@@ -1404,11 +1404,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(5);
+	var _flex = __webpack_require__(4);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
-	var _trigger = __webpack_require__(6);
+	var _trigger = __webpack_require__(5);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -1838,19 +1838,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(4);
-
 	var _underscore = __webpack_require__(2);
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _flex = __webpack_require__(5);
+	var _flex = __webpack_require__(4);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -1858,7 +1858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _trigger = __webpack_require__(6);
+	var _trigger = __webpack_require__(5);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -1903,11 +1903,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // 单选版本才设置value
 	        _this.state = {
 	            value: props.selected && props.selected.name || '',
-	            selected: getPropsSelected(props)
+	            selected: getPropsSelected(props),
+	            activeIndex: null // 键盘上下键选中的index
 	        };
 
 	        _this.searchSelect = null;
 	        _this.searchSelectList = null;
+	        _this.refInput = null;
 	        _this.______isMounted = false;
 
 	        _this.scrollTimer = null;
@@ -1915,7 +1917,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.handleFocus = _this.handleFocus.bind(_this);
 	        _this.handleBlur = _this.handleBlur.bind(_this);
 	        _this.handleChange = _this.handleChange.bind(_this);
-	        _this.handleKeyDown = _this.handleKeyDown.bind(_this);
+	        _this.getListItemCount = _this.getListItemCount.bind(_this);
 	        return _this;
 	    }
 
@@ -1927,6 +1929,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	        }
 	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps, prevState) {
+	            if (this.state.activeIndex !== prevState.activeIndex) {
+	                var dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
+	                dom && dom.scrollIntoViewIfNeeded();
+	            }
+	        }
+	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            this.______isMounted = true;
@@ -1936,161 +1946,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function doScroll() {
 	            // 滚动到选择的地方。 不知道会发生什么，尽量来做容错
 	            if (this.searchSelectList) {
-	                var ssDom = (0, _reactDom.findDOMNode)(this.searchSelectList);
-	                if (ssDom) {
-	                    // 选第一个
-	                    var activeDOM = ssDom.querySelectorAll(".list-group-item.active")[0];
-	                    if (activeDOM) {
-	                        ssDom.scrollTop = activeDOM.offsetTop;
-	                    }
+	                // 选第一个
+	                var activeDOM = this.searchSelectList.querySelectorAll(".list-group-item.active")[0];
+	                if (activeDOM) {
+	                    this.searchSelectList.scrollTop = activeDOM.offsetTop;
 	                }
 	            }
-	        }
-	    }, {
-	        key: 'renderOverlay',
-	        value: function renderOverlay() {
-	            var _this2 = this;
-
-	            var _props = this.props,
-	                list = _props.list,
-	                listMaxHeight = _props.listMaxHeight,
-	                inputClassName = _props.inputClassName,
-	                isGroupList = _props.isGroupList;
-
-
-	            if (isGroupList) {
-	                // 不存在group数据
-	                if (list.length === 0) {
-	                    return undefined;
-	                }
-	                // 不存在其中一个group有数据
-	                if (!_underscore2.default.find(list, function (value) {
-	                    return (value.children || []).length > 0;
-	                })) {
-	                    return undefined;
-	                }
-	                return _react2.default.createElement(
-	                    'div',
-	                    {
-	                        className: 'list-group',
-	                        style: { maxHeight: listMaxHeight },
-	                        ref: function ref(_ref) {
-	                            return _this2.searchSelectList = _ref;
-	                        }
-	                    },
-	                    _underscore2.default.map(list, function (groupList, i) {
-	                        return _react2.default.createElement(
-	                            'div',
-	                            { key: i, className: 'list-group-label' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'list-group-label-item' },
-	                                groupList.label
-	                            ),
-	                            _underscore2.default.map(groupList.children, function (value, i) {
-	                                return _react2.default.createElement(
-	                                    _flex2.default,
-	                                    {
-	                                        key: i,
-	                                        alignCenter: true,
-	                                        className: (0, _classnames2.default)('list-group-item', inputClassName, {
-	                                            active: _this2.state.selected.indexOf(value) > -1
-	                                        }),
-	                                        onClick: _this2.handleSelect.bind(_this2, value)
-	                                    },
-	                                    _react2.default.createElement(
-	                                        _flex2.default,
-	                                        { flex: true },
-	                                        value.name
-	                                    )
-	                                );
-	                            })
-	                        );
-	                    })
-	                );
-	            } else {
-	                if (list.length === 0) {
-	                    return undefined;
-	                }
-	                return _react2.default.createElement(
-	                    'div',
-	                    {
-	                        className: 'list-group gm-search-select-list',
-	                        style: { maxHeight: listMaxHeight },
-	                        ref: function ref(_ref2) {
-	                            return _this2.searchSelectList = _ref2;
-	                        }
-	                    },
-	                    _underscore2.default.map(list, function (value, i) {
-	                        return _react2.default.createElement(
-	                            _flex2.default,
-	                            {
-	                                key: i,
-	                                alignCenter: true,
-	                                className: (0, _classnames2.default)('list-group-item', inputClassName, {
-	                                    active: _this2.state.selected.indexOf(value) > -1
-	                                }),
-	                                onClick: _this2.handleSelect.bind(_this2, value)
-	                            },
-	                            value.name
-	                        );
-	                    })
-	                );
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _this3 = this;
-
-	            return _react2.default.createElement(
-	                'div',
-	                { ref: function ref(_ref3) {
-	                        _this3.searchSelect = _ref3;
-	                    }, className: (0, _classnames2.default)("gm-search-select", this.props.className) },
-	                _react2.default.createElement(
-	                    _flex2.default,
-	                    { className: 'gm-search-select-input' },
-	                    this.props.multiple ? _underscore2.default.map(this.state.selected, function (value, i) {
-	                        return _react2.default.createElement(
-	                            _flex2.default,
-	                            { key: i, alignStart: true, className: 'selected' },
-	                            value.name,
-	                            _react2.default.createElement(
-	                                'button',
-	                                {
-	                                    type: 'button',
-	                                    className: 'close',
-	                                    onClick: _this3.handleClose.bind(_this3, value)
-	                                },
-	                                '\xD7'
-	                            )
-	                        );
-	                    }) : undefined,
-	                    _react2.default.createElement(
-	                        _trigger2.default,
-	                        {
-	                            component: _react2.default.createElement(_flex2.default, { flex: true }),
-	                            popup: this.renderOverlay()
-	                        },
-	                        _react2.default.createElement('input', {
-	                            ref: 'target',
-	                            type: 'text',
-	                            value: this.state.value,
-	                            onFocus: this.handleFocus,
-	                            onBlur: this.handleBlur,
-	                            onChange: this.handleChange,
-	                            onKeyDown: this.handleKeyDown,
-	                            placeholder: this.props.placeholder
-	                        })
-	                    )
-	                )
-	            );
 	        }
 	    }, {
 	        key: 'handleFocus',
 	        value: function handleFocus(event) {
-	            var _this4 = this;
+	            var _this2 = this;
 
 	            event.target.select();
 
@@ -2098,14 +1964,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                // focus 先触发，此时浮层未出来。等个500毫秒？
 	                clearTimeout(this.scrollTimer);
 	                this.scrollTimer = setTimeout(function () {
-	                    _this4.doScroll();
+	                    _this2.doScroll();
 	                }, 500);
 	            }
 	        }
 	    }, {
 	        key: 'handleBlur',
 	        value: function handleBlur(event) {
-	            var _this5 = this;
+	            var _this3 = this;
 
 	            // 慎用blur，在选择的之前会出发blur
 	            event.preventDefault();
@@ -2115,24 +1981,59 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!multiple) {
 	                // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
 	                setTimeout(function () {
-	                    if (!_this5.______isMounted) {
-	                        var selected = _this5.props.selected;
+	                    if (!_this3.______isMounted) {
+	                        var selected = _this3.props.selected;
 
-	                        _this5.doChange(selected && selected.name || '');
+	                        _this3.doChange(selected && selected.name || '');
 	                    }
 	                }, 500);
 	            }
+
+	            // 失去焦点，去掉选中
+	            this.setState({
+	                activeIndex: null
+	            });
 	        }
 	    }, {
 	        key: 'handleKeyDown',
-	        value: function handleKeyDown(event) {
-	            if (event.key === 'Backspace') {
-	                if (event.target.value === '') {
-	                    var selected = this.state.selected;
-	                    selected.pop();
-	                    this.doSelect(selected);
+	        value: function handleKeyDown(size, event) {
+	            var keyCode = event.keyCode;
+
+	            var activeIndex = this.state.activeIndex;
+
+	            if (keyCode !== 38 && keyCode !== 40) {
+	                if (event.key === 'Backspace') {
+	                    if (event.target.value === '') {
+	                        var selected = this.state.selected;
+	                        selected.pop();
+	                        this.doSelect(selected);
+	                    }
+	                } else if (keyCode === 13) {
+	                    // 键盘 回车
+	                    var dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
+	                    dom.click();
+
+	                    !this.props.multiple && this.refInput.blur();
 	                }
+
+	                return;
 	            }
+
+	            if (keyCode === 38) {
+	                // 键盘 上键
+	                if (activeIndex === null) activeIndex = size;
+
+	                activeIndex--;
+	            } else if (keyCode === 40) {
+	                // 键盘 下键
+	                if (activeIndex === null) activeIndex = -1;
+
+	                activeIndex++;
+	            }
+
+	            this.setState({
+	                activeIndex: (size + activeIndex) % size
+	            });
 	        }
 	    }, {
 	        key: 'handleClose',
@@ -2158,7 +2059,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'handleSelect',
 	        value: function handleSelect(value, event) {
-	            var _this6 = this;
+	            var _this4 = this;
 
 	            event.preventDefault();
 	            if (this.state.selected.indexOf(value) > -1) {
@@ -2175,8 +2076,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (!this.props.multiple) {
 	                // 要异步
 	                setTimeout(function () {
-	                    if (!_this6.______isMounted) {
-	                        _this6.searchSelect.click();
+	                    if (!_this4.______isMounted) {
+	                        _this4.searchSelect.click();
 	                    }
 	                }, 0);
 	            }
@@ -2184,7 +2085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'doChange',
 	        value: function doChange(value) {
-	            var _this7 = this;
+	            var _this5 = this;
 
 	            clearTimeout(this.timer);
 	            this.setState({
@@ -2196,8 +2097,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 
 	            this.timer = setTimeout(function () {
-	                if (!_this7.______isMounted) {
-	                    _this7.props.onSearch(value);
+	                if (!_this5.______isMounted) {
+	                    _this5.props.onSearch(value);
 	                }
 	            }, this.props.delay);
 	        }
@@ -2205,6 +2106,180 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'handleChange',
 	        value: function handleChange(event) {
 	            this.doChange(event.target.value);
+	        }
+	    }, {
+	        key: 'getListItemCount',
+	        value: function getListItemCount() {
+	            var _props = this.props,
+	                list = _props.list,
+	                isGroupList = _props.isGroupList;
+
+
+	            if (isGroupList) return _underscore2.default.reduce(list, function (count, group) {
+	                return count + group.children.length;
+	            }, 0);
+
+	            return list.length;
+	        }
+	    }, {
+	        key: 'renderOverlay',
+	        value: function renderOverlay() {
+	            var _this6 = this;
+
+	            var _props2 = this.props,
+	                list = _props2.list,
+	                listMaxHeight = _props2.listMaxHeight,
+	                inputClassName = _props2.inputClassName,
+	                isGroupList = _props2.isGroupList;
+
+
+	            if (isGroupList) {
+	                var _ret = function () {
+	                    // 不存在group数据
+	                    if (list.length === 0) {
+	                        return {
+	                            v: undefined
+	                        };
+	                    }
+	                    // 不存在其中一个group有数据
+	                    if (!_underscore2.default.find(list, function (value) {
+	                        return (value.children || []).length > 0;
+	                    })) {
+	                        return {
+	                            v: undefined
+	                        };
+	                    }
+
+	                    var itemSequence = -1;
+
+	                    return {
+	                        v: _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'list-group',
+	                                style: { maxHeight: listMaxHeight },
+	                                ref: function ref(_ref) {
+	                                    return _this6.searchSelectList = _ref;
+	                                }
+	                            },
+	                            _underscore2.default.map(list, function (groupList, i) {
+	                                return _react2.default.createElement(
+	                                    'div',
+	                                    { key: i, className: 'list-group-label' },
+	                                    _react2.default.createElement(
+	                                        'div',
+	                                        { className: 'list-group-label-item' },
+	                                        groupList.label
+	                                    ),
+	                                    _underscore2.default.map(groupList.children, function (value, i) {
+	                                        itemSequence++;
+
+	                                        return _react2.default.createElement(
+	                                            _flex2.default,
+	                                            {
+	                                                key: i,
+	                                                alignCenter: true,
+	                                                className: (0, _classnames2.default)('list-group-item', inputClassName, {
+	                                                    'active': _this6.state.selected.indexOf(value) > -1,
+	                                                    'line-selected': _this6.state.activeIndex === itemSequence
+	                                                }),
+	                                                onClick: _this6.handleSelect.bind(_this6, value)
+	                                            },
+	                                            _react2.default.createElement(
+	                                                _flex2.default,
+	                                                { flex: true },
+	                                                value.name
+	                                            )
+	                                        );
+	                                    })
+	                                );
+	                            })
+	                        )
+	                    };
+	                }();
+
+	                if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	            } else {
+	                if (list.length === 0) {
+	                    return undefined;
+	                }
+	                return _react2.default.createElement(
+	                    'div',
+	                    {
+	                        className: 'list-group gm-search-select-list',
+	                        style: { maxHeight: listMaxHeight },
+	                        ref: function ref(_ref2) {
+	                            return _this6.searchSelectList = _ref2;
+	                        }
+	                    },
+	                    _underscore2.default.map(list, function (value, i) {
+	                        return _react2.default.createElement(
+	                            _flex2.default,
+	                            {
+	                                key: i,
+	                                alignCenter: true,
+	                                className: (0, _classnames2.default)('list-group-item', inputClassName, {
+	                                    'active': _this6.state.selected.indexOf(value) > -1,
+	                                    'line-selected': _this6.state.activeIndex === i
+	                                }),
+	                                onClick: _this6.handleSelect.bind(_this6, value)
+	                            },
+	                            value.name
+	                        );
+	                    })
+	                );
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this7 = this;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { ref: function ref(_ref4) {
+	                        _this7.searchSelect = _ref4;
+	                    }, className: (0, _classnames2.default)("gm-search-select", this.props.className) },
+	                _react2.default.createElement(
+	                    _flex2.default,
+	                    { className: 'gm-search-select-input' },
+	                    this.props.multiple ? _underscore2.default.map(this.state.selected, function (value, i) {
+	                        return _react2.default.createElement(
+	                            _flex2.default,
+	                            { key: i, alignStart: true, className: 'selected' },
+	                            value.name,
+	                            _react2.default.createElement(
+	                                'button',
+	                                {
+	                                    type: 'button',
+	                                    className: 'close',
+	                                    onClick: _this7.handleClose.bind(_this7, value)
+	                                },
+	                                '\xD7'
+	                            )
+	                        );
+	                    }) : undefined,
+	                    _react2.default.createElement(
+	                        _trigger2.default,
+	                        {
+	                            component: _react2.default.createElement(_flex2.default, { flex: true }),
+	                            popup: this.renderOverlay()
+	                        },
+	                        _react2.default.createElement('input', {
+	                            ref: function ref(_ref3) {
+	                                return _this7.refInput = _ref3;
+	                            },
+	                            type: 'text',
+	                            value: this.state.value,
+	                            onFocus: this.handleFocus,
+	                            onBlur: this.handleBlur,
+	                            onChange: this.handleChange,
+	                            onKeyDown: this.handleKeyDown.bind(this, this.getListItemCount()),
+	                            placeholder: this.props.placeholder
+	                        })
+	                    )
+	                )
+	            );
 	        }
 	    }]);
 
@@ -3195,7 +3270,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cascader2 = _interopRequireDefault(_cascader);
 
-	var _flex = __webpack_require__(5);
+	var _flex = __webpack_require__(4);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -3420,7 +3495,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _trigger = __webpack_require__(6);
+	var _trigger = __webpack_require__(5);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -3528,7 +3603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _trigger = __webpack_require__(6);
+	var _trigger = __webpack_require__(5);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -3655,7 +3730,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(4);
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -3922,7 +3997,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 
 	        _this.documentClickHandler = _this.documentClickHandler.bind(_this);
-	        _this.handleKeyDown = _this.handleKeyDown.bind(_this);
+	        _this.onEscapeKeyUp = _this.onEscapeKeyUp.bind(_this);
 	        return _this;
 	    }
 
@@ -3930,7 +4005,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            document.addEventListener("click", this.documentClickHandler);
-	            document.addEventListener("keydown", this.handleKeyDown);
+	            document.addEventListener("keydown", this.onEscapeKeyUp);
 	        }
 	    }, {
 	        key: 'componentDidUpdate',
@@ -3942,7 +4017,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            document.removeEventListener("click", this.documentClickHandler);
-	            document.removeEventListener("keydown", this.handleKeyDown);
+	            document.removeEventListener("keydown", this.onEscapeKeyUp);
 	        }
 	    }, {
 	        key: 'processData',
@@ -3966,8 +4041,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }, {
-	        key: 'handleKeyUp',
-	        value: function handleKeyUp(size, e) {
+	        key: 'handleKeyDown',
+	        value: function handleKeyDown(size, e) {
 	            // 列表为空
 	            if (!size) {
 	                return;
@@ -3998,8 +4073,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	        }
 	    }, {
-	        key: 'handleKeyDown',
-	        value: function handleKeyDown(e) {
+	        key: 'onEscapeKeyUp',
+	        value: function onEscapeKeyUp(e) {
 	            if (e.keyCode === 27) {
 	                this.props.onHide();
 	            }
@@ -4101,8 +4176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    ref: function ref(_ref) {
 	                        return _this2.refSelectPanel = _ref;
 	                    },
-	                    onKeyUp: this.handleKeyUp.bind(this, list.length),
-	                    onKeyDown: this.handleKeyDown
+	                    onKeyDown: this.handleKeyDown.bind(this, list.length)
 	                },
 	                thisProps.children,
 	                _react2.default.createElement(
@@ -4746,7 +4820,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(4);
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -5164,7 +5238,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(5);
+	var _flex = __webpack_require__(4);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -5318,7 +5392,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(4);
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -6079,7 +6153,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(5);
+	var _flex = __webpack_require__(4);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -6253,7 +6327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _trigger = __webpack_require__(6);
+	var _trigger = __webpack_require__(5);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -6373,7 +6447,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(4);
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -6622,7 +6696,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _reactDom = __webpack_require__(4);
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
