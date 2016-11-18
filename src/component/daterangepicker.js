@@ -31,13 +31,32 @@ class DateRangePicker extends React.Component {
     }
 
     render() {
-        const beginPopup = <Calendar selected={this.props.begin} onSelect={this.handleSelectBegin}/>,
-            endPopup = <Calendar selected={this.props.end} onSelect={this.handleSelectEnd}/>;
+        const beginPopup = (
+                <Calendar
+                    selected={this.props.begin}
+                    onSelect={this.handleSelectBegin}
+                    {...this.props.beginProps}
+                />
+            ),
+            endPopup = (
+                <Calendar
+                    selected={this.props.end}
+                    onSelect={this.handleSelectEnd}
+                    {...Object.assign({
+                        min: this.props.begin
+                    }, this.props.endProps)}
+                />
+            );
+
         return (
-            <div ref={ref => {
-                this.dateRangePicker = ref;
-            }} className={classNames("gm-datepicker gm-daterangepicker", this.props.className)}>
-                <Trigger component={<div className="gm-inline-block"/>} popup={beginPopup}>
+            <div
+                ref={ref => this.dateRangePicker = ref}
+                className={classNames("gm-datepicker gm-daterangepicker", this.props.className)}
+            >
+                <Trigger
+                    component={<div className="gm-inline-block"/>}
+                    popup={beginPopup}
+                >
                     <input
                         type="text"
                         className={this.props.inputClassName}
@@ -47,11 +66,12 @@ class DateRangePicker extends React.Component {
                     />
                 </Trigger>
                 <span> ~ </span>
-                <Trigger component={<div className="gm-inline-block"/>} popup={endPopup}>
+                <Trigger
+                    component={<div className="gm-inline-block"/>}
+                    popup={endPopup}
+                >
                     <input
-                        ref={ref => {
-                            this.endTarget = ref;
-                        }}
+                        ref={ref => this.endTarget = ref}
                         type="text"
                         className={this.props.inputClassName}
                         disabled={this.props.disabled}
@@ -70,7 +90,18 @@ DateRangePicker.propTypes = {
     onChange: PropTypes.func.isRequired,
     inputClassName: PropTypes.string,
     disabled: PropTypes.bool,
-    className: PropTypes.string
+    className: PropTypes.string,
+
+    beginProps: PropTypes.shape({
+        min: React.PropTypes.object,
+        max: React.PropTypes.object,
+        disabledDate: React.PropTypes.func
+    }),
+    endProps: PropTypes.shape({
+        min: React.PropTypes.object,
+        max: React.PropTypes.object,
+        disabledDate: React.PropTypes.func
+    })
 };
 
 export default DateRangePicker;

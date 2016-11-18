@@ -82,7 +82,6 @@ class Cascader extends React.Component {
 
         return (
             <div className="gm-cascader-input">
-                <i className={classNames('glyphicon glyphicon-menu-down', this.props.className)}/>
                 <input
                     {...inputProps}
                     type="text"
@@ -90,6 +89,7 @@ class Cascader extends React.Component {
                     value={valueRender ? valueRender(value) : _.map(value, v => v.name).join(',')}
                     className={classNames("form-control", inputProps.className)}
                 />
+                <i className="gm-arrow-down"/>
             </div>
         );
     }

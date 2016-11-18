@@ -12,9 +12,9 @@ SearchSelect  和 FilterSearchSelect 如果用起来发现二次进入的时候�
 
 **注意，请尽量提供key**
 
-- `list (array|isRequired)` 搜索待选数据，是过滤后的数据。结构`[{value: 1, name: 'aaaaa'}]`
-- `isGroupList (bool)` list数据是否分组数据，此时list的结构为 `[{label: '一组', children: [{value: 1, name: 'aaaaa'}]}]`
-- `selected (any)` 选中了什么，`list`中某条数据
+- `list (array|isRequired)` 搜索待选数据，是过滤后的数据。结构`[{name: 'aaaaa'}]` ，name用来显示
+- `isGroupList (bool)` list数据是否分组数据，此时list的结构为 `[{label: '一组', children: [{name: 'aaaaa'}]}]`
+- `selected (any)` 选中了什么，`list`中某条数据(引用！)
 - `onSearch (func|isRequired)` 搜索触发函数，以便过滤重新得出`list`数据。 可以引入`gm-pinyin`库来做拼音搜索
 - `onSelect (func|isRequired)` 选中后触发，提供和`selected`一样的数据结构，一般直接设置`selected`即可
 - `delay (number)` 搜索过程中延迟多少ms才出触发`onSearch`， 默认500
@@ -24,22 +24,20 @@ SearchSelect  和 FilterSearchSelect 如果用起来发现二次进入的时候�
 - `isScrollToSelected (bool)` focus后列表是否滚动到选择的位置
 
 ```jsx
-<div style={{width: '300px'}}>
-    <SearchSelect
-        list={this.state.list}
-        selected={this.state.selected}
-        onSearch={this.handleSearch}
-        onSelect={this.handleSelect}
-        placeholder="搜索"/>
-</div>
+<SearchSelect
+    list={this.state.list}
+    selected={this.state.selected}
+    onSearch={this.handleSearch}
+    onSelect={this.handleSelect}
+    placeholder="搜索"
+/>
 
-<div style={{width: '300px'}}>
-    <SearchSelect
-        list={this.state.list}
-        selected={this.state.multipleSelected}
-        onSearch={this.handleSearch}
-        onSelect={this.handleMultipleSelect}
-        multiple
-        placeholder="搜索"/>
-</div>
+<SearchSelect
+    list={this.state.list}
+    selected={this.state.multipleSelected}
+    onSearch={this.handleSearch}
+    onSelect={this.handleMultipleSelect}
+    multiple
+    placeholder="搜索"
+/>
 ```

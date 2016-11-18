@@ -220,41 +220,37 @@ class AdvanceSelectComponent extends React.Component {
 }
 
 var searchSelectData = [
-    {value: 0, name: '我们'},
-    {value: 1, name: '1'},
-    {value: 2, name: '2我们我们我们我们'},
-    {value: 3, name: '3我们'},
-    {value: 4, name: '4我们'},
-    {value: 5, name: '5我们'},
-    {value: 6, name: '6我们'},
-    {value: 7, name: '7我们'},
-    {value: 8, name: '8我们'},
-    {value: 9, name: '9你们'},
-    {value: 10, name: '10哦'},
-    {value: 11, name: 'no'}
+    {name: '我们'},
+    {name: '1'},
+    {name: '2我们我们我们我们'},
+    {name: '3我们'},
+    {name: '4我们'},
+    {name: '5我们'},
+    {name: '6我们'},
+    {name: 'no'}
 ];
 
 var searchSelectGroupData = [
     {
         label: '一组',
         children: [
-            {value: 0, name: '我们我们我们我们'},
-            {value: 1, name: '1'},
-            {value: 2, name: '2我们'},
-            {value: 3, name: '3我们'},
-            {value: 4, name: '4我们'},
-            {value: 5, name: '5我们'}
+            {name: '我们我们我们我们'},
+            {name: '1'},
+            {name: '2我们'},
+            {name: '3我们'},
+            {name: '4我们'},
+            {name: '5我们'}
         ]
     },
     {
         label: '二组',
         children: [
-            {value: 6, name: '6我们'},
-            {value: 7, name: '7我们'},
-            {value: 8, name: '8我们'},
-            {value: 9, name: '9你们'},
-            {value: 10, name: '10哦'},
-            {value: 11, name: 'no'}
+            {name: '6我们'},
+            {name: '7我们'},
+            {name: '8我们'},
+            {name: '9你们'},
+            {name: '10哦'},
+            {name: 'no'}
         ]
     }
 ];

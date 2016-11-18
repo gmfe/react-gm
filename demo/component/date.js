@@ -4,7 +4,8 @@ import {
     DatePicker,
     DateRangePicker,
     TimeSpan,
-    TimeSpanPicker
+    TimeSpanPicker,
+    Flex
 } from '../../src/index';
 import moment from 'moment';
 
@@ -19,9 +20,31 @@ class CalendarWrap extends React.Component {
 
     render() {
         return (
-            <div>
-                <Calendar selected={this.state.selected} onSelect={this.handleSelect}/>
-            </div>
+            <Flex>
+                <div>
+                    <div>一般情况</div>
+                    <Calendar selected={this.state.selected} onSelect={this.handleSelect}/>
+                </div>
+                <div>
+                    <div>带min max</div>
+                    <Calendar
+                        selected={this.state.selected}
+                        onSelect={this.handleSelect}
+                        min={moment().toDate()}
+                        max={moment().add(10, 'd').toDate()}
+                    />
+                </div>
+                <div>
+                    <div>自定义日期是否可用 disabledDate</div>
+                    <Calendar
+                        selected={this.state.selected}
+                        onSelect={this.handleSelect}
+                        disabledDate={d => {
+                            return d < new Date();
+                        }}
+                    />
+                </div>
+            </Flex>
         );
     }
 
@@ -45,19 +68,55 @@ class DatePickerWrap extends React.Component {
     render() {
         return (
             <div>
-                <DatePicker date={this.state.date}
+                <Flex>
+                    <div>
+                        <div>inline-block</div>
+                        <DatePicker
+                            date={this.state.date}
                             placeholder="adfasdf"
                             onChange={this.handleChange}
-                            inputClassName="form-control input-sm"/>
-                <DatePicker date={this.state.date}
+                            inputClassName="form-control input-sm"
+                        />
+                    </div>
+                    <div>
+                        <div>disabled</div>
+                        <DatePicker
+                            date={this.state.date}
                             placeholder="adfasdf"
                             disabled={true}
                             onChange={this.handleChange}
-                            inputClassName="form-control input-sm"/>
-                <span>inline-block</span>
+                            inputClassName="form-control input-sm"
+                        />
+                    </div>
+                    <div>
+                        <div>disabled date</div>
+                        <DatePicker
+                            date={this.state.date}
+                            placeholder="选今天之后的"
+                            onChange={this.handleChange}
+                            inputClassName="form-control input-sm"
+                            min={new Date()}
+                        />
+                    </div>
+                    <div>
+                        <div>disabled date</div>
+                        <DatePicker
+                            date={this.state.date}
+                            placeholder="非周五"
+                            onChange={this.handleChange}
+                            inputClassName="form-control input-sm"
+                            disabledDate={m => {
+                                return moment(m).get('day') === 5;
+                            }}
+                        />
+                    </div>
+                </Flex>
+
                 <div className="gm-padding10"></div>
-                <DatePicker date={this.state.date}
-                            onChange={this.handleChange}>
+                <DatePicker
+                    date={this.state.date}
+                    onChange={this.handleChange}
+                >
                     <span>
                         {this.state.date ? moment(this.state.date).format('YYYY-MM-DD') : '请点击选择'}
                     </span>
@@ -88,16 +147,23 @@ class DaterangepickerWrap extends React.Component {
     render() {
         return (
             <div>
-                <DateRangePicker begin={this.state.begin}
-                                 end={this.state.end}
-                                 onChange={this.handleChange}
-                                 inputClassName="form-control input-sm"/>
+                <DateRangePicker
+                    begin={this.state.begin}
+                    end={this.state.end}
+                    onChange={this.handleChange}
+                    inputClassName="form-control input-sm"
+                    endProps={{
+                        min: this.state.begin
+                    }}
+                />
 
-                <DateRangePicker begin={this.state.begin}
-                                 end={this.state.end}
-                                 onChange={this.handleChange}
-                                 disabled={true}
-                                 inputClassName="form-control input-sm"/>
+                <DateRangePicker
+                    begin={this.state.begin}
+                    end={this.state.end}
+                    onChange={this.handleChange}
+                    disabled={true}
+                    inputClassName="form-control input-sm"
+                />
             </div>
         );
     }
@@ -131,34 +197,43 @@ class TimeSpanWrap extends React.Component {
         return (
             <div>
                 <div>
-                    <TimeSpan max={null}
-                              selected={this.state.date}
-                              onSelect={this.handleChange}/>
-                    <TimeSpan max={moment().hour(20).minute(0)}
-                              selected={this.state.date}
-                              onSelect={this.handleChange}/>
+                    <TimeSpan
+                        max={null}
+                        selected={this.state.date}
+                        onSelect={this.handleChange}
+                    />
+                    <TimeSpan
+                        max={moment().hour(20).minute(0)}
+                        selected={this.state.date}
+                        onSelect={this.handleChange}
+                    />
 
-                    <TimeSpan max={moment().hour(20).minute(0)}
-                              span={60 * 60 * 1000}
-                              render={value => moment(value).format('HH')}
-                              selected={this.state.date}
-                              onSelect={this.handleChange}/>
+                    <TimeSpan
+                        max={moment().hour(20).minute(0)}
+                        span={60 * 60 * 1000}
+                        render={value => moment(value).format('HH')}
+                        selected={this.state.date}
+                        onSelect={this.handleChange}
+                    />
                 </div>
                 <div>
                     <TimeSpanPicker
                         date={this.state.date}
-                        onChange={this.handleChange}/>
+                        onChange={this.handleChange}
+                    />
 
                     <TimeSpanPicker
                         disabled={true}
                         date={this.state.date}
-                        onChange={this.handleChange}/>
+                        onChange={this.handleChange}
+                    />
 
                     <TimeSpanPicker
                         date={this.state.date}
-                        onChange={this.handleChange}>
+                        onChange={this.handleChange}
+                    >
                         <span>
-                            {this.state.date ? moment(this.state.date).format('HH:mm') : '请点击选择'}
+                        {this.state.date ? moment(this.state.date).format('HH:mm') : '请点击选择'}
                         </span>
                     </TimeSpanPicker>
                 </div>

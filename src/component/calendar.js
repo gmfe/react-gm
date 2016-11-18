@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
+import _ from 'underscore';
 
 const noop = () => {
 };
@@ -11,22 +12,27 @@ class Day extends React.Component {
         this.handleClick = ::this.handleClick;
     }
 
+    handleClick() {
+        if (this.props.disabled) {
+            return;
+        }
+        this.props.onClick(this.props.moment);
+    }
+
     render() {
         const now = this.props.nowMoment,
             m = this.props.moment,
-            selected = this.props.selected;
+            selected = this.props.selected,
+            disabled = this.props.disabled;
 
         const cn = classNames('gm-calendar-day', {
             'gm-calendar-day-old': now.month() > m.month(),
             'gm-calendar-day-new': now.month() < m.month(),
+            'gm-calendar-day-disabled': disabled,
             'gm-calendar-active': +selected.startOf('day') === +m.startOf('day')
         });
 
         return <span className={cn} onClick={this.handleClick}>{m.date()}</span>;
-    }
-
-    handleClick() {
-        this.props.onClick(this.props.moment);
     }
 }
 
@@ -74,17 +80,23 @@ class Calendar extends React.Component {
         const month = m.month();
         return (
             <div className="gm-calendar-head text-center clearfix">
-                <a className="gm-calendar-head-pre pull-left"
-                   onClick={this.handleChangeMonth.bind(this, month - 1)}>
+                <a
+                    className="gm-calendar-head-pre pull-left"
+                    onClick={this.handleChangeMonth.bind(this, month - 1)}
+                >
                     <i className="glyphicon glyphicon-chevron-left"/>
                 </a>
                 <span className="gm-calendar-head-title">
-                        <span className="gm-calendar-head-month"
-                              onClick={this.handleSelectMonth}>{month + 1}月</span>
-                        <span>&nbsp;&nbsp;{m.year()}</span>
-                    </span>
-                <a className="gm-calendar-head-next pull-right"
-                   onClick={this.handleChangeMonth.bind(this, month + 1)}>
+                    <span
+                        className="gm-calendar-head-month"
+                        onClick={this.handleSelectMonth}
+                    >{month + 1}月</span>
+                    <span>&nbsp;&nbsp;{m.year()}</span>
+                </span>
+                <a
+                    className="gm-calendar-head-next pull-right"
+                    onClick={this.handleChangeMonth.bind(this, month + 1)}
+                >
                     <i className="glyphicon glyphicon-chevron-right"/>
                 </a>
             </div>
@@ -94,9 +106,9 @@ class Calendar extends React.Component {
     renderWeek() {
         return (
             <div className="gm-calendar-week">
-                {this.state.weekDays.map(function (v, i) {
-                    return (<span key={i} className="gm-calendar-day-name">{v}</span>);
-                })}
+                {_.map(this.state.weekDays, (v, i) => (
+                    <span key={i} className="gm-calendar-day-name">{v}</span>
+                ))}
             </div>
         );
     }
@@ -109,11 +121,11 @@ class Calendar extends React.Component {
                 'gm-calendar-active': i === month
             });
             months.push(
-                <span key={i}
-                      className={cn}
-                      onClick={this.handleChangeMonth.bind(this, i)}>
-                    {i + 1}月
-                </span>
+                <span
+                    key={i}
+                    className={cn}
+                    onClick={this.handleChangeMonth.bind(this, i)}
+                >{i + 1}月</span>
             );
         }
         return (
@@ -123,23 +135,51 @@ class Calendar extends React.Component {
         );
     }
 
+    getDisabled(m) {
+        let {min, max, disabledDate} = this.props;
+        min = min ? moment(min).startOf('day') : null;
+        max = max ? moment(max).startOf('day') : null;
+
+        let disabled = false;
+
+        if (disabledDate) {
+            disabled = disabledDate(m.toDate());
+        } else {
+            if (min && m < min) {
+                disabled = true;
+            }
+            if (max && m > max) {
+                disabled = true;
+            }
+        }
+        return disabled;
+    }
+
     renderContent() {
         const m = moment(this.state.moment).startOf('month').day(0).add(-1, 'day');
         let days = [];
 
         for (let i = 0; i < 42; i++) {
+            const mm = moment(m.add(1, 'day'));
             days.push(
-                <Day key={i}
-                     selected={moment(this.state.selected)}
-                     nowMoment={this.state.moment}
-                     moment={moment(m.add(1, 'day'))}
-                     onClick={this.handleSelectDay}/>
+                <Day
+                    key={i}
+                    selected={moment(this.state.selected)}
+                    nowMoment={this.state.moment}
+                    moment={mm}
+                    onClick={this.handleSelectDay}
+                    disabled={this.getDisabled(mm)}
+                />
             );
         }
 
+        days = _.groupBy(days, (v, i) => parseInt(i / 7));
+
         return (
             <div className="gm-calendar-content">
-                {days}
+                {_.map(days, (v, i) => (
+                    <div key={i} className="gm-calendar-content-div">{v}</div>
+                ))}
             </div>
         );
     }
@@ -150,7 +190,7 @@ class Calendar extends React.Component {
                 {this.renderHead()}
                 {this.renderWeek()}
                 {this.renderContent()}
-                {this.state.isSelectMonth ? this.renderMonth() : undefined}
+                {this.state.isSelectMonth ? this.renderMonth() : null}
             </div>
         );
     }
@@ -158,8 +198,12 @@ class Calendar extends React.Component {
 
 Calendar.propTypes = {
     selected: React.PropTypes.object,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
+    min: React.PropTypes.object,
+    max: React.PropTypes.object,
+    disabledDate: React.PropTypes.func
 };
+
 Calendar.defaultProps = {
     onSelect: noop
 };
