@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {findDOMNode} from 'react-dom';
 import _ from 'underscore';
 import Flex from './flex';
 import classNames from 'classnames';
@@ -69,13 +68,10 @@ class SearchSelect extends React.Component {
     doScroll() {
         // 滚动到选择的地方。 不知道会发生什么，尽量来做容错
         if (this.searchSelectList) {
-            const ssDom = findDOMNode(this.searchSelectList);
-            if (ssDom) {
-                // 选第一个
-                const activeDOM = ssDom.querySelectorAll(".list-group-item.active")[0];
-                if (activeDOM) {
-                    ssDom.scrollTop = activeDOM.offsetTop;
-                }
+            // 选第一个
+            const activeDOM = this.searchSelectList.querySelectorAll(".list-group-item.active")[0];
+            if (activeDOM) {
+                this.searchSelectList.scrollTop = activeDOM.offsetTop;
             }
         }
     }
@@ -252,7 +248,7 @@ class SearchSelect extends React.Component {
                                             key={i}
                                             alignCenter
                                             className={classNames('list-group-item', inputClassName, {
-                                                'active': this.state.selected.indexOf(value) > -1 || this.state.activeIndex === itemSequence,
+                                                'active': this.state.selected.indexOf(value) > -1,
                                                 'line-selected': this.state.activeIndex === itemSequence
                                             })}
                                             onClick={this.handleSelect.bind(this, value)}
@@ -282,7 +278,7 @@ class SearchSelect extends React.Component {
                                 key={i}
                                 alignCenter
                                 className={classNames('list-group-item', inputClassName, {
-                                    'active': this.state.selected.indexOf(value) > -1 || this.state.activeIndex === i,
+                                    'active': this.state.selected.indexOf(value) > -1,
                                     'line-selected': this.state.activeIndex === i
                                 })}
                                 onClick={this.handleSelect.bind(this, value)}
