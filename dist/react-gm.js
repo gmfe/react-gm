@@ -3924,7 +3924,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = _possibleConstructorReturn(this, (Dialog.__proto__ || Object.getPrototypeOf(Dialog)).call(this, props));
 
 	        _this.state = {
-	            show: props.show
+	            show: props.show,
+	            isLoading: false
 	        };
 	        _this.handleCancel = _this.handleCancel.bind(_this);
 	        _this.handleOk = _this.handleOk.bind(_this);
@@ -3964,12 +3965,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (result === false) {
 	                return;
 	            }
+
+	            this.setState({
+	                isLoading: true
+	            });
+
 	            Promise.resolve(result).then(function () {
 	                if (!_this2.______isMounted) {
 	                    _this2.setState({
-	                        show: false
+	                        show: false,
+	                        isLoading: false
 	                    });
 	                }
+	            }).catch(function () {
+	                _this2.setState({
+	                    isLoading: false
+	                });
 	            });
 	        }
 	    }, {
@@ -3982,6 +3993,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var isLoading = this.state.isLoading;
 	            var _props = this.props,
 	                bsSize = _props.bsSize,
 	                title = _props.title,
@@ -4028,16 +4040,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'text-right' },
-	                        type !== 'alert' && cancelBtn && _react2.default.createElement(
+	                        type !== 'alert' && cancelBtn && !isLoading && _react2.default.createElement(
 	                            'button',
 	                            { className: 'btn btn-default', onClick: this.handleCancel },
 	                            cancelBtn
 	                        ),
 	                        _react2.default.createElement('div', { className: 'gm-gap10' }),
 	                        OKBtn && _react2.default.createElement(
-	                            'button',
-	                            { className: 'btn btn-primary', onClick: this.handleOk },
-	                            OKBtn
+	                            _reactBootstrap.Button,
+	                            {
+	                                bsStyle: 'primary',
+	                                disabled: isLoading,
+	                                onClick: !isLoading ? this.handleOk : null },
+	                            isLoading ? _react2.default.createElement('i', { className: 'glyphicon glyphicon-refresh glyphicon-spin' }) : OKBtn
 	                        )
 	                    )
 	                )
