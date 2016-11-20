@@ -1,46 +1,13 @@
-import React from 'react';
-import {
-    Tip,
-    Trigger,
-    Dialog,
-    Flex
-} from '../../src/index';
+---
+imports:
+    import {Dialog} from '../../src/index';
+---
+## Dialog
 
-class TipWrap extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleClick = ::this.handleClick;
-    }
+对话框
 
-    render() {
-        return (
-            <div>
-                <div>
-                    <button className="btn btn-primary" onClick={this.handleClick}>showTip</button>
-                </div>
-                <Tip type="success">啊啊啊</Tip>
-                <Tip type="info">啊啊啊</Tip>
-                <Tip type="warning">啊啊啊</Tip>
-                <Tip type="danger">啊啊啊</Tip>
-                <Tip type="success" title="错误">啊啊啊</Tip>
-            </div>
-        );
-    }
-
-    handleClick() {
-        Tip.success({
-            children: '需要用户自行关闭的',
-            time: 0,
-            onClose: () => console.log('tip closed by user')
-        });
-        Tip.info({
-            children: '提示啦,提示啦',
-            onClose: () => console.log('tip closed')
-        });
-        Tip.info('提示啦，提示啦');
-    }
-}
-
+::: demo Dialog
+```js
 class DialogWrap extends React.Component {
     constructor(props) {
         super(props);
@@ -215,81 +182,27 @@ class DialogWrap extends React.Component {
         );
     }
 }
+```
+```jsx
+<DialogWrap/>
+```
+:::
 
-class TriggerWrap extends React.Component {
-    renderPopup() {
-        return (
-            <div className="gm-border" style={{width: '200px', height: '200px', background: 'red'}}>
-                <div>popup</div>
-            </div>
-        );
-    }
+### Props
+- `show (bool|isRequired)` 是否显示
+- `title (string)` 标题，默认"提示"
+- `type (string)` 对话框类型，`alert` `confirm` `prompt`和无。默认无，其实有点像`confirm`
+- `onCancel (func)` 对话框消失前触发，可能点取消按钮，可能点浮层，可能close按钮。
+- `onOK (func)` 点确认按钮，之后对话框关闭。但返回 false 或者 Promise.reject() 则不会关闭。
+- `bsSize (string)` 对话框大小，`lg` `md` `sm`。 默认`md`
+- `cancelBtn (bool|string)` 为false则不显示cancel按钮，为字符串则替换按钮文案
+- `OKBtn (bool|string)` 同上
+- `promptDefaultValue (string)` 当type为`prompt`时有效，初始化输入框
+- `promptPlaceholder (string)` 当type为`prompt`时有效，输入框的placeholder
+- `children`
 
-    render() {
-        return (
-            <div>
-                <div>三种行为 focus click hover</div>
-                <Flex>
-                    <Trigger component={<div/>} popup={this.renderPopup()}>
-                        <button className="btn btn-default">focus me default</button>
-                    </Trigger>
 
-                    <Trigger component={<div/>} type="click" popup={this.renderPopup()}>
-                        <button className="btn btn-default">click me</button>
-                    </Trigger>
+### Static
+当然更多的时候是用其静态化方法 `alert` `confirm` `prompt`，返回一个promise，确定则resolve，取消则reject。之后对话框自动关闭。
 
-                    <Trigger component={<div/>} type="hover" popup={this.renderPopup()}>
-                        <button className="btn btn-default">hover me</button>
-                    </Trigger>
-                </Flex>
-                <div>各种位置</div>
-                <Flex>
-                    <Trigger component={<div/>} popup={this.renderPopup()}>
-                        <button className="btn btn-default">focus me(default)</button>
-                    </Trigger>
-
-                    <Trigger component={<div/>} right popup={this.renderPopup()}>
-                        <button className="btn btn-default">focus me(right)</button>
-                    </Trigger>
-
-                    <Trigger component={<div/>} top popup={this.renderPopup()}>
-                        <button className="btn btn-default">focus me(top)</button>
-                    </Trigger>
-
-                    <Trigger component={<div/>} right top popup={this.renderPopup()}>
-                        <button className="btn btn-default">focus me(right top)</button>
-                    </Trigger>
-                </Flex>
-                <div>disabled</div>
-                <Flex>
-                    <Trigger component={<div/>} disabled popup={this.renderPopup()}>
-                        <button className="btn btn-default">focus me(disabled)</button>
-                    </Trigger>
-                    <Trigger component={<div/>} popup={this.renderPopup()}>
-                        <button disabled className="btn btn-default">focus me(inner disabled)</button>
-                    </Trigger>
-                </Flex>
-            </div>
-        );
-    }
-}
-
-class Component extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1 id="overlay">浮层</h1>
-                <h2 id="Tip">Tip</h2>
-                <TipWrap/>
-                <hr/>
-                <h2 id="Dialog">Dialog</h2>
-                <DialogWrap/>
-                <hr/>
-                <h2 id="Trigger">Trigger</h2>
-                <TriggerWrap/>
-            </div>
-        );
-    }
-}
-
-export default Component;
+在`confirm`时，用户输入可能不符合你的要求，不要求对话框自动关闭。可以在onOK中返回false（或者Promise.reject()）即可。

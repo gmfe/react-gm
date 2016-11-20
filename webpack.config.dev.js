@@ -31,6 +31,9 @@ module.exports = {
             loader: 'babel',
             exclude: /dict-zi\.js/
         }, {
+            test: /\.md$/,
+            loader: 'babel!markdown-it-react-loader'
+        }, {
             test: /(fontawesome-webfont|glyphicons-halflings-regular)\.(woff|woff2|ttf|eot|svg)($|\?)/,
             loader: 'url?limit=1024&name=fonts/[name].[hash].[ext]'
         }, {

@@ -1,30 +1,31 @@
+---
+imports:
+    import {Sheet, SheetColumn} from '../../src/index';
+---
+## Sheet
+
 取代Grid组件。更React风格化。给开发者更多控制，更多灵活。
 
-## 一个简单的demo
-
+::: demo 一个简单的demo
 ```jsx
-const list = [{
-    id: 3,
-    name: '小明',
-    age: '10'
-}, {
-    id: 4,
-    name: '小红',
-    age: '15',
-    _gm_select: true
-}];
-
-
-<Sheet list={list}>
+<Sheet list={[{
+     id: 3,
+     name: '小明',
+     age: '10'
+ }, {
+     id: 4,
+     name: '小红',
+     age: '15',
+     _gm_select: true
+ }]}>
     <SheetColumn field="id" name="id"/>
     <SheetColumn field="name" name="名字"/>
     <SheetColumn field="age" name="年龄"/>
 </Sheet>
 ```
+:::
 
-## 组件介绍
-
-### Sheet
+### Props
 
 - `list (Array|isRequired)` 是列表的数据，最好是数组。 当然有人没注意传了obj（非常不推荐）。
 - `loading (bool)` true显示loading状态，false显示数据

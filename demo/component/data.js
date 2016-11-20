@@ -2,8 +2,7 @@ import React from 'react';
 import {
     Sheet,
     Pagination,
-    PaginationText,
-    Storage
+    PaginationText
 } from '../../src/index';
 import _ from 'underscore';
 import ImportLeadWrap from './import.lead.js';
@@ -124,29 +123,6 @@ class SheetWrap extends React.Component {
     }
 }
 
-const key = 'testValue';
-class StorageWrap extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: Storage.get(key) || ''
-        };
-    }
-
-    render() {
-        return (
-            <div>
-                刷新后看到存储的数据
-                <input type="text" value={this.state.value}
-                       onChange={event => this.setState({value: event.target.value})}/>
-                <Storage name={key} value={this.state.value}/>
-            </div>
-        );
-    }
-}
-
-window.Storage = Storage;
-
 class Component extends React.Component {
     render() {
         return (
@@ -156,8 +132,6 @@ class Component extends React.Component {
                 <SheetWrap/>
                 <h2 id="importLead">ImportLead</h2>
                 <ImportLeadWrap/>
-                <h2 id="Storage">Storage</h2>
-                <StorageWrap/>
             </div>
         );
     }

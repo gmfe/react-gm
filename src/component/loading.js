@@ -29,7 +29,9 @@ Loading.propTypes = {
     style: PropTypes.object,
     size: PropTypes.number
 };
+
 Loading.defaultProps = {
     size: 50
 };
+
 export default Loading;
