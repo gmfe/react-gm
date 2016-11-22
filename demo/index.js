@@ -9,15 +9,6 @@ import {Router, Route, hashHistory, IndexRedirect} from 'react-router';
 import NavConfig from './nav.config.md';
 import _ from 'underscore';
 
-// import Form from './component/form';
-// import Select from './component/select';
-// import Date from './component/date';
-// import Overlay from './component/overlay';
-// import Data from './component/data';
-// import Upload from './component/upload';
-// import Layout from './component/layout';
-// import Load from './component/load';
-
 import About from './doc/About.md';
 import Flex from './doc/Flex.md';
 import Loading from './doc/Loading.md';
@@ -100,12 +91,15 @@ const docMap = {
 
 const setNavCurrent = () => {
     _.each(document.querySelectorAll('.demo-left a'), element => element.className = '');
-    document.querySelector('.demo-left a[href="' + location.hash + '"]').className = 'active';
+    const dom = document.querySelector('.demo-left a[href="' + location.hash + '"]');
+    if (dom) {
+        dom.className = 'active';
+    }
 };
 
 class App extends React.Component {
     render() {
-        // 暴力
+        // 暴力，莫喷
         setTimeout(() => {
             setNavCurrent();
         }, 10);
@@ -113,11 +107,11 @@ class App extends React.Component {
             <div className="demo">
                 <div className="demo-header">
                     <GMFlex className="container">
-                        <GMFlex alignCenter className="gm-header-logo">
+                        <a href={location.pathname} className="gm-flex gm-flex-align-center gm-header-logo">
                             <img src={location.pathname + "demo/images/logo.png"} alt=""/>
                             <span>ReactGM </span>
                             <small>&nbsp;&nbsp;by gmfe</small>
-                        </GMFlex>
+                        </a>
                         <GMFlex flex justifyEnd alignCenter className="gm-header-nav">
                             <a href="#/standard">UI规范TODO</a>
                             <a href="#/doc">组件</a>
