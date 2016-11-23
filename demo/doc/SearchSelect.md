@@ -162,7 +162,7 @@ class SearchSelect3 extends React.Component {
         super(props);
         this.state = {
             selected: null,
-            list: searchSelectGroupData
+            list: [...searchSelectGroupData]
         };
         this.handleSelect = ::this.handleSelect;
         this.handleSearch = ::this.handleSearch;
@@ -178,12 +178,18 @@ class SearchSelect3 extends React.Component {
     handleSearch(value) {
         // 字符串匹配过滤
         // this.setState({
-        //     list: _.filter(searchSelectData, v => v.name.indexOf(value) > -1)
+        //     list: _.filter(searchSelectGroupData, v => v.name.indexOf(value) > -1)
         // });
 
+        const list = JSON.parse(JSON.stringify(searchSelectGroupData));
         this.setState({
-            list: _.filter(searchSelectData, v => {
-                return v.name.indexOf(value) > -1;
+            list: _.filter(list, v => {
+                v.children = _.filter(v.children, item => {
+                    console.log('item', item.name.indexOf(value) > -1);
+                    return item.name.indexOf(value) > -1;
+                });
+                
+                return v.children.length;
             })
         });
     }

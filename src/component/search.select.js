@@ -124,9 +124,10 @@ class SearchSelect extends React.Component {
                 }
             } else if (keyCode === 13) { // 键盘 回车
                 const dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
-                dom.click();
-
-                !this.props.multiple && this.refInput.blur();
+                if (dom) {
+                    dom.click();
+                    !this.props.multiple && this.refInput.blur();
+                }
             }
 
             return;
@@ -146,6 +147,12 @@ class SearchSelect extends React.Component {
 
         this.setState({
             activeIndex: (size + activeIndex) % size
+        });
+    }
+
+    handleItemMouseEnter(activeIndex) {
+        this.setState({
+            activeIndex
         });
     }
 
@@ -254,6 +261,7 @@ class SearchSelect extends React.Component {
                                                 'line-selected': this.state.activeIndex === itemSequence
                                             })}
                                             onClick={this.handleSelect.bind(this, value)}
+                                            onMouseEnter={this.handleItemMouseEnter.bind(this, itemSequence)}
                                         >
                                             <Flex flex>{value.name}</Flex>
                                         </Flex>
@@ -284,6 +292,7 @@ class SearchSelect extends React.Component {
                                     'line-selected': this.state.activeIndex === i
                                 })}
                                 onClick={this.handleSelect.bind(this, value)}
+                                onMouseEnter={this.handleItemMouseEnter.bind(this, i)}
                             >
                                 {value.name}
                             </Flex>
