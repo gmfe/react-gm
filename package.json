@@ -22,7 +22,7 @@
     "build": "NODE_ENV=production webpack",
     "build:min": "NODE_ENV=production webpack --config webpack.config.min.js",
     "publishpatch": "sh deploy/publish.sh",
-    "gh-pages": "git branch -D gh-pages; git checkout -b gh-pages; webpack --config webpack.config.dev.js; rm -rf .gitignore; git add --all; git commit -m 'page'; git push origin :gh-pages; git push origin HEAD:gh-pages; git checkout master;"
+    "gh-pages": "git branch -D gh-pages; git checkout -b gh-pages; webpack --config webpack.config.dev.js; rm -rf .gitignore; git add --all; git commit -m 'page'; git push origin HEAD:gh-pages -f; git checkout master;"
   },
   "repository": {
     "type": "git",
