@@ -30,7 +30,6 @@ class DropSelect extends React.Component {
     processData(data) {
         return Object.assign({
             loading: false,
-            show: false,
             actions: [],
             list: [],
             columns: []
@@ -97,7 +96,7 @@ class DropSelect extends React.Component {
 
         if (loading) {
             coolList = <li className="gm-dropselect-item">
-                <span>&nbsp;</span><i className="glyphicon glyphicon-refresh"/>
+                <span>&nbsp;</span><i className="glyphicon glyphicon-refresh glyphicon-spin"/>
             </li>;
         } else {
             coolList = list.map((rowData, rowIndex) => {
@@ -162,10 +161,10 @@ class DropSelect extends React.Component {
 }
 
 DropSelect.propTypes = {
-    show: React.PropTypes.bool,
-    loading: React.PropTypes.bool,
+    show: React.PropTypes.bool.isRequired,
     data: React.PropTypes.object,
-    onEnter: React.PropTypes.func
+    onEnter: React.PropTypes.func,
+    onHide: React.PropTypes.func
 };
 
 DropSelect.defaultProps = {

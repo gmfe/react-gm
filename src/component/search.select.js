@@ -57,7 +57,7 @@ class SearchSelect extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.activeIndex !== prevState.activeIndex) {
+        if (this.state.activeIndex !== prevState.activeIndex && this.searchSelectList) {
             const dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
             dom && dom.scrollIntoViewIfNeeded();
         }

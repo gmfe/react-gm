@@ -1,128 +1,7 @@
 import React from 'react';
 import {
-    DropSelect,
     AdvanceSelect
 } from '../../src/index';
-
-class DropSelectWrap extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            show: false,
-            coolData: {
-                list: [],
-                actions: [{
-                    className: "btn btn-sm btn-info",
-                    text: <i className="glyphicon glyphicon-ok"/>,
-                    getDisabled: (value, i) => {
-                        return i % 2;
-                    },
-                    onClick: function (col) {
-                        console.log(col, 'onclick');
-                    }
-                }, {
-                    className: "btn btn-sm btn-danger",
-                    text: '删除',
-                    onClick: function (col) {
-                        console.log(col, 'onclick');
-                    }
-                }],
-                columns: [{
-                    field: 'id',
-                    name: '序号',
-                    render: function (value) {
-                        return 'D00' + value;
-                    }
-                }, {
-                    field: 'name',
-                    name: '商品名'
-                }, {
-                    field: 'price',
-                    name: '成本价'
-                }],
-                loading: true
-            }
-        };
-        this.onFocus = ::this.onFocus;
-        this.onHide = ::this.onHide;
-        this.handleEnter = ::this.handleEnter;
-    }
-
-    componentDidMount() {
-        const me = this;
-        setTimeout(() => {
-            me.setState({
-                coolData: Object.assign(this.state.coolData, {
-                    loading: false,
-                    list: [{
-                        id: '0001',
-                        name: '大白菜',
-                        price: 22.12,
-                        actionStatus: [0]
-                    }, {
-                        id: '0002',
-                        name: '大白菜',
-                        price: 22.12
-                    }, {
-                        id: '0003',
-                        name: '大白菜',
-                        price: 22.12,
-                        actionStatus: [0, 1]
-                    }, {
-                        id: '0004',
-                        name: '大白菜',
-                        price: 22.12,
-                        actionStatus: [1, 0]
-                    }, {
-                        id: '0005',
-                        name: '大白菜',
-                        price: 22.12
-                    }, {
-                        id: '00015',
-                        name: '大白菜',
-                        price: 22.12
-                    }, {
-                        id: '00013',
-                        name: '大白菜',
-                        price: 22.12,
-                        actionStatus: [1, 1]
-                    }]
-                })
-            });
-        }, 2000);
-    }
-
-    onFocus() {
-        this.setState({
-            show: true
-        });
-    }
-
-    handleEnter(index) {
-        console.log(index, this.state.coolData.list[index]);
-    }
-
-    onHide() {
-        this.setState({
-            show: false
-        });
-    }
-
-    render() {
-        return (
-            <div style={{width: '400px'}}>
-                <DropSelect
-                    show={this.state.show}
-                    data={this.state.coolData}
-                    onHide={this.onHide}
-                    onEnter={this.handleEnter}
-                >
-                    <input className="form-control" onFocus={this.onFocus}/>
-                </DropSelect>
-            </div>
-        );
-    }
-}
 
 class AdvanceSelectComponent extends React.Component {
     constructor(props) {
@@ -204,8 +83,6 @@ class SelectWrap extends React.Component {
                 <h1 id="select">选择</h1>
                 <h2 id="AdvanceSelect">AdvanceSelect</h2>
                 <AdvanceSelectComponent />
-                <h2 id="DropSelect">DropSelect</h2>
-                <DropSelectWrap/>
             </div>
         );
     }
