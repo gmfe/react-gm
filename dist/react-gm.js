@@ -2073,9 +2073,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                } else if (keyCode === 13) {
 	                    // 键盘 回车
 	                    var dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
-	                    dom.click();
-
-	                    !this.props.multiple && this.refInput.blur();
+	                    if (dom) {
+	                        dom.click();
+	                        !this.props.multiple && this.refInput.blur();
+	                    }
 	                }
 
 	                return;
@@ -2095,6 +2096,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            this.setState({
 	                activeIndex: (size + activeIndex) % size
+	            });
+	        }
+	    }, {
+	        key: 'handleItemMouseEnter',
+	        value: function handleItemMouseEnter(activeIndex) {
+	            this.setState({
+	                activeIndex: activeIndex
 	            });
 	        }
 	    }, {
@@ -2245,7 +2253,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                    'active': _this6.state.selected.indexOf(value) > -1,
 	                                                    'line-selected': _this6.state.activeIndex === itemSequence
 	                                                }),
-	                                                onClick: _this6.handleSelect.bind(_this6, value)
+	                                                onClick: _this6.handleSelect.bind(_this6, value),
+	                                                onMouseEnter: _this6.handleItemMouseEnter.bind(_this6, itemSequence)
 	                                            },
 	                                            _react2.default.createElement(
 	                                                _flex2.default,
@@ -2284,7 +2293,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                    'active': _this6.state.selected.indexOf(value) > -1,
 	                                    'line-selected': _this6.state.activeIndex === i
 	                                }),
-	                                onClick: _this6.handleSelect.bind(_this6, value)
+	                                onClick: _this6.handleSelect.bind(_this6, value),
+	                                onMouseEnter: _this6.handleItemMouseEnter.bind(_this6, i)
 	                            },
 	                            value.name
 	                        );

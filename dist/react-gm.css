@@ -945,8 +945,7 @@
   border-top: none;
 }
 .gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-item.active.line-selected {
-  background-color: #0080bd;
-  border-color: #0080bd;
+  background-color: #1c9bd7;
 }
 .gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-item.line-selected {
   background-color: #f5f5f5;
