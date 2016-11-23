@@ -1,5 +1,6 @@
 import 'gm-bootstrap/dist/css/bootstrap.css';
 import './index.less';
+import 'markdown-it-react-loader/index.css';
 import 'highlight.js/styles/default.css';
 
 import React from 'react';
@@ -98,6 +99,54 @@ const setNavCurrent = () => {
 };
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleAnchor = ::this.handleAnchor;
+        this.doScrollToAnchor = ::this.doScrollToAnchor;
+    }
+
+    componentDidMount() {
+        this.doScrollToAnchor();
+    }
+
+    componentDidUpdate() {
+        // TODO 目前应该就只有路由变化
+        this.doScrollToAnchor();
+    }
+
+    doScrollToAnchor() {
+        const {anchor} = this.props.location.query;
+        if (anchor) {
+            const dom = document.getElementById(anchor);
+            if (dom) {
+                const top = dom.offsetTop;
+                console.log(top);
+                setTimeout(() => {
+                    document.body.scrollTop = top;
+                }, 100);
+            }
+        }
+    }
+
+    // 处理文档的anchor
+    handleAnchor(e) {
+        const {tagName, className} = e.target;
+        const {query, pathname} = this.props.location;
+        if (tagName === 'A' && className === 'header-anchor') {
+            e.preventDefault();
+
+            const anchor = e.target.parentNode.id;
+            if (query.anchor !== anchor) {
+                hashHistory.push({
+                    pathname,
+                    query: {
+                        anchor
+                    }
+                });
+            }
+        }
+    }
+
     render() {
         // 暴力，莫喷
         setTimeout(() => {
@@ -122,7 +171,7 @@ class App extends React.Component {
                     <div className="demo-left">
                         <NavConfig/>
                     </div>
-                    <GMFlex flex column className="demo-content">
+                    <GMFlex flex column className="demo-content doc markdown-body" onClick={this.handleAnchor}>
                         {this.props.children}
                     </GMFlex>
                 </GMFlex>

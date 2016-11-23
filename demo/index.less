@@ -9,29 +9,6 @@ h1 {
   padding-bottom: 0.3em;
 }
 
-.doc-nav {
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding: 10px;
-  border-left: 1px solid @gm-border-color;
-
-  div {
-
-  }
-  a {
-    padding: 2px 2px 2px 1em;
-    color: black;
-    &:last-child {
-      font-size: 12px;
-    }
-  }
-
-  & > a.doc-nav-title {
-    padding-left: 0;
-  }
-}
-
 .demo {
   .demo-header {
     background-color: #303030;
@@ -64,6 +41,11 @@ h1 {
     .demo-left {
       width: 200px;
       min-width: 200px;
+      padding-right: 20px;
+
+      h2 a, h3 a {
+        display: none;
+      }
 
       h2 {
         font-size: 16px;
@@ -96,78 +78,4 @@ h1 {
       }
     }
   }
-}
-
-.demo-box {
-  border: 1px solid @gm-border-color;
-  margin-bottom: 20px;
-
-  &:hover {
-    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5);
-    z-index: 10;
-  }
-
-  .demo-instance {
-    padding: 10px;
-    h4 {
-      margin: 0 0 10px;
-      font-size: 14px;
-    }
-  }
-
-  .demo-meta {
-    .demo-description {
-      border-top: 1px solid @gm-border-color;
-      padding: 10px;
-      p {
-        margin: 0;
-      }
-    }
-    .demo-code {
-      display: none;
-      border-top: 1px dashed @gm-border-color;
-      padding: 10px;
-      pre {
-        background: white;
-        margin: 0;
-        padding: 0;
-        border: none;
-      }
-    }
-  }
-
-  .demo-code-btn {
-    padding: 10px;
-    border-top: 1px solid @gm-border-color;
-    cursor: pointer;
-
-    i {
-      margin: auto;
-      display: block;
-      border-bottom: 8px solid transparent;
-      border-left: 8px solid transparent;
-      border-top: 8px solid @gm-border-color;
-      border-right: 8px solid transparent;
-      margin-bottom: -8px;
-      width: 0;
-      height: 0;
-    }
-  }
-
-  &.code-active {
-    .demo-code {
-      display: block;
-    }
-    .demo-code-btn {
-      i {
-        border-top: 8px solid transparent;
-        border-left: 8px solid transparent;
-        border-bottom: 8px solid @gm-border-color;
-        border-right: 8px solid transparent;
-        margin-top: -8px;
-        margin-bottom: 0;
-      }
-    }
-  }
-
 }
