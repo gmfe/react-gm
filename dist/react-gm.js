@@ -1993,7 +1993,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate(prevProps, prevState) {
-	            if (this.state.activeIndex !== prevState.activeIndex) {
+	            if (this.state.activeIndex !== prevState.activeIndex && this.searchSelectList) {
 	                var dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
 	                dom && dom.scrollIntoViewIfNeeded();
 	            }
@@ -4157,7 +4157,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function processData(data) {
 	            return Object.assign({
 	                loading: false,
-	                show: false,
 	                actions: [],
 	                list: [],
 	                columns: []
@@ -4247,7 +4246,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        null,
 	                        '\xA0'
 	                    ),
-	                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-refresh' })
+	                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-refresh glyphicon-spin' })
 	                );
 	            } else {
 	                coolList = list.map(function (rowData, rowIndex) {
@@ -4346,10 +4345,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	DropSelect.propTypes = {
-	    show: _react2.default.PropTypes.bool,
-	    loading: _react2.default.PropTypes.bool,
+	    show: _react2.default.PropTypes.bool.isRequired,
 	    data: _react2.default.PropTypes.object,
-	    onEnter: _react2.default.PropTypes.func
+	    onEnter: _react2.default.PropTypes.func,
+	    onHide: _react2.default.PropTypes.func
 	};
 
 	DropSelect.defaultProps = {
@@ -5342,9 +5341,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    style: _react.PropTypes.object,
 	    size: _react.PropTypes.number
 	};
+
 	Loading.defaultProps = {
 	    size: 50
 	};
+
 	exports.default = Loading;
 
 /***/ },
