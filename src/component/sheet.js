@@ -56,9 +56,7 @@ class Sheet extends React.Component {
         let select = false, isSelectAll = false, list = this.props.list || [], loading = this.props.loading, enableEmptyTip = this.props.enableEmptyTip, scrollX = this.props.scrollX;
 
         if (list.length > 0) {
-            isSelectAll = _.filter(list, value => {
-                    return value._gm_select;
-                }).length === list.length;
+            isSelectAll = _.filter(list, value => value._gm_select).length === list.length;
         }
 
         const children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
@@ -91,17 +89,20 @@ class Sheet extends React.Component {
                     <div className="gm-marginBottom5 text-right">
                         {batchs.props.children}
                     </div>
-                ) : undefined}
+                ) : null}
                 <div className={"gm-sheet-table" + (scrollX ? ' gm-sheet-table-scroll-x' : '')}>
                     <table className="table table-striped table-hover table-bordered">
                         <thead>
                         <tr>
                             {select ? (
                                 <th className="gm-sheet-select">
-                                    <input type="checkbox" checked={isSelectAll}
-                                           onChange={this.handleSelectAll.bind(this, select)}/>
+                                    <input
+                                        type="checkbox"
+                                        checked={isSelectAll}
+                                        onChange={this.handleSelectAll.bind(this, select)}
+                                    />
                                 </th>
-                            ) : undefined}
+                            ) : null}
                             {_.map(columns, (value, index) => {
                                 const {
                                     children, field, name, // eslint-disable-line
@@ -111,7 +112,7 @@ class Sheet extends React.Component {
                             })}
                             {actions ? (
                                 <th>操作</th>
-                            ) : undefined}
+                            ) : null}
                         </tr>
                         </thead>
                         <tbody>
@@ -120,14 +121,14 @@ class Sheet extends React.Component {
                                 <td colSpan="99" className="text-center">加载中...
                                 </td>
                             </tr>
-                        ) : undefined}
+                        ) : null}
                         {(!loading && enableEmptyTip && list.length === 0) ? (
                             <tr>
                                 <td colSpan="99" className="text-center">
                                     {enableEmptyTip === true ? '没有数据' : enableEmptyTip}
                                 </td>
                             </tr>
-                        ) : undefined}
+                        ) : null}
                         {!loading ? _.map(list, (value, index) => (
                             <tr {...this.props.getTrProps(index)} key={index}>
                                 {select ? (
@@ -135,7 +136,7 @@ class Sheet extends React.Component {
                                         <input type="checkbox" checked={value._gm_select || false}
                                                onChange={this.handleSelect.bind(this, select, index)}/>
                                     </td>
-                                ) : undefined}
+                                ) : null}
                                 {_.map(columns, (v, i) => {
                                     const {
                                         children, field, name, // eslint-disable-line
@@ -151,9 +152,9 @@ class Sheet extends React.Component {
                                     <td>
                                         {actions.props.children(value, index)}
                                     </td>
-                                ) : undefined}
+                                ) : null}
                             </tr>
-                        )) : undefined}
+                        )) : null}
                         </tbody>
                     </table>
                 </div>

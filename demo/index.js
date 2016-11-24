@@ -21,6 +21,10 @@ import DropSelect from './doc/DropSelect.md';
 import SearchSelect from './doc/SearchSelect.md';
 import FilterSearchSelect from './doc/FilterSearchSelect.md';
 import Sheet from './doc/Sheet.md';
+import SheetColumn from './doc/SheetColumn.md';
+import SheetAction from './doc/SheetAction.md';
+import SheetSelect from './doc/SheetSelect.md';
+import SheetBatchAction from './doc/SheetBatchAction.md';
 import ImportLead from './doc/ImportLead.md';
 import Storage from './doc/Storage.md';
 import Calendar from './doc/Calendar.md';
@@ -44,7 +48,7 @@ const docMap = {
     DropSelect,
     SearchSelect,
     FilterSearchSelect,
-    Sheet,
+    Sheet, SheetColumn, SheetSelect, SheetAction, SheetBatchAction,
     ImportLead,
     Storage,
     Calendar,
@@ -102,6 +106,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.handleAnchor = ::this.handleAnchor;
+        this.handleNav = ::this.handleNav;
         this.doScrollToAnchor = ::this.doScrollToAnchor;
     }
 
@@ -147,6 +152,14 @@ class App extends React.Component {
         }
     }
 
+    // 处理左侧导航的点击
+    handleNav(e) {
+        const {tagName} = e.target;
+        if (tagName === 'A') {
+            document.body.scrollTop = 0;
+        }
+    }
+
     render() {
         // 暴力，莫喷
         setTimeout(() => {
@@ -168,7 +181,7 @@ class App extends React.Component {
                     </GMFlex>
                 </div>
                 <GMFlex className="demo-center container">
-                    <div className="demo-left">
+                    <div className="demo-left" onClick={this.handleNav}>
                         <NavConfig/>
                     </div>
                     <GMFlex flex column className="demo-content doc markdown-body" onClick={this.handleAnchor}>

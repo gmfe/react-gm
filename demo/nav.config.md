@@ -23,6 +23,10 @@
 
 ### 数据
 - [Sheet](#/doc/Sheet)
+- [SheetColumn](#/doc/SheetColumn)
+- [SheetAction](#/doc/SheetAction)
+- [SheetSelect](#/doc/SheetSelect)
+- [SheetBatchAction](#/doc/SheetBatchAction)
 - [ImportLead](#/doc/ImportLead)
 - [Storage](#/doc/Storage)
 

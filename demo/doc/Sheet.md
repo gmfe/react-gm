@@ -1,23 +1,30 @@
 ---
 imports:
-    import {Sheet, SheetColumn} from '../../src/index';
+    import {Sheet, SheetColumn, Flex} from '../../src/index';
 ---
 ## Sheet
 
 取代Grid组件。更React风格化。给开发者更多控制，更多灵活。
 
 ::: demo 一个简单的demo
+```js
+const list= [{
+    id: 3,
+    name: '小明',
+    age: '10'
+}, {
+    id: 4,
+    name: '小红',
+    age: '15',
+    _gm_select: true
+}, {
+   id: 5,
+   name: '小蓝',
+   age: '20'
+}];
+```
 ```jsx
-<Sheet list={[{
-     id: 3,
-     name: '小明',
-     age: '10'
- }, {
-     id: 4,
-     name: '小红',
-     age: '15',
-     _gm_select: true
- }]}>
+<Sheet list={list}>
     <SheetColumn field="id" name="id"/>
     <SheetColumn field="name" name="名字"/>
     <SheetColumn field="age" name="年龄"/>
@@ -25,62 +32,114 @@ imports:
 ```
 :::
 
-### Props
+::: demo loading 和 没有数据
+```jsx
+<Flex>
+    <Flex flex column> 
+        <Sheet list={list} loading={true}>
+            <SheetColumn field="id" name="id"/>
+            <SheetColumn field="name" name="名字"/>
+            <SheetColumn field="age" name="年龄"/>
+        </Sheet>
+    </Flex>
+    <div className="gm-padding5"/>
+    <Flex flex column> 
+        <Sheet list={[]} enableEmptyTip>
+            <SheetColumn field="id" name="id"/>
+            <SheetColumn field="name" name="名字"/>
+            <SheetColumn field="age" name="年龄"/>
+        </Sheet>
+    </Flex>
+</Flex> 
+```
+:::
 
+::: demo tr传props自定义行
+```jsx
+<Sheet list={list} getTrProps={index => (index === 1 ? {
+    className: 'warning'
+} : {})}>
+    <SheetColumn field="id" name="id"/>
+    <SheetColumn field="name" name="名字"/>
+    <SheetColumn field="age" name="年龄"/>
+</Sheet>
+```
+:::
+
+::: demo table 滚动。但是要调用方保证可滚动。 比如没有足够的宽度。
+```jsx
+<div style={{width: '300px'}}>
+    <Sheet list={list} scrollX>
+        <SheetColumn field="id" name="id"/>
+        <SheetColumn field="name" name="名字"/>
+        <SheetColumn field="age" name="年龄"/>
+        <SheetColumn field="id" name="id"/>
+        <SheetColumn field="name" name="名字"/>
+        <SheetColumn field="age" name="年龄"/>
+        <SheetColumn field="id" name="id"/>
+        <SheetColumn field="name" name="名字"/>
+        <SheetColumn field="age" name="年龄"/>
+        <SheetColumn field="id" name="id"/>
+        <SheetColumn field="name" name="名字"/>
+        <SheetColumn field="age" name="年龄"/>
+        <SheetColumn field="id" name="id"/>
+        <SheetColumn field="name" name="名字"/>
+        <SheetColumn field="age" name="年龄"/>
+        <SheetColumn field="id" name="id"/>
+        <SheetColumn field="name" name="名字"/>
+        <SheetColumn field="age" name="年龄"/>
+    </Sheet>
+</div>
+```
+:::
+
+### Props
 - `list (Array|isRequired)` 是列表的数据，最好是数组。 当然有人没注意传了obj（非常不推荐）。
 - `loading (bool)` true显示loading状态，false显示数据
 - `enableEmptyTip (bool|string|element)` true则显示默认的“没有数据”文案，其他值string or element则直接显示 
+- `className (string)`
 - `getTrProps (func)` 自定义`tr`的props，提供`index`索引，返回 object。
 - `scrollX (bool)` 是否允许table横向滚动。 但是table是否具备横向滚动的条件要调用方保证
 
-```jsx
-// 一般用法
-<Sheet list={list}>...</Sheet>
- 
-// loading 状态
-<Sheet list={list} loading={true}>...</Sheet>
+## SheetColumn
 
-// 如果数据为空则显示“没有数据”
-<Sheet list={list} loading={false} enableEmptyTip>...</Sheet>
 
-<Sheet list={list} loading={false} enableEmptyTip="没有数据，请重新查询">...</Sheet>
 
-// 如果数据为空则显示“没有数据”
-<Sheet list={list} loading={false} enableEmptyTip={<div>啊啊啊啊啊啊啊啊啊啊</div>}>...</Sheet>
-```
+
 
 ### SheetColumn
 
 - `field (string|isRequired)` 某列读取数据的字段名
-- `name (string|isRequired)` 某列表头的名字
-- `children (func)` 返回任意东西，自定义单元格展现 
+- `name (string|element|isRequired)` 某列表头的名字
+- `children (func)` 返回任意东西，自定义单元格展现
+- ...rest
 
 SheetColumn的顺序决定table列的顺序
 
 ```jsx
 // 一般用法
 <SheetColumn field="id" name="id"/>
-
+    
 // 可以传入各种className style自定义
 <SheetColumn field="name" name="name" style={{
     width: '150px'
 }}/>
-
+    
 // 可以自定义显示，children传入一个func，func提供当前数据值，返回要显示的结果
 <SheetColumn field="name" name="name">
     {value => '你好 ' + value}
 </SheetColumn>
-
+    
 // 不止文本，可以返回任何东西。 可交互的input啊，button啊等
 <SheetColumn field="name" name="name">
     {value => <strong>你好 {value}</strong>}
 </SheetColumn>
-
+    
 // func第二个参数提供当前数据的索引，通过索引你可以找到当前的数据
 <SheetColumn field="name" name="name">
     {(value, i) => <strong>你好 {value}，你的id是 {list[i].id}</strong>}
 </SheetColumn>
-
+    
 // field你也可以乱来，你喜欢
 <SheetColumn field="asfafasfas" name="field乱来">
     {(value, i) => <strong>你好 {list[i].name}，你的id是 {list[i].id}</strong>}
