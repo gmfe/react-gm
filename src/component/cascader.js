@@ -117,7 +117,8 @@ Cascader.propTypes = {
     onChange: PropTypes.func,
     // 没有this.props.children时有效
     inputProps: PropTypes.object,
-    valueRender: PropTypes.func
+    valueRender: PropTypes.func,
+    children: PropTypes.element
 };
 
 Cascader.defaultProps = {

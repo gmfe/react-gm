@@ -47,6 +47,7 @@ class Cascader1 extends React.Component {
             data: cascaderData
         };
     }
+    
     render() {
         return (
             <div style={{width: '200px'}}>
@@ -54,11 +55,11 @@ class Cascader1 extends React.Component {
                     data={this.state.data}
                     value={this.state.value}
                     onChange={::this.handleChange}
-                    inputProps={{className: 'input-sm'}}
                 />
             </div>
         );
     }
+    
     handleChange(value) {
         console.log(value);
         this.setState({
@@ -76,30 +77,14 @@ class Cascader1 extends React.Component {
 ::: demo 不提供value
 ```js
 class Cascader2 extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: ['0', '01'],
-            data: cascaderData
-        };
-    }
     render() {
         return (
             <div style={{width: '200px'}}>
                 <Cascader
-                    data={this.state.data}
-                    value={this.state.value}
-                    onChange={::this.handleChange}
-                    inputProps={{className: 'input-sm'}}
+                    data={cascaderData}
                 />
             </div>
         );
-    }
-    handleChange(value) {
-        console.log(value);
-        this.setState({
-            value
-        });
     }
 }
 ```
@@ -118,18 +103,20 @@ class Cascader3 extends React.Component {
             data: cascaderData
         };
     }
+    
     render() {
         return (
             <div style={{width: '200px'}}>
                 <Cascader
                     data={this.state.data}
                     value={this.state.value}
+                    valueRender={(value) => (value && value.length > 0 ? value[value.length - 1].name : '')}
                     onChange={::this.handleChange}
-                    inputProps={{className: 'input-sm'}}
                 />
             </div>
         );
     }
+    
     handleChange(value) {
         console.log(value);
         this.setState({
@@ -143,9 +130,29 @@ class Cascader3 extends React.Component {
 ```
 :::
 
-::: demo 自定义children
+::: demo 更改input样式（sm尺寸）
 ```js
 class Cascader4 extends React.Component {
+    render() {
+        return (
+            <div style={{width: '200px'}}>
+                <Cascader
+                    data={cascaderData}
+                    inputProps={{className: 'input-sm'}}
+                />
+            </div>
+        );
+    }
+}
+```
+```jsx
+<Cascader4/>
+```
+:::
+
+::: demo 自定义children
+```js
+class Cascader5 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -153,6 +160,7 @@ class Cascader4 extends React.Component {
             data: cascaderData
         };
     }
+    
     render() {
         let value = [];
         if (this.state.value.length > 0) {
@@ -168,7 +176,7 @@ class Cascader4 extends React.Component {
             <div style={{width: '200px'}}>
                 <Cascader
                     data={this.state.data}
-                    onChange={this.handleChange}
+                    onChange={::this.handleChange}
                 >
                     <div>
                         {_.map(value, v => v.name).join(',')}
@@ -178,6 +186,7 @@ class Cascader4 extends React.Component {
             </div>
         );
     }
+    
     handleChange(value) {
         console.log(value);
         this.setState({
@@ -187,12 +196,12 @@ class Cascader4 extends React.Component {
 }
 ```
 ```jsx
-<Cascader4/>
+<Cascader5/>
 ```
 :::
 
 ### Props
-- `data (array|isRequired)` 格式如上面的data，`value` 是值，`name`是值的展现，`children`是其下一级。
+- `data (array|isRequired)` 格式如上面的data，`{'[{value: 1, name: \'深圳\', children: [{...}]}]'}` 。
 - `value (array)` 一个数组或者null，表示选中了那些数据。 ['0']则选择了广东，['0', '01']则选择了广东，深圳
 - `defaultValue` 同上
 - `onChange (func)` 提供和value一样的数组

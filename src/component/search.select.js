@@ -94,6 +94,7 @@ class SearchSelect extends React.Component {
         // 慎用blur，在选择的之前会出发blur
         event.preventDefault();
         const {multiple} = this.props;
+
         // 多选不处理
         if (!multiple) {
             // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
@@ -198,7 +199,8 @@ class SearchSelect extends React.Component {
             value
         });
 
-        if (!value) {
+        // 多选不处理
+        if (!this.props.multiple && !value) {
             this.doSelect([]);
         }
 

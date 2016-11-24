@@ -19,17 +19,10 @@ class FilterSearchSelect extends React.Component {
     render() {
         const {
             list,
-            isGroupList,
-            selected,
-            onSelect,
             onFilter,
-            delay,
-            listMaxHeight,
-            multiple,
-            placeholder,
-            isScrollToSelected,
             ...rest
         } = this.props;
+
         const {query} = this.state;
         let filterList = list;
         if (query) {
@@ -39,15 +32,7 @@ class FilterSearchSelect extends React.Component {
             <SearchSelect
                 {...rest}
                 list={filterList}
-                isGroupList={isGroupList}
-                selected={selected}
-                onSelect={onSelect}
                 onSearch={this.handleSearch}
-                delay={delay}
-                listMaxHeight={listMaxHeight}
-                multiple={multiple}
-                placeholder={placeholder}
-                isScrollToSelected={isScrollToSelected}
             />
         );
     }
