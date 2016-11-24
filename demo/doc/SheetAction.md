@@ -1,21 +1,44 @@
 ---
 imports:
-    import {Sheet, SheetColumn, Flex} from '../../src/index';
+    import {Sheet, SheetColumn, SheetAction, Flex} from '../../src/index';
 ---
 ## SheetAction
 
-- `children (func)` func提供当前数据和当前数据的索引，返回值为渲染内容。返回任意东西，自定义操作区域
-
-行的操作。Sheet会自动放到表格最后面
-
-```jsx
-<SheetAction>
-    {(eList, i) => (
-        <div>
-            <button className="btn btn-xs btn-default gm-marginRight5"
-                    onClick={this.handleAction.bind(this, eList, i)}>删除
-            </button>
-        </div>
-    )}
-</SheetAction>
+::: demo 操作行为
+```js
+const list= [{
+    id: 3,
+    name: '小明',
+    age: '10'
+}, {
+    id: 4,
+    name: '小红',
+    age: '15',
+    _gm_select: true
+}, {
+   id: 5,
+   name: '小蓝',
+   age: '20'
+}];
 ```
+```jsx
+<Sheet list={list}>
+    <SheetColumn field="id" name="id"/>
+    <SheetColumn field="name" name="名字"/>
+    <SheetColumn field="age" name="年龄"/>
+    <SheetAction>
+        {(eList, i) => (
+            <div>
+                <button 
+                    className="btn btn-xs btn-default gm-marginRight5"
+                    onClick={() => alert('dosomething')}
+                >删除</button>
+            </div>
+        )}
+    </SheetAction>
+</Sheet>
+```
+:::
+
+### Props
+- `children (func)` func提供当前数据和当前数据的索引，返回值为渲染内容。

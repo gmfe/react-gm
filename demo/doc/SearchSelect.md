@@ -14,14 +14,14 @@ SearchSelect  和 FilterSearchSelect 如果用起来发现二次进入的时候�
 const searchSelectData = [
     {name: '我们'},
     {name: '1'},
-    {name: '2我们我们我们我们'},
+    {name: '2我们我们我们我们2我们我们我们我们2我们我们我们我们'},
     {name: '3我们'},
     {name: '4我们'},
     {name: '5我们'},
     {name: '6我们'},
     {name: 'no'}
 ];
-
+    
 const searchSelectGroupData = [{
     label: '一组',
     children: [
@@ -135,14 +135,16 @@ class SearchSelect2 extends React.Component {
     
     render() {
         return (
-            <SearchSelect
-                list={this.state.list}
-                selected={this.state.selected}
-                onSearch={this.handleSearch}
-                onSelect={this.handleSelect}
-                multiple
-                placeholder="搜索"
-            />
+            <div style={{width: '500px'}}>
+                <SearchSelect
+                    list={this.state.list}
+                    selected={this.state.selected}
+                    onSearch={this.handleSearch}
+                    onSelect={this.handleSelect}
+                    multiple
+                    placeholder="搜索"
+                />
+            </div>
         );
     }
 }

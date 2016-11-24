@@ -26,20 +26,26 @@ const list= [{
 ```jsx
 <Sheet list={list}>
     <SheetColumn field="id" name="id"/>
+    
     <SheetColumn field="name" name={<div>1换行<br/>2</div>}/>
+    
     <SheetColumn field="age" name="年龄" style={{width: '100px', backgroundColor: 'red'}}/>
+    
     {/*可以自定义显示，children传入一个func，func提供当前数据值，返回要显示的结果*/}
     <SheetColumn field="name" name="name">
         {value => '你好 ' + value}
     </SheetColumn>
+    
     {/*不止文本，可以返回任何东西。 可交互的input啊，button啊等*/}
     <SheetColumn field="name" name="name">
         {value => <strong>你好 {value}</strong>}
     </SheetColumn>
+    
     {/*func第二个参数提供当前数据的索引，通过索引你可以找到当前的数据*/}
     <SheetColumn field="name" name="name">
         {(value, i) => <strong>你好 {value}，你的id是 {list[i].id}</strong>}
     </SheetColumn>
+    
     {/*field你也可以乱来，你喜欢*/}
     <SheetColumn field="asfafasfas" name="field乱来">
         {(value, i) => <strong>你好 {list[i].name}，你的id是 {list[i].id}</strong>}
