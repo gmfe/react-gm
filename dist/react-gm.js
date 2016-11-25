@@ -1086,19 +1086,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Pagination = function (_React$Component) {
-	    _inherits(Pagination, _React$Component);
+	var WithCount = function (_React$Component) {
+	    _inherits(WithCount, _React$Component);
 
-	    function Pagination(props) {
-	        _classCallCheck(this, Pagination);
+	    function WithCount(props) {
+	        _classCallCheck(this, WithCount);
 
-	        var _this = _possibleConstructorReturn(this, (Pagination.__proto__ || Object.getPrototypeOf(Pagination)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (WithCount.__proto__ || Object.getPrototypeOf(WithCount)).call(this, props));
 
-	        _this.onPage = _this.onPage.bind(_this);
+	        _this.handlePage = _this.handlePage.bind(_this);
 	        return _this;
 	    }
 
-	    _createClass(Pagination, [{
+	    _createClass(WithCount, [{
 	        key: "render",
 	        value: function render() {
 	            var data = Object.assign({}, this.props.data);
@@ -1128,7 +1128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: "gm-pagination" },
 	                _react2.default.createElement(
 	                    "ul",
-	                    { className: "pagination pagination-sm", onClick: this.onPage },
+	                    { className: "pagination pagination-sm", onClick: this.handlePage },
 	                    _react2.default.createElement(
 	                        "li",
 	                        { className: data.index === 1 ? 'disabled' : '' },
@@ -1199,8 +1199,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            );
 	        }
 	    }, {
-	        key: "onPage",
-	        value: function onPage(event) {
+	        key: "handlePage",
+	        value: function handlePage(event) {
 	            var page = ~~event.target.getAttribute('data-page'),
 	                data = this.props.data,
 	                count = Math.ceil(data.count / data.limit),
@@ -1216,13 +1216,114 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }]);
 
+	    return WithCount;
+	}(_react2.default.Component);
+
+	var WithoutCount = function (_React$Component2) {
+	    _inherits(WithoutCount, _React$Component2);
+
+	    function WithoutCount(props) {
+	        _classCallCheck(this, WithoutCount);
+
+	        var _this2 = _possibleConstructorReturn(this, (WithoutCount.__proto__ || Object.getPrototypeOf(WithoutCount)).call(this, props));
+
+	        _this2.handlePage = _this2.handlePage.bind(_this2);
+	        return _this2;
+	    }
+
+	    _createClass(WithoutCount, [{
+	        key: "handlePage",
+	        value: function handlePage(action) {
+	            var _props = this.props,
+	                data = _props.data,
+	                toPage = _props.toPage;
+
+
+	            if (action === -1) {
+	                if (data.offset === 0) {
+	                    return;
+	                }
+	                toPage({
+	                    offset: data.offset + data.limit,
+	                    limit: data.limit
+	                });
+	            } else {
+	                toPage({
+	                    offset: Math.max(data.offset - data.limit, 0),
+	                    limit: data.limit
+	                });
+	            }
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var data = this.props.data;
+
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "gm-pagination" },
+	                _react2.default.createElement(
+	                    "ul",
+	                    { className: "pagination pagination-sm" },
+	                    _react2.default.createElement(
+	                        "li",
+	                        { className: data.offset === 0 ? 'disabled' : '' },
+	                        _react2.default.createElement(
+	                            "a",
+	                            {
+	                                href: "javascript:;",
+	                                onClick: this.handlePage.bind(this, -1)
+	                            },
+	                            "\u4E0A\u4E00\u9875"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "li",
+	                        null,
+	                        _react2.default.createElement(
+	                            "a",
+	                            {
+	                                href: "javascript:;",
+	                                onClick: this.handlePage.bind(this, 1)
+	                            },
+	                            "\u4E0B\u4E00\u9875"
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return WithoutCount;
+	}(_react2.default.Component);
+
+	var Pagination = function (_React$Component3) {
+	    _inherits(Pagination, _React$Component3);
+
+	    function Pagination() {
+	        _classCallCheck(this, Pagination);
+
+	        return _possibleConstructorReturn(this, (Pagination.__proto__ || Object.getPrototypeOf(Pagination)).apply(this, arguments));
+	    }
+
+	    _createClass(Pagination, [{
+	        key: "render",
+	        value: function render() {
+	            if (this.props.data.count) {
+	                return _react2.default.createElement(WithCount, this.props);
+	            } else {
+	                return _react2.default.createElement(WithoutCount, this.props);
+	            }
+	        }
+	    }]);
+
 	    return Pagination;
 	}(_react2.default.Component);
 
 	Pagination.displayName = 'Pagination';
 	Pagination.propTypes = {
 	    data: _react2.default.PropTypes.shape({
-	        count: _react2.default.PropTypes.number.isRequired,
+	        count: _react2.default.PropTypes.number,
 	        offset: _react2.default.PropTypes.number.isRequired,
 	        limit: _react2.default.PropTypes.number.isRequired
 	    }),
@@ -1235,7 +1336,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -1255,8 +1356,68 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var PaginationText = function (_React$Component) {
-	    _inherits(PaginationText, _React$Component);
+	var WithCount = function (_React$Component) {
+	    _inherits(WithCount, _React$Component);
+
+	    function WithCount() {
+	        _classCallCheck(this, WithCount);
+
+	        return _possibleConstructorReturn(this, (WithCount.__proto__ || Object.getPrototypeOf(WithCount)).apply(this, arguments));
+	    }
+
+	    _createClass(WithCount, [{
+	        key: "render",
+	        value: function render() {
+	            var data = this.props.data;
+
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "gm-pagination-text" },
+	                "\u663E\u793A\u7B2C ",
+	                data.offset + 1,
+	                " \u5230 ",
+	                Math.min(data.count, data.offset + data.limit),
+	                " \u884C\uFF0C\u4E00\u5171 ",
+	                data.count,
+	                " \u884C\u8BB0\u5F55"
+	            );
+	        }
+	    }]);
+
+	    return WithCount;
+	}(_react2.default.Component);
+
+	var WithoutCount = function (_React$Component2) {
+	    _inherits(WithoutCount, _React$Component2);
+
+	    function WithoutCount() {
+	        _classCallCheck(this, WithoutCount);
+
+	        return _possibleConstructorReturn(this, (WithoutCount.__proto__ || Object.getPrototypeOf(WithoutCount)).apply(this, arguments));
+	    }
+
+	    _createClass(WithoutCount, [{
+	        key: "render",
+	        value: function render() {
+	            var data = this.props.data;
+
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "gm-pagination-text" },
+	                "\u663E\u793A\u7B2C ",
+	                data.offset + 1,
+	                " \u5230 ",
+	                data.offset + data.limit,
+	                " \u884C"
+	            );
+	        }
+	    }]);
+
+	    return WithoutCount;
+	}(_react2.default.Component);
+
+	var PaginationText = function (_React$Component3) {
+	    _inherits(PaginationText, _React$Component3);
 
 	    function PaginationText() {
 	        _classCallCheck(this, PaginationText);
@@ -1265,20 +1426,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    _createClass(PaginationText, [{
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
-	            var data = Object.assign({}, this.props.data);
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'gm-pagination-text' },
-	                '\u663E\u793A\u7B2C ',
-	                data.offset + 1,
-	                ' \u5230 ',
-	                Math.min(data.count, data.offset + data.limit),
-	                ' \u884C\uFF0C\u4E00\u5171 ',
-	                data.count,
-	                ' \u884C\u8BB0\u5F55'
-	            );
+	            if (this.props.data.count) {
+	                return _react2.default.createElement(WithCount, this.props);
+	            } else {
+	                return _react2.default.createElement(WithoutCount, this.props);
+	            }
 	        }
 	    }]);
 
@@ -1288,7 +1442,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	PaginationText.displayName = 'PaginationText';
 	PaginationText.propTypes = {
 	    data: _react2.default.PropTypes.shape({
-	        count: _react2.default.PropTypes.number.isRequired,
+	        count: _react2.default.PropTypes.number,
 	        offset: _react2.default.PropTypes.number.isRequired,
 	        limit: _react2.default.PropTypes.number.isRequired
 	    })
@@ -1623,7 +1777,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onChange: _react.PropTypes.func,
 	    // 没有this.props.children时有效
 	    inputProps: _react.PropTypes.object,
-	    valueRender: _react.PropTypes.func
+	    valueRender: _react.PropTypes.func,
+	    children: _react.PropTypes.element
 	};
 
 	Cascader.defaultProps = {
@@ -2038,6 +2193,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // 慎用blur，在选择的之前会出发blur
 	            event.preventDefault();
 	            var multiple = this.props.multiple;
+
 	            // 多选不处理
 
 	            if (!multiple) {
@@ -2162,7 +2318,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                value: value
 	            });
 
-	            if (!value) {
+	            // 多选不处理
+	            if (!this.props.multiple && !value) {
 	                this.doSelect([]);
 	            }
 
@@ -4428,16 +4585,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function render() {
 	            var _props = this.props,
 	                list = _props.list,
-	                isGroupList = _props.isGroupList,
-	                selected = _props.selected,
-	                onSelect = _props.onSelect,
 	                onFilter = _props.onFilter,
-	                delay = _props.delay,
-	                listMaxHeight = _props.listMaxHeight,
-	                multiple = _props.multiple,
-	                placeholder = _props.placeholder,
-	                isScrollToSelected = _props.isScrollToSelected,
-	                rest = _objectWithoutProperties(_props, ['list', 'isGroupList', 'selected', 'onSelect', 'onFilter', 'delay', 'listMaxHeight', 'multiple', 'placeholder', 'isScrollToSelected']);
+	                rest = _objectWithoutProperties(_props, ['list', 'onFilter']);
 
 	            var query = this.state.query;
 
@@ -4447,15 +4596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	            return _react2.default.createElement(_search2.default, _extends({}, rest, {
 	                list: filterList,
-	                isGroupList: isGroupList,
-	                selected: selected,
-	                onSelect: onSelect,
-	                onSearch: this.handleSearch,
-	                delay: delay,
-	                listMaxHeight: listMaxHeight,
-	                multiple: multiple,
-	                placeholder: placeholder,
-	                isScrollToSelected: isScrollToSelected
+	                onSearch: this.handleSearch
 	            }));
 	        }
 	    }]);
@@ -5855,7 +5996,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    'div',
 	                    { className: 'gm-marginBottom5 text-right' },
 	                    batchs.props.children
-	                ) : undefined,
+	                ) : null,
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: "gm-sheet-table" + (scrollX ? ' gm-sheet-table-scroll-x' : '') },
@@ -5871,9 +6012,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                select ? _react2.default.createElement(
 	                                    'th',
 	                                    { className: 'gm-sheet-select' },
-	                                    _react2.default.createElement('input', { type: 'checkbox', checked: isSelectAll,
-	                                        onChange: this.handleSelectAll.bind(this, select) })
-	                                ) : undefined,
+	                                    _react2.default.createElement('input', {
+	                                        type: 'checkbox',
+	                                        checked: isSelectAll,
+	                                        onChange: this.handleSelectAll.bind(this, select)
+	                                    })
+	                                ) : null,
 	                                _underscore2.default.map(columns, function (value, index) {
 	                                    var _value$props = value.props,
 	                                        children = _value$props.children,
@@ -5891,7 +6035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                    'th',
 	                                    null,
 	                                    '\u64CD\u4F5C'
-	                                ) : undefined
+	                                ) : null
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -5905,7 +6049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                    { colSpan: '99', className: 'text-center' },
 	                                    '\u52A0\u8F7D\u4E2D...'
 	                                )
-	                            ) : undefined,
+	                            ) : null,
 	                            !loading && enableEmptyTip && list.length === 0 ? _react2.default.createElement(
 	                                'tr',
 	                                null,
@@ -5914,7 +6058,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                    { colSpan: '99', className: 'text-center' },
 	                                    enableEmptyTip === true ? '没有数据' : enableEmptyTip
 	                                )
-	                            ) : undefined,
+	                            ) : null,
 	                            !loading ? _underscore2.default.map(list, function (value, index) {
 	                                return _react2.default.createElement(
 	                                    'tr',
@@ -5924,7 +6068,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                        null,
 	                                        _react2.default.createElement('input', { type: 'checkbox', checked: value._gm_select || false,
 	                                            onChange: _this6.handleSelect.bind(_this6, select, index) })
-	                                    ) : undefined,
+	                                    ) : null,
 	                                    _underscore2.default.map(columns, function (v, i) {
 	                                        var _v$props = v.props,
 	                                            children = _v$props.children,
@@ -5950,9 +6094,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                        'td',
 	                                        null,
 	                                        actions.props.children(value, index)
-	                                    ) : undefined
+	                                    ) : null
 	                                );
-	                            }) : undefined
+	                            }) : null
 	                        )
 	                    )
 	                ),

@@ -896,7 +896,7 @@
   background-color: white;
 }
 .gm-search-select .gm-search-select-input {
-  padding: 6px 12px;
+  padding: 6px 20px 6px 12px;
   overflow-x: auto;
 }
 .gm-search-select .gm-search-select-input input {
@@ -963,6 +963,9 @@
 }
 .gm-cascader .gm-cascader-input {
   position: relative;
+}
+.gm-cascader .gm-cascader-input input {
+  padding-right: 17px;
 }
 .gm-cascader .gm-cascader-input .glyphicon {
   position: absolute;
