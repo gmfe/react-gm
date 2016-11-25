@@ -3,13 +3,18 @@ var webpack = require('webpack');
 var AssetsPlugin = require('assets-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
+var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+var env = process.env.NODE_ENV;
+var isDev = env === 'development';
 
-module.exports = {
-    devtool: 'eval',
+var config = {
     entry: {
         'index': [
             './demo/index'
         ]
+    },
+    resolve: {
+        alias: {}
     },
     output: {
         path: path.join(__dirname, 'build'),
@@ -39,7 +44,8 @@ module.exports = {
         }, {
             test: /\.(css|less)$/,
             loader: 'style!css?-autoprefixer!postcss!less'
-        }]
+        }],
+        noParse: []
     },
     postcss: function () {
         return [autoprefixer({browsers: ['iOS >= 8', 'Android >= 4.1']}), precss];
@@ -53,3 +59,35 @@ module.exports = {
         }
     }
 };
+
+if (!isDev) {
+    // 压缩
+    config.plugins.push(new uglifyJsPlugin({
+        screw_ie8: false,
+        compress: {
+            screw_ie8: false,
+            warnings: false
+        }
+    }));
+}
+
+// build ++
+var deps = [
+    'react-bootstrap/dist/react-bootstrap.min.js',
+
+    'react-router/umd/ReactRouter.min.js',
+
+    'redux/dist/redux.min.js',
+    'react-redux/dist/react-redux.min.js',
+
+    'underscore/underscore-min.js',
+    'moment/min/moment.min.js'
+];
+deps.forEach(function (dep) {
+    config.resolve.alias[dep.split('/')[0]] = dep;
+    config.module.noParse.push(dep);
+});
+
+module.exports = config;
+
+module.exports = config;

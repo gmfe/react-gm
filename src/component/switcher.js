@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
-import Flex from './flex';
 
 function noop() {
 }
@@ -10,10 +9,20 @@ class Switcher extends React.Component {
         super(props);
 
         this.state = {
+            left: 1,
             checked: props.checked
         };
 
+        this.refOn = null;
+
         this.handleChange = ::this.handleChange;
+    }
+
+    componentDidMount() {
+        // 初始化后开始计算on的宽度，方便做开关切换动画
+        this.setState({
+            left: this.refOn.offsetWidth + 2 + 22 + 1 - 17
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -33,12 +42,11 @@ class Switcher extends React.Component {
         this.props.onChange(checked);
     }
 
-    handleChange() {
+    handleChange(e) {
         if (this.props.disabled) {
             return;
         }
-        const checked = !this.state.checked;
-        this.setChecked(checked);
+        this.setChecked(e.target.checked);
     }
 
     render() {
@@ -49,33 +57,30 @@ class Switcher extends React.Component {
         } = this.props;
 
         const cn = classNames('gm-switcher gm-switcher-' + type, this.props.className, {
-            'gm-switcher-on': this.state.checked,
-            'gm-switcher-off': !this.state.checked,
             'gm-switcher-disabled': disabled
         });
 
-        return this.state.checked ? (
-            <div
-                {...rest}
-                className={cn}
-                onClick={this.handleChange}
-            >
-                <Flex className="gm-switcher-inner">
-                    <Flex flex className="gm-paddingLR5">{on}</Flex>
-                    <Flex className="gm-switcher-dot">&nbsp;</Flex>
-                </Flex>
-            </div>
-        ) : (
-            <div
-                {...rest}
-                className={cn}
-                onClick={this.handleChange}
-            >
-                <Flex className="gm-switcher-inner">
-                    <Flex className="gm-switcher-dot">&nbsp;</Flex>
-                    <Flex flex className="gm-paddingLR5">{off}</Flex>
-                </Flex>
-            </div>
+        const handleStyle = {};
+        if (this.state.checked) {
+            handleStyle.left = this.state.left;
+        }
+
+        return (
+            <label {...rest} className={cn}>
+                <input
+                    disabled={disabled}
+                    type="checkbox"
+                    className="gm-switcher-input"
+                    checked={this.state.checked}
+                    onChange={this.handleChange}
+                />
+                <div className="gm-switcher-label">
+                    <span>{this.state.checked ? on : off}</span>
+                    {/*只需算on的宽度*/}
+                    <span className="gm-switcher-label-on" ref={ref => this.refOn = ref}>{on}</span>
+                </div>
+                <div className="gm-switcher-handle" style={handleStyle}/>
+            </label>
         );
     }
 }
@@ -90,8 +95,8 @@ Switcher.propTypes = {
 };
 Switcher.defaultProps = {
     type: 'default',
-    on: <span>ON&nbsp;</span>,
-    off: <span>OFF</span>,
+    on: 'ON',
+    off: 'OFF',
     onChange: noop
 };
 

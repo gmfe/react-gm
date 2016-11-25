@@ -1,3 +1,4 @@
 .idea
 /deploy
-/demo/doc
+/demo
+/build

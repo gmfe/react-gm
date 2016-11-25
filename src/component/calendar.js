@@ -3,6 +3,8 @@ import moment from 'moment';
 import classNames from 'classnames';
 import _ from 'underscore';
 
+// TODO 优化性能
+
 const noop = () => {
 };
 
@@ -26,6 +28,7 @@ class Day extends React.Component {
             disabled = this.props.disabled;
 
         const cn = classNames('gm-calendar-day', {
+            'gm-calendar-day-now': (+now.startOf('day') === +m.startOf('day')),
             'gm-calendar-day-old': now.month() > m.month(),
             'gm-calendar-day-new': now.month() < m.month(),
             'gm-calendar-day-disabled': disabled,

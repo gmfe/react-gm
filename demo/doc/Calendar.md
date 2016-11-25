@@ -17,13 +17,13 @@ class Calendar1 extends React.Component {
         };
         this.handleSelect = ::this.handleSelect;
     }
-
+    
     render() {
         return (
             <Calendar selected={this.state.selected} onSelect={this.handleSelect}/>
         );
     }
-
+    
     handleSelect(date) {
         this.setState({
             selected: date
@@ -47,7 +47,7 @@ class Calendar2 extends React.Component {
         };
         this.handleSelect = ::this.handleSelect;
     }
-
+    
     render() {
         return (
             <Calendar
@@ -58,7 +58,7 @@ class Calendar2 extends React.Component {
             />
         );
     }
-
+    
     handleSelect(date) {
         this.setState({
             selected: date
@@ -82,7 +82,7 @@ class Calendar3 extends React.Component {
         };
         this.handleSelect = ::this.handleSelect;
     }
-
+    
     render() {
         return (
             <Calendar
@@ -94,7 +94,7 @@ class Calendar3 extends React.Component {
             />
         );
     }
-
+    
     handleSelect(date) {
         this.setState({
             selected: date

@@ -10,6 +10,8 @@ import {Router, Route, hashHistory, IndexRedirect} from 'react-router';
 import NavConfig from './nav.config.md';
 import _ from 'underscore';
 
+import Demo from './component/demo';
+
 import About from './doc/About.md';
 import Flex from './doc/Flex.md';
 import Loading from './doc/Loading.md';
@@ -181,7 +183,6 @@ class App extends React.Component {
                 <div className="demo-header">
                     <GMFlex className="container">
                         <a href={location.pathname} className="gm-flex gm-flex-align-center gm-header-logo">
-                            <img src={location.pathname + "demo/images/logo.png"} alt=""/>
                             <span>ReactGM </span>
                             <small>&nbsp;&nbsp;by gmfe</small>
                         </a>
@@ -224,6 +225,7 @@ ReactDOM.render((
             <IndexRedirect to='/doc'/>
             <Route path="/standard(/:doc)" component={Standard}/>
             <Route path="/doc(/:doc)" component={Doc}/>
+            <Route path="/demo" component={Demo}/>
         </Route>
     </Router>
 ), document.getElementById('appContainer'));

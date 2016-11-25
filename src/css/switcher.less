@@ -1,13 +1,16 @@
 .gm-switcher {
+  position: relative;
   display: inline-block;
   cursor: pointer;
-  background-color: #ccc;
+  background-color: #f9f9f9;
   padding: 1px;
   color: white;
   font-size: 12px;
-  text-align: center;
+  overflow: hidden;
+  margin: 0;
 
   &.gm-switcher-default {
+    color: #aaa;
     border: 1px solid @gm-border-color;
   }
 
@@ -36,30 +39,51 @@
     border: 1px solid @brand-danger;
   }
 
-  &.gm-switcher-on {
-    text-align: left;
-  }
-
-  &.gm-switcher-off {
-    text-align: right;
-    background-color: #ccc !important;
-    border: 1px solid @gm-border-color;
-  }
-
   &.gm-switcher-disabled {
     cursor: @cursor-disabled;
     .opacity(.65);
-    .gm-switcher-dot {
-      background-color: @gray-lighter;
+  }
+
+  .gm-switcher-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+
+    ~ .gm-switcher-label {
+      padding: 0 2px 0 22px;
+    }
+
+    &:checked ~ .gm-switcher-label {
+      padding: 0 22px 0 2px;
+    }
+
+    &:checked ~ .gm-switcher-handle {
+      box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
     }
   }
 
-  .gm-switcher-dot {
-    background-color: white;
-    display: inline-block;
-    width: 15px;
-    height: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  .gm-switcher-label {
+    position: relative;
+
+    .gm-switcher-label-on, .gm-switcher-label-off {
+      position: absolute;
+      display: block;
+      top: -200%;
+    }
   }
+
+  .gm-switcher-handle {
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    left: 1px;
+    width: 17px;
+    background: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    transition: left .15s ease-out;
+    background-image: linear-gradient(to bottom, #fff 40%, #f0f0f0);
+  }
+
 }
 

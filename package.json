@@ -17,12 +17,12 @@
     "precommit": "eslint ./src/ ./demo/;",
     "pre": "npm install",
     "clear": "rm -rf build && mkdir build;",
-    "start": "npm run clear && NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0 --inline --hot --progress --colors --port 3000",
+    "start": "npm run clear && NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --devtool eval --host 0.0.0.0 --inline --hot --progress --colors --port 3000",
     "deploy": "npm install;npm run build && npm run build:min",
     "build": "NODE_ENV=production webpack",
     "build:min": "NODE_ENV=production webpack --config webpack.config.min.js",
     "publishpatch": "sh deploy/publish.sh",
-    "gh-pages": "git branch -D gh-pages; git checkout -b gh-pages; npm install; webpack --config webpack.config.dev.js; rm -rf .gitignore; git add --all; git commit -m 'page'; git push origin HEAD:gh-pages -f; git checkout master;"
+    "gh-pages": "sh deploy/gh-pages.sh;"
   },
   "repository": {
     "type": "git",

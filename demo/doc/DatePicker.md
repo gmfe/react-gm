@@ -17,7 +17,7 @@ class DatePickerWrap extends React.Component {
         };
         this.handleChange = ::this.handleChange;
     }
-
+    
     render() {
         return (
             <div>
@@ -64,7 +64,7 @@ class DatePickerWrap extends React.Component {
                         />
                     </div>
                 </Flex>
-
+                
                 <div className="gm-padding10"></div>
                 <DatePicker
                     date={this.state.date}
@@ -77,7 +77,7 @@ class DatePickerWrap extends React.Component {
             </div>
         );
     }
-
+    
     handleChange(date) {
         console.log(date);
         this.setState({
