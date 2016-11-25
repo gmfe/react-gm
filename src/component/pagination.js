@@ -1,9 +1,9 @@
 import React from 'react';
 
-class Pagination extends React.Component {
+class WithCount extends React.Component {
     constructor(props) {
         super(props);
-        this.onPage = ::this.onPage;
+        this.handlePage = ::this.handlePage;
     }
 
     render() {
@@ -31,7 +31,7 @@ class Pagination extends React.Component {
 
         return (
             <div className="gm-pagination">
-                <ul className="pagination pagination-sm" onClick={this.onPage}>
+                <ul className="pagination pagination-sm" onClick={this.handlePage}>
                     <li className={data.index === 1 ? 'disabled' : ''}>
                         <a href="javascript:;" data-page={data.index - 1}>&laquo;</a>
                     </li>
@@ -53,8 +53,8 @@ class Pagination extends React.Component {
         );
     }
 
-    onPage(event) {
-        var page = ~~event.target.getAttribute('data-page'),
+    handlePage(event) {
+        const page = ~~event.target.getAttribute('data-page'),
             data = this.props.data,
             count = Math.ceil(data.count / data.limit),
             toPage = this.props.toPage;
@@ -68,10 +68,69 @@ class Pagination extends React.Component {
         }, page);
     }
 }
+
+class WithoutCount extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handlePage = ::this.handlePage;
+    }
+
+    handlePage(action) {
+        const {data, toPage} = this.props;
+
+        if (action === -1) {
+            if (data.offset === 0) {
+                return;
+            }
+            toPage({
+                offset: data.offset + data.limit,
+                limit: data.limit
+            });
+        } else {
+            toPage({
+                offset: Math.max(data.offset - data.limit, 0),
+                limit: data.limit
+            });
+        }
+    }
+
+    render() {
+        const {data} = this.props;
+        return (
+            <div className="gm-pagination">
+                <ul className="pagination pagination-sm">
+                    <li className={data.offset === 0 ? 'disabled' : ''}>
+                        <a
+                            href="javascript:;"
+                            onClick={this.handlePage.bind(this, -1)}
+                        >上一页</a>
+                    </li>
+                    <li>
+                        <a
+                            href="javascript:;"
+                            onClick={this.handlePage.bind(this, 1)}
+                        >下一页</a>
+                    </li>
+                </ul>
+            </div>
+        );
+    }
+}
+
+class Pagination extends React.Component {
+    render() {
+        if (this.props.data.count) {
+            return <WithCount {...this.props}/>;
+        } else {
+            return <WithoutCount {...this.props}/>;
+        }
+    }
+}
+
 Pagination.displayName = 'Pagination';
 Pagination.propTypes = {
     data: React.PropTypes.shape({
-        count: React.PropTypes.number.isRequired,
+        count: React.PropTypes.number,
         offset: React.PropTypes.number.isRequired,
         limit: React.PropTypes.number.isRequired
     }),

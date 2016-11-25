@@ -27,6 +27,7 @@
 - [SheetAction](#/doc/SheetAction)
 - [SheetSelect](#/doc/SheetSelect)
 - [SheetBatchAction](#/doc/SheetBatchAction)
+- [Pagination](#/doc/Pagination)
 - [ImportLead](#/doc/ImportLead)
 - [Storage](#/doc/Storage)
 

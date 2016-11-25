@@ -25,6 +25,7 @@ import SheetColumn from './doc/SheetColumn.md';
 import SheetAction from './doc/SheetAction.md';
 import SheetSelect from './doc/SheetSelect.md';
 import SheetBatchAction from './doc/SheetBatchAction.md';
+import Pagination from './doc/Pagination.md';
 import ImportLead from './doc/ImportLead.md';
 import Storage from './doc/Storage.md';
 import Calendar from './doc/Calendar.md';
@@ -49,6 +50,7 @@ const docMap = {
     SearchSelect,
     FilterSearchSelect,
     Sheet, SheetColumn, SheetSelect, SheetAction, SheetBatchAction,
+    Pagination,
     ImportLead,
     Storage,
     Calendar,
