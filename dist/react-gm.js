@@ -5905,7 +5905,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	SheetSelect.displayName = 'SheetSelect';
 	SheetSelect.propTypes = {
 	    onSelect: _react.PropTypes.func.isRequired,
-	    onSelectAll: _react.PropTypes.func.isRequired
+	    onSelectAll: _react.PropTypes.func.isRequired,
+	    isDisabled: _react.PropTypes.func
+	};
+	SheetSelect.defaultProps = {
+	    isDisabled: function isDisabled() {
+	        return false;
+	    }
 	};
 
 	var SheetBatchAction = function (_React$Component4) {
@@ -5954,12 +5960,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                enableEmptyTip = this.props.enableEmptyTip,
 	                scrollX = this.props.scrollX;
 
-	            if (list.length > 0) {
-	                isSelectAll = _underscore2.default.filter(list, function (value) {
-	                    return value._gm_select;
-	                }).length === list.length;
-	            }
-
 	            var children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
 
 	            var columns = [],
@@ -5988,6 +5988,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }
 	                }
 	            });
+
+	            if (list.length > 0) {
+	                isSelectAll = !_underscore2.default.find(list, function (value) {
+	                    return !select.props.isDisabled(value) && !value._gm_select;
+	                });
+	            }
 
 	            return _react2.default.createElement(
 	                'div',
@@ -6066,8 +6072,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                    select ? _react2.default.createElement(
 	                                        'td',
 	                                        null,
-	                                        _react2.default.createElement('input', { type: 'checkbox', checked: value._gm_select || false,
-	                                            onChange: _this6.handleSelect.bind(_this6, select, index) })
+	                                        _react2.default.createElement('input', {
+	                                            type: 'checkbox',
+	                                            checked: value._gm_select || false,
+	                                            onChange: _this6.handleSelect.bind(_this6, select, index),
+	                                            disabled: select.props.isDisabled(value)
+	                                        })
 	                                    ) : null,
 	                                    _underscore2.default.map(columns, function (v, i) {
 	                                        var _v$props = v.props,
