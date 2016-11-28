@@ -83,7 +83,7 @@ class Sheet extends React.Component {
             }
         });
 
-        if (list.length > 0) {
+        if (select && list.length > 0) {
             isSelectAll = !_.find(list, value => !select.props.isDisabled(value) && !value._gm_select);
         }
 
