@@ -5989,7 +5989,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	            });
 
-	            if (list.length > 0) {
+	            if (select && list.length > 0) {
 	                isSelectAll = !_underscore2.default.find(list, function (value) {
 	                    return !select.props.isDisabled(value) && !value._gm_select;
 	                });
