@@ -35,7 +35,11 @@ class SheetSelect extends React.Component {
 SheetSelect.displayName = 'SheetSelect';
 SheetSelect.propTypes = {
     onSelect: PropTypes.func.isRequired,
-    onSelectAll: PropTypes.func.isRequired
+    onSelectAll: PropTypes.func.isRequired,
+    isDisabled: PropTypes.func
+};
+SheetSelect.defaultProps = {
+    isDisabled: () => false
 };
 
 
@@ -54,10 +58,6 @@ class Sheet extends React.Component {
 
     render() {
         let select = false, isSelectAll = false, list = this.props.list || [], loading = this.props.loading, enableEmptyTip = this.props.enableEmptyTip, scrollX = this.props.scrollX;
-
-        if (list.length > 0) {
-            isSelectAll = _.filter(list, value => value._gm_select).length === list.length;
-        }
 
         const children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
 
@@ -82,6 +82,10 @@ class Sheet extends React.Component {
                 }
             }
         });
+
+        if (list.length > 0) {
+            isSelectAll = !_.find(list, value => !select.props.isDisabled(value) && !value._gm_select);
+        }
 
         return (
             <div className={classNames("gm-sheet", this.props.className)}>
@@ -133,8 +137,12 @@ class Sheet extends React.Component {
                             <tr {...this.props.getTrProps(index)} key={index}>
                                 {select ? (
                                     <td>
-                                        <input type="checkbox" checked={value._gm_select || false}
-                                               onChange={this.handleSelect.bind(this, select, index)}/>
+                                        <input
+                                            type="checkbox"
+                                            checked={value._gm_select || false}
+                                            onChange={this.handleSelect.bind(this, select, index)}
+                                            disabled={select.props.isDisabled(value)}
+                                        />
                                     </td>
                                 ) : null}
                                 {_.map(columns, (v, i) => {
