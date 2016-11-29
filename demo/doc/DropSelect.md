@@ -13,6 +13,7 @@ class DropSelectWrap extends React.Component {
         super(props);
         this.state = {
             show: false,
+            input: '',
             coolData: {
                 list: [],
                 actions: [{
@@ -51,7 +52,7 @@ class DropSelectWrap extends React.Component {
         this.onHide = ::this.onHide;
         this.handleEnter = ::this.handleEnter;
     }
-
+    
     onFocus() {
         this.setState({
             show: true,
@@ -100,24 +101,24 @@ class DropSelectWrap extends React.Component {
                     }]
                 })
             });
-        }, 2000);
+        }, 1000);
     }
-
+    
     handleEnter(index) {
         console.log(index, this.state.coolData.list[index]);
         this.setState({
-            
+            input: this.state.coolData.list[index].name,
+            show: false
         });
     }
-
+    
     onHide() {
         this.setState({
             show: false
         });
     }
-
+    
     render() {
-    console.log(this.state)
         return (
             <div style={{width: '400px'}}>
                 <DropSelect
@@ -127,7 +128,7 @@ class DropSelectWrap extends React.Component {
                     onHide={this.onHide}
                     onEnter={this.handleEnter}
                 >
-                    <input className="form-control" onFocus={this.onFocus} placeholder="支持键盘上下键选中，回车选择"/>
+                    <input value={this.state.input} className="form-control" onFocus={this.onFocus} placeholder="支持键盘上下键选中，回车选择"/>
                 </DropSelect>
             </div>
         );

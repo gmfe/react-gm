@@ -38,6 +38,10 @@ import Trigger from './doc/Trigger.md';
 import Droper from './doc/Droper.md';
 import Switcher from './doc/Switcher.md';
 
+import NavConfigStandard from './standard/nav.config.md';
+import StandardAbout from './standard/About.md';
+import Color from './standard/Color.md';
+
 const docMap = {
     About,
     Flex,
@@ -62,6 +66,11 @@ const docMap = {
     Trigger,
     Droper,
     Switcher
+};
+
+const standardMap = {
+    StandardAbout,
+    Color
 };
 
 
@@ -184,7 +193,7 @@ class App extends React.Component {
                 </div>
                 <GMFlex className="demo-center container">
                     <div className="demo-left" onClick={this.handleNav}>
-                        <NavConfig/>
+                        {location.hash.indexOf('#/standard') > -1 ? <NavConfigStandard/> : <NavConfig/>}
                     </div>
                     <GMFlex flex column className="demo-content doc markdown-body" onClick={this.handleAnchor}>
                         {this.props.children}
@@ -204,9 +213,8 @@ class Doc extends React.Component {
 
 class Standard extends React.Component {
     render() {
-        return (
-            <div>TODO</div>
-        );
+        const {doc} = this.props.params;
+        return React.createElement(standardMap[doc || 'StandardAbout']);
     }
 }
 
@@ -214,7 +222,7 @@ ReactDOM.render((
     <Router history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRedirect to='/doc'/>
-            <Route path="/standard" component={Standard}/>
+            <Route path="/standard(/:doc)" component={Standard}/>
             <Route path="/doc(/:doc)" component={Doc}/>
         </Route>
     </Router>

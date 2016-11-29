@@ -3,6 +3,12 @@
 @import "../node_modules/gm-bootstrap/less/custom.less";
 @import "../src/css/variables.less";
 
+@gm-color-stress: #fb9447; //强调色：模块顶部点缀、导航选中态、功能性按钮
+@gm-color-action: #29a7e4; //链接、操作文字
+@gm-color-primary: #333333; //左侧导航、panel标题、页面正文文字
+@gm-color-second: #666666; //辅助文字
+@gm-color-back: #f5f5f5; //页面、hover背景色等
+
 #appContainer {
   padding-bottom: 100px;
 }
@@ -86,6 +92,25 @@ h1 {
         border-bottom: 1px solid #eee;
         padding-bottom: 0.3em;
       }
+    }
+  }
+
+  .demo-box {
+    .item {
+      padding-left: 30px;
+      height: 70px;
+      line-height: 70px;
+      margin-bottom: 10px;
+      position: relative;
+      color: white;
+      background-color: @gm-back-body-bg;
+      font-size: 14px;
+      span {
+        margin-right: 20px;
+      }
+    }
+    .text {
+      color: @gm-color-primary
     }
   }
 }

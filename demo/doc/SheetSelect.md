@@ -6,7 +6,7 @@ imports:
 
 ::: demo 操作行为
 ```js
-class DropSelectWrap extends React.Component {
+class SheetWrap extends React.Component {
     constructor(props) {
         super(props);
         
@@ -56,7 +56,7 @@ class DropSelectWrap extends React.Component {
     isDisabled(line){
         return line.age > 18;
     }
-
+    
     render() {
         return (
            <Sheet list={this.state.list}>
@@ -74,15 +74,17 @@ class DropSelectWrap extends React.Component {
 }
 ```
 ```jsx
-<DropSelectWrap/>
+<SheetWrap/>
 ```
 :::
 
 ### Props
 - `onSelect (func|isRequired)`
 - `onSelectAll (func|isRequired)`
+- `isDisabled (func)`
 
 一但用到`SheetSelect`，就约定了数据eList中的`_gm_select`字段，`_gm_select`为bool是选中。
 `onSelect`当选择一行时触发，参数为是否选中`checked`，和当前索引`index`。
 `onSelectAll`当选择所有的时候触发，参数为是否选择`checked`。
 需要根据select事件自动修改_gm_select属性。
+`isDisabled`参数为当前行数据，返回`true`or`false`，表示是当前行是否可被选中
