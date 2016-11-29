@@ -179,6 +179,9 @@
 .gm-calendar-day:hover {
   background-color: #f5f5f5;
 }
+.gm-calendar-day-now {
+  background-color: #f5f5f5;
+}
 .gm-calendar-day-old {
   color: #999999;
 }
@@ -823,15 +826,18 @@
   }
 }
 .gm-switcher {
+  position: relative;
   display: inline-block;
   cursor: pointer;
-  background-color: #ccc;
+  background-color: #f9f9f9;
   padding: 1px;
   color: white;
   font-size: 12px;
-  text-align: center;
+  overflow: hidden;
+  margin: 0;
 }
 .gm-switcher.gm-switcher-default {
+  color: #aaa;
   border: 1px solid #ddd;
 }
 .gm-switcher.gm-switcher-primary {
@@ -854,28 +860,46 @@
   background-color: #FC6265;
   border: 1px solid #FC6265;
 }
-.gm-switcher.gm-switcher-on {
-  text-align: left;
-}
-.gm-switcher.gm-switcher-off {
-  text-align: right;
-  background-color: #ccc !important;
-  border: 1px solid #ddd;
-}
 .gm-switcher.gm-switcher-disabled {
   cursor: not-allowed;
   opacity: 0.65;
   filter: alpha(opacity=65);
 }
-.gm-switcher.gm-switcher-disabled .gm-switcher-dot {
-  background-color: #eeeeee;
+.gm-switcher .gm-switcher-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
-.gm-switcher .gm-switcher-dot {
-  background-color: white;
-  display: inline-block;
-  width: 15px;
-  height: 100%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+.gm-switcher .gm-switcher-input ~ .gm-switcher-label {
+  padding: 0 2px 0 22px;
+}
+.gm-switcher .gm-switcher-input:checked ~ .gm-switcher-label {
+  padding: 0 22px 0 2px;
+}
+.gm-switcher .gm-switcher-input:checked ~ .gm-switcher-handle {
+  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.gm-switcher .gm-switcher-label {
+  position: relative;
+}
+.gm-switcher .gm-switcher-label .gm-switcher-label-on, .gm-switcher .gm-switcher-label .gm-switcher-label-off {
+  position: absolute;
+  display: block;
+  top: -200%;
+}
+.gm-switcher .gm-switcher-handle {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: 1px;
+  width: 17px;
+  background: white;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  -webkit-transition: left 0.15s ease-out;
+  transition: left 0.15s ease-out;
+  background-image: -webkit-linear-gradient(top, #fff 40%, #f0f0f0);
+  background-image: linear-gradient(to bottom, #fff 40%, #f0f0f0);
 }
 .gm-sheet-table-scroll-x {
   overflow-x: auto;

@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"), require("react-bootstrap"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"], root["react-bootstrap"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_51__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_51__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -128,7 +128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _flex = __webpack_require__(4);
+	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -176,7 +176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cascader4 = _interopRequireDefault(_cascader3);
 
-	var _trigger = __webpack_require__(5);
+	var _trigger = __webpack_require__(4);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -317,155 +317,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(3);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Flex = function (_React$Component) {
-	    _inherits(Flex, _React$Component);
-
-	    function Flex() {
-	        _classCallCheck(this, Flex);
-
-	        return _possibleConstructorReturn(this, (Flex.__proto__ || Object.getPrototypeOf(Flex)).apply(this, arguments));
-	    }
-
-	    _createClass(Flex, [{
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props,
-	                flex = _props.flex,
-	                auto = _props.auto,
-	                none = _props.none,
-	                width = _props.width,
-	                height = _props.height,
-	                row = _props.row,
-	                column = _props.column,
-	                wrap = _props.wrap,
-	                nowrap = _props.nowrap,
-	                justifyStart = _props.justifyStart,
-	                justifyEnd = _props.justifyEnd,
-	                justifyCenter = _props.justifyCenter,
-	                justifyBetween = _props.justifyBetween,
-	                justifyAround = _props.justifyAround,
-	                alignStart = _props.alignStart,
-	                alignEnd = _props.alignEnd,
-	                alignCenter = _props.alignCenter,
-	                alignBaseline = _props.alignBaseline,
-	                alignStretch = _props.alignStretch,
-	                className = _props.className,
-	                style = _props.style,
-	                rest = _objectWithoutProperties(_props, ['flex', 'auto', 'none', 'width', 'height', 'row', 'column', 'wrap', 'nowrap', 'justifyStart', 'justifyEnd', 'justifyCenter', 'justifyBetween', 'justifyAround', 'alignStart', 'alignEnd', 'alignCenter', 'alignBaseline', 'alignStretch', 'className', 'style']);
-
-	            var cn = (0, _classnames2.default)({
-	                'gm-flex': true,
-
-	                'gm-flex-flex': flex,
-	                'gm-flex-auto': auto,
-	                'gm-flex-none': none || width || height,
-
-	                'gm-flex-row': row,
-	                'gm-flex-column': column,
-
-	                'gm-flex-wrap': wrap,
-	                'gm-flex-nowrap': nowrap,
-
-	                'gm-flex-justify-start': justifyStart,
-	                'gm-flex-justify-end': justifyEnd,
-	                'gm-flex-justify-center': justifyCenter,
-	                'gm-flex-justify-between': justifyBetween,
-	                'gm-flex-justify-around': justifyAround,
-
-	                'gm-flex-align-start': alignStart,
-	                'gm-flex-align-end': alignEnd,
-	                'gm-flex-align-center': alignCenter,
-	                'gm-flex-align-baseline': alignBaseline,
-	                'gm-flex-align-stretch': alignStretch
-	            }, className);
-
-	            // TODO 有待商榷，WebkitFlex 是否会生效？
-	            var s = Object.assign({}, style);
-	            if (flex) {
-	                s.flex = typeof flex === 'boolean' ? 1 : flex;
-	                s.WebKitFlex = typeof flex === 'boolean' ? 1 : flex;
-	            }
-	            if (height) {
-	                s.height = height;
-	            }
-	            if (width) {
-	                s.width = width;
-	            }
-
-	            return _react2.default.createElement(
-	                'div',
-	                _extends({}, rest, { className: cn, style: s }),
-	                this.props.children
-	            );
-	        }
-	    }]);
-
-	    return Flex;
-	}(_react2.default.Component);
-
-	Flex.propTypes = {
-	    flex: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.bool]),
-	    auto: _react.PropTypes.bool,
-	    none: _react.PropTypes.bool,
-	    width: _react.PropTypes.string,
-	    height: _react.PropTypes.string,
-	    row: _react.PropTypes.bool,
-	    column: _react.PropTypes.bool,
-	    wrap: _react.PropTypes.bool,
-	    nowrap: _react.PropTypes.bool,
-	    justifyStart: _react.PropTypes.bool,
-	    justifyEnd: _react.PropTypes.bool,
-	    justifyCenter: _react.PropTypes.bool,
-	    justifyBetween: _react.PropTypes.bool,
-	    justifyAround: _react.PropTypes.bool,
-	    alignStart: _react.PropTypes.bool,
-	    alignEnd: _react.PropTypes.bool,
-	    alignCenter: _react.PropTypes.bool,
-	    alignBaseline: _react.PropTypes.bool,
-	    alignStretch: _react.PropTypes.bool
-	};
-
-	exports.default = Flex;
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(6);
+	var _reactDom = __webpack_require__(5);
 
 	var _classnames = __webpack_require__(3);
 
@@ -681,10 +539,152 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Trigger;
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(3);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Flex = function (_React$Component) {
+	    _inherits(Flex, _React$Component);
+
+	    function Flex() {
+	        _classCallCheck(this, Flex);
+
+	        return _possibleConstructorReturn(this, (Flex.__proto__ || Object.getPrototypeOf(Flex)).apply(this, arguments));
+	    }
+
+	    _createClass(Flex, [{
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props,
+	                flex = _props.flex,
+	                auto = _props.auto,
+	                none = _props.none,
+	                width = _props.width,
+	                height = _props.height,
+	                row = _props.row,
+	                column = _props.column,
+	                wrap = _props.wrap,
+	                nowrap = _props.nowrap,
+	                justifyStart = _props.justifyStart,
+	                justifyEnd = _props.justifyEnd,
+	                justifyCenter = _props.justifyCenter,
+	                justifyBetween = _props.justifyBetween,
+	                justifyAround = _props.justifyAround,
+	                alignStart = _props.alignStart,
+	                alignEnd = _props.alignEnd,
+	                alignCenter = _props.alignCenter,
+	                alignBaseline = _props.alignBaseline,
+	                alignStretch = _props.alignStretch,
+	                className = _props.className,
+	                style = _props.style,
+	                rest = _objectWithoutProperties(_props, ['flex', 'auto', 'none', 'width', 'height', 'row', 'column', 'wrap', 'nowrap', 'justifyStart', 'justifyEnd', 'justifyCenter', 'justifyBetween', 'justifyAround', 'alignStart', 'alignEnd', 'alignCenter', 'alignBaseline', 'alignStretch', 'className', 'style']);
+
+	            var cn = (0, _classnames2.default)({
+	                'gm-flex': true,
+
+	                'gm-flex-flex': flex,
+	                'gm-flex-auto': auto,
+	                'gm-flex-none': none || width || height,
+
+	                'gm-flex-row': row,
+	                'gm-flex-column': column,
+
+	                'gm-flex-wrap': wrap,
+	                'gm-flex-nowrap': nowrap,
+
+	                'gm-flex-justify-start': justifyStart,
+	                'gm-flex-justify-end': justifyEnd,
+	                'gm-flex-justify-center': justifyCenter,
+	                'gm-flex-justify-between': justifyBetween,
+	                'gm-flex-justify-around': justifyAround,
+
+	                'gm-flex-align-start': alignStart,
+	                'gm-flex-align-end': alignEnd,
+	                'gm-flex-align-center': alignCenter,
+	                'gm-flex-align-baseline': alignBaseline,
+	                'gm-flex-align-stretch': alignStretch
+	            }, className);
+
+	            // TODO 有待商榷，WebkitFlex 是否会生效？
+	            var s = Object.assign({}, style);
+	            if (flex) {
+	                s.flex = typeof flex === 'boolean' ? 1 : flex;
+	                s.WebKitFlex = typeof flex === 'boolean' ? 1 : flex;
+	            }
+	            if (height) {
+	                s.height = height;
+	            }
+	            if (width) {
+	                s.width = width;
+	            }
+
+	            return _react2.default.createElement(
+	                'div',
+	                _extends({}, rest, { className: cn, style: s }),
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return Flex;
+	}(_react2.default.Component);
+
+	Flex.propTypes = {
+	    flex: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.bool]),
+	    auto: _react.PropTypes.bool,
+	    none: _react.PropTypes.bool,
+	    width: _react.PropTypes.string,
+	    height: _react.PropTypes.string,
+	    row: _react.PropTypes.bool,
+	    column: _react.PropTypes.bool,
+	    wrap: _react.PropTypes.bool,
+	    nowrap: _react.PropTypes.bool,
+	    justifyStart: _react.PropTypes.bool,
+	    justifyEnd: _react.PropTypes.bool,
+	    justifyCenter: _react.PropTypes.bool,
+	    justifyBetween: _react.PropTypes.bool,
+	    justifyAround: _react.PropTypes.bool,
+	    alignStart: _react.PropTypes.bool,
+	    alignEnd: _react.PropTypes.bool,
+	    alignCenter: _react.PropTypes.bool,
+	    alignBaseline: _react.PropTypes.bool,
+	    alignStretch: _react.PropTypes.bool
+	};
+
+	exports.default = Flex;
 
 /***/ },
 /* 7 */
@@ -789,6 +789,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	// TODO 优化性能
+
 	var noop = function noop() {};
 
 	var Day = function (_React$Component) {
@@ -820,6 +822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                disabled = this.props.disabled;
 
 	            var cn = (0, _classnames2.default)('gm-calendar-day', {
+	                'gm-calendar-day-now': +now.startOf('day') === +m.startOf('day'),
 	                'gm-calendar-day-old': now.month() > m.month(),
 	                'gm-calendar-day-new': now.month() < m.month(),
 	                'gm-calendar-day-disabled': disabled,
@@ -1618,11 +1621,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(4);
+	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
-	var _trigger = __webpack_require__(5);
+	var _trigger = __webpack_require__(4);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -2065,7 +2068,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _flex = __webpack_require__(4);
+	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -2073,7 +2076,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _trigger = __webpack_require__(5);
+	var _trigger = __webpack_require__(4);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -3500,7 +3503,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cascader2 = _interopRequireDefault(_cascader);
 
-	var _flex = __webpack_require__(4);
+	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -3725,7 +3728,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _trigger = __webpack_require__(5);
+	var _trigger = __webpack_require__(4);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -3859,7 +3862,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _trigger = __webpack_require__(5);
+	var _trigger = __webpack_require__(4);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -4015,7 +4018,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(6);
+	var _reactDom = __webpack_require__(5);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -5103,7 +5106,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(6);
+	var _reactDom = __webpack_require__(5);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -5523,7 +5526,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(4);
+	var _flex = __webpack_require__(6);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -5677,7 +5680,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(6);
+	var _reactDom = __webpack_require__(5);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -6451,10 +6454,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(4);
-
-	var _flex2 = _interopRequireDefault(_flex);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -6476,14 +6475,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = _possibleConstructorReturn(this, (Switcher.__proto__ || Object.getPrototypeOf(Switcher)).call(this, props));
 
 	        _this.state = {
+	            left: 1,
 	            checked: props.checked
 	        };
+
+	        _this.refOn = null;
 
 	        _this.handleChange = _this.handleChange.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(Switcher, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            // 初始化后开始计算on的宽度，方便做开关切换动画
+	            this.setState({
+	                left: this.refOn.offsetWidth + 2 + 22 + 1 - 17
+	            });
+	        }
+	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps(nextProps) {
 	            if ('checked' in nextProps) {
@@ -6504,16 +6514,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }, {
 	        key: 'handleChange',
-	        value: function handleChange() {
+	        value: function handleChange(e) {
 	            if (this.props.disabled) {
 	                return;
 	            }
-	            var checked = !this.state.checked;
-	            this.setChecked(checked);
+	            this.setChecked(e.target.checked);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
 	            var _props = this.props,
 	                checked = _props.checked,
 	                onChange = _props.onChange,
@@ -6524,51 +6535,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	                rest = _objectWithoutProperties(_props, ['checked', 'onChange', 'type', 'disabled', 'on', 'off']);
 
 	            var cn = (0, _classnames2.default)('gm-switcher gm-switcher-' + type, this.props.className, {
-	                'gm-switcher-on': this.state.checked,
-	                'gm-switcher-off': !this.state.checked,
 	                'gm-switcher-disabled': disabled
 	            });
 
-	            return this.state.checked ? _react2.default.createElement(
-	                'div',
-	                _extends({}, rest, {
-	                    className: cn,
-	                    onClick: this.handleChange
+	            var handleStyle = {};
+	            if (this.state.checked) {
+	                handleStyle.left = this.state.left;
+	            }
+
+	            return _react2.default.createElement(
+	                'label',
+	                _extends({}, rest, { className: cn }),
+	                _react2.default.createElement('input', {
+	                    disabled: disabled,
+	                    type: 'checkbox',
+	                    className: 'gm-switcher-input',
+	                    checked: this.state.checked,
+	                    onChange: this.handleChange
 	                }),
 	                _react2.default.createElement(
-	                    _flex2.default,
-	                    { className: 'gm-switcher-inner' },
+	                    'div',
+	                    { className: 'gm-switcher-label' },
 	                    _react2.default.createElement(
-	                        _flex2.default,
-	                        { flex: true, className: 'gm-paddingLR5' },
+	                        'span',
+	                        null,
+	                        this.state.checked ? on : off
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'gm-switcher-label-on', ref: function ref(_ref) {
+	                                return _this2.refOn = _ref;
+	                            } },
 	                        on
-	                    ),
-	                    _react2.default.createElement(
-	                        _flex2.default,
-	                        { className: 'gm-switcher-dot' },
-	                        '\xA0'
 	                    )
-	                )
-	            ) : _react2.default.createElement(
-	                'div',
-	                _extends({}, rest, {
-	                    className: cn,
-	                    onClick: this.handleChange
-	                }),
-	                _react2.default.createElement(
-	                    _flex2.default,
-	                    { className: 'gm-switcher-inner' },
-	                    _react2.default.createElement(
-	                        _flex2.default,
-	                        { className: 'gm-switcher-dot' },
-	                        '\xA0'
-	                    ),
-	                    _react2.default.createElement(
-	                        _flex2.default,
-	                        { flex: true, className: 'gm-paddingLR5' },
-	                        off
-	                    )
-	                )
+	                ),
+	                _react2.default.createElement('div', { className: 'gm-switcher-handle', style: handleStyle })
 	            );
 	        }
 	    }]);
@@ -6586,16 +6587,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	Switcher.defaultProps = {
 	    type: 'default',
-	    on: _react2.default.createElement(
-	        'span',
-	        null,
-	        'ON\xA0'
-	    ),
-	    off: _react2.default.createElement(
-	        'span',
-	        null,
-	        'OFF'
-	    ),
+	    on: 'ON',
+	    off: 'OFF',
 	    onChange: noop
 	};
 
@@ -6625,7 +6618,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _trigger = __webpack_require__(5);
+	var _trigger = __webpack_require__(4);
 
 	var _trigger2 = _interopRequireDefault(_trigger);
 
@@ -6745,7 +6738,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(6);
+	var _reactDom = __webpack_require__(5);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -6994,7 +6987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _reactDom = __webpack_require__(6);
+	var _reactDom = __webpack_require__(5);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
