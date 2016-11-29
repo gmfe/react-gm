@@ -48,3 +48,5 @@
 ### 表单
 - [Switch](#/doc/Switch)
 - [Switcher](#/doc/Switcher)
+- [InputNumber](#/doc/InputNumber)
+
