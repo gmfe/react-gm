@@ -13,6 +13,7 @@ class Component extends React.Component {
         this.state = {
             checked: false
         };
+        this.handleChange = ::this.handleChange;
     }
         
     handleChange(){
