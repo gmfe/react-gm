@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import _ from 'underscore';
 
-// background-color: @brand-primary （#6dc3ec）
 // 如果需要设置loading大小:  set size = 100  (default 50)
 const LIMIT = 12;
 
@@ -26,7 +25,6 @@ class Loading extends React.Component {
 }
 
 Loading.propTypes = {
-    style: PropTypes.object,
     size: PropTypes.number
 };
 

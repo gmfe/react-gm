@@ -24,11 +24,9 @@ class TriggerWrap extends React.Component {
                     <Trigger component={<div/>} popup={this.renderPopup()}>
                         <button className="btn btn-default">focus me default</button>
                     </Trigger>
-
                     <Trigger component={<div/>} type="click" popup={this.renderPopup()}>
                         <button className="btn btn-default">click me</button>
                     </Trigger>
-
                     <Trigger component={<div/>} type="hover" popup={this.renderPopup()}>
                         <button className="btn btn-default">hover me</button>
                     </Trigger>
@@ -38,15 +36,12 @@ class TriggerWrap extends React.Component {
                     <Trigger component={<div/>} popup={this.renderPopup()}>
                         <button className="btn btn-default">focus me(default)</button>
                     </Trigger>
-
                     <Trigger component={<div/>} right popup={this.renderPopup()}>
                         <button className="btn btn-default">focus me(right)</button>
                     </Trigger>
-
                     <Trigger component={<div/>} top popup={this.renderPopup()}>
                         <button className="btn btn-default">focus me(top)</button>
                     </Trigger>
-
                     <Trigger component={<div/>} right top popup={this.renderPopup()}>
                         <button className="btn btn-default">focus me(right top)</button>
                     </Trigger>

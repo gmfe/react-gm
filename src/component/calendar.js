@@ -8,6 +8,8 @@ import _ from 'underscore';
 const noop = () => {
 };
 
+const nowMountStart = +moment().startOf('day');
+
 class Day extends React.Component {
     constructor(props) {
         super(props);
@@ -18,24 +20,21 @@ class Day extends React.Component {
         if (this.props.disabled) {
             return;
         }
-        this.props.onClick(this.props.moment);
+        this.props.onClick(this.props.value);
     }
 
     render() {
-        const now = this.props.nowMoment,
-            m = this.props.moment,
-            selected = this.props.selected,
-            disabled = this.props.disabled;
+        const {willSelect, value, selected, disabled} = this.props;
 
         const cn = classNames('gm-calendar-day', {
-            'gm-calendar-day-now': (+now.startOf('day') === +m.startOf('day')),
-            'gm-calendar-day-old': now.month() > m.month(),
-            'gm-calendar-day-new': now.month() < m.month(),
+            'gm-calendar-day-now': (nowMountStart === +value.startOf('day')),
+            'gm-calendar-day-old': willSelect.month() > value.month(),
+            'gm-calendar-day-new': willSelect.month() < value.month(),
             'gm-calendar-day-disabled': disabled,
-            'gm-calendar-active': +selected.startOf('day') === +m.startOf('day')
+            'gm-calendar-active': +selected.startOf('day') === +value.startOf('day')
         });
 
-        return <span className={cn} onClick={this.handleClick}>{m.date()}</span>;
+        return <span className={cn} onClick={this.handleClick}>{value.date()}</span>;
     }
 }
 
@@ -81,6 +80,7 @@ class Calendar extends React.Component {
     renderHead() {
         const m = moment(this.state.moment);
         const month = m.month();
+
         return (
             <div className="gm-calendar-head text-center clearfix">
                 <a
@@ -160,28 +160,25 @@ class Calendar extends React.Component {
 
     renderContent() {
         const m = moment(this.state.moment).startOf('month').day(0).add(-1, 'day');
-        let days = [];
-
-        for (let i = 0; i < 42; i++) {
-            const mm = moment(m.add(1, 'day'));
-            days.push(
-                <Day
-                    key={i}
-                    selected={moment(this.state.selected)}
-                    nowMoment={this.state.moment}
-                    moment={mm}
-                    onClick={this.handleSelectDay}
-                    disabled={this.getDisabled(mm)}
-                />
-            );
-        }
-
-        days = _.groupBy(days, (v, i) => parseInt(i / 7));
 
         return (
             <div className="gm-calendar-content">
-                {_.map(days, (v, i) => (
-                    <div key={i} className="gm-calendar-content-div">{v}</div>
+                {_.map(_.groupBy(_.range(42), v => parseInt(v / 7)), (v, i) => (
+                    <div key={i} className="gm-calendar-content-div">
+                        {_.map(v, (value, index) => {
+                            const mm = moment(m.add(1, 'day'));
+                            return (
+                                <Day
+                                    key={index}
+                                    selected={moment(this.state.selected)}
+                                    willSelect={this.state.moment}
+                                    value={mm}
+                                    onClick={this.handleSelectDay}
+                                    disabled={this.getDisabled(mm)}
+                                />
+                            );
+                        })}
+                    </div>
                 ))}
             </div>
         );

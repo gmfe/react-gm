@@ -12,35 +12,31 @@ SearchSelect  和 FilterSearchSelect 如果用起来发现二次进入的时候�
 ::: demo 以下example依赖的数据
 ```js
 const searchSelectData = [
-    {name: '我们'},
-    {name: '1'},
-    {name: '2我们我们我们我们2我们我们我们我们2我们我们我们我们'},
-    {name: '3我们'},
-    {name: '4我们'},
-    {name: '5我们'},
-    {name: '6我们'},
-    {name: 'no'}
+    {name: '华侨城'},
+    {name: '世界之窗'},
+    {name: '南山'},
+    {name: '梧桐山'},
+    {name: '欢乐海岸'},
+    {name: '东部华侨城'},
+    {name: '深圳湾'},
+    {name: '华中科技大学'}
 ];
     
 const searchSelectGroupData = [{
     label: '一组',
     children: [
-        {name: '我们我们我们我们'},
-        {name: '1'},
-        {name: '2我们'},
-        {name: '3我们'},
-        {name: '4我们'},
-        {name: '5我们'}
+        {name: '华侨城'},
+        {name: '世界之窗'},
+        {name: '南山'},
+        {name: '梧桐山'},
+        {name: '欢乐海岸'}
     ]
 },{
     label: '二组',
     children: [
-        {name: '6我们'},
-        {name: '7我们'},
-        {name: '8我们'},
-        {name: '9你们'},
-        {name: '10哦'},
-        {name: 'no'}
+        {name: '东部华侨城'},
+        {name: '深圳湾'},
+        {name: '华中科技大学'}
     ]
 }];
 ```
@@ -106,7 +102,7 @@ class SearchSelect2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: [searchSelectData[1]],
+            selected: searchSelectData,
             list: searchSelectData
         };
         this.handleSelect = ::this.handleSelect;

@@ -793,6 +793,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var noop = function noop() {};
 
+	var nowMountStart = +(0, _moment2.default)().startOf('day');
+
 	var Day = function (_React$Component) {
 	    _inherits(Day, _React$Component);
 
@@ -811,28 +813,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (this.props.disabled) {
 	                return;
 	            }
-	            this.props.onClick(this.props.moment);
+	            this.props.onClick(this.props.value);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var now = this.props.nowMoment,
-	                m = this.props.moment,
-	                selected = this.props.selected,
-	                disabled = this.props.disabled;
+	            var _props = this.props,
+	                willSelect = _props.willSelect,
+	                value = _props.value,
+	                selected = _props.selected,
+	                disabled = _props.disabled;
+
 
 	            var cn = (0, _classnames2.default)('gm-calendar-day', {
-	                'gm-calendar-day-now': +now.startOf('day') === +m.startOf('day'),
-	                'gm-calendar-day-old': now.month() > m.month(),
-	                'gm-calendar-day-new': now.month() < m.month(),
+	                'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
+	                'gm-calendar-day-old': willSelect.month() > value.month(),
+	                'gm-calendar-day-new': willSelect.month() < value.month(),
 	                'gm-calendar-day-disabled': disabled,
-	                'gm-calendar-active': +selected.startOf('day') === +m.startOf('day')
+	                'gm-calendar-active': +selected.startOf('day') === +value.startOf('day')
 	            });
 
 	            return _react2.default.createElement(
 	                'span',
 	                { className: cn, onClick: this.handleClick },
-	                m.date()
+	                value.date()
 	            );
 	        }
 	    }]);
@@ -894,6 +898,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function renderHead() {
 	            var m = (0, _moment2.default)(this.state.moment);
 	            var month = m.month();
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'gm-calendar-head text-center clearfix' },
@@ -978,10 +983,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'getDisabled',
 	        value: function getDisabled(m) {
-	            var _props = this.props,
-	                min = _props.min,
-	                max = _props.max,
-	                disabledDate = _props.disabledDate;
+	            var _props2 = this.props,
+	                min = _props2.min,
+	                max = _props2.max,
+	                disabledDate = _props2.disabledDate;
 
 	            min = min ? (0, _moment2.default)(min).startOf('day') : null;
 	            max = max ? (0, _moment2.default)(max).startOf('day') : null;
@@ -1003,33 +1008,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'renderContent',
 	        value: function renderContent() {
+	            var _this3 = this;
+
 	            var m = (0, _moment2.default)(this.state.moment).startOf('month').day(0).add(-1, 'day');
-	            var days = [];
-
-	            for (var i = 0; i < 42; i++) {
-	                var mm = (0, _moment2.default)(m.add(1, 'day'));
-	                days.push(_react2.default.createElement(Day, {
-	                    key: i,
-	                    selected: (0, _moment2.default)(this.state.selected),
-	                    nowMoment: this.state.moment,
-	                    moment: mm,
-	                    onClick: this.handleSelectDay,
-	                    disabled: this.getDisabled(mm)
-	                }));
-	            }
-
-	            days = _underscore2.default.groupBy(days, function (v, i) {
-	                return parseInt(i / 7);
-	            });
 
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'gm-calendar-content' },
-	                _underscore2.default.map(days, function (v, i) {
+	                _underscore2.default.map(_underscore2.default.groupBy(_underscore2.default.range(42), function (v) {
+	                    return parseInt(v / 7);
+	                }), function (v, i) {
 	                    return _react2.default.createElement(
 	                        'div',
 	                        { key: i, className: 'gm-calendar-content-div' },
-	                        v
+	                        _underscore2.default.map(v, function (value, index) {
+	                            var mm = (0, _moment2.default)(m.add(1, 'day'));
+	                            return _react2.default.createElement(Day, {
+	                                key: index,
+	                                selected: (0, _moment2.default)(_this3.state.selected),
+	                                willSelect: _this3.state.moment,
+	                                value: mm,
+	                                onClick: _this3.handleSelectDay,
+	                                disabled: _this3.getDisabled(mm)
+	                            });
+	                        })
 	                    );
 	                })
 	            );
@@ -2474,7 +2476,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }, className: (0, _classnames2.default)("gm-search-select", this.props.className) },
 	                _react2.default.createElement(
 	                    _flex2.default,
-	                    { className: 'gm-search-select-input' },
+	                    { wrap: true, className: 'gm-search-select-input' },
 	                    this.props.multiple ? _underscore2.default.map(this.state.selected, function (value, i) {
 	                        return _react2.default.createElement(
 	                            _flex2.default,
@@ -3884,8 +3886,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var _this = _possibleConstructorReturn(this, (DateRangePicker.__proto__ || Object.getPrototypeOf(DateRangePicker)).call(this, props));
 
-	        _this.dateRangePicker = null;
-	        _this.endTarget = null;
+	        _this.refDateRangePicker = null;
+	        _this.refEndTarget = null;
 	        _this.handleSelectBegin = _this.handleSelectBegin.bind(_this);
 	        _this.handleSelectEnd = _this.handleSelectEnd.bind(_this);
 	        return _this;
@@ -3898,7 +3900,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            this.props.onChange(date, this.props.end);
 	            setTimeout(function () {
-	                _this2.endTarget.click();
+	                _this2.refEndTarget.click();
 	            }, 0);
 	        }
 	    }, {
@@ -3908,7 +3910,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            this.props.onChange(this.props.begin, date);
 	            setTimeout(function () {
-	                _this3.dateRangePicker.click();
+	                _this3.refDateRangePicker.click();
 	            }, 0);
 	        }
 	    }, {
@@ -3916,22 +3918,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function render() {
 	            var _this4 = this;
 
-	            var beginPopup = _react2.default.createElement(_calendar2.default, _extends({
-	                selected: this.props.begin,
-	                onSelect: this.handleSelectBegin
-	            }, this.props.beginProps)),
-	                endPopup = _react2.default.createElement(_calendar2.default, _extends({
-	                selected: this.props.end,
-	                onSelect: this.handleSelectEnd
-	            }, Object.assign({
-	                min: this.props.begin
-	            }, this.props.endProps)));
+	            var _props = this.props,
+	                begin = _props.begin,
+	                end = _props.end,
+	                beginProps = _props.beginProps,
+	                endProps = _props.endProps,
+	                inputClassName = _props.inputClassName,
+	                disabled = _props.disabled;
+
 
 	            return _react2.default.createElement(
 	                'div',
 	                {
 	                    ref: function ref(_ref2) {
-	                        return _this4.dateRangePicker = _ref2;
+	                        return _this4.refDateRangePicker = _ref2;
 	                    },
 	                    className: (0, _classnames2.default)("gm-datepicker gm-daterangepicker", this.props.className)
 	                },
@@ -3939,13 +3939,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _trigger2.default,
 	                    {
 	                        component: _react2.default.createElement('div', { className: 'gm-inline-block' }),
-	                        popup: beginPopup
+	                        popup: _react2.default.createElement(_calendar2.default, _extends({
+	                            selected: begin,
+	                            onSelect: this.handleSelectBegin
+	                        }, beginProps))
 	                    },
 	                    _react2.default.createElement('input', {
 	                        type: 'text',
-	                        className: this.props.inputClassName,
-	                        disabled: this.props.disabled,
-	                        value: (0, _moment2.default)(this.props.begin).format('YYYY-MM-DD'),
+	                        className: inputClassName,
+	                        disabled: disabled,
+	                        value: begin ? (0, _moment2.default)(begin).format('YYYY-MM-DD') : '',
 	                        onChange: noop
 	                    })
 	                ),
@@ -3958,16 +3961,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _trigger2.default,
 	                    {
 	                        component: _react2.default.createElement('div', { className: 'gm-inline-block' }),
-	                        popup: endPopup
+	                        popup: _react2.default.createElement(_calendar2.default, _extends({
+	                            selected: end,
+	                            onSelect: this.handleSelectEnd
+	                        }, Object.assign({
+	                            min: begin
+	                        }, endProps)))
 	                    },
 	                    _react2.default.createElement('input', {
 	                        ref: function ref(_ref) {
-	                            return _this4.endTarget = _ref;
+	                            return _this4.refEndTarget = _ref;
 	                        },
 	                        type: 'text',
-	                        className: this.props.inputClassName,
-	                        disabled: this.props.disabled,
-	                        value: (0, _moment2.default)(this.props.end).format('YYYY-MM-DD'),
+	                        className: inputClassName,
+	                        disabled: disabled,
+	                        value: end ? (0, _moment2.default)(end).format('YYYY-MM-DD') : '',
 	                        onChange: noop
 	                    })
 	                )
@@ -3979,9 +3987,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	DateRangePicker.propTypes = {
-	    begin: _react.PropTypes.object.isRequired,
-	    end: _react.PropTypes.object.isRequired,
-	    onChange: _react.PropTypes.func.isRequired,
+	    begin: _react.PropTypes.object,
+	    end: _react.PropTypes.object,
+	    onChange: _react.PropTypes.func,
 	    inputClassName: _react.PropTypes.string,
 	    disabled: _react.PropTypes.bool,
 	    className: _react.PropTypes.string,
@@ -3996,6 +4004,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        max: _react2.default.PropTypes.object,
 	        disabledDate: _react2.default.PropTypes.func
 	    })
+	};
+
+	DateRangePicker.defaultProps = {
+	    onChange: noop
 	};
 
 	exports.default = DateRangePicker;
@@ -5453,7 +5465,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	// background-color: @brand-primary （#6dc3ec）
 	// 如果需要设置loading大小:  set size = 100  (default 50)
 	var LIMIT = 12;
 
@@ -5492,7 +5503,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	Loading.propTypes = {
-	    style: _react.PropTypes.object,
 	    size: _react.PropTypes.number
 	};
 

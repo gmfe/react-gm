@@ -15,10 +15,11 @@ class DaterangepickerWrap extends React.Component {
         };
         this.handleChange = ::this.handleChange;
     }
-
+    
     render() {
         return (
             <div>
+                可用
                 <DateRangePicker
                     begin={this.state.begin}
                     end={this.state.end}
@@ -28,7 +29,8 @@ class DaterangepickerWrap extends React.Component {
                         min: this.state.begin
                     }}
                 />
-
+                <br/>
+                disabled
                 <DateRangePicker
                     begin={this.state.begin}
                     end={this.state.end}
@@ -39,7 +41,7 @@ class DaterangepickerWrap extends React.Component {
             </div>
         );
     }
-
+    
     handleChange(begin, end) {
         console.log(begin, end);
         this.setState({
@@ -54,11 +56,50 @@ class DaterangepickerWrap extends React.Component {
 ```
 :::
 
+::: demo 不传begin end
+```js
+class DaterangepickerWrap2 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            begin: null,
+            end: null
+        };
+        this.handleChange = ::this.handleChange;
+    }
+    
+    render() {
+        return (
+            <div>
+                <DateRangePicker
+                    begin={this.state.begin}
+                    end={this.state.end}
+                    onChange={this.handleChange}
+                    inputClassName="form-control input-sm"
+                />
+            </div>
+        );
+    }
+    
+    handleChange(begin, end) {
+        console.log(begin, end);
+        this.setState({
+            begin: begin,
+            end: end
+        });
+    }
+}
+```
+```jsx
+<DaterangepickerWrap2/>
+```
+:::
+
 ### Props
 和`DatePicker`没多大区别，`date` 换成 `begin` 和 `end` 而已。
-- `begin (object|isRequired)`
-- `end (object|isRequired)`
-- `onChange (func|isRequired)`
+- `begin (object)`
+- `end (object)`
+- `onChange (func)`
 - `inputClassName (string)`
 - `disabled (bool)` 不可用
 - `className (string)`

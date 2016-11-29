@@ -24,7 +24,7 @@ class DialogWrap extends React.Component {
         this.handleComponentSize = ::this.handleComponentSize;
         this.handleDialogOK = ::this.handleDialogOK;
     }
-
+    
     handleAlert() {
         Dialog.alert({
             children: 'adsf'
@@ -34,7 +34,7 @@ class DialogWrap extends React.Component {
             console.log('reject');
         });
     }
-
+    
     handleConfirm() {
         // Dialog.confirm({
         //     children: 'asdf',
@@ -44,7 +44,7 @@ class DialogWrap extends React.Component {
         // }, () => {
         //     console.log('reject');
         // });
-
+        
         Dialog.dialog({
             title: 'title',
             bsSize: 'md',
@@ -57,7 +57,7 @@ class DialogWrap extends React.Component {
             console.log('promise resolve');
         });
     }
-
+    
     handleConfirmWithLoading() {
         Dialog.confirm({
             title: 'title',
@@ -74,7 +74,7 @@ class DialogWrap extends React.Component {
             console.log('promise resolve');
         });
     }
-
+    
     handlePrompt() {
         Dialog.prompt({
             children: 'sssss',
@@ -90,13 +90,13 @@ class DialogWrap extends React.Component {
             console.log('reject');
         });
     }
-
+    
     handleComponent() {
         this.setState({
             show: !this.state.show
         });
     }
-
+    
     handleComponentSize(bsSize) {
         console.log(bsSize, this.state);
         this.setState({
@@ -104,7 +104,7 @@ class DialogWrap extends React.Component {
             bsSize
         });
     }
-
+    
     handleComponentSizeWithLoading(bsSize) {
         console.log(bsSize);
         this.setState({
@@ -123,7 +123,7 @@ class DialogWrap extends React.Component {
             }, 1000);
         });
     }
-
+    
     render() {
         return (
             <div>

@@ -308,7 +308,7 @@ class SearchSelect extends React.Component {
     render() {
         return (
             <div ref={ref => this.searchSelect = ref} className={classNames("gm-search-select", this.props.className)}>
-                <Flex className="gm-search-select-input">
+                <Flex wrap className="gm-search-select-input">
                     {this.props.multiple ? _.map(this.state.selected, (value, i) => (
                         <Flex key={i} alignStart className="selected">
                             {value.name}

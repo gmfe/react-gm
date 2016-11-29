@@ -17,14 +17,14 @@ class TimeSpanWrap extends React.Component {
         };
         this.handleChange = ::this.handleChange;
     }
-
+    
     handleChange(date) {
         console.log(date);
         this.setState({
             date
         });
     }
-
+    
     render() {
         return (
             <div>
@@ -39,7 +39,6 @@ class TimeSpanWrap extends React.Component {
                         selected={this.state.date}
                         onSelect={this.handleChange}
                     />
-
                     <TimeSpan
                         max={moment().hour(20).minute(0)}
                         span={60 * 60 * 1000}
@@ -53,13 +52,11 @@ class TimeSpanWrap extends React.Component {
                         date={this.state.date}
                         onChange={this.handleChange}
                     />
-
                     <TimeSpanPicker
                         disabled={true}
                         date={this.state.date}
                         onChange={this.handleChange}
                     />
-
                     <TimeSpanPicker
                         date={this.state.date}
                         onChange={this.handleChange}

@@ -26,7 +26,7 @@ class DatePickerWrap extends React.Component {
                         <div>inline-block</div>
                         <DatePicker
                             date={this.state.date}
-                            placeholder="adfasdf"
+                            placeholder="请选择日期"
                             onChange={this.handleChange}
                             inputClassName="form-control input-sm"
                         />
@@ -35,7 +35,7 @@ class DatePickerWrap extends React.Component {
                         <div>disabled</div>
                         <DatePicker
                             date={this.state.date}
-                            placeholder="adfasdf"
+                            placeholder="请选择日期"
                             disabled={true}
                             onChange={this.handleChange}
                             inputClassName="form-control input-sm"
