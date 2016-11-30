@@ -3,44 +3,53 @@
   display: inline-block;
   cursor: pointer;
   background-color: #f9f9f9;
-  padding: 1px;
-  color: white;
+  color: #aaa;
   font-size: 12px;
   margin: 0;
 
-  &.gm-switcher-default {
-    color: #aaa;
-    border: 1px solid @gm-border-color;
+  &.gm-switcher-disabled {
+    cursor: @cursor-disabled;
+    .opacity(.6);
   }
 
   &.gm-switcher-primary {
-    background-color: @brand-primary;
-    border: 1px solid @brand-primary;
+    .gm-switcher-input:checked ~ .gm-switcher-label {
+      color: white;
+      background-color: @brand-primary;
+      border: 1px solid @brand-primary;
+    }
   }
 
   &.gm-switcher-success {
-    background-color: @brand-success;
-    border: 1px solid @brand-success;
+    .gm-switcher-input:checked ~ .gm-switcher-label {
+      color: white;
+      background-color: @brand-success;
+      border: 1px solid @brand-success;
+    }
   }
 
   &.gm-switcher-info {
-    background-color: @brand-info;
-    border: 1px solid @brand-info;
+    .gm-switcher-input:checked ~ .gm-switcher-label {
+      color: white;
+      background-color: @brand-info;
+      border: 1px solid @brand-info;
+    }
   }
 
   &.gm-switcher-warning {
-    background-color: @brand-warning;
-    border: 1px solid @brand-warning;
+    .gm-switcher-input:checked ~ .gm-switcher-label {
+      color: white;
+      background-color: @brand-warning;
+      border: 1px solid @brand-warning;
+    }
   }
 
   &.gm-switcher-danger {
-    background-color: @brand-danger;
-    border: 1px solid @brand-danger;
-  }
-
-  &.gm-switcher-disabled {
-    cursor: @cursor-disabled;
-    .opacity(.65);
+    .gm-switcher-input:checked ~ .gm-switcher-label {
+      color: white;
+      background-color: @brand-danger;
+      border: 1px solid @brand-danger;
+    }
   }
 
   .gm-switcher-input {
@@ -50,20 +59,18 @@
     opacity: 0;
 
     ~ .gm-switcher-label {
-      padding: 0 2px 0 22px;
+      padding: 1px 4px 1px 24px;
     }
 
     &:checked ~ .gm-switcher-label {
-      padding: 0 22px 0 2px;
-    }
-
-    &:checked ~ .gm-switcher-handle {
-      box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+      padding: 1px 24px 1px 4px;
     }
   }
 
   .gm-switcher-label {
     position: relative;
+    border: 1px solid @gm-border-color;
+    padding: 1px;
 
     .gm-switcher-label-on, .gm-switcher-label-off {
       position: absolute;
@@ -76,15 +83,14 @@
 
   .gm-switcher-handle {
     position: absolute;
-    top: 1px;
-    bottom: 1px;
-    left: 1px;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
     width: 17px;
     background: white;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     transition: left .15s ease-out;
     background-image: linear-gradient(to bottom, #fff 40%, #f0f0f0);
   }
-
 }
 
