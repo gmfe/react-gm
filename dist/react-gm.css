@@ -830,39 +830,39 @@
   display: inline-block;
   cursor: pointer;
   background-color: #f9f9f9;
-  padding: 1px;
-  color: white;
+  color: #aaa;
   font-size: 12px;
   margin: 0;
 }
-.gm-switcher.gm-switcher-default {
-  color: #aaa;
-  border: 1px solid #ddd;
+.gm-switcher.gm-switcher-disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
 }
-.gm-switcher.gm-switcher-primary {
+.gm-switcher.gm-switcher-primary .gm-switcher-input:checked ~ .gm-switcher-label {
+  color: white;
   background-color: #6dc3ec;
   border: 1px solid #6dc3ec;
 }
-.gm-switcher.gm-switcher-success {
+.gm-switcher.gm-switcher-success .gm-switcher-input:checked ~ .gm-switcher-label {
+  color: white;
   background-color: #34AE4B;
   border: 1px solid #34AE4B;
 }
-.gm-switcher.gm-switcher-info {
+.gm-switcher.gm-switcher-info .gm-switcher-input:checked ~ .gm-switcher-label {
+  color: white;
   background-color: #8DBF31;
   border: 1px solid #8DBF31;
 }
-.gm-switcher.gm-switcher-warning {
+.gm-switcher.gm-switcher-warning .gm-switcher-input:checked ~ .gm-switcher-label {
+  color: white;
   background-color: #F8C243;
   border: 1px solid #F8C243;
 }
-.gm-switcher.gm-switcher-danger {
+.gm-switcher.gm-switcher-danger .gm-switcher-input:checked ~ .gm-switcher-label {
+  color: white;
   background-color: #FC6265;
   border: 1px solid #FC6265;
-}
-.gm-switcher.gm-switcher-disabled {
-  cursor: not-allowed;
-  opacity: 0.65;
-  filter: alpha(opacity=65);
 }
 .gm-switcher .gm-switcher-input {
   position: absolute;
@@ -871,16 +871,15 @@
   opacity: 0;
 }
 .gm-switcher .gm-switcher-input ~ .gm-switcher-label {
-  padding: 0 2px 0 22px;
+  padding: 1px 4px 1px 24px;
 }
 .gm-switcher .gm-switcher-input:checked ~ .gm-switcher-label {
-  padding: 0 22px 0 2px;
-}
-.gm-switcher .gm-switcher-input:checked ~ .gm-switcher-handle {
-  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+  padding: 1px 24px 1px 4px;
 }
 .gm-switcher .gm-switcher-label {
   position: relative;
+  border: 1px solid #ddd;
+  padding: 1px;
 }
 .gm-switcher .gm-switcher-label .gm-switcher-label-on, .gm-switcher .gm-switcher-label .gm-switcher-label-off {
   position: absolute;
@@ -891,12 +890,12 @@
 }
 .gm-switcher .gm-switcher-handle {
   position: absolute;
-  top: 1px;
-  bottom: 1px;
-  left: 1px;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
   width: 17px;
   background: white;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   -webkit-transition: left 0.15s ease-out;
   transition: left 0.15s ease-out;
   background-image: -webkit-linear-gradient(top, #fff 40%, #f0f0f0);

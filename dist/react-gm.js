@@ -6504,7 +6504,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function componentDidMount() {
 	            // 初始化后开始计算on的宽度，方便做开关切换动画
 	            this.setState({
-	                left: this.refOn.offsetWidth + 2 + 22 + 1 - 17
+	                left: this.refOn.offsetWidth + 4 + 24 - 17
 	            });
 	        }
 	    }, {
