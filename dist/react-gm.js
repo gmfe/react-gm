@@ -2182,6 +2182,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            event.target.select();
 
+	            this.props.onInputFocus();
+
 	            if (this.props.isScrollToSelected) {
 	                // focus 先触发，此时浮层未出来。等个500毫秒？
 	                clearTimeout(this.scrollTimer);
@@ -2531,7 +2533,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    listMaxHeight: _react.PropTypes.string,
 	    multiple: _react.PropTypes.bool,
 	    placeholder: _react.PropTypes.string,
-	    isScrollToSelected: _react.PropTypes.bool
+	    isScrollToSelected: _react.PropTypes.bool,
+	    onInputFocus: _react.PropTypes.func
 	};
 
 	SearchSelect.defaultProps = {
@@ -2539,7 +2542,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    listMaxHeight: '250px',
 	    delay: 500,
 	    multiple: false,
-	    placeholder: ''
+	    placeholder: '',
+	    onInputFocus: function onInputFocus() {}
 	};
 
 	exports.default = SearchSelect;

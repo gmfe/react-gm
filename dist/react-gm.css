@@ -833,7 +833,6 @@
   padding: 1px;
   color: white;
   font-size: 12px;
-  overflow: hidden;
   margin: 0;
 }
 .gm-switcher.gm-switcher-default {
@@ -886,7 +885,9 @@
 .gm-switcher .gm-switcher-label .gm-switcher-label-on, .gm-switcher .gm-switcher-label .gm-switcher-label-off {
   position: absolute;
   display: block;
-  top: -200%;
+  visibility: hidden;
+  left: 0;
+  top: 0;
 }
 .gm-switcher .gm-switcher-handle {
   position: absolute;
