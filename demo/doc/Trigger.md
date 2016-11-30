@@ -3,7 +3,6 @@ imports:
     import {Trigger, Flex} from '../../src/index';
 ---
 ## Trigger
-类似react-bootstrap的 `OverlayTrigger`，背景是`OverlayTrigger`的浮层会两次触发，暂时没有排查出来原因。故造个轮子。
 
 ::: demo Trigger
 ```js

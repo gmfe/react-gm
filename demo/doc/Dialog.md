@@ -36,26 +36,26 @@ class DialogWrap extends React.Component {
     }
     
     handleConfirm() {
-        // Dialog.confirm({
-        //     children: 'asdf',
-        //     title: 'title'
-        // }).then(() => {
-        //     console.log('resolve');
-        // }, () => {
-        //     console.log('reject');
-        // });
-        
-        Dialog.dialog({
-            title: 'title',
-            bsSize: 'md',
-            children: <div>something</div>,
-            onOK: () => {
-                console.log('onOK');
-                return Promise.resolve('a'); // return false
-            }
+        Dialog.confirm({
+            children: 'asdf',
+            title: 'title'
         }).then(() => {
-            console.log('promise resolve');
+            console.log('resolve');
+        }, () => {
+            console.log('reject');
         });
+        
+        // Dialog.dialog({
+        //     title: 'title',
+        //     bsSize: 'md',
+        //     children: <div>something</div>,
+        //     onOK: () => {
+        //         console.log('onOK');
+        //         return Promise.resolve('a'); // return false
+        //     }
+        // }).then(() => {
+        //     console.log('promise resolve');
+        // });
     }
     
     handleConfirmWithLoading() {

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import {Modal, Button} from 'react-bootstrap';
+import Modal from './modal';
 
 const noop = () => {
 };
@@ -19,21 +19,21 @@ let DialogStatics = {};
 DialogStatics = {
     alert(options){
         options.type = 'alert';
-        options.bsSize = 'sm';
+        options.size = 'sm';
         return DialogStatics.dialog(options);
     },
     confirm(options){
         options.type = 'confirm';
-        options.bsSize = 'sm';
+        options.size = 'sm';
         return DialogStatics.dialog(options);
     },
     prompt(options){
         options.type = 'prompt';
-        options.bsSize = 'sm';
+        options.size = 'sm';
         return DialogStatics.dialog(options);
     },
     dialog(options){
-        options = Object.assign({}, {bsSize: 'sm'}, options);
+        options = Object.assign({}, {size: 'sm'}, options);
         return new Promise((resolve, reject) => {
             let div = document.createElement('div');
             dialogContainer.appendChild(div);
@@ -117,50 +117,45 @@ class Dialog extends React.Component {
 
     render() {
         const {isLoading} = this.state;
-        const {bsSize, title, children, type, promptDefaultValue, promptPlaceholder, cancelBtn, OKBtn} = this.props;
+        const {size, title, children, type, promptDefaultValue, promptPlaceholder, cancelBtn, OKBtn} = this.props;
         let modalProps = {
             show: this.state.show,
             onHide: this.handleCancel
         };
-        if (bsSize !== 'md') {
-            modalProps.bsSize = bsSize;
+        if (size !== 'md') {
+            modalProps.size = size;
         }
         return (
-            <Modal {...modalProps}>
-                <Modal.Header closeButton>
-                    {title}
-                </Modal.Header>
-                <Modal.Body>
-                    <div>
-                        {children}
-                        {type === 'prompt' && (
-                            <input
-                                autoFocus
-                                defaultValue={promptDefaultValue}
-                                placeholder={promptPlaceholder}
-                                ref="input"
-                                type="text"
-                                style={{display: 'block', width: '100%'}}
-                                onKeyDown={this.handleEnter}
-                            />
-                        )}
-                    </div>
+            <Modal {...modalProps} size={modalProps.size} title={title}>
+                <div>
+                    {children}
+                    {type === 'prompt' && (
+                        <input
+                            autoFocus
+                            defaultValue={promptDefaultValue}
+                            placeholder={promptPlaceholder}
+                            ref="input"
+                            type="text"
+                            style={{display: 'block', width: '100%'}}
+                            onKeyDown={this.handleEnter}
+                        />
+                    )}
+                </div>
+                <div className="gm-gap10"></div>
+                <div className="text-right">
+                    {(type !== 'alert' && cancelBtn && !isLoading) && (
+                        <button className="btn btn-default" onClick={this.handleCancel}>{cancelBtn}</button>
+                    )}
                     <div className="gm-gap10"></div>
-                    <div className="text-right">
-                        {(type !== 'alert' && cancelBtn && !isLoading) && (
-                            <button className="btn btn-default" onClick={this.handleCancel}>{cancelBtn}</button>
-                        )}
-                        <div className="gm-gap10"></div>
-                        {OKBtn && (
-                            <Button
-                                bsStyle="primary"
-                                disabled={isLoading}
-                                onClick={!isLoading ? this.handleOk : null}>
-                                {isLoading ? <i className="glyphicon glyphicon-refresh glyphicon-spin"/> : OKBtn}
-                            </Button>
-                        )}
-                    </div>
-                </Modal.Body>
+                    {OKBtn && (
+                        <button
+                            className="btn btn-primary"
+                            disabled={isLoading}
+                            onClick={!isLoading ? this.handleOk : null}>
+                            {isLoading ? <i className="glyphicon glyphicon-refresh glyphicon-spin"/> : OKBtn}
+                        </button>
+                    )}
+                </div>
             </Modal>
         );
     }
@@ -172,7 +167,7 @@ Dialog.propTypes = {
     title: PropTypes.string,
     onCancel: PropTypes.func,
     onOK: PropTypes.func,
-    bsSize: PropTypes.string,
+    size: PropTypes.string,
     promptDefaultValue: PropTypes.string,
     promptPlaceholder: PropTypes.string,
     cancelBtn: PropTypes.oneOfType([
@@ -190,7 +185,7 @@ Dialog.defaultProps = {
     type: 'confirm',
     onCancel: noop,
     onOK: noop,
-    bsSize: 'md',
+    size: 'md',
     cancelBtn: '取消',
     OKBtn: '确定'
 };

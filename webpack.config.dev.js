@@ -73,8 +73,6 @@ if (!isDev) {
 
 // build ++
 var deps = [
-    'react-bootstrap/dist/react-bootstrap.min.js',
-
     'react-router/umd/ReactRouter.min.js',
 
     'redux/dist/redux.min.js',

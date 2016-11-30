@@ -31,6 +31,8 @@ import CascaderSelect from './component/cascader.select';
 import Trigger from './component/trigger';
 import Loading from './component/loading';
 import InputNumber from './component/input.number';
+import LayoutRoot from './component/layout_root';
+import Modal from './component/modal';
 
 import './index.less';
 
@@ -78,5 +80,7 @@ module.exports = {
     SheetBatchAction,
     Trigger,
     Loading,
-    InputNumber
+    InputNumber,
+    LayoutRoot,
+    Modal
 };

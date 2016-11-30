@@ -5,7 +5,7 @@ import 'highlight.js/styles/default.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Flex as GMFlex} from '../src/index';
+import {Flex as GMFlex, LayoutRoot} from '../src/index';
 import {Router, Route, hashHistory, IndexRedirect} from 'react-router';
 import NavConfig from './nav.config.md';
 import _ from 'underscore';
@@ -40,6 +40,7 @@ import Trigger from './doc/Trigger.md';
 import Droper from './doc/Droper.md';
 import Switcher from './doc/Switcher.md';
 import InputNumber from './doc/InputNumber.md';
+import Modal from './doc/Modal.md';
 
 import NavConfigStandard from './standard/nav.config.md';
 import StandardAbout from './standard/About.md';
@@ -69,7 +70,8 @@ const docMap = {
     Trigger,
     Droper,
     Switcher,
-    InputNumber
+    InputNumber,
+    Modal
 };
 
 const standardMap = {
@@ -202,6 +204,7 @@ class App extends React.Component {
                         {this.props.children}
                     </GMFlex>
                 </GMFlex>
+                <LayoutRoot/>
             </div>
         );
     }

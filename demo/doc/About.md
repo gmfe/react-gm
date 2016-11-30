@@ -12,7 +12,6 @@
 
 使用前请保证以下依赖存在
 - react react-dom
-- [react-bootstrap](http://react-bootstrap.github.io/) 后续会慢慢脱离
 - classnames
 - underscore
 - moment

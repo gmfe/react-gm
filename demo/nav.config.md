@@ -40,6 +40,7 @@
 ### 浮层
 - [Tip](#/doc/Tip)
 - [Dialog](#/doc/Dialog)
+- [Modal](#/doc/Modal)
 - [Trigger](#/doc/Trigger)
 
 ### 上传

@@ -1236,6 +1236,66 @@
   bottom: 0;
   margin: auto 0;
 }
+.gm-modal-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.gm-modal-open .gm-modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.gm-modal {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  outline: 0;
+}
+.gm-modal .gm-modal-dialog {
+  position: relative;
+  background-color: white;
+}
+.gm-modal .gm-modal-dialog .close {
+  margin: 8px 10px 0 0;
+}
+.gm-modal .gm-modal-dialog .gm-modal-title {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.gm-modal .gm-modal-dialog .gm-modal-content {
+  padding: 10px;
+}
+.gm-modal-dialog {
+  margin: 10px;
+  width: auto;
+}
+@media (min-width: 768px) {
+  .gm-modal-lg {
+    width: 600px;
+    margin: 30px auto;
+  }
+  .gm-modal-md {
+    width: 600px;
+    margin: 30px auto;
+  }
+  .gm-modal-sm {
+    width: 300px;
+    margin: 30px auto;
+  }
+}
+@media (min-width: 992px) {
+  .gm-modal-lg {
+    width: 900px;
+  }
+}
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
   font-weight: 400;

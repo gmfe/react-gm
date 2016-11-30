@@ -10,8 +10,7 @@ module.exports = {
         'react': 'react',
         'react-dom': 'react-dom',
         'moment': 'moment',
-        'underscore': 'underscore',
-        'react-bootstrap': 'react-bootstrap'
+        'underscore': 'underscore'
     },
     output: {
         path: path.join(__dirname, 'dist'),

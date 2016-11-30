@@ -1,7 +1,3 @@
----
-imports:
-    import {Label} from 'react-bootstrap';
----
 ## 颜色规范
 
 ::: demo Color
