@@ -81,6 +81,8 @@ class SearchSelect extends React.Component {
     handleFocus(event) {
         event.target.select();
 
+        this.props.onInputFocus();
+
         if (this.props.isScrollToSelected) {
             // focus 先触发，此时浮层未出来。等个500毫秒？
             clearTimeout(this.scrollTimer);
@@ -350,7 +352,8 @@ SearchSelect.propTypes = {
     listMaxHeight: PropTypes.string,
     multiple: PropTypes.bool,
     placeholder: PropTypes.string,
-    isScrollToSelected: PropTypes.bool
+    isScrollToSelected: PropTypes.bool,
+    onInputFocus: PropTypes.func
 };
 
 SearchSelect.defaultProps = {
@@ -358,7 +361,9 @@ SearchSelect.defaultProps = {
     listMaxHeight: '250px',
     delay: 500,
     multiple: false,
-    placeholder: ''
+    placeholder: '',
+    onInputFocus: () => {
+    }
 };
 
 export default SearchSelect;
