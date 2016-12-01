@@ -4,3 +4,4 @@
 /webpack-assets.js
 .idea
 node_modules/
+.happypack/

@@ -84,7 +84,8 @@ class Sheet extends React.Component {
         });
 
         if (select && list.length > 0) {
-            isSelectAll = !_.find(list, value => !select.props.isDisabled(value) && !value._gm_select);
+            // 存在有效行，且不存在未选中的行
+            isSelectAll = _.find(list, value => !select.props.isDisabled(value)) && !_.find(list, value => !select.props.isDisabled(value) && !value._gm_select);
         }
 
         return (
@@ -115,7 +116,7 @@ class Sheet extends React.Component {
                                 return <th key={index} {...rest}>{value.props.name}</th>;
                             })}
                             {actions ? (
-                                <th>操作</th>
+                                <th className="text-center">操作</th>
                             ) : null}
                         </tr>
                         </thead>
@@ -157,7 +158,7 @@ class Sheet extends React.Component {
                                     }
                                 })}
                                 {actions ? (
-                                    <td>
+                                    <td className="text-center">
                                         {actions.props.children(value, index)}
                                     </td>
                                 ) : null}

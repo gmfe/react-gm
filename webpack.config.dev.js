@@ -6,6 +6,7 @@ var precss = require('precss');
 var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var env = process.env.NODE_ENV;
 var isDev = env === 'development';
+var HappyPack = require('happypack');
 
 var config = {
     entry: {
@@ -28,12 +29,18 @@ var config = {
             processOutput: function (assets) {
                 return 'window.WEBPACK_ASSETS = ' + JSON.stringify(assets);
             }
+        }),
+        new HappyPack({
+            id: 'js',
+            threads: 4,
+            cache: true,
+            loaders: isDev ? ['babel?cacheDirectory'] : ['babel']
         })
     ],
     module: {
         loaders: [{
             test: /\.js$/,
-            loader: 'babel',
+            loaders: ['happypack/loader?id=js'],
             exclude: /dict-zi\.js/
         }, {
             test: /\.md$/,
@@ -85,7 +92,5 @@ deps.forEach(function (dep) {
     config.resolve.alias[dep.split('/')[0]] = dep;
     config.module.noParse.push(dep);
 });
-
-module.exports = config;
 
 module.exports = config;
