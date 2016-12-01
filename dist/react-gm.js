@@ -6275,7 +6275,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 
 	            if (select && list.length > 0) {
-	                isSelectAll = !_underscore2.default.find(list, function (value) {
+	                // 存在有效行，且不存在未选中的行
+	                isSelectAll = _underscore2.default.find(list, function (value) {
+	                    return !select.props.isDisabled(value);
+	                }) && !_underscore2.default.find(list, function (value) {
 	                    return !select.props.isDisabled(value) && !value._gm_select;
 	                });
 	            }
@@ -6324,7 +6327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                }),
 	                                actions ? _react2.default.createElement(
 	                                    'th',
-	                                    null,
+	                                    { className: 'text-center' },
 	                                    '\u64CD\u4F5C'
 	                                ) : null
 	                            )
@@ -6387,7 +6390,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                    }),
 	                                    actions ? _react2.default.createElement(
 	                                        'td',
-	                                        null,
+	                                        { className: 'text-center' },
 	                                        actions.props.children(value, index)
 	                                    ) : null
 	                                );
