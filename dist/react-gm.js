@@ -212,6 +212,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    SheetAction = _sheet2.default.SheetAction,
 	    SheetSelect = _sheet2.default.SheetSelect,
 	    SheetBatchAction = _sheet2.default.SheetBatchAction;
+	var DropDownItems = _drop4.default.DropDownItems,
+	    DropDownItem = _drop4.default.DropDownItem;
 
 
 	module.exports = {
@@ -255,7 +257,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    LayoutRoot: _layout_root2.default,
 	    Modal: _modal2.default,
 	    Collapse: _collapse2.default,
-	    DropDown: _drop4.default
+	    DropDown: _drop4.default, DropDownItems: DropDownItems, DropDownItem: DropDownItem
 	};
 
 /***/ },
@@ -4752,9 +4754,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                children = _props3.children,
 	                className = _props3.className,
 	                popup = _props3.popup,
+	                right = _props3.right,
 	                split = _props3.split,
 	                cartClassName = _props3.cartClassName,
-	                rest = _objectWithoutProperties(_props3, ['children', 'className', 'popup', 'split', 'cartClassName']);
+	                rest = _objectWithoutProperties(_props3, ['children', 'className', 'popup', 'right', 'split', 'cartClassName']);
 
 	            return _react2.default.createElement(
 	                'div',
@@ -4766,6 +4769,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _trigger2.default,
 	                    {
 	                        type: 'click',
+	                        right: right,
 	                        component: _react2.default.createElement('button', {
 	                            ref: function ref(_ref) {
 	                                return _this5.refTrigger = _ref;
@@ -4792,8 +4796,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                className = _props4.className,
 	                popup = _props4.popup,
 	                split = _props4.split,
+	                right = _props4.right,
 	                cartClassName = _props4.cartClassName,
-	                rest = _objectWithoutProperties(_props4, ['children', 'className', 'popup', 'split', 'cartClassName']);
+	                rest = _objectWithoutProperties(_props4, ['children', 'className', 'popup', 'split', 'right', 'cartClassName']);
 
 	            if (split) {
 	                return this.renderSplit();
@@ -4803,6 +4808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _trigger2.default,
 	                {
 	                    type: 'click',
+	                    right: right,
 	                    component: _react2.default.createElement('div', _extends({}, rest, {
 	                        ref: function ref(_ref2) {
 	                            return _this6.refTrigger = _ref2;
@@ -4823,11 +4829,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return DropDown;
 	}(_react2.default.Component);
 
-	DropDown.Item = Item;
-	DropDown.Items = Items;
+	DropDown.DropDownItem = Item;
+	DropDown.DropDownItems = Items;
 
 	DropDown.propTypes = {
 	    popup: _react.PropTypes.element.isRequired,
+	    right: _react.PropTypes.bool,
 	    split: _react.PropTypes.bool,
 	    cartClassName: _react.PropTypes.string // split true时有效
 	};

@@ -1,6 +1,6 @@
 ---
 imports:
-    import {DropDown} from '../../src/index';
+    import {DropDown, DropDownItems, DropDownItem} from '../../src/index';
 ---
 ## DropDown
 
@@ -18,13 +18,13 @@ class DropDownWrap extends React.Component {
             <div>
                 <DropDown
                     popup={(
-                        <DropDown.Items>
-                            <DropDown.Item onClick={this.handleClick}>aaa</DropDown.Item>
-                            <DropDown.Item>aaa</DropDown.Item>
-                            <DropDown.Item>aaa</DropDown.Item>
-                            <DropDown.Item/>
-                            <DropDown.Item>aaa</DropDown.Item>
-                        </DropDown.Items>
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem/>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
                     )}
                 >
                     <button className="btn btn-default">
@@ -34,13 +34,13 @@ class DropDownWrap extends React.Component {
                 
                 <DropDown
                     popup={(
-                        <DropDown.Items>
-                            <DropDown.Item onClick={this.handleClick}>aaa</DropDown.Item>
-                            <DropDown.Item>aaa</DropDown.Item>
-                            <DropDown.Item>aaa</DropDown.Item>
-                            <DropDown.Item/>
-                            <DropDown.Item>aaa</DropDown.Item>
-                        </DropDown.Items>
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem/>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
                     )}
                 >
                     <button className="btn btn-primary">
@@ -50,13 +50,13 @@ class DropDownWrap extends React.Component {
                 
                 <DropDown
                     popup={(
-                        <DropDown.Items>
-                            <DropDown.Item onClick={this.handleClick}>aaa</DropDown.Item>
-                            <DropDown.Item>aaa</DropDown.Item>
-                            <DropDown.Item>aaa</DropDown.Item>
-                            <DropDown.Item/>
-                            <DropDown.Item>aaa</DropDown.Item>
-                        </DropDown.Items>
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem/>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
                     )}
                 >
                     <button className="btn btn-default btn-sm">
@@ -70,13 +70,34 @@ class DropDownWrap extends React.Component {
                         split
                         cartClassName="btn-sm"
                         popup={(
-                            <DropDown.Items>
-                                <DropDown.Item onClick={this.handleClick}>aaa</DropDown.Item>
-                                <DropDown.Item>aaa</DropDown.Item>
-                                <DropDown.Item>aaa</DropDown.Item>
-                                <DropDown.Item/>
-                                <DropDown.Item>aaa</DropDown.Item>
-                            </DropDown.Items>
+                            <DropDownItems>
+                                <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                                <DropDownItem>aaa</DropDownItem>
+                                <DropDownItem>aaa</DropDownItem>
+                                <DropDownItem/>
+                                <DropDownItem>aaa</DropDownItem>
+                            </DropDownItems>
+                        )}
+                    >
+                        <button className="btn btn-default btn-sm">
+                            drop down
+                        </button>
+                    </DropDown>
+                </div>
+                <div>
+                右边对齐
+                    <DropDown
+                        split
+                        right
+                        cartClassName="btn-sm"
+                        popup={(
+                            <DropDownItems>
+                                <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                                <DropDownItem>aaa</DropDownItem>
+                                <DropDownItem>aaa</DropDownItem>
+                                <DropDownItem/>
+                                <DropDownItem>aaa</DropDownItem>
+                            </DropDownItems>
                         )}
                     >
                         <button className="btn btn-default btn-sm">
@@ -99,10 +120,10 @@ class DropDownWrap extends React.Component {
 - `split (bool)` 是否分裂式按钮
 - `cartClassName (string)` split true时有效，设置cart的样式
 
-### DropDown.Items
+### DropDownItems
 
-用来包裹 DropDown.Item
+用来包裹 DropDownItem
 
-### DropDown.Item
+### DropDownItem
 
 如果没有children，则是分割线

@@ -45,6 +45,11 @@ const {
     SheetBatchAction
 } = Sheet;
 
+const {
+    DropDownItems,
+    DropDownItem
+} = DropDown;
+
 module.exports = {
     Util,
     Grid,
@@ -86,5 +91,5 @@ module.exports = {
     LayoutRoot,
     Modal,
     Collapse,
-    DropDown
+    DropDown, DropDownItems, DropDownItem
 };

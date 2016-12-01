@@ -49,6 +49,7 @@ class DropDown extends React.Component {
             children,
             className,
             popup,
+            right,
             split, // eslint-disable-line
             cartClassName,
             ...rest
@@ -62,6 +63,7 @@ class DropDown extends React.Component {
                 {children}
                 <Trigger
                     type="click"
+                    right={right}
                     component={(
                         <button
                             ref={ref => this.refTrigger = ref}
@@ -82,6 +84,7 @@ class DropDown extends React.Component {
             className,
             popup,
             split,
+            right,
             cartClassName, // eslint-disable-line
             ...rest
         } = this.props;
@@ -93,6 +96,7 @@ class DropDown extends React.Component {
         return (
             <Trigger
                 type="click"
+                right={right}
                 component={(
                     <div
                         {...rest}
@@ -106,11 +110,12 @@ class DropDown extends React.Component {
     }
 }
 
-DropDown.Item = Item;
-DropDown.Items = Items;
+DropDown.DropDownItem = Item;
+DropDown.DropDownItems = Items;
 
 DropDown.propTypes = {
     popup: PropTypes.element.isRequired,
+    right: PropTypes.bool,
     split: PropTypes.bool,
     cartClassName: PropTypes.string // split true时有效
 };
