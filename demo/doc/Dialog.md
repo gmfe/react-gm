@@ -15,7 +15,7 @@ class DialogWrap extends React.Component {
             show: false,
             show2: false,
             show3: false,
-            bsSize: 'sm'
+            size: 'sm'
         };
         this.handleAlert = ::this.handleAlert;
         this.handleConfirm = ::this.handleConfirm;
@@ -47,7 +47,7 @@ class DialogWrap extends React.Component {
         
         // Dialog.dialog({
         //     title: 'title',
-        //     bsSize: 'md',
+        //     size: 'md',
         //     children: <div>something</div>,
         //     onOK: () => {
         //         console.log('onOK');
@@ -61,7 +61,7 @@ class DialogWrap extends React.Component {
     handleConfirmWithLoading() {
         Dialog.confirm({
             title: 'title',
-            bsSize: 'md',
+            size: 'md',
             children: <div>something</div>,
             onOK: () => {
                 return new Promise((resove) => {
@@ -97,19 +97,19 @@ class DialogWrap extends React.Component {
         });
     }
     
-    handleComponentSize(bsSize) {
-        console.log(bsSize, this.state);
+    handleComponentSize(size) {
+        console.log(size, this.state);
         this.setState({
             show2: !this.state.show2,
-            bsSize
+            size
         });
     }
     
-    handleComponentSizeWithLoading(bsSize) {
-        console.log(bsSize);
+    handleComponentSizeWithLoading(size) {
+        console.log(size);
         this.setState({
             show3: !this.state.show3,
-            bsSize
+            size
         });
     }
 
@@ -165,18 +165,18 @@ class DialogWrap extends React.Component {
                 </Dialog>
                 <Dialog
                     show={this.state.show2}
-                    bsSize={this.state.bsSize}
-                    onCancel={this.handleComponentSize.bind(this, this.state.bsSize)}
+                    size={this.state.size}
+                    onCancel={this.handleComponentSize.bind(this, this.state.size)}
                 >
-                    bsSize {this.state.bsSize}
+                    size {this.state.size}
                 </Dialog>
                 <Dialog
                     show={this.state.show3}
-                    bsSize={this.state.bsSize}
-                    onCancel={this.handleComponentSizeWithLoading.bind(this, this.state.bsSize)}
+                    size={this.state.size}
+                    onCancel={this.handleComponentSizeWithLoading.bind(this, this.state.size)}
                     onOK={this.handleDialogOK}
                 >
-                    bsSize {this.state.bsSize}
+                    size {this.state.size}
                 </Dialog>
             </div>
         );
@@ -194,7 +194,7 @@ class DialogWrap extends React.Component {
 - `type (string)` 对话框类型，`alert` `confirm` `prompt`和无。默认无，其实有点像`confirm`
 - `onCancel (func)` 对话框消失前触发，可能点取消按钮，可能点浮层，可能close按钮。
 - `onOK (func)` 点确认按钮，之后对话框关闭。但返回 false 或者 Promise.reject() 则不会关闭。
-- `bsSize (string)` 对话框大小，`lg` `md` `sm`。 默认`md`
+- `size (string)` 对话框大小，`lg` `md` `sm`。 默认`md`
 - `cancelBtn (bool|string)` 为false则不显示cancel按钮，为字符串则替换按钮文案
 - `OKBtn (bool|string)` 同上
 - `promptDefaultValue (string)` 当type为`prompt`时有效，初始化输入框

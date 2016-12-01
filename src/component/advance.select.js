@@ -125,7 +125,7 @@ var AdvanceSelect = React.createClass({
         return (
             <div className={this.state.opened ? "gm-select gm-margin0 gm-open" : "gm-select gm-margin0"}>
                 <div className="gm-arrow" onClick={this.handleArrow}></div>
-                <ul className="gm-dropdown">
+                <ul className="gm--dropdown">
                     {optionList}
                 </ul>
                 <input id={this.state.id} ref="input" type="text" placeholder={this.props.title}

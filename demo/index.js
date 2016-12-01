@@ -41,6 +41,8 @@ import Droper from './doc/Droper.md';
 import Switcher from './doc/Switcher.md';
 import InputNumber from './doc/InputNumber.md';
 import Modal from './doc/Modal.md';
+import Collapse from './doc/Collapse.md';
+import DropDown from './doc/DropDown.md';
 
 import NavConfigStandard from './standard/nav.config.md';
 import StandardAbout from './standard/About.md';
@@ -71,7 +73,9 @@ const docMap = {
     Droper,
     Switcher,
     InputNumber,
-    Modal
+    Modal,
+    Collapse,
+    DropDown
 };
 
 const standardMap = {

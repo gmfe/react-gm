@@ -33,6 +33,8 @@ import Loading from './component/loading';
 import InputNumber from './component/input.number';
 import LayoutRoot from './component/layout_root';
 import Modal from './component/modal';
+import Collapse from './component/collapse';
+import DropDown from './component/drop.down';
 
 import './index.less';
 
@@ -82,5 +84,7 @@ module.exports = {
     Loading,
     InputNumber,
     LayoutRoot,
-    Modal
+    Modal,
+    Collapse,
+    DropDown
 };

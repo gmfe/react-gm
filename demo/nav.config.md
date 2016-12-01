@@ -8,6 +8,7 @@
 
 ### 布局
 - [Flex](#/doc/Flex)
+- [Collapse](#/doc/Collapse)
 
 ### 加载
 - [Loading](#/doc/Loading)
@@ -50,4 +51,5 @@
 - [Switch](#/doc/Switch)
 - [Switcher](#/doc/Switcher)
 - [InputNumber](#/doc/InputNumber)
+- [DropDown](#/doc/DropDown)
 

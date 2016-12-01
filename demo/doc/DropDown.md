@@ -1,11 +1,18 @@
-import React from 'react';
-import {DropDown} from '../../src/index';
+---
+imports:
+    import {DropDown} from '../../src/index';
+---
+## DropDown
 
-class Demo extends React.Component {
+下拉框
+
+::: demo DropDown
+```js
+class DropDownWrap extends React.Component {
     handleClick() {
         console.log('click');
     }
-
+    
     render() {
         return (
             <div>
@@ -24,7 +31,7 @@ class Demo extends React.Component {
                         drop down <span className="caret"/>
                     </button>
                 </DropDown>
-
+                
                 <DropDown
                     popup={(
                         <DropDown.Items>
@@ -40,7 +47,7 @@ class Demo extends React.Component {
                         drop down <span className="caret"/>
                     </button>
                 </DropDown>
-
+                
                 <DropDown
                     popup={(
                         <DropDown.Items>
@@ -56,8 +63,9 @@ class Demo extends React.Component {
                         drop down <span className="caret"/>
                     </button>
                 </DropDown>
-
+                
                 <div>
+                分裂式按钮
                     <DropDown
                         split
                         cartClassName="btn-sm"
@@ -80,5 +88,21 @@ class Demo extends React.Component {
         );
     }
 }
+```
+```jsx
+<DropDownWrap/>
+```
+:::
 
-export default Demo;
+### Props
+- `popup (element|isRequired)` 对应的浮层
+- `split (bool)` 是否分裂式按钮
+- `cartClassName (string)` split true时有效，设置cart的样式
+
+### DropDown.Items
+
+用来包裹 DropDown.Item
+
+### DropDown.Item
+
+如果没有children，则是分割线

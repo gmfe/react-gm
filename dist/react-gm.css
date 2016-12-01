@@ -662,7 +662,7 @@
 .option-disabled {
   opacity: 0.5;
 }
-.gm-dropdown {
+.gm--dropdown {
   position: absolute;
   z-index: 1;
   top: 100%;
@@ -679,12 +679,12 @@
   border-radius: 0;
   box-sizing: border-box;
 }
-.gm-dropdown li {
+.gm--dropdown li {
   list-style: none;
   padding: 8px 1em;
   margin: 0;
 }
-.gm-open .gm-dropdown {
+.gm-open .gm--dropdown {
   display: block;
 }
 .gm-marker {
@@ -1295,6 +1295,23 @@
   .gm-modal-lg {
     width: 900px;
   }
+}
+.gm-collapse {
+  display: none;
+}
+.gm-collapse.in {
+  display: block;
+}
+.gm-dropdown .dropdown-menu {
+  display: block;
+  position: initial;
+  float: none;
+}
+.gm-dropdown.gm-dropdown-split {
+  position: relative;
+}
+.gm-dropdown.gm-dropdown-split .gm-trigger {
+  position: initial;
 }
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
