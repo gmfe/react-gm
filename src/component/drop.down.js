@@ -5,15 +5,11 @@ import Trigger from './trigger';
 class Item extends React.Component {
     render() {
         const {children, ...rest} = this.props;
-        if (children) {
-            return (
-                <li {...rest}>
-                    <a href="javascript:;">{children}</a>
-                </li>
-            );
-        } else {
-            return <li className="divider"/>;
-        }
+        return (
+            <li {...rest}>
+                <a href="javascript:;">{children}</a>
+            </li>
+        );
     }
 }
 

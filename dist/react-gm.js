@@ -4674,19 +4674,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                children = _props.children,
 	                rest = _objectWithoutProperties(_props, ['children']);
 
-	            if (children) {
-	                return _react2.default.createElement(
-	                    'li',
-	                    rest,
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: 'javascript:;' },
-	                        children
-	                    )
-	                );
-	            } else {
-	                return _react2.default.createElement('li', { className: 'divider' });
-	            }
+	            return _react2.default.createElement(
+	                'li',
+	                rest,
+	                _react2.default.createElement(
+	                    'a',
+	                    { href: 'javascript:;' },
+	                    children
+	                )
+	            );
 	        }
 	    }]);
 

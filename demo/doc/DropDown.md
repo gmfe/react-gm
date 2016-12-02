@@ -134,7 +134,7 @@ class DropDownWrap1 extends React.Component {
 
 ::: demo 对齐
 ```js
-class DropDownWrap3 extends React.Component {
+class DropDownWrap2 extends React.Component {
     handleClick() {
         console.log('click');
     }
@@ -172,13 +172,13 @@ class DropDownWrap3 extends React.Component {
 }
 ```
 ```jsx
-<DropDownWrap3/>
+<DropDownWrap2/>
 ```
 :::
 
 ::: demo 其他
 ```js
-class DropDownWrap4 extends React.Component {
+class DropDownWrap3 extends React.Component {
     handleClick() {
         console.log('click');
     }
@@ -192,7 +192,7 @@ class DropDownWrap4 extends React.Component {
                         <DropDownItems>
                             <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
                             <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem/>
+                            <DropDownItem className="divider"/>
                             <DropDownItem>aaa</DropDownItem>
                         </DropDownItems>
                     )}
@@ -234,7 +234,7 @@ class DropDownWrap4 extends React.Component {
 }
 ```
 ```jsx
-<DropDownWrap4/>
+<DropDownWrap3/>
 ```
 :::
 
@@ -249,4 +249,4 @@ class DropDownWrap4 extends React.Component {
 
 ### DropDownItem
 
-如果没有children，则是分割线
+选项
