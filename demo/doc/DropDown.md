@@ -115,6 +115,101 @@ class DropDownWrap extends React.Component {
 ```
 :::
 
+::: demo 分裂式
+```js
+class DropDownWrap2 extends React.Component {
+    handleClick() {
+        console.log('click');
+    }
+    
+    render() {
+        return (
+            <div>
+                分裂式按钮
+                <DropDown
+                    split
+                    cartClassName="btn-sm"
+                    popup={(
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem/>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
+                    )}
+                >
+                    <button className="btn btn-default btn-sm">
+                        drop down
+                    </button>
+                </DropDown>
+            </div>
+        );
+    }
+}
+```
+```jsx
+<DropDownWrap2/>
+```
+:::
+
+::: demo 其他
+```js
+class DropDownWrap4 extends React.Component {
+    handleClick() {
+        console.log('click');
+    }
+    
+    render() {
+        return (
+            <div>
+                第二个选项disabled
+                <DropDown
+                    split
+                    cartClassName="btn-sm"
+                    popup={(
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem className="disabled">aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem/>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
+                    )}
+                >
+                    <button className="btn btn-default btn-sm">
+                        drop down
+                    </button>
+                </DropDown>
+                选项header
+                <DropDown
+                    split
+                    cartClassName="btn-sm"
+                    popup={(
+                        <DropDownItems>
+                            <DropDownItem className="dropdown-header">我是header</DropDownItem>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem className="disabled">aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem/>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
+                    )}
+                >
+                    <button className="btn btn-default btn-sm">
+                        drop down
+                    </button>
+                </DropDown>
+            </div>
+        );
+    }
+}
+```
+```jsx
+<DropDownWrap4/>
+```
+:::
+
 ### Props
 - `popup (element|isRequired)` 对应的浮层
 - `split (bool)` 是否分裂式按钮
