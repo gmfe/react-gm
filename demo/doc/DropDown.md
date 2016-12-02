@@ -6,7 +6,7 @@ imports:
 
 下拉框
 
-::: demo DropDown
+::: demo DropDown 色系 default primary success info warning danger
 ```js
 class DropDownWrap extends React.Component {
     handleClick() {
@@ -16,95 +16,57 @@ class DropDownWrap extends React.Component {
     render() {
         return (
             <div>
+                <div>普通，要自己加caret</div>
+                默认
                 <DropDown
                     popup={(
                         <DropDownItems>
                             <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
                             <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem/>
-                            <DropDownItem>aaa</DropDownItem>
                         </DropDownItems>
                     )}
                 >
-                    <button className="btn btn-default">
-                        drop down <span className="caret"/>
-                    </button>
+                    <button className="btn btn-default">drop down <span className="caret"/></button>
                 </DropDown>
-                
+                主色
                 <DropDown
                     popup={(
                         <DropDownItems>
                             <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
                             <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem/>
-                            <DropDownItem>aaa</DropDownItem>
                         </DropDownItems>
                     )}
                 >
-                    <button className="btn btn-primary">
-                        drop down <span className="caret"/>
-                    </button>
+                    <button className="btn btn-primary">drop down <span className="caret"/></button>
                 </DropDown>
                 
+                <div>分裂式按钮</div>
+                默认
                 <DropDown
+                    split
+                    cartClassName="btn-default"
                     popup={(
                         <DropDownItems>
                             <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
                             <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem/>
+                        </DropDownItems>
+                    )}
+                >
+                    <button className="btn btn-default">drop down</button>
+                </DropDown>
+                主色
+                <DropDown
+                    split
+                    cartClassName="btn-primary"
+                    popup={(
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
                             <DropDownItem>aaa</DropDownItem>
                         </DropDownItems>
                     )}
                 >
-                    <button className="btn btn-default btn-sm">
-                        drop down <span className="caret"/>
-                    </button>
+                    <button className="btn btn-primary">drop down</button>
                 </DropDown>
-                
-                <div>
-                分裂式按钮
-                    <DropDown
-                        split
-                        cartClassName="btn-sm"
-                        popup={(
-                            <DropDownItems>
-                                <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
-                                <DropDownItem>aaa</DropDownItem>
-                                <DropDownItem>aaa</DropDownItem>
-                                <DropDownItem/>
-                                <DropDownItem>aaa</DropDownItem>
-                            </DropDownItems>
-                        )}
-                    >
-                        <button className="btn btn-default btn-sm">
-                            drop down
-                        </button>
-                    </DropDown>
-                </div>
-                <div>
-                右边对齐
-                    <DropDown
-                        split
-                        right
-                        cartClassName="btn-sm"
-                        popup={(
-                            <DropDownItems>
-                                <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
-                                <DropDownItem>aaa</DropDownItem>
-                                <DropDownItem>aaa</DropDownItem>
-                                <DropDownItem/>
-                                <DropDownItem>aaa</DropDownItem>
-                            </DropDownItems>
-                        )}
-                    >
-                        <button className="btn btn-default btn-sm">
-                            drop down
-                        </button>
-                    </DropDown>
-                </div>
             </div>
         );
     }
@@ -117,31 +79,48 @@ class DropDownWrap extends React.Component {
 
 ::: demo 分裂式
 ```js
-class DropDownWrap2 extends React.Component {
+class DropDownWrap1 extends React.Component {
     handleClick() {
         console.log('click');
     }
     
     render() {
         return (
-            <div>
-                分裂式按钮
+            <div>           
+                大 lg
                 <DropDown
-                    split
-                    cartClassName="btn-sm"
                     popup={(
                         <DropDownItems>
                             <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
                             <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem/>
+                        </DropDownItems>
+                    )}
+                >
+                    <button className="btn btn-primary">drop down <span className="caret"/></button>
+                </DropDown>
+                小 sm
+                <DropDown
+                    popup={(
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
                             <DropDownItem>aaa</DropDownItem>
                         </DropDownItems>
                     )}
                 >
-                    <button className="btn btn-default btn-sm">
-                        drop down
-                    </button>
+                    <button className="btn btn-primary">drop down <span className="caret"/></button>
+                </DropDown>
+                超小 xs
+                <DropDown
+                    split
+                    cartClassName="btn-xs"
+                    popup={(
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
+                    )}
+                >
+                    <button className="btn btn-default btn-xs">drop down</button>
                 </DropDown>
             </div>
         );
@@ -149,7 +128,51 @@ class DropDownWrap2 extends React.Component {
 }
 ```
 ```jsx
-<DropDownWrap2/>
+<DropDownWrap1/>
+```
+:::
+
+::: demo 对齐
+```js
+class DropDownWrap3 extends React.Component {
+    handleClick() {
+        console.log('click');
+    }
+    
+    render() {
+        return (
+            <div>
+                右边对齐
+                <DropDown
+                    right
+                    popup={(
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
+                    )}
+                >
+                    <button className="btn btn-primary">drop down <span className="caret"/></button>
+                </DropDown>
+                <DropDown
+                    split
+                    right
+                    popup={(
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
+                    )}
+                >
+                    <button className="btn btn-default">drop down</button>
+                </DropDown>
+            </div>
+        );
+    }
+}
+```
+```jsx
+<DropDownWrap3/>
 ```
 :::
 
@@ -163,10 +186,21 @@ class DropDownWrap4 extends React.Component {
     render() {
         return (
             <div>
+                选项分割
+                <DropDown
+                    popup={(
+                        <DropDownItems>
+                            <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
+                            <DropDownItem>aaa</DropDownItem>
+                            <DropDownItem/>
+                            <DropDownItem>aaa</DropDownItem>
+                        </DropDownItems>
+                    )}
+                >
+                    <button className="btn btn-default">drop down <span className="caret"/></button>
+                </DropDown>
                 第二个选项disabled
                 <DropDown
-                    split
-                    cartClassName="btn-sm"
                     popup={(
                         <DropDownItems>
                             <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
@@ -177,28 +211,22 @@ class DropDownWrap4 extends React.Component {
                         </DropDownItems>
                     )}
                 >
-                    <button className="btn btn-default btn-sm">
-                        drop down
-                    </button>
+                    <button className="btn btn-default">drop down <span className="caret"/></button>
                 </DropDown>
                 选项header
                 <DropDown
-                    split
-                    cartClassName="btn-sm"
                     popup={(
                         <DropDownItems>
                             <DropDownItem className="dropdown-header">我是header</DropDownItem>
                             <DropDownItem onClick={this.handleClick}>aaa</DropDownItem>
                             <DropDownItem className="disabled">aaa</DropDownItem>
                             <DropDownItem>aaa</DropDownItem>
-                            <DropDownItem/>
+                            <DropDownItem className="dropdown-header">我是header</DropDownItem>
                             <DropDownItem>aaa</DropDownItem>
                         </DropDownItems>
                     )}
                 >
-                    <button className="btn btn-default btn-sm">
-                        drop down
-                    </button>
+                    <button className="btn btn-default">drop down <span className="caret"/></button>
                 </DropDown>
             </div>
         );
