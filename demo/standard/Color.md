@@ -56,6 +56,10 @@ station定义了5，10，15三种大小的padding和margin。
 - `gm-padding0`， `gm-padding5`，`gm-padding10`，`gm-padding15`
 - `gm-paddingLeft5`，`gm-paddingLeft10`，`gm-paddingLeft15`
 - `gm-paddingRight5`，`gm-paddingRight10`，`gm-paddingRight15`
+- `gm-paddingTop5`，`gm-paddingTop10`，`gm-paddingTop15`
+- `gm-paddingBottom5`，`gm-paddingBottom10`，`gm-paddingBottom15`
 - `gm-margin0`， `gm-margin5`，`gm-margin10`，`gm-margin15`
 - `gm-marginLeft5`，`gm-marginLeft10`，`gm-marginLeft15`
 - `gm-marginRight5`，`gm-marginRight10`，`gm-marginRight15`
+- `gm-marginTop5`，`gm-marginTop10`，`gm-marginTop15`
+- `gm-marginBottom5`，`gm-marginBottom10`，`gm-marginBottom15`
