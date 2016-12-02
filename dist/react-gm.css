@@ -2,19 +2,44 @@
   background-color: white;
 }
 .btn.btn-plain.btn-primary {
-  color: #6dc3ec;
+  color: #409d39;
+}
+.btn.btn-plain.btn-primary:hover {
+  color: #fff;
+  background-color: #409d39;
+  border-color: #388a32;
 }
 .btn.btn-plain.btn-success {
   color: #34AE4B;
 }
+.btn.btn-plain.btn-success:hover {
+  color: #fff;
+  background-color: #34AE4B;
+  border-color: #2e9a43;
+}
 .btn.btn-plain.btn-info {
   color: #8DBF31;
 }
+.btn.btn-plain.btn-info:hover {
+  color: #fff;
+  background-color: #8DBF31;
+  border-color: #7eab2c;
+}
 .btn.btn-plain.btn-warning {
-  color: #F8C243;
+  color: #FFD642;
+}
+.btn.btn-plain.btn-warning:hover {
+  color: #fff;
+  background-color: #FFD642;
+  border-color: #ffd028;
 }
 .btn.btn-plain.btn-danger {
-  color: #FC6265;
+  color: #F75462;
+}
+.btn.btn-plain.btn-danger:hover {
+  color: #fff;
+  background-color: #F75462;
+  border-color: #f63c4c;
 }
 .gm-grid td > button {
   margin: 0 5px;
@@ -189,11 +214,11 @@
   color: #999999;
 }
 .gm-calendar-active {
-  background-color: #6dc3ec;
+  background-color: #409d39;
   color: white;
 }
 .gm-calendar-active:hover {
-  background-color: #6dc3ec;
+  background-color: #409d39;
   color: white;
 }
 .gm-calendar-day-disabled {
@@ -472,7 +497,7 @@
   background-color: #f5f5f5;
 }
 .gm-time-span-cell.active {
-  background-color: #6dc3ec;
+  background-color: #409d39;
   color: white;
 }
 .gm-time-span-picker {
@@ -635,7 +660,7 @@
   background-color: #eee;
 }
 .option-hover {
-  background-color: #6dc3ec;
+  background-color: #409d39;
   color: #fff;
 }
 .option-item {
@@ -646,7 +671,7 @@
   background-color: #f5f5f5;
 }
 .option-hover:hover {
-  background-color: #6dc3ec;
+  background-color: #409d39;
   color: #fff;
 }
 .option-item:last-child {
@@ -841,8 +866,8 @@
 }
 .gm-switcher.gm-switcher-primary .gm-switcher-input:checked ~ .gm-switcher-label {
   color: white;
-  background-color: #6dc3ec;
-  border: 1px solid #6dc3ec;
+  background-color: #409d39;
+  border: 1px solid #409d39;
 }
 .gm-switcher.gm-switcher-success .gm-switcher-input:checked ~ .gm-switcher-label {
   color: white;
@@ -856,13 +881,13 @@
 }
 .gm-switcher.gm-switcher-warning .gm-switcher-input:checked ~ .gm-switcher-label {
   color: white;
-  background-color: #F8C243;
-  border: 1px solid #F8C243;
+  background-color: #FFD642;
+  border: 1px solid #FFD642;
 }
 .gm-switcher.gm-switcher-danger .gm-switcher-input:checked ~ .gm-switcher-label {
   color: white;
-  background-color: #FC6265;
-  border: 1px solid #FC6265;
+  background-color: #F75462;
+  border: 1px solid #F75462;
 }
 .gm-switcher .gm-switcher-input {
   position: absolute;
@@ -970,7 +995,7 @@
   border-top: none;
 }
 .gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-item.active.line-selected {
-  background-color: #1c9bd7;
+  background-color: #21521e;
 }
 .gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-item.line-selected {
   background-color: #f5f5f5;
@@ -1105,7 +1130,7 @@
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: #6dc3ec;
+  background-color: #409d39;
   border-radius: 100%;
   -webkit-animation: gm-loadingFade 1.2s infinite ease-in-out both;
           animation: gm-loadingFade 1.2s infinite ease-in-out both;
