@@ -1389,6 +1389,9 @@ html, body {
 .gm-padding15 {
   padding: 15px;
 }
+.gm-paddingTop0 {
+  padding-top: 0;
+}
 .gm-paddingTop5 {
   padding-top: 5px;
 }
@@ -1397,6 +1400,9 @@ html, body {
 }
 .gm-paddingTop15 {
   padding-top: 15px;
+}
+.gm-paddingBottom0 {
+  padding-bottom: 0;
 }
 .gm-paddingBottom5 {
   padding-bottom: 5px;
@@ -1407,6 +1413,9 @@ html, body {
 .gm-paddingBottom15 {
   padding-bottom: 15px;
 }
+.gm-paddingLeft0 {
+  padding-left: 0;
+}
 .gm-paddingLeft5 {
   padding-left: 5px;
 }
@@ -1416,6 +1425,9 @@ html, body {
 .gm-paddingLeft15 {
   padding-left: 15px;
 }
+.gm-paddingRight0 {
+  padding-right: 0;
+}
 .gm-paddingRight5 {
   padding-right: 5px;
 }
@@ -1424,6 +1436,10 @@ html, body {
 }
 .gm-paddingRight15 {
   padding-right: 15px;
+}
+.gm-paddingLR0 {
+  padding-left: 0;
+  padding-right: 0;
 }
 .gm-paddingLR5 {
   padding-left: 5px;
@@ -1436,6 +1452,10 @@ html, body {
 .gm-paddingLR15 {
   padding-left: 15px;
   padding-right: 15px;
+}
+.gm-paddingTB0 {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .gm-paddingTB5 {
   padding-top: 5px;
@@ -1461,6 +1481,9 @@ html, body {
 .gm-margin15 {
   margin: 15px;
 }
+.gm-marginTop0 {
+  margin-top: 0;
+}
 .gm-marginTop5 {
   margin-top: 5px;
 }
@@ -1469,6 +1492,9 @@ html, body {
 }
 .gm-marginTop15 {
   margin-top: 15px;
+}
+.gm-marginBottom0 {
+  margin-bottom: 0;
 }
 .gm-marginBottom5 {
   margin-bottom: 5px;
@@ -1479,6 +1505,9 @@ html, body {
 .gm-marginBottom15 {
   margin-bottom: 15px;
 }
+.gm-marginLeft0 {
+  margin-left: 0;
+}
 .gm-marginLeft5 {
   margin-left: 5px;
 }
@@ -1488,6 +1517,9 @@ html, body {
 .gm-marginLeft15 {
   margin-left: 15px;
 }
+.gm-marginRight0 {
+  margin-right: 0;
+}
 .gm-marginRight5 {
   margin-right: 5px;
 }
@@ -1496,6 +1528,10 @@ html, body {
 }
 .gm-marginRight15 {
   margin-right: 15px;
+}
+.gm-marginTB0 {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .gm-marginTB5 {
   margin-top: 5px;
@@ -1508,6 +1544,10 @@ html, body {
 .gm-marginTB15 {
   margin-top: 15px;
   margin-bottom: 15px;
+}
+.gm-marginLR0 {
+  margin-left: 0;
+  margin-right: 0;
 }
 .gm-marginLR5 {
   margin-left: 5px;
