@@ -3,13 +3,26 @@ import 'intro.js/introjs.css';
 
 const introJs = Introjs.introJs();
 
+window.introJs = introJs;
+
 introJs.setOptions({
     exitOnOverlayClick: false
 });
+
+// const getCurrentTarget = () => {
+//     return introJs._introItems[introJs._currentStep];
+// };
+
 introJs.onbeforechange((targetElement) => {
-    console.log(targetElement);
-    // return fa
-    // introJs.goToStep(2);
+    const step = targetElement.dataset['step'];
+    if (step) {
+        if (step === '3') {
+            targetElement.click();
+        } else if (step === '4') {
+            targetElement.click();
+        }
+    }
+    console.log(targetElement, targetElement.dataset['step']);
 });
 
 module.exports = {

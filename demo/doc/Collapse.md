@@ -22,11 +22,15 @@ class CollapseWrap extends React.Component {
 
     render() {
         return (
-            <div>
-                <button onClick={::this.handleCollapse}>Collapse toggle</button>
+            <div data-intro="展开啦" data-step="5">
+                <button data-intro="点此展开" data-step="4" onClick={::this.handleCollapse}>Collapse toggle</button>
                 <Collapse in={this.state.show}>
-                    <div>
+                    <div style={{background: 'red'}}>
                         啦啦啦啦
+                        <br/>
+                        lalala
+                        <br/>
+                        666666
                     </div>
                 </Collapse>
             </div>
