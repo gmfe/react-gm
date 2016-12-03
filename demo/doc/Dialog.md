@@ -127,7 +127,7 @@ class DialogWrap extends React.Component {
     render() {
         return (
             <div>
-                <div>
+                <div data-intro="asdfaf">
                     <button className="btn btn-default" onClick={this.handleAlert}>alert</button>
                     <button className="btn btn-default" onClick={this.handleConfirm}>confirm</button>
                     <button className="btn btn-default" onClick={this.handleConfirmWithLoading}>

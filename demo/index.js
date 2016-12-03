@@ -7,11 +7,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Flex as GMFlex, LayoutRoot} from '../src/index';
 import {Router, Route, hashHistory, IndexRedirect} from 'react-router';
-import NavConfig from './nav.config.md';
 import _ from 'underscore';
 
 import Demo from './component/demo';
 
+import NavConfigDoc from './doc/nav.config';
 import About from './doc/About.md';
 import Flex from './doc/Flex.md';
 import Loading from './doc/Loading.md';
@@ -44,7 +44,7 @@ import Modal from './doc/Modal.md';
 import Collapse from './doc/Collapse.md';
 import DropDown from './doc/DropDown.md';
 
-import NavConfigStandard from './standard/nav.config.md';
+import NavConfigStandard from './standard/nav.config';
 import StandardAbout from './standard/About.md';
 import Color from './standard/Color.md';
 
@@ -82,38 +82,6 @@ const standardMap = {
     StandardAbout,
     Color
 };
-
-
-// var interceptorId = Util.RequestInterceptor.add({
-//     request: function (config) {
-//         NProgress.start();
-//         console.log('request Interceptor', config);
-//
-//         // 修改相关的信息
-//         // config.url = '/testmodify/';
-//         // config.data.name = '111';
-//
-//         return config;
-//     },
-//     response: function (json) {
-//         NProgress.done();
-//         console.log('response Interceptor');
-//     },
-//     responseError: function (reason) {
-//         NProgress.done();
-//         console.log('responseError Interceptor', reason);
-//     }
-// });
-
-// Util.Request('/test/').data({name: 'haha'}).get().then(function (data) {
-//     console.log(data);
-// }, function (reason) {
-//     console.log(reason);
-// });
-// console.log(Util.format('hello {name}', {name: 'liyatang'}));
-// console.log(Util.param({
-//     a: 1, b: 2, c: 3
-// }));
 
 const setNavCurrent = () => {
     _.each(document.querySelectorAll('.demo-left a'), element => element.className = '');
@@ -181,6 +149,12 @@ class App extends React.Component {
         }
     }
 
+    handleIntro() {
+        require.ensure([], require => {
+            require('./intro').start();
+        });
+    }
+
     render() {
         // 暴力，莫喷
         setTimeout(() => {
@@ -195,14 +169,15 @@ class App extends React.Component {
                             <small>&nbsp;&nbsp;by gmfe</small>
                         </a>
                         <GMFlex flex justifyEnd alignCenter className="gm-header-nav">
-                            <a href="#/standard">UI规范TODO</a>
-                            <a href="#/doc">组件</a>
+                            <a href="javascript:;" onClick={this.handleIntro}>功能引导？TODO</a>
+                            <a href="#/standard" data-intro="点这里看UI规范">UI规范TODO</a>
+                            <a href="#/doc" data-intro="点这里看组件" data-hint="xx">组件</a>
                         </GMFlex>
                     </GMFlex>
                 </div>
                 <GMFlex className="demo-center container">
                     <div className="demo-left" onClick={this.handleNav}>
-                        {location.hash.indexOf('#/standard') > -1 ? <NavConfigStandard/> : <NavConfig/>}
+                        {location.hash.indexOf('#/standard') > -1 ? <NavConfigStandard/> : <NavConfigDoc/>}
                     </div>
                     <GMFlex flex column className="demo-content doc markdown-body" onClick={this.handleAnchor}>
                         {this.props.children}
@@ -232,8 +207,12 @@ ReactDOM.render((
     <Router history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRedirect to='/doc'/>
-            <Route path="/standard(/:doc)" component={Standard}/>
-            <Route path="/doc(/:doc)" component={Doc}/>
+            <Route path="standard(/:doc)" component={Standard}/>
+            <Route path="doc">
+                <IndexRedirect to='/doc/About'/>
+                <Route path=":doc" component={Doc}/>
+            </Route>
+
             <Route path="/demo" component={Demo}/>
         </Route>
     </Router>
