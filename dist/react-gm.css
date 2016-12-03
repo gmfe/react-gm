@@ -1377,203 +1377,203 @@ html, body {
   height: 15px;
   width: 15px;
 }
-.gm-padding0 {
+.gm-padding-0 {
   padding: 0;
 }
-.gm-padding5 {
+.gm-padding-5 {
   padding: 5px;
 }
-.gm-padding10 {
+.gm-padding-10 {
   padding: 10px;
 }
-.gm-padding15 {
+.gm-padding-15 {
   padding: 15px;
 }
-.gm-paddingTop0 {
+.gm-padding-top-0 {
   padding-top: 0;
 }
-.gm-paddingTop5 {
+.gm-padding-top-5 {
   padding-top: 5px;
 }
-.gm-paddingTop10 {
+.gm-padding-top-10 {
   padding-top: 10px;
 }
-.gm-paddingTop15 {
+.gm-padding-top-15 {
   padding-top: 15px;
 }
-.gm-paddingBottom0 {
+.gm-padding-bottom-0 {
   padding-bottom: 0;
 }
-.gm-paddingBottom5 {
+.gm-padding-bottom-5 {
   padding-bottom: 5px;
 }
-.gm-paddingBottom10 {
+.gm-padding-bottom-10 {
   padding-bottom: 10px;
 }
-.gm-paddingBottom15 {
+.gm-padding-bottom-15 {
   padding-bottom: 15px;
 }
-.gm-paddingLeft0 {
+.gm-padding-left-0 {
   padding-left: 0;
 }
-.gm-paddingLeft5 {
+.gm-padding-left-5 {
   padding-left: 5px;
 }
-.gm-paddingLeft10 {
+.gm-padding-left-10 {
   padding-left: 10px;
 }
-.gm-paddingLeft15 {
+.gm-padding-left-15 {
   padding-left: 15px;
 }
-.gm-paddingRight0 {
+.gm-padding-right-0 {
   padding-right: 0;
 }
-.gm-paddingRight5 {
+.gm-padding-right-5 {
   padding-right: 5px;
 }
-.gm-paddingRight10 {
+.gm-padding-right-10 {
   padding-right: 10px;
 }
-.gm-paddingRight15 {
+.gm-padding-right-15 {
   padding-right: 15px;
 }
-.gm-paddingLR0 {
+.gm-padding-lr-0 {
   padding-left: 0;
   padding-right: 0;
 }
-.gm-paddingLR5 {
+.gm-padding-lr-5 {
   padding-left: 5px;
   padding-right: 5px;
 }
-.gm-paddingLR10 {
+.gm-padding-lr-10 {
   padding-left: 10px;
   padding-right: 10px;
 }
-.gm-paddingLR15 {
+.gm-padding-lr-15 {
   padding-left: 15px;
   padding-right: 15px;
 }
-.gm-paddingTB0 {
+.gm-padding-tb-0 {
   padding-top: 0;
   padding-bottom: 0;
 }
-.gm-paddingTB5 {
+.gm-padding-tb-5 {
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.gm-paddingTB10 {
+.gm-padding-tb-10 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.gm-paddingTB15 {
+.gm-padding-tb-15 {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.gm-margin0 {
+.gm-margin-0 {
   margin: 0;
 }
-.gm-margin5 {
+.gm-margin-5 {
   margin: 5px;
 }
-.gm-margin10 {
+.gm-margin-10 {
   margin: 10px;
 }
-.gm-margin15 {
+.gm-margin-15 {
   margin: 15px;
 }
-.gm-marginTop0 {
+.gm-margin-top-0 {
   margin-top: 0;
 }
-.gm-marginTop5 {
+.gm-margin-top-5 {
   margin-top: 5px;
 }
-.gm-marginTop10 {
+.gm-margin-top-10 {
   margin-top: 10px;
 }
-.gm-marginTop15 {
+.gm-margin-top-15 {
   margin-top: 15px;
 }
-.gm-marginBottom0 {
+.gm-margin-bottom-0 {
   margin-bottom: 0;
 }
-.gm-marginBottom5 {
+.gm-margin-bottom-5 {
   margin-bottom: 5px;
 }
-.gm-marginBottom10 {
+.gm-margin-bottom-10 {
   margin-bottom: 10px;
 }
-.gm-marginBottom15 {
+.gm-margin-bottom-15 {
   margin-bottom: 15px;
 }
-.gm-marginLeft0 {
+.gm-margin-left-0 {
   margin-left: 0;
 }
-.gm-marginLeft5 {
+.gm-margin-left-5 {
   margin-left: 5px;
 }
-.gm-marginLeft10 {
+.gm-margin-left-10 {
   margin-left: 10px;
 }
-.gm-marginLeft15 {
+.gm-margin-left-15 {
   margin-left: 15px;
 }
-.gm-marginRight0 {
+.gm-margin-right-0 {
   margin-right: 0;
 }
-.gm-marginRight5 {
+.gm-margin-right-5 {
   margin-right: 5px;
 }
-.gm-marginRight10 {
+.gm-margin-right-10 {
   margin-right: 10px;
 }
-.gm-marginRight15 {
+.gm-margin-right-15 {
   margin-right: 15px;
 }
-.gm-marginTB0 {
+.gm-margin-tb-0 {
   margin-top: 0;
   margin-bottom: 0;
 }
-.gm-marginTB5 {
+.gm-margin-tb-5 {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.gm-marginTB10 {
+.gm-margin-tb-10 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.gm-marginTB15 {
+.gm-margin-tb-15 {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-.gm-marginLR0 {
+.gm-margin-lr-0 {
   margin-left: 0;
   margin-right: 0;
 }
-.gm-marginLR5 {
+.gm-margin-lr-5 {
   margin-left: 5px;
   margin-right: 5px;
 }
-.gm-marginLR10 {
+.gm-margin-lr-10 {
   margin-left: 10px;
   margin-right: 10px;
 }
-.gm-marginLR15 {
+.gm-margin-lr-15 {
   margin-left: 15px;
   margin-right: 15px;
 }
 .gm-border {
   border: 1px solid #ddd;
 }
-.gm-borderBottom {
+.gm-border-bottom {
   border-bottom: 1px solid #ddd;
 }
-.gm-borderRight {
+.gm-border-right {
   border-right: 1px solid #ddd;
 }
-.gm-borderTop {
+.gm-border-top {
   border-top: 1px solid #ddd;
 }
-.gm-borderLeft {
+.gm-border-left {
   border-left: 1px solid #ddd;
 }
 .gm-block {
@@ -1629,7 +1629,7 @@ html, body {
             transform: none;
   }
 }
-.fadeInRight {
+.fade-in-right {
   -webkit-animation-name: fadeInRight;
           animation-name: fadeInRight;
   -webkit-animation-duration: .5s;
