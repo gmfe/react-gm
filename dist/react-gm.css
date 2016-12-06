@@ -1270,12 +1270,9 @@
   z-index: 1040;
   background-color: rgba(0, 0, 0, 0.2);
 }
-.gm-modal-open .gm-modal {
+.gm-modal {
   overflow-x: hidden;
   overflow-y: auto;
-}
-.gm-modal {
-  overflow: hidden;
   position: fixed;
   top: 0;
   right: 0;
