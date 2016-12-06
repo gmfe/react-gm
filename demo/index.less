@@ -3,9 +3,9 @@
 @import "../node_modules/gm-bootstrap/less/custom.less";
 @import "../src/css/variables.less";
 
-@gm-color-stress: #fb9447; //强调色：模块顶部点缀、导航选中态、功能性按钮
-@gm-color-action: #29a7e4; //链接、操作文字
-@gm-color-primary: #333333; //左侧导航、panel标题、页面正文文字
+@gm-color-stress: @brand-primary; //强调色：模块顶部点缀、导航选中态、功能性按钮背景色
+@gm-color-action: @link-color; //链接、操作文字
+@gm-color-first: @gray-dark; //左侧导航、panel标题、页面正文文字
 @gm-color-second: #666666; //辅助文字
 @gm-color-back: #f5f5f5; //页面、hover背景色等
 
@@ -110,8 +110,23 @@ h1 {
         margin-right: 20px;
       }
     }
+    .bg-stress {
+      background-color: @gm-color-stress;
+    }
+    .bg-action {
+      background-color: @gm-color-action;
+    }
+    .bg-first {
+      background-color: @gm-color-first;
+    }
+    .bg-second {
+      background-color: @gm-color-second;
+    }
+    .bg-back {
+      background-color: @gm-color-back;
+    }
     .text {
-      color: @gm-color-primary
+      color: @gm-color-first
     }
   }
 }

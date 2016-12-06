@@ -1,0 +1,46 @@
+.gm-quick {
+  position: relative;
+  background-color: white;
+
+  & + .gm-quick {
+    margin-top: 15px;
+  }
+  .gm-quick-title {
+    padding: 0 20px;
+    border-left: 4px solid @brand-primary;
+    margin-left: -1px;
+  }
+  .gm-quick-desc-title {
+    border-left: 4px solid @brand-primary;
+    margin-left: -1px;
+    padding-left: 20px;
+  }
+  .gm-quick-desc-right-box {
+    width: 100%;
+  }
+  &.gm-quick-panel {
+    .gm-quick-title {
+      height: 60px;
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+  &.gm-quick-filter {
+    padding: 15px;
+  }
+  &.gm-quick-desc {
+    .btn {
+      width: 90px;
+    }
+  }
+
+  .row {
+    span {
+      font-size: 12px;
+    }
+    .btn {
+      width: 90px;
+    }
+  }
+}

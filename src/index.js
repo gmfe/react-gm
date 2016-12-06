@@ -36,6 +36,7 @@ import Modal from './component/modal';
 import Collapse from './component/collapse';
 import DropDown from './component/drop.down';
 import TreeSelect from './component/tree_select';
+import {QuickInfo, QuickInfoCell, QuickPanel, QuickFilter, QuickTab, QuickDesc} from './component/quick';
 
 import './index.less';
 
@@ -93,5 +94,11 @@ module.exports = {
     Modal,
     Collapse,
     DropDown, DropDownItems, DropDownItem,
-    TreeSelect
+    TreeSelect,
+    QuickInfo,
+    QuickInfoCell,
+    QuickPanel,
+    QuickFilter,
+    QuickTab,
+    QuickDesc
 };

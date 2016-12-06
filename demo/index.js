@@ -43,11 +43,12 @@ import InputNumber from './doc/InputNumber.md';
 import Modal from './doc/Modal.md';
 import Collapse from './doc/Collapse.md';
 import DropDown from './doc/DropDown.md';
+import TreeSelect from './doc/TreeSelect.md';
 
 import NavConfigStandard from './standard/nav.config';
 import StandardAbout from './standard/About.md';
 import Color from './standard/Color.md';
-import TreeSelect from './doc/TreeSelect.md';
+import Layout from './standard/Layout.md';
 
 const docMap = {
     About,
@@ -82,7 +83,8 @@ const docMap = {
 
 const standardMap = {
     StandardAbout,
-    Color
+    Color,
+    Layout
 };
 
 const setNavCurrent = () => {
