@@ -35,6 +35,7 @@ import LayoutRoot from './component/layout_root';
 import Modal from './component/modal';
 import Collapse from './component/collapse';
 import DropDown from './component/drop.down';
+import TreeSelect from './component/tree_select';
 
 import './index.less';
 
@@ -91,5 +92,6 @@ module.exports = {
     LayoutRoot,
     Modal,
     Collapse,
-    DropDown, DropDownItems, DropDownItem
+    DropDown, DropDownItems, DropDownItem,
+    TreeSelect
 };

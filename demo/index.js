@@ -47,6 +47,7 @@ import DropDown from './doc/DropDown.md';
 import NavConfigStandard from './standard/nav.config';
 import StandardAbout from './standard/About.md';
 import Color from './standard/Color.md';
+import TreeSelect from './doc/TreeSelect.md';
 
 const docMap = {
     About,
@@ -75,7 +76,8 @@ const docMap = {
     InputNumber,
     Modal,
     Collapse,
-    DropDown
+    DropDown,
+    TreeSelect
 };
 
 const standardMap = {

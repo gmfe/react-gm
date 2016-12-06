@@ -27,6 +27,7 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/DropSelect">DropSelect</a></li>
                     <li><a href="#/doc/SearchSelect">SearchSelect</a></li>
                     <li><a href="#/doc/FilterSearchSelect">FilterSearchSelect</a></li>
+                    <li><a href="#/doc/TreeSelect">TreeSelect</a></li>
                 </ul>
                 <h3>数据</h3>
                 <ul>
