@@ -25,7 +25,7 @@ class ModalWrap extends React.Component {
     handleModalStatic(){
         Modal.render({
             show: true,
-            children: '我是内容',
+            children: 我是内容,
             title: '我是标题',
             onHide: () => {
                 Modal.render({
@@ -87,6 +87,19 @@ class ModalWrap2 extends React.Component {
         });
     }
     
+    handleBigModal(){
+        Modal.render({
+            show: true,
+            children: <div style={{height: '1000px', background: 'red'}}>我是内容</div>,
+            title: '我是标题',
+            onHide: () => {
+                Modal.render({
+                    show: false
+                });
+            }
+        });
+    }
+    
     render() {
         return (
             <div>
@@ -102,6 +115,10 @@ class ModalWrap2 extends React.Component {
                     className="btn btn-default" 
                     onClick={this.handleModal.bind(this, 'sm')}
                 >sm</button>
+                <button 
+                    className="btn btn-default" 
+                    onClick={this.handleBigModal}
+                >内容很大</button>
             </div>
         );
     }
