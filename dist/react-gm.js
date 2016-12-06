@@ -7,7 +7,7 @@
 		exports["ReactGM"] = factory(require("react"), require("underscore"), require("react-dom"), require("moment"));
 	else
 		root["ReactGM"] = factory(root["react"], root["underscore"], root["react-dom"], root["moment"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validate2 = _interopRequireDefault(_validate);
 
-	var _validate3 = __webpack_require__(53);
+	var _validate3 = __webpack_require__(54);
 
 	var _validate4 = _interopRequireDefault(_validate3);
 
@@ -128,7 +128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _flex = __webpack_require__(6);
+	var _flex = __webpack_require__(5);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -204,7 +204,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _drop4 = _interopRequireDefault(_drop3);
 
-	__webpack_require__(54);
+	var _tree_select = __webpack_require__(53);
+
+	var _tree_select2 = _interopRequireDefault(_tree_select);
+
+	__webpack_require__(55);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -257,7 +261,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    LayoutRoot: _layout_root2.default,
 	    Modal: _modal2.default,
 	    Collapse: _collapse2.default,
-	    DropDown: _drop4.default, DropDownItems: DropDownItems, DropDownItem: DropDownItem
+	    DropDown: _drop4.default, DropDownItems: DropDownItems, DropDownItem: DropDownItem,
+	    TreeSelect: _tree_select2.default
 	};
 
 /***/ },
@@ -345,7 +350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(5);
+	var _reactDom = __webpack_require__(6);
 
 	var _classnames = __webpack_require__(3);
 
@@ -562,12 +567,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 5 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
-
-/***/ },
-/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -707,6 +706,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	exports.default = Flex;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
 
 /***/ },
 /* 7 */
@@ -1645,7 +1650,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(6);
+	var _flex = __webpack_require__(5);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -2357,7 +2362,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _flex = __webpack_require__(6);
+	var _flex = __webpack_require__(5);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -3796,7 +3801,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cascader2 = _interopRequireDefault(_cascader);
 
-	var _flex = __webpack_require__(6);
+	var _flex = __webpack_require__(5);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -4388,7 +4393,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(5);
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -5688,7 +5693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(5);
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -6106,7 +6111,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _flex = __webpack_require__(6);
+	var _flex = __webpack_require__(5);
 
 	var _flex2 = _interopRequireDefault(_flex);
 
@@ -6260,7 +6265,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(5);
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -7321,7 +7326,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(5);
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -7570,7 +7575,352 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _reactDom = __webpack_require__(5);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _flex = __webpack_require__(5);
+
+	var _flex2 = _interopRequireDefault(_flex);
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TreeSelect = function (_React$Component) {
+	    _inherits(TreeSelect, _React$Component);
+
+	    function TreeSelect(props) {
+	        _classCallCheck(this, TreeSelect);
+
+	        var _this = _possibleConstructorReturn(this, (TreeSelect.__proto__ || Object.getPrototypeOf(TreeSelect)).call(this, props));
+
+	        _this.state = {
+	            showList: []
+	        };
+
+	        _this.handleSelectAll = _this.handleSelectAll.bind(_this);
+	        _this.handleSelect = _this.handleSelect.bind(_this);
+	        _this.handleShow = _this.handleShow.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(TreeSelect, [{
+	        key: 'handleSelectAll',
+	        value: function handleSelectAll(e) {
+	            if (e.target.checked) {
+	                var data = this.findAllChildrenNode(this.props.list);
+	                this.props.onSelect && this.props.onSelect(data);
+	                return;
+	            }
+	            this.props.onSelect && this.props.onSelect([]);
+	        }
+	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(data, checked) {
+	            var _props = this.props,
+	                list = _props.list,
+	                selected = _props.selected;
+
+
+	            if (data.children) {
+	                if (checked) {
+	                    var selectData = this.findChildrenNodeByValue(list, data.value, selected);
+	                    this.props.onSelect && this.props.onSelect(selectData);
+	                } else {
+	                    var _selectData = this.findChildrenNodeByValue(list, data.value);
+	                    this.props.onSelect && this.props.onSelect(_underscore2.default.difference(selected, _selectData));
+	                }
+	            } else {
+	                if (checked) {
+	                    selected.push(data.value);
+	                    this.props.onSelect && this.props.onSelect(selected);
+	                } else {
+	                    var _selectData2 = _underscore2.default.without(selected, data.value);
+	                    this.props.onSelect && this.props.onSelect(_selectData2);
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'findAllChildrenNode',
+	        value: function findAllChildrenNode(list) {
+	            var _this2 = this;
+
+	            var childrenNodes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
+	            _underscore2.default.each(list, function (data) {
+	                //只有便利到最后一层时才加入节点value
+	                if (data.children) {
+	                    _this2.findAllChildrenNode(data.children, childrenNodes);
+	                } else {
+	                    if (!_underscore2.default.contains(childrenNodes, data.value)) {
+	                        childrenNodes.push(data.value);
+	                    }
+	                }
+	            });
+	            return childrenNodes;
+	        }
+	    }, {
+	        key: 'findChildrenNodeByValue',
+	        value: function findChildrenNodeByValue(list, value) {
+	            var _this3 = this;
+
+	            var items = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+	            _underscore2.default.each(list, function (data) {
+	                if (data.value === value) {
+	                    //只有便利到最后一层时才加入节点value
+	                    if (data.children) {
+	                        _this3.findAllChildrenNode(data.children, items);
+	                    } else {
+	                        if (!_underscore2.default.contains(items, value)) {
+	                            items.push(value);
+	                        }
+	                    }
+	                } else {
+	                    if (data.children) {
+	                        _this3.findChildrenNodeByValue(data.children, value, items);
+	                    }
+	                }
+	            });
+	            return items;
+	        }
+	    }, {
+	        key: 'handleShow',
+	        value: function handleShow(data) {
+	            var showList = this.state.showList;
+
+
+	            if (_underscore2.default.contains(showList, data.value)) {
+	                this.setState({ showList: _underscore2.default.without(showList, data.value) });
+	                return;
+	            }
+
+	            showList.push(data.value);
+	            this.setState({ showList: showList });
+	        }
+	    }, {
+	        key: 'renderNodeList',
+	        value: function renderNodeList(list) {
+	            var _this4 = this;
+
+	            var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+	            var panel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+	            var _props2 = this.props,
+	                disabledSelected = _props2.disabledSelected,
+	                selected = _props2.selected;
+
+
+	            _underscore2.default.each(list, function (data) {
+	                var childrenNode = _this4.findChildrenNodeByValue(list, data.value);
+	                if (data.children) {
+	                    panel.push(_react2.default.createElement(TreeNode, {
+	                        key: data.value,
+	                        data: data,
+	                        childrenNode: childrenNode,
+	                        level: level,
+	                        last: false,
+	                        disabledSelected: disabledSelected,
+	                        selected: selected,
+	                        showList: _this4.state.showList,
+	                        handleSelect: _this4.handleSelect,
+	                        handleShow: _this4.handleShow
+	                    }));
+	                    if (_underscore2.default.contains(_this4.state.showList, data.value)) {
+	                        _this4.renderNodeList(data.children, level + 1, panel);
+	                    }
+	                } else {
+	                    panel.push(_react2.default.createElement(TreeNode, {
+	                        key: data.value,
+	                        data: data,
+	                        childrenNode: childrenNode,
+	                        level: level,
+	                        last: true,
+	                        disabledSelected: disabledSelected,
+	                        selected: selected,
+	                        showList: _this4.state.showList,
+	                        handleSelect: _this4.handleSelect
+	                    }));
+	                }
+	            });
+	            return panel;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props3 = this.props,
+	                list = _props3.list,
+	                label = _props3.label,
+	                disabledSelected = _props3.disabledSelected,
+	                selected = _props3.selected;
+
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gm-border tree-select' },
+	                _react2.default.createElement(
+	                    _flex2.default,
+	                    { column: true, className: 'gm-marginTB10 gm-marginLR15' },
+	                    disabledSelected ? undefined : _react2.default.createElement(
+	                        _flex2.default,
+	                        { flex: true, className: 'gm-margin-bottom-10' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { style: { width: '30px' } },
+	                            _react2.default.createElement('input', {
+	                                type: 'checkbox',
+	                                checked: selected.length !== 0 && this.findAllChildrenNode(list).length === selected.length,
+	                                onChange: this.handleSelectAll
+	                            })
+	                        ),
+	                        _react2.default.createElement(
+	                            _flex2.default,
+	                            { flex: true, alignCenter: true },
+	                            label
+	                        )
+	                    ),
+	                    this.renderNodeList(list)
+	                )
+	            );
+	        }
+	    }]);
+
+	    return TreeSelect;
+	}(_react2.default.Component);
+
+	var TreeNode = function (_React$Component2) {
+	    _inherits(TreeNode, _React$Component2);
+
+	    function TreeNode(props) {
+	        _classCallCheck(this, TreeNode);
+
+	        return _possibleConstructorReturn(this, (TreeNode.__proto__ || Object.getPrototypeOf(TreeNode)).call(this, props));
+	    }
+
+	    _createClass(TreeNode, [{
+	        key: 'handleSelect',
+	        value: function handleSelect(data, e) {
+	            this.props.handleSelect && this.props.handleSelect(data, e.target.checked);
+	        }
+	    }, {
+	        key: 'handleShow',
+	        value: function handleShow(data) {
+	            this.props.handleShow && this.props.handleShow(data);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props4 = this.props,
+	                data = _props4.data,
+	                childrenNode = _props4.childrenNode,
+	                level = _props4.level,
+	                last = _props4.last,
+	                disabledSelected = _props4.disabledSelected,
+	                selected = _props4.selected,
+	                showList = _props4.showList;
+
+	            var selectedFlag = false;
+
+	            if (last) {
+	                selectedFlag = _underscore2.default.contains(selected, data.value);
+	            } else {
+	                selectedFlag = _underscore2.default.difference(childrenNode, selected).length === 0;
+	            }
+
+	            return _react2.default.createElement(
+	                _flex2.default,
+	                { flex: true, className: 'gm-margin-bottom-10' },
+	                disabledSelected ? undefined : _react2.default.createElement(
+	                    'div',
+	                    { style: { width: '30px' } },
+	                    _react2.default.createElement('input', {
+	                        type: 'checkbox',
+	                        checked: selectedFlag,
+	                        onChange: this.handleSelect.bind(this, data)
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    _flex2.default,
+	                    { flex: true, alignCenter: true },
+	                    _react2.default.createElement(
+	                        'div',
+	                        {
+	                            className: data.children ? "item" : '',
+	                            style: { marginLeft: Number(level) * 15 + 'px' },
+	                            onClick: this.handleShow.bind(this, data)
+	                        },
+	                        last ? _react2.default.createElement('div', { className: 'gm-gap15' }) : _react2.default.createElement('span', {
+	                            className: _underscore2.default.contains(showList, data.value) ? "glyphicon glyphicon-chevron-down" : "glyphicon glyphicon-chevron-right" }),
+	                        '\xA0\xA0',
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'gm-border gm-paddingLR10 attributes' },
+	                            data.value,
+	                            '\xA0',
+	                            data.name
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return TreeNode;
+	}(_react2.default.Component);
+
+	/**
+	 * list的格式为:
+	 * [{
+	 *  value: '111',
+	 *  name: '111',
+	 *  children: [{value: '222', name: '222', children:[{}...]
+	 *  },
+	 *  ...
+	 *  ]
+	 *  label:全选标签
+	 *  disabledSelected:是否开启select功能
+	 *  selected:选中的node
+	 *  onSelect:将选择的节点value，以数组结构暴露出去
+	 */
+
+
+	TreeSelect.propTypes = {
+	    list: _react2.default.PropTypes.array.isRequired,
+	    label: _react2.default.PropTypes.string,
+	    disabledSelected: _react2.default.PropTypes.bool,
+	    selected: _react2.default.PropTypes.array,
+	    onSelect: _react2.default.PropTypes.func
+	};
+
+	TreeSelect.defaultProps = {
+	    list: [],
+	    label: '选择全部',
+	    disabledSelected: false
+	};
+
+	exports.default = TreeSelect;
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _reactDom = __webpack_require__(6);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -7686,7 +8036,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = ValidateMixin;
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

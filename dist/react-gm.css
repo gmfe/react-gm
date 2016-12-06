@@ -1335,6 +1335,13 @@
 .gm-dropdown.gm-dropdown-split .gm-trigger {
   position: initial;
 }
+.tree-select .item {
+  cursor: pointer;
+}
+.tree-select .attributes:hover {
+  background-color: white;
+  color: #67c2ef;
+}
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
   font-weight: 400;
