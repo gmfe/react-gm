@@ -83,12 +83,12 @@ class WithoutCount extends React.Component {
                 return;
             }
             toPage({
-                offset: data.offset + data.limit,
+                offset: Math.max(data.offset - data.limit, 0),
                 limit: data.limit
             });
         } else {
             toPage({
-                offset: Math.max(data.offset - data.limit, 0),
+                offset: data.offset + data.limit,
                 limit: data.limit
             });
         }

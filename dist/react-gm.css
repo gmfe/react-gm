@@ -1342,6 +1342,44 @@
   background-color: white;
   color: #67c2ef;
 }
+.gm-quick {
+  position: relative;
+  background-color: white;
+}
+.gm-quick + .gm-quick {
+  margin-top: 15px;
+}
+.gm-quick .gm-quick-title {
+  padding: 0 20px;
+  border-left: 4px solid #409d39;
+  margin-left: -1px;
+}
+.gm-quick .gm-quick-desc-title {
+  border-left: 4px solid #409d39;
+  margin-left: -1px;
+  padding-left: 20px;
+}
+.gm-quick .gm-quick-desc-right-box {
+  width: 100%;
+}
+.gm-quick.gm-quick-panel .gm-quick-title {
+  height: 60px;
+}
+.gm-quick.gm-quick-panel .gm-quick-title a {
+  cursor: pointer;
+}
+.gm-quick.gm-quick-filter {
+  padding: 15px;
+}
+.gm-quick.gm-quick-desc .btn {
+  width: 90px;
+}
+.gm-quick .row span {
+  font-size: 12px;
+}
+.gm-quick .row .btn {
+  width: 90px;
+}
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
   font-weight: 400;
