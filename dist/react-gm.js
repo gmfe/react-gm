@@ -3394,7 +3394,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return t._beforeRequest().then(function () {
 	            var p = (0, _param2.default)(t._data);
-	            var newUrl = t.url + (t.url.indexOf('?') > -1 ? '&' : '?') + p;
+	            var newUrl = t.url + (p ? (t.url.indexOf('?') > -1 ? '&' : '?') + p : '');
 	            return processResponse(fetch(newUrl, t.options), t.url, t.sucCode, t._getConfig());
 	        });
 	    },

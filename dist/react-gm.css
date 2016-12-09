@@ -858,6 +858,7 @@
   color: #aaa;
   font-size: 12px;
   margin: 0;
+  white-space: nowrap;
 }
 .gm-switcher.gm-switcher-disabled {
   cursor: not-allowed;
