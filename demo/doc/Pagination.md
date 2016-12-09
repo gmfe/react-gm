@@ -32,9 +32,17 @@ const pagination1 = {
 };
 ```
 ```jsx
-<Flex alignCenter>
+<Flex column>
     <PaginationText data={pagination1}/>
     <Pagination data={pagination1} toPage={data => console.log(data)}/>
+</Flex>
+```
+:::
+
+::: demo 不带count，下一步disable，当前页不足10条（包括0条）的时候
+```jsx
+<Flex column>
+    <Pagination data={pagination1} toPage={data => console.log(data)} nextDisabled={true}/>
 </Flex>
 ```
 :::

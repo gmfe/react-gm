@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 class WithCount extends React.Component {
     constructor(props) {
@@ -95,7 +95,7 @@ class WithoutCount extends React.Component {
     }
 
     render() {
-        const {data} = this.props;
+        const {data, nextDisabled} = this.props;
         return (
             <div className="gm-pagination">
                 <ul className="pagination pagination-sm">
@@ -105,7 +105,7 @@ class WithoutCount extends React.Component {
                             onClick={this.handlePage.bind(this, -1)}
                         >上一页</a>
                     </li>
-                    <li>
+                    <li className={nextDisabled ? 'disabled' : ''}>
                         <a
                             href="javascript:;"
                             onClick={this.handlePage.bind(this, 1)}
@@ -129,12 +129,13 @@ class Pagination extends React.Component {
 
 Pagination.displayName = 'Pagination';
 Pagination.propTypes = {
-    data: React.PropTypes.shape({
-        count: React.PropTypes.number,
-        offset: React.PropTypes.number.isRequired,
-        limit: React.PropTypes.number.isRequired
+    data: PropTypes.shape({
+        count: PropTypes.number,
+        offset: PropTypes.number.isRequired,
+        limit: PropTypes.number.isRequired
     }),
-    toPage: React.PropTypes.func.isRequired
+    toPage: PropTypes.func.isRequired,
+    nextDisabled: PropTypes.bool
 };
 
 export default Pagination;
