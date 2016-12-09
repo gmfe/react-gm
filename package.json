@@ -52,7 +52,6 @@
     "happypack": "^3.0.0",
     "highlight.js": "^9.8.0",
     "husky": "^0.11.9",
-    "intro.js": "^2.3.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "markdown-it-react-loader": "0.0.7",
