@@ -1297,7 +1297,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: "render",
 	        value: function render() {
-	            var data = this.props.data;
+	            var _props2 = this.props,
+	                data = _props2.data,
+	                nextDisabled = _props2.nextDisabled;
 
 	            return _react2.default.createElement(
 	                "div",
@@ -1319,7 +1321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    ),
 	                    _react2.default.createElement(
 	                        "li",
-	                        null,
+	                        { className: nextDisabled ? 'disabled' : '' },
 	                        _react2.default.createElement(
 	                            "a",
 	                            {
@@ -1362,12 +1364,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	Pagination.displayName = 'Pagination';
 	Pagination.propTypes = {
-	    data: _react2.default.PropTypes.shape({
-	        count: _react2.default.PropTypes.number,
-	        offset: _react2.default.PropTypes.number.isRequired,
-	        limit: _react2.default.PropTypes.number.isRequired
+	    data: _react.PropTypes.shape({
+	        count: _react.PropTypes.number,
+	        offset: _react.PropTypes.number.isRequired,
+	        limit: _react.PropTypes.number.isRequired
 	    }),
-	    toPage: _react2.default.PropTypes.func.isRequired
+	    toPage: _react.PropTypes.func.isRequired,
+	    nextDisabled: _react.PropTypes.bool
 	};
 
 	exports.default = Pagination;

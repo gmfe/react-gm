@@ -1643,6 +1643,9 @@ html, body {
 .modal-footer {
   padding: 10px;
 }
+.pagination > li > a {
+  color: inherit;
+}
 .gm-bg-info {
   background-color: #d9edf7 !important;
 }
