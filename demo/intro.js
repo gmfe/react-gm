@@ -1,4 +1,5 @@
 import Introjs from 'react-intro.js/intro';
+import 'react-intro.js/introjs.css';
 
 const introJs = Introjs.introJs();
 
