@@ -47,7 +47,7 @@ var config = {
             loader: 'babel!markdown-it-react-loader'
         }, {
             test: /(fontawesome-webfont|glyphicons-halflings-regular)\.(woff|woff2|ttf|eot|svg)($|\?)/,
-            loader: 'url?limit=1024&name=fonts/[name].[hash].[ext]'
+            loader: 'url?limit=1024&name=fonts/[name].[ext]'
         }, {
             test: /\.(css|less)$/,
             loader: 'style!css?-autoprefixer!postcss!less'

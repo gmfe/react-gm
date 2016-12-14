@@ -1,0 +1,56 @@
+// 以下变量将覆盖bootstrap的variable.less中的同名变量
+@brand-primary: #409d39;
+@brand-success: #34AE4B;
+@brand-info: #8DBF31;
+@brand-warning: #FFD642;
+@brand-danger: #F75462;
+
+@link-color: #2182CC;
+
+@border-radius-base: 0;
+@border-radius-large: 0;
+@border-radius-small: 0;
+
+.btn.btn-plain {
+  background-color: white;
+  &.btn-primary {
+    color: @brand-primary;
+    &:hover {
+      color: @btn-primary-color;
+      background-color: @btn-primary-bg;
+      border-color: @btn-primary-border;
+    }
+  }
+  &.btn-success {
+    color: @brand-success;
+    &:hover {
+      color: @btn-success-color;
+      background-color: @btn-success-bg;
+      border-color: @btn-success-border;
+    }
+  }
+  &.btn-info {
+    color: @brand-info;
+    &:hover {
+      color: @btn-info-color;
+      background-color: @btn-info-bg;
+      border-color: @btn-info-border;
+    }
+  }
+  &.btn-warning {
+    color: @brand-warning;
+    &:hover {
+      color: @btn-warning-color;
+      background-color: @btn-warning-bg;
+      border-color: @btn-warning-border;
+    }
+  }
+  &.btn-danger {
+    color: @brand-danger;
+    &:hover {
+      color: @btn-danger-color;
+      background-color: @btn-danger-bg;
+      border-color: @btn-danger-border;
+    }
+  }
+}

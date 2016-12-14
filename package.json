@@ -1,6 +1,6 @@
 {
   "name": "react-gm",
-  "version": "3.1.5",
+  "version": "3.2.0",
   "description": "",
   "main": "src/index.js",
   "style": "src/index.css",
@@ -34,6 +34,9 @@
     "url": "https://github.com/gmfe/react-gm/issues"
   },
   "homepage": "https://github.com/gmfe/react-gm#readme",
+  "dependencies": {
+    "gm-util": "^2.1.4"
+  },
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.0",
     "autoprefixer": "^6.5.2",
@@ -48,7 +51,6 @@
     "file-loader": "^0.8.5",
     "gm-bootstrap": "^1.1.5",
     "gm-pinyin": "^2.0.1",
-    "gm-util": "^2.1.4",
     "happypack": "^3.0.0",
     "highlight.js": "^9.8.0",
     "husky": "^0.11.9",

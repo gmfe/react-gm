@@ -30,6 +30,9 @@ module.exports = {
             test: /\.js$/,
             loader: 'babel'
         }, {
+            test: /(fontawesome-webfont|glyphicons-halflings-regular)\.(woff|woff2|ttf|eot|svg)($|\?)/,
+            loader: 'url?limit=1024&name=fonts/[name].[ext]'
+        }, {
             test: /\.(css|less)$/,
             loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss!less')
         }]
