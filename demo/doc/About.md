@@ -15,4 +15,3 @@
 - classnames
 - underscore
 - moment
-- [gm-bootstrap](https://github.com/gmfe/gm-bootstrap) css主题
