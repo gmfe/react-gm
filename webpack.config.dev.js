@@ -46,11 +46,14 @@ var config = {
             test: /\.md$/,
             loader: 'babel!markdown-it-react-loader'
         }, {
-            test: /(fontawesome-webfont|glyphicons-halflings-regular)\.(woff|woff2|ttf|eot|svg)($|\?)/,
+            test: /(fontawesome-webfont|glyphicons-halflings-regular|iconfont)\.(woff|woff2|ttf|eot|svg)($|\?)/,
             loader: 'url?limit=1024&name=fonts/[name].[ext]'
         }, {
             test: /\.(css|less)$/,
             loader: 'style!css?-autoprefixer!postcss!less'
+        }, {
+            test: /\.(jpe?g|png|gif|svg)$/,
+            loader: 'url?limit=1024&name=img/[name].[hash:8].[ext]'
         }],
         noParse: []
     },

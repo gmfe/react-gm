@@ -1,4 +1,5 @@
 import 'gm-bootstrap/dist/css/bootstrap.css';
+import 'gm-font/iconfont.css';
 import './index.less';
 import 'markdown-it-react-loader/index.css';
 import 'highlight.js/styles/default.css';
@@ -46,9 +47,10 @@ import DropDown from './doc/DropDown.md';
 import TreeSelect from './doc/TreeSelect.md';
 
 import NavConfigStandard from './standard/nav.config';
-import StandardAbout from './standard/About.md';
-import Color from './standard/Color.md';
-import Layout from './standard/Layout.md';
+import LayoutCommon from './standard/LayoutCommon.md';
+import LayoutRule from './standard/LayoutRule.md';
+import Module from './standard/Module.md';
+import ComponentRule from  './standard/Component.md';
 
 const docMap = {
     About,
@@ -82,9 +84,10 @@ const docMap = {
 };
 
 const standardMap = {
-    StandardAbout,
-    Color,
-    Layout
+    LayoutCommon,
+    LayoutRule,
+    Module,
+    ComponentRule
 };
 
 const setNavCurrent = () => {
@@ -203,7 +206,7 @@ class Doc extends React.Component {
 class Standard extends React.Component {
     render() {
         const {doc} = this.props.params;
-        return React.createElement(standardMap[doc || 'StandardAbout']);
+        return React.createElement(standardMap[doc || 'Color']);
     }
 }
 
@@ -211,7 +214,10 @@ ReactDOM.render((
     <Router history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRedirect to='/doc'/>
-            <Route path="standard(/:doc)" component={Standard}/>
+            <Route path="standard">
+                <IndexRedirect to='/standard/Color'/>
+                <Route path=":doc" component={Standard}/>
+            </Route>
             <Route path="doc">
                 <IndexRedirect to='/doc/About'/>
                 <Route path=":doc" component={Doc}/>
