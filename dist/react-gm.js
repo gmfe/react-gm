@@ -5031,15 +5031,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                {
 	                                    className: 'gm-ellipsis',
 	                                    style: { flex: '1' },
-	                                    key: index,
-	                                    title: value
+	                                    key: index
 	                                },
 	                                val
 	                            );
 	                        } else {
 	                            return _react2.default.createElement(
 	                                'div',
-	                                { className: 'gm-ellipsis', key: index, title: value },
+	                                { className: 'gm-ellipsis', key: index },
 	                                value
 	                            );
 	                        }
