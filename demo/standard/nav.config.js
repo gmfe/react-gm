@@ -19,9 +19,10 @@ class NavConfig extends React.Component {
                 </ul>
                 <h2>控件规范</h2>
                 <ul>
-                    <li><a href="#/standard/ComponentRule">颜色规范</a></li>
-                    <li><a href="#/standard/ComponentRule?anchor=wen-zi-gui-fan">文字规范</a></li>
-                    <li><a href="#/standard/ComponentRule?anchor=an-niu-gui-fan">按钮布局</a></li>
+                    <li><a href="#/standard/ComponentRule">颜色</a></li>
+                    <li><a href="#/standard/ComponentRule?anchor=wen-zi-gui-fan">文字</a></li>
+                    <li><a href="#/standard/ComponentRule?anchor=an-niu-gui-fan">按钮</a></li>
+                    <li><a href="#/standard/ComponentRule?anchor=shai-xuan-qi">筛选器</a></li>
                 </ul>
             </div>
         );

@@ -1,6 +1,7 @@
 ---
 imports:
-    import {DropDown, DropDownItems, DropDownItem} from '../../src/index';
+    import {DropDown, DropDownItems, DropDownItem, DateRangePicker, QuickFilter, SearchSelect} from '../../src/index';
+    import _ from 'underscore';
 ---
 
 ### 颜色规范
@@ -20,7 +21,7 @@ const ColorWrap = () =>
 <ColorWrap/>
 ```
 :::
-
+<br />
 
 ### 文字规范
 ::: demo Font
@@ -41,8 +42,8 @@ const FontWrap = () =>
 微软雅黑 16px 用于一级导航中的文本
 微软雅黑 14px 用于二级导航，筛选器，模块头部，需突出说明的文本
 微软雅黑 12px 用于列表，辅助性标题，面包屑，提示性的文本
-
-
+<br />
+<br />
 
 ### 按钮规范
 ::: demo btn-primary
@@ -58,7 +59,7 @@ const FontWrap = () =>
 * 注意事项：
     1.  “保存”、“编辑”按钮通常与“取消”按钮同时出现，且“取消”在前，“保存”或“编辑”在后；
     2.  同一个模块中的强指向性按钮不宜过多
-
+<br />
 
 ::: demo btn-default
 ```jsx
@@ -72,7 +73,7 @@ const FontWrap = () =>
 * 应用场景：取消、导出按钮的样式
 * 注意事项：
  “保存”、“编辑”按钮通常与“取消”按钮同时出现，且“取消”在前，“保存”或“编辑”在后
-
+<br />
 
 ::: demo btn-primary btn-plain
 ```jsx
@@ -85,7 +86,7 @@ const FontWrap = () =>
 :::
 * 应用场景： 
  在列表头部的按钮样式，用于一级页面中的功能性按钮（无明显倾向性），按钮功能间逻辑并列
-
+<br />
 
 ::: demo btn-primary
 ```jsx
@@ -99,7 +100,7 @@ const FontWrap = () =>
 * 应用场景： 用于1.2中的详情页面中顶部基本信息的强指向性按钮，如“保存”“修改”“提交入库单”“审核通过”等
 * 注意事项： 
  同一个详情页面中的顶部信息仅可有一个强指向性按钮，判定方式如下：如存在多个按钮，将涉及正向流程的“状态修改”、“内容更改”的按钮（如“审核通过”“保存”等正向流程）确认为“强指向性”，其他功能性按钮采用工具栏的方式呈现
-
+<br />
 
 ::: demo btn-default
 ```jsx
@@ -114,7 +115,7 @@ const FontWrap = () =>
 用于1.2中的详情页面中顶部基本信息中的“取消”按钮，
 * 注意事项：
  仅在基本信息栏变为“可编辑态”时展现取消按钮，通常与“保存”按钮一起出现
-
+<br />
 
 ::: demo DropDown
 ```jsx
@@ -132,7 +133,7 @@ const FontWrap = () =>
 :::
 * 应用场景：
 用于1.2中的详情页面中顶部基本信息的功能性按钮，通过工具栏下拉的方式聚合展现
-
+<br />
 
 ::: demo DropDown disabled
 ```jsx
@@ -150,7 +151,7 @@ const FontWrap = () =>
 :::
 * 应用场景：
 选项不可点样式
-
+<br />
 
 ::: demo 链接
 ```jsx
@@ -163,6 +164,114 @@ const FontWrap = () =>
 :::
 * 应用场景：
 用于模块详情中的功能性操作
+<br />
+<br />
+
+### 筛选器
+::: demo 时间搜索
+```jsx
+<DateRangePicker
+    begin={new Date()}
+    end={new Date()}
+    inputClassName="form-control"
+/>
+```
+:::
+<br/>
+
+::: demo 搜索栏
+```jsx
+<QuickFilter className="b-border-top-0">
+    <form className="form-inline">
+        <div className="input-group gm-margin-right-10">
+            <input
+                type="text"
+                className="form-control"
+                placeholder="请输入订单号、商户名称或商户ID"
+                style={{minWidth: '250px'}}
+            />
+        </div>
+        <button type="submit" className="btn btn-primary">搜索</button>
+    </form>
+</QuickFilter>
+```
+:::
+<br/>
+
+::: demo 单项筛选器
+```jsx
+<select className="form-control" style={{width:'125px'}}>
+    <option value="0">全部报价单状态</option>
+    <option value="1">已激活</option>
+    <option value="2">未激活</option>
+</select>
+```
+:::
+<br/>
+
+::: demo 多项筛选器
+```js
+const searchSelectData = [
+    {name: '华侨城'},
+    {name: '世界之窗'},
+    {name: '南山'},
+    {name: '梧桐山'},
+    {name: '欢乐海岸'},
+    {name: '东部华侨城'},
+    {name: '深圳湾'},
+    {name: '华中科技大学'}
+];
+class SearchSelect2 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: searchSelectData,
+            list: searchSelectData
+        };
+        this.handleSelect = ::this.handleSelect;
+        this.handleSearch = ::this.handleSearch;
+    }
+    
+    handleSelect(selected) {
+        console.log(selected);
+        this.setState({
+            selected
+        });
+    }
+    
+    handleSearch(value) {
+        // 字符串匹配过滤，如果和选中的一样，则返回全部
+        if(this.state.selected && value === this.state.selected){
+            this.setState({
+                list: searchSelectData
+            });
+        }else{
+            this.setState({
+                 list: _.filter(searchSelectData, v => v.name.indexOf(value) > -1)
+            });
+        }
+    }
+    
+    render() {
+        return (
+            <div style={{width: '500px'}}>
+                <SearchSelect
+                    list={this.state.list}
+                    selected={this.state.selected}
+                    onSearch={this.handleSearch}
+                    onSelect={this.handleSelect}
+                    multiple
+                    placeholder="搜索"
+                />
+            </div>
+        );
+    }
+}
+```
+```jsx
+<SearchSelect2/>
+```
+:::
 
 
 ### 边距规范
