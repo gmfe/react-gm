@@ -206,7 +206,7 @@ class Doc extends React.Component {
 class Standard extends React.Component {
     render() {
         const {doc} = this.props.params;
-        return React.createElement(standardMap[doc || 'Color']);
+        return React.createElement(standardMap[doc || 'LayoutRule']);
     }
 }
 
@@ -215,7 +215,7 @@ ReactDOM.render((
         <Route path="/" component={App}>
             <IndexRedirect to='/doc'/>
             <Route path="standard">
-                <IndexRedirect to='/standard/Color'/>
+                <IndexRedirect to='/standard/LayoutRule'/>
                 <Route path=":doc" component={Standard}/>
             </Route>
             <Route path="doc">
