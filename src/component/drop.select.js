@@ -111,12 +111,11 @@ class DropSelect extends React.Component {
                             className="gm-ellipsis"
                             style={{flex: '1'}}
                             key={index}
-                            title={value}
                         >
                             {val}
                         </div>;
                     } else {
-                        return <div className="gm-ellipsis" key={index} title={value}>{value}</div>;
+                        return <div className="gm-ellipsis" key={index}>{value}</div>;
                     }
                 });
                 const actionDom = actions.map((action, index) => {
