@@ -7034,12 +7034,20 @@ button.close {
 .gm-dropdown.gm-dropdown-split .gm-trigger {
   position: initial;
 }
-.tree-select .item {
+.tree-select .tree-select-border {
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: none;
+}
+.tree-select .tree-select-title {
+  background-color: #eee;
+}
+.tree-select .tree-select-item {
   cursor: pointer;
 }
-.tree-select .attributes:hover {
-  background-color: white;
-  color: #67c2ef;
+.tree-select .tree-select-trap:hover {
+  background-color: #eee;
 }
 .gm-quick {
   position: relative;
