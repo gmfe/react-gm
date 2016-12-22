@@ -144,10 +144,13 @@ class TreeSelect extends React.Component {
         const {list, label, disabledSelected, selected} = this.props;
 
         return (
-            <div className="gm-border tree-select">
-                <Flex column={true} className="gm-marginTB10 gm-marginLR15">
+            <div className="tree-select">
+                <Flex
+                    column={true}
+                    className="tree-select-border"
+                >
                     {disabledSelected ? undefined : (
-                        <Flex flex={true} className="gm-margin-bottom-10">
+                            <Flex flex={true} className="gm-border-bottom gm-padding-10 tree-select-title">
                             <div style={{width: '30px'}}>
                                 <input
                                     type="checkbox"
@@ -192,26 +195,27 @@ class TreeNode extends React.Component {
         }
 
         return (
-            <Flex flex={true} className="gm-margin-bottom-10">
+            <Flex flex={true} className="gm-border-bottom gm-padding-10 tree-select-trap">
                 {disabledSelected ? undefined : (
-                    <div style={{width: '30px'}}>
-                        <input
-                            type="checkbox"
-                            checked={selectedFlag}
-                            onChange={this.handleSelect.bind(this, data)}
-                        />
-                    </div>
-                )}
+                        <div style={{width: '30px'}}>
+                            <input
+                                type="checkbox"
+                                checked={selectedFlag}
+                                onChange={this.handleSelect.bind(this, data)}
+                            />
+                        </div>
+                    )}
                 <Flex flex={true} alignCenter={true}>
                     <div
-                        className={data.children ? "item" : ''}
+                        className={data.children ? "tree-select-item" : ''}
                         style={{marginLeft: Number(level) * 15 + 'px'}}
                         onClick={this.handleShow.bind(this, data)}
                     >
-                        {last ? <div className="gm-gap15"/> : <span
-                            className={(_.contains(showList, data.value)) ? "glyphicon glyphicon-chevron-down" : "glyphicon glyphicon-chevron-right" }/>}
-                        &nbsp;&nbsp;
-                        <span className="gm-border gm-paddingLR10 attributes">
+                        {last ? <div className="gm-gap15"/> :
+                            <span
+                                className={(_.contains(showList, data.value)) ? "glyphicon glyphicon-minus text-primary" : "glyphicon glyphicon-plus text-primary"}/>}
+                        &nbsp;
+                        <span className="gm-padding-lr-5">
                             {data.value }&nbsp;{data.name}
                         </span>
                     </div>
