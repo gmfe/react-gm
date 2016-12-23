@@ -4,7 +4,7 @@ imports:
     import _ from 'underscore';
 ---
 
-### 颜色规范
+# 颜色规范
 ::: demo Color
 ```js
 const ColorWrap = () => 
@@ -23,7 +23,7 @@ const ColorWrap = () =>
 :::
 <br />
 
-### 文字规范
+# 文字规范
 ::: demo Font
 
 ```js
@@ -45,7 +45,7 @@ const FontWrap = () =>
 <br />
 <br />
 
-### 按钮规范
+# 按钮规范
 ::: demo btn-primary
 ```jsx
 <div className="demo-box">
@@ -74,6 +74,7 @@ const FontWrap = () =>
 * 注意事项：
  “保存”、“编辑”按钮通常与“取消”按钮同时出现，且“取消”在前，“保存”或“编辑”在后
 <br />
+<br />
 
 ::: demo btn-primary btn-plain
 ```jsx
@@ -101,6 +102,7 @@ const FontWrap = () =>
 * 注意事项： 
  同一个详情页面中的顶部信息仅可有一个强指向性按钮，判定方式如下：如存在多个按钮，将涉及正向流程的“状态修改”、“内容更改”的按钮（如“审核通过”“保存”等正向流程）确认为“强指向性”，其他功能性按钮采用工具栏的方式呈现
 <br />
+<br />
 
 ::: demo btn-default
 ```jsx
@@ -115,6 +117,7 @@ const FontWrap = () =>
 用于1.2中的详情页面中顶部基本信息中的“取消”按钮，
 * 注意事项：
  仅在基本信息栏变为“可编辑态”时展现取消按钮，通常与“保存”按钮一起出现
+<br />
 <br />
 
 ::: demo DropDown
@@ -167,7 +170,7 @@ const FontWrap = () =>
 <br />
 <br />
 
-### 筛选器
+# 筛选器
 ::: demo 时间搜索
 ```jsx
 <DateRangePicker
@@ -272,9 +275,9 @@ class SearchSelect2 extends React.Component {
 <SearchSelect2/>
 ```
 :::
+<br/>
 
-
-### 边距规范
+# 边距规范
 station定义了0，5，10，15三种大小的padding和margin。
 一般来说，模块（如panel）之间的距离为15px，按钮为5px。
 - `gm-padding-0`， `gm-padding-5`，`gm-padding-10`，`gm-padding-15`

@@ -45,6 +45,65 @@ h1 {
 
   .demo-center {
     margin-top: 20px;
+
+    .demo-left {
+      width: 170px;
+
+      .demo-left-ui {
+        position: fixed;
+        width: 170px;
+      }
+
+      .demo-left-ui-y {
+        background: white;
+        width: 100%;
+        padding: 10px 0;
+        margin: 0;
+        & > div:not(:last-child) {
+          margin-top: 5px;
+          margin-bottom: 10px;
+        }
+        & > div:last-child {
+          margin: 5px 0;
+        }
+        a {
+          display: block;
+          cursor: pointer;
+          font-size: 14px;
+          color: #333333;
+          padding: 10px 10px 10px 35px;
+          text-decoration: none;
+          line-height: 1.2;
+          &.active {
+            position: relative;
+            color: @brand-primary;
+            &:before {
+              position: absolute;
+              width: 4px;
+              height: 100%;
+              background-color: @brand-primary;
+              content: " ";
+              top: 0;
+              left: 0;
+            }
+          }
+          &:hover {
+            background: #f5f5f5;
+          }
+        }
+        span {
+          font-size: 12px;
+          color: #666666;
+          display: block;
+          padding: 10px 0 10px 20px;
+          margin-top: 30px;
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
     .demo-left {
       width: 200px;
       min-width: 200px;
@@ -84,10 +143,19 @@ h1 {
         }
       }
     }
+
     .demo-content {
+      padding-left: 20px;
       h2 {
         border-bottom: 1px solid #eee;
         padding-bottom: 0.3em;
+      }
+
+      .gm-quick-panel {
+        .item-title {
+          font-size: 12px;
+          color: #666666;
+        }
       }
     }
   }

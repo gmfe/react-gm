@@ -5,6 +5,8 @@ imports:
 
 ## 布局规范
 参见bootstrap的[栅格系统](http://getbootstrap.com/css/#grid)
+<br/>
+<br/>
 
 ## 常用布局
 ::: demo 常用布局-QuickPanel
@@ -47,6 +49,8 @@ class PanelWrap extends React.Component {
 <PanelWrap/>
 ```
 :::
+<br/>
+<br/>
 
 ::: demo 常用布局-QuickDesc
 
