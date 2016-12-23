@@ -1,5 +1,4 @@
 import Util from 'gm-util';
-import Grid from './component/grid';
 import Pagination from './component/pagination';
 import PaginationText from './component/pagination.text';
 import Droper from './component/droper';
@@ -54,7 +53,6 @@ const {
 
 module.exports = {
     Util,
-    Grid,
     Pagination,
     PaginationText,
     Former,

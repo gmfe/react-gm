@@ -4,7 +4,7 @@ imports:
 ---
 ## Sheet
 
-取代Grid组件。更React风格化。给开发者更多控制，更多灵活。
+更React风格化。给开发者更多控制，更多灵活。
 
 ::: demo 一个简单的demo
 ```js
