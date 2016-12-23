@@ -5736,28 +5736,6 @@ button.close {
     display: none !important;
   }
 }
-.gm-grid td > button {
-  margin: 0 5px;
-}
-.gm-grid td > button:first-child {
-  margin-left: 0;
-}
-.gm-grid td > button:last-child {
-  margin-right: 0;
-}
-.gm-grid-select {
-  width: 30px;
-}
-.gm-grid .pagination {
-  margin: 0;
-}
-.gm-grid .gm-pagination-text {
-  line-height: 30px;
-  margin-right: 10px;
-}
-.gm-grid-batch button {
-  margin-right: 10px;
-}
 .gm-droper {
   display: inline-block;
 }
