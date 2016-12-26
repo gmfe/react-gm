@@ -2,3 +2,6 @@
 /deploy
 /demo
 /build
+/docs
+.happypack
+.DS_Store
