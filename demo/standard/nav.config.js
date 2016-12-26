@@ -17,7 +17,7 @@ class NavConfig extends React.Component {
                         <a href="#/standard/Module?anchor=shai-xuan-qi">筛选器</a>
                         <a href="#/standard/Module?anchor=chang-gui-mo-kuai-tou-bu">常规模块头部</a>
                         <a href="#/standard/Module?anchor=xiang-qing-ye-mian-zhong-ji-ben-xin-xi">详情页面中基本信息</a>
-                        <a href="#/standard/Module?anchor=xiang-qing-ye-mian-zhong-ji-ben-xin-xi">表单</a>
+                        <a href="#/standard/Module?anchor=biao-dan">表单</a>
                     </div>
                     <div>
                         <span>控件规范</span>

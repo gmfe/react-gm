@@ -1,5 +1,4 @@
 @import "less/bootstrap.less";
-
 @import "css/variables";
 @import "css/droper";
 @import "css/import.lead.less";
@@ -38,16 +37,16 @@ html, body {
 }
 
 // text
-.gm-text-second {
-  color: @gm-text-second-color;
-}
+//.gm-text-second {
+//  color: @gm-color-second;
+//}
 
 .gm-text-red {
   color: red;
 }
 
 .gm-text-desc {
-  color: @gm-text-desc-color;
+  color: @gm-color-second;
 }
 
 // bg
@@ -344,6 +343,10 @@ html, body {
   border-left: 1px solid @gm-border-color;
 }
 
+.gm-border-top-0 {
+  border-top: none;
+}
+
 // display
 .gm-block {
   display: block;
@@ -420,28 +423,97 @@ html, body {
 }
 
 .glyphicon-spin {
-  -webkit-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
-}
-
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
 }
 
 @keyframes spin {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(359deg);
     transform: rotate(359deg);
+  }
+}
+
+.table {
+  font-size: 12px;
+  th, td {
+    text-align: center;
+    a {
+      cursor: pointer;
+    }
+  }
+  thead > tr > th {
+    padding: 8px 2px;
+    &:not(.text-center) {
+      text-align: left;
+    }
+    &:first-child {
+      padding-left: 15px;
+    }
+  }
+  tbody > tr > td {
+    padding: 18px 2px;
+    vertical-align: middle;
+    &:not(.text-center) {
+      text-align: left;
+    }
+    &:first-child {
+      padding-left: 15px;
+    }
+    a {
+      color: @link-color;
+    }
+  }
+  &.table-bordered {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid @gm-border-color;
+    thead {
+      tr {
+        th {
+          border: none;
+          font-weight: normal;
+          color: @gm-color-first;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          border: none;
+          color: @gm-color-second;
+        }
+      }
+    }
+  }
+  &.table-striped {
+    thead {
+      tr {
+        background: @table-bg-accent;
+      }
+    }
+    tbody {
+      tr {
+        background: white;
+      }
+    }
+  }
+  thead {
+    tr {
+      border-bottom: 1px solid @gm-border-color;
+    }
+  }
+  tbody {
+    tr {
+      border-bottom: 1px solid @gm-border-color;
+      &:hover {
+        background-color: @table-bg-hover;
+      }
+    }
+  }
+  .b-table-margin-left20 {
+    margin-left: 20%;
   }
 }

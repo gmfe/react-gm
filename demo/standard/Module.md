@@ -10,7 +10,7 @@ imports:
 const Tab = () => 
     <QuickTab tabs={['按订单查看', '按商品查看']} className="gm-padding-15">
         <div>
-            <QuickFilter className="b-border-top-0">
+            <QuickFilter className="gm-border-top-0">
                 <form className="form-inline">
                     <div className="input-group gm-margin-right-10">
                         <input
@@ -27,7 +27,7 @@ const Tab = () =>
             </QuickFilter>
         </div>
         <div>
-            <QuickFilter className="b-border-top-0">
+            <QuickFilter className="gm-border-top-0">
                 <form className="form-inline">
                     <div className="input-group gm-margin-right-10">
                         <input
@@ -99,7 +99,7 @@ const Filter = () =>
 
 
 # 常规模块头部
-::: demo Panel
+::: demo 表格
 ```js
 const orders = [{"freight": 20.0, "receive_begin_time": "2016-12-21 06:00", "details": [{"quantity": 1.2, "accept_quantity": 1.2, "version": 274, "spu_remark": "", "real_item_price": 12.01, "real_quantity": 1.2, "total_item_price": 12.01, "total_item_pay": 12.01, "sync_origin_id": "D805923", "id": "D805923", "sale_price": 10.01, "spu_id": "C05661"}], "origin_total_price": 12.01, "customer": {"address": "\u5b98\u8def\u5413\u675111\u53f7", "station_id": "", "new_consumer": 0, "receiver_name": "\u9ec4\u5468\u5e73", "id": "11585", "extender": {"order_pay_method": 2, "resname": "\u4e61\u4e0b\u5473\u5ba2\u5bb6\u83dc\u9986"}, "address_id": "5624", "salemenu_id": "", "receiver_phone": "13813699281"}, "date_time": 1482221923.934, "station_id": "T002", "total_price": 12.01, "receive_end_time": "2016-12-21 12:00", "id": "PL373271", "time_config_info": {"type": 0.0, "desc": "\u9ed8\u8ba4\u670d\u52a1\u65f6\u95f4", "receive_time_limit": {"end": "12:00", "s_span_time": 1, "e_span_time": 1, "receiveTimeSpan": "30", "start": "06:00"}, "final_distribute_time_span": 1, "service_time_creator": "T001", "_id": "ST001", "order_time_limit": {"end": "23:00", "start": "06:00", "e_span_time": 0}, "final_distribute_time": "06:00", "task_begin_time": "06:00", "name": "\u9ed8\u8ba4\u670d\u52a1\u65f6\u95f4"}, "status": 1, "date_time_str": "2016-12-20 16:18:43"}, {"freight": 0.0, "receive_begin_time": "2016-12-21 01:00:00", "details": [{"quantity": 1.0, "accept_quantity": 1.0, "version": 141, "spu_remark": "", "real_item_price": 4.88, "real_quantity": 1.0, "total_item_price": 4.88, "total_item_pay": 4.88, "sync_origin_id": "D1572205", "id": "D1572205", "sale_price": 4.88, "spu_id": "C00003"}, {"quantity": 2.0, "accept_quantity": 2.0, "version": 394, "spu_remark": "", "real_item_price": 11.56, "real_quantity": 2.0, "total_item_price": 11.56, "total_item_pay": 11.56, "sync_origin_id": "D804054", "id": "D804054", "sale_price": 5.78, "spu_id": "C00005"}, {"quantity": 8.98, "accept_quantity": 8.98, "version": 228, "spu_remark": "", "real_item_price": 59.72, "real_quantity": 8.98, "total_item_price": 59.72, "total_item_pay": 59.72, "sync_origin_id": "D1079936", "id": "D1079936", "sale_price": 6.65, "spu_id": "C00001"}], "origin_total_price": 76.16, "customer": {"address": "\u5e73\u6e56\u6d77\u5409\u661fK10", "station_id": "", "new_consumer": 0, "receiver_name": "\u803f\u7ee7\u90a6", "id": "T213", "extender": {"resname": "SZ-\u963f\u7c73\u5df49\u53f7-\u79d1\u6280\u56ed"}, "address_id": "T213", "salemenu_id": "", "receiver_phone": "13243768397"}, "date_time": 1482198888.575, "station_id": "T002", "total_price": 76.16, "receive_end_time": "2016-12-21 01:30:00", "id": "LK436666", "time_config_info": {"type": 0.0, "desc": "\u9ed8\u8ba4\u670d\u52a1\u65f6\u95f4", "receive_time_limit": {"end": "12:00", "s_span_time": 1, "e_span_time": 1, "receiveTimeSpan": "30", "start": "06:00"}, "final_distribute_time_span": 1, "service_time_creator": "T001", "_id": "ST001", "order_time_limit": {"end": "23:00", "start": "06:00", "e_span_time": 0}, "final_distribute_time": "06:00", "task_begin_time": "06:00", "name": "\u9ed8\u8ba4\u670d\u52a1\u65f6\u95f4"}, "status": 1, "date_time_str": "2016-12-20 09:54:48"}];
 const Panel = () => 
@@ -151,7 +151,7 @@ const Panel = () =>
 
 
 # 详情页面中基本信息
-::: demo Panel
+::: demo 详情头部
 ```js
 const customer = {"address": "\u5b98\u8def\u5413\u675111\u53f7", "uid": "11585", "supply_station_id": "T002", "receive_end_time": "2016-12-21 12:00", "receiver_name": "\u9ec4\u5468\u5e73", "receive_begin_time": "2016-12-21 06:00", "address_sign_id": "30700300000", "receiver_phone": "13813699281", "address_id": "5624", "extender": {"order_pay_method": 2, "resname": "\u4e61\u4e0b\u5473\u5ba2\u5bb6\u83dc\u9986"}};
 const order = {_id:"PL373271", date_time: "2016-12-20T16:18:43.934", sort_id: 0, customer: customer};
@@ -212,10 +212,11 @@ const Title = () =>
     1. 上半部分左边填写详情页面的唯一识别信息（如订单号，出库单号等）；
     2. 基于页面操作或系统逻辑产生更新的新置于下半部分；
 <br /> 
+<br /> 
     
     
-# 详情页面中基本信息
-::: demo Panel
+# 表单
+::: demo 表单
 ```js
 class FormGroup extends React.Component {
     render() {

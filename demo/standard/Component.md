@@ -9,12 +9,12 @@ imports:
 ```js
 const ColorWrap = () => 
     <div className="demo-box">
-        <div className="item" style={{backgroundColor: '#409d39'}}><span>#409d39</span>模块顶部点缀，导航选中态，功能性按钮</div>
-        <div className="item" style={{backgroundColor: '#2182cc'}}><span>#2182cc</span>文字链接颜色</div>
-        <div className="item" style={{backgroundColor: '#333333'}}><span>#333333</span>用于导航，列表头部，模块标题，需突出说明的文字（非列表）的文本配色</div>
-        <div className="item" style={{backgroundColor: '#666666'}}><span>#666666</span>用于列表内容，辅助性标题，表单内容中的填写项目的文本配色</div>
-        <div className="item" style={{color: '#333333', backgroundColor: '#f9f9f9'}}><span>#f9f9f9</span>表头背景</div>
-        <div className="item" style={{color: '#333333', backgroundColor: '#f5f5f5'}}><span>#f5f5f5</span>页面背景色，hover背景色</div>
+        <div className="item" style={{backgroundColor: '#409d39'}}><span>#409d39 @brand-primary</span>模块顶部点缀，导航选中态，功能性按钮</div>
+        <div className="item" style={{backgroundColor: '#2182cc'}}><span>#2182cc @link-color</span>文字链接颜色</div>
+        <div className="item" style={{backgroundColor: '#333333'}}><span>#333333 @gm-color-first</span>用于导航，列表头部，模块标题，需突出说明的文字（非列表）的文本配色</div>
+        <div className="item" style={{backgroundColor: '#666666'}}><span>#666666 @gm-color-second</span>用于列表内容，辅助性标题，表单内容中的填写项目的文本配色</div>
+        <div className="item" style={{color: '#333333', backgroundColor: '#f9f9f9'}}><span>#f9f9f9 @gm-table-bg-accent</span>表头背景</div>
+        <div className="item" style={{color: '#333333', backgroundColor: '#f5f5f5'}}><span>#f5f5f5 @gm-back-body-bg</span>页面背景色，hover背景色</div>
     </div>
 ```
 ```jsx
