@@ -1,0 +1,1 @@
+window.WEBPACK_ASSETS = {"index":{"js":"/react-gm/build/index.db379fae9921cd6edd84.bundle.js"}}

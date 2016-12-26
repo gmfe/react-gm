@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReactGM</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="shortcut icon" href="http://static.guanmai.cn/static_config/default/favicon.ico"/>
+</head>
+<body>
+<div id="appContainer"/>
+<script>
+    document.write('<script src="build/webpack-assets.js?v=' + Math.random() + '"><\/script>');
+</script>
+<script>
+    document.write('<script src="' + window.WEBPACK_ASSETS['index'].js + '"><\/script>');
+</script>
+</body>
+</html>
