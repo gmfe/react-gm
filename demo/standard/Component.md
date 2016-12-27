@@ -254,39 +254,15 @@ const pagination = {
 :::
 <br/>
 
-::: demo 输入框禁用状态
-```jsx
-<QuickFilter className="b-border-top-0">
-    <form className="form-inline">
-         <DateRangePicker
-                begin={new Date()}
-                end={new Date()}
-                inputClassName="form-control"
-                disabled
-         />
-        <div className="input-group gm-margin-lr-10">
-            <input
-                type="text"
-                className="form-control"
-                placeholder="disabled状态"
-                style={{minWidth: '100px'}}
-                disabled
-            />
-        </div>
-        <button type="submit" className="btn btn-primary">搜索</button>
-    </form>
-</QuickFilter>
-```
-:::
-<br/>
-
 ::: demo 单项筛选器
 ```jsx
-<select className="form-control" style={{width:'125px'}}>
-    <option value="0">全部报价单状态</option>
-    <option value="1">已激活</option>
-    <option value="2">未激活</option>
-</select>
+<div className="form-inline">
+    <select className="form-control">
+        <option value="0">全部报价单状态</option>
+        <option value="1">已激活</option>
+        <option value="2">未激活</option>
+    </select>
+</div>
 ```
 :::
 <br/>
@@ -355,6 +331,33 @@ class SearchSelect2 extends React.Component {
 ```
 :::
 <br/>
+
+::: demo 输入框禁用状态
+```jsx
+<QuickFilter className="b-border-top-0">
+    <form className="form-inline">
+         <DateRangePicker
+                begin={new Date()}
+                end={new Date()}
+                inputClassName="form-control"
+                disabled
+         />
+        <div className="input-group gm-margin-lr-10">
+            <input
+                type="text"
+                className="form-control"
+                placeholder="disabled状态"
+                style={{minWidth: '100px'}}
+                disabled
+            />
+        </div>
+        <button type="submit" className="btn btn-primary">搜索</button>
+    </form>
+</QuickFilter>
+```
+:::
+<br/>
+
 
 # 边距规范
 station定义了0，5，10，15三种大小的padding和margin。
