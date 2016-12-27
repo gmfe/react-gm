@@ -4,7 +4,7 @@ imports:
 ---
 ## Trigger
 
-::: demo Trigger
+::: demo
 ```js
 class TriggerWrap extends React.Component {
     renderPopup() {

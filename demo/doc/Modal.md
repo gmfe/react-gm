@@ -6,7 +6,7 @@ imports:
 
 模态框，出Modal浮层
 
-::: demo Modal
+::: demo
 ```js
 class ModalWrap extends React.Component {
     constructor(props) {

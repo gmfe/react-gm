@@ -6,7 +6,7 @@ imports:
 ## Storage
 存储用，基于localStorage。没啥特别，只是简单的封装了下接口。 且添加前缀 `_react-gm_`避免冲突
 
-::: demo Storage
+::: demo
 ```js
 window.Storage = Storage;
 const key = 'testValue';

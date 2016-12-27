@@ -7,7 +7,7 @@ imports:
 
 只能选择，不能编辑
 
-::: demo demo
+::: demo
 ```js
 class DatePickerWrap extends React.Component {
     constructor(props) {

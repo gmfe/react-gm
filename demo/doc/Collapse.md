@@ -4,7 +4,7 @@ imports:
 ---
 ## Collapse
 
-::: demo Collapse
+::: demo
 ```js
 class CollapseWrap extends React.Component {
     constructor(props) {

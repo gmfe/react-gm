@@ -4,7 +4,7 @@ imports:
 ---
 ## DateRangePicker
 
-::: demo demo
+::: demo
 ```js
 class DaterangepickerWrap extends React.Component {
     constructor(props) {

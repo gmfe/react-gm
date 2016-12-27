@@ -6,7 +6,7 @@ imports:
 
 下拉选择组件。支持键盘上下键操作，回车选择
 
-::: demo DropSelect
+::: demo
 ```js
 class DropSelectWrap extends React.Component {
     constructor(props) {

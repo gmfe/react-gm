@@ -5,7 +5,7 @@ imports:
 ## Switcher
 开关切换
 
-::: demo Switcher
+::: demo
 ```js
 class Component extends React.Component {
     constructor(props){

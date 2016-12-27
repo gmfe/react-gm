@@ -6,7 +6,7 @@ imports:
 
 对话框
 
-::: demo Dialog
+::: demo
 ```js
 class DialogWrap extends React.Component {
     constructor(props) {

@@ -7,7 +7,7 @@ imports:
 
 时间段选择
 
-::: demo demo
+::: demo
 ```js
 class TimeSpanWrap extends React.Component {
     constructor(props) {

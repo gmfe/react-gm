@@ -6,7 +6,7 @@ imports:
 
 上传文件
 
-::: demo Droper
+::: demo
 ```jsx
 <div>
     <Droper onDrop={() => console.log(arguments)} accept="image/*"/>
