@@ -247,7 +247,24 @@ const pagination = {
                 style={{minWidth: '250px'}}
             />
         </div>
-        <div className="input-group gm-margin-right-10">
+        <button type="submit" className="btn btn-primary">搜索</button>
+    </form>
+</QuickFilter>
+```
+:::
+<br/>
+
+::: demo 输入框禁用状态
+```jsx
+<QuickFilter className="b-border-top-0">
+    <form className="form-inline">
+         <DateRangePicker
+                begin={new Date()}
+                end={new Date()}
+                inputClassName="form-control"
+                disabled
+         />
+        <div className="input-group gm-margin-lr-10">
             <input
                 type="text"
                 className="form-control"
