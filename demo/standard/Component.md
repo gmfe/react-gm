@@ -1,6 +1,6 @@
 ---
 imports:
-    import {DropDown, DropDownItems, DropDownItem, DateRangePicker, QuickFilter, SearchSelect} from '../../src/index';
+    import {DropDown, DropDownItems, DropDownItem, DateRangePicker, QuickFilter, SearchSelect, Pagination} from '../../src/index';
     import _ from 'underscore';
 ---
 
@@ -44,6 +44,7 @@ const FontWrap = () =>
 微软雅黑 12px 用于列表，辅助性标题，面包屑，提示性的文本
 <br />
 <br />
+<br />
 
 # 按钮规范
 ::: demo btn-primary
@@ -59,6 +60,7 @@ const FontWrap = () =>
 * 注意事项：
     1.  “保存”、“编辑”按钮通常与“取消”按钮同时出现，且“取消”在前，“保存”或“编辑”在后；
     2.  同一个模块中的强指向性按钮不宜过多
+<br />
 <br />
 
 ::: demo btn-default
@@ -88,6 +90,7 @@ const FontWrap = () =>
 * 应用场景： 
  在列表头部的按钮样式，用于一级页面中的功能性按钮（无明显倾向性），按钮功能间逻辑并列
 <br />
+<br />
 
 ::: demo btn-primary
 ```jsx
@@ -100,7 +103,7 @@ const FontWrap = () =>
 :::
 * 应用场景： 用于1.2中的详情页面中顶部基本信息的强指向性按钮，如“保存”“修改”“提交入库单”“审核通过”等
 * 注意事项： 
- 同一个详情页面中的顶部信息仅可有一个强指向性按钮，判定方式如下：如存在多个按钮，将涉及正向流程的“状态修改”、“内容更改”的按钮（如“审核通过”“保存”等正向流程）确认为“强指向性”，其他功能性按钮采用工具栏的方式呈现
+    同一个详情页面中的顶部信息仅可有一个强指向性按钮，判定方式如下：如存在多个按钮，将涉及正向流程的“状态修改”、“内容更改”的按钮（如“审核通过”“保存”等正向流程）确认为“强指向性”，其他功能性按钮采用工具栏的方式呈现
 <br />
 <br />
 
@@ -117,6 +120,20 @@ const FontWrap = () =>
 用于1.2中的详情页面中顶部基本信息中的“取消”按钮，
 * 注意事项：
  仅在基本信息栏变为“可编辑态”时展现取消按钮，通常与“保存”按钮一起出现
+<br />
+<br />
+
+::: demo disabled
+```jsx
+<div className="demo-box">
+   <div className="item text">
+        <button className="btn btn-primary gm-margin-right-15" disabled>确定</button>
+        <button className="btn btn-default" disabled>导出</button>
+   </div>
+</div>
+```
+:::
+* 应用场景： 不可点击按钮(bootstrap默认颜色规范)
 <br />
 <br />
 
@@ -137,6 +154,7 @@ const FontWrap = () =>
 * 应用场景：
 用于1.2中的详情页面中顶部基本信息的功能性按钮，通过工具栏下拉的方式聚合展现
 <br />
+<br />
 
 ::: demo DropDown disabled
 ```jsx
@@ -155,6 +173,7 @@ const FontWrap = () =>
 * 应用场景：
 选项不可点样式
 <br />
+<br />
 
 ::: demo 链接
 ```jsx
@@ -167,6 +186,40 @@ const FontWrap = () =>
 :::
 * 应用场景：
 用于模块详情中的功能性操作
+<br />
+<br />
+
+::: demo 分页
+```js
+const pagination = {
+    count: 60,
+    offset: 0,
+    limit: 10
+};
+```
+```jsx
+<div className="demo-box">
+    <Pagination data={pagination}/>
+</div>
+```
+:::
+* 应用场景：用于列表的分页操作
+* 注意事项：
+    1. 如模块内如存在“分页”展现的场景，在当前页面如存在多个模块，则采用“展开更多”样式，不展现为“分页”
+    2. 如页面仅有单个的数据模块，且存在较多的跨页批量操作，采用“展开更多”样式，不展现为“分页”
+<br />
+<br />
+
+::: demo icon
+```jsx
+<div className="demo-box">
+    <div className="item text"><span><i className="glyphicon glyphicon-pencil"/></span>编辑</div>
+    <div className="item text"><span><i className="glyphicon glyphicon-trash"/></span>删除</div>
+    <div className="item text"><span><i className="glyphicon glyphicon-plus"/></span>增加</div>
+    <div className="item text"><span><i className="glyphicon glyphicon-cog"/></span>设置</div>
+</div>
+```
+:::
 <br />
 <br />
 
@@ -192,6 +245,15 @@ const FontWrap = () =>
                 className="form-control"
                 placeholder="请输入订单号、商户名称或商户ID"
                 style={{minWidth: '250px'}}
+            />
+        </div>
+        <div className="input-group gm-margin-right-10">
+            <input
+                type="text"
+                className="form-control"
+                placeholder="disabled状态"
+                style={{minWidth: '100px'}}
+                disabled
             />
         </div>
         <button type="submit" className="btn btn-primary">搜索</button>
