@@ -332,7 +332,7 @@ class SearchSelect2 extends React.Component {
 :::
 <br/>
 
-::: demo 输入框禁用状态
+::: demo 输入框禁用状态(bootstrap默认)
 ```jsx
 <QuickFilter className="b-border-top-0">
     <form className="form-inline">
