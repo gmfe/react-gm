@@ -6384,7 +6384,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                tabs = _props2.tabs,
 	                children = _props2.children,
 	                active = _props2.active,
-	                rest = _objectWithoutProperties(_props2, ['tabs', 'children', 'active']);
+	                onChange = _props2.onChange,
+	                rest = _objectWithoutProperties(_props2, ['tabs', 'children', 'active', 'onChange']);
 
 	            return _react2.default.createElement(
 	                'div',
