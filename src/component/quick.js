@@ -150,7 +150,7 @@ class QuickTab extends React.Component {
 
     render() {
         const {
-            tabs, children, active, // eslint-disable-line
+            tabs, children, active, onChange, // eslint-disable-line
             ...rest
         } = this.props;
         return (
