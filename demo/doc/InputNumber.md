@@ -27,6 +27,7 @@ class Component extends React.Component {
                     min={0}
                     precision={4}
                     className="form-control"
+                    minus
                 />
             </div>
         );

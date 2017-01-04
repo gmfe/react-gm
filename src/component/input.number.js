@@ -8,14 +8,19 @@ class InputNumber extends React.Component {
     }
 
     handleChange(e) {
-        const {max, min, precision} = this.props;
-        let value = e.target.value;
+        const {max, min, precision, minus} = this.props;
+        let value = e.target.value,
+            figure = value;
 
         const reg = new RegExp("(^[1-9]\\d*(\\.\\d{0," + precision + "})?$)|(^0(\\.\\d{0," + precision + "})?$)");
 
-        if (reg.test(value) || value === '') {
-            const num = Number(value);
+        if (minus && value.indexOf('-') > -1) {
+            // 去掉减号，然后去匹配正则
+            figure = value.slice(1);
+        }
 
+        if (reg.test(figure) || figure === '') {
+            const num = Number(value);
 
             if (max && num > max)
                 this.props.onChange(max);
@@ -31,7 +36,7 @@ class InputNumber extends React.Component {
 
     render() {
         const {
-            precision, // eslint-disable-line
+            precision, minus, // eslint-disable-line
             ...rest
         } = this.props;
 
@@ -46,17 +51,19 @@ class InputNumber extends React.Component {
 }
 
 InputNumber.propTypes = {
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     max: PropTypes.number,
     min: PropTypes.number,
     precision: PropTypes.number, // 精确度，保留几位小数
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
     placeholder: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
+    minus: PropTypes.bool // 是否支持输入负数
 };
 
 InputNumber.defaultProps = {
-    precision: 2
+    precision: 2,
+    minus: false
 };
 
 
