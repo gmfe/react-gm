@@ -7061,6 +7061,7 @@ button.close {
 }
 .gm-quick.gm-quick-desc span {
   font-size: 12px;
+  color: #666666;
 }
 html, body {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
@@ -7073,6 +7074,10 @@ html, body {
 }
 .gm-text-desc {
   color: #666666;
+}
+.gm-text-helper {
+  color: #666666;
+  font-size: 12px;
 }
 .gm-back-bg {
   background-color: #f5f5f5 !important;

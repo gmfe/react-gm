@@ -5699,13 +5699,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var _props = this.props,
 	                max = _props.max,
 	                min = _props.min,
-	                precision = _props.precision;
+	                precision = _props.precision,
+	                minus = _props.minus;
 
-	            var value = e.target.value;
+	            var value = e.target.value,
+	                figure = value;
 
 	            var reg = new RegExp("(^[1-9]\\d*(\\.\\d{0," + precision + "})?$)|(^0(\\.\\d{0," + precision + "})?$)");
 
-	            if (reg.test(value) || value === '') {
+	            if (minus && value.indexOf('-') > -1) {
+	                // 去掉减号，然后去匹配正则
+	                figure = value.slice(1);
+	            }
+
+	            if (reg.test(figure) || figure === '') {
 	                var num = Number(value);
 
 	                if (max && num > max) this.props.onChange(max);else if (min && num < min) this.props.onChange(min);else this.props.onChange(value);
@@ -5719,7 +5726,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function render() {
 	            var _props2 = this.props,
 	                precision = _props2.precision,
-	                rest = _objectWithoutProperties(_props2, ["precision"]);
+	                minus = _props2.minus,
+	                rest = _objectWithoutProperties(_props2, ["precision", "minus"]);
 
 	            return _react2.default.createElement("input", _extends({}, rest, {
 	                type: "text",
@@ -5732,17 +5740,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	InputNumber.propTypes = {
-	    value: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]).isRequired,
+	    value: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]),
 	    max: _react.PropTypes.number,
 	    min: _react.PropTypes.number,
 	    precision: _react.PropTypes.number, // 精确度，保留几位小数
-	    onChange: _react.PropTypes.func.isRequired,
+	    onChange: _react.PropTypes.func,
 	    placeholder: _react.PropTypes.string,
-	    className: _react.PropTypes.string
+	    className: _react.PropTypes.string,
+	    minus: _react.PropTypes.bool // 是否支持输入负数
 	};
 
 	InputNumber.defaultProps = {
-	    precision: 2
+	    precision: 2,
+	    minus: false
 	};
 
 	exports.default = InputNumber;
