@@ -55,7 +55,7 @@ InputNumber.propTypes = {
     max: PropTypes.number,
     min: PropTypes.number,
     precision: PropTypes.number, // 精确度，保留几位小数
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     className: PropTypes.string,
     minus: PropTypes.bool // 是否支持输入负数
