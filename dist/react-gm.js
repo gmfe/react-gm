@@ -5744,7 +5744,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    max: _react.PropTypes.number,
 	    min: _react.PropTypes.number,
 	    precision: _react.PropTypes.number, // 精确度，保留几位小数
-	    onChange: _react.PropTypes.func,
+	    onChange: _react.PropTypes.func.isRequired,
 	    placeholder: _react.PropTypes.string,
 	    className: _react.PropTypes.string,
 	    minus: _react.PropTypes.bool // 是否支持输入负数
