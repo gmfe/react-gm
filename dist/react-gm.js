@@ -6199,7 +6199,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    title,
 	                    collapse ? _react2.default.createElement(
 	                        'a',
-	                        { onClick: this.handleCollapse.bind(this) },
+	                        { onClick: this.handleCollapse.bind(this), style: { fontSize: '12px', marginLeft: '25px' } },
 	                        collapse === true ? "收拢明细" : collapse,
 	                        ' '
 	                    ) : undefined,
