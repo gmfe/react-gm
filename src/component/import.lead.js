@@ -33,6 +33,9 @@ class ImportLead extends React.Component {
 
         const tableBody = data.list.map((eList, index) => {
             const tds = data.columns.map((col, i) => {
+                if (col.render)
+                    return <td key={i}>{col.render(eList[col.field], eList, index)}</td>;
+
                 var tip = tipsMap[index] && tipsMap[index][col.field];
                 return tip ? (
                     <td key={i} className={tip.modifyed ? "gm-bg-info" : "gm-bg-invalid"}>
