@@ -5490,6 +5490,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var tableBody = data.list.map(function (eList, index) {
 	                var tds = data.columns.map(function (col, i) {
+	                    if (col.render) return _react2.default.createElement(
+	                        'td',
+	                        { key: i },
+	                        col.render(eList[col.field], eList, index)
+	                    );
+
 	                    var tip = tipsMap[index] && tipsMap[index][col.field];
 	                    return tip ? _react2.default.createElement(
 	                        'td',
