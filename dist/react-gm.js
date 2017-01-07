@@ -535,12 +535,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(Trigger, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            document.body.addEventListener('click', this.handleBodyClick);
+	            window.document.body.addEventListener('click', this.handleBodyClick);
 	        }
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
-	            document.body.removeEventListener('click', this.handleBodyClick);
+	            window.document.body.removeEventListener('click', this.handleBodyClick);
 	        }
 	    }, {
 	        key: 'handleBodyClick',
@@ -1915,12 +1915,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(Modal, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            document.body.addEventListener('keydown', this.handleKeyDown);
+	            window.document.body.addEventListener('keydown', this.handleKeyDown);
 	        }
 	    }, {
 	        key: 'componentWillUnMount',
 	        value: function componentWillUnMount() {
-	            document.body.removeEventListener('keydown', this.handleKeyDown);
+	            window.document.body.removeEventListener('keydown', this.handleKeyDown);
 	        }
 	    }, {
 	        key: 'handleKeyDown',
@@ -3581,11 +3581,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    componentDidMount: function componentDidMount() {
 	        console.error('AdvanceSelect are deprecated! Replace with SearchSelect!');
-	        document.addEventListener('click', this._close);
+	        window.document.addEventListener('click', this._close);
 	    },
 
 	    componentWillUnmount: function componentWillUnmount() {
-	        document.removeEventListener('click', this._close);
+	        window.document.removeEventListener('click', this._close);
 	    },
 
 	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -4420,12 +4420,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	// 搞的复杂了，后续要补充文档
 
 	var dialogContainerId = '_gm_dialog_container' + (Math.random() + '').slice(2);
-	var dialogContainer = document.getElementById(dialogContainerId);
+	var dialogContainer = window.document.getElementById(dialogContainerId);
 	if (!dialogContainer) {
-	    dialogContainer = document.createElement('div');
+	    dialogContainer = window.document.createElement('div');
 	    dialogContainer.className = 'gm-container-dialog';
 	    dialogContainer.id = dialogContainerId;
-	    document.body.appendChild(dialogContainer);
+	    window.document.body.appendChild(dialogContainer);
 	}
 	var DialogStatics = {};
 	DialogStatics = {
@@ -4447,7 +4447,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    dialog: function dialog(options) {
 	        options = Object.assign({}, { size: 'sm' }, options);
 	        return new Promise(function (resolve, reject) {
-	            var div = document.createElement('div');
+	            var div = window.document.createElement('div');
 	            dialogContainer.appendChild(div);
 	            var _OK = options.onOK;
 	            options.onOK = function (value) {
@@ -4581,7 +4581,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        onKeyDown: this.handleEnter
 	                    })
 	                ),
-	                _react2.default.createElement('div', { className: 'gm-gap10' }),
+	                _react2.default.createElement('div', { className: 'gm-gap-10' }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'text-right' },
@@ -4590,7 +4590,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { className: 'btn btn-default', onClick: this.handleCancel },
 	                        cancelBtn
 	                    ),
-	                    _react2.default.createElement('div', { className: 'gm-gap10' }),
+	                    _react2.default.createElement('div', { className: 'gm-gap-10' }),
 	                    OKBtn && _react2.default.createElement(
 	                        'button',
 	                        {
@@ -4900,8 +4900,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(DropSelect, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            document.addEventListener("click", this.documentClickHandler);
-	            document.addEventListener("keydown", this.onEscapeKeyUp);
+	            window.document.addEventListener("click", this.documentClickHandler);
+	            window.document.addEventListener("keydown", this.onEscapeKeyUp);
 	        }
 	    }, {
 	        key: 'componentDidUpdate',
@@ -4912,8 +4912,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
-	            document.removeEventListener("click", this.documentClickHandler);
-	            document.removeEventListener("keydown", this.onEscapeKeyUp);
+	            window.document.removeEventListener("click", this.documentClickHandler);
+	            window.document.removeEventListener("keydown", this.onEscapeKeyUp);
 	        }
 	    }, {
 	        key: 'processData',
@@ -6029,12 +6029,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var containerId = '_gm_nprogress_container' + (Math.random() + '').slice(2);
-	var container = document.getElementById(containerId);
+	var container = window.document.getElementById(containerId);
 	if (!container) {
-	    container = document.createElement('div');
+	    container = window.document.createElement('div');
 	    container.className = 'gm-nprogress-container';
 	    container.id = containerId;
-	    document.body.appendChild(container);
+	    window.document.body.appendChild(container);
 	}
 
 	var NProgressStatics = {
@@ -6926,23 +6926,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var StorageStatics = {
 	    set: function set(key, value) {
-	        localStorage.setItem(prefix + key, JSON.stringify(value));
+	        window.localStorage.setItem(prefix + key, JSON.stringify(value));
 	    },
 	    get: function get(key) {
-	        var v = localStorage.getItem(prefix + key);
+	        var v = window.localStorage.getItem(prefix + key);
 	        return v ? JSON.parse(v) : v;
 	    },
 	    remove: function remove(key) {
-	        localStorage.removeItem(prefix + key);
+	        window.localStorage.removeItem(prefix + key);
 	    },
 	    clear: function clear() {
-	        localStorage.clear();
+	        window.localStorage.clear();
 	    },
 	    getAll: function getAll() {
 	        var result = {};
 	        var key;
-	        for (var i = 0; i < localStorage.length; i++) {
-	            key = localStorage.key(i);
+	        for (var i = 0; i < window.localStorage.length; i++) {
+	            key = window.localStorage.key(i);
 	            if (key.startsWith(prefix)) {
 	                key = key.slice(prefix.length);
 	                result[key] = Storage.get(key);
@@ -7475,18 +7475,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	var noop = function noop() {};
 
 	var tipContainerId = '_gm_tips_container' + (Math.random() + '').slice(2);
-	var tipsContainer = document.getElementById(tipContainerId);
+	var tipsContainer = window.document.getElementById(tipContainerId);
 	if (!tipsContainer) {
-	    tipsContainer = document.createElement('div');
+	    tipsContainer = window.document.createElement('div');
 	    tipsContainer.className = 'gm-tips';
 	    tipsContainer.id = tipContainerId;
-	    document.body.appendChild(tipsContainer);
+	    window.document.body.appendChild(tipsContainer);
 	}
 
 	var TipStatics = {
 	    tip: function tip(options) {
 	        var _b_onClose = options.onClose;
-	        var div = document.createElement('div');
+	        var div = window.document.createElement('div');
 	        div.className = 'gm-tips-cell';
 	        tipsContainer.appendChild(div);
 
@@ -7996,7 +7996,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            style: { marginLeft: Number(level) * 15 + 'px' },
 	                            onClick: this.handleShow.bind(this, data)
 	                        },
-	                        last ? _react2.default.createElement('div', { className: 'gm-gap15' }) : _react2.default.createElement('span', {
+	                        last ? _react2.default.createElement('div', { className: 'gm-gap-15' }) : _react2.default.createElement('span', {
 	                            className: _underscore2.default.contains(showList, data.value) ? "glyphicon glyphicon-minus text-primary" : "glyphicon glyphicon-plus text-primary" }),
 	                        '\xA0',
 	                        _react2.default.createElement(
