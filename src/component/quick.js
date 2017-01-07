@@ -25,7 +25,9 @@ class QuickPanel extends React.Component {
                 <Flex flex alignCenter justifyBetween className="gm-quick-title">
                     {title}
                     {collapse ? (
-                        <a onClick={::this.handleCollapse} style={{fontSize: '12px', marginLeft: '25px'}}>{collapse === true ? "收拢明细" : collapse} </a>
+                        <a onClick={::this.handleCollapse} style={{fontSize: '12px', marginLeft: '25px'}}>
+                            {collapse === true ? (this.state.in ? "收拢明细": "展现明细") : collapse}
+                        </a>
                     ) : undefined}
                     <Flex flex/>
                     {right ? React.cloneElement(right, {className: right.props.className}) : undefined}

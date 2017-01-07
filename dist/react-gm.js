@@ -6206,8 +6206,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    collapse ? _react2.default.createElement(
 	                        'a',
 	                        { onClick: this.handleCollapse.bind(this), style: { fontSize: '12px', marginLeft: '25px' } },
-	                        collapse === true ? "收拢明细" : collapse,
-	                        ' '
+	                        collapse === true ? this.state.in ? "收拢明细" : "展现明细" : collapse
 	                    ) : undefined,
 	                    _react2.default.createElement(_flex2.default, { flex: true }),
 	                    right ? _react2.default.cloneElement(right, { className: right.props.className }) : undefined

@@ -7057,7 +7057,7 @@ button.close {
   padding: 15px;
 }
 .gm-quick.gm-quick-desc .btn {
-  width: 90px;
+  min-width: 90px;
 }
 .gm-quick.gm-quick-desc span {
   font-size: 12px;
