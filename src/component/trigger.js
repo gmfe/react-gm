@@ -19,11 +19,11 @@ class Trigger extends React.Component {
     }
 
     componentDidMount() {
-        document.body.addEventListener('click', this.handleBodyClick);
+        window.document.body.addEventListener('click', this.handleBodyClick);
     }
 
     componentWillUnmount() {
-        document.body.removeEventListener('click', this.handleBodyClick);
+        window.document.body.removeEventListener('click', this.handleBodyClick);
     }
 
     handleBodyClick(event) {

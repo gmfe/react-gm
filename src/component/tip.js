@@ -5,18 +5,18 @@ const noop = () => {
 };
 
 const tipContainerId = '_gm_tips_container' + (Math.random() + '').slice(2);
-let tipsContainer = document.getElementById(tipContainerId);
+let tipsContainer = window.document.getElementById(tipContainerId);
 if (!tipsContainer) {
-    tipsContainer = document.createElement('div');
+    tipsContainer = window.document.createElement('div');
     tipsContainer.className = 'gm-tips';
     tipsContainer.id = tipContainerId;
-    document.body.appendChild(tipsContainer);
+    window.document.body.appendChild(tipsContainer);
 }
 
 const TipStatics = {
     tip: function (options) {
         const _b_onClose = options.onClose;
-        let div = document.createElement('div');
+        let div = window.document.createElement('div');
         div.className = 'gm-tips-cell';
         tipsContainer.appendChild(div);
 

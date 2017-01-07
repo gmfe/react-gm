@@ -91,8 +91,8 @@ const standardMap = {
 };
 
 const setNavCurrent = () => {
-    _.each(document.querySelectorAll('.demo-left a'), element => element.className = '');
-    const dom = document.querySelector('.demo-left a[href="' + location.hash + '"]');
+    _.each(window.document.querySelectorAll('.demo-left a'), element => element.className = '');
+    const dom = window.document.querySelector('.demo-left a[href="' + window.location.hash + '"]');
     if (dom) {
         dom.className = 'active';
     }
@@ -118,12 +118,12 @@ class App extends React.Component {
     doScrollToAnchor() {
         const {anchor} = this.props.location.query;
         if (anchor) {
-            const dom = document.getElementById(anchor);
+            const dom = window.document.getElementById(anchor);
             if (dom) {
                 const top = dom.offsetTop;
                 console.log(top);
                 setTimeout(() => {
-                    document.body.scrollTop = top;
+                    window.document.body.scrollTop = top;
                 }, 100);
             }
         }
@@ -152,7 +152,7 @@ class App extends React.Component {
     handleNav(e) {
         const {tagName} = e.target;
         if (tagName === 'A') {
-            document.body.scrollTop = 0;
+            window.document.body.scrollTop = 0;
         }
     }
 
@@ -171,7 +171,7 @@ class App extends React.Component {
             <div className="demo">
                 <div className="demo-header">
                     <GMFlex className="container">
-                        <a href={location.pathname} className="gm-flex gm-flex-align-center gm-header-logo">
+                        <a href={window.location.pathname} className="gm-flex gm-flex-align-center gm-header-logo">
                             <span>ReactGM </span>
                             <small>&nbsp;&nbsp;by gmfe</small>
                         </a>
@@ -184,7 +184,7 @@ class App extends React.Component {
                 </div>
                 <GMFlex className="demo-center container">
                     <div className="demo-left" onClick={this.handleNav}>
-                        {location.hash.indexOf('#/standard') > -1 ? <NavConfigStandard/> : <NavConfigDoc/>}
+                        {window.location.hash.indexOf('#/standard') > -1 ? <NavConfigStandard/> : <NavConfigDoc/>}
                     </div>
                     <GMFlex flex column className="demo-content doc markdown-body" onClick={this.handleAnchor}>
                         {this.props.children}
@@ -226,4 +226,4 @@ ReactDOM.render((
             <Route path="/demo" component={Demo}/>
         </Route>
     </Router>
-), document.getElementById('appContainer'));
+), window.document.getElementById('appContainer'));

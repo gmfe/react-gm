@@ -13,8 +13,8 @@ class DropSelect extends React.Component {
     }
 
     componentDidMount() {
-        document.addEventListener("click", this.documentClickHandler);
-        document.addEventListener("keydown", this.onEscapeKeyUp);
+        window.document.addEventListener("click", this.documentClickHandler);
+        window.document.addEventListener("keydown", this.onEscapeKeyUp);
     }
 
     componentDidUpdate() {
@@ -23,8 +23,8 @@ class DropSelect extends React.Component {
     }
 
     componentWillUnmount() {
-        document.removeEventListener("click", this.documentClickHandler);
-        document.removeEventListener("keydown", this.onEscapeKeyUp);
+        window.document.removeEventListener("click", this.documentClickHandler);
+        window.document.removeEventListener("keydown", this.onEscapeKeyUp);
     }
 
     processData(data) {

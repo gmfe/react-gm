@@ -8,12 +8,12 @@ const noop = () => {
 // 搞的复杂了，后续要补充文档
 
 let dialogContainerId = '_gm_dialog_container' + (Math.random() + '').slice(2);
-let dialogContainer = document.getElementById(dialogContainerId);
+let dialogContainer = window.document.getElementById(dialogContainerId);
 if (!dialogContainer) {
-    dialogContainer = document.createElement('div');
+    dialogContainer = window.document.createElement('div');
     dialogContainer.className = 'gm-container-dialog';
     dialogContainer.id = dialogContainerId;
-    document.body.appendChild(dialogContainer);
+    window.document.body.appendChild(dialogContainer);
 }
 let DialogStatics = {};
 DialogStatics = {
@@ -35,7 +35,7 @@ DialogStatics = {
     dialog(options){
         options = Object.assign({}, {size: 'sm'}, options);
         return new Promise((resolve, reject) => {
-            let div = document.createElement('div');
+            let div = window.document.createElement('div');
             dialogContainer.appendChild(div);
             const _OK = options.onOK;
             options.onOK = value => {
@@ -141,12 +141,12 @@ class Dialog extends React.Component {
                         />
                     )}
                 </div>
-                <div className="gm-gap10"></div>
+                <div className="gm-gap-10"></div>
                 <div className="text-right">
                     {(type !== 'alert' && cancelBtn && !isLoading) && (
                         <button className="btn btn-default" onClick={this.handleCancel}>{cancelBtn}</button>
                     )}
-                    <div className="gm-gap10"></div>
+                    <div className="gm-gap-10"></div>
                     {OKBtn && (
                         <button
                             className="btn btn-primary"

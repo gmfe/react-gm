@@ -14,11 +14,11 @@ class Modal extends React.Component {
     }
 
     componentDidMount() {
-        document.body.addEventListener('keydown', this.handleKeyDown);
+        window.document.body.addEventListener('keydown', this.handleKeyDown);
     }
 
     componentWillUnMount() {
-        document.body.removeEventListener('keydown', this.handleKeyDown);
+        window.document.body.removeEventListener('keydown', this.handleKeyDown);
     }
 
     handleKeyDown(event) {

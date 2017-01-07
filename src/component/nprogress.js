@@ -2,12 +2,12 @@ import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
 const containerId = '_gm_nprogress_container' + (Math.random() + '').slice(2);
-let container = document.getElementById(containerId);
+let container = window.document.getElementById(containerId);
 if (!container) {
-    container = document.createElement('div');
+    container = window.document.createElement('div');
     container.className = 'gm-nprogress-container';
     container.id = containerId;
-    document.body.appendChild(container);
+    window.document.body.appendChild(container);
 }
 
 const NProgressStatics = {

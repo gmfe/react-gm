@@ -5,23 +5,23 @@ const prefix = '_react-gm_';
 
 const StorageStatics = {
     set: function (key, value) {
-        localStorage.setItem(prefix + key, JSON.stringify(value));
+        window.localStorage.setItem(prefix + key, JSON.stringify(value));
     },
     get: function (key) {
-        var v = localStorage.getItem(prefix + key);
+        var v = window.localStorage.getItem(prefix + key);
         return v ? JSON.parse(v) : v;
     },
     remove: function (key) {
-        localStorage.removeItem(prefix + key);
+        window.localStorage.removeItem(prefix + key);
     },
     clear: function () {
-        localStorage.clear();
+        window.localStorage.clear();
     },
     getAll: function () {
         var result = {};
         var key;
-        for (var i = 0; i < localStorage.length; i++) {
-            key = localStorage.key(i);
+        for (var i = 0; i < window.localStorage.length; i++) {
+            key = window.localStorage.key(i);
             if (key.startsWith(prefix)) {
                 key = key.slice(prefix.length);
                 result[key] = Storage.get(key);

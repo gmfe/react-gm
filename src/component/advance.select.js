@@ -31,11 +31,11 @@ var AdvanceSelect = React.createClass({
 
     componentDidMount: function () {
         console.error('AdvanceSelect are deprecated! Replace with SearchSelect!');
-        document.addEventListener('click', this._close);
+        window.document.addEventListener('click', this._close);
     },
 
     componentWillUnmount: function () {
-        document.removeEventListener('click', this._close);
+        window.document.removeEventListener('click', this._close);
     },
 
     componentWillReceiveProps: function (nextProps) {

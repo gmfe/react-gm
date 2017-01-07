@@ -21,7 +21,7 @@ const Tab = () =>
                         />
                     </div>
                     <button type="submit" className="btn btn-primary">搜索</button>
-                    <div className="gm-gap10"></div>
+                    <div className="gm-gap-10"></div>
                     <a href="" className="btn btn-default">导出</a>
                 </form>
             </QuickFilter>
@@ -38,7 +38,7 @@ const Tab = () =>
                         />
                     </div>
                     <button type="submit" className="btn btn-primary">搜索</button>
-                    <div className="gm-gap10"></div>
+                    <div className="gm-gap-10"></div>
                     <a href="" className="btn btn-default">导出</a>
                 </form>
             </QuickFilter>
@@ -72,7 +72,7 @@ const Filter = () =>
                 end={new Date()}
                 inputClassName="form-control"
             />
-            <div className="gm-gap10"></div>
+            <div className="gm-gap-10"></div>
             <div className="input-group gm-margin-right-10">
                 <input
                     type="text"
@@ -82,7 +82,7 @@ const Filter = () =>
                 />
             </div>
             <button type="submit" className="btn btn-primary">搜索</button>
-            <div className="gm-gap10"></div>
+            <div className="gm-gap-10"></div>
             <a href="" className="btn btn-default">导出</a>
         </form>
     </QuickFilter>
@@ -268,15 +268,15 @@ class FormGroup extends React.Component {
             <FormGroup label="收货时间限制:">
                 <TimeSpanPicker inputClassName="form-control input-sm"
                                 date={new Date()}/>
-                <div className="gm-gap10"></div>
+                <div className="gm-gap-10"></div>
                 ~
-                <div className="gm-gap10"></div>
+                <div className="gm-gap-10"></div>
                 <TimeSpanPicker inputClassName="form-control input-sm"
                                 date={new Date()}/>
             </FormGroup>
             <div>
                 <button className="btn btn-default" onClick={this.handleBack}>取消</button>
-                <div className="gm-gap10"></div>
+                <div className="gm-gap-10"></div>
                 <button type="submit" className="btn btn-primary">保存</button>
             </div>
         </form>

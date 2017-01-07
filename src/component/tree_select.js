@@ -211,7 +211,7 @@ class TreeNode extends React.Component {
                         style={{marginLeft: Number(level) * 15 + 'px'}}
                         onClick={this.handleShow.bind(this, data)}
                     >
-                        {last ? <div className="gm-gap15"/> :
+                        {last ? <div className="gm-gap-15"/> :
                             <span
                                 className={(_.contains(showList, data.value)) ? "glyphicon glyphicon-minus text-primary" : "glyphicon glyphicon-plus text-primary"}/>}
                         &nbsp;

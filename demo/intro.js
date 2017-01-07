@@ -49,7 +49,7 @@ introJs.onbeforechange((targetElement) => {
             targetElement.click();
         } else if (step === 5) {
             // 异步场景，返回一个promise
-            document.querySelector('#intro4').click();
+            window.document.querySelector('#intro4').click();
             return new Promise(resolve => {
                 setTimeout(() => {
                     resolve();
@@ -64,7 +64,7 @@ introJs.onchange(() => {
     const step = introJs._currentStep;
     const stepItem = introJs._introItems[introJs._currentStep];
     if (steps[step].element) {
-        stepItem.element = document.querySelector(steps[step].element);
+        stepItem.element = window.document.querySelector(steps[step].element);
 
         // 非某刻页面元素
         if (stepItem.position === 'floating') {
