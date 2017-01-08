@@ -1076,7 +1076,7 @@ a {
   text-decoration: none;
 }
 a:hover, a:focus {
-  color: #16588a;
+  color: #2182CC;
   text-decoration: underline;
 }
 a:focus {
@@ -2914,7 +2914,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   border-color: transparent;
 }
 .btn-link:hover, .btn-link:focus {
-  color: #16588a;
+  color: #2182CC;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -4059,7 +4059,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 }
 .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus {
   z-index: 2;
-  color: #16588a;
+  color: #2182CC;
   background-color: #eeeeee;
   border-color: #ddd;
 }
