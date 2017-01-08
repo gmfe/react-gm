@@ -3,6 +3,7 @@ import Pagination from './component/pagination';
 import PaginationText from './component/pagination.text';
 import Droper from './component/droper';
 import Former from './component/former';
+import Form from './component/forms';
 import Validate from './component/validate';
 import ValidateMixin from './component/validate.mixin';
 import ImportLead from './component/import.lead';
@@ -51,10 +52,15 @@ const {
     DropDownItem
 } = DropDown;
 
+const {
+    FormItem
+} = Form;
+
 module.exports = {
     Util,
     Pagination,
     PaginationText,
+    Form, FormItem,
     Former,
     Calendar,
     DatePicker,
