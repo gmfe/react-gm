@@ -1,8 +1,6 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
-
-function noop() {
-}
+import _ from 'underscore';
 
 class Switcher extends React.Component {
     constructor(props) {
@@ -97,7 +95,7 @@ Switcher.defaultProps = {
     type: 'default',
     on: 'ON',
     off: 'OFF',
-    onChange: noop
+    onChange: _.noop
 };
 
 export default Switcher;

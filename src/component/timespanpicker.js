@@ -2,9 +2,7 @@ import React, {PropTypes} from 'react';
 import moment from 'moment';
 import TimeSpan from './timespan.js';
 import Trigger from './trigger';
-
-const noop = ()=> {
-};
+import _ from 'underscore';
 
 class TimeSpanPicker extends React.Component {
     constructor(props) {
@@ -46,7 +44,7 @@ class TimeSpanPicker extends React.Component {
                             ref="target"
                             disabled={disabled}
                             value={render(date)}
-                            onChange={noop}
+                            onChange={_.noop}
                         />
                     )}
                 </Trigger>
@@ -69,7 +67,7 @@ TimeSpanPicker.propTypes = {
 TimeSpanPicker.defaultProps = {
     render: value => moment(value).format('HH:mm'),
     disabled: false,
-    onChange: noop
+    onChange: _.noop
 };
 
 export default TimeSpanPicker;

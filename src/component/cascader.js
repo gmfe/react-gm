@@ -4,9 +4,6 @@ import classNames from 'classnames';
 import Flex from './flex';
 import Trigger from './trigger';
 
-const noop = () => {
-};
-
 class Cascader extends React.Component {
     constructor(props) {
         super(props);
@@ -85,7 +82,7 @@ class Cascader extends React.Component {
                 <input
                     {...inputProps}
                     type="text"
-                    onChange={noop}
+                    onChange={_.noop}
                     value={valueRender ? valueRender(value) : _.map(value, v => v.name).join(',')}
                     className={classNames("form-control", inputProps.className)}
                 />
@@ -122,7 +119,7 @@ Cascader.propTypes = {
 };
 
 Cascader.defaultProps = {
-    onChange: noop,
+    onChange: _.noop,
     inputProps: {}
 };
 

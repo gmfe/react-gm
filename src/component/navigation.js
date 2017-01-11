@@ -3,9 +3,6 @@ import _ from 'underscore';
 import classNames from 'classnames';
 import Flex from './flex';
 
-const noop = () => {
-};
-
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
@@ -92,7 +89,7 @@ class Navigation extends React.Component {
 Navigation.defaultProps = {
     data: [],
     select: null,
-    onSelect: noop
+    onSelect: _.noop
 };
 
 export default Navigation;

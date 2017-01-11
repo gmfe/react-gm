@@ -1,9 +1,7 @@
 import React, {PropTypes} from 'react';
 import LayoutRoot from './layout_root';
 import className from 'classnames';
-
-const noop = () => {
-};
+import _ from 'underscore';
 
 class Modal extends React.Component {
     constructor(props) {
@@ -95,7 +93,7 @@ Modal.propTypes = {
 };
 
 Modal.defaultProps = {
-    onHide: noop,
+    onHide: _.noop,
     size: 'md'
 };
 
