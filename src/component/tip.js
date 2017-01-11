@@ -1,8 +1,6 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-
-const noop = () => {
-};
+import _ from 'underscore';
 
 const tipContainerId = '_gm_tips_container' + (Math.random() + '').slice(2);
 let tipsContainer = window.document.getElementById(tipContainerId);
@@ -163,7 +161,7 @@ Tip.propTypes = {
 Tip.defaultProps = {
     title: '',
     type: 'info',
-    onClose: noop
+    onClose: _.noop
 };
 
 Object.assign(Tip, TipStatics);

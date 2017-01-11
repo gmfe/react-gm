@@ -5,9 +5,6 @@ import _ from 'underscore';
 
 // TODO 优化性能
 
-const noop = () => {
-};
-
 const nowMountStart = +moment().startOf('day');
 
 class Day extends React.Component {
@@ -205,7 +202,7 @@ Calendar.propTypes = {
 };
 
 Calendar.defaultProps = {
-    onSelect: noop
+    onSelect: _.noop
 };
 
 export default Calendar;

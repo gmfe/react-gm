@@ -45,6 +45,9 @@ import Modal from './doc/Modal.md';
 import Collapse from './doc/Collapse.md';
 import DropDown from './doc/DropDown.md';
 import TreeSelect from './doc/TreeSelect.md';
+import Form from './doc/Form.md';
+import Validator from './doc/Validator.md';
+import Radio from './doc/Radio.md';
 
 import NavConfigStandard from './standard/nav.config';
 import LayoutCommon from './standard/LayoutCommon.md';
@@ -75,6 +78,9 @@ const docMap = {
     Dialog,
     Trigger,
     Droper,
+    Form,
+    Validator,
+    Radio,
     Switcher,
     InputNumber,
     Modal,

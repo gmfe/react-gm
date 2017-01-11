@@ -1,9 +1,7 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import Modal from './modal';
-
-const noop = () => {
-};
+import _ from 'underscore';
 
 // 搞的复杂了，后续要补充文档
 
@@ -183,8 +181,8 @@ Dialog.defaultProps = {
     show: false,
     title: '提示',
     type: 'confirm',
-    onCancel: noop,
-    onOK: noop,
+    onCancel: _.noop,
+    onOK: _.noop,
     size: 'md',
     cancelBtn: '取消',
     OKBtn: '确定'

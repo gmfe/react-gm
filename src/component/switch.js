@@ -1,8 +1,6 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
-
-function noop() {
-}
+import _ from 'underscore';
 
 class Switch extends React.Component {
     constructor(props) {
@@ -93,7 +91,7 @@ Switch.defaultProps = {
     checkedChildren: 'ON',
     unCheckedChildren: 'OFF',
     defaultChecked: false,
-    onChange: noop
+    onChange: _.noop
 };
 
 export default Switch;

@@ -2,10 +2,7 @@ import Util from 'gm-util';
 import Pagination from './component/pagination';
 import PaginationText from './component/pagination.text';
 import Droper from './component/droper';
-import Former from './component/former';
-import Form from './component/forms';
-import Validate from './component/validate';
-import ValidateMixin from './component/validate.mixin';
+import Form from './form';
 import ImportLead from './component/import.lead';
 import Storage from './component/storage';
 import Calendar from './component/calendar';
@@ -37,6 +34,10 @@ import Collapse from './component/collapse';
 import DropDown from './component/drop.down';
 import TreeSelect from './component/tree_select';
 import {QuickInfo, QuickInfoCell, QuickPanel, QuickFilter, QuickTab, QuickDesc} from './component/quick';
+import Radio from './radio';
+import Checkbox from './checkbox';
+
+import Validator from './validator';
 
 import './index.less';
 
@@ -53,20 +54,26 @@ const {
 } = DropDown;
 
 const {
-    FormItem
+    FormItem,
+    formValidatorDecorator
 } = Form;
+
+const {
+    RadioGroup
+} = Radio;
+
+const {
+    CheckboxGroup
+} = Checkbox;
 
 module.exports = {
     Util,
     Pagination,
     PaginationText,
-    Form, FormItem,
-    Former,
+    Form, FormItem, formValidatorDecorator,
     Calendar,
     DatePicker,
     DateRangePicker,
-    ValidateMixin,
-    Validate,
     ImportLead,
     Droper,
     Storage,
@@ -104,5 +111,8 @@ module.exports = {
     QuickPanel,
     QuickFilter,
     QuickTab,
-    QuickDesc
+    QuickDesc,
+    Validator,
+    Radio, RadioGroup,
+    Checkbox, CheckboxGroup
 };

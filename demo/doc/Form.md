@@ -1,0 +1,224 @@
+---
+imports:
+    import {
+        Form, FormItem, 
+        Validator, 
+        Droper, 
+        Radio, RadioGroup,
+        Checkbox, CheckboxGroup
+    } from '../../src/index';
+---
+## Form
+
+目的：约束Form表单的UI，同时提供更便捷的表单写法。
+
+::: demo 默认形态
+```js
+class FormWrap extends React.Component {
+    render() {
+        return (
+            <Form onSubmit={this.handleSubmit}>
+                <FormItem label="姓名">
+                    <input type="text"/>
+                </FormItem>
+                <FormItem label="描述">
+                    <textarea type="text" name="desc"/>
+                </FormItem>
+                <div>
+                    <button className="btn btn-primary" type="submit">提交</button>
+                </div>
+            </Form>
+        );
+    }
+}
+```
+```jsx
+<FormWrap/>
+```
+:::
+
+::: demo 内联表单 inline
+```js
+class FormWrap2 extends React.Component {
+    render() {
+        return (
+            <Form onSubmit={this.handleSubmit} inline>
+                <FormItem label="姓名">
+                    <input type="text"/>
+                </FormItem>
+                <FormItem label="描述">
+                    <textarea type="text" name="desc"/>
+                </FormItem>
+                <div>
+                    <button className="btn btn-primary" type="submit">提交</button>
+                </div>
+            </Form>
+        );
+    }
+}
+```
+```jsx
+<FormWrap2/>
+```
+:::
+
+::: demo 水平排列表单。 需要提供labelWidth以便对齐label的宽度
+```js
+class FormWrap3 extends React.Component {
+    render() {
+        return (
+            <Form onSubmit={this.handleSubmit} labelWidth="100px" horizontal>
+                <FormItem label="姓名">
+                    <input type="text"/>
+                </FormItem>
+                <FormItem label="描述">
+                    <textarea type="text" name="desc"/>
+                </FormItem>
+                <FormItem>
+                    <button className="btn btn-primary" type="submit">提交</button>
+                </FormItem>
+            </Form>
+        );
+    }
+}
+```
+```jsx
+<FormWrap3/>
+```
+:::
+
+行内表单和内联表单在手机端均失效，显示出默认形态
+
+### Props
+- `inline (bool)` 默认`false`，内联表单
+- `horizontal (bool)` 默认`false` 水平排列表单
+- `labelWidth (string)` label的宽度
+- `onSubmit (func)` 已默认处理了 preventDefault
+
+## FormItem
+
+::: demo 会给子表单元素添加class`form-control` <br/>children也可以是其他元素
+```js
+class FormItemWrap extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            email: '',
+            url: '',
+            cityList: [],
+            city: null
+        };
+    }
+    
+    handleChangeOther(field, value) {
+        this.setState({
+            [field]: value
+        });
+    }
+    
+    render() {
+        return (
+            <Form onSubmit={this.handleSubmit}>
+                <FormItem label="姓名">
+                    <input type="text"/>
+                </FormItem>
+                <FormItem label="网址">
+                    <div>
+                        <Droper></Droper> 其他东西
+                    </div>
+                </FormItem>
+                <FormItem label="多选（行内排列）">
+                    <CheckboxGroup
+                        inline
+                        name="cityList"
+                        value={this.state.cityList}
+                        onChange={this.handleChangeOther.bind(this, 'cityList')}
+                    >
+                        <Checkbox value={1}>广州</Checkbox>
+                        <Checkbox value={2}>深圳</Checkbox>
+                    </CheckboxGroup>
+                </FormItem>
+                <FormItem label="单选">
+                    <RadioGroup
+                        name="city"
+                        value={this.state.city}
+                        onChange={this.handleChangeOther.bind(this, 'city')}
+                    >
+                        <Radio value={1}>广州</Radio>
+                        <Radio value={2}>深圳</Radio>
+                    </RadioGroup>
+                </FormItem>
+                <div>
+                    <button className="btn btn-primary" type="submit">提交</button>
+                </div>
+            </Form>
+        );
+    }
+}
+```
+```jsx
+<FormItemWrap/>
+```
+:::
+
+::: demo 校验。推荐用`Validator.TYPE`提供的校验类型校验，没有则注册
+```js
+class FormItemWrap2 extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            email: '',
+            url: ''
+        };
+    }
+    
+    render() {
+        return (
+            <Form onSubmit={this.handleSubmit}>
+                <FormItem 
+                    label="姓名" 
+                    error 
+                    help="错误啦"
+                >
+                    <input type="text"/>
+                </FormItem>
+                <FormItem 
+                    label="网址" 
+                    validate={Validator.create(Validator.TYPE.url, this.state.url)}
+                >
+                    <input 
+                        type="text" 
+                        value={this.state.url} 
+                        onChange={e => this.setState({url: e.target.value})}
+                    />
+                </FormItem>
+                <FormItem 
+                    label="邮件" 
+                    required 
+                    validate={Validator.create([Validator.TYPE.required, Validator.TYPE.email], this.state.email)}
+                >
+                    <input 
+                        type="text" 
+                        value={this.state.email} 
+                        onChange={e => this.setState({email: e.target.value})}
+                    />
+                </FormItem>
+                <div>
+                    <button className="btn btn-primary" type="submit">提交</button>
+                </div>
+            </Form>
+        );
+    }
+}
+```
+```jsx
+<FormItemWrap2/>
+```
+:::
+
+### Props
+- `required (bool)` label旁边的`*`
+- `label (string)` 
+- `validate (func)` 校验后返回错误帮助信息，且只有过提交过动作后才显示，onChange则会自动重新校验。存在validate，则`error` `help`无效
+- `error (bool)` 校验的状态，只有`true`时help才会显示
+- `help (string)` 错误帮助信息

@@ -3,9 +3,7 @@ import moment from 'moment';
 import Calendar from './calendar.js';
 import classNames from 'classnames';
 import Trigger from './trigger';
-
-const noop = () => {
-};
+import _ from 'underscore';
 
 class DateRangePicker extends React.Component {
     constructor(props) {
@@ -53,7 +51,7 @@ class DateRangePicker extends React.Component {
                         className={inputClassName}
                         disabled={disabled}
                         value={begin ? moment(begin).format('YYYY-MM-DD') : ''}
-                        onChange={noop}
+                        onChange={_.noop}
                     />
                 </Trigger>
                 <span> ~ </span>
@@ -75,7 +73,7 @@ class DateRangePicker extends React.Component {
                         className={inputClassName}
                         disabled={disabled}
                         value={end ? moment(end).format('YYYY-MM-DD') : ''}
-                        onChange={noop}
+                        onChange={_.noop}
                     />
                 </Trigger>
             </div>
@@ -104,7 +102,7 @@ DateRangePicker.propTypes = {
 };
 
 DateRangePicker.defaultProps = {
-    onChange: noop
+    onChange: _.noop
 };
 
 export default DateRangePicker;

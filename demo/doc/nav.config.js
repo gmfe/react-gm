@@ -60,6 +60,10 @@ class NavConfig extends React.Component {
                 </ul>
                 <h3>表单</h3>
                 <ul>
+                    <li><a href="#/doc/Form">Form</a></li>
+                    <li><a href="#/doc/Validator">Validator</a></li>
+                    <li><a href="#/doc/Radio">Radio & Checkbox</a></li>
+                    <li><a href="#/doc/Checkbox">Checkbox</a></li>
                     <li><a href="#/doc/Switch">Switch</a></li>
                     <li><a href="#/doc/Switcher">Switcher</a></li>
                     <li><a href="#/doc/InputNumber">InputNumber</a></li>
