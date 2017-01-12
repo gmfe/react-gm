@@ -39,7 +39,7 @@ import Tip from './doc/Tip.md';
 import Dialog from './doc/Dialog.md';
 import Trigger from './doc/Trigger.md';
 import Droper from './doc/Droper.md';
-import Switcher from './doc/Switcher.md';
+import Switch from './doc/Switch.md';
 import InputNumber from './doc/InputNumber.md';
 import Modal from './doc/Modal.md';
 import Collapse from './doc/Collapse.md';
@@ -81,7 +81,7 @@ const docMap = {
     Form,
     Validator,
     Radio,
-    Switcher,
+    Switch,
     InputNumber,
     Modal,
     Collapse,

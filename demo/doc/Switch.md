@@ -1,8 +1,8 @@
 ---
 imports:
-    import {Switcher, InputNumber} from '../../src/index';
+    import {Switch, InputNumber} from '../../src/index';
 ---
-## Switcher
+## Switch
 开关切换
 
 ::: demo
@@ -27,12 +27,12 @@ class Component extends React.Component {
             <div>
                 <div>
                     default
-                    <Switcher
+                    <Switch
                         checked={this.state.checked}
                         onChange={this.handleChange}
                     />
                     disabled(会透明点)
-                    <Switcher
+                    <Switch
                         checked={this.state.checked}
                         disabled
                         onChange={this.handleChange}
@@ -40,7 +40,7 @@ class Component extends React.Component {
                 </div>
                 <div>
                     其他文案
-                    <Switcher
+                    <Switch
                         checked={this.state.checked}
                         on="激活"
                         off="已失效"
@@ -49,35 +49,35 @@ class Component extends React.Component {
                 </div>
                 <div>
                     primary
-                    <Switcher
+                    <Switch
                         type="primary"
                         checked={this.state.checked}
                         onChange={this.handleChange}
                     />
                      
                     success
-                    <Switcher
+                    <Switch
                         type="success"
                         checked={this.state.checked}
                         onChange={this.handleChange}
                     />
                     
                     info
-                    <Switcher
+                    <Switch
                         type="info"
                         checked={this.state.checked}
                         onChange={this.handleChange}
                     />
                     
                     warning
-                    <Switcher
+                    <Switch
                         type="warning"
                         checked={this.state.checked}
                         onChange={this.handleChange}
                     />
                     
                     danger
-                    <Switcher
+                    <Switch
                         type="danger"
                         checked={this.state.checked}
                         onChange={this.handleChange}

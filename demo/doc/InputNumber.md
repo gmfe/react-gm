@@ -1,9 +1,8 @@
 ---
 imports:
-    import {Switcher, InputNumber} from '../../src/index';
+    import {InputNumber} from '../../src/index';
 ---
-## Switcher
-开关切换
+## InputNumber
 
 ::: demo 数字输入框
 ```js

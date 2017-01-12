@@ -1,127 +1,101 @@
 .gm-switch {
   position: relative;
   display: inline-block;
-  box-sizing: border-box;
-  width: 52px;
-  height: 22px;
-  line-height: 20px;
-  vertical-align: middle;
-  border-radius: 20px 20px;
-  border: 1px solid #ccc;
-  background-color: #ccc;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.35, 0, 0.25, 1);
-}
-
-.gm-switch-inner {
-  color: #fff;
+  background-color: #f9f9f9;
+  color: #aaa;
   font-size: 12px;
-  position: absolute;
-  left: 24px;
-}
+  margin: 0;
+  white-space: nowrap;
 
-.gm-switch:after {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  left: 2px;
-  top: 1px;
-  border-radius: 50% 50%;
-  background-color: #ffffff;
-  content: " ";
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-  transform: scale(1);
-  transition: left 0.3s cubic-bezier(0.35, 0, 0.25, 1);
-  animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
-  animation-duration: 0.3s;
-  animation-name: rcSwitchOff;
-}
-
-.gm-switch:hover:after {
-  transform: scale(1.1);
-  animation-name: rcSwitchOn;
-}
-
-.gm-switch-checked {
-  border: 1px solid @brand-success;
-  background-color: @brand-success;
-}
-
-.gm-switch-checked .gm-switch-inner {
-  left: 6px;
-}
-
-.gm-switch-checked:after {
-  left: 30px;
-}
-
-.gm-switch-disabled {
-  cursor: no-drop;
-  background: #ccc;
-  border-color: #ccc;
-}
-
-.gm-switch-disabled:after {
-  background: #9e9e9e;
-  animation-name: none;
-  cursor: no-drop;
-}
-
-.gm-switch-disabled:hover:after {
-  transform: scale(1);
-  animation-name: none;
-}
-
-.gm-switch-label {
-  display: inline-block;
-  line-height: 20px;
-  font-size: 14px;
-  padding-left: 10px;
-  vertical-align: middle;
-  white-space: normal;
-  pointer-events: none;
-  user-select: text;
-}
-
-@-webkit-keyframes rcSwitchOn {
-  0% {
-    transform: scale(1);
+  &.gm-switch-disabled {
+    cursor: @cursor-disabled;
+    .opacity(.6);
   }
-  50% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1.1);
-  }
-}
 
-@keyframes rcSwitchOn {
-  0% {
-    transform: scale(1);
+  &.gm-switch-primary {
+    .gm-switch-input:checked ~ .gm-switch-label {
+      color: white;
+      background-color: @brand-primary;
+      border: 1px solid @brand-primary;
+    }
   }
-  50% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1.1);
-  }
-}
 
-@-webkit-keyframes rcSwitchOff {
-  0% {
-    transform: scale(1.1);
+  &.gm-switch-success {
+    .gm-switch-input:checked ~ .gm-switch-label {
+      color: white;
+      background-color: @brand-success;
+      border: 1px solid @brand-success;
+    }
   }
-  100% {
-    transform: scale(1);
+
+  &.gm-switch-info {
+    .gm-switch-input:checked ~ .gm-switch-label {
+      color: white;
+      background-color: @brand-info;
+      border: 1px solid @brand-info;
+    }
+  }
+
+  &.gm-switch-warning {
+    .gm-switch-input:checked ~ .gm-switch-label {
+      color: white;
+      background-color: @brand-warning;
+      border: 1px solid @brand-warning;
+    }
+  }
+
+  &.gm-switch-danger {
+    .gm-switch-input:checked ~ .gm-switch-label {
+      color: white;
+      background-color: @brand-danger;
+      border: 1px solid @brand-danger;
+    }
+  }
+
+  .gm-switch-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+
+    ~ .gm-switch-label {
+      padding: 1px 4px 1px 24px;
+    }
+
+    &:checked ~ .gm-switch-label {
+      padding: 1px 24px 1px 4px;
+    }
+
+    &:checked ~ .gm-switch-handle {
+      box-shadow: -1px 0 5px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .gm-switch-label {
+    position: relative;
+    border: 1px solid @gm-border-color;
+    padding: 1px;
+
+    .gm-switch-label-on, .gm-switch-label-off {
+      position: absolute;
+      display: block;
+      visibility: hidden;
+      left: 0;
+      top: 0;
+    }
+  }
+
+  .gm-switch-handle {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    width: 17px;
+    background: white;
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
+    transition: left .15s ease-out;
+    background-image: linear-gradient(to bottom, #fff 40%, #f0f0f0);
   }
 }
 
-@keyframes rcSwitchOff {
-  0% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}

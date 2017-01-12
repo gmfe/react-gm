@@ -6,18 +6,21 @@ class Switch extends React.Component {
     constructor(props) {
         super(props);
 
-        let checked = false;
-        if ('checked' in props) {
-            checked = !!props.checked;
-        } else {
-            checked = !!props.defaultChecked;
-        }
         this.state = {
-            checked
+            left: 1,
+            checked: props.checked
         };
 
-        this.handleToggle = ::this.handleToggle;
-        this.handleMouseUp = ::this.handleMouseUp;
+        this.refOn = null;
+
+        this.handleChange = ::this.handleChange;
+    }
+
+    componentDidMount() {
+        // 初始化后开始计算on的宽度，方便做开关切换动画
+        this.setState({
+            left: this.refOn.offsetWidth + 4 + 24 - 17
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -26,10 +29,6 @@ class Switch extends React.Component {
                 checked: !!nextProps.checked
             });
         }
-    }
-
-    componentDidMount() {
-        console.error('Switch are deprecated! Replace with Switcher!');
     }
 
     setChecked(checked) {
@@ -41,56 +40,61 @@ class Switch extends React.Component {
         this.props.onChange(checked);
     }
 
-    handleToggle() {
+    handleChange(e) {
         if (this.props.disabled) {
             return;
         }
-        const checked = !this.state.checked;
-        this.setChecked(checked);
-    }
-
-    handleMouseUp() {
-        if (this.refs.node) {
-            this.refs.node.blur();
-        }
+        this.setChecked(e.target.checked);
     }
 
     render() {
         const {
-            className, checked, defaultChecked, onChange, // eslint-disable-line
-            disabled, checkedChildren, unCheckedChildren,
+            checked, onChange, // eslint-disable-line
+            type, disabled, on, off,
             ...rest
         } = this.props;
-        const cn = classNames('gm-switch', this.props.className, {
-            'gm-switch-checked': this.state.checked,
+
+        const cn = classNames('gm-switch gm-switch-' + type, this.props.className, {
             'gm-switch-disabled': disabled
         });
+
+        const handleStyle = {};
+        if (this.state.checked) {
+            handleStyle.left = this.state.left;
+        }
+
         return (
-            <span {...rest}
-                  className={cn}
-                  tabIndex="0"
-                  ref="node"
-                  onClick={this.handleToggle}
-                  onMouseUp={this.handleMouseUp}>
-                <span className="gm-switch-inner">{this.state.checked ? checkedChildren : unCheckedChildren}</span>
-            </span>
+            <label {...rest} className={cn}>
+                <input
+                    disabled={disabled}
+                    type="checkbox"
+                    className="gm-switch-input"
+                    checked={this.state.checked}
+                    onChange={this.handleChange}
+                />
+                <div className="gm-switch-label">
+                    <span>{this.state.checked ? on : off}</span>
+                    {/*只需算on的宽度*/}
+                    <span className="gm-switch-label-on" ref={ref => this.refOn = ref}>{on}</span>
+                </div>
+                <div className="gm-switch-handle" style={handleStyle}/>
+            </label>
         );
     }
 }
 
 Switch.propTypes = {
-    checked: PropTypes.bool,
-    defaultChecked: PropTypes.bool,
+    type: PropTypes.string, // default primary success info warning danger
+    checked: PropTypes.bool.isRequired,
     disabled: PropTypes.bool,
-    checkedChildren: PropTypes.any,
-    unCheckedChildren: PropTypes.any,
-    onChange: PropTypes.func,
-    className: PropTypes.string
+    on: PropTypes.any, // 请保证 on off 的宽度一样
+    off: PropTypes.any,
+    onChange: PropTypes.func
 };
 Switch.defaultProps = {
-    checkedChildren: 'ON',
-    unCheckedChildren: 'OFF',
-    defaultChecked: false,
+    type: 'default',
+    on: 'ON',
+    off: 'OFF',
     onChange: _.noop
 };
 
