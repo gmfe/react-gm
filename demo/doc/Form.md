@@ -176,8 +176,10 @@ class FormItemWrap2 extends React.Component {
         super(props);
         this.state = {
             email: '',
+            repeat_email: '',
             url: ''
         };
+        this.validateRepeatEmail = ::this.validateRepeatEmail;
     }
     
     handleSubmit(e){
@@ -186,6 +188,13 @@ class FormItemWrap2 extends React.Component {
     
     handleSubmitValidated(){
         console.log('handleSubmitValidated');
+    }
+    
+    validateRepeatEmail(value){
+        if(value === this.state.email){
+            return '';
+        }
+        return '两次邮件输入不一致';
     }
     
     render() {
@@ -211,6 +220,17 @@ class FormItemWrap2 extends React.Component {
                         type="text" 
                         value={this.state.email} 
                         onChange={e => this.setState({email: e.target.value})}
+                    />
+                </FormItem>
+                <FormItem 
+                    label="重复邮件" 
+                    required 
+                    validate={Validator.create([Validator.TYPE.required, Validator.TYPE.email], this.state.repeat_email, this.validateRepeatEmail)}
+                >
+                    <input 
+                        type="text" 
+                        value={this.state.repeat_email} 
+                        onChange={e => this.setState({repeat_email: e.target.value})}
                     />
                 </FormItem>
                 <div>

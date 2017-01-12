@@ -24,15 +24,19 @@ class ModalWrap extends React.Component {
     
     handleModalStatic(){
         Modal.render({
-            show: true,
-            children: 我是内容,
+            children: '我是内容',
             title: '我是标题',
-            onHide: () => {
-                Modal.render({
-                    show: false
-                });
-            }
+            onHide: Modal.hide
         });
+    }
+    
+    handleModalRemove(){
+        Modal.render({
+            children: '我是内容',
+            title: '我是标题',
+            onHide: Modal.hide
+        });
+        setTimeout(() => {Modal.hide()}, 2000);
     }
     
     render() {
@@ -46,7 +50,10 @@ class ModalWrap extends React.Component {
                     className="btn btn-primary" 
                     onClick={::this.handleModalStatic}
                 >静态方法形式 + title</button>
-                
+                <button 
+                    className="btn btn-default" 
+                    onClick={::this.handleModalRemove}
+                >静态方法形式 + 2s关闭</button>
                 <Modal
                     show={this.state.show}
                     onHide={::this.handleModal}
@@ -75,28 +82,18 @@ class ModalWrap2 extends React.Component {
     
     handleModal(size){
         Modal.render({
-            show: true,
             children: '我是内容',
             title: '我是标题',
             size,
-            onHide: () => {
-                Modal.render({
-                    show: false
-                });
-            }
+            onHide: Modal.hide
         });
     }
     
     handleBigModal(){
         Modal.render({
-            show: true,
             children: <div style={{height: '1000px', background: 'red'}}>我是内容</div>,
             title: '我是标题',
-            onHide: () => {
-                Modal.render({
-                    show: false
-                });
-            }
+            onHide: Modal.hide
         });
     }
     

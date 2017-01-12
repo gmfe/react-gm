@@ -78,9 +78,11 @@ class Modal extends React.Component {
 
 Modal.render = (props) => {
     LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
-        <Modal {...props}/>
+        <Modal show={true} {...props}/>
     ));
 };
+
+Modal.hide = () => LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, null);
 
 Modal.propTypes = {
     show: PropTypes.bool.isRequired,

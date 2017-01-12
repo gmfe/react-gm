@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import Flex from '../component/flex';
+import _ from 'underscore';
 
 class FormControl extends React.Component {
     render() {
@@ -55,13 +56,14 @@ class FormItem extends React.Component {
             <Flex column={!horizontal && !inline} {...rest} className={classNames('gm-form-group', className, {
                 'has-error': error
             })}>
-                <Flex justifyEnd={horizontal} width={labelWidth} className="gm-form-label">
+                <Flex justifyEnd={horizontal} width={labelWidth} className="gm-form-label control-label">
                     {required ? <span style={{color: 'red'}}>*</span> : ''}
                     {label}
                 </Flex>
                 <Flex flex column>
                     <div>
-                        <FormControl>{children}</FormControl>
+                        {/*理论上不支持children是数组，但也合理，兼容吧*/}
+                        {_.isArray(children) ? children : <FormControl>{children}</FormControl>}
                         {error && help ? (
                             <div className={classNames({'help-block': error})}>{help}</div>
                         ) : null}
