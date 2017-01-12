@@ -13,6 +13,34 @@ class Form extends React.Component {
         };
     }
 
+    validateAll() {
+        const {children} = this.props;
+        const helpList = [];
+
+        let childList = _.isArray(children) ? children : [children];
+
+        _.each(childList, child => {
+            if (child.type.displayName === 'FormItem') {
+                if (child.props.error) {
+                    helpList.push({
+                        label: child.props.label,
+                        help: child.props.error
+                    });
+                } else if (child.props.validate) {
+                    const help = child.props.validate();
+                    if (help) {
+                        helpList.push({
+                            label: child.props.label,
+                            help
+                        });
+                    }
+                }
+            }
+        });
+
+        return helpList.length === 0 ? 0 : helpList;
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         this.setState({
@@ -20,6 +48,11 @@ class Form extends React.Component {
         });
 
         this.props.onSubmit(e);
+
+        const err = this.validateAll();
+        if (!err) {
+            this.props.onSubmitValidated(err);
+        }
     }
 
     render() {
@@ -29,6 +62,7 @@ class Form extends React.Component {
             labelWidth,
             className,
             children,
+            onSubmitValidated, //eslint-disable-line
             ...rest
         } = this.props;
 
@@ -63,13 +97,15 @@ Form.propTypes = {
     inline: PropTypes.bool,
     horizontal: PropTypes.bool,
     labelWidth: PropTypes.string, // horizontal true 才有效
-    onSubmit: PropTypes.func // 默认处理了 preventDefault
+    onSubmit: PropTypes.func, // 默认处理了 preventDefault,
+    onSubmitValidated: PropTypes.func
 };
 
 Form.defaultProps = {
     inline: false,
     horizontal: false,
-    onSubmit: _.noop
+    onSubmit: _.noop,
+    onSubmitValidated: _.noop
 };
 
 export default Form;

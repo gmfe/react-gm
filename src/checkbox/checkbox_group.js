@@ -25,7 +25,6 @@ class CheckboxGroup extends React.Component {
 
         const childList = _.isArray(children) ? children : [children];
 
-
         return (
             <div {...rest} className={classNames('checkbox', className)}>
                 {_.map(childList, (child, i) => {

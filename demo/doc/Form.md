@@ -122,6 +122,13 @@ class FormItemWrap extends React.Component {
                 <FormItem label="姓名">
                     <input type="text"/>
                 </FormItem>
+                <FormItem 
+                    label="姓名" 
+                    error 
+                    help="错误啦"
+                >
+                    <input type="text"/>
+                </FormItem>
                 <FormItem label="网址">
                     <div>
                         <Droper></Droper> 其他东西
@@ -172,16 +179,18 @@ class FormItemWrap2 extends React.Component {
         };
     }
     
+    handleSubmit(e){
+        console.log('submit');
+    }
+    
+    handleSubmitValidated(){
+        console.log('handleSubmitValidated');
+    }
+    
     render() {
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <FormItem 
-                    label="姓名" 
-                    error 
-                    help="错误啦"
-                >
-                    <input type="text"/>
-                </FormItem>
+            <Form onSubmit={this.handleSubmit} onSubmitValidated={this.handleSubmitValidated}>
+                
                 <FormItem 
                     label="网址" 
                     validate={Validator.create(Validator.TYPE.url, this.state.url)}
