@@ -8130,6 +8130,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    _createClass(Form, [{
+	        key: 'validateAll',
+	        value: function validateAll() {
+	            var children = this.props.children;
+
+	            var helpList = [];
+
+	            var childList = _underscore2.default.isArray(children) ? children : [children];
+
+	            _underscore2.default.each(childList, function (child) {
+	                if (child.type.displayName === 'FormItem') {
+	                    if (child.props.error) {
+	                        helpList.push({
+	                            label: child.props.label,
+	                            help: child.props.error
+	                        });
+	                    } else if (child.props.validate) {
+	                        var help = child.props.validate();
+	                        if (help) {
+	                            helpList.push({
+	                                label: child.props.label,
+	                                help: help
+	                            });
+	                        }
+	                    }
+	                }
+	            });
+
+	            return helpList.length === 0 ? 0 : helpList;
+	        }
+	    }, {
 	        key: 'handleSubmit',
 	        value: function handleSubmit(e) {
 	            e.preventDefault();
@@ -8138,6 +8168,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 
 	            this.props.onSubmit(e);
+
+	            var err = this.validateAll();
+	            if (!err) {
+	                this.props.onSubmitValidated(err);
+	            }
 	        }
 	    }, {
 	        key: 'render',
@@ -8150,7 +8185,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                labelWidth = _props.labelWidth,
 	                className = _props.className,
 	                children = _props.children,
-	                rest = _objectWithoutProperties(_props, ['inline', 'horizontal', 'labelWidth', 'className', 'children']);
+	                onSubmitValidated = _props.onSubmitValidated,
+	                rest = _objectWithoutProperties(_props, ['inline', 'horizontal', 'labelWidth', 'className', 'children', 'onSubmitValidated']);
 
 	            var childList = _underscore2.default.isArray(children) ? children : [children];
 
@@ -8185,13 +8221,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    inline: _react.PropTypes.bool,
 	    horizontal: _react.PropTypes.bool,
 	    labelWidth: _react.PropTypes.string, // horizontal true 才有效
-	    onSubmit: _react.PropTypes.func // 默认处理了 preventDefault
+	    onSubmit: _react.PropTypes.func, // 默认处理了 preventDefault,
+	    onSubmitValidated: _react.PropTypes.func
 	};
 
 	Form.defaultProps = {
 	    inline: false,
 	    horizontal: false,
-	    onSubmit: _underscore2.default.noop
+	    onSubmit: _underscore2.default.noop,
+	    onSubmitValidated: _underscore2.default.noop
 	};
 
 	exports.default = Form;
