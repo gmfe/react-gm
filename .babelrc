@@ -1,7 +1,4 @@
 {
-  "plugins": [
-    "transform-decorators-legacy"
-  ],
   "presets": [
     "react",
     "es2015",
