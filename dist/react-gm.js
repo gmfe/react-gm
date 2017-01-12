@@ -1873,6 +1873,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -2006,7 +2008,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	Modal.render = function (props) {
-	    _layout_root2.default.setComponent(_layout_root2.default.TYPE.MODAL, _react2.default.createElement(Modal, props));
+	    _layout_root2.default.setComponent(_layout_root2.default.TYPE.MODAL, _react2.default.createElement(Modal, _extends({ show: true }, props)));
+	};
+
+	Modal.hide = function () {
+	    return _layout_root2.default.setComponent(_layout_root2.default.TYPE.MODAL, null);
 	};
 
 	Modal.propTypes = {
@@ -3042,7 +3048,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TYPE = {
 	    required: 'required',
 	    email: 'email',
-	    url: 'url'
+	    url: 'url',
+	    number: 'number',
+	    number_or_letter: 'number_or_letter'
 	};
 
 	exports.default = TYPE;
@@ -3120,7 +3128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return help;
 	    },
-	    create: function create(types, value) {
+	    create: function create(types, value, otherValidate) {
 	        types = _underscore2.default.isArray(types) ? types : [types];
 	        return function () {
 	            var help = '';
@@ -3131,6 +3139,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    return true;
 	                }
 	            });
+
+	            if (!help && otherValidate) {
+	                help = otherValidate(value);
+	            }
 
 	            return help;
 	        };
@@ -8100,6 +8112,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _flex2 = _interopRequireDefault(_flex);
 
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -8187,7 +8203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    }) }),
 	                _react2.default.createElement(
 	                    _flex2.default,
-	                    { justifyEnd: horizontal, width: labelWidth, className: 'gm-form-label' },
+	                    { justifyEnd: horizontal, width: labelWidth, className: 'gm-form-label control-label' },
 	                    required ? _react2.default.createElement(
 	                        'span',
 	                        { style: { color: 'red' } },
@@ -8201,7 +8217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2.default.createElement(
 	                        'div',
 	                        null,
-	                        _react2.default.createElement(
+	                        _underscore2.default.isArray(children) ? children : _react2.default.createElement(
 	                            FormControl,
 	                            null,
 	                            children
@@ -8534,7 +8550,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var pattern = {
 	    email: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
-	    url: new RegExp('^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$', 'i')
+	    url: new RegExp('^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$', 'i'),
+	    number: /[+-]?((\d+.\d+)|(\d+))/,
+	    number_or_letter: /[a-zA-Z0-9]/
 	};
 
 	_validator2.default.register(_type2.default.required, [{
@@ -8553,6 +8571,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    help: '请填写网址',
 	    validate: function validate(value) {
 	        return pattern.url.test(value);
+	    }
+	}]);
+
+	_validator2.default.register(_type2.default.number, [{
+	    help: '请填写数字',
+	    validate: function validate(value) {
+	        return pattern.number.test(value);
+	    }
+	}]);
+
+	_validator2.default.register(_type2.default.number_or_letter, [{
+	    help: '请填写字母或数字',
+	    validate: function validate(value) {
+	        return pattern.number_or_letter.test(value);
 	    }
 	}]);
 
