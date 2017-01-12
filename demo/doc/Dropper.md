@@ -1,19 +1,19 @@
 ---
 imports:
-    import {Droper} from '../../src/index';
+    import {Dropper} from '../../src/index';
 ---
-## Droper
+## Dropper
 
 上传文件
 
 ::: demo
 ```jsx
 <div>
-    <Droper onDrop={() => console.log(arguments)} accept="image/*"/>
+    <Dropper onDrop={() => console.log(arguments)} accept="image/*"/>
 
-    <Droper className="gm-droper-wrap" onDrop={() => console.log(arguments)} accept=".xlsx">
+    <Dropper className="gm-dropper-wrap" onDrop={() => console.log(arguments)} accept=".xlsx">
         <button className="btn btn-default">upload</button>
-    </Droper>
+    </Dropper>
 </div>
 ```
 :::

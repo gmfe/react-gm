@@ -38,7 +38,7 @@ import TimeSpan from './doc/TimeSpan.md';
 import Tip from './doc/Tip.md';
 import Dialog from './doc/Dialog.md';
 import Trigger from './doc/Trigger.md';
-import Droper from './doc/Droper.md';
+import Dropper from './doc/Dropper.md';
 import Switch from './doc/Switch.md';
 import InputNumber from './doc/InputNumber.md';
 import Modal from './doc/Modal.md';
@@ -77,7 +77,7 @@ const docMap = {
     Tip,
     Dialog,
     Trigger,
-    Droper,
+    Dropper,
     Form,
     Validator,
     Radio,

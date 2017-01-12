@@ -1,7 +1,7 @@
 import Util from 'gm-util';
 import Pagination from './component/pagination';
 import PaginationText from './component/pagination.text';
-import Droper from './component/droper';
+import Dropper from './component/dropper';
 import Form from './form';
 import ImportLead from './component/import.lead';
 import Storage from './component/storage';
@@ -73,7 +73,7 @@ module.exports = {
     DatePicker,
     DateRangePicker,
     ImportLead,
-    Droper,
+    Dropper,
     Storage,
     Tip,
     NProgress,

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import Util from 'gm-util';
 
-class Droper extends React.Component {
+class Dropper extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -135,10 +135,10 @@ class Droper extends React.Component {
 
     render() {
         const {className, children, accept, multiple} = this.props;
-        const cn = className ? className : 'gm-droper-default';
+        const cn = className ? className : 'gm-dropper-default';
 
         return (
-            <div className="gm-droper">
+            <div className="gm-dropper">
                 <div className={cn}
                      onClick={this.onClick}
                      onDragEnter={this.onDragEnter}
@@ -148,13 +148,13 @@ class Droper extends React.Component {
                 {this.state.isWX ? <input
                     type="file"
                     ref="fileInput"
-                    className="gm-droper-input"
+                    className="gm-dropper-input"
                     accept={accept}
                     onChange={this.onDrop}
                 /> : <input
                     type="file"
                     ref="fileInput"
-                    className="gm-droper-input"
+                    className="gm-dropper-input"
                     multiple={multiple}
                     accept={accept}
                     onChange={this.onDrop}
@@ -164,11 +164,11 @@ class Droper extends React.Component {
     }
 }
 
-Droper.defaultProps = {
+Dropper.defaultProps = {
     multiple: false
 };
 
-Droper.propTypes = {
+Dropper.propTypes = {
     onDrop: PropTypes.func,
     onDropAccepted: PropTypes.func,
     onDropRejected: PropTypes.func,
@@ -181,4 +181,4 @@ Droper.propTypes = {
     className: PropTypes.string
 };
 
-export default Droper;
+export default Dropper;

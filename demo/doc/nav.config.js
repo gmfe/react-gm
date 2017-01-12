@@ -56,7 +56,7 @@ class NavConfig extends React.Component {
                 </ul>
                 <h3>上传</h3>
                 <ul>
-                    <li><a href="#/doc/Droper">Droper</a></li>
+                    <li><a href="#/doc/Dropper">Dropper</a></li>
                 </ul>
                 <h3>表单</h3>
                 <ul>

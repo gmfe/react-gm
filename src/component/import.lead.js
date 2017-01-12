@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'underscore';
-import Droper from './droper.js';
+import Dropper from './dropper.js';
 
 class ImportLead extends React.Component {
     constructor(props) {
@@ -70,9 +70,9 @@ class ImportLead extends React.Component {
             <div className="gm-import-lead">
                 <div>
                     <div>
-                        <Droper className="gm-droper-wrap" onDrop={this.handleDrop} accept=".xlsx">
+                        <Dropper className="gm-dropper-wrap" onDrop={this.handleDrop} accept=".xlsx">
                             <button className="btn btn-primary btn-sm">上传xlsx</button>
-                        </Droper>
+                        </Dropper>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         {!this.props.disableSubmit && (
                             <button disabled={!canSubmit} className="btn btn-primary btn-sm"

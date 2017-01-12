@@ -3,7 +3,7 @@ imports:
     import {
         Form, FormItem, 
         Validator, 
-        Droper, 
+        Dropper, 
         Radio, RadioGroup,
         Checkbox, CheckboxGroup
     } from '../../src/index';
@@ -132,7 +132,7 @@ class FormItemWrap extends React.Component {
                 </FormItem>
                 <FormItem label="网址">
                     <div>
-                        <Droper></Droper> 其他东西
+                        <Dropper/> 其他东西
                     </div>
                 </FormItem>
                 <FormItem label="多选（行内排列）">

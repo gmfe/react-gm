@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _droper2 = _interopRequireDefault(_droper);
 
-	var _form = __webpack_require__(59);
+	var _form = __webpack_require__(58);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -96,7 +96,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
 
-	var _tip = __webpack_require__(55);
+	var _tip = __webpack_require__(54);
 
 	var _tip2 = _interopRequireDefault(_tip);
 
@@ -124,7 +124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _timespan2 = _interopRequireDefault(_timespan);
 
-	var _timespanpicker = __webpack_require__(54);
+	var _timespanpicker = __webpack_require__(53);
 
 	var _timespanpicker2 = _interopRequireDefault(_timespanpicker);
 
@@ -147,10 +147,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _switch = __webpack_require__(52);
 
 	var _switch2 = _interopRequireDefault(_switch);
-
-	var _switcher = __webpack_require__(53);
-
-	var _switcher2 = _interopRequireDefault(_switcher);
 
 	var _sheet = __webpack_require__(50);
 
@@ -192,13 +188,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _drop4 = _interopRequireDefault(_drop3);
 
-	var _tree_select = __webpack_require__(56);
+	var _tree_select = __webpack_require__(55);
 
 	var _tree_select2 = _interopRequireDefault(_tree_select);
 
 	var _quick = __webpack_require__(49);
 
-	var _radio = __webpack_require__(60);
+	var _radio = __webpack_require__(59);
 
 	var _radio2 = _interopRequireDefault(_radio);
 
@@ -206,11 +202,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _checkbox2 = _interopRequireDefault(_checkbox);
 
-	var _validator = __webpack_require__(63);
+	var _validator = __webpack_require__(62);
 
 	var _validator2 = _interopRequireDefault(_validator);
 
-	__webpack_require__(66);
+	__webpack_require__(65);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -220,8 +216,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    SheetBatchAction = _sheet2.default.SheetBatchAction;
 	var DropDownItems = _drop4.default.DropDownItems,
 	    DropDownItem = _drop4.default.DropDownItem;
-	var FormItem = _form2.default.FormItem,
-	    formValidatorDecorator = _form2.default.formValidatorDecorator;
+	var FormItem = _form2.default.FormItem;
 	var RadioGroup = _radio2.default.RadioGroup;
 	var CheckboxGroup = _checkbox2.default.CheckboxGroup;
 
@@ -230,7 +225,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Util: _gmUtil2.default,
 	    Pagination: _pagination2.default,
 	    PaginationText: _pagination4.default,
-	    Form: _form2.default, FormItem: FormItem, formValidatorDecorator: formValidatorDecorator,
+	    Form: _form2.default, FormItem: FormItem,
 	    Calendar: _calendar2.default,
 	    DatePicker: _datepicker2.default,
 	    DateRangePicker: _daterangepicker2.default,
@@ -252,7 +247,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Cascader: _cascader2.default,
 	    CascaderSelect: _cascader4.default,
 	    Switch: _switch2.default,
-	    Switcher: _switcher2.default,
 	    Sheet: _sheet2.default,
 	    SheetColumn: SheetColumn,
 	    SheetAction: SheetAction,
@@ -7067,160 +7061,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var _this = _possibleConstructorReturn(this, (Switch.__proto__ || Object.getPrototypeOf(Switch)).call(this, props));
 
-	        var checked = false;
-	        if ('checked' in props) {
-	            checked = !!props.checked;
-	        } else {
-	            checked = !!props.defaultChecked;
-	        }
-	        _this.state = {
-	            checked: checked
-	        };
-
-	        _this.handleToggle = _this.handleToggle.bind(_this);
-	        _this.handleMouseUp = _this.handleMouseUp.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(Switch, [{
-	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            if ('checked' in nextProps) {
-	                this.setState({
-	                    checked: !!nextProps.checked
-	                });
-	            }
-	        }
-	    }, {
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            console.error('Switch are deprecated! Replace with Switcher!');
-	        }
-	    }, {
-	        key: 'setChecked',
-	        value: function setChecked(checked) {
-	            if (!('checked' in this.props)) {
-	                this.setState({
-	                    checked: checked
-	                });
-	            }
-	            this.props.onChange(checked);
-	        }
-	    }, {
-	        key: 'handleToggle',
-	        value: function handleToggle() {
-	            if (this.props.disabled) {
-	                return;
-	            }
-	            var checked = !this.state.checked;
-	            this.setChecked(checked);
-	        }
-	    }, {
-	        key: 'handleMouseUp',
-	        value: function handleMouseUp() {
-	            if (this.refs.node) {
-	                this.refs.node.blur();
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props,
-	                className = _props.className,
-	                checked = _props.checked,
-	                defaultChecked = _props.defaultChecked,
-	                onChange = _props.onChange,
-	                disabled = _props.disabled,
-	                checkedChildren = _props.checkedChildren,
-	                unCheckedChildren = _props.unCheckedChildren,
-	                rest = _objectWithoutProperties(_props, ['className', 'checked', 'defaultChecked', 'onChange', 'disabled', 'checkedChildren', 'unCheckedChildren']);
-
-	            var cn = (0, _classnames2.default)('gm-switch', this.props.className, {
-	                'gm-switch-checked': this.state.checked,
-	                'gm-switch-disabled': disabled
-	            });
-	            return _react2.default.createElement(
-	                'span',
-	                _extends({}, rest, {
-	                    className: cn,
-	                    tabIndex: '0',
-	                    ref: 'node',
-	                    onClick: this.handleToggle,
-	                    onMouseUp: this.handleMouseUp }),
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'gm-switch-inner' },
-	                    this.state.checked ? checkedChildren : unCheckedChildren
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Switch;
-	}(_react2.default.Component);
-
-	Switch.propTypes = {
-	    checked: _react.PropTypes.bool,
-	    defaultChecked: _react.PropTypes.bool,
-	    disabled: _react.PropTypes.bool,
-	    checkedChildren: _react.PropTypes.any,
-	    unCheckedChildren: _react.PropTypes.any,
-	    onChange: _react.PropTypes.func,
-	    className: _react.PropTypes.string
-	};
-	Switch.defaultProps = {
-	    checkedChildren: 'ON',
-	    unCheckedChildren: 'OFF',
-	    defaultChecked: false,
-	    onChange: _underscore2.default.noop
-	};
-
-	exports.default = Switch;
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _classnames = __webpack_require__(3);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	var _underscore = __webpack_require__(2);
-
-	var _underscore2 = _interopRequireDefault(_underscore);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Switcher = function (_React$Component) {
-	    _inherits(Switcher, _React$Component);
-
-	    function Switcher(props) {
-	        _classCallCheck(this, Switcher);
-
-	        var _this = _possibleConstructorReturn(this, (Switcher.__proto__ || Object.getPrototypeOf(Switcher)).call(this, props));
-
 	        _this.state = {
 	            left: 1,
 	            checked: props.checked
@@ -7232,7 +7072,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _this;
 	    }
 
-	    _createClass(Switcher, [{
+	    _createClass(Switch, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            // 初始化后开始计算on的宽度，方便做开关切换动画
@@ -7281,8 +7121,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                off = _props.off,
 	                rest = _objectWithoutProperties(_props, ['checked', 'onChange', 'type', 'disabled', 'on', 'off']);
 
-	            var cn = (0, _classnames2.default)('gm-switcher gm-switcher-' + type, this.props.className, {
-	                'gm-switcher-disabled': disabled
+	            var cn = (0, _classnames2.default)('gm-switch gm-switch-' + type, this.props.className, {
+	                'gm-switch-disabled': disabled
 	            });
 
 	            var handleStyle = {};
@@ -7296,13 +7136,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2.default.createElement('input', {
 	                    disabled: disabled,
 	                    type: 'checkbox',
-	                    className: 'gm-switcher-input',
+	                    className: 'gm-switch-input',
 	                    checked: this.state.checked,
 	                    onChange: this.handleChange
 	                }),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'gm-switcher-label' },
+	                    { className: 'gm-switch-label' },
 	                    _react2.default.createElement(
 	                        'span',
 	                        null,
@@ -7310,21 +7150,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    ),
 	                    _react2.default.createElement(
 	                        'span',
-	                        { className: 'gm-switcher-label-on', ref: function ref(_ref) {
+	                        { className: 'gm-switch-label-on', ref: function ref(_ref) {
 	                                return _this2.refOn = _ref;
 	                            } },
 	                        on
 	                    )
 	                ),
-	                _react2.default.createElement('div', { className: 'gm-switcher-handle', style: handleStyle })
+	                _react2.default.createElement('div', { className: 'gm-switch-handle', style: handleStyle })
 	            );
 	        }
 	    }]);
 
-	    return Switcher;
+	    return Switch;
 	}(_react2.default.Component);
 
-	Switcher.propTypes = {
+	Switch.propTypes = {
 	    type: _react.PropTypes.string, // default primary success info warning danger
 	    checked: _react.PropTypes.bool.isRequired,
 	    disabled: _react.PropTypes.bool,
@@ -7332,17 +7172,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    off: _react.PropTypes.any,
 	    onChange: _react.PropTypes.func
 	};
-	Switcher.defaultProps = {
+	Switch.defaultProps = {
 	    type: 'default',
 	    on: 'ON',
 	    off: 'OFF',
 	    onChange: _underscore2.default.noop
 	};
 
-	exports.default = Switcher;
+	exports.default = Switch;
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7472,7 +7312,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TimeSpanPicker;
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7729,7 +7569,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Tip;
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8077,7 +7917,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = TreeSelect;
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8102,7 +7942,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	__webpack_require__(65);
+	__webpack_require__(64);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8235,7 +8075,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Form;
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8399,7 +8239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = FormItem;
 
 /***/ },
-/* 59 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8408,11 +8248,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _form = __webpack_require__(57);
+	var _form = __webpack_require__(56);
 
 	var _form2 = _interopRequireDefault(_form);
 
-	var _form_item = __webpack_require__(58);
+	var _form_item = __webpack_require__(57);
 
 	var _form_item2 = _interopRequireDefault(_form_item);
 
@@ -8425,7 +8265,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = _form2.default;
 
 /***/ },
-/* 60 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8434,11 +8274,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
-	var _radio = __webpack_require__(61);
+	var _radio = __webpack_require__(60);
 
 	var _radio2 = _interopRequireDefault(_radio);
 
-	var _radio_group = __webpack_require__(62);
+	var _radio_group = __webpack_require__(61);
 
 	var _radio_group2 = _interopRequireDefault(_radio_group);
 
@@ -8451,7 +8291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = _radio2.default;
 
 /***/ },
-/* 61 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8554,7 +8394,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Radio;
 
 /***/ },
-/* 62 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8648,7 +8488,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = RadioGroup;
 
 /***/ },
-/* 63 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8661,7 +8501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _validator2 = _interopRequireDefault(_validator);
 
-	__webpack_require__(64);
+	__webpack_require__(63);
 
 	var _type = __webpack_require__(22);
 
@@ -8677,7 +8517,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = _validator2.default;
 
 /***/ },
-/* 64 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8717,13 +8557,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 
 /***/ },
-/* 65 */
+/* 64 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 66 */
+/* 65 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
