@@ -94,6 +94,7 @@ class FormWrap3 extends React.Component {
 - `horizontal (bool)` 默认`false` 水平排列表单
 - `labelWidth (string)` label的宽度
 - `onSubmit (func)` 已默认处理了 preventDefault
+- `onSubmitValidated (func)` 只有所有验证通过才会回调，依据是`FormItem`的`error`属性是`false`或者`validate`运行的结果是成功。
 
 ## FormItem
 
