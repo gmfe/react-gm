@@ -68,9 +68,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _pagination4 = _interopRequireDefault(_pagination3);
 
-	var _droper = __webpack_require__(15);
+	var _dropper = __webpack_require__(15);
 
-	var _droper2 = _interopRequireDefault(_droper);
+	var _dropper2 = _interopRequireDefault(_dropper);
 
 	var _form = __webpack_require__(58);
 
@@ -230,7 +230,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    DatePicker: _datepicker2.default,
 	    DateRangePicker: _daterangepicker2.default,
 	    ImportLead: _import2.default,
-	    Droper: _droper2.default,
+	    Dropper: _dropper2.default,
 	    Storage: _storage2.default,
 	    Tip: _tip2.default,
 	    NProgress: _nprogress2.default,
@@ -1531,13 +1531,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Droper = function (_React$Component) {
-	    _inherits(Droper, _React$Component);
+	var Dropper = function (_React$Component) {
+	    _inherits(Dropper, _React$Component);
 
-	    function Droper(props) {
-	        _classCallCheck(this, Droper);
+	    function Dropper(props) {
+	        _classCallCheck(this, Dropper);
 
-	        var _this = _possibleConstructorReturn(this, (Droper.__proto__ || Object.getPrototypeOf(Droper)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (Dropper.__proto__ || Object.getPrototypeOf(Dropper)).call(this, props));
 
 	        _this.state = {
 	            isDragActive: false,
@@ -1551,7 +1551,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _this;
 	    }
 
-	    _createClass(Droper, [{
+	    _createClass(Dropper, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.enterCounter = 0;
@@ -1701,11 +1701,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                accept = _props2.accept,
 	                multiple = _props2.multiple;
 
-	            var cn = className ? className : 'gm-droper-default';
+	            var cn = className ? className : 'gm-dropper-default';
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'gm-droper' },
+	                { className: 'gm-dropper' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: cn,
@@ -1719,13 +1719,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.state.isWX ? _react2.default.createElement('input', {
 	                    type: 'file',
 	                    ref: 'fileInput',
-	                    className: 'gm-droper-input',
+	                    className: 'gm-dropper-input',
 	                    accept: accept,
 	                    onChange: this.onDrop
 	                }) : _react2.default.createElement('input', {
 	                    type: 'file',
 	                    ref: 'fileInput',
-	                    className: 'gm-droper-input',
+	                    className: 'gm-dropper-input',
 	                    multiple: multiple,
 	                    accept: accept,
 	                    onChange: this.onDrop
@@ -1734,14 +1734,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }]);
 
-	    return Droper;
+	    return Dropper;
 	}(_react2.default.Component);
 
-	Droper.defaultProps = {
+	Dropper.defaultProps = {
 	    multiple: false
 	};
 
-	Droper.propTypes = {
+	Dropper.propTypes = {
 	    onDrop: _react.PropTypes.func,
 	    onDropAccepted: _react.PropTypes.func,
 	    onDropRejected: _react.PropTypes.func,
@@ -1754,7 +1754,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    className: _react.PropTypes.string
 	};
 
-	exports.default = Droper;
+	exports.default = Dropper;
 
 /***/ },
 /* 16 */
@@ -5454,9 +5454,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _droper = __webpack_require__(15);
+	var _dropper = __webpack_require__(15);
 
-	var _droper2 = _interopRequireDefault(_droper);
+	var _dropper2 = _interopRequireDefault(_dropper);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5562,8 +5562,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        'div',
 	                        null,
 	                        _react2.default.createElement(
-	                            _droper2.default,
-	                            { className: 'gm-droper-wrap', onDrop: this.handleDrop, accept: '.xlsx' },
+	                            _dropper2.default,
+	                            { className: 'gm-dropper-wrap', onDrop: this.handleDrop, accept: '.xlsx' },
 	                            _react2.default.createElement(
 	                                'button',
 	                                { className: 'btn btn-primary btn-sm' },

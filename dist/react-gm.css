@@ -5775,18 +5775,18 @@ button.close {
     display: none !important;
   }
 }
-.gm-droper {
+.gm-dropper {
   display: inline-block;
 }
-.gm-droper .gm-droper-default {
+.gm-dropper .gm-dropper-default {
   width: 100px;
   height: 100px;
   border: 2px dashed #ccc;
 }
-.gm-droper .gm-droper-wrap {
+.gm-dropper .gm-dropper-wrap {
   display: inline-block;
 }
-.gm-droper .gm-droper-input[type="file"] {
+.gm-dropper .gm-dropper-input[type="file"] {
   display: none;
 }
 .gm-import-lead {
