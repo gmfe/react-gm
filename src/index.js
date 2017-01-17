@@ -53,7 +53,8 @@ const {
 } = DropDown;
 
 const {
-    FormItem
+    FormItem,
+    FormButton
 } = Form;
 
 const {
@@ -68,7 +69,7 @@ module.exports = {
     Util,
     Pagination,
     PaginationText,
-    Form, FormItem,
+    Form, FormItem, FormButton,
     Calendar,
     DatePicker,
     DateRangePicker,

@@ -1,7 +1,7 @@
 ---
 imports:
     import {
-        Form, FormItem, 
+        Form, FormItem, FormButton,
         Validator, 
         Dropper, 
         Radio, RadioGroup,
@@ -24,9 +24,9 @@ class FormWrap extends React.Component {
                 <FormItem label="描述">
                     <textarea type="text" name="desc"/>
                 </FormItem>
-                <div>
+                <FormButton>
                     <button className="btn btn-primary" type="submit">提交</button>
-                </div>
+                </FormButton>
             </Form>
         );
     }
@@ -49,9 +49,9 @@ class FormWrap2 extends React.Component {
                 <FormItem label="描述">
                     <textarea type="text" name="desc"/>
                 </FormItem>
-                <div>
+                <FormButton>
                     <button className="btn btn-primary" type="submit">提交</button>
-                </div>
+                </FormButton>
             </Form>
         );
     }
@@ -74,9 +74,9 @@ class FormWrap3 extends React.Component {
                 <FormItem label="描述">
                     <textarea type="text" name="desc"/>
                 </FormItem>
-                <FormItem>
+                <FormButton>
                     <button className="btn btn-primary" type="submit">提交</button>
-                </FormItem>
+                </FormButton>
             </Form>
         );
     }
@@ -156,9 +156,9 @@ class FormItemWrap extends React.Component {
                         <Radio value={2}>深圳</Radio>
                     </RadioGroup>
                 </FormItem>
-                <div>
+                <FormButton>
                     <button className="btn btn-primary" type="submit">提交</button>
-                </div>
+                </FormButton>
             </Form>
         );
     }
@@ -214,7 +214,7 @@ class FormItemWrap2 extends React.Component {
                 <FormItem 
                     label="邮件" 
                     required 
-                    validate={Validator.create([Validator.TYPE.required, Validator.TYPE.email], this.state.email)}
+                    validate={Validator.create([Validator.TYPE.email], this.state.email)}
                 >
                     <input 
                         type="text" 
@@ -225,7 +225,7 @@ class FormItemWrap2 extends React.Component {
                 <FormItem 
                     label="重复邮件" 
                     required 
-                    validate={Validator.create([Validator.TYPE.required, Validator.TYPE.email], this.state.repeat_email, this.validateRepeatEmail)}
+                    validate={Validator.create([Validator.TYPE.email], this.state.repeat_email, this.validateRepeatEmail)}
                 >
                     <input 
                         type="text" 
@@ -233,9 +233,9 @@ class FormItemWrap2 extends React.Component {
                         onChange={e => this.setState({repeat_email: e.target.value})}
                     />
                 </FormItem>
-                <div>
+                <FormButton>
                     <button className="btn btn-primary" type="submit">提交</button>
-                </div>
+                </FormButton>
             </Form>
         );
     }
@@ -247,8 +247,8 @@ class FormItemWrap2 extends React.Component {
 :::
 
 ### Props
-- `required (bool)` label旁边的`*`
+- `required (bool)` label旁边的`*` 
 - `label (string)` 
-- `validate (func)` 校验后返回错误帮助信息，且只有过提交过动作后才显示，onChange则会自动重新校验。存在validate，则`error` `help`无效
+- `validate (func)` 校验后返回错误帮助信息，且只有过提交过动作后才显示，onChange则会自动重新校验。存在validate，则`error` `help`无效。如果存在`required`，则先校验是否有值。
 - `error (bool)` 校验的状态，只有`true`时help才会显示
 - `help (string)` 错误帮助信息

@@ -53,10 +53,18 @@ const Validator = {
 
         return help;
     },
-    create(types, value, otherValidate){
+    create(types, value, nextValidate){
         types = _.isArray(types) ? types : [types];
-        return () => {
+        return (before) => {
             let help = '';
+
+            if (before) {
+                help = before(value);
+                if (help) {
+                    return help;
+                }
+            }
+
             _.find(types, type => {
                 const rt = Validator.validate(type, value);
                 if (rt) {
@@ -65,8 +73,8 @@ const Validator = {
                 }
             });
 
-            if (!help && otherValidate) {
-                help = otherValidate(value);
+            if (!help && nextValidate) {
+                help = nextValidate(value);
             }
 
             return help;

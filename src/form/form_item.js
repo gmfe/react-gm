@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import Flex from '../component/flex';
 import _ from 'underscore';
+import Validator from '../validator';
 
 class FormControl extends React.Component {
     render() {
@@ -48,7 +49,13 @@ class FormItem extends React.Component {
         } = this.props;
 
         if (canValidate && validate !== undefined) {
-            help = validate();
+            if (required) {
+                help = validate(function (value) {
+                    return Validator.validate(Validator.TYPE.required, value);
+                });
+            } else {
+                help = validate();
+            }
             error = !!help;
         }
 
