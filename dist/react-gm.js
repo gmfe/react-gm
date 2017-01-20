@@ -8047,7 +8047,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	            });
 
-	            return helpList.length === 0 ? 0 : helpList;
+	            return helpList.length === 0 ? null : helpList;
 	        }
 	    }, {
 	        key: 'handleSubmit',
@@ -8061,7 +8061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var err = this.validateAll();
 	            if (!err) {
-	                this.props.onSubmitValidated(err);
+	                this.props.onSubmitValidated();
 	            }
 	        }
 	    }, {

@@ -9,6 +9,8 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
 }
 .gm-form.form-inline .gm-form-label {
   padding-top: 5px;
