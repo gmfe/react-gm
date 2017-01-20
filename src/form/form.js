@@ -38,7 +38,7 @@ class Form extends React.Component {
             }
         });
 
-        return helpList.length === 0 ? 0 : helpList;
+        return helpList.length === 0 ? null : helpList;
     }
 
     handleSubmit(e) {
@@ -51,7 +51,7 @@ class Form extends React.Component {
 
         const err = this.validateAll();
         if (!err) {
-            this.props.onSubmitValidated(err);
+            this.props.onSubmitValidated();
         }
     }
 
