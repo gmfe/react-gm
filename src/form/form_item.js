@@ -10,7 +10,7 @@ class FormControl extends React.Component {
             children
         } = this.props;
 
-        const {className} = children.props;
+        const {className, inputClassName} = children.props;
 
         let child = children;
 
@@ -25,6 +25,10 @@ class FormControl extends React.Component {
         } else if (child.type === 'select') {
             return React.cloneElement(child, {
                 className: classNames('form-control', className)
+            });
+        } else if (child.type.displayName === 'DateRangePicker') {
+            return React.cloneElement(child, {
+                inputClassName: classNames('form-control', inputClassName)
             });
         }
 
@@ -65,7 +69,7 @@ class FormItem extends React.Component {
             })}>
                 <Flex justifyEnd={horizontal} width={labelWidth} className="gm-form-label control-label">
                     {required ? <span style={{color: 'red'}}>*</span> : ''}
-                    {label}
+                    {label}{label && inline ? '：' : null}
                 </Flex>
                 <Flex flex column>
                     <div>

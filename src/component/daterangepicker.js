@@ -81,6 +81,8 @@ class DateRangePicker extends React.Component {
     }
 }
 
+DateRangePicker.displayName = 'DateRangePicker';
+
 DateRangePicker.propTypes = {
     begin: PropTypes.object,
     end: PropTypes.object,
