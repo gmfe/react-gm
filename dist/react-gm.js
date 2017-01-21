@@ -4563,6 +4563,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return DateRangePicker;
 	}(_react2.default.Component);
 
+	DateRangePicker.displayName = 'DateRangePicker';
+
 	DateRangePicker.propTypes = {
 	    begin: _react.PropTypes.object,
 	    end: _react.PropTypes.object,
@@ -8230,7 +8232,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'render',
 	        value: function render() {
 	            var children = this.props.children;
-	            var className = children.props.className;
+	            var _children$props = children.props,
+	                className = _children$props.className,
+	                inputClassName = _children$props.inputClassName;
 
 
 	            var child = children;
@@ -8246,6 +8250,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            } else if (child.type === 'select') {
 	                return _react2.default.cloneElement(child, {
 	                    className: (0, _classnames2.default)('form-control', className)
+	                });
+	            } else if (child.type.displayName === 'DateRangePicker') {
+	                return _react2.default.cloneElement(child, {
+	                    inputClassName: (0, _classnames2.default)('form-control', inputClassName)
 	                });
 	            }
 
@@ -8306,7 +8314,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        { style: { color: 'red' } },
 	                        '*'
 	                    ) : '',
-	                    label
+	                    label,
+	                    label && inline ? '：' : null
 	                ),
 	                _react2.default.createElement(
 	                    _flex2.default,
