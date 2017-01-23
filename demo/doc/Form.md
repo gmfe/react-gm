@@ -177,7 +177,8 @@ class FormItemWrap2 extends React.Component {
         this.state = {
             email: '',
             repeat_email: '',
-            url: ''
+            url: '',
+            name: ''
         };
         this.validateRepeatEmail = ::this.validateRepeatEmail;
     }
@@ -200,7 +201,17 @@ class FormItemWrap2 extends React.Component {
     render() {
         return (
             <Form onSubmit={this.handleSubmit} onSubmitValidated={this.handleSubmitValidated}>
-                
+                <FormItem 
+                    label="名字" 
+                    required
+                    validate={Validator.create([], this.state.name)}
+                >
+                    <input 
+                        type="text" 
+                        value={this.state.name} 
+                        onChange={e => this.setState({name: e.target.value})}
+                    />
+                </FormItem>
                 <FormItem 
                     label="网址" 
                     validate={Validator.create(Validator.TYPE.url, this.state.url)}
