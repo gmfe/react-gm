@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-
+import Validator from '../validator';
 import './style.less';
 
 class Form extends React.Component {
@@ -27,7 +27,14 @@ class Form extends React.Component {
                         help: child.props.error
                     });
                 } else if (child.props.validate) {
-                    const help = child.props.validate();
+                    let help = '';
+                    if (child.props.required) {
+                        help = child.props.validate(function (value) {
+                            return Validator.validate(Validator.TYPE.required, value);
+                        });
+                    } else {
+                        help = child.props.validate();
+                    }
                     if (help) {
                         helpList.push({
                             label: child.props.label,
