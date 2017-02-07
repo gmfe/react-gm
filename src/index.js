@@ -37,6 +37,9 @@ import Radio from './radio';
 import Checkbox from './checkbox';
 
 import Validator from './validator';
+import Transfer from './transfer';
+
+import Select from './select';
 
 import './index.less';
 
@@ -64,6 +67,10 @@ const {
 const {
     CheckboxGroup
 } = Checkbox;
+
+const {
+    Option
+} = Select;
 
 module.exports = {
     Util,
@@ -112,5 +119,7 @@ module.exports = {
     QuickDesc,
     Validator,
     Radio, RadioGroup,
-    Checkbox, CheckboxGroup
+    Checkbox, CheckboxGroup,
+    Select, Option,
+    Transfer
 };

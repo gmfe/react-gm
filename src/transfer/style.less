@@ -1,0 +1,50 @@
+.gm-transfer {
+
+  .gm-transfer-list {
+    border: 1px solid @gm-border-color;
+
+    &:first-child {
+      margin-right: 5px;
+    }
+    &:last-child {
+      margin-left: 5px;
+    }
+
+    select {
+      padding: 0;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      .gm-flex();
+      .gm-flex-flex();
+    }
+
+    .gm-transfer-list-title {
+      padding: 5px;
+      background-color: @gray-lighter;
+      text-align: center;
+      border-bottom: 1px solid @gm-border-color;
+    }
+
+    .gm-transfer-list-filter {
+      .input-group-addon {
+        border-left: none;
+      }
+      input {
+        border-right: none;
+      }
+    }
+
+    .gm-transfer-list-all {
+      border-bottom: none;
+      border-left: none;
+      border-right: none;
+    }
+  }
+
+  .gm-transfer-operation {
+    button {
+      display: block;
+    }
+  }
+}
