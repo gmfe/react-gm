@@ -67,6 +67,8 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/Switch">Switch</a></li>
                     <li><a href="#/doc/InputNumber">InputNumber</a></li>
                     <li><a href="#/doc/DropDown">DropDown</a></li>
+                    <li><a href="#/doc/Select">Select</a></li>
+                    <li><a href="#/doc/Transfer">Transfer</a></li>
                 </ul>
             </div>
         );

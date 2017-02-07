@@ -20,7 +20,7 @@ class Form extends React.Component {
         let childList = _.isArray(children) ? children : [children];
 
         _.each(childList, child => {
-            if (child.type.displayName === 'FormItem') {
+            if (child !== null && child !== undefined && child.type.displayName === 'FormItem') {
                 if (child.props.error) {
                     helpList.push({
                         label: child.props.label,

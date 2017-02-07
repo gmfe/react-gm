@@ -48,6 +48,8 @@ import TreeSelect from './doc/TreeSelect.md';
 import Form from './doc/Form.md';
 import Validator from './doc/Validator.md';
 import Radio from './doc/Radio.md';
+import Select from './doc/Select.md';
+import Transfer from './doc/Transfer.md';
 
 import NavConfigStandard from './standard/nav.config';
 import LayoutCommon from './standard/LayoutCommon.md';
@@ -86,7 +88,9 @@ const docMap = {
     Modal,
     Collapse,
     DropDown,
-    TreeSelect
+    TreeSelect,
+    Select,
+    Transfer
 };
 
 const standardMap = {
