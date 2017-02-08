@@ -8072,7 +8072,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var childList = _underscore2.default.isArray(children) ? children : [children];
 
 	            _underscore2.default.each(childList, function (child) {
-	                if (child.type.displayName === 'FormItem') {
+	                if (child !== null && child !== undefined && child.type.displayName === 'FormItem') {
 	                    if (child.props.error) {
 	                        helpList.push({
 	                            label: child.props.label,
