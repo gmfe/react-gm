@@ -7,7 +7,7 @@ imports:
 
 穿梭框
 
-::: demo 单选，提供value的原始值出来，而非原生的字符串。 
+::: demo 
 ```js
 class Component extends React.Component {
     constructor(props) {

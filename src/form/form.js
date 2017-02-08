@@ -76,7 +76,7 @@ class Form extends React.Component {
         let childList = _.isArray(children) ? children : [children];
 
         childList = _.map(childList, (child, i) => {
-            return child.type.displayName === 'FormItem' ? React.cloneElement(child, {
+            return child !== null && child !== undefined && child.type.displayName === 'FormItem' ? React.cloneElement(child, {
                 key: i,
                 horizontal,
                 inline,
