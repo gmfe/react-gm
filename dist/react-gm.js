@@ -8131,7 +8131,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var childList = _underscore2.default.isArray(children) ? children : [children];
 
 	            childList = _underscore2.default.map(childList, function (child, i) {
-	                return child.type.displayName === 'FormItem' ? _react2.default.cloneElement(child, {
+	                return child !== null && child !== undefined && child.type.displayName === 'FormItem' ? _react2.default.cloneElement(child, {
 	                    key: i,
 	                    horizontal: horizontal,
 	                    inline: inline,
