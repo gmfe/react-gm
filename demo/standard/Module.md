@@ -8,7 +8,7 @@ imports:
 ::: demo Tab
 ```js
 const Tab = () => 
-    <QuickTab tabs={['按订单查看', '按商品查看']} className="gm-padding-15">
+    <QuickTab tabs={['按订单查看', '按商品查看']} className="gm-padding-15" isStatic={true}>
         <div>
             <QuickFilter className="gm-border-top-0">
                 <form className="form-inline">
@@ -16,7 +16,7 @@ const Tab = () =>
                         <input
                             type="text"
                             className="form-control"
-                            placeholder="请输入订单号、商户名称或商户ID"
+                            placeholder="请输入订单号"
                             style={{minWidth: '250px'}}
                         />
                     </div>
@@ -33,7 +33,7 @@ const Tab = () =>
                         <input
                             type="text"
                             className="form-control"
-                            placeholder="请输入订单号、商户名称或商户ID"
+                            placeholder="请输入商户名称"
                             style={{minWidth: '250px'}}
                         />
                     </div>

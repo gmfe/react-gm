@@ -50,12 +50,14 @@ import Validator from './doc/Validator.md';
 import Radio from './doc/Radio.md';
 import Select from './doc/Select.md';
 import Transfer from './doc/Transfer.md';
+import Quick from './doc/Quick.md';
 
 import NavConfigStandard from './standard/nav.config';
 import LayoutCommon from './standard/LayoutCommon.md';
 import LayoutRule from './standard/LayoutRule.md';
 import Module from './standard/Module.md';
 import ComponentRule from  './standard/Component.md';
+
 
 const docMap = {
     About,
@@ -90,7 +92,8 @@ const docMap = {
     DropDown,
     TreeSelect,
     Select,
-    Transfer
+    Transfer,
+    Quick
 };
 
 const standardMap = {

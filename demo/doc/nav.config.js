@@ -12,6 +12,7 @@ class NavConfig extends React.Component {
                 <h3>布局</h3>
                 <ul>
                     <li><a href="#/doc/Flex">Flex</a></li>
+                    <li><a href="#/doc/Quick">Quick</a></li>
                     <li><a href="#/doc/Collapse" id="intro3">Collapse</a></li>
                 </ul>
                 <h3>加载</h3>
