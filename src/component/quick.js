@@ -125,6 +125,17 @@ class QuickFilter extends React.Component {
     }
 }
 
+class QuickTabItem extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <div>{this.props.children}</div>
+        );
+    }
+}
+
 class QuickTab extends React.Component {
     constructor(props) {
         super(props);
@@ -152,23 +163,30 @@ class QuickTab extends React.Component {
 
     render() {
         const {
-            tabs, children, active, onChange, // eslint-disable-line
+            tabs, children, active, onChange, isStatic, // eslint-disable-line
             ...rest
         } = this.props;
+
+        const activeTab = this.state.active;
+
+        const tabPanels = _.map(children, (child, i) => (
+            <div key={i} className={activeTab !== i ? 'hidden' : ''}>{child}</div>
+        ));
+
         return (
             <div {...rest} className={classNames("b-nav-tabs", this.props.className)}>
                 {this.props.right ? React.cloneElement(this.props.right, {className: this.props.right.props.className + ' pull-right'}) : null}
                 <ul className="nav nav-tabs">
                     {_.map(tabs, (tab, i) => (
                         <li key={i} className={classNames("gm-quick-tab", {
-                            active: i === this.state.active
+                            active: i === activeTab
                         })}>
                             <a href="javascript:;" onClick={this.handleTab.bind(this, i)}>{tab}</a>
                         </li>
                     ))}
                 </ul>
                 <div>
-                    {children[this.state.active]}
+                    { isStatic ?  tabPanels : tabPanels[activeTab] }
                 </div>
             </div>
         );
@@ -180,8 +198,26 @@ QuickTab.propTypes = {
     tabs: PropTypes.array.isRequired,
     onChange: PropTypes.func,
     active: PropTypes.number,
-    right: PropTypes.element
+    right: PropTypes.element,
+    isStatic: PropTypes.bool,
+    children: (props, propName, componentName) => {
+        if(props.tabs && props.children && (props.tabs.length !== props.children.length)) {
+            return new Error(
+                'Invalid prop `children` supplied to' +
+                ' `' + componentName +
+                '`, prop `tabs` length is not match prop `children` length'
+            );
+        }
+    }
 };
+
+QuickTab.defaultProps = {
+    isStatic: false
+};
+
+Object.assign(QuickTab, {
+    QuickTabItem
+});
 
 class QuickDesc extends React.Component {
     constructor(props) {
@@ -216,10 +252,10 @@ class QuickDesc extends React.Component {
     }
 }
 
-module.exports = {
+export {
+    QuickPanel,
     QuickInfo,
     QuickInfoCell,
-    QuickPanel,
     QuickFilter,
     QuickTab,
     QuickDesc
