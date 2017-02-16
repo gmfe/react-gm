@@ -38,6 +38,7 @@ class FilterSearchSelect extends React.Component {
     }
 }
 FilterSearchSelect.propTypes = {
+    disabled: PropTypes.bool,
     list: PropTypes.array.isRequired,
     isGroupList: PropTypes.bool,
     selected: PropTypes.any,

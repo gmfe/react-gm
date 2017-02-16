@@ -309,12 +309,18 @@ class SearchSelect extends React.Component {
 
     render() {
         return (
-            <div ref={ref => this.searchSelect = ref} className={classNames("gm-search-select", this.props.className)}>
+            <div
+                ref={ref => this.searchSelect = ref}
+                className={classNames("gm-search-select", this.props.className, {
+                    "gm-search-select-disabled": this.props.disabled
+                })}
+            >
                 <Flex wrap className="gm-search-select-input">
                     {this.props.multiple ? _.map(this.state.selected, (value, i) => (
                         <Flex key={i} alignStart className="selected">
                             {value.name}
                             <button
+                                disabled={this.props.disabled}
                                 type="button"
                                 className="close"
                                 onClick={this.handleClose.bind(this, value)}
@@ -326,6 +332,7 @@ class SearchSelect extends React.Component {
                         popup={this.renderOverlay()}
                     >
                         <input
+                            disabled={this.props.disabled}
                             ref={ref => this.refInput = ref}
                             type="text"
                             value={this.state.value}
@@ -343,6 +350,7 @@ class SearchSelect extends React.Component {
     }
 }
 SearchSelect.propTypes = {
+    disabled: PropTypes.bool,
     list: PropTypes.array.isRequired,
     isGroupList: PropTypes.bool,
     selected: PropTypes.any,
@@ -357,6 +365,7 @@ SearchSelect.propTypes = {
 };
 
 SearchSelect.defaultProps = {
+    disabled: false,
     isGroupList: false,
     listMaxHeight: '250px',
     delay: 500,

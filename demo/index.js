@@ -189,8 +189,8 @@ class App extends React.Component {
                             <small>&nbsp;&nbsp;by gmfe</small>
                         </a>
                         <GMFlex flex justifyEnd alignCenter className="gm-header-nav">
-                            <a href="javascript:;" onClick={this.handleIntro}>功能引导？TODO</a>
-                            <a href="#/standard" id="intro1">UI规范TODO</a>
+                            <a href="javascript:;" onClick={this.handleIntro}>功能引导？</a>
+                            <a href="#/standard" id="intro1">UI规范</a>
                             <a href="#/doc" id="intro2">组件</a>
                         </GMFlex>
                     </GMFlex>

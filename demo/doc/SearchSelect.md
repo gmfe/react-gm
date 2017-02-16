@@ -86,6 +86,15 @@ class SearchSelect1 extends React.Component {
                     onSelect={this.handleSelect}
                     placeholder="搜索"
                 />
+                
+                <SearchSelect
+                    disabled
+                    list={this.state.list}
+                    selected={this.state.selected}
+                    onSearch={this.handleSearch}
+                    onSelect={this.handleSelect}
+                    placeholder="搜索"
+                />
             </div>
         );
     }
@@ -133,6 +142,16 @@ class SearchSelect2 extends React.Component {
         return (
             <div style={{width: '500px'}}>
                 <SearchSelect
+                    list={this.state.list}
+                    selected={this.state.selected}
+                    onSearch={this.handleSearch}
+                    onSelect={this.handleSelect}
+                    multiple
+                    placeholder="搜索"
+                />
+                
+                <SearchSelect
+                    disabled
                     list={this.state.list}
                     selected={this.state.selected}
                     onSearch={this.handleSearch}

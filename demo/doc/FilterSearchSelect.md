@@ -73,13 +73,24 @@ class FilterSearchSelect1 extends React.Component {
     
     render() {
         return (
-            <FilterSearchSelect
-                list={searchSelectGroupData}
-                isGroupList
-                selected={this.state.selected}
-                onSelect={::this.handleSelect}
-                onFilter={::this.handleFilter}
-            />
+            <div>
+                <FilterSearchSelect
+                    list={searchSelectGroupData}
+                    isGroupList
+                    selected={this.state.selected}
+                    onSelect={::this.handleSelect}
+                    onFilter={::this.handleFilter}
+                />
+
+                <FilterSearchSelect
+                    disabled
+                    list={searchSelectGroupData}
+                    isGroupList
+                    selected={this.state.selected}
+                    onSelect={::this.handleSelect}
+                    onFilter={::this.handleFilter}
+                />
+            </div>
         );
     }
 }
