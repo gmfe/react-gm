@@ -2,7 +2,7 @@
   margin-bottom: 10px;
 }
 .gm-form.form-horizontal .gm-form-label {
-  padding-top: 5px;
+  padding-top: 7px;
   padding-right: 10px;
 }
 .gm-form.form-inline {
@@ -13,7 +13,7 @@
           flex-wrap: wrap;
 }
 .gm-form.form-inline .gm-form-label {
-  padding-top: 5px;
+  padding-top: 7px;
 }
 .gm-form.form-inline .gm-form-group {
   margin-right: 10px;
@@ -6590,6 +6590,16 @@ button.close {
 }
 .gm-search-select .gm-search-select-input .gm-trigger .gm-trigger-popup .list-group .list-group-label .list-group-item {
   padding: 6px 26px;
+}
+.gm-search-select.gm-search-select-disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+.gm-search-select.gm-search-select-disabled input {
+  cursor: not-allowed;
+}
+.gm-search-select.gm-search-select-disabled button.close {
+  cursor: not-allowed;
 }
 .gm-cascader {
   position: relative;
