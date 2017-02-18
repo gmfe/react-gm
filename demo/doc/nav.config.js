@@ -14,6 +14,7 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/Flex">Flex</a></li>
                     <li><a href="#/doc/Quick">Quick</a></li>
                     <li><a href="#/doc/Collapse" id="intro3">Collapse</a></li>
+                    <li><a href="#/doc/Divider" id="intro3">Divider</a></li>
                 </ul>
                 <h3>加载</h3>
                 <ul>
@@ -24,7 +25,6 @@ class NavConfig extends React.Component {
                 <ul>
                     <li><a href="#/doc/Cascader">Cascader</a></li>
                     <li><a href="#/doc/CascaderSelect">CascaderSelect</a></li>
-                    <li><a href="#/doc/AdvanceSelect">AdvanceSelect</a></li>
                     <li><a href="#/doc/DropSelect">DropSelect</a></li>
                     <li><a href="#/doc/SearchSelect">SearchSelect</a></li>
                     <li><a href="#/doc/FilterSearchSelect">FilterSearchSelect</a></li>
@@ -55,10 +55,6 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/Modal">Modal</a></li>
                     <li><a href="#/doc/Trigger">Trigger</a></li>
                 </ul>
-                <h3>上传</h3>
-                <ul>
-                    <li><a href="#/doc/Dropper">Dropper</a></li>
-                </ul>
                 <h3>表单</h3>
                 <ul>
                     <li><a href="#/doc/Form">Form</a></li>
@@ -70,6 +66,7 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/DropDown">DropDown</a></li>
                     <li><a href="#/doc/Select">Select</a></li>
                     <li><a href="#/doc/Transfer">Transfer</a></li>
+                    <li><a href="#/doc/Dropper">Dropper</a></li>
                 </ul>
             </div>
         );

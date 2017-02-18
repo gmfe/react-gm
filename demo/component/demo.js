@@ -1,43 +1,18 @@
 import React from 'react';
-import {Transfer} from '../../src/index';
-import _ from 'underscore';
+import {Divider} from '../../src/index';
 
 class Component extends React.Component {
-    constructor(props) {
-        super(props);
-        const list = _.map(_.range(5), v => ({
-            value: v,
-            name: 'item' + v
-        }));
-        this.state = {
-            list,
-            selectedValues: [0, 2]
-        };
-        this.handleSelect = ::this.handleSelect;
-    }
-
-    handleSelect(selectedValues) {
-        console.log(selectedValues);
-        this.setState({
-            selectedValues
-        });
-    }
-
-    handleFilter(list, query) {
-        return _.filter(list, v => v.name.indexOf(query) > -1);
-    }
-
     render() {
-        const {list, selectedValues} = this.state;
         return (
             <div>
                 demo
-                <Transfer
-                    list={list}
-                    selectedValues={selectedValues}
-                    onSelect={this.handleSelect}
-                    withFilter={this.handleFilter}
-                />
+                <div>
+                    原生分割线
+                    <hr/>
+                    <Divider/>
+                    中间又文字的分割线
+                    <Divider>asdf</Divider>
+                </div>
             </div>
         );
     }

@@ -10,14 +10,12 @@ import DatePicker from './component/datepicker';
 import DateRangePicker from './component/daterangepicker';
 import Tip from './component/tip';
 import NProgress from './component/nprogress';
-import Hr from './component/hr';
+import Divider from './divider/index';
 import Dialog from './component/dialog';
-import Navigation from './component/navigation';
 import Flex from './component/flex';
 import TimeSpan from './component/timespan';
 import TimeSpanPicker from './component/timespanpicker';
 import DropSelect from './component/drop.select';
-import AdvanceSelect from './component/advance.select';
 import SearchSelect from './component/search.select';
 import FilterSearchSelect from './component/filter.search.select';
 import Switch from './component/switch';
@@ -85,14 +83,12 @@ module.exports = {
     Storage,
     Tip,
     NProgress,
-    Hr,
+    Divider,
     Dialog,
-    Navigation,
-    Flex,
     TimeSpan,
+    Flex,
     TimeSpanPicker,
     DropSelect,
-    AdvanceSelect,
     SearchSelect,
     FilterSearchSelect,
     Cascader,

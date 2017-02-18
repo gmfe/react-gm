@@ -2,48 +2,44 @@ import React, {PropTypes} from 'react';
 import _ from 'underscore';
 
 const prefix = '_react-gm_';
+const {localStorage} = window;
 
 const StorageStatics = {
-    set: function (key, value) {
-        window.localStorage.setItem(prefix + key, JSON.stringify(value));
+    set(key, value){
+        localStorage.setItem(prefix + key, JSON.stringify(value));
     },
-    get: function (key) {
-        var v = window.localStorage.getItem(prefix + key);
+    get (key) {
+        const v = localStorage.getItem(prefix + key);
         return v ? JSON.parse(v) : v;
     },
-    remove: function (key) {
-        window.localStorage.removeItem(prefix + key);
+    remove (key) {
+        localStorage.removeItem(prefix + key);
     },
-    clear: function () {
-        window.localStorage.clear();
+    clear () {
+        localStorage.clear();
     },
-    getAll: function () {
-        var result = {};
-        var key;
-        for (var i = 0; i < window.localStorage.length; i++) {
-            key = window.localStorage.key(i);
+    getAll () {
+        const result = {};
+        _.each(_.range(localStorage.length), i => {
+            let key = localStorage.key(i);
             if (key.startsWith(prefix)) {
                 key = key.slice(prefix.length);
-                result[key] = Storage.get(key);
+                result[key] = StorageStatics.get(key);
             }
-        }
+        });
         return _.keys(result) ? result : null;
     }
 };
 
 class Storage extends React.Component {
-    save() {
-        Storage.set(this.props.name, this.props.value);
-    }
-
-    componentWillUpdate() {
+    componentWillUpdate(nextProps) {
         if (this.props.autoSave) {
-            this.save();
+            StorageStatics.set(nextProps.name, nextProps.value);
         }
     }
 
     componentWillMount() {
-        this.save();
+        StorageStatics.set(this.props.name, this.props.value);
     }
 
     render() {

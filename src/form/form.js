@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
 import Validator from '../validator';
-import './style.less';
 
 class Form extends React.Component {
     constructor(props) {

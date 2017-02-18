@@ -2,10 +2,9 @@ import React, {PropTypes} from 'react';
 import _ from 'underscore';
 import Flex from '../component/flex';
 import Select from '../select';
+import {isMac} from '../util';
 
 const {Option} = Select;
-
-const isMac = window.navigator.userAgent.indexOf('Mac') > -1;
 
 class Transfer extends React.Component {
     constructor(props) {

@@ -19,7 +19,6 @@ import Loading from './doc/Loading.md';
 import NProgress from './doc/NProgress.md';
 import Cascader from './doc/Cascader.md';
 import CascaderSelect from './doc/CascaderSelect.md';
-import AdvanceSelect from './doc/AdvanceSelect.md';
 import DropSelect from './doc/DropSelect.md';
 import SearchSelect from './doc/SearchSelect.md';
 import FilterSearchSelect from './doc/FilterSearchSelect.md';
@@ -51,13 +50,13 @@ import Radio from './doc/Radio.md';
 import Select from './doc/Select.md';
 import Transfer from './doc/Transfer.md';
 import Quick from './doc/Quick.md';
+import Divider from './doc/Divider.md';
 
 import NavConfigStandard from './standard/nav.config';
 import LayoutCommon from './standard/LayoutCommon.md';
 import LayoutRule from './standard/LayoutRule.md';
 import Module from './standard/Module.md';
 import ComponentRule from  './standard/Component.md';
-
 
 const docMap = {
     About,
@@ -66,7 +65,6 @@ const docMap = {
     NProgress,
     Cascader,
     CascaderSelect,
-    AdvanceSelect,
     DropSelect,
     SearchSelect,
     FilterSearchSelect,
@@ -93,7 +91,8 @@ const docMap = {
     TreeSelect,
     Select,
     Transfer,
-    Quick
+    Quick,
+    Divider
 };
 
 const standardMap = {

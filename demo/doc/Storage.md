@@ -17,7 +17,7 @@ class StorageWrap extends React.Component {
             value: Storage.get(key) || ''
         };
     }
-
+    
     render() {
         return (
             <div>
