@@ -50,6 +50,8 @@ class InputNumber extends React.Component {
     }
 }
 
+InputNumber.displayName = 'InputNumber';
+
 InputNumber.propTypes = {
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     max: PropTypes.number,

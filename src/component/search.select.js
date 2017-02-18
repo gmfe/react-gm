@@ -46,6 +46,8 @@ class SearchSelect extends React.Component {
         this.handleBlur = ::this.handleBlur;
         this.handleChange = ::this.handleChange;
         this.getListItemCount = ::this.getListItemCount;
+
+        console.warn('请尽量提供key（暂时无法检测key是否有传，暴力提示）');
     }
 
     componentWillReceiveProps(nextProps) {

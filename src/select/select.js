@@ -43,6 +43,8 @@ class Select extends React.Component {
     }
 }
 
+Select.displayName = 'Select';
+
 Select.propTypes = {
     multiple: PropTypes.bool,
     value: PropTypes.any.isRequired,

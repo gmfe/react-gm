@@ -30,6 +30,10 @@ class FormControl extends React.Component {
             return React.cloneElement(child, {
                 inputClassName: classNames('form-control', inputClassName)
             });
+        } else if (child.type.displayName === 'InputNumber' || child.type.displayName === 'Search') {
+            return React.cloneElement(child, {
+                className: classNames('form-control', className)
+            });
         }
 
         return child;
