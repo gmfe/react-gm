@@ -5,7 +5,7 @@ imports:
 ---
 ## Cascader
 
-多级选择器
+多级选择器 (多选版本[CascaderSelect](#/doc/CascaderSelect))
 
 ::: demo 以下example依赖的数据
 ```js

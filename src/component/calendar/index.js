@@ -3,8 +3,6 @@ import moment from 'moment';
 import classNames from 'classnames';
 import _ from 'underscore';
 
-// TODO 优化性能
-
 const nowMountStart = +moment().startOf('day');
 
 class Day extends React.Component {
@@ -14,17 +12,19 @@ class Day extends React.Component {
     }
 
     handleClick() {
-        if (this.props.disabled) {
+        const {disabled, onClick, value} = this.props;
+
+        if (disabled) {
             return;
         }
-        this.props.onClick(this.props.value);
+        onClick(value);
     }
 
     render() {
         const {willSelect, value, selected, disabled} = this.props;
 
         const cn = classNames('gm-calendar-day', {
-            'gm-calendar-day-now': (nowMountStart === +value.startOf('day')),
+            'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
             'gm-calendar-day-old': willSelect.month() > value.month(),
             'gm-calendar-day-new': willSelect.month() < value.month(),
             'gm-calendar-day-disabled': disabled,
@@ -38,9 +38,10 @@ class Day extends React.Component {
 class Calendar extends React.Component {
     constructor(props) {
         super(props);
+        const {selected} = props;
         this.state = {
-            selected: this.props.selected ? this.props.selected : null, // 调用方的时间
-            moment: this.props.selected ? moment(this.props.selected) : moment(), // 日历内的时间
+            selected: selected ? selected : null, // 调用方的时间
+            moment: selected ? moment(selected) : moment(), // 日历内的时间
             isSelectMonth: false,
             weekDays: ['日', '一', '二', '三', '四', '五', '六']
         };

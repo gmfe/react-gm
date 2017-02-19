@@ -5,7 +5,7 @@ imports:
 ---
 ## SearchSelect
 
-搜索选择组件。请优先考虑选择FilterSearchSelect。
+搜索选择组件，请优先考虑选择更便捷的[FilterSearchSelect](#/doc/FilterSearchSelect)。
 
 SearchSelect  和 FilterSearchSelect 如果用起来发现二次进入的时候会有奇怪现象（输入框的默认值存在），就试试给个key吧，设计的略复杂，不知道怎么处理了。
 

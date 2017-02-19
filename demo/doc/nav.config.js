@@ -4,68 +4,115 @@ class NavConfig extends React.Component {
     render() {
         return (
             <div className="demo-left-nav">
-                <h2>开发指南</h2>
+                <h2>Guide</h2>
                 <ul>
                     <li><a href="#/doc/About">About</a></li>
                 </ul>
-                <h2>基础组件</h2>
-                <h3>布局</h3>
+                <h2>Basic</h2>
+                <h3>Layout</h3>
                 <ul>
                     <li><a href="#/doc/Flex">Flex</a></li>
                     <li><a href="#/doc/Quick">Quick</a></li>
-                    <li><a href="#/doc/Collapse" id="intro3">Collapse</a></li>
-                    <li><a href="#/doc/Divider" id="intro3">Divider</a></li>
+                    <li><a href="#/doc/Collapse" id="intro3">Collapse
+                        <small>折叠面板</small>
+                    </a></li>
+                    <li><a href="#/doc/Divider">Divider
+                        <small>分割线</small>
+                    </a></li>
                 </ul>
-                <h3>加载</h3>
+                <h3>Data</h3>
                 <ul>
-                    <li><a href="#/doc/Loading">Loading</a></li>
-                    <li><a href="#/doc/NProgress">NProgress</a></li>
+                    <li><a href="#/doc/Sheet">Sheet
+                        <small>表格</small>
+                    </a></li>
+                    <li><a href="#/doc/Pagination">Pagination
+                        <small>页码</small>
+                    </a></li>
+                    <li><a href="#/doc/ImportLead">ImportLead
+                        <small>导入指引</small>
+                    </a></li>
                 </ul>
-                <h3>选择</h3>
+                <h3>Select</h3>
                 <ul>
-                    <li><a href="#/doc/Cascader">Cascader</a></li>
-                    <li><a href="#/doc/CascaderSelect">CascaderSelect</a></li>
+                    <li><a href="#/doc/Cascader">Cascader
+                        <small>级联选择</small>
+                    </a></li>
                     <li><a href="#/doc/DropSelect">DropSelect</a></li>
-                    <li><a href="#/doc/SearchSelect">SearchSelect</a></li>
-                    <li><a href="#/doc/FilterSearchSelect">FilterSearchSelect</a></li>
-                    <li><a href="#/doc/TreeSelect">TreeSelect</a></li>
+                    <li><a href="#/doc/SearchSelect">SearchSelect
+                        <small>搜索选择</small>
+                    </a></li>
+                    <li><a href="#/doc/TreeSelect">TreeSelect
+                        <small>树形选择</small>
+                    </a></li>
+                    <li><a href="#/doc/Transfer">Transfer
+                        <small>穿梭框</small>
+                    </a></li>
+                    <li><a href="#/doc/Calendar">Calendar
+                        <small>日历</small>
+                    </a></li>
+                    <li><a href="#/doc/DatePicker">DatePicker
+                        <small>日期选择</small>
+                    </a></li>
+                    <li><a href="#/doc/TimeSpan">TimeSpan
+                        <small>时间点选择</small>
+                    </a></li>
                 </ul>
-                <h3>数据</h3>
+                <h3>Layer</h3>
                 <ul>
-                    <li><a href="#/doc/Sheet">Sheet</a></li>
-                    <li><a href="#/doc/SheetColumn">SheetColumn</a></li>
-                    <li><a href="#/doc/SheetAction">SheetAction</a></li>
-                    <li><a href="#/doc/SheetSelect">SheetSelect</a></li>
-                    <li><a href="#/doc/SheetBatchAction">SheetBatchAction</a></li>
-                    <li><a href="#/doc/Pagination">Pagination</a></li>
-                    <li><a href="#/doc/ImportLead">ImportLead</a></li>
-                    <li><a href="#/doc/Storage">Storage</a></li>
+                    <li><a href="#/doc/Tip">Tip
+                        <small>提示</small>
+                    </a></li>
+                    <li><a href="#/doc/Dialog">Dialog
+                        <small>对话框</small>
+                    </a></li>
+                    <li><a href="#/doc/Modal">Modal
+                        <small>模态框</small>
+                    </a></li>
+                    <li><a href="#/doc/Trigger">Trigger
+                        <small>触发器</small>
+                    </a></li>
                 </ul>
-                <h3>日期</h3>
+                <h3>Form</h3>
                 <ul>
-                    <li><a href="#/doc/Calendar">Calendar</a></li>
-                    <li><a href="#/doc/DatePicker">DatePicker</a></li>
-                    <li><a href="#/doc/DateRangePicker">DateRangePicker</a></li>
-                    <li><a href="#/doc/TimeSpan">TimeSpan</a></li>
+                    <li><a href="#/doc/Validator">Validator
+                        <small>校验工具</small>
+                    </a></li>
+                    <li><a href="#/doc/Form">Form
+                        <small>表单</small>
+                    </a></li>
+                    <li><a href="#/doc/Radio">Radio & Checkbox
+                        <small>单(多)选框</small>
+                    </a></li>
+                    <li><a href="#/doc/Switch">Switch
+                        <small>开关</small>
+                    </a></li>
+                    <li><a href="#/doc/InputNumber">InputNumber
+                        <small>数字输入框</small>
+                    </a></li>
+                    <li><a href="#/doc/Select">Select
+                        <small>选择</small>
+                    </a></li>
+                    <li><a href="#/doc/DropDown">DropDown
+                        <small>下拉框</small>
+                    </a></li>
+                    <li><a href="#/doc/Dropper">Dropper
+                        <small>上传</small>
+                    </a></li>
                 </ul>
-                <h3>浮层</h3>
+                <h3>Loading</h3>
                 <ul>
-                    <li><a href="#/doc/Tip">Tip</a></li>
-                    <li><a href="#/doc/Dialog">Dialog</a></li>
-                    <li><a href="#/doc/Modal">Modal</a></li>
-                    <li><a href="#/doc/Trigger">Trigger</a></li>
+                    <li><a href="#/doc/Loading">Loading
+                        <small>加载中</small>
+                    </a></li>
+                    <li><a href="#/doc/NProgress">NProgress
+                        <small>请求进度条</small>
+                    </a></li>
                 </ul>
-                <h3>表单</h3>
+                <h3>Other</h3>
                 <ul>
-                    <li><a href="#/doc/Form">Form</a></li>
-                    <li><a href="#/doc/Validator">Validator</a></li>
-                    <li><a href="#/doc/Radio">Radio & Checkbox</a></li>
-                    <li><a href="#/doc/Switch">Switch</a></li>
-                    <li><a href="#/doc/InputNumber">InputNumber</a></li>
-                    <li><a href="#/doc/DropDown">DropDown</a></li>
-                    <li><a href="#/doc/Select">Select</a></li>
-                    <li><a href="#/doc/Transfer">Transfer</a></li>
-                    <li><a href="#/doc/Dropper">Dropper</a></li>
+                    <li><a href="#/doc/Storage">Storage
+                        <small>存储</small>
+                    </a></li>
                 </ul>
             </div>
         );
