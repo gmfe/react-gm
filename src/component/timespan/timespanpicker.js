@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import moment from 'moment';
 import TimeSpan from './timespan.js';
-import Trigger from './trigger';
+import Trigger from '../trigger';
 import _ from 'underscore';
 
 class TimeSpanPicker extends React.Component {

@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
-import Flex from './flex';
-import Trigger from './trigger';
+import Flex from '../flex';
+import Trigger from '../trigger';
 
 class Cascader extends React.Component {
     constructor(props) {

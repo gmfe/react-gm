@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import _ from 'underscore';
-import Flex from './flex';
+import Flex from '../flex';
 import classNames from 'classnames';
-import Trigger from './trigger';
+import Trigger from '../trigger';
 // 略复杂了，脱离初衷，应该把单选和多选版本分开，改代码请周知
 
 // 在内部，this.state.selected 是个数组处理

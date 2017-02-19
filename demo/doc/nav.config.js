@@ -60,7 +60,6 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/Form">Form</a></li>
                     <li><a href="#/doc/Validator">Validator</a></li>
                     <li><a href="#/doc/Radio">Radio & Checkbox</a></li>
-                    <li><a href="#/doc/Checkbox">Checkbox</a></li>
                     <li><a href="#/doc/Switch">Switch</a></li>
                     <li><a href="#/doc/InputNumber">InputNumber</a></li>
                     <li><a href="#/doc/DropDown">DropDown</a></li>

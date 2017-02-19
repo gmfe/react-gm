@@ -1,5 +1,5 @@
 import React from 'react';
-import Flex from './flex';
+import Flex from '../flex';
 import _ from 'underscore';
 
 class TreeSelect extends React.Component {

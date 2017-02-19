@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
-import Flex from '../component/flex';
+import Flex from '../flex';
 import _ from 'underscore';
-import Validator from '../validator';
+import Validator from '../../validator';
 
 class FormControl extends React.Component {
     render() {

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import Modal from './modal';
+import Modal from '../modal';
 import _ from 'underscore';
 
 // 搞的复杂了，后续要补充文档

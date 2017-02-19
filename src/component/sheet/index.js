@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
-import Pagination from './pagination.js';
-import PaginationText from './pagination.text.js';
+import Pagination from '../pagination/pagination.js';
+import PaginationText from '../pagination/pagination.text.js';
 import _ from 'underscore';
 import classNames from 'classnames';
 

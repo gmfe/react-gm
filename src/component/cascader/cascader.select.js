@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import _ from 'underscore';
 import Cascader from './cascader';
-import Flex from './flex';
+import Flex from '../flex';
 
 // TODO 后续考虑拆开单选，多选。 耦合起来太蛋疼。
 

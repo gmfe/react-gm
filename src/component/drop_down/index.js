@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
-import Trigger from './trigger';
+import Trigger from '../trigger';
 
 class Item extends React.Component {
     render() {

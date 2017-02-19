@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import _ from 'underscore';
-import Flex from '../component/flex';
+import Flex from '../flex';
 import Select from '../select';
-import {isMac} from '../util';
+import {isMac} from '../../util';
 
 const {Option} = Select;
 

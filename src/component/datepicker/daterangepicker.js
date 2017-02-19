@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import moment from 'moment';
-import Calendar from './calendar.js';
+import Calendar from '../calendar';
 import classNames from 'classnames';
-import Trigger from './trigger';
+import Trigger from '../trigger';
 import _ from 'underscore';
 
 class DateRangePicker extends React.Component {

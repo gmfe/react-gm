@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
-import Flex from './flex';
-import Collapse from './collapse';
+import Flex from '../flex';
+import Collapse from '../collapse';
 import _ from 'underscore';
 import classNames from 'classnames';
 
