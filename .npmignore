@@ -1,7 +1,7 @@
 .idea
-/deploy
-/demo
-/build
-/docs
 .happypack
+/build
+/demo
+/deploy
+/docs
 .DS_Store
