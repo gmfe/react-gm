@@ -2,6 +2,8 @@
 
 愿景：致力于快速搭建项目，像搭积木一样
 
+![team](/react-gm/demo/images/chrome.jpeg)
+
 ## Install
 
 `npm install react-gm -D`
