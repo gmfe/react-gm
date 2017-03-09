@@ -9,7 +9,7 @@ class NavConfig extends React.Component {
                         <span>布局规范</span>
                         <a href="#/standard/LayoutRule">一级页面布局</a>
                         <a href="#/standard/LayoutRule?anchor=xiang-qing-ye-mian-bu-ju">详情页面布局</a>
-                        <a href="#/standard/LayoutRule?anchor=guo-du-ye-mian-bu-ju">过度页面布局</a>
+                        <a href="#/standard/LayoutRule?anchor=guo-du-ye-mian-bu-ju">过渡页面布局</a>
                     </div>
                     <div>
                         <span>模块规范</span>
