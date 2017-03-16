@@ -13,24 +13,30 @@ class DateRangePicker extends React.Component {
         this.handleSelectBegin = ::this.handleSelectBegin;
         this.handleSelectEnd = ::this.handleSelectEnd;
     }
-
+    
     handleSelectBegin(date) {
         this.props.onChange(date, this.props.end);
         setTimeout(() => {
             this.refEndTarget.click();
         }, 0);
     }
-
+    
     handleSelectEnd(date) {
         this.props.onChange(this.props.begin, date);
         setTimeout(() => {
             this.refDateRangePicker.click();
         }, 0);
     }
-
+    
     render() {
-        const {begin, end, beginProps, endProps, inputClassName, disabled} = this.props;
-
+        const {
+            begin, end,
+            beginProps, endProps,
+            inputClassName,
+            disabled,
+            beginRenderInputValue, endRenderInputValue
+        } = this.props;
+        
         return (
             <div
                 ref={ref => this.refDateRangePicker = ref}
@@ -50,7 +56,7 @@ class DateRangePicker extends React.Component {
                         type="text"
                         className={inputClassName}
                         disabled={disabled}
-                        value={begin ? moment(begin).format('YYYY-MM-DD') : ''}
+                        value={begin ? (beginRenderInputValue ? beginRenderInputValue(begin) : moment(begin).format('YYYY-MM-DD')) : ''}
                         onChange={_.noop}
                     />
                 </Trigger>
@@ -72,7 +78,7 @@ class DateRangePicker extends React.Component {
                         type="text"
                         className={inputClassName}
                         disabled={disabled}
-                        value={end ? moment(end).format('YYYY-MM-DD') : ''}
+                        value={end ? (endRenderInputValue ? endRenderInputValue(end) : moment(end).format('YYYY-MM-DD')) : ''}
                         onChange={_.noop}
                     />
                 </Trigger>
@@ -90,17 +96,19 @@ DateRangePicker.propTypes = {
     inputClassName: PropTypes.string,
     disabled: PropTypes.bool,
     className: PropTypes.string,
-
+    
     beginProps: PropTypes.shape({
         min: React.PropTypes.object,
         max: React.PropTypes.object,
         disabledDate: React.PropTypes.func
     }),
+    beginRenderInputValue: PropTypes.func,
     endProps: PropTypes.shape({
         min: React.PropTypes.object,
         max: React.PropTypes.object,
         disabledDate: React.PropTypes.func
-    })
+    }),
+    endRenderInputValue: PropTypes.func
 };
 
 DateRangePicker.defaultProps = {

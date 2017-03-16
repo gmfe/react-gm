@@ -4232,7 +4232,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                beginProps = _props.beginProps,
 	                endProps = _props.endProps,
 	                inputClassName = _props.inputClassName,
-	                disabled = _props.disabled;
+	                disabled = _props.disabled,
+	                beginRenderInputValue = _props.beginRenderInputValue,
+	                endRenderInputValue = _props.endRenderInputValue;
 
 
 	            return _react2.default.createElement(
@@ -4256,7 +4258,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        type: 'text',
 	                        className: inputClassName,
 	                        disabled: disabled,
-	                        value: begin ? (0, _moment2.default)(begin).format('YYYY-MM-DD') : '',
+	                        value: begin ? beginRenderInputValue ? beginRenderInputValue(begin) : (0, _moment2.default)(begin).format('YYYY-MM-DD') : '',
 	                        onChange: _underscore2.default.noop
 	                    })
 	                ),
@@ -4283,7 +4285,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        type: 'text',
 	                        className: inputClassName,
 	                        disabled: disabled,
-	                        value: end ? (0, _moment2.default)(end).format('YYYY-MM-DD') : '',
+	                        value: end ? endRenderInputValue ? endRenderInputValue(end) : (0, _moment2.default)(end).format('YYYY-MM-DD') : '',
 	                        onChange: _underscore2.default.noop
 	                    })
 	                )
@@ -4309,11 +4311,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        max: _react2.default.PropTypes.object,
 	        disabledDate: _react2.default.PropTypes.func
 	    }),
+	    beginRenderInputValue: _react.PropTypes.func,
 	    endProps: _react.PropTypes.shape({
 	        min: _react2.default.PropTypes.object,
 	        max: _react2.default.PropTypes.object,
 	        disabledDate: _react2.default.PropTypes.func
-	    })
+	    }),
+	    endRenderInputValue: _react.PropTypes.func
 	};
 
 	DateRangePicker.defaultProps = {
