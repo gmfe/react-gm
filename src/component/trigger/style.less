@@ -4,10 +4,51 @@
   .gm-trigger-popup {
     position: absolute;
     top: 100%;
-    margin-top: 2px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     left: 0;
     z-index: 1000;
-    overflow: auto;
+
+    // 默认arrow边框颜色 @gm-border-color
+    // 默认arrow背景色 #FFF
+    .gm-trigger-arrow {
+      position: absolute;
+      top: -5px;
+      left: 10px;
+      width: 10px;
+      height: 10px;
+      background-color: #FFF;
+      border-top: 1px solid @gm-border-color;
+      border-right: none;
+      border-bottom: none;
+      border-left: 1px solid @gm-border-color;
+      transform: rotate(45deg);
+      z-index:1001;
+
+      &.gm-trigger-arrow-top {
+        position: absolute;
+        top: 100% - 3px;
+        border-top: none;
+        border-right: 1px solid @gm-border-color;
+        border-bottom: 1px solid @gm-border-color;
+        border-left: none;
+        &.gm-trigger-arrow-right {
+          position: absolute;
+          right: -10px;
+          border-top: none;
+          border-right: 1px solid @gm-border-color;
+          border-bottom: 1px solid @gm-border-color;
+          border-left: none;
+        }
+      }
+      &.gm-trigger-arrow-right {
+        left: 100% - 10px;
+        border-top: 1px solid @gm-border-color;
+        border-right: none;
+        border-bottom: none;
+        border-left: 1px solid @gm-border-color;
+      }
+    }
   }
 
   .gm-trigger-popup-right {
