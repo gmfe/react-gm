@@ -116,16 +116,18 @@ class Trigger extends React.Component {
         }
     }
 
-    // 添加浮层的三角标
+    // 添加浮层的三角标，三角标背景用border模拟，三角标的boder用box-shadow模拟
     renderTriggerArrow(showArrow = false, arrowBgColor = '#FFF', arrowBorderColor) {
+        let arrowStyle = {};
         if(showArrow) {
             const {right, top} = this.props;
-            let arrowBorderStyle = {
-                'backgroundColor': arrowBgColor
+            arrowStyle = {
+                'borderRightColor': arrowBgColor,
+                'borderBottomColor': arrowBgColor
             };
             if(arrowBorderColor) {
-                arrowBorderStyle = Object.assign(arrowBorderStyle, {
-                    'borderColor': arrowBorderColor
+                arrowStyle = Object.assign({}, arrowStyle, {
+                    'boxShadow': `1px 1px 0px ${arrowBorderColor}`
                 });
             }
 
@@ -135,7 +137,7 @@ class Trigger extends React.Component {
                         'gm-trigger-arrow-right': right,
                         'gm-trigger-arrow-top': top
                     })}
-                    style={arrowBorderStyle}
+                    style={arrowStyle}
                 >
                 </div>
             );
@@ -159,7 +161,7 @@ class Trigger extends React.Component {
 
         return React.cloneElement(component, Object.assign({}, componentProps, {
             className: classNames(component.props.className, 'gm-trigger'),
-            children: [child,
+            children: [child, active ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor): undefined,
                 active ? React.createElement('div', {
                         key: 'popup',
                         ref: ref => this.refPopup = ref,
@@ -167,7 +169,7 @@ class Trigger extends React.Component {
                             'gm-trigger-popup-right': right,
                             'gm-trigger-popup-top': top
                         }),
-                        children: [active ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor): undefined, popup]
+                        children: [popup]
                     }) : undefined]
         }));
     }

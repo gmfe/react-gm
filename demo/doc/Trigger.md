@@ -10,7 +10,7 @@ class TriggerWrap extends React.Component {
     renderPopup(text) {
         return (
             <div className="gm-border" style={{width: '200px', height: '200px', background: 'red'}}>
-                <div>{text ? text : 'default  arrow'}</div>
+                <div>{text ? text : 'popup'}</div>
             </div>
         );
     }
@@ -20,28 +20,28 @@ class TriggerWrap extends React.Component {
             <div>
                 <div>三种行为 focus click hover</div>
                 <Flex>
-                    <Trigger showArrow component={<div/>} popup={this.renderPopup()}>
+                    <Trigger showArrow component={<div/>} popup={this.renderPopup('default showArrow')}>
                         <button className="btn btn-default">focus me default</button>
                     </Trigger>
-                    <Trigger showArrow component={<div/>} type="click" popup={this.renderPopup()}>
+                    <Trigger component={<div/>} type="click" popup={this.renderPopup()}>
                         <button className="btn btn-default">click me</button>
                     </Trigger>
-                    <Trigger showArrow component={<div/>} type="hover" popup={this.renderPopup()}>
+                    <Trigger showArrow component={<div/>} type="hover" popup={this.renderPopup('default showArrow')}>
                         <button className="btn btn-default">hover me</button>
                     </Trigger>
                 </Flex>
                 <div>各种位置</div>
                 <Flex>
-                    <Trigger showArrow arrowBorderColor='#FFF' arrowBgColor='#F00' component={<div/>} popup={this.renderPopup("arrowBorderColor='#FFF';  arrowBgColor='#F00'")}>
+                    <Trigger showArrow arrowBorderColor='#F00' arrowBgColor='#FF0' component={<div/>} popup={this.renderPopup("arrowBorderColor=#F00  arrowBgColor=#FF0")}>
                         <button className="btn btn-default">focus me(default)</button>
                     </Trigger>
-                    <Trigger showArrow arrowBorderColor='#FFF' arrowBgColor='#F00' component={<div/>} right popup={this.renderPopup("arrowBorderColor='#FFF' arrowBgColor='#F00'")}>
+                    <Trigger showArrow arrowBorderColor='#F0F'  component={<div/>} right popup={this.renderPopup("arrowBorderColor=#F0F arrowBgColor=default")}>
                         <button className="btn btn-default">focus me(right)</button>
                     </Trigger>
-                    <Trigger showArrow arrowBorderColor='#FFF' component={<div/>} top popup={this.renderPopup("arrowBorderColor='#FFF'")}>
+                    <Trigger showArrow arrowBgColor='#00F' component={<div/>} top popup={this.renderPopup("arrowBgColor=#00F    arrowBorderColor=default")}>
                         <button className="btn btn-default">focus me(top)</button>
                     </Trigger>
-                    <Trigger showArrow component={<div/>} right top popup={this.renderPopup()}>
+                    <Trigger showArrow component={<div/>} right top popup={this.renderPopup('default showArrow')}>
                         <button className="btn btn-default">focus me(right top)</button>
                     </Trigger>
                 </Flex>
