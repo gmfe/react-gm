@@ -117,7 +117,7 @@ class Trigger extends React.Component {
     }
 
     // 添加浮层的三角标，三角标背景用border模拟，三角标的boder用box-shadow模拟
-    renderTriggerArrow(showArrow = false, arrowBgColor = '#FFF', arrowBorderColor) {
+    renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) {
         let arrowStyle = {};
         if (showArrow) {
             const {right, top} = this.props;
@@ -191,7 +191,9 @@ Trigger.propTypes = {
 };
 
 Trigger.defaultProps = {
-    type: 'focus'
+    type: 'focus',
+    showArrow: false,
+    arrowBgColor: '#FFF'
 };
 
 export default Trigger;
