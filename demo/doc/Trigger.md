@@ -72,3 +72,6 @@ class TriggerWrap extends React.Component {
 - `top (bool)` 在目标的上方。 可和right组合用。
 - `children (node)` 必须单个元素，非string
 - `disabled` 不会触发浮层，优先级比`popup`的 disabled 高。 建议使用popup disabled属性，因为有disabled样式。
+- `showArrow`  是否显示trigger的三角标
+- `arrowBgColor`  设置三角标的背景颜色  如： '#FF0'
+- `arrowBorderColor`  设置三角标的border颜色  如： '#FF0'
