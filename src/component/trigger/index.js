@@ -119,13 +119,13 @@ class Trigger extends React.Component {
     // 添加浮层的三角标，三角标背景用border模拟，三角标的boder用box-shadow模拟
     renderTriggerArrow(showArrow = false, arrowBgColor = '#FFF', arrowBorderColor) {
         let arrowStyle = {};
-        if(showArrow) {
+        if (showArrow) {
             const {right, top} = this.props;
             arrowStyle = {
                 'borderRightColor': arrowBgColor,
                 'borderBottomColor': arrowBgColor
             };
-            if(arrowBorderColor) {
+            if (arrowBorderColor) {
                 arrowStyle = Object.assign({}, arrowStyle, {
                     'boxShadow': `1px 1px 0px ${arrowBorderColor}`
                 });
@@ -133,7 +133,7 @@ class Trigger extends React.Component {
 
             return (
                 <div
-                    className={classNames('gm-trigger-arrow',{
+                    className={classNames('gm-trigger-arrow', {
                         'gm-trigger-arrow-right': right,
                         'gm-trigger-arrow-top': top
                     })}
@@ -145,7 +145,9 @@ class Trigger extends React.Component {
     }
 
     render() {
-        const {component, children, popup, type, right, top,showArrow, arrowBgColor, arrowBorderColor} = this.props;
+        const {component, children, popup,
+            type, right, top,
+            showArrow, arrowBgColor, arrowBorderColor} = this.props;
         const child = React.Children.only(children);
         const {active} = this.state;
 
@@ -161,7 +163,7 @@ class Trigger extends React.Component {
 
         return React.cloneElement(component, Object.assign({}, componentProps, {
             className: classNames(component.props.className, 'gm-trigger'),
-            children: [child, active ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor): undefined,
+            children: [child, active ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) : undefined,
                 active ? React.createElement('div', {
                         key: 'popup',
                         ref: ref => this.refPopup = ref,
