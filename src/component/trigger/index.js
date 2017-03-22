@@ -116,8 +116,38 @@ class Trigger extends React.Component {
         }
     }
 
+    // 添加浮层的三角标，三角标背景用border模拟，三角标的boder用box-shadow模拟
+    renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) {
+        let arrowStyle = {};
+        if (showArrow) {
+            const {right, top} = this.props;
+            arrowStyle = {
+                'borderRightColor': arrowBgColor,
+                'borderBottomColor': arrowBgColor
+            };
+            if (arrowBorderColor) {
+                arrowStyle = Object.assign({}, arrowStyle, {
+                    'boxShadow': `1px 1px 0px ${arrowBorderColor}`
+                });
+            }
+
+            return (
+                <div
+                    className={classNames('gm-trigger-arrow', {
+                        'gm-trigger-arrow-right': right,
+                        'gm-trigger-arrow-top': top
+                    })}
+                    style={arrowStyle}
+                >
+                </div>
+            );
+        }
+    }
+
     render() {
-        const {component, children, popup, type, right, top} = this.props;
+        const {component, children, popup,
+            type, right, top,
+            showArrow, arrowBgColor, arrowBorderColor} = this.props;
         const child = React.Children.only(children);
         const {active} = this.state;
 
@@ -133,14 +163,16 @@ class Trigger extends React.Component {
 
         return React.cloneElement(component, Object.assign({}, componentProps, {
             className: classNames(component.props.className, 'gm-trigger'),
-            children: [child, active ? React.createElement('div', {
-                key: 'popup',
-                ref: ref => this.refPopup = ref,
-                className: classNames('gm-trigger-popup ', {
-                    'gm-trigger-popup-right': right,
-                    'gm-trigger-popup-top': top
-                })
-            }, popup) : undefined]
+            children: [child, active ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) : undefined,
+                active ? React.createElement('div', {
+                        key: 'popup',
+                        ref: ref => this.refPopup = ref,
+                        className: classNames('gm-trigger-popup ', {
+                            'gm-trigger-popup-right': right,
+                            'gm-trigger-popup-top': top
+                        }),
+                        children: [popup]
+                    }) : undefined]
         }));
     }
 }
@@ -152,11 +184,16 @@ Trigger.propTypes = {
     children: PropTypes.element,
     right: PropTypes.bool,
     top: PropTypes.bool,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    showArrow: PropTypes.bool,          // 是否显示三角标
+    arrowBgColor: PropTypes.string,     // 三角标的背景颜色
+    arrowBorderColor: PropTypes.string  // 三角标的border颜色
 };
 
 Trigger.defaultProps = {
-    type: 'focus'
+    type: 'focus',
+    showArrow: false,
+    arrowBgColor: '#FFF'
 };
 
 export default Trigger;

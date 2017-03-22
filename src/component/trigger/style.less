@@ -1,13 +1,45 @@
 .gm-trigger {
   position: relative;
+  // 默认arrow边框颜色 @gm-border-color
+  // 默认arrow背景色 #FFF
+  .gm-trigger-arrow {
+    position: absolute;
+    bottom: -11px;
+    left: 10px;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-right: 4px solid #FFF;
+    border-bottom: 4px solid #FFF;
+    border-left: 4px solid transparent;
+    box-shadow: 1px 1px 0px @gm-border-color;
+    transform: rotate(-135deg);
+    z-index: 1001;
 
+    &.gm-trigger-arrow-top {
+      position: absolute;
+      top: -11px;
+      transform: rotate(45deg);
+      &.gm-trigger-arrow-right {
+        position: absolute;
+        top: -11px;
+        transform: rotate(45deg);
+      }
+    }
+    &.gm-trigger-arrow-right {
+      position: absolute;
+      left: auto;
+      right: 10px;
+      transform: rotate(-135deg);
+    }
+  }
   .gm-trigger-popup {
     position: absolute;
     top: 100%;
-    margin-top: 2px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     left: 0;
     z-index: 1000;
-    overflow: auto;
   }
 
   .gm-trigger-popup-right {

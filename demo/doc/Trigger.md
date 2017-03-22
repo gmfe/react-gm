@@ -7,10 +7,10 @@ imports:
 ::: demo
 ```js
 class TriggerWrap extends React.Component {
-    renderPopup() {
+    renderPopup(text) {
         return (
             <div className="gm-border" style={{width: '200px', height: '200px', background: 'red'}}>
-                <div>popup</div>
+                <div>{text ? text : 'popup'}</div>
             </div>
         );
     }
@@ -20,34 +20,34 @@ class TriggerWrap extends React.Component {
             <div>
                 <div>三种行为 focus click hover</div>
                 <Flex>
-                    <Trigger component={<div/>} popup={this.renderPopup()}>
+                    <Trigger showArrow component={<div/>} popup={this.renderPopup('default showArrow')}>
                         <button className="btn btn-default">focus me default</button>
                     </Trigger>
                     <Trigger component={<div/>} type="click" popup={this.renderPopup()}>
                         <button className="btn btn-default">click me</button>
                     </Trigger>
-                    <Trigger component={<div/>} type="hover" popup={this.renderPopup()}>
+                    <Trigger showArrow component={<div/>} type="hover" popup={this.renderPopup('default showArrow')}>
                         <button className="btn btn-default">hover me</button>
                     </Trigger>
                 </Flex>
                 <div>各种位置</div>
                 <Flex>
-                    <Trigger component={<div/>} popup={this.renderPopup()}>
+                    <Trigger showArrow arrowBorderColor='#F00' arrowBgColor='#FF0' component={<div/>} popup={this.renderPopup("arrowBorderColor=#F00  arrowBgColor=#FF0")}>
                         <button className="btn btn-default">focus me(default)</button>
                     </Trigger>
-                    <Trigger component={<div/>} right popup={this.renderPopup()}>
+                    <Trigger showArrow arrowBorderColor='#F0F'  component={<div/>} right popup={this.renderPopup("arrowBorderColor=#F0F arrowBgColor=default")}>
                         <button className="btn btn-default">focus me(right)</button>
                     </Trigger>
-                    <Trigger component={<div/>} top popup={this.renderPopup()}>
+                    <Trigger showArrow arrowBgColor='#00F' component={<div/>} top popup={this.renderPopup("arrowBgColor=#00F    arrowBorderColor=default")}>
                         <button className="btn btn-default">focus me(top)</button>
                     </Trigger>
-                    <Trigger component={<div/>} right top popup={this.renderPopup()}>
+                    <Trigger showArrow component={<div/>} right top popup={this.renderPopup('default showArrow')}>
                         <button className="btn btn-default">focus me(right top)</button>
                     </Trigger>
                 </Flex>
                 <div>disabled</div>
                 <Flex>
-                    <Trigger component={<div/>} disabled popup={this.renderPopup()}>
+                    <Trigger showArrow component={<div/>} disabled popup={this.renderPopup()}>
                         <button className="btn btn-default">focus me(disabled)</button>
                     </Trigger>
                     <Trigger component={<div/>} popup={this.renderPopup()}>
@@ -72,3 +72,6 @@ class TriggerWrap extends React.Component {
 - `top (bool)` 在目标的上方。 可和right组合用。
 - `children (node)` 必须单个元素，非string
 - `disabled` 不会触发浮层，优先级比`popup`的 disabled 高。 建议使用popup disabled属性，因为有disabled样式。
+- `showArrow`  是否显示trigger的三角标
+- `arrowBgColor`  设置三角标的背景颜色  如： '#FF0'
+- `arrowBorderColor`  设置三角标的border颜色  如： '#FF0'
