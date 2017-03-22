@@ -6767,13 +6767,47 @@ button.close {
 .gm-trigger {
   position: relative;
 }
+.gm-trigger .gm-trigger-arrow {
+  position: absolute;
+  bottom: -11px;
+  left: 10px;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-right: 4px solid #FFF;
+  border-bottom: 4px solid #FFF;
+  border-left: 4px solid transparent;
+  box-shadow: 1px 1px 0px #ddd;
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+  z-index: 1001;
+}
+.gm-trigger .gm-trigger-arrow.gm-trigger-arrow-top {
+  position: absolute;
+  top: -11px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.gm-trigger .gm-trigger-arrow.gm-trigger-arrow-top.gm-trigger-arrow-right {
+  position: absolute;
+  top: -11px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.gm-trigger .gm-trigger-arrow.gm-trigger-arrow-right {
+  position: absolute;
+  left: auto;
+  right: 10px;
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+}
 .gm-trigger .gm-trigger-popup {
   position: absolute;
   top: 100%;
-  margin-top: 2px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   left: 0;
   z-index: 1000;
-  overflow: auto;
 }
 .gm-trigger .gm-trigger-popup-right {
   right: 0;

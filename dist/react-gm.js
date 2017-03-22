@@ -653,18 +653,52 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }, 500);
 	            }
 	        }
+
+	        // 添加浮层的三角标，三角标背景用border模拟，三角标的boder用box-shadow模拟
+
+	    }, {
+	        key: 'renderTriggerArrow',
+	        value: function renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) {
+	            var arrowStyle = {};
+	            if (showArrow) {
+	                var _props4 = this.props,
+	                    right = _props4.right,
+	                    top = _props4.top;
+
+	                arrowStyle = {
+	                    'borderRightColor': arrowBgColor,
+	                    'borderBottomColor': arrowBgColor
+	                };
+	                if (arrowBorderColor) {
+	                    arrowStyle = Object.assign({}, arrowStyle, {
+	                        'boxShadow': '1px 1px 0px ' + arrowBorderColor
+	                    });
+	                }
+
+	                return _react2.default.createElement('div', {
+	                    className: (0, _classnames2.default)('gm-trigger-arrow', {
+	                        'gm-trigger-arrow-right': right,
+	                        'gm-trigger-arrow-top': top
+	                    }),
+	                    style: arrowStyle
+	                });
+	            }
+	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this3 = this;
 
-	            var _props4 = this.props,
-	                component = _props4.component,
-	                children = _props4.children,
-	                popup = _props4.popup,
-	                type = _props4.type,
-	                right = _props4.right,
-	                top = _props4.top;
+	            var _props5 = this.props,
+	                component = _props5.component,
+	                children = _props5.children,
+	                popup = _props5.popup,
+	                type = _props5.type,
+	                right = _props5.right,
+	                top = _props5.top,
+	                showArrow = _props5.showArrow,
+	                arrowBgColor = _props5.arrowBgColor,
+	                arrowBorderColor = _props5.arrowBorderColor;
 
 	            var child = _react2.default.Children.only(children);
 	            var active = this.state.active;
@@ -682,7 +716,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.cloneElement(component, Object.assign({}, componentProps, {
 	                className: (0, _classnames2.default)(component.props.className, 'gm-trigger'),
-	                children: [child, active ? _react2.default.createElement('div', {
+	                children: [child, active ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) : undefined, active ? _react2.default.createElement('div', {
 	                    key: 'popup',
 	                    ref: function ref(_ref) {
 	                        return _this3.refPopup = _ref;
@@ -690,8 +724,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    className: (0, _classnames2.default)('gm-trigger-popup ', {
 	                        'gm-trigger-popup-right': right,
 	                        'gm-trigger-popup-top': top
-	                    })
-	                }, popup) : undefined]
+	                    }),
+	                    children: [popup]
+	                }) : undefined]
 	            }));
 	        }
 	    }]);
@@ -706,11 +741,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    children: _react.PropTypes.element,
 	    right: _react.PropTypes.bool,
 	    top: _react.PropTypes.bool,
-	    disabled: _react.PropTypes.bool
+	    disabled: _react.PropTypes.bool,
+	    showArrow: _react.PropTypes.bool, // 是否显示三角标
+	    arrowBgColor: _react.PropTypes.string, // 三角标的背景颜色
+	    arrowBorderColor: _react.PropTypes.string // 三角标的border颜色
 	};
 
 	Trigger.defaultProps = {
-	    type: 'focus'
+	    type: 'focus',
+	    showArrow: false,
+	    arrowBgColor: '#FFF'
 	};
 
 	exports.default = Trigger;
