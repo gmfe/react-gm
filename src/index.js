@@ -38,6 +38,7 @@ import Validator from './validator';
 import Transfer from './component/transfer';
 
 import Select from './component/select';
+import Input from './component/input/input';
 
 import './index.less';
 
@@ -117,5 +118,6 @@ module.exports = {
     Radio, RadioGroup,
     Checkbox, CheckboxGroup,
     Select, Option,
-    Transfer
+    Transfer,
+    Input
 };
