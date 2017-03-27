@@ -1,7 +1,18 @@
 .gm-collapse {
-  display: none;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all .2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 
   &.in {
-    display: block;
+    opacity: 1;
+    height: auto;
+    padding: 0;
+  }
+
+  &.gm-collapsing {
+    padding-bottom: 5px;
+    opacity: 1;
+    height: auto;
   }
 }

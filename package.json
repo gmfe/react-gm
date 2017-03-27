@@ -32,7 +32,7 @@
   "homepage": "https://github.com/gmfe/react-gm#readme",
   "dependencies": {
     "classnames": "^2.2.5",
-    "gm-font": "^2.0.4",
+    "gm-font": "^2.0.6",
     "gm-util": "^2.1.4",
     "moment": "^2.15.2",
     "react": "^15.3.2",

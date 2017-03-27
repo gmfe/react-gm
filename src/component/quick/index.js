@@ -26,7 +26,7 @@ class QuickPanel extends React.Component {
                     {title}
                     {collapse ? (
                         <a onClick={::this.handleCollapse} style={{fontSize: '12px', marginLeft: '25px'}}>
-                            {collapse === true ? (this.state.in ? "收拢明细": "展现明细") : collapse}
+                            {collapse === true ? (this.state.in ? "收拢明细" : "展现明细") : collapse}
                         </a>
                     ) : undefined}
                     <Flex flex/>
@@ -114,21 +114,59 @@ class QuickInfo extends React.Component {
 class QuickFilter extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            show: false
+        };
+
+        this.handleCollape = ::this.handleCollape;
+    }
+
+    handleCollape() {
+        this.setState({
+            show: !this.state.show
+        });
     }
 
     render() {
+        const {collapseRender, children} = this.props,
+            {show} = this.state;
+
         return (
-            <div className={classNames("gm-bg gm-border gm-quick gm-quick-filter", this.props.className)}>
-                {this.props.children}
+            <div className={classNames("gm-bg gm-border gm-quick gm-quick-filter gm-padding-15", this.props.className, {
+                'gm-padding-bottom-0': collapseRender
+            })}>
+                {collapseRender ? <div>
+                    {show ? null : children}
+
+                    <Collapse in={show}>
+                        {show ? collapseRender() : null}
+                    </Collapse>
+
+                    <Flex justifyCenter className="gm-padding-5 gm-quick-filter-toggle"
+                          onClick={this.handleCollape}>
+                        {show ? '收拢筛选条件' : '展开筛选条件'}&nbsp;
+                        <i className={classNames('ifont', {
+                            'ifont-down': !show,
+                            'ifont-up': show
+                        })}/>
+                    </Flex>
+                </div> : children}
             </div>
         );
     }
 }
 
+QuickFilter.propTypes = {
+    collapseRender: PropTypes.func
+};
+
+
 class QuickTabItem extends React.Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
             <div>{this.props.children}</div>
@@ -186,7 +224,7 @@ class QuickTab extends React.Component {
                     ))}
                 </ul>
                 <div>
-                    { isStatic ?  tabPanels : tabPanels[activeTab] }
+                    { isStatic ? tabPanels : tabPanels[activeTab] }
                 </div>
             </div>
         );
@@ -201,7 +239,7 @@ QuickTab.propTypes = {
     right: PropTypes.element,
     isStatic: PropTypes.bool,
     children: (props, propName, componentName) => {
-        if(props.tabs && props.children && (props.tabs.length !== props.children.length)) {
+        if (props.tabs && props.children && (props.tabs.length !== props.children.length)) {
             return new Error(
                 'Invalid prop `children` supplied to' +
                 ' `' + componentName +

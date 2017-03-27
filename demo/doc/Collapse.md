@@ -32,6 +32,20 @@ class CollapseWrap extends React.Component {
                         <br/>
                         666666
                     </div>
+                    <div style={{background: 'red'}}>
+                        啦啦啦啦
+                        <br/>
+                        lalala
+                        <br/>
+                        666666
+                    </div>
+                    <div style={{background: 'red'}}>
+                        啦啦啦啦
+                        <br/>
+                        lalala
+                        <br/>
+                        666666
+                    </div>
                 </Collapse>
             </div>
         );
