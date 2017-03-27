@@ -6444,14 +6444,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    ),
 	                    _react2.default.createElement(
 	                        _flex2.default,
-	                        { justifyCenter: true, className: 'gm-padding-5 gm-quick-filter-toggle',
-	                            onClick: this.handleCollape },
-	                        show ? '收拢筛选条件' : '展开筛选条件',
-	                        '\xA0',
-	                        _react2.default.createElement('i', { className: (0, _classnames2.default)('ifont', {
-	                                'ifont-down': !show,
-	                                'ifont-up': show
-	                            }) })
+	                        { justifyCenter: true, className: 'gm-padding-5' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'gm-quick-filter-toggle', onClick: this.handleCollape },
+	                            show ? '收拢筛选条件' : '展开筛选条件',
+	                            '\xA0',
+	                            _react2.default.createElement('i', { className: (0, _classnames2.default)('ifont', {
+	                                    'ifont-down': !show,
+	                                    'ifont-up': show
+	                                }) })
+	                        )
 	                    )
 	                ) : children
 	            );
