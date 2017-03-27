@@ -1546,13 +1546,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Collapse = function (_React$Component) {
 	    _inherits(Collapse, _React$Component);
 
-	    function Collapse() {
+	    function Collapse(props) {
 	        _classCallCheck(this, Collapse);
 
-	        return _possibleConstructorReturn(this, (Collapse.__proto__ || Object.getPrototypeOf(Collapse)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Collapse.__proto__ || Object.getPrototypeOf(Collapse)).call(this, props));
+
+	        _this.state = {
+	            collapsing: false
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Collapse, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            var _this2 = this;
+
+	            if (nextProps.in !== this.props.in) {
+	                clearTimeout(this.timer);
+
+	                this.setState({
+	                    collapsing: true
+	                }, function () {
+	                    _this2.timer = setTimeout(function () {
+	                        _this2.setState({
+	                            collapsing: false
+	                        });
+	                    }, 350);
+	                });
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _props = this.props,
@@ -1561,8 +1585,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            return _react2.default.createElement(
 	                'div',
-	                _extends({}, rest, { className: (0, _classnames2.default)('gm-collapse', this.props.className, {
-	                        'in': this.props.in
+	                _extends({}, rest, {
+	                    className: (0, _classnames2.default)('gm-collapse', this.props.className, {
+	                        'in': this.props.in && !this.state.collapsing,
+	                        'gm-collapsing': this.state.collapsing
 	                    }) }),
 	                children
 	            );
@@ -1573,7 +1599,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	Collapse.propTypes = {
-	    in: _react.PropTypes.bool.isRequired
+	    in: _react.PropTypes.bool.isRequired,
+	    collapsing: _react.PropTypes.bool
 	};
 
 	exports.default = Collapse;
@@ -6375,22 +6402,68 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function QuickFilter(props) {
 	        _classCallCheck(this, QuickFilter);
 
-	        return _possibleConstructorReturn(this, (QuickFilter.__proto__ || Object.getPrototypeOf(QuickFilter)).call(this, props));
+	        var _this4 = _possibleConstructorReturn(this, (QuickFilter.__proto__ || Object.getPrototypeOf(QuickFilter)).call(this, props));
+
+	        _this4.state = {
+	            show: false
+	        };
+
+	        _this4.handleCollape = _this4.handleCollape.bind(_this4);
+	        return _this4;
 	    }
 
 	    _createClass(QuickFilter, [{
+	        key: 'handleCollape',
+	        value: function handleCollape() {
+	            this.setState({
+	                show: !this.state.show
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _props2 = this.props,
+	                collapseRender = _props2.collapseRender,
+	                children = _props2.children,
+	                show = this.state.show;
+
+
 	            return _react2.default.createElement(
 	                'div',
-	                { className: (0, _classnames2.default)("gm-bg gm-border gm-quick gm-quick-filter", this.props.className) },
-	                this.props.children
+	                { className: (0, _classnames2.default)("gm-bg gm-border gm-quick gm-quick-filter gm-padding-15", this.props.className, {
+	                        'gm-padding-bottom-0': collapseRender
+	                    }) },
+	                collapseRender ? _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    show ? null : children,
+	                    _react2.default.createElement(
+	                        _collapse2.default,
+	                        { 'in': show },
+	                        show ? collapseRender() : null
+	                    ),
+	                    _react2.default.createElement(
+	                        _flex2.default,
+	                        { justifyCenter: true, className: 'gm-padding-5 gm-quick-filter-toggle',
+	                            onClick: this.handleCollape },
+	                        show ? '收拢筛选条件' : '展开筛选条件',
+	                        '\xA0',
+	                        _react2.default.createElement('i', { className: (0, _classnames2.default)('ifont', {
+	                                'ifont-down': !show,
+	                                'ifont-up': show
+	                            }) })
+	                    )
+	                ) : children
 	            );
 	        }
 	    }]);
 
 	    return QuickFilter;
 	}(_react2.default.Component);
+
+	QuickFilter.propTypes = {
+	    collapseRender: _react.PropTypes.func
+	};
 
 	var QuickTabItem = function (_React$Component5) {
 	    _inherits(QuickTabItem, _React$Component5);
@@ -6454,13 +6527,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function render() {
 	            var _this7 = this;
 
-	            var _props2 = this.props,
-	                tabs = _props2.tabs,
-	                children = _props2.children,
-	                active = _props2.active,
-	                onChange = _props2.onChange,
-	                isStatic = _props2.isStatic,
-	                rest = _objectWithoutProperties(_props2, ['tabs', 'children', 'active', 'onChange', 'isStatic']);
+	            var _props3 = this.props,
+	                tabs = _props3.tabs,
+	                children = _props3.children,
+	                active = _props3.active,
+	                onChange = _props3.onChange,
+	                isStatic = _props3.isStatic,
+	                rest = _objectWithoutProperties(_props3, ['tabs', 'children', 'active', 'onChange', 'isStatic']);
 
 	            var activeTab = this.state.active;
 
@@ -6541,12 +6614,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(QuickDesc, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props3 = this.props,
-	                left = _props3.left,
-	                right = _props3.right,
-	                leftFlex = _props3.leftFlex,
-	                rightFlex = _props3.rightFlex,
-	                children = _props3.children;
+	            var _props4 = this.props,
+	                left = _props4.left,
+	                right = _props4.right,
+	                leftFlex = _props4.leftFlex,
+	                rightFlex = _props4.rightFlex,
+	                children = _props4.children;
 
 
 	            return _react2.default.createElement(

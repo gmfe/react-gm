@@ -5969,6 +5969,9 @@ button.close {
 .gm-border-top-0 {
   border-top: none;
 }
+.gm-border-0 {
+  border: none;
+}
 .gm-block {
   display: block;
 }
@@ -7025,10 +7028,21 @@ button.close {
   }
 }
 .gm-collapse {
-  display: none;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 .gm-collapse.in {
-  display: block;
+  opacity: 1;
+  height: auto;
+  padding: 0;
+}
+.gm-collapse.gm-collapsing {
+  padding-bottom: 5px;
+  opacity: 1;
+  height: auto;
 }
 .gm-dropdown .dropdown-menu {
   display: block;
@@ -7082,8 +7096,8 @@ button.close {
 .gm-quick.gm-quick-panel .gm-quick-title a {
   cursor: pointer;
 }
-.gm-quick.gm-quick-filter {
-  padding: 15px;
+.gm-quick.gm-quick-filter .gm-quick-filter-toggle {
+  cursor: pointer;
 }
 .gm-quick.gm-quick-desc .btn {
   min-width: 90px;
