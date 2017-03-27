@@ -12,93 +12,95 @@ imports:
 ::: demo
 ```js
 class Tab extends React.Component{
-    render() {
-        const collapse = <div>
-            <form className="form-horizontal">
-                <Flex alignCenter className="form-group">
-                    <Flex alignCenter className="col-md-2">
-                        <div className="gm-inline-block">
-                            <select className="form-control" style={{border: 'none'}}>
-                                <option value="1">按日期</option>    
-                                <option value="1">按周期</option>    
-                            </select>
-                        </div>
-                    </Flex>
-                    <div className="col-md-10">
-                        <DateRangePicker
-                            begin={new Date()}
-                            end={new Date()}
-                            onChange={_.noop}
-                            inputClassName="form-control"
-                        />
-                    </div>
-                </Flex>
-                <Flex alignCenter className="form-group">
-                    <Flex alignCenter className="col-md-2">商品筛选：</Flex>
-                    <div className="col-md-10">
-                        <div className="gm-inline-block">
-                            <input type="text" style={{width: '120px'}} placeholder="全部一级分类" className="form-control gm-inline-block gm-margin-right-5"/>
-                        </div>
-                        <div className="gm-inline-block">
-                            <input type="text" style={{width: '120px'}} placeholder="全部二级分类" className="form-control gm-inline-block gm-margin-right-5"/>
-                        </div>
-                        <div className="gm-inline-block">
-                            <input type="text" style={{width: '120px'}} placeholder="全部三级分类" className="form-control gm-inline-block"/>
-                        </div>
-                    </div>
-                </Flex>
-                <Flex alignCenter className="form-group">
-                    <Flex alignCenter className="col-md-2">任务筛选：</Flex>
-                    <div className="col-md-10">
-                        <div className="gm-inline-block gm-margin-right-5">
-                            <select className="form-control">
-                                <option value="1">全部分拣备注</option>    
-                                <option value="2">全部分拣备注</option>    
-                            </select>
-                        </div>
-                        <div className="gm-inline-block gm-margin-right-5">
-                            <select className="form-control">
-                                <option value="1">全部任务类型</option>    
-                                <option value="1">全部任务类型</option>    
-                            </select>
-                        </div>
-                        <div className="gm-inline-block">
-                            <select className="form-control">
-                                <option value="1">全部任务状态</option>    
-                                <option value="1">全部任务状态</option>    
-                            </select>
-                        </div>
-                    </div>
-                </Flex>
-                <div className="form-group">
-                    <Flex alignCenter className="col-md-2">订单筛选：</Flex>
-                    <div className="col-md-10">
-                        <div className="gm-inline-block">
-                            <select className="form-control">
-                                <option value="1">选择运营配置</option>    
-                                <option value="1">选择XX配置</option>    
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <Flex alignCenter className="form-group">
-                    <Flex alignCenter className="col-md-2">搜索：</Flex>
-                    <div className="col-md-10">
-                        <input style={{width: '350px'}} className="form-control" placeholder="输入订单号、分拣号、商户信息、商品信息搜索等"/>
-                    </div>
-                </Flex>
-                <Flex alignCenter className="form-group gm-padding-left-15">
-                    <button type="submit" className="btn btn-primary">搜索</button>
-                    <div className="gm-gap-10"></div>
-                    <a href="" className="btn btn-default">导出</a>
-                </Flex>
-            </form>
-        </div>;
+    renderCollapseFilter(){
+        return <div>
+                   <form className="form-horizontal">
+                       <Flex alignCenter className="form-group">
+                           <Flex alignCenter className="col-md-2">
+                               <div className="gm-inline-block">
+                                   <select className="form-control" style={{border: 'none'}}>
+                                       <option value="1">按日期</option>
+                                       <option value="1">按周期</option>
+                                   </select>
+                               </div>
+                           </Flex>
+                           <div className="col-md-10">
+                               <DateRangePicker
+                                   begin={new Date()}
+                                   end={new Date()}
+                                   onChange={_.noop}
+                                   inputClassName="form-control"
+                               />
+                           </div>
+                       </Flex>
+                       <Flex alignCenter className="form-group">
+                           <Flex alignCenter className="col-md-2">商品筛选：</Flex>
+                           <div className="col-md-10">
+                               <div className="gm-inline-block">
+                                   <input type="text" style={{width: '120px'}} placeholder="全部一级分类" className="form-control gm-inline-block gm-margin-right-5"/>
+                               </div>
+                               <div className="gm-inline-block">
+                                   <input type="text" style={{width: '120px'}} placeholder="全部二级分类" className="form-control gm-inline-block gm-margin-right-5"/>
+                               </div>
+                               <div className="gm-inline-block">
+                                   <input type="text" style={{width: '120px'}} placeholder="全部三级分类" className="form-control gm-inline-block"/>
+                               </div>
+                           </div>
+                       </Flex>
+                       <Flex alignCenter className="form-group">
+                           <Flex alignCenter className="col-md-2">任务筛选：</Flex>
+                           <div className="col-md-10">
+                               <div className="gm-inline-block gm-margin-right-5">
+                                   <select className="form-control">
+                                       <option value="1">全部分拣备注</option>
+                                       <option value="2">全部分拣备注</option>
+                                   </select>
+                               </div>
+                               <div className="gm-inline-block gm-margin-right-5">
+                                   <select className="form-control">
+                                       <option value="1">全部任务类型</option>
+                                       <option value="1">全部任务类型</option>
+                                   </select>
+                               </div>
+                               <div className="gm-inline-block">
+                                   <select className="form-control">
+                                       <option value="1">全部任务状态</option>
+                                       <option value="1">全部任务状态</option>
+                                   </select>
+                               </div>
+                           </div>
+                       </Flex>
+                       <div className="form-group">
+                           <Flex alignCenter className="col-md-2">订单筛选：</Flex>
+                           <div className="col-md-10">
+                               <div className="gm-inline-block">
+                                   <select className="form-control">
+                                       <option value="1">选择运营配置</option>
+                                       <option value="1">选择XX配置</option>
+                                   </select>
+                               </div>
+                           </div>
+                       </div>
+                       <Flex alignCenter className="form-group">
+                           <Flex alignCenter className="col-md-2">搜索：</Flex>
+                           <div className="col-md-10">
+                               <input style={{width: '350px'}} className="form-control" placeholder="输入订单号、分拣号、商户信息、商品信息搜索等"/>
+                           </div>
+                       </Flex>
+                       <Flex alignCenter className="form-group gm-padding-left-15">
+                           <button type="submit" className="btn btn-primary">搜索</button>
+                           <div className="gm-gap-10"></div>
+                           <a href="" className="btn btn-default">导出</a>
+                       </Flex>
+                   </form>
+               </div>;
+    }
 
+    render() {
         return (
             <QuickTab tabs={['按订单查看', '按商品查看']} className="gm-padding-15" isStatic={true}>
                 <QuickTab.QuickTabItem>
-                    <QuickFilter className="gm-border-top-0" collapse={collapse}>
+                    <QuickFilter className="gm-border-top-0" collapseRender={this.renderCollapseFilter}>
                         <form className="form-inline">
                             <select className="form-control gm-margin-right-10 gm-border-0">
                                 <option value="1">按周期</option>    

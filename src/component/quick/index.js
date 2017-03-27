@@ -25,10 +25,10 @@ class QuickPanel extends React.Component {
                 <Flex flex alignCenter justifyBetween className="gm-quick-title">
                     {title}
                     {collapse ? (
-                            <a onClick={::this.handleCollapse} style={{fontSize: '12px', marginLeft: '25px'}}>
-                                {collapse === true ? (this.state.in ? "收拢明细" : "展现明细") : collapse}
-                            </a>
-                        ) : undefined}
+                        <a onClick={::this.handleCollapse} style={{fontSize: '12px', marginLeft: '25px'}}>
+                            {collapse === true ? (this.state.in ? "收拢明细" : "展现明细") : collapse}
+                        </a>
+                    ) : undefined}
                     <Flex flex/>
                     {right ? React.cloneElement(right, {className: right.props.className}) : undefined}
                 </Flex>
@@ -85,24 +85,24 @@ class QuickInfo extends React.Component {
         return (
             <div className={classNames("gm-bg gm-border gm-quick", this.props.className)}>
                 {(infos.length > 0 || primaryInfo) ? (
-                        <Flex className="gm-quick-title">
-                            {primaryInfo ? (
-                                    <Flex alignCenter juestifyCenter width="150px">
-                                        <strong>{primaryInfo.props.title}：</strong> {primaryInfo.props.children}
-                                    </Flex>
-                                ) : undefined}
-                            {primaryInfo ? (
-                                    <Flex className="gm-margin-lr-15 gm-border-right"/>
-                                ) : undefined}
-                            <Flex flex wrap>
-                                {_.map(infos, (value, i) => (
-                                    <Flex key={i} width="33.33%" juestifyCenter>
-                                        <strong>{value.props.title}：</strong>{value.props.children}
-                                    </Flex>
-                                ))}
+                    <Flex className="gm-quick-title">
+                        {primaryInfo ? (
+                            <Flex alignCenter juestifyCenter width="150px">
+                                <strong>{primaryInfo.props.title}：</strong> {primaryInfo.props.children}
                             </Flex>
+                        ) : undefined}
+                        {primaryInfo ? (
+                            <Flex className="gm-margin-lr-15 gm-border-right"/>
+                        ) : undefined}
+                        <Flex flex wrap>
+                            {_.map(infos, (value, i) => (
+                                <Flex key={i} width="33.33%" juestifyCenter>
+                                    <strong>{value.props.title}：</strong>{value.props.children}
+                                </Flex>
+                            ))}
                         </Flex>
-                    ) : undefined}
+                    </Flex>
+                ) : undefined}
                 <div className="gm-border-top">
                     {others}
                 </div>
@@ -129,36 +129,36 @@ class QuickFilter extends React.Component {
     }
 
     render() {
-        const {collapse, children} = this.props,
+        const {collapseRender, children} = this.props,
             {show} = this.state;
 
         return (
             <div className={classNames("gm-bg gm-border gm-quick gm-quick-filter gm-padding-15", this.props.className, {
-                'gm-padding-bottom-0': collapse
+                'gm-padding-bottom-0': collapseRender
             })}>
-                {collapse ? <div>
-                        {show ? null : children}
+                {collapseRender ? <div>
+                    {show ? null : children}
 
-                        <Collapse in={show}>
-                            {show ? collapse : null}
-                        </Collapse>
+                    <Collapse in={show}>
+                        {show ? collapseRender() : null}
+                    </Collapse>
 
-                        <Flex justifyCenter className="gm-padding-5 gm-quick-filter-toggle"
-                              onClick={this.handleCollape}>
-                            {show ? '收拢筛选条件' : '展开筛选条件'}&nbsp;
-                            <i className={classNames('ifont', {
-                                'ifont-down': !show,
-                                'ifont-up': show
-                            })}/>
-                        </Flex>
-                    </div> : children}
+                    <Flex justifyCenter className="gm-padding-5 gm-quick-filter-toggle"
+                          onClick={this.handleCollape}>
+                        {show ? '收拢筛选条件' : '展开筛选条件'}&nbsp;
+                        <i className={classNames('ifont', {
+                            'ifont-down': !show,
+                            'ifont-up': show
+                        })}/>
+                    </Flex>
+                </div> : children}
             </div>
         );
     }
 }
 
 QuickFilter.propTypes = {
-    collapse: PropTypes.element
+    collapseRender: PropTypes.func
 };
 
 
@@ -274,8 +274,8 @@ class QuickDesc extends React.Component {
                     <Flex flex={rightFlex || 10} alignCenter className="gm-padding-left-5">
                         <div className="gm-border-left gm-padding-left-15" style={{height: '40px'}}/>
                         {right ? React.cloneElement(right, {
-                                className: "gm-quick-desc-right-box gm-padding-tb-10 " + (right.props.className || '')
-                            }) : null}
+                            className: "gm-quick-desc-right-box gm-padding-tb-10 " + (right.props.className || '')
+                        }) : null}
                     </Flex>
                 </Flex>
                 {
