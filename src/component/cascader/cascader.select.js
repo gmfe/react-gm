@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import _ from 'underscore';
+import _ from 'lodash';
 import Cascader from './cascader';
 import Flex from '../flex';
 

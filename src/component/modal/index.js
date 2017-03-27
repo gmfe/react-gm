@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import LayoutRoot from '../layout_root';
 import className from 'classnames';
-import _ from 'underscore';
+import _ from 'lodash';
 
 class Modal extends React.Component {
     constructor(props) {

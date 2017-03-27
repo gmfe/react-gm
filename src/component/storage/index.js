@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import _ from 'underscore';
+import _ from 'lodash';
 
 const prefix = '_react-gm_';
 const {localStorage} = window;

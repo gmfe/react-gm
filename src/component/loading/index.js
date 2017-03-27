@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import _ from 'underscore';
+import _ from 'lodash';
 
 // 如果需要设置loading大小:  set size = 100  (default 50)
 const LIMIT = 12;

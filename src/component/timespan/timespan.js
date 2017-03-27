@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import _ from 'underscore';
+import _ from 'lodash';
 import classNames from 'classnames';
 
 class TimeSpan extends React.Component {

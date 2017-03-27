@@ -13,5 +13,5 @@
 使用前请保证以下依赖存在
 - react react-dom
 - classnames
-- underscore
+- lodash
 - moment

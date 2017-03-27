@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import Modal from '../modal';
-import _ from 'underscore';
+import _ from 'lodash';
 
 // 搞的复杂了，后续要补充文档
 

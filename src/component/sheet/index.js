@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import Pagination from '../pagination/pagination.js';
 import PaginationText from '../pagination/pagination.text.js';
-import _ from 'underscore';
+import _ from 'lodash';
 import classNames from 'classnames';
 
 class SheetColumn extends React.Component {

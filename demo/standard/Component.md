@@ -1,7 +1,7 @@
 ---
 imports:
     import {DropDown, DropDownItems, DropDownItem, DateRangePicker, QuickFilter, SearchSelect, Pagination} from '../../src/index';
-    import _ from 'underscore';
+    import _ from 'lodash';
 ---
 
 # 颜色规范

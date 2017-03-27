@@ -8,7 +8,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Flex as GMFlex, LayoutRoot} from '../src/index';
 import {Router, Route, hashHistory, IndexRedirect} from 'react-router';
-import _ from 'underscore';
+import _ from 'lodash';
 
 import Demo from './component/demo';
 

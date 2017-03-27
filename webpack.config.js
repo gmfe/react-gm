@@ -1,8 +1,7 @@
-var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var autoprefixer = require('autoprefixer');
-var precss = require('precss');
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const precss = require('precss');
 
 module.exports = {
     entry: './src/index',
@@ -10,7 +9,7 @@ module.exports = {
         'react': 'react',
         'react-dom': 'react-dom',
         'moment': 'moment',
-        'underscore': 'underscore'
+        'lodash': 'lodash'
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -19,25 +18,43 @@ module.exports = {
         libraryTarget: 'umd'
     },
     resolve: {
-        extensions: ['', '.js', '.css', '.less']
+        extensions: ['.js', '.css', '.less']
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
         new ExtractTextPlugin('react-gm.css')
     ],
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js$/,
-            loader: 'babel'
+            use: ['babel-loader']
         }, {
-            test: /(fontawesome-webfont|glyphicons-halflings-regular)\.(woff|woff2|ttf|eot|svg)($|\?)/,
-            loader: 'url?limit=1024&name=fonts/[name].[ext]'
+            test: /(fontawesome-webfont|glyphicons-halflings-regular|iconfont)\.(woff|woff2|ttf|eot|svg)($|\?)/,
+            use: [{
+                loader: 'url-loader',
+                options: {
+                    limit: 1024,
+                    name: 'fonts/[name].[ext]'
+                }
+            }]
         }, {
             test: /\.(css|less)$/,
-            loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss!less')
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [
+                    {
+                        loader: 'css-loader?-autoprefixer'
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function () {
+                                return [autoprefixer({browsers: ['iOS >= 8', 'Android >= 4.1']}), precss];
+                            }
+                        }
+                    },
+                    'less-loader'
+                ]
+            })
         }]
-    },
-    postcss: function () {
-        return [autoprefixer({browsers: ['iOS >= 8', 'Android >= 4.1']}), precss];
     }
 };

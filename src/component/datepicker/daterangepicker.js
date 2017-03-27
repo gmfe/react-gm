@@ -3,7 +3,7 @@ import moment from 'moment';
 import Calendar from '../calendar';
 import classNames from 'classnames';
 import Trigger from '../trigger';
-import _ from 'underscore';
+import _ from 'lodash';
 
 class DateRangePicker extends React.Component {
     constructor(props) {

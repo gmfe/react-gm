@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import _ from 'underscore';
+import _ from 'lodash';
 import Dropper from '../dropper/index.js';
 
 class ImportLead extends React.Component {

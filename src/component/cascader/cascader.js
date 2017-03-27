@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import _ from 'underscore';
+import _ from 'lodash';
 import classNames from 'classnames';
 import Flex from '../flex';
 import Trigger from '../trigger';

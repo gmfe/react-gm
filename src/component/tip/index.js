@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import _ from 'underscore';
+import _ from 'lodash';
 
 const tipContainerId = '_gm_tips_container' + (Math.random() + '').slice(2);
 let tipsContainer = window.document.getElementById(tipContainerId);

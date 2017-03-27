@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
-import _ from 'underscore';
+import _ from 'lodash';
 import Validator from '../../validator';
 
 class Form extends React.Component {

@@ -1,7 +1,7 @@
 ---
 imports:
     import {SearchSelect} from '../../src/index.js';
-    import _ from 'underscore';
+    import _ from 'lodash';
 ---
 ## SearchSelect
 

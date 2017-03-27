@@ -1,7 +1,7 @@
 ---
 imports:
     import {QuickPanel, QuickTab, QuickFilter, QuickDesc, DateRangePicker, Flex} from '../../src/index.js';
-    import _ from 'underscore';
+    import _ from 'lodash';
 ---
 ## Quick
 
@@ -103,12 +103,12 @@ class Tab extends React.Component{
                     <QuickFilter className="gm-border-top-0" collapseRender={this.renderCollapseFilter}>
                         <form className="form-inline">
                             <select className="form-control gm-margin-right-10 gm-border-0">
-                                <option value="1">按周期</option>    
-                                <option value="1">按日期</option>    
+                                <option value="1">按周期</option>
+                                <option value="1">按日期</option>
                             </select>
                             <select className="form-control gm-margin-right-10">
-                                <option value="1">选择运营配置</option>    
-                                <option value="1">选择XX配置</option>    
+                                <option value="1">选择运营配置</option>
+                                <option value="1">选择XX配置</option>
                             </select>
                             <div className="input-group gm-margin-right-10">
                                 <input

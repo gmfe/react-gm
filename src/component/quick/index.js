@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import Flex from '../flex';
 import Collapse from '../collapse';
-import _ from 'underscore';
+import _ from 'lodash';
 import classNames from 'classnames';
 
 class QuickPanel extends React.Component {

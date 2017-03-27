@@ -1,7 +1,7 @@
 ---
 imports:
     import {Select, Option} from '../../src/index';
-    import _ from 'underscore';
+    import _ from 'lodash';
 ---
 ## Select
 原生select在onChange的时候是字符串，经常要转换，累。

@@ -1,6 +1,6 @@
 import React from 'react';
 import Flex from '../flex';
-import _ from 'underscore';
+import _ from 'lodash';
 
 class TreeSelect extends React.Component {
     constructor(props) {
@@ -55,7 +55,7 @@ class TreeSelect extends React.Component {
                 this.findAllChildrenNode(data.children, childrenNodes);
             }
             else {
-                if (!_.contains(childrenNodes, data.value)) {
+                if (!_.includes(childrenNodes, data.value)) {
                     childrenNodes.push(data.value);
                 }
             }
@@ -71,7 +71,7 @@ class TreeSelect extends React.Component {
                     this.findAllChildrenNode(data.children, items);
                 }
                 else {
-                    if (!_.contains(items, value)) {
+                    if (!_.includes(items, value)) {
                         items.push(value);
                     }
                 }
@@ -87,8 +87,8 @@ class TreeSelect extends React.Component {
 
     handleShow(data) {
         let {showList} = this.state;
-
-        if (_.contains(showList, data.value)) {
+    
+        if (_.includes(showList, data.value)) {
             this.setState({showList: _.without(showList, data.value)});
             return;
         }
@@ -117,7 +117,7 @@ class TreeSelect extends React.Component {
                         handleShow={this.handleShow}
                     />
                 );
-                if (_.contains(this.state.showList, data.value)) {
+                if (_.includes(this.state.showList, data.value)) {
                     this.renderNodeList(data.children, level + 1, panel);
                 }
             }
@@ -188,7 +188,7 @@ class TreeNode extends React.Component {
         let selectedFlag = false;
 
         if (last) {
-            selectedFlag = _.contains(selected, data.value);
+            selectedFlag = _.includes(selected, data.value);
         }
         else {
             selectedFlag = (_.difference(childrenNode, selected).length === 0);
@@ -213,7 +213,7 @@ class TreeNode extends React.Component {
                     >
                         {last ? <div className="gm-gap-15"/> :
                             <span
-                                className={(_.contains(showList, data.value)) ? "glyphicon glyphicon-minus text-primary" : "glyphicon glyphicon-plus text-primary"}/>}
+                                className={(_.includes(showList, data.value)) ? "glyphicon glyphicon-minus text-primary" : "glyphicon glyphicon-plus text-primary"}/>}
                         &nbsp;
                         <span className="gm-padding-lr-5">
                             {data.value }&nbsp;{data.name}

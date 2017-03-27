@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
-import _ from 'underscore';
+import _ from 'lodash';
 
 const nowMountStart = +moment().startOf('day');
 

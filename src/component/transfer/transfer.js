@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import _ from 'underscore';
+import _ from 'lodash';
 import Flex from '../flex';
 import Select from '../select';
 import {isMac} from '../../util';

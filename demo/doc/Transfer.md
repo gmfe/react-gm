@@ -1,7 +1,7 @@
 ---
 imports:
     import {Transfer} from '../../src/index';
-    import _ from 'underscore';
+    import _ from 'lodash';
 ---
 ## Transfer
 
