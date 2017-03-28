@@ -144,13 +144,13 @@ class QuickFilter extends React.Component {
                     </Collapse>
 
                     <Flex justifyCenter className="gm-padding-5">
-                        <span className="gm-quick-filter-toggle" onClick={this.handleCollape}>
+                        <a href="javascript:;" className="gm-quick-filter-toggle" onClick={this.handleCollape}>
                             {show ? '收拢筛选条件' : '展开筛选条件'}&nbsp;
                             <i className={classNames('ifont', {
                                 'ifont-down': !show,
                                 'ifont-up': show
                             })}/>
-                        </span>
+                        </a>
                     </Flex>
                 </div> : children}
             </div>
