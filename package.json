@@ -1,6 +1,6 @@
 {
   "name": "react-gm",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "",
   "main": "dist/react-gm.js",
   "module": "src/index.js",
