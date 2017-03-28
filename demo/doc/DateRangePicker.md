@@ -135,6 +135,48 @@ class DaterangepickerWrap3 extends React.Component {
 ```
 :::
 
+
+::: demo beginLabel endLabel
+```js
+class DaterangepickerWrap4 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            begin: new Date(),
+            end: new Date()
+        };
+        this.handleChange = ::this.handleChange;
+    }
+
+    render() {
+        return (
+            <div>
+                <DateRangePicker
+                    begin={this.state.begin}
+                    end={this.state.end}
+                    beginLabel="开始周期"
+                    endLabel="截止周期"
+                    onChange={this.handleChange}
+                    inputClassName="form-control input-sm"
+                />
+            </div>
+        );
+    }
+
+    handleChange(begin, end) {
+        console.log(begin, end);
+        this.setState({
+            begin: begin,
+            end: end
+        });
+    }
+}
+```
+```jsx
+<DaterangepickerWrap4/>
+```
+:::
+
 ### Props
 和`DatePicker`没多大区别，`date` 换成 `begin` 和 `end` 而已。
 - `begin (object)`

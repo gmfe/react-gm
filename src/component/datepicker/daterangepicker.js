@@ -13,35 +13,37 @@ class DateRangePicker extends React.Component {
         this.handleSelectBegin = ::this.handleSelectBegin;
         this.handleSelectEnd = ::this.handleSelectEnd;
     }
-    
+
     handleSelectBegin(date) {
         this.props.onChange(date, this.props.end);
         setTimeout(() => {
             this.refEndTarget.click();
         }, 0);
     }
-    
+
     handleSelectEnd(date) {
         this.props.onChange(this.props.begin, date);
         setTimeout(() => {
             this.refDateRangePicker.click();
         }, 0);
     }
-    
+
     render() {
         const {
             begin, end,
+            beginLabel, endLabel,
             beginProps, endProps,
             inputClassName,
             disabled,
             beginRenderInputValue, endRenderInputValue
         } = this.props;
-        
+
         return (
             <div
                 ref={ref => this.refDateRangePicker = ref}
                 className={classNames("gm-datepicker gm-daterangepicker", this.props.className)}
             >
+                {beginLabel && <span className="gm-padding-right-5">{beginLabel}</span>}
                 <Trigger
                     component={<div className="gm-inline-block"/>}
                     popup={(
@@ -60,7 +62,8 @@ class DateRangePicker extends React.Component {
                         onChange={_.noop}
                     />
                 </Trigger>
-                <span> ~ </span>
+                {!endLabel && <span> ~ </span>}
+                {endLabel && <span className="gm-padding-lr-5">{endLabel}</span>}
                 <Trigger
                     component={<div className="gm-inline-block"/>}
                     popup={(
@@ -92,11 +95,13 @@ DateRangePicker.displayName = 'DateRangePicker';
 DateRangePicker.propTypes = {
     begin: PropTypes.object,
     end: PropTypes.object,
+    beginLabel: PropTypes.string,
+    endLabel: PropTypes.string,
     onChange: PropTypes.func,
     inputClassName: PropTypes.string,
     disabled: PropTypes.bool,
     className: PropTypes.string,
-    
+
     beginProps: PropTypes.shape({
         min: React.PropTypes.object,
         max: React.PropTypes.object,
