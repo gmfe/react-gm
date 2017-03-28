@@ -7039,7 +7039,7 @@ button.close {
   padding: 0;
 }
 .gm-collapse.gm-collapsing {
-  padding-bottom: 5px;
+  padding-bottom: 2px;
   opacity: 1;
   height: auto;
 }
@@ -7096,6 +7096,7 @@ button.close {
   cursor: pointer;
 }
 .gm-quick.gm-quick-filter .gm-quick-filter-toggle {
+  font-size: 12px;
   cursor: pointer;
 }
 .gm-quick.gm-quick-desc .btn {

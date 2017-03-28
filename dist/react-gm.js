@@ -1286,6 +1286,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -1333,21 +1335,27 @@ var Dropper = function (_React$Component) {
         key: 'accept',
         value: function accept(file, acceptedFiles) {
             if (file && acceptedFiles) {
-                var acceptedFilesArray = acceptedFiles.split(',');
-                var fileName = file.name || '';
-                var mimeType = file.type || '';
-                var baseMimeType = mimeType.replace(/\/.*$/, '');
+                var _ret = function () {
+                    var acceptedFilesArray = acceptedFiles.split(',');
+                    var fileName = file.name || '';
+                    var mimeType = file.type || '';
+                    var baseMimeType = mimeType.replace(/\/.*$/, '');
 
-                return acceptedFilesArray.some(function (type) {
-                    var validType = type.trim();
-                    if (validType.charAt(0) === '.') {
-                        return fileName.toLowerCase().endsWith(validType.toLowerCase());
-                    } else if (/\/\*$/.test(validType)) {
-                        // This is something like a image/* mime type
-                        return baseMimeType === validType.replace(/\/.*$/, '');
-                    }
-                    return mimeType === validType;
-                });
+                    return {
+                        v: acceptedFilesArray.some(function (type) {
+                            var validType = type.trim();
+                            if (validType.charAt(0) === '.') {
+                                return fileName.toLowerCase().endsWith(validType.toLowerCase());
+                            } else if (/\/\*$/.test(validType)) {
+                                // This is something like a image/* mime type
+                                return baseMimeType === validType.replace(/\/.*$/, '');
+                            }
+                            return mimeType === validType;
+                        })
+                    };
+                }();
+
+                if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
             }
             return true;
         }
@@ -2202,6 +2210,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -2512,62 +2522,72 @@ var SearchSelect = function (_React$Component) {
 
 
             if (isGroupList) {
-                // 不存在group数据
-                if (list.length === 0) {
-                    return null;
-                }
-                // 不存在其中一个group有数据
-                if (!_lodash2.default.find(list, function (value) {
-                    return (value.children || []).length > 0;
-                })) {
-                    return null;
-                }
+                var _ret = function () {
+                    // 不存在group数据
+                    if (list.length === 0) {
+                        return {
+                            v: null
+                        };
+                    }
+                    // 不存在其中一个group有数据
+                    if (!_lodash2.default.find(list, function (value) {
+                        return (value.children || []).length > 0;
+                    })) {
+                        return {
+                            v: null
+                        };
+                    }
 
-                var itemSequence = -1;
+                    var itemSequence = -1;
 
-                return _react2.default.createElement(
-                    'div',
-                    {
-                        className: 'list-group',
-                        style: { maxHeight: listMaxHeight },
-                        ref: function ref(_ref) {
-                            return _this6.searchSelectList = _ref;
-                        }
-                    },
-                    _lodash2.default.map(list, function (groupList, i) {
-                        return _react2.default.createElement(
+                    return {
+                        v: _react2.default.createElement(
                             'div',
-                            { key: i, className: 'list-group-label' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'list-group-label-item' },
-                                groupList.label
-                            ),
-                            _lodash2.default.map(groupList.children, function (value, i) {
-                                itemSequence++;
-
+                            {
+                                className: 'list-group',
+                                style: { maxHeight: listMaxHeight },
+                                ref: function ref(_ref) {
+                                    return _this6.searchSelectList = _ref;
+                                }
+                            },
+                            _lodash2.default.map(list, function (groupList, i) {
                                 return _react2.default.createElement(
-                                    _flex2.default,
-                                    {
-                                        key: i,
-                                        alignCenter: true,
-                                        className: (0, _classnames2.default)('list-group-item', inputClassName, {
-                                            'active': _this6.state.selected.indexOf(value) > -1,
-                                            'line-selected': _this6.state.activeIndex === itemSequence
-                                        }),
-                                        onClick: _this6.handleSelect.bind(_this6, value),
-                                        onMouseEnter: _this6.handleItemMouseEnter.bind(_this6, itemSequence)
-                                    },
+                                    'div',
+                                    { key: i, className: 'list-group-label' },
                                     _react2.default.createElement(
-                                        _flex2.default,
-                                        { flex: true },
-                                        value.name
-                                    )
+                                        'div',
+                                        { className: 'list-group-label-item' },
+                                        groupList.label
+                                    ),
+                                    _lodash2.default.map(groupList.children, function (value, i) {
+                                        itemSequence++;
+
+                                        return _react2.default.createElement(
+                                            _flex2.default,
+                                            {
+                                                key: i,
+                                                alignCenter: true,
+                                                className: (0, _classnames2.default)('list-group-item', inputClassName, {
+                                                    'active': _this6.state.selected.indexOf(value) > -1,
+                                                    'line-selected': _this6.state.activeIndex === itemSequence
+                                                }),
+                                                onClick: _this6.handleSelect.bind(_this6, value),
+                                                onMouseEnter: _this6.handleItemMouseEnter.bind(_this6, itemSequence)
+                                            },
+                                            _react2.default.createElement(
+                                                _flex2.default,
+                                                { flex: true },
+                                                value.name
+                                            )
+                                        );
+                                    })
                                 );
                             })
-                        );
-                    })
-                );
+                        )
+                    };
+                }();
+
+                if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
             } else {
                 if (list.length === 0) {
                     return null;
@@ -3588,6 +3608,8 @@ var DateRangePicker = function (_React$Component) {
             var _props = this.props,
                 begin = _props.begin,
                 end = _props.end,
+                beginLabel = _props.beginLabel,
+                endLabel = _props.endLabel,
                 beginProps = _props.beginProps,
                 endProps = _props.endProps,
                 inputClassName = _props.inputClassName,
@@ -3604,6 +3626,11 @@ var DateRangePicker = function (_React$Component) {
                     },
                     className: (0, _classnames2.default)("gm-datepicker gm-daterangepicker", this.props.className)
                 },
+                beginLabel && _react2.default.createElement(
+                    'span',
+                    { className: 'gm-padding-right-5' },
+                    beginLabel
+                ),
                 _react2.default.createElement(
                     _trigger2.default,
                     {
@@ -3621,10 +3648,15 @@ var DateRangePicker = function (_React$Component) {
                         onChange: _lodash2.default.noop
                     })
                 ),
-                _react2.default.createElement(
+                !endLabel && _react2.default.createElement(
                     'span',
                     null,
                     ' ~ '
+                ),
+                endLabel && _react2.default.createElement(
+                    'span',
+                    { className: 'gm-padding-lr-5' },
+                    endLabel
                 ),
                 _react2.default.createElement(
                     _trigger2.default,
@@ -3660,6 +3692,8 @@ DateRangePicker.displayName = 'DateRangePicker';
 DateRangePicker.propTypes = {
     begin: _react.PropTypes.object,
     end: _react.PropTypes.object,
+    beginLabel: _react.PropTypes.string,
+    endLabel: _react.PropTypes.string,
     onChange: _react.PropTypes.func,
     inputClassName: _react.PropTypes.string,
     disabled: _react.PropTypes.bool,
@@ -5343,8 +5377,8 @@ var QuickFilter = function (_React$Component4) {
                         _flex2.default,
                         { justifyCenter: true, className: 'gm-padding-5' },
                         _react2.default.createElement(
-                            'span',
-                            { className: 'gm-quick-filter-toggle', onClick: this.handleCollape },
+                            'a',
+                            { href: 'javascript:;', className: 'gm-quick-filter-toggle', onClick: this.handleCollape },
                             show ? '收拢筛选条件' : '展开筛选条件',
                             '\xA0',
                             _react2.default.createElement('i', { className: (0, _classnames2.default)('ifont', {
