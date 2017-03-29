@@ -1216,37 +1216,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Collapse = function (_React$Component) {
     _inherits(Collapse, _React$Component);
 
-    function Collapse(props) {
+    function Collapse() {
         _classCallCheck(this, Collapse);
 
-        var _this = _possibleConstructorReturn(this, (Collapse.__proto__ || Object.getPrototypeOf(Collapse)).call(this, props));
-
-        _this.state = {
-            collapsing: false
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (Collapse.__proto__ || Object.getPrototypeOf(Collapse)).apply(this, arguments));
     }
 
     _createClass(Collapse, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            var _this2 = this;
-
-            if (nextProps.in !== this.props.in) {
-                clearTimeout(this.timer);
-
-                this.setState({
-                    collapsing: true
-                }, function () {
-                    _this2.timer = setTimeout(function () {
-                        _this2.setState({
-                            collapsing: false
-                        });
-                    }, 350);
-                });
-            }
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _props = this.props,
@@ -1255,10 +1231,8 @@ var Collapse = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                _extends({}, rest, {
-                    className: (0, _classnames2.default)('gm-collapse', this.props.className, {
-                        'in': this.props.in && !this.state.collapsing,
-                        'gm-collapsing': this.state.collapsing
+                _extends({}, rest, { className: (0, _classnames2.default)('gm-collapse', this.props.className, {
+                        'in': this.props.in
                     }) }),
                 children
             );
@@ -1269,8 +1243,7 @@ var Collapse = function (_React$Component) {
 }(_react2.default.Component);
 
 Collapse.propTypes = {
-    in: _react.PropTypes.bool.isRequired,
-    collapsing: _react.PropTypes.bool
+    in: _react.PropTypes.bool.isRequired
 };
 
 exports.default = Collapse;

@@ -7028,20 +7028,10 @@ button.close {
   }
 }
 .gm-collapse {
-  opacity: 0;
-  height: 0;
-  -webkit-transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-  transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  display: none;
 }
 .gm-collapse.in {
-  opacity: 1;
-  height: auto;
-  padding: 0;
-}
-.gm-collapse.gm-collapsing {
-  padding-bottom: 2px;
-  opacity: 1;
-  height: auto;
+  display: block;
 }
 .gm-dropdown .dropdown-menu {
   display: block;
