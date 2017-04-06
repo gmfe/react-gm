@@ -28,7 +28,7 @@ class Modal extends React.Component {
     }
 
     handleMask(e) {
-        if (e.target.className === 'gm-modal') {
+        if (!this.props.disableMaskClose && e.target.className === 'gm-modal') {
             this.props.onHide();
         }
     }
@@ -87,6 +87,7 @@ Modal.hide = () => LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, null);
 Modal.propTypes = {
     show: PropTypes.bool.isRequired,
     onHide: PropTypes.func,
+    disableMaskClose: PropTypes.bool,
     size: PropTypes.string, // lg md sm
     title: PropTypes.oneOfType([
         PropTypes.string,
@@ -96,7 +97,8 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
     onHide: _.noop,
-    size: 'md'
+    size: 'md',
+    disableMaskClose: false
 };
 
 export default Modal;

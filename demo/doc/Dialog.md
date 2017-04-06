@@ -154,7 +154,7 @@ class DialogWrap extends React.Component {
                         className="btn btn-default"
                         onClick={this.handleComponentSizeWithLoading.bind(this, 'md')}
                     >
-                        toggle Component with loading state
+                        toggle Component with loading state & disableMaskClose
                     </button>
                 </div>
                 <Dialog
@@ -175,6 +175,7 @@ class DialogWrap extends React.Component {
                     size={this.state.size}
                     onCancel={this.handleComponentSizeWithLoading.bind(this, this.state.size)}
                     onOK={this.handleDialogOK}
+                    disableMaskClose
                 >
                     size {this.state.size}
                 </Dialog>
