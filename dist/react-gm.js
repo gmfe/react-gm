@@ -1679,7 +1679,7 @@ var Modal = function (_React$Component) {
     }, {
         key: 'handleMask',
         value: function handleMask(e) {
-            if (e.target.className === 'gm-modal') {
+            if (!this.props.disableMaskClose && e.target.className === 'gm-modal') {
                 this.props.onHide();
             }
         }
@@ -1760,13 +1760,15 @@ Modal.hide = function () {
 Modal.propTypes = {
     show: _react.PropTypes.bool.isRequired,
     onHide: _react.PropTypes.func,
+    disableMaskClose: _react.PropTypes.bool,
     size: _react.PropTypes.string, // lg md sm
     title: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element])
 };
 
 Modal.defaultProps = {
     onHide: _lodash2.default.noop,
-    size: 'md'
+    size: 'md',
+    disableMaskClose: false
 };
 
 exports.default = Modal;
@@ -3855,11 +3857,13 @@ var Dialog = function (_React$Component) {
                 promptDefaultValue = _props.promptDefaultValue,
                 promptPlaceholder = _props.promptPlaceholder,
                 cancelBtn = _props.cancelBtn,
-                OKBtn = _props.OKBtn;
+                OKBtn = _props.OKBtn,
+                disableMaskClose = _props.disableMaskClose;
 
             var modalProps = {
                 show: this.state.show,
-                onHide: this.handleCancel
+                onHide: this.handleCancel,
+                disableMaskClose: disableMaskClose
             };
             if (size !== 'md') {
                 modalProps.size = size;
@@ -3918,7 +3922,8 @@ Dialog.propTypes = {
     promptDefaultValue: _react.PropTypes.string,
     promptPlaceholder: _react.PropTypes.string,
     cancelBtn: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.bool]),
-    OKBtn: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.bool])
+    OKBtn: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.bool]),
+    disableMaskClose: _react.PropTypes.bool
 };
 Dialog.defaultProps = {
     show: false,
@@ -3928,7 +3933,8 @@ Dialog.defaultProps = {
     onOK: _lodash2.default.noop,
     size: 'md',
     cancelBtn: '取消',
-    OKBtn: '确定'
+    OKBtn: '确定',
+    disableMaskClose: false
 };
 
 exports.default = Dialog;
