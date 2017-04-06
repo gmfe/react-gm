@@ -115,10 +115,11 @@ class Dialog extends React.Component {
 
     render() {
         const {isLoading} = this.state;
-        const {size, title, children, type, promptDefaultValue, promptPlaceholder, cancelBtn, OKBtn} = this.props;
+        const {size, title, children, type, promptDefaultValue, promptPlaceholder, cancelBtn, OKBtn, disableMaskClose} = this.props;
         let modalProps = {
             show: this.state.show,
-            onHide: this.handleCancel
+            onHide: this.handleCancel,
+            disableMaskClose
         };
         if (size !== 'md') {
             modalProps.size = size;
@@ -139,12 +140,12 @@ class Dialog extends React.Component {
                         />
                     )}
                 </div>
-                <div className="gm-gap-10"></div>
+                <div className="gm-gap-10"/>
                 <div className="text-right">
                     {(type !== 'alert' && cancelBtn && !isLoading) && (
                         <button className="btn btn-default" onClick={this.handleCancel}>{cancelBtn}</button>
                     )}
-                    <div className="gm-gap-10"></div>
+                    <div className="gm-gap-10"/>
                     {OKBtn && (
                         <button
                             className="btn btn-primary"
@@ -175,7 +176,8 @@ Dialog.propTypes = {
     OKBtn: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.bool
-    ])
+    ]),
+    disableMaskClose: PropTypes.bool
 };
 Dialog.defaultProps = {
     show: false,
@@ -185,7 +187,8 @@ Dialog.defaultProps = {
     onOK: _.noop,
     size: 'md',
     cancelBtn: '取消',
-    OKBtn: '确定'
+    OKBtn: '确定',
+    disableMaskClose: false
 };
 
 export default Dialog;
