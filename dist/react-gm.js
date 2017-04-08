@@ -7154,7 +7154,7 @@ var processResponse = function processResponse(promise, url, sucCode, config) {
                     if (html.indexOf('title>登陆</title') > -1) {
                         return Promise.reject('请登录!');
                     }
-                    return Promise.reject('未知错误！！！！！');
+                    return Promise.reject('未知错误，请刷新页面重试！！！！！');
                 });
             } else {
                 return res.json();
