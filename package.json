@@ -34,7 +34,7 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "gm-font": "^2.0.6",
-    "gm-util": "^4.0.0",
+    "gm-util": "^4.0.2",
     "moment": "^2.18.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
