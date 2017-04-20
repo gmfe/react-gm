@@ -7151,7 +7151,7 @@ var processResponse = function processResponse(promise, url, sucCode, config) {
             // 后台可能会有登录拦截，返回登录页面
             if (ct.indexOf('text/html') > -1) {
                 return res.text().then(function (html) {
-                    if (html.indexOf('title>登陆</title') > -1) {
+                    if (html.indexOf('title>登录</title') > -1) {
                         return Promise.reject('请登录!');
                     }
                     return Promise.reject('未知错误，请刷新页面重试！！！！！');
