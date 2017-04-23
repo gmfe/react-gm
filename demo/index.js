@@ -51,6 +51,7 @@ import Select from './doc/Select.md';
 import Transfer from './doc/Transfer.md';
 import Quick from './doc/Quick.md';
 import Divider from './doc/Divider.md';
+import Input from './doc/Input.md';
 
 import NavConfigStandard from './standard/nav.config';
 import LayoutCommon from './standard/LayoutCommon.md';
@@ -92,7 +93,8 @@ const docMap = {
     Select,
     Transfer,
     Quick,
-    Divider
+    Divider,
+    Input
 };
 
 const standardMap = {

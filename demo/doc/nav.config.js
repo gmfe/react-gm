@@ -89,6 +89,9 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/InputNumber">InputNumber
                         <small>数字输入框</small>
                     </a></li>
+                    <li><a href="#/doc/Input">Input
+                        <small>输入框</small>
+                    </a></li>
                     <li><a href="#/doc/Select">Select
                         <small>选择</small>
                     </a></li>
