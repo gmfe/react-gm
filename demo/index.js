@@ -217,6 +217,7 @@ class Doc extends React.Component {
 
 class Standard extends React.Component {
     render() {
+        console.log('test.......');
         const {doc} = this.props.params;
         return React.createElement(standardMap[doc || 'LayoutRule']);
     }
