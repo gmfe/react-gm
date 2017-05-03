@@ -195,6 +195,9 @@ class App extends React.Component {
                             <span className="gm-gap-10"/>
                             <span>ReactGM </span>
                             <small>&nbsp;&nbsp;by gmfe</small>
+                            <span className="gm-gap-10"/>
+                            <a className="github-button" href="https://github.com/gmfe/react-gm" data-show-count="true"
+                               aria-label="Star gmfe/react-gm on GitHub">Star</a>
                         </a>
                         <GMFlex flex justifyEnd alignCenter className="gm-header-nav">
                             <a href="#/standard" id="intro1">UI规范</a>

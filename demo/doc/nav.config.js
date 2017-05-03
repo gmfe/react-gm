@@ -4,11 +4,10 @@ class NavConfig extends React.Component {
     render() {
         return (
             <div className="demo-left-nav">
-                <h2>Guide</h2>
+                <h3>Guide</h3>
                 <ul>
                     <li><a href="#/doc/About">About</a></li>
                 </ul>
-                <h2>Basic</h2>
                 <h3>Layout</h3>
                 <ul>
                     <li><a href="#/doc/Flex">Flex</a></li>
