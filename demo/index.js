@@ -184,11 +184,19 @@ class App extends React.Component {
                 <div className="demo-header">
                     <GMFlex className="container">
                         <a href={window.location.pathname} className="gm-flex gm-flex-align-center gm-header-logo">
+                            <svg width="28" height="28" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 110 10 L 10 10 L 10 110 L 110 110 L 110 50 L 75 85 L 75 50 L 40 85" style={{
+                                    fill: 'none',
+                                    stroke: 'black',
+                                    strokeWidth: 10,
+                                    strokeLinejoin: 'round'
+                                }}/>
+                            </svg>
+                            <span className="gm-gap-10"/>
                             <span>ReactGM </span>
                             <small>&nbsp;&nbsp;by gmfe</small>
                         </a>
                         <GMFlex flex justifyEnd alignCenter className="gm-header-nav">
-                            <a href="javascript:;" onClick={this.handleIntro}>功能引导？</a>
                             <a href="#/standard" id="intro1">UI规范</a>
                             <a href="#/doc" id="intro2">组件</a>
                         </GMFlex>
