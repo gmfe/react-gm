@@ -168,12 +168,6 @@ class App extends React.Component {
         }
     }
 
-    handleIntro() {
-        require.ensure([], require => {
-            require('./intro').start();
-        });
-    }
-
     render() {
         // 暴力，莫喷
         setTimeout(() => {
@@ -200,8 +194,8 @@ class App extends React.Component {
                                aria-label="Star gmfe/react-gm on GitHub">Star</a>
                         </a>
                         <GMFlex flex justifyEnd alignCenter className="gm-header-nav">
-                            <a href="#/standard" id="intro1">UI规范</a>
-                            <a href="#/doc" id="intro2">组件</a>
+                            <a href="#/standard">UI规范</a>
+                            <a href="#/doc">组件</a>
                         </GMFlex>
                     </GMFlex>
                 </div>
