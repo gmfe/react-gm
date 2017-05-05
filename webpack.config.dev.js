@@ -11,9 +11,6 @@ const config = {
             './demo/index'
         ]
     },
-    // resolve: {
-    //     alias: {}
-    // },
     output: {
         path: path.join(__dirname, 'build'),
         filename: '[name].[hash].bundle.js',
@@ -63,7 +60,6 @@ const config = {
                 }
             }]
         }]
-        // noParse: []
     },
     plugins: [
         // new webpack.NoEmitOnErrorsPlugin(),
@@ -80,20 +76,5 @@ if (!isDev) {
     // 压缩
     config.plugins.push(new webpack.optimize.UglifyJsPlugin());
 }
-
-// // build ++
-// const deps = [
-//     'react-router/umd/ReactRouter.min.js',
-//
-//     'redux/dist/redux.min.js',
-//     'react-redux/dist/react-redux.min.js',
-//
-//     'underscore/underscore-min.js',
-//     'moment/min/moment.min.js'
-// ];
-// deps.forEach(function (dep) {
-//     config.resolve.alias[dep.split('/')[0]] = dep;
-//     config.module.noParse.push(dep);
-// });
 
 module.exports = config;
