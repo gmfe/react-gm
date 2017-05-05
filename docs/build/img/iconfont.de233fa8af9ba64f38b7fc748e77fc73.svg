@@ -2,7 +2,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <svg xmlns="http://www.w3.org/2000/svg">
 <metadata>
-Created by FontForge 20120731 at Thu Mar 23 15:49:11 2017
+Created by FontForge 20120731 at Wed May  3 15:18:16 2017
  By admin
 </metadata>
 <defs>
@@ -16,10 +16,10 @@ Created by FontForge 20120731 at Thu Mar 23 15:49:11 2017
     ascent="896"
     descent="-128"
     x-height="792"
-    bbox="-11 -160 1170 901"
+    bbox="-11 -160 1220 901"
     underline-thickness="0"
     underline-position="0"
-    unicode-range="U+0078-E696"
+    unicode-range="U+0078-E69A"
   />
 <missing-glyph 
  />
@@ -132,5 +132,15 @@ h676q46 0 79 33t33 80v675q0 47 -33 80t-79 33zM912 47q0 -23 -16.5 -39.5t-39.5 -16
 d="M513 474l327 -326q20 -21 48.5 -21t48.5 20.5t20 49t-20 48.5l-375 376q-20 20 -49 20t-49 -20l-375 -376q-21 -20 -21 -48.5t20.5 -49t49 -20.5t48.5 21z" />
     <glyph glyph-name="down" unicode="&#xe61b;" 
 d="M513 294l-327 327q-20 20 -48.5 20t-48.5 -20t-20 -49t20 -49l375 -375q20 -21 49 -21t49 21l375 375q21 20 21 48.5t-20.5 49t-49 20.5t-48.5 -20z" />
+    <glyph glyph-name="xinhao5" unicode="&#xe61e;" horiz-adv-x="1294" 
+d="M83 173h166v-260h-166v260zM320 315h166v-402h-166v402zM581 481h142v-568h-142v568zM818 647h165v-734h-165v734zM1054 813h166v-900h-166v900z" />
+    <glyph glyph-name="xinhao1" unicode="&#xe697;" horiz-adv-x="1294" 
+d="M83 173h166v-260h-166v260z" />
+    <glyph glyph-name="xinhao3" unicode="&#xe698;" horiz-adv-x="1294" 
+d="M83 173h166v-260h-166v260zM320 315h166v-402h-166v402zM581 481h142v-568h-142v568z" />
+    <glyph glyph-name="xinhao2" unicode="&#xe699;" horiz-adv-x="1294" 
+d="M83 173h166v-260h-166v260zM320 315h166v-402h-166v402z" />
+    <glyph glyph-name="xinhao4" unicode="&#xe69a;" horiz-adv-x="1294" 
+d="M83 173h166v-260h-166v260zM320 315h166v-402h-166v402zM581 481h142v-568h-142v568zM818 647h165v-734h-165v734z" />
   </font>
 </defs></svg>
