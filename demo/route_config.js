@@ -4,7 +4,7 @@ import {
     Route,
     Redirect
 } from 'react-router-dom';
-import {getModule, Bundle} from './util';
+import {getModule, Bundle, processReactRouterProps} from './util';
 
 import App from './app';
 import Demo from 'bundle-loader?lazy!./component/demo';
@@ -110,7 +110,7 @@ class Page extends React.Component {
 
         return (
             <Bundle load={load}>
-                {(Component) => Component ? <Component/> : <div>loading...</div>}
+                {(Component) => Component ? <Component {...this.props}/> : <div>loading...</div>}
             </Bundle>
         );
     }
@@ -119,11 +119,11 @@ class Page extends React.Component {
 const RouteConfig = () => (
     <Router>
         <Route path="/" component={(props) => (
-            <App {...props}>
-                <Redirect from="/" to="/doc/About"/>
-                <Redirect from="/doc" to="/doc/About"/>
-
+            <App {...processReactRouterProps(props)} match={1}>
+                <Route exact path="/" render={() => <Redirect from="/" to="/doc/About"/>}/>
                 <Route exact path="/demo" component={getModule(Demo)}/>
+
+                <Route exact path="/doc" render={() => <Redirect from="/" to="/doc/About"/>}/>
                 <Route exact path="/:path1/:path2" component={Page}/>
                 <Route exact render={() => <div>无法匹配</div>}/>
             </App>

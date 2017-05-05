@@ -3,9 +3,9 @@ import {Divider} from '../../src/index';
 
 class Component extends React.Component {
     render() {
+        console.log(this.props);
         return (
             <div>
-                demo
                 <div>
                     原生分割线
                     <hr/>

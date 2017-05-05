@@ -1,4 +1,5 @@
 import React from 'react';
+import queryString from 'query-string';
 
 class Bundle extends React.Component {
     constructor(props) {
@@ -36,17 +37,22 @@ class Bundle extends React.Component {
 }
 
 const getModule = (loaderLazyModule) => {
-    return (match) => {
-        console.log('match', match);
+    return (props) => {
         return (
             <Bundle load={loaderLazyModule}>
-                {(Component) => Component ? <Component/> : <div/>}
+                {(Component) => Component ? <Component {...props}/> : <div/>}
             </Bundle>
         );
     };
 };
 
+function processReactRouterProps(props) {
+    props.location.query = queryString.parse(props.location.search);
+    return props;
+}
+
 export {
     getModule,
-    Bundle
+    Bundle,
+    processReactRouterProps
 };
