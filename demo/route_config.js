@@ -2,9 +2,10 @@ import React from 'react';
 import {
     HashRouter as Router,
     Route,
-    Redirect
+    Redirect,
+    Switch as RRSwitch
 } from 'react-router-dom';
-import {getModule, Bundle, processReactRouterProps} from './util';
+import {Bundle, processReactRouterProps} from 'gm-util';
 
 import App from './app';
 import Demo from 'bundle-loader?lazy!./component/demo';
@@ -116,16 +117,28 @@ class Page extends React.Component {
     }
 }
 
+const getModule = (loaderLazyModule) => {
+    return (props) => {
+        return (
+            <Bundle load={loaderLazyModule}>
+                {(Component) => Component ? <Component {...props}/> : <div/>}
+            </Bundle>
+        );
+    };
+};
+
 const RouteConfig = () => (
     <Router>
         <Route path="/" component={(props) => (
             <App {...processReactRouterProps(props)} match={1}>
-                <Route exact path="/" render={() => <Redirect from="/" to="/doc/About"/>}/>
-                <Route exact path="/demo" component={getModule(Demo)}/>
+                <RRSwitch>
+                    <Route exact path="/" render={() => <Redirect from="/" to="/doc/About"/>}/>
+                    <Route exact path="/demo" component={getModule(Demo)}/>
 
-                <Route exact path="/doc" render={() => <Redirect from="/" to="/doc/About"/>}/>
-                <Route exact path="/:path1/:path2" component={Page}/>
-                <Route exact render={() => <div>无法匹配</div>}/>
+                    <Route exact path="/doc" render={() => <Redirect from="/" to="/doc/About"/>}/>
+                    <Route exact path="/:path1/:path2" component={Page}/>
+                    <Route exact render={() => <div>无法匹配</div>}/>
+                </RRSwitch>
             </App>
         )}/>
     </Router>
