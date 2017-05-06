@@ -1,5 +1,6 @@
 import React from 'react';
-import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 class DropSelect extends React.Component {
     constructor(props) {
@@ -100,7 +101,7 @@ class DropSelect extends React.Component {
             </li>;
         } else {
             coolList = list.map((rowData, rowIndex) => {
-                const cls = classnames('gm-dropselect-item', {
+                const cls = classNames('gm-dropselect-item', {
                     active: activeIndex === rowIndex
                 });
                 const row = columns.map((col, index) => {
@@ -160,10 +161,10 @@ class DropSelect extends React.Component {
 }
 
 DropSelect.propTypes = {
-    show: React.PropTypes.bool.isRequired,
-    data: React.PropTypes.object,
-    onEnter: React.PropTypes.func,
-    onHide: React.PropTypes.func
+    show: PropTypes.bool.isRequired,
+    data: PropTypes.object,
+    onEnter: PropTypes.func,
+    onHide: PropTypes.func
 };
 
 DropSelect.defaultProps = {

@@ -12,6 +12,8 @@
 
 使用前请保证以下依赖存在
 - react react-dom
+- gm-util
 - classnames
 - lodash
 - moment
+- query-string

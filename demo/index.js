@@ -6,6 +6,6 @@ import 'highlight.js/styles/default.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RouteConfig from './route_config';
+import Route from './route';
 
-ReactDOM.render(<RouteConfig/>, window.document.getElementById('appContainer'));
+ReactDOM.render(<Route/>, window.document.getElementById('appContainer'));

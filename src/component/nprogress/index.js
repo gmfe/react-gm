@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 const containerId = '_gm_nprogress_container' + (Math.random() + '').slice(2);

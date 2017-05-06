@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class WithCount extends React.Component {
     render() {
@@ -34,10 +35,10 @@ class PaginationText extends React.Component {
 
 PaginationText.displayName = 'PaginationText';
 PaginationText.propTypes = {
-    data: React.PropTypes.shape({
-        count: React.PropTypes.number,
-        offset: React.PropTypes.number.isRequired,
-        limit: React.PropTypes.number.isRequired
+    data: PropTypes.shape({
+        count: PropTypes.number,
+        offset: PropTypes.number.isRequired,
+        limit: PropTypes.number.isRequired
     })
 };
 

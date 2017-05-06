@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import Calendar from '../calendar';
 import classNames from 'classnames';
@@ -65,9 +66,9 @@ DatePicker.propTypes = {
     disabled: PropTypes.bool,
     className: PropTypes.string,
 
-    min: React.PropTypes.object,
-    max: React.PropTypes.object,
-    disabledDate: React.PropTypes.func
+    min: PropTypes.object,
+    max: PropTypes.object,
+    disabledDate: PropTypes.func
 };
 
 export default DatePicker;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Flex from '../flex';
 import _ from 'lodash';
 
@@ -240,11 +241,11 @@ class TreeNode extends React.Component {
  *  onSelect:将选择的节点value，以数组结构暴露出去
  */
 TreeSelect.propTypes = {
-    list: React.PropTypes.array.isRequired,
-    label: React.PropTypes.string,
-    disabledSelected: React.PropTypes.bool,
-    selected: React.PropTypes.array,
-    onSelect: React.PropTypes.func
+    list: PropTypes.array.isRequired,
+    label: PropTypes.string,
+    disabledSelected: PropTypes.bool,
+    selected: PropTypes.array,
+    onSelect: PropTypes.func
 };
 
 TreeSelect.defaultProps = {

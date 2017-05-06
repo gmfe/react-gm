@@ -1,8 +1,9 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Flex from '../flex';
 import Select from '../select';
-import {isMac} from '../../util';
+import {is} from 'gm-util';
 
 const {Option} = Select;
 
@@ -199,7 +200,7 @@ class Transfer extends React.Component {
                     </Flex>
                 </Flex>
                 <div className="gm-text-desc">
-                    按下{isMac ? 'Command' : 'Control'}选择多个值
+                    按下{is.mac ? 'Command' : 'Control'}选择多个值
                 </div>
             </div>
         );

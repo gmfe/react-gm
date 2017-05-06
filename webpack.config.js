@@ -1,32 +1,31 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const AssetsPlugin = require('assets-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
+const isDev = process.env.NODE_ENV === 'development';
 
-module.exports = {
-    entry: './src/index',
-    externals: {
-        'react': 'react',
-        'react-dom': 'react-dom',
-        'moment': 'moment',
-        'lodash': 'lodash'
+const config = {
+    entry: {
+        'index': [
+            './demo/index'
+        ]
     },
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'react-gm.js',
-        library: 'ReactGM',
-        libraryTarget: 'umd'
+        path: path.join(__dirname, 'build'),
+        filename: '[name].[hash].bundle.js',
+        publicPath: '/react-gm/build/'
     },
-    resolve: {
-        extensions: ['.js', '.css', '.less']
-    },
-    plugins: [
-        new ExtractTextPlugin('react-gm.css')
-    ],
     module: {
         rules: [{
             test: /\.js$/,
             use: ['babel-loader']
+        }, {
+            test: /\.md$/,
+            use: [
+                'babel-loader',
+                'markdown-it-react-loader'
+            ]
         }, {
             test: /(fontawesome-webfont|glyphicons-halflings-regular|iconfont)\.(woff|woff2|ttf|eot|svg)($|\?)/,
             use: [{
@@ -38,23 +37,44 @@ module.exports = {
             }]
         }, {
             test: /\.(css|less)$/,
-            use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: [
-                    {
-                        loader: 'css-loader?-autoprefixer'
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: function () {
-                                return [autoprefixer({browsers: ['iOS >= 8', 'Android >= 4.1']}), precss];
-                            }
+            use: [
+                'style-loader',
+                'css-loader?-autoprefixer',
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: function () {
+                            return [autoprefixer({browsers: ['iOS >= 8', 'Android >= 4.1']}), precss];
                         }
-                    },
-                    'less-loader'
-                ]
-            })
+                    }
+                },
+                'less-loader'
+            ]
+        }, {
+            test: /\.(jpe?g|png|gif|svg)$/,
+            use: [{
+                loader: 'url-loader',
+                options: {
+                    limit: 1024,
+                    name: 'img/[name].[hash].[ext]'
+                }
+            }]
         }]
-    }
+    },
+    plugins: [
+        // new webpack.NoEmitOnErrorsPlugin(),
+        new AssetsPlugin({
+            filename: 'build/webpack-assets.js',
+            processOutput: function (assets) {
+                return 'window.WEBPACK_ASSETS = ' + JSON.stringify(assets);
+            }
+        })
+    ]
 };
+
+if (!isDev) {
+    // 压缩
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+}
+
+module.exports = config;

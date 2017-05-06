@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import Calendar from '../calendar';
 import classNames from 'classnames';
@@ -103,15 +104,15 @@ DateRangePicker.propTypes = {
     className: PropTypes.string,
 
     beginProps: PropTypes.shape({
-        min: React.PropTypes.object,
-        max: React.PropTypes.object,
-        disabledDate: React.PropTypes.func
+        min: PropTypes.object,
+        max: PropTypes.object,
+        disabledDate: PropTypes.func
     }),
     beginRenderInputValue: PropTypes.func,
     endProps: PropTypes.shape({
-        min: React.PropTypes.object,
-        max: React.PropTypes.object,
-        disabledDate: React.PropTypes.func
+        min: PropTypes.object,
+        max: PropTypes.object,
+        disabledDate: PropTypes.func
     }),
     endRenderInputValue: PropTypes.func
 };

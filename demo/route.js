@@ -130,7 +130,7 @@ const getModule = (loaderLazyModule) => {
 const RouteConfig = () => (
     <Router>
         <Route path="/" component={(props) => (
-            <App {...processReactRouterProps(props)} match={1}>
+            <App {...processReactRouterProps(props)}>
                 <RRSwitch>
                     <Route exact path="/" render={() => <Redirect from="/" to="/doc/About"/>}/>
                     <Route exact path="/demo" component={getModule(Demo)}/>

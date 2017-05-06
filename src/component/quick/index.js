@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Flex from '../flex';
 import Collapse from '../collapse';
 import _ from 'lodash';

@@ -1,4 +1,3 @@
-import Util from 'gm-util';
 import Pagination from './component/pagination/pagination';
 import PaginationText from './component/pagination/pagination.text';
 import Dropper from './component/dropper/index';
@@ -70,8 +69,7 @@ const {
     Option
 } = Select;
 
-module.exports = {
-    Util,
+export {
     Pagination,
     PaginationText,
     Form, FormItem, FormButton,

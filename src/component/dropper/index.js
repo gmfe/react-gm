@@ -1,12 +1,13 @@
-import React, {PropTypes} from 'react';
-import Util from 'gm-util';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {is} from 'gm-util';
 
 class Dropper extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isDragActive: false,
-            isWX: Util.is.weixin()
+            isWX: is.weixin()
         };
         this.onClick = ::this.onClick;
         this.onDragEnter = ::this.onDragEnter;

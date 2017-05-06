@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
 import classNames from 'classnames';
@@ -33,12 +34,12 @@ class TimeSpan extends React.Component {
 }
 
 TimeSpan.propTypes = {
-    min: React.PropTypes.object,
-    max: React.PropTypes.object,
-    span: React.PropTypes.number,
-    selected: React.PropTypes.object,
-    render: React.PropTypes.func,
-    onSelect: React.PropTypes.func
+    min: PropTypes.object,
+    max: PropTypes.object,
+    span: PropTypes.number,
+    selected: PropTypes.object,
+    render: PropTypes.func,
+    onSelect: PropTypes.func
 };
 TimeSpan.defaultProps = {
     min: moment().startOf('day').toDate(),

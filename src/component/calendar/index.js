@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
 import _ from 'lodash';
@@ -195,11 +196,11 @@ class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-    selected: React.PropTypes.object,
-    onSelect: React.PropTypes.func,
-    min: React.PropTypes.object,
-    max: React.PropTypes.object,
-    disabledDate: React.PropTypes.func
+    selected: PropTypes.object,
+    onSelect: PropTypes.func,
+    min: PropTypes.object,
+    max: PropTypes.object,
+    disabledDate: PropTypes.func
 };
 
 Calendar.defaultProps = {

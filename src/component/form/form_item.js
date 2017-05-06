@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Flex from '../flex';
 import _ from 'lodash';
@@ -14,7 +15,8 @@ class FormControl extends React.Component {
 
         let child = children;
 
-        if (child.type === 'input') {
+        // 文件类型特殊
+        if (child.type === 'input' && child.props.type !== 'file') {
             return React.cloneElement(child, {
                 className: classNames('form-control', className)
             });
