@@ -145,6 +145,20 @@ class ModalWrap3 extends React.Component {
             },
             onCancel() {
                 console.log('Cancel');
+            }
+        });
+    }
+
+    handleModalWithOKBtn(type, okBtnClassName){
+        Modal[type]({
+            children: '我是内容我内容我是内容我是内容',
+            title: '我是标题题我danger',
+            onHide: Modal.hide,
+            onOk() {
+                console.log('OK');
+            },
+            onCancel() {
+                console.log('Cancel');
             },
             okBtnClassName
         });
@@ -159,7 +173,7 @@ class ModalWrap3 extends React.Component {
                 >confirm</button>
                 <button
                     className="btn btn-default"
-                    onClick={this.handleModal.bind(this, 'confirm', 'btn-danger')}
+                    onClick={this.handleModalWithOKBtn.bind(this, 'confirm', 'btn-danger')}
                 >confirm danger</button>
                 <button
                     className="btn btn-default"
