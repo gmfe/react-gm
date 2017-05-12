@@ -1,8 +1,8 @@
 {
   "name": "react-gm",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "",
-  "main": "dist/react-gm.js",
+  "main": "src/index.js",
   "module": "src/index.js",
   "style": "src/index.css",
   "keywords": [
