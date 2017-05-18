@@ -7,4 +7,4 @@ cp index.html docs;
 cp -r build docs;
 git add --all;
 git commit -m 'docs generate';
-git push;
+git push origin master:master;
