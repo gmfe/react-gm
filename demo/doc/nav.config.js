@@ -7,6 +7,7 @@ class NavConfig extends React.Component {
                 <h3>Guide</h3>
                 <ul>
                     <li><a href="#/doc/About">About</a></li>
+                    <li><a href="#/doc/IFont">IFont</a></li>
                 </ul>
                 <h3>Layout</h3>
                 <ul>

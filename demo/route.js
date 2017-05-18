@@ -11,6 +11,7 @@ import App from './app';
 import Demo from 'bundle-loader?lazy!./component/demo';
 
 import About from 'bundle-loader?lazy!./doc/About.md';
+import IFont from 'bundle-loader?lazy!./doc/IFont.md';
 import Flex from 'bundle-loader?lazy!./doc/Flex.md';
 import Loading from 'bundle-loader?lazy!./doc/Loading.md';
 import NProgress from 'bundle-loader?lazy!./doc/NProgress.md';
@@ -58,6 +59,7 @@ import ComponentRule from  'bundle-loader?lazy!./standard/Component.md';
 const pageMap = {
     doc: {
         About,
+        IFont,
         Flex,
         Loading,
         NProgress,
