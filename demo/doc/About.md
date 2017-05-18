@@ -17,3 +17,7 @@
 - lodash
 - moment
 - query-string
+
+## 自动化集成
+
+flow.ci
