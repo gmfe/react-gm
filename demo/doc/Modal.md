@@ -125,3 +125,16 @@ class ModalWrap2 extends React.Component {
 <ModalWrap2/>
 ```
 :::
+
+### Props
+- `show (bool|isRequired)` 是否显示
+- `disableMaskClose (bool)` 是否启用点击mask关闭modal
+- `onHide (func)` 隐藏触发回调
+- `size (string ['lg', 'md', 'sm'])` modal尺寸，默认md
+- `title (string|element)` 标题
+- `children` 模态框里面的内容
+
+
+### Static
+- `render`
+- `hide`

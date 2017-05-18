@@ -45,4 +45,11 @@ class Component extends React.Component {
 :::
 
 ### Props
-todo
+- `value (number|string)` 当前值
+- `max (number)` 最大值
+- `min (number)` 最小值
+- `precision (number)` 精确度，保留几位小数
+- `onChange (func|isRequired)` 数值变化回调
+- `placeholder (string)`: 默认值
+- `className (string)`
+- `minus (bool)` 是否支持输入负数
