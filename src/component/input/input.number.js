@@ -32,6 +32,9 @@ class InputNumber extends React.Component {
         } else if (/^0[1-9]/.test(value)) {
             // 如果第一个数字是0，第二个是1-9，则选取第二个数字
             this.props.onChange(value.substr(1));
+        } else if (value.length < this.props.value.toString().length) {
+            // 有默认值，且不符合以上的规则，但是是一个删减字符的操作
+            this.props.onChange(value);
         }
     }
 
