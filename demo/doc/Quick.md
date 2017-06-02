@@ -7,6 +7,22 @@ imports:
 
 各种Panel面板
 
+## QuickPanel
+::: demo
+```js
+class QuickPanelDemo extends React.Component{
+    render(){
+        return <QuickPanel title={"运营时间设置"}>
+            <div className="gm-padding-15">内容</div>
+        </QuickPanel>
+    }
+}
+```
+```jsx
+<QuickPanelDemo/>
+```
+:::
+
 ## QuickTab
 
 ::: demo

@@ -62,6 +62,11 @@ const TipStatics = {
         }
         options.type = 'danger';
         TipStatics.tip(options);
+    },
+    clearAll(){
+        _.forEach(tipsContainer.children, tip => {
+            ReactDOM.unmountComponentAtNode(tip);
+        });
     }
 };
 
@@ -89,7 +94,7 @@ class TipOverlay extends React.Component {
     componentDidMount() {
         const {time} = this.props;
         if (time) {
-            this.timer = setTimeout(()=> this.fadeOut(), time);
+            this.timer = setTimeout(() => this.fadeOut(), time);
         }
     }
 
