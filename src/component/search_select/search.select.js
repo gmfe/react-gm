@@ -49,6 +49,7 @@ class SearchSelect extends React.Component {
         this.getListItemCount = ::this.getListItemCount;
 
         console.warn('请尽量提供key（暂时无法检测key是否有传，暴力提示）');
+        console.warn('SearchSelect(FilterSearchSelect) is deprecated. Use FilterSelect instead.');
     }
 
     componentWillReceiveProps(nextProps) {
