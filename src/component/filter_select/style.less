@@ -1,0 +1,128 @@
+.gm-filter-select {
+  position: relative;
+  border: 1px solid @gm-form-border-color;
+  background-color: white;
+  cursor: pointer;
+
+  .gm-filter-select-target {
+    padding: 6px 20px 6px 12px;
+    overflow-x: auto;
+
+    .selected {
+      background-color: @list-group-hover-bg;
+      padding: 0 5px;
+      margin-right: 5px;
+      border-radius: 4px;
+
+      .close {
+        right: -5px;
+        line-height: 1;
+        font-size: 15px;
+        padding-left: 2px;
+      }
+    }
+
+    .gm-trigger {
+      position: static;
+
+      >
+      .gm-trigger-popup {
+        left: -1px;
+        right: -1px;
+
+        .gm-filter-select-list {
+          .gm-filter-select-list-input {
+            padding: 5px;
+            border-bottom: 1px solid @gm-border-color;
+            background: whitesmoke;
+            input {
+              padding: 0 5px;
+              height: 28px;
+              box-shadow: none;
+              min-width: 50px;
+              width: 100%;
+              outline: none;
+            }
+          }
+        }
+
+        .list-group {
+          width: 100%;
+          overflow-x: hidden;
+          overflow-y: auto;
+          z-index: 1;
+          margin-bottom: 0;
+
+          .list-group-item {
+            cursor: pointer;
+            border-bottom: none;
+            border-left: none;
+            border-right: none;
+            border-top: 1px solid @gm-border-color;
+            padding: 6px 12px;
+
+            &.active {
+              z-index: inherit;
+              color: inherit;
+              background: @list-group-hover-bg;
+            }
+
+            &:first-child {
+              border-top: none;
+            }
+
+            &.active.line-selected {
+              background-color: @gm-list-group-active-hover-bg;
+            }
+
+            &.line-selected {
+              background-color: @gm-list-group-active-hover-bg;
+            }
+          }
+
+          .list-group-label {
+            .list-group-label-item {
+              padding: 6px 12px;
+              border-top: 1px solid @gm-border-color;
+              color: @input-color-placeholder;
+              background: white;
+            }
+            .list-group-item {
+              padding: 6px 26px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //&.gm-filter-select-multiple {
+  //  .gm-filter-select-target {
+  //    .selected {
+  //      background-color: @list-group-hover-bg;
+  //      padding: 0 5px;
+  //      margin-right: 5px;
+  //      border-radius: 4px;
+  //
+  //      .close {
+  //        right: -5px;
+  //        line-height: 1;
+  //        font-size: 15px;
+  //        padding-left: 2px;
+  //      }
+  //    }
+  //  }
+  //}
+
+  &.gm-filter-select-disabled {
+    cursor: not-allowed;
+    opacity: .6;
+    input {
+      cursor: not-allowed;
+    }
+    button.close {
+      cursor: not-allowed;
+    }
+  }
+
+}

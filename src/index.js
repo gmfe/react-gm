@@ -32,6 +32,8 @@ import TreeSelect from './component/tree_select';
 import {QuickInfo, QuickInfoCell, QuickPanel, QuickFilter, QuickTab, QuickDesc} from './component/quick';
 import Radio from './component/radio';
 import Checkbox from './component/checkbox';
+import FilterSelect from './component/filter_select/filter.select';
+import MultipleFilterSelect from './component/filter_select/multiple.filter.select';
 
 import Validator from './validator';
 import Transfer from './component/transfer';
@@ -115,5 +117,7 @@ export {
     Radio, RadioGroup,
     Checkbox, CheckboxGroup,
     Select, Option,
-    Transfer
+    Transfer,
+    FilterSelect,
+    MultipleFilterSelect
 };

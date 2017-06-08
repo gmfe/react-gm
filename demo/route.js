@@ -20,6 +20,7 @@ import CascaderSelect from 'bundle-loader?lazy!./doc/CascaderSelect.md';
 import DropSelect from 'bundle-loader?lazy!./doc/DropSelect.md';
 import SearchSelect from 'bundle-loader?lazy!./doc/SearchSelect.md';
 import FilterSearchSelect from 'bundle-loader?lazy!./doc/FilterSearchSelect.md';
+import FilterSelect from 'bundle-loader?lazy!./doc/FilterSelect.md';
 import Sheet from 'bundle-loader?lazy!./doc/Sheet.md';
 import SheetColumn from 'bundle-loader?lazy!./doc/SheetColumn.md';
 import SheetAction from 'bundle-loader?lazy!./doc/SheetAction.md';
@@ -68,6 +69,7 @@ const pageMap = {
         DropSelect,
         SearchSelect,
         FilterSearchSelect,
+        FilterSelect,
         Sheet, SheetColumn, SheetSelect, SheetAction, SheetBatchAction,
         Pagination,
         ImportLead,

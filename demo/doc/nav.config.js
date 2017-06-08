@@ -38,8 +38,11 @@ class NavConfig extends React.Component {
                         <small>级联选择</small>
                     </a></li>
                     <li><a href="#/doc/DropSelect">DropSelect</a></li>
+                    <li><a href="#/doc/FilterSelect">FilterSelect
+                        <small>搜索选择v2</small>
+                    </a></li>
                     <li><a href="#/doc/SearchSelect">SearchSelect
-                        <small>搜索选择</small>
+                        <small>废弃</small>
                     </a></li>
                     <li><a href="#/doc/TreeSelect">TreeSelect
                         <small>树形选择</small>
