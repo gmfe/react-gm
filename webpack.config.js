@@ -40,14 +40,7 @@ const config = {
             use: [
                 'style-loader',
                 'css-loader?-autoprefixer',
-                {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins: function () {
-                            return [autoprefixer({browsers: ['iOS >= 8', 'Android >= 4.1']}), precss];
-                        }
-                    }
-                },
+                'postcss-loader',
                 'less-loader'
             ]
         }, {
