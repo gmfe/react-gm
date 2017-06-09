@@ -12,7 +12,6 @@
   ],
   "scripts": {
     "precommit": "eslint ./src/ ./demo/;",
-    "pre": "npm install",
     "clear": "rm -rf build && mkdir build;",
     "start": "npm run clear && NODE_ENV=development webpack-dev-server --config webpack.config.js --devtool eval --host 0.0.0.0 --inline --hot --progress --colors --port 3000",
     "publishpatch": "sh deploy/publish.sh",
