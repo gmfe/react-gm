@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Flex from '../flex';
+import Loading from '../loading';
 import classNames from 'classnames';
 import Trigger from '../trigger';
 
@@ -14,6 +15,7 @@ class FilterSelect extends React.Component {
         // 单选版本才设置query
         this.state = {
             query: '',
+            loading: false,
             activeIndex: null  // 键盘上下键选中的index
         };
 
@@ -132,7 +134,25 @@ class FilterSelect extends React.Component {
 
         this.timer = setTimeout(() => {
             if (!this.______isMounted) {
-                this.props.onSearch(query);
+                const result = this.props.onSearch(query);
+
+                if (!result) {
+                    return;
+                }
+
+                this.setState({
+                    loading: true
+                });
+
+                Promise.resolve(result).then(() => {
+                    this.setState({
+                        loading: false
+                    });
+                }).catch(() => {
+                    this.setState({
+                        isLoading: false
+                    });
+                });
             }
         }, this.props.delay);
     }
@@ -227,7 +247,7 @@ class FilterSelect extends React.Component {
 
     renderOverlay(filterList) {
         const {isGroupList} = this.props;
-        const {query} = this.state;
+        const {query, loading} = this.state;
 
         return (
             <div className="gm-filter-select-list gm-border">
@@ -243,7 +263,8 @@ class FilterSelect extends React.Component {
                         placeholder={this.props.placeholder}
                     />
                 </div>
-                {isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList)}
+                {loading && <Flex alignCenter justifyCenter className="gm-bg gm-padding-5"><Loading size={20}/></Flex>}
+                {loading ? loading : isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList)}
             </div>
         );
     }
