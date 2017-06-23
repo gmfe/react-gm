@@ -19,6 +19,15 @@ const filterSelectData = [
     {name: '深圳湾'},
     {name: '华中科技大学'}
 ];
+
+const ajaxFilterSelectData = [
+    {name: '刘备'},
+    {name: '关羽'},
+    {name: '张飞'},
+    {name: '张云'},
+    {name: '黄忠'},
+    {name: '周瑜'}
+];
     
 const filterSelectGroupData = [{
     label: '一组',
@@ -51,6 +60,7 @@ class FilterSelect1 extends React.Component {
         };
         this.handleSelect = ::this.handleSelect;
         this.handleSearch = ::this.handleSearch;
+        this.handleSearchAjax = ::this.handleSearchAjax;
     }
     
     handleSelect(selected) {
@@ -72,6 +82,17 @@ class FilterSelect1 extends React.Component {
                 })
             });
         }
+    }
+
+    handleSearchAjax(value) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                this.setState({
+                    list: ajaxFilterSelectData
+                });
+                resolve();
+            }, 1000);
+        });
     }
 
     handleWithFilter(list, query) {
@@ -112,6 +133,18 @@ class FilterSelect1 extends React.Component {
                     selected={this.state.selected}
                     withFilter={this.handleWithFilter}
                     onSelect={this.handleSelect}
+                    placeholder="搜索"
+                />
+
+                <div>ajax搜索数据。</div>
+
+                <FilterSelect
+                    id="ggg"
+                    list={this.state.list}
+                    selected={this.state.selected}
+                    withFilter={this.handleWithFilter}
+                    onSelect={this.handleSelect}
+                    onSearch={this.handleSearchAjax}
                     placeholder="搜索"
                 />
             </div>
