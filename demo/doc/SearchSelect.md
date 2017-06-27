@@ -86,6 +86,15 @@ class SearchSelect1 extends React.Component {
                     onSelect={this.handleSelect}
                     placeholder="搜索"
                 />
+
+                <SearchSelect
+                    list={this.state.list}
+                    renderListCell={v => (<strong>{v.name} balabala</strong>)}
+                    selected={this.state.selected}
+                    onSearch={this.handleSearch}
+                    onSelect={this.handleSelect}
+                    placeholder="搜索"
+                />
                 
                 <SearchSelect
                     disabled
@@ -234,6 +243,7 @@ class SearchSelect3 extends React.Component {
 ### Props
 **注意，请尽量提供key**
 - `list (array|isRequired)` 搜索待选数据，是过滤后的数据。结构`{'[{name: "aaaaa"}]'}` ，name用来显示
+- `renderListCell` 有时候需要改变列表的样式，通过此方法自定义
 - `isGroupList (bool)` list数据是否分组数据，此时list的结构为`{'[{label: "一组", children: [{name: "aaaaa"}]}]'}`
 - `selected (any)` 选中了什么，`list`中某条数据(引用！)
 - `onSelect (func|isRequired)` 选中后触发，提供和`selected`一样的数据结构，一般直接设置`selected`即可

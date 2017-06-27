@@ -233,7 +233,7 @@ class SearchSelect extends React.Component {
     }
 
     renderOverlay() {
-        const {list, listMaxHeight, inputClassName, isGroupList} = this.props;
+        const {list, listMaxHeight, inputClassName, isGroupList, renderListCell} = this.props;
 
         if (isGroupList) {
             // 不存在group数据
@@ -271,7 +271,7 @@ class SearchSelect extends React.Component {
                                             onClick={this.handleSelect.bind(this, value)}
                                             onMouseEnter={this.handleItemMouseEnter.bind(this, itemSequence)}
                                         >
-                                            <Flex flex>{value.name}</Flex>
+                                            <Flex flex>{renderListCell(value)}</Flex>
                                         </Flex>
                                     );
                                 })}
@@ -302,7 +302,7 @@ class SearchSelect extends React.Component {
                                 onClick={this.handleSelect.bind(this, value)}
                                 onMouseEnter={this.handleItemMouseEnter.bind(this, i)}
                             >
-                                {value.name}
+                                {renderListCell(value)}
                             </Flex>
                         );
                     })}
@@ -356,6 +356,7 @@ class SearchSelect extends React.Component {
 SearchSelect.propTypes = {
     disabled: PropTypes.bool,
     list: PropTypes.array.isRequired,
+    renderListCell: PropTypes.func,
     isGroupList: PropTypes.bool,
     selected: PropTypes.any,
     onSearch: PropTypes.func.isRequired,
@@ -370,6 +371,7 @@ SearchSelect.propTypes = {
 
 SearchSelect.defaultProps = {
     disabled: false,
+    renderListCell: v => v.name,
     isGroupList: false,
     listMaxHeight: '250px',
     delay: 500,
