@@ -21,13 +21,25 @@ class TimeSpan extends React.Component {
     }
 
     render() {
-        const cells = this.getCells(), {selected, render} = this.props;
+        const cells = this.getCells(), {selected, render, disabledSpan} = this.props;
 
         return (
             <div className="gm-time-span">
-                {_.map(cells, (value, i) => <div key={i} className={classNames("gm-time-span-cell", {
-                    active: +value === +selected
-                })} onClick={this.handleSelect.bind(this, value)}>{render(value.toDate())}</div>)}
+                {_.map(cells, (value, i) => {
+                    const disabled = disabledSpan && disabledSpan(value);
+                    return (
+                        <div
+                            key={i}
+                            className={classNames("gm-time-span-cell", {
+                                active: +value === +selected,
+                                disabled
+                            })}
+                            onClick={disabled ? _.noop : this.handleSelect.bind(this, value)}
+                        >
+                            {render(value.toDate())}
+                        </div>
+                    );
+                })}
             </div>
         );
     }
@@ -36,6 +48,7 @@ class TimeSpan extends React.Component {
 TimeSpan.propTypes = {
     min: PropTypes.object,
     max: PropTypes.object,
+    disabledSpan: PropTypes.func,
     span: PropTypes.number,
     selected: PropTypes.object,
     render: PropTypes.func,

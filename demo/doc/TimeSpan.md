@@ -31,6 +31,7 @@ class TimeSpanWrap extends React.Component {
                 <div>
                     <TimeSpan
                         max={null}
+                        disabledSpan={spanMoment => spanMoment.isSameOrAfter(moment('11:00', 'HH:mm')) && spanMoment.isSameOrBefore(moment('18:30', 'HH:mm'))}
                         selected={this.state.date}
                         onSelect={this.handleChange}
                     />
@@ -51,6 +52,7 @@ class TimeSpanWrap extends React.Component {
                     <TimeSpanPicker
                         date={this.state.date}
                         onChange={this.handleChange}
+                        disabledSpan={spanMoment => spanMoment.isSameOrAfter(moment('11:00', 'HH:mm')) && spanMoment.isSameOrBefore(moment('18:30', 'HH:mm'))}
                     />
                     <TimeSpanPicker
                         disabled={true}
@@ -89,6 +91,7 @@ class TimeSpanWrap extends React.Component {
 
 - `min (object)` 同
 - `max (object)` 同
+- `disabledSpan (func)` 同
 - `span (number)` 同
 - `date (object)` 同 TimeSpan selected
 - `render (func)` 同
