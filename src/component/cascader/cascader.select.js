@@ -107,11 +107,16 @@ class CascaderSelect extends React.Component {
     }
 
     handleClose(value) {
+        const {disabled} = this.props;
+        if(disabled) {
+            return false;
+        }
         const selected = _.filter(this.state.selected, v => v !== value);
         this.doSelect(selected);
     }
 
     render() {
+        const {disabled} = this.props;
         return (
             <div className="gm-cascader-select" ref={ref => this.refCascaderSelect = ref}>
                 <Flex className="gm-cascader-select-input">
@@ -126,11 +131,14 @@ class CascaderSelect extends React.Component {
                         </Flex>
                     ))}
                     <Flex flex column onKeyDown={::this.handleKeyDown}>
-                        <Cascader
-                            data={this.props.data}
-                            value={this.state.cascaderValue}
-                            onChange={::this.handleChange}
-                        />
+                        {
+                            !disabled ?
+                                <Cascader
+                                    data={this.props.data}
+                                    value={this.state.cascaderValue}
+                                    onChange={::this.handleChange}
+                                /> : <input type="text" disabled/>
+                        }
                     </Flex>
                 </Flex>
             </div>
@@ -144,7 +152,11 @@ CascaderSelect.propTypes = {
     // 会提供整个value回去
     onSelect: PropTypes.func.isRequired,
     multiple: PropTypes.bool,
-    selectedRender: PropTypes.func
+    selectedRender: PropTypes.func,
+    disabled: PropTypes.bool
+};
+CascaderSelect.defaultProps = {
+    disabled: false
 };
 
 export default CascaderSelect;

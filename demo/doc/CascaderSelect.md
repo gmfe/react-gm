@@ -156,3 +156,4 @@ class CascaderSelect3 extends React.Component {
 - `onSelect (func|isRequired)` 提供和selected一样的数组
 - `multiple (bool)` 是否支持多选
 - `selectRender (func)` 自定义已选择渲染
+- `disabled (bool)` 禁用CascaderSelect
