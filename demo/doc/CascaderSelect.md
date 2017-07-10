@@ -59,6 +59,7 @@ class CascaderSelect1 extends React.Component {
     render() {
         return (
             <CascaderSelect
+                disabled
                 multiple
                 data={this.state.data}
                 selected={this.state.selected}

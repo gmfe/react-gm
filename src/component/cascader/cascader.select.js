@@ -107,10 +107,6 @@ class CascaderSelect extends React.Component {
     }
 
     handleClose(value) {
-        const {disabled} = this.props;
-        if(disabled) {
-            return false;
-        }
         const selected = _.filter(this.state.selected, v => v !== value);
         this.doSelect(selected);
     }
@@ -124,6 +120,7 @@ class CascaderSelect extends React.Component {
                         <Flex key={i} alignStart className="selected">
                             {this.props.selectedRender ? this.props.selectedRender(value, i) : _.map(value, v => v.name).join(',')}
                             <button
+                                disabled={disabled}
                                 type="button"
                                 className="close"
                                 onClick={this.handleClose.bind(this, value)}
@@ -131,14 +128,12 @@ class CascaderSelect extends React.Component {
                         </Flex>
                     ))}
                     <Flex flex column onKeyDown={::this.handleKeyDown}>
-                        {
-                            !disabled ?
-                                <Cascader
-                                    data={this.props.data}
-                                    value={this.state.cascaderValue}
-                                    onChange={::this.handleChange}
-                                /> : <input type="text" disabled/>
-                        }
+                        <Cascader
+                            disabled={disabled}
+                            data={this.props.data}
+                            value={this.state.cascaderValue}
+                            onChange={::this.handleChange}
+                        />
                     </Flex>
                 </Flex>
             </div>
