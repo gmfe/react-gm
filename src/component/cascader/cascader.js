@@ -66,7 +66,8 @@ class Cascader extends React.Component {
     }
 
     renderChildren() {
-        const {data, valueRender, inputProps} = this.props;
+        const {data, valueRender, disabled} = this.props;
+        let {inputProps} = this.props;
 
         let value = [];
         if (this.state.value.length > 0) {
@@ -76,6 +77,9 @@ class Cascader extends React.Component {
                 });
                 value.push(match);
             });
+        }
+        if(disabled) {
+            inputProps = Object.assign({}, inputProps, {disabled});
         }
 
         return (
@@ -93,8 +97,10 @@ class Cascader extends React.Component {
     }
 
     render() {
+        const {disabled} = this.props;
         return (
             <Trigger
+                disabled={disabled}
                 component={<div className="gm-cascader"/>}
                 popup={this.renderOverlay()}
             >
@@ -116,12 +122,14 @@ Cascader.propTypes = {
     // 没有this.props.children时有效
     inputProps: PropTypes.object,
     valueRender: PropTypes.func,
-    children: PropTypes.element
+    children: PropTypes.element,
+    disabled: PropTypes.bool
 };
 
 Cascader.defaultProps = {
     onChange: _.noop,
-    inputProps: {}
+    inputProps: {},
+    disabled: false
 };
 
 export default Cascader;
