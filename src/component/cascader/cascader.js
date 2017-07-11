@@ -78,6 +78,7 @@ class Cascader extends React.Component {
                 value.push(match);
             });
         }
+        // disabled 的优先级比 inputProps的优先级高
         if(disabled) {
             inputProps = Object.assign({}, inputProps, {disabled});
         }

@@ -59,7 +59,6 @@ class CascaderSelect1 extends React.Component {
     render() {
         return (
             <CascaderSelect
-                disabled
                 multiple
                 data={this.state.data}
                 selected={this.state.selected}
@@ -148,6 +147,44 @@ class CascaderSelect3 extends React.Component {
 ```
 ```jsx
 <CascaderSelect3/>
+```
+:::
+
+::: demo 禁止点击and选择
+```js
+class CascaderSelect4 extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            selected: [[cascaderData[0], cascaderData[0].children[0]]],
+            data: cascaderData
+        };
+        this.handleSelect = ::this.handleSelect;
+    }
+    
+    handleSelect(selected) {
+        console.log(selected);
+        this.setState({
+            selected
+        });
+    }
+    
+    render() {
+        return (
+            <CascaderSelect
+                disabled
+                multiple
+                data={this.state.data}
+                selected={this.state.selected}
+                onSelect={this.handleSelect}
+            />
+        );
+    }
+}
+```
+```jsx
+<CascaderSelect4/>
 ```
 :::
 
