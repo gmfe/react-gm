@@ -188,10 +188,51 @@ class CascaderSelect4 extends React.Component {
 ```
 :::
 
+::: demo inputProps的使用
+```js
+class CascaderSelect5 extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            selected: [[cascaderData[0], cascaderData[0].children[0]]],
+            data: cascaderData
+        };
+        this.handleSelect = ::this.handleSelect;
+    }
+    
+    handleSelect(selected) {
+        console.log(selected);
+        this.setState({
+            selected
+        });
+    }
+    
+    render() {
+        return (
+            <CascaderSelect
+                inputProps={{
+                    'placeholder': '请选择...'
+                }}
+                multiple
+                data={this.state.data}
+                selected={this.state.selected}
+                onSelect={this.handleSelect}
+            />
+        );
+    }
+}
+```
+```jsx
+<CascaderSelect5/>
+```
+:::
+
 ### Props
 - `data (array|isRequired)` 同Cascader的data
 - `selected (array)` Cascader的value的数组版本[Cascader.value]
 - `onSelect (func|isRequired)` 提供和selected一样的数组
 - `multiple (bool)` 是否支持多选
 - `selectRender (func)` 自定义已选择渲染
+- `inputProps (object)` 定义里面input的props
 - `disabled (bool)` 禁用CascaderSelect
