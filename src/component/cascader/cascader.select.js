@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Cascader from './cascader';
 import Flex from '../flex';
+import classnames from 'classnames';
 
 // TODO 后续考虑拆开单选，多选。 耦合起来太蛋疼。
 
@@ -114,7 +115,9 @@ class CascaderSelect extends React.Component {
     render() {
         const {disabled} = this.props;
         return (
-            <div className="gm-cascader-select" ref={ref => this.refCascaderSelect = ref}>
+            <div className={classnames("gm-cascader-select", {
+                "disabled": disabled
+            })} ref={ref => this.refCascaderSelect = ref}>
                 <Flex className="gm-cascader-select-input">
                     {_.map(this.state.selected, (value, i) => (
                         <Flex key={i} alignStart className="selected">
@@ -124,7 +127,7 @@ class CascaderSelect extends React.Component {
                                 type="button"
                                 className="close"
                                 onClick={this.handleClose.bind(this, value)}
-                            >&times;</button>
+                            >{disabled ? null : <span>&times;</span>}</button>
                         </Flex>
                     ))}
                     <Flex flex column onKeyDown={::this.handleKeyDown}>

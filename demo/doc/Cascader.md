@@ -200,6 +200,46 @@ class Cascader5 extends React.Component {
 ```
 :::
 
+::: demo 禁止选择
+```js
+class Cascader6 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: [],
+            data: cascaderData
+        };
+    }
+    
+    render() {
+        return (
+            <div style={{width: '200px'}}>
+                <Cascader
+                    disabled
+                    data={this.state.data}
+                    value={this.state.value}
+                    onChange={::this.handleChange}
+                />
+            </div>
+        );
+    }
+    
+    handleChange(value) {
+        console.log(value);
+        this.setState({
+            value
+        });
+    }
+}
+```
+
+```jsx
+<Cascader6/>
+```
+:::
+
+
+
 ### Props
 - `data (array|isRequired)` 格式如上面的data，`{'[{value: 1, name: \'深圳\', children: [{...}]}]'}` 。
 - `value (array)` 一个数组或者null，表示选中了那些数据。 ['0']则选择了广东，['0', '01']则选择了广东，深圳
@@ -208,3 +248,4 @@ class Cascader5 extends React.Component {
 - `inputProps (object)` 定义里面input的props
 - `valueRender (func)` 自定义value的展现
 - `children` 自定义children的展现
+- `disabled` 禁止选择
