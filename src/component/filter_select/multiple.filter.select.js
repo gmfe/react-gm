@@ -233,24 +233,27 @@ class MultipleFilterSelect extends React.Component {
     }
 
     renderOverlay(filterList) {
-        const {isGroupList} = this.props;
+        const {isGroupList, onSearch} = this.props;
         const {query} = this.state;
 
         return (
             <div className="gm-filter-select-list gm-border">
-                <div className="gm-filter-select-list-input">
-                    <input
-                        ref={ref => this.refInput = ref}
-                        autoFocus
-                        className="form-control"
-                        type="text"
-                        value={query}
-                        onFocus={this.handleFocus}
-                        onChange={this.handleChange}
-                        onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
-                        placeholder={this.props.placeholder}
-                    />
-                </div>
+                {
+                    onSearch !== _.noop ?
+                        <div className="gm-filter-select-list-input">
+                            <input
+                                ref={ref => this.refInput = ref}
+                                autoFocus
+                                className="form-control"
+                                type="text"
+                                value={query}
+                                onFocus={this.handleFocus}
+                                onChange={this.handleChange}
+                                onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
+                                placeholder={this.props.placeholder}
+                            />
+                        </div> : null
+                }
                 {isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList)}
             </div>
         );

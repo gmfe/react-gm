@@ -284,6 +284,45 @@ class FilterSelect3 extends React.Component {
 ```
 :::
 
+::: demo 无搜索框的MultipleFilterSelect
+```js
+class FilterSelect4 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: filterSelectData,
+            list: filterSelectData
+        };
+        this.handleSelect = ::this.handleSelect;
+    }
+    
+    handleSelect(selected) {
+        console.log(selected);
+        this.setState({
+            selected
+        });
+    }
+    
+    render() {
+        return (
+            <div style={{width: '500px'}}>
+                <MultipleFilterSelect
+                    id="aa"
+                    list={this.state.list}
+                    selected={this.state.selected}
+                    onSelect={this.handleSelect}
+                    placeholder="搜索"
+                />
+            </div>
+        );
+    }
+}
+```
+```jsx
+<FilterSelect4/>
+```
+:::
+
 
 ### FilterSelect Props
 
