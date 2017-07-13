@@ -252,7 +252,7 @@ class FilterSelect extends React.Component {
         return (
             <div className="gm-filter-select-list gm-border">
                 {
-                    disableSearch ?
+                    !disableSearch ?
                         <div className="gm-filter-select-list-input">
                             <input
                                 autoFocus
