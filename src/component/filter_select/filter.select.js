@@ -246,13 +246,13 @@ class FilterSelect extends React.Component {
     }
 
     renderOverlay(filterList) {
-        const {isGroupList, enableSearch} = this.props;
+        const {isGroupList, disableSearch} = this.props;
         const {query, loading} = this.state;
 
         return (
             <div className="gm-filter-select-list gm-border">
                 {
-                    enableSearch ?
+                    disableSearch ?
                         <div className="gm-filter-select-list-input">
                             <input
                                 autoFocus
@@ -328,7 +328,7 @@ FilterSelect.propTypes = {
     placeholder: PropTypes.string,
     isScrollToSelected: PropTypes.bool,
     onInputFocus: PropTypes.func,
-    enableSearch: PropTypes.bool
+    disableSearch: PropTypes.bool
 };
 
 FilterSelect.defaultProps = {
@@ -340,7 +340,7 @@ FilterSelect.defaultProps = {
     onSearch: _.noop,
     withFilter: v => v,
     onInputFocus: _.noop,
-    enableSearch: true
+    disableSearch: false
 };
 
 export default FilterSelect;

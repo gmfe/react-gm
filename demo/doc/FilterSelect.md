@@ -307,7 +307,7 @@ class FilterSelect4 extends React.Component {
         return (
             <div style={{width: '500px'}}>
                 <MultipleFilterSelect
-                    enableSearch={false}
+                    disableSearch
                     id="aa"
                     list={this.state.list}
                     selected={this.state.selected}
@@ -339,7 +339,7 @@ class FilterSelect4 extends React.Component {
 - `listMaxHeight (string)` 搜索待选数据的高度，默认250px
 - `placeholder (string)`
 - `isScrollToSelected (bool)` focus后列表是否滚动到选择的位置
-- `enableSearch (bool)` 是否显示搜索框
+- `disableSearch (bool)` 是否显示搜索框
 
 ### MultipleFilterSelect Props
 
