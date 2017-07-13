@@ -233,13 +233,13 @@ class MultipleFilterSelect extends React.Component {
     }
 
     renderOverlay(filterList) {
-        const {isGroupList, onSearch} = this.props;
+        const {isGroupList, enableSearch} = this.props;
         const {query} = this.state;
 
         return (
             <div className="gm-filter-select-list gm-border">
                 {
-                    onSearch !== _.noop ?
+                    enableSearch ?
                         <div className="gm-filter-select-list-input">
                             <input
                                 ref={ref => this.refInput = ref}
@@ -316,7 +316,8 @@ MultipleFilterSelect.propTypes = {
     listMaxHeight: PropTypes.string,
     placeholder: PropTypes.string,
     isScrollToSelected: PropTypes.bool,
-    onInputFocus: PropTypes.func
+    onInputFocus: PropTypes.func,
+    enableSearch: PropTypes.bool
 };
 
 MultipleFilterSelect.defaultProps = {
@@ -327,7 +328,8 @@ MultipleFilterSelect.defaultProps = {
     placeholder: '',
     onSearch: _.noop,
     withFilter: v => v,
-    onInputFocus: _.noop
+    onInputFocus: _.noop,
+    enableSearch: true
 };
 
 export default MultipleFilterSelect;
