@@ -246,23 +246,26 @@ class FilterSelect extends React.Component {
     }
 
     renderOverlay(filterList) {
-        const {isGroupList} = this.props;
+        const {isGroupList, enableSearch} = this.props;
         const {query, loading} = this.state;
 
         return (
             <div className="gm-filter-select-list gm-border">
-                <div className="gm-filter-select-list-input">
-                    <input
-                        autoFocus
-                        className="form-control"
-                        type="text"
-                        value={query}
-                        onFocus={this.handleFocus}
-                        onChange={this.handleChange}
-                        onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
-                        placeholder={this.props.placeholder}
-                    />
-                </div>
+                {
+                    enableSearch ?
+                        <div className="gm-filter-select-list-input">
+                            <input
+                                autoFocus
+                                className="form-control"
+                                type="text"
+                                value={query}
+                                onFocus={this.handleFocus}
+                                onChange={this.handleChange}
+                                onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
+                                placeholder={this.props.placeholder}
+                            />
+                        </div> : null
+                }
                 {loading && <Flex alignCenter justifyCenter className="gm-bg gm-padding-5"><Loading size={20}/></Flex>}
                 {loading ? loading : isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList)}
             </div>
@@ -324,7 +327,8 @@ FilterSelect.propTypes = {
     listMaxHeight: PropTypes.string,
     placeholder: PropTypes.string,
     isScrollToSelected: PropTypes.bool,
-    onInputFocus: PropTypes.func
+    onInputFocus: PropTypes.func,
+    enableSearch: PropTypes.bool
 };
 
 FilterSelect.defaultProps = {
@@ -335,7 +339,8 @@ FilterSelect.defaultProps = {
     placeholder: '',
     onSearch: _.noop,
     withFilter: v => v,
-    onInputFocus: _.noop
+    onInputFocus: _.noop,
+    enableSearch: true
 };
 
 export default FilterSelect;
