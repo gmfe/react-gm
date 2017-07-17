@@ -107,7 +107,8 @@ class SearchSelect extends React.Component {
             setTimeout(() => {
                 if (!this.______isMounted) {
                     const {selected} = this.props;
-                    this.doChange(selected && selected.name || '');
+                    if (selected)
+                        this.doChange(selected && selected.name || '');
                 }
             }, 500);
         }
@@ -119,7 +120,7 @@ class SearchSelect extends React.Component {
     }
 
     handleKeyDown(size, event) {
-        const {keyCode}= event;
+        const {keyCode} = event;
         let activeIndex = this.state.activeIndex;
 
         if (keyCode !== 38 && keyCode !== 40) {
@@ -129,7 +130,7 @@ class SearchSelect extends React.Component {
                     selected.pop();
                     this.doSelect(selected);
                 }
-            } else if (keyCode === 13) { // 键盘 回车
+            } else if (activeIndex !== null && keyCode === 13) { // 键盘 回车
                 const dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
                 if (dom) {
                     dom.click();
@@ -175,7 +176,6 @@ class SearchSelect extends React.Component {
         } else {
             this.props.onSelect(selected.length === 0 ? null : selected.pop());
         }
-        this.props.onSearch('');
     }
 
     handleSelect(value, event) {
@@ -201,12 +201,11 @@ class SearchSelect extends React.Component {
 
     doChange(value) {
         clearTimeout(this.timer);
-        this.setState({
-            value
-        });
+
+        const isSelected = _.find(this.state.selected, v => v.name === value);
 
         // 多选不处理
-        if (!this.props.multiple && !value) {
+        if (!this.props.multiple && !isSelected) {
             this.doSelect([]);
         }
 
@@ -218,6 +217,10 @@ class SearchSelect extends React.Component {
     }
 
     handleChange(event) {
+        this.setState({
+            value: event.target.value
+        });
+
         this.doChange(event.target.value);
     }
 
