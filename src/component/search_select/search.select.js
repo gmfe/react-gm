@@ -55,7 +55,8 @@ class SearchSelect extends React.Component {
     componentWillReceiveProps(nextProps) {
         if ('selected' in nextProps) {
             this.setState({
-                selected: getPropsSelected(nextProps)
+                selected: getPropsSelected(nextProps),
+                value: (nextProps.selected && nextProps.selected.name) || ''
             });
         }
     }
