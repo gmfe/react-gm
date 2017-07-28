@@ -8,7 +8,6 @@ class MenuItem extends React.Component {
     constructor(props) {
         super(props);
         this.handleTriggerMenu = ::this.handleTriggerMenu;
-        this.isEmptyObject = ::this.isEmptyObject;
         this.gitActiveMenuItem = ::this.gitActiveMenuItem;
 
         this.state = {
@@ -16,19 +15,10 @@ class MenuItem extends React.Component {
         };
     }
 
-    isEmptyObject(obj) {
-        for (let key in obj){
-            if(obj.hasOwnProperty(key)){
-                return false;
-            }
-        }
-        return true;
-    }
-
     gitActiveMenuItem(data, selected) {
         let menuItemDisabled = false;
 
-        if (selected && !this.isEmptyObject(selected)) {
+        if (selected && !_.isEmpty(selected)) {
             _.map(data.sub, (v) => {
                 if (selected === v) {
                     menuItemDisabled = true;
