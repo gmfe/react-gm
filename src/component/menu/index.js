@@ -8,45 +8,38 @@ class MenuItem extends React.Component {
     constructor(props) {
         super(props);
         this.handleTriggerMenu = ::this.handleTriggerMenu;
-        this.getActiveMenuItem = ::this.getActiveMenuItem;
+        this.getMenuItemDisabled = ::this.getMenuItemDisabled;
 
         this.state = {
             collapse: false
         };
     }
 
-    getActiveMenuItem(data, selected) {
+    getMenuItemDisabled(data, selected) {
         let menuItemDisabled = false;
 
         if (selected && !_.isEmpty(selected)) {
-            _.map(data.sub, (v) => {
+            _.find(data.sub, (v) => {
                 if (selected === v) {
                     menuItemDisabled = true;
                 }
             });
         }
-
         return menuItemDisabled;
     }
 
     handleTriggerMenu() {
         const {collapse} = this.state;
 
-        if (collapse) {
-            this.setState({
-                collapse: false
-            });
-        } else {
-            this.setState({
-                collapse: true
-            });
-        }
+        this.setState({
+            collapse: !collapse
+        });
     }
 
     componentWillReceiveProps(newProps){
         const {collapse} = this.state;
         const {data, selected} = newProps;
-        const menuItemDisabled = this.getActiveMenuItem(data, selected);
+        const menuItemDisabled = !!this.getMenuItemDisabled(data, selected);
 
         if(menuItemDisabled && collapse){
             this.setState({
@@ -58,10 +51,10 @@ class MenuItem extends React.Component {
     render() {
         const {data, selected, onSelect} = this.props;
         const {collapse} = this.state;
-        const menuItemDisabled = this.getActiveMenuItem(data, selected);
+        const menuItemDisabled = !!this.getMenuItemDisabled(data, selected);
 
         return (
-            <div className={'gm-menu'}>
+            <div className='gm-menu'>
                 <Flex alignCenter justifyBetween onClick={menuItemDisabled ? null : this.handleTriggerMenu} className={classNames("gm-menu-title", {
                     'gm-menu-title-disabled': menuItemDisabled
                 })}>
@@ -95,10 +88,6 @@ MenuItem.propTypes = {
 };
 
 class Menu extends React.Component {
-    constructor(props){
-        super(props);
-    }
-
     render() {
         const {data, onSelect, selected} = this.props;
 

@@ -40,9 +40,9 @@ class NavLeft extends React.Component {
         }
     }
     
-    handleClick(value) {
+    handleClick(selected) {
         this.setState({
-            selected: value
+            selected: selected
         })
     }
     
