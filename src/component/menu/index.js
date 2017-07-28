@@ -11,7 +11,7 @@ class MenuItem extends React.Component {
         this.getActiveMenuItem = ::this.getActiveMenuItem;
 
         this.state = {
-            on: true
+            collapse: false
         };
     }
 
@@ -30,51 +30,49 @@ class MenuItem extends React.Component {
     }
 
     handleTriggerMenu() {
-        const {on} = this.state;
+        const {collapse} = this.state;
 
-        if (on) {
+        if (collapse) {
             this.setState({
-                on: false
+                collapse: false
             });
         } else {
             this.setState({
-                on: true
+                collapse: true
             });
         }
     }
 
     componentWillReceiveProps(newProps){
-        const {on} = this.state;
+        const {collapse} = this.state;
         const {data, selected} = newProps;
         const menuItemDisabled = this.getActiveMenuItem(data, selected);
 
-        if(menuItemDisabled && !on){
+        if(menuItemDisabled && collapse){
             this.setState({
-                on: true
+                collapse: false
             });
         }
     }
 
     render() {
         const {data, selected, onSelect} = this.props;
-        const {on} = this.state;
+        const {collapse} = this.state;
         const menuItemDisabled = this.getActiveMenuItem(data, selected);
 
         return (
-            <div className={classNames('gm-menu', {
-                'gm-menu-close-status': !on
-            })}>
+            <div className={'gm-menu'}>
                 <Flex alignCenter justifyBetween onClick={menuItemDisabled ? null : this.handleTriggerMenu} className={classNames("gm-menu-title", {
                     'gm-menu-title-disabled': menuItemDisabled
                 })}>
                     <span>{data.name}</span>
                     <i className={classNames('gm-margin-right-15 ifont', {
-                        'ifont-down-small': !on,
-                        'ifont-up-small': on
+                        'ifont-down-small': collapse,
+                        'ifont-up-small': !collapse
                     })}/>
                 </Flex>
                 <div className={classNames("gm-menu-sub", {
-                    'gm-menu-sub-opened': on
+                    'gm-menu-sub-opened': !collapse
                 })}>
                     {_.map(data.sub, (v, k)=>(
                             <span

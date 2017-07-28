@@ -7,7 +7,7 @@ imports:
 导航菜单组件。
 
 
-::: demo 以下example依赖的数据
+::: demo 以下 example 依赖的数据
 ```js
 const data = [{
        name: '订单管理',
