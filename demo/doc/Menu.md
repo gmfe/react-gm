@@ -72,5 +72,5 @@ class NavLeft extends React.Component {
 
 ### Props
 - `data (array|isRequired)` 菜单数据。数据结构 `{'[{name: "订单管理",sub: [{name: "订单异常"},{name: "每日订单"}]}]'}`
-- `onClick (func | isRequired)` 点击菜单子项后回调，返回点击的节点数据
+- `onSelect (func | isRequired)` 点击菜单子项后回调，返回点击的节点数据
 - `selected (object)` 选中的数据
