@@ -8,14 +8,14 @@ class MenuItem extends React.Component {
     constructor(props) {
         super(props);
         this.handleTriggerMenu = ::this.handleTriggerMenu;
-        this.gitActiveMenuItem = ::this.gitActiveMenuItem;
+        this.getActiveMenuItem = ::this.getActiveMenuItem;
 
         this.state = {
             on: true
         };
     }
 
-    gitActiveMenuItem(data, selected) {
+    getActiveMenuItem(data, selected) {
         let menuItemDisabled = false;
 
         if (selected && !_.isEmpty(selected)) {
@@ -46,7 +46,7 @@ class MenuItem extends React.Component {
     componentWillReceiveProps(newProps){
         const {on} = this.state;
         const {data, selected} = newProps;
-        const menuItemDisabled = this.gitActiveMenuItem(data, selected);
+        const menuItemDisabled = this.getActiveMenuItem(data, selected);
 
         if(menuItemDisabled && !on){
             this.setState({
@@ -58,7 +58,7 @@ class MenuItem extends React.Component {
     render() {
         const {data, selected, onSelect} = this.props;
         const {on} = this.state;
-        const menuItemDisabled = this.gitActiveMenuItem(data, selected);
+        const menuItemDisabled = this.getActiveMenuItem(data, selected);
 
         return (
             <div className={classNames('gm-menu', {

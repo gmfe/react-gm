@@ -41,8 +41,6 @@ class NavLeft extends React.Component {
     }
     
     handleClick(value) {
-        console.log(value);
-        
         this.setState({
             selected: value
         })
