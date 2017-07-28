@@ -1,0 +1,63 @@
+.gm-menu-y {
+  background: #fff;
+  width: 100%;
+  padding: 10px 0;
+  margin: 0;
+
+  .gm-menu {
+    position: relative;
+
+    .gm-menu-sub{
+      width: 100%;
+      display: none;
+
+      span {
+        display: block;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 10px 10px 10px 35px;
+        text-decoration: none;
+        line-height: 1.2;
+
+        &:hover {
+          background: @gm-back-body-bg;
+          text-decoration: none;
+        }
+
+        &.active {
+          position: relative;
+          color: @link-color;
+        }
+      }
+
+    }
+
+    .gm-menu-sub-opened {
+      display: inline-block;
+    }
+
+    >.gm-menu-title{
+      cursor: pointer;
+      width: 100%;
+
+      span {
+        font-size: 12px;
+        color: @gm-color-second;
+        padding: 10px 0 10px 20px;
+      }
+    }
+
+    >.gm-menu-sub {
+      transition: width .24s;
+    }
+
+    >.gm-menu-title i {
+      font-size: 12px;
+    }
+
+    >.gm-menu-title-disabled {
+      cursor: default;
+    }
+  }
+}
+

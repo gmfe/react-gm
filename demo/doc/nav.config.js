@@ -111,6 +111,12 @@ class NavConfig extends React.Component {
                         <small>请求进度条</small>
                     </a></li>
                 </ul>
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#/doc/Menu">Menu
+                        <small>导航菜单</small>
+                    </a></li>
+                </ul>
                 <h3>Other</h3>
                 <ul>
                     <li><a href="#/doc/Storage">Storage

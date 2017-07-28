@@ -34,6 +34,7 @@ import Radio from './component/radio';
 import Checkbox from './component/checkbox';
 import FilterSelect from './component/filter_select/filter.select';
 import MultipleFilterSelect from './component/filter_select/multiple.filter.select';
+import Menu from './component/menu';
 
 import Validator from './validator';
 import Transfer from './component/transfer';
@@ -119,5 +120,6 @@ export {
     Select, Option,
     Transfer,
     FilterSelect,
-    MultipleFilterSelect
+    MultipleFilterSelect,
+    Menu
 };
