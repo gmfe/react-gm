@@ -50,6 +50,7 @@ import Select from 'bundle-loader?lazy!./doc/Select.md';
 import Transfer from 'bundle-loader?lazy!./doc/Transfer.md';
 import Quick from 'bundle-loader?lazy!./doc/Quick.md';
 import Divider from 'bundle-loader?lazy!./doc/Divider.md';
+import Menu from 'bundle-loader?lazy!./doc/Menu.md';
 
 import LayoutCommon from 'bundle-loader?lazy!./standard/LayoutCommon.md';
 import LayoutRule from 'bundle-loader?lazy!./standard/LayoutRule.md';
@@ -94,7 +95,8 @@ const pageMap = {
         Select,
         Transfer,
         Quick,
-        Divider
+        Divider,
+        Menu
     },
     standard: {
         LayoutCommon,
