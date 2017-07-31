@@ -1,7 +1,8 @@
-/build
-# Created by .ignore support plugin (hsz.mobi)
-/npm-debug.log
-/webpack-assets.js
 .idea
+.happypack
+.DS_Store
+/npm-debug.log
+/build
+/webpack-assets.js
 node_modules/
-.happypack/
+package-lock.json
