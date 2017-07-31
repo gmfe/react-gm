@@ -13,11 +13,15 @@ const data = [
 ];
 
 class ComponentGroup extends React.Component {
+
+    renderExpandedRowRender() {
+
+    }
+
     render() {
         return (
-            <div style={{width: '300px'}}>
-                <div>group</div>
-                <Sheet list={data}>
+            <div style={{width: '500px'}}>
+                <Sheet list={data} expandedRowRender={this.renderExpandedRowRender}>
                     <SheetColumn name="id" field="id"/>
                     <SheetColumn name="name" field="name"/>
                 </Sheet>

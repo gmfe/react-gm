@@ -14,13 +14,97 @@ class Sheet extends React.Component {
         super(props);
     }
 
+    handleSelect(select, i, event) {
+        select.props.onSelect(event.target.checked, i);
+    }
+
+    handleSelectAll(select, event) {
+        select.props.onSelectAll(event.target.checked);
+    }
+
+    renderTr(select, columns, actions) {
+        const {loading, list = [], enableEmptyTip} = this.props;
+
+        if (loading) {
+            return (
+                <tr>
+                    <td colSpan="99" className="text-center">加载中...
+                    </td>
+                </tr>
+            );
+        }
+
+        if (enableEmptyTip && list.length === 0) {
+            return (
+                <tr>
+                    <td colSpan="99" className="text-center">
+                        {enableEmptyTip === true ? '没有数据' : enableEmptyTip}
+                    </td>
+                </tr>
+            );
+        }
+
+        return _.map(list, (value, index) => (
+            <tr {...this.props.getTrProps(index)} key={index}>
+                {select ? (
+                    <td>
+                        <input
+                            type="checkbox"
+                            checked={value._gm_select || false}
+                            onChange={this.handleSelect.bind(this, select, index)}
+                            disabled={select.props.isDisabled(value)}
+                        />
+                    </td>
+                ) : null}
+                {_.map(columns, (v, i) => {
+                    const {
+                        children, field, name, // eslint-disable-line
+                        ...rest
+                    } = v.props;
+                    if (typeof children === 'function') {
+                        return <td key={i} {...rest}>{children(value[field], index)}</td>;
+                    } else {
+                        return <td key={i} {...rest}>{value[field]}</td>;
+                    }
+                })}
+                {actions ? (
+                    <td className="text-center">
+                        {actions.props.children(value, index)}
+                    </td>
+                ) : null}
+            </tr>
+        ));
+    }
+
+    renderPagination() {
+        const {children} = this.props;
+
+        let pagination, paginationText;
+
+        _.each(children, value => {
+            if (value !== null && value !== undefined) {
+                if (value.type.displayName === Pagination.displayName) {
+                    pagination = value;
+                } else if (value.type.displayName === PaginationText.displayName) {
+                    paginationText = value;
+                }
+            }
+        });
+
+        return (pagination || paginationText) && (
+            <div className="clearfix">
+                {pagination && <div className="pull-right">{pagination}</div>}
+                {paginationText && <div className="pull-right">{paginationText}</div>}
+            </div>
+        );
+    }
+
     render() {
-        let select = false, isSelectAll = false, list = this.props.list || [], loading = this.props.loading,
-            enableEmptyTip = this.props.enableEmptyTip, scrollX = this.props.scrollX;
+        let select = false, isSelectAll = false, list = this.props.list || [], scrollX = this.props.scrollX;
 
         const children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
 
-        let columns = [], actions = false, batchs = false, others = [], pagination, paginationText;
+        let columns = [], actions = false, batchs = false, others = [];
 
         _.each(children, value => {
             if (value !== null && value !== undefined) {
@@ -32,10 +116,6 @@ class Sheet extends React.Component {
                     select = value;
                 } else if (value.type.displayName === SheetBatchAction.displayName) {
                     batchs = value;
-                } else if (value.type.displayName === Pagination.displayName) {
-                    pagination = value;
-                } else if (value.type.displayName === PaginationText.displayName) {
-                    paginationText = value;
                 } else {
                     others.push(value);
                 }
@@ -58,7 +138,7 @@ class Sheet extends React.Component {
                     <table className="table table-striped table-hover table-bordered">
                         <thead>
                         <tr>
-                            {select ? (
+                            {select && (
                                 <th className="gm-sheet-select">
                                     <input
                                         type="checkbox"
@@ -66,7 +146,7 @@ class Sheet extends React.Component {
                                         onChange={this.handleSelectAll.bind(this, select)}
                                     />
                                 </th>
-                            ) : null}
+                            )}
                             {_.map(columns, (value, index) => {
                                 const {
                                     children, field, name, // eslint-disable-line
@@ -74,73 +154,20 @@ class Sheet extends React.Component {
                                 } = value.props;
                                 return <th key={index} {...rest}>{value.props.name}</th>;
                             })}
-                            {actions ? (
+                            {actions && (
                                 <th className="text-center">操作</th>
-                            ) : null}
+                            )}
                         </tr>
                         </thead>
                         <tbody>
-                        {loading ? (
-                            <tr>
-                                <td colSpan="99" className="text-center">加载中...
-                                </td>
-                            </tr>
-                        ) : null}
-                        {(!loading && enableEmptyTip && list.length === 0) ? (
-                            <tr>
-                                <td colSpan="99" className="text-center">
-                                    {enableEmptyTip === true ? '没有数据' : enableEmptyTip}
-                                </td>
-                            </tr>
-                        ) : null}
-                        {!loading ? _.map(list, (value, index) => (
-                            <tr {...this.props.getTrProps(index)} key={index}>
-                                {select ? (
-                                    <td>
-                                        <input
-                                            type="checkbox"
-                                            checked={value._gm_select || false}
-                                            onChange={this.handleSelect.bind(this, select, index)}
-                                            disabled={select.props.isDisabled(value)}
-                                        />
-                                    </td>
-                                ) : null}
-                                {_.map(columns, (v, i) => {
-                                    const {
-                                        children, field, name, // eslint-disable-line
-                                        ...rest
-                                    } = v.props;
-                                    if (typeof children === 'function') {
-                                        return <td key={i} {...rest}>{children(value[field], index)}</td>;
-                                    } else {
-                                        return <td key={i} {...rest}>{value[field]}</td>;
-                                    }
-                                })}
-                                {actions ? (
-                                    <td className="text-center">
-                                        {actions.props.children(value, index)}
-                                    </td>
-                                ) : null}
-                            </tr>
-                        )) : null}
+                        {this.renderTr(select, columns, actions)}
                         </tbody>
                     </table>
                 </div>
-                <div className="clearfix">
-                    <div className="pull-right">{pagination}</div>
-                    <div className="pull-right">{paginationText}</div>
-                </div>
+                {this.renderPagination()}
                 {others}
             </div>
         );
-    }
-
-    handleSelect(select, i, event) {
-        select.props.onSelect(event.target.checked, i);
-    }
-
-    handleSelectAll(select, event) {
-        select.props.onSelectAll(event.target.checked);
     }
 }
 
