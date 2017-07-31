@@ -1,8 +1,7 @@
 import Checkbox from './checkbox';
 import CheckboxGroup from './checkbox_group';
 
-Object.assign(Checkbox, {
+export {
+    Checkbox,
     CheckboxGroup
-});
-
-export default Checkbox;
+};

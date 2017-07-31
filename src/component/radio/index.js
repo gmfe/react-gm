@@ -1,8 +1,7 @@
 import Radio from './radio';
 import RadioGroup from './radio_group';
 
-Object.assign(Radio, {
+export {
+    Radio,
     RadioGroup
-});
-
-export default Radio;
+};
