@@ -1,6 +1,5 @@
 import React from 'react';
 import {Sheet, SheetColumn} from '../../src/index';
-import _ from 'lodash';
 
 const data = [
     {id: 1, name: 'adfadfadfaf'},
