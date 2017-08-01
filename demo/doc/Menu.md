@@ -51,6 +51,7 @@ class NavLeft extends React.Component {
         return (
             <div className="b-app-nav-left" style={{width: 200}}>
                 <Menu
+                    key='menu'
                     data={data}
                     onSelect={this.handleClick}
                     selected={selected}

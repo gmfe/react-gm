@@ -88,6 +88,10 @@ MenuItem.propTypes = {
 };
 
 class Menu extends React.Component {
+    constructor(props){
+        super(props);
+        console.warn('请尽量提供key（暂时无法检测key是否有传，暴力提示）');
+    }
     render() {
         const {data, onSelect, selected} = this.props;
 
