@@ -51,7 +51,7 @@ class Component extends React.Component {
         return (
             <div>
                 {_.map(glyphions, v => (
-                    <div>
+                    <div key={v}>
                     <i style={{fontSize: '30px', padding: '10px'}} className={"ifont " + v}/>
                     {v}
                     </div>

@@ -1,7 +1,7 @@
 import Pagination from './component/pagination/pagination';
 import PaginationText from './component/pagination/pagination.text';
 import Dropper from './component/dropper/index';
-import Form from './component/form';
+import {Form, FormItem, FormButton} from './component/form';
 import ImportLead from './component/import_lead';
 import Storage from './component/storage';
 import Calendar from './component/calendar';
@@ -18,7 +18,7 @@ import DropSelect from './component/drop_select';
 import SearchSelect from './component/search_select/search.select';
 import FilterSearchSelect from './component/search_select/filter.search.select';
 import Switch from './component/switch';
-import Sheet from './component/sheet';
+import {Sheet, SheetColumn, SheetAction, SheetSelect, SheetBatchAction} from './component/sheet';
 import Cascader from './component/cascader/cascader';
 import CascaderSelect from './component/cascader/cascader.select';
 import Trigger from './component/trigger';
@@ -27,11 +27,11 @@ import InputNumber from './component/input/input.number';
 import LayoutRoot from './component/layout_root';
 import Modal from './component/modal';
 import Collapse from './component/collapse';
-import DropDown from './component/drop_down';
+import {DropDown, DropDownItem, DropDownItems} from './component/drop_down';
 import TreeSelect from './component/tree_select';
 import {QuickInfo, QuickInfoCell, QuickPanel, QuickFilter, QuickTab, QuickDesc} from './component/quick';
-import Radio from './component/radio';
-import Checkbox from './component/checkbox';
+import {Radio, RadioGroup} from './component/radio';
+import {Checkbox, CheckboxGroup} from './component/checkbox';
 import FilterSelect from './component/filter_select/filter.select';
 import MultipleFilterSelect from './component/filter_select/multiple.filter.select';
 import Menu from './component/menu';
@@ -39,38 +39,9 @@ import Menu from './component/menu';
 import Validator from './validator';
 import Transfer from './component/transfer';
 
-import Select from './component/select';
+import {Select, Option} from './component/select';
 
 import './index.less';
-
-const {
-    SheetColumn,
-    SheetAction,
-    SheetSelect,
-    SheetBatchAction
-} = Sheet;
-
-const {
-    DropDownItems,
-    DropDownItem
-} = DropDown;
-
-const {
-    FormItem,
-    FormButton
-} = Form;
-
-const {
-    RadioGroup
-} = Radio;
-
-const {
-    CheckboxGroup
-} = Checkbox;
-
-const {
-    Option
-} = Select;
 
 export {
     Pagination,

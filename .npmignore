@@ -1,7 +1,9 @@
 .idea
 .happypack
+.DS_Store
+/npm-debug.log
 /build
 /demo
 /deploy
 /docs
-.DS_Store
+package-lock.json

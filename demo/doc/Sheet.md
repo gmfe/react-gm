@@ -95,6 +95,73 @@ const list= [{
 ```
 :::
 
+::: demo sheet 套 sheet
+```js
+class SheetInSheet extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [
+               {
+                   id: 3,
+                   name: '小明',
+                   age: '10'
+               }, {
+                   id: 4,
+                   name: '小红',
+                   age: '15',
+                   __gm_expanded: true
+               }, {
+                  id: 5,
+                  name: '小蓝',
+                  age: '20'
+               }
+            ]
+        };
+
+        this.renderExpandedRowRender = ::this.renderExpandedRowRender;
+        this.handleExpand = ::this.handleExpand;
+    }
+
+    renderExpandedRowRender() {
+        return (
+            <Sheet list={this.state.data}>
+                <SheetColumn name="id" field="id"/>
+                <SheetColumn name="name" field="name"/>
+            </Sheet>
+        );
+    }
+
+    handleExpand(index) {
+        const {data} = this.state;
+        data[index].__gm_expanded = !data[index].__gm_expanded;
+        this.setState({
+            data
+        });
+    }
+
+    render() {
+        return (
+            <div style={{width: '500px'}}>
+                <Sheet
+                    list={this.state.data}
+                    expandedRowRender={this.renderExpandedRowRender}
+                    onExpand={this.handleExpand}
+                >
+                    <SheetColumn name="id" field="id"/>
+                    <SheetColumn name="name" field="name"/>
+                    <SheetColumn name="name" field="name"/>
+                </Sheet>
+            </div>
+        );
+    }
+}
+```
+```jsx
+<SheetInSheet/>
+```
+:::
+
 ### Props
 - `list (Array|isRequired)` 是列表的数据，最好是数组。 当然有人没注意传了obj（非常不推荐）。
 - `loading (bool)` true显示loading状态，false显示数据
@@ -102,6 +169,8 @@ const list= [{
 - `className (string)`
 - `getTrProps (func)` 自定义`tr`的props，提供`index`索引，返回 object。
 - `scrollX (bool)` 是否允许table横向滚动。 但是table是否具备横向滚动的条件要调用方保证
+- `expandedRowRender(func)` sheet in sheet，通过此方法渲染另外一个table
+- `onExpand(func)` 相应sheet in sheet的展开/收起。 直接操作数据的 __gm_expanded 字段，具体见demo
 
 ### Pagination PaginationText
 

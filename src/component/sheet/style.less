@@ -1,19 +1,53 @@
 .gm-sheet {
 
+  .pagination {
+    margin: 0;
+  }
+
+  .gm-pagination-text {
+    line-height: 30px;
+    margin-right: 10px;
+  }
+
+  .gm-sheet-select {
+    width: 30px;
+  }
+
+  .gm-sheet-table-scroll-x {
+    overflow-x: auto;
+  }
+
+  .gm-sheet-th-expanded {
+    width: 50px;
+  }
+
+  .table > tbody {
+    & > .gm-sheet-expanded-tr {
+      background: @table-bg-accent;
+
+      > td {
+        padding: 0 10px 0 0;
+
+        .gm-sheet {
+          .table {
+            background: @table-bg-accent;
+
+            thead, tbody {
+              tr {
+                background: @table-bg-accent;
+              }
+            }
+
+            thead:first-child, tbody:first-child {
+              tr:first-child {
+                padding-left: 2px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-.gm-sheet-table-scroll-x {
-  overflow-x: auto;
-}
-.gm-sheet-select {
-  width: 30px;
-}
 
-.gm-sheet .pagination {
-  margin: 0;
-}
-
-.gm-sheet .gm-pagination-text {
-  line-height: 30px;
-  margin-right: 10px;
-}
