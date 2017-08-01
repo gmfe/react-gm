@@ -1,55 +1,32 @@
 import React from 'react';
-import {Sheet, SheetColumn} from '../../src/index';
+import {Form, FormItem, FormButton, FormBlock, Validator} from '../../src/index';
 
-class ComponentGroup extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [
-                {id: 1, name: '啦啦', __gm_expanded: true},
-                {id: 1, name: '啦啦'},
-                {id: 1, name: '啦啦', __gm_expanded: true},
-                {id: 1, name: '啦啦'},
-                {id: 1, name: '啦啦'}
-            ]
-        };
-
-        this.renderExpandedRowRender = ::this.renderExpandedRowRender;
-        this.handleExpand = ::this.handleExpand;
-    }
-
-    renderExpandedRowRender() {
-        return (
-            <Sheet list={this.state.data}>
-                <SheetColumn name="id" field="id"/>
-                <SheetColumn name="name" field="name"/>
-            </Sheet>
-        );
-    }
-
-    handleExpand(index) {
-        const {data} = this.state;
-        data[index].__gm_expanded = !data[index].__gm_expanded;
-        this.setState({
-            data
-        });
-    }
-
+class Component extends React.Component {
     render() {
         return (
-            <div style={{width: '500px'}}>
-                <Sheet
-                    list={this.state.data}
-                    expandedRowRender={this.renderExpandedRowRender}
-                    onExpand={this.handleExpand}
-                >
-                    <SheetColumn name="id" field="id"/>
-                    <SheetColumn name="name" field="name"/>
-                    <SheetColumn name="name" field="name"/>
-                </Sheet>
+            <div>
+                <Form onSubmit={this.handleSubmit}>
+                    <FormBlock>
+                        <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
+                            <input type="text"/>
+                        </FormItem>
+                        <FormItem label="身高" inline>
+                            <input type="text"/>
+                        </FormItem>
+                    </FormBlock>
+                    <FormItem label="姓名" required validate={Validator.create([], '')}>
+                        <input type="text"/>
+                    </FormItem>
+                    <FormItem label="描述">
+                        <textarea type="text" name="desc"/>
+                    </FormItem>
+                    <FormButton>
+                        <button className="btn btn-primary" type="submit">提交</button>
+                    </FormButton>
+                </Form>
             </div>
         );
     }
 }
 
-export default ComponentGroup;
+export default Component;

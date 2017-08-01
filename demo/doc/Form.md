@@ -1,7 +1,7 @@
 ---
 imports:
     import {
-        Form, FormItem, FormButton,
+        Form, FormItem, FormButton, FormBlock,
         Validator, 
         Dropper, 
         Radio, RadioGroup,
@@ -263,3 +263,63 @@ class FormItemWrap2 extends React.Component {
 - `validate (func)` 校验后返回错误帮助信息，且只有过提交过动作后才显示，onChange则会自动重新校验。存在validate，则`error` `help`无效。如果存在`required`，则先校验是否有值。
 - `error (bool)` 校验的状态，只有`true`时help才会显示
 - `help (string)` 错误帮助信息
+
+## FormBlock
+
+::: demo 用FormBlock做更复杂的布局
+```js
+class FormBlockWrap extends React.Component {
+    render() {
+        return (
+            <div>
+                <Form onSubmit={this.handleSubmit}>
+                    <FormBlock>
+                        <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
+                            <input type="text"/>
+                        </FormItem>
+                        <FormItem label="身高" inline>
+                            <input type="text"/>
+                        </FormItem>
+                    </FormBlock>
+                    <FormItem label="姓名" required validate={Validator.create([], '')}>
+                        <input type="text"/>
+                    </FormItem>
+                    <FormItem label="描述">
+                        <textarea type="text" name="desc"/>
+                    </FormItem>
+                    <FormButton>
+                        <button className="btn btn-primary" type="submit">提交</button>
+                    </FormButton>
+                </Form>
+
+                <Form onSubmit={this.handleSubmit} horizontal labelWidth="50px">
+                    <FormBlock>
+                        <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
+                            <input type="text"/>
+                        </FormItem>
+                        <FormItem label="身高" inline>
+                            <input type="text"/>
+                        </FormItem>
+                    </FormBlock>
+                    <FormItem label="姓名" required validate={Validator.create([], '')}>
+                        <input type="text"/>
+                    </FormItem>
+                    <FormItem label="描述">
+                        <textarea type="text" name="desc"/>
+                    </FormItem>
+                    <FormButton>
+                        <button className="btn btn-primary" type="submit">提交</button>
+                    </FormButton>
+                </Form>
+            </div>
+        );
+    }
+}
+```
+```jsx
+<FormBlockWrap/>
+```
+:::
+
+### Props
+无，自动根据children等分

@@ -76,13 +76,13 @@ class Form extends React.Component {
         let childList = _.isArray(children) ? children : [children];
 
         childList = _.map(childList, (child, i) => {
-            return child !== null && child !== undefined && child.type.displayName === 'FormItem' ? React.cloneElement(child, {
+            return child !== null && child !== undefined && (child.type.displayName === 'FormItem' || child.type.displayName === 'FormBlock') ? React.cloneElement(child, Object.assign({
                 key: i,
                 horizontal,
                 inline,
                 labelWidth,
                 canValidate: this.state.canValidate
-            }) : child;
+            }, child.props)) : child;
         });
 
         return (
