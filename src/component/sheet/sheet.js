@@ -99,32 +99,9 @@ class Sheet extends React.Component {
         return trs;
     }
 
-    renderPagination() {
-        const {children} = this.props;
-
-        let pagination, paginationText;
-
-        _.each(children, value => {
-            if (value !== null && value !== undefined) {
-                if (value.type.displayName === Pagination.displayName) {
-                    pagination = value;
-                } else if (value.type.displayName === PaginationText.displayName) {
-                    paginationText = value;
-                }
-            }
-        });
-
-        return (pagination || paginationText) && (
-            <div className="clearfix">
-                {pagination && <div className="pull-right">{pagination}</div>}
-                {paginationText && <div className="pull-right">{paginationText}</div>}
-            </div>
-        );
-    }
-
     render() {
         let {list = [], scrollX, expandedRowRender} = this.props;
-        let select = false, isSelectAll = false;
+        let select = false, isSelectAll = false, pagination, paginationText;
         const children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
 
         let columns = [], actions = false, batchs = false, others = [];
@@ -139,6 +116,10 @@ class Sheet extends React.Component {
                     select = value;
                 } else if (value.type.displayName === SheetBatchAction.displayName) {
                     batchs = value;
+                } else if (value.type.displayName === Pagination.displayName) {
+                    pagination = value;
+                } else if (value.type.displayName === PaginationText.displayName) {
+                    paginationText = value;
                 } else {
                     others.push(value);
                 }
@@ -190,7 +171,12 @@ class Sheet extends React.Component {
                         </tbody>
                     </table>
                 </div>
-                {this.renderPagination()}
+                {(pagination || paginationText) && (
+                    <div className="clearfix">
+                        {pagination && <div className="pull-right">{pagination}</div>}
+                        {paginationText && <div className="pull-right">{paginationText}</div>}
+                    </div>
+                )}
                 {others}
             </div>
         );
