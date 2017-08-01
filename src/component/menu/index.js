@@ -89,14 +89,14 @@ MenuItem.propTypes = {
 
 class Menu extends React.Component {
     render() {
-        const {data, onSelect, selected} = this.props;
+        const {data, onSelect, selected, id} = this.props;
 
         if (!data) {
             return <div/>;
         }
 
         return (
-            <ul className="gm-menu-y gm-border">
+            <ul className="gm-menu-y gm-border" key={id}>
                 {
                     _.map(
                         data, (value, i) => {
@@ -115,6 +115,7 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
+    id: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired,
     onSelect: PropTypes.func.isRequired,
     selected: PropTypes.object

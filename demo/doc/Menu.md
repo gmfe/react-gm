@@ -51,6 +51,7 @@ class NavLeft extends React.Component {
         return (
             <div className="b-app-nav-left" style={{width: 200}}>
                 <Menu
+                    id="menu_id"
                     data={data}
                     onSelect={this.handleClick}
                     selected={selected}
@@ -69,6 +70,7 @@ class NavLeft extends React.Component {
 :::
 
 ### Props
+- `id (string|isRequired)` 作为组件 `key`， 请保证其唯一性
 - `data (array|isRequired)` 菜单数据。数据结构 `{'[{name: "订单管理",sub: [{name: "订单异常"},{name: "每日订单"}]}]'}`
 - `onSelect (func | isRequired)` 点击菜单子项后回调，返回点击的节点数据
 - `selected (object)` 选中的数据

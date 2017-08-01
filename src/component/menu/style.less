@@ -26,7 +26,17 @@
 
         &.active {
           position: relative;
-          color: @link-color;
+          color: @brand-primary;
+        }
+
+        &.active:before {
+          position: absolute;
+          width: 4px;
+          height: 100%;
+          background-color: @brand-primary;
+          content: " ";
+          top: 0;
+          left: 0;
         }
       }
 
