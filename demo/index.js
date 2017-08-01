@@ -1,4 +1,3 @@
-import 'gm-bootstrap/dist/css/bootstrap.css';
 import 'gm-font/iconfont.css';
 import './index.less';
 import 'markdown-it-react-loader/index.css';

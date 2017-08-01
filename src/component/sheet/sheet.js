@@ -10,10 +10,6 @@ import SheetSelect from './sheet_select';
 import SheetBatchAction from './sheet_batch_action';
 
 class Sheet extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleSelect(select, i, event) {
         select.props.onSelect(event.target.checked, i);
     }
@@ -22,8 +18,13 @@ class Sheet extends React.Component {
         select.props.onSelectAll(event.target.checked);
     }
 
+    handleExpanded(index) {
+        const {onExpand} = this.props;
+        onExpand && onExpand(index);
+    }
+
     renderTr(select, columns, actions) {
-        const {loading, list = [], enableEmptyTip} = this.props;
+        const {loading, list = [], enableEmptyTip, expandedRowRender} = this.props;
 
         if (loading) {
             return (
@@ -44,9 +45,20 @@ class Sheet extends React.Component {
             );
         }
 
-        return _.map(list, (value, index) => (
-            <tr {...this.props.getTrProps(index)} key={index}>
-                {select ? (
+        const trs = [];
+
+        _.each(list, (value, index) => {
+            trs.push(<tr {...this.props.getTrProps(index)} key={index}>
+                {expandedRowRender && (
+                    <td>
+                        <button
+                            type="button"
+                            className="btn btn-default btn-xs"
+                            onClick={this.handleExpanded.bind(this, index)}
+                        >{value.__gm_expanded ? '-' : '+'}</button>
+                    </td>
+                )}
+                {select && (
                     <td>
                         <input
                             type="checkbox"
@@ -55,7 +67,7 @@ class Sheet extends React.Component {
                             disabled={select.props.isDisabled(value)}
                         />
                     </td>
-                ) : null}
+                )}
                 {_.map(columns, (v, i) => {
                     const {
                         children, field, name, // eslint-disable-line
@@ -72,8 +84,19 @@ class Sheet extends React.Component {
                         {actions.props.children(value, index)}
                     </td>
                 ) : null}
-            </tr>
-        ));
+            </tr>);
+
+            if (expandedRowRender && value.__gm_expanded) {
+                trs.push(<tr className="gm-sheet-expanded-tr" key={index + '_expanded'}>
+                    <td/>
+                    <td className="gm-sheet-expanded-td" colSpan={columns.length}>
+                        {expandedRowRender()}
+                    </td>
+                </tr>);
+            }
+        });
+
+        return trs;
     }
 
     renderPagination() {
@@ -100,8 +123,8 @@ class Sheet extends React.Component {
     }
 
     render() {
-        let select = false, isSelectAll = false, list = this.props.list || [], scrollX = this.props.scrollX;
-
+        let {list = [], scrollX, expandedRowRender} = this.props;
+        let select = false, isSelectAll = false;
         const children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children];
 
         let columns = [], actions = false, batchs = false, others = [];
@@ -138,6 +161,9 @@ class Sheet extends React.Component {
                     <table className="table table-striped table-hover table-bordered">
                         <thead>
                         <tr>
+                            {expandedRowRender && (
+                                <th className="gm-sheet-th-expanded"/>
+                            )}
                             {select && (
                                 <th className="gm-sheet-select">
                                     <input
@@ -177,7 +203,9 @@ Sheet.propTypes = {
     enableEmptyTip: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.element]),
     className: PropTypes.string,
     getTrProps: PropTypes.func,
-    scrollX: PropTypes.bool
+    scrollX: PropTypes.bool,
+    expandedRowRender: PropTypes.func,
+    onExpand: PropTypes.func
 };
 
 Sheet.defaultProps = {
