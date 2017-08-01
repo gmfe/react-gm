@@ -43,6 +43,35 @@ import {Select, Option} from './component/select';
 
 import './index.less';
 
+Object.assign(Sheet, {
+    SheetColumn,
+    SheetAction,
+    SheetSelect,
+    SheetBatchAction
+});
+
+Object.assign(DropDown, {
+    DropDownItems,
+    DropDownItem
+});
+
+Object.assign(Form, {
+    FormItem,
+    FormButton
+});
+
+Object.assign(Radio, {
+    RadioGroup
+});
+
+Object.assign(Checkbox, {
+    CheckboxGroup
+});
+
+Object.assign(Select, {
+    Option
+});
+
 export {
     Pagination,
     PaginationText,
