@@ -88,19 +88,15 @@ MenuItem.propTypes = {
 };
 
 class Menu extends React.Component {
-    constructor(props){
-        super(props);
-        console.warn('请尽量提供key（暂时无法检测key是否有传，暴力提示）');
-    }
     render() {
-        const {data, onSelect, selected} = this.props;
+        const {data, onSelect, selected, id} = this.props;
 
         if (!data) {
             return <div/>;
         }
 
         return (
-            <ul className="gm-menu-y gm-border">
+            <ul className="gm-menu-y gm-border" key={id}>
                 {
                     _.map(
                         data, (value, i) => {
@@ -119,6 +115,7 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
+    id: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired,
     onSelect: PropTypes.func.isRequired,
     selected: PropTypes.object
