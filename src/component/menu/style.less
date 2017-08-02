@@ -49,24 +49,24 @@
     >.gm-menu-title{
       cursor: pointer;
       width: 100%;
+      color: @gm-color-second;
 
       span {
         font-size: 12px;
-        color: @gm-color-second;
         padding: 10px 0 10px 20px;
+      }
+
+      i {
+        font-size: 12px;
+      }
+
+      .gm-disabled-arrow-color {
+        color: #dedddd;
       }
     }
 
-    >.gm-menu-sub {
-      transition: width .24s;
-    }
-
-    >.gm-menu-title i {
-      font-size: 12px;
-    }
-
     >.gm-menu-title-disabled {
-      cursor: not-allowed;
+      cursor: default;
     }
   }
 }
