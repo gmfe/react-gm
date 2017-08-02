@@ -74,5 +74,5 @@ class NavLeft extends React.Component {
 - `id (string|isRequired)` 作为组件 `key`， 请保证其唯一性
 - `data (array|isRequired)` 菜单数据。数据结构 `{'[{name: "订单管理",sub: [{name: "订单异常"},{name: "每日订单"}]}]'}`
 - `onSelect (func|isRequired)` 点击菜单子项后回调，返回点击的节点数据
-- `allowCollapse (bool|isRequired)` 设置菜单是否可收起或展开
+- `allowCollapse (bool)` 设置菜单是否可收起或展开, 默认false
 - `selected (object)` 选中的数据

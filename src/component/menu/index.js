@@ -88,7 +88,7 @@ class MenuItem extends React.Component {
 MenuItem.propTypes = {
     data: PropTypes.object.isRequired,
     onSelect: PropTypes.func.isRequired,
-    allowCollapse: PropTypes.bool.isRequired,
+    allowCollapse: PropTypes.bool,
     selected: PropTypes.object
 };
 
@@ -123,8 +123,12 @@ Menu.propTypes = {
     id: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired,
     onSelect: PropTypes.func.isRequired,
-    allowCollapse: PropTypes.bool.isRequired,
+    allowCollapse: PropTypes.bool,
     selected: PropTypes.object
+};
+
+Menu.defaultProps = {
+    allowCollapse: false
 };
 
 export default Menu;
