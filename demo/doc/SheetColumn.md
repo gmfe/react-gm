@@ -58,5 +58,6 @@ const list= [{
 
 - `field (string|isRequired)` 某列读取数据的字段名
 - `name (string|element|isRequired)` 某列表头的名字
+- `placeholder (any)` 默认值， 值为 undefined 和 null 时就显示placeholder的值
 - `children (func)` 返回任意东西，自定义单元格展现
 - ...rest

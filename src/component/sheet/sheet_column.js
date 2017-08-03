@@ -13,7 +13,8 @@ SheetColumn.propTypes = {
     name: PropTypes.oneOfType([
         PropTypes.string.isRequired,
         PropTypes.element.isRequired
-    ])
+    ]),
+    placeholder: PropTypes.any
 };
 
 export default SheetColumn;

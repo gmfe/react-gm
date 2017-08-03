@@ -76,7 +76,11 @@ class Sheet extends React.Component {
                     if (typeof children === 'function') {
                         return <td key={i} {...rest}>{children(value[field], index)}</td>;
                     } else {
-                        return <td key={i} {...rest}>{value[field]}</td>;
+                        const tdV = value[field];
+                        if (v.props.placeholder !== undefined && (tdV === undefined || tdV === null)) {
+                            return <td key={i} {...rest}>{v.props.placeholder}</td>;
+                        }
+                        return <td key={i} {...rest}>{tdV}</td>;
                     }
                 })}
                 {actions ? (
