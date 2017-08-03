@@ -301,6 +301,14 @@ class FormBlockWrap extends React.Component {
                             <input type="text"/>
                         </FormItem>
                     </FormBlock>
+                    <FormBlock block={[2, 1]}>
+                        <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
+                            <input type="text"/>
+                        </FormItem>
+                        <FormItem label="身高" inline>
+                            <input type="text"/>
+                        </FormItem>
+                    </FormBlock>
                     <FormItem label="姓名" required validate={Validator.create([], '')}>
                         <input type="text"/>
                     </FormItem>
@@ -322,4 +330,4 @@ class FormBlockWrap extends React.Component {
 :::
 
 ### Props
-无，自动根据children等分
+- `block (array)` 提供children的比例，比如2:1是[2,1]。 不提供根据等分。
