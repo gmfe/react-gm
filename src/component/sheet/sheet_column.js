@@ -14,6 +14,7 @@ SheetColumn.propTypes = {
         PropTypes.string.isRequired,
         PropTypes.element.isRequired
     ]),
+    render: PropTypes.func,
     placeholder: PropTypes.any
 };
 

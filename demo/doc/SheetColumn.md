@@ -35,6 +35,9 @@ const list= [{
     <SheetColumn field="name" name="name">
         {value => '你好 ' + value}
     </SheetColumn>
+
+    {/*可以自定义显示，children传入一个func，func提供当前数据值，返回要显示的结果*/}
+    <SheetColumn field="name" name="name" render={value => ('你好 ' + value)}/>
     
     {/*不止文本，可以返回任何东西。 可交互的input啊，button啊等*/}
     <SheetColumn field="name" name="name">
@@ -59,5 +62,6 @@ const list= [{
 - `field (string|isRequired)` 某列读取数据的字段名
 - `name (string|element|isRequired)` 某列表头的名字
 - `placeholder (any)` 默认值， 值为 undefined 和 null 时就显示placeholder的值
+- `render (func)` 返回任意东西，自定义单元格展现
 - `children (func)` 返回任意东西，自定义单元格展现
 - ...rest

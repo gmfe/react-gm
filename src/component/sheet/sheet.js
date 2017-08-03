@@ -71,14 +71,18 @@ class Sheet extends React.Component {
                 {_.map(columns, (v, i) => {
                     const {
                         children, field, name, // eslint-disable-line
+                        placeholder,
+                        render,
                         ...rest
                     } = v.props;
                     if (typeof children === 'function') {
                         return <td key={i} {...rest}>{children(value[field], index)}</td>;
+                    } else if (typeof render === 'function') {
+                        return <td key={i} {...rest}>{render(value[field], index)}</td>;
                     } else {
                         const tdV = value[field];
-                        if (v.props.placeholder !== undefined && (tdV === undefined || tdV === null)) {
-                            return <td key={i} {...rest}>{v.props.placeholder}</td>;
+                        if (placeholder !== undefined && (tdV === undefined || tdV === null)) {
+                            return <td key={i} {...rest}>{placeholder}</td>;
                         }
                         return <td key={i} {...rest}>{tdV}</td>;
                     }
