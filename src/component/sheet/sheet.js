@@ -164,7 +164,7 @@ class Sheet extends React.Component {
                             )}
                             {_.map(columns, (value, index) => {
                                 const {
-                                    children, field, name, // eslint-disable-line
+                                    children, field, name, placeholder, render,// eslint-disable-line
                                     ...rest
                                 } = value.props;
                                 return <th key={index} {...rest}>{value.props.name}</th>;
