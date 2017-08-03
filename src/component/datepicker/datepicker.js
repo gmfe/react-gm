@@ -23,7 +23,7 @@ class DatePicker extends React.Component {
     render() {
         const {
             date, min, max, disabledDate,
-            className, children, inputClassName, placeholder, disabled
+            className, children, inputClassName, placeholder, disabled, inputValueRender
         } = this.props;
 
         const popup = (
@@ -48,7 +48,7 @@ class DatePicker extends React.Component {
                             className={inputClassName}
                             placeholder={placeholder}
                             disabled={disabled}
-                            value={date ? moment(date).format('YYYY-MM-DD') : ''}
+                            value={date ? (inputValueRender ? inputValueRender(date) : moment(date).format('YYYY-MM-DD')) : ''}
                             onChange={_.noop}
                         />
                     )}
@@ -68,7 +68,8 @@ DatePicker.propTypes = {
 
     min: PropTypes.object,
     max: PropTypes.object,
-    disabledDate: PropTypes.func
+    disabledDate: PropTypes.func,
+    inputValueRender: PropTypes.func
 };
 
 export default DatePicker;
