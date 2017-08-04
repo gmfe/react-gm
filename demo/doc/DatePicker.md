@@ -32,6 +32,16 @@ class DatePickerWrap extends React.Component {
                         />
                     </div>
                     <div>
+                        <div>inputValueRender</div>
+                        <DatePicker
+                            date={this.state.date}
+                            placeholder="请选择日期"
+                            onChange={this.handleChange}
+                            inputValueRender={begin => `${begin.getMonth() + 1}月-${begin.getDate()}日`}
+                            inputClassName="form-control input-sm"
+                        />
+                    </div>
+                    <div>
                         <div>disabled</div>
                         <DatePicker
                             date={this.state.date}
