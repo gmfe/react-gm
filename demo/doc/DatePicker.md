@@ -32,7 +32,7 @@ class DatePickerWrap extends React.Component {
                         />
                     </div>
                     <div>
-                        <div>inputRender</div>
+                        <div>inputValueRender</div>
                         <DatePicker
                             date={this.state.date}
                             placeholder="请选择日期"
