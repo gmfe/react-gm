@@ -28,6 +28,10 @@ class FormControl extends React.Component {
             return React.cloneElement(child, {
                 className: classNames('form-control', className)
             });
+        } else if (child.type.displayName === 'DatePicker') {
+            return React.cloneElement(child, {
+                inputClassName: classNames('form-control', inputClassName)
+            });
         } else if (child.type.displayName === 'DateRangePicker') {
             return React.cloneElement(child, {
                 inputClassName: classNames('form-control', inputClassName)
