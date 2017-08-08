@@ -19,28 +19,44 @@ class Form extends React.Component {
 
         let childList = _.isArray(children) ? children : [children];
 
+        const formItems = [];
         _.each(childList, child => {
-            if (child !== null && child !== undefined && child.type.displayName === 'FormItem') {
-                if (child.props.error) {
-                    helpList.push({
-                        label: child.props.label,
-                        help: child.props.error
+            if (child !== null && child !== undefined) {
+                if (child.type.displayName === 'FormItem') {
+                    formItems.push(child);
+                } else if (child.type.displayName === 'FormBlock') {
+                    _.each(child.props.children, cChild => {
+                        if (cChild !== null && cChild !== undefined) {
+                            if (cChild.type.displayName === 'FormItem') {
+                                formItems.push(cChild);
+                            }
+                        }
                     });
-                } else if (child.props.validate) {
-                    let help = '';
-                    if (child.props.required) {
-                        help = child.props.validate(function (value) {
-                            return Validator.validate(Validator.TYPE.required, value);
-                        });
-                    } else {
-                        help = child.props.validate();
-                    }
-                    if (help) {
-                        helpList.push({
-                            label: child.props.label,
-                            help
-                        });
-                    }
+                }
+            }
+
+        });
+
+        _.each(formItems, item => {
+            if (item.props.error) {
+                helpList.push({
+                    label: item.props.label,
+                    help: item.props.error
+                });
+            } else if (item.props.validate) {
+                let help = '';
+                if (item.props.required) {
+                    help = item.props.validate(function (value) {
+                        return Validator.validate(Validator.TYPE.required, value);
+                    });
+                } else {
+                    help = item.props.validate();
+                }
+                if (help) {
+                    helpList.push({
+                        label: item.props.label,
+                        help
+                    });
                 }
             }
         });

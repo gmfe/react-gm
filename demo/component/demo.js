@@ -2,10 +2,18 @@ import React from 'react';
 import {Form, FormItem, FormButton, FormBlock, Validator, Radio, RadioGroup} from '../../src/index';
 
 class Component extends React.Component {
+    handleSubmit() {
+        console.log('handleSubmit');
+    }
+
+    handleSubmitValidated() {
+        console.log('handleValidatedSubmit');
+    }
+
     render() {
         return (
             <div>
-                <Form horizontal onSubmit={this.handleSubmit}>
+                <Form horizontal onSubmit={this.handleSubmit} onSubmitValidated={this.handleSubmitValidated}>
                     <FormBlock>
                         <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
                             <input type="text"/>
@@ -14,9 +22,6 @@ class Component extends React.Component {
                             <input type="text"/>
                         </FormItem>
                     </FormBlock>
-                    <FormItem label="姓名" required validate={Validator.create([], '')}>
-                        <input type="text"/>
-                    </FormItem>
                     <FormItem label="描述">
                         <textarea type="text" name="desc"/>
                     </FormItem>

@@ -98,11 +98,11 @@ class FormWrap3 extends React.Component {
 行内表单和内联表单在手机端均失效，显示出默认形态
 
 ### Props
-- `inline (bool)` 默认`false`，内联表单
-- `horizontal (bool)` 默认`false` 水平排列表单
+- `inline (bool)` 默认`false`，内联表单。 和 horizontal 互斥。
+- `horizontal (bool)` 默认`false` 水平排列表单。和 inline 互斥。
 - `labelWidth (string)` label的宽度
-- `onSubmit (func)` 已默认处理了 preventDefault
-- `onSubmitValidated (func)` 只有所有验证通过才会回调，依据是`FormItem`的`error`属性是`false`或者`validate`运行的结果是成功。
+- `onSubmit (func)` 已默认处理了 preventDefault。和 onSubmitValidated 互斥。
+- `onSubmitValidated (func)` 只有所有验证通过才会回调，依据是`FormItem`的`error`属性是`false`或者`validate`运行的结果是成功。和 onSubmit 互斥。
 
 ## FormItem
 
