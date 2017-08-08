@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NewPaginationWithCount from './pagination_new';
 
 class WithCount extends React.Component {
     constructor(props) {
@@ -37,14 +38,14 @@ class WithCount extends React.Component {
                         <a href="javascript:;" data-page={data.index - 1}>上一页</a>
                     </li>
 
-                    { begin >= 2 ? (<li><a href="javascript:;" data-page="1">1</a></li>) : undefined}
-                    { begin >= 3 ? (<li className="disabled"><a href="javascript:;">...</a></li>) : undefined}
+                    {begin >= 2 ? (<li><a href="javascript:;" data-page="1">1</a></li>) : undefined}
+                    {begin >= 3 ? (<li className="disabled"><a href="javascript:;">...</a></li>) : undefined}
 
                     {pages.map((page, i) => <li key={i} className={data.index === page ? 'active' : ''}><a
                         href="javascript:;" data-page={page}>{page}</a></li>)}
 
-                    { end <= all - 2 ? (<li className="disabled"><a href="javascript:;">...</a></li>) : undefined}
-                    { end <= all - 1 ? (<li><a href="javascript:;" data-page={all}>{all}</a></li>) : undefined}
+                    {end <= all - 2 ? (<li className="disabled"><a href="javascript:;">...</a></li>) : undefined}
+                    {end <= all - 1 ? (<li><a href="javascript:;" data-page={all}>{all}</a></li>) : undefined}
 
                     <li className={(data.index === all || all === 0) ? 'disabled' : ''}>
                         <a href="javascript:;" data-page={data.index + 1}>下一页</a>
@@ -69,6 +70,17 @@ class WithCount extends React.Component {
         }, page);
     }
 }
+
+WithCount.propTypes = {
+    data: PropTypes.shape({
+        count: PropTypes.number,
+        offset: PropTypes.number.isRequired,
+        limit: PropTypes.number.isRequired
+    }),
+    toPage: PropTypes.func.isRequired,
+    nextDisabled: PropTypes.bool
+};
+
 
 class WithoutCount extends React.Component {
     constructor(props) {
@@ -118,24 +130,36 @@ class WithoutCount extends React.Component {
     }
 }
 
-class Pagination extends React.Component {
-    render() {
-        if (this.props.data.count !== undefined) {
-            return <WithCount {...this.props}/>;
-        } else {
-            return <WithoutCount {...this.props}/>;
-        }
-    }
-}
-
-Pagination.displayName = 'Pagination';
-Pagination.propTypes = {
+WithoutCount.propTypes = {
     data: PropTypes.shape({
         count: PropTypes.number,
         offset: PropTypes.number.isRequired,
         limit: PropTypes.number.isRequired
     }),
     toPage: PropTypes.func.isRequired,
+    nextDisabled: PropTypes.bool
+};
+
+class Pagination extends React.Component {
+    render() {
+        if (this.props.nextVersion) {
+            return <NewPaginationWithCount {...this.props}/>;
+        } else {
+            if (this.props.data.count !== undefined) {
+                return <WithCount {...this.props}/>;
+            } else {
+                return <WithoutCount {...this.props}/>;
+            }
+        }
+    }
+}
+
+Pagination.displayName = 'Pagination';
+Pagination.propTypes = {
+    nextVersion: PropTypes.bool, // 新规范
+    data: PropTypes.object,
+    toPage: PropTypes.func,
+    onChange: PropTypes.func,
     nextDisabled: PropTypes.bool
 };
 
