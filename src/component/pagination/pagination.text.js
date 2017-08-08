@@ -6,7 +6,7 @@ class WithCount extends React.Component {
         const {data} =  this.props;
         return (
             <div className="gm-pagination-text">
-                显示第 {data.offset + 1} 到 {Math.min(data.count, data.offset + data.limit)} 行，一共 {data.count} 行记录
+                显示 {data.offset + 1} ~ {Math.min(data.count, data.offset + data.limit)}，共 {data.count} 条记录
             </div>
         );
     }
@@ -17,7 +17,7 @@ class WithoutCount extends React.Component {
         const {data} =  this.props;
         return (
             <div className="gm-pagination-text">
-                显示第 {data.offset + 1} 到 {data.offset + data.limit} 行
+                显示 {data.offset + 1} ~ {data.offset + data.limit} 条记录
             </div>
         );
     }
@@ -25,7 +25,7 @@ class WithoutCount extends React.Component {
 
 class PaginationText extends React.Component {
     render() {
-        if (this.props.data.count) {
+        if (this.props.data.count !== undefined) {
             return <WithCount {...this.props}/>;
         } else {
             return <WithoutCount {...this.props}/>;

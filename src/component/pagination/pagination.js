@@ -34,7 +34,7 @@ class WithCount extends React.Component {
             <div className="gm-pagination">
                 <ul className="pagination pagination-sm" onClick={this.handlePage}>
                     <li className={data.index === 1 ? 'disabled' : ''}>
-                        <a href="javascript:;" data-page={data.index - 1}>&laquo;</a>
+                        <a href="javascript:;" data-page={data.index - 1}>上一页</a>
                     </li>
 
                     { begin >= 2 ? (<li><a href="javascript:;" data-page="1">1</a></li>) : undefined}
@@ -46,8 +46,8 @@ class WithCount extends React.Component {
                     { end <= all - 2 ? (<li className="disabled"><a href="javascript:;">...</a></li>) : undefined}
                     { end <= all - 1 ? (<li><a href="javascript:;" data-page={all}>{all}</a></li>) : undefined}
 
-                    <li className={data.index === all ? 'disabled' : ''}>
-                        <a href="javascript:;" data-page={data.index + 1}>&raquo;</a>
+                    <li className={(data.index === all || all === 0) ? 'disabled' : ''}>
+                        <a href="javascript:;" data-page={data.index + 1}>下一页</a>
                     </li>
                 </ul>
             </div>
@@ -120,7 +120,7 @@ class WithoutCount extends React.Component {
 
 class Pagination extends React.Component {
     render() {
-        if (this.props.data.count) {
+        if (this.props.data.count !== undefined) {
             return <WithCount {...this.props}/>;
         } else {
             return <WithoutCount {...this.props}/>;

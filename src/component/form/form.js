@@ -50,9 +50,6 @@ class Form extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({
-            canValidate: true
-        });
 
         this.props.onSubmit(e);
 
@@ -60,6 +57,11 @@ class Form extends React.Component {
         if (!err) {
             this.props.onSubmitValidated();
         }
+
+        // 有错误才打开错误提示，没有错误则不打开
+        this.setState({
+            canValidate: !!err
+        });
     }
 
     render() {
