@@ -57,6 +57,7 @@ class FormItem extends React.Component {
             validate,
             error,
             help,
+            fieldTop,
             className,
             children,
             ...rest
@@ -73,6 +74,13 @@ class FormItem extends React.Component {
             error = !!help;
         }
 
+        let gmFormFieldTop = false;
+        if (!_.isArray(children)) {
+            if (children.type.displayName === 'Switch') {
+                gmFormFieldTop = true;
+            }
+        }
+
         return (
             <Flex column={!horizontal && !inline} {...rest} className={classNames('gm-form-group', className, {
                 'has-error': error
@@ -82,7 +90,9 @@ class FormItem extends React.Component {
                     {label}{label && inline ? '：' : null}
                 </Flex>
                 <Flex flex column>
-                    <div>
+                    <div className={classNames("gm-form-field", {
+                        "gm-form-field-top": gmFormFieldTop || fieldTop
+                    })}>
                         {/*理论上不支持children是数组，但也合理，兼容吧*/}
                         {_.isArray(children) ? children : <FormControl>{children}</FormControl>}
                         {error && help ? (
@@ -108,7 +118,9 @@ FormItem.propTypes = {
     horizontal: PropTypes.bool, // 由Form传过来
     inline: PropTypes.bool, // 由Form传过来
     labelWidth: PropTypes.string, // horizontal true 才有效， 可由Form传过来
-    canValidate: PropTypes.bool
+    canValidate: PropTypes.bool,
+
+    fieldTop: PropTypes.bool
 };
 
 export default FormItem;

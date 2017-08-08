@@ -1,3 +1,5 @@
+@gm-form-field-top: 7px;
+
 .gm-form {
 
   .gm-form-group {
@@ -6,8 +8,14 @@
 
   &.form-horizontal {
     .gm-form-label {
-      padding-top: 7px;
+      padding-top: @gm-form-field-top;
       padding-right: 10px;
+    }
+
+    .gm-form-field {
+      &.gm-form-field-top {
+        margin-top: @gm-form-field-top;
+      }
     }
   }
 
@@ -15,7 +23,7 @@
     display: flex;
     flex-wrap: wrap;
     .gm-form-label {
-      padding-top: 7px;
+      padding-top: @gm-form-field-top;
     }
     .gm-form-group {
       margin-right: 10px;

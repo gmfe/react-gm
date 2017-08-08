@@ -5,7 +5,8 @@ imports:
         Validator, 
         Dropper, 
         Radio, RadioGroup,
-        Checkbox, CheckboxGroup
+        Checkbox, CheckboxGroup,
+        Switch
     } from '../../src/index';
 ---
 ## Form
@@ -73,6 +74,13 @@ class FormWrap3 extends React.Component {
                 </FormItem>
                 <FormItem label="描述">
                     <textarea type="text" name="desc"/>
+                </FormItem>
+                <FormItem label="switch">
+                    <Switch
+                        type="primary"
+                        checked={true}
+                        onChange={() => {}}
+                    />
                 </FormItem>
                 <FormButton>
                     <button className="btn btn-primary" type="submit">提交</button>

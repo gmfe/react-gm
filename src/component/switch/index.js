@@ -84,6 +84,8 @@ class Switch extends React.Component {
     }
 }
 
+Switch.displayName = 'Switch';
+
 Switch.propTypes = {
     type: PropTypes.string, // default primary success info warning danger
     checked: PropTypes.bool.isRequired,
