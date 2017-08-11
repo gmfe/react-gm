@@ -55,7 +55,7 @@ class FilterSelect1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: filterSelectData[2],
+            selected: null,
             list: filterSelectData
         };
         this.handleSelect = ::this.handleSelect;
