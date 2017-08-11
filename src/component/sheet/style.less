@@ -31,11 +31,11 @@
         .gm-sheet {
           .table {
             margin-bottom: 0;
+            border-bottom: none;
             background: @table-bg-accent;
 
             thead, tbody {
               tr {
-                border: none;
                 background: @table-bg-accent;
               }
             }
@@ -44,6 +44,10 @@
               tr:first-child {
                 padding-left: 2px;
               }
+            }
+
+            tbody tr:last-child {
+              border-bottom: none;
             }
           }
         }
