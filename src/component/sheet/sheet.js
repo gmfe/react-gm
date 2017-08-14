@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Pagination from '../pagination/pagination.js';
 import PaginationText from '../pagination/pagination.text.js';
@@ -190,6 +191,10 @@ class Sheet extends React.Component {
         );
     }
 }
+
+Sheet.findTableDOM = function (ref) {
+    return ReactDOM.findDOMNode(ref).getElementsByTagName('table')[0];
+};
 
 Sheet.propTypes = {
     list: PropTypes.array.isRequired,

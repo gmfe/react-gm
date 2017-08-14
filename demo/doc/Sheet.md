@@ -1,6 +1,7 @@
 ---
 imports:
     import {Sheet, SheetColumn, Flex} from '../../src/index';
+    import ReactDOM from 'react-dom';
 ---
 ## Sheet
 
@@ -162,6 +163,59 @@ class SheetInSheet extends React.Component {
 ```
 :::
 
+::: demo find
+```js
+class SheetWithTableDom extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [
+               {
+                   id: 3,
+                   name: '小明',
+                   age: '10'
+               }, {
+                   id: 4,
+                   name: '小红',
+                   age: '15',
+                   __gm_expanded: true
+               }, {
+                  id: 5,
+                  name: '小蓝',
+                  age: '20'
+               }
+            ]
+        };
+
+        this.getDOM = ::this.getDOM;
+    }
+
+    getDOM() {
+        console.log(Sheet.findTableDOM(this.refSheet));
+    }
+
+    render() {
+        return (
+            <div style={{width: '500px'}}>
+                <Sheet
+                    list={this.state.data}
+                    ref={ref => this.refSheet = ref}
+                >
+                    <SheetColumn name="id" field="id"/>
+                    <SheetColumn name="name" field="name"/>
+                    <SheetColumn name="name" field="name"/>
+                </Sheet>
+                <button onClick={this.getDOM}>获取table dom</button>
+            </div>
+        );
+    }
+}
+```
+```jsx
+<SheetWithTableDom/>
+```
+:::
+
 ### Props
 - `list (Array|isRequired)` 是列表的数据，最好是数组。 当然有人没注意传了obj（非常不推荐）。
 - `loading (bool)` true显示loading状态，false显示数据
@@ -171,6 +225,10 @@ class SheetInSheet extends React.Component {
 - `scrollX (bool)` 是否允许table横向滚动。 但是table是否具备横向滚动的条件要调用方保证
 - `expandedRowRender(func)` sheet in sheet，通过此方法渲染另外一个table
 - `onExpand(func)` 相应sheet in sheet的展开/收起。 直接操作数据的 __gm_expanded 字段，具体见demo
+
+### Static
+
+- `findTableDOM (func)` 传 Sheet 的 ref 进去，返回 table 的 dom
 
 ### Pagination PaginationText
 
