@@ -28,7 +28,7 @@ class NProgress extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            percent: 0
+            percent: this.props.percent || 0
         };
         this.timer = null;
     }
