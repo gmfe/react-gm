@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Flex from '../flex';
-import {Select} from '../select';
+import {Select, Option} from '../select';
 import {is} from 'gm-util';
-
-const {Option} = Select;
 
 class Transfer extends React.Component {
     constructor(props) {
