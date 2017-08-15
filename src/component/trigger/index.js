@@ -170,7 +170,8 @@ class Trigger extends React.Component {
                         ref: ref => this.refPopup = ref,
                         className: classNames('gm-trigger-popup gm-box-shadow-bottom', {
                             'gm-trigger-popup-right': right,
-                            'gm-trigger-popup-top gm-box-shadow-top': top
+                            'gm-trigger-popup-top gm-box-shadow-top': top,
+                            'gm-trigger-popup-no-arrow': !showArrow
                         }),
                         children: [popup]
                     }) : undefined]
