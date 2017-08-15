@@ -52,11 +52,12 @@ class Sheet extends React.Component {
             trs.push(<tr {...this.props.getTrProps(index)} key={index}>
                 {expandedRowRender && (
                     <td>
-                        <button
-                            type="button"
-                            className="btn btn-default btn-xs"
-                            onClick={this.handleExpanded.bind(this, index)}
-                        >{value.__gm_expanded ? '-' : '+'}</button>
+                        <i className={classNames('gm-sheet-expanded-icon text-primary glyphicon', {
+                            'glyphicon-minus': value.__gm_expanded,
+                            'glyphicon-plus': !value.__gm_expanded
+                        })}
+                           onClick={this.handleExpanded.bind(this, index)}
+                        />
                     </td>
                 )}
                 {select && (
