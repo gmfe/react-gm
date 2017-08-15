@@ -47,7 +47,7 @@ class Cascader extends React.Component {
 
     renderOverlay() {
         return (
-            <Flex className={classNames("gm-cascader-list", this.props.className)}>
+            <Flex className={classNames("gm-cascader-list gm-box-shadow", this.props.className)}>
                 {_.map(this.getList(), (value, i) => (
                     <Flex column key={i} className="list-group gm-block">
                         {_.map(value, v => (

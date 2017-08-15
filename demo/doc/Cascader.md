@@ -14,7 +14,7 @@ const cascaderData = [{
     name: '广东',
     children: [{
         value: '01',
-        name: '深圳深圳深圳深圳深圳深圳深圳深圳深圳深圳深圳'
+        name: '深圳'
     }, {
         value: '02',
         name: '广州'

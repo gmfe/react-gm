@@ -143,7 +143,7 @@ class DropSelect extends React.Component {
                 {thisProps.children}
                 <div className="gm-dropselect-wrap">
                     <div
-                        className="gm-dropselect-list-wrap"
+                        className="gm-dropselect-list-wrap gm-box-shadow"
                         style={{display: show ? 'block' : 'none'}}
                     >
                         <ul className="gm-dropselect-list">

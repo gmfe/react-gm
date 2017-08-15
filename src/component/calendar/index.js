@@ -185,7 +185,7 @@ class Calendar extends React.Component {
 
     render() {
         return (
-            <div className="gm-calendar">
+            <div className="gm-calendar gm-box-shadow">
                 {this.renderHead()}
                 {this.renderWeek()}
                 {this.renderContent()}

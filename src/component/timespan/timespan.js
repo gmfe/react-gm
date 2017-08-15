@@ -24,7 +24,7 @@ class TimeSpan extends React.Component {
         const cells = this.getCells(), {selected, render, disabledSpan} = this.props;
 
         return (
-            <div className="gm-time-span">
+            <div className="gm-time-span gm-box-shadow">
                 {_.map(cells, (value, i) => {
                     const disabled = disabledSpan && disabledSpan(value);
                     return (
