@@ -237,7 +237,7 @@ class MultipleFilterSelect extends React.Component {
         const {query} = this.state;
 
         return (
-            <div className="gm-filter-select-list gm-box-shadow">
+            <div className="gm-filter-select-list">
                 {
                     !disableSearch ?
                         <div className="gm-filter-select-list-input">
