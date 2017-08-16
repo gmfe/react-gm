@@ -168,9 +168,11 @@ class Trigger extends React.Component {
                 active ? React.createElement('div', {
                         key: 'popup',
                         ref: ref => this.refPopup = ref,
-                        className: classNames('gm-trigger-popup ', {
+                        className: classNames('gm-trigger-popup gm-box-shadow-bottom', {
                             'gm-trigger-popup-right': right,
-                            'gm-trigger-popup-top': top
+                            'gm-trigger-popup-top': top,
+                            'gm-box-shadow-top': top,
+                            'gm-trigger-popup-no-arrow': !showArrow
                         }),
                         children: [popup]
                     }) : undefined]

@@ -140,7 +140,7 @@ class Tip extends React.Component {
         };
 
         return (
-            <div className="gm-tip panel panel-default">
+            <div className="gm-tip panel panel-default gm-box-shadow-modal">
                 <button type="button" className="close" onClick={this.handleClose}>
                     <span>&times;</span>
                 </button>

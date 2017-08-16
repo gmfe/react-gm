@@ -250,7 +250,7 @@ class FilterSelect extends React.Component {
         const {query, loading} = this.state;
 
         return (
-            <div className="gm-filter-select-list gm-border">
+            <div className="gm-filter-select-list">
                 {
                     !disableSearch ?
                         <div className="gm-filter-select-list-input">

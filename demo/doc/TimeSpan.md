@@ -26,20 +26,27 @@ class TimeSpanWrap extends React.Component {
     }
     
     render() {
-        return (
-            <div>
+        return (                                        
+            <div className="doc-time-span-container">
                 <div>
+                    <h5>不设置时间最大值，禁用某时间段点击</h5>
                     <TimeSpan
                         max={null}
                         disabledSpan={spanMoment => spanMoment.isSameOrAfter(moment('11:00', 'HH:mm')) && spanMoment.isSameOrBefore(moment('18:30', 'HH:mm'))}
                         selected={this.state.date}
                         onSelect={this.handleChange}
                     />
+                </div>
+                <div>
+                    <h5>设置最大时间值为 20:00</h5>
                     <TimeSpan
                         max={moment().hour(20).minute(0)}
                         selected={this.state.date}
                         onSelect={this.handleChange}
                     />
+                </div>
+                <div>
+                    <h5>设置时间跨度为 1 小时（默认 30 分钟）</h5>
                     <TimeSpan
                         max={moment().hour(20).minute(0)}
                         span={60 * 60 * 1000}
@@ -49,24 +56,33 @@ class TimeSpanWrap extends React.Component {
                     />
                 </div>
                 <div>
-                    <TimeSpanPicker
-                        date={this.state.date}
-                        onChange={this.handleChange}
-                        disabledSpan={spanMoment => spanMoment.isSameOrAfter(moment('11:00', 'HH:mm')) && spanMoment.isSameOrBefore(moment('18:30', 'HH:mm'))}
-                    />
-                    <TimeSpanPicker
-                        disabled={true}
-                        date={this.state.date}
-                        onChange={this.handleChange}
-                    />
-                    <TimeSpanPicker
-                        date={this.state.date}
-                        onChange={this.handleChange}
-                    >
-                        <span>
-                        {this.state.date ? moment(this.state.date).format('HH:mm') : '请点击选择'}
-                        </span>
-                    </TimeSpanPicker>
+                    <div>
+                        <h5>时间选择</h5>
+                        <TimeSpanPicker
+                            date={this.state.date}
+                            onChange={this.handleChange}
+                            disabledSpan={spanMoment => spanMoment.isSameOrAfter(moment('11:00', 'HH:mm')) && spanMoment.isSameOrBefore(moment('18:30', 'HH:mm'))}
+                        />
+                    </div>
+                    <div>
+                        <h5>禁用</h5> 
+                        <TimeSpanPicker
+                           disabled={true}
+                           date={this.state.date}
+                           onChange={this.handleChange}
+                        />
+                    </div>
+                    <div>
+                        <h5>时间选择（不显示输入框）</h5> 
+                        <TimeSpanPicker
+                            date={this.state.date}
+                            onChange={this.handleChange}
+                        >
+                            <span>
+                            {this.state.date ? moment(this.state.date).format('HH:mm') : '请点击选择'}
+                            </span>
+                        </TimeSpanPicker>
+                    </div>
                 </div>
             </div>
         );
