@@ -1,11 +1,17 @@
 .gm-time-span {
   width: 297px;
   overflow: hidden;
-  display: inline-block;
+  display: block;
   border: 1px solid @gm-form-border-color;
   border-radius: 4px;
   background: white;
   position: relative;
+}
+
+.gm-time-span-picker {
+  .gm-time-span {
+    border: none;
+  }
 }
 
 .gm-time-span-cell {
