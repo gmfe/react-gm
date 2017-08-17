@@ -40,6 +40,7 @@ class DropDown extends React.Component {
                     right={right}
                     component={(
                         <button
+                            type="button"
                             ref={ref => this.refTrigger = ref}
                             className={classNames("btn btn-default dropdown-toggle", cartClassName)}
                         />
