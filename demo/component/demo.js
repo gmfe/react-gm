@@ -15,6 +15,10 @@ class Component extends React.Component {
             <div>
                 <Form horizontal onSubmit={this.handleSubmit} onSubmitValidated={this.handleSubmitValidated}>
                     <FormBlock>
+                        {null}
+                        <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
+                            <input type="text"/>
+                        </FormItem>
                         <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
                             <input type="text"/>
                         </FormItem>

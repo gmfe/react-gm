@@ -14,9 +14,12 @@ class FormBlock extends React.Component {
         return (
             <Flex className="gm-form-block">
                 {_.map(children, (child, i) => {
+                    if (child === null || child === undefined) {
+                        return null;
+                    }
                     return (
                         <Flex flex={block[i] || 1} key={i}>
-                            {child !== null && child !== undefined && child.type.displayName === 'FormItem' ? React.cloneElement(child, {
+                            {child.type.displayName === 'FormItem' ? React.cloneElement(child, {
                                 ...rest
                             }) : child}
                         </Flex>
