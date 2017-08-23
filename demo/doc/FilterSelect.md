@@ -19,15 +19,6 @@ const filterSelectData = [
     {name: '深圳湾'},
     {name: '华中科技大学'}
 ];
-
-const ajaxFilterSelectData = [
-    {name: '刘备'},
-    {name: '关羽'},
-    {name: '张飞'},
-    {name: '张云'},
-    {name: '黄忠'},
-    {name: '周瑜'}
-];
     
 const filterSelectGroupData = [{
     label: '一组',
@@ -87,9 +78,7 @@ class FilterSelect1 extends React.Component {
     handleSearchAjax(value) {
         return new Promise((resolve) => {
             setTimeout(() => {
-                this.setState({
-                    list: ajaxFilterSelectData
-                });
+                this.handleSearch(value);
                 resolve();
             }, 1000);
         });
@@ -168,6 +157,7 @@ class FilterSelect2 extends React.Component {
         };
         this.handleSelect = ::this.handleSelect;
         this.handleSearch = ::this.handleSearch;
+        this.handleSearchAjax = ::this.handleSearchAjax;
     }
     
     handleSelect(selected) {
@@ -189,6 +179,15 @@ class FilterSelect2 extends React.Component {
             });
         }
     }
+
+    handleSearchAjax(value) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                this.handleSearch(value);
+                resolve();
+            }, 1000);
+        });
+    }
     
     render() {
         return (
@@ -208,6 +207,15 @@ class FilterSelect2 extends React.Component {
                     list={this.state.list}
                     selected={this.state.selected}
                     onSearch={this.handleSearch}
+                    onSelect={this.handleSelect}
+                    placeholder="搜索"
+                />
+
+                <MultipleFilterSelect
+                    id="ccc"
+                    list={this.state.list}
+                    selected={this.state.selected}
+                    onSearch={this.handleSearchAjax}
                     onSelect={this.handleSelect}
                     placeholder="搜索"
                 />

@@ -28,6 +28,7 @@ class FilterSelect extends React.Component {
         this.handleChange = ::this.handleChange;
         this.getListItemCount = ::this.getListItemCount;
         this.handleKeyDown = ::this.handleKeyDown;
+        this.doChange = ::this.doChange;
 
         if (!this.props.id) {
             console.warn('请提供id');
@@ -123,6 +124,9 @@ class FilterSelect extends React.Component {
                 this.filterSelect.click();
             }
         }, 0);
+
+        // 并且要出发onChange
+        this.doChange('');
     }
 
     handleChange(event) {
@@ -134,27 +138,33 @@ class FilterSelect extends React.Component {
 
         this.timer = setTimeout(() => {
             if (!this.______isMounted) {
-                const result = this.props.onSearch(query);
-
-                if (!result) {
-                    return;
-                }
-
-                this.setState({
-                    loading: true
-                });
-
-                Promise.resolve(result).then(() => {
-                    this.setState({
-                        loading: false
-                    });
-                }).catch(() => {
-                    this.setState({
-                        isLoading: false
-                    });
-                });
+                this.doChange(query);
             }
         }, this.props.delay);
+    }
+
+    doChange(query) {
+        if (!this.______isMounted) {
+            const result = this.props.onSearch(query);
+
+            if (!result) {
+                return;
+            }
+
+            this.setState({
+                loading: true
+            });
+
+            Promise.resolve(result).then(() => {
+                this.setState({
+                    loading: false
+                });
+            }).catch(() => {
+                this.setState({
+                    isLoading: false
+                });
+            });
+        }
     }
 
     getListItemCount(list) {
@@ -267,7 +277,7 @@ class FilterSelect extends React.Component {
                         </div> : null
                 }
                 {loading && <Flex alignCenter justifyCenter className="gm-bg gm-padding-5"><Loading size={20}/></Flex>}
-                {loading ? loading : isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList)}
+                {!loading && (isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList))}
             </div>
         );
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Flex from '../flex';
+import Loading from '../loading';
 import classNames from 'classnames';
 import Trigger from '../trigger';
 
@@ -14,6 +15,7 @@ class MultipleFilterSelect extends React.Component {
         // 单选版本才设置query
         this.state = {
             query: '',
+            loading: false,
             activeIndex: null  // 键盘上下键选中的index
         };
 
@@ -28,6 +30,7 @@ class MultipleFilterSelect extends React.Component {
         this.handleChange = ::this.handleChange;
         this.getListItemCount = ::this.getListItemCount;
         this.handleKeyDown = ::this.handleKeyDown;
+        this.doChange = ::this.doChange;
 
         if (!this.props.id) {
             console.warn('请提供id');
@@ -124,6 +127,8 @@ class MultipleFilterSelect extends React.Component {
 
         // 让input获得焦点，响应键盘
         this.refInput && this.refInput.focus();
+
+        this.doChange('');
     }
 
     handleChange(event) {
@@ -135,9 +140,33 @@ class MultipleFilterSelect extends React.Component {
 
         this.timer = setTimeout(() => {
             if (!this.______isMounted) {
-                this.props.onSearch(query);
+                this.doChange(query);
             }
         }, this.props.delay);
+    }
+
+    doChange(query) {
+        if (!this.______isMounted) {
+            const result = this.props.onSearch(query);
+
+            if (!result) {
+                return;
+            }
+
+            this.setState({
+                loading: true
+            });
+
+            Promise.resolve(result).then(() => {
+                this.setState({
+                    loading: false
+                });
+            }).catch(() => {
+                this.setState({
+                    isLoading: false
+                });
+            });
+        }
     }
 
     getListItemCount(list) {
@@ -234,7 +263,7 @@ class MultipleFilterSelect extends React.Component {
 
     renderOverlay(filterList) {
         const {isGroupList, disableSearch} = this.props;
-        const {query} = this.state;
+        const {query, loading} = this.state;
 
         return (
             <div className="gm-filter-select-list">
@@ -254,7 +283,9 @@ class MultipleFilterSelect extends React.Component {
                             />
                         </div> : null
                 }
-                {isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList)}
+                {loading && <Flex alignCenter justifyCenter className="gm-bg gm-padding-5"><Loading size={20}/></Flex>}
+
+                {!loading && (isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList))}
             </div>
         );
     }
