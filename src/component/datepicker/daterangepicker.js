@@ -16,14 +16,18 @@ class DateRangePicker extends React.Component {
     }
 
     handleSelectBegin(date) {
-        this.props.onChange(date, this.props.end);
+        const {end, onChange} = this.props;
+        onChange(date, date <= end ? end : date);
+
         setTimeout(() => {
             this.refEndTarget.click();
         }, 0);
     }
 
     handleSelectEnd(date) {
-        this.props.onChange(this.props.begin, date);
+        const {begin, onChange} = this.props;
+        onChange(begin <= date ? begin : date, date);
+
         setTimeout(() => {
             this.refDateRangePicker.click();
         }, 0);
