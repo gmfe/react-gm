@@ -6,7 +6,7 @@ class WithCount extends React.Component {
         const {data} =  this.props;
         return (
             <div className="gm-pagination-text">
-                显示 {data.offset + 1} ~ {Math.min(data.count, data.offset + data.limit)}，共 {data.count} 条记录
+                显示 {data.offset + 1} ~ {data.offset + data.limit}，共 {data.count} 条记录
             </div>
         );
     }
