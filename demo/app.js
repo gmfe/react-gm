@@ -1,7 +1,8 @@
 import React from 'react';
-import {Flex as GMFlex, LayoutRoot} from '../src/index';
+import {Flex as GMFlex, LayoutRoot, Emitter} from '../src/index';
 import createHashHistory from 'history/createHashHistory';
 import _ from 'lodash';
+import classNames from 'classnames';
 
 import NavConfigDoc from './doc/nav.config';
 import NavConfigStandard from './standard/nav.config';
@@ -21,6 +22,11 @@ const setNavCurrent = () => {
 class App extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            blur: false
+        };
+
         this.doAnchor = ::this.doAnchor;
         this.handleNav = ::this.handleNav;
         this.doScrollToAnchor = ::this.doScrollToAnchor;
@@ -29,6 +35,8 @@ class App extends React.Component {
 
     componentDidMount() {
         // this.doScrollToAnchor();
+        Emitter.on(Emitter.TYPE.MODAL_SHOW, () => this.setState({blur: true}));
+        Emitter.on(Emitter.TYPE.MODAL_HIDE, () => this.setState({blur: false}));
     }
 
     componentDidUpdate() {
@@ -87,39 +95,45 @@ class App extends React.Component {
             setNavCurrent();
         }, 10);
         return (
-            <div className="demo">
-                <div className="demo-header">
-                    <GMFlex className="container">
-                        <div onClick={this.handleLogo} className="gm-flex gm-flex-align-center gm-header-logo">
-                            <svg width="28" height="28" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M 110 10 L 10 10 L 10 110 L 110 110 L 110 50 L 75 85 L 75 50 L 40 85" style={{
-                                    fill: 'none',
-                                    stroke: 'black',
-                                    strokeWidth: 10,
-                                    strokeLinejoin: 'round'
-                                }}/>
-                            </svg>
-                            <span className="gm-gap-10"/>
-                            <span>ReactGM </span>
-                            <small>&nbsp;&nbsp;by gmfe</small>
-                            <span className="gm-gap-10"/>
-                            <a className="github-button" href="https://github.com/gmfe/react-gm" data-show-count="true"
-                               aria-label="Star gmfe/react-gm on GitHub">Star</a>
+            <div>
+                <div className={classNames("demo", {
+                    'gm-filter-blur-transition': this.state.blur
+                })}>
+                    <div className="demo-header">
+                        <GMFlex className="container">
+                            <div onClick={this.handleLogo} className="gm-flex gm-flex-align-center gm-header-logo">
+                                <svg width="28" height="28" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 110 10 L 10 10 L 10 110 L 110 110 L 110 50 L 75 85 L 75 50 L 40 85"
+                                          style={{
+                                              fill: 'none',
+                                              stroke: 'black',
+                                              strokeWidth: 10,
+                                              strokeLinejoin: 'round'
+                                          }}/>
+                                </svg>
+                                <span className="gm-gap-10"/>
+                                <span>ReactGM </span>
+                                <small>&nbsp;&nbsp;by gmfe</small>
+                                <span className="gm-gap-10"/>
+                                <a className="github-button" href="https://github.com/gmfe/react-gm"
+                                   data-show-count="true"
+                                   aria-label="Star gmfe/react-gm on GitHub">Star</a>
+                            </div>
+                            <GMFlex flex justifyEnd alignCenter className="gm-header-nav">
+                                <a href="#/standard">UI规范</a>
+                                <a href="#/doc">组件</a>
+                            </GMFlex>
+                        </GMFlex>
+                    </div>
+                    <GMFlex className="demo-center container">
+                        <div className="demo-left" onClick={this.handleNav}>
+                            {window.location.hash.indexOf('#/standard') > -1 ? <NavConfigStandard/> : <NavConfigDoc/>}
                         </div>
-                        <GMFlex flex justifyEnd alignCenter className="gm-header-nav">
-                            <a href="#/standard">UI规范</a>
-                            <a href="#/doc">组件</a>
+                        <GMFlex flex column className="demo-content doc markdown-body" onClick={this.doAnchor}>
+                            {this.props.children}
                         </GMFlex>
                     </GMFlex>
                 </div>
-                <GMFlex className="demo-center container">
-                    <div className="demo-left" onClick={this.handleNav}>
-                        {window.location.hash.indexOf('#/standard') > -1 ? <NavConfigStandard/> : <NavConfigDoc/>}
-                    </div>
-                    <GMFlex flex column className="demo-content doc markdown-body" onClick={this.doAnchor}>
-                        {this.props.children}
-                    </GMFlex>
-                </GMFlex>
                 <LayoutRoot/>
             </div>
         );
