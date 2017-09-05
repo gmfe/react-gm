@@ -82,7 +82,7 @@ class ImportLead extends React.Component {
                             </button>
                         )}
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        {fileTempUrl ? (<a href={fileTempUrl} target="blank">上传模板下载</a>) : undefined}
+                        {fileTempUrl ? (<a href={fileTempUrl} target="blank">模板下载</a>) : undefined}
                         <div>{filename}</div>
                     </div>
                     {!this.props.unLine && (
