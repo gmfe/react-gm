@@ -4,6 +4,7 @@ import LayoutRoot from '../layout_root';
 import className from 'classnames';
 import _ from 'lodash';
 import Flex from '../flex';
+import Emitter from '../../emitter';
 
 const iconClassName = {
     confirm: 'ifont ifont-14052218',
@@ -139,36 +140,44 @@ class Modal extends React.Component {
 }
 
 Modal.render = (props) => {
+    Emitter.emit(Emitter.TYPE.MODAL_SHOW);
     LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
         <Modal show={true} {...props}/>
     ));
 };
 
 Modal.confirm = (props) => {
+    Emitter.emit(Emitter.TYPE.MODAL_SHOW);
     LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
         <Modal show={true} disableMaskClose {...props} type="confirm"/>
     ));
 };
 
 Modal.info = (props) => {
+    Emitter.emit(Emitter.TYPE.MODAL_SHOW);
     LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
         <Modal show={true} disableMaskClose {...props} type="info"/>
     ));
 };
 
 Modal.success = (props) => {
+    Emitter.emit(Emitter.TYPE.MODAL_SHOW);
     LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
         <Modal show={true} disableMaskClose {...props} type="success"/>
     ));
 };
 
 Modal.warning = (props) => {
+    Emitter.emit(Emitter.TYPE.MODAL_SHOW);
     LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
         <Modal show={true} disableMaskClose {...props} type="warning"/>
     ));
 };
 
-Modal.hide = () => LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, null);
+Modal.hide = () => {
+    Emitter.emit(Emitter.TYPE.MODAL_HIDE);
+    LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, null);
+};
 
 Modal.propTypes = {
     show: PropTypes.bool.isRequired,

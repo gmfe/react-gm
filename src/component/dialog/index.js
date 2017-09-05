@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import Modal from '../modal';
 import _ from 'lodash';
+import Emitter from '../../emitter';
 
 // 搞的复杂了，后续要补充文档
 
@@ -16,22 +17,22 @@ if (!dialogContainer) {
 }
 let DialogStatics = {};
 DialogStatics = {
-    alert(options){
+    alert(options) {
         options.type = 'alert';
         options.size = 'sm';
         return DialogStatics.dialog(options);
     },
-    confirm(options){
+    confirm(options) {
         options.type = 'confirm';
         options.size = 'sm';
         return DialogStatics.dialog(options);
     },
-    prompt(options){
+    prompt(options) {
         options.type = 'prompt';
         options.size = 'sm';
         return DialogStatics.dialog(options);
     },
-    dialog(options){
+    dialog(options) {
         options = Object.assign({}, {size: 'sm'}, options);
         return new Promise((resolve, reject) => {
             let div = window.document.createElement('div');
@@ -39,15 +40,25 @@ DialogStatics = {
             const _OK = options.onOK;
             options.onOK = value => {
                 const result = _OK && _OK(value);
-                if (result !== false) {
+                if (result && result.then) { // 简单判断是否promise
+                    return result.then(v => {
+                        Emitter.emit(Emitter.TYPE.MODAL_HIDE);
+                        return v;
+                    });
+                } else if (result !== false) {
                     resolve(value);
-                } else if (result.then) { // 简单判断是否promise
-                    return result;
+                }
+                if (result !== false) {
+                    Emitter.emit(Emitter.TYPE.MODAL_HIDE);
                 }
                 return result;
             };
-            options.onCancel = () => reject();
+            options.onCancel = () => {
+                reject();
+                Emitter.emit(Emitter.TYPE.MODAL_HIDE);
+            };
             ReactDOM.render(<Dialog show={true} {...options} />, div);
+            Emitter.emit(Emitter.TYPE.MODAL_SHOW);
         });
     }
 };
@@ -160,6 +171,7 @@ class Dialog extends React.Component {
         );
     }
 }
+
 Object.assign(Dialog, DialogStatics);
 
 Dialog.propTypes = {
