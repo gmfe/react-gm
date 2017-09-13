@@ -67,7 +67,15 @@ const list = [{
               ]
           }
       ]
-  }];
+  },{
+    value: '333',
+    name: '鲜肉类',
+    children: [{
+         value: '444',
+         name: '猪肉',
+         children: []
+     }]
+}];
 ```
 :::
 
@@ -107,7 +115,7 @@ class TreeSelectDemo extends React.Component {
 
 ### Props
 **注意，请尽量提供key**
-- `list (array|isRequired)` 树形数据。结构 `{'[{value: "111", name: "aaa", children: [{value: "222", name: "bbb"}]}]'}`
+- `list (array|isRequired)` 树形数据。结构 `{'[{value: "111", name: "aaa", children: [{value: "222", name: "bbb"}]}]'},如果没有子节点children传空数组`
 - `selected (array)` 选中了什么，`list`中的节点数组
 - `onSelect (func)` 选中后触发，会根据操作提供节点数据给selected，一般直接设置`selected`即可
 - `disabledSelected (func)` 是否开启select功能
