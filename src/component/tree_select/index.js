@@ -192,7 +192,7 @@ class TreeNode extends React.Component {
             selectedFlag = _.includes(selected, data.value);
         }
         else {
-            selectedFlag = (_.difference(childrenNode, selected).length === 0);
+            selectedFlag = (childrenNode.length === 0) ? false: (_.difference(childrenNode, selected).length === 0);
         }
 
         return (
@@ -203,6 +203,7 @@ class TreeNode extends React.Component {
                                 type="checkbox"
                                 checked={selectedFlag}
                                 onChange={this.handleSelect.bind(this, data)}
+                                disabled={childrenNode.length === 0}
                             />
                         </div>
                     )}
