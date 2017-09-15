@@ -22,6 +22,7 @@ class RadioGroup extends React.Component {
                 {_.map(childList, (child, i) => {
                     return React.cloneElement(child, {
                         key: i,
+                        index: i,
                         checked: child.props.value === value,
                         inline,
                         onChange: () => {

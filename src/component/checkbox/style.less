@@ -1,3 +1,62 @@
+//cover bootstrap.style for checkbox
+.gm-checkbox-group label {
+  padding-left: 0 !important;
+}
+
+.gm-checkbox-group {
+  .gm-checkbox {
+    display: none;
+  }
+  .gm-checkbox + span {
+    padding: 0;
+    min-height: 0 !important;
+    margin-right: 5px;
+    top: 2px;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 1px solid @brand-success;
+    border-radius: 10px;
+    display: inline-block;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    transition: background-color 0.25s linear;
+  }
+  .gm-checkbox + span:after {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 5px;
+    top: 3px;
+    left: 2px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    transition: opacity 0.25s linear;
+
+  }
+  .gm-checkbox:checked + span {
+    background-color: @brand-success;
+
+  }
+  .gm-checkbox:checked + span:after {
+    opacity: 1;
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 5px;
+    top: 3px;
+    left: 2px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    transition: opacity 0.25s linear;
+
 .gm-checkbox-group {
   label.disabled {
     cursor: not-allowed;
