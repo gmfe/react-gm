@@ -85,10 +85,10 @@ class FormItem extends React.Component {
             <Flex column={!horizontal && !inline} {...rest} className={classNames('gm-form-group', className, {
                 'has-error': error
             })}>
-                <Flex justifyEnd={horizontal} width={labelWidth} className="gm-form-label control-label">
+                {label && <Flex justifyEnd={horizontal} width={labelWidth} className="gm-form-label control-label">
                     {required ? <span style={{color: 'red'}}>*</span> : ''}
                     {label}{label && inline ? '：' : null}
-                </Flex>
+                </Flex>}
                 <Flex flex column>
                     <div className={classNames("gm-form-field", {
                         "gm-form-field-top": gmFormFieldTop || fieldTop

@@ -6,8 +6,6 @@
 
 `npm install react-gm -D`
 
-库文件和样式文件在dist下
-
 ## 依赖
 
 使用前请保证以下依赖存在
