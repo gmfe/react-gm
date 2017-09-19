@@ -80,11 +80,12 @@ class ModalWrap2 extends React.Component {
         };
     }
     
-    handleModal(size){
+    handleModal(size, style){
         Modal.render({
             children: '我是内容',
             title: '我是标题',
             size,
+            style,
             onHide: Modal.hide
         });
     }
@@ -112,6 +113,10 @@ class ModalWrap2 extends React.Component {
                     className="btn btn-default" 
                     onClick={this.handleModal.bind(this, 'sm')}
                 >sm</button>
+                <button
+                    className="btn btn-default"
+                    onClick={this.handleModal.bind(this, 'sm', {width: '750px'})}
+                >固定750宽</button>
                 <button 
                     className="btn btn-default" 
                     onClick={this.handleBigModal}

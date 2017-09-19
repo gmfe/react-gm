@@ -98,7 +98,7 @@ class Modal extends React.Component {
     }
 
     render() {
-        const {show, title, size, children, type} = this.props;
+        const {show, title, size, children, type, style} = this.props;
         if (!show) {
             return null;
         }
@@ -114,9 +114,10 @@ class Modal extends React.Component {
                     tabIndex="-1"
                     onClick={this.handleMask}
                 >
-                    <div className={className("gm-modal-dialog", "gm-modal-" + size, {
-                        in: show
-                    })}>
+                    <div
+                        className={className("gm-modal-dialog", "gm-modal-" + size, {in: show})}
+                        style={style}
+                    >
                         <button
                             type="button"
                             className="close"
