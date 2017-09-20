@@ -80,7 +80,7 @@ class FilterSearchSelect1 extends React.Component {
                     selected={this.state.selected}
                     onSelect={::this.handleSelect}
                     onFilter={::this.handleFilter}
-                    className="gm-filter-select-sm"
+                    className="gm-search-select-sm"
                 />
 
                 <FilterSearchSelect
@@ -90,7 +90,7 @@ class FilterSearchSelect1 extends React.Component {
                     selected={this.state.selected}
                     onSelect={::this.handleSelect}
                     onFilter={::this.handleFilter}
-                    className="gm-filter-select-sm"
+                    className="gm-search-select-sm"
                 />
             </div>
         );
