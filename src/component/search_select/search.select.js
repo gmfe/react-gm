@@ -312,11 +312,13 @@ class SearchSelect extends React.Component {
     }
 
     render() {
+        var classnameProps = this.props.className && this.props.className.split(' ');
         return (
             <div
                 ref={ref => this.searchSelect = ref}
-                className={classNames("gm-search-select", this.props.className, {
-                    "gm-search-select-disabled": this.props.disabled
+                className={classNames("gm-search-select", {
+                    "gm-search-select-disabled": this.props.disabled,
+                    "gm-filter-select-sm": classnameProps && (classnameProps.indexOf('gm-filter-select-sm') > -1)
                 })}
             >
                 <Flex wrap className="gm-search-select-input">
