@@ -82,6 +82,9 @@ class FormWrap3 extends React.Component {
                         onChange={() => {}}
                     />
                 </FormItem>
+                <FormItem label="image">
+                    <Dropper/>
+                </FormItem>
                 <FormButton>
                     <button className="btn btn-primary" type="submit">提交</button>
                 </FormButton>
@@ -271,7 +274,7 @@ class FormItemWrap2 extends React.Component {
 - `validate (func)` 校验后返回错误帮助信息，且只有过提交过动作后才显示，onChange则会自动重新校验。存在validate，则`error` `help`无效。如果存在`required`，则先校验是否有值。
 - `error (bool)` 校验的状态，只有`true`时help才会显示
 - `help (string)` 错误帮助信息
-- `fieldTop (bool)` 是否加上margin-top: 7px
+- `unLabelTop (bool)` 是否取消 label 的 padding-top: 7px。Switch 默认取消。
 
 ## FormBlock
 

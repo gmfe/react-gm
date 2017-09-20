@@ -57,7 +57,7 @@ class FormItem extends React.Component {
             validate,
             error,
             help,
-            fieldTop,
+            unLabelTop,
             className,
             children,
             ...rest
@@ -74,10 +74,10 @@ class FormItem extends React.Component {
             error = !!help;
         }
 
-        let gmFormFieldTop = false;
+
         if (!_.isArray(children)) {
             if (children.type.displayName === 'Switch') {
-                gmFormFieldTop = true;
+                unLabelTop = true;
             }
         }
 
@@ -85,14 +85,15 @@ class FormItem extends React.Component {
             <Flex column={!horizontal && !inline} {...rest} className={classNames('gm-form-group', className, {
                 'has-error': error
             })}>
-                {label && <Flex justifyEnd={horizontal} width={labelWidth} className="gm-form-label control-label">
+                {label &&
+                <Flex justifyEnd={horizontal} width={labelWidth} className={classNames("gm-form-label control-label", {
+                    "gm-form-label-untop": unLabelTop
+                })}>
                     {required ? <span style={{color: 'red'}}>*</span> : ''}
                     {label}{label && inline ? '：' : null}
                 </Flex>}
                 <Flex flex column>
-                    <div className={classNames("gm-form-field", {
-                        "gm-form-field-top": gmFormFieldTop || fieldTop
-                    })}>
+                    <div className="gm-form-field">
                         {/*理论上不支持children是数组，但也合理，兼容吧*/}
                         {_.isArray(children) ? children : <FormControl>{children}</FormControl>}
                         {error && help ? (
@@ -120,7 +121,7 @@ FormItem.propTypes = {
     labelWidth: PropTypes.string, // horizontal true 才有效， 可由Form传过来
     canValidate: PropTypes.bool,
 
-    fieldTop: PropTypes.bool
+    unLabelTop: PropTypes.bool
 };
 
 export default FormItem;
