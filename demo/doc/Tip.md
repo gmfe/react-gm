@@ -35,6 +35,38 @@ imports:
 ```
 :::
 
+::: demo 浮层形式
+```js
+class TipClear extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleTip = ::this.handleTip;
+    }
+    handleTip() {
+        const clearFunc = Tip.success({
+            children: '这个常驻tip将会在2s后用代码关闭',
+            time: 0
+        });
+        setTimeout(() => {
+            clearFunc();
+        }, 2000)
+    }
+    
+    render() {
+        return (
+            <button className="btn btn-default" onClick={this.handleTip}>代码clear当前tip</button>
+        );
+    }
+}
+```
+
+```jsx
+<TipClear/>
+```
+
+:::
+
+
 ### Props
 - `title (string)` 标题啦
 - `type (string)` 类型，有`success` `info` `warning` `danger`四种
