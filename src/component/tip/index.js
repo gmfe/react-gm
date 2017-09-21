@@ -21,6 +21,7 @@ const TipStatics = {
 
         options.onClose = function () {
             tipsContainer.removeChild(div);
+            div = null;
             if (_b_onClose) {
                 _b_onClose();
             }
@@ -65,7 +66,8 @@ const TipStatics = {
         return TipStatics.tip(options);
     },
     clear(dom) {
-        dom && tipsContainer.removeChild(dom);
+        _.includes(tipsContainer.children, dom) && tipsContainer.removeChild(dom);
+        dom = null;
     },
     clearAll(){
         _.forEach(tipsContainer.children, tip => {
