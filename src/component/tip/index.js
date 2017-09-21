@@ -35,8 +35,7 @@ const TipStatics = {
             };
         }
         options.type = 'success';
-        const div = TipStatics.tip(options);
-        return div;
+        return TipStatics.tip(options);
     },
     info: function (options) {
         if (typeof options === 'string') {
@@ -45,8 +44,7 @@ const TipStatics = {
             };
         }
         options.type = 'info';
-        const div = TipStatics.tip(options);
-        return div;
+        return TipStatics.tip(options);
     },
     warning: function (options) {
         if (typeof options === 'string') {
@@ -55,8 +53,7 @@ const TipStatics = {
             };
         }
         options.type = 'warning';
-        const div = TipStatics.tip(options);
-        return div;
+        return TipStatics.tip(options);
     },
     danger: function (options) {
         if (typeof options === 'string') {
@@ -65,8 +62,7 @@ const TipStatics = {
             };
         }
         options.type = 'danger';
-        const div = TipStatics.tip(options);
-        return div;
+        return TipStatics.tip(options);
     },
     clear(dom) {
         dom && tipsContainer.removeChild(dom);
