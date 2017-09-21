@@ -5,7 +5,7 @@ imports:
         Checkbox, CheckboxGroup
     } from '../../src/index';
 ---
-## Radio
+## Radio & Checkbox
 
 配合`RadioGroup`一起用，onChange返回的是原始值，非原始radio组件的字符串值
 
@@ -16,7 +16,9 @@ class RadioWrap extends React.Component {
         super(props);
         this.state = {
             city: null,
-            city2: null
+            city2: null,
+            city3: [],
+            city4: []
         };
     }
     
@@ -24,7 +26,7 @@ class RadioWrap extends React.Component {
         return (
             <div>
                 <RadioGroup name="city" value={this.state.city} onChange={v => this.setState({city: v})}>
-                    <Radio value={1}>广州</Radio>
+                    <Radio value={1} disabled>广州</Radio>
                     <Radio value={2}>深圳</Radio>
                 </RadioGroup>
                 <hr/>
@@ -34,9 +36,24 @@ class RadioWrap extends React.Component {
                     value={this.state.city2}
                     onChange={v => this.setState({city2: v})}
                 >
-                    <Radio value={1}>广州</Radio>
+                    <Radio value={1} disabled>广州</Radio>
                     <Radio value={2}>深圳</Radio>
                 </RadioGroup>
+                <hr/>
+                <CheckboxGroup name="city3" value={this.state.city3} onChange={v => this.setState({city3: v})}>
+                    <Checkbox value={1} disabled>广州</Checkbox>
+                    <Checkbox value={2}>深圳</Checkbox>
+                </CheckboxGroup>
+                <hr/>
+                <CheckboxGroup
+                    name="city4"
+                    inline
+                    value={this.state.city4}
+                    onChange={v => this.setState({city4: v})}
+                >
+                    <Checkbox value={1} disabled>广州</Checkbox>
+                    <Checkbox value={2}>深圳</Checkbox>
+                </CheckboxGroup>
             </div>
         );
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import classNames from 'classnames';
 
 class Radio extends React.Component {
     render() {
@@ -10,19 +11,23 @@ class Radio extends React.Component {
             onChange,
             children,
             inline,
-            name
+            name,
+            disabled
         } = this.props;
 
         if (!inline) {
             return (
                 <div>
-                    <label>
+                    <label className={classNames({
+                        disabled
+                    })}>
                         <input
                             type="radio"
                             name={name}
                             value={value}
                             checked={checked}
                             onChange={onChange}
+                            disabled={disabled}
                         />
                         {children}
                     </label>
@@ -30,13 +35,16 @@ class Radio extends React.Component {
             );
         } else {
             return (
-                <label className="radio-inline">
+                <label className={classNames("radio-inline", {
+                    disabled
+                })}>
                     <input
                         type="radio"
                         name={name}
                         value={value}
                         checked={checked}
                         onChange={onChange}
+                        disabled={disabled}
                     />
                     {children}
                 </label>
@@ -52,7 +60,9 @@ Radio.propTypes = {
     // 由RadioGroup 传下来
     checked: PropTypes.bool,
     name: PropTypes.string,
-    inline: PropTypes.bool
+    inline: PropTypes.bool,
+
+    disabled: PropTypes.bool
 };
 
 Radio.defaultProps = {

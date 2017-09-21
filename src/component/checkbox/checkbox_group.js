@@ -27,7 +27,7 @@ class CheckboxGroup extends React.Component {
         const childList = _.isArray(children) ? children : [children];
 
         return (
-            <div {...rest} className={classNames('checkbox', className)}>
+            <div {...rest} className={classNames('gm-checkbox-group checkbox', className)}>
                 {_.map(childList, (child, i) => {
                     return React.cloneElement(child, {
                         key: i,
