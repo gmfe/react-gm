@@ -43,12 +43,12 @@ class TipClear extends React.Component {
         this.handleTip = ::this.handleTip;
     }
     handleTip() {
-        const clearFunc = Tip.success({
+        const clearDom = Tip.success({
             children: '这个常驻tip将会在2s后用代码关闭',
             time: 0
         });
         setTimeout(() => {
-            clearFunc();
+            Tip.clear(clearDom)
         }, 2000)
     }
     
