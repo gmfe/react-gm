@@ -26,8 +26,7 @@ const TipStatics = {
             }
         };
         ReactDOM.render(<TipOverlay {...options} />, div);
-        const fRemove = () => ((tipsContainer.removeChild(div)));
-        return fRemove;
+        return div;
     },
     success: function (options) {
         if (typeof options === 'string') {
@@ -36,8 +35,8 @@ const TipStatics = {
             };
         }
         options.type = 'success';
-        const fRemove = TipStatics.tip(options);
-        return fRemove;
+        const div = TipStatics.tip(options);
+        return div;
     },
     info: function (options) {
         if (typeof options === 'string') {
@@ -46,8 +45,8 @@ const TipStatics = {
             };
         }
         options.type = 'info';
-        const fRemove = TipStatics.tip(options);
-        return fRemove;
+        const div = TipStatics.tip(options);
+        return div;
     },
     warning: function (options) {
         if (typeof options === 'string') {
@@ -56,8 +55,8 @@ const TipStatics = {
             };
         }
         options.type = 'warning';
-        const fRemove = TipStatics.tip(options);
-        return fRemove;
+        const div = TipStatics.tip(options);
+        return div;
     },
     danger: function (options) {
         if (typeof options === 'string') {
@@ -66,8 +65,11 @@ const TipStatics = {
             };
         }
         options.type = 'danger';
-        const fRemove = TipStatics.tip(options);
-        return fRemove;
+        const div = TipStatics.tip(options);
+        return div;
+    },
+    clear(dom) {
+        dom && tipsContainer.removeChild(dom);
     },
     clearAll(){
         _.forEach(tipsContainer.children, tip => {
