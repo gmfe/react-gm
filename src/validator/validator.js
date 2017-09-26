@@ -7,7 +7,7 @@ const hasValue = value => !(value === '' || value === null || value === undefine
 const Validator = {
     // type 类型名，全局唯一
     // rules [{help, required, validate}] 其中help必填
-    register(type, rules){
+    register(type, rules) {
         if (ruleMap[type]) {
             console.warn(`you has register the type ${type}, will be overwritten!`);
         }
@@ -22,7 +22,7 @@ const Validator = {
             rules
         };
     },
-    validate(type, value){
+    validate(type, value) {
         if (!ruleMap[type]) {
             console.warn('can not find validator of ' + type);
             return '';
@@ -53,7 +53,7 @@ const Validator = {
 
         return help;
     },
-    create(types, value, nextValidate){
+    create(types, value, nextValidate) {
         types = _.isArray(types) ? types : [types];
         return (before) => {
             let help = '';

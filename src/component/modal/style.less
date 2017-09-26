@@ -19,6 +19,19 @@
   z-index: 1050;
   outline: 0;
 
+  &.gm-modal-clean{
+    .gm-modal-dialog{
+      background: transparent;
+      
+      >.close{
+        display: none;
+      }
+      .gm-modal-content{
+        padding: 0;
+      }
+    }
+  }
+
   .gm-modal-dialog {
     position: relative;
     background-color: white;

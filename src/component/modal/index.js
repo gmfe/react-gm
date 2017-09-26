@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LayoutRoot from '../layout_root';
-import className from 'classnames';
+import classNames from 'classnames';
 import _ from 'lodash';
 import Flex from '../flex';
 import Emitter from '../../emitter';
@@ -40,7 +40,7 @@ class Modal extends React.Component {
     }
 
     handleMask(e) {
-        if (!this.props.disableMaskClose && e.target.className === 'gm-modal') {
+        if (!this.props.disableMaskClose && e.target.className.split(' ').indexOf('gm-modal') > -1) {
             this.props.onHide();
         }
     }
@@ -70,7 +70,7 @@ class Modal extends React.Component {
                     tabIndex="-1"
                     onClick={this.handleMask}
                 >
-                    <div className={className("gm-modal-dialog", "gm-modal-type", {
+                    <div className={classNames("gm-modal-dialog", "gm-modal-type", {
                         in: show
                     })}>
                         <Flex justifyCenter alignCenter className="gm-modal-type-title">
@@ -86,7 +86,7 @@ class Modal extends React.Component {
                             )}
                             <div className="gm-gap-10"/>
                             <button
-                                className={className("btn btn-sm btn-primary", okBtnClassName)}
+                                className={classNames("btn btn-sm btn-primary", okBtnClassName)}
                                 onClick={this.handleOk}>
                                 确认
                             </button>
@@ -98,7 +98,7 @@ class Modal extends React.Component {
     }
 
     render() {
-        const {show, title, size, children, type, style} = this.props;
+        const {show, title, size, children, type, style, clean} = this.props;
         if (!show) {
             return null;
         }
@@ -110,12 +110,14 @@ class Modal extends React.Component {
             <div>
                 <div className="gm-modal-mask"/>
                 <div
-                    className="gm-modal"
+                    className={classNames("gm-modal", {
+                        'gm-modal-clean': clean
+                    })}
                     tabIndex="-1"
                     onClick={this.handleMask}
                 >
                     <div
-                        className={className("gm-modal-dialog", "gm-modal-" + size, {in: show})}
+                        className={classNames("gm-modal-dialog", "gm-modal-" + size, {in: show})}
                         style={style}
                     >
                         <button
@@ -189,13 +191,15 @@ Modal.propTypes = {
         PropTypes.string,
         PropTypes.element
     ]),
-    okBtnClassName: PropTypes.string // Modal confirm okbtn的className
+    okBtnClassName: PropTypes.string, // Modal confirm okbtn的className
+    clean: PropTypes.bool
 };
 
 Modal.defaultProps = {
     onHide: _.noop,
     size: 'md',
-    disableMaskClose: false
+    disableMaskClose: false,
+    clean: false
 };
 
 export default Modal;

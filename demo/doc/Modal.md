@@ -131,7 +131,7 @@ class ModalWrap2 extends React.Component {
 ```
 :::
 
-::: demo info
+::: demo 各种形态
 ```js
 class ModalWrap3 extends React.Component {
     constructor(props) {
@@ -203,6 +203,40 @@ class ModalWrap3 extends React.Component {
 ```
 :::
 
+::: demo 干净的Modal
+```js
+class ModalWrap4 extends React.Component {
+    handleModal(){
+        Modal.render({
+            children: <div>啦啦啦啦阿里<br/>adfafaf</div> ,
+            onHide: Modal.hide,
+            clean: true,
+            style: {
+                width: 'auto',
+                background: 'black',
+                margin: '50px',
+                height: 'calc(100% - 100px)'
+            }
+        });
+    }
+
+    render() {
+            return (
+                <div>
+                    <button
+                        className="btn btn-default"
+                        onClick={this.handleModal}
+                    >clean Modal</button>
+                </div>
+            );
+        }
+}
+```
+```jsx
+<ModalWrap4/>
+```
+:::
+
 ### Props
 - `show (bool|isRequired)` 是否显示
 - `disableMaskClose (bool)` 是否启用点击mask关闭modal
@@ -210,7 +244,7 @@ class ModalWrap3 extends React.Component {
 - `size (string ['lg', 'md', 'sm'])` modal尺寸，默认md
 - `title (string|element)` 标题
 - `children` 模态框里面的内容
-
+- `clean` 干净版
 
 ### Static
 - `render`
