@@ -28,6 +28,7 @@ class RadioWrap extends React.Component {
                 <RadioGroup name="city" value={this.state.city} onChange={v => this.setState({city: v})}>
                     <Radio value={1} disabled>广州</Radio>
                     <Radio value={2}>深圳</Radio>
+                    <Radio value={3}>成都</Radio>
                 </RadioGroup>
                 <hr/>
                 <RadioGroup
@@ -38,11 +39,13 @@ class RadioWrap extends React.Component {
                 >
                     <Radio value={1} disabled>广州</Radio>
                     <Radio value={2}>深圳</Radio>
+                    <Radio value={3}>成都</Radio>
                 </RadioGroup>
                 <hr/>
                 <CheckboxGroup name="city3" value={this.state.city3} onChange={v => this.setState({city3: v})}>
                     <Checkbox value={1} disabled>广州</Checkbox>
                     <Checkbox value={2}>深圳</Checkbox>
+                    <Checkbox value={3}>成都</Checkbox>
                 </CheckboxGroup>
                 <hr/>
                 <CheckboxGroup
@@ -53,6 +56,7 @@ class RadioWrap extends React.Component {
                 >
                     <Checkbox value={1} disabled>广州</Checkbox>
                     <Checkbox value={2}>深圳</Checkbox>
+                    <Checkbox value={3}>成都</Checkbox>
                 </CheckboxGroup>
             </div>
         );
@@ -78,42 +82,3 @@ class RadioWrap extends React.Component {
 ## Checkbox
 
 基本同Radio，区别在于`CheckboxGroup`的value是个数组，onChange提供参数回来
-
-::: demo
-```js
-class CheckBoxWrap extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            citys:[],
-            citys2: [],
-            city2: null
-        };
-    }
-
-    render() {
-        return (
-            <div>
-                <CheckboxGroup name="city" value={this.state.citys} onChange={v => this.setState({citys: v})}>
-                    <Checkbox value={1}>广州</Checkbox>
-                    <Checkbox value={2}>深圳</Checkbox>
-                </CheckboxGroup>
-                <hr/>
-                <CheckboxGroup
-                    name="city2"
-                    inline
-                    value={this.state.citys2}
-                    onChange={v => this.setState({citys2: v})}
-                >
-                    <Checkbox value={1}>广州</Checkbox>
-                    <Checkbox value={2}>深圳</Checkbox>
-                </CheckboxGroup>
-            </div>
-        );
-    }
-}
-```
-```jsx
-<CheckBoxWrap/>
-```
-:::
