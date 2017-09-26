@@ -45,7 +45,6 @@ class Checkbox extends React.Component {
                         checked={checked}
                         onChange={onChange}
                         disabled={disabled}
-                        className="gm-checkbox"
                     />
                     <span/>
                     {children}

@@ -45,7 +45,6 @@ class Radio extends React.Component {
                         checked={checked}
                         onChange={onChange}
                         disabled={disabled}
-                        className="gm-radio"
                     />
                     <span/>
                     {children}
