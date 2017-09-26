@@ -6,10 +6,10 @@
   .radio-inline {
     padding-top: 0;
   }
-  .gm-radio {
+  input {
     display: none;
   }
-  .gm-radio + span {
+  input + span {
     padding: 0;
     min-height: 0 !important;
     margin-right: 5px;
@@ -24,7 +24,7 @@
     height: 14px;
   }
 
-  .gm-radio + span:after {
+  input + span:after {
     opacity: 0;
     content: '';
     position: absolute;
@@ -37,10 +37,10 @@
     border: 2px solid @brand-primary;
     transition: opacity 0.20s linear;
   }
-  .gm-radio:checked + span {
+  input:checked + span {
     border: 1px solid @brand-primary;
   }
-  .gm-radio:checked + span:after {
+  input:checked + span:after {
     opacity: 1;
     content: '';
     position: absolute;

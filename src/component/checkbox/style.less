@@ -4,10 +4,10 @@
 }
 
 .gm-checkbox-group {
-  .gm-checkbox {
+  input {
     display: none;
   }
-  .gm-checkbox + span {
+  input + span {
     padding: 0;
     min-height: 0 !important;
     margin-right: 5px;
@@ -21,7 +21,7 @@
     height: 14px;
     transition: background-color 0.20s linear;
   }
-  .gm-checkbox + span:after {
+  input + span:after {
     opacity: 0;
     content: '';
     position: absolute;
@@ -37,11 +37,11 @@
     transition: opacity 0.20s linear;
 
   }
-  .gm-checkbox:checked + span {
+  input:checked + span {
     border: 1px solid @brand-primary;
     background-color: @brand-primary;
   }
-  .gm-checkbox:checked + span:after {
+  input:checked + span:after {
     opacity: 1;
     content: '';
     position: absolute;
