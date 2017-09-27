@@ -37,141 +37,144 @@
 @import "component/menu/style";
 @import "component/radio/style";
 @import "component/checkbox/style";
+@import "component/image_preview/style";
 
-html, body {
-  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -webkit-overflow-scrolling: touch;
+html,
+body {
+    font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
 }
 
 .gm-bg-info {
-  background-color: #d9edf7 !important;
+    background-color: #d9edf7 !important;
 }
 
 .gm-bg-invalid {
-  background-color: #ffd3cf !important;
+    background-color: #ffd3cf !important;
 }
 
 .gm-invalid {
-  border-color: #a94442 !important;
+    border-color: #a94442 !important;
 }
 
 // modal 全局修改
 .modal-backdrop.in {
-  opacity: .2;
+    opacity: .2;
 }
 
 .modal-content {
-  box-shadow: none;
-  border: 0;
+    box-shadow: none;
+    border: 0;
 }
 
 .modal-header {
-  padding: 10px;
+    padding: 10px;
 }
 
 .modal-body {
-  padding: 10px;
+    padding: 10px;
 }
 
 .modal-footer {
-  padding: 10px;
+    padding: 10px;
 }
 
 // pagination 全局修改
-.pagination > li > a {
-  color: inherit;
+.pagination>li>a {
+    color: inherit;
 }
 
 .table {
-  font-size: 12px;
-  th, td {
-    text-align: center;
-    a {
-      cursor: pointer;
-    }
-  }
-  thead > tr > th {
-    padding: 8px 2px;
-    &:not(.text-center) {
-      text-align: left;
-    }
-    &:first-child {
-      padding-left: 15px;
-    }
-  }
-  tbody > tr > td {
-    padding: 18px 2px;
-    vertical-align: middle;
-    &:not(.text-center) {
-      text-align: left;
-    }
-    &:first-child {
-      padding-left: 15px;
-    }
-    a {
-      color: @link-color;
-    }
-  }
-  &.table-bordered {
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom: 1px solid @gm-border-color;
-    thead {
-      tr {
-        th {
-          border: none;
-          font-weight: normal;
-          color: @gm-color-first;
+    font-size: 12px;
+    th,
+    td {
+        text-align: center;
+        a {
+            cursor: pointer;
         }
-      }
+    }
+    thead>tr>th {
+        padding: 8px 2px;
+        &:not(.text-center) {
+            text-align: left;
+        }
+        &:first-child {
+            padding-left: 15px;
+        }
+    }
+    tbody>tr>td {
+        padding: 18px 2px;
+        vertical-align: middle;
+        &:not(.text-center) {
+            text-align: left;
+        }
+        &:first-child {
+            padding-left: 15px;
+        }
+        a {
+            color: @link-color;
+        }
+    }
+    &.table-bordered {
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: 1px solid @gm-border-color;
+        thead {
+            tr {
+                th {
+                    border: none;
+                    font-weight: normal;
+                    color: @gm-color-first;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    border: none;
+                    color: @gm-color-second;
+                }
+            }
+        }
+    }
+    &.table-striped {
+        thead {
+            tr {
+                background: @table-bg-accent;
+            }
+        }
+        tbody {
+            tr {
+                background: white;
+            }
+        }
+    }
+    thead {
+        tr {
+            border-bottom: 1px solid @gm-border-color;
+        }
     }
     tbody {
-      tr {
-        td {
-          border: none;
-          color: @gm-color-second;
+        tr {
+            border-bottom: 1px solid @gm-border-color;
+            &:hover {
+                background-color: @table-bg-hover;
+            }
         }
-      }
     }
-  }
-  &.table-striped {
-    thead {
-      tr {
-        background: @table-bg-accent;
-      }
+    .b-table-margin-left20 {
+        margin-left: 20%;
     }
-    tbody {
-      tr {
-        background: white;
-      }
-    }
-  }
-  thead {
-    tr {
-      border-bottom: 1px solid @gm-border-color;
-    }
-  }
-  tbody {
-    tr {
-      border-bottom: 1px solid @gm-border-color;
-      &:hover {
-        background-color: @table-bg-hover;
-      }
-    }
-  }
-  .b-table-margin-left20 {
-    margin-left: 20%;
-  }
 }
 
 .gm-filter-blur {
-  filter: blur(2px);
+    filter: blur(2px);
 }
 
 .gm-filter-blur-transition {
-  filter: blur(2px);
-  transition: .3s filter
+    filter: blur(2px);
+    transition: .3s filter
 }
