@@ -1,5 +1,68 @@
+//cover bootstrap.style for checkbox
+.gm-checkbox-group label {
+  padding-left: 0 !important;
+}
+
 .gm-checkbox-group {
+  input {
+    display: none;
+  }
+  input + span {
+    padding: 0;
+    min-height: 0 !important;
+    margin-right: 5px;
+    top: 2px;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 1px solid @gm-form-border-color;
+    display: inline-block;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    transition: background-color 0.20s linear;
+  }
+  input + span:after {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 5px;
+    top: 3px;
+    left: 2px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    transition: opacity 0.20s linear;
+
+  }
+  input:checked + span {
+    border: 1px solid @brand-primary;
+    background-color: @brand-primary;
+  }
+  input:checked + span:after {
+    opacity: 1;
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 5px;
+    top: 3px;
+    left: 2px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    transition: opacity 0.20s linear;
+  }
   label.disabled {
     cursor: not-allowed;
+  }
+  .disabled {
+    opacity: .6;
+    & span {
+      border: 1px solid @gm-form-border-color;
+    }
   }
 }

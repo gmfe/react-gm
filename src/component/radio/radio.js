@@ -14,7 +14,6 @@ class Radio extends React.Component {
             name,
             disabled
         } = this.props;
-
         if (!inline) {
             return (
                 <div>
@@ -29,6 +28,7 @@ class Radio extends React.Component {
                             onChange={onChange}
                             disabled={disabled}
                         />
+                        <span/>
                         {children}
                     </label>
                 </div>
@@ -46,6 +46,7 @@ class Radio extends React.Component {
                         onChange={onChange}
                         disabled={disabled}
                     />
+                    <span/>
                     {children}
                 </label>
             );

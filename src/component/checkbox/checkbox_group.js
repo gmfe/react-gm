@@ -30,6 +30,7 @@ class CheckboxGroup extends React.Component {
             <div {...rest} className={classNames('gm-checkbox-group checkbox', className)}>
                 {_.map(childList, (child, i) => {
                     return React.cloneElement(child, {
+                        index: i,
                         key: i,
                         checked: value.indexOf(child.props.value) > -1,
                         inline,

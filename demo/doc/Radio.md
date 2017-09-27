@@ -28,6 +28,7 @@ class RadioWrap extends React.Component {
                 <RadioGroup name="city" value={this.state.city} onChange={v => this.setState({city: v})}>
                     <Radio value={1} disabled>广州</Radio>
                     <Radio value={2}>深圳</Radio>
+                    <Radio value={3}>成都</Radio>
                 </RadioGroup>
                 <hr/>
                 <RadioGroup
@@ -38,11 +39,13 @@ class RadioWrap extends React.Component {
                 >
                     <Radio value={1} disabled>广州</Radio>
                     <Radio value={2}>深圳</Radio>
+                    <Radio value={3}>成都</Radio>
                 </RadioGroup>
                 <hr/>
                 <CheckboxGroup name="city3" value={this.state.city3} onChange={v => this.setState({city3: v})}>
                     <Checkbox value={1} disabled>广州</Checkbox>
                     <Checkbox value={2}>深圳</Checkbox>
+                    <Checkbox value={3}>成都</Checkbox>
                 </CheckboxGroup>
                 <hr/>
                 <CheckboxGroup
@@ -53,6 +56,7 @@ class RadioWrap extends React.Component {
                 >
                     <Checkbox value={1} disabled>广州</Checkbox>
                     <Checkbox value={2}>深圳</Checkbox>
+                    <Checkbox value={3}>成都</Checkbox>
                 </CheckboxGroup>
             </div>
         );
