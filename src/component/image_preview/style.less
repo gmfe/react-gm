@@ -1,6 +1,6 @@
 
 // 浮层按钮 
-.gm-preview-modal-btn {
+.gm-image-preview-btn {
     position: fixed;
     top: 50%;
     margin-top: -40px;
@@ -16,15 +16,15 @@
     }
 }
 
-.gm-preview-modal-btn-left {
+.gm-image-preview-btn-left {
     left: 5px;
 }
 
-.gm-preview-modal-btn-right {
+.gm-image-preview-btn-right {
     right: 5px;
 }
 
-.gm-preview-modal-btn-close {
+.gm-image-preview-btn-close {
     position: fixed;
     right: 0;
     top: 0;
@@ -40,21 +40,21 @@
     }
 }
 
-// 浮层
+// content
 @thumbnail-img-size: 50px;
 @thumbnail-img-margin: 5px;
 
-.gm-preview-modal-content {
+.gm-image-preview-content {
     padding-top: 10px;
 
-    .gm-preview-modal-footer {
+    .gm-image-preview-footer {
         position: absolute;
         width: 100%;
         overflow: hidden;
         bottom: 0;
         left: 0;
 
-        .gm-preview-modal-thumbnails-container {
+        .gm-image-preview-thumbnails-container {
             position: relative;
 
             .gm-thumbnails-btn {
@@ -79,26 +79,26 @@
             }
         }
 
-        .gm-preview-modal-thumbnails {
+        .gm-image-preview-thumbnails {
             position: relative;
             overflow: hidden;
             height: @thumbnail-img-size + @thumbnail-img-margin * 2;
             white-space: nowrap;
 
-            .gm-preview-modal-list {
+            .gm-image-preview-list {
                 position: relative;
                 height: @thumbnail-img-size + @thumbnail-img-margin * 2;
                 padding: 0;
                 margin: 0;
                 transition: left 1s; // 滚动动画
             }
-            .gm-preview-modal-img {
+            .gm-image-preview-img {
                 list-style: none;
                 display: inline-block;
                 width: @thumbnail-img-size;
                 height: @thumbnail-img-size;
                 background-position: center;
-                background-size: auto @thumbnail-img-size;
+                background-size: cover;
                 background-repeat: no-repeat;
                 margin: 5px;
                 cursor: pointer;
@@ -107,7 +107,7 @@
                     border: 2px solid @brand-primary;
                     opacity: 1;
                 }
-                &.gm-preview-modal-focus {
+                &.gm-image-preview-focus {
                     border: 2px solid @brand-primary;
                     opacity: 1;
                 }
