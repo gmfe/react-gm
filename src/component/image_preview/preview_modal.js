@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from '../modal';
 import Flex from '../flex';
 import classNames from 'classnames';
 import _ from 'lodash';
@@ -12,11 +11,14 @@ class Preview_modal extends React.Component {
     static defaultProps = {
         thumbnailImgWidth: 60   // 缩略图大小,包括magin
     }
-
+    
     constructor(props) {
         super(props);
+        const {imgSrc, images} = this.props;
+
         this.state = {
-            curLeft: 0
+            curLeft: 0,
+            previewImgIndex: images.indexOf(imgSrc)
         };
     }
 
@@ -46,14 +48,19 @@ class Preview_modal extends React.Component {
         return left;
     }
 
+    handlePreview = (previewImgIndex) => {
+        this.setState({previewImgIndex});
+    }
+
     handlePrevious = () => {
-        const {handlePreview, previewImgIndex} = this.props;
-        previewImgIndex !== 0 && handlePreview(previewImgIndex - 1);
+        const {previewImgIndex} = this.state;
+        previewImgIndex !== 0 && this.handlePreview(previewImgIndex - 1);
     }
 
     handleNext = () => {
-        const {handlePreview, previewImgIndex, images} = this.props;
-        previewImgIndex !== images.length - 1 && handlePreview(previewImgIndex + 1);
+        const {images} = this.props;
+        const {previewImgIndex} = this.state;
+        previewImgIndex !== images.length - 1 && this.handlePreview(previewImgIndex + 1);
     }
 
     handleSrollLeft = () => {
@@ -85,17 +92,10 @@ class Preview_modal extends React.Component {
     }
 
     render() {
-        const {modalProps, thumbnails, images, previewImgIndex, handlePreview, thumbnailImgWidth} = this.props;
-        const {onHide} = modalProps;
-
+        const {thumbnails, images, thumbnailImgWidth, onHide} = this.props;
+        const {previewImgIndex} = this.state;
         return (
-            <Modal {...modalProps} style={{
-                width: 'auto',
-                background: 'black',
-                margin: '50px',
-                height: clientHeight - 100 + 'px'
-            }}>
-
+            <div>
                 <span className="gm-preview-modal-btn-close" onClick={onHide} >×</span>
 
                 {previewImgIndex !== 0 &&
@@ -137,7 +137,7 @@ class Preview_modal extends React.Component {
                                         <li key={index}
                                             className={classNames("gm-preview-modal-img", {"gm-preview-modal-focus": index === previewImgIndex})}
                                             style={{backgroundImage: `url(${img})`}}
-                                            onClick={() => handlePreview(index)}
+                                            onClick={() => this.handlePreview(index)}
                                         >
                                         </li>
                                     ))}
@@ -147,7 +147,7 @@ class Preview_modal extends React.Component {
                     </Flex>
                     }
                 </div>
-            </Modal>
+            </div>
         );
     }
 }
@@ -155,9 +155,8 @@ class Preview_modal extends React.Component {
 Preview_modal.propTypes = {
     images: PropTypes.array.isRequired,
     thumbnails: PropTypes.array,
-    modalProps: PropTypes.object.isRequired,
-    previewImgIndex: PropTypes.number.isRequired,
-    handlePreview: PropTypes.func.isRequired
+    imgSrc: PropTypes.string.isRequired,
+    thumbnailImgWidth: PropTypes.number
 };
 
 export default Preview_modal;
