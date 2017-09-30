@@ -19,6 +19,9 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/Divider">Divider
                         <small>分割线</small>
                     </a></li>
+                    <li><a href="#/doc/ImagePreview">ImagePreview
+                        <small>图片预览</small>
+                    </a></li>
                 </ul>
                 <h3>Data</h3>
                 <ul>
@@ -124,9 +127,6 @@ class NavConfig extends React.Component {
                 <ul>
                     <li><a href="#/doc/Storage">Storage
                         <small>存储</small>
-                    </a></li>
-                    <li><a href="#/doc/ImagePreview">ImagePreview
-                        <small>图片预览</small>
                     </a></li>
                 </ul>
             </div>

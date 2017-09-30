@@ -10,16 +10,18 @@ imports:
 ::: demo 以下example依赖的数据
 
 ```js
-  const srcList = ['./demo/images/chrome.jpeg', './demo/images/chrome.jpeg','./demo/images/layout-1.png',
-    './demo/images/layout-2.png', './demo/images/chrome.jpeg','./demo/images/layout-3.png',
-    './demo/images/layout-4.png',  './demo/images/chrome.jpeg', './demo/images/layout-1.png',
-    './demo/images/layout-1.png', './demo/images/layout-1.png', './demo/images/chrome.jpeg', './demo/images/layout-1.png', 
-    './demo/images/chrome.jpeg', './demo/images/chrome.jpeg','./demo/images/layout-1.png',
-    './demo/images/layout-2.png', './demo/images/chrome.jpeg','./demo/images/layout-3.png',
-    './demo/images/layout-4.png',  './demo/images/chrome.jpeg', './demo/images/layout-1.png',
-    './demo/images/chrome.jpeg', './demo/images/chrome.jpeg','./demo/images/layout-1.png',
-    './demo/images/layout-2.png', './demo/images/chrome.jpeg','./demo/images/layout-3.png',
-    './demo/images/layout-4.png',  './demo/images/chrome.jpeg', './demo/images/layout-1.png',
+    const srcList = ['./demo/images/image_preview/react5.png','./demo/images/image_preview/demo2.png',
+        './demo/images/image_preview/width.jpg','./demo/images/image_preview/long.jpg',
+        './demo/images/image_preview/node.jpg','./demo/images/image_preview/node_big.png',
+        './demo/images/image_preview/react1.png', './demo/images/image_preview/react2.jpg',
+        './demo/images/image_preview/react3.png', './demo/images/image_preview/react4.png',
+        './demo/images/image_preview/react5.png', './demo/images/image_preview/vue.jpg',
+        './demo/images/image_preview/width.jpg','./demo/images/image_preview/demo2.png',
+        './demo/images/image_preview/demo3.jpg','./demo/images/image_preview/long.jpg',
+        './demo/images/image_preview/node.jpg','./demo/images/image_preview/node_big.png',
+        './demo/images/image_preview/react1.png', './demo/images/image_preview/react2.jpg',
+        './demo/images/image_preview/react3.png', './demo/images/image_preview/react4.png',
+        './demo/images/image_preview/react5.png', './demo/images/image_preview/vue.jpg',
     ];
 ```
 
@@ -30,25 +32,43 @@ imports:
 
 ```js
 class ImagePreviewWrap extends React.Component {
-    handlePreview(src) {
+    handlePreviewWithThumbnails() {
         ImagePreview({
             images: srcList,
             thumbnails: srcList,
-            imgSrc: src
+            index: 0
+        });
+    }
+    
+    handlePreview(index) {
+        ImagePreview({
+            images: srcList,
+            index: 0
+        });
+    }
+
+    handlePreviewSingle() {
+        ImagePreview({
+            images: ['./demo/images/image_preview/demo2.png'],
+            index: 0
         });
     }
 
     render() {
         return (
-            <div style={{width: '898px', overflowX: 'auto', whiteSpace: 'nowrap'}}>
-                {srcList.map( (src, index) => {
-                    return <img src={src} 
-                        onClick={this.handlePreview.bind(this, src)} 
-                        key={index} 
-                        alt="缩略图" 
-                        style={{width: '100px', height: '100px', margin: '10px'}}
-                        />
-                })}
+            <div>
+               <button 
+                    className="btn btn-default gm-marginRight10" 
+                    onClick={::this.handlePreviewWithThumbnails}
+                >带缩略图</button>
+                <button 
+                    className="btn btn-primary" 
+                    onClick={::this.handlePreview}
+                >不带缩略图</button>
+                <button 
+                    className="btn btn-default" 
+                    onClick={::this.handlePreviewSingle}
+                >单张图片</button>
             </div>
         );
     }
@@ -61,41 +81,6 @@ class ImagePreviewWrap extends React.Component {
 
 :::
 
-::: demo 打开模态框后没有缩略图
+### Static
 
-```js
-class ImagePreviewWrap2 extends React.Component {
-    handlePreview(src) {
-        ImagePreview({
-            images: srcList,
-            imgSrc: src
-        });
-    }
-    render() {
-        return (
-             <div style={{width: '898px', overflowX: 'auto', whiteSpace: 'nowrap'}}>
-                {srcList.map( (src, index) => {
-                    return <img src={src} 
-                            onClick={this.handlePreview.bind(this, src)} 
-                            key={index} 
-                            style={{width: '100px', height: '100px', margin: '10px'}}
-                            alt="缩略图" 
-                            />
-                })}
-            </div>
-        );
-    }
-}
-```
-
-```jsx
-<ImagePreviewWrap2 />
-```
-
-:::
-
-### Props
-
-- `images (array|isRequired)` 原图src数组
-- `thumbnails (array)` 缩略图src数组
-- `imgSrc (string|isRequired)` 当前预览图片的src
+- `ImagePreview()` 

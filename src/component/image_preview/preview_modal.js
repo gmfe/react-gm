@@ -8,17 +8,12 @@ const {clientHeight, clientWidth} = window.document.documentElement;
 const containerWidth = clientWidth - 220;    // 缩略图容器宽度
 
 class Preview_modal extends React.Component {
-    static defaultProps = {
-        thumbnailImgWidth: 60   // 缩略图大小,包括magin
-    }
-    
     constructor(props) {
         super(props);
-        const {imgSrc, images} = this.props;
 
         this.state = {
             curLeft: 0,
-            previewImgIndex: images.indexOf(imgSrc)
+            previewImgIndex: this.props.index
         };
     }
 
@@ -46,34 +41,36 @@ class Preview_modal extends React.Component {
             left = scrollLeft;
         }
         return left;
-    }
+    };
 
     handlePreview = (previewImgIndex) => {
         this.setState({previewImgIndex});
-    }
+        // 滚动居中
+        window.document.getElementsByClassName("gm-image-preview-focus")[0].scrollIntoViewIfNeeded();
+    };
 
     handlePrevious = () => {
         const {previewImgIndex} = this.state;
         previewImgIndex !== 0 && this.handlePreview(previewImgIndex - 1);
-    }
+    };
 
     handleNext = () => {
         const {images} = this.props;
         const {previewImgIndex} = this.state;
         previewImgIndex !== images.length - 1 && this.handlePreview(previewImgIndex + 1);
-    }
+    };
 
-    handleSrollLeft = () => {
+    handleScrollLeft = () => {
         this.setState({
             curLeft: this.calcLeft('scrollLeft')
         });
-    }
+    };
 
-    handleSrollRight = () => {
+    handleScrollRight = () => {
         this.setState({
             curLeft: this.calcLeft('scrollRight')
         });
-    }
+    };
 
     handleKeydown = (event) => {
         if (event.keyCode === 37) {
@@ -81,7 +78,7 @@ class Preview_modal extends React.Component {
         } else if (event.keyCode === 39) {
             this.handleNext();
         }
-    }
+    };
 
     componentDidMount() {
         window.document.body.addEventListener('keydown', this.handleKeydown);
@@ -96,16 +93,16 @@ class Preview_modal extends React.Component {
         const {previewImgIndex} = this.state;
         return (
             <div>
-                <span className="gm-preview-modal-btn-close" onClick={onHide} >×</span>
+                <span className="gm-image-preview-btn-close" onClick={onHide} >×</span>
 
                 {previewImgIndex !== 0 &&
-                    <i className="glyphicon glyphicon-menu-left gm-preview-modal-btn-left gm-preview-modal-btn" onClick={this.handlePrevious}></i>
+                    <i className="glyphicon glyphicon-menu-left gm-image-preview-btn-left gm-image-preview-btn" onClick={this.handlePrevious}></i>
                 }
                 {previewImgIndex !== images.length - 1 &&
-                    <i className="glyphicon glyphicon-menu-right gm-preview-modal-btn-right gm-preview-modal-btn" onClick={this.handleNext} ></i>
+                    <i className="glyphicon glyphicon-menu-right gm-image-preview-btn-right gm-image-preview-btn" onClick={this.handleNext} ></i>
                 }
 
-                <div className="gm-preview-modal-content">
+                <div className="gm-image-preview-content">
 
                     <Flex alignCenter justifyCenter column style={{
                         width: 'auto',
@@ -119,23 +116,23 @@ class Preview_modal extends React.Component {
                     </Flex>
                     
                     {/* 缩略图列表高度: 60px, 最大跨度: containerWidth  */}
-                    {thumbnails && thumbnails.length !== 0 && <Flex justifyCenter className="gm-preview-modal-footer">
+                    {thumbnails && thumbnails.length > 1 && <Flex justifyCenter className="gm-image-preview-footer">
 
-                        <div className="gm-preview-modal-thumbnails-container" style={{maxWidth: containerWidth + 'px'}}>
+                        <div className="gm-image-preview-thumbnails-container" style={{maxWidth: containerWidth + 'px'}}>
                             {thumbnails.length * thumbnailImgWidth > containerWidth &&
-                                <i className="glyphicon glyphicon-chevron-left gm-thumbnails-btn-left gm-thumbnails-btn" onClick={this.handleSrollLeft}></i>}
+                                <i className="glyphicon glyphicon-chevron-left gm-thumbnails-btn-left gm-thumbnails-btn" onClick={this.handleScrollLeft}></i>}
                             {thumbnails.length * thumbnailImgWidth > containerWidth &&
-                                <i className="glyphicon glyphicon-chevron-right gm-thumbnails-btn-right gm-thumbnails-btn" onClick={this.handleSrollRight}></i>}
+                                <i className="glyphicon glyphicon-chevron-right gm-thumbnails-btn-right gm-thumbnails-btn" onClick={this.handleScrollRight}></i>}
 
-                            <div className="gm-preview-modal-thumbnails">
-                                <ul className="gm-preview-modal-list"
+                            <div className="gm-image-preview-thumbnails">
+                                <ul className="gm-image-preview-list"
                                     style={{
                                         left: this.state.curLeft + 'px'
                                     }}
                                 >
                                     {_.map(thumbnails, (img, index) => (
                                         <li key={index}
-                                            className={classNames("gm-preview-modal-img", {"gm-preview-modal-focus": index === previewImgIndex})}
+                                            className={classNames("gm-image-preview-img", {"gm-image-preview-focus": index === previewImgIndex})}
                                             style={{backgroundImage: `url(${img})`}}
                                             onClick={() => this.handlePreview(index)}
                                         >
@@ -155,8 +152,11 @@ class Preview_modal extends React.Component {
 Preview_modal.propTypes = {
     images: PropTypes.array.isRequired,
     thumbnails: PropTypes.array,
-    imgSrc: PropTypes.string.isRequired,
-    thumbnailImgWidth: PropTypes.number
+    index: PropTypes.number.isRequired
+};
+
+Preview_modal.defaultProps = {
+        thumbnailImgWidth: 60   // 缩略图大小,包括magin
 };
 
 export default Preview_modal;
