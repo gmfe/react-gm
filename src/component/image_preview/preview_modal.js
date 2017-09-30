@@ -19,6 +19,10 @@ class Preview_modal extends React.Component {
         this.setState({previewImgIndex});
     };
 
+    handlePreview = (previewImgIndex) => {
+        this.setState({previewImgIndex});
+    }
+
     handlePrevious = () => {
         const {previewImgIndex} = this.state;
         previewImgIndex !== 0 && this.handlePreview(previewImgIndex - 1);
@@ -120,7 +124,6 @@ class Preview_modal extends React.Component {
                     </Flex>}
 
                 </div>
-
             </div>
         );
     }
