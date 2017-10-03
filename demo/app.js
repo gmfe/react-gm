@@ -1,47 +1,30 @@
 import React from 'react';
-import {Flex as GMFlex, LayoutRoot, Emitter} from '../src/index';
+import {Flex, Emitter} from '../src/index';
 import createHashHistory from 'history/createHashHistory';
-import _ from 'lodash';
-import classNames from 'classnames';
 
 import NavConfigDoc from './doc/nav.config';
 import NavConfigStandard from './standard/nav.config';
 
 import queryString from 'query-string';
+import {withRouter} from 'react-router-dom';
+
+import {Framework, TopContent} from '../framework';
 
 const history = createHashHistory();
 
-const setNavCurrent = () => {
-    _.each(window.document.querySelectorAll('.demo-left a'), element => element.className = '');
-    const dom = window.document.querySelector('.demo-left a[href="' + window.location.hash + '"]');
-    if (dom) {
-        dom.className = 'active';
-    }
-};
-
+@withRouter
 class App extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            blur: false
-        };
-
-        this.doAnchor = ::this.doAnchor;
-        this.handleNav = ::this.handleNav;
         this.doScrollToAnchor = ::this.doScrollToAnchor;
-        this.handleLogo = ::this.handleLogo;
+        this.handleClickAnchor = ::this.handleClickAnchor;
     }
 
     componentDidMount() {
-        // this.doScrollToAnchor();
-        Emitter.on(Emitter.TYPE.MODAL_SHOW, () => this.setState({blur: true}));
-        Emitter.on(Emitter.TYPE.MODAL_HIDE, () => this.setState({blur: false}));
-    }
-
-    componentDidUpdate() {
-        // TODO 目前应该就只有路由变化
-        // this.doScrollToAnchor();
+        Emitter.on('DEMO-PAGE-LOADED', () => {
+            console.log('DEMO-PAGE-LOADED');
+            this.doScrollToAnchor();
+        });
     }
 
     doScrollToAnchor() {
@@ -50,15 +33,13 @@ class App extends React.Component {
             const dom = window.document.getElementById(anchor);
             if (dom) {
                 const top = dom.offsetTop;
-                setTimeout(() => {
-                    window.document.body.scrollTop = top;
-                }, 100);
+                window.scroll(0, top);
             }
         }
     }
 
-    // 处理文档的anchor
-    doAnchor(e) {
+    handleClickAnchor(e) {
+        e.preventDefault();
         const {tagName, className} = e.target;
         const {search, pathname} = this.props.location;
 
@@ -77,65 +58,57 @@ class App extends React.Component {
         }
     }
 
-    // 处理左侧导航的点击
-    handleNav(e) {
-        const {tagName} = e.target;
-        if (tagName === 'A') {
-            window.document.body.scrollTop = 0;
-        }
-    }
+    renderTopContent() {
 
-    handleLogo() {
-        window.location.href = window.location.pathname;
+        const navList = [
+            {text: 'UI规范', link: '#/standard'},
+            {text: '组件', link: '#/doc/About'}
+        ];
+
+        return (
+            <TopContent
+                logo={(
+                    <Flex alignCenter style={{fontSize: '20px'}}>
+                        <svg width="28" height="28" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M 110 10 L 10 10 L 10 110 L 110 110 L 110 50 L 75 85 L 75 50 L 40 85"
+                                style={{
+                                    fill: 'none',
+                                    stroke: 'black',
+                                    strokeWidth: 10,
+                                    strokeLinejoin: 'round'
+                                }}
+                            />
+                        </svg>
+                        <span className="gm-gap-10"/>
+                        <span>ReactGM </span>
+                        <small>&nbsp;&nbsp;by gmfe</small>
+                        <span className="gm-gap-10"/>
+                        <a
+                            className="github-button"
+                            href="https://github.com/gmfe/react-gm"
+                            data-show-count="true"
+                            aria-label="Star gmfe/react-gm on GitHub"
+                        >Star</a>
+                    </Flex>
+                )}
+                navList={navList}
+            />
+        );
     }
 
     render() {
-        // 暴力，莫喷
-        setTimeout(() => {
-            setNavCurrent();
-        }, 10);
+        const {children, location: {pathname}} = this.props;
+
         return (
-            <div>
-                <div className={classNames("demo", {
-                    'gm-filter-blur-transition': this.state.blur
-                })}>
-                    <div className="demo-header">
-                        <GMFlex className="container">
-                            <div onClick={this.handleLogo} className="gm-flex gm-flex-align-center gm-header-logo">
-                                <svg width="28" height="28" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M 110 10 L 10 10 L 10 110 L 110 110 L 110 50 L 75 85 L 75 50 L 40 85"
-                                          style={{
-                                              fill: 'none',
-                                              stroke: 'black',
-                                              strokeWidth: 10,
-                                              strokeLinejoin: 'round'
-                                          }}/>
-                                </svg>
-                                <span className="gm-gap-10"/>
-                                <span>ReactGM </span>
-                                <small>&nbsp;&nbsp;by gmfe</small>
-                                <span className="gm-gap-10"/>
-                                <a className="github-button" href="https://github.com/gmfe/react-gm"
-                                   data-show-count="true"
-                                   aria-label="Star gmfe/react-gm on GitHub">Star</a>
-                            </div>
-                            <GMFlex flex justifyEnd alignCenter className="gm-header-nav">
-                                <a href="#/standard">UI规范</a>
-                                <a href="#/doc">组件</a>
-                            </GMFlex>
-                        </GMFlex>
-                    </div>
-                    <GMFlex className="demo-center container">
-                        <div className="demo-left" onClick={this.handleNav}>
-                            {window.location.hash.indexOf('#/standard') > -1 ? <NavConfigStandard/> : <NavConfigDoc/>}
-                        </div>
-                        <GMFlex flex column className="demo-content doc markdown-body" onClick={this.doAnchor}>
-                            {this.props.children}
-                        </GMFlex>
-                    </GMFlex>
+            <Framework
+                topContent={this.renderTopContent()}
+                menu={pathname.startsWith('/doc') ? <NavConfigDoc/> : <NavConfigStandard/>}
+            >
+                <div onClick={this.handleClickAnchor}>
+                    {children}
                 </div>
-                <LayoutRoot/>
-            </div>
+            </Framework>
         );
     }
 }

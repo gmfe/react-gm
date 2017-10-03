@@ -1,135 +1,103 @@
 import React from 'react';
+import {Menu} from '../../src/index';
+import {history} from "../service";
+import {withRouter} from 'react-router-dom';
+import _ from 'lodash';
+import {Framework} from '../../framework';
 
+const data = [{
+    name: 'Guide',
+    sub: [
+        {name: 'About', path: '/doc/About'}
+    ]
+}, {
+    name: 'Layout',
+    sub: [
+        {name: 'Flex', path: '/doc/Flex'},
+        {name: 'Quick', path: '/doc/Quick'},
+        {name: 'Collapse 折叠面板', path: '/doc/Collapse'},
+        {name: 'Divider 分割线', path: '/doc/Divider'},
+        {name: 'Menu 导航菜单', path: '/doc/Menu'}
+    ]
+}, {
+    name: 'Data',
+    sub: [
+        {name: 'Sheet 表格', path: '/doc/Sheet'},
+        {name: 'Pagination 页码', path: '/doc/Pagination'},
+        {name: 'ImportLead 导入指引', path: '/doc/ImportLead'}
+    ]
+}, {
+    name: 'Select',
+    sub: [
+        {name: 'Cascader 级联选择', path: '/doc/Cascader'},
+        {name: 'DropSelect', path: '/doc/DropSelect'},
+        {name: 'FilterSearchSelect 搜索选择', path: '/doc/FilterSearchSelect'},
+        {name: 'FilterSelect 搜索选择v2', path: '/doc/FilterSelect'},
+        {name: 'SearchSelect 废弃', path: '/doc/SearchSelect'},
+        {name: 'TreeSelect 树形选择', path: '/doc/TreeSelect'},
+        {name: 'Transfer 穿梭框', path: '/doc/Transfer'},
+        {name: 'Calendar 日历', path: '/doc/Calendar'},
+        {name: 'DatePicker 日期选择', path: '/doc/DatePicker'},
+        {name: 'TimeSpan 时间点选择', path: '/doc/TimeSpan'}
+    ]
+}, {
+    name: 'Layer',
+    sub: [
+        {name: 'Tip 提示', path: '/doc/Tip'},
+        {name: 'Dialog 对话框', path: '/doc/Dialog'},
+        {name: 'Modal 模态框', path: '/doc/Modal'},
+        {name: 'Trigger 触发器', path: '/doc/Trigger'}
+    ]
+}, {
+    name: 'Form',
+    sub: [
+        {name: 'Validator 校验工具', path: '/doc/Validator'},
+        {name: 'Form 表单', path: '/doc/Form'},
+        {name: 'Radio & Checkbox 单(多)选框', path: '/doc/Radio'},
+        {name: 'Switch 开个', path: '/doc/Switch'},
+        {name: 'InputNumber 数字输入框', path: '/doc/InputNumber'},
+        {name: 'Select 选择', path: '/doc/Select'},
+        {name: 'DropDown 下拉框', path: '/doc/DropDown'},
+        {name: 'Dropper 上传', path: '/doc/Dropper'}
+    ]
+}, {
+    name: 'Loading',
+    sub: [
+        {name: 'Loading 加载中', path: '/doc/Loading'},
+        {name: 'NProgress 请求进度条', path: '/doc/NProgress'}
+    ]
+}, {
+    name: 'Other',
+    sub: [
+        {name: 'Storage', path: '/doc/Storage'},
+        {name: 'IFont', path: '/doc/IFont'}
+    ]
+}];
+
+@withRouter
 class NavConfig extends React.Component {
+    handleSelect(item) {
+        Framework.scrollTop();
+        history.push(item.path);
+    }
+
     render() {
+        const {location: {pathname}} = this.props;
+        let selected = null;
+
+        // doc 性能无须考虑太多，暂且每次render处理
+        _.find(data, v => {
+            return selected = _.find(v.sub, s => s.path === pathname);
+        });
+
         return (
-            <div className="demo-left-nav">
-                <h3>Guide</h3>
-                <ul>
-                    <li><a href="#/doc/About">About</a></li>
-                    <li><a href="#/doc/IFont">IFont</a></li>
-                </ul>
-                <h3>Layout</h3>
-                <ul>
-                    <li><a href="#/doc/Flex">Flex</a></li>
-                    <li><a href="#/doc/Quick">Quick</a></li>
-                    <li><a href="#/doc/Collapse">Collapse
-                        <small>折叠面板</small>
-                    </a></li>
-                    <li><a href="#/doc/Divider">Divider
-                        <small>分割线</small>
-                    </a></li>
-                </ul>
-                <h3>Data</h3>
-                <ul>
-                    <li><a href="#/doc/Sheet">Sheet
-                        <small>表格</small>
-                    </a></li>
-                    <li><a href="#/doc/Pagination">Pagination
-                        <small>页码</small>
-                    </a></li>
-                    <li><a href="#/doc/ImportLead">ImportLead
-                        <small>导入指引</small>
-                    </a></li>
-                </ul>
-                <h3>Select</h3>
-                <ul>
-                    <li><a href="#/doc/Cascader">Cascader
-                        <small>级联选择</small>
-                    </a></li>
-                    <li><a href="#/doc/DropSelect">DropSelect</a></li>
-                    <li><a href="#/doc/FilterSearchSelect">FilterSearchSelect
-                        <small>搜索选择</small>
-                    </a></li>
-                    <li><a href="#/doc/FilterSelect">FilterSelect
-                        <small>搜索选择v2</small>
-                    </a></li>
-                    <li><a href="#/doc/SearchSelect">SearchSelect
-                        <small>废弃</small>
-                    </a></li>
-                    <li><a href="#/doc/TreeSelect">TreeSelect
-                        <small>树形选择</small>
-                    </a></li>
-                    <li><a href="#/doc/Transfer">Transfer
-                        <small>穿梭框</small>
-                    </a></li>
-                    <li><a href="#/doc/Calendar">Calendar
-                        <small>日历</small>
-                    </a></li>
-                    <li><a href="#/doc/DatePicker">DatePicker
-                        <small>日期选择</small>
-                    </a></li>
-                    <li><a href="#/doc/TimeSpan">TimeSpan
-                        <small>时间点选择</small>
-                    </a></li>
-                </ul>
-                <h3>Layer</h3>
-                <ul>
-                    <li><a href="#/doc/Tip">Tip
-                        <small>提示</small>
-                    </a></li>
-                    <li><a href="#/doc/Dialog">Dialog
-                        <small>对话框</small>
-                    </a></li>
-                    <li><a href="#/doc/Modal">Modal
-                        <small>模态框</small>
-                    </a></li>
-                    <li><a href="#/doc/Trigger">Trigger
-                        <small>触发器</small>
-                    </a></li>
-                    <li><a href="#/doc/ImagePreview">ImagePreview
-                        <small>图片预览</small>
-                    </a></li>
-                </ul>
-                <h3>Form</h3>
-                <ul>
-                    <li><a href="#/doc/Validator">Validator
-                        <small>校验工具</small>
-                    </a></li>
-                    <li><a href="#/doc/Form">Form
-                        <small>表单</small>
-                    </a></li>
-                    <li><a href="#/doc/Radio">Radio & Checkbox
-                        <small>单(多)选框</small>
-                    </a></li>
-                    <li><a href="#/doc/Switch">Switch
-                        <small>开关</small>
-                    </a></li>
-                    <li><a href="#/doc/InputNumber">InputNumber
-                        <small>数字输入框</small>
-                    </a></li>
-                    <li><a href="#/doc/Select">Select
-                        <small>选择</small>
-                    </a></li>
-                    <li><a href="#/doc/DropDown">DropDown
-                        <small>下拉框</small>
-                    </a></li>
-                    <li><a href="#/doc/Dropper">Dropper
-                        <small>上传</small>
-                    </a></li>
-                </ul>
-                <h3>Loading</h3>
-                <ul>
-                    <li><a href="#/doc/Loading">Loading
-                        <small>加载中</small>
-                    </a></li>
-                    <li><a href="#/doc/NProgress">NProgress
-                        <small>请求进度条</small>
-                    </a></li>
-                </ul>
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a href="#/doc/Menu">Menu
-                        <small>导航菜单</small>
-                    </a></li>
-                </ul>
-                <h3>Other</h3>
-                <ul>
-                    <li><a href="#/doc/Storage">Storage
-                        <small>存储</small>
-                    </a></li>
-                </ul>
-            </div>
+            <Menu
+                id="docMenu"
+                allowCollapse
+                data={data}
+                onSelect={this.handleSelect}
+                selected={selected}
+            />
         );
     }
 }
