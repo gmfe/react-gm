@@ -134,7 +134,7 @@ class QuickFilter extends React.Component {
             {show} = this.state;
 
         return (
-            <div className={classNames("gm-bg gm-border gm-quick gm-quick-filter gm-padding-15", this.props.className, {
+            <div className={classNames("gm-bg gm-border gm-quick gm-quick-filter gm-padding-15 gm-12", this.props.className, {
                 'gm-padding-bottom-0': collapseRender
             })}>
                 {collapseRender ? <div>
