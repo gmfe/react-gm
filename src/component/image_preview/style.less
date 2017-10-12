@@ -1,0 +1,153 @@
+.gm-image-preview {
+<<<<<<< HEAD
+
+=======
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 140px;
+    border: 1px solid #ccc;
+>>>>>>> 9a9e6d8... 优化代码
+    .gm-image-preview-list {
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+<<<<<<< HEAD
+        overflow-x: auto;
+        overflow-y: hidden;
+        border: 1px solid #ccc;
+=======
+>>>>>>> 9a9e6d8... 优化代码
+    }
+    .gm-image-preview-img {
+        list-style: none;
+        display: inline-block;
+        width: 200px;
+        height: 140px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px 8px 6px;
+        border: 1px solid #ccc;
+        cursor: zoom-in;
+    }
+}
+
+// 浮层按钮 
+.gm-preview-modal-btn {
+    position: fixed;
+    top: 50%;
+    margin-top: -40px;
+    width: 40px;
+    height: 80px;
+    line-height: 80px;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+    opacity: .7;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.gm-preview-modal-btn-left {
+    left: 5px;
+}
+
+.gm-preview-modal-btn-right {
+    right: 5px;
+}
+
+.gm-preview-modal-btn-close {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 50px;
+    cursor: pointer;
+    opacity: .7;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+// 浮层
+@thumbnail-img-size: 50px;
+@thumbnail-img-margin: 5px;
+
+.gm-preview-modal-content {
+    padding-top: 10px;
+
+    .gm-preview-modal-footer {
+        position: absolute;
+        width: 100%;
+        overflow: hidden;
+        bottom: 0;
+        left: 0;
+
+        .gm-preview-modal-thumbnails-container {
+            position: relative;
+
+            .gm-thumbnails-btn {
+                position: absolute;
+                top: 0;
+                width: 20px;
+                height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+                color: #fff;
+                line-height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+                cursor: pointer;
+                text-align: center;
+                opacity: .7;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+            .gm-thumbnails-btn-left {
+                left: -20px;
+            }
+            .gm-thumbnails-btn-right {
+                right: -20px;
+            }
+        }
+
+        .gm-preview-modal-thumbnails {
+            position: relative;
+            overflow: hidden;
+            height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+            white-space: nowrap;
+
+            .gm-preview-modal-list {
+                position: relative;
+                height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+                padding: 0;
+                margin: 0;
+                transition: left 1s; // 滚动动画
+            }
+            .gm-preview-modal-img {
+                list-style: none;
+                display: inline-block;
+                width: @thumbnail-img-size;
+                height: @thumbnail-img-size;
+                background-position: center;
+                background-size: auto @thumbnail-img-size;
+<<<<<<< HEAD
+                background-repeat: no-repeat;
+=======
+>>>>>>> 9a9e6d8... 优化代码
+                margin: 5px;
+                cursor: pointer;
+                opacity: .7;
+                &:hover {
+                    border: 2px solid @brand-primary;
+                    opacity: 1;
+                }
+                &.gm-preview-modal-focus {
+                    border: 2px solid @brand-primary;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

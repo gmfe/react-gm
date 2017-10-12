@@ -125,6 +125,9 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/Storage">Storage
                         <small>存储</small>
                     </a></li>
+                    <li><a href="#/doc/ImagePreview">ImagePreview
+                        <small>图片预览</small>
+                    </a></li>
                 </ul>
             </div>
         );

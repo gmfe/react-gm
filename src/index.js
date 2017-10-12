@@ -36,6 +36,7 @@ import FilterSelect from './component/filter_select/filter.select';
 import MultipleFilterSelect from './component/filter_select/multiple.filter.select';
 import Menu from './component/menu';
 import Transfer from './component/transfer';
+import ImagePreview from './component/image_preview';
 
 import Validator from './validator';
 import Emitter from './emitter';
@@ -123,5 +124,6 @@ export {
     FilterSelect,
     MultipleFilterSelect,
     Menu,
-    Emitter
+    Emitter,
+    ImagePreview
 };
