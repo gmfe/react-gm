@@ -19,12 +19,6 @@ class Preview_modal extends React.Component {
         this.setState({previewImgIndex});
     };
 
-    handlePreview = (previewImgIndex) => {
-        this.setState({previewImgIndex});
-        // 滚动居中
-        window.document.getElementsByClassName("gm-image-preview-focus")[0].scrollIntoViewIfNeeded();
-    };
-
     handlePrevious = () => {
         const {previewImgIndex} = this.state;
         previewImgIndex !== 0 && this.handlePreview(previewImgIndex - 1);
