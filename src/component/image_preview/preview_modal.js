@@ -9,7 +9,6 @@ class Preview_modal extends React.Component {
         super(props);
 
         this.state = {
-<<<<<<< HEAD
             previewImgIndex: this.props.index,
             showScrollBtn: true,
             timer: null
@@ -18,37 +17,6 @@ class Preview_modal extends React.Component {
 
     handlePreview = (previewImgIndex) => {
         this.setState({previewImgIndex});
-=======
-            curLeft: 0,
-            previewImgIndex: this.props.index
-        };
-    }
-
-    /**
-     * 计算图片列表left值
-     * @param {string} type  两个可能值: scrollLeft 或者 scrollRight
-     * @return {number} 移动距离,负数为向左移动,正数向右 
-     */
-    calcLeft = (type) => {
-        const num = type === 'scrollLeft' ? -1 : 1;
-
-        const {images, thumbnailImgWidth} = this.props;
-        const {curLeft} = this.state;
-        const ulWidth = images.length * thumbnailImgWidth;     // ul总长度 
-        const scrollLeft = curLeft + (num * containerWidth);   // 向左移动的距离
-        
-        let left = 0;
-
-        // 边界:   -(ulWidth - containerWidth) < scrollLeft < 0
-        if (scrollLeft < containerWidth - ulWidth) {
-            left = containerWidth - ulWidth;
-        } else if (scrollLeft > 0) {
-            left = 0;
-        } else {
-            left = scrollLeft;
-        }
-        return left;
->>>>>>> 4ca0885... 1. 代码优化  2.更换demo素材图片  3.更新文档
     };
 
     handlePreview = (previewImgIndex) => {
@@ -67,7 +35,6 @@ class Preview_modal extends React.Component {
         const {previewImgIndex} = this.state;
         previewImgIndex !== images.length - 1 && this.handlePreview(previewImgIndex + 1);
     };
-<<<<<<< HEAD
    
     handleScroll = (direction) => {
         const num = direction === 'left' ? 1 : -1;
@@ -87,19 +54,6 @@ class Preview_modal extends React.Component {
     
     handleScrollLeft = () => {
         this.handleScroll('left');      
-=======
-
-    handleScrollLeft = () => {
-        this.setState({
-            curLeft: this.calcLeft('scrollLeft')
-        });
-    };
-
-    handleScrollRight = () => {
-        this.setState({
-            curLeft: this.calcLeft('scrollRight')
-        });
->>>>>>> 4ca0885... 1. 代码优化  2.更换demo素材图片  3.更新文档
     };
 
     handleScrollRight = () => {
@@ -131,11 +85,7 @@ class Preview_modal extends React.Component {
         const {previewImgIndex, showScrollBtn} = this.state;
 
         return (
-<<<<<<< HEAD
             <div className="gm-image-preview-wrap">
-=======
-            <div>
->>>>>>> 4ca0885... 1. 代码优化  2.更换demo素材图片  3.更新文档
                 <span className="gm-image-preview-btn-close" onClick={onHide} >×</span>
 
                 {previewImgIndex !== 0 &&
@@ -146,7 +96,6 @@ class Preview_modal extends React.Component {
                 }
 
                 <div className="gm-image-preview-content">
-<<<<<<< HEAD
                     <Flex auto alignCenter className="gm-image-preview-img-wrap">
                         <img src={images[previewImgIndex]} alt="" className="gm-image-preview-img" />
                     </Flex>
@@ -163,35 +112,6 @@ class Preview_modal extends React.Component {
 
                             <div className="gm-image-preview-thumbnails" ref={ref => this.thumbnails = ref}>
                                 <ul className="gm-image-preview-list">
-=======
-
-                    <Flex alignCenter justifyCenter column style={{
-                        width: 'auto',
-                        height: clientHeight - 180 + 'px',
-                        overflow: 'hidden'
-                    }} >
-                        <img src={images[previewImgIndex]} alt="" style={{
-                            maxWidth: clientWidth - 180 + 'px',
-                            maxHeight: clientHeight - 160 + 'px'
-                        }} />
-                    </Flex>
-                    
-                    {/* 缩略图列表高度: 60px, 最大跨度: containerWidth  */}
-                    {thumbnails && thumbnails.length > 1 && <Flex justifyCenter className="gm-image-preview-footer">
-
-                        <div className="gm-image-preview-thumbnails-container" style={{maxWidth: containerWidth + 'px'}}>
-                            {thumbnails.length * thumbnailImgWidth > containerWidth &&
-                                <i className="glyphicon glyphicon-chevron-left gm-thumbnails-btn-left gm-thumbnails-btn" onClick={this.handleScrollLeft}></i>}
-                            {thumbnails.length * thumbnailImgWidth > containerWidth &&
-                                <i className="glyphicon glyphicon-chevron-right gm-thumbnails-btn-right gm-thumbnails-btn" onClick={this.handleScrollRight}></i>}
-
-                            <div className="gm-image-preview-thumbnails">
-                                <ul className="gm-image-preview-list"
-                                    style={{
-                                        left: this.state.curLeft + 'px'
-                                    }}
-                                >
->>>>>>> 4ca0885... 1. 代码优化  2.更换demo素材图片  3.更新文档
                                     {_.map(thumbnails, (img, index) => (
                                         <li key={index}
                                             className={classNames("gm-image-preview-img", {"gm-image-preview-focus": index === previewImgIndex})}
@@ -218,11 +138,7 @@ Preview_modal.propTypes = {
 };
 
 Preview_modal.defaultProps = {
-<<<<<<< HEAD
     thumbnailImgWidth: 60   // 缩略图大小,包括magin
-=======
-        thumbnailImgWidth: 60   // 缩略图大小,包括magin
->>>>>>> 4ca0885... 1. 代码优化  2.更换demo素材图片  3.更新文档
 };
 
 export default Preview_modal;

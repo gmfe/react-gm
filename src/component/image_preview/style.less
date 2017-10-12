@@ -1,4 +1,3 @@
-
 // 浮层按钮 
 .gm-image-preview-btn {
     position: fixed;
@@ -44,73 +43,98 @@
 @thumbnail-img-size: 50px;
 @thumbnail-img-margin: 5px;
 
+.gm-image-preview-wrap {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
 .gm-image-preview-content {
-    padding-top: 10px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 60px;
+}
 
-    .gm-image-preview-footer {
-        position: absolute;
-        width: 100%;
-        overflow: hidden;
-        bottom: 0;
-        left: 0;
+.gm-image-preview-img-wrap {
+    padding: 15px;
+    width: 100%;
+    height: 100%;
 
-        .gm-image-preview-thumbnails-container {
-            position: relative;
+    .gm-image-preview-img {
+        object-fit: contain;
+        max-width: 100%;
+        max-height: 100%;
+        margin: 0 auto;
+    }
+}
 
-            .gm-thumbnails-btn {
-                position: absolute;
-                top: 0;
-                width: 20px;
-                height: @thumbnail-img-size + @thumbnail-img-margin * 2;
-                color: #fff;
-                line-height: @thumbnail-img-size + @thumbnail-img-margin * 2;
-                cursor: pointer;
-                text-align: center;
-                opacity: .7;
-                &:hover {
-                    opacity: 1;
-                }
-            }
-            .gm-thumbnails-btn-left {
-                left: -20px;
-            }
-            .gm-thumbnails-btn-right {
-                right: -20px;
+
+.gm-image-preview-footer {
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    .gm-image-preview-thumbnails-container {
+        position: relative;
+
+        .gm-thumbnails-btn {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+            color: #fff;
+            line-height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+            cursor: pointer;
+            text-align: center;
+            opacity: .7;
+            &:hover {
+                opacity: 1;
             }
         }
+        .gm-thumbnails-btn-left {
+            left: -20px;
+        }
+        .gm-thumbnails-btn-right {
+            right: -20px;
+        }
+    }
 
-        .gm-image-preview-thumbnails {
+    .gm-image-preview-thumbnails {
+        position: relative;
+        overflow: hidden;
+        height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+        white-space: nowrap;
+
+        .gm-image-preview-list {
             position: relative;
-            overflow: hidden;
             height: @thumbnail-img-size + @thumbnail-img-margin * 2;
-            white-space: nowrap;
+            padding: 0;
+            margin: 0;
+            transition: left 1s; // 滚动动画
+        }
+        .gm-image-preview-img {
+            list-style: none;
+            display: inline-block;
+            width: @thumbnail-img-size;
+            height: @thumbnail-img-size;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 5px;
+            cursor: pointer;
+            opacity: .7;
+            border: 2px solid transparent;
 
-            .gm-image-preview-list {
-                position: relative;
-                height: @thumbnail-img-size + @thumbnail-img-margin * 2;
-                padding: 0;
-                margin: 0;
-                transition: left 1s; // 滚动动画
+            &:hover {
+                border: 2px solid @brand-primary;
+                opacity: 1;
             }
-            .gm-image-preview-img {
-                list-style: none;
-                display: inline-block;
-                width: @thumbnail-img-size;
-                height: @thumbnail-img-size;
-                background-position: center;
-                background-size: cover;
-                background-repeat: no-repeat;
-                margin: 5px;
-                cursor: pointer;
-                opacity: .7;
-                &:hover {
-                    border: 2px solid @brand-primary;
-                    opacity: 1;
-                }
-                &.gm-image-preview-focus {
-                    border: 2px solid @brand-primary;
-                    opacity: 1;
-                }
+            &.gm-image-preview-focus {
+                border: 2px solid @brand-primary;
+                opacity: 1;
             }
         }
     }

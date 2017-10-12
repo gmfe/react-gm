@@ -19,9 +19,6 @@ class NavConfig extends React.Component {
                     <li><a href="#/doc/Divider">Divider
                         <small>分割线</small>
                     </a></li>
-                    <li><a href="#/doc/ImagePreview">ImagePreview
-                        <small>图片预览</small>
-                    </a></li>
                 </ul>
                 <h3>Data</h3>
                 <ul>
@@ -79,6 +76,9 @@ class NavConfig extends React.Component {
                     </a></li>
                     <li><a href="#/doc/Trigger">Trigger
                         <small>触发器</small>
+                    </a></li>
+                    <li><a href="#/doc/ImagePreview">ImagePreview
+                        <small>图片预览</small>
                     </a></li>
                 </ul>
                 <h3>Form</h3>
