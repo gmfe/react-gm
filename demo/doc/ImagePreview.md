@@ -39,7 +39,6 @@ imports:
 :::
 
 
-<<<<<<< HEAD
 ::: demo 打开模态框后带缩略图
 
 ```js
@@ -95,15 +94,12 @@ class ImagePreviewWrap extends React.Component {
 
 ### Static
 
-- `ImagePreview()` 
+- `ImagePreview(object|isRequired)`   参数详情请看下方
 
-```jsx
-<ImagePreviewWrap2 />
+```javascript
+    object = { 
+        images: (array | isRequired),   // 原图数组
+        thumbnails: (array),            // 缩略图数组
+        index: (number | isRequired)    // 当前图片下标
+    }
 ```
-
-:::
-
-### Props
-
-- `images (array|isRequired)` 原图src数组
-- `thumbnails (array)` 缩略图src数组
