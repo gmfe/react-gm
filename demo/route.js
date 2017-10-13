@@ -51,6 +51,7 @@ import Transfer from 'bundle-loader?lazy!./doc/Transfer.md';
 import Quick from 'bundle-loader?lazy!./doc/Quick.md';
 import Divider from 'bundle-loader?lazy!./doc/Divider.md';
 import Menu from 'bundle-loader?lazy!./doc/Menu.md';
+import ImagePreview from 'bundle-loader?lazy!./doc/ImagePreview.md';
 
 import LayoutCommon from 'bundle-loader?lazy!./standard/LayoutCommon.md';
 import LayoutRule from 'bundle-loader?lazy!./standard/LayoutRule.md';
@@ -96,7 +97,8 @@ const pageMap = {
         Transfer,
         Quick,
         Divider,
-        Menu
+        Menu,
+        ImagePreview
     },
     standard: {
         LayoutCommon,
