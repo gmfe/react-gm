@@ -20,24 +20,40 @@ class Preview_modal extends React.Component {
     };
 
     handlePrevious = () => {
+        const {thumbnails} = this.props;
         const {previewImgIndex} = this.state;
-        previewImgIndex !== 0 && this.handlePreview(previewImgIndex - 1);
+
+        if (previewImgIndex !== 0) {
+            this.setState({previewImgIndex: previewImgIndex - 1});
+
+            if (thumbnails) {
+                window.document.querySelector('.gm-image-preview-focus').scrollIntoViewIfNeeded();
+            }
+        }
     };
 
     handleNext = () => {
-        const {images} = this.props;
+        const {images, thumbnails} = this.props;
         const {previewImgIndex} = this.state;
-        previewImgIndex !== images.length - 1 && this.handlePreview(previewImgIndex + 1);
+
+        if (previewImgIndex !== images.length - 1) {
+            this.setState({previewImgIndex: previewImgIndex + 1});
+
+            if (thumbnails) {
+                window.document.querySelector('.gm-image-preview-focus').scrollIntoViewIfNeeded();
+            }
+        }
     };
 
     handleScroll = (direction) => {
         const num = direction === 'left' ? 1 : -1;
-        let {thumbnails} = this;
+        const {thumbnails} = this;
         const initScrollLeft = thumbnails.scrollLeft;
         clearInterval(this.timer);
 
         function intervalScroll() {
             thumbnails.scrollLeft += (num * 60);
+            // 每次移动6张图片
             if (num * (thumbnails.scrollLeft - initScrollLeft) >= 360 || thumbnails.scrollLeft - initScrollLeft === 0) {
                 clearInterval(this.timer);
             }
@@ -54,7 +70,7 @@ class Preview_modal extends React.Component {
         this.handleScroll('right');
     };
 
-    handleKeydown = (event) => {
+    handleKeyDown = (event) => {
         if (event.keyCode === 37) {
             this.handlePrevious();
         } else if (event.keyCode === 39) {
@@ -64,14 +80,14 @@ class Preview_modal extends React.Component {
 
     componentDidMount() {
         // 如果没有滚动条,不显示左右滚动按钮
-        this.thumbnails && this.thumbnails.offsetWidth === this.thumbnails.scrollWidth && 
-        this.setState({showScrollBtn: false});
+        this.thumbnails && this.thumbnails.offsetWidth === this.thumbnails.scrollWidth &&
+            this.setState({showScrollBtn: false});
 
-        window.document.body.addEventListener('keydown', this.handleKeydown);
+        window.document.body.addEventListener('keydown', this.handleKeyDown);
     }
 
     componentWillUnmount() {
-        window.document.body.removeEventListener('keydown', this.handleKeydown);
+        window.document.body.removeEventListener('keydown', this.handleKeyDown);
     }
 
     render() {
@@ -131,9 +147,4 @@ Preview_modal.propTypes = {
     index: PropTypes.number.isRequired
 };
 
-Preview_modal.defaultProps = {
-    thumbnailImgWidth: 60   // 缩略图大小,包括magin
-};
-
 export default Preview_modal;
-
