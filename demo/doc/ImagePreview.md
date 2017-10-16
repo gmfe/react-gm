@@ -10,29 +10,23 @@ imports:
 ::: demo 以下example依赖的数据
 
 ```js
-    const srcList = ['./demo/images/image_preview/react5.png','./demo/images/image_preview/demo2.png',
-        './demo/images/image_preview/long.jpg','./demo/images/image_preview/react2.jpg',
-        './demo/images/image_preview/react3.png', './demo/images/image_preview/react4.png',
-        './demo/images/image_preview/react5.png', './demo/images/image_preview/vue.jpg',
-        './demo/images/image_preview/node.jpg', './demo/images/image_preview/react1.png',
-        './demo/images/image_preview/react3.png', './demo/images/image_preview/react4.png',
-        './demo/images/image_preview/react5.png', './demo/images/image_preview/vue.jpg',
-        './demo/images/image_preview/demo2.png', './demo/images/image_preview/react1.png',
-        './demo/images/image_preview/react3.png', './demo/images/image_preview/react4.png',
-        './demo/images/image_preview/react5.png', './demo/images/image_preview/vue.jpg',
-        './demo/images/image_preview/demo2.png','./demo/images/image_preview/react2.jpg',
-        './demo/images/image_preview/react1.png', './demo/images/image_preview/react2.jpg',
-        './demo/images/image_preview/react3.png', './demo/images/image_preview/react4.png',
-        './demo/images/image_preview/react5.png', './demo/images/image_preview/vue.jpg',
-        './demo/images/image_preview/demo2.png', './demo/images/image_preview/react1.png',
-        './demo/images/image_preview/react3.png', './demo/images/image_preview/react4.png',
-        './demo/images/image_preview/react5.png', './demo/images/image_preview/vue.jpg',
-        './demo/images/image_preview/demo2.png','./demo/images/image_preview/react2.jpg',
-        './demo/images/image_preview/demo3.jpg','./demo/images/image_preview/long.jpg',
-        './demo/images/image_preview/node.jpg','./demo/images/image_preview/react2.jpg',
-        './demo/images/image_preview/react1.png', './demo/images/image_preview/react2.jpg',
-        './demo/images/image_preview/react3.png', './demo/images/image_preview/react4.png',
-        './demo/images/image_preview/react5.png', './demo/images/image_preview/vue.jpg',
+    const demo2 = require('../images/image_preview/demo2.png');
+    const demo3 = require('../images/image_preview/demo3.jpg');
+    const long = require('../images/image_preview/long.jpg');
+    const node = require('../images/image_preview/node.jpg');
+    const react1 = require('../images/image_preview/react1.png');
+    const react2 = require('../images/image_preview/react2.jpg');
+    const react3 = require('../images/image_preview/react3.png');
+    const react4 = require('../images/image_preview/react4.png');
+    const react5 = require('../images/image_preview/react5.png');
+    const vue = require('../images/image_preview/vue.jpg');
+    const srcList = [
+        demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
+        demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
+        demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
+        demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
+        demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
+        demo2, demo3, long, node, react1, react2, react3, react4, react5, vue
     ];
 ```
 
