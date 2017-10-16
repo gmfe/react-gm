@@ -11,9 +11,9 @@ const ImagePreview = props => {
         disableMaskClose: true,
         style: {
             width: "auto",
-            background: "black",
-            margin: "50px",
-            height: "calc(100% - 100px)"
+            background: "rgba(0, 0, 0, .5)",
+            margin: "80px",
+            height: "calc(100% - 160px)"
         }
     });
 };
