@@ -10,10 +10,10 @@ const ImagePreview = props => {
         onHide: Modal.hide,
         disableMaskClose: true,
         style: {
-            width: "auto",
-            background: "rgba(0, 0, 0, .5)",
-            margin: "80px",
-            height: "calc(100% - 160px)"
+            background: "rgba(0, 0, 0, 1)",
+            margin: '0',
+            width: "100%",
+            height: "100%"
         }
     });
 };
