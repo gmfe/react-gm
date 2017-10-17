@@ -10,8 +10,7 @@ class Preview_modal extends React.Component {
 
         this.state = {
             previewImgIndex: this.props.index,
-            showScrollBtn: true,
-            timer: null
+            showScrollBtn: true
         };
     }
 
@@ -105,7 +104,7 @@ class Preview_modal extends React.Component {
                     <i className="glyphicon glyphicon-menu-right gm-image-preview-btn-right gm-image-preview-btn" onClick={this.handleNext} ></i>
                 }
 
-                <div className="gm-image-preview-content">
+                <div className="gm-image-preview-content" style={{paddingBottom: thumbnails ? "60px" : "0"}} >
                     <Flex auto alignCenter className="gm-image-preview-img-wrap">
                         <img src={images[previewImgIndex]} alt="" className="gm-image-preview-img" />
                     </Flex>
