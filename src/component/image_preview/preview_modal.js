@@ -33,7 +33,7 @@ class Preview_modal extends React.Component {
             this.setState({previewImgIndex: previewImgIndex - 1});
 
             if (thumbnails) {
-                window.document.querySelector('.gm-image-preview-focus').scrollIntoViewIfNeeded();
+                this.thumbnails.childNodes[previewImgIndex].scrollIntoViewIfNeeded();
             }
         }
     }
@@ -46,7 +46,7 @@ class Preview_modal extends React.Component {
             this.setState({previewImgIndex: previewImgIndex + 1});
 
             if (thumbnails) {
-                window.document.querySelector('.gm-image-preview-focus').scrollIntoViewIfNeeded();
+                this.thumbnails.childNodes[previewImgIndex].scrollIntoViewIfNeeded();
             }
         }
     }
