@@ -122,16 +122,14 @@ class Preview_modal extends React.Component {
                                 <i className="glyphicon glyphicon-chevron-left gm-image-preview-thumbnails-btn" onClick={this.handleScrollRight}></i>}
 
                             <div className="gm-image-preview-thumbnails" ref={ref => this.thumbnails = ref}>
-                                <div className="gm-image-preview-list">
-                                    {_.map(thumbnails, (img, index) => (
-                                        <img key={index}
-                                            className={classNames("gm-image-preview-img", {"gm-image-preview-focus": index === previewImgIndex})}
-                                            src={img}
-                                            onClick={() => this.handlePreview(index)}
-                                        >
-                                        </img>
-                                    ))}
-                                </div>
+                                {_.map(thumbnails, (img, index) => (
+                                    <img key={index}
+                                        className={classNames("gm-image-preview-img", {"gm-image-preview-focus": index === previewImgIndex})}
+                                        src={img}
+                                        onClick={() => this.handlePreview(index)}
+                                    >
+                                    </img>
+                                ))}
                             </div>
 
                             {showScrollBtn &&

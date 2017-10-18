@@ -43,7 +43,7 @@
 .gm-image-preview-content {
     width: 100%;
     overflow: hidden;
-    
+
     .gm-image-preview-img-wrap {
         padding: 20px 0;
         width: 100%;
@@ -81,15 +81,12 @@
         overflow-x: auto;
         overflow-y: hidden;
         height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+        white-space: nowrap;
 
         &::-webkit-scrollbar {
             display: none;
         }
 
-        .gm-image-preview-list {
-            height: @thumbnail-img-size + @thumbnail-img-margin * 2;
-            white-space: nowrap;
-        }
         .gm-image-preview-img {
             width: @thumbnail-img-size;
             height: @thumbnail-img-size;
