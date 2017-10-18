@@ -28,12 +28,13 @@ class Preview_modal extends React.Component {
     handlePrevious() {
         const {thumbnails} = this.props;
         const {previewImgIndex} = this.state;
-
+        
         if (previewImgIndex !== 0) {
-            this.setState({previewImgIndex: previewImgIndex - 1});
+            const index = previewImgIndex - 1;
+            this.setState({previewImgIndex: index});
 
             if (thumbnails) {
-                this.thumbnails.childNodes[previewImgIndex].scrollIntoViewIfNeeded();
+                this.thumbnails.childNodes[index].scrollIntoViewIfNeeded();
             }
         }
     }
@@ -43,10 +44,11 @@ class Preview_modal extends React.Component {
         const {previewImgIndex} = this.state;
 
         if (previewImgIndex !== images.length - 1) {
-            this.setState({previewImgIndex: previewImgIndex + 1});
+            const index = previewImgIndex + 1;            
+            this.setState({previewImgIndex: index});
 
             if (thumbnails) {
-                this.thumbnails.childNodes[previewImgIndex].scrollIntoViewIfNeeded();
+                this.thumbnails.childNodes[index].scrollIntoViewIfNeeded();
             }
         }
     }
