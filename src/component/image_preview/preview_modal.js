@@ -12,39 +12,48 @@ class Preview_modal extends React.Component {
             previewImgIndex: this.props.index,
             showScrollBtn: true
         };
+        this.handlePreview = ::this.handlePreview;
+        this.handlePrevious = ::this.handlePrevious;
+        this.handleNext = ::this.handleNext;
+        this.handleScroll = ::this.handleScroll;
+        this.handleScrollLeft = ::this.handleScrollLeft;
+        this.handleScrollRight = ::this.handleScrollRight;
+        this.handleKeyDown = ::this.handleKeyDown;
     }
 
-    handlePreview = (previewImgIndex) => {
+    handlePreview(previewImgIndex) {
         this.setState({previewImgIndex});
-    };
+    }
 
-    handlePrevious = () => {
+    handlePrevious() {
         const {thumbnails} = this.props;
         const {previewImgIndex} = this.state;
-
+        
         if (previewImgIndex !== 0) {
-            this.setState({previewImgIndex: previewImgIndex - 1});
+            const index = previewImgIndex - 1;
+            this.setState({previewImgIndex: index});
 
             if (thumbnails) {
-                window.document.querySelector('.gm-image-preview-focus').scrollIntoViewIfNeeded();
+                this.thumbnails.childNodes[index].scrollIntoViewIfNeeded();
             }
         }
-    };
+    }
 
-    handleNext = () => {
+    handleNext() {
         const {images, thumbnails} = this.props;
         const {previewImgIndex} = this.state;
 
         if (previewImgIndex !== images.length - 1) {
-            this.setState({previewImgIndex: previewImgIndex + 1});
+            const index = previewImgIndex + 1;            
+            this.setState({previewImgIndex: index});
 
             if (thumbnails) {
-                window.document.querySelector('.gm-image-preview-focus').scrollIntoViewIfNeeded();
+                this.thumbnails.childNodes[index].scrollIntoViewIfNeeded();
             }
         }
-    };
+    }
 
-    handleScroll = (direction) => {
+    handleScroll(direction) {
         const num = direction === 'left' ? 1 : -1;
         const {thumbnails} = this;
         const initScrollLeft = thumbnails.scrollLeft;
@@ -59,23 +68,23 @@ class Preview_modal extends React.Component {
         }
 
         this.timer = setInterval(intervalScroll.bind(this), 50);
-    };
+    }
 
-    handleScrollLeft = () => {
+    handleScrollLeft() {
         this.handleScroll('left');
-    };
+    }
 
-    handleScrollRight = () => {
+    handleScrollRight() {
         this.handleScroll('right');
-    };
+    }
 
-    handleKeyDown = (event) => {
+    handleKeyDown(event) {
         if (event.keyCode === 37) {
             this.handlePrevious();
         } else if (event.keyCode === 39) {
             this.handleNext();
         }
-    };
+    }
 
     componentDidMount() {
         // 如果没有滚动条,不显示左右滚动按钮
@@ -94,48 +103,49 @@ class Preview_modal extends React.Component {
         const {previewImgIndex, showScrollBtn} = this.state;
 
         return (
-            <div className="gm-image-preview-wrap">
+            <Flex className="gm-image-preview-wrap">
                 <span className="gm-image-preview-btn-close" onClick={onHide} >×</span>
 
-                {previewImgIndex !== 0 &&
-                    <i className="glyphicon glyphicon-menu-left gm-image-preview-btn-left gm-image-preview-btn" onClick={this.handlePrevious}></i>
-                }
-                {previewImgIndex !== images.length - 1 &&
-                    <i className="glyphicon glyphicon-menu-right gm-image-preview-btn-right gm-image-preview-btn" onClick={this.handleNext} ></i>
-                }
+                <Flex alignCenter className="gm-image-preview-btn-container">
+                    <i className={classNames("glyphicon glyphicon-menu-left gm-image-preview-btn", {"hidden": previewImgIndex === 0})} onClick={this.handlePrevious}></i>
+                </Flex>
 
-                <div className="gm-image-preview-content" style={{paddingBottom: thumbnails ? "60px" : "0"}} >
+
+                <Flex column className="gm-image-preview-content">
                     <Flex auto alignCenter className="gm-image-preview-img-wrap">
                         <img src={images[previewImgIndex]} alt="" className="gm-image-preview-img" />
                     </Flex>
 
                     {/* 缩略图列表高度: 60px */}
                     {thumbnails && thumbnails.length > 1 && <Flex justifyCenter className="gm-image-preview-footer">
+                        <Flex className="gm-image-preview-thumbnails-container">
 
-                        <div className="gm-image-preview-thumbnails-container" >
-
-                            {thumbnails && showScrollBtn &&
-                                <i className="glyphicon glyphicon-chevron-left gm-thumbnails-btn-left gm-thumbnails-btn" onClick={this.handleScrollRight}></i>}
-                            {thumbnails && showScrollBtn &&
-                                <i className="glyphicon glyphicon-chevron-right gm-thumbnails-btn-right gm-thumbnails-btn" onClick={this.handleScrollLeft}></i>}
+                            {showScrollBtn &&
+                                <i className="glyphicon glyphicon-chevron-left gm-image-preview-thumbnails-btn" onClick={this.handleScrollRight}></i>}
 
                             <div className="gm-image-preview-thumbnails" ref={ref => this.thumbnails = ref}>
-                                <ul className="gm-image-preview-list">
-                                    {_.map(thumbnails, (img, index) => (
-                                        <li key={index}
-                                            className={classNames("gm-image-preview-img", {"gm-image-preview-focus": index === previewImgIndex})}
-                                            style={{backgroundImage: `url(${img})`}}
-                                            onClick={() => this.handlePreview(index)}
-                                        >
-                                        </li>
-                                    ))}
-                                </ul>
+                                {_.map(thumbnails, (img, index) => (
+                                    <img key={index}
+                                        className={classNames("gm-image-preview-img", {"gm-image-preview-focus": index === previewImgIndex})}
+                                        src={img}
+                                        onClick={() => this.handlePreview(index)}
+                                    >
+                                    </img>
+                                ))}
                             </div>
-                        </div>
+
+                            {showScrollBtn &&
+                                <i className="glyphicon glyphicon-chevron-right gm-image-preview-thumbnails-btn" onClick={this.handleScrollLeft}></i>}
+                        </Flex>
                     </Flex>}
 
-                </div>
-            </div>
+                </Flex>
+
+                <Flex alignCenter className="gm-image-preview-btn-container">
+                    <i className={classNames("glyphicon glyphicon-menu-right gm-image-preview-btn", {"hidden": previewImgIndex === images.length - 1})} onClick={this.handleNext} ></i>
+                </Flex>
+
+            </Flex>
         );
     }
 }
