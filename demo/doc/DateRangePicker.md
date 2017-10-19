@@ -177,6 +177,50 @@ class DaterangepickerWrap4 extends React.Component {
 ```
 :::
 
+::: demo can clear date
+```js
+class DaterangepickerWrap5 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            begin: new Date(),
+            end: new Date()
+        };
+        this.handleChange = ::this.handleChange;
+    }
+
+    render() {
+        return (
+            <div>
+                <DateRangePicker
+                    begin={this.state.begin}
+                    end={this.state.end}
+                    onChange={this.handleChange}
+                    inputClassName="form-control input-sm"
+                    endProps={{
+                        min: this.state.begin
+                    }}
+                    canClear={true}
+                />
+            </div>
+        );
+    }
+
+    handleChange(begin, end) {
+        console.log(begin, end);
+        this.setState({
+            begin: begin,
+            end: end
+        });
+    }
+
+}
+```
+```jsx
+<DaterangepickerWrap5/>
+```
+:::
+
 ### Props
 和`DatePicker`没多大区别，`date` 换成 `begin` 和 `end` 而已。
 - `begin (object)`
@@ -184,6 +228,7 @@ class DaterangepickerWrap4 extends React.Component {
 - `onChange (func)`
 - `inputClassName (string)`
 - `disabled (bool)` 不可用
+- `canClear (bool)` 是否可以清除所选date
 - `className (string)`
 - `beginProps (shape)` 结构是DatePicker的 {'{min max disabledDate}'}
 - `endProps (shape)` 同上

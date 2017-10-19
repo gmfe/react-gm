@@ -17,6 +17,13 @@ class DatePickerWrap extends React.Component {
         };
         this.handleChange = ::this.handleChange;
     }
+
+    handleChange(date) {
+        console.log(date);
+        this.setState({
+            date: date
+        });
+    }
     
     render() {
         return (
@@ -73,6 +80,16 @@ class DatePickerWrap extends React.Component {
                             }}
                         />
                     </div>
+                    <div>
+                        <div>clear date</div>
+                        <DatePicker
+                            date={this.state.date}
+                            placeholder="请选择日期"
+                            onChange={this.handleChange}
+                            canClear={true}
+                            inputClassName="form-control input-sm"
+                        />
+                    </div>
                 </Flex>
                 
                 <div className="gm-padding10"></div>
@@ -87,13 +104,6 @@ class DatePickerWrap extends React.Component {
             </div>
         );
     }
-    
-    handleChange(date) {
-        console.log(date);
-        this.setState({
-            date: date
-        });
-    }
 }
 ```
 ```jsx
@@ -104,7 +114,7 @@ class DatePickerWrap extends React.Component {
 
 ### Props
 - `date (object)` Date对象
-- `onChange (func|isRequired)` 选择后回调，参数是Date对象
+- `onChange (func|isRequired)` 选择后回调，参数是Date对象（若canClear为true，则清除date时会传null）
 - `inputClassName (string)` 自定义input的样子
 - `placeholder (string)`
 - `disabled (bool)` 是否不可用
@@ -112,3 +122,4 @@ class DatePickerWrap extends React.Component {
 - `disabledDate (func)` 提供date参数，返回true or false
 - `min (object)` 一个Date对象，最小日期
 - `max (object)` 一个Date对象，最大日期
+- `canClear (bool)` 是否可清除所选时间
