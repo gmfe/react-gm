@@ -74,7 +74,7 @@ class DateRangePicker extends React.Component {
                     >
                         <input
                             type="text"
-                            className={inputClassName}
+                            className={canClear ? "gm-clear-input " + inputClassName : inputClassName}
                             disabled={disabled}
                             value={begin ? (beginRenderInputValue ? beginRenderInputValue(begin) : moment(begin).format('YYYY-MM-DD')) : ''}
                             onChange={_.noop}
@@ -82,12 +82,12 @@ class DateRangePicker extends React.Component {
                     </Trigger>
                     {
                         canClear && begin &&
-                            <button
-                                type="button"
-                                className="gm-datepicker-clear close"
-                                onClick={this.handleClearBegin}>
-                                &times;
-                            </button>
+                        <button
+                            type="button"
+                            className="gm-datepicker-clear-btn close"
+                            onClick={this.handleClearBegin}>
+                            &times;
+                        </button>
                     }
                 </div>
                 {!endLabel && <span> ~ </span>}
@@ -108,7 +108,7 @@ class DateRangePicker extends React.Component {
                         <input
                             ref={ref => this.refEndTarget = ref}
                             type="text"
-                            className={inputClassName}
+                            className={canClear ? "gm-clear-input " + inputClassName : inputClassName}
                             disabled={disabled}
                             value={end ? (endRenderInputValue ? endRenderInputValue(end) : moment(end).format('YYYY-MM-DD')) : ''}
                             onChange={_.noop}
@@ -116,12 +116,12 @@ class DateRangePicker extends React.Component {
                     </Trigger>
                     {
                         canClear && end &&
-                            <button
-                                type="button"
-                                className="gm-datepicker-clear close"
-                                onClick={this.handleClearEnd}>
-                                &times;
-                            </button>
+                        <button
+                            type="button"
+                            className="gm-datepicker-clear-btn close"
+                            onClick={this.handleClearEnd}>
+                            &times;
+                        </button>
                     }
                 </div>
             </div>
