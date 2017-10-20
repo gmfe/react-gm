@@ -50,7 +50,7 @@ class DatePicker extends React.Component {
                     {children ? children : (
                         <input
                             type="text"
-                            className={canClear ? "gm-clear-input " + inputClassName : inputClassName}
+                            className={classNames(inputClassName,{"gm-clear-input": canClear})}
                             placeholder={placeholder}
                             disabled={disabled}
                             value={date ? (inputValueRender ? inputValueRender(date) : moment(date).format('YYYY-MM-DD')) : ''}

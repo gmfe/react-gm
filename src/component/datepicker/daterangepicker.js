@@ -74,7 +74,7 @@ class DateRangePicker extends React.Component {
                     >
                         <input
                             type="text"
-                            className={canClear ? "gm-clear-input " + inputClassName : inputClassName}
+                            className={classNames(inputClassName,{"gm-clear-input": canClear})}
                             disabled={disabled}
                             value={begin ? (beginRenderInputValue ? beginRenderInputValue(begin) : moment(begin).format('YYYY-MM-DD')) : ''}
                             onChange={_.noop}
@@ -108,7 +108,7 @@ class DateRangePicker extends React.Component {
                         <input
                             ref={ref => this.refEndTarget = ref}
                             type="text"
-                            className={canClear ? "gm-clear-input " + inputClassName : inputClassName}
+                            className={classNames(inputClassName,{"gm-clear-input": canClear})}
                             disabled={disabled}
                             value={end ? (endRenderInputValue ? endRenderInputValue(end) : moment(end).format('YYYY-MM-DD')) : ''}
                             onChange={_.noop}
