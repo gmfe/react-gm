@@ -11,6 +11,7 @@ class DatePicker extends React.Component {
         super(props);
         this.datepicker = null;
         this.handleSelect = ::this.handleSelect;
+        this.handleClear = ::this.handleClear;
     }
 
     handleSelect(date) {
@@ -20,10 +21,14 @@ class DatePicker extends React.Component {
         }, 0);
     }
 
+    handleClear(){
+        this.props.onChange();
+    }
+
     render() {
         const {
             date, min, max, disabledDate,
-            className, children, inputClassName, placeholder, disabled, inputValueRender
+            className, children, inputClassName, placeholder, disabled, inputValueRender, canClear
         } = this.props;
 
         const popup = (
@@ -53,6 +58,15 @@ class DatePicker extends React.Component {
                         />
                     )}
                 </Trigger>
+                {
+                    canClear && date &&
+                        <button
+                            type="button"
+                            className="gm-datepicker-clear close"
+                            onClick={this.handleClear}>
+                            &times;
+                        </button>
+                }
             </div>
         );
     }
@@ -63,6 +77,7 @@ DatePicker.displayName = 'DatePicker';
 DatePicker.propTypes = {
     date: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    canClear: PropTypes.bool,
     inputClassName: PropTypes.string,
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,

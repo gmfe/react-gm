@@ -13,6 +13,8 @@ class DateRangePicker extends React.Component {
         this.refEndTarget = null;
         this.handleSelectBegin = ::this.handleSelectBegin;
         this.handleSelectEnd = ::this.handleSelectEnd;
+        this.handleClearEnd = ::this.handleClearEnd;
+        this.handleClearBegin = ::this.handleClearBegin;
     }
 
     handleSelectBegin(date) {
@@ -33,63 +35,95 @@ class DateRangePicker extends React.Component {
         }, 0);
     }
 
+    handleClearEnd(){
+        const {begin, onChange} = this.props;
+        onChange(begin, null);
+    }
+
+    handleClearBegin(){
+        const {end, onChange} = this.props;
+        onChange(null, end);
+    }
+
     render() {
         const {
             begin, end,
             beginLabel, endLabel,
             beginProps, endProps,
             inputClassName,
-            disabled,
+            disabled,canClear,
             beginRenderInputValue, endRenderInputValue
         } = this.props;
 
         return (
             <div
                 ref={ref => this.refDateRangePicker = ref}
-                className={classNames("gm-datepicker gm-daterangepicker", this.props.className)}
+                className={classNames("gm-daterangepicker", this.props.className)}
             >
                 {beginLabel && <span className="gm-padding-right-5">{beginLabel}</span>}
-                <Trigger
-                    component={<div className="gm-inline-block"/>}
-                    popup={(
-                        <Calendar
-                            selected={begin}
-                            onSelect={this.handleSelectBegin}
-                            {...beginProps}
+                <div className="gm-datepicker">
+                    <Trigger
+                        component={<div className="gm-inline-block"/>}
+                        popup={(
+                            <Calendar
+                                selected={begin}
+                                onSelect={this.handleSelectBegin}
+                                {...beginProps}
+                            />
+                        )}
+                    >
+                        <input
+                            type="text"
+                            className={inputClassName}
+                            disabled={disabled}
+                            value={begin ? (beginRenderInputValue ? beginRenderInputValue(begin) : moment(begin).format('YYYY-MM-DD')) : ''}
+                            onChange={_.noop}
                         />
-                    )}
-                >
-                    <input
-                        type="text"
-                        className={inputClassName}
-                        disabled={disabled}
-                        value={begin ? (beginRenderInputValue ? beginRenderInputValue(begin) : moment(begin).format('YYYY-MM-DD')) : ''}
-                        onChange={_.noop}
-                    />
-                </Trigger>
+                    </Trigger>
+                    {
+                        canClear && begin &&
+                            <button
+                                type="button"
+                                className="gm-datepicker-clear close"
+                                onClick={this.handleClearBegin}>
+                                &times;
+                            </button>
+                    }
+                </div>
                 {!endLabel && <span> ~ </span>}
                 {endLabel && <span className="gm-padding-lr-5">{endLabel}</span>}
-                <Trigger
-                    component={<div className="gm-inline-block"/>}
-                    popup={(
-                        <Calendar
-                            selected={end}
-                            onSelect={this.handleSelectEnd}
-                            {...Object.assign({
-                                min: begin
-                            }, endProps)}
+                <div className="gm-datepicker">
+                    <Trigger
+                        component={<div className="gm-inline-block"/>}
+                        popup={(
+                            <Calendar
+                                selected={end}
+                                onSelect={this.handleSelectEnd}
+                                {...Object.assign({
+                                    min: begin
+                                }, endProps)}
+                            />
+                        )}
+                    >
+                        <input
+                            ref={ref => this.refEndTarget = ref}
+                            type="text"
+                            className={inputClassName}
+                            disabled={disabled}
+                            value={end ? (endRenderInputValue ? endRenderInputValue(end) : moment(end).format('YYYY-MM-DD')) : ''}
+                            onChange={_.noop}
                         />
-                    )}
-                >
-                    <input
-                        ref={ref => this.refEndTarget = ref}
-                        type="text"
-                        className={inputClassName}
-                        disabled={disabled}
-                        value={end ? (endRenderInputValue ? endRenderInputValue(end) : moment(end).format('YYYY-MM-DD')) : ''}
-                        onChange={_.noop}
-                    />
-                </Trigger>
+                    </Trigger>
+                    {
+                        canClear && end &&
+                            <button
+                                type="button"
+                                className="gm-datepicker-clear close"
+                                onClick={this.handleClearEnd}>
+                                &times;
+                            </button>
+                    }
+                </div>
             </div>
         );
     }
@@ -105,6 +139,7 @@ DateRangePicker.propTypes = {
     onChange: PropTypes.func,
     inputClassName: PropTypes.string,
     disabled: PropTypes.bool,
+    canClear: PropTypes.bool,
     className: PropTypes.string,
 
     beginProps: PropTypes.shape({
