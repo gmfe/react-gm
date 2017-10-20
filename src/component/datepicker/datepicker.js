@@ -50,7 +50,7 @@ class DatePicker extends React.Component {
                     {children ? children : (
                         <input
                             type="text"
-                            className={inputClassName}
+                            className={canClear ? "gm-clear-input " + inputClassName : inputClassName}
                             placeholder={placeholder}
                             disabled={disabled}
                             value={date ? (inputValueRender ? inputValueRender(date) : moment(date).format('YYYY-MM-DD')) : ''}
@@ -60,12 +60,12 @@ class DatePicker extends React.Component {
                 </Trigger>
                 {
                     canClear && date &&
-                        <button
-                            type="button"
-                            className="gm-datepicker-clear close"
-                            onClick={this.handleClear}>
-                            &times;
-                        </button>
+                    <button
+                        type="button"
+                        className="gm-datepicker-clear-btn close"
+                        onClick={this.handleClear}>
+                        &times;
+                    </button>
                 }
             </div>
         );
