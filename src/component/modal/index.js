@@ -111,16 +111,14 @@ class Modal extends React.Component {
                 <div className="gm-modal-mask"/>
                 <div
                     className={classNames("gm-modal", {
-                        'gm-modal-clean': clean
+                        'gm-modal-clean': clean,
+                        'gm-modal-right-side': rightSide
                     })}
                     tabIndex="-1"
                     onClick={this.handleMask}
                 >
                     <div
-                        className={classNames("gm-modal-dialog", "gm-modal-" + size, {
-                            'gm-modal-right-side': rightSide,
-                            in: show
-                        })}
+                        className={classNames("gm-modal-dialog", "gm-modal-" + size, {in: show})}
                         style={style}
                     >
                         <button

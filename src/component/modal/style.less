@@ -32,9 +32,16 @@
     }
   }
 
-  .gm-modal-right-side {
-    margin: 0 0 0 auto;
-    height: 100%;
+  &.gm-modal-right-side {
+    .gm-modal-dialog {
+      margin: 0 0 0 auto;
+      height: 100%;
+      overflow: hidden;
+
+      .gm-modal-content {
+        padding: 0;
+      }
+    }
   }
 
   .gm-modal-dialog {
