@@ -19,14 +19,26 @@
   z-index: 1050;
   outline: 0;
 
-  &.gm-modal-clean{
-    .gm-modal-dialog{
+  &.gm-modal-clean {
+    .gm-modal-dialog {
       background: transparent;
-      
-      >.close{
+
+      >.close {
         display: none;
       }
-      .gm-modal-content{
+      .gm-modal-content {
+        padding: 0;
+      }
+    }
+  }
+
+  &.gm-modal-right-side {
+    .gm-modal-dialog {
+      margin: 0 0 0 auto;
+      height: 100%;
+      overflow: hidden;
+
+      .gm-modal-content {
         padding: 0;
       }
     }
@@ -109,6 +121,3 @@
     width: 900px;
   }
 }
-
-
-
