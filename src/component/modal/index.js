@@ -98,7 +98,7 @@ class Modal extends React.Component {
     }
 
     render() {
-        const {show, title, size, children, type, style, clean} = this.props;
+        const {show, title, size, children, type, style, clean, rightSide} = this.props;
         if (!show) {
             return null;
         }
@@ -117,7 +117,10 @@ class Modal extends React.Component {
                     onClick={this.handleMask}
                 >
                     <div
-                        className={classNames("gm-modal-dialog", "gm-modal-" + size, {in: show})}
+                        className={classNames("gm-modal-dialog", "gm-modal-" + size, {
+                            'gm-modal-right-side': rightSide,
+                            in: show
+                        })}
                         style={style}
                     >
                         <button
@@ -192,14 +195,16 @@ Modal.propTypes = {
         PropTypes.element
     ]),
     okBtnClassName: PropTypes.string, // Modal confirm okbtn的className
-    clean: PropTypes.bool
+    clean: PropTypes.bool,
+    rightSide: PropTypes.bool
 };
 
 Modal.defaultProps = {
     onHide: _.noop,
     size: 'md',
     disableMaskClose: false,
-    clean: false
+    clean: false,
+    rightSide: false
 };
 
 export default Modal;

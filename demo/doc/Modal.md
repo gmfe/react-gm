@@ -237,6 +237,38 @@ class ModalWrap4 extends React.Component {
 ```
 :::
 
+::: demo 右侧的modal
+```js
+class ModalWrap5 extends React.Component {
+    handleModal(){
+        Modal.render({
+            children: <div>示例示例<br/>滴滴滴</div>,
+            title: '右侧弹出modal',
+            onHide: Modal.hide,
+            rightSide: true,
+            style: {
+                width: '600px'
+            }
+        });
+    }
+
+    render() {
+            return (
+                <div>
+                    <button
+                        className="btn btn-default"
+                        onClick={this.handleModal}
+                    >right-side Modal</button>
+                </div>
+            );
+        }
+}
+```
+```jsx
+<ModalWrap5/>
+```
+:::
+
 ### Props
 - `show (bool|isRequired)` 是否显示
 - `disableMaskClose (bool)` 是否启用点击mask关闭modal
@@ -245,6 +277,7 @@ class ModalWrap4 extends React.Component {
 - `title (string|element)` 标题
 - `children` 模态框里面的内容
 - `clean` 干净版
+- `rightSide` 右侧版
 
 ### Static
 - `render`
