@@ -14,43 +14,22 @@ class Radio extends React.Component {
             name,
             disabled
         } = this.props;
-        if (!inline) {
-            return (
-                <div>
-                    <label className={classNames({
-                        disabled
-                    })}>
-                        <input
-                            type="radio"
-                            name={name}
-                            value={value}
-                            checked={checked}
-                            onChange={onChange}
-                            disabled={disabled}
-                        />
-                        <span/>
-                        {children}
-                    </label>
-                </div>
-            );
-        } else {
-            return (
-                <label className={classNames("radio-inline", {
-                    disabled
-                })}>
-                    <input
-                        type="radio"
-                        name={name}
-                        value={value}
-                        checked={checked}
-                        onChange={onChange}
-                        disabled={disabled}
-                    />
-                    <span/>
-                    {children}
-                </label>
-            );
-        }
+
+        return (
+            <label className={inline? classNames("radio-inline", {disabled}): classNames({disabled})}>
+                <input
+                    id="_gm-input-radio_"
+                    type="radio"
+                    name={name}
+                    value={value}
+                    checked={checked}
+                    onChange={onChange}
+                    disabled={disabled}
+                />
+                <span/>
+                {children}
+            </label>
+        );
     }
 }
 
