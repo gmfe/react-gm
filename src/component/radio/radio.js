@@ -14,34 +14,15 @@ class Radio extends React.Component {
             name,
             disabled
         } = this.props;
-        if (!inline) {
-            return (
-                <div>
-                    <label className={classNames({
-                        disabled
-                    })}>
-                        <input
-                            id="_gm-input-radio_"
-                            type="radio"
-                            name={name}
-                            value={value}
-                            checked={checked}
-                            onChange={onChange}
-                            disabled={disabled}
-                        />
-                        <span/>
-                        {children}
-                    </label>
-                </div>
-            );
-        } else {
-            return (
-                <label className={classNames("radio-inline", {
+
+        return (
+            <div className={inline? 'radio-inline': ''}>
+                <label className={classNames({
                     disabled
                 })}>
                     <input
-                        id="_gm-input-radio_"
                         type="radio"
+                        className="gm-input-radio"
                         name={name}
                         value={value}
                         checked={checked}
@@ -51,8 +32,8 @@ class Radio extends React.Component {
                     <span/>
                     {children}
                 </label>
-            );
-        }
+            </div>
+        );
     }
 }
 
