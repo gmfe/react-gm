@@ -61,7 +61,7 @@ class DateRangePicker extends React.Component {
                 className={classNames("gm-daterangepicker", this.props.className)}
             >
                 {beginLabel && <span className="gm-padding-right-5">{beginLabel}</span>}
-                <div className="gm-datepicker">
+                <div className="gm-daterangepicker-item">
                     <Trigger
                         component={<div className="gm-inline-block"/>}
                         popup={(
@@ -84,7 +84,7 @@ class DateRangePicker extends React.Component {
                         canClear && begin &&
                         <button
                             type="button"
-                            className="gm-datepicker-clear-btn close"
+                            className="gm-daterangepicker-clear-btn close"
                             onClick={this.handleClearBegin}>
                             &times;
                         </button>
@@ -92,7 +92,7 @@ class DateRangePicker extends React.Component {
                 </div>
                 {!endLabel && <span> ~ </span>}
                 {endLabel && <span className="gm-padding-lr-5">{endLabel}</span>}
-                <div className="gm-datepicker">
+                <div className="gm-daterangepicker-item">
                     <Trigger
                         component={<div className="gm-inline-block"/>}
                         popup={(
@@ -118,7 +118,7 @@ class DateRangePicker extends React.Component {
                         canClear && end &&
                         <button
                             type="button"
-                            className="gm-datepicker-clear-btn close"
+                            className="gm-daterangepicker-clear-btn close"
                             onClick={this.handleClearEnd}>
                             &times;
                         </button>

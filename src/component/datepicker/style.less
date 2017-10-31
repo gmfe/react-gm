@@ -1,12 +1,20 @@
+.gm-datepicker-clear-btn, .gm-daterangepicker-clear-btn{
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  font-size: 18px;
+  color: #555555;
+}
+
+.gm-calendar {
+  border: none;
+}
+
 .gm-datepicker {
   position: relative;
   display: inline-block;
   border: 1px solid #ccc;
   background-color: white;
-
-  .gm-calendar {
-    border: none;
-  }
 
   input {
     border: 0;
@@ -16,21 +24,25 @@
       padding: 6px 20px 6px 12px;
     }
   }
-
-  .gm-datepicker-clear-btn{
-    position: absolute;
-    right: 6px;
-    top: 6px;
-    font-size: 18px;
-    color: #555555;
-  }
 }
 
 .gm-daterangepicker{
   display: inline-block;
 
-  & > input {
+  &-item {
+    position: relative;
     display: inline-block;
-    width: auto;
+    border: 1px solid #ccc;
+    background-color: white;
+
+    input {
+      border: 0;
+      cursor: pointer;
+
+      &.gm-clear-input {
+        padding: 6px 20px 6px 12px;
+      }
+    }
   }
+
 }
