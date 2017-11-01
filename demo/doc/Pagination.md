@@ -114,11 +114,11 @@ class PaginationNewWithoutCount extends React.Component{
 
 ### Props 
 
-- `data (shape)` 
-    * `count (number|isRequired)` 出于性能考虑，有些接口不会返回`count`
-    * `offset (number|isRequired)`
-    * `limit (number|isRequired)`
-- `toPage (func|isRequired)` 提供 `offset` 和 `limit` 回去，直接用此数据请求后台即可
+- `pagination (shape)` 
+    * `pageobj (number|isRequired)` 起始页（不包含），默认第0页
+    * `peek (number|isRequired)` 实际peek到的条数。
+- `limit (number|isRequired)` 返回条数，默认10
+- `onChange (func|isRequired)` 提供 `pageobj`、`limit`、`offset`、`reverse`、`peek` 回去，直接用此数据请求后台即可
 
 
 ## Pagination【老规范】
