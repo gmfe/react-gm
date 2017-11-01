@@ -1,9 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
-const isDev = process.env.NODE_ENV === 'development';
+const env = process.env.NODE_ENV;
 
 const config = {
     entry: {
@@ -13,7 +11,7 @@ const config = {
     },
     output: {
         path: path.join(__dirname, 'build'),
-        filename: '[name].[hash].bundle.js',
+        filename: '[name].[hash:8].bundle.js',
         publicPath: '/react-gm/build/'
     },
     module: {
@@ -27,7 +25,7 @@ const config = {
                 'markdown-it-react-loader'
             ]
         }, {
-            test: /(fontawesome-webfont|glyphicons-halflings-regular|iconfont)\.(woff|woff2|ttf|eot|svg)($|\?)/,
+            test: /(glyphicons-halflings-regular|iconfont)\.(woff|woff2|ttf|eot|svg)($|\?)/,
             use: [{
                 loader: 'url-loader',
                 options: {
@@ -39,7 +37,7 @@ const config = {
             test: /\.(css|less)$/,
             use: [
                 'style-loader',
-                'css-loader?-autoprefixer',
+                'css-loader',
                 'postcss-loader',
                 'less-loader'
             ]
@@ -49,7 +47,7 @@ const config = {
                 loader: 'url-loader',
                 options: {
                     limit: 1024,
-                    name: 'img/[name].[hash].[ext]'
+                    name: 'img/[name].[hash:8].[ext]'
                 }
             }]
         }]
@@ -65,7 +63,7 @@ const config = {
     ]
 };
 
-if (!isDev) {
+if (env === 'production') {
     // 压缩
     config.plugins.push(new webpack.optimize.UglifyJsPlugin());
 }

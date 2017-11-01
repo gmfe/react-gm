@@ -9,13 +9,12 @@
 ## 依赖
 
 使用前请保证以下依赖存在
-- react react-dom
-- gm-util
+- react 
+- react-dom
+- prop-types
 - classnames
+- gm-util
+- gm-font
 - lodash
 - moment
 - query-string
-
-## 自动化集成
-
-flow.ci

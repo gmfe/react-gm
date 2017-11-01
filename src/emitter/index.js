@@ -1,4 +1,4 @@
-import EventEmitter from './eventemitter';
+import {EventEmitter} from 'gm-util';
 
 const event_prefix = 'GM_EVENT_';
 

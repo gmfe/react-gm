@@ -1,0 +1,187 @@
+@import "../src/less/variables.less";
+@import "../src/less/mixins.less";
+@import "../src/less/custom.less";
+@import "../src/css/variables.less";
+@import "./print.less";
+
+.gm-framework {
+
+  // 满足内容区域最小一屏
+  &-full-height {
+    min-height: 100vh;
+  }
+
+  // container
+  &-container {
+    width: 85%;
+    margin: auto;
+  }
+
+  // top
+  &-top {
+    &-header {
+      &-default {
+        height: 30px;
+        background: #303030;
+        color: white;
+        font-size: 12px;
+        line-height: 30px;
+
+        &-mobile-nav {
+          display: none;
+          line-height: 30px;
+          padding: 0 10px;
+          cursor: pointer;
+        }
+
+        &-settings {
+          .list-group {
+            margin-bottom: 0;
+            .list-group-item {
+              color: #333333;
+              padding: 5px;
+              margin: 0;
+              border-top: none;
+            }
+          }
+        }
+      }
+    }
+
+    &-content {
+      &-default {
+        background: white;
+        height: 60px;
+
+        &-nav > a, &-jump > div > a {
+          font-size: 16px;
+          color: black;
+          display: inline-block;
+          padding: 9px 20px 5px;
+          border-bottom: 4px solid transparent;
+          margin-left: 10px;
+          text-decoration: none;
+          cursor: pointer;
+
+          &.active {
+            color: @brand-primary;
+            border-bottom: 4px solid @brand-primary;
+          }
+          &:hover {
+            text-decoration: none;
+            background: @gm-back-body-bg;
+            color: black;
+          }
+        }
+
+        &-jump {
+          position: relative;
+
+          & > div > a:hover {
+            color: @brand-primary;
+          }
+
+          &::before {
+            content: '';
+            border-left: 1px solid @text-color;
+            position: absolute;
+            bottom: 12px;
+            height: 16px;
+            left: 5px;
+          }
+
+          .list-group {
+            margin-top: -3px;
+            margin-bottom: 0;
+            width: 104px;
+            text-align: center;
+
+            .list-group-item {
+              font-size: 15px;
+              color: black;
+              border-top: none;
+
+              &:last-child {
+                padding-bottom: 18px;
+              }
+
+              &:focus, &:hover {
+                color: @brand-primary;
+                background: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // center
+  &-center {
+    .gm-framework-container {
+      padding: 20px 0;
+    }
+  }
+
+  // left
+  &-left {
+    width: 190px;
+    padding-right: 20px;
+  }
+
+  // right
+  &-right{
+    width: ~"calc(85% - 170px)";
+  }
+
+  // content
+  &-content {
+    height: ~"calc(100% - 30px)";
+  }
+
+  // breadcrumb
+  &-breadcrumb {
+
+    &-default {
+      background: none;
+      position: relative;
+      margin-bottom: 0;
+      padding: 3px 0 15px 20px;
+      line-height: 1;
+      font-size: 12px;
+
+      &:before {
+        content: "";
+        top: 2px;
+        left: 0;
+        position: absolute;
+        display: block;
+        height: 13px;
+        width: 13px;
+        background: @brand-primary;
+      }
+
+      li:last-child {
+        color: @brand-primary;
+      }
+
+      &-link {
+        color: @gm-color-second;
+      }
+    }
+  }
+
+  // copyright
+  &-copyright {
+    &-default {
+      padding: 0 10px;
+      height: 80px;
+      background: #303030;
+      color: white;
+      font-size: 12px;
+    }
+  }
+}
+
+// 放后面
+@import "./mobile.less";
