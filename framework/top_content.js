@@ -29,28 +29,30 @@ class TopContent extends React.Component {
         );
 
         return (
-            <Flex column className="gm-framework-top-content-default gm-box-shadow-bottom">
-                <Flex flex alignStretch className="gm-framework-container">
-                    <Flex alignCenter>
-                        {logo}
-                    </Flex>
-                    <Flex flex/>
-                    {navList && (
-                        <Flex alignEnd className="gm-framework-top-content-default-nav">
-                            {_.map(navList, v => (
-                                <a
-                                    key={v.link}
-                                    href={v.link}
-                                    className={classNames({
-                                        'active': v === navSelected
-                                    })}
-                                >{v.text}</a>
-                            ))}
+            <div className="gm-framework-top-content-default">
+                <Flex column className="gm-framework-top-content-default-inner gm-box-shadow-bottom">
+                    <Flex flex alignStretch className="gm-framework-container">
+                        <Flex alignCenter>
+                            {logo}
                         </Flex>
-                    )}
-                    {jumpTerm}
+                        <Flex flex/>
+                        {navList && (
+                            <Flex alignEnd className="gm-framework-top-content-default-nav">
+                                {_.map(navList, v => (
+                                    <a
+                                        key={v.link}
+                                        href={v.link}
+                                        className={classNames({
+                                            'active': v === navSelected
+                                        })}
+                                    >{v.text}</a>
+                                ))}
+                            </Flex>
+                        )}
+                        {jumpTerm}
+                    </Flex>
                 </Flex>
-            </Flex>
+            </div>
         );
     }
 }

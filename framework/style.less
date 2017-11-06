@@ -22,10 +22,18 @@
     &-header {
       &-default {
         height: 30px;
-        background: #303030;
-        color: white;
-        font-size: 12px;
-        line-height: 30px;
+        &-inner {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1020;
+          height: 30px;
+          background: #303030;
+          color: white;
+          font-size: 12px;
+          line-height: 30px;
+        }
 
         &-mobile-nav {
           display: none;
@@ -50,8 +58,16 @@
 
     &-content {
       &-default {
-        background: white;
         height: 60px;
+        &-inner {
+          position: fixed;
+          top: 30px;
+          left: 0;
+          right: 0;
+          z-index: 1019;
+          background: white;
+          height: 60px;
+        }
 
         &-nav > a, &-jump > div > a {
           font-size: 16px;
@@ -130,7 +146,7 @@
   }
 
   // right
-  &-right{
+  &-right {
     width: ~"calc(85% - 170px)";
   }
 
