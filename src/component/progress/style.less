@@ -1,0 +1,41 @@
+.gm-progress {
+  position: relative;
+  line-height: 24px;
+  font-size: 12px;
+  width: 50%; 
+  height: 24px;
+  border:1px solid #ccc;
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: 0 0 5px 0px #ddd inset;
+}
+
+.gm-progress-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.gm-progress-bar {
+  float: left;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+  background-color: #0e90d2;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+  border-radius: 100px;
+  transition: width .6s ease;
+}
+
+.gm-progress-bar-success{
+  background-color: #5cb85c;
+}
+
+.gm-progress-bar-warning{
+  background-color: #f0ad4e;
+}
+
+.gm-progress-bar-danger{
+  background-color: #d9534f;
+}
