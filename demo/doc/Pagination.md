@@ -2,126 +2,7 @@
 imports:
     import {Flex, Pagination, PaginationText} from '../../src/index';
 ---
-## Pagination【新规范】
-
-提前阅读[新分页规范](https://doc.guanmai.cn/%E5%88%86%E4%BA%AB%E5%9F%B9%E8%AE%AD/%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/%E5%88%86%E9%A1%B5%E8%A7%84%E8%8C%83/)
-
-::: demo 新分页规范 带页码
-```js
-class PaginationNew extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-           pagination: {},
-           count: 0
-        };
-    }
-    componentDidMount(){
-        setTimeout(() => {
-            this.setState({
-                pagination:{
-                    pageobj:'pageobj',
-                    peek:55,
-                    more: true
-                }
-            });
-        },200);
-    }
-    handlePageChange(params){
-        console.log('handlePageChange:', params);
-
-        const {count } = this.state;
-
-        if(count < 5){
-            setTimeout(() => {
-                this.setState({
-                    pagination:{
-                        pageobj:`pageobj ${count}`,
-                        peek: count < 4  ? 20 * (5-count) : 23,
-                        more: count < 4
-                    },
-                    count:count +1
-                });
-            },200);
-        }
-    }
-    render(){
-        return (
-            <Flex alignCenter column>
-                <Pagination nextVersion pagination={this.state.pagination} onChange={this.handlePageChange.bind(this)}/>
-            </Flex>
-        );
-    }
-}
-```
-```jsx
-<PaginationNew/>
-```
-:::
-
-::: demo 新分页规范 不带页码
-```js
-class PaginationNewWithoutCount extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-           pagination: {},
-           count: 0
-        };
-    }
-    componentDidMount(){
-        setTimeout(() => {
-            this.setState({
-                pagination:{
-                    pageobj:'pageobj',
-                    peek:55,
-                    more: true
-                }
-            });
-        },200);
-    }
-    handlePageChange(params){
-        console.log('handlePageChange:', params);
-
-        const {count } = this.state;
-
-        if(count < 5){
-            setTimeout(() => {
-                this.setState({
-                    pagination:{
-                        pageobj:`pageobj ${count}`,
-                        peek: count < 4  ? 20 * (5-count) : 23,
-                        more: count < 4
-                    },
-                    count:count +1
-                });
-            },200);
-        }
-    }
-    render(){
-        return (
-            <Flex alignCenter column>
-                <Pagination nextVersion pagination={this.state.pagination} onChange={this.handlePageChange.bind(this)} showCount={false}/>
-            </Flex>
-        );
-    }
-}
-```
-```jsx
-<PaginationNewWithoutCount/>
-```
-:::
-
-### Props 
-
-- `pagination (shape)` 
-    * `pageobj (number|isRequired)` 起始页（不包含），默认第0页
-    * `peek (number|isRequired)` 实际peek到的条数。
-- `limit (number|isRequired)` 返回条数，默认10
-- `onChange (func|isRequired)` 提供 `pageobj`、`limit`、`offset`、`reverse`、`peek` 回去，直接用此数据请求后台即可
-
-
-## Pagination【老规范】
+## Pagination
 
 两种形式，Pagination PaginationText
 
@@ -130,7 +11,7 @@ class PaginationNewWithoutCount extends React.Component{
 ::: demo 带count
 ```js
 const pagination = {
-    count: 70,
+    count: 60,
     offset: 0,
     limit: 10
 };
