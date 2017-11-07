@@ -16,6 +16,7 @@ import IFont from 'bundle-loader?lazy!./doc/IFont.md';
 import Flex from 'bundle-loader?lazy!./doc/Flex.md';
 import Loading from 'bundle-loader?lazy!./doc/Loading.md';
 import NProgress from 'bundle-loader?lazy!./doc/NProgress.md';
+import Progress from 'bundle-loader?lazy!./doc/Progress.md';
 import Cascader from 'bundle-loader?lazy!./doc/Cascader.md';
 import CascaderSelect from 'bundle-loader?lazy!./doc/CascaderSelect.md';
 import DropSelect from 'bundle-loader?lazy!./doc/DropSelect.md';
@@ -66,6 +67,7 @@ const pageMap = {
         IFont,
         Flex,
         Loading,
+        Progress,
         NProgress,
         Cascader,
         CascaderSelect,
