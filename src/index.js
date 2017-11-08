@@ -9,7 +9,7 @@ import DatePicker from './component/datepicker/datepicker';
 import DateRangePicker from './component/datepicker/daterangepicker';
 import Tip from './component/tip';
 import NProgress from './component/nprogress';
-import Progress from './component/Progress';
+import Progress from './component/progress';
 import Divider from './component/divider';
 import Dialog from './component/dialog';
 import Flex from './component/flex';
