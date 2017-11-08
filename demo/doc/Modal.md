@@ -246,6 +246,7 @@ class ModalWrap5 extends React.Component {
             title: '右侧弹出modal',
             onHide: Modal.hide,
             rightSide: true,
+            noContentPadding: true,
             style: {
                 width: '600px'
             }
@@ -278,6 +279,7 @@ class ModalWrap5 extends React.Component {
 - `children` 模态框里面的内容
 - `clean` 干净版
 - `rightSide` 右侧版
+- `noContentPadding` 内容没有padding
 
 ### Static
 - `render`

@@ -98,7 +98,7 @@ class Modal extends React.Component {
     }
 
     render() {
-        const {show, title, size, children, type, style, clean, rightSide} = this.props;
+        const {show, title, size, children, type, style, clean, rightSide, noContentPadding} = this.props;
         if (!show) {
             return null;
         }
@@ -133,7 +133,7 @@ class Modal extends React.Component {
                                 {title}
                             </div>
                         ) : null}
-                        <div className="gm-modal-content">
+                        <div className={classNames("gm-modal-content", {"gm-padding-0": noContentPadding})}>
                             {children}
                         </div>
                     </div>
@@ -194,7 +194,8 @@ Modal.propTypes = {
     ]),
     okBtnClassName: PropTypes.string, // Modal confirm okbtn的className
     clean: PropTypes.bool,
-    rightSide: PropTypes.bool
+    rightSide: PropTypes.bool,
+    noContentPadding: PropTypes.bool
 };
 
 Modal.defaultProps = {
@@ -202,7 +203,8 @@ Modal.defaultProps = {
     size: 'md',
     disableMaskClose: false,
     clean: false,
-    rightSide: false
+    rightSide: false,
+    noContentPadding: false
 };
 
 export default Modal;
