@@ -246,7 +246,6 @@ class ModalWrap5 extends React.Component {
             title: '右侧弹出modal',
             onHide: Modal.hide,
             rightSide: true,
-            noContentPadding: true,
             style: {
                 width: '600px'
             }
@@ -267,6 +266,38 @@ class ModalWrap5 extends React.Component {
 ```
 ```jsx
 <ModalWrap5/>
+```
+:::
+
+::: demo 没有padding的modal
+```js
+class ModalWrap6 extends React.Component {
+    handleModal(){
+        Modal.render({
+            children: <div>示例示例<br/>滴滴滴</div>,
+            title: 'content没padding的modal',
+            onHide: Modal.hide,
+            noContentPadding: true,
+            style: {
+                width: '600px'
+            }
+        });
+    }
+
+    render() {
+            return (
+                <div>
+                    <button
+                        className="btn btn-default"
+                        onClick={this.handleModal}
+                    >noContentPadding Modal</button>
+                </div>
+            );
+        }
+}
+```
+```jsx
+<ModalWrap6/>
 ```
 :::
 
