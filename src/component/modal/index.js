@@ -133,7 +133,7 @@ class Modal extends React.Component {
                                 {title}
                             </div>
                         ) : null}
-                        <div className={classNames("gm-modal-content", {"gm-padding-0": noContentPadding})}>
+                        <div className={noContentPadding ? "gm-padding-0" : "gm-modal-content"}>
                             {children}
                         </div>
                     </div>
