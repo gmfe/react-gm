@@ -29,7 +29,7 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "gm-font": "^2.1.1",
-    "gm-util": "^5.4.1",
+    "gm-util": "^5.4.23",
     "moment": "^2.18.1",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.0",
@@ -53,7 +53,7 @@
     "file-loader": "^1.1.4",
     "gm-font": "^2.2.8",
     "gm-pinyin": "^3.0.0",
-    "gm-util": "^5.4.22",
+    "gm-util": "^5.4.23",
     "happypack": "^4.0.1",
     "highlight.js": "^9.11.0",
     "history": "^4.7.2",

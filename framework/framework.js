@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Flex, LayoutRoot, Emitter} from '../src/index';
 import classNames from 'classnames';
+import { setTitle } from 'gm-util';
 
 class Framework extends React.Component {
     constructor(props) {
@@ -21,6 +22,10 @@ class Framework extends React.Component {
         Emitter.on(Emitter.TYPE.MODAL_HIDE, () => {
             window.document.body.classList.remove('gm-overflow-hidden');
             this.setState({blur: false});
+        });
+
+        Emitter.on(Emitter.TYPE.TITLE_CHANGE, (title) => {
+            setTitle(title);
         });
     }
 
