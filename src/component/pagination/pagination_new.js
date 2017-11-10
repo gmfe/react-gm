@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import classnames from 'classnames';
 
 class WithCount extends React.Component {
     constructor(props) {
@@ -11,19 +12,19 @@ class WithCount extends React.Component {
                 number: 1
             }],
             current: 1,
-            pageClicked: 1
+            pageClicked: 1 // 加了限制，点击页码未收到响应之前其他页码不可点
         };
 
         this.handlePage = ::this.handlePage;
     }
 
     componentWillReceiveProps(nextProps) {
-        const { current, pages } = this.state,
+        const { pages, pageClicked } = this.state,
             { limit } = nextProps,
             { peek, pageobj } = nextProps.pagination;
 
         if (this.props.pagination !== nextProps.pagination) {
-            const currentIndex = _.findIndex(pages, page => page.number === current),
+            const currentIndex = _.findIndex(pages, page => page.number === pageClicked),
                 pagesNew = _.slice(pages, 0, currentIndex + 1),
                 currentPage = pages[currentIndex],
                 afterPageCount = Math.ceil(peek / limit);
@@ -39,7 +40,9 @@ class WithCount extends React.Component {
             }
 
             this.setState({
-                pages: pagesNew
+                pages: pagesNew,
+                pageClicked: null,
+                current: pageClicked
             });
         }
     }
@@ -51,7 +54,7 @@ class WithCount extends React.Component {
 
         if (pageClicked < 1 || pageClicked > pages.length) return;
 
-        this.setState({ current: pageClicked, pageClicked });
+        this.setState({ pageClicked });
 
         const pageClickedIndex = _.findLastIndex(pages, page => page.number === pageClicked),
             closestFromPageIndex = _.findLastIndex(pages, page => page.pageobj, pageClickedIndex - 1);
@@ -77,7 +80,7 @@ class WithCount extends React.Component {
     }
 
     render() {
-        const { current } = this.state,
+        const { current, pageClicked } = this.state,
             len = this.state.pages.length;
 
         let pages = [];
@@ -93,14 +96,14 @@ class WithCount extends React.Component {
         return (
             <div className="gm-pagination">
                 <ul className="pagination pagination-sm" onClick={this.handlePage}>
-                    <li className={current === pages[0].number ? 'disabled' : ''}>
+                    <li className={classnames({ 'disabled': current === pages[0].number || pageClicked })}>
                         <a href="javascript:;" data-page={current - 1}>上一页</a>
                     </li>
 
-                    {pages.map((page, i) => <li key={i} className={current === page.number ? 'active' : ''}><a
-                        href="javascript:;" data-page={page.number}>{page.number}</a></li>)}
+                    {pages.map((page, i) => <li key={i} className={classnames({ 'disabled': current !== page.number && pageClicked, active: current === page.number })}>
+                        <a href="javascript:;" data-page={page.number}>{page.number}</a></li>)}
 
-                    <li className={current === _.last(pages).number ? 'disabled' : ''}>
+                    <li className={classnames({ 'disabled': current === _.last(pages).number || pageClicked })}>
                         <a href="javascript:;" data-page={current + 1}>下一页</a>
                     </li>
                 </ul>

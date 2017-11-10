@@ -25,7 +25,7 @@ class PaginationNewComponent1 extends React.Component{
                     more: true
                 }
             });
-        },200);
+        },1000);
     }
     handlePageChange(params){
         console.log('handlePageChange:', params);
@@ -42,7 +42,7 @@ class PaginationNewComponent1 extends React.Component{
                     },
                     count:count +1
                 });
-            },200);
+            },1000);
         }
     }
     render(){
