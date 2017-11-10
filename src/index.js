@@ -1,4 +1,5 @@
 import Pagination from './component/pagination/pagination';
+import PaginationNew from './component/pagination/pagination_new';
 import PaginationText from './component/pagination/pagination.text';
 import Dropper from './component/dropper/index';
 import { Form, FormItem, FormButton, FormBlock } from './component/form';
@@ -77,6 +78,7 @@ Object.assign(Select, {
 
 export {
     Pagination,
+    PaginationNew,
     PaginationText,
     Form, FormItem, FormButton, FormBlock,
     Calendar,
