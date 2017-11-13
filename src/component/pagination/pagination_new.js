@@ -21,7 +21,7 @@ class WithCount extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { pages, pageClicked } = this.state,
             { limit } = nextProps,
-            { peek, pageobj } = nextProps.pagination;
+            { peek, page_obj } = nextProps.pagination;
 
         if (this.props.pagination !== nextProps.pagination) {
             const currentIndex = _.findIndex(pages, page => page.number === pageClicked),
@@ -30,7 +30,7 @@ class WithCount extends React.Component {
                 afterPageCount = Math.ceil(peek / limit);
             let i = 1;
 
-            currentPage.pageobj = pageobj;
+            currentPage.page_obj = page_obj;
 
             while (i <= afterPageCount) {
                 pagesNew.push({
@@ -57,7 +57,7 @@ class WithCount extends React.Component {
         this.setState({ pageClicked });
 
         const pageClickedIndex = _.findLastIndex(pages, page => page.number === pageClicked),
-            closestFromPageIndex = _.findLastIndex(pages, page => page.pageobj, pageClickedIndex - 1);
+            closestFromPageIndex = _.findLastIndex(pages, page => page.page_obj, pageClickedIndex - 1);
 
         let params = {};
         if (pageClickedIndex === 0) {
@@ -68,7 +68,7 @@ class WithCount extends React.Component {
         } else {
             params = {
                 limit,
-                pageobj: pages[closestFromPageIndex].pageobj,
+                page_obj: pages[closestFromPageIndex].page_obj,
                 offset: (pageClickedIndex - closestFromPageIndex - 1) * limit,
                 peek: pageClicked > 5 ? 50 : (10 - pageClickedIndex) * limit
             };
@@ -118,7 +118,7 @@ WithCount.defaultProps = {
 
 WithCount.propTypes = {
     pagination: PropTypes.shape({
-        pageobj: PropTypes.string,
+        page_obj: PropTypes.string,
         peek: PropTypes.number
     }),
     limit: PropTypes.number.isRequired,
@@ -132,7 +132,7 @@ class WithoutCount extends React.Component {
         this.state = {
             isFirstPage: true,
             reverse: false,
-            pageobj: ''
+            page_obj: ''
         };
 
         this.handlePage = ::this.handlePage;
@@ -140,14 +140,14 @@ class WithoutCount extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.pagination !== nextProps.pagination) {
-            const { pageobj, reverse } = this.state;
+            const { page_obj, reverse } = this.state;
 
             const stateNew = {
-                pageobj: nextProps.pagination.pageobj
+                page_obj: nextProps.pagination.page_obj
             };
 
             // 非第一次点击
-            if (pageobj) {
+            if (page_obj) {
                 stateNew.isFirstPage = reverse ? !nextProps.pagination.more : false;
             }
 
@@ -157,7 +157,7 @@ class WithoutCount extends React.Component {
 
     handlePage(reverse) {
         const { onChange, limit } = this.props,
-            { pageobj } = this.state;
+            { page_obj } = this.state;
         let params = {};
 
         this.setState({
@@ -167,8 +167,8 @@ class WithoutCount extends React.Component {
 
         params = {
             limit,
-            reverse: !!reverse,
-            pageobj
+            reverse: reverse ? 1 : 0,
+            page_obj
         };
 
         onChange(params);
@@ -208,7 +208,7 @@ WithoutCount.defaultProps = {
 
 WithoutCount.propTypes = {
     pagination: PropTypes.shape({
-        pageobj: PropTypes.string,
+        page_obj: PropTypes.string,
         peek: PropTypes.number,
         more: PropTypes.bool
     }),

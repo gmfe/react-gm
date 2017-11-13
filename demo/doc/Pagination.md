@@ -20,7 +20,7 @@ class PaginationNewComponent1 extends React.Component{
         setTimeout(() => {
             this.setState({
                 pagination:{
-                    pageobj:'pageobj',
+                    page_obj:'page_obj',
                     peek:55,
                     more: true
                 }
@@ -36,7 +36,7 @@ class PaginationNewComponent1 extends React.Component{
             setTimeout(() => {
                 this.setState({
                     pagination:{
-                        pageobj:`pageobj ${count}`,
+                        page_obj:`page_obj ${count}`,
                         peek: count < 4  ? 20 * (5-count) : 23,
                         more: count < 4
                     },
@@ -73,7 +73,7 @@ class PaginationNewWithoutCount extends React.Component{
         setTimeout(() => {
             this.setState({
                 pagination:{
-                    pageobj:'pageobj',
+                    page_obj:'page_obj',
                     peek:55,
                     more: true
                 }
@@ -89,7 +89,7 @@ class PaginationNewWithoutCount extends React.Component{
             setTimeout(() => {
                 this.setState({
                     pagination:{
-                        pageobj:`pageobj ${count}`,
+                        page_obj:`page_obj ${count}`,
                         peek: count < 4  ? 20 * (5-count) : 23,
                         more: count < 4
                     },
@@ -115,10 +115,10 @@ class PaginationNewWithoutCount extends React.Component{
 ### Props 
 
 - `pagination (shape)` 
-    * `pageobj (number|isRequired)` 起始页（不包含），默认第0页
+    * `page_obj (number|isRequired)` 起始页（不包含），默认第0页
     * `peek (number|isRequired)` 实际peek到的条数。
 - `limit (number|isRequired)` 返回条数，默认10
-- `onChange (func|isRequired)` 提供 `pageobj`、`limit`、`offset`、`reverse`、`peek` 回去，直接用此数据请求后台即可
+- `onChange (func|isRequired)` 提供 `page_obj`、`limit`、`offset`、`reverse`、`peek` 回去，直接用此数据请求后台即可
 
 
 ## Pagination【老规范】
