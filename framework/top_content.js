@@ -7,7 +7,7 @@ import classNames from 'classnames';
 class TopContent extends React.Component {
     render() {
 
-        const {logo, navList, navSelected, jump} = this.props;
+        const {logo, navList, navSelected, jump, fixedTop} = this.props;
 
         const jumpTerm = jump && (
             <Flex alignEnd className="gm-framework-top-content-default-jump">
@@ -30,7 +30,8 @@ class TopContent extends React.Component {
 
         return (
             <div className="gm-framework-top-content-default">
-                <Flex column className="gm-framework-top-content-default-inner gm-box-shadow-bottom">
+                <Flex column className="gm-framework-top-content-default-inner gm-box-shadow-bottom"
+                      style={{top: fixedTop}}>
                     <Flex flex alignStretch className="gm-framework-container">
                         <Flex alignCenter>
                             {logo}
@@ -61,7 +62,8 @@ TopContent.propTypes = {
     logo: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     navList: PropTypes.array, // [{text, link}]
     navSelected: PropTypes.any,
-    jump: PropTypes.object
+    jump: PropTypes.object,
+    fixedTop: PropTypes.string
 };
 
 export default TopContent;

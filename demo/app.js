@@ -67,6 +67,7 @@ class App extends React.Component {
 
         return (
             <TopContent
+                fixedTop="0px"
                 logo={(
                     <Flex alignCenter style={{fontSize: '20px'}}>
                         <svg width="28" height="28" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">

@@ -1,6 +1,6 @@
 {
   "name": "react-gm",
-  "version": "6.0.10",
+  "version": "6.1.0",
   "description": "",
   "main": "src/index.js",
   "module": "src/index.js",
@@ -14,7 +14,6 @@
     "precommit": "eslint --fix ./src/ ./demo/;",
     "clear": "rm -rf build && mkdir build;",
     "start": "npm run clear && NODE_ENV=development webpack-dev-server --host 0.0.0.0 --port 3000 --disableHostCheck --inline --hot --devtool eval --progress --colors",
-    "publishpatch": "sh deploy/publish.sh",
     "docs": "sh deploy/docs.sh;"
   },
   "repository": {
