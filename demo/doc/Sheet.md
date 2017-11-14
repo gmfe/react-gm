@@ -31,6 +31,7 @@ const list= [{
     <SheetColumn field="id" name="id"/>
     <SheetColumn field="name" name="名字"/>
     <SheetColumn field="age" name="年龄"/>
+    <SheetColumn field="age" name={<div style={{background: 'red'}}>自定义head</div>}/>
 </Sheet>
 ```
 :::
@@ -45,7 +46,7 @@ const list= [{
             <SheetColumn field="age" name="年龄"/>
         </Sheet>
     </Flex>
-    <div className="gm-padding5"/>
+    <div className="gm-padding-5"/>
     <Flex flex column> 
         <Sheet list={[]} enableEmptyTip>
             <SheetColumn field="id" name="id"/>
