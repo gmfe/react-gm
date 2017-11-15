@@ -26,8 +26,8 @@ class WithCount extends React.Component {
             { peek, page_obj } = nextProps.pagination;
 
         if (this.props.pagination !== nextProps.pagination) {
-            if (nextProps.pagination.page_obj) {
-                this.setState({ initState });
+            if (!nextProps.pagination.page_obj) {
+                this.setState({ ...initState });
                 return;
             }
 
@@ -149,8 +149,8 @@ class WithoutCount extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.pagination !== nextProps.pagination) {
-            if (nextProps.pagination.page_obj) {
-                this.setState({ initStateWithoutCount });
+            if (!nextProps.pagination.page_obj) {
+                this.setState({ ...initStateWithoutCount });
                 return;
             }
 
