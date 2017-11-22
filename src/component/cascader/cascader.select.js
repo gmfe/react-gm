@@ -113,7 +113,7 @@ class CascaderSelect extends React.Component {
     }
 
     render() {
-        const {disabled, inputProps} = this.props;
+        const {disabled, inputProps, valueRender} = this.props;
         return (
             <div className={classnames("gm-cascader-select", {
                 "disabled": disabled
@@ -132,6 +132,7 @@ class CascaderSelect extends React.Component {
                     ))}
                     <Flex flex column onKeyDown={::this.handleKeyDown}>
                         <Cascader
+                            valueRender={valueRender}
                             inputProps={inputProps}
                             disabled={disabled}
                             data={this.props.data}
@@ -153,7 +154,8 @@ CascaderSelect.propTypes = {
     multiple: PropTypes.bool,
     selectedRender: PropTypes.func,
     inputProps: PropTypes.object,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+	valueRender: PropTypes.func
 };
 CascaderSelect.defaultProps = {
     inputProps: {},
