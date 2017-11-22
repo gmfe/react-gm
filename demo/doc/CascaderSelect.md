@@ -236,3 +236,4 @@ class CascaderSelect5 extends React.Component {
 - `selectRender (func)` 自定义已选择渲染
 - `inputProps (object)` 定义里面input的props
 - `disabled (bool)` 禁用CascaderSelect
+- `valueRender (func)` 自定义value的展现
