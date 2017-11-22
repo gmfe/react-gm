@@ -54,7 +54,7 @@
     "gm-bootstrap": "^1.1.5",
     "gm-font": "^2.1.1",
     "gm-pinyin": "^3.0.0",
-    "gm-util": "^5.4.1",
+    "gm-util": "^5.4.14",
     "highlight.js": "^9.11.0",
     "history": "^4.7.2",
     "husky": "^0.14.3",
