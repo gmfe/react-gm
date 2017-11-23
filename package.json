@@ -51,7 +51,6 @@
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
-    "gm-bootstrap": "^1.1.5",
     "gm-font": "^2.1.1",
     "gm-pinyin": "^3.0.0",
     "gm-util": "^5.4.14",

@@ -84,7 +84,7 @@ class Dialog extends React.Component {
         }
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         this.______isMounted = true;
     }
 
