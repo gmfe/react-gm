@@ -13,6 +13,9 @@ const cascaderData = [{
     value: '0',
     name: '广东',
     children: [{
+        value: '0',
+        name: '全部'
+    },{
         value: '04',
         name: '官方'
     },{
@@ -29,12 +32,18 @@ const cascaderData = [{
     value: '1',
     name: '上海',
     children: [{
+        value: '0',
+        name: '全部'
+    },{
         value: '11',
         name: '上海1'
     }, {
         value: '12',
         name: '上海2',
         children: [{
+        value: '0',
+        name: '全部'
+    },{
             value: '121',
             name: 'sssss'
         },{
@@ -46,6 +55,9 @@ const cascaderData = [{
     value: 'r',
     name: 'rrrr',
     children: [{
+        value: '0',
+        name: '全部'
+    },{
         value: 'rr',
         name: 'yyyy'
     }]

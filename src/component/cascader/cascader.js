@@ -55,6 +55,7 @@ class Cascader extends React.Component {
         };
 
         this.handleSelect = :: this.handleSelect;
+        this.handleClear = :: this.handleClear;
         this.handleInputChange = :: this.handleInputChange;
         this.handleKeyDown = :: this.handleKeyDown;
         this.inputValueRender = :: this.inputValueRender;
@@ -63,7 +64,7 @@ class Cascader extends React.Component {
     componentWillReceiveProps(nextProps) {
         if ('value' in nextProps) {
             this.setState({
-                value: nextProps.value || []
+                selected: nextProps.value ? [...nextProps.value] : []
             });
         }
 
@@ -102,6 +103,14 @@ class Cascader extends React.Component {
             if (pinYinFilter([item], searchText, (v) => v.name).length) return true;
 
             return false;
+        });
+    }
+
+    handleClear(e) {
+        e.stopPropagation();
+
+        this.setState({ selected: [] }, () => {
+            this.handleSelect();
         });
     }
 
@@ -149,7 +158,7 @@ class Cascader extends React.Component {
             }
 
             const lastList = listArr[len - 1],
-                currentIndex = _.findIndex(lastList, item => item.value === selected[len - 1])
+                currentIndex = _.findIndex(lastList, item => item.value === selected[len - 1]);
 
             let lastValue = selected[len - 1];
 
@@ -222,7 +231,8 @@ class Cascader extends React.Component {
 
     renderChildren() {
         const { disabled } = this.props,
-            { data } = this.state;
+            { data } = this.state,
+            inputValue = this.inputValueRender();
         let { inputProps } = this.props;
 
         const selected = this.props.value || this.state.selected;
@@ -248,9 +258,10 @@ class Cascader extends React.Component {
                     type="text"
                     onChange={this.handleInputChange}
                     onKeyDown={this.handleKeyDown}
-                    value={this.inputValueRender()}
+                    value={inputValue}
                     className={classNames("form-control", inputProps.className)}
                 />
+                {inputValue ? <i onClick={this.handleClear} className="ifont ifont-close gm-cursor" /> : null}
                 <i className="gm-arrow-down" />
             </div>
         );
