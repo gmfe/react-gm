@@ -320,3 +320,4 @@ class CascaderSelect5 extends React.Component {
 - `inputProps (object)` 定义里面input的props
 - `disabled (bool)` 禁用CascaderSelect
 - `valueRender (func)` 自定义value的展现
+- `filtrable` 搜索，支持拼音模糊搜索

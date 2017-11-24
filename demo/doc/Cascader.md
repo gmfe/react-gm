@@ -103,7 +103,7 @@ class Cascader1 extends React.Component {
 :::
 
 
-::: demo filter用法
+::: demo filtrable用法
 ```js
 class CascaderFilter extends React.Component {
     constructor(props) {
@@ -317,3 +317,4 @@ class Cascader6 extends React.Component {
 - `valueRender (func)` 自定义value的展现
 - `children` 自定义children的展现
 - `disabled` 禁止选择
+- `filtrable` 搜索，支持拼音模糊搜索
