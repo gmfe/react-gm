@@ -90,7 +90,7 @@ class CascaderSelect extends React.Component {
         }
 
         // 知道没有children才认为选择了
-        if (!result[result.length - 1].children) {
+        if (result.length && !result[result.length - 1].children) {
             let n = this.state.selected.slice();
             n.push(result);
             // 过滤
@@ -113,7 +113,7 @@ class CascaderSelect extends React.Component {
     }
 
     render() {
-        const {disabled, inputProps, valueRender} = this.props;
+        const {disabled, inputProps, valueRender, filtrable} = this.props;
         return (
             <div className={classnames("gm-cascader-select", {
                 "disabled": disabled
@@ -133,6 +133,7 @@ class CascaderSelect extends React.Component {
                     <Flex flex column onKeyDown={::this.handleKeyDown}>
                         <Cascader
                             valueRender={valueRender}
+                            filtrable={filtrable}
                             inputProps={inputProps}
                             disabled={disabled}
                             data={this.props.data}
@@ -155,7 +156,8 @@ CascaderSelect.propTypes = {
     selectedRender: PropTypes.func,
     inputProps: PropTypes.object,
     disabled: PropTypes.bool,
-	valueRender: PropTypes.func
+	valueRender: PropTypes.func,
+    filtrable: PropTypes.bool
 };
 CascaderSelect.defaultProps = {
     inputProps: {},

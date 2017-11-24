@@ -13,6 +13,15 @@ const cascaderData = [{
     value: '0',
     name: '广东',
     children: [{
+        value: '0',
+        name: '全部'
+    },{
+        value: '04',
+        name: '官方'
+    },{
+        value: '31',
+        name: '上海'
+    },{
         value: '01',
         name: '深圳'
     }, {
@@ -23,15 +32,34 @@ const cascaderData = [{
     value: '1',
     name: '上海',
     children: [{
+        value: '0',
+        name: '全部'
+    },{
         value: '11',
         name: '上海1'
     }, {
         value: '12',
         name: '上海2',
         children: [{
+        value: '0',
+        name: '全部'
+    },{
             value: '121',
-            name: 'adfadf'
+            name: 'sssss'
+        },{
+            value: '122',
+            name: 'ggggg'
         }]
+    }]
+}, {
+    value: 'r',
+    name: 'rrrr',
+    children: [{
+        value: '0',
+        name: '全部'
+    },{
+        value: 'rr',
+        name: 'yyyy'
     }]
 }];
 ```
@@ -73,6 +101,46 @@ class Cascader1 extends React.Component {
 <Cascader1/>
 ```
 :::
+
+
+::: demo filter用法
+```js
+class CascaderFilter extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ['0', '01'],
+            data: cascaderData
+        };
+    }
+    
+    render() {
+        return (
+            <div style={{width: '200px'}}>
+                <Cascader
+                    filtrable
+                    data={this.state.data}
+                    value={this.state.value}
+                    onChange={::this.handleChange}
+                />
+            </div>
+        );
+    }
+    
+    handleChange(value) {
+        console.log('handleChange:', value);
+        this.setState({
+            value
+        });
+    }
+}
+```
+
+```jsx
+<CascaderFilter/>
+```
+:::
+
 
 ::: demo 不提供value
 ```js

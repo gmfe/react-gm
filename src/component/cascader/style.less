@@ -22,6 +22,20 @@
         transform: rotate(180deg);
       }
     }
+
+    .ifont-close{
+      position: absolute;
+      display: block;
+      width: 10px;
+      height: 14px;
+      font-size: 14px;
+      line-height: 1;
+      top: 0;
+      right: 24px;
+      bottom: 0;
+      color: @gm-form-border-color;
+      margin: auto 0;
+    }
   }
 
   .gm-cascader-list {
@@ -30,11 +44,11 @@
 
     .list-group {
       margin: 0;
-      border-right: 1px solid @gm-form-border-color;
+      border: 1px solid @brand-primary;
       min-width: 100px;
       overflow: auto;
-      &:last-child {
-        border-right: none;
+      &:not(:first-child) {
+        border-left: none;
       }
       .list-group-item {
         padding: 5px 10px;
@@ -90,7 +104,7 @@
       }
     }
 
-    .gm-cascader-list {
+    .gm-trigger-popup{
       margin-top: 8px;
     }
   }

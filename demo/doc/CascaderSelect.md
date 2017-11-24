@@ -16,7 +16,15 @@ const cascaderData = [{
         name: '深圳'
     }, {
         value: '02',
-        name: '广州'
+        name: '广州',
+        children: [{
+            value: 'ddddd',
+            name: 'ddddd',
+            children: [{
+                value: 'eeeee',
+                name: 'eeeee'
+            }]
+        }]
     }]
 }, {
     value: '1',
@@ -73,6 +81,44 @@ class CascaderSelect1 extends React.Component {
 ```
 :::
 
+::: demo 多选带搜索
+```js
+class CascaderSelectWithFilter1 extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            selected: [[cascaderData[0], cascaderData[0].children[0]]],
+            data: cascaderData
+        };
+        this.handleSelect = ::this.handleSelect;
+    }
+    
+    handleSelect(selected) {
+        console.log(selected);
+        this.setState({
+            selected
+        });
+    }
+    
+    render() {
+        return (
+            <CascaderSelect
+                multiple
+                filtrable
+                data={this.state.data}
+                selected={this.state.selected}
+                onSelect={this.handleSelect}
+            />
+        );
+    }
+}
+```
+```jsx
+<CascaderSelectWithFilter1/>
+```
+:::
+
 ::: demo 单选
 ```js
 class CascaderSelect2 extends React.Component {
@@ -107,6 +153,43 @@ class CascaderSelect2 extends React.Component {
 <CascaderSelect2/>
 ```
 :::
+
+::: demo 单选带搜索
+```js
+class CascaderSelectWithFilter2 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: null,
+            data: cascaderData,
+        };
+        this.handleSelect = ::this.handleSelect;
+    }
+    
+    handleSelect(selected) {
+        console.log(selected);
+        this.setState({
+            selected
+        });
+    }
+    
+    render() {
+        return (
+            <CascaderSelect
+                filtrable
+                data={this.state.data}
+                selected={this.state.selected}
+                onSelect={this.handleSelect}
+            />
+        );
+    }
+}
+```
+```jsx
+<CascaderSelectWithFilter2/>
+```
+:::
+
 
 ::: demo 自定义显示
 ```js

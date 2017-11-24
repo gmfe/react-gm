@@ -4,26 +4,83 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import Flex from '../flex';
 import Trigger from '../trigger';
+import { pinYinFilter, pinyin } from 'gm-util';
+
+// 给list中每个元素添加_path
+function mapPath(list, searchText, parentPath = []) {
+    _.each(list, item => {
+        if (item._path === undefined) item._path = [...parentPath, item.value];
+
+        if (item.children) mapPath(item.children, searchText, [...item._path]);
+    });
+}
+
+// 找出list树下匹配searchText的最深元素的路径
+function getMaxDeepPathOfMatchElement(list, searchText) {
+    let maxLengthPath = [];
+
+    function findMaxLengthPath(list, searchText) {
+        _.each(list, item => {
+            // 匹配首字母
+            const first_letter = _.map(pinyin(item.name, 'first_letter'), value => value[0]).join('');
+            //全拼集合
+            const normal = _.map(pinyin(item.name), value => value[0]).join('');
+
+            if ((item.name.indexOf(searchText) > -1 || normal.indexOf(searchText) > -1 ||
+                first_letter.indexOf(searchText) > -1) && maxLengthPath.length < item._path.length) {
+                maxLengthPath = item._path;
+            }
+
+            if (item.children) findMaxLengthPath(item.children, searchText);
+        });
+    }
+
+    findMaxLengthPath(list, searchText);
+
+    return maxLengthPath;
+}
 
 class Cascader extends React.Component {
     constructor(props) {
         super(props);
+
+        // deep clone data,然后给data生成_path数据
+        const data = _.cloneDeep(props.data);
+        mapPath(data);
+
         this.state = {
-            value: this.props.value || []
+            selected: props.value ? [...props.value] : [], // 选中状态
+            filterInput: null, // filtrable为true时，输入框的内容
+            data: data
         };
+
+        this.handleSelect = :: this.handleSelect;
+        this.handleClear = :: this.handleClear;
+        this.handleInputChange = :: this.handleInputChange;
+        this.handleKeyDown = :: this.handleKeyDown;
+        this.inputValueRender = :: this.inputValueRender;
     }
 
     componentWillReceiveProps(nextProps) {
         if ('value' in nextProps) {
             this.setState({
-                value: nextProps.value || []
+                selected: nextProps.value ? [...nextProps.value] : []
             });
+        }
+
+        if (this.props.data !== nextProps.data) {
+            const data = _.cloneDeep(this.props.data);
+            mapPath(data); // 给data生成_path数据
+
+            this.setState({ data });
         }
     }
 
     getList() {
-        let result = [this.props.data];
-        _.each(this.state.value, (value, i) => {
+        const selected = this.state.selected,
+            result = [this.state.data];
+
+        _.each(selected, (value, i) => {
             const match = _.find(result[i], v => v.value === value);
             if (match) {
                 if (match.children) {
@@ -35,29 +92,136 @@ class Cascader extends React.Component {
         return result;
     }
 
-    handleSelect(value, index) {
-        const selected = this.state.value;
-        selected[index] = value.value;
-        selected.length = index + 1;
-        this.setState({
-            selected
+    getFilterList(list, searchText) {
+        return _.filter(list, item => {
+            if (item.children) {
+                item.children = this.getFilterList(item.children, searchText);
+
+                if (item.children.length) return true;
+            }
+
+            if (pinYinFilter([item], searchText, (v) => v.name).length) return true;
+
+            return false;
         });
-        this.props.onChange(selected);
+    }
+
+    handleClear(e) {
+        e.stopPropagation();
+
+        this.setState({ selected: [] }, () => {
+            this.handleSelect();
+        });
+    }
+
+    handleSelect() {
+        this.setState({ filterInput: null });
+        this.props.onChange(this.state.selected);
+
+        // 选中后关闭cascader
+        setTimeout(() => {
+            window.document.body.click();
+        }, 0);
+        window.document.activeElement.blur();  // blur input
+    }
+
+    handleMouseEnter(selected) {
+        this.setState({ selected });
+    }
+
+    handleInputChange(e) {
+        const filterInput = e.target.value;
+
+        if (this.props.filtrable) {
+            this.setState({
+                filterInput,
+                selected: getMaxDeepPathOfMatchElement(this.state.data, filterInput)
+            });
+        }
+    }
+
+    handleKeyDown(event) {
+        const { keyCode } = event;
+
+        // 键盘上下键控制最当前选中列
+        if (keyCode === 38 || keyCode === 40) {
+            const listArr = this.getList(),
+                selected = [...this.state.selected],
+                len = selected.length;
+
+            if (!len) {
+                this.setState({
+                    selected: [listArr[0][0].value],
+                    filterInput: ''
+                });
+                return;
+            }
+
+            const lastList = listArr[len - 1],
+                currentIndex = _.findIndex(lastList, item => item.value === selected[len - 1]);
+
+            let lastValue = selected[len - 1];
+
+            if (keyCode === 38 && currentIndex > 0) {
+                lastValue = lastList[currentIndex - 1].value;
+            } else if (keyCode === 40 && currentIndex < lastList.length - 1) {
+                lastValue = lastList[currentIndex + 1].value;
+            }
+
+            selected[len - 1] = lastValue;
+
+            this.setState({
+                selected
+            });
+        } else if (keyCode === 13) { // 键盘 回车
+            this.handleSelect();
+        }
+    }
+
+    inputValueRender() {
+        const { filterInput, data } = this.state,
+            { valueRender, filtrable } = this.props,
+            selected = this.props.value || this.state.selected;
+
+        let value = [];
+        if (selected.length > 0) {
+            _.each(selected, (v, i) => {
+                const match = _.find(i === 0 ? data : value[i - 1].children, val => {
+                    return v === val.value;
+                });
+                value.push(match);
+            });
+        }
+
+        if (!filtrable) {
+            return valueRender ? valueRender(value) : _.map(value, v => v.name).join(',');
+        }
+
+        return filterInput === null ? (valueRender ? valueRender(value) : _.map(value, v => v.name).join(',')) : filterInput;
     }
 
     renderOverlay() {
+        const selected = this.state.selected;
+
         return (
             <Flex className={classNames("gm-cascader-list", this.props.className)}>
                 {_.map(this.getList(), (value, i) => (
                     <Flex column key={i} className="list-group gm-block">
                         {_.map(value, v => (
-                            <a key={v.value}
-                               title={v.name}
-                               onClick={this.handleSelect.bind(this, v, i)}
-                               className={classNames("list-group-item", {
-                                   active: v.value === this.state.value[i]
-                               })}
-                            >{v.name}</a>
+                            <Flex
+                                key={v.value}
+                                title={v.name}
+                                justifyBetween
+                                onClick={this.handleSelect}
+                                onMouseEnter={this.handleMouseEnter.bind(this, v._path)}
+                                className={classNames("list-group-item", {
+                                    active: v.value === selected[i]
+                                })}>
+                                {v.name}&nbsp;
+                                {v.children && v.children.length ? <i className={classNames("gm-arrow-right", {
+                                    active: v.value === selected[i]
+                                })} /> : null}
+                            </Flex>
                         ))}
                     </Flex>
                 ))}
@@ -66,21 +230,25 @@ class Cascader extends React.Component {
     }
 
     renderChildren() {
-        const {data, valueRender, disabled} = this.props;
-        let {inputProps} = this.props;
+        const { disabled } = this.props,
+            { data } = this.state,
+            inputValue = this.inputValueRender();
+        let { inputProps } = this.props;
 
+        const selected = this.props.value || this.state.selected;
         let value = [];
-        if (this.state.value.length > 0) {
-            _.each(this.state.value, (v, i) => {
+        if (selected.length > 0) {
+            _.each(selected, (v, i) => {
                 const match = _.find(i === 0 ? data : value[i - 1].children, val => {
                     return v === val.value;
                 });
                 value.push(match);
             });
         }
+
         // disabled 的优先级比 inputProps的优先级高
-        if(disabled) {
-            inputProps = Object.assign({}, inputProps, {disabled});
+        if (disabled) {
+            inputProps = Object.assign({}, inputProps, { disabled });
         }
 
         return (
@@ -88,21 +256,24 @@ class Cascader extends React.Component {
                 <input
                     {...inputProps}
                     type="text"
-                    onChange={_.noop}
-                    value={valueRender ? valueRender(value) : _.map(value, v => v.name).join(',')}
+                    onChange={this.handleInputChange}
+                    onKeyDown={this.handleKeyDown}
+                    value={inputValue}
                     className={classNames("form-control", inputProps.className)}
                 />
-                <i className="gm-arrow-down"/>
+                {inputValue ? <i onClick={this.handleClear} className="ifont ifont-close gm-cursor" /> : null}
+                <i className="gm-arrow-down" />
             </div>
         );
     }
 
     render() {
-        const {disabled} = this.props;
+        const { disabled } = this.props;
+
         return (
             <Trigger
                 disabled={disabled}
-                component={<div className="gm-cascader"/>}
+                component={<div className="gm-cascader" />}
                 popup={this.renderOverlay()}
             >
                 {this.props.children ? this.props.children : this.renderChildren()}
@@ -124,7 +295,9 @@ Cascader.propTypes = {
     inputProps: PropTypes.object,
     valueRender: PropTypes.func,
     children: PropTypes.element,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    // 是否可搜索
+    filtrable: PropTypes.bool
 };
 
 Cascader.defaultProps = {
