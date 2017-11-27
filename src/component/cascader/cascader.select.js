@@ -113,7 +113,7 @@ class CascaderSelect extends React.Component {
     }
 
     render() {
-        const {disabled, inputProps, valueRender, filtrable} = this.props;
+        const {disabled, inputProps, valueRender, filtrable, onlyChildSelectable} = this.props;
         return (
             <div className={classnames("gm-cascader-select", {
                 "disabled": disabled
@@ -134,6 +134,7 @@ class CascaderSelect extends React.Component {
                         <Cascader
                             valueRender={valueRender}
                             filtrable={filtrable}
+                            onlyChildSelectable={onlyChildSelectable}
                             inputProps={inputProps}
                             disabled={disabled}
                             data={this.props.data}
@@ -157,11 +158,14 @@ CascaderSelect.propTypes = {
     inputProps: PropTypes.object,
     disabled: PropTypes.bool,
 	valueRender: PropTypes.func,
-    filtrable: PropTypes.bool
+    filtrable: PropTypes.bool,
+    onlyChildSelectable: PropTypes.bool
 };
 CascaderSelect.defaultProps = {
     inputProps: {},
-    disabled: false
+    disabled: false,
+    filtrable:false,
+    onlyChildSelectable:false
 };
 
 export default CascaderSelect;

@@ -119,6 +119,7 @@ class CascaderFilter extends React.Component {
             <div style={{width: '200px'}}>
                 <Cascader
                     filtrable
+                    onlyChildSelectable
                     data={this.state.data}
                     value={this.state.value}
                     onChange={::this.handleChange}
