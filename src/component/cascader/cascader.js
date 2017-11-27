@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classNames from 'classnames';
@@ -54,6 +55,8 @@ class Cascader extends React.Component {
             data: data
         };
 
+        this.listActiveRef = [];
+
         this.handleSelect = :: this.handleSelect;
         this.handleClear = :: this.handleClear;
         this.handleInputChange = :: this.handleInputChange;
@@ -74,6 +77,12 @@ class Cascader extends React.Component {
 
             this.setState({ data });
         }
+    }
+
+    componentDidUpdate() {
+        _.each(this.listActiveRef, ref => {
+            ref && ReactDom.findDOMNode(ref).scrollIntoViewIfNeeded();
+        });
     }
 
     getList() {
@@ -222,6 +231,8 @@ class Cascader extends React.Component {
     renderOverlay() {
         const selected = this.state.selected;
 
+        this.listActiveRef = [];
+
         return (
             <Flex className={classNames("gm-cascader-list", this.props.className)}>
                 {_.map(this.getList(), (value, i) => (
@@ -235,7 +246,11 @@ class Cascader extends React.Component {
                                 onMouseEnter={this.handleMouseEnter.bind(this, v._path)}
                                 className={classNames("list-group-item", {
                                     active: v.value === selected[i]
-                                })}>
+                                })}
+                                ref={ref => {
+                                    if (v.value === selected[i]) this.listActiveRef[i] = ref;
+                                }}
+                            >
                                 {v.name}&nbsp;
                                 {v.children && v.children.length ? <i className={classNames("gm-arrow-right", {
                                     active: v.value === selected[i]
