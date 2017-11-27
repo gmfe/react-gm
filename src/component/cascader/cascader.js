@@ -115,8 +115,27 @@ class Cascader extends React.Component {
     }
 
     handleSelect() {
-        this.setState({ filterInput: null });
-        this.props.onChange(this.state.selected);
+        const { onlyChildSelectable } = this.props,
+            { selected, data } = this.state;
+
+        const value = [];
+        if (selected.length > 0) {
+            _.each(selected, (v, i) => {
+                const match = _.find(i === 0 ? data : value[i - 1].children, val => {
+                    return v === val.value;
+                });
+                value.push(match);
+            });
+        }
+
+        // 如果选择有children的，则清空输入框
+        if (onlyChildSelectable && value[value.length - 1].children) {
+            this.setState({ filterInput: '' });
+            this.props.onChange([]);
+        } else {
+            this.setState({ filterInput: null });
+            this.props.onChange(selected);
+        }
 
         // 选中后关闭cascader
         setTimeout(() => {
@@ -297,13 +316,16 @@ Cascader.propTypes = {
     children: PropTypes.element,
     disabled: PropTypes.bool,
     // 是否可搜索
-    filtrable: PropTypes.bool
+    filtrable: PropTypes.bool,
+    // 只允许选择子节点，有children则清空输入框
+    onlyChildSelectable: PropTypes.bool
 };
 
 Cascader.defaultProps = {
     onChange: _.noop,
     inputProps: {},
-    disabled: false
+    disabled: false,
+    onlyChildSelectable: false
 };
 
 export default Cascader;

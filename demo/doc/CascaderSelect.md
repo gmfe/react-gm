@@ -58,7 +58,7 @@ class CascaderSelect1 extends React.Component {
     }
     
     handleSelect(selected) {
-        console.log(selected);
+        console.log('handleSelect', selected);
         this.setState({
             selected
         });
@@ -95,7 +95,7 @@ class CascaderSelectWithFilter1 extends React.Component {
     }
     
     handleSelect(selected) {
-        console.log(selected);
+        console.log('handleSelect', selected);
         this.setState({
             selected
         });
@@ -132,7 +132,7 @@ class CascaderSelect2 extends React.Component {
     }
     
     handleSelect(selected) {
-        console.log(selected);
+        console.log('handleSelect', selected);
         this.setState({
             selected
         });
@@ -167,7 +167,7 @@ class CascaderSelectWithFilter2 extends React.Component {
     }
     
     handleSelect(selected) {
-        console.log(selected);
+        console.log('handleSelect', selected);
         this.setState({
             selected
         });
@@ -190,6 +190,43 @@ class CascaderSelectWithFilter2 extends React.Component {
 ```
 :::
 
+::: demo 单选带搜索 & onlyChildSelectable
+```js
+class CascaderSelectWithFilter3 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: null,
+            data: cascaderData,
+        };
+        this.handleSelect = ::this.handleSelect;
+    }
+    
+    handleSelect(selected) {
+        console.log('handleSelect', selected);
+        this.setState({
+            selected
+        });
+    }
+    
+    render() {
+        return (
+            <CascaderSelect
+                filtrable
+                onlyChildSelectable
+                data={this.state.data}
+                selected={this.state.selected}
+                onSelect={this.handleSelect}
+            />
+        );
+    }
+}
+```
+```jsx
+<CascaderSelectWithFilter3/>
+```
+:::
+
 
 ::: demo 自定义显示
 ```js
@@ -209,7 +246,7 @@ class CascaderSelect3 extends React.Component {
     }
     
     handleSelect(selected) {
-        console.log(selected);
+        console.log('handleSelect', selected);
         this.setState({
             selected
         });
@@ -247,7 +284,7 @@ class CascaderSelect4 extends React.Component {
     }
     
     handleSelect(selected) {
-        console.log(selected);
+        console.log('handleSelect', selected);
         this.setState({
             selected
         });
@@ -285,7 +322,7 @@ class CascaderSelect5 extends React.Component {
     }
     
     handleSelect(selected) {
-        console.log(selected);
+        console.log('handleSelect', selected);
         this.setState({
             selected
         });
