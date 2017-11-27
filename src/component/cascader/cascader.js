@@ -129,7 +129,7 @@ class Cascader extends React.Component {
         }
 
         // 如果选择有children的，则清空输入框
-        if (onlyChildSelectable && value[value.length - 1].children) {
+        if (onlyChildSelectable && value.length && value[value.length - 1].children) {
             this.setState({ filterInput: '' });
             this.props.onChange([]);
         } else {
