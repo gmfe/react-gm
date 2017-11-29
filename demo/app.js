@@ -39,7 +39,6 @@ class App extends React.Component {
     }
 
     handleClickAnchor(e) {
-        e.preventDefault();
         const {tagName, className} = e.target;
         const {search, pathname} = this.props.location;
 
