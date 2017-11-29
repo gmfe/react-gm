@@ -46,7 +46,7 @@ class Popover extends React.Component {
             style,
             popup, type,
             top, right, center,
-            showArrow
+            showArrow, arrowLeft
         } = this.props;
 
         this.setState({
@@ -68,6 +68,7 @@ class Popover extends React.Component {
                     right={right}
                     center={center}
                     showArrow={showArrow}
+                    arrowLeft={arrowLeft}
                 >
                     {popup}
                 </Popup>
@@ -163,7 +164,8 @@ Popover.propTypes = {
     top: PropTypes.bool,
     center: PropTypes.bool,
 
-    showArrow: PropTypes.bool // 是否显示三角标
+    showArrow: PropTypes.bool, // 是否显示三角标
+    arrowLeft: PropTypes.string
 };
 
 Popover.defaultProps = {

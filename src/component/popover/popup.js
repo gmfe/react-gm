@@ -20,8 +20,14 @@ class Popup extends React.Component {
 
     renderTriggerArrow() {
         const {
-            top, right, center
+            top, right, center,
+            arrowLeft
         } = this.props;
+
+        const style = {};
+        if (arrowLeft) {
+            style.left = arrowLeft;
+        }
 
         return (
             <div
@@ -32,6 +38,7 @@ class Popup extends React.Component {
                     'gm-popover-popup-arrow-left': !center && !right,
                     'gm-popover-popup-arrow-center': center
                 })}
+                style={style}
             />
         );
     }
@@ -40,6 +47,7 @@ class Popup extends React.Component {
         const {
             top, right, center,
             showArrow,
+            arrowLeft, // eslint-disable-line
             children,
             rect,
             style,
@@ -84,7 +92,8 @@ Popup.propTypes = {
     center: PropTypes.bool,
     top: PropTypes.bool,
     right: PropTypes.bool,
-    showArrow: PropTypes.bool // 是否显示三角标
+    showArrow: PropTypes.bool, // 是否显示三角标
+    arrowLeft: PropTypes.string
 };
 
 Popup.defaultProps = {

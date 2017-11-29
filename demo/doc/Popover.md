@@ -60,6 +60,12 @@ class PopoverWrap extends React.Component {
                     <Popover showArrow popup={this.renderPopup()}>
                         <button className="btn btn-default">showArrow</button>
                     </Popover>
+                    <Popover showArrow right popup={this.renderPopup()}>
+                        <button className="btn btn-default">showArrow right</button>
+                    </Popover>
+                    <Popover showArrow arrowLeft="0px" popup={this.renderPopup()}>
+                        <button className="btn btn-default">showArrow arrowLeft 0</button>
+                    </Popover>
                 </div>
                 <div>disabled</div>
                 <div>
