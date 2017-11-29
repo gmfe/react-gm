@@ -39,6 +39,8 @@ import MultipleFilterSelect from './component/filter_select/multiple.filter.sele
 import Menu from './component/menu';
 import Transfer from './component/transfer';
 import ImagePreview from './component/image_preview';
+import Mask from './component/mask';
+import Popover from './component/popover';
 
 import Validator from './validator';
 import Emitter from './emitter';
@@ -127,6 +129,9 @@ export {
     Transfer,
     FilterSelect,
     MultipleFilterSelect,
+    Mask,
+    Popover,
+
     Menu,
     Emitter,
     ImagePreview

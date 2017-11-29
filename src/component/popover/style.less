@@ -1,0 +1,82 @@
+.gm-popup {
+  position: absolute;
+  z-index: 900;
+  background: white;
+  // 默认arrow边框颜色 @gm-border-color
+  // 默认arrow背景色 #FFF
+  .gm-popover-popup-arrow {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+
+    &:after {
+      content: " ";
+      display: block;
+      width: 0;
+      height: 0;
+      position: absolute;
+      margin-left: -4px;
+      border: 4px solid transparent;
+    }
+
+    &.gm-popover-popup-arrow-bottom {
+      top: -5px;
+      border-top-width: 0;
+      border-bottom-color: hsla(0, 0%, 85%, .7);
+      &:after {
+        top: 1px;
+        border-top-width: 0;
+        border-bottom-color: white;
+      }
+    }
+
+    &.gm-popover-popup-arrow-left {
+      left: 10px;
+    }
+
+    &.gm-popover-popup-arrow-top {
+      bottom: -5px;
+      border-bottom-width: 0;
+      border-top-color: hsla(0, 0%, 85%, .7);
+      &:after {
+        bottom: 1px;
+        border-bottom-width: 0;
+        border-top-color: white;
+      }
+    }
+
+    &.gm-popover-popup-arrow-right {
+      left: ~"calc(100% - 20px)";
+    }
+
+    &.gm-popover-popup-arrow-center {
+      left: ~"calc(50% - 4px)";
+    }
+
+  }
+
+  .gm-popover-popup-popup {
+    position: absolute;
+    top: 100%;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .gm-popover-popup-popup-no-arrow {
+    margin-top: 3px;
+  }
+
+  .gm-popover-popup-popup-right {
+    right: 0;
+    left: auto;
+  }
+
+  .gm-popover-popup-popup-top {
+    top: auto;
+    bottom: 100%
+  }
+}

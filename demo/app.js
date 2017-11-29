@@ -98,13 +98,24 @@ class App extends React.Component {
         );
     }
 
+    renderMenu() {
+        const {location: {pathname}} = this.props;
+        if (pathname.startsWith('/doc')) {
+            return <NavConfigDoc/>;
+        } else if (pathname.startsWith('/standard')) {
+            return <NavConfigStandard/>;
+        } else {
+            return null;
+        }
+    }
+
     render() {
-        const {children, location: {pathname}} = this.props;
+        const {children} = this.props;
 
         return (
             <Framework
                 topContent={this.renderTopContent()}
-                menu={pathname.startsWith('/doc') ? <NavConfigDoc/> : <NavConfigStandard/>}
+                menu={this.renderMenu()}
             >
                 <div onClick={this.handleClickAnchor}>
                     {children}

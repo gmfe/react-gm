@@ -27,7 +27,7 @@ class Modal extends React.Component {
         window.document.body.addEventListener('keydown', this.handleKeyDown);
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         window.document.body.removeEventListener('keydown', this.handleKeyDown);
     }
 

@@ -46,6 +46,7 @@ const data = [{
         {name: 'Tip 提示', path: '/doc/Tip'},
         {name: 'Dialog 对话框', path: '/doc/Dialog'},
         {name: 'Modal 模态框', path: '/doc/Modal'},
+        {name: 'Popover 浮层', path: '/doc/Popover'},
         {name: 'Trigger 触发器', path: '/doc/Trigger'}
     ]
 }, {

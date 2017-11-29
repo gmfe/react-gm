@@ -14,6 +14,7 @@ class Trigger extends React.Component {
         this.handleMouseEnter = ::this.handleMouseEnter;
         this.handleMouseLeave = ::this.handleMouseLeave;
         this.handleBodyClick = ::this.handleBodyClick;
+        this.setActive = ::this.setActive;
 
         this.timer = null;
         this.refPopup = null;
@@ -27,13 +28,17 @@ class Trigger extends React.Component {
         window.document.body.removeEventListener('click', this.handleBodyClick);
     }
 
+    setActive(active) {
+        this.setState({
+            active
+        });
+    }
+
     handleBodyClick(event) {
         const target = event.target;
         const root = findDOMNode(this);
         if (!contains(root, target)) {
-            this.setState({
-                active: false
-            });
+            this.setActive(false);
         }
     }
 
@@ -55,15 +60,11 @@ class Trigger extends React.Component {
         }
 
         if (disabled === false) {
-            this.setState({
-                active
-            });
+            this.setActive(active);
         }
         // 如果没有props disabled，判定children是否不可用状态
         if (!children.props.disabled) {
-            this.setState({
-                active
-            });
+            this.setActive(active);
         }
     }
 
@@ -77,16 +78,12 @@ class Trigger extends React.Component {
         clearTimeout(this.timer);
 
         if (disabled === false) {
-            this.setState({
-                active: true
-            });
+            this.setActive(true);
         }
 
         // 如果没有props disabled，判定children是否不可用状态
         if (!children.props.disabled) {
-            this.setState({
-                active: true
-            });
+            this.setActive(true);
         }
     }
 
@@ -101,18 +98,14 @@ class Trigger extends React.Component {
 
         if (disabled === false) {
             this.timer = setTimeout(() => {
-                this.setState({
-                    active: false
-                });
+                this.setActive(false);
             }, 500);
         }
 
         // 如果没有props disabled，判定children是否不可用状态
         if (!children.props.disabled) {
             this.timer = setTimeout(() => {
-                this.setState({
-                    active: false
-                });
+                this.setActive(false);
             }, 500);
         }
     }
@@ -146,11 +139,14 @@ class Trigger extends React.Component {
     }
 
     render() {
-        const {component, children, popup,
+        const {
+            component, children, popup,
             type, right, top,
-            showArrow, arrowBgColor, arrowBorderColor} = this.props;
-        const child = React.Children.only(children);
+            showArrow, arrowBgColor, arrowBorderColor
+        } = this.props;
         const {active} = this.state;
+
+        const child = React.Children.only(children);
 
         const p = {};
         if (type === 'focus' || type === 'click') {
@@ -164,18 +160,21 @@ class Trigger extends React.Component {
 
         return React.cloneElement(component, Object.assign({}, componentProps, {
             className: classNames(component.props.className, 'gm-trigger'),
-            children: [child, active ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) : undefined,
+            children: [
+                child,
+                active ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) : undefined,
                 active ? React.createElement('div', {
-                        key: 'popup',
-                        ref: ref => this.refPopup = ref,
-                        className: classNames('gm-trigger-popup gm-box-shadow-bottom', {
-                            'gm-trigger-popup-right': right,
-                            'gm-trigger-popup-top': top,
-                            'gm-box-shadow-top': top,
-                            'gm-trigger-popup-no-arrow': !showArrow
-                        }),
-                        children: [popup]
-                    }) : undefined]
+                    key: 'popup',
+                    ref: ref => this.refPopup = ref,
+                    className: classNames('gm-trigger-popup gm-box-shadow-bottom', {
+                        'gm-trigger-popup-right': right,
+                        'gm-trigger-popup-top': top,
+                        'gm-box-shadow-top': top,
+                        'gm-trigger-popup-no-arrow': !showArrow
+                    }),
+                    children: [popup]
+                }) : undefined
+            ]
         }));
     }
 }
