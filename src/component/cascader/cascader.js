@@ -71,8 +71,8 @@ class Cascader extends React.Component {
             });
         }
 
-        if (this.props.data !== nextProps.data) {
-            const data = _.cloneDeep(this.props.data);
+        if (nextProps.data !== this.props.data) {
+            const data = _.cloneDeep(nextProps.data);
             mapPath(data); // 给data生成_path数据
 
             this.setState({ data });
