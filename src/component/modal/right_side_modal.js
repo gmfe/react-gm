@@ -3,21 +3,12 @@ import PropTypes from 'prop-types';
 import Modal from './index';
 import _ from 'lodash';
 
-class RightSideModal extends React.Component {
-    render() {
-        const rightSideProps = {
-            ...this.props,
-            modalClassName: 'gm-modal-right-side'
-        };
-
-        return <Modal {...rightSideProps} />;
-    }
-}
+const RightSideModal = (props) => <Modal {...props} className='gm-modal-right-side'/>;
 
 RightSideModal.render = (props) => {
     const rightSideProps = {
         ...props,
-        modalClassName: 'gm-modal-right-side'
+        className: 'gm-modal-right-side'
     };
     Modal.render(rightSideProps);
 };

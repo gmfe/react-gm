@@ -3,21 +3,12 @@ import PropTypes from 'prop-types';
 import Modal from './index';
 import _ from 'lodash';
 
-class CleanModal extends React.Component {
-    render() {
-        const cleanProps = {
-            ...this.props,
-            modalClassName: 'gm-modal-clean'
-        };
-
-        return <Modal {...cleanProps} />;
-    }
-}
+const CleanModal = (props) => <Modal {...props} className='gm-modal-clean'/>;
 
 CleanModal.render = (props) => {
     const cleanProps = {
         ...props,
-        modalClassName: 'gm-modal-clean'
+        className: 'gm-modal-clean'
     };
     Modal.render(cleanProps);
 };

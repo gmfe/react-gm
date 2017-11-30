@@ -98,7 +98,7 @@ class Modal extends React.Component {
     }
 
     render() {
-        const {show, title, size, children, type, style, noContentPadding, modalClassName} = this.props;
+        const {show, title, size, children, type, style, noContentPadding, className} = this.props;
         if (!show) {
             return null;
         }
@@ -110,7 +110,7 @@ class Modal extends React.Component {
             <div>
                 <div className="gm-modal-mask"/>
                 <div
-                    className={classNames("gm-modal", modalClassName)}
+                    className={classNames("gm-modal", className)}
                     tabIndex="-1"
                     onClick={this.handleMask}
                 >
@@ -190,7 +190,7 @@ Modal.propTypes = {
         PropTypes.element
     ]),
     okBtnClassName: PropTypes.string, // Modal confirm okbtn的className
-    modalClassName: PropTypes.string,
+    className: PropTypes.string,
     noContentPadding: PropTypes.bool
 };
 
