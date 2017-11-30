@@ -1,13 +1,12 @@
 import React from "react";
 import PreviewModal from "./preview_modal";
-import Modal from "../modal";
+import CleanModal from "../modal/clean_modal";
 
 const ImagePreview = props => {
-    Modal.render({
-        children: <PreviewModal {...props} onHide={Modal.hide} />,
-        clean: true,
+    CleanModal.render({
+        children: <PreviewModal {...props} onHide={CleanModal.hide} />,
         show: true,
-        onHide: Modal.hide,
+        onHide: CleanModal.hide,
         disableMaskClose: true,
         style: {
             background: "rgba(0, 0, 0, 1)",
