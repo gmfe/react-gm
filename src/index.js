@@ -43,6 +43,7 @@ import Transfer from './component/transfer';
 import ImagePreview from './component/image_preview';
 import Mask from './component/mask';
 import Popover from './component/popover';
+import ColorPicker from './component/color_picker';
 
 import Validator from './validator';
 import Emitter from './emitter';
@@ -135,6 +136,7 @@ export {
     MultipleFilterSelect,
     Mask,
     Popover,
+    ColorPicker,
 
     Menu,
     Emitter,

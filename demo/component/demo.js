@@ -1,7 +1,14 @@
 import React from 'react';
 import Popover from '../../src/component/popover';
+import ColorPicker from '../../src/component/color_picker';
 
 class Component extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            color: '#8ED1FC'
+        };
+    }
 
     render() {
         return (
@@ -38,6 +45,16 @@ class Component extends React.Component {
                 <Popover type="click" popup={<div>asdfasdfasdfadfasdafasf</div>}>
                     <button>click</button>
                 </Popover>
+
+                <ColorPicker
+                    color={this.state.color}
+                    onChange={color => {
+                        console.log(color);
+                        this.setState({color});
+                    }}
+                >
+                    <button>color picker</button>
+                </ColorPicker>
             </div>
         );
     }
