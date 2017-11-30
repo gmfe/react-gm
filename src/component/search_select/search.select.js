@@ -54,10 +54,15 @@ class SearchSelect extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if ('selected' in nextProps) {
-            this.setState({
-                value: nextProps.selected && nextProps.selected.name || '',
+            const state = {
                 selected: getPropsSelected(nextProps)
-            });
+            };
+
+            if (this.props.isSelectedChangeValue) {
+                state.value = nextProps.selected && nextProps.selected.name || '';
+            }
+            
+            this.setState(state);
         }
     }
 
@@ -367,7 +372,8 @@ SearchSelect.propTypes = {
     multiple: PropTypes.bool,
     placeholder: PropTypes.string,
     isScrollToSelected: PropTypes.bool,
-    onInputFocus: PropTypes.func
+    onInputFocus: PropTypes.func,
+    isSelectedChangeValue: PropTypes.bool
 };
 
 SearchSelect.defaultProps = {
@@ -379,7 +385,8 @@ SearchSelect.defaultProps = {
     multiple: false,
     placeholder: '',
     onInputFocus: () => {
-    }
+    },
+    isSelectedChangeValue: false
 };
 
 export default SearchSelect;
