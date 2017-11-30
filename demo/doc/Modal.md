@@ -1,10 +1,10 @@
 ---
 imports:
-    import {Modal} from '../../src/index';
+    import {Modal, RightSideModal, CleanModal} from '../../src/index';
 ---
 ## Modal
 
-模态框，出Modal浮层
+模态框，出Modal浮层.  高阶Modal组件:[RightSideModal](#/doc/RightSideAndCleanModal) ,[CleanModal](#/doc/RightSideAndCleanModal)
 
 ::: demo
 ```js
@@ -203,71 +203,7 @@ class ModalWrap3 extends React.Component {
 ```
 :::
 
-::: demo 干净的Modal
-```js
-class ModalWrap4 extends React.Component {
-    handleModal(){
-        Modal.render({
-            children: <div>啦啦啦啦阿里<br/>adfafaf</div> ,
-            onHide: Modal.hide,
-            clean: true,
-            style: {
-                width: 'auto',
-                background: 'black',
-                margin: '50px',
-                height: 'calc(100% - 100px)'
-            }
-        });
-    }
 
-    render() {
-            return (
-                <div>
-                    <button
-                        className="btn btn-default"
-                        onClick={this.handleModal}
-                    >clean Modal</button>
-                </div>
-            );
-        }
-}
-```
-```jsx
-<ModalWrap4/>
-```
-:::
-
-::: demo 右侧的modal
-```js
-class ModalWrap5 extends React.Component {
-    handleModal(){
-        Modal.render({
-            children: <div>示例示例<br/>滴滴滴</div>,
-            title: '右侧弹出modal',
-            onHide: Modal.hide,
-            rightSide: true,
-            style: {
-                width: '600px'
-            }
-        });
-    }
-
-    render() {
-            return (
-                <div>
-                    <button
-                        className="btn btn-default"
-                        onClick={this.handleModal}
-                    >right-side Modal</button>
-                </div>
-            );
-        }
-}
-```
-```jsx
-<ModalWrap5/>
-```
-:::
 
 ::: demo 没有padding的modal
 ```js
@@ -308,8 +244,6 @@ class ModalWrap6 extends React.Component {
 - `size (string ['lg', 'md', 'sm'])` modal尺寸，默认md
 - `title (string|element)` 标题
 - `children` 模态框里面的内容
-- `clean` 干净版
-- `rightSide` 右侧版
 - `noContentPadding` 内容没有padding
 
 ### Static

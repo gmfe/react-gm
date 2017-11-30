@@ -43,6 +43,7 @@ import Dropper from 'bundle-loader?lazy!./doc/Dropper.md';
 import Switch from 'bundle-loader?lazy!./doc/Switch.md';
 import InputNumber from 'bundle-loader?lazy!./doc/InputNumber.md';
 import Modal from 'bundle-loader?lazy!./doc/Modal.md';
+import RightSideAndCleanModal from 'bundle-loader?lazy!./doc/RightSideAndCleanModal.md';
 import Collapse from 'bundle-loader?lazy!./doc/Collapse.md';
 import DropDown from 'bundle-loader?lazy!./doc/DropDown.md';
 import TreeSelect from 'bundle-loader?lazy!./doc/TreeSelect.md';
@@ -95,6 +96,7 @@ const pageMap = {
         Switch,
         InputNumber,
         Modal,
+        RightSideAndCleanModal,
         Collapse,
         DropDown,
         TreeSelect,
