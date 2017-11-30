@@ -28,6 +28,8 @@ import Loading from './component/loading';
 import InputNumber from './component/input/input.number';
 import LayoutRoot from './component/layout_root';
 import Modal from './component/modal';
+import RightSideModal from './component/modal/right_side_modal';
+import CleanModal from './component/modal/clean_modal';
 import Collapse from './component/collapse';
 import { DropDown, DropDownItem, DropDownItems } from './component/drop_down';
 import TreeSelect from './component/tree_select';
@@ -113,6 +115,8 @@ export {
     InputNumber,
     LayoutRoot,
     Modal,
+    RightSideModal,
+    CleanModal,
     Collapse,
     DropDown, DropDownItems, DropDownItem,
     TreeSelect,
