@@ -5,21 +5,21 @@ import _ from 'lodash';
 
 class CleanModal extends React.Component {
     render() {
-        const props = {
+        const cleanProps = {
             ...this.props,
             modalClassName: 'gm-modal-clean'
         };
 
-        return <Modal {...props} />;
+        return <Modal {...cleanProps} />;
     }
 }
 
 CleanModal.render = (props) => {
-    const rightSideProps = {
+    const cleanProps = {
         ...props,
         modalClassName: 'gm-modal-clean'
     };
-    Modal.render(rightSideProps);
+    Modal.render(cleanProps);
 };
 
 CleanModal.hide = () => {
