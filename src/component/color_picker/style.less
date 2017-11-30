@@ -1,6 +1,8 @@
 .gm-color-picker {
   padding: 10px;
   width: 276px;
+  background: white;
+  position: relative;
 
   div {
     margin: 3px;
@@ -33,5 +35,14 @@
     box-shadow: rgb(240, 240, 240) 0px 0px 0px 1px inset;
     border-radius: 0px 4px 4px 0px;
     padding-left: 8px;
+  }
+
+  .gm-color-picker-value {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    bottom: 15px;
+    right: 20px;
+    border-radius: 50%;
   }
 }

@@ -33,7 +33,8 @@ class Color extends React.Component {
                     />
                 ))}
                 <div className="gm-color-picker-addon">#</div>
-                <input type="text" value={color.replace('#', '')} onChange={e => onChange(e.target.value)}/>
+                <input type="text" value={color.replace('#', '')} onChange={e => onChange('#' + e.target.value)}/>
+                <div className="gm-color-picker-value" style={{background: color}}/>
             </Flex>
         );
     }
