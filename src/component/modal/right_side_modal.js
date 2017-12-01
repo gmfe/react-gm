@@ -1,9 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from './index';
 import _ from 'lodash';
 
-const RightSideModal = (props) => <Modal {...props} className='gm-modal-right-side'/>;
+const RightSideModal = {};
 
 RightSideModal.render = (props) => {
     const rightSideProps = {
