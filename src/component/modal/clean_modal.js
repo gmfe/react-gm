@@ -1,9 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from './index';
 import _ from 'lodash';
 
-const CleanModal = (props) => <Modal {...props} className='gm-modal-clean'/>;
+const CleanModal = {};
 
 CleanModal.render = (props) => {
     const cleanProps = {
