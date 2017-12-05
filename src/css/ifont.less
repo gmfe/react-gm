@@ -1,0 +1,41 @@
+.ifont-spin {
+  animation: ifont-spin 2s infinite linear;
+  display: inline-block;
+}
+
+@keyframes ifont-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.ifont-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+}
+
+.ifont-stack-1x, .ifont-stack-2x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.ifont-stack-1x {
+  line-height: inherit;
+}
+
+.ifont-stack-2x {
+  font-size: 2em;
+}
+
+.ifont-inverse {
+  color: white;
+}
