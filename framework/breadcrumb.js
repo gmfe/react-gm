@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 class Breadcrumb extends React.Component {
     render() {
-        const {data} = this.props;
+        const {data, back} = this.props;
 
         if (!data || data.length === 0) {
             return <div className="gm-framework-breadcrumb-default"/>;
@@ -12,6 +12,13 @@ class Breadcrumb extends React.Component {
 
         return (
             <ol className="gm-framework-breadcrumb-default breadcrumb">
+                {back && <li>
+                    <a
+                        href="javascript:;"
+                        onClick={() => back()}
+                        className="gm-framework-breadcrumb-default-back"
+                    >返回</a>
+                </li>}
                 {_.map(data.slice(0, -1), (v, i) => (
                     <li key={i + '_' + v.link}>
                         <a
@@ -27,7 +34,8 @@ class Breadcrumb extends React.Component {
 }
 
 Breadcrumb.propTypes = {
-    data: PropTypes.array // [{text, link}]
+    data: PropTypes.array, // [{text, link}]
+    back: PropTypes.oneOfType([PropTypes.func, PropTypes.bool])
 };
 
 export default Breadcrumb;
