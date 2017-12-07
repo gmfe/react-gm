@@ -6,6 +6,21 @@ import _ from 'lodash';
 const LIMIT = 12;
 
 class Loading extends React.Component {
+
+    componentDidMount() {
+        const {color} = this.props;
+
+        // 可以通过重写的方式覆盖默认的颜色，但是提供一个 color props 感觉更方便点
+        if(color) {
+            const style = window.document.createElement("style");
+            window.document.head.appendChild(style);
+            let sheet = style.sheet;
+
+            sheet.addRule('.gm-loading .loading-circle::before','background-color: ' + color);
+            sheet.insertRule('gm-loading .loading-circle::before { background-color: ' + color + ' }', 0);
+        }
+    }
+
     render() {
         let {style, size} = this.props;
 
@@ -26,7 +41,8 @@ class Loading extends React.Component {
 }
 
 Loading.propTypes = {
-    size: PropTypes.number
+    size: PropTypes.number,
+    color: PropTypes.string
 };
 
 Loading.defaultProps = {

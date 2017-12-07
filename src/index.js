@@ -44,6 +44,7 @@ import ImagePreview from './component/image_preview';
 import Mask from './component/mask';
 import Popover from './component/popover';
 import ColorPicker from './component/color_picker';
+import Button from './component/button';
 
 import Validator from './validator';
 import Emitter from './emitter';
@@ -137,6 +138,7 @@ export {
     Mask,
     Popover,
     ColorPicker,
+    Button,
 
     Menu,
     Emitter,
