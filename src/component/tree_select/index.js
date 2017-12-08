@@ -88,7 +88,7 @@ class TreeSelect extends React.Component {
 
     handleShow(data) {
         let {showList} = this.state;
-    
+
         if (_.includes(showList, data.value)) {
             this.setState({showList: _.without(showList, data.value)});
             return;
@@ -145,21 +145,21 @@ class TreeSelect extends React.Component {
         const {list, label, disabledSelected, selected} = this.props;
 
         return (
-            <div className="tree-select">
+            <div className="gm-tree-select">
                 <Flex
                     column={true}
-                    className="tree-select-border"
+                    className="gm-tree-select-border"
                 >
                     {disabledSelected ? undefined : (
-                            <Flex flex={true} className="gm-border-bottom gm-padding-10 tree-select-title">
-                            <div style={{width: '30px'}}>
+                        <Flex flex={true} className="gm-border-bottom gm-tree-select-title">
+                            <label className="gm-cursor gm-padding-10" style={{width: '30px'}}>
                                 <input
                                     type="checkbox"
                                     checked={(selected.length !== 0 && this.findAllChildrenNode(list).length === selected.length)}
                                     onChange={this.handleSelectAll}
                                 />
-                            </div>
-                            <Flex flex={true} alignCenter={true}>
+                            </label>
+                            <Flex className="gm-padding-10" flex={true} alignCenter={true}>
                                 {label}
                             </Flex>
                         </Flex>
@@ -172,10 +172,6 @@ class TreeSelect extends React.Component {
 }
 
 class TreeNode extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleSelect(data, e) {
         this.props.handleSelect && this.props.handleSelect(data, e.target.checked);
     }
@@ -192,24 +188,24 @@ class TreeNode extends React.Component {
             selectedFlag = _.includes(selected, data.value);
         }
         else {
-            selectedFlag = (childrenNode.length === 0) ? false: (_.difference(childrenNode, selected).length === 0);
+            selectedFlag = (childrenNode.length === 0) ? false : (_.difference(childrenNode, selected).length === 0);
         }
 
         return (
-            <Flex flex={true} className="gm-border-bottom gm-padding-10 tree-select-trap">
+            <Flex flex={true} className="gm-border-bottom gm-tree-select-trap">
                 {disabledSelected ? undefined : (
-                        <div style={{width: '30px'}}>
-                            <input
-                                type="checkbox"
-                                checked={selectedFlag}
-                                onChange={this.handleSelect.bind(this, data)}
-                                disabled={childrenNode.length === 0}
-                            />
-                        </div>
-                    )}
-                <Flex flex={true} alignCenter={true}>
+                    <label className="gm-padding-10 gm-cursor" style={{width: '30px'}}>
+                        <input
+                            type="checkbox"
+                            checked={selectedFlag}
+                            onChange={this.handleSelect.bind(this, data)}
+                            disabled={childrenNode.length === 0}
+                        />
+                    </label>
+                )}
+                <Flex className="gm-padding-10" flex={true} alignCenter={true}>
                     <div
-                        className={data.children ? "tree-select-item" : ''}
+                        className={data.children ? "gm-tree-select-item" : ''}
                         style={{marginLeft: Number(level) * 15 + 'px'}}
                         onClick={this.handleShow.bind(this, data)}
                     >
@@ -218,7 +214,7 @@ class TreeNode extends React.Component {
                                 className={(_.includes(showList, data.value)) ? "glyphicon glyphicon-minus text-primary" : "glyphicon glyphicon-plus text-primary"}/>}
                         &nbsp;
                         <span className="gm-padding-lr-5">
-                            {data.value }&nbsp;{data.name}
+                            {data.value}&nbsp;{data.name}
                         </span>
                     </div>
                 </Flex>

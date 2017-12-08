@@ -8,13 +8,17 @@ class Popup extends React.Component {
         super(props);
 
         this.state = {
-            popupRect: {}
+            width: 0,
+            height: 0
         };
     }
 
     componentDidMount() {
+        const dom = findDOMNode(this.refPopup);
+
         this.setState({
-            popupRect: findDOMNode(this.refPopup).getBoundingClientRect()
+            width: dom.offsetWidth,
+            height: dom.offsetHeight
         });
     }
 
@@ -54,21 +58,21 @@ class Popup extends React.Component {
             ...rest
         } = this.props;
 
-        const {popupRect} = this.state;
+        const {width, height} = this.state;
 
         const sStyle = {
-            top: rect.bottom + 5,
+            top: rect.top + rect.height + 5,
             left: rect.left
         };
 
         if (center) {
-            sStyle.left = rect.left + (rect.right - rect.left) / 2 - (popupRect.right - popupRect.left) / 2;
+            sStyle.left = rect.left + rect.width / 2 - (width) / 2;
         } else if (right) {
-            sStyle.left = rect.right - (popupRect.right - popupRect.left);
+            sStyle.left = rect.left + rect.width - (width);
         }
 
         if (top) {
-            sStyle.top = rect.top - (popupRect.bottom - popupRect.top) - 5;
+            sStyle.top = rect.top - (height) - 5;
         }
 
         return (
