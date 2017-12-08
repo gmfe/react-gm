@@ -26,7 +26,6 @@ class LayerRoot extends React.Component {
 
     componentDidMount() {
         setComponentFunc = (type, component) => {
-            console.log(component);
             const s = {};
             s[type] = component;
             this.setState(s);

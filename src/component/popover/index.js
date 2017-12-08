@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
-import {createChainedFunction, contains} from 'gm-util';
+import {createChainedFunction, contains, getElementPosition} from 'gm-util';
 import LayoutRoot from '../layout_root';
 import Popup from './popup';
 import _ from 'lodash';
+
 
 class Popover extends React.Component {
     constructor(props) {
@@ -56,7 +57,16 @@ class Popover extends React.Component {
         const disabled = this.getDisabled();
 
         if (active) {
-            const rect = findDOMNode(this).getBoundingClientRect();
+            const dom = findDOMNode(this);
+            const pos = getElementPosition(dom);
+            const rect = {
+                left: pos.left,
+                top: pos.top,
+                height: dom.offsetHeight,
+                width: dom.offsetWidth
+            };
+
+
             LayoutRoot._setComponentPopup(this.id, (
                 <Popup
                     style={style}
