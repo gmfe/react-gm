@@ -28,6 +28,17 @@ class Component extends React.Component {
                     className="form-control"
                     minus
                 />
+                <br/>
+                <InputNumber
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    placeholder="最大0，最小0"
+                    max={0}
+                    min={0}
+                    precision={0}
+                    className="form-control"
+                    minus
+                />
             </div>
         );
     }
