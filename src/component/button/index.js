@@ -4,7 +4,6 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import {is} from 'gm-util';
 import Loading from '../loading';
-import Flex from '../flex';
 
 class Button extends React.Component {
     constructor(props) {
@@ -40,26 +39,23 @@ class Button extends React.Component {
         const {
             onClick, // eslint-disable-line
             hasLoading,
-            className,
             children,
-            size,
-            color,
+            iconSize,
+            iconColor,
+            className,
             ...rest
         } = this.props;
 
         const {loading} = this.state;
 
-
         return (
             <button
                 {...rest}
-                className={classNames(className)}
+                className={classNames('gm-button', className)}
                 onClick={this.handleClick}
             >
-                <Flex justifyCenter alignCenter>
-                    {hasLoading && loading && <Loading size={size} style={{marginRight: '4px'}} color={color}/>}
-                    {children}
-                </Flex>
+                {hasLoading && loading && <Loading size={iconSize} color={iconColor} className='gm-button-loading'/>}
+                <span className='gm-button-content'>{children}</span>
             </button>
         );
     }
@@ -69,14 +65,14 @@ class Button extends React.Component {
 Button.propTypes = {
     hasLoading: PropTypes.bool,
     onClick: PropTypes.func,
-    size: PropTypes.number,  // 转圈圈的大小，默认20
-    color: PropTypes.string  // 转圈圈的颜色
+    iconSize: PropTypes.number,  // 转圈圈的大小，默认20
+    iconColor: PropTypes.string  // 转圈圈的颜色
 };
 
 Button.defaultProps = {
     hasLoading: false,
     onClick: _.noop,
-    size: 20
+    iconSize: 20
 };
 
 export default Button;

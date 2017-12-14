@@ -16,39 +16,24 @@ class ButtonWrap extends React.Component {
     
     handleClick() {
         console.log('click');
-        return new Promise(resolve => setTimeout(() => resolve('12'), 2000));
+        return new Promise(resolve => setTimeout(() => resolve('12'),2000));
     }
     
     render() {
         return (
             <div>
                 <h2>Button 没有 loading</h2>
-                <Button onClick={this.handleClick} style={{
-                    'background': '#7ab155',
-                    'borderRadius': '4px',
-                    'height': '32px',
-                    'width': '120px',
-                    'outline': 0
-                }}
-                >加载更多</Button>
-                <h2>Button 只封装了loading (loading 2s)</h2>
-                <Button hasLoading onClick={this.handleClick} style={{
-                    'background': 'white',
-                    'borderRadius': '4px',
-                    'height': '32px',
-                    'width': '120px',
-                    'outline': 0
-                }}
-                >加载更多</Button>
+                <Button onClick={this.handleClick} style={{'background': '#7ab155'}} className='demo-button'>加载更多</Button>
                 <h2>Button 只封装了loading (loading 2s，改变菊花转颜色)</h2>
-                <Button hasLoading onClick={this.handleClick} color={'white'} style={{
-                    'background': '#1890ff',
-                    'borderRadius': '4px',
-                    'height': '32px',
-                    'width': '120px',
-                    'outline': 0
-                }}
-                >加载更多</Button>
+                <Button hasLoading key='2' onClick={this.handleClick} iconColor='white' style={{'background': '#1890ff'}} className='demo-button'>加载更多</Button>
+                <h2>Button 只封装了loading (loading 2s， 改变菊花转大小)</h2>
+                <Button hasLoading key='1' 
+                    onClick={this.handleClick} 
+                    iconColor='gray' 
+                    style={{'background': 'white', fontSize: '12px', height: 'auto', padding: '2px 16px'}} 
+                    className='demo-button'
+                    iconSize={15}
+                >加载</Button>
             </div>
         );
     }
