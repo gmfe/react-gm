@@ -276,7 +276,7 @@ class FilterSelect extends React.Component {
                             />
                         </div> : null
                 }
-                {loading && <Flex alignCenter justifyCenter className="gm-bg gm-padding-5"><Loading size={20}/></Flex>}
+                {loading && <Flex alignCenter justifyCenter className="gm-bg gm-padding-15"><Loading size={20}/></Flex>}
                 {!loading && (isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList))}
             </div>
         );

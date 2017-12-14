@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classNames from 'classnames';
 import {is} from 'gm-util';
-import Loading from '../loading';
 
 class Button extends React.Component {
     constructor(props) {
@@ -42,8 +41,6 @@ class Button extends React.Component {
         const {
             onClick, // eslint-disable-line
             children,
-            iconSize,
-            iconColor,
             className,
             ...rest
         } = this.props;
@@ -57,7 +54,8 @@ class Button extends React.Component {
                 disabled={isLoading}
                 onClick={this.handleClick}
             >
-                {isLoading && <Loading size={iconSize} color={iconColor} className='gm-button-loading'/>}
+                {/*{isLoading && <Loading size={iconSize} color={iconColor} className='gm-button-loading'/>}*/}
+                {isLoading && <i className='ifont ifont-loading gm-button-loading'></i>}
                 <span className='gm-button-content'>{children}</span>
             </button>
         );
@@ -66,14 +64,11 @@ class Button extends React.Component {
 
 // 只封装了 loading
 Button.propTypes = {
-    onClick: PropTypes.func,
-    iconSize: PropTypes.number,  // 转圈圈的大小，默认20
-    iconColor: PropTypes.string  // 转圈圈的颜色
+    onClick: PropTypes.func
 };
 
 Button.defaultProps = {
-    onClick: _.noop,
-    iconSize: 20
+    onClick: _.noop
 };
 
 export default Button;

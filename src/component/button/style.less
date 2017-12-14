@@ -1,7 +1,20 @@
-.gm-button-loading, .gm-button-content {
-  vertical-align: middle;
-}
+.gm-button {
+  .gm-button-loading, .gm-button-content {
+    vertical-align: middle;
+  }
 
-.gm-button-loading {
-  margin-right: 4px;
+  .gm-button-loading {
+    display: inline-block;
+    animation: gm-rotating 1s linear infinite;
+  }
+
+  @keyframes gm-rotating {
+    0% {
+      transform: rotate(0)
+    }
+
+    100% {
+      transform: rotate(360deg)
+    }
+  }
 }

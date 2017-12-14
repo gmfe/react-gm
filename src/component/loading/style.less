@@ -1,78 +1,51 @@
-// @brand-primary @brand-success @brand-info @brand-warning @brand-danger
-.gm-loading {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  position: relative;
-  animation: gm-loadingFade 1.8s linear infinite;
-  .loading-circle {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    &:before {
-      content: '';
-      display: block;
-      margin: 0 auto;
-      width: 15%;
-      height: 15%;
-      background-color: @brand-primary;
-      border-radius: 100%;
-    }
-  }
-
-  .circle1 {
-    transform: rotate(0);
-    opacity: .2;
-  }
-  .circle2 {
-    transform: rotate(30deg);
-    opacity: .4;
-  }
-  .circle3 {
-    transform: rotate(60deg);
-    opacity: .6;
-  }
-  .circle4 {
-    transform: rotate(90deg);
-    opacity: .7;
-  }
-  .circle5 {
-    transform: rotate(120deg);
-    opacity: .8;
-  }
-  .circle6 {
-    transform: rotate(150deg);
-    opacity: .9;
-  }
-  .circle7 {
-    transform: rotate(180deg);
-    opacity: 1;
-  }
-  .circle8 {
-    transform: rotate(210deg);
-    opacity: .6;
-  }
-  .circle9 {
-    transform: rotate(240deg);
-    opacity: .6;
-  }
-  .circle10 {
-    transform: rotate(270deg);
-    opacity: .4;
-  }
-  .circle11 {
-    transform: rotate(300deg);
-    opacity: .2;
-  }
-  .circle12 {
-    transform: rotate(330deg);
-    opacity: .2;
-  }
-
+.gm-loading-spinner {
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+  position: absolute;
+  text-align: center;
 }
-@keyframes gm-loadingFade {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+
+.gm-loading-path {
+  animation: gm-loading-dash 1.5s ease-in-out infinite;
+  stroke-dasharray: 90,150;
+  stroke-dashoffset: 0;
+  stroke-width: 2;
+  stroke: @brand-primary;
+  stroke-linecap: round;
+}
+
+.gm-loading-circular {
+  width: 42px;
+  height: 42px;
+  animation: gm-loading-rotate 2s linear infinite;
+}
+
+.gm-loading-text {
+  color: @brand-primary;
+  margin: 3px 0;
+  font-size: 14px;
+}
+
+@keyframes gm-loading-rotate {
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes gm-loading-dash {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0
+  }
+
+  50% {
+    stroke-dasharray: 90,150;
+    stroke-dashoffset: -40px
+  }
+
+  100% {
+    stroke-dasharray: 90,150;
+    stroke-dashoffset: -120px
+  }
 }
