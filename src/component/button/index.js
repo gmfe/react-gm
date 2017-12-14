@@ -10,35 +10,37 @@ class Button extends React.Component {
         super(props);
         this.handleClick = ::this.handleClick;
         this.state = {
-            loading: false
+            isLoading: false
         };
     }
 
     handleClick(event) {
         event.preventDefault();
-        const {hasLoading, onClick} = this.props;
-        const {loading} = this.state;
+        const {onClick} = this.props;
+        const result = onClick(event);
 
-        if (loading) {
+        if(!is.promise(result)){
             return;
         }
 
-        const result = onClick(event);
+        this.setState({isLoading: true});
 
-        if (hasLoading && is.promise(result)) {
-            this.setState({loading: true});
-            Promise.resolve(result).then(() => this.setState({
-                loading: false
-            }), () => this.setState({
-                loading: false
-            }));
-        }
+        Promise.resolve(result).then(() => {
+            if (!this.______isMounted) {
+                this.setState({
+                    isLoading: false
+                });
+            }
+        }).catch(() => {
+            this.setState({
+                isLoading: false
+            });
+        });
     }
 
     render() {
         const {
             onClick, // eslint-disable-line
-            hasLoading,
             children,
             iconSize,
             iconColor,
@@ -46,15 +48,16 @@ class Button extends React.Component {
             ...rest
         } = this.props;
 
-        const {loading} = this.state;
+        const {isLoading} = this.state;
 
         return (
             <button
                 {...rest}
                 className={classNames('gm-button', className)}
+                disabled={isLoading}
                 onClick={this.handleClick}
             >
-                {hasLoading && loading && <Loading size={iconSize} color={iconColor} className='gm-button-loading'/>}
+                {isLoading && <Loading size={iconSize} color={iconColor} className='gm-button-loading'/>}
                 <span className='gm-button-content'>{children}</span>
             </button>
         );
@@ -63,14 +66,12 @@ class Button extends React.Component {
 
 // 只封装了 loading
 Button.propTypes = {
-    hasLoading: PropTypes.bool,
     onClick: PropTypes.func,
     iconSize: PropTypes.number,  // 转圈圈的大小，默认20
     iconColor: PropTypes.string  // 转圈圈的颜色
 };
 
 Button.defaultProps = {
-    hasLoading: false,
     onClick: _.noop,
     iconSize: 20
 };
