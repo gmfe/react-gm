@@ -14,10 +14,17 @@ class LoadingWrap extends React.Component {
       super(props);
     
       this.state = {
-        fullscreen: false
+        fullscreen: false,
+        loading: true
       };
       
       this.onClick = ::this.onClick;
+      
+      setTimeout(()=>{
+          this.setState({
+            loading: false
+          })
+      }, 2000);
     }
     
     onClick() {
@@ -53,7 +60,13 @@ class LoadingWrap extends React.Component {
         return (
             <div>
                 <h2>加载</h2>
-                <Loading loading={true}></Loading>
+                <div style={{background: 'white'}} >
+                    <Loading loading={this.state.loading} size={30}>
+                        {
+                            !this.state.loading && <div>hello world</div>
+                        }
+                    </Loading>
+                </div> 
                 
                 <h2>区域加载</h2>
                 <Loading>

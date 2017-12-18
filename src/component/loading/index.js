@@ -24,7 +24,6 @@ class Loading extends React.Component {
             };
         } else {
             this.enableScroll();
-
             return {
                 position: 'relative'
             };
@@ -64,7 +63,6 @@ class Loading extends React.Component {
         });
 
         return (
-
             <div style={this.getStyle()} {...rest}>
                 { loading && (
                     <div
@@ -93,7 +91,7 @@ class Loading extends React.Component {
                         </div>
                     </div>
                 )}
-                {this.props.children}
+                {this.props.children || <div style={{height: (this.props.size || 50) + 'px'}}/>}
             </div>
         );
     }
@@ -108,7 +106,8 @@ Loading.propTypes = {
 
 Loading.defaultProps = {
     loading: true,
-    fullscreen: false
+    fullscreen: false,
+    size: 50
 };
 
 export default Loading;
