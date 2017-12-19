@@ -15,6 +15,18 @@
   stroke-linecap: round;
 }
 
+.gm-loading-mask {
+  display: block;
+  position: absolute;
+  z-index: 666;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0
+}
+
 .gm-loading-circular {
   width: 50px;
   height: 50px;
@@ -25,6 +37,7 @@
   color: @brand-primary;
   margin: 3px 0;
   font-size: 14px;
+  word-break: keep-all;
 }
 
 @keyframes gm-loading-rotate {

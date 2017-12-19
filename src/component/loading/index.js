@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 class Loading extends React.Component {
     constructor(props) {
@@ -65,18 +66,9 @@ class Loading extends React.Component {
         return (
             <div style={this.getStyle()} {...rest}>
                 { loading && (
-                    <div
-                        style={{
-                            display: 'block',
-                            position: 'absolute',
-                            zIndex: 666,
-                            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                            margin: 0,
-                            top: 0,
-                            right: 0,
-                            bottom: 0,
-                            left: 0
-                        }}>
+                    <div className={classNames({
+                        'gm-loading-mask': this.props.children
+                    })}>
                         <div className='gm-loading-spinner' style={{
                             position: 'absolute',
                             display: 'inline-block',

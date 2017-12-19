@@ -24,7 +24,7 @@ class LoadingWrap extends React.Component {
           this.setState({
             loading: false
           })
-      }, 2000);
+      }, 200000);
     }
     
     onClick() {
@@ -78,7 +78,7 @@ class LoadingWrap extends React.Component {
                 </Loading>
                 
                 <h2>区域加载,自定义文案</h2>
-                <Loading text='拼命加载'>
+                <Loading text='拼命加载中...'>
                     <Sheet list={list}>
                         <SheetColumn field="id" name="id"/>
                         <SheetColumn field="name" name="名字"/>
