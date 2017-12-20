@@ -6,6 +6,7 @@ const TYPE = {
     POPUP: 'popup', // TODO
     MODAL: 'modal',
     TIP: 'tip',
+    FULLLOADING: 'fullloading',
     NPROGRESS: 'nprogress'
 };
 
@@ -47,6 +48,7 @@ class LayerRoot extends React.Component {
                 <div>{this.state.modal}</div>
                 <div>{this.state.popover}</div>
                 <div>{this.state.tip}</div>
+                <div>{this.state.fullloading}</div>
                 <div>{this.state.nprogress}</div>
             </div>
         );

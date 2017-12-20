@@ -1,24 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
-
-// 如果需要设置loading大小:  set size = 100  (default 50)
-const LIMIT = 12;
+import classNames from 'classnames';
 
 class Loading extends React.Component {
-    render() {
-        let {style, size} = this.props;
+  render() {
+        let {
+            style,
+            size,
+            text,
+            className,
+            ...rest
+        } = this.props;
 
-        style = Object.assign({}, style, {
+        const s = Object.assign({}, style, {
             'width': size + 'px',
             'height': size + 'px'
         });
+
         return (
-            <div className="gm-loading" style={style}>
+            <div className={classNames('gm-loading', className)} {...rest}>
+                <svg className="gm-loading-circular" style={s} viewBox="0 0 50 50">
+                    <circle className="gm-loading-path" cx="25" cy="25" r="20" fill="none"/>
+                </svg>
                 {
-                    _.times(LIMIT, (i) => (
-                        <div key={i} className={"circle" + (i+1) + " loading-circle"} />
-                    ))
+                    text && <p className="gm-loading-text">{text}</p>
                 }
             </div>
         );
@@ -26,6 +31,7 @@ class Loading extends React.Component {
 }
 
 Loading.propTypes = {
+    text: PropTypes.string,
     size: PropTypes.number
 };
 

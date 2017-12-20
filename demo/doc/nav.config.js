@@ -60,7 +60,8 @@ const data = [{
         {name: 'InputNumber 数字输入框', path: '/doc/InputNumber'},
         {name: 'Select 选择', path: '/doc/Select'},
         {name: 'DropDown 下拉框', path: '/doc/DropDown'},
-        {name: 'Dropper 上传', path: '/doc/Dropper'}
+        {name: 'Dropper 上传', path: '/doc/Dropper'},
+        {name: 'Button 按钮', path: '/doc/Button'}
     ]
 }, {
     name: 'Loading',

@@ -25,6 +25,8 @@ import Cascader from './component/cascader/cascader';
 import CascaderSelect from './component/cascader/cascader.select';
 import Trigger from './component/trigger';
 import Loading from './component/loading';
+import LoadingChunk from './component/loading/loading_chunk';
+import LoadingFullScreen from './component/loading/loading_full_screen';
 import InputNumber from './component/input/input.number';
 import LayoutRoot from './component/layout_root';
 import Modal from './component/modal';
@@ -44,6 +46,7 @@ import ImagePreview from './component/image_preview';
 import Mask from './component/mask';
 import Popover from './component/popover';
 import ColorPicker from './component/color_picker';
+import Button from './component/button';
 
 import Validator from './validator';
 import Emitter from './emitter';
@@ -113,6 +116,8 @@ export {
     SheetBatchAction,
     Trigger,
     Loading,
+    LoadingFullScreen,
+    LoadingChunk,
     InputNumber,
     LayoutRoot,
     Modal,
@@ -137,6 +142,7 @@ export {
     Mask,
     Popover,
     ColorPicker,
+    Button,
 
     Menu,
     Emitter,
