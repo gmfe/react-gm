@@ -15,7 +15,7 @@ imports:
 class Component extends React.Component {
     constructor(props){
         super(props);
-        const list = _.map(_.range(5), v => ({
+        const list = _.map(_.range(8), v => ({
             value: v,
             name: 'item' + v
         }));
@@ -34,7 +34,8 @@ class Component extends React.Component {
     }
     
     render() {
-        const {list, selectedValues, value} = this.state;
+        const {list, value} = this.state;
+        console.log(list, value,'---');
         return (
             <div>
                 <Select value={value} onChange={this.handleChange}>
@@ -50,9 +51,50 @@ class Component extends React.Component {
 ```
 :::
 
-::: demo  多选，value 和 onChange 参数都是数组 
+::: demo disabled 
 ```js
 class Component2 extends React.Component {
+    constructor(props){
+        super(props);
+        const list = _.map(_.range(8), v => ({
+            value: v,
+            name: 'item' + v
+        }));
+        this.state = {
+            list,
+            value: list[0].value
+        };
+        this.handleChange = ::this.handleChange;
+    }
+    
+    handleChange(value){
+        console.log(value);
+        this.setState({
+            value
+        });
+    }
+    
+    render() {
+        const {list, value} = this.state;
+        
+        return (
+            <div>
+                <Select value={value} onChange={this.handleChange} disabled>
+                    {_.map(list, v => <Option key={v.value} value={v.value}>{v.name}</Option>)}
+                </Select>
+            </div>
+        );
+    }
+}
+```
+```jsx
+<Component2/>
+```
+:::
+
+::: demo  多选，value 和 onChange 参数都是数组 
+```js
+class Component3 extends React.Component {
     constructor(props){
         super(props);
         const list = _.map(_.range(5), v => ({
@@ -74,7 +116,7 @@ class Component2 extends React.Component {
     }
     
     render() {
-        const {list, selectedValues, value} = this.state;
+        const {list, value} = this.state;
         return (
             <div>
                 <Select multiple value={value} onChange={this.handleChange}>
@@ -86,7 +128,7 @@ class Component2 extends React.Component {
 }
 ```
 ```jsx
-<Component2/>
+<Component3/>
 ```
 :::
 
