@@ -36,7 +36,7 @@ LoadingFullScreen.render = (props) => {
 
     const documentBody = window.document.body;
     if (documentBody) {
-        documentBody.classList.add('gm-body-overflow');
+        documentBody.classList.add('gm-loading-body-overflow');
     }
 };
 
@@ -46,7 +46,7 @@ LoadingFullScreen.hide = () => {
 
     const documentBody = window.document.body;
     if (documentBody) {
-        documentBody.classList.remove('gm-body-overflow');
+        documentBody.classList.remove('gm-loading-body-overflow');
     }
 };
 

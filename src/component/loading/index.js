@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 class Loading extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
+  render() {
         let {
             style,
             size,

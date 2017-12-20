@@ -101,7 +101,7 @@ class LoadingWrap extends React.Component {
 
 
 #### LoadingChunk
-- `loading (bool)` 默认 `true`,
+- `loading (bool)` 默认 `false`,
 - `size(number)` 默认 50
 -  `text (string)` loading 文案
 
