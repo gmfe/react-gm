@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Loading, Sheet, SheetColumn, Flex} from '../../src/index';
+    import {Loading, Sheet, SheetColumn, Flex, LoadingFullScreen, LoadingChunk} from '../../src/index';
 ---
 ## Loading
 
@@ -24,21 +24,14 @@ class LoadingWrap extends React.Component {
           this.setState({
             loading: false
           })
-      }, 200000);
+      }, 3000);
     }
     
-    onClick() {
-      clearTimeout(this.timeout);
-    
-      this.timeout = setTimeout(() => {
-        this.setState({
-          fullscreen: false
-        });
-      }, 3000);
-    
-      this.setState({
-        fullscreen: true
+    onClick() {      
+      LoadingFullScreen.render({
+          text: '玩命加载中...'
       });
+      setTimeout(() => {LoadingFullScreen.hide()}, 3000); 
     }
 
     
@@ -60,37 +53,32 @@ class LoadingWrap extends React.Component {
         return (
             <div>
                 <h2>加载</h2>
-                <div style={{background: 'white'}} >
-                    <Loading loading={this.state.loading} size={30}>
-                        {
-                            !this.state.loading && <div>hello world</div>
-                        }
-                    </Loading>
+                <div>
+                    <Loading size={30} />
+                    <Loading/>
                 </div> 
                 
-                <h2>区域加载</h2>
-                <Loading>
+
+                <h2>区域加载 ,size 60</h2>
+                <LoadingChunk loading={true} size={60}>
                     <Sheet list={list}>
                         <SheetColumn field="id" name="id"/>
                         <SheetColumn field="name" name="名字"/>
                         <SheetColumn field="age" name="年龄"/>
                     </Sheet>
-                </Loading>
+                </LoadingChunk>
                 
-                <h2>区域加载,自定义文案</h2>
-                <Loading text='拼命加载中...'>
+                <h2>区域加载,自定义文案,3秒后关闭</h2>
+                <LoadingChunk text='拼命加载中...' loading={this.state.loading}>
                     <Sheet list={list}>
                         <SheetColumn field="id" name="id"/>
                         <SheetColumn field="name" name="名字"/>
                         <SheetColumn field="age" name="年龄"/>
                     </Sheet>
-                </Loading>
+                </LoadingChunk>
                 
-                <h2>全屏加载,自定义文案</h2>
-                <button onClick={this.onClick}>整页加载</button>
-                {
-                    this.state.fullscreen && <Loading fullscreen={true} text='玩命加载中' />
-                }
+                <h2>全屏加载,自定义文案, 静态方法，3秒后关闭</h2>
+                <button className="btn btn-default"  onClick={this.onClick}>整页加载</button>
             </div>       
         );
     }
@@ -102,8 +90,21 @@ class LoadingWrap extends React.Component {
 :::
 
 ### Props
-- `size(number)` 默认 42
-- `loading (bool)` 默认 `true`,
-- `fullscreen (bool)` 默认 `false`， 全屏加载
+#### Loading
+- `size(number)` 默认 50
 -  `text (string)` loading 文案
+
+
+#### LoadingFullScreen (静态方法)
+- `size(number)` 默认 50
+-  `text (string)` loading 文案
+
+
+#### LoadingChunk
+- `loading (bool)` 默认 `true`,
+- `size(number)` 默认 50
+-  `text (string)` loading 文案
+
+
+
 

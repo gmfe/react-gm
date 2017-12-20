@@ -5,100 +5,41 @@ import classNames from 'classnames';
 class Loading extends React.Component {
     constructor(props) {
         super(props);
-
-        this.getStyle = ::this.getStyle;
-        this.documentBody = ::this.documentBody;
-        this.documentBody = ::this.documentBody;
-        this.disableScroll = ::this.disableScroll;
-        this.enableScroll = ::this.enableScroll;
-    }
-    getStyle() {
-        if (this.props.fullscreen) {
-            this.disableScroll();
-            return {
-                position: 'fixed',
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                zIndex: 8888
-            };
-        } else {
-            this.enableScroll();
-            return {
-                position: 'relative'
-            };
-        }
-    }
-
-    documentBody() {
-        return window.document.body;
-    }
-
-    disableScroll() {
-        const documentBody = this.documentBody();
-        if (documentBody) {
-            documentBody.style.setProperty('overflow', 'hidden');
-        }
-    }
-
-    enableScroll() {
-        const documentBody = this.documentBody();
-        if (documentBody) {
-            documentBody.style.removeProperty('overflow');
-        }
     }
 
     render() {
         let {
-            loading,
             style,
             size,
-            fullscreen, // eslint-disable-line
             text,
-            ...rest} = this.props;
+            className,
+            ...rest
+        } = this.props;
 
-        style = Object.assign({}, style, {
+        const s = Object.assign({}, style, {
             'width': size + 'px',
             'height': size + 'px'
         });
 
         return (
-            <div style={this.getStyle()} {...rest}>
-                { loading && (
-                    <div className={classNames({
-                        'gm-loading-mask': this.props.children
-                    })}>
-                        <div className='gm-loading-spinner' style={{
-                            position: 'absolute',
-                            display: 'inline-block',
-                            lineHeight: 1
-                        }}>
-                            <svg className="gm-loading-circular" style={style} viewBox="0 0 50 50">
-                                <circle className="gm-loading-path" cx="25" cy="25" r="20" fill="none" />
-                            </svg>
-                            {
-                                text && <p className="gm-loading-text">{text}</p>
-                            }
-                        </div>
-                    </div>
-                )}
-                {this.props.children || <div style={{height: (this.props.size || 50) + 'px'}}/>}
+            <div className={classNames('gm-loading', className)} {...rest}>
+                <svg className="gm-loading-circular" style={s} viewBox="0 0 50 50">
+                    <circle className="gm-loading-path" cx="25" cy="25" r="20" fill="none"/>
+                </svg>
+                {
+                    text && <p className="gm-loading-text">{text}</p>
+                }
             </div>
         );
     }
 }
 
 Loading.propTypes = {
-    loading: PropTypes.bool,
-    fullscreen: PropTypes.bool,
     text: PropTypes.string,
     size: PropTypes.number
 };
 
 Loading.defaultProps = {
-    loading: true,
-    fullscreen: false,
     size: 50
 };
 

@@ -1,8 +1,4 @@
-.gm-loading-spinner {
-  top: 50%;
-  left: 50%;
-  transform:translate(-50%,-50%);
-  position: absolute;
+.gm-loading {
   text-align: center;
 }
 
@@ -13,18 +9,6 @@
   stroke-width: 2;
   stroke: @brand-primary;
   stroke-linecap: round;
-}
-
-.gm-loading-mask {
-  display: block;
-  position: absolute;
-  z-index: 666;
-  background-color: rgba(255, 255, 255, 0.8);
-  margin: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0
 }
 
 .gm-loading-circular {
@@ -60,5 +44,49 @@
   100% {
     stroke-dasharray: 90,150;
     stroke-dashoffset: -120px
+  }
+}
+
+.gm-body-overflow {
+  overflow: hidden;
+}
+
+.gm-loading-full-screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 8000;
+
+  .gm-loading-spinner {
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    position: absolute;
+  }
+}
+
+.gm-loading-chunk {
+  position: relative;
+  z-index: 8000;
+
+  .gm-loading-mask {
+    display: block;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0
+  }
+
+  .gm-loading-spinner {
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    position: absolute;
   }
 }

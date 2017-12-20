@@ -25,11 +25,9 @@ class Button extends React.Component {
         this.setState({isLoading: true});
 
         Promise.resolve(result).then(() => {
-            if (!this.______isMounted) {
-                this.setState({
-                    isLoading: false
-                });
-            }
+            this.setState({
+                isLoading: false
+            });
         }).catch(() => {
             this.setState({
                 isLoading: false
@@ -54,7 +52,6 @@ class Button extends React.Component {
                 disabled={isLoading}
                 onClick={this.handleClick}
             >
-                {/*{isLoading && <Loading size={iconSize} color={iconColor} className='gm-button-loading'/>}*/}
                 {isLoading && <i className='ifont ifont-loading gm-button-loading'></i>}
                 <span className='gm-button-content'>{children}</span>
             </button>

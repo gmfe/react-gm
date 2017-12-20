@@ -16,4 +16,5 @@
 - dialog 5000 dialog mask 5000
 
 - tip 7000 toast的mask 7000
+- fullloading 8000
 - nprogress 9999

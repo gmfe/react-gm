@@ -25,6 +25,8 @@ import Cascader from './component/cascader/cascader';
 import CascaderSelect from './component/cascader/cascader.select';
 import Trigger from './component/trigger';
 import Loading from './component/loading';
+import LoadingChunk from './component/loading/loading_chunk';
+import LoadingFullScreen from './component/loading/loading_full_screen';
 import InputNumber from './component/input/input.number';
 import LayoutRoot from './component/layout_root';
 import Modal from './component/modal';
@@ -114,6 +116,8 @@ export {
     SheetBatchAction,
     Trigger,
     Loading,
+    LoadingFullScreen,
+    LoadingChunk,
     InputNumber,
     LayoutRoot,
     Modal,
