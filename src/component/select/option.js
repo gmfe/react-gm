@@ -9,10 +9,10 @@ class Option extends React.Component {
 		if(isText) {
 			return (
                 <div
+					{...rest}
 					className={classNames("gm-select-option",className, {
 						'disabled': disabled
 					})}
-					{...rest}
 				>
 					{children}
                 </div>
