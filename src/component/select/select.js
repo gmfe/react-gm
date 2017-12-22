@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import {findDOMNode} from 'react-dom';
 import {contains} from 'gm-util';
 import Option from './option';
-import _ from 'lodash';
 
 const findItemByValueFromList = (childrenList, val) => {
 	let ret = null;
@@ -32,9 +31,6 @@ class Select extends React.Component {
 		
 		this.handleBodyClick = ::this.handleBodyClick;
 		this.handleSelectionClick = ::this.handleSelectionClick;
-		
-		this.handleChange = ::this.handleChange;
-		this.refSelect = null;
 	}
 	
 	componentDidMount() {
@@ -102,109 +98,68 @@ class Select extends React.Component {
 		}
 	}
 	
-	handleChange() {
-		const {onChange, children, multiple} = this.props;
-		const childList = _.isArray(children) ? children : [children];
-		const result = [];
-		_.each(this.refSelect.childNodes, (node, i) => {
-			if (node.selected) {
-				result.push(childList[i].props.value);
-			}
-		});
-		onChange(multiple ? result : result[0]);
-	}
-	
 	render() {
 		const {show, selected, value} = this.state;
 		const {
-			multiple,
 			children,
-			className,
 			disabled,
 			...rest
 		} = this.props;
 		
-		if(multiple) {
-			return (
-                <select
-                    ref={ref => this.refSelect = ref}
-					{...rest}
-                    multiple={multiple}
-                    value={rest.value}
-                    onChange={this.handleChange}
-                    className={classNames('form-control', className)}
-                >{
-					React.Children.map(children, (el) => {
-						if(el.type === Option) {
-							return <option {...el.props}/>;
-						} else {
-							return null;
-						}
-					})
-				}</select>
-			);
-        } else {
-			return (
-                <div
-                    className={classNames('gm-select', {
-						'gm-select-open': show
+		return (
+			<div
+				className={classNames('gm-select', {
+					'gm-select-open': show
+				})}
+				{...rest}
+			>
+				<div
+					className={classNames("gm-select-selection", {
+						'disabled': disabled
 					})}
-					{...rest}
-                >
-                    <div
-                        className={classNames("gm-select-selection", {
-							'disabled': disabled
-						})}
-                        onClick={this.handleSelectionClick}
-                    >
-                        <div className="gm-select-selected">
-							{selected}
-                        </div>
-                        <i className={classNames("gm-select-arrow ifont", {
-							'ifont-up-small': show,
-							'ifont-down-small': !show
-						})}/>
-                    </div>
-                    
-                    <div className="gm-select-list">
-						{
-							React.Children.map(children, (el) => {
-								if(el.type === Option) {
-									const {
-										className,
-										onClick, // eslint-disable-line
-										...rest} = el.props;
-									
-									return React.cloneElement(el, Object.assign({}, {
-											className: classNames(className, {
-												'selected': rest.value === value
-											}),
-											onClick: this.handleOptionClick.bind(this, el.props)
-										}, rest)
-									);
-								} else {
-									return null;
-								}
-							})
-						}
-                    </div>
-                </div>
-			);
-        }
-		
+					onClick={this.handleSelectionClick}
+				>
+					<div className="gm-select-selected">
+						{selected}
+					</div>
+					<i className={classNames("gm-select-arrow ifont", {
+						'ifont-up-small': show,
+						'ifont-down-small': !show
+					})}/>
+				</div>
+				
+				<div className="gm-select-list">
+					{
+						React.Children.map(children, (el) => {
+							if(el.type === Option) {
+								const {
+									className,
+									onClick, // eslint-disable-line
+									...rest} = el.props;
+								
+								return React.cloneElement(el, Object.assign({}, {
+										className: classNames(className, {
+											'selected': rest.value === value
+										}),
+										onClick: this.handleOptionClick.bind(this, el.props)
+									}, rest)
+								);
+							} else {
+								return null;
+							}
+						})
+					}
+				</div>
+			</div>
+		);
 	}
 }
 
 Select.displayName = 'Select';
 
 Select.propTypes = {
-    multiple: PropTypes.bool,
     value: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired
-};
-
-Select.defaultProps = {
-    multiple: false
 };
 
 export default Select;

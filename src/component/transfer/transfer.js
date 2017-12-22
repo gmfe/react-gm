@@ -2,8 +2,55 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Flex from '../flex';
-import {Select, Option} from '../select';
 import {is} from 'gm-util';
+import classNames from 'classnames';
+
+const Option = ({children, ...rest}) => (<option {...rest}>{children}</option>);
+
+class Select extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleChange = ::this.handleChange;
+		this.refSelect = null;
+	}
+	handleChange() {
+		const {onChange, children, multiple} = this.props;
+		const childList = _.isArray(children) ? children : [children];
+		const result = [];
+		_.each(this.refSelect.childNodes, (node, i) => {
+			if (node.selected) {
+				result.push(childList[i].props.value);
+			}
+		});
+		onChange(multiple ? result : result[0]);
+	}
+	render() {
+		const {
+			multiple,
+			children,
+			className,
+			...rest
+		} = this.props;
+		return (
+            <select
+                ref={ref => this.refSelect = ref}
+				{...rest}
+                multiple={multiple}
+                value={rest.value}
+                onChange={this.handleChange}
+                className={classNames('form-control', className)}
+            >{
+				React.Children.map(children, (el) => {
+					if(el.type === Option) {
+						return <option {...el.props}/>;
+					} else {
+						return null;
+					}
+				})
+			}</select>
+		);
+	}
+}
 
 class Transfer extends React.Component {
     constructor(props) {
