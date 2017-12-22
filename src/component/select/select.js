@@ -103,7 +103,6 @@ class Select extends React.Component {
 		const {
 			children,
 			disabled,
-			...rest
 		} = this.props;
 		
 		return (
@@ -111,7 +110,6 @@ class Select extends React.Component {
 				className={classNames('gm-select', {
 					'gm-select-open': show
 				})}
-				{...rest}
 			>
 				<div
 					className={classNames("gm-select-selection", {
