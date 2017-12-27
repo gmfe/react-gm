@@ -5,12 +5,12 @@ class InputNumber extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleChange = ::this.handleChange;
+        this.handleChange = :: this.handleChange;
     }
 
     handleChange(e) {
-        const {max, min, precision, minus} = this.props;
-        let value = e.target.value,
+        const { max, min, precision, minus } = this.props;
+        let value = e.target.value.replace(/。/g, '.'),
             figure = value;
 
         const reg = new RegExp("(^[1-9]\\d*(\\.\\d{0," + precision + "})?$)|(^0(\\.\\d{0," + precision + "})?$)");
@@ -29,9 +29,9 @@ class InputNumber extends React.Component {
                 this.props.onChange(min);
             else {
                 // 如果第一个数字是0，第二个是1-9，则选取第二个数字
-                this.props.onChange(/^0[1-9]/.test(value) ?  value.slice(1):value);
+                this.props.onChange(/^0[1-9]/.test(value) ? value.slice(1) : value);
             }
-        }else if (value.length < this.props.value.toString().length && reg.test(value)) {
+        } else if (value.length < this.props.value.toString().length && reg.test(value)) {
             // 有默认值，且不符合以上的规则，但是是一个删减字符的操作
             this.props.onChange(value);
         }
