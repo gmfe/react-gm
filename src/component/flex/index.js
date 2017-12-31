@@ -17,6 +17,8 @@ class Flex extends React.Component {
 
             alignStart, alignEnd, alignCenter, alignBaseline, alignStretch,
 
+            alignContentStart, alignContentEnd, alignContentCenter, alignContentBetween, alignContentAround, alignContentStretch,
+
             className, style,
 
             ...rest
@@ -44,7 +46,14 @@ class Flex extends React.Component {
             'gm-flex-align-end': alignEnd,
             'gm-flex-align-center': alignCenter,
             'gm-flex-align-baseline': alignBaseline,
-            'gm-flex-align-stretch': alignStretch
+            'gm-flex-align-stretch': alignStretch,
+
+            'gm-flex-align-content-start': alignContentStart,
+            'gm-flex-align-content-end': alignContentEnd,
+            'gm-flex-align-content-center': alignContentCenter,
+            'gm-flex-align-content-between': alignContentBetween,
+            'gm-flex-align-content-around': alignContentAround,
+            'gm-flex-align-content-stretch': alignContentStretch
         }, className);
 
         // TODO 有待商榷，WebkitFlex 是否会生效？
@@ -83,7 +92,13 @@ Flex.propTypes = {
     alignEnd: PropTypes.bool,
     alignCenter: PropTypes.bool,
     alignBaseline: PropTypes.bool,
-    alignStretch: PropTypes.bool
+    alignStretch: PropTypes.bool,
+    alignContentStart: PropTypes.bool,
+    alignContentEnd: PropTypes.bool,
+    alignContentCenter: PropTypes.bool,
+    alignContentBetween: PropTypes.bool,
+    alignContentAround: PropTypes.bool,
+    alignContentStretch: PropTypes.bool
 };
 
 export default Flex;
