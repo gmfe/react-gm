@@ -53,8 +53,6 @@ import Emitter from './emitter';
 
 import { Select, Option } from './component/select';
 
-import './index.less';
-
 Object.assign(Sheet, {
     SheetColumn,
     SheetAction,
