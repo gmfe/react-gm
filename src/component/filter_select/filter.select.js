@@ -305,9 +305,9 @@ class FilterSelect extends React.Component {
                         disabled={disabled}
                     >
                         {selected ? (
-                            <Flex alignStart>{selected.name}</Flex>
+                            <Flex>{selected.name}</Flex>
                         ) : (
-                            <Flex alignStart className="gm-text-desc">{placeholder}</Flex>
+                            <Flex className="gm-text-desc">{placeholder}</Flex>
                         )}
                     </Trigger>
                     <i className="gm-arrow-down"/>
