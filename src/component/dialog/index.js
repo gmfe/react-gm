@@ -19,20 +19,21 @@ let DialogStatics = {};
 DialogStatics = {
     alert(options) {
         options.type = 'alert';
-        options.size = 'sm';
+        options.size = options.size || 'sm';
         return DialogStatics.dialog(options);
     },
     confirm(options) {
         options.type = 'confirm';
-        options.size = 'sm';
+        options.size = options.size || 'sm';
         return DialogStatics.dialog(options);
     },
     prompt(options) {
         options.type = 'prompt';
-        options.size = 'sm';
+        options.size = options.size || 'sm';
         return DialogStatics.dialog(options);
     },
     dialog(options) {
+        console.log(options);
         options = Object.assign({}, {size: 'sm'}, options);
         return new Promise((resolve, reject) => {
             let div = window.document.createElement('div');
