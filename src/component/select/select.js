@@ -132,7 +132,7 @@ class Select extends React.Component {
 				<div className="gm-select-list">
 					{
 						React.Children.map(children, (el) => {
-							if(el.type === Option) {
+							if(el.type.displayName === 'Option') {
 								const {
 									className,
 									onClick, // eslint-disable-line
