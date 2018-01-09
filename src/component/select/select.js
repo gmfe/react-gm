@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {findDOMNode} from 'react-dom';
 import {contains} from 'gm-util';
-import Option from './option';
 
 const findItemByValueFromList = (childrenList, val) => {
 	let ret = null;
 	React.Children.map(childrenList, (el) => {
-		if(el.type === Option) {
+		if(el.type.displayName === 'Option') {
 			const elProps = el.props;
 			const elValue = elProps.value;
 			
