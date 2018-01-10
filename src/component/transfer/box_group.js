@@ -2,13 +2,15 @@ import React from 'react';
 import Flex from '../flex';
 import {Checkbox, CheckboxGroup} from '../checkbox';
 import {pinYinFilter} from "gm-util";
+import {getLeaf} from './util';
 import _ from 'lodash';
 
 class Box extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: ''
+            query: '',
+            groupSelected: []
         };
     }
 
@@ -19,8 +21,7 @@ class Box extends React.Component {
 
     handleSelectAll = (checked) => {
         const {list, onSelect} = this.props;
-
-        onSelect(checked.length === 0 ? [] : _.map(list, v => v.value));
+        onSelect(checked.length === 0 ? [] : _.map(getLeaf(list), v => v.value));
     };
 
     handleQuery = (e) => {
@@ -28,6 +29,75 @@ class Box extends React.Component {
             query: e.target.value
         });
     };
+
+    handleGroup = (value) => {
+        const {groupSelected} = this.state;
+        if (_.includes(groupSelected, value)) {
+            this.setState({
+                groupSelected: _.without(groupSelected, value)
+            });
+        } else {
+            this.setState({
+                groupSelected: groupSelected.concat(value)
+            });
+        }
+    };
+
+    renderList(list) {
+        const {selectedValues} = this.props;
+        const {groupSelected} = this.state;
+
+        const listValues = _.map(list, v => v.value);
+
+        if (list.length === 0) {
+            return null;
+        }
+
+
+        const isGroupData = !!list[0].children;
+
+        if (isGroupData) {
+            return (
+                <div className="gm-transfer-group">
+                    {_.map(list, group => {
+                        const isOpen = _.includes(groupSelected, group.value);
+
+                        return (
+                            <div key={group.value}>
+                                <div
+                                    className="gm-transfer-group-name gm-cursor"
+                                    onClick={() => this.handleGroup(group.value)}
+                                >
+                                    <span style={{
+                                        width: '1em',
+                                        display: 'inline-block'
+                                    }}>{isOpen ? '-' : '+'}</span> {group.name}
+                                </div>
+                                {isOpen && (
+                                    <div className="gm-transfer-group-list">
+                                        {this.renderList(group.children)}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        }
+
+        return (
+            <CheckboxGroup
+                className="gm-margin-0"
+                name={"transferBox" + Math.random()}
+                value={_.filter(selectedValues, vv => _.includes(listValues, vv))}
+                onChange={this.handleChange}
+            >
+                {_.map(list, v => (
+                    <Checkbox key={v.value} value={v.value} className="gm-cursor">{v.name}</Checkbox>
+                ))}
+            </CheckboxGroup>
+        );
+    }
 
     render() {
         let {
@@ -69,16 +139,7 @@ class Box extends React.Component {
                     </div>
                 ) : null}
                 <Flex flex column className="gm-bg gm-transfer-box-list gm-overflow-y">
-                    <CheckboxGroup
-                        className="gm-margin-0"
-                        name={"transferBox" + Math.random()}
-                        value={selectedValues}
-                        onChange={this.handleChange}
-                    >
-                        {_.map(list, v => (
-                            <Checkbox key={v.value} value={v.value} className="gm-cursor">{v.name}</Checkbox>
-                        ))}
-                    </CheckboxGroup>
+                    {this.renderList(list)}
                 </Flex>
 
                 <Flex justifyBetween alignCenter className="gm-border-top">

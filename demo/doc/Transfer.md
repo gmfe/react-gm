@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Transfer} from '../../src/index';
+    import {Transfer, TransferGroup} from '../../src/index';
     import _ from 'lodash';
 ---
 ## Transfer
@@ -60,6 +60,82 @@ class Component extends React.Component {
 ```
 ```jsx
 <Component/>
+```
+:::
+
+::: demo 
+```js
+class Component2 extends React.Component {
+    constructor(props) {
+        super(props);
+        const list = [{
+             value: 1,
+             name: '蔬菜',
+             children: [{
+                 value: 11,
+                 name: '叶菜',
+                 children: [{
+                     value: 111,
+                     name: '皇帝菜'
+                 }, {
+                     value: 112,
+                     name: '金不换'
+                 }]
+             }, {
+                 value: 12,
+                 name: '甘蓝',
+                 children: [{
+                     value: 121,
+                     name: '甘蓝1'
+                 }, {
+                    value: 122,
+                    name: '甘蓝2'  
+                 }]
+             }]
+         }, {
+             value: 2,
+             name: '冻品',
+             children: [{
+                 value: 21,
+                 name: '冻猪肉',
+                 children: [{
+                     value: 211,
+                     name: '五花肉'
+                 }, {
+                     value: 212,
+                     name: '猪脚'
+                 }]
+             }]
+         }];
+        
+        this.state = {
+            list,
+            selectedValues: [111, 212]
+        };
+        this.handleSelect = ::this.handleSelect;
+    }
+    
+    handleSelect(selectedValues) {
+        console.log(selectedValues);
+        this.setState({
+            selectedValues
+        });
+    }
+    
+    render() {
+        const {list, selectedValues} = this.state;
+        return (
+            <TransferGroup
+                list={list}
+                selectedValues={selectedValues}
+                onSelect={this.handleSelect}
+            />
+        );
+    }
+}
+```
+```jsx
+<Component2/>
 ```
 :::
 

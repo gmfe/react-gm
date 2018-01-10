@@ -2,7 +2,7 @@ import Pagination from './component/pagination/pagination';
 import PaginationNew from './component/pagination/pagination_new';
 import PaginationText from './component/pagination/pagination.text';
 import Dropper from './component/dropper/index';
-import { Form, FormItem, FormButton, FormBlock } from './component/form';
+import {Form, FormItem, FormButton, FormBlock} from './component/form';
 import ImportLead from './component/import_lead';
 import Storage from './component/storage';
 import Calendar from './component/calendar';
@@ -20,7 +20,7 @@ import DropSelect from './component/drop_select';
 import SearchSelect from './component/search_select/search.select';
 import FilterSearchSelect from './component/search_select/filter.search.select';
 import Switch from './component/switch';
-import { Sheet, SheetColumn, SheetAction, SheetSelect, SheetBatchAction } from './component/sheet';
+import {Sheet, SheetColumn, SheetAction, SheetSelect, SheetBatchAction} from './component/sheet';
 import Cascader from './component/cascader/cascader';
 import CascaderSelect from './component/cascader/cascader.select';
 import Trigger from './component/trigger';
@@ -33,15 +33,15 @@ import Modal from './component/modal';
 import RightSideModal from './component/modal/right_side_modal';
 import CleanModal from './component/modal/clean_modal';
 import Collapse from './component/collapse';
-import { DropDown, DropDownItem, DropDownItems } from './component/drop_down';
+import {DropDown, DropDownItem, DropDownItems} from './component/drop_down';
 import TreeSelect from './component/tree_select';
-import { QuickInfo, QuickInfoCell, QuickPanel, QuickFilter, QuickTab, QuickDesc } from './component/quick';
-import { Radio, RadioGroup } from './component/radio';
-import { Checkbox, CheckboxGroup } from './component/checkbox';
+import {QuickInfo, QuickInfoCell, QuickPanel, QuickFilter, QuickTab, QuickDesc} from './component/quick';
+import {Radio, RadioGroup} from './component/radio';
+import {Checkbox, CheckboxGroup} from './component/checkbox';
 import FilterSelect from './component/filter_select/filter.select';
 import MultipleFilterSelect from './component/filter_select/multiple.filter.select';
 import Menu from './component/menu';
-import Transfer from './component/transfer';
+import {Transfer, TransferGroup} from './component/transfer';
 import ImagePreview from './component/image_preview';
 import Mask from './component/mask';
 import Popover from './component/popover';
@@ -51,7 +51,7 @@ import Button from './component/button';
 import Validator from './validator';
 import Emitter from './emitter';
 
-import { Select, Option } from './component/select';
+import {Select, Option} from './component/select';
 
 Object.assign(Sheet, {
     SheetColumn,
@@ -134,7 +134,7 @@ export {
     Radio, RadioGroup,
     Checkbox, CheckboxGroup,
     Select, Option,
-    Transfer,
+    Transfer, TransferGroup,
     FilterSelect,
     MultipleFilterSelect,
     Mask,

@@ -1,3 +1,7 @@
 import Transfer from './transfer';
+import TransferGroup from './transfer_group';
 
-export default Transfer;
+export {
+    Transfer,
+    TransferGroup
+};
