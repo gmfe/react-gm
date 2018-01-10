@@ -153,3 +153,7 @@ class Component2 extends React.Component {
 - `rightTitles (string)` 标题，默认 待选择 
 - `rightWithFilter (func|bool)` 过滤函数，默认 true 且集成拼音搜索。false 则不出过滤框，fun 则过滤逻辑业务控
 - `rightPlaceHolder (string)`
+
+## TransferGroup 
+
+分组版，区别是 list 结构变了，具体见上述例子
