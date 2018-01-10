@@ -51,7 +51,7 @@ class Box extends React.Component {
         }
 
         return (
-            <Flex column className="gm-transfer-box gm-border" style={style}>
+            <Flex column className="gm-transfer-box gm-border gm-bg" style={style}>
                 <div
                     className="gm-transfer-box-title gm-padding-5 gm-back-bg text-center gm-border-bottom">{title}</div>
 
@@ -80,14 +80,17 @@ class Box extends React.Component {
                     </CheckboxGroup>
                 </Flex>
 
-                <CheckboxGroup
-                    name="transferBoxBottom"
-                    className="gm-margin-0 gm-padding-5 gm-bg gm-border-top"
-                    value={[list.length !== 0 && list.length === selectedValues.length]}
-                    onChange={this.handleSelectAll}
-                >
-                    <Checkbox value={true}>全选</Checkbox>
-                </CheckboxGroup>
+                <Flex justifyBetween alignCenter className="gm-border-top">
+                    <CheckboxGroup
+                        name="transferBoxBottom"
+                        className="gm-margin-0 gm-padding-5"
+                        value={[list.length !== 0 && list.length === selectedValues.length]}
+                        onChange={this.handleSelectAll}
+                    >
+                        <Checkbox value={true}>全选</Checkbox>
+                    </CheckboxGroup>
+                    <div className="gm-padding-lr-5 gm-text-desc">{selectedValues.length}/{list.length}</div>
+                </Flex>
             </Flex>
         );
     }
