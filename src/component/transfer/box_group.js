@@ -2,10 +2,10 @@ import React from 'react';
 import Flex from '../flex';
 import {Checkbox, CheckboxGroup} from '../checkbox';
 import {pinYinFilter} from "gm-util";
-import {getLeaf} from './util';
+import {getLeaf, getUnLeafValues, filterGroupList} from './util';
 import _ from 'lodash';
 
-class Box extends React.Component {
+class BoxGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,14 +14,24 @@ class Box extends React.Component {
         };
     }
 
-    handleChange = (selectedValues) => {
-        const {onSelect} = this.props;
-        onSelect(selectedValues);
+    handleChange = (value, groupSelectedValues) => {
+        const {onSelect, selectedValues} = this.props;
+
+        // 原先是 1 2 | 3 4 | 5
+        // 点击 4，此时参数 value 是 3 4 ，3
+        // 要得出 1 2 | 3   | 5
+        // 所以 _.xor(12345, _.xor(34, 3))
+        onSelect(_.xor(_.xor(value, groupSelectedValues), selectedValues));
     };
 
     handleSelectAll = (checked) => {
         const {list, onSelect} = this.props;
         onSelect(checked.length === 0 ? [] : _.map(getLeaf(list), v => v.value));
+
+        // 全选应该展开
+        this.setState({
+            groupSelected: getUnLeafValues(list)
+        });
     };
 
     handleQuery = (e) => {
@@ -52,7 +62,6 @@ class Box extends React.Component {
         if (list.length === 0) {
             return null;
         }
-
 
         const isGroupData = !!list[0].children;
 
@@ -85,12 +94,14 @@ class Box extends React.Component {
             );
         }
 
+        const value = _.filter(selectedValues, vv => _.includes(listValues, vv));
+
         return (
             <CheckboxGroup
                 className="gm-margin-0"
                 name={"transferBox" + Math.random()}
-                value={_.filter(selectedValues, vv => _.includes(listValues, vv))}
-                onChange={this.handleChange}
+                value={value}
+                onChange={this.handleChange.bind(this, value)}
             >
                 {_.map(list, v => (
                     <Checkbox key={v.value} value={v.value} className="gm-cursor">{v.name}</Checkbox>
@@ -116,7 +127,7 @@ class Box extends React.Component {
         } = this.state;
 
         if (withFilter === true) {
-            list = pinYinFilter(list, query, e => e.name);
+            list = filterGroupList(list, v => pinYinFilter([v], query, v => v.name).length > 0);
         } else if (withFilter) {
             list = withFilter(list, query);
         }
@@ -146,7 +157,7 @@ class Box extends React.Component {
                     <CheckboxGroup
                         name="transferBoxBottom"
                         className="gm-margin-0 gm-padding-5"
-                        value={[list.length !== 0 && list.length === selectedValues.length]}
+                        value={[allLength !== 0 && allLength === selectedValues.length]}
                         onChange={this.handleSelectAll}
                     >
                         <Checkbox value={true}>全选</Checkbox>
@@ -158,4 +169,4 @@ class Box extends React.Component {
     }
 }
 
-export default Box;
+export default BoxGroup;

@@ -4,8 +4,9 @@ import _ from 'lodash';
 import Flex from '../flex';
 import BoxGroup from './box_group';
 import Box from './box';
-import {getLeaf, filterList} from "./util";
+import {getLeaf, filterGroupList} from "./util";
 
+// 很复杂  很复杂  很复杂
 class TransferGroup extends React.Component {
     constructor(props) {
         super(props);
@@ -27,27 +28,24 @@ class TransferGroup extends React.Component {
         });
     };
 
-    handleToRightClick = () => {
+    handleToClick = (isLeft) => {
         const {onSelect, selectedValues} = this.props;
-        const {leftSelectedValues} = this.state;
+        const {leftSelectedValues, rightSelectedValues} = this.state;
 
-        onSelect(selectedValues.concat(leftSelectedValues));
+        onSelect(_.xor(selectedValues, isLeft ? rightSelectedValues : leftSelectedValues));
+
         this.setState({
             leftSelectedValues: [],
             rightSelectedValues: []
         });
     };
 
+    handleToRightClick = () => {
+        this.handleToClick(false);
+    };
+
     handleToLeftClick = () => {
-        const {onSelect, selectedValues} = this.props;
-        const {rightSelectedValues} = this.state;
-
-        onSelect(_.difference(selectedValues, rightSelectedValues));
-
-        this.setState({
-            leftSelectedValues: [],
-            rightSelectedValues: []
-        });
+        this.handleToClick(true);
     };
 
     render() {
@@ -66,7 +64,10 @@ class TransferGroup extends React.Component {
             rightSelectedValues
         } = this.state;
 
+        // 很复杂
         const leafList = getLeaf(list);
+
+        // 右边是个简单的array
         let rightList = [];
         _.each(leafList, v => {
             if (_.includes(selectedValues, v.value)) {
@@ -74,7 +75,8 @@ class TransferGroup extends React.Component {
             }
         });
 
-        let leftList = filterList(list, v => {
+        // 左边是group数据
+        let leftList = filterGroupList(list, v => {
             return !_.includes(selectedValues, v.value);
         });
 
@@ -145,7 +147,7 @@ TransferGroup.propTypes = {
 TransferGroup.defaultProps = {
     listStyle: {
         width: '250px',
-        height: '550px'
+        height: '350px'
     },
 
     leftTitle: '待选择',

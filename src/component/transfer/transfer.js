@@ -25,29 +25,25 @@ class Transfer extends React.Component {
         });
     };
 
-    handleToRightClick = () => {
+    handleToClick = (isLeft) => {
         const {onSelect, selectedValues} = this.props;
-        const {leftSelectedValues} = this.state;
+        const {leftSelectedValues, rightSelectedValues} = this.state;
 
-        onSelect(selectedValues.concat(leftSelectedValues));
+        onSelect(_.xor(selectedValues, isLeft ? rightSelectedValues : leftSelectedValues));
+
         this.setState({
             leftSelectedValues: [],
             rightSelectedValues: []
         });
+    };
+
+    handleToRightClick = () => {
+        this.handleToClick(false);
     };
 
     handleToLeftClick = () => {
-        const {onSelect, selectedValues} = this.props;
-        const {rightSelectedValues} = this.state;
-
-        onSelect(_.difference(selectedValues, rightSelectedValues));
-
-        this.setState({
-            leftSelectedValues: [],
-            rightSelectedValues: []
-        });
+        this.handleToClick(true);
     };
-
 
     render() {
         let {
@@ -141,7 +137,7 @@ Transfer.propTypes = {
 Transfer.defaultProps = {
     listStyle: {
         width: '250px',
-        height: '550px'
+        height: '350px'
     },
 
     leftTitle: '待选择',
