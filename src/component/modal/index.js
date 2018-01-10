@@ -60,13 +60,13 @@ class Modal extends React.Component {
     }
 
     renderTypeModal() {
-        const {show, title, children, type, okBtnClassName} = this.props;
+        const {show, title, children, type, okBtnClassName, className} = this.props;
 
         return (
             <div>
                 <div className="gm-modal-mask"/>
                 <div
-                    className="gm-modal"
+                    className={classNames("gm-modal", className)}
                     tabIndex="-1"
                     onClick={this.handleMask}
                 >

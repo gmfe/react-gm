@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Flex from '../flex';
+import BoxGroup from './box_group';
 import Box from './box';
+import {getLeaf, filterGroupList} from "./util";
 
-class Transfer extends React.Component {
+// 很复杂  很复杂  很复杂
+class TransferGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -61,22 +64,29 @@ class Transfer extends React.Component {
             rightSelectedValues
         } = this.state;
 
-        let leftList = [];
+        // 很复杂
+        const leafList = getLeaf(list);
+
+        // 右边是个简单的array
         let rightList = [];
-        _.each(list, v => {
-            if (selectedValues.indexOf(v.value) > -1) {
+        _.each(leafList, v => {
+            if (_.includes(selectedValues, v.value)) {
                 rightList.push(v);
-            } else {
-                leftList.push(v);
             }
+        });
+
+        // 左边是group数据
+        let leftList = filterGroupList(list, v => {
+            return !_.includes(selectedValues, v.value);
         });
 
         return (
             <div className="gm-transfer">
                 <Flex>
-                    <Box
+                    <BoxGroup
+                        isGroup
                         list={leftList}
-                        allLength={leftList.length}
+                        allLength={leafList.length - rightList.length}
                         selectedValues={leftSelectedValues}
                         onSelect={this.handleLeftChange}
 
@@ -118,7 +128,7 @@ class Transfer extends React.Component {
     }
 }
 
-Transfer.propTypes = {
+TransferGroup.propTypes = {
     list: PropTypes.array.isRequired,
     selectedValues: PropTypes.array.isRequired,
     onSelect: PropTypes.func.isRequired,
@@ -134,7 +144,7 @@ Transfer.propTypes = {
     rightPlaceHolder: PropTypes.string
 };
 
-Transfer.defaultProps = {
+TransferGroup.defaultProps = {
     listStyle: {
         width: '250px',
         height: '350px'
@@ -149,4 +159,4 @@ Transfer.defaultProps = {
     rightPlaceHolder: '搜索'
 };
 
-export default Transfer;
+export default TransferGroup;
