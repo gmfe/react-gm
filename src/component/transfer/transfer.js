@@ -2,271 +2,153 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Flex from '../flex';
-import {is} from 'gm-util';
-import classNames from 'classnames';
-
-const Option = ({children, ...rest}) => (<option {...rest}>{children}</option>);
-
-class Select extends React.Component {
-	constructor(props) {
-		super(props);
-		this.handleChange = ::this.handleChange;
-		this.refSelect = null;
-	}
-	handleChange() {
-		const {onChange, children, multiple} = this.props;
-		const childList = _.isArray(children) ? children : [children];
-		const result = [];
-		_.each(this.refSelect.childNodes, (node, i) => {
-			if (node.selected) {
-				result.push(childList[i].props.value);
-			}
-		});
-		onChange(multiple ? result : result[0]);
-	}
-	render() {
-		const {
-			multiple,
-			children,
-			className,
-			...rest
-		} = this.props;
-		return (
-            <select
-                ref={ref => this.refSelect = ref}
-				{...rest}
-                multiple={multiple}
-                value={rest.value}
-                onChange={this.handleChange}
-                className={classNames('form-control', className)}
-            >{
-				React.Children.map(children, (el) => {
-					if(el.type === Option) {
-						return <option {...el.props}/>;
-					} else {
-						return null;
-					}
-				})
-			}</select>
-		);
-	}
-}
+import Box from './box';
 
 class Transfer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: '',
-            selectedSourceValues: [],
-            selectedTargetValues: []
+            leftSelectedValues: [],
+            rightSelectedValues: []
         };
-        this.handleQuery = ::this.handleQuery;
-        this.handleSourceChange = ::this.handleSourceChange;
-        this.handleTargetChange = ::this.handleTargetChange;
-        this.handleSourceDoubleClick = ::this.handleSourceDoubleClick;
-        this.handleTargetDoubleClick = ::this.handleTargetDoubleClick;
-        this.handlePickAll = ::this.handlePickAll;
-        this.handleRemoveAll = ::this.handleRemoveAll;
-        this.handleToRightClick = ::this.handleToRightClick;
-        this.handleToLeftClick = ::this.handleToLeftClick;
     }
 
-    handleQuery(e) {
+    handleLeftChange = (leftSelectedValues) => {
         this.setState({
-            query: e.target.value
+            leftSelectedValues
         });
-    }
+    };
 
-    handleSourceChange(selectedSourceValues) {
+    handleRightChange = (rightSelectedValues) => {
         this.setState({
-            selectedSourceValues
+            rightSelectedValues
         });
-    }
+    };
 
-    handleTargetChange(selectedTargetValues) {
-        this.setState({
-            selectedTargetValues
-        });
-    }
-
-    handleSourceDoubleClick() {
-        // 这个时候 selectedSourceValues 有值
+    handleToRightClick = () => {
         const {onSelect, selectedValues} = this.props;
-        const {selectedSourceValues} = this.state;
+        const {leftSelectedValues} = this.state;
 
-        onSelect(selectedValues.concat(selectedSourceValues));
+        onSelect(selectedValues.concat(leftSelectedValues));
         this.setState({
-            selectedSourceValues: [],
-            selectedTargetValues: []
+            leftSelectedValues: [],
+            rightSelectedValues: []
         });
-    }
+    };
 
-    handleTargetDoubleClick() {
+    handleToLeftClick = () => {
         const {onSelect, selectedValues} = this.props;
-        const {selectedTargetValues} = this.state;
+        const {rightSelectedValues} = this.state;
 
-        onSelect(_.difference(selectedValues, selectedTargetValues));
+        onSelect(_.difference(selectedValues, rightSelectedValues));
+
         this.setState({
-            selectedSourceValues: [],
-            selectedTargetValues: []
+            leftSelectedValues: [],
+            rightSelectedValues: []
         });
-    }
-
-    handlePickAll() {
-        const {onSelect, list} = this.props;
-
-        onSelect(_.map(list, v => v.value));
-        this.setState({
-            selectedSourceValues: [],
-            selectedTargetValues: []
-        });
-    }
-
-    handleRemoveAll() {
-        const {onSelect} = this.props;
-
-        onSelect([]);
-        this.setState({
-            selectedSourceValues: [],
-            selectedTargetValues: []
-        });
-    }
-
-    handleToRightClick() {
-        const {onSelect, selectedValues} = this.props;
-        const {selectedSourceValues} = this.state;
-
-        onSelect(selectedValues.concat(selectedSourceValues));
-        this.setState({
-            selectedSourceValues: [],
-            selectedTargetValues: []
-        });
-    }
-
-    handleToLeftClick() {
-        const {onSelect, selectedValues} = this.props;
-        const {selectedTargetValues} = this.state;
-
-        onSelect(_.difference(selectedValues, selectedTargetValues));
-        this.setState({
-            selectedSourceValues: [],
-            selectedTargetValues: []
-        });
-    }
+    };
 
 
     render() {
-        let {list, titles, selectedValues, withFilter, listStyle} = this.props;
-        const {query, selectedSourceValues, selectedTargetValues} = this.state;
+        let {
+            list,
+            selectedValues,
+            listStyle,
 
-        const selectedList = [];
+            leftTitle, leftWithFilter, leftPlaceHolder,
 
-        // 过滤掉已选中的
+            rightTitle, rightWithFilter, rightPlaceHolder
+        } = this.props;
+
+        const {
+            leftSelectedValues,
+            rightSelectedValues
+        } = this.state;
+
+        let leftList = [];
+        let rightList = [];
         _.each(list, v => {
             if (selectedValues.indexOf(v.value) > -1) {
-                selectedList.push(v);
+                rightList.push(v);
+            } else {
+                leftList.push(v);
             }
         });
-
-        // 调用方自定义过滤
-        list = _.filter(list, v => selectedValues.indexOf(v.value) === -1);
-        if (withFilter) {
-            list = withFilter(list, query);
-        }
 
         return (
             <div className="gm-transfer">
                 <Flex>
-                    <Flex column className="gm-transfer-list" style={listStyle}>
-                        <div className="gm-transfer-list-title">{titles[0]}</div>
+                    <Box
+                        list={leftList}
+                        selectedValues={leftSelectedValues}
+                        onSelect={this.handleLeftChange}
 
-                        {withFilter ? (
-                            <div className="input-group input-group-sm gm-transfer-list-filter">
-                                <span className="input-group-addon">
-                                    <i className="glyphicon glyphicon-search"/>
-                                </span>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    value={query}
-                                    onChange={this.handleQuery}
-                                />
-                            </div>
-                        ) : null}
+                        title={leftTitle}
+                        style={listStyle}
+                        withFilter={leftWithFilter}
+                        placeholder={leftPlaceHolder}
+                    />
 
-                        <Select
-                            multiple
-                            value={selectedSourceValues}
-                            onChange={this.handleSourceChange}
-                            onDoubleClick={this.handleSourceDoubleClick}
-                        >
-                            {_.map(list, v => (
-                                <Option key={v.value} value={v.value}>{v.name}</Option>
-                            ))}
-                        </Select>
-
-                        <button
-                            className="gm-transfer-list-all btn btn-default btn-sm"
-                            onClick={this.handlePickAll}
-                        >选中全部
-                        </button>
-                    </Flex>
+                    <div className="gm-gap-5"/>
                     <Flex column justifyCenter alignCenter className="gm-transfer-operation">
                         <button
-                            disabled={selectedSourceValues.length === 0}
-                            className="btn btn-xs btn-default gm-margin-bottom-5"
+                            disabled={leftSelectedValues.length === 0}
+                            className="btn btn-default btn-block gm-margin-bottom-5"
                             onClick={this.handleToRightClick}
                         >&gt;</button>
                         <button
-                            disabled={selectedTargetValues.length === 0}
-                            className="btn btn-xs btn-default"
+                            disabled={rightSelectedValues.length === 0}
+                            className="btn btn-default btn-block"
                             onClick={this.handleToLeftClick}
                         >&lt;</button>
                     </Flex>
-                    <Flex column className="gm-transfer-list" style={listStyle}>
-                        <div className="gm-transfer-list-title">{titles[1]}</div>
+                    <div className="gm-gap-5"/>
 
-                        <Select
-                            multiple
-                            value={selectedTargetValues}
-                            onChange={this.handleTargetChange}
-                            onDoubleClick={this.handleTargetDoubleClick}
-                        >
-                            {_.map(selectedList, v => (
-                                <Option key={v.value} value={v.value}>{v.name}</Option>
-                            ))}
-                        </Select>
+                    <Box
+                        list={rightList}
+                        selectedValues={rightSelectedValues}
+                        onSelect={this.handleRightChange}
 
-                        <button
-                            className="gm-transfer-list-all btn btn-default btn-sm"
-                            onClick={this.handleRemoveAll}
-                        >删除全部
-                        </button>
-                    </Flex>
+                        title={rightTitle}
+                        style={listStyle}
+                        withFilter={rightWithFilter}
+                        placeholder={rightPlaceHolder}
+                    />
                 </Flex>
-                <div className="gm-text-desc">
-                    按下{is.mac ? 'Command' : 'Control'}选择多个值
-                </div>
             </div>
         );
     }
 }
 
 Transfer.propTypes = {
-    titles: PropTypes.array,
     list: PropTypes.array.isRequired,
     selectedValues: PropTypes.array.isRequired,
     onSelect: PropTypes.func.isRequired,
-    withFilter: PropTypes.func,
-    listStyle: PropTypes.object
+
+    listStyle: PropTypes.object,
+
+    leftTitle: PropTypes.string,
+    leftWithFilter: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+    leftPlaceHolder: PropTypes.string,
+
+    rightTitle: PropTypes.string,
+    rightWithFilter: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+    rightPlaceHolder: PropTypes.string
 };
 
 Transfer.defaultProps = {
-    titles: ['待选择', '已选择'],
     listStyle: {
         width: '250px',
-        height: '300px'
-    }
+        height: '350px'
+    },
+
+    leftTitle: '待选择',
+    leftWithFilter: true,
+    leftPlaceHolder: '搜索',
+
+    rightTitle: '已选择',
+    rightWithFilter: true,
+    rightPlaceHolder: '搜索'
 };
 
 export default Transfer;

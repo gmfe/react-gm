@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Modal from '../modal';
 import _ from 'lodash';
 import Emitter from '../../emitter';
+import classNames from 'classnames';
 
 // 搞的复杂了，后续要补充文档
 
@@ -138,7 +139,9 @@ class Dialog extends React.Component {
             modalProps.size = size;
         }
         return (
-            <Modal {...modalProps} size={modalProps.size} title={title}>
+            <Modal {...modalProps} className={classNames('gm-dialog', {
+                ['gm-dialog-' + type]: type
+            })} size={modalProps.size} title={title}>
                 <div>
                     {children}
                     {type === 'prompt' && (
