@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Flex from '../flex';
 import Box from './box';
+import classNames from "classnames";
 
 class Transfer extends React.Component {
     constructor(props) {
@@ -53,7 +54,11 @@ class Transfer extends React.Component {
 
             leftTitle, leftWithFilter, leftPlaceHolder,
 
-            rightTitle, rightWithFilter, rightPlaceHolder
+            rightTitle, rightWithFilter, rightPlaceHolder,
+
+            onSelect, // eslint-disable-line
+            className,
+            ...rest
         } = this.props;
 
         const {
@@ -72,7 +77,7 @@ class Transfer extends React.Component {
         });
 
         return (
-            <div className="gm-transfer">
+            <div {...rest} className={classNames("gm-transfer", className)}>
                 <Flex>
                     <Box
                         list={leftList}

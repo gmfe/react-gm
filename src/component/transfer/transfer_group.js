@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Flex from '../flex';
 import BoxGroup from './box_group';
 import Box from './box';
+import classNames from 'classnames';
 import {getLeaf, filterGroupList} from "./util";
 
 // 很复杂  很复杂  很复杂
@@ -56,7 +57,11 @@ class TransferGroup extends React.Component {
 
             leftTitle, leftWithFilter, leftPlaceHolder,
 
-            rightTitle, rightWithFilter, rightPlaceHolder
+            rightTitle, rightWithFilter, rightPlaceHolder,
+
+            onSelect, // eslint-disable-line
+            className,
+            ...rest
         } = this.props;
 
         const {
@@ -81,10 +86,9 @@ class TransferGroup extends React.Component {
         });
 
         return (
-            <div className="gm-transfer">
+            <div {...rest} className={classNames("gm-transfer gm-transfer-group", className)}>
                 <Flex>
                     <BoxGroup
-                        isGroup
                         list={leftList}
                         allLength={leafList.length - rightList.length}
                         selectedValues={leftSelectedValues}
