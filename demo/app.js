@@ -9,6 +9,7 @@ import queryString from 'query-string';
 import {withRouter} from 'react-router-dom';
 
 import {Framework, TopContent} from '../framework';
+import Logo from './logo';
 
 const history = createHashHistory();
 
@@ -118,6 +119,7 @@ class App extends React.Component {
             >
                 <div onClick={this.handleClickAnchor}>
                     {children}
+                    <Logo/>
                 </div>
             </Framework>
         );
