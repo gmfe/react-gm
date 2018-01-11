@@ -231,9 +231,15 @@ h1 {
   left: ~"calc(50% - 200px)";
 
   .b-logo-item {
+    display: block;
     position: absolute;
     width: 50px;
     height: 50px;
-    background: #555;
+    opacity: 0;
+    transition: opacity 2s;
+  }
+
+  .b-logo-item-show {
+    opacity: 1;
   }
 }
