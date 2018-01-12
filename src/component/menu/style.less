@@ -7,7 +7,26 @@
   .gm-menu {
     position: relative;
 
-    .gm-menu-sub{
+    > .gm-menu-title {
+      cursor: pointer;
+      width: 100%;
+      color: @gm-color-second;
+
+      span {
+        font-size: 12px;
+        padding: 10px 0 10px 20px;
+      }
+
+      i {
+        font-size: 12px;
+      }
+
+      .gm-disabled-arrow-color {
+        color: #dedddd;
+      }
+    }
+
+    .gm-menu-sub {
       width: 100%;
       display: none;
 
@@ -29,7 +48,7 @@
           color: @brand-primary;
         }
 
-        &.active:before {
+        &.active::before {
           position: absolute;
           width: 4px;
           height: 100%;
@@ -39,33 +58,13 @@
           left: 0;
         }
       }
-
     }
 
     .gm-menu-sub-opened {
       display: inline-block;
     }
 
-    >.gm-menu-title{
-      cursor: pointer;
-      width: 100%;
-      color: @gm-color-second;
-
-      span {
-        font-size: 12px;
-        padding: 10px 0 10px 20px;
-      }
-
-      i {
-        font-size: 12px;
-      }
-
-      .gm-disabled-arrow-color {
-        color: #dedddd;
-      }
-    }
-
-    >.gm-menu-title-disabled {
+    > .gm-menu-title-disabled {
       cursor: default;
     }
   }

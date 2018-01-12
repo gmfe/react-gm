@@ -12,18 +12,19 @@
       position: absolute;
       font-size: 12px;
       top: 50%;
-      margin-top: -.5em;
-      right: .5em;
+      margin-top: -0.5em;
+      right: 0.5em;
       line-height: 100%;
       color: @input-border;
       transform: rotate(0deg);
-      transition: transform .2s ease;
+      transition: transform 0.2s ease;
+
       &.active {
         transform: rotate(180deg);
       }
     }
 
-    .ifont-close{
+    .ifont-close {
       position: absolute;
       display: block;
       width: 10px;
@@ -47,9 +48,11 @@
       border: 1px solid @gm-form-border-color;
       min-width: 100px;
       overflow: auto;
+
       &:not(:first-child) {
         border-left: none;
       }
+
       .list-group-item {
         padding: 5px 10px;
         border: none;
@@ -64,19 +67,22 @@
   position: relative;
   border: 1px solid @gm-form-border-color;
   background-color: white;
+
   &.disabled {
     cursor: not-allowed;
+
     .selected {
-      opacity: .6;
+      opacity: 0.6;
     }
   }
   .gm-cascader-input input[disabled] {
     cursor: not-allowed;
-    background-color: #FFF;
+    background-color: #fff;
   }
 
   .gm-cascader-select-input {
     padding: 6px 12px;
+
     input {
       padding: 0;
       padding-right: 35px;
@@ -86,11 +92,13 @@
       outline: none;
       height: auto;
     }
+
     .selected {
       background-color: @list-group-hover-bg;
       padding: 0 5px;
       margin-right: 12px;
       border-radius: 4px;
+
       .close {
         right: -5px;
         line-height: 1;
@@ -98,13 +106,14 @@
         padding-left: 2px;
       }
     }
+
     .gm-cascader-input {
       .glyphicon {
         right: 0;
       }
     }
 
-    .gm-trigger-popup{
+    .gm-trigger-popup {
       margin-top: 8px;
     }
   }

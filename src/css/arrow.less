@@ -26,6 +26,7 @@
   right: 5px;
   bottom: 0;
   margin: auto 0;
+
   &.active {
     border-left: 5px solid white;
   }
@@ -33,7 +34,8 @@
 
 .GMArrowDown() {
   position: relative;
-  &:after {
+
+  &::after {
     .gm-arrow-down();
   }
 }

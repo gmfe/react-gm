@@ -13,6 +13,52 @@
     .opacity(.6);
   }
 
+  .gm-switch-label {
+    position: relative;
+    border: 1px solid @gm-border-color;
+    padding: 1px;
+
+    .gm-switch-label-on,
+    .gm-switch-label-off {
+      position: absolute;
+      display: block;
+      visibility: hidden;
+      left: 0;
+      top: 0;
+    }
+  }
+
+  .gm-switch-handle {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    width: 17px;
+    background: white;
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
+    transition: left 0.15s ease-out;
+    background-image: linear-gradient(to bottom, #fff 40%, #f0f0f0);
+  }
+
+  .gm-switch-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+
+    ~ .gm-switch-label {
+      padding: 1px 4px 1px 24px;
+    }
+
+    &:checked ~ .gm-switch-label {
+      padding: 1px 24px 1px 4px;
+    }
+
+    &:checked ~ .gm-switch-handle {
+      box-shadow: -1px 0 5px rgba(0, 0, 0, 0.3);
+    }
+  }
+
   &.gm-switch-primary {
     .gm-switch-input:checked ~ .gm-switch-label {
       color: white;
@@ -51,51 +97,6 @@
       background-color: @brand-danger;
       border: 1px solid @brand-danger;
     }
-  }
-
-  .gm-switch-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-
-    ~ .gm-switch-label {
-      padding: 1px 4px 1px 24px;
-    }
-
-    &:checked ~ .gm-switch-label {
-      padding: 1px 24px 1px 4px;
-    }
-
-    &:checked ~ .gm-switch-handle {
-      box-shadow: -1px 0 5px rgba(0, 0, 0, 0.3);
-    }
-  }
-
-  .gm-switch-label {
-    position: relative;
-    border: 1px solid @gm-border-color;
-    padding: 1px;
-
-    .gm-switch-label-on, .gm-switch-label-off {
-      position: absolute;
-      display: block;
-      visibility: hidden;
-      left: 0;
-      top: 0;
-    }
-  }
-
-  .gm-switch-handle {
-    position: absolute;
-    top: 2px;
-    bottom: 2px;
-    left: 2px;
-    width: 17px;
-    background: white;
-    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
-    transition: left .15s ease-out;
-    background-image: linear-gradient(to bottom, #fff 40%, #f0f0f0);
   }
 }
 

@@ -7,6 +7,7 @@
   input {
     display: none;
   }
+
   input + span {
     padding: 0;
     min-height: 0 !important;
@@ -19,9 +20,18 @@
     position: relative;
     width: 14px;
     height: 14px;
-    transition: background-color 0.20s linear;
+    transition: background-color 0.2s linear;
   }
-  input + span:after {
+
+  .disabled {
+    opacity: 0.6;
+
+    span {
+      border: 1px solid @gm-form-border-color;
+    }
+  }
+
+  input + span::after {
     opacity: 0;
     content: '';
     position: absolute;
@@ -34,14 +44,15 @@
     border-top: none;
     border-right: none;
     transform: rotate(-45deg);
-    transition: opacity 0.20s linear;
-
+    transition: opacity 0.2s linear;
   }
+
   input:checked + span {
     border: 1px solid @brand-primary;
     background-color: @brand-primary;
   }
-  input:checked + span:after {
+
+  input:checked + span::after {
     opacity: 1;
     content: '';
     position: absolute;
@@ -54,15 +65,10 @@
     border-top: none;
     border-right: none;
     transform: rotate(-45deg);
-    transition: opacity 0.20s linear;
+    transition: opacity 0.2s linear;
   }
+
   label.disabled {
     cursor: not-allowed;
-  }
-  .disabled {
-    opacity: .6;
-    & span {
-      border: 1px solid @gm-form-border-color;
-    }
   }
 }

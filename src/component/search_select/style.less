@@ -6,6 +6,7 @@
   .gm-search-select-input {
     padding: 7px 20px 8px 12px;
     overflow-x: auto;
+
     input {
       padding: 0;
       border: none;
@@ -14,6 +15,7 @@
       width: 100%;
       outline: none;
     }
+
     .selected {
       background-color: @list-group-hover-bg;
       padding: 0 5px;
@@ -50,6 +52,7 @@
             border-right: none;
             border-top: 1px solid @gm-border-color;
             padding: 6px 12px;
+
             &:first-child {
               border-top: none;
             }
@@ -69,6 +72,7 @@
               border-top: 1px solid @gm-border-color;
               background-color: @gray-lighter;
             }
+
             .list-group-item {
               padding: 6px 26px;
             }
@@ -80,13 +84,14 @@
 
   &.gm-search-select-disabled {
     cursor: not-allowed;
-    opacity: .6;
+    opacity: 0.6;
+
     input {
       cursor: not-allowed;
     }
+
     button.close {
       cursor: not-allowed;
     }
   }
-
 }

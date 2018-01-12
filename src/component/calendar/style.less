@@ -17,7 +17,8 @@
   line-height: 24px;
 }
 
-.gm-calendar-head-pre, .gm-calendar-head-next {
+.gm-calendar-head-pre,
+.gm-calendar-head-next {
   width: 24px;
   height: 24px;
   border-radius: 4px;
@@ -25,7 +26,8 @@
   cursor: pointer;
 }
 
-.gm-calendar-head-pre:hover, .gm-calendar-head-next:hover {
+.gm-calendar-head-pre:hover,
+.gm-calendar-head-next:hover {
   background-color: @gray-lighter;
   text-decoration: none;
 }
@@ -36,9 +38,6 @@
 
 .gm-calendar-week {
   background-color: @gray-lighter;
-}
-
-.gm-calendar-content {
 }
 
 .gm-calendar-months {
@@ -52,7 +51,6 @@
 }
 
 .gm-calendar-month {
-
   width: 56px;
   height: 40px;
   line-height: 40px;
@@ -96,11 +94,11 @@
 }
 
 .gm-calendar-day-old {
-  color: #999999;
+  color: #999;
 }
 
 .gm-calendar-day-new {
-  color: #999999;
+  color: #999;
 }
 
 .gm-calendar-active {
@@ -115,7 +113,7 @@
 
 .gm-calendar-day-disabled {
   background: @list-group-hover-bg;
-  color: #999999;
+  color: #999;
   cursor: not-allowed;
 }
 
@@ -133,6 +131,7 @@
       border-bottom-left-radius: 4px;
       border-top-left-radius: 4px;
     }
+
     &:last-child {
       width: 26px;
       padding-right: 0;
@@ -141,5 +140,4 @@
       border-bottom-right-radius: 4px;
     }
   }
-
 }

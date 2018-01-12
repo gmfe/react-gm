@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   z-index: 1040;
-  background-color: rgba(0, 0, 0, .2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .gm-modal {
@@ -19,34 +19,11 @@
   z-index: 1050;
   outline: 0;
 
-  &.gm-modal-clean {
-    .gm-modal-dialog {
-      background: transparent;
-
-      >.close {
-        display: none;
-      }
-      .gm-modal-content {
-        padding: 0;
-      }
-    }
-  }
-
-  &.gm-modal-right-side {
-    .gm-modal-dialog {
-      margin: 0 0 0 auto;
-      height: 100%;
-      overflow: hidden;
-
-      .gm-modal-content {
-        padding: 0;
-      }
-    }
-  }
-
   .gm-modal-dialog {
     position: relative;
     background-color: white;
+    margin: 10px;
+    width: auto;
 
     .close {
       margin: 8px 10px 0 0;
@@ -65,63 +42,92 @@
       padding: 0;
     }
   }
-}
 
-.gm-modal-dialog {
-  margin: 10px;
-  width: auto;
-}
+  &.gm-modal-clean {
+    .gm-modal-dialog {
+      background: transparent;
 
-.gm-modal-type {
-  width: 390px;
-  padding: 20px 30px 20px 30px;
-  margin: 30px auto;
-  font-size: 14px;
-  border: 1px solid @gm-border-color;
-  border-radius: 6px;
+      > .close {
+        display: none;
+      }
 
-  .gm-modal-type-title {
-    font-size: 16px;
-    line-height: 16px;
+      .gm-modal-content {
+        padding: 0;
+      }
+    }
+  }
 
-    i {
-      font-size: 18px;
-      margin-right: 5px;
+  &.gm-modal-right-side {
+    .gm-modal-dialog {
+      margin: 0 0 0 auto;
+      height: 100%;
+      overflow: hidden;
+
+      .gm-modal-content {
+        padding: 0;
+      }
     }
-    .ifont-success {
-      color: @brand-primary;
-    }
-    .ifont-14052218 {
-      color: #ff6600;
-    }
-    .ifont-warning {
-      color: #f1ce35;
-    }
-    .ifont-info-circle {
-      color: #108ee9;
+  }
+
+  .gm-modal-type {
+    width: 390px;
+    padding: 20px 30px 20px 30px;
+    margin: 30px auto;
+    font-size: 14px;
+    border: 1px solid @gm-border-color;
+    border-radius: 6px;
+
+    .gm-modal-type-title {
+      font-size: 16px;
+      line-height: 16px;
+
+      i {
+        font-size: 18px;
+        margin-right: 5px;
+      }
+
+      .ifont-success {
+        color: @brand-primary;
+      }
+
+      .ifont-14052218 {
+        color: #f60;
+      }
+
+      .ifont-warning {
+        color: #f1ce35;
+      }
+
+      .ifont-info-circle {
+        color: #108ee9;
+      }
     }
   }
 }
 
 @media (min-width: 768px) {
-  .gm-modal-lg {
-    width: 600px;
-    margin: 160px auto 20px;
-  }
+  .gm-modal {
+    .gm-modal-lg {
+      width: 600px;
+      margin: 160px auto 20px;
+    }
 
-  .gm-modal-md {
-    width: 600px;
-    margin: 160px auto 20px;
-  }
+    .gm-modal-md {
+      width: 600px;
+      margin: 160px auto 20px;
+    }
 
-  .gm-modal-sm {
-    width: 300px;
-    margin: 160px auto 20px;
+    .gm-modal-sm {
+      width: 300px;
+      margin: 160px auto 20px;
+    }
   }
 }
 
 @media (min-width: 992px) {
-  .gm-modal-lg {
-    width: 900px;
+  .gm-modal {
+    .gm-modal-lg {
+      width: 900px;
+    }
   }
 }

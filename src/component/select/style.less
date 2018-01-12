@@ -32,9 +32,7 @@
     position: relative;
     cursor: pointer;
     margin: 0;
-
-    border: 1px solid #CCC;
-
+    border: 1px solid #ccc;
     overflow: hidden;
     padding: @gm-select-item-padding;
     padding-right: 20px;
@@ -47,7 +45,7 @@
 
     &.disabled {
       cursor: not-allowed;
-      background-color: #EEE;
+      background-color: #eee;
       border: 1px solid darken(@gm-border-color, 10%);
       box-shadow: none;
     }
@@ -75,19 +73,22 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    &:hover{
+
+    &:hover {
       background-color: lighten(@gm-select-option-hover-background, 10%);
     }
+
     &.selected {
       background-color: lighten(@gm-select-option-hover-background, 5%);
     }
+
     &:not(:first-child) {
       border-top: 1px solid @gm-border-color;
     }
 
     &.disabled {
       cursor: not-allowed;
-      background-color: #EEE;
+      background-color: #eee;
       border-top: 1px solid @gm-border-color;
     }
   }

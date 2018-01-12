@@ -1,8 +1,8 @@
 @media (max-width: 768px) {
   .gm-framework {
-    .gm-framework-top{
+    .gm-framework-top {
       &-header-default {
-        &-inner{
+        &-inner {
           position: relative;
         }
 
@@ -13,14 +13,15 @@
 
       &-content-default {
         height: 0;
-        &-inner{
+
+        &-inner {
           position: absolute;
           left: -110%;
           width: 100%;
           height: 100px;
           top: 30px;
           z-index: 100;
-          transition: left .2s ease-out;
+          transition: left 0.2s ease-out;
         }
 
         .gm-framework-container {
@@ -28,7 +29,8 @@
           flex-direction: column;
         }
 
-        &-nav > a, &-jump > div > a {
+        &-nav > a,
+        &-jump > div > a {
           padding: 0;
         }
 
@@ -53,10 +55,10 @@
         top: 130px;
         bottom: 0;
         z-index: 100;
-        transition: left .2s ease-out;
+        transition: left 0.2s ease-out;
         padding: 0;
         overflow: auto;
-        background-color: rgba(0, 0, 0, .5)
+        background-color: rgba(0, 0, 0, 0.5);
       }
 
       .gm-framework-breadcrumb {
@@ -72,6 +74,7 @@
       .gm-framework-top-content-default-inner {
         left: 0;
       }
+
       .gm-framework-left {
         left: 0;
       }

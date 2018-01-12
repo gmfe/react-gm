@@ -4,6 +4,19 @@
   background-color: white;
   cursor: pointer;
 
+  &.gm-filter-select-disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+
+    input {
+      cursor: not-allowed;
+    }
+
+    button.close {
+      cursor: not-allowed;
+    }
+  }
+
   .gm-filter-select-target {
     overflow-x: auto;
 
@@ -25,7 +38,6 @@
       position: static;
       padding: 6px 20px 6px 12px;
 
-      >
       .gm-trigger-popup {
         left: -1px;
         right: -1px;
@@ -35,6 +47,7 @@
             padding: 5px;
             border-bottom: 1px solid @gm-border-color;
             background: whitesmoke;
+
             input {
               padding: 0 5px;
               height: 28px;
@@ -87,6 +100,7 @@
               color: @input-color-placeholder;
               background: white;
             }
+
             .list-group-item {
               padding: 6px 26px;
             }
@@ -95,34 +109,4 @@
       }
     }
   }
-
-  //&.gm-filter-select-multiple {
-  //  .gm-filter-select-target {
-  //    .selected {
-  //      background-color: @list-group-hover-bg;
-  //      padding: 0 5px;
-  //      margin-right: 5px;
-  //      border-radius: 4px;
-  //
-  //      .close {
-  //        right: -5px;
-  //        line-height: 1;
-  //        font-size: 15px;
-  //        padding-left: 2px;
-  //      }
-  //    }
-  //  }
-  //}
-
-  &.gm-filter-select-disabled {
-    cursor: not-allowed;
-    opacity: .6;
-    input {
-      cursor: not-allowed;
-    }
-    button.close {
-      cursor: not-allowed;
-    }
-  }
-
 }

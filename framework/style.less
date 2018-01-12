@@ -22,6 +22,7 @@
     &-header {
       &-default {
         height: 30px;
+
         &-inner {
           position: fixed;
           top: 0;
@@ -45,8 +46,9 @@
         &-settings {
           .list-group {
             margin-bottom: 0;
+
             .list-group-item {
-              color: #333333;
+              color: #333;
               padding: 5px;
               margin: 0;
               border-top: none;
@@ -59,6 +61,7 @@
     &-content {
       &-default {
         height: 60px;
+
         &-inner {
           position: fixed;
           top: 30px;
@@ -69,7 +72,8 @@
           height: 60px;
         }
 
-        &-nav > a, &-jump > div > a {
+        &-nav > a,
+        &-jump > div > a {
           font-size: 16px;
           color: black;
           display: inline-block;
@@ -83,6 +87,7 @@
             color: @brand-primary;
             border-bottom: 4px solid @brand-primary;
           }
+
           &:hover {
             text-decoration: none;
             background: @gm-back-body-bg;
@@ -121,7 +126,8 @@
                 padding-bottom: 18px;
               }
 
-              &:focus, &:hover {
+              &:focus,
+              &:hover {
                 color: @brand-primary;
                 background: #fff;
               }
@@ -157,7 +163,6 @@
 
   // breadcrumb
   &-breadcrumb {
-
     &-default {
       background: none;
       position: relative;
@@ -166,7 +171,7 @@
       line-height: 1;
       font-size: 12px;
 
-      &:before {
+      &::before {
         content: "";
         top: 2px;
         left: 0;

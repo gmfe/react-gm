@@ -9,10 +9,10 @@
     width: 0;
     height: 0;
     border-top: 4px solid transparent;
-    border-right: 4px solid #FFF;
-    border-bottom: 4px solid #FFF;
+    border-right: 4px solid #fff;
+    border-bottom: 4px solid #fff;
     border-left: 4px solid transparent;
-    box-shadow: 1px 1px 0px @gm-border-color;
+    box-shadow: 1px 1px 0 @gm-border-color;
     transform: rotate(-135deg);
     z-index: 1001;
 
@@ -20,12 +20,14 @@
       position: absolute;
       top: -11px;
       transform: rotate(45deg);
+
       &.gm-trigger-arrow-right {
         position: absolute;
         top: -11px;
         transform: rotate(45deg);
       }
     }
+
     &.gm-trigger-arrow-right {
       position: absolute;
       left: auto;
@@ -33,6 +35,7 @@
       transform: rotate(-135deg);
     }
   }
+
   .gm-trigger-popup {
     position: absolute;
     top: 100%;
@@ -53,6 +56,6 @@
 
   .gm-trigger-popup-top {
     top: auto;
-    bottom: 100%
+    bottom: 100%;
   }
 }
