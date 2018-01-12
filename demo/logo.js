@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-const x = 50;
+const x = 20;
 
 const imgList = [
     'https://avatars2.githubusercontent.com/u/25808269',
@@ -86,7 +86,7 @@ class Image extends React.Component {
     componentDidMount() {
         this.timer = setTimeout(() => {
             this.setState({show: true});
-        }, this.props.index * 50);
+        }, this.props.index * 30);
     }
 
     componentWillUnmount() {
@@ -117,7 +117,7 @@ class Logo extends React.Component {
     componentDidMount() {
         setTimeout(() => {
             this.setState({show: false});
-        }, posList.length * 50 + 2000);
+        }, posList.length * 50 + 500);
     }
 
     render() {
