@@ -106,7 +106,7 @@ class Component extends React.Component {
 - `withFilter (func|bool)` 过滤函数，默认 true 且集成拼音搜索。false 则不出过滤框，fun 则过滤逻辑业务控
 - `placeHolder (string)`
 - `disableSelectAll (bool)`
-- `style` 默认 width 250px height 400px
+- `style` 默认 width 250px height 350px
 
 ## TransferGroup 
 
