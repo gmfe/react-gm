@@ -44,7 +44,7 @@ class Select extends React.Component {
 	}
 	
 	componentWillReceiveProps(nextProps) {
-		if(this.props.value !== nextProps.value) {
+		if(this.props !== nextProps) {
 			const {children, value} = nextProps;
 			
 			const selected = findItemByValueFromList(children, value);
