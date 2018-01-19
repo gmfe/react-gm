@@ -52,6 +52,7 @@ import Validator from 'bundle-loader?lazy!./doc/Validator.md';
 import Radio from 'bundle-loader?lazy!./doc/Radio.md';
 import Select from 'bundle-loader?lazy!./doc/Select.md';
 import Transfer from 'bundle-loader?lazy!./doc/Transfer.md';
+import Tree from 'bundle-loader?lazy!./doc/Tree.md';
 import Quick from 'bundle-loader?lazy!./doc/Quick.md';
 import Divider from 'bundle-loader?lazy!./doc/Divider.md';
 import Menu from 'bundle-loader?lazy!./doc/Menu.md';
@@ -102,6 +103,7 @@ const pageMap = {
         TreeSelect,
         Select,
         Transfer,
+        Tree,
         Quick,
         Divider,
         Menu,

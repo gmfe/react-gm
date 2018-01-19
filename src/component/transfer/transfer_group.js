@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Flex from '../flex';
-import BoxGroup from './box_group';
 import Box from './box';
 import classNames from 'classnames';
-import {getLeaf, filterGroupList} from "./util";
+import {getLeaf, filterGroupList} from "../tree/util";
+import Tree from '../tree';
 
-// 很复杂  很复杂  很复杂
 class TransferGroup extends React.Component {
     constructor(props) {
         super(props);
@@ -88,18 +87,14 @@ class TransferGroup extends React.Component {
         return (
             <div {...rest} className={classNames("gm-transfer gm-transfer-group", className)}>
                 <Flex>
-                    <BoxGroup
-                        list={leftList}
-                        allLength={leafList.length - rightList.length}
-                        selectedValues={leftSelectedValues}
-                        onSelect={this.handleLeftChange}
-
+                    <Tree
                         title={leftTitle}
-                        style={listStyle}
+                        list={leftList}
+                        selectedValues={leftSelectedValues}
+                        onSelectValues={this.handleLeftChange}
                         withFilter={leftWithFilter}
                         placeholder={leftPlaceHolder}
                     />
-
                     <div className="gm-gap-5"/>
                     <Flex column justifyCenter alignCenter className="gm-transfer-operation">
                         <button
@@ -114,10 +109,8 @@ class TransferGroup extends React.Component {
                         >&lt;</button>
                     </Flex>
                     <div className="gm-gap-5"/>
-
                     <Box
                         list={rightList}
-                        allLength={rightList.length}
                         selectedValues={rightSelectedValues}
                         onSelect={this.handleRightChange}
 

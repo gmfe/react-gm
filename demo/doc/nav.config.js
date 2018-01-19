@@ -36,6 +36,7 @@ const data = [{
         {name: 'SearchSelect 废弃', path: '/doc/SearchSelect'},
         {name: 'TreeSelect 树形选择', path: '/doc/TreeSelect'},
         {name: 'Transfer 穿梭框', path: '/doc/Transfer'},
+        {name: 'Tree 树形选择', path: '/doc/Tree'},
         {name: 'Calendar 日历', path: '/doc/Calendar'},
         {name: 'DatePicker 日期选择', path: '/doc/DatePicker'},
         {name: 'TimeSpan 时间点选择', path: '/doc/TimeSpan'}
@@ -96,6 +97,7 @@ class NavConfig extends React.Component {
         return (
             <Menu
                 id="docMenu"
+                className="gm-border-0"
                 allowCollapse
                 data={data}
                 onSelect={this.handleSelect}

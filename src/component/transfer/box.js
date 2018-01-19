@@ -31,7 +31,7 @@ class Box extends React.Component {
 
     render() {
         let {
-            list, allLength,
+            list,
             selectedValues,
 
             style,
@@ -45,16 +45,19 @@ class Box extends React.Component {
             query
         } = this.state;
 
+        let processList;
         if (withFilter === true) {
-            list = pinYinFilter(list, query, e => e.name);
+            processList = pinYinFilter(list, query, e => e.name);
         } else if (withFilter) {
-            list = withFilter(list, query);
+            processList = withFilter(list, query);
         }
 
         return (
             <Flex column className="gm-transfer-box gm-border gm-bg" style={style}>
-                <div
-                    className="gm-transfer-box-title gm-padding-5 gm-back-bg text-center gm-border-bottom">{title}</div>
+                {title && (
+                    <div
+                        className="gm-transfer-box-title gm-padding-5 gm-back-bg text-center gm-border-bottom">{title}</div>
+                )}
 
                 {withFilter ? (
                     <div className="gm-transfer-box-filter">
@@ -75,7 +78,7 @@ class Box extends React.Component {
                         value={selectedValues}
                         onChange={this.handleChange}
                     >
-                        {_.map(list, v => (
+                        {_.map(processList, v => (
                             <Checkbox key={v.value} value={v.value} className="gm-cursor">{v.name}</Checkbox>
                         ))}
                     </CheckboxGroup>
@@ -90,7 +93,7 @@ class Box extends React.Component {
                     >
                         <Checkbox value={true}>全选</Checkbox>
                     </CheckboxGroup>
-                    <div className="gm-padding-lr-5 gm-text-desc">{selectedValues.length}/{allLength}</div>
+                    <div className="gm-padding-lr-5 gm-text-desc">{selectedValues.length}/{list.length}</div>
                 </Flex>
             </Flex>
         );

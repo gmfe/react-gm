@@ -36,12 +36,12 @@ class MenuItem extends React.Component {
         });
     }
 
-    componentWillReceiveProps(newProps){
+    componentWillReceiveProps(newProps) {
         const {collapse} = this.state;
         const {data, selected} = newProps;
         const menuItemDisabled = !!this.getMenuItemDisabled(data, selected);
 
-        if(menuItemDisabled && collapse){
+        if (menuItemDisabled && collapse) {
             this.setState({
                 collapse: false
             });
@@ -55,9 +55,11 @@ class MenuItem extends React.Component {
 
         return (
             <div className='gm-menu'>
-                <Flex alignCenter justifyBetween onClick={allowCollapse && !menuItemDisabled ? this.handleTriggerMenu : null} className={classNames("gm-menu-title", {
-                    'gm-menu-title-disabled': !allowCollapse || menuItemDisabled
-                })}>
+                <Flex alignCenter justifyBetween
+                      onClick={allowCollapse && !menuItemDisabled ? this.handleTriggerMenu : null}
+                      className={classNames("gm-menu-title", {
+                          'gm-menu-title-disabled': !allowCollapse || menuItemDisabled
+                      })}>
                     <span>{data.name}</span>
                     {
                         allowCollapse ?
@@ -71,7 +73,7 @@ class MenuItem extends React.Component {
                 <div className={classNames("gm-menu-sub", {
                     'gm-menu-sub-opened': !collapse
                 })}>
-                    {_.map(data.sub, (v, k)=>(
+                    {_.map(data.sub, (v, k) => (
                             <span
                                 key={k}
                                 onClick={onSelect.bind(this, v)}
@@ -94,26 +96,28 @@ MenuItem.propTypes = {
 
 class Menu extends React.Component {
     render() {
-        const {data, onSelect, selected, id, allowCollapse} = this.props;
+        const {
+            data, onSelect, selected, id, allowCollapse,
+            className,
+            ...rest
+        } = this.props;
 
         if (!data) {
             return <div/>;
         }
 
         return (
-            <ul className="gm-menu-y gm-border" key={id}>
-                {
-                    _.map(data, (value, i) => {
-                            return <MenuItem
-                                key={i}
-                                data={value}
-                                selected={selected}
-                                onSelect={onSelect}
-                                allowCollapse={allowCollapse}
-                            />;
-                        }
-                    )
-                }
+            <ul key={id} {...rest} className={classNames("gm-menu-y gm-border", className)}>
+                {_.map(data, (value, i) => {
+                        return <MenuItem
+                            key={i}
+                            data={value}
+                            selected={selected}
+                            onSelect={onSelect}
+                            allowCollapse={allowCollapse}
+                        />;
+                    }
+                )}
             </ul>
         );
     }

@@ -81,7 +81,6 @@ class Transfer extends React.Component {
                 <Flex>
                     <Box
                         list={leftList}
-                        allLength={leftList.length}
                         selectedValues={leftSelectedValues}
                         onSelect={this.handleLeftChange}
 
@@ -108,7 +107,6 @@ class Transfer extends React.Component {
 
                     <Box
                         list={rightList}
-                        allLength={rightList.length}
                         selectedValues={rightSelectedValues}
                         onSelect={this.handleRightChange}
 

@@ -42,6 +42,7 @@ import FilterSelect from './component/filter_select/filter.select';
 import MultipleFilterSelect from './component/filter_select/multiple.filter.select';
 import Menu from './component/menu';
 import {Transfer, TransferGroup} from './component/transfer';
+import Tree from './component/tree';
 import ImagePreview from './component/image_preview';
 import Mask from './component/mask';
 import Popover from './component/popover';
@@ -135,6 +136,7 @@ export {
     Checkbox, CheckboxGroup,
     Select, Option,
     Transfer, TransferGroup,
+    Tree,
     FilterSelect,
     MultipleFilterSelect,
     Mask,
