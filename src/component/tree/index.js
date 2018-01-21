@@ -221,7 +221,7 @@ Tree.propTypes = {
     disableSelectAll: PropTypes.bool,
     showGroupCheckbox: PropTypes.func,
 
-    style: PropTypes.object,
+    style: PropTypes.object
 };
 
 Tree.defaultProps = {
