@@ -64,12 +64,20 @@ class Component extends React.Component {
         });
     };
 
-    handleClickItemName(item, checked) {
-        console.log(item, checked);
+    handleClickLeafName(leaf, checked) {
+        console.log(leaf, checked);
     }
 
-    handleClickGroupSelect = (group, checked) => {
-        console.log(group, checked);
+    handleClickCheckbox = (data, checked) => {
+        console.log(data, checked);
+    };
+
+    showGroupCheckbox = (group) => {
+        
+        if(group.children && group.children[0] && group.children[0].children){
+            return false;
+        }
+        return true;
     };
 
     render() {
@@ -81,9 +89,10 @@ class Component extends React.Component {
                     list={treeData}
                     selectedValues={selectedValues}
                     onSelectValues={this.handleSelect}
-                    onClickItemName={this.handleClickItemName}
-                    onClickGroupSelect={this.handleClickGroupSelect}
+                    onClickLeafName={this.handleClickLeafName}
+                    onClickCheckbox={this.handleClickCheckbox}
                     disableSelectAll
+                    showGroupCheckbox={this.showGroupCheckbox}
                 />
             </div>
         );
@@ -101,11 +110,12 @@ class Component extends React.Component {
 - `selectedValues (array|isRequired)` 已选择的值，格式是`[1,2,3]`
 - `onSelectValues (func|isRequired)` 选择回调，参数和`selectedValues`一样
 - `style (object)` 框的高宽，默认`{'{'}width: '250px', height: '350px'{'}'}`
-- `onClickItemName (func)` 点击叶子节点的时间。如果提供，则 chexkbox 和 name 点击分开处理。
-- `onClickGroupSelect (func)` 勾选分组粗发事件
+- `onClickLeafName (func)` 点击叶子节点事件。如果提供，则 chexkbox 和 name 点击分开处理。
+- `onClickCheckbox (func)` 勾选 checkbox 触发事件
 - `withFilter (func|bool)` 过滤函数，默认 true 且集成拼音搜索。false 则不出过滤框，fun 则过滤逻辑业务控
 - `placeHolder (string)`
 - `disableSelectAll (bool)`
+- `showGroupCheckbox (func)` 是否显示 checkbox，参数是 group 信息
 - `style` 默认 width 250px height 350px
 
 ## TransferGroup 

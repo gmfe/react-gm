@@ -16,9 +16,13 @@ class Tree extends React.Component {
         };
     }
 
-    handleChange = (value) => {
-        const {onSelectValues, selectedValues} = this.props;
-        onSelectValues(_.xor([value], selectedValues));
+    handleChange = (leaf, checked) => {
+        const {onSelectValues, selectedValues, onClickCheckbox} = this.props;
+        onSelectValues(_.xor([leaf.value], selectedValues));
+
+        if (onClickCheckbox) {
+            onClickCheckbox(leaf, checked);
+        }
     };
 
     handleSelectAll = (checked) => {
@@ -41,18 +45,18 @@ class Tree extends React.Component {
     };
 
     handleSelectGroup = (group, isSelectGroup) => {
-        const {onClickGroupSelect, selectedValues, onSelectValues} = this.props;
+        const {onClickCheckbox, selectedValues, onSelectValues} = this.props;
 
         const leafValues = _.map(getLeaf(group.children), item => item.value);
         onSelectValues(isSelectGroup ? _.union(selectedValues, leafValues) : _.difference(selectedValues, leafValues));
 
-        if (onClickGroupSelect) {
-            onClickGroupSelect(group, isSelectGroup);
+        if (onClickCheckbox) {
+            onClickCheckbox(group, isSelectGroup);
         }
     };
 
     renderList(list) {
-        const {selectedValues, onClickItemName} = this.props;
+        const {selectedValues, onClickLeafName, showGroupCheckbox} = this.props;
         const {groupSelected} = this.state;
 
         if (list.length === 0) {
@@ -73,13 +77,15 @@ class Tree extends React.Component {
                         return (
                             <div key={group.value}>
                                 <Flex className="gm-tree-group-name gm-cursor gm-hover-bg">
-                                    <Checkbox
-                                        value={true}
-                                        checked={isSelectGroup}
-                                        onChange={() => {
-                                            this.handleSelectGroup(group, !isSelectGroup);
-                                        }}
-                                    />
+                                    {showGroupCheckbox(group) && (
+                                        <Checkbox
+                                            value={true}
+                                            checked={isSelectGroup}
+                                            onChange={() => {
+                                                this.handleSelectGroup(group, !isSelectGroup);
+                                            }}
+                                        />
+                                    )}
                                     <Flex flex alignCenter onClick={() => this.handleGroup(group.value)}>
                                         {isOpen ? '-' : '+'}&nbsp;{group.name}
                                     </Flex>
@@ -107,14 +113,14 @@ class Tree extends React.Component {
                                 value={v.value}
                                 checked={checked}
                                 onChange={() => {
-                                    this.handleChange(v.value);
+                                    this.handleChange(v, !checked);
                                 }}
                             />
                             <Flex flex onClick={() => {
-                                if (onClickItemName) {
-                                    onClickItemName(v, checked);
+                                if (onClickLeafName) {
+                                    onClickLeafName(v, checked);
                                 } else {
-                                    this.handleChange(v.value);
+                                    this.handleChange(v, !checked);
                                 }
                             }}>
                                 {v.name}
@@ -135,7 +141,7 @@ class Tree extends React.Component {
             withFilter,
             disableSelectAll,
 
-            onSelectValues, onClickItemName, onClickGroupSelect, // eslint-disable-line
+            onSelectValues, onClickLeafName, onClickCheckbox, showGroupCheckbox, // eslint-disable-line
 
             className,
             ...rest
@@ -203,18 +209,19 @@ Tree.propTypes = {
     selectedValues: PropTypes.array.isRequired,
     onSelectValues: PropTypes.func.isRequired,
 
-    // 如果 checkbox 和 名字 的点击分开处理，则提供 onClickItemName
-    onClickItemName: PropTypes.func,
+    // 如果 checkbox 和 名字 的点击分开处理，则提供 onClickLeafName
+    onClickLeafName: PropTypes.func,
 
-    // 勾选 group 的时候周知，纯通知
-    onClickGroupSelect: PropTypes.func,
+    // 勾选 checkbox 的时候周知，纯通知
+    onClickCheckbox: PropTypes.func,
 
     withFilter: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     placeholder: PropTypes.string,
 
     disableSelectAll: PropTypes.bool,
+    showGroupCheckbox: PropTypes.func,
 
-    style: PropTypes.object
+    style: PropTypes.object,
 };
 
 Tree.defaultProps = {
@@ -223,7 +230,8 @@ Tree.defaultProps = {
         height: '350px'
     },
     withFilter: true,
-    placeholder: '搜索'
+    placeholder: '搜索',
+    showGroupCheckbox: () => true
 };
 
 export default Tree;
