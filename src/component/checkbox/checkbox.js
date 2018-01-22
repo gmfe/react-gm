@@ -12,51 +12,47 @@ class Checkbox extends React.Component {
             children,
             name,
             inline,
+            block,
             disabled
         } = this.props;
+
+        const inner = (
+            <label className={classNames('gm-checkbox', {
+                'checkbox-inline': inline,
+                'gm-block': block,
+                disabled
+            })}>
+                <input
+                    type="checkbox"
+                    name={name}
+                    value={value}
+                    checked={checked}
+                    onChange={onChange}
+                    disabled={disabled}
+                />
+                <span/>
+                {children}
+            </label>
+        );
+
         if (!inline) {
             return (
                 <div>
-                    <label className={classNames({
-                        disabled
-                    })}>
-                        <input
-                            type="checkbox"
-                            name={name}
-                            value={value}
-                            checked={checked}
-                            onChange={onChange}
-                            disabled={disabled}
-                        />
-                        <span/>
-                        {children}
-                    </label>
+                    {inner}
                 </div>
             );
-        } else {
-            return (
-                <label className={classNames("checkbox-inline", {
-                    disabled
-                })}>
-                    <input
-                        type="checkbox"
-                        name={name}
-                        value={value}
-                        checked={checked}
-                        onChange={onChange}
-                        disabled={disabled}
-                    />
-                    <span/>
-                    {children}
-                </label>
-            );
         }
+
+        return inner;
     }
 }
 
 Checkbox.propTypes = {
     value: PropTypes.any,
     onChange: PropTypes.func,
+
+    // 如果需要整行可点，则
+    block: PropTypes.bool,
 
     // 由CheckboxGroup 传下来
     name: PropTypes.string,

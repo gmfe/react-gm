@@ -15,6 +15,10 @@ class TreeSelect extends React.Component {
         this.handleShow = ::this.handleShow;
     }
 
+    componentDidMount() {
+        console.warn('TreeSelect is deprecated. Use Tree instead.');
+    }
+
     handleSelectAll(e) {
         if (e.target.checked) {
             let data = this.findAllChildrenNode(this.props.list);

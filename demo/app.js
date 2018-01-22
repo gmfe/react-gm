@@ -110,7 +110,7 @@ class App extends React.Component {
     }
 
     render() {
-        const {children} = this.props;
+        const {children, location: {pathname}} = this.props;
 
         return (
             <Framework
@@ -119,7 +119,7 @@ class App extends React.Component {
             >
                 <div onClick={this.handleClickAnchor}>
                     {children}
-                    <Logo/>
+                    {pathname === '/doc/About' && <Logo/>}
                 </div>
             </Framework>
         );

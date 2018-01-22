@@ -1,9 +1,19 @@
 //cover bootstrap.style for checkbox
-.gm-checkbox-group label {
-  padding-left: 0 !important;
+// 这样写好点
+label.gm-checkbox {
+  padding-left: 0;
 }
 
-.gm-checkbox-group {
+.gm-checkbox {
+  font-weight: normal;
+  margin: 0;
+  cursor: pointer;
+
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
   input {
     display: none;
   }
@@ -21,14 +31,6 @@
     width: 14px;
     height: 14px;
     transition: background-color 0.2s linear;
-  }
-
-  .disabled {
-    opacity: 0.6;
-
-    span {
-      border: 1px solid @gm-form-border-color;
-    }
   }
 
   input + span::after {
@@ -66,9 +68,5 @@
     border-right: none;
     transform: rotate(-45deg);
     transition: opacity 0.2s linear;
-  }
-
-  label.disabled {
-    cursor: not-allowed;
   }
 }
