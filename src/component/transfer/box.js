@@ -79,7 +79,7 @@ class Box extends React.Component {
                         onChange={this.handleChange}
                     >
                         {_.map(processList, v => (
-                            <Checkbox key={v.value} value={v.value} className="gm-cursor">{v.name}</Checkbox>
+                            <Checkbox key={v.value} value={v.value} block className="gm-cursor">{v.name}</Checkbox>
                         ))}
                     </CheckboxGroup>
                 </Flex>

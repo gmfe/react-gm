@@ -94,6 +94,7 @@ class TransferGroup extends React.Component {
                         onSelectValues={this.handleLeftChange}
                         withFilter={leftWithFilter}
                         placeholder={leftPlaceHolder}
+                        style={listStyle}
                     />
                     <div className="gm-gap-5"/>
                     <Flex column justifyCenter alignCenter className="gm-transfer-operation">
