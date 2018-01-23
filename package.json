@@ -11,7 +11,7 @@
     "react-component"
   ],
   "scripts": {
-    "precommit": "eslint --fix ./src/ ./demo/;",
+    "precommit": "eslint --fix ./src/ ./demo/; stylelint ./src/*.less ./src/css/*.less ./src/component/**/*.less !./src/less/**/*.less --fix --cache",
     "clear": "rm -rf build && mkdir build;",
     "start": "npm run clear && NODE_ENV=development webpack-dev-server --host 0.0.0.0 --port 3000 --disableHostCheck --inline --hot --devtool eval --progress --colors",
     "docs": "sh deploy/docs.sh;"
@@ -73,6 +73,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "style-loader": "^0.18.2",
+    "stylelint-config-standard": "^18.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.10.2",
