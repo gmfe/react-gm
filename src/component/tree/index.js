@@ -109,7 +109,6 @@ class Tree extends React.Component {
                     return (
                         <Flex alignCenter key={v.value} className="gm-hover-bg gm-tree-group-list-item gm-cursor">
                             <Checkbox
-                                inline
                                 value={v.value}
                                 checked={checked}
                                 onChange={() => {
