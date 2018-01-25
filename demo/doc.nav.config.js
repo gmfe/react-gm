@@ -1,9 +1,9 @@
 import React from 'react';
-import {Menu} from '../../src/index';
-import {history} from "../service";
+import {Menu} from '../src/index';
+import {history} from "./service";
 import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
-import {Framework} from '../../framework';
+import {Framework} from '../framework/index';
 
 const data = [{
     name: 'Guide',

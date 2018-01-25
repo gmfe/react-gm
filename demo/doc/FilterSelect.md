@@ -348,6 +348,7 @@ class FilterSelect4 extends React.Component {
 - `placeholder (string)`
 - `isScrollToSelected (bool)` focus后列表是否滚动到选择的位置
 - `disableSearch (bool)` 是否显示搜索框
+- `renderItemName (func)` 默认 v => v.name
 
 ### MultipleFilterSelect Props
 

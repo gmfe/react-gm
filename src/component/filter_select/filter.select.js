@@ -185,7 +185,7 @@ class FilterSelect extends React.Component {
     }
 
     renderGroupList(list) {
-        const {listMaxHeight, inputClassName, selected} = this.props;
+        const {listMaxHeight, inputClassName, selected, renderItemName} = this.props;
 
         const usefulList = _.filter(list, v => (v.children || []).length > 0);
 
@@ -215,7 +215,7 @@ class FilterSelect extends React.Component {
                                         onClick={this.handleSelect.bind(this, value)}
                                         onMouseEnter={this.handleItemMouseEnter.bind(this, itemSequence)}
                                     >
-                                        <Flex flex>{value.name}</Flex>
+                                        <Flex flex>{renderItemName(value)}</Flex>
                                     </Flex>
                                 );
                             })}
@@ -227,7 +227,7 @@ class FilterSelect extends React.Component {
     }
 
     renderList(list) {
-        const {listMaxHeight, inputClassName, selected} = this.props;
+        const {listMaxHeight, inputClassName, selected, renderItemName} = this.props;
 
         return (
             <div
@@ -247,7 +247,7 @@ class FilterSelect extends React.Component {
                             onClick={this.handleSelect.bind(this, value)}
                             onMouseEnter={this.handleItemMouseEnter.bind(this, i)}
                         >
-                            {value.name}
+                            {renderItemName(value)}
                         </Flex>
                     );
                 })}
@@ -330,7 +330,8 @@ FilterSelect.propTypes = {
     placeholder: PropTypes.string,
     isScrollToSelected: PropTypes.bool,
     onInputFocus: PropTypes.func,
-    disableSearch: PropTypes.bool
+    disableSearch: PropTypes.bool,
+    renderItemName: PropTypes.func
 };
 
 FilterSelect.defaultProps = {
@@ -342,7 +343,8 @@ FilterSelect.defaultProps = {
     onSearch: _.noop,
     withFilter: v => v,
     onInputFocus: _.noop,
-    disableSearch: false
+    disableSearch: false,
+    renderItemName: v => v.name
 };
 
 export default FilterSelect;

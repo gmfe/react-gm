@@ -2,8 +2,8 @@ import React from 'react';
 import {Flex, Emitter} from '../src/index';
 import createHashHistory from 'history/createHashHistory';
 
-import NavConfigDoc from './doc/nav.config';
-import NavConfigStandard from './standard/nav.config';
+import NavConfigDoc from './doc.nav.config';
+import NavConfigStandard from './standard.nav.config';
 
 import queryString from 'query-string';
 import {withRouter} from 'react-router-dom';
