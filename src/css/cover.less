@@ -1,0 +1,128 @@
+// modal 全局修改
+.modal-backdrop.in {
+  opacity: 0.2;
+}
+
+.modal-content {
+  box-shadow: none;
+  border: 0;
+}
+
+.modal-header {
+  padding: 10px;
+}
+
+.modal-body {
+  padding: 10px;
+}
+
+.modal-footer {
+  padding: 10px;
+}
+
+// pagination 全局修改
+.pagination > li > a {
+  color: inherit;
+}
+
+.table {
+  font-size: 12px;
+
+  th,
+  td {
+    text-align: center;
+
+    a {
+      cursor: pointer;
+    }
+  }
+
+  thead {
+    tr {
+      border-bottom: 1px solid @gm-border-color;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid @gm-border-color;
+
+      &:hover {
+        background-color: @table-bg-hover;
+      }
+    }
+  }
+
+  thead > tr > th {
+    padding: 8px 2px;
+
+    &:not(.text-center) {
+      text-align: left;
+    }
+
+    &:first-child {
+      padding-left: 15px;
+    }
+  }
+
+  tbody > tr > td {
+    padding: 18px 2px;
+    vertical-align: middle;
+
+    &:not(.text-center) {
+      text-align: left;
+    }
+
+    &:first-child {
+      padding-left: 15px;
+    }
+
+    a {
+      color: @link-color;
+    }
+  }
+
+  &.table-bordered {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid @gm-border-color;
+
+    thead {
+      tr {
+        th {
+          border: none;
+          font-weight: normal;
+          color: @gm-color-first;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          border: none;
+          color: @gm-color-second;
+        }
+      }
+    }
+  }
+
+  &.table-striped {
+    thead {
+      tr {
+        background: @table-bg-accent;
+      }
+    }
+
+    tbody {
+      tr {
+        background: white;
+      }
+    }
+  }
+
+  .b-table-margin-left20 {
+    margin-left: 20%;
+  }
+}

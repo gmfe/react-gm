@@ -15,13 +15,13 @@ class TopHeader extends React.Component {
                         className="gm-framework-top-header-default-mobile-nav"
                         onClick={onMenuBtnClick}
                     >
-                        <i className="glyphicon glyphicon-menu-hamburger"/>
+                        <i className="glyphicon glyphicon-menu-hamburger gm-padding-lr-10 gm-cursor"/>
                     </Flex>
                     <Flex flex/>
                     <Flex>{text}</Flex>
                     {settings && (
                         <div className="gm-framework-top-header-default-settings">
-                            <Popover showArrow type="click" right popup={(
+                            <Popover showArrow type="hover" right popup={(
                                 <div className="list-group gm-margin-bottom-0"
                                      style={{minWidth: '100px', color: 'in'}}>
                                     {_.map(settings, (v, i) => (
