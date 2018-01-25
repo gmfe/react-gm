@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import Calendar from '../calendar';
 import classNames from 'classnames';
-import Trigger from '../trigger';
+import Popover from '../popover';
 import _ from 'lodash';
 
 class DatePicker extends React.Component {
@@ -21,7 +21,7 @@ class DatePicker extends React.Component {
         }, 0);
     }
 
-    handleClear(){
+    handleClear() {
         this.props.onChange();
     }
 
@@ -33,6 +33,7 @@ class DatePicker extends React.Component {
 
         const popup = (
             <Calendar
+                className="gm-border-0"
                 selected={date}
                 onSelect={this.handleSelect}
                 min={min}
@@ -44,29 +45,28 @@ class DatePicker extends React.Component {
         return (
             <div
                 ref={ref => this.datepicker = ref}
-                className={classNames("gm-datepicker", className)}
+                className={classNames("gm-datepicker gm-border gm-bg gm-inline-block gm-position-relative", className)}
             >
-                <Trigger component={<div/>} popup={popup}>
+                <Popover popup={popup}>
                     {children ? children : (
                         <input
                             type="text"
-                            className={classNames(inputClassName,{"gm-clear-input": canClear})}
+                            className={classNames('gm-border-0 gm-cursor', inputClassName, {"gm-clear-input": canClear})}
                             placeholder={placeholder}
                             disabled={disabled}
                             value={date ? (inputValueRender ? inputValueRender(date) : moment(date).format('YYYY-MM-DD')) : ''}
                             onChange={_.noop}
                         />
                     )}
-                </Trigger>
-                {
-                    canClear && date &&
+                </Popover>
+                {canClear && date && (
                     <button
                         type="button"
                         className="gm-datepicker-clear-btn close"
-                        onClick={this.handleClear}>
-                        &times;
-                    </button>
-                }
+                        onClick={this.handleClear}
+                        style={{padding: '6px 20px 6px 12px'}}
+                    >&times;</button>
+                )}
             </div>
         );
     }

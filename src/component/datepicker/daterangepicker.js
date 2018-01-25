@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import Calendar from '../calendar';
 import classNames from 'classnames';
-import Trigger from '../trigger';
+import Popover from '../popover';
 import _ from 'lodash';
 
 class DateRangePicker extends React.Component {
@@ -35,12 +35,12 @@ class DateRangePicker extends React.Component {
         }, 0);
     }
 
-    handleClearEnd(){
+    handleClearEnd() {
         const {begin, onChange} = this.props;
         onChange(begin, null);
     }
 
-    handleClearBegin(){
+    handleClearBegin() {
         const {end, onChange} = this.props;
         onChange(null, end);
     }
@@ -51,19 +51,18 @@ class DateRangePicker extends React.Component {
             beginLabel, endLabel,
             beginProps, endProps,
             inputClassName,
-            disabled,canClear,
+            disabled, canClear,
             beginRenderInputValue, endRenderInputValue
         } = this.props;
 
         return (
             <div
                 ref={ref => this.refDateRangePicker = ref}
-                className={classNames("gm-daterangepicker", this.props.className)}
+                className={classNames("gm-daterangepicker gm-inline-block", this.props.className)}
             >
                 {beginLabel && <span className="gm-padding-right-5">{beginLabel}</span>}
-                <div className="gm-daterangepicker-item">
-                    <Trigger
-                        component={<div className="gm-inline-block"/>}
+                <div className="gm-daterangepicker-item gm-border gm-bg gm-inline-block gm-position-relative">
+                    <Popover
                         popup={(
                             <Calendar
                                 selected={begin}
@@ -74,26 +73,25 @@ class DateRangePicker extends React.Component {
                     >
                         <input
                             type="text"
-                            className={classNames(inputClassName,{"gm-clear-input": canClear})}
+                            className={classNames('gm-border-0 gm-cursor', inputClassName, {"gm-clear-input": canClear})}
                             disabled={disabled}
                             value={begin ? (beginRenderInputValue ? beginRenderInputValue(begin) : moment(begin).format('YYYY-MM-DD')) : ''}
                             onChange={_.noop}
                         />
-                    </Trigger>
-                    {
-                        canClear && begin &&
+                    </Popover>
+                    {canClear && begin && (
                         <button
                             type="button"
                             className="gm-daterangepicker-clear-btn close"
-                            onClick={this.handleClearBegin}>
-                            &times;
-                        </button>
-                    }
+                            onClick={this.handleClearBegin}
+                            style={{padding: '6px 20px 6px 12px'}}
+                        >&times;</button>
+                    )}
                 </div>
                 {!endLabel && <span> ~ </span>}
                 {endLabel && <span className="gm-padding-lr-5">{endLabel}</span>}
-                <div className="gm-daterangepicker-item">
-                    <Trigger
+                <div className="gm-daterangepicker-item gm-border gm-bg gm-inline-block gm-position-relative">
+                    <Popover
                         component={<div className="gm-inline-block"/>}
                         popup={(
                             <Calendar
@@ -108,21 +106,20 @@ class DateRangePicker extends React.Component {
                         <input
                             ref={ref => this.refEndTarget = ref}
                             type="text"
-                            className={classNames(inputClassName,{"gm-clear-input": canClear})}
+                            className={classNames('gm-border-0 gm-cursor', inputClassName, {"gm-clear-input": canClear})}
                             disabled={disabled}
                             value={end ? (endRenderInputValue ? endRenderInputValue(end) : moment(end).format('YYYY-MM-DD')) : ''}
                             onChange={_.noop}
                         />
-                    </Trigger>
-                    {
-                        canClear && end &&
+                    </Popover>
+                    {canClear && end && (
                         <button
                             type="button"
                             className="gm-daterangepicker-clear-btn close"
-                            onClick={this.handleClearEnd}>
-                            &times;
-                        </button>
-                    }
+                            onClick={this.handleClearEnd}
+                            style={{padding: '6px 20px 6px 12px'}}
+                        >&times;</button>
+                    )}
                 </div>
             </div>
         );
