@@ -167,6 +167,7 @@ class Popover extends React.Component {
     }
 }
 
+// 注意 Popover 的 popup 不会随 render 更新
 Popover.propTypes = {
     type: PropTypes.oneOf(['focus', 'click', 'hover']),
     popup: PropTypes.element.isRequired,
