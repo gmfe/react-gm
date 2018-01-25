@@ -5,7 +5,7 @@ import {createChainedFunction, contains, getElementPosition} from 'gm-util';
 import LayoutRoot from '../layout_root';
 import Popup from './popup';
 import _ from 'lodash';
-
+import classNames from 'classnames';
 
 class Popover extends React.Component {
     constructor(props) {
@@ -143,6 +143,8 @@ class Popover extends React.Component {
             type
         } = this.props;
 
+        const {active} = this.state;
+
         const child = React.Children.only(children);
 
         const p = {};
@@ -157,7 +159,10 @@ class Popover extends React.Component {
 
         return React.cloneElement(child, {
             ...child.props,
-            ...p
+            ...p,
+            className: classNames(child.props.className, {
+                'gm-popover-active': active
+            })
         });
     }
 }

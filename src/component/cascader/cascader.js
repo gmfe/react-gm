@@ -5,14 +5,18 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import Flex from '../flex';
 import Trigger from '../trigger';
-import { pinYinFilter, pinyin } from 'gm-util';
+import {pinYinFilter, pinyin} from 'gm-util';
 
 // 给list中每个元素添加_path
 function mapPath(list, searchText, parentPath = []) {
     _.each(list, item => {
-        if (item._path === undefined) item._path = [...parentPath, item.value];
+        if (item._path === undefined) {
+            item._path = [...parentPath, item.value];
+        }
 
-        if (item.children) mapPath(item.children, searchText, [...item._path]);
+        if (item.children) {
+            mapPath(item.children, searchText, [...item._path]);
+        }
     });
 }
 
@@ -28,11 +32,13 @@ function getMaxDeepPathOfMatchElement(list, searchText) {
             const normal = _.map(pinyin(item.name), value => value[0]).join('');
 
             if ((item.name.indexOf(searchText) > -1 || normal.indexOf(searchText) > -1 ||
-                first_letter.indexOf(searchText) > -1) && maxLengthPath.length < item._path.length) {
+                    first_letter.indexOf(searchText) > -1) && maxLengthPath.length < item._path.length) {
                 maxLengthPath = item._path;
             }
 
-            if (item.children) findMaxLengthPath(item.children, searchText);
+            if (item.children) {
+                findMaxLengthPath(item.children, searchText);
+            }
         });
     }
 
@@ -75,7 +81,7 @@ class Cascader extends React.Component {
             const data = _.cloneDeep(nextProps.data);
             mapPath(data); // 给data生成_path数据
 
-            this.setState({ data });
+            this.setState({data});
         }
     }
 
@@ -106,10 +112,14 @@ class Cascader extends React.Component {
             if (item.children) {
                 item.children = this.getFilterList(item.children, searchText);
 
-                if (item.children.length) return true;
+                if (item.children.length) {
+                    return true;
+                }
             }
 
-            if (pinYinFilter([item], searchText, (v) => v.name).length) return true;
+            if (pinYinFilter([item], searchText, (v) => v.name).length) {
+                return true;
+            }
 
             return false;
         });
@@ -118,14 +128,14 @@ class Cascader extends React.Component {
     handleClear(e) {
         e.stopPropagation();
 
-        this.setState({ selected: [] }, () => {
+        this.setState({selected: []}, () => {
             this.handleSelect();
         });
     }
 
     handleSelect() {
-        const { onlyChildSelectable } = this.props,
-            { selected, data } = this.state;
+        const {onlyChildSelectable} = this.props,
+            {selected, data} = this.state;
 
         const value = [];
         if (selected.length > 0) {
@@ -139,10 +149,10 @@ class Cascader extends React.Component {
 
         // 如果选择有children的，则清空输入框
         if (onlyChildSelectable && value.length && value[value.length - 1].children) {
-            this.setState({ filterInput: '' });
+            this.setState({filterInput: ''});
             this.props.onChange([]);
         } else {
-            this.setState({ filterInput: null });
+            this.setState({filterInput: null});
             this.props.onChange(selected);
         }
 
@@ -150,11 +160,12 @@ class Cascader extends React.Component {
         setTimeout(() => {
             window.document.body.click();
         }, 0);
+
         window.document.activeElement.blur();  // blur input
     }
 
     handleMouseEnter(selected) {
-        this.setState({ selected });
+        this.setState({selected});
     }
 
     handleInputChange(e) {
@@ -169,7 +180,7 @@ class Cascader extends React.Component {
     }
 
     handleKeyDown(event) {
-        const { keyCode } = event;
+        const {keyCode} = event;
 
         // 键盘上下键控制最当前选中列
         if (keyCode === 38 || keyCode === 40) {
@@ -207,8 +218,8 @@ class Cascader extends React.Component {
     }
 
     inputValueRender() {
-        const { filterInput, data } = this.state,
-            { valueRender, filtrable } = this.props,
+        const {filterInput, data} = this.state,
+            {valueRender, filtrable} = this.props,
             selected = this.props.value || this.state.selected;
 
         let value = [];
@@ -233,10 +244,15 @@ class Cascader extends React.Component {
 
         this.listActiveRef = [];
 
+        const list = this.getList();
+
         return (
-            <Flex className={classNames("gm-cascader-list", this.props.className)}>
-                {_.map(this.getList(), (value, i) => (
-                    <Flex column key={i} className="list-group gm-block">
+            <Flex className={classNames("gm-cascader-list gm-bg", this.props.className)}>
+                {_.map(list, (value, i) => (
+                    <Flex column key={i}
+                          className={classNames("list-group gm-block gm-margin-0 gm-border-0 gm-overflow-y", {
+                              'gm-border-right': i !== list.length - 1
+                          })}>
                         {_.map(value, v => (
                             <Flex
                                 key={v.value}
@@ -254,7 +270,7 @@ class Cascader extends React.Component {
                                 {v.name}&nbsp;
                                 {v.children && v.children.length ? <i className={classNames("gm-arrow-right", {
                                     active: v.value === selected[i]
-                                })} /> : null}
+                                })}/> : null}
                             </Flex>
                         ))}
                     </Flex>
@@ -264,10 +280,10 @@ class Cascader extends React.Component {
     }
 
     renderChildren() {
-        const { disabled } = this.props,
-            { data } = this.state,
+        const {disabled} = this.props,
+            {data} = this.state,
             inputValue = this.inputValueRender();
-        let { inputProps } = this.props;
+        let {inputProps} = this.props;
 
         const selected = this.props.value || this.state.selected;
         let value = [];
@@ -282,7 +298,7 @@ class Cascader extends React.Component {
 
         // disabled 的优先级比 inputProps的优先级高
         if (disabled) {
-            inputProps = Object.assign({}, inputProps, { disabled });
+            inputProps = Object.assign({}, inputProps, {disabled});
         }
 
         return (
@@ -295,19 +311,21 @@ class Cascader extends React.Component {
                     value={inputValue}
                     className={classNames("form-control", inputProps.className)}
                 />
-                {inputValue ? <i onClick={this.handleClear} className="ifont ifont-close gm-cursor" /> : null}
-                <i className="gm-arrow-down" />
+                {inputValue && <i onClick={this.handleClear} className="ifont ifont-close gm-cursor"/>}
+                <i className="gm-arrow-down"/>
             </div>
         );
     }
 
     render() {
-        const { disabled } = this.props;
+        const {disabled, inputValue} = this.props;
 
         return (
             <Trigger
                 disabled={disabled}
-                component={<div className="gm-cascader" />}
+                component={<div className={classNames("gm-cascader", {
+                    'gm-cascader-close': inputValue
+                })}/>}
                 popup={this.renderOverlay()}
             >
                 {this.props.children ? this.props.children : this.renderChildren()}
