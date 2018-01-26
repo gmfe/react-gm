@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Trigger from '../trigger';
+import Popover from '../popover';
 import Flex from '../flex';
 import _ from 'lodash';
 
@@ -45,16 +45,13 @@ class ColorPicker extends React.Component {
         const {color, onChange, children} = this.props;
 
         return (
-            <Trigger
+            <Popover
                 type="hover"
                 showArrow
-                component={<div/>}
-                popup={(
-                    <Color color={color} onChange={onChange}/>
-                )}
+                popup={<Color color={color} onChange={onChange}/>}
             >
                 {children}
-            </Trigger>
+            </Popover>
         );
     }
 }
