@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Flex, Trigger} from '../src/index';
+import {Flex, Popover} from '../src/index';
 import _ from 'lodash';
 import classNames from 'classnames';
 
@@ -11,20 +11,24 @@ class TopContent extends React.Component {
 
         const jumpTerm = jump && (
             <Flex alignEnd className="gm-framework-top-content-default-jump">
-                <Trigger type="hover" right component={<div/>} popup={(
-                    <div className="list-group">
-                        {_.map(jump.jumpList, v => (
-                            <a
-                                target="_blank"
-                                key={v.link}
-                                className="list-group-item"
-                                href={v.link}
-                            >{v.text}</a>
-                        ))}
-                    </div>
-                )}>
+                <Popover
+                    type="hover"
+                    right
+                    popup={(
+                        <div className="list-group gm-margin-0 text-center" style={{minWidth: '104px'}}>
+                            {_.map(jump.jumpList, v => (
+                                <a
+                                    target="_blank"
+                                    key={v.link}
+                                    className="list-group-item gm-bg-hover-primary gm-text-black"
+                                    href={v.link}
+                                >{v.text}</a>
+                            ))}
+                        </div>
+                    )}
+                >
                     <a href={jump.jumpLink} target='_blank'>{jump.name}</a>
-                </Trigger>
+                </Popover>
             </Flex>
         );
 

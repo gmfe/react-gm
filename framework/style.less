@@ -58,7 +58,7 @@
         }
 
         &-nav > a,
-        &-jump > div > a {
+        &-jump > a {
           font-size: 16px;
           color: black;
           display: inline-block;
@@ -83,7 +83,7 @@
         &-jump {
           position: relative;
 
-          & > div > a:hover {
+          & > a:hover {
             color: @brand-primary;
           }
 
@@ -94,29 +94,6 @@
             bottom: 12px;
             height: 16px;
             left: 5px;
-          }
-
-          .list-group {
-            margin-top: -3px;
-            margin-bottom: 0;
-            width: 104px;
-            text-align: center;
-
-            .list-group-item {
-              font-size: 15px;
-              color: black;
-              border-top: none;
-
-              &:last-child {
-                padding-bottom: 18px;
-              }
-
-              &:focus,
-              &:hover {
-                color: @brand-primary;
-                background: #fff;
-              }
-            }
           }
         }
       }
