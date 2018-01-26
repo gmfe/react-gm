@@ -24,7 +24,6 @@ import DateRangePicker from 'bundle-loader?lazy!./doc/DateRangePicker.md';
 import TimeSpan from 'bundle-loader?lazy!./doc/TimeSpan.md';
 import Tip from 'bundle-loader?lazy!./doc/Tip.md';
 import Dialog from 'bundle-loader?lazy!./doc/Dialog.md';
-import Trigger from 'bundle-loader?lazy!./doc/Trigger.md';
 import Popover from 'bundle-loader?lazy!./doc/Popover.md';
 import Dropper from 'bundle-loader?lazy!./doc/Dropper.md';
 import Switch from 'bundle-loader?lazy!./doc/Switch.md';
@@ -77,7 +76,6 @@ const config = {
         DateRangePicker,
         Tip,
         Dialog,
-        Trigger,
         Popover,
         Dropper,
         Form,
