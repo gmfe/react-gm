@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import TimeSpan from './timespan.js';
-import Trigger from '../trigger';
+import Popover from '../popover';
 import _ from 'lodash';
 
 class TimeSpanPicker extends React.Component {
@@ -33,13 +33,11 @@ class TimeSpanPicker extends React.Component {
         );
         return (
             <div
-                ref={ref => {
-                    this.timeSpanPicker = ref;
-                }}
+                ref={ref => this.timeSpanPicker = ref}
                 className="gm-time-span-picker"
             >
-                <Trigger component={<div />} popup={popup}>
-                    {children ? children : (
+                <Popover popup={popup}>
+                    {children || (
                         <input
                             type="text"
                             className={inputClassName}
@@ -49,7 +47,7 @@ class TimeSpanPicker extends React.Component {
                             onChange={_.noop}
                         />
                     )}
-                </Trigger>
+                </Popover>
             </div>
         );
     }
