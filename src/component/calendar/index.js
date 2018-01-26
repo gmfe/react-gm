@@ -184,8 +184,14 @@ class Calendar extends React.Component {
     }
 
     render() {
+        const {
+            selected, onSelect, min, max, disabledDate, // eslint-disable-line
+            className,
+            ...rest
+        } = this.props;
+
         return (
-            <div className="gm-calendar">
+            <div {...rest} className={classNames("gm-calendar", className)}>
                 {this.renderHead()}
                 {this.renderWeek()}
                 {this.renderContent()}

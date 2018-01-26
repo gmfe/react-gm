@@ -24,7 +24,6 @@ import DateRangePicker from 'bundle-loader?lazy!./doc/DateRangePicker.md';
 import TimeSpan from 'bundle-loader?lazy!./doc/TimeSpan.md';
 import Tip from 'bundle-loader?lazy!./doc/Tip.md';
 import Dialog from 'bundle-loader?lazy!./doc/Dialog.md';
-import Trigger from 'bundle-loader?lazy!./doc/Trigger.md';
 import Popover from 'bundle-loader?lazy!./doc/Popover.md';
 import Dropper from 'bundle-loader?lazy!./doc/Dropper.md';
 import Switch from 'bundle-loader?lazy!./doc/Switch.md';
@@ -45,6 +44,9 @@ import Divider from 'bundle-loader?lazy!./doc/Divider.md';
 import Menu from 'bundle-loader?lazy!./doc/Menu.md';
 import ImagePreview from 'bundle-loader?lazy!./doc/ImagePreview.md';
 import Button from 'bundle-loader?lazy!./doc/Button.md';
+import ColorPicker from 'bundle-loader?lazy!./doc/ColorPicker.md';
+
+
 import LayoutCommon from 'bundle-loader?lazy!./standard/LayoutCommon.md';
 import LayoutRule from 'bundle-loader?lazy!./standard/LayoutRule.md';
 import Module from 'bundle-loader?lazy!./standard/Module.md';
@@ -74,7 +76,6 @@ const config = {
         DateRangePicker,
         Tip,
         Dialog,
-        Trigger,
         Popover,
         Dropper,
         Form,
@@ -94,7 +95,8 @@ const config = {
         Divider,
         Menu,
         ImagePreview,
-        Button
+        Button,
+        ColorPicker
     },
     standard: {
         LayoutCommon,

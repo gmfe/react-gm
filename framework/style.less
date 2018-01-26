@@ -39,21 +39,6 @@
         &-mobile-nav {
           display: none;
           line-height: 30px;
-          padding: 0 10px;
-          cursor: pointer;
-        }
-
-        &-settings {
-          .list-group {
-            margin-bottom: 0;
-
-            .list-group-item {
-              color: #333;
-              padding: 5px;
-              margin: 0;
-              border-top: none;
-            }
-          }
         }
       }
     }
@@ -73,7 +58,7 @@
         }
 
         &-nav > a,
-        &-jump > div > a {
+        &-jump > a {
           font-size: 16px;
           color: black;
           display: inline-block;
@@ -98,7 +83,7 @@
         &-jump {
           position: relative;
 
-          & > div > a:hover {
+          & > a:hover {
             color: @brand-primary;
           }
 
@@ -109,29 +94,6 @@
             bottom: 12px;
             height: 16px;
             left: 5px;
-          }
-
-          .list-group {
-            margin-top: -3px;
-            margin-bottom: 0;
-            width: 104px;
-            text-align: center;
-
-            .list-group-item {
-              font-size: 15px;
-              color: black;
-              border-top: none;
-
-              &:last-child {
-                padding-bottom: 18px;
-              }
-
-              &:focus,
-              &:hover {
-                color: @brand-primary;
-                background: #fff;
-              }
-            }
           }
         }
       }
@@ -167,13 +129,13 @@
       background: none;
       position: relative;
       margin-bottom: 0;
-      padding: 3px 0 15px 20px;
+      padding: 5px 0 15px 20px;
       line-height: 1;
       font-size: 12px;
 
       &::before {
         content: "";
-        top: 2px;
+        top: 4px;
         left: 0;
         position: absolute;
         display: block;

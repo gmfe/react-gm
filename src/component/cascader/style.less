@@ -1,76 +1,61 @@
 .gm-cascader {
   position: relative;
 
-  .gm-cascader-input {
-    position: relative;
+  input {
+    padding-right: 20px;
+  }
 
+  &.gm-cascader-close {
     input {
       padding-right: 35px;
     }
-
-    .glyphicon {
-      position: absolute;
-      font-size: 12px;
-      top: 50%;
-      margin-top: -0.5em;
-      right: 0.5em;
-      line-height: 100%;
-      color: @input-border;
-      transform: rotate(0deg);
-      transition: transform 0.2s ease;
-
-      &.active {
-        transform: rotate(180deg);
-      }
-    }
-
-    .ifont-close {
-      position: absolute;
-      display: block;
-      width: 10px;
-      height: 14px;
-      font-size: 14px;
-      line-height: 1;
-      top: 0;
-      right: 24px;
-      bottom: 0;
-      color: @gm-form-border-color;
-      margin: auto 0;
-    }
   }
 
-  .gm-cascader-list {
-    height: 200px;
-    background-color: white;
+  .ifont-close {
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 14px;
+    font-size: 14px;
+    line-height: 1;
+    top: 0;
+    right: 24px;
+    bottom: 0;
+    color: @gm-border-color;
+    margin: auto 0;
+  }
+}
 
-    .list-group {
-      margin: 0;
-      border: 1px solid @gm-form-border-color;
-      min-width: 100px;
-      overflow: auto;
+// 三角标
+.gm-cascader.gm-popover-active {
+  .gm-arrow-down {
+    border-top: none;
+    border-bottom: 5px solid @gm-border-color;
+  }
+}
 
-      &:not(:first-child) {
-        border-left: none;
-      }
+.gm-cascader-list {
+  height: 250px;
 
-      .list-group-item {
-        padding: 5px 10px;
-        border: none;
-        border-radius: 0;
-        cursor: pointer;
-      }
+  .list-group {
+    border: 1px solid @gm-form-border-color;
+    min-width: 120px;
+
+    &:not(:first-child) {
+      border-left: none;
+    }
+
+    .list-group-item {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
     }
   }
 }
 
 .gm-cascader-select {
-  position: relative;
-  border: 1px solid @gm-form-border-color;
-  background-color: white;
-
   &.disabled {
-    cursor: not-allowed;
-
     .selected {
       opacity: 0.6;
     }
@@ -81,11 +66,11 @@
   }
 
   .gm-cascader-select-input {
-    padding: 6px 12px;
+    padding: 6px 0 6px 12px;
 
     input {
       padding: 0;
-      padding-right: 35px;
+      padding-right: 20px;
       border: none;
       box-shadow: none;
       width: 100%;
@@ -105,16 +90,6 @@
         font-size: 15px;
         padding-left: 2px;
       }
-    }
-
-    .gm-cascader-input {
-      .glyphicon {
-        right: 0;
-      }
-    }
-
-    .gm-trigger-popup {
-      margin-top: 8px;
     }
   }
 }

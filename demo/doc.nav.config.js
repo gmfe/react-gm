@@ -39,7 +39,8 @@ const data = [{
         {name: 'Tree 树形选择', path: '/doc/Tree'},
         {name: 'Calendar 日历', path: '/doc/Calendar'},
         {name: 'DatePicker 日期选择', path: '/doc/DatePicker'},
-        {name: 'TimeSpan 时间点选择', path: '/doc/TimeSpan'}
+        {name: 'TimeSpan 时间点选择', path: '/doc/TimeSpan'},
+        {name: 'ColorPicker 颜色选择', path: '/doc/ColorPicker'}
     ]
 }, {
     name: 'Layer',
@@ -48,7 +49,6 @@ const data = [{
         {name: 'Dialog 对话框', path: '/doc/Dialog'},
         {name: 'Modal 模态框', path: '/doc/Modal'},
         {name: 'Popover 浮层', path: '/doc/Popover'},
-        {name: 'Trigger 触发器', path: '/doc/Trigger'},
         {name: 'ImagePreview 图片预览', path: '/doc/ImagePreview'}
     ]
 }, {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Cascader from './cascader';
 import Flex from '../flex';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 // TODO 后续考虑拆开单选，多选。 耦合起来太蛋疼。
 
@@ -115,8 +115,9 @@ class CascaderSelect extends React.Component {
     render() {
         const {disabled, inputProps, valueRender, filtrable, onlyChildSelectable} = this.props;
         return (
-            <div className={classnames("gm-cascader-select", {
-                "disabled": disabled
+            <div className={classNames("gm-cascader-select gm-border gm-bg gm-position-relative", {
+                "disabled": disabled,
+                'gm-not-allowed': disabled
             })} ref={ref => this.refCascaderSelect = ref}>
                 <Flex className="gm-cascader-select-input">
                     {_.map(this.state.selected, (value, i) => (
@@ -132,6 +133,9 @@ class CascaderSelect extends React.Component {
                     ))}
                     <Flex flex column onKeyDown={::this.handleKeyDown}>
                         <Cascader
+                            popoverStyle={{
+                                marginTop: '5px'
+                            }}
                             valueRender={valueRender}
                             filtrable={filtrable}
                             onlyChildSelectable={onlyChildSelectable}
@@ -157,15 +161,15 @@ CascaderSelect.propTypes = {
     selectedRender: PropTypes.func,
     inputProps: PropTypes.object,
     disabled: PropTypes.bool,
-	valueRender: PropTypes.func,
+    valueRender: PropTypes.func,
     filtrable: PropTypes.bool,
     onlyChildSelectable: PropTypes.bool
 };
 CascaderSelect.defaultProps = {
     inputProps: {},
     disabled: false,
-    filtrable:false,
-    onlyChildSelectable:false
+    filtrable: false,
+    onlyChildSelectable: false
 };
 
 export default CascaderSelect;

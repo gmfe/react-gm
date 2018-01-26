@@ -5,7 +5,7 @@ import {createChainedFunction, contains, getElementPosition} from 'gm-util';
 import LayoutRoot from '../layout_root';
 import Popup from './popup';
 import _ from 'lodash';
-
+import classNames from 'classnames';
 
 class Popover extends React.Component {
     constructor(props) {
@@ -42,7 +42,11 @@ class Popover extends React.Component {
         LayoutRoot.removeComponent(LayoutRoot.TYPE.POPOVER);
     }
 
-    setActive(active) {
+    componentDidUpdate() {
+        this.doRenderPopup(this.state.active);
+    }
+
+    doRenderPopup(active) {
         const {
             style,
             popup, type,
@@ -50,30 +54,16 @@ class Popover extends React.Component {
             showArrow, arrowLeft
         } = this.props;
 
-        this.setState({
-            active
-        });
-
         const disabled = this.getDisabled();
 
         if (active) {
-            const dom = findDOMNode(this);
-            const pos = getElementPosition(dom);
-            const rect = {
-                left: pos.left,
-                top: pos.top,
-                height: dom.offsetHeight,
-                width: dom.offsetWidth
-            };
-
-
             LayoutRoot._setComponentPopup(this.id, (
                 <Popup
                     style={style}
                     ref={ref => this.refPopup = ref}
                     onMouseEnter={!disabled && type === 'hover' ? this.handleMouseEnter : _.noop}
                     onMouseLeave={!disabled && type === 'hover' ? this.handleMouseLeave : _.noop}
-                    rect={rect}
+                    rect={this.rect}
                     top={top}
                     right={right}
                     center={center}
@@ -86,6 +76,26 @@ class Popover extends React.Component {
         } else {
             LayoutRoot._removeComponentPopup(this.id);
         }
+    }
+
+    setActive(active) {
+        this.setState({
+            active
+        });
+
+        if (active) {
+            const dom = findDOMNode(this);
+            const pos = getElementPosition(dom);
+            const rect = {
+                left: pos.left,
+                top: pos.top,
+                height: dom.offsetHeight,
+                width: dom.offsetWidth
+            };
+            this.rect = rect;
+        }
+
+        this.doRenderPopup(active);
     }
 
     handleBodyClick(event) {
@@ -143,6 +153,8 @@ class Popover extends React.Component {
             type
         } = this.props;
 
+        const {active} = this.state;
+
         const child = React.Children.only(children);
 
         const p = {};
@@ -157,11 +169,15 @@ class Popover extends React.Component {
 
         return React.cloneElement(child, {
             ...child.props,
-            ...p
+            ...p,
+            className: classNames(child.props.className, {
+                'gm-popover-active': active
+            })
         });
     }
 }
 
+// 注意 Popover 的 popup 不会随 render 更新
 Popover.propTypes = {
     type: PropTypes.oneOf(['focus', 'click', 'hover']),
     popup: PropTypes.element.isRequired,
