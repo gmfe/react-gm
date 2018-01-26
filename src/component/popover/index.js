@@ -42,7 +42,11 @@ class Popover extends React.Component {
         LayoutRoot.removeComponent(LayoutRoot.TYPE.POPOVER);
     }
 
-    setActive(active) {
+    componentDidUpdate() {
+        this.doRenderPopup(this.state.active);
+    }
+
+    doRenderPopup(active) {
         const {
             style,
             popup, type,
@@ -50,30 +54,16 @@ class Popover extends React.Component {
             showArrow, arrowLeft
         } = this.props;
 
-        this.setState({
-            active
-        });
-
         const disabled = this.getDisabled();
 
         if (active) {
-            const dom = findDOMNode(this);
-            const pos = getElementPosition(dom);
-            const rect = {
-                left: pos.left,
-                top: pos.top,
-                height: dom.offsetHeight,
-                width: dom.offsetWidth
-            };
-
-
             LayoutRoot._setComponentPopup(this.id, (
                 <Popup
                     style={style}
                     ref={ref => this.refPopup = ref}
                     onMouseEnter={!disabled && type === 'hover' ? this.handleMouseEnter : _.noop}
                     onMouseLeave={!disabled && type === 'hover' ? this.handleMouseLeave : _.noop}
-                    rect={rect}
+                    rect={this.rect}
                     top={top}
                     right={right}
                     center={center}
@@ -86,6 +76,26 @@ class Popover extends React.Component {
         } else {
             LayoutRoot._removeComponentPopup(this.id);
         }
+    }
+
+    setActive(active) {
+        this.setState({
+            active
+        });
+
+        if (active) {
+            const dom = findDOMNode(this);
+            const pos = getElementPosition(dom);
+            const rect = {
+                left: pos.left,
+                top: pos.top,
+                height: dom.offsetHeight,
+                width: dom.offsetWidth
+            };
+            this.rect = rect;
+        }
+
+        this.doRenderPopup(active);
     }
 
     handleBodyClick(event) {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classNames from 'classnames';
 import Flex from '../flex';
-import Trigger from '../trigger';
+import Popover from '../popover';
 import {pinYinFilter, pinyin} from 'gm-util';
 
 // 给list中每个元素添加_path
@@ -247,7 +247,7 @@ class Cascader extends React.Component {
         const list = this.getList();
 
         return (
-            <Flex className={classNames("gm-cascader-list gm-bg", this.props.className)}>
+            <Flex className={classNames("gm-cascader-list gm-bg", this.props.className)} style={this.props.style}>
                 {_.map(list, (value, i) => (
                     <Flex column key={i}
                           className={classNames("list-group gm-block gm-margin-0 gm-border-0 gm-overflow-y", {
@@ -302,7 +302,9 @@ class Cascader extends React.Component {
         }
 
         return (
-            <div className="gm-cascader-input">
+            <div className={classNames("gm-cascader", {
+                'gm-cascader-close': inputValue
+            })}>
                 <input
                     {...inputProps}
                     type="text"
@@ -318,18 +320,16 @@ class Cascader extends React.Component {
     }
 
     render() {
-        const {disabled, inputValue} = this.props;
+        const {disabled, popoverStyle} = this.props;
 
         return (
-            <Trigger
+            <Popover
+                style={popoverStyle}
                 disabled={disabled}
-                component={<div className={classNames("gm-cascader", {
-                    'gm-cascader-close': inputValue
-                })}/>}
                 popup={this.renderOverlay()}
             >
                 {this.props.children ? this.props.children : this.renderChildren()}
-            </Trigger>
+            </Popover>
         );
     }
 }
@@ -351,7 +351,8 @@ Cascader.propTypes = {
     // 是否可搜索
     filtrable: PropTypes.bool,
     // 只允许选择子节点，有children则清空输入框
-    onlyChildSelectable: PropTypes.bool
+    onlyChildSelectable: PropTypes.bool,
+    popoverStyle: PropTypes.object
 };
 
 Cascader.defaultProps = {
