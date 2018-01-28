@@ -1,4 +1,5 @@
 import About from 'bundle-loader?lazy!./doc/About.md';
+import ClassName from 'bundle-loader?lazy!./doc/ClassName.md';
 import IFont from 'bundle-loader?lazy!./doc/IFont.md';
 import Flex from 'bundle-loader?lazy!./doc/Flex.md';
 import Loading from 'bundle-loader?lazy!./doc/Loading.md';
@@ -55,6 +56,7 @@ import ComponentRule from 'bundle-loader?lazy!./standard/Component.md';
 const config = {
     doc: {
         About,
+        ClassName,
         IFont,
         Flex,
         Loading,

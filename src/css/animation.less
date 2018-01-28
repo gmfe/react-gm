@@ -1,7 +1,12 @@
 /*animatre lite*/
-.animated {
+.gm-animated {
   animation-duration: 1s;
   animation-fill-mode: both;
+}
+
+.gm-animated-fade-in-right {
+  animation-name: fadeInRight;
+  animation-duration: 0.3s;
 }
 
 @-webkit-keyframes fadeInRight {
@@ -13,24 +18,5 @@
   to {
     opacity: 1;
     transform: none;
-  }
-}
-
-.fade-in-right {
-  animation-name: fadeInRight;
-  animation-duration: 0.5s;
-}
-
-.glyphicon-spin {
-  animation: spin 1000ms infinite linear;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(359deg);
   }
 }

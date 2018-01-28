@@ -22,6 +22,7 @@ class Trigger extends React.Component {
 
     componentDidMount() {
         window.document.body.addEventListener('click', this.handleBodyClick);
+        console.warn('Trigger is deprecated. Use Popover instead.');
     }
 
     componentWillUnmount() {

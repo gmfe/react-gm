@@ -20,20 +20,20 @@ class TopHeader extends React.Component {
                     <Flex flex/>
                     <Flex>{text}</Flex>
                     {settings && (
-                        <div className="gm-framework-top-header-default-settings">
-                            <Popover showArrow type="hover" right popup={(
-                                <div className="list-group gm-margin-bottom-0"
-                                     style={{minWidth: '100px', color: 'in'}}>
-                                    {_.map(settings, (v, i) => (
-                                        <a key={i + '_' + v.text} href="javascript:;"
-                                           className="list-group-item text-center gm-padding-10 gm-margin-0 gm-border-top-0"
-                                           onClick={v.onClick}>{v.text}</a>
-                                    ))}
-                                </div>
-                            )}>
-                                <i className="glyphicon glyphicon-cog gm-padding-lr-10 gm-cursor"/>
-                            </Popover>
-                        </div>
+                        <Popover showArrow type="hover" right popup={(
+                            <div className="list-group gm-margin-bottom-0"
+                                 style={{minWidth: '100px', color: 'in'}}>
+                                {_.map(settings, (v, i) => (
+                                    <a key={i + '_' + v.text} href="javascript:;"
+                                       className="list-group-item text-center gm-padding-10 gm-margin-0 gm-border-top-0"
+                                       onClick={v.onClick}>{v.text}</a>
+                                ))}
+                            </div>
+                        )}>
+                            <div className="gm-framework-top-header-default-settings gm-cursor">
+                                <i className="glyphicon glyphicon-cog gm-padding-lr-10"/>
+                            </div>
+                        </Popover>
                     )}
                 </Flex>
             </div>

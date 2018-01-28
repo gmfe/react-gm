@@ -1,7 +1,11 @@
 const path = require('path');
-const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
+const HappyPack = require('happypack');
 const env = process.env.NODE_ENV;
+const isDev = env === 'development';
+const happyThreadPool = HappyPack.ThreadPool({size: 5});
+const os = require('os');
+const UglifyJsParallelPlugin = require('webpack-uglify-parallel');
 
 const config = {
     entry: {
@@ -17,13 +21,14 @@ const config = {
     module: {
         rules: [{
             test: /\.js$/,
-            use: ['babel-loader']
+            loader: 'happypack/loader?id=js',
+            exclude: /node_modules\/(^react-hot)/
         }, {
             test: /\.md$/,
-            use: [
-                'babel-loader',
-                'markdown-it-react-loader'
-            ]
+            loader: 'happypack/loader?id=md'
+        }, {
+            test: /\.(css|less)$/,
+            loader: 'happypack/loader?id=css'
         }, {
             test: /(glyphicons-halflings-regular|iconfont)\.(woff|woff2|ttf|eot|svg)($|\?)/,
             use: [{
@@ -33,14 +38,6 @@ const config = {
                     name: 'fonts/[name].[ext]'
                 }
             }]
-        }, {
-            test: /\.(css|less)$/,
-            use: [
-                'style-loader',
-                'css-loader',
-                'postcss-loader',
-                'less-loader'
-            ]
         }, {
             test: /\.(jpe?g|png|gif|svg)$/,
             use: [{
@@ -53,7 +50,23 @@ const config = {
         }]
     },
     plugins: [
-        // new webpack.NoEmitOnErrorsPlugin(),
+        new HappyPack({
+            id: 'md',
+            threadPool: happyThreadPool,
+            loaders: ['babel-loader', 'markdown-it-react-loader']
+        }),
+        new HappyPack({
+            id: 'js',
+            threadPool: happyThreadPool,
+            loaders: [{
+                path: 'babel-loader'
+            }]
+        }),
+        new HappyPack({
+            id: 'css',
+            threadPool: happyThreadPool,
+            loaders: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+        }),
         new AssetsPlugin({
             filename: 'build/webpack-assets.js',
             processOutput: function (assets) {
@@ -63,9 +76,19 @@ const config = {
     ]
 };
 
-if (env === 'production') {
+if (isDev) {
+    config.entry.index.unshift(`webpack-dev-server/client?http://localhost:3000`);
+    config.entry.index.unshift('webpack/hot/only-dev-server');
+    config.entry.index.unshift('react-hot-loader/patch');
+} else {
     // 压缩
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+    config.plugins.push(new UglifyJsParallelPlugin({
+        workers: os.cpus().length,
+        compress: {
+            screw_ie8: false,
+            warnings: false
+        }
+    }));
 }
 
 module.exports = config;
