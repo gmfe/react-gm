@@ -1,6 +1,6 @@
 ## About react-gm
 
-愿景：致力于快速搭建项目，像搭积木一样
+愿景：致力于快速搭建项目，像搭积木一样。
 
 ## Install
 
@@ -17,4 +17,3 @@
 - gm-font
 - lodash
 - moment
-- query-string
