@@ -8,7 +8,8 @@ import {Framework} from '../framework/index';
 const data = [{
     name: 'Guide',
     sub: [
-        {name: 'About', path: '/doc/About'}
+        {name: 'About', path: '/doc/About'},
+        {name: 'ClassName', path: '/doc/ClassName'}
     ]
 }, {
     name: 'Layout',
