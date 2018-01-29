@@ -23,9 +23,7 @@ class Select extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			show: false,
-			value: null,
-			selected: null
+			show: false
 		};
 		
 		this.handleBodyClick = ::this.handleBodyClick;
@@ -33,26 +31,7 @@ class Select extends React.Component {
 	}
 	
 	componentDidMount() {
-		const {children, value} = this.props;
-		const selected = findItemByValueFromList(children, value);
-		
-		this.setState({
-			value,
-			selected
-		});
 		window.document.body.addEventListener('click', this.handleBodyClick);
-	}
-	
-	componentWillReceiveProps(nextProps) {
-		if(this.props.value !== nextProps.value) {
-			const {children, value} = nextProps;
-			
-			const selected = findItemByValueFromList(children, value);
-			this.setState({
-				value: nextProps.value,
-				selected
-			});
-		}
 	}
 	
 	componentWillUnmount() {
@@ -81,14 +60,19 @@ class Select extends React.Component {
 	
 	handleOptionClick(elProps, e) {
 		e.preventDefault();
-		const {onChange, disabled} = this.props;
-		if(disabled) {
-			return false;
-		}
+		const {onChange} = this.props;
 		
-		const {value, children} = elProps;
+		const {
+			value: elPropsValue,
+			disabled: elPropsDisabled,
+			children: elPropsChildren
+		} = elProps;
 		
-		const changeReturn = onChange && onChange(value, children);
+        if(elPropsDisabled) {
+            return false;
+        }
+		
+		const changeReturn = onChange && onChange(elPropsValue, elPropsChildren);
 		
 		if(changeReturn || changeReturn === undefined) {
 			this.setState({show: false});
@@ -98,13 +82,16 @@ class Select extends React.Component {
 	}
 	
 	render() {
-		const {show, selected, value} = this.state;
+		const {show} = this.state;
 		const {
+			value,
 			children,
 			disabled,
 			className,
 			...rest
 		} = this.props;
+        
+        const selected = findItemByValueFromList(children, value);
 		
 		return (
 			<div
