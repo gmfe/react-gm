@@ -51,7 +51,7 @@ class Component extends React.Component {
 ```
 :::
 
-::: demo disabled 
+::: demo  selection disabled
 ```js
 class Component2 extends React.Component {
     constructor(props){
@@ -92,34 +92,36 @@ class Component2 extends React.Component {
 ```
 :::
 
-::: demo  多选，value 和 onChange 参数都是数组 
+::: demo option disabled
 ```js
 class Component3 extends React.Component {
     constructor(props){
         super(props);
-        const list = _.map(_.range(5), v => ({
+        const list = _.map(_.range(8), v => ({
             value: v,
             name: 'item' + v
         }));
         this.state = {
             list,
-            value: [list[0].value]
+            value: list[1].value
         };
         this.handleChange = ::this.handleChange;
     }
-    
+
     handleChange(value){
         console.log(value);
         this.setState({
             value
         });
     }
-    
+
     render() {
         const {list, value} = this.state;
+        console.log(list, value,'---');
         return (
             <div>
-                <Select multiple value={value} onChange={this.handleChange}>
+                <Select value={value} onChange={this.handleChange}>
+                    <Option value="option disabled" disabled>Option Disabled</Option>
                     {_.map(list, v => <Option key={v.value} value={v.value}>{v.name}</Option>)}
                 </Select>
             </div>
@@ -136,4 +138,3 @@ class Component3 extends React.Component {
 - `multiple (bool)`
 - `value (any|isRequired)`
 - `onChange (func)`
-- ...rest
