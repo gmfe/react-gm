@@ -1,6 +1,6 @@
 .gm-popup {
   position: absolute;
-  z-index: 900;
+  z-index: 2000;
   background: white;
   // 默认arrow边框颜色 @gm-border-color
   // 默认arrow背景色 #FFF
@@ -56,28 +56,5 @@
     &.gm-popover-popup-arrow-center {
       left: ~"calc(50% - 4px)";
     }
-  }
-
-  .gm-popover-popup-popup {
-    position: absolute;
-    top: 100%;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    left: 0;
-    z-index: 1000;
-  }
-
-  .gm-popover-popup-popup-no-arrow {
-    margin-top: 3px;
-  }
-
-  .gm-popover-popup-popup-right {
-    right: 0;
-    left: auto;
-  }
-
-  .gm-popover-popup-popup-top {
-    top: auto;
-    bottom: 100%;
   }
 }

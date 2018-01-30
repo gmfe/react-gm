@@ -1,11 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
-import {createChainedFunction, contains, getElementPosition} from 'gm-util';
+import {createChainedFunction, contains} from 'gm-util';
 import LayoutRoot from '../layout_root';
 import Popup from './popup';
 import _ from 'lodash';
 import classNames from 'classnames';
+import Emitter from "../../emitter";
+
+function getElementPositionWithScrollTop(element) {
+    let top = element.offsetTop;
+    let left = element.offsetLeft;
+    let current = element.offsetParent;
+
+    while (current !== null) {
+        top += current.offsetTop;
+        left += current.offsetLeft;
+
+        // 特殊逻辑，如果是 modal
+        if (current.classList.contains('gm-modal')) {
+            top += window.document.documentElement.scrollTop - current.scrollTop;
+        }
+
+        current = current.offsetParent;
+    }
+
+    return {
+        top,
+        left
+    };
+}
 
 class Popover extends React.Component {
     constructor(props) {
@@ -20,6 +44,7 @@ class Popover extends React.Component {
         this.handleBodyClick = ::this.handleBodyClick;
         this.setActive = ::this.setActive;
         this.getDisabled = ::this.getDisabled;
+        this.handleModalScroll = ::this.handleModalScroll;
 
         this.timer = null;
 
@@ -33,6 +58,9 @@ class Popover extends React.Component {
         if (this.props.type === 'click' || this.props.type === 'focus') {
             window.document.body.addEventListener('click', this.handleBodyClick);
         }
+
+        // 用 debounce
+        Emitter.on(Emitter.TYPE.MODAL_SCROLL, _.debounce(this.handleModalScroll, 200));
     }
 
     componentWillUnmount() {
@@ -40,6 +68,12 @@ class Popover extends React.Component {
             window.document.body.removeEventListener('click', this.handleBodyClick);
         }
         LayoutRoot.removeComponent(LayoutRoot.TYPE.POPOVER);
+
+        Emitter.off(Emitter.TYPE.MODAL_SCROLL, this.handleModalScroll);
+    }
+
+    handleModalScroll() {
+        this.setActive(this.state.active);
     }
 
     componentDidUpdate() {
@@ -85,7 +119,7 @@ class Popover extends React.Component {
 
         if (active) {
             const dom = findDOMNode(this);
-            const pos = getElementPosition(dom);
+            const pos = getElementPositionWithScrollTop(dom);
             const rect = {
                 left: pos.left,
                 top: pos.top,

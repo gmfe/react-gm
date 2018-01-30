@@ -13,8 +13,15 @@ class Framework extends React.Component {
     }
 
     componentDidMount() {
-        Emitter.on(Emitter.TYPE.MODAL_SHOW, () => this.setState({blur: true}));
-        Emitter.on(Emitter.TYPE.MODAL_HIDE, () => this.setState({blur: false}));
+        Emitter.on(Emitter.TYPE.MODAL_SHOW, () => {
+            window.document.body.classList.add('gm-overflow-hidden');
+            this.setState({blur: true});
+        });
+
+        Emitter.on(Emitter.TYPE.MODAL_HIDE, () => {
+            window.document.body.classList.remove('gm-overflow-hidden');
+            this.setState({blur: false});
+        });
     }
 
     render() {
