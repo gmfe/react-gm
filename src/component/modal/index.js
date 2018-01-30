@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LayoutRoot from '../layout_root';
 import classNames from 'classnames';
+import {findDOMNode} from 'react-dom';
 import _ from 'lodash';
 import Flex from '../flex';
 import Emitter from '../../emitter';
@@ -25,11 +26,23 @@ class Modal extends React.Component {
 
     componentDidMount() {
         window.document.body.addEventListener('keydown', this.handleKeyDown);
+
+        // 只做一开始是 show 的情况。 其他情况 componentDidUpdate 不做，比如组件形式调用的。
+        if (this.props.show) {
+            findDOMNode(this.refModal).addEventListener('scroll', _.throttle(this.doScroll, 200));
+        }
     }
 
     componentWillUnmount() {
         window.document.body.removeEventListener('keydown', this.handleKeyDown);
+        if (this.refModal) {
+            findDOMNode(this.refModal).removeEventListener('scroll', this.doScroll);
+        }
     }
+
+    doScroll = () => {
+        Emitter.emit(Emitter.TYPE.MODAL_SCROLL);
+    };
 
     handleKeyDown(event) {
         if (this.props.show) {
@@ -66,6 +79,7 @@ class Modal extends React.Component {
             <div>
                 <div className="gm-modal-mask"/>
                 <div
+                    ref={ref => this.refModal = ref}
                     className={classNames("gm-modal", className)}
                     tabIndex="-1"
                     onClick={this.handleMask}
@@ -110,6 +124,7 @@ class Modal extends React.Component {
             <div>
                 <div className="gm-modal-mask"/>
                 <div
+                    ref={ref => this.refModal = ref}
                     className={classNames("gm-modal", className)}
                     tabIndex="-1"
                     onClick={this.handleMask}

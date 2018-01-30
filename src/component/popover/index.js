@@ -6,6 +6,7 @@ import LayoutRoot from '../layout_root';
 import Popup from './popup';
 import _ from 'lodash';
 import classNames from 'classnames';
+import Emitter from "../../emitter";
 
 function getElementPositionWithScrollTop(element) {
     let top = element.offsetTop;
@@ -43,6 +44,7 @@ class Popover extends React.Component {
         this.handleBodyClick = ::this.handleBodyClick;
         this.setActive = ::this.setActive;
         this.getDisabled = ::this.getDisabled;
+        this.handleModalScroll = ::this.handleModalScroll;
 
         this.timer = null;
 
@@ -56,6 +58,9 @@ class Popover extends React.Component {
         if (this.props.type === 'click' || this.props.type === 'focus') {
             window.document.body.addEventListener('click', this.handleBodyClick);
         }
+
+        // 用 debounce
+        Emitter.on(Emitter.TYPE.MODAL_SCROLL, _.debounce(this.handleModalScroll, 200));
     }
 
     componentWillUnmount() {
@@ -63,6 +68,12 @@ class Popover extends React.Component {
             window.document.body.removeEventListener('click', this.handleBodyClick);
         }
         LayoutRoot.removeComponent(LayoutRoot.TYPE.POPOVER);
+
+        Emitter.off(Emitter.TYPE.MODAL_SCROLL, this.handleModalScroll);
+    }
+
+    handleModalScroll() {
+        this.setActive(this.state.active);
     }
 
     componentDidUpdate() {

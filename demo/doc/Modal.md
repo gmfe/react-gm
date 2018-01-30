@@ -95,8 +95,9 @@ class ModalWrap2 extends React.Component {
             children: (
                 <div>
                 <DatePicker date={new Date} />
-                <div style={{height: '600px', background: 'red'}}>我是内容</div>
+                <div style={{height: '800px', background: 'red'}}>我是内容</div>
                 <DatePicker date={new Date} />
+                <div style={{height: '400px', background: 'red'}}>我是内容</div>
                 </div>
             ),
             title: '我是标题',
