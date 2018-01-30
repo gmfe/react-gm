@@ -130,7 +130,8 @@ class Modal extends React.Component {
                                 {title}
                             </div>
                         ) : null}
-                        <div className={classNames("gm-modal-content", {"gm-modal-content-padding-0": noContentPadding})}>
+                        <div
+                            className={classNames("gm-modal-content", {"gm-modal-content-padding-0": noContentPadding})}>
                             {children}
                         </div>
                     </div>
@@ -148,31 +149,31 @@ Modal.render = (props) => {
 };
 
 Modal.confirm = (props) => {
-    Emitter.emit(Emitter.TYPE.MODAL_SHOW);
-    LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
-        <Modal show={true} disableMaskClose {...props} type="confirm"/>
-    ));
+    Modal.render(Object.assign({}, {
+        disableMaskClose: true,
+        type: 'confirm'
+    }, props));
 };
 
 Modal.info = (props) => {
-    Emitter.emit(Emitter.TYPE.MODAL_SHOW);
-    LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
-        <Modal show={true} disableMaskClose {...props} type="info"/>
-    ));
+    Modal.render(Object.assign({}, {
+        disableMaskClose: true,
+        type: 'info'
+    }, props));
 };
 
 Modal.success = (props) => {
-    Emitter.emit(Emitter.TYPE.MODAL_SHOW);
-    LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
-        <Modal show={true} disableMaskClose {...props} type="success"/>
-    ));
+    Modal.render(Object.assign({}, {
+        disableMaskClose: true,
+        type: 'success'
+    }, props));
 };
 
 Modal.warning = (props) => {
-    Emitter.emit(Emitter.TYPE.MODAL_SHOW);
-    LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
-        <Modal show={true} disableMaskClose {...props} type="warning"/>
-    ));
+    Modal.render(Object.assign({}, {
+        disableMaskClose: true,
+        type: 'warning'
+    }, props));
 };
 
 Modal.hide = () => {

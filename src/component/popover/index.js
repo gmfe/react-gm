@@ -1,11 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
-import {createChainedFunction, contains, getElementPosition} from 'gm-util';
+import {createChainedFunction, contains} from 'gm-util';
 import LayoutRoot from '../layout_root';
 import Popup from './popup';
 import _ from 'lodash';
 import classNames from 'classnames';
+
+function getElementPositionWithScrollTop(element) {
+    let top = element.offsetTop;
+    let left = element.offsetLeft;
+    let current = element.offsetParent;
+
+    while (current !== null) {
+        top += current.offsetTop;
+        left += current.offsetLeft;
+
+        // 特殊逻辑，如果是 modal
+        if (current.classList.contains('gm-modal')) {
+            top += window.document.documentElement.scrollTop - current.scrollTop;
+        }
+
+        current = current.offsetParent;
+    }
+
+    return {
+        top,
+        left
+    };
+}
 
 class Popover extends React.Component {
     constructor(props) {
@@ -85,7 +108,7 @@ class Popover extends React.Component {
 
         if (active) {
             const dom = findDOMNode(this);
-            const pos = getElementPosition(dom);
+            const pos = getElementPositionWithScrollTop(dom);
             const rect = {
                 left: pos.left,
                 top: pos.top,

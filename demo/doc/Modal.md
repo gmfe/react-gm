@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Modal, RightSideModal, CleanModal} from '../../src/index';
+    import {Modal, RightSideModal, CleanModal, DatePicker} from '../../src/index';
 ---
 ## Modal
 
@@ -92,7 +92,13 @@ class ModalWrap2 extends React.Component {
     
     handleBigModal(){
         Modal.render({
-            children: <div style={{height: '1000px', background: 'red'}}>我是内容</div>,
+            children: (
+                <div>
+                <DatePicker date={new Date} />
+                <div style={{height: '600px', background: 'red'}}>我是内容</div>
+                <DatePicker date={new Date} />
+                </div>
+            ),
             title: '我是标题',
             onHide: Modal.hide
         });

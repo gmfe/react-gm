@@ -6,17 +6,17 @@
 
 - chunk loading 90
 - header 100
+- trigger popup 900
 
 ### 浮层
 
-
-- popover 900
 - mask 1000
+- modal 1050 modal mask 1040
 - popup 2000
-- trigger popup 3000
-- PreviewImage 4000
-- dialog 5000 dialog mask 5000
-
-- tip 7000 toast的mask 7000
+- tip 7000
 - full_screen loading 8000
 - nprogress 9999
+
+待整理
+
+- drop_select 1000
