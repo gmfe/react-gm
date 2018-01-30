@@ -61,7 +61,7 @@
  
  ## overflow
  
- `gm-overflow` `gm-overflow-x` `gm-overflow-y`
+ `gm-overflow` `gm-overflow-hidden` `gm-overflow-x` `gm-overflow-x-hidden` `gm-overflow-y` `gm-overflow-y-hidden`
  
  ## shadow
  
