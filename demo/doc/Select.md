@@ -38,7 +38,7 @@ class Component extends React.Component {
         console.log(list, value,'---');
         return (
             <div>
-                <Select value={value} onChange={this.handleChange} style={{width: '200px', height: '40px'}}>
+                <Select value={value} onChange={this.handleChange}>
                     {_.map(list, v => <Option key={v.value} value={v.value}>{v.name}</Option>)}
                 </Select>
             </div>
