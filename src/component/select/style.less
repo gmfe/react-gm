@@ -1,23 +1,27 @@
-@gm-select-item-padding: 8px 12px;
-@gm-select-option-hover-background: #ddd;
+@gm-select-padding: 8px 12px;
 
 .gm-select {
   display: inline-block;
   position: relative;
-  user-select: none;
-  background-color: #fff;
   min-width: 160px;
-  vertical-align: top;
+  background-color: #fff;
+  user-select: none;
+  cursor: pointer;
+
+  &.disabled {
+    cursor: not-allowed;
+    background-color: #eee;
+    opacity: 0.6;
+  }
 
   .gm-select-list {
-    position: absolute;
-    z-index: 9999;
-    background-color: #fff;
-    width: 100%;
     display: none;
+    position: absolute;
+    z-index: 3000;
+    width: 100%;
+    background-color: #fff;
     max-height: 200px;
-    overflow: auto;
-    box-shadow: 0 0 5px @gm-border-color;
+    overflow-y: auto;
     border: 1px solid @gm-border-color;
     border-top: none;
   }
@@ -30,30 +34,12 @@
 
   .gm-select-selection {
     position: relative;
-    cursor: pointer;
     height: 100%;
-    margin: 0;
-    border: 1px solid #ccc;
+    padding: @gm-select-padding;
+    border: 1px solid @gm-border-color;
     overflow: hidden;
-    padding: @gm-select-item-padding;
-    padding-right: 20px;
-
-    &:focus,
-    &:hover {
-      border: 1px solid darken(@gm-border-color, 20%);
-      box-shadow: 0 0 2px @gm-border-color;
-    }
-
-    &.disabled {
-      cursor: not-allowed;
-      background-color: #eee;
-      border: 1px solid darken(@gm-border-color, 10%);
-      box-shadow: none;
-    }
 
     .gm-select-selected {
-      vertical-align: middle;
-      min-height: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -64,24 +50,16 @@
       right: 3px;
       top: 50%;
       transform: translate(0, -50%);
-      color: #aaa;
+      color: @gm-border-color;
     }
   }
 
   .gm-select-option {
     cursor: pointer;
-    padding: @gm-select-item-padding;
+    padding: @gm-select-padding;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
-    &:hover {
-      background-color: lighten(@gm-select-option-hover-background, 10%);
-    }
-
-    &.selected {
-      background-color: lighten(@gm-select-option-hover-background, 5%);
-    }
 
     &:not(:first-child) {
       border-top: 1px solid @gm-border-color;
@@ -89,8 +67,17 @@
 
     &.disabled {
       cursor: not-allowed;
-      background-color: #ccc;
-      border-top: 1px solid @gm-border-color;
+      background-color: #eee;
+      opacity: 0.6;
+    }
+
+    &:hover {
+      background-color: lighten(#ddd, 10%);
+    }
+
+    &.selected {
+      background-color: lighten(#ddd, 5%);
     }
   }
 }
+

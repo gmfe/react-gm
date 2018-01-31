@@ -5,8 +5,8 @@ import classNames from 'classnames';
 class Option extends React.Component {
 	render() {
 		const {children, className, disabled, ...rest} = this.props;
-		const isText = typeof children === 'string';
-		if(isText) {
+		const isTextOrNumber = typeof children === 'string' || typeof children === 'number';
+		if(isTextOrNumber) {
 			return (
                 <div
 					{...rest}
@@ -18,7 +18,7 @@ class Option extends React.Component {
                 </div>
 			);
 		} else {
-			console.warn(`Option组件内只能包含string!`);
+			console.warn(`Option组件内只能包含string或者number!`);
 			return null;
 		}
 	}
@@ -27,7 +27,10 @@ class Option extends React.Component {
 Option.displayName = 'Option';
 
 Option.propTypes = {
-	value: PropTypes.any.isRequired
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired
 };
 
 export default Option;
