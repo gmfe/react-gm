@@ -9,7 +9,8 @@ const TYPE = {
     MODAL_HIDE: event_prefix + 'MODAL_HIDE',
     MODAL_SCROLL: event_prefix + 'MODAL_SCROLL',
     FULLLOADING_SHOW: event_prefix + 'FULLLOADING_SHOW',
-    FULLLOADING_HIDE: event_prefix + 'FULLLOADING_HIDE'
+    FULLLOADING_HIDE: event_prefix + 'FULLLOADING_HIDE',
+    TITLE_CHANGE: event_prefix + 'TITLE_CHANGE'
 };
 
 Emitter.TYPE = TYPE;
