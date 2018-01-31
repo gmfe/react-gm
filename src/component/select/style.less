@@ -1,4 +1,4 @@
-@gm-select-padding: 8px 12px;
+@gm-select-padding: 6px 12px;
 
 .gm-select {
   display: inline-block;
@@ -34,12 +34,13 @@
 
   .gm-select-selection {
     position: relative;
-    height: 100%;
     padding: @gm-select-padding;
+    height: 100%;
     border: 1px solid @gm-border-color;
     overflow: hidden;
 
     .gm-select-selected {
+      min-height: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -66,20 +67,19 @@
     }
 
     &:hover {
-      background-color: lighten(#ddd, 10%);
+      background-color: @list-group-hover-bg;
     }
 
     &.disabled {
       cursor: not-allowed;
-      background-color: #eee;
-      opacity: 0.6;
+      background-color: @list-group-disabled-bg;
 
       &:hover {
-        background-color: #eee;
+        background-color: @list-group-disabled-bg;
       }
     }
     &.selected {
-      background-color: lighten(#ddd, 5%);
+      background-color: @list-group-active-bg;
     }
   }
 }
