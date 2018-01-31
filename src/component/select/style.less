@@ -65,16 +65,19 @@
       border-top: 1px solid @gm-border-color;
     }
 
-    &.disabled {
-      cursor: not-allowed;
-      background-color: #eee;
-      opacity: 0.6;
-    }
-
     &:hover {
       background-color: lighten(#ddd, 10%);
     }
 
+    &.disabled {
+      cursor: not-allowed;
+      background-color: #eee;
+      opacity: 0.6;
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
     &.selected {
       background-color: lighten(#ddd, 5%);
     }

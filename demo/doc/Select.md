@@ -39,7 +39,6 @@ class Component extends React.Component {
         return (
             <div>
                 <Select value={value} onChange={this.handleChange} style={{width: '200px', height: '40px'}}>
-                    <Option disabled value={11}>hahahhahahhahahhahahhahah</Option>
                     {_.map(list, v => <Option key={v.value} value={v.value}>{v.name}</Option>)}
                 </Select>
             </div>
