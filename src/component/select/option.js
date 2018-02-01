@@ -4,10 +4,11 @@ import classNames from 'classnames';
 
 class Option extends React.Component {
 	render() {
-		const {children, className, disabled, ...rest} = this.props;
+		const {children, className, disabled, value, ...rest} = this.props;
 		return (
 			<div
 				{...rest}
+				value={value}
 				className={classNames("gm-select-option",className, {
 					'disabled': disabled
 				})}
@@ -22,13 +23,7 @@ class Option extends React.Component {
 Option.displayName = 'Option';
 
 Option.propTypes = {
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-		PropTypes.bool,
-        PropTypes.symbol,
-        PropTypes.oneOf([undefined, null])
-    ]).isRequired,
+    value: PropTypes.any.isRequired,
 	disabled: PropTypes.bool
 };
 

@@ -7,12 +7,7 @@ import _ from 'lodash';
 
 const findItemByValFromChildren = (children, val) => {
     children = React.Children.toArray(children);
-    
-    return _.find(children, (el) => {
-        if (el.type.displayName === 'Option') {
-            return el.props.value === val;
-        }
-    });
+    return _.find(children, (el) => (el.props.value === val));
 };
 
 class Select extends React.Component {
@@ -54,9 +49,7 @@ class Select extends React.Component {
         }
     }
     
-    handleOptionClick(elProps, e) {
-        e.preventDefault();
-        
+    handleOptionClick(elProps) {
         const {onChange} = this.props;
         const {
             value: elPropsValue,
@@ -124,13 +117,7 @@ class Select extends React.Component {
 Select.displayName = 'Select';
 
 Select.propTypes = {
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.bool,
-        PropTypes.symbol,
-        PropTypes.oneOf([undefined, null])
-    ]).isRequired,
+    value: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired
 };
 
