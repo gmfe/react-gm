@@ -3,10 +3,11 @@
 .gm-select {
   display: inline-block;
   position: relative;
-  min-width: 160px;
+  width: 160px;
   background-color: #fff;
   user-select: none;
   cursor: pointer;
+  height: 34px;
 
   &.disabled {
     cursor: not-allowed;
@@ -35,23 +36,15 @@
   .gm-select-selection {
     position: relative;
     padding: @gm-select-padding;
+    padding-right: 20px;
     height: 100%;
     border: 1px solid @gm-border-color;
     overflow: hidden;
 
     .gm-select-selected {
-      min-height: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-    }
-
-    .gm-select-arrow {
-      position: absolute;
-      right: 3px;
-      top: 50%;
-      transform: translate(0, -50%);
-      color: @gm-border-color;
     }
   }
 
@@ -78,6 +71,7 @@
         background-color: @list-group-disabled-bg;
       }
     }
+
     &.selected {
       background-color: @list-group-active-bg;
     }
