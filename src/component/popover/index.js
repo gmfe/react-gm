@@ -83,7 +83,7 @@ class Popover extends React.Component {
 
     doRenderPopup(active) {
         const {
-            style,
+            style,className,
             popup, type,
             top, right, center,
             showArrow, arrowLeft
@@ -104,6 +104,7 @@ class Popover extends React.Component {
                     center={center}
                     showArrow={showArrow}
                     arrowLeft={arrowLeft}
+                    className={className}
                 >
                     {popup}
                 </Popup>
@@ -220,6 +221,7 @@ Popover.propTypes = {
     disabled: PropTypes.bool, // 也可以用children props disable
 
     style: PropTypes.object,
+    className: PropTypes.string,
 
     right: PropTypes.bool,
     top: PropTypes.bool,

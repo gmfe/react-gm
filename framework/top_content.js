@@ -14,8 +14,9 @@ class TopContent extends React.Component {
                 <Popover
                     type="hover"
                     right
+                    className="gm-framework-top-content-default-jump-popover"
                     popup={(
-                        <div className="list-group gm-margin-0 text-center" style={{minWidth: '104px'}}>
+                        <div className="list-group gm-margin-0 text-center">
                             {_.map(jump.jumpList, v => (
                                 <a
                                     target="_blank"

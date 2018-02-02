@@ -20,9 +20,13 @@ class TopHeader extends React.Component {
                     <Flex flex/>
                     <Flex>{text}</Flex>
                     {settings && (
-                        <Popover showArrow type="hover" right popup={(
-                            <div className="list-group gm-margin-bottom-0"
-                                 style={{minWidth: '100px', color: 'in'}}>
+                        <Popover
+                            showArrow
+                            type="hover"
+                            right
+                            className="gm-framework-top-header-default-setting-popover"
+                            popup={(
+                            <div className="list-group gm-margin-bottom-0">
                                 {_.map(settings, (v, i) => (
                                     <a key={i + '_' + v.text} href="javascript:;"
                                        className="list-group-item text-center gm-padding-10 gm-margin-0 gm-border-top-0"
