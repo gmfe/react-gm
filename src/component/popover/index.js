@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
-import {createChainedFunction, contains, getScrollTop} from 'gm-util';
+import {createChainedFunction, contains, getScrollTop, getScrollLeft} from 'gm-util';
 import LayoutRoot from '../layout_root';
 import Popup from './popup';
 import _ from 'lodash';
@@ -20,6 +20,7 @@ function getElementPositionWithScrollTop(element) {
         // 特殊逻辑，如果是 modal
         if (current.classList.contains('gm-modal')) {
             top += getScrollTop() - current.scrollTop;
+            left += getScrollLeft() - current.scrollLeft;
         }
 
         current = current.offsetParent;
