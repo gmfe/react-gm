@@ -36,6 +36,12 @@
           line-height: 30px;
         }
 
+        // setting popover
+        &-setting-popover {
+          min-width: 100px;
+          font-size: 12px;
+        }
+
         &-mobile-nav {
           display: none;
           line-height: 30px;
@@ -80,8 +86,23 @@
           }
         }
 
+        // 跳转到另一个页面的 popover
         &-jump {
           position: relative;
+
+          &-popover {
+            min-width: 104px;
+            font-size: 16px;
+            box-shadow: 0 8px 6px rgba(0, 0, 0, 0.2) !important;
+
+            & > .list-group {
+              margin-top: -6px !important;
+
+              & > .list-group-item {
+                border: 0;
+              }
+            }
+          }
 
           & > a:hover {
             color: @brand-primary;

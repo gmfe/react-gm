@@ -6,7 +6,7 @@ import {Emitter} from '../src/index';
 
 class Breadcrumb extends React.Component {
     nav2BreadCrumb() {
-        const { breadcrumbs, pathname, navConfig, homeTitle } = this.props;
+        const { breadcrumbs, pathname, navConfig } = this.props;
         let result = [], title;
 
         _.forEach(navConfig, value => {
@@ -33,7 +33,7 @@ class Breadcrumb extends React.Component {
             }
         });
 
-        title = result.length ? result[result.length - 1].name : homeTitle;
+        title = result.length ? result[result.length - 1].name : '';
         Emitter.emit(Emitter.TYPE.TITLE_CHANGE, title);
         return result;
     }
@@ -74,8 +74,7 @@ Breadcrumb.propTypes = {
     pathname: PropTypes.string,
     navConfig: PropTypes.array,
     name: PropTypes.string,
-    back: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-    homeTitle: PropTypes.string
+    back: PropTypes.oneOfType([PropTypes.func, PropTypes.bool])
 };
 
 export default Breadcrumb;

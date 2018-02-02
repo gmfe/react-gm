@@ -55,6 +55,7 @@ class Popup extends React.Component {
             children,
             rect,
             style,
+            className,
             ...rest
         } = this.props;
 
@@ -80,7 +81,7 @@ class Popup extends React.Component {
                 ref={ref => this.refPopup = ref}
                 {...rest}
                 style={Object.assign(sStyle, style)}
-                className={classNames('gm-popup  gm-box-shadow-bottom')}
+                className={classNames('gm-popup  gm-box-shadow-bottom', className)}
             >
                 {showArrow && this.renderTriggerArrow()}
                 {children}
@@ -92,6 +93,7 @@ class Popup extends React.Component {
 Popup.propTypes = {
     children: PropTypes.element,
     style: PropTypes.object,
+    className: PropTypes.string,
     rect: PropTypes.object.isRequired,
     center: PropTypes.bool,
     top: PropTypes.bool,
