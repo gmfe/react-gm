@@ -3,7 +3,7 @@
 .gm-select {
   display: inline-block;
   position: relative;
-  width: 160px;
+  min-width: 160px;
   background-color: #fff;
   user-select: none;
   cursor: pointer;
@@ -12,7 +12,7 @@
   &.disabled {
     cursor: not-allowed;
     background-color: #eee;
-    opacity: 0.6;
+    opacity: 1;
   }
 
   .gm-select-list {
@@ -39,7 +39,6 @@
     padding-right: 20px;
     height: 100%;
     border: 1px solid @gm-border-color;
-    overflow: hidden;
 
     .gm-select-selected {
       overflow: hidden;
@@ -66,9 +65,12 @@
     &.disabled {
       cursor: not-allowed;
       background-color: @list-group-disabled-bg;
+      color: #777;
+      opacity: 1;
 
       &:hover {
         background-color: @list-group-disabled-bg;
+        color: #777;
       }
     }
 
