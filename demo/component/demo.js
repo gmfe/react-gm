@@ -1,33 +1,30 @@
 import React from 'react';
-import {Popover} from '../../src/';
+import {Flex, DatePicker} from '../../src/';
 
 class Component extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0
-        };
-    }
-
-    componentDidMount() {
-        setInterval(() => {
-            this.setState({
-                count: this.state.count + 2
-            });
-        }, 3000);
-    }
-
     render() {
-
-        console.log(this.state.count);
 
         return (
             <div>
-                demo
 
-                <Popover popup={<div>state {this.state.count}</div>}>
-                    <div>asdf</div>
-                </Popover>
+                demo
+                <input type="text"/>
+                <DatePicker
+                    date={new Date}
+                    placeholder="请选择日期"
+                    onChange={this.handleChange}
+                />
+
+                <Flex>
+                    <DatePicker
+                        date={new Date}
+                        placeholder="请选择日期"
+                        onChange={this.handleChange}
+                        inputClassName="form-control"
+                    />
+
+                    <input type="email" className="form-control" placeholder="Email"/>
+                </Flex>
             </div>
         );
     }

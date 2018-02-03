@@ -35,7 +35,6 @@ class DatePickerWrap extends React.Component {
                             date={this.state.date}
                             placeholder="请选择日期"
                             onChange={this.handleChange}
-                            inputClassName="form-control input-sm"
                         />
                     </div>
                     <div>
@@ -45,7 +44,6 @@ class DatePickerWrap extends React.Component {
                             placeholder="请选择日期"
                             onChange={this.handleChange}
                             inputValueRender={begin => `${begin.getMonth() + 1}月-${begin.getDate()}日`}
-                            inputClassName="form-control input-sm"
                         />
                     </div>
                     <div>
@@ -55,7 +53,6 @@ class DatePickerWrap extends React.Component {
                             placeholder="请选择日期"
                             disabled={true}
                             onChange={this.handleChange}
-                            inputClassName="form-control input-sm"
                         />
                     </div>
                     <div>
@@ -64,7 +61,6 @@ class DatePickerWrap extends React.Component {
                             date={this.state.date}
                             placeholder="选今天之后的"
                             onChange={this.handleChange}
-                            inputClassName="form-control input-sm"
                             min={new Date()}
                         />
                     </div>
@@ -74,7 +70,6 @@ class DatePickerWrap extends React.Component {
                             date={this.state.date}
                             placeholder="非周五"
                             onChange={this.handleChange}
-                            inputClassName="form-control input-sm"
                             disabledDate={m => {
                                 return moment(m).get('day') === 5;
                             }}
@@ -87,12 +82,12 @@ class DatePickerWrap extends React.Component {
                             placeholder="请选择日期"
                             onChange={this.handleChange}
                             canClear={true}
-                            inputClassName="form-control input-sm"
                         />
                     </div>
                 </Flex>
                 
-                <div className="gm-padding10"></div>
+                <div className="gm-padding10"/>
+                
                 <DatePicker
                     date={this.state.date}
                     onChange={this.handleChange}

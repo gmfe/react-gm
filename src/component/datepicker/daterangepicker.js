@@ -106,7 +106,7 @@ class DateRangePicker extends React.Component {
                         <input
                             ref={ref => this.refEndTarget = ref}
                             type="text"
-                            className={classNames('gm-border-0 gm-cursor', inputClassName, {"gm-clear-input": canClear})}
+                            className={classNames('gm-border-0 gm-cursor form-control', inputClassName, {"gm-clear-input": canClear})}
                             disabled={disabled}
                             value={end ? (endRenderInputValue ? endRenderInputValue(end) : moment(end).format('YYYY-MM-DD')) : ''}
                             onChange={_.noop}
