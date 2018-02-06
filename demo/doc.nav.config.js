@@ -69,7 +69,8 @@ const data = [{
     name: 'Loading',
     sub: [
         {name: 'Loading 加载中', path: '/doc/Loading'},
-        {name: 'NProgress 请求进度条', path: '/doc/NProgress'}
+        {name: 'NProgress 顶部请求进度条', path: '/doc/NProgress'},
+        {name: 'Progress 请求进度条', path: '/doc/Progress'}
     ]
 }, {
     name: 'Other',

@@ -2,21 +2,71 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-function ProgressBar(props) {
-    const { percent, text, type = 'success', className, ...rest } = props;
+class ProgressBar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.getIconClass = ::this.getIconClass;
 
-    return (
-        <div className={classnames("gm-progress", className)} {...rest}>
-            <div className="gm-progress-text">{text}</div>
-            <span className={`gm-progress-bar gm-progress-bar-${type}`} style={{ width: percent + '%' }} />
-        </div>
-    );
+    }
+
+    getIconClass() {
+        const {status} = this.props;
+        return status === 'success' ? 'ifont ifont-success gm-progress-bar-success-icon' : 'ifont ifont-close gm-progress-bar-exception-icon';
+    }
+
+    render() {
+        const {percentage, status, strokeWidth, textInside, showText, className, ...rest} = this.props;
+
+        return (
+            <div className={classnames('gm-progress', className)} {...rest}>
+                <div className="gm-progress-bar">
+                    <div
+                        className="gm-progress-bar-outer"
+                        style={{height: `${strokeWidth}px`}}
+                    >
+                        <div
+                            className={classnames("gm-progress-bar-inner",
+                                {
+                                    'gm-progress-bar-success': status === 'success',
+                                    'gm-progress-bar-exception': status === 'exception'
+                                })}
+                            style={{width: `${percentage}%`}}
+                        >
+                            {
+                                showText && textInside &&
+                                <div className="gm-progress-bar-innerText">
+                                    {`${percentage}%`}
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                {
+                    showText &&
+                    !textInside &&
+                    <div
+                        className="gm-progress-bar-text"
+                        style={{fontSize: `12px`}}
+                    >
+                        {status ? <i className={this.getIconClass()}/> : `${percentage}%`}
+                    </div>
+                }
+            </div>
+        );
+    }
 }
 
 ProgressBar.propTypes = {
-    percent: PropTypes.number.isRequired,
-    text: PropTypes.string,
-    type: PropTypes.string
+    percentage: PropTypes.number.isRequired,
+    status: PropTypes.string,
+    strokeWidth: PropTypes.number,
+    textInside: PropTypes.bool,
+    showText: PropTypes.bool
+};
+
+ProgressBar.defaultProps = {
+    textInside: false,
+    showText: true
 };
 
 export default ProgressBar;
