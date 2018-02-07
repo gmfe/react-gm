@@ -16,7 +16,7 @@
     "precommit": "eslint --fix ./src/ ./demo/; stylelint ./src/*.less ./src/css/*.less ./src/component/**/*.less !./src/less/**/*.less --fix --cache",
     "clear": "rm -rf build && mkdir build;",
     "start": "NODE_ENV=development node ./node_modules/gm-webpack/start",
-    "deploy": "NODE_ENV=production GIT_BRANCH=$BRANCH GIT_COMMIT=$COMMIT node ./node_modules/gm-webpack/deploy",
+    "deploy": "npm install; NODE_ENV=production GIT_BRANCH=$BRANCH GIT_COMMIT=$COMMIT node ./node_modules/gm-webpack/deploy",
     "docs": "rm-rf build; rm -rf docs; mkdir docs; NODE_ENV=production npm run deploy; cp -r build docs; git add --all; git commit -m 'docs generate'; git push origin master:master;"
   },
   "repository": {
