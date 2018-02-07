@@ -1,8 +1,6 @@
 const webpackConfigDll = require('gm-webpack/webpack.config.dll.js');
-const {dllVersion} = require('./package.json');
 
 const config = webpackConfigDll({
-    version: dllVersion,
     publicPath: '/react-gm/build/',
     dll: [
         'react', 'react-dom',

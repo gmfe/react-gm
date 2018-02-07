@@ -57,7 +57,7 @@
     "fs": "0.0.1-security",
     "gm-font": "^2.2.8",
     "gm-util": "^5.4.26",
-    "gm-webpack": "^0.1.0",
+    "gm-webpack": "^0.1.1",
     "happypack": "^4.0.1",
     "highlight.js": "^9.11.0",
     "history": "^4.7.2",
