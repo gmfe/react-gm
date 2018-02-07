@@ -58,7 +58,7 @@ class ProgressBar extends React.Component {
 
 ProgressBar.propTypes = {
     percentage: PropTypes.number.isRequired,
-    status: PropTypes.string,
+    status: PropTypes.oneOf(['success', 'exception']),
     strokeWidth: PropTypes.number,
     textInside: PropTypes.bool,
     showText: PropTypes.bool
