@@ -1,6 +1,8 @@
 {
   "name": "react-gm",
   "version": "6.6.5",
+  "dllVersion": "1.0.0",
+  "version": "6.6.5",
   "description": "",
   "main": "src/index.js",
   "module": "src/index.js",
@@ -13,8 +15,9 @@
   "scripts": {
     "precommit": "eslint --fix ./src/ ./demo/; stylelint ./src/*.less ./src/css/*.less ./src/component/**/*.less !./src/less/**/*.less --fix --cache",
     "clear": "rm -rf build && mkdir build;",
-    "start": "npm run clear && NODE_ENV=development webpack-dev-server --host 0.0.0.0 --port 3000 --disableHostCheck --inline --hot --devtool eval --progress --colors",
-    "docs": "sh deploy/docs.sh;"
+    "start": "NODE_ENV=development node ./node_modules/gm-webpack/start",
+    "deploy": "NODE_ENV=production GIT_BRANCH=$BRANCH GIT_COMMIT=$COMMIT node ./node_modules/gm-webpack/deploy",
+    "docs": "rm-rf build; rm -rf docs; mkdir docs; NODE_ENV=production npm run deploy; cp -r build docs; git add --all; git commit -m 'docs generate'; git push origin master:master;"
   },
   "repository": {
     "type": "git",
@@ -38,6 +41,7 @@
     "lodash": "^4.17.4"
   },
   "devDependencies": {
+    "add-asset-html-webpack-plugin": "^2.1.2",
     "assets-webpack-plugin": "^3.5.0",
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.26.0",
@@ -49,18 +53,20 @@
     "bundle-loader": "^0.5.5",
     "classnames": "^2.2.5",
     "css-loader": "^0.28.9",
-    "extract-text-webpack-plugin": "^3.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.4",
+    "fs": "0.0.1-security",
     "gm-font": "^2.2.8",
-    "gm-pinyin": "^3.0.0",
     "gm-util": "^5.4.26",
+    "gm-webpack": "^0.1.0",
     "happypack": "^4.0.1",
     "highlight.js": "^9.11.0",
     "history": "^4.7.2",
+    "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.5",
     "markdown-it-react-loader": "0.0.9",
     "moment": "^2.18.1",
     "path": "^0.12.7",
@@ -73,13 +79,11 @@
     "react-hot-loader": "^3.1.3",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "shelljs": "^0.8.1",
     "style-loader": "^0.20.1",
     "stylelint-config-standard": "^18.0.0",
     "url-loader": "^0.6.2",
-    "webpack": "^3.6.0",
-    "webpack-dev-middleware": "^2.0.4",
-    "webpack-dev-server": "^2.11.1",
-    "webpack-hot-middleware": "^2.19.1",
-    "webpack-uglify-parallel": "^0.1.4"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   }
 }
