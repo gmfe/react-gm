@@ -64,7 +64,6 @@ class DatePicker extends React.Component {
                         type="button"
                         className="gm-datepicker-clear-btn close"
                         onClick={this.handleClear}
-                        style={{padding: '6px 20px 6px 12px'}}
                     >&times;</button>
                 )}
             </div>

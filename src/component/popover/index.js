@@ -83,9 +83,9 @@ class Popover extends React.Component {
 
     doRenderPopup(active) {
         const {
-            style,className,
+            style, className,
             popup, type,
-            top, right, center,
+            top, right, center, offset,
             showArrow, arrowLeft
         } = this.props;
 
@@ -102,6 +102,7 @@ class Popover extends React.Component {
                     top={top}
                     right={right}
                     center={center}
+                    offset={offset}
                     showArrow={showArrow}
                     arrowLeft={arrowLeft}
                     className={className}
@@ -226,6 +227,7 @@ Popover.propTypes = {
     right: PropTypes.bool,
     top: PropTypes.bool,
     center: PropTypes.bool,
+    offset: PropTypes.number,   // 偏移量
 
     showArrow: PropTypes.bool, // 是否显示三角标
     arrowLeft: PropTypes.string
