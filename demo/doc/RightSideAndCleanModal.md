@@ -1,6 +1,7 @@
 ---
 imports:
     import {RightSideModal, CleanModal} from '../../src/index';
+
 ---
 ## Modal
 
@@ -44,7 +45,23 @@ class ModalWrap4 extends React.Component {
 class ModalWrap5 extends React.Component {
     handleModal(){
         RightSideModal.render({
-            children: <div>示例示例<br/>右侧右侧的</div>,
+            children: 
+            <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+                <div style={{flex: '1',  overflowY: 'auto'}}> 
+                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
+                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
+                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>的示例示例
+                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
+                右侧右侧<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
+                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
+                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
+                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>的示例示例
+                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
+                右侧右侧<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
+             
+                </div>
+                <div style={{height: '50px', backgroundColor: '#64DD17'}}>btn</div>
+            </div>,
             title: '右侧弹出modal',
             onHide: RightSideModal.hide,
             style: {

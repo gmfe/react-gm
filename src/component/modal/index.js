@@ -130,7 +130,11 @@ class Modal extends React.Component {
                     onClick={this.handleMask}
                 >
                     <div
-                        className={classNames("gm-modal-dialog", "gm-modal-" + size, {in: show})}
+                        className={classNames("gm-modal-dialog", "gm-modal-" + size,
+                            {
+                                in: show,
+                                "gm-modal-dialog-has-title": title
+                            })}
                         style={style}
                     >
                         <button
@@ -146,7 +150,9 @@ class Modal extends React.Component {
                             </div>
                         ) : null}
                         <div
-                            className={classNames("gm-modal-content", {"gm-modal-content-padding-0": noContentPadding})}>
+                            className={classNames("gm-modal-content", {
+                                "gm-padding-0": noContentPadding
+                            })}>
                             {children}
                         </div>
                     </div>
