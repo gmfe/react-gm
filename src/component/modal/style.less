@@ -26,7 +26,10 @@
     width: auto;
 
     .close {
-      margin: 8px 10px 0 0;
+      padding: 8px;
+      position: absolute;
+      top: 0;
+      right: 2px;
     }
 
     .gm-modal-title {
@@ -66,6 +69,11 @@
       .gm-modal-content {
         padding: 0;
         height: 100%;
+        overflow: hidden;
+      }
+
+      .gm-modal-content-with-title {
+        height: ~"calc(100% - 41px)";
       }
     }
   }
