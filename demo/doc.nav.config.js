@@ -58,7 +58,7 @@ const data = [{
         {name: 'Validator 校验工具', path: '/doc/Validator'},
         {name: 'Form 表单', path: '/doc/Form'},
         {name: 'Radio & Checkbox 单(多)选框', path: '/doc/Radio'},
-        {name: 'Switch 开个', path: '/doc/Switch'},
+        {name: 'Switch 开关', path: '/doc/Switch'},
         {name: 'InputNumber 数字输入框', path: '/doc/InputNumber'},
         {name: 'Select 选择', path: '/doc/Select'},
         {name: 'DropDown 下拉框', path: '/doc/DropDown'},
