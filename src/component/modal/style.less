@@ -26,10 +26,10 @@
     width: auto;
 
     .close {
-      padding: 8px;
+      padding: 5px;
       position: absolute;
-      top: 0;
-      right: 2px;
+      top: 3px;
+      right: 5px;
     }
 
     .gm-modal-title {
@@ -39,10 +39,6 @@
 
     .gm-modal-content {
       padding: 10px;
-    }
-
-    .gm-modal-content-padding-0 {
-      padding: 0;
     }
   }
 
@@ -69,10 +65,12 @@
       .gm-modal-content {
         padding: 0;
         height: 100%;
-        overflow: hidden;
+        overflow: auto;
       }
+    }
 
-      .gm-modal-content-with-title {
+    .gm-modal-dialog-has-title {
+      .gm-modal-content {
         height: ~"calc(100% - 41px)";
       }
     }
