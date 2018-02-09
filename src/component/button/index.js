@@ -40,6 +40,7 @@ class Button extends React.Component {
             onClick, // eslint-disable-line
             children,
             className,
+            disabled,
             ...rest
         } = this.props;
 
@@ -49,7 +50,7 @@ class Button extends React.Component {
             <button
                 {...rest}
                 className={classNames('gm-button', className)}
-                disabled={isLoading}
+                disabled={isLoading || disabled}
                 onClick={this.handleClick}
             >
                 {isLoading && <i className='ifont ifont-loading gm-button-loading'></i>}
