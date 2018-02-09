@@ -49,7 +49,7 @@ class Popup extends React.Component {
 
     render() {
         const {
-            top, right, center,
+            top, right, center, offset,
             showArrow,
             arrowLeft, // eslint-disable-line
             children,
@@ -63,13 +63,13 @@ class Popup extends React.Component {
 
         const sStyle = {
             top: rect.top + rect.height + 5,
-            left: rect.left
+            left: rect.left + offset
         };
 
         if (center) {
-            sStyle.left = rect.left + rect.width / 2 - (width) / 2;
+            sStyle.left = rect.left + rect.width / 2 - (width) / 2 + offset;
         } else if (right) {
-            sStyle.left = rect.left + rect.width - (width);
+            sStyle.left = rect.left + rect.width - (width) + offset;
         }
 
         if (top) {
@@ -98,6 +98,7 @@ Popup.propTypes = {
     center: PropTypes.bool,
     top: PropTypes.bool,
     right: PropTypes.bool,
+    offset: PropTypes.number,
     showArrow: PropTypes.bool, // 是否显示三角标
     arrowLeft: PropTypes.string
 };
@@ -105,7 +106,8 @@ Popup.propTypes = {
 Popup.defaultProps = {
     top: false,
     right: false,
-    showArrow: false
+    showArrow: false,
+    offset: 0
 };
 
 export default Popup;

@@ -55,6 +55,29 @@ class PopoverWrap extends React.Component {
                         <button className="btn btn-default">focus me(center top)</button>
                     </Popover>
                 </div>
+
+                <div>偏移位置</div>
+                <div>
+                    <Popover offset={20} popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(20)</button>
+                    </Popover>
+                    <Popover offset={-20} popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(-20)</button>
+                    </Popover>
+                    <Popover right offset={20} popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(right 20)</button>
+                    </Popover>
+                    <Popover right top offset={20} popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(right top 20)</button>
+                    </Popover>
+                    <Popover center offset={20} popup={this.renderPopup()}>
+                        <button className="btn btn-default">focus me(center 20)</button>
+                    </Popover>
+                    <Popover showArrow offset={20} popup={this.renderPopup()}>
+                        <button className="btn btn-default">showArrow(offset 20)</button>
+                    </Popover>
+                </div>
+
                 <div>加角标</div>
                 <div>
                     <Popover showArrow popup={this.renderPopup()}>
@@ -97,4 +120,5 @@ class PopoverWrap extends React.Component {
 - `center (bool)` 和目标居中对齐。
 - `right (bool)` 和目标右对齐。
 - `top (bool)` 在目标的上方。 可和 right center 组合用。
+- `offset (number)` 出现位置的偏移量。可和 right center 组合用。
 - `showArrow`  是否显示trigger的三角标

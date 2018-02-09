@@ -84,7 +84,6 @@ class DateRangePicker extends React.Component {
                             type="button"
                             className="gm-daterangepicker-clear-btn close"
                             onClick={this.handleClearBegin}
-                            style={{padding: '6px 20px 6px 12px'}}
                         >&times;</button>
                     )}
                 </div>
@@ -117,7 +116,6 @@ class DateRangePicker extends React.Component {
                             type="button"
                             className="gm-daterangepicker-clear-btn close"
                             onClick={this.handleClearEnd}
-                            style={{padding: '6px 20px 6px 12px'}}
                         >&times;</button>
                     )}
                 </div>

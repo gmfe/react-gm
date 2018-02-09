@@ -24,6 +24,7 @@ class TopHeader extends React.Component {
                             showArrow
                             type="hover"
                             right
+                            offset={10}
                             className="gm-framework-top-header-default-setting-popover"
                             popup={(
                             <div className="list-group gm-margin-bottom-0">
