@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Flex, LayoutRoot, Emitter} from '../src/index';
 import classNames from 'classnames';
 import { setTitle } from 'gm-util';
+import _ from 'lodash';
 
 class Framework extends React.Component {
     constructor(props) {
@@ -27,7 +28,13 @@ class Framework extends React.Component {
         Emitter.on(Emitter.TYPE.TITLE_CHANGE, (title) => {
             setTitle(title);
         });
+
+        window.addEventListener('scroll', _.throttle(this.doScroll, 200));
     }
+
+    doScroll = () => {
+        Emitter.emit(Emitter.TYPE.BROWSER_SCROLL);
+    };
 
     render() {
         let {showMobileMenu, topContent, topHeader, menu, breadcrumb, copyright, children} = this.props;
