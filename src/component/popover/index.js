@@ -13,12 +13,17 @@ function getElementPositionWithScrollTop(element) {
     let left = element.offsetLeft;
     let current = element.offsetParent;
 
+    if( !current && window.getComputedStyle(element, null).position === 'fixed' ) {
+        top += getScrollTop() - element.scrollTop;
+        left += getScrollLeft() - element.scrollLeft;
+    }
+
     while (current !== null) {
         top += current.offsetTop;
         left += current.offsetLeft;
 
-        // 特殊逻辑，如果是 modal
-        if (current.classList.contains('gm-modal')) {
+        // 特殊逻辑，如果是 position: fixed
+        if (window.getComputedStyle(current, null).position === 'fixed') {
             top += getScrollTop() - current.scrollTop;
             left += getScrollLeft() - current.scrollLeft;
         }
@@ -46,6 +51,7 @@ class Popover extends React.Component {
         this.setActive = ::this.setActive;
         this.getDisabled = ::this.getDisabled;
         this.handleModalScroll = ::this.handleModalScroll;
+        this.handleBrowserScroll = ::this.handleBrowserScroll;
 
         this.timer = null;
 
@@ -62,6 +68,7 @@ class Popover extends React.Component {
 
         // 用 debounce
         Emitter.on(Emitter.TYPE.MODAL_SCROLL, _.debounce(this.handleModalScroll, 200));
+        Emitter.on(Emitter.TYPE.BROWSER_SCROLL, _.debounce(this.handleBrowserScroll, 200));
     }
 
     componentWillUnmount() {
@@ -71,9 +78,14 @@ class Popover extends React.Component {
         LayoutRoot.removeComponent(LayoutRoot.TYPE.POPOVER);
 
         Emitter.off(Emitter.TYPE.MODAL_SCROLL, this.handleModalScroll);
+        Emitter.off(Emitter.TYPE.BROWSER_SCROLL, this.handleBrowserScroll);
     }
 
     handleModalScroll() {
+        this.setActive(this.state.active);
+    }
+
+    handleBrowserScroll() {
         this.setActive(this.state.active);
     }
 
