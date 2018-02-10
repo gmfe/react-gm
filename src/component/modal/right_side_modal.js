@@ -21,10 +21,7 @@ RightSideModal.propTypes = {
     onHide: PropTypes.func,
     disableMaskClose: PropTypes.bool,
     size: PropTypes.string, // lg md sm
-    title: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.element
-    ]),
+    title: PropTypes.string,
     okBtnClassName: PropTypes.string, // Modal confirm okbtn的className
     noContentPadding: PropTypes.bool
 };
