@@ -252,6 +252,7 @@ class ModalWrap6 extends React.Component {
 - `title (string|element)` 标题
 - `children` 模态框里面的内容
 - `noContentPadding` 内容没有padding
+- `noCloseBtn(bool)` 关闭按钮
 
 ### Static
 - `render`

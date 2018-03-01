@@ -53,4 +53,31 @@
       color: @gm-color-second;
     }
   }
+
+  &.gm-quick-tabs {
+    & > .nav-tabs {
+      border-top: 1px solid @gm-border-color;
+      border-right: 1px solid @gm-border-color;
+      border-left: 1px solid @gm-border-color;
+
+      li {
+        a {
+          color: inherit;
+          border-top: none;
+        }
+
+        &.active {
+          a {
+            color: @brand-primary;
+          }
+        }
+
+        &:first-child {
+          a {
+            border-left: none;
+          }
+        }
+      }
+    }
+  }
 }

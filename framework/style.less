@@ -4,6 +4,9 @@
 @import "../src/css/variables.less";
 @import "./print.less";
 
+@gm-framework-top-header-default-height: 30px;
+@gm-framework-top-content-default-height: 60px;
+
 .gm-framework {
 
   // 满足内容区域最小一屏
@@ -21,7 +24,7 @@
   &-top {
     &-header {
       &-default {
-        height: 30px;
+        height: @gm-framework-top-header-default-height;
 
         &-inner {
           position: fixed;
@@ -29,11 +32,11 @@
           left: 0;
           right: 0;
           z-index: 101;
-          height: 30px;
+          height: @gm-framework-top-header-default-height;
           background: #303030;
           color: white;
           font-size: 12px;
-          line-height: 30px;
+          line-height: @gm-framework-top-header-default-height;
         }
 
         // setting popover
@@ -51,7 +54,7 @@
 
     &-content {
       &-default {
-        height: 60px;
+        height: @gm-framework-top-content-default-height;
 
         &-inner {
           position: fixed;
@@ -60,7 +63,7 @@
           right: 0;
           z-index: 100;
           background: white;
-          height: 60px;
+          height: @gm-framework-top-content-default-height;
         }
 
         &-nav > a,

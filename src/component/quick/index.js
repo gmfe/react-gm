@@ -53,6 +53,7 @@ QuickPanel.propTypes = {
 
 class QuickInfoCell extends React.Component {
 }
+
 QuickInfoCell.displayName = 'QuickInfoCell';
 QuickInfoCell.propTypes = {
     primary: PropTypes.bool,
@@ -134,9 +135,10 @@ class QuickFilter extends React.Component {
             {show} = this.state;
 
         return (
-            <div className={classNames("gm-bg gm-border gm-quick gm-quick-filter gm-padding-15 gm-font-12", this.props.className, {
-                'gm-padding-bottom-0': collapseRender
-            })}>
+            <div
+                className={classNames("gm-bg gm-border gm-quick gm-quick-filter gm-padding-15 gm-font-12", this.props.className, {
+                    'gm-padding-bottom-0': collapseRender
+                })}>
                 {collapseRender ? <div>
                     {show ? null : children}
 
@@ -204,6 +206,7 @@ class QuickTab extends React.Component {
     render() {
         const {
             tabs, children, active, onChange, isStatic, // eslint-disable-line
+            justified,
             ...rest
         } = this.props;
 
@@ -214,9 +217,11 @@ class QuickTab extends React.Component {
         ));
 
         return (
-            <div {...rest} className={classNames("b-nav-tabs", this.props.className)}>
+            <div {...rest} className={classNames("gm-quick gm-quick-tabs", this.props.className)}>
                 {this.props.right ? React.cloneElement(this.props.right, {className: this.props.right.props.className + ' pull-right'}) : null}
-                <ul className="nav nav-tabs">
+                <ul className={classNames("nav nav-tabs gm-back-bg", {
+                    'nav-justified': justified
+                })}>
                     {_.map(tabs, (tab, i) => (
                         <li key={i} className={classNames("gm-quick-tab", {
                             active: i === activeTab
@@ -226,7 +231,7 @@ class QuickTab extends React.Component {
                     ))}
                 </ul>
                 <div>
-                    { isStatic ? tabPanels : tabPanels[activeTab] }
+                    {isStatic ? tabPanels : tabPanels[activeTab]}
                 </div>
             </div>
         );
@@ -240,6 +245,7 @@ QuickTab.propTypes = {
     active: PropTypes.number,
     right: PropTypes.element,
     isStatic: PropTypes.bool,
+    justified: PropTypes.bool,
     children: (props, propName, componentName) => {
         if (props.tabs && props.children && (props.tabs.length !== props.children.length)) {
             return new Error(
@@ -252,7 +258,8 @@ QuickTab.propTypes = {
 };
 
 QuickTab.defaultProps = {
-    isStatic: false
+    isStatic: false,
+    justified: false
 };
 
 Object.assign(QuickTab, {

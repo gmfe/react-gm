@@ -169,10 +169,11 @@ class Tab extends React.Component{
 :::
 
 ### Props
-- `tabs (array)` tab 名称数组,
+- `tabs (array)` tab 名称数组
 - `onChange (func)`
-- `active (number)` 当前激活的tab,
-- `right (element)` 头部右边内容,
+- `active (number)` 当前激活的tab
+- `right (element)` 头部右边内容
+- `justified(bool)` 平分
 - `isStatic (bool)` tab 内容切换的时候是否不被卸载
 - `children` 尽量提供`QuickTabItem`组件数组，这样语义化好点
 

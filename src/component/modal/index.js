@@ -112,7 +112,7 @@ class Modal extends React.Component {
     }
 
     render() {
-        const {show, title, size, children, type, style, noContentPadding, className} = this.props;
+        const {show, title, size, children, type, style, noContentPadding, className, noCloseBtn, opacityMask} = this.props;
         if (!show) {
             return null;
         }
@@ -122,7 +122,9 @@ class Modal extends React.Component {
 
         return (
             <div>
-                <div className="gm-modal-mask"/>
+                <div className={classNames("gm-modal-mask", {
+                    'gm-modal-mask-opacity': opacityMask
+                })}/>
                 <div
                     ref={ref => this.refModal = ref}
                     className={classNames("gm-modal", className)}
@@ -130,20 +132,22 @@ class Modal extends React.Component {
                     onClick={this.handleMask}
                 >
                     <div
-                        className={classNames("gm-modal-dialog", "gm-modal-" + size,
-                            {
-                                in: show,
-                                "gm-modal-dialog-has-title": title
-                            })}
+                        className={classNames("gm-modal-dialog", "gm-modal-" + size, {
+                            in: show,
+                            "gm-modal-dialog-has-title": title,
+                            'gm-border': opacityMask
+                        })}
                         style={style}
                     >
-                        <button
-                            type="button"
-                            className="close"
-                            onClick={this.handleClose}
-                        >
-                            <span>×</span>
-                        </button>
+                        {noCloseBtn || (
+                            <button
+                                type="button"
+                                className="close"
+                                onClick={this.handleClose}
+                            >
+                                <span>×</span>
+                            </button>
+                        )}
                         {title ? (
                             <div className="gm-modal-title">
                                 {title}
@@ -206,18 +210,22 @@ Modal.propTypes = {
     show: PropTypes.bool.isRequired,
     onHide: PropTypes.func,
     disableMaskClose: PropTypes.bool,
+    opacityMask: PropTypes.bool,
     size: PropTypes.string, // lg md sm
     title: PropTypes.string,
     okBtnClassName: PropTypes.string, // Modal confirm okbtn的className
     className: PropTypes.string,
-    noContentPadding: PropTypes.bool
+    noContentPadding: PropTypes.bool,
+    noCloseBtn: PropTypes.bool
 };
 
 Modal.defaultProps = {
     onHide: _.noop,
     size: 'md',
     disableMaskClose: false,
-    noContentPadding: false
+    opacityMask: false,
+    noContentPadding: false,
+    noCloseBtn: false
 };
 
 export default Modal;
