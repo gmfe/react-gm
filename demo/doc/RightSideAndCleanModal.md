@@ -64,6 +64,7 @@ class ModalWrap5 extends React.Component {
             </div>,
             title: '右侧弹出modal',
             onHide: RightSideModal.hide,
+            opacityMask: true,            
             style: {
                 width: '600px'
             }
