@@ -135,7 +135,8 @@ class Modal extends React.Component {
                         className={classNames("gm-modal-dialog", "gm-modal-" + size, {
                             in: show,
                             "gm-modal-dialog-has-title": title,
-                            'gm-border': opacityMask
+                            'gm-border': opacityMask,
+                            'gm-box-shadow-bottom': opacityMask
                         })}
                         style={style}
                     >

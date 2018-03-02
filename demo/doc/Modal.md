@@ -244,6 +244,38 @@ class ModalWrap6 extends React.Component {
 ```
 :::
 
+::: demo 没有遮罩的modal
+```js
+class ModalWrap7 extends React.Component {
+    handleModal(){
+        Modal.render({
+            children: <div>示例示例<br/>滴滴滴</div>,
+            title: 'content没padding的modal',
+            onHide: Modal.hide,
+            opacityMask: true,
+            style: {
+                width: '600px'
+            }
+        });
+    }
+
+    render() {
+            return (
+                <div>
+                    <button
+                        className="btn btn-default"
+                        onClick={this.handleModal}
+                    >noContentPadding Modal</button>
+                </div>
+            );
+        }
+}
+```
+```jsx
+<ModalWrap7/>
+```
+:::
+
 ### Props
 - `show (bool|isRequired)` 是否显示
 - `disableMaskClose (bool)` 是否启用点击mask关闭modal
