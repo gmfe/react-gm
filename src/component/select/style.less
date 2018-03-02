@@ -7,7 +7,6 @@
   background-color: #fff;
   user-select: none;
   cursor: pointer;
-  height: 34px;
 
   &.disabled {
     cursor: not-allowed;
@@ -35,7 +34,6 @@
 
   .gm-select-selection {
     position: relative;
-    padding: @gm-select-padding;
     padding-right: 20px;
     height: 100%;
     border: 1px solid @gm-border-color;
@@ -49,7 +47,6 @@
 
   .gm-select-option {
     cursor: pointer;
-    padding: @gm-select-padding;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -76,6 +73,36 @@
 
     &.selected {
       background-color: @list-group-active-bg;
+    }
+  }
+
+  &.select-sm {
+    .gm-select-selection,
+    .gm-select-option {
+      height: 30px;
+      padding: 5px 10px;
+      font-size: 12px;
+      padding-right: 18px;
+    }
+  }
+
+  &.select-md {
+    .gm-select-selection,
+    .gm-select-option {
+      height: 34px;
+      padding: @gm-select-padding;
+      font-size: 14px;
+      padding-right: 20px;
+    }
+  }
+
+  &.select-lg {
+    .gm-select-selection,
+    .gm-select-option {
+      height: 46px;
+      padding: 10px 16px;
+      font-size: 18px;
+      padding-right: 24px;
     }
   }
 }

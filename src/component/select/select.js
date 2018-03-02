@@ -78,7 +78,7 @@ class Select extends React.Component {
         return (
             <div
                 {...rest}
-                className={classNames('gm-select', className, {
+                className={classNames('gm-select', className ? className : 'select-md', {
                     'gm-select-open': show,
                     'disabled': disabled
                 })}
