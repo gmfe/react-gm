@@ -62,6 +62,10 @@
 
       li {
         a {
+          border: none;
+          border-right: 1px solid @gm-border-color;
+          border-bottom: 1px solid @gm-border-color;
+          margin: 0;
           color: inherit;
           border-top: none;
         }
@@ -69,12 +73,27 @@
         &.active {
           a {
             color: @brand-primary;
+            border-bottom: 1px solid transparent;
           }
         }
 
         &:first-child {
           a {
             border-left: none;
+          }
+        }
+      }
+
+      &.nav-justified {
+        li {
+          a {
+            border-top: none;
+            border-left: none;
+          }
+          &:last-child {
+            a {
+              border-right: none;
+            }
           }
         }
       }
