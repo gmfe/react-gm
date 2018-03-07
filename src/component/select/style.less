@@ -32,6 +32,14 @@
     }
   }
 
+  .gm-select-selection,
+  .gm-select-option {
+    height: 34px;
+    padding: @gm-select-padding;
+    font-size: 14px;
+    padding-right: 20px;
+  }
+
   .gm-select-selection {
     position: relative;
     padding-right: 20px;
@@ -76,7 +84,7 @@
     }
   }
 
-  &.select-sm {
+  &[data-size~="sm"] {
     .gm-select-selection,
     .gm-select-option {
       height: 30px;
@@ -86,7 +94,7 @@
     }
   }
 
-  &.select-md {
+  &[data-size~="md"] {
     .gm-select-selection,
     .gm-select-option {
       height: 34px;
@@ -96,7 +104,7 @@
     }
   }
 
-  &.select-lg {
+  &[data-size~="lg"] {
     .gm-select-selection,
     .gm-select-option {
       height: 46px;
