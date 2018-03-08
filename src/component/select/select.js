@@ -69,6 +69,7 @@ class Select extends React.Component {
             children,
             disabled,
             className,
+            size,
             ...rest
         } = this.props;
         
@@ -78,7 +79,7 @@ class Select extends React.Component {
         return (
             <div
                 {...rest}
-                className={classNames('gm-select', className, {
+                className={classNames(className, `gm-select gm-select-${size}`, {
                     'gm-select-open': show,
                     'disabled': disabled
                 })}
@@ -118,7 +119,12 @@ Select.displayName = 'Select';
 
 Select.propTypes = {
     value: PropTypes.any.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    size: PropTypes.string
+};
+
+Select.defaultProps = {
+    size: 'md'
 };
 
 export default Select;

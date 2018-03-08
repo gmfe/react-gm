@@ -8,9 +8,9 @@ imports:
 
 同时隐藏了多选的特别处理逻辑
 
-data-size属性可控制`Select`的大小: `sm`, `md`, `lg`
+props `size`可控制`Select`的大小: `sm`, `md`, `lg`
 
-默认是 `md`
+`默认size`是 `md`
 
 一定要配合`Option`使用
 
@@ -53,17 +53,17 @@ class Component extends React.Component {
 
         return (
             <div>
-                <Select value={value_1} onChange={this.handleChange.bind(this, 'value_1')} data-size="sm">
+                <Select value={value_1} onChange={this.handleChange.bind(this, 'value_1')} size="sm" className="das">
                     {_.map(list_1, v => <Option key={v.value} value={v.value}>{v.name}</Option>)}
-                </Select>  select-sm
+                </Select>  size="sm"
                 <div className="gm-margin-15"></div>
                 <Select value={value_2} onChange={this.handleChange.bind(this, 'value_2')}>
                     {_.map(list_2, v => <Option key={v.value} value={v.value}>{v.name}</Option>)}
-                </Select>  select-md
+                </Select>  size="md"
                 <div className="gm-margin-15"></div>
-                <Select value={value_3} onChange={this.handleChange.bind(this, 'value_3')} data-size="lg">
+                <Select value={value_3} onChange={this.handleChange.bind(this, 'value_3')} size="lg">
                     {_.map(list_3, v => <Option key={v.value} value={v.value}>{v.name}</Option>)}
-                </Select>  select-lg
+                </Select>  size="lg"
             </div>
         );
     }
