@@ -101,7 +101,7 @@ class Select extends React.Component {
                     {
                         React.Children.map(children, (el) => (
                             React.cloneElement(el, Object.assign({}, el.props, {
-                                    className: classNames(className, {
+                                    className: classNames(el.props.className, {
                                         'selected': el.props.value === value
                                     }),
                                     onClick: this.handleOptionClick.bind(this, el.props)
