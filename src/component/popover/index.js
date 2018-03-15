@@ -53,6 +53,9 @@ class Popover extends React.Component {
         this.handleModalScroll = ::this.handleModalScroll;
         this.handleBrowserScroll = ::this.handleBrowserScroll;
 
+        this.debounceHandleModalScroll = _.debounce(this.handleModalScroll, 200);
+        this.debounceHandleBrowserScroll = _.debounce(this.handleBrowserScroll, 200);
+
         this.timer = null;
 
         // 延迟的，可能不存在。使用的时候判断下
@@ -67,18 +70,18 @@ class Popover extends React.Component {
         }
 
         // 用 debounce
-        Emitter.on(Emitter.TYPE.MODAL_SCROLL, _.debounce(this.handleModalScroll, 200));
-        Emitter.on(Emitter.TYPE.BROWSER_SCROLL, _.debounce(this.handleBrowserScroll, 200));
+        Emitter.on(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll);
+        Emitter.on(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll);
     }
 
     componentWillUnmount() {
         if (this.props.type === 'click' || this.props.type === 'focus') {
             window.document.body.removeEventListener('click', this.handleBodyClick);
         }
-        LayoutRoot.removeComponent(LayoutRoot.TYPE.POPOVER);
+        LayoutRoot._removeComponentPopup(this.id);
 
-        Emitter.off(Emitter.TYPE.MODAL_SCROLL, this.handleModalScroll);
-        Emitter.off(Emitter.TYPE.BROWSER_SCROLL, this.handleBrowserScroll);
+        Emitter.off(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll);
+        Emitter.off(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll);
     }
 
     handleModalScroll() {
