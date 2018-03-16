@@ -8,10 +8,10 @@ import Flex from '../flex';
 import Emitter from '../../emitter';
 
 const iconClassName = {
-    confirm: 'ifont ifont-14052218',
-    success: 'ifont ifont-success',
-    info: 'ifont ifont-info-circle',
-    warning: 'ifont ifont-warning'
+    confirm: 'xfont xfont-question-circle',
+    success: 'xfont xfont-success-circle',
+    info: 'xfont xfont-info-circle',
+    warning: 'xfont xfont-warning-circle'
 };
 
 class Modal extends React.Component {
