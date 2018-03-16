@@ -9,7 +9,7 @@ const config = webpackConfig({
     index: './demo/index.js',
     commons: [
         'gm-util',
-        'gm-font/iconfont.css',
+        'gm-xfont/iconfont.css',
         'highlight.js/styles/default.css'
     ]
 });

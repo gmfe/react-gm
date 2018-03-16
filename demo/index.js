@@ -1,4 +1,4 @@
-import 'gm-font/iconfont.css';
+import 'gm-xfont/iconfont.css';
 import './index.less';
 import 'markdown-it-react-loader/index.css';
 import 'highlight.js/styles/default.css';
