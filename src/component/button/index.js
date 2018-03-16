@@ -53,7 +53,7 @@ class Button extends React.Component {
                 disabled={isLoading || disabled}
                 onClick={this.handleClick}
             >
-                {isLoading && <i className='ifont ifont-loading gm-button-loading'></i>}
+                {isLoading && <i className='xfont xfont-loading gm-button-loading'/>}
                 <span className='gm-button-content'>{children}</span>
             </button>
         );
