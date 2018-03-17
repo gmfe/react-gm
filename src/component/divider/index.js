@@ -8,7 +8,7 @@ class Divider extends React.Component {
             <Flex className="gm-divider">
                 <Flex flex className="gm-divider-line"/>
                 <div className="gm-padding-lr-10">
-                    {typeof children === 'string' ? <h4>{children}</h4> : children}
+                    {typeof children === 'string' ? <span className="gm-font-18">{children}</span> : children}
                 </div>
                 <Flex flex className="gm-divider-line"/>
             </Flex>

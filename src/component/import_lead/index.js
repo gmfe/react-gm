@@ -14,6 +14,10 @@ class ImportLead extends React.Component {
         this.handleDrop = ::this.handleDrop;
     }
 
+    componentDidMount() {
+        console.warn('Deprecated. Use gm-service / ImportLead instead.');
+    }
+
     render() {
         const data = _.extend({columns: [], list: []}, this.props.data);
         const tips = this.props.tips || [];
@@ -60,8 +64,8 @@ class ImportLead extends React.Component {
         });
 
         var canSubmit = _.filter(tips, function (value) {
-                return value.modifyed === true;
-            }).length === tips.length;
+            return value.modifyed === true;
+        }).length === tips.length;
 
         var filename = this.state.selectedFile ? this.state.selectedFile.name : '';
 
@@ -88,8 +92,8 @@ class ImportLead extends React.Component {
                     {!this.props.unLine && (
                         <div className="gm-import-line clearfix">
                             {lineMap.map((v, i) => (
-                                <div key={i} className={v ? "tip" : ""}
-                                     onClick={this.handleLine.bind(this, i)}></div>))}
+                                <div key={i} className={v ? "tip" : ""} onClick={this.handleLine.bind(this, i)}/>)
+                            )}
                         </div>
                     )}
                 </div>

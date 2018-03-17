@@ -11,7 +11,9 @@ class LoadingChunk extends React.Component {
             size,
             text,
             className,
-            ...rest} = this.props;
+            children,
+            ...rest
+        } = this.props;
 
         const s = Object.assign({}, style, {
             'width': size + 'px',
@@ -22,12 +24,12 @@ class LoadingChunk extends React.Component {
             <div {...rest} className={classNames(className, {
                 'gm-loading-chunk': loading
             })}>
-                {this.props.children || <div style={{height: (this.props.size || 50) + 'px'}}/>}
-                {
-                    loading && <div className='gm-loading-mask'>
-                         <Loading style={s} text={text} size={size} className='gm-loading-position'/>
+                {children || <div style={{height: (size || 50) + 'px'}}/>}
+                {loading && (
+                    <div className='gm-loading-mask'>
+                        <Loading style={s} text={text} size={size} className='gm-loading-position'/>
                     </div>
-                }
+                )}
             </div>
         );
     }

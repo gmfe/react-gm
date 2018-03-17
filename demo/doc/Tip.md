@@ -21,49 +21,15 @@ imports:
 ::: demo 浮层形式
 ```jsx
 <div>
-    <button className="btn btn-primary" onClick={() => Tip.info('提示啦，提示啦')}>需要用户自行关闭的</button>
-    <button className="btn btn-default" onClick={() => Tip.success({
+    <button className="btn btn-primary" onClick={() => window.___lastTip = Tip.info('提示啦，提示啦')}>默认 3s 关闭</button>
+    <button className="btn btn-default" onClick={() => window.___lastTip = Tip.success({
         children: '需要用户自行关闭的',
         time: 0,
         onClose: () => console.log('tip closed by user')
     })}>需要用户自行关闭的</button>
-    <button className="btn btn-default" onClick={() => Tip.info({
-        children: '提示啦,提示啦',
-        onClose: () => console.log('tip closed')
-    })}>onClose时间回调</button>
+    <button className="btn btn-default" onClick={() => Tip.clear(window.___lastTip)}>关闭指定 tip （比如最后一个tip）</button>  
 </div>
 ```
-:::
-
-::: demo 浮层形式
-```js
-class TipClear extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleTip = ::this.handleTip;
-    }
-    handleTip() {
-        const clearDom = Tip.success({
-            children: '这个常驻tip将会在2s后用代码关闭',
-            time: 0
-        });
-        setTimeout(() => {
-            Tip.clear(clearDom)
-        }, 2000)
-    }
-    
-    render() {
-        return (
-            <button className="btn btn-default" onClick={this.handleTip}>代码clear当前tip</button>
-        );
-    }
-}
-```
-
-```jsx
-<TipClear/>
-```
-
 :::
 
 
@@ -74,15 +40,12 @@ class TipClear extends React.Component {
 - `children` 显示的内容，一般提供字符串，也可以是其他
 
 ### Static
-参数同`TipOverlay`，同时提供只传string的快捷方法。
+
+方法返回 id ,可以通过 clear(id) 来关闭指定的 tip
+
 - `success()`
 - `info()`
 - `warning()`
 - `danger()`
-
-### TipOverlay
-浮层形式的Tip。没有对外暴露。 一般是通过`Tip`提供的静态方法来调用`TipOverlay`在右上角做提示用。
-- `title` 同上
-- `type` 同上
-- `onClose` 同上
-- `time (number)` 多长时间自动关闭，默认3000，0表示不自动关闭（用户手动触发）
+- `clear(id)`
+- `clearAll()`

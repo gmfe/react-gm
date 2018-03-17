@@ -1,6 +1,6 @@
 // content
-@thumbnail-img-size: 50px;
-@thumbnail-img-margin: 5px;
+@gm-image-preview-thumbnail-img-size: 50px;
+@gm-image-preview-thumbnail-img-margin: 5px;
 
 .gm-image-preview-wrap {
   position: relative;
@@ -70,7 +70,7 @@
 
     .gm-image-preview-thumbnails-btn {
       color: #fff;
-      line-height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+      line-height: @gm-image-preview-thumbnail-img-size + @gm-image-preview-thumbnail-img-margin * 2;
       cursor: pointer;
       opacity: 0.7;
       font-size: 19px;
@@ -84,7 +84,7 @@
   .gm-image-preview-thumbnails {
     overflow-x: auto;
     overflow-y: hidden;
-    height: @thumbnail-img-size + @thumbnail-img-margin * 2;
+    height: @gm-image-preview-thumbnail-img-size + @gm-image-preview-thumbnail-img-margin * 2;
     white-space: nowrap;
 
     &::-webkit-scrollbar {
@@ -92,8 +92,8 @@
     }
 
     .gm-image-preview-img {
-      width: @thumbnail-img-size;
-      height: @thumbnail-img-size;
+      width: @gm-image-preview-thumbnail-img-size;
+      height: @gm-image-preview-thumbnail-img-size;
       object-fit: cover;
       margin-top: 5px;
       margin-bottom: 5px;

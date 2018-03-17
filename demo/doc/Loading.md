@@ -59,7 +59,7 @@ class LoadingWrap extends React.Component {
                 </div> 
                 
 
-                <h2>区域加载 ,size 60</h2>
+                <h2>区域加载 size 60</h2>
                 <LoadingChunk loading={true} size={60}>
                     <Sheet list={list}>
                         <SheetColumn field="id" name="id"/>
@@ -91,20 +91,17 @@ class LoadingWrap extends React.Component {
 
 ### Props
 #### Loading
-- `size(number)` 默认 50
+- `size (number)` 默认 50
 -  `text (string)` loading 文案
-
+- `...rest`
 
 #### LoadingFullScreen (静态方法)
-- `size(number)` 默认 50
+- `size (number)` 默认 50
 -  `text (string)` loading 文案
-
+- `...rest`
 
 #### LoadingChunk
 - `loading (bool)` 默认 `false`,
-- `size(number)` 默认 50
+- `size (number)` 默认 50
 -  `text (string)` loading 文案
-
-
-
-
+- `...rest`

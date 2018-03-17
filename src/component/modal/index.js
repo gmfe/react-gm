@@ -175,6 +175,7 @@ Modal.render = (props) => {
 };
 
 Modal.confirm = (props) => {
+    console.warn('Deprecated. Use Dialog.xxx instead.');
     Modal.render(Object.assign({}, {
         disableMaskClose: true,
         type: 'confirm'
@@ -182,6 +183,7 @@ Modal.confirm = (props) => {
 };
 
 Modal.info = (props) => {
+    console.warn('Deprecated. Use Dialog.xxx instead.');
     Modal.render(Object.assign({}, {
         disableMaskClose: true,
         type: 'info'
@@ -189,6 +191,7 @@ Modal.info = (props) => {
 };
 
 Modal.success = (props) => {
+    console.warn('Deprecated. Use Dialog.xxx instead.');
     Modal.render(Object.assign({}, {
         disableMaskClose: true,
         type: 'success'
@@ -196,6 +199,7 @@ Modal.success = (props) => {
 };
 
 Modal.warning = (props) => {
+    console.warn('Deprecated. Use Dialog.xxx instead.');
     Modal.render(Object.assign({}, {
         disableMaskClose: true,
         type: 'warning'
@@ -217,7 +221,8 @@ Modal.propTypes = {
     okBtnClassName: PropTypes.string, // Modal confirm okbtn的className
     className: PropTypes.string,
     noContentPadding: PropTypes.bool,
-    noCloseBtn: PropTypes.bool
+    noCloseBtn: PropTypes.bool,
+    style: PropTypes.object
 };
 
 Modal.defaultProps = {

@@ -4,7 +4,7 @@ imports:
 ---
 ## Divider
 
-::: demo 分隔符中间又文字，切回呗转成大写
+::: demo
 ```js
 class Component extends React.Component {
     render() {

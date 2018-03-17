@@ -1,63 +1,56 @@
-import About from 'bundle-loader?lazy!./doc/About.md';
-import ClassName from 'bundle-loader?lazy!./doc/ClassName.md';
-import IFont from 'bundle-loader?lazy!./doc/IFont.md';
-import Flex from 'bundle-loader?lazy!./doc/Flex.md';
-import Loading from 'bundle-loader?lazy!./doc/Loading.md';
-import NProgress from 'bundle-loader?lazy!./doc/NProgress.md';
-import Progress from 'bundle-loader?lazy!./doc/Progress.md';
-import Cascader from 'bundle-loader?lazy!./doc/Cascader.md';
-import CascaderSelect from 'bundle-loader?lazy!./doc/CascaderSelect.md';
-import DropSelect from 'bundle-loader?lazy!./doc/DropSelect.md';
-import SearchSelect from 'bundle-loader?lazy!./doc/SearchSelect.md';
-import FilterSearchSelect from 'bundle-loader?lazy!./doc/FilterSearchSelect.md';
-import FilterSelect from 'bundle-loader?lazy!./doc/FilterSelect.md';
-import Sheet from 'bundle-loader?lazy!./doc/Sheet.md';
-import SheetColumn from 'bundle-loader?lazy!./doc/SheetColumn.md';
-import SheetAction from 'bundle-loader?lazy!./doc/SheetAction.md';
-import SheetSelect from 'bundle-loader?lazy!./doc/SheetSelect.md';
-import SheetBatchAction from 'bundle-loader?lazy!./doc/SheetBatchAction.md';
-import Pagination from 'bundle-loader?lazy!./doc/Pagination.md';
-import ImportLead from 'bundle-loader?lazy!./doc/ImportLead.md';
-import Storage from 'bundle-loader?lazy!./doc/Storage.md';
-import Calendar from 'bundle-loader?lazy!./doc/Calendar.md';
-import DatePicker from 'bundle-loader?lazy!./doc/DatePicker.md';
-import DateRangePicker from 'bundle-loader?lazy!./doc/DateRangePicker.md';
-import TimeSpan from 'bundle-loader?lazy!./doc/TimeSpan.md';
-import Tip from 'bundle-loader?lazy!./doc/Tip.md';
-import Dialog from 'bundle-loader?lazy!./doc/Dialog.md';
-import Popover from 'bundle-loader?lazy!./doc/Popover.md';
-import Dropper from 'bundle-loader?lazy!./doc/Dropper.md';
-import Switch from 'bundle-loader?lazy!./doc/Switch.md';
-import InputNumber from 'bundle-loader?lazy!./doc/InputNumber.md';
-import Modal from 'bundle-loader?lazy!./doc/Modal.md';
-import RightSideAndCleanModal from 'bundle-loader?lazy!./doc/RightSideAndCleanModal.md';
-import Collapse from 'bundle-loader?lazy!./doc/Collapse.md';
-import DropDown from 'bundle-loader?lazy!./doc/DropDown.md';
-import TreeSelect from 'bundle-loader?lazy!./doc/TreeSelect.md';
-import Form from 'bundle-loader?lazy!./doc/Form.md';
-import Validator from 'bundle-loader?lazy!./doc/Validator.md';
-import Radio from 'bundle-loader?lazy!./doc/Radio.md';
-import Select from 'bundle-loader?lazy!./doc/Select.md';
-import Transfer from 'bundle-loader?lazy!./doc/Transfer.md';
-import Tree from 'bundle-loader?lazy!./doc/Tree.md';
-import Quick from 'bundle-loader?lazy!./doc/Quick.md';
-import Divider from 'bundle-loader?lazy!./doc/Divider.md';
-import Menu from 'bundle-loader?lazy!./doc/Menu.md';
-import ImagePreview from 'bundle-loader?lazy!./doc/ImagePreview.md';
-import Button from 'bundle-loader?lazy!./doc/Button.md';
-import ColorPicker from 'bundle-loader?lazy!./doc/ColorPicker.md';
-
-
-import LayoutCommon from 'bundle-loader?lazy!./standard/LayoutCommon.md';
-import LayoutRule from 'bundle-loader?lazy!./standard/LayoutRule.md';
-import Module from 'bundle-loader?lazy!./standard/Module.md';
-import ComponentRule from 'bundle-loader?lazy!./standard/Component.md';
+const About = () => import('./doc/About.md');
+const ClassName = () => import('./doc/ClassName.md');
+const Flex = () => import('./doc/Flex.md');
+const Loading = () => import('./doc/Loading.md');
+const NProgress = () => import('./doc/NProgress.md');
+const Progress = () => import('./doc/Progress.md');
+const Cascader = () => import('./doc/Cascader.md');
+const CascaderSelect = () => import('./doc/CascaderSelect.md');
+const DropSelect = () => import('./doc/DropSelect.md');
+const SearchSelect = () => import('./doc/SearchSelect.md');
+const FilterSearchSelect = () => import('./doc/FilterSearchSelect.md');
+const FilterSelect = () => import('./doc/FilterSelect.md');
+const Sheet = () => import('./doc/Sheet.md');
+const SheetColumn = () => import('./doc/SheetColumn.md');
+const SheetAction = () => import('./doc/SheetAction.md');
+const SheetSelect = () => import('./doc/SheetSelect.md');
+const SheetBatchAction = () => import('./doc/SheetBatchAction.md');
+const Pagination = () => import('./doc/Pagination.md');
+const ImportLead = () => import('./doc/ImportLead.md');
+const Storage = () => import('./doc/Storage.md');
+const Calendar = () => import('./doc/Calendar.md');
+const DatePicker = () => import('./doc/DatePicker.md');
+const DateRangePicker = () => import('./doc/DateRangePicker.md');
+const TimeSpan = () => import('./doc/TimeSpan.md');
+const Tip = () => import('./doc/Tip.md');
+const Dialog = () => import('./doc/Dialog.md');
+const Popover = () => import('./doc/Popover.md');
+const Dropper = () => import('./doc/Dropper.md');
+const Switch = () => import('./doc/Switch.md');
+const InputNumber = () => import('./doc/InputNumber.md');
+const Modal = () => import('./doc/Modal.md');
+const RightSideAndCleanModal = () => import('./doc/RightSideAndCleanModal.md');
+const Collapse = () => import('./doc/Collapse.md');
+const DropDown = () => import('./doc/DropDown.md');
+const TreeSelect = () => import('./doc/TreeSelect.md');
+const Form = () => import('./doc/Form.md');
+const Validator = () => import('./doc/Validator.md');
+const Radio = () => import('./doc/Radio.md');
+const Select = () => import('./doc/Select.md');
+const Transfer = () => import('./doc/Transfer.md');
+const Tree = () => import('./doc/Tree.md');
+const Quick = () => import('./doc/Quick.md');
+const Divider = () => import('./doc/Divider.md');
+const Menu = () => import('./doc/Menu.md');
+const Nav = () => import('./doc/Nav.md');
+const ImagePreview = () => import('./doc/ImagePreview.md');
+const Button = () => import('./doc/Button.md');
+const ColorPicker = () => import('./doc/ColorPicker.md');
 
 const config = {
     doc: {
         About,
         ClassName,
-        IFont,
         Flex,
         Loading,
         Progress,
@@ -96,15 +89,10 @@ const config = {
         Quick,
         Divider,
         Menu,
+        Nav,
         ImagePreview,
         Button,
         ColorPicker
-    },
-    standard: {
-        LayoutCommon,
-        LayoutRule,
-        Module,
-        ComponentRule
     }
 };
 

@@ -5,27 +5,13 @@ import {
     Redirect,
     Switch as RRSwitch
 } from 'react-router-dom';
-import {Bundle, processReactRouterProps} from 'gm-util';
+import {importComponent, processReactRouterProps} from 'gm-util';
 import {Emitter} from '../src/index';
 
 import App from './app';
-import Demo from 'bundle-loader?lazy!./component/demo';
 import Config from './config';
 
 class Page extends React.Component {
-    constructor(props) {
-        super(props);
-        this.afterBundle = ::this.afterBundle;
-    }
-
-    afterBundle(component) {
-        if (this.component !== component) {
-            Emitter.emit('DEMO-PAGE-LOADED');
-        }
-
-        this.component = component;
-    }
-
     render() {
         const {path1, path2} = this.props.match.params;
         const load = Config[path1][path2];
@@ -34,30 +20,15 @@ class Page extends React.Component {
             return null;
         }
 
-        return (
-            <Bundle load={load}>
-                {(Component) => {
-                    if (Component) {
-                        setTimeout(() => this.afterBundle(Component), 500);
-                        return <Component {...this.props}/>;
-                    } else {
-                        return <div>loading</div>;
-                    }
-                }}
-            </Bundle>
-        );
+        const Com = importComponent(load, {
+            onLoad: () => {
+                setTimeout(() => Emitter.emit('DEMO-PAGE-LOADED'), 500);
+            }
+        });
+
+        return <Com {...this.props}/>;
     }
 }
-
-const getModule = (loaderLazyModule) => {
-    return (props) => {
-        return (
-            <Bundle load={loaderLazyModule}>
-                {(Component) => Component ? <Component {...props}/> : <div/>}
-            </Bundle>
-        );
-    };
-};
 
 const RouteConfig = () => (
     <Router>
@@ -65,7 +36,7 @@ const RouteConfig = () => (
             <App {...processReactRouterProps(props)}>
                 <RRSwitch>
                     <Route exact path="/" render={() => <Redirect from="/" to="/doc/About"/>}/>
-                    <Route exact path="/demo" component={getModule(Demo)}/>
+                    <Route exact path="/demo" component={importComponent(() => import('./component/demo'))}/>
 
                     <Route exact path="/doc" render={() => <Redirect from="/" to="/doc/About"/>}/>
                     <Route exact path="/standard" render={() => <Redirect from="/" to="/standard/LayoutRule"/>}/>

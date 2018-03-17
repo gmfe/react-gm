@@ -18,7 +18,8 @@ const data = [{
         {name: 'Quick', path: '/doc/Quick'},
         {name: 'Collapse 折叠面板', path: '/doc/Collapse'},
         {name: 'Divider 分割线', path: '/doc/Divider'},
-        {name: 'Menu 导航菜单', path: '/doc/Menu'}
+        {name: 'Menu 导航菜单', path: '/doc/Menu'},
+        {name: 'Nav 新导航', path: '/doc/Nav'}
     ]
 }, {
     name: 'Data',

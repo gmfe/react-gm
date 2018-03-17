@@ -1,17 +1,14 @@
 import React from 'react';
-import {Flex, Emitter} from '../src/index';
 import createHashHistory from 'history/createHashHistory';
-
-import NavConfigDoc from './doc.nav.config';
-import NavConfigStandard from './standard.nav.config';
-
 import queryString from 'query-string';
 import {withRouter} from 'react-router-dom';
-
+import NavConfigDoc from './doc.nav.config';
+import {Flex, Emitter} from '../src/index';
 import {Framework, TopContent} from '../framework';
-import Logo from './logo';
 
 const history = createHashHistory();
+
+const version = __REACT_GM_VERSION__; // eslint-disable-line
 
 @withRouter
 class App extends React.Component {
@@ -59,12 +56,6 @@ class App extends React.Component {
     }
 
     renderTopContent() {
-
-        const navList = [
-            {text: 'UI规范', link: '#/standard'},
-            {text: '组件', link: '#/doc/About'}
-        ];
-
         return (
             <TopContent
                 fixedTop="0px"
@@ -82,7 +73,8 @@ class App extends React.Component {
                             />
                         </svg>
                         <span className="gm-gap-10"/>
-                        <span>ReactGM </span>
+                        <span>ReactGM</span>
+                        <small>&nbsp;&nbsp;v{version}</small>
                         <small>&nbsp;&nbsp;by gmfe</small>
                         <span className="gm-gap-10"/>
                         <a
@@ -91,9 +83,9 @@ class App extends React.Component {
                             data-show-count="true"
                             aria-label="Star gmfe/react-gm on GitHub"
                         >Star</a>
+                        <Flex flex/>
                     </Flex>
                 )}
-                navList={navList}
             />
         );
     }
@@ -102,15 +94,13 @@ class App extends React.Component {
         const {location: {pathname}} = this.props;
         if (pathname.startsWith('/doc')) {
             return <NavConfigDoc/>;
-        } else if (pathname.startsWith('/standard')) {
-            return <NavConfigStandard/>;
         } else {
             return null;
         }
     }
 
     render() {
-        const {children, location: {pathname}} = this.props;
+        const {children} = this.props;
 
         return (
             <Framework
@@ -119,7 +109,6 @@ class App extends React.Component {
             >
                 <div onClick={this.handleClickAnchor}>
                     {children}
-                    {pathname === '/doc/About' && <Logo/>}
                 </div>
             </Framework>
         );

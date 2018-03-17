@@ -28,7 +28,7 @@ class Preview_modal extends React.Component {
     handlePrevious() {
         const {thumbnails} = this.props;
         const {previewImgIndex} = this.state;
-        
+
         if (previewImgIndex !== 0) {
             const index = previewImgIndex - 1;
             this.setState({previewImgIndex: index});
@@ -44,7 +44,7 @@ class Preview_modal extends React.Component {
         const {previewImgIndex} = this.state;
 
         if (previewImgIndex !== images.length - 1) {
-            const index = previewImgIndex + 1;            
+            const index = previewImgIndex + 1;
             this.setState({previewImgIndex: index});
 
             if (thumbnails) {
@@ -89,7 +89,7 @@ class Preview_modal extends React.Component {
     componentDidMount() {
         // 如果没有滚动条,不显示左右滚动按钮
         this.thumbnails && this.thumbnails.offsetWidth === this.thumbnails.scrollWidth &&
-            this.setState({showScrollBtn: false});
+        this.setState({showScrollBtn: false});
 
         window.document.body.addEventListener('keydown', this.handleKeyDown);
     }
@@ -104,16 +104,17 @@ class Preview_modal extends React.Component {
 
         return (
             <Flex className="gm-image-preview-wrap">
-                <span className="gm-image-preview-btn-close" onClick={onHide} >×</span>
+                <span className="gm-image-preview-btn-close" onClick={onHide}>×</span>
 
                 <Flex alignCenter className="gm-image-preview-btn-container">
-                    <i className={classNames("glyphicon glyphicon-menu-left gm-image-preview-btn", {"hidden": previewImgIndex === 0})} onClick={this.handlePrevious}></i>
+                    <i className={classNames("glyphicon glyphicon-menu-left gm-image-preview-btn", {"hidden": previewImgIndex === 0})}
+                       onClick={this.handlePrevious}></i>
                 </Flex>
 
 
                 <Flex column className="gm-image-preview-content">
                     <Flex auto alignCenter className="gm-image-preview-img-wrap">
-                        <img src={images[previewImgIndex]} alt="" className="gm-image-preview-img" />
+                        <img src={images[previewImgIndex]} alt="" className="gm-image-preview-img"/>
                     </Flex>
 
                     {/* 缩略图列表高度: 60px */}
@@ -121,28 +122,31 @@ class Preview_modal extends React.Component {
                         <Flex className="gm-image-preview-thumbnails-container">
 
                             {showScrollBtn &&
-                                <i className="glyphicon glyphicon-chevron-left gm-image-preview-thumbnails-btn" onClick={this.handleScrollRight}></i>}
+                            <i className="glyphicon glyphicon-chevron-left gm-image-preview-thumbnails-btn"
+                               onClick={this.handleScrollRight}></i>}
 
                             <div className="gm-image-preview-thumbnails" ref={ref => this.thumbnails = ref}>
                                 {_.map(thumbnails, (img, index) => (
                                     <img key={index}
-                                        className={classNames("gm-image-preview-img", {"gm-image-preview-focus": index === previewImgIndex})}
-                                        src={img}
-                                        onClick={() => this.handlePreview(index)}
+                                         className={classNames("gm-image-preview-img", {"gm-image-preview-focus": index === previewImgIndex})}
+                                         src={img}
+                                         onClick={() => this.handlePreview(index)}
                                     >
                                     </img>
                                 ))}
                             </div>
 
                             {showScrollBtn &&
-                                <i className="glyphicon glyphicon-chevron-right gm-image-preview-thumbnails-btn" onClick={this.handleScrollLeft}></i>}
+                            <i className="glyphicon glyphicon-chevron-right gm-image-preview-thumbnails-btn"
+                               onClick={this.handleScrollLeft}></i>}
                         </Flex>
                     </Flex>}
 
                 </Flex>
 
                 <Flex alignCenter className="gm-image-preview-btn-container">
-                    <i className={classNames("glyphicon glyphicon-menu-right gm-image-preview-btn", {"hidden": previewImgIndex === images.length - 1})} onClick={this.handleNext} ></i>
+                    <i className={classNames("glyphicon glyphicon-menu-right gm-image-preview-btn", {"hidden": previewImgIndex === images.length - 1})}
+                       onClick={this.handleNext}></i>
                 </Flex>
 
             </Flex>

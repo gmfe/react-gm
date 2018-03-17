@@ -1,33 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import _ from 'lodash';
-
-const tipContainerId = '_gm_tips_container' + (Math.random() + '').slice(2);
-let tipsContainer = window.document.getElementById(tipContainerId);
-if (!tipsContainer) {
-    tipsContainer = window.document.createElement('div');
-    tipsContainer.className = 'gm-tips';
-    tipsContainer.id = tipContainerId;
-    window.document.body.appendChild(tipsContainer);
-}
+import LayoutRoot from '../layout_root';
 
 const TipStatics = {
     tip: function (options) {
-        const _b_onClose = options.onClose;
-        let div = window.document.createElement('div');
-        div.className = 'gm-tips-cell';
-        tipsContainer.appendChild(div);
+        const id = +new Date() + '' + Math.random();
+        const _onClose = options.onClose;
 
-        options.onClose = function () {
-            tipsContainer.removeChild(div);
-            div = null;
-            if (_b_onClose) {
-                _b_onClose();
+        options.onClose = () => {
+            LayoutRoot._removeComponentTip(id);
+            if (_onClose) {
+                _onClose();
             }
         };
-        ReactDOM.render(<TipOverlay {...options} />, div);
-        return div;
+        LayoutRoot._setComponentTip(id, <TipOverlay {...options} />);
+
+        return id;
     },
     success: function (options) {
         if (typeof options === 'string') {
@@ -65,14 +54,11 @@ const TipStatics = {
         options.type = 'danger';
         return TipStatics.tip(options);
     },
-    clear(dom) {
-        _.includes(tipsContainer.children, dom) && tipsContainer.removeChild(dom);
-        dom = null;
+    clear(id) {
+        LayoutRoot._removeComponentTip(id);
     },
-    clearAll(){
-        _.forEach(tipsContainer.children, tip => {
-            ReactDOM.unmountComponentAtNode(tip);
-        });
+    clearAll() {
+        LayoutRoot._removeComponentTipAll();
     }
 };
 
@@ -82,19 +68,6 @@ class TipOverlay extends React.Component {
         this.timer = null;
         this.hasClosed = false;
         this.handleClose = ::this.handleClose;
-    }
-
-    render() {
-        const {title, type, children} = this.props;
-        return (
-            <div ref="tipOverlay" className="gm-animated gm-animated-fade-in-right">
-                <Tip title={title}
-                     type={type}
-                     onClose={this.handleClose}>
-                    {children}
-                </Tip>
-            </div>
-        );
     }
 
     componentDidMount() {
@@ -118,8 +91,22 @@ class TipOverlay extends React.Component {
             this.props.onClose();
         }
     }
+
+    render() {
+        const {title, type, children} = this.props;
+        return (
+            <div className="gm-animated gm-animated-fade-in-right">
+                <Tip title={title}
+                     type={type}
+                     onClose={this.handleClose}>
+                    {children}
+                </Tip>
+            </div>
+        );
+    }
 }
-TipOverlay.PropTypes = {
+
+TipOverlay.propTypes = {
     title: PropTypes.string,
     type: PropTypes.string,
     onClose: PropTypes.func,
@@ -131,10 +118,9 @@ TipOverlay.defaultProps = {
 };
 
 class Tip extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleClose = ::this.handleClose;
-    }
+    handleClose = () => {
+        this.props.onClose();
+    };
 
     render() {
         const {title, type, children} = this.props;
@@ -157,10 +143,6 @@ class Tip extends React.Component {
                 </div>
             </div>
         );
-    }
-
-    handleClose() {
-        this.props.onClose();
     }
 }
 

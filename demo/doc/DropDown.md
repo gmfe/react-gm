@@ -96,7 +96,7 @@ class DropDownWrap1 extends React.Component {
                         </DropDownItems>
                     )}
                 >
-                    <button className="btn btn-primary">drop down <span className="caret"/></button>
+                    <button className="btn btn-primary btn-lg">drop down <span className="caret"/></button>
                 </DropDown>
                 小 sm
                 <DropDown
@@ -107,7 +107,7 @@ class DropDownWrap1 extends React.Component {
                         </DropDownItems>
                     )}
                 >
-                    <button className="btn btn-primary">drop down <span className="caret"/></button>
+                    <button className="btn btn-primary btn-sm">drop down <span className="caret"/></button>
                 </DropDown>
                 超小 xs
                 <DropDown
@@ -233,6 +233,7 @@ class DropDownWrap3 extends React.Component {
     }
 }
 ```
+
 ```jsx
 <DropDownWrap3/>
 ```
@@ -242,11 +243,12 @@ class DropDownWrap3 extends React.Component {
 - `popup (element|isRequired)` 对应的浮层
 - `split (bool)` 是否分裂式按钮
 - `cartClassName (string)` split true时有效，设置cart的样式
+- `...rest`
 
 ### DropDownItems
+- `...rest`
 
 用来包裹 DropDownItem
 
 ### DropDownItem
-
-选项
+- `...rest`

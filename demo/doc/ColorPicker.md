@@ -5,9 +5,9 @@ imports:
 ---
 ## Calendar
 
-日历组件
+颜色选择
 
-::: demo 一般
+::: demo
 ```js
 class ColorPickerWrap extends React.Component {
     constructor(props) {

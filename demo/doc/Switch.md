@@ -100,4 +100,4 @@ class Component extends React.Component {
 - `on (string)` 选中的文案，默认`ON`
 - `off (string)` 不选中的文案，默认`OFF`
 - `onChange (func)`
-- ...rest
+- `...rest`

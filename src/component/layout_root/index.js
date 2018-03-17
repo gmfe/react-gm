@@ -5,7 +5,7 @@ const TYPE = {
     _POPOVER: '_popover',
     POPUP: 'popup', // TODO
     MODAL: 'modal',
-    TIP: 'tip',
+    _TIP: '_tip',
     FULLLOADING: 'fullloading',
     NPROGRESS: 'nprogress'
 };
@@ -19,8 +19,8 @@ class LayerRoot extends React.Component {
             _popover: null,
             popup: null,
             modal: null,
-            popover: null,
-            tip: null,
+            _tip: null,
+            fullloading: null,
             nprogress: null
         };
     }
@@ -38,46 +38,101 @@ class LayerRoot extends React.Component {
     }
 
     render() {
+        const {
+            _popover,
+            popup,
+            modal,
+            _tip,
+            fullloading,
+            nprogress
+        } = this.state;
         // 有层级关系
         return (
             <div>
-                <div>{_.map(this.state._popover, v => React.cloneElement(v.com, Object.assign({
-                    key: v.id
-                }, v.com.props)))}</div>
-                <div>{this.state.popup}</div>
-                <div>{this.state.modal}</div>
-                <div>{this.state.popover}</div>
-                <div>{this.state.tip}</div>
-                <div>{this.state.fullloading}</div>
-                <div>{this.state.nprogress}</div>
+                {_popover && _popover.length > 0 && (
+                    <div>
+                        {_.map(_popover, v => React.cloneElement(v.com, Object.assign({
+                            key: v.id
+                        }, v.com.props)))}
+                    </div>
+                )}
+
+                {popup && <div>{popup}</div>}
+
+                {modal && <div>{modal}</div>}
+
+                {_tip && _tip.length > 0 && (
+                    <div className="gm-tips">
+                        {_.map(_tip, v => React.cloneElement(v.com, Object.assign({
+                            key: v.id
+                        }, v.com.props)))}
+                    </div>
+                )}
+
+                {fullloading && <div>{fullloading}</div>}
+
+                {nprogress && <div>{nprogress}</div>}
             </div>
         );
     }
 }
 
-const popupList = [];
-LayerRoot._setComponentPopup = (id, com) => {
+const componentListMap = {
+    _popover: [],
+    _tip: []
+};
+
+function getList(type) {
+    if (!componentListMap[type]) {
+        componentListMap[type] = [];
+    }
+    return componentListMap[type];
+}
+
+const _setComponentArray = (type, id, com) => {
+    const list = getList(type);
     if (setComponentFunc) {
-        const index = _.findIndex(popupList, v => v.id === id);
+        const index = _.findIndex(list, v => v.id === id);
         if (index === -1) {
-            popupList.push({id, com});
+            list.push({id, com});
         } else {
-            popupList[index] = {id, com};
+            list[index] = {id, com};
         }
 
-        setComponentFunc(LayerRoot.TYPE._POPOVER, popupList);
+        setComponentFunc(type, list);
     } else {
         console.warn('LayerRoot is uninitialized');
     }
 };
 
-LayerRoot._removeComponentPopup = (id) => {
+const _removeComponentArray = (type, id) => {
+    const list = getList(type);
     if (setComponentFunc) {
-        _.remove(popupList, v => v.id === id);
-        setComponentFunc(LayerRoot.TYPE._POPOVER, popupList);
+        _.remove(list, v => v.id === id);
+        setComponentFunc(type, list);
     } else {
         console.warn('LayerRoot is uninitialized');
     }
+};
+
+LayerRoot._setComponentPopup = (id, com) => {
+    _setComponentArray(LayerRoot.TYPE._POPOVER, id, com);
+};
+
+LayerRoot._removeComponentPopup = (id) => {
+    _removeComponentArray(LayerRoot.TYPE._POPOVER, id);
+};
+
+LayerRoot._setComponentTip = (id, com) => {
+    _setComponentArray(LayerRoot.TYPE._TIP, id, com);
+};
+
+LayerRoot._removeComponentTip = (id) => {
+    _removeComponentArray(LayerRoot.TYPE._TIP, id);
+};
+
+LayerRoot._removeComponentTipAll = () => {
+    setComponentFunc(LayerRoot.TYPE._TIP, []);
 };
 
 LayerRoot.setComponent = (type, com) => {

@@ -21,7 +21,7 @@ class LoadingFullScreen extends React.Component {
         });
 
         return (
-            <div className={classNames('gm-loading-full-screen', className)} style={style} {...rest}>
+            <div {...rest} className={classNames('gm-loading-full-screen', className)}>
                 <Loading style={s} text={text} className='gm-loading-spinner'/>
             </div>
         );

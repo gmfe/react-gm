@@ -23,7 +23,7 @@
 
 `gm-text-helper`
 
-`gm-font-20` `gm-font-16` `gm-font-14` `gm-font-12`
+`gm-font-20` `gm-font-18` `gm-font-16` `gm-font-14` `gm-font-12`
 
 ## distance
 

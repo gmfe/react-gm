@@ -21,7 +21,8 @@ class TimeSpan extends React.Component {
     }
 
     render() {
-        const cells = this.getCells(), {selected, render, disabledSpan} = this.props;
+        const {selected, render, disabledSpan} = this.props;
+        const cells = this.getCells();
 
         return (
             <div className="gm-time-span">
@@ -59,8 +60,7 @@ TimeSpan.defaultProps = {
     max: moment().endOf('day').toDate(),
     span: 30 * 60 * 1000,
     render: value => moment(value).format('HH:mm'),
-    onSelect: () => {
-    }
+    onSelect: _.noop
 };
 
 export default TimeSpan;
