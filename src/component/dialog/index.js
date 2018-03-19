@@ -24,7 +24,10 @@ DialogStatics = {
         return DialogStatics.dialog(options);
     },
     dialog(options) {
-        options = Object.assign({}, {size: 'sm'}, options);
+        options = Object.assign({
+            _from: 'DialogStatics',
+            size: 'sm'
+        }, options);
         return new Promise((resolve, reject) => {
             const _OK = options.onOK;
             options.onOK = value => {
@@ -78,6 +81,12 @@ class Dialog extends React.Component {
             this.setState({
                 show: nextProps.show
             });
+        }
+    }
+
+    componentDidMount() {
+        if (this.props._from !== 'DialogStatics') {
+            console.warn('Use Dialog Static instead of Component');
         }
     }
 
