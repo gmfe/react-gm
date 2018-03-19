@@ -313,7 +313,7 @@ class Cascader extends React.Component {
                     value={inputValue}
                     className={classNames("form-control", inputProps.className)}
                 />
-                {inputValue && <i onClick={this.handleClear} className="ifont ifont-close gm-cursor"/>}
+                {inputValue && <i onClick={this.handleClear} className="xfont xfont-close-circle gm-cursor gm-cascader-close-icon"/>}
                 <i className="gm-arrow-down"/>
             </div>
         );

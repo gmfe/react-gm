@@ -63,10 +63,10 @@ class MenuItem extends React.Component {
                     <span>{data.name}</span>
                     {
                         allowCollapse ?
-                            <i className={classNames('gm-margin-right-15 ifont', {
+                            <i className={classNames('gm-margin-right-15 xfont', {
                                 'gm-disabled-arrow-color': menuItemDisabled,
-                                'ifont-down-small': collapse,
-                                'ifont-up-small': !collapse
+                                'xfont-down-small': collapse,
+                                'xfont-up-small': !collapse
                             })}/> : null
                     }
                 </Flex>

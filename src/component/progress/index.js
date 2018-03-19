@@ -11,7 +11,7 @@ class ProgressBar extends React.Component {
 
     getIconClass() {
         const {status} = this.props;
-        return status === 'success' ? 'ifont ifont-success gm-progress-bar-success-icon' : 'ifont ifont-close gm-progress-bar-exception-icon';
+        return status === 'success' ? 'xfont xfont-success-circle gm-progress-bar-success-icon' : 'xfont xfont-close-circle gm-progress-bar-exception-icon';
     }
 
     render() {
