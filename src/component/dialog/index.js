@@ -1,21 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import Modal from '../modal';
 import _ from 'lodash';
 import Emitter from '../../emitter';
 import classNames from 'classnames';
+import LayoutRoot from '../layout_root';
 
-// 搞的复杂了，后续要补充文档
-
-let dialogContainerId = '_gm_dialog_container' + (Math.random() + '').slice(2);
-let dialogContainer = window.document.getElementById(dialogContainerId);
-if (!dialogContainer) {
-    dialogContainer = window.document.createElement('div');
-    dialogContainer.className = 'gm-container-dialog';
-    dialogContainer.id = dialogContainerId;
-    window.document.body.appendChild(dialogContainer);
-}
 let DialogStatics = {};
 DialogStatics = {
     alert(options) {
@@ -34,32 +24,37 @@ DialogStatics = {
         return DialogStatics.dialog(options);
     },
     dialog(options) {
-        console.log(options);
         options = Object.assign({}, {size: 'sm'}, options);
         return new Promise((resolve, reject) => {
-            let div = window.document.createElement('div');
-            dialogContainer.appendChild(div);
             const _OK = options.onOK;
             options.onOK = value => {
                 const result = _OK && _OK(value);
+
                 if (result && result.then) { // 简单判断是否promise
                     return result.then(v => {
+                        LayoutRoot.removeComponent(LayoutRoot.TYPE.MODAL);
                         Emitter.emit(Emitter.TYPE.MODAL_HIDE);
                         return v;
                     });
                 } else if (result !== false) {
                     resolve(value);
                 }
+
                 if (result !== false) {
+                    LayoutRoot.removeComponent(LayoutRoot.TYPE.MODAL);
                     Emitter.emit(Emitter.TYPE.MODAL_HIDE);
                 }
+
                 return result;
             };
             options.onCancel = () => {
                 reject();
+
+                LayoutRoot.removeComponent(LayoutRoot.TYPE.MODAL);
                 Emitter.emit(Emitter.TYPE.MODAL_HIDE);
             };
-            ReactDOM.render(<Dialog show={true} {...options} />, div);
+
+            LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, <Dialog show={true} {...options} />);
             Emitter.emit(Emitter.TYPE.MODAL_SHOW);
         });
     }

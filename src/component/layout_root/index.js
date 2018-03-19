@@ -2,8 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 const TYPE = {
-    _POPOVER: '_popover',
-    POPUP: 'popup', // TODO
+    _POPUP: '_popup',
     MODAL: 'modal',
     _TIP: '_tip',
     FULLLOADING: 'fullloading',
@@ -16,8 +15,7 @@ class LayerRoot extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            _popover: null,
-            popup: null,
+            _popup: null,
             modal: null,
             _tip: null,
             fullloading: null,
@@ -39,8 +37,7 @@ class LayerRoot extends React.Component {
 
     render() {
         const {
-            _popover,
-            popup,
+            _popup,
             modal,
             _tip,
             fullloading,
@@ -49,15 +46,13 @@ class LayerRoot extends React.Component {
         // 有层级关系
         return (
             <div>
-                {_popover && _popover.length > 0 && (
+                {_popup && _popup.length > 0 && (
                     <div>
-                        {_.map(_popover, v => React.cloneElement(v.com, Object.assign({
+                        {_.map(_popup, v => React.cloneElement(v.com, Object.assign({
                             key: v.id
                         }, v.com.props)))}
                     </div>
                 )}
-
-                {popup && <div>{popup}</div>}
 
                 {modal && <div>{modal}</div>}
 
@@ -78,7 +73,7 @@ class LayerRoot extends React.Component {
 }
 
 const componentListMap = {
-    _popover: [],
+    _popup: [],
     _tip: []
 };
 
@@ -116,11 +111,11 @@ const _removeComponentArray = (type, id) => {
 };
 
 LayerRoot._setComponentPopup = (id, com) => {
-    _setComponentArray(LayerRoot.TYPE._POPOVER, id, com);
+    _setComponentArray(LayerRoot.TYPE._POPUP, id, com);
 };
 
 LayerRoot._removeComponentPopup = (id) => {
-    _removeComponentArray(LayerRoot.TYPE._POPOVER, id);
+    _removeComponentArray(LayerRoot.TYPE._POPUP, id);
 };
 
 LayerRoot._setComponentTip = (id, com) => {
