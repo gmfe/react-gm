@@ -18,7 +18,7 @@ class Button extends React.Component {
         const {onClick} = this.props;
         const result = onClick(event);
 
-        if(!is.promise(result)){
+        if (!is.promise(result)) {
             return;
         }
 

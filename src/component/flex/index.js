@@ -56,7 +56,6 @@ class Flex extends React.Component {
             'gm-flex-align-content-stretch': alignContentStretch
         }, className);
 
-        // TODO 有待商榷，WebkitFlex 是否会生效？
         let s = Object.assign({}, style);
         if (flex) {
             s.flex = (typeof flex === 'boolean') ? 1 : flex;

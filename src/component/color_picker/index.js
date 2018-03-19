@@ -5,16 +5,16 @@ import Flex from '../flex';
 import _ from 'lodash';
 
 const colorList = [
-    '#FF6900',
-    '#FCB900',
-    '#7BDCB5',
-    '#00D084',
-    '#8ED1FC',
-    '#0693E3',
-    '#ABB8C3',
-    '#EB144C',
-    '#F78DA7',
-    '#9900EF'
+    '#ff6900',
+    '#fcb900',
+    '#7bdcb5',
+    '#00d084',
+    '#8ed1fc',
+    '#0693e3',
+    '#abb8c3',
+    '#eb144c',
+    '#f78da7',
+    '#9900ef'
 ];
 
 class Color extends React.Component {

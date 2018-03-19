@@ -50,14 +50,11 @@ class Switch extends React.Component {
 
     render() {
         const {
+            className,
             checked, onChange, // eslint-disable-line
             type, disabled, on, off,
             ...rest
         } = this.props;
-
-        const cn = classNames('gm-switch gm-switch-' + type, this.props.className, {
-            'gm-switch-disabled': disabled
-        });
 
         const handleStyle = {};
         if (this.state.checked) {
@@ -65,7 +62,12 @@ class Switch extends React.Component {
         }
 
         return (
-            <label {...rest} className={cn}>
+            <label
+                {...rest}
+                className={classNames('gm-switch gm-switch-' + type, className, {
+                    'gm-switch-disabled': disabled
+                })}
+            >
                 <input
                     disabled={disabled}
                     type="checkbox"

@@ -13,7 +13,6 @@ class ButtonWrap extends React.Component {
         super(props);
         this.handleClick = ::this.handleClick;
         this.handleClick1 = ::this.handleClick1;
-        this.handleClick2 = ::this.handleClick2;
     }
     
     handleClick() {
@@ -24,23 +23,15 @@ class ButtonWrap extends React.Component {
     handleClick1() {
         console.log('click');
         return new Promise(resolve => setTimeout(() => resolve('12'),2000));
-    }
-        
-        
-    handleClick2() {
-        console.log('click');
-        return new Promise(resolve => setTimeout(() => resolve('12'),2000));
-    }          
+    }     
     
     render() {
         return (
             <div>
                 <h2>Button 没有 loading, 回调函数返回 false</h2>
-                <Button onClick={this.handleClick} style={{'background': '#7ab155'}} className='demo-button'>加载更多</Button>
+                <Button onClick={this.handleClick} className='btn btn-default'>加载更多</Button>
                 <h2>Button loading ，回调函数返回一个 Promise</h2>
-                <Button key='1' onClick={this.handleClick1} style={{'background': '#20a0ff', color: 'white'}} className='demo-button'>加载更多</Button>
-                <br/>
-                <Button key='2' onClick={this.handleClick2} style={{'background': 'white', marginTop: '4px'}} className='demo-button'>加载更多</Button>
+                <Button onClick={this.handleClick1} className='btn btn-default'>加载更多</Button>
             </div>
         );
     }
@@ -54,5 +45,5 @@ class ButtonWrap extends React.Component {
 :::
 
 ### Props
-- `hasLoading(bool)`  是否显示 loadding
 - `onClick(func)` 点击回调函数
+- `...rest`

@@ -29,8 +29,7 @@ imports:
 - `alignCenter (bool)`
 - `alignBaseline (bool)`
 - `alignStretch (bool)`
-- `classNames`
-- `style`
+- `...rest`
 
 以上只列了写常用的特性，还有些很有用的特性，不妨直接用style来处理。
 

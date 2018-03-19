@@ -59,3 +59,4 @@ class CollapseWrap extends React.Component {
 
 ### Props
 - `in (bool|isRequired)` 是否显示
+- `...rest`

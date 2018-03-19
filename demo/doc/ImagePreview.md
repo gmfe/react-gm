@@ -10,19 +10,17 @@ imports:
 ::: demo 以下example依赖的数据
 
 ```js
-    const demo2 = require('../images/image_preview/demo2.png');
-    const demo3 = require('../images/image_preview/demo3.jpg');
-    const long = require('../images/image_preview/long.jpg');
-    const node = require('../images/image_preview/node.jpg');
-    const react1 = require('../images/image_preview/react1.png');
-    const react2 = require('../images/image_preview/react2.jpg');
-    const react3 = require('../images/image_preview/react3.png');
-    const react4 = require('../images/image_preview/react4.png');
-    const react5 = require('../images/image_preview/react5.png');
-    const vue = require('../images/image_preview/vue.jpg');
+    const demo2 = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/55189630.jpg';
+    const demo3 = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/92456680.jpg';
+    const long = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/94425102.jpg';
+    const node = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/19643068.jpg';
+    const react1 = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/92330201.jpg';
+    const react2 = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/14452818.jpg';
+    const react3 = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/38213335.jpg';
+    const react4 = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/38181942.jpg';
+    const react5 = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/40298099.jpg';
+    const vue = 'http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/39193365.jpg';
     const srcList = [
-        demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
-        demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
         demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
         demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
         demo2, demo3, long, node, react1, react2, react3, react4, react5, vue,
@@ -54,7 +52,7 @@ class ImagePreviewWrap extends React.Component {
 
     handlePreviewSingle() {
         ImagePreview({
-            images: ['./demo/images/image_preview/demo2.png'],
+            images: ['http://7xlnio.com1.z0.glb.clouddn.com/18-3-9/55189630.jpg'],
             index: 0
         });
     }

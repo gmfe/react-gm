@@ -64,3 +64,4 @@ class Component extends React.Component {
 - `placeholder (string)`: 默认值
 - `className (string)`
 - `minus (bool)` 是否支持输入负数
+- `...rest`

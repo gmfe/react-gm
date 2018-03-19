@@ -27,7 +27,7 @@ import Trigger from './component/trigger';
 import Loading from './component/loading';
 import LoadingChunk from './component/loading/loading_chunk';
 import LoadingFullScreen from './component/loading/loading_full_screen';
-import InputNumber from './component/input/input.number';
+import InputNumber from './component/input_number';
 import LayoutRoot from './component/layout_root';
 import Modal from './component/modal';
 import RightSideModal from './component/modal/right_side_modal';
@@ -41,6 +41,7 @@ import {Checkbox, CheckboxGroup} from './component/checkbox';
 import FilterSelect from './component/filter_select/filter.select';
 import MultipleFilterSelect from './component/filter_select/multiple.filter.select';
 import Menu from './component/menu';
+import Nav from './component/nav';
 import {Transfer, TransferGroup} from './component/transfer';
 import Tree from './component/tree';
 import ImagePreview from './component/image_preview';
@@ -144,7 +145,7 @@ export {
     ColorPicker,
     Button,
 
-    Menu,
+    Menu, Nav,
     Emitter,
     ImagePreview
 };

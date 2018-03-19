@@ -9,6 +9,7 @@ import SheetColumn from './sheet_column';
 import SheetAction from './sheet_action';
 import SheetSelect from './sheet_select';
 import SheetBatchAction from './sheet_batch_action';
+import Loading from '../loading';
 
 class Sheet extends React.Component {
     handleSelect(select, i, event) {
@@ -30,7 +31,8 @@ class Sheet extends React.Component {
         if (loading) {
             return (
                 <tr>
-                    <td colSpan="99" className="text-center">加载中...
+                    <td colSpan="99" className="text-center" style={{padding: '10px'}}>
+                        <Loading size={30}/>
                     </td>
                 </tr>
             );

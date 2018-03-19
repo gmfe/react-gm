@@ -1,28 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-
-const containerId = '_gm_nprogress_container' + (Math.random() + '').slice(2);
-let container = window.document.getElementById(containerId);
-if (!container) {
-    container = window.document.createElement('div');
-    container.className = 'gm-nprogress-container';
-    container.id = containerId;
-    window.document.body.appendChild(container);
-}
-
-const NProgressStatics = {
-    start: function () {
-        ReactDOM.unmountComponentAtNode(container);
-        ReactDOM.render(<NProgress/>, container);
-    },
-    done: function () {
-        ReactDOM.render(<NProgress percent={100}/>, container);
-        setTimeout(function () {
-            ReactDOM.unmountComponentAtNode(container);
-        }, 250);
-    }
-};
+import LayoutRoot from '../layout_root';
 
 class NProgress extends React.Component {
     constructor(props) {
@@ -40,15 +18,6 @@ class NProgress extends React.Component {
                 percent: nextProps.percent
             });
         }
-    }
-
-    render() {
-        var percent = 100 - this.state.percent;
-        return (
-            <div className="gm-nprogress" style={{transform: "translate3d(-" + percent + "%, 0px, 0px)"}}>
-                <div className="gm-nprogress-head"></div>
-            </div>
-        );
     }
 
     componentDidMount() {
@@ -70,7 +39,29 @@ class NProgress extends React.Component {
             }
         }, 150);
     }
+
+    render() {
+        const percent = 100 - this.state.percent;
+        return (
+            <div className="gm-nprogress" style={{transform: "translate3d(-" + percent + "%, 0, 0)"}}>
+                <div className="gm-nprogress-head"/>
+            </div>
+        );
+    }
 }
+
+const NProgressStatics = {
+    start: function () {
+        LayoutRoot.setComponent(LayoutRoot.TYPE.NPROGRESS, <NProgress/>);
+    },
+    done: function () {
+        LayoutRoot.setComponent(LayoutRoot.TYPE.NPROGRESS, <NProgress percent={100}/>);
+        setTimeout(function () {
+            LayoutRoot.removeComponent(LayoutRoot.TYPE.NPROGRESS);
+        }, 250);
+    }
+};
+
 Object.assign(NProgress, NProgressStatics);
 
 NProgress.propTypes = {

@@ -161,3 +161,4 @@ class Component3 extends React.Component {
 - `multiple (bool)`
 - `value (any|isRequired)`
 - `onChange (func)`
+- `...rest`

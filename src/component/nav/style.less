@@ -1,0 +1,64 @@
+.gm-nav {
+  background: #22252b;
+  position: relative;
+
+  .gm-nav-logo {
+    height: 80px;
+  }
+
+  .gm-nav-two {
+    display: none;
+  }
+
+  .gm-nav-there {
+    padding-top: 100px;
+    position: absolute;
+    background: #282e35;
+    left: 100%;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .gm-nav-there > a {
+    font-size: 16px;
+    display: block;
+    color: #7f8386;
+    white-space: nowrap;
+    padding: 15px 15px 20px;
+    text-decoration: none;
+  }
+
+  .gm-nav-two > a {
+    font-size: 16px;
+    display: block;
+    padding: 10px 10px 10px 25px;
+    color: #7f8386;
+    text-decoration: none;
+  }
+
+  .gm-nav-one > div.active > .gm-nav-two {
+    display: block;
+  }
+
+  .gm-nav-two > a.active {
+    background: #282e35;
+  }
+
+  .gm-nav-there > a.active {
+    color: @brand-primary;
+  }
+
+  .gm-nav-one > div > a {
+    font-size: 18px;
+    border-top: 1px solid #282e35;
+    display: block;
+    padding: 15px 10px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .gm-nav-two > a:hover {
+    background: #282e35;
+  }
+}

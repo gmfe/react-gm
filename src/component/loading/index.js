@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 class Loading extends React.Component {
-  render() {
+    render() {
         let {
             style,
             size,
@@ -18,13 +18,11 @@ class Loading extends React.Component {
         });
 
         return (
-            <div className={classNames('gm-loading', className)} {...rest}>
+            <div {...rest} className={classNames('gm-loading', className)}>
                 <svg className="gm-loading-circular" style={s} viewBox="0 0 50 50">
                     <circle className="gm-loading-path" cx="25" cy="25" r="20" fill="none"/>
                 </svg>
-                {
-                    text && <p className="gm-loading-text">{text}</p>
-                }
+                {text && <p className="gm-loading-text">{text}</p>}
             </div>
         );
     }
