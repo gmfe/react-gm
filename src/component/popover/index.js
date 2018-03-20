@@ -13,7 +13,7 @@ function getElementPositionWithScrollTop(element) {
     let left = element.offsetLeft;
     let current = element.offsetParent;
 
-    if( !current && window.getComputedStyle(element, null).position === 'fixed' ) {
+    if (!current && window.getComputedStyle(element, null).position === 'fixed') {
         top += getScrollTop() - element.scrollTop;
         left += getScrollLeft() - element.scrollLeft;
     }
@@ -101,14 +101,38 @@ class Popover extends React.Component {
             style, className,
             popup, type,
             top, right, center, offset,
-            showArrow, arrowLeft
+            showArrow, arrowLeft,
+            animName
         } = this.props;
 
         const disabled = this.getDisabled();
 
+        let animate = animName;
+
+        if (animName === true) {
+            if (top) {
+                if (right) {
+                    animate = 'fade-in-left';
+                } else if (center) {
+                    animate = 'fade-in-top';
+                } else {
+                    animate = 'fade-in-right';
+                }
+            } else {
+                if (right) {
+                    animate = 'fade-in-left';
+                } else if (center) {
+                    animate = 'fade-in-bottom';
+                } else {
+                    animate = 'fade-in-right';
+                }
+            }
+        }
+
         if (active) {
             LayoutRoot._setComponentPopup(this.id, (
                 <Popup
+                    key="popup"
                     style={style}
                     ref={ref => this.refPopup = ref}
                     onMouseEnter={!disabled && type === 'hover' ? this.handleMouseEnter : _.noop}
@@ -120,10 +144,11 @@ class Popover extends React.Component {
                     offset={offset}
                     showArrow={showArrow}
                     arrowLeft={arrowLeft}
-                    className={className}
-                >
-                    {popup}
-                </Popup>
+                    className={classNames({
+                        'gm-animated': !!animate,
+                        ['gm-animated-' + animate]: animate
+                    }, className)}
+                >{popup}</Popup>
             ));
         } else {
             LayoutRoot._removeComponentPopup(this.id);
@@ -245,12 +270,15 @@ Popover.propTypes = {
     offset: PropTypes.number,   // 偏移量
 
     showArrow: PropTypes.bool, // 是否显示三角标
-    arrowLeft: PropTypes.string
+    arrowLeft: PropTypes.string,
+
+    animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom'])
 };
 
 Popover.defaultProps = {
     type: 'focus',
-    showArrow: false
+    showArrow: false,
+    animName: true
 };
 
 export default Popover;

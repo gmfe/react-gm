@@ -1,0 +1,32 @@
+@media (max-width: 768px) {
+  .gm-framework {
+    &-left {
+      &-default {
+        width: 0 !important;
+
+        &-inner {
+          left: -110%;
+        }
+      }
+    }
+
+    &-right-top {
+      &-default {
+        &-inner {
+          left: 0 !important;
+
+          .gm-framework-right-top-default-mobile-nav {
+            display: block;
+          }
+        }
+      }
+    }
+
+    &.gm-framework-mobile-menu {
+      .gm-framework-left-default-inner {
+        left: 0;
+        width: 100vw !important;
+      }
+    }
+  }
+}

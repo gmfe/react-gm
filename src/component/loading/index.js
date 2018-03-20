@@ -34,7 +34,7 @@ Loading.propTypes = {
 };
 
 Loading.defaultProps = {
-    size: 50
+    size: 40
 };
 
 export default Loading;

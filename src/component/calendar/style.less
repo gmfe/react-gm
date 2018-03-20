@@ -1,5 +1,5 @@
 .gm-calendar {
-  font-size: 14px;
+  font-size: 12px;
   width: 199px;
   overflow: hidden;
   border: 1px solid @gm-border-color;
@@ -8,7 +8,9 @@
 }
 
 .gm-calendar-head {
-  background-color: @gray-lighter;
+  cursor: pointer;
+  background-color: #fafbfd;
+  border-bottom: 1px solid @gm-border-color;
 }
 
 .gm-calendar-head-title {
@@ -18,10 +20,11 @@
 
 .gm-calendar-head-pre,
 .gm-calendar-head-next {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   color: inherit;
   cursor: pointer;
+  line-height: 26px;
 }
 
 .gm-calendar-head-pre:hover,
@@ -32,10 +35,6 @@
 
 .gm-calendar-head-month {
   cursor: pointer;
-}
-
-.gm-calendar-week {
-  background-color: @gray-lighter;
 }
 
 .gm-calendar-months {
@@ -62,10 +61,19 @@
   background-color: @list-group-hover-bg;
 }
 
+.gm-calendar-content {
+  cursor: pointer;
+}
+
+.gm-calendar-week {
+  cursor: pointer;
+}
+
 .gm-calendar-day-name {
   color: black;
   display: inline-block;
   width: 24px;
+  height: 24px;
   line-height: 24px;
   text-align: center;
   margin: 2px;
@@ -75,30 +83,34 @@
   color: black;
   display: inline-block;
   width: 24px;
+  height: 24px;
   line-height: 24px;
   text-align: center;
   margin: 2px;
-  cursor: pointer;
 }
 
-.gm-calendar-day:hover {
-  background-color: @list-group-hover-bg;
+.gm-calendar-day:hover:not(.gm-calendar-day-disabled) {
+  background-color: @brand-primary;
+  color: white;
+  border-radius: 50%;
 }
 
 .gm-calendar-day-now {
-  background-color: @list-group-hover-bg;
+  border-radius: 50%;
+  border: 1px solid @brand-primary;
 }
 
 .gm-calendar-day-old {
-  color: #999;
+  color: @gm-color-third;
 }
 
 .gm-calendar-day-new {
-  color: #999;
+  color: @gm-color-third;
 }
 
 .gm-calendar-active {
   background-color: @brand-primary;
+  border-radius: 50%;
   color: white;
 }
 
@@ -108,27 +120,6 @@
 }
 
 .gm-calendar-day-disabled {
-  background: @list-group-hover-bg;
-  color: #999;
+  color: @gm-color-second;
   cursor: not-allowed;
-}
-
-.gm-calendar-content-div {
-  .gm-calendar-day-disabled {
-    width: 28px;
-    padding: 0 2px;
-    margin: 2px 0;
-
-    &:first-child {
-      width: 26px;
-      padding-left: 0;
-      margin-left: 2px;
-    }
-
-    &:last-child {
-      width: 26px;
-      padding-right: 0;
-      margin-right: 2px;
-    }
-  }
 }

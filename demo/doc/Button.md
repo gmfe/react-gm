@@ -22,7 +22,7 @@ class ButtonWrap extends React.Component {
     
     handleClick1() {
         console.log('click');
-        return new Promise(resolve => setTimeout(() => resolve('12'),2000));
+        return new Promise(resolve => setTimeout(() => resolve('12'),20000));
     }     
     
     render() {

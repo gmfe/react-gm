@@ -90,7 +90,7 @@ class FormItem extends React.Component {
                     "gm-form-label-untop": unLabelTop
                 })}>
                     {required ? <span style={{color: 'red'}}>*</span> : ''}
-                    {label}{label && inline ? '：' : null}
+                    {label}
                 </Flex>}
                 <Flex flex column>
                     <div className="gm-form-field">

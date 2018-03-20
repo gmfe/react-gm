@@ -4,7 +4,7 @@
   background-color: white;
 
   .gm-search-select-input {
-    padding: 7px 20px 8px 12px;
+    padding: 5px 18px 5px 10px;
     overflow-x: auto;
 
     input {
@@ -17,7 +17,7 @@
     }
 
     .selected {
-      background-color: @list-group-hover-bg;
+      background-color: @gm-back-body-bg;
       padding: 0 5px;
       margin-right: 5px;
       border-radius: 4px;
@@ -34,8 +34,8 @@
       position: static;
 
       .gm-trigger-popup {
-        left: -1px;
-        right: -1px;
+        left: 0;
+        right: 0;
 
         .list-group {
           width: 100%;
@@ -43,38 +43,34 @@
           overflow-y: auto;
           z-index: 1;
           margin-bottom: 0;
-          border: 1px solid @gm-border-color;
 
           .list-group-item {
             cursor: pointer;
-            border-bottom: none;
-            border-left: none;
-            border-right: none;
-            border-top: 1px solid @gm-border-color;
-            padding: 6px 12px;
+            border: none;
+            padding: 5px 10px;
 
             &:first-child {
               border-top: none;
             }
 
             &.active.line-selected {
-              background-color: @gm-list-group-active-hover-bg;
+              background-color: @gm-list-group-hover-bg;
             }
 
             &.line-selected {
-              background-color: @list-group-hover-bg;
+              background-color: @gm-list-group-hover-bg;
             }
           }
 
           .list-group-label {
             .list-group-label-item {
-              padding: 6px 12px;
+              padding: 5px 10px;
               border-top: 1px solid @gm-border-color;
               background-color: @gray-lighter;
             }
 
             .list-group-item {
-              padding: 6px 26px;
+              padding: 5px 22px;
             }
           }
         }

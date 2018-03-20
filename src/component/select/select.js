@@ -16,52 +16,52 @@ class Select extends React.Component {
         this.state = {
             show: false
         };
-        
+
         this.handleBodyClick = ::this.handleBodyClick;
         this.handleSelectionClick = ::this.handleSelectionClick;
     }
-    
+
     componentDidMount() {
         window.document.body.addEventListener('click', this.handleBodyClick);
     }
-    
+
     componentWillUnmount() {
         window.document.body.removeEventListener('click', this.handleBodyClick);
     }
-    
+
     handleBodyClick(e) {
         const target = e.target;
         const selectDOM = findDOMNode(this);
-        
+
         if (!contains(selectDOM, target)) {
             this.setState({show: false});
         }
     }
-    
+
     handleSelectionClick() {
         const {disabled} = this.props;
         const {show} = this.state;
-    
+
         if (!disabled) {
             this.setState({
                 show: !show
             });
         }
     }
-    
+
     handleOptionClick(elProps) {
         const {onChange} = this.props;
         const {
             value: elPropsValue,
             disabled: elPropsDisabled
         } = elProps;
-        
+
         if (!elPropsDisabled) {
             onChange(elPropsValue);
             this.setState({show: false});
         }
     }
-    
+
     render() {
         const {show} = this.state;
         const {
@@ -69,17 +69,18 @@ class Select extends React.Component {
             children,
             disabled,
             className,
-            size,
+            clean,
             ...rest
         } = this.props;
-        
+
         const selected = findItemByValFromChildren(children, value);
         const selectedChildren = selected && selected.props.children;
-        
+
         return (
             <div
                 {...rest}
-                className={classNames(className, `gm-select gm-select-${size}`, {
+                className={classNames(className, `gm-select`, {
+                    'gm-select-clean': clean,
                     'gm-select-open': show,
                     'disabled': disabled
                 })}
@@ -89,27 +90,26 @@ class Select extends React.Component {
                     onClick={this.handleSelectionClick}
                 >
                     <div className="gm-select-selected">
-                        {selectedChildren}
+                        {selectedChildren !== undefined ? selectedChildren : <span>&nbsp;</span>}
                     </div>
-                    <i className={classNames("gm-arrow", {
+                    <i className={classNames({
                         'gm-arrow-up': show,
                         'gm-arrow-down': !show
                     })}/>
                 </div>
-                
-                <div className="gm-select-list">
-                    {
-                        React.Children.map(children, (el) => (
+
+                {show && (
+                    <div key="list" className="gm-select-list gm-animated gm-animated-fade-in-right">
+                        {React.Children.map(children, (el) => (
                             React.cloneElement(el, Object.assign({}, el.props, {
-                                    className: classNames(el.props.className, {
-                                        'selected': el.props.value === value
-                                    }),
-                                    onClick: this.handleOptionClick.bind(this, el.props)
-                                })
-                            )
-                        ))
-                    }
-                </div>
+                                className: classNames(el.props.className, {
+                                    'selected': el.props.value === value
+                                }),
+                                onClick: this.handleOptionClick.bind(this, el.props)
+                            }))
+                        ))}
+                    </div>
+                )}
             </div>
         );
     }
@@ -118,13 +118,9 @@ class Select extends React.Component {
 Select.displayName = 'Select';
 
 Select.propTypes = {
+    clean: PropTypes.bool,
     value: PropTypes.any.isRequired,
-    onChange: PropTypes.func.isRequired,
-    size: PropTypes.string
-};
-
-Select.defaultProps = {
-    size: 'md'
+    onChange: PropTypes.func.isRequired
 };
 
 export default Select;

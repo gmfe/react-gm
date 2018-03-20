@@ -4,6 +4,7 @@ import moment from 'moment';
 import TimeSpan from './timespan.js';
 import Popover from '../popover';
 import _ from 'lodash';
+import classNames from 'classnames';
 
 class TimeSpanPicker extends React.Component {
     constructor(props) {
@@ -36,11 +37,11 @@ class TimeSpanPicker extends React.Component {
                 ref={ref => this.timeSpanPicker = ref}
                 className="gm-time-span-picker"
             >
-                <Popover popup={popup}>
+                <Popover popup={popup} animName>
                     {children || (
                         <input
                             type="text"
-                            className={inputClassName}
+                            className={classNames('gm-cursor form-control', inputClassName)}
                             ref="target"
                             disabled={disabled}
                             value={render(date)}

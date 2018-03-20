@@ -1,63 +1,28 @@
 // 以下变量将覆盖bootstrap的variable.less中的同名变量
-@brand-primary: #86B04E;
-@brand-success: #34AE4B;
-@brand-info: #8DBF31;
-@brand-warning: #FFD642;
-@brand-danger: #F75462;
 
-@link-color: #2182CC;
-@link-hover-color: #2182CC;
+@font-size-base: 12px;
+@padding-base-vertical: 5px;
+@padding-base-horizontal: 10px;
+@line-height-base: 1.5;
+@border-radius-base: 3px;
+
+@brand-primary: #36ad3a;
+
+@link-color: #1e80e5;
+@link-hover-color: darken(@link-color, 15%);
 
 @border-radius-base: 0;
 @border-radius-large: 0;
 @border-radius-small: 0;
 
-.btn.btn-plain {
-  background-color: white;
-  &.btn-primary {
-    color: @brand-primary;
-    &:hover {
-      color: @btn-primary-color;
-      background-color: @btn-primary-bg;
-      border-color: @btn-primary-border;
-    }
-  }
-  &.btn-success {
-    color: @brand-success;
-    &:hover {
-      color: @btn-success-color;
-      background-color: @btn-success-bg;
-      border-color: @btn-success-border;
-    }
-  }
-  &.btn-info {
-    color: @brand-info;
-    &:hover {
-      color: @btn-info-color;
-      background-color: @btn-info-bg;
-      border-color: @btn-info-border;
-    }
-  }
-  &.btn-warning {
-    color: @brand-warning;
-    &:hover {
-      color: @btn-warning-color;
-      background-color: @btn-warning-bg;
-      border-color: @btn-warning-border;
-    }
-  }
-  &.btn-danger {
-    color: @brand-danger;
-    &:hover {
-      color: @btn-danger-color;
-      background-color: @btn-danger-bg;
-      border-color: @btn-danger-border;
-    }
-  }
-}
+@btn-default-border: #eee;
+@input-border: #eee;
+@dropdown-fallback-border: #eee;
+@navbar-default-link-disabled-color: #eee;
+@popover-fallback-border-color: #eee;
 
-@btn-default-border: #ddd;
-@input-border: #ddd;
-@dropdown-fallback-border: #ddd;
-@navbar-default-link-disabled-color: #ddd;
-@popover-fallback-border-color: #ddd;
+@input-border-focus: @brand-primary;
+
+@table-bg-accent: white;
+//** Background color used for `.table-hover`.
+@table-bg-hover: #e7f5e8;

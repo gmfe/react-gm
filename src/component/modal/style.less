@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   z-index: 1040;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.7);
 
   &.gm-modal-mask-opacity {
     background-color: rgba(0, 0, 0, 0);
@@ -30,18 +30,30 @@
     width: auto;
 
     .close {
-      padding: 5px;
+      font-size: 16px;
+      padding: 10px;
       position: absolute;
       top: 3px;
       right: 5px;
     }
 
     .gm-modal-title {
-      padding: 10px 20px 10px 10px;
+      font-size: 16px;
+      padding: 10px 20px 10px 20px;
       border-bottom: 1px solid @gm-border-color;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 15px;
+        top: 13px;
+        background: @brand-primary;
+        width: 3px;
+        height: 1em;
+      }
     }
 
     .gm-modal-content {
@@ -95,7 +107,7 @@
       line-height: 16px;
 
       i {
-        font-size: 18px;
+        font-size: 16px;
         margin-right: 5px;
       }
 

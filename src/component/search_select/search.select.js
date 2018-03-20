@@ -338,6 +338,7 @@ class SearchSelect extends React.Component {
                         </Flex>
                     )) : undefined}
                     <Trigger
+                        animName
                         component={<Flex flex/>}
                         popup={this.renderOverlay()}
                     >
@@ -384,8 +385,7 @@ SearchSelect.defaultProps = {
     delay: 500,
     multiple: false,
     placeholder: '',
-    onInputFocus: () => {
-    },
+    onInputFocus: _.noop,
     isSelectedChangeValue: false
 };
 

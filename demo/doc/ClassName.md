@@ -69,11 +69,15 @@
  
  ## animation
  
- `gm-animated` `gm-animated-fade-in-right` 
+ `gm-animated` `gm-animated-fade-in-right` `gm-animated-fade-in-left` `gm-animated-fade-in-top` `gm-animated-fade-in-bottom`
  
  ## arrow
  
  `gm-arrow-down` `gm-arrow-up` `gm-arrow-right`
+ 
+ ## rotate
+ 
+ `gm-rotate-45` 90 135 180 225 270 315
  
  ## other
  

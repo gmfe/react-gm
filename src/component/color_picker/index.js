@@ -46,6 +46,7 @@ class ColorPicker extends React.Component {
 
         return (
             <Popover
+                animName
                 type="hover"
                 showArrow
                 popup={<Color color={color} onChange={onChange}/>}

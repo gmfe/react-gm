@@ -122,4 +122,5 @@ class PopoverWrap extends React.Component {
 - `top (bool)` 在目标的上方。 可和 right center 组合用。
 - `offset (number)` 出现位置的偏移量。可和 right center 组合用。
 - `showArrow`  是否显示trigger的三角标
+- `animName (false|true|fade-in-left|fade-in-right|fade-in-bottom|fade-in-top)` 默认 true，false 关闭动画
 - `...rest`

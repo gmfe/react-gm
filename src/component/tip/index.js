@@ -95,7 +95,7 @@ class TipOverlay extends React.Component {
     render() {
         const {title, type, children} = this.props;
         return (
-            <div className="gm-animated gm-animated-fade-in-right">
+            <div className="gm-animated gm-animated-fade-in-right-100">
                 <Tip title={title}
                      type={type}
                      onClose={this.handleClose}>

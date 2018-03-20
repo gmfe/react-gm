@@ -1,4 +1,4 @@
-@gm-form-field-top: 7px;
+@gm-form-field-top: 6px;
 
 .gm-form {
   .gm-form-group {
@@ -28,6 +28,7 @@
 
     .gm-form-label {
       padding-top: @gm-form-field-top;
+      padding-right: 5px;
 
       &.gm-form-label-untop {
         padding-top: 0;
@@ -35,8 +36,16 @@
     }
 
     .gm-form-group {
-      margin-right: 10px;
+      margin-right: 20px;
       margin-bottom: 0;
+    }
+  }
+
+  .gm-form-block {
+    &.gm-form-block-inline {
+      .gm-form-group {
+        margin-right: 20px;
+      }
     }
   }
 
@@ -48,6 +57,7 @@
 @media (max-width: 768px) {
   .gm-form {
     .gm-form-group {
+      margin-right: 0;
       flex-direction: column;
 
       .gm-form-label {
@@ -58,6 +68,22 @@
 
     &.form-inline {
       display: block;
+
+      .gm-form-group {
+        margin-right: 0;
+        flex-direction: column;
+      }
+    }
+
+    .gm-form-block {
+      flex-direction: column;
+
+      &.gm-form-block-inline {
+        .gm-form-group {
+          margin-right: 0;
+          flex-direction: column;
+        }
+      }
     }
   }
 }

@@ -62,7 +62,7 @@ class Popup extends React.Component {
         const {width, height} = this.state;
 
         const sStyle = {
-            top: rect.top + rect.height + 5,
+            top: rect.top + rect.height + (showArrow ? 5 : 1),
             left: rect.left + offset
         };
 
@@ -71,6 +71,8 @@ class Popup extends React.Component {
         } else if (right) {
             sStyle.left = rect.left + rect.width - (width) + offset;
         }
+
+        // TODO 考虑是否提供 sStyle width
 
         if (top) {
             sStyle.top = rect.top - (height) - 5;

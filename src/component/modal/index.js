@@ -112,13 +112,57 @@ class Modal extends React.Component {
     }
 
     render() {
-        const {show, title, size, children, type, style, noContentPadding, className, noCloseBtn, opacityMask} = this.props;
+        const {show, title, size, children, type, style, noContentPadding, className, noCloseBtn, opacityMask, animName} = this.props;
         if (!show) {
             return null;
         }
 
         if (type)
             return this.renderTypeModal();
+
+        let animate = false;
+        if (animName) {
+            if (animName === true) {
+                animate = 'fade-in-bottom';
+            } else {
+                animate = animName;
+            }
+        }
+
+
+        const inner = (
+            <div
+                key="modal-dialog"
+                className={classNames("gm-modal-dialog", "gm-modal-" + size, {
+                    in: show,
+                    "gm-modal-dialog-has-title": title,
+                    'gm-border': opacityMask,
+                    'gm-box-shadow-bottom': opacityMask
+                })}
+                style={style}
+            >
+                {noCloseBtn || (
+                    <button
+                        type="button"
+                        className="close"
+                        onClick={this.handleClose}
+                    >
+                        <span>×</span>
+                    </button>
+                )}
+                {title ? (
+                    <div className="gm-modal-title">
+                        {title}
+                    </div>
+                ) : null}
+                <div
+                    className={classNames("gm-modal-content", {
+                        "gm-padding-0": noContentPadding
+                    })}>
+                    {children}
+                </div>
+            </div>
+        );
 
         return (
             <div>
@@ -127,40 +171,14 @@ class Modal extends React.Component {
                 })}/>
                 <div
                     ref={ref => this.refModal = ref}
-                    className={classNames("gm-modal", className)}
+                    className={classNames('gm-modal', {
+                        'gm-animated': !!animate,
+                        ['gm-animated-' + animate]: animate
+                    }, className)}
                     tabIndex="-1"
                     onClick={this.handleMask}
                 >
-                    <div
-                        className={classNames("gm-modal-dialog", "gm-modal-" + size, {
-                            in: show,
-                            "gm-modal-dialog-has-title": title,
-                            'gm-border': opacityMask,
-                            'gm-box-shadow-bottom': opacityMask
-                        })}
-                        style={style}
-                    >
-                        {noCloseBtn || (
-                            <button
-                                type="button"
-                                className="close"
-                                onClick={this.handleClose}
-                            >
-                                <span>×</span>
-                            </button>
-                        )}
-                        {title ? (
-                            <div className="gm-modal-title">
-                                {title}
-                            </div>
-                        ) : null}
-                        <div
-                            className={classNames("gm-modal-content", {
-                                "gm-padding-0": noContentPadding
-                            })}>
-                            {children}
-                        </div>
-                    </div>
+                    {inner}
                 </div>
             </div>
         );
@@ -222,7 +240,8 @@ Modal.propTypes = {
     className: PropTypes.string,
     noContentPadding: PropTypes.bool,
     noCloseBtn: PropTypes.bool,
-    style: PropTypes.object
+    style: PropTypes.object,
+    animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom'])
 };
 
 Modal.defaultProps = {
@@ -231,7 +250,8 @@ Modal.defaultProps = {
     disableMaskClose: false,
     opacityMask: false,
     noContentPadding: false,
-    noCloseBtn: false
+    noCloseBtn: false,
+    animName: true
 };
 
 export default Modal;

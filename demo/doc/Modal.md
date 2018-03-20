@@ -45,7 +45,7 @@ class ModalWrap extends React.Component {
                 <button 
                     className="btn btn-default gm-marginRight10" 
                     onClick={::this.handleModal}
-                >component 形式</button>
+                >component 形式(少用)</button>
                 <button 
                     className="btn btn-primary" 
                     onClick={::this.handleModalStatic}
@@ -110,15 +110,15 @@ class ModalWrap2 extends React.Component {
             <div>
                 <button 
                     className="btn btn-default" 
-                    onClick={this.handleModal.bind(this, 'lg')}
+                    onClick={this.handleModal.bind(this, 'lg', {})}
                 >lg</button>
                 <button 
                     className="btn btn-primary" 
-                    onClick={this.handleModal.bind(this, 'md')}
+                    onClick={this.handleModal.bind(this, 'md', {})}
                 >默认 md</button>
                 <button 
                     className="btn btn-default" 
-                    onClick={this.handleModal.bind(this, 'sm')}
+                    onClick={this.handleModal.bind(this, 'sm', {})}
                 >sm</button>
                 <button
                     className="btn btn-default"
@@ -137,79 +137,6 @@ class ModalWrap2 extends React.Component {
 <ModalWrap2/>
 ```
 :::
-
-::: demo 各种形态
-```js
-class ModalWrap3 extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            show: false
-        };
-    }
-
-    handleModal(type, okBtnClassName){
-        Modal[type]({
-            children: '我是内容我内容我是内容我是内容',
-            title: '我是标题题我是标题',
-            onHide: Modal.hide,
-            onOk() {
-                console.log('OK');
-            },
-            onCancel() {
-                console.log('Cancel');
-            }
-        });
-    }
-
-    handleModalWithOKBtn(type, okBtnClassName){
-        Modal[type]({
-            children: '我是内容我内容我是内容我是内容',
-            title: '我是标题题我danger',
-            onHide: Modal.hide,
-            onOk() {
-                console.log('OK');
-            },
-            onCancel() {
-                console.log('Cancel');
-            },
-            okBtnClassName
-        });
-    }
-
-    render() {
-            return (
-                <div>
-                    <button
-                        className="btn btn-default"
-                        onClick={this.handleModal.bind(this, 'confirm', '')}
-                    >confirm</button>
-                    <button
-                        className="btn btn-default"
-                        onClick={this.handleModalWithOKBtn.bind(this, 'confirm', 'btn-danger')}
-                    >confirm danger</button>
-                    <button
-                        className="btn btn-default"
-                        onClick={this.handleModal.bind(this, 'info', '')}
-                    >info</button>
-                    <button
-                        className="btn btn-default"
-                        onClick={this.handleModal.bind(this, 'success', '')}
-                    >success</button>
-                    <button
-                        className="btn btn-default"
-                        onClick={this.handleModal.bind(this, 'warning', '')}
-                    >warning</button>
-                </div>
-            );
-        }
-}
-```
-```jsx
-<ModalWrap3/>
-```
-:::
-
 
 ::: demo 其他形态
 ```js

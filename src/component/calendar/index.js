@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
 import _ from 'lodash';
+import Flex from '../flex';
 
 const nowMountStart = +moment().startOf('day');
 
@@ -81,27 +82,27 @@ class Calendar extends React.Component {
         const month = m.month();
 
         return (
-            <div className="gm-calendar-head text-center clearfix">
+            <Flex alignCenter className="gm-calendar-head text-center clearfix">
                 <a
-                    className="gm-calendar-head-pre pull-left"
+                    className="gm-calendar-head-pre"
                     onClick={this.handleChangeMonth.bind(this, month - 1)}
                 >
-                    <i className="glyphicon glyphicon-chevron-left"/>
+                    <i className="xfont xfont-left-small"/>
                 </a>
-                <span className="gm-calendar-head-title">
+                <Flex flex justifyCenter className="gm-calendar-head-title text-center">
                     <span
                         className="gm-calendar-head-month"
                         onClick={this.handleSelectMonth}
                     >{month + 1}月</span>
                     <span>&nbsp;&nbsp;{m.year()}</span>
-                </span>
+                </Flex>
                 <a
-                    className="gm-calendar-head-next pull-right"
+                    className="gm-calendar-head-next"
                     onClick={this.handleChangeMonth.bind(this, month + 1)}
                 >
-                    <i className="glyphicon glyphicon-chevron-right"/>
+                    <i className="xfont xfont-right-small"/>
                 </a>
-            </div>
+            </Flex>
         );
     }
 
