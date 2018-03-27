@@ -136,7 +136,7 @@ class SearchSelect extends React.Component {
                     this.doSelect(selected);
                 }
             } else if (keyCode === 13) { // 键盘 回车
-                const dom = this.searchSelectList.querySelector('.list-group-item.line-selected');
+                const dom = this.searchSelectList && this.searchSelectList.querySelector('.list-group-item.line-selected');
                 if (dom) {
                     dom.click();
                     !this.props.multiple && this.refInput.blur();
