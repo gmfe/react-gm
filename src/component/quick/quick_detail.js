@@ -147,8 +147,8 @@ class QuickDetailMoney extends React.Component {
                     {_.map(process, (item, i) => (
                         <Flex flex column alignCenter justifyCenter className="gm-padding-10" key={i}
                               style={{backgroundColor: '#f1f0f6', height: '78px'}}>
-                            <div className="gm-line-height-1" style={{marginBottom: '2px'}}>{item.name}</div>
-                            <div className="gm-font-20 gm-line-height-1">{item.value}<span
+                            <div>{item.name}</div>
+                            <div className="gm-font-20">{item.value}<span
                                 className="gm-font-12">元</span></div>
                         </Flex>
                     ))}
