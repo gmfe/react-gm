@@ -4,7 +4,6 @@ import moment from 'moment';
 import Calendar from '../calendar';
 import classNames from 'classnames';
 import Popover from '../popover';
-import _ from 'lodash';
 
 class DatePicker extends React.Component {
     constructor(props) {
@@ -28,7 +27,7 @@ class DatePicker extends React.Component {
     render() {
         const {
             date, min, max, disabledDate,
-            className, children, inputClassName, placeholder, disabled, inputValueRender, canClear
+            className, children, placeholder, disabled, inputValueRender, canClear
         } = this.props;
 
         const popup = (
@@ -45,27 +44,26 @@ class DatePicker extends React.Component {
         return (
             <div
                 ref={ref => this.datepicker = ref}
-                className={classNames("gm-datepicker gm-border gm-bg gm-inline-block gm-position-relative", className)}
+                className={classNames("gm-datepicker gm-inline-block gm-position-relative", {
+                    "disabled": disabled,
+                    "gm-datepicker-placeholder": !date
+                }, className)}
             >
-                <Popover popup={popup}>
+                <Popover popup={popup} animName>
                     {children ? children : (
-                        <input
-                            type="text"
-                            className={classNames('gm-border-0 gm-cursor form-control', inputClassName, {"gm-clear-input": canClear})}
-                            placeholder={placeholder}
-                            disabled={disabled}
-                            value={date ? (inputValueRender ? inputValueRender(date) : moment(date).format('YYYY-MM-DD')) : ''}
-                            onChange={_.noop}
-                        />
+                        <div disabled={disabled} className="gm-datepicker-inner gm-cursor">
+                            {date ? (inputValueRender ? inputValueRender(date) : moment(date).format('YYYY-MM-DD')) : placeholder}
+                        </div>
                     )}
                 </Popover>
-                {canClear && date && (
+                {!children && canClear && date && (
                     <button
                         type="button"
                         className="gm-datepicker-clear-btn close"
                         onClick={this.handleClear}
                     >&times;</button>
                 )}
+                {!children && <i className="xfont xfont-calendar"/>}
             </div>
         );
     }
@@ -77,7 +75,6 @@ DatePicker.propTypes = {
     date: PropTypes.object,
     onChange: PropTypes.func.isRequired,
     canClear: PropTypes.bool,
-    inputClassName: PropTypes.string,
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
     className: PropTypes.string,

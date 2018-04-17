@@ -1,9 +1,7 @@
-@gm-select-padding: 6px 12px;
-
 .gm-select {
   display: inline-block;
   position: relative;
-  min-width: 160px;
+  min-width: 80px;
   background-color: #fff;
   user-select: none;
   cursor: pointer;
@@ -12,39 +10,14 @@
     cursor: not-allowed;
     background-color: #eee;
     opacity: 1;
-  }
-
-  .gm-select-list {
-    display: none;
-    position: absolute;
-    z-index: 3000;
-    width: 100%;
-    background-color: #fff;
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid @gm-border-color;
-    border-top: none;
-  }
-
-  &.gm-select-open {
-    .gm-select-list {
-      display: block;
-    }
-  }
-
-  .gm-select-selection,
-  .gm-select-option {
-    height: 34px;
-    padding: @gm-select-padding;
-    font-size: 14px;
-    padding-right: 20px;
+    color: @gm-color-second;
   }
 
   .gm-select-selection {
     position: relative;
-    padding-right: 20px;
-    height: 100%;
     border: 1px solid @gm-border-color;
+    height: 30px;
+    padding: 5px 18px 5px 10px;
 
     .gm-select-selected {
       overflow: hidden;
@@ -53,15 +26,24 @@
     }
   }
 
+  .gm-select-list {
+    display: none;
+    position: absolute;
+    z-index: 3000;
+    min-width: 80px;
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid @gm-border-color;
+    margin-top: 2px;
+    background: white;
+  }
+
   .gm-select-option {
     cursor: pointer;
+    padding: 5px 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
-    &:not(:first-child) {
-      border-top: 1px solid @gm-border-color;
-    }
 
     &:hover {
       background-color: @list-group-hover-bg;
@@ -69,49 +51,27 @@
 
     &.disabled {
       cursor: not-allowed;
-      background-color: @list-group-disabled-bg;
-      color: #777;
-      opacity: 1;
-
-      &:hover {
-        background-color: @list-group-disabled-bg;
-        color: #777;
-      }
+      color: @gm-color-second;
     }
 
     &.selected {
-      background-color: @list-group-active-bg;
+      color: @brand-primary;
     }
   }
 
-  &.gm-select-sm {
-    .gm-select-selection,
-    .gm-select-option {
-      height: 30px;
-      padding: 5px 10px;
-      font-size: 12px;
-      padding-right: 18px;
+  &.gm-select-open {
+    .gm-select-selection {
+      .gm-form-control-focus();
+    }
+
+    .gm-select-list {
+      display: block;
     }
   }
 
-  &.gm-select-md {
-    .gm-select-selection,
-    .gm-select-option {
-      height: 34px;
-      padding: @gm-select-padding;
-      font-size: 14px;
-      padding-right: 20px;
-    }
-  }
-
-  &.gm-select-lg {
-    .gm-select-selection,
-    .gm-select-option {
-      height: 46px;
-      padding: 10px 16px;
-      font-size: 18px;
-      padding-right: 24px;
+  &.gm-select-clean {
+    .gm-select-selection {
+      border: none;
     }
   }
 }
-

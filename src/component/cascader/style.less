@@ -16,21 +16,26 @@
     display: block;
     width: 10px;
     height: 14px;
-    font-size: 14px;
     line-height: 1;
-    top: 0;
+    top: 3px;
     right: 24px;
     bottom: 0;
     color: @gm-border-color;
     margin: auto 0;
   }
-}
 
-// 三角标
-.gm-cascader.gm-popover-active {
-  .gm-arrow-down {
-    border-top: none;
-    border-bottom: 5px solid @gm-border-color;
+  .gm-arrow-up {
+    display: none;
+  }
+
+  &.gm-popover-active {
+    .gm-arrow-up {
+      display: block;
+    }
+
+    .gm-arrow-down {
+      display: none;
+    }
   }
 }
 
@@ -66,7 +71,7 @@
   }
 
   .gm-cascader-select-input {
-    padding: 6px 0 6px 12px;
+    padding: 5px 0 5px 10px;
 
     input {
       padding: 0;

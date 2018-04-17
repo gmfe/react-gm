@@ -1,6 +1,6 @@
 @import "less/bootstrap.less";
-@import "css/cover.less";
 @import "css/variables";
+@import "css/cover.less";
 @import "css/ifont.less";
 @import "css/xfont.less";
 @import "css/text";
@@ -14,8 +14,8 @@
 @import "css/shadow.less";
 @import "css/arrow.less";
 @import "css/animation.less";
+@import "css/rotate.less";
 @import "other.less";
-
 @import "component/dropper/style";
 @import "component/import_lead/style";
 @import "component/calendar/style";
@@ -34,7 +34,6 @@
 @import "component/trigger/style";
 @import "component/loading/style";
 @import "component/modal/style";
-@import "component/collapse/style";
 @import "component/drop_down/style";
 @import "component/tree_select/style";
 @import "component/quick/style";
@@ -52,6 +51,7 @@
 @import "component/button/style";
 @import "component/select/style";
 @import "component/tree/style";
+@import "component/list_group/style";
 
 html,
 body {
@@ -59,4 +59,9 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
+  line-height: 1.5;
+}
+
+::-webkit-input-placeholder {
+  color: @gm-color-second;
 }

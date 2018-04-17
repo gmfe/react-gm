@@ -236,7 +236,7 @@ class FilterSelect3 extends React.Component {
         super(props);
         this.state = {
             selected: null,
-            list: [...filterSelectGroupData]
+            list: filterSelectGroupData
         };
         this.handleSelect = ::this.handleSelect;
         this.handleSearch = ::this.handleSearch;
@@ -250,11 +250,11 @@ class FilterSelect3 extends React.Component {
     }
     
     handleSearch(value) {
-        const list = JSON.parse(JSON.stringify(filterSelectGroupData));
+        const list = filterSelectGroupData;
         
         if(this.state.selected && this.state.selected.name === value){
             this.setState({
-                list: [...filterSelectGroupData]
+                list: filterSelectGroupData
             });
         }else{
             this.setState({

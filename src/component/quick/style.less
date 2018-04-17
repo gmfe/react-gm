@@ -3,7 +3,7 @@
   background-color: white;
 
   & + .gm-quick {
-    margin-top: 15px;
+    margin-top: 20px;
   }
 
   .gm-quick-title {
@@ -23,30 +23,47 @@
   }
 
   &.gm-quick-panel {
-    .gm-quick-title {
-      height: 60px;
+    background-color: white;
+    border: 1px solid @gm-border-color;
+    padding: 20px;
+
+    .gm-quick-panel-title {
+      font-size: 16px;
 
       a {
         cursor: pointer;
+
+        &:focus {
+          outline: none;
+          text-decoration: none;
+          color: @link-color;
+        }
       }
+    }
+
+    & + & {
+      margin-top: -1px;
+      border-top: none;
     }
   }
 
   &.gm-quick-filter {
-    .form-control {
-      font-size: 12px;
-    }
+    border: 1px solid @gm-border-color;
 
     .gm-quick-filter-toggle {
       font-size: 12px;
       cursor: pointer;
+
+      &:focus {
+        outline: none;
+        text-decoration: none;
+        color: @link-color;
+      }
     }
   }
 
   &.gm-quick-desc {
-    .btn {
-      min-width: 90px;
-    }
+    border: 1px solid @gm-border-color;
   }
 
   &.gm-quick-tabs {
@@ -56,7 +73,7 @@
       border-left: 1px solid @gm-border-color;
 
       li {
-        a {
+        .gm-quick-tab-a {
           border: none;
           border-right: 1px solid @gm-border-color;
           border-bottom: 1px solid @gm-border-color;

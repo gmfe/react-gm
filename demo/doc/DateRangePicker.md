@@ -24,7 +24,7 @@ class DaterangepickerWrap extends React.Component {
                     begin={this.state.begin}
                     end={this.state.end}
                     onChange={this.handleChange}
-                    inputClassName="form-control input-sm"
+                    inputClassName="input-sm"
                     endProps={{
                         min: this.state.begin
                     }}
@@ -36,7 +36,7 @@ class DaterangepickerWrap extends React.Component {
                     end={this.state.end}
                     onChange={this.handleChange}
                     disabled={true}
-                    inputClassName="form-control input-sm"
+                    inputClassName="input-sm"
                 />
             </div>
         );
@@ -75,7 +75,7 @@ class DaterangepickerWrap2 extends React.Component {
                     begin={this.state.begin}
                     end={this.state.end}
                     onChange={this.handleChange}
-                    inputClassName="form-control input-sm"
+                    inputClassName="input-sm"
                 />
             </div>
         );
@@ -114,7 +114,7 @@ class DaterangepickerWrap3 extends React.Component {
                     begin={this.state.begin}
                     end={this.state.end}
                     onChange={this.handleChange}
-                    inputClassName="form-control input-sm"
+                    inputClassName="input-sm"
                     beginRenderInputValue={begin => begin.getFullYear() + '年'}
                 />
             </div>
@@ -157,7 +157,7 @@ class DaterangepickerWrap4 extends React.Component {
                     beginLabel="开始周期"
                     endLabel="截止周期"
                     onChange={this.handleChange}
-                    inputClassName="form-control input-sm"
+                    inputClassName="input-sm"
                 />
             </div>
         );
@@ -196,7 +196,7 @@ class DaterangepickerWrap5 extends React.Component {
                     begin={this.state.begin}
                     end={this.state.end}
                     onChange={this.handleChange}
-                    inputClassName="form-control input-sm"
+                    inputClassName="input-sm"
                     endProps={{
                         min: this.state.begin
                     }}

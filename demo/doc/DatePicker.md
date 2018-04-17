@@ -28,14 +28,14 @@ class DatePickerWrap extends React.Component {
     render() {
         return (
             <div>
-                <Flex>
+                <Flex column>
                     <div>
-                        <div>inline-block</div>
                         <DatePicker
                             date={this.state.date}
                             placeholder="请选择日期"
                             onChange={this.handleChange}
                         />
+                        拉拉啊
                     </div>
                     <div>
                         <div>inputValueRender</div>
@@ -59,20 +59,17 @@ class DatePickerWrap extends React.Component {
                         <div>disabled date</div>
                         <DatePicker
                             date={this.state.date}
-                            placeholder="选今天之后的"
-                            onChange={this.handleChange}
-                            min={new Date()}
-                        />
-                    </div>
-                    <div>
-                        <div>disabled date</div>
-                        <DatePicker
-                            date={this.state.date}
                             placeholder="非周五"
                             onChange={this.handleChange}
                             disabledDate={m => {
                                 return moment(m).get('day') === 5;
                             }}
+                        />
+                        <DatePicker
+                            date={this.state.date}
+                            placeholder="选今天之后的"
+                            onChange={this.handleChange}
+                            min={new Date()}
                         />
                     </div>
                     <div>

@@ -35,7 +35,7 @@ import CleanModal from './component/modal/clean_modal';
 import Collapse from './component/collapse';
 import {DropDown, DropDownItem, DropDownItems} from './component/drop_down';
 import TreeSelect from './component/tree_select';
-import {QuickInfo, QuickInfoCell, QuickPanel, QuickFilter, QuickTab, QuickDesc} from './component/quick';
+import {QuickPanel, QuickFilter, QuickTab, QuickDesc, QuickDetail} from './component/quick';
 import {Radio, RadioGroup} from './component/radio';
 import {Checkbox, CheckboxGroup} from './component/checkbox';
 import FilterSelect from './component/filter_select/filter.select';
@@ -49,6 +49,7 @@ import Mask from './component/mask';
 import Popover from './component/popover';
 import ColorPicker from './component/color_picker';
 import Button from './component/button';
+import Affix from './component/affix';
 
 import Validator from './validator';
 import Emitter from './emitter';
@@ -83,6 +84,8 @@ Object.assign(Checkbox, {
 Object.assign(Select, {
     Option
 });
+
+const {QuickDetailFirst, QuickDetailSecond, QuickDetailMoney} = QuickDetail;
 
 export {
     Pagination,
@@ -126,12 +129,8 @@ export {
     Collapse,
     DropDown, DropDownItems, DropDownItem,
     TreeSelect,
-    QuickInfo,
-    QuickInfoCell,
-    QuickPanel,
-    QuickFilter,
-    QuickTab,
-    QuickDesc,
+    QuickPanel, QuickFilter, QuickTab, QuickDesc,
+    QuickDetail, QuickDetailFirst, QuickDetailSecond, QuickDetailMoney,
     Validator,
     Radio, RadioGroup,
     Checkbox, CheckboxGroup,
@@ -144,6 +143,7 @@ export {
     Popover,
     ColorPicker,
     Button,
+    Affix,
 
     Menu, Nav,
     Emitter,

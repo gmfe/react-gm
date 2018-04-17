@@ -7,6 +7,7 @@ const RightSideModal = {};
 RightSideModal.render = (props) => {
     const rightSideProps = {
         ...props,
+        animName: 'fade-in-left',
         className: 'gm-modal-right-side'
     };
     Modal.render(rightSideProps);

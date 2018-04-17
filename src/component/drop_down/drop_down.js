@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Trigger from '../trigger';
+import Popover from '../popover';
 
 class DropDown extends React.Component {
     constructor(props) {
@@ -23,8 +23,7 @@ class DropDown extends React.Component {
             children,
             className,
             popup,
-            right,
-            split, // eslint-disable-line
+            right, split, // eslint-disable-line
             cartClassName,
             ...rest
         } = this.props;
@@ -35,20 +34,20 @@ class DropDown extends React.Component {
                 className={classNames("gm-dropdown btn-group gm-dropdown-split", className)}
             >
                 {children}
-                <Trigger
+                <Popover
+                    animName
                     type="click"
-                    right={right}
-                    component={(
-                        <button
-                            type="button"
-                            ref={ref => this.refTrigger = ref}
-                            className={classNames("btn btn-default dropdown-toggle", cartClassName)}
-                        />
-                    )}
-                    popup={<div onClick={this.handlePopupClick}>{popup}</div>}
+                    right
+                    popup={<div className="gm-dropdown-split-popup" onClick={this.handlePopupClick}>{popup}</div>}
                 >
-                    <span className="caret"/>
-                </Trigger>
+                    <button
+                        type="button"
+                        ref={ref => this.refTrigger = ref}
+                        className={classNames("btn btn-default dropdown-toggle", cartClassName)}
+                    >
+                        <span className="caret"/>
+                    </button>
+                </Popover>
             </div>
         );
     }
@@ -69,26 +68,28 @@ class DropDown extends React.Component {
         }
 
         return (
-            <Trigger
+            <Popover
+                animName="fade-in-bottom"
                 type="click"
                 right={right}
-                component={(
-                    <div
-                        {...rest}
-                        ref={ref => this.refTrigger = ref}
-                        className={classNames("gm-dropdown btn-group", className)}
-                    />
-                )}
-                popup={<div onClick={this.handlePopupClick}>{popup}</div>}
-            >{children}</Trigger>
+                popup={<div className="gm-dropdown-popup" onClick={this.handlePopupClick}>{popup}</div>}
+            >
+                <div
+                    {...rest}
+                    ref={ref => this.refTrigger = ref}
+                    className={classNames("gm-dropdown btn-group", className)}
+                >
+                    {children}
+                </div>
+            </Popover>
         );
     }
 }
 
 DropDown.propTypes = {
     popup: PropTypes.element.isRequired,
-    right: PropTypes.bool,
     split: PropTypes.bool,
+    right: PropTypes.bool, // 非 split 有效
     cartClassName: PropTypes.string // split true时有效
 };
 

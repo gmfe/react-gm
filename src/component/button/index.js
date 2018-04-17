@@ -54,7 +54,7 @@ class Button extends React.Component {
                 onClick={this.handleClick}
             >
                 {isLoading && <i className='xfont xfont-loading gm-button-loading'/>}
-                <span className='gm-button-content'>{children}</span>
+                {children}
             </button>
         );
     }

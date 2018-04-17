@@ -1,6 +1,8 @@
+@gm-nav-bg-second: #363d44;
+
 .gm-nav {
-  background: #22252b;
-  position: relative;
+  background: @gm-nav-bg-second;
+  font-size: 14px;
 
   .gm-nav-logo {
     height: 80px;
@@ -11,29 +13,23 @@
   }
 
   .gm-nav-there {
-    padding-top: 100px;
-    position: absolute;
-    background: #282e35;
-    left: 100%;
-    top: 0;
-    height: 100%;
-    width: 100%;
+    padding-top: 80px;
+    background: white;
+    height: 100vh;
   }
 
   .gm-nav-there > a {
-    font-size: 16px;
     display: block;
-    color: #7f8386;
+    color: @gm-color-first;
     white-space: nowrap;
     padding: 15px 15px 20px;
     text-decoration: none;
   }
 
   .gm-nav-two > a {
-    font-size: 16px;
     display: block;
-    padding: 10px 10px 10px 25px;
-    color: #7f8386;
+    padding: 10px 10px 10px 33px;
+    color: white;
     text-decoration: none;
   }
 
@@ -42,23 +38,31 @@
   }
 
   .gm-nav-two > a.active {
-    background: #282e35;
-  }
-
-  .gm-nav-there > a.active {
-    color: @brand-primary;
+    background: white;
+    color: @gm-color-first;
   }
 
   .gm-nav-one > div > a {
-    font-size: 18px;
-    border-top: 1px solid #282e35;
+    border-top: 1px solid @gm-nav-bg-second;
     display: block;
     padding: 15px 10px;
     color: white;
     text-decoration: none;
   }
 
+  .gm-nav-there > a.active {
+    color: @brand-primary;
+  }
+
+  .gm-nav-there > a:hover {
+    color: @brand-primary;
+  }
+
   .gm-nav-two > a:hover {
-    background: #282e35;
+    background: #666;
+  }
+
+  .gm-nav-one > div > a:hover {
+    background: #666;
   }
 }

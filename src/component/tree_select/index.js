@@ -156,14 +156,14 @@ class TreeSelect extends React.Component {
                 >
                     {disabledSelected ? undefined : (
                         <Flex flex={true} className="gm-border-bottom gm-tree-select-title">
-                            <label className="gm-cursor gm-padding-10" style={{width: '30px'}}>
+                            <label className="gm-cursor gm-padding-lr-10 gm-padding-tb-5" style={{width: '30px'}}>
                                 <input
                                     type="checkbox"
                                     checked={(selected.length !== 0 && this.findAllChildrenNode(list).length === selected.length)}
                                     onChange={this.handleSelectAll}
                                 />
                             </label>
-                            <Flex className="gm-padding-10" flex={true} alignCenter={true}>
+                            <Flex className="gm-padding-lr-10 gm-padding-tb-5" flex={true} alignCenter={true}>
                                 {label}
                             </Flex>
                         </Flex>
@@ -198,7 +198,7 @@ class TreeNode extends React.Component {
         return (
             <Flex flex={true} className="gm-border-bottom gm-tree-select-trap">
                 {disabledSelected ? undefined : (
-                    <label className="gm-padding-10 gm-cursor" style={{width: '30px'}}>
+                    <label className="gm-padding-lr-10 gm-padding-tb-5 gm-cursor" style={{width: '30px'}}>
                         <input
                             type="checkbox"
                             checked={selectedFlag}
@@ -207,16 +207,15 @@ class TreeNode extends React.Component {
                         />
                     </label>
                 )}
-                <Flex className="gm-padding-10" flex={true} alignCenter={true}>
+                <Flex className="gm-padding-lr-10 gm-padding-tb-5" flex={true} alignCenter={true}>
                     <div
                         className={data.children ? "gm-tree-select-item" : ''}
-                        style={{marginLeft: Number(level) * 15 + 'px'}}
+                        style={{marginLeft: Number(level) * 10 + 'px'}}
                         onClick={this.handleShow.bind(this, data)}
                     >
-                        {last ? <div className="gm-gap-15"/> :
+                        {last ? <div className="gm-gap-10"/> :
                             <span
                                 className={(_.includes(showList, data.value)) ? "glyphicon glyphicon-minus text-primary" : "glyphicon glyphicon-plus text-primary"}/>}
-                        &nbsp;
                         <span className="gm-padding-lr-5">
                             {data.value}&nbsp;{data.name}
                         </span>

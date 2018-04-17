@@ -1,5 +1,5 @@
 import React from 'react';
-import {Flex, DatePicker} from '../../src/';
+import {Flex, DatePicker, Affix} from '../../src/';
 
 class Component extends React.Component {
     handleChange() {
@@ -29,6 +29,14 @@ class Component extends React.Component {
 
                     <input type="email" className="form-control" placeholder="Email"/>
                 </Flex>
+                <Affix top offset={50}>
+                    <button>adfasfasfa</button>
+                </Affix>
+                <div style={{height: '1000px', background: 'red'}}/>
+                <Affix offset={200}>
+                    <button>adfasfasfa</button>
+                </Affix>
+                <div style={{height: '1000px', background: 'red'}}/>
             </div>
         );
     }

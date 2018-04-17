@@ -1,14 +1,14 @@
 import React from 'react';
+import {Flex, Emitter} from '../src/index';
 import createHashHistory from 'history/createHashHistory';
+import NavConfigDoc from './doc.nav.config';
 import queryString from 'query-string';
 import {withRouter} from 'react-router-dom';
-import NavConfigDoc from './doc.nav.config';
-import {Flex, Emitter} from '../src/index';
-import {Framework, TopContent} from '../framework';
+import {Framework, RightTop} from '../frame';
 
 const history = createHashHistory();
 
-const version = __REACT_GM_VERSION__; // eslint-disable-line
+const version = __REACT_GM_VERSION__; //eslint-disable-line
 
 @withRouter
 class App extends React.Component {
@@ -20,7 +20,6 @@ class App extends React.Component {
 
     componentDidMount() {
         Emitter.on('DEMO-PAGE-LOADED', () => {
-            console.log('DEMO-PAGE-LOADED');
             this.doScrollToAnchor();
         });
     }
@@ -55,12 +54,28 @@ class App extends React.Component {
         }
     }
 
-    renderTopContent() {
+    renderMenu() {
+        const {location: {pathname}} = this.props;
+        let nav = null;
+
+        if (pathname.startsWith('/doc')) {
+            nav = <NavConfigDoc/>;
+        }
+
         return (
-            <TopContent
-                fixedTop="0px"
-                logo={(
-                    <Flex alignCenter style={{fontSize: '20px'}}>
+            <div style={{
+                width: "230px"
+            }}>
+                <div style={{height: '40px'}} className="gm-cursor" onClick={() => window.location.href = '/'}>
+                    <Flex alignCenter className="gm-border-bottom" style={{
+                        height: "40px",
+                        position: "fixed",
+                        left: 0,
+                        width: "230px",
+                        zIndex: 101,
+                        background: 'white',
+                        paddingLeft: '10px'
+                    }}>
                         <svg width="28" height="28" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M 110 10 L 10 10 L 10 110 L 110 110 L 110 50 L 75 85 L 75 50 L 40 85"
@@ -74,8 +89,6 @@ class App extends React.Component {
                         </svg>
                         <span className="gm-gap-10"/>
                         <span>ReactGM</span>
-                        <small>&nbsp;&nbsp;v{version}</small>
-                        <small>&nbsp;&nbsp;by gmfe</small>
                         <span className="gm-gap-10"/>
                         <a
                             className="github-button"
@@ -83,20 +96,11 @@ class App extends React.Component {
                             data-show-count="true"
                             aria-label="Star gmfe/react-gm on GitHub"
                         >Star</a>
-                        <Flex flex/>
                     </Flex>
-                )}
-            />
+                </div>
+                {nav}
+            </div>
         );
-    }
-
-    renderMenu() {
-        const {location: {pathname}} = this.props;
-        if (pathname.startsWith('/doc')) {
-            return <NavConfigDoc/>;
-        } else {
-            return null;
-        }
     }
 
     render() {
@@ -104,7 +108,11 @@ class App extends React.Component {
 
         return (
             <Framework
-                topContent={this.renderTopContent()}
+                leftWidth="230px"
+                rightTop={<RightTop
+                    leftWidth="230px"
+                    info={<div className="gm-padding-lr-10">v{version}</div>}
+                />}
                 menu={this.renderMenu()}
             >
                 <div onClick={this.handleClickAnchor}>

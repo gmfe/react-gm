@@ -4,7 +4,7 @@ import _ from 'lodash';
 import Flex from '../flex';
 import Loading from '../loading';
 import classNames from 'classnames';
-import Trigger from '../trigger';
+import Popover from '../popover';
 
 class FilterSelect extends React.Component {
     constructor(props) {
@@ -107,7 +107,7 @@ class FilterSelect extends React.Component {
         });
     }
 
-    handleSelect(value, event) {
+    handleSelect = (value, event) => {
         event.preventDefault();
 
         this.props.onSelect(value);
@@ -127,7 +127,7 @@ class FilterSelect extends React.Component {
 
         // 并且要出发onChange
         this.doChange('');
-    }
+    };
 
     handleChange(event) {
         const query = event.target.value;
@@ -201,12 +201,11 @@ class FilterSelect extends React.Component {
                     return (
                         <div key={i} className="list-group-label">
                             <div className="list-group-label-item gm-text-desc">{groupList.label}</div>
-                            {_.map(groupList.children, (value, i) => {
+                            {_.map(groupList.children, (value, j) => {
                                 itemSequence++;
-
                                 return (
                                     <Flex
-                                        key={i}
+                                        key={i + '_' + j}
                                         alignCenter
                                         className={classNames('list-group-item', inputClassName, {
                                             'active': selected === value,
@@ -260,22 +259,21 @@ class FilterSelect extends React.Component {
         const {query, loading} = this.state;
 
         return (
-            <div className="gm-filter-select-list">
-                {
-                    !disableSearch ?
-                        <div className="gm-filter-select-list-input">
-                            <input
-                                autoFocus
-                                className="form-control"
-                                type="text"
-                                value={query}
-                                onFocus={this.handleFocus}
-                                onChange={this.handleChange}
-                                onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
-                                placeholder={this.props.placeholder}
-                            />
-                        </div> : null
-                }
+            <div className="gm-filter-select-popup">
+                {!disableSearch && (
+                    <div className="gm-filter-select-popup-input">
+                        <input
+                            autoFocus
+                            className="form-control"
+                            type="text"
+                            value={query}
+                            onFocus={this.handleFocus}
+                            onChange={this.handleChange}
+                            onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
+                            placeholder={this.props.placeholder}
+                        />
+                    </div>
+                )}
                 {loading && <Flex alignCenter justifyCenter className="gm-bg gm-padding-5"><Loading size={20}/></Flex>}
                 {!loading && (isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList))}
             </div>
@@ -298,24 +296,27 @@ class FilterSelect extends React.Component {
                     "gm-filter-select-disabled": this.props.disabled
                 })}
             >
-                <Flex wrap className="gm-filter-select-target">
-                    <Trigger
-                        component={<Flex flex/>}
+                <Flex wrap className="gm-filter-select-target-box">
+                    <Popover
+                        animName
                         popup={this.renderOverlay(filterList)}
                         disabled={disabled}
                     >
-                        {selected ? (
-                            <Flex>{selected.name}</Flex>
-                        ) : (
-                            <Flex className="gm-text-desc">{placeholder}</Flex>
-                        )}
-                    </Trigger>
+                        <Flex flex className="gm-filter-select-target">
+                            {selected ? (
+                                <Flex>{selected.name}</Flex>
+                            ) : (
+                                <Flex className="gm-text-desc">{placeholder}</Flex>
+                            )}
+                        </Flex>
+                    </Popover>
                     <i className="gm-arrow-down"/>
                 </Flex>
             </div>
         );
     }
 }
+
 FilterSelect.propTypes = {
     id: PropTypes.string.isRequired,
     disabled: PropTypes.bool,

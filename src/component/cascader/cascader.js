@@ -268,9 +268,7 @@ class Cascader extends React.Component {
                                 }}
                             >
                                 {v.name}&nbsp;
-                                {v.children && v.children.length ? <i className={classNames("gm-arrow-right", {
-                                    active: v.value === selected[i]
-                                })}/> : null}
+                                {v.children && v.children.length && <i className={classNames("gm-arrow-right")}/>}
                             </Flex>
                         ))}
                     </Flex>
@@ -313,8 +311,10 @@ class Cascader extends React.Component {
                     value={inputValue}
                     className={classNames("form-control", inputProps.className)}
                 />
-                {inputValue && <i onClick={this.handleClear} className="xfont xfont-close-circle gm-cursor gm-cascader-close-icon"/>}
+                {inputValue &&
+                <i onClick={this.handleClear} className="xfont xfont-close-circle gm-cursor gm-cascader-close-icon"/>}
                 <i className="gm-arrow-down"/>
+                <i className="gm-arrow-up"/>
             </div>
         );
     }
@@ -324,6 +324,7 @@ class Cascader extends React.Component {
 
         return (
             <Popover
+                animName
                 style={popoverStyle}
                 disabled={disabled}
                 popup={this.renderOverlay()}

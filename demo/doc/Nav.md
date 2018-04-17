@@ -72,6 +72,7 @@ class NavLeft extends React.Component {
                     data={data}
                     onSelect={this.handleClick}
                     selected={selected}
+                    widths={['100px', '100px']}
                 />
             </div>
         );

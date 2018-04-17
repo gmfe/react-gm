@@ -12,9 +12,23 @@ imports:
 ```js
 class QuickPanelDemo extends React.Component{
     render(){
-        return <QuickPanel title={"运营时间设置"}>
-            <div className="gm-padding-15">内容</div>
-        </QuickPanel>
+        return (
+            <div>
+                <QuickPanel title={"运营时间设置"} right={(
+                    <button disabled>adfasf</button>
+                )}>
+                    <div>内容</div>
+                </QuickPanel>
+                <hr/>
+                <div>quick panel 一起会相连</div>
+                <QuickPanel title={"运营时间设置"} collapse>
+                    <div>内容</div>
+                </QuickPanel>
+                <QuickPanel title={"运营时间设置"} collapse in={false}>
+                    <div>内容</div>
+                </QuickPanel>
+            </div>
+        );
     }
 }
 ```
@@ -22,6 +36,15 @@ class QuickPanelDemo extends React.Component{
 <QuickPanelDemo/>
 ```
 :::
+
+
+### Props
+- `title (string|element|isRequired)` 标题
+- `collapse (bool)` 是否具有明细收拢展开功能
+- `right (element)` 头部右边内容
+- `in (bool)` true 默认展开
+- `icon (string)` 标题左边icon
+- `iconColor (string)` icon颜色，默认 #fd5271
 
 ## QuickTab
 
@@ -173,7 +196,7 @@ class Tab extends React.Component{
 - `onChange (func)`
 - `active (number)` 当前激活的tab
 - `right (element)` 头部右边内容
-- `justified(bool)` 平分
+- `justified (bool)` 平分
 - `isStatic (bool)` tab 内容切换的时候是否不被卸载
 - `children` 尽量提供`QuickTabItem`组件数组，这样语义化好点
 

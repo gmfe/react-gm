@@ -64,5 +64,5 @@ Dropper.propTypes = {
     accept: PropTypes.string,
     className: PropTypes.string
 };
-
+// TODO 重构
 export default Dropper;

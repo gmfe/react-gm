@@ -10,6 +10,7 @@ import SheetAction from './sheet_action';
 import SheetSelect from './sheet_select';
 import SheetBatchAction from './sheet_batch_action';
 import Loading from '../loading';
+import Flex from '../flex';
 
 class Sheet extends React.Component {
     handleSelect(select, i, event) {
@@ -174,7 +175,8 @@ class Sheet extends React.Component {
                                 return <th key={index} {...rest}>{value.props.name}</th>;
                             })}
                             {actions && (
-                                <th className="text-center">操作</th>
+                                <th className="text-center"><i className="xfont xfont-fun" style={{color: '#13c19f'}}/>
+                                </th>
                             )}
                         </tr>
                         </thead>
@@ -184,10 +186,10 @@ class Sheet extends React.Component {
                     </table>
                 </div>
                 {(pagination || paginationText) && (
-                    <div className="clearfix">
-                        {pagination && <div className="pull-right">{pagination}</div>}
-                        {paginationText && <div className="pull-right">{paginationText}</div>}
-                    </div>
+                    <Flex justifyCenter alignCenter>
+                        {paginationText && <div>{paginationText}</div>}
+                        {pagination && <div>{pagination}</div>}
+                    </Flex>
                 )}
                 {others}
             </div>

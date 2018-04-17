@@ -50,19 +50,23 @@ class DateRangePicker extends React.Component {
             begin, end,
             beginLabel, endLabel,
             beginProps, endProps,
-            inputClassName,
             disabled, canClear,
-            beginRenderInputValue, endRenderInputValue
+            beginRenderInputValue, endRenderInputValue,
+            className
         } = this.props;
 
         return (
             <div
                 ref={ref => this.refDateRangePicker = ref}
-                className={classNames("gm-daterangepicker gm-inline-block", this.props.className)}
+                className={classNames("gm-daterangepicker gm-inline-block", {
+                    "gm-daterangepicker-can-clear": canClear,
+                    "disabled": disabled
+                }, className)}
             >
                 {beginLabel && <span className="gm-padding-right-5">{beginLabel}</span>}
-                <div className="gm-daterangepicker-item gm-border gm-bg gm-inline-block gm-position-relative">
+                <div className="gm-daterangepicker-item gm-inline-block gm-position-relative">
                     <Popover
+                        animName
                         popup={(
                             <Calendar
                                 selected={begin}
@@ -71,13 +75,13 @@ class DateRangePicker extends React.Component {
                             />
                         )}
                     >
-                        <input
-                            type="text"
-                            className={classNames('gm-border-0 gm-cursor', inputClassName, {"gm-clear-input": canClear})}
+                        <div
                             disabled={disabled}
-                            value={begin ? (beginRenderInputValue ? beginRenderInputValue(begin) : moment(begin).format('YYYY-MM-DD')) : ''}
-                            onChange={_.noop}
-                        />
+                            className={classNames('gm-daterangepicker-inner gm-cursor')}
+                        >
+                            {begin ? (beginRenderInputValue ? beginRenderInputValue(begin) : moment(begin).format('YYYY-MM-DD')) :
+                                <span>&nbsp;</span>}
+                        </div>
                     </Popover>
                     {canClear && begin && (
                         <button
@@ -86,11 +90,13 @@ class DateRangePicker extends React.Component {
                             onClick={this.handleClearBegin}
                         >&times;</button>
                     )}
+                    <i className="xfont xfont-calendar"/>
                 </div>
                 {!endLabel && <span> ~ </span>}
                 {endLabel && <span className="gm-padding-lr-5">{endLabel}</span>}
-                <div className="gm-daterangepicker-item gm-border gm-bg gm-inline-block gm-position-relative">
+                <div className="gm-daterangepicker-item gm-inline-block gm-position-relative">
                     <Popover
+                        animName
                         component={<div className="gm-inline-block"/>}
                         popup={(
                             <Calendar
@@ -102,14 +108,14 @@ class DateRangePicker extends React.Component {
                             />
                         )}
                     >
-                        <input
+                        <div
                             ref={ref => this.refEndTarget = ref}
-                            type="text"
-                            className={classNames('gm-border-0 gm-cursor form-control', inputClassName, {"gm-clear-input": canClear})}
                             disabled={disabled}
-                            value={end ? (endRenderInputValue ? endRenderInputValue(end) : moment(end).format('YYYY-MM-DD')) : ''}
-                            onChange={_.noop}
-                        />
+                            className={classNames('gm-daterangepicker-inner gm-cursor')}
+                        >
+                            {end ? (endRenderInputValue ? endRenderInputValue(end) : moment(end).format('YYYY-MM-DD')) :
+                                <span>&nbsp;</span>}
+                        </div>
                     </Popover>
                     {canClear && end && (
                         <button
@@ -118,6 +124,7 @@ class DateRangePicker extends React.Component {
                             onClick={this.handleClearEnd}
                         >&times;</button>
                     )}
+                    <i className="xfont xfont-calendar"/>
                 </div>
             </div>
         );
@@ -132,7 +139,6 @@ DateRangePicker.propTypes = {
     beginLabel: PropTypes.string,
     endLabel: PropTypes.string,
     onChange: PropTypes.func,
-    inputClassName: PropTypes.string,
     disabled: PropTypes.bool,
     canClear: PropTypes.bool,
     className: PropTypes.string,

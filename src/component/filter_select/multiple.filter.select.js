@@ -4,7 +4,7 @@ import _ from 'lodash';
 import Flex from '../flex';
 import Loading from '../loading';
 import classNames from 'classnames';
-import Trigger from '../trigger';
+import Popover from '../popover';
 
 class MultipleFilterSelect extends React.Component {
     constructor(props) {
@@ -266,23 +266,22 @@ class MultipleFilterSelect extends React.Component {
         const {query, loading} = this.state;
 
         return (
-            <div className="gm-filter-select-list">
-                {
-                    !disableSearch ?
-                        <div className="gm-filter-select-list-input">
-                            <input
-                                ref={ref => this.refInput = ref}
-                                autoFocus
-                                className="form-control"
-                                type="text"
-                                value={query}
-                                onFocus={this.handleFocus}
-                                onChange={this.handleChange}
-                                onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
-                                placeholder={this.props.placeholder}
-                            />
-                        </div> : null
-                }
+            <div className="gm-filter-select-popup">
+                {!disableSearch && (
+                    <div className="gm-filter-select-popup-input">
+                        <input
+                            ref={ref => this.refInput = ref}
+                            autoFocus
+                            className="form-control"
+                            type="text"
+                            value={query}
+                            onFocus={this.handleFocus}
+                            onChange={this.handleChange}
+                            onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
+                            placeholder={this.props.placeholder}
+                        />
+                    </div>
+                )}
                 {loading && <Flex alignCenter justifyCenter className="gm-bg gm-padding-5"><Loading size={20}/></Flex>}
                 {!loading && (isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList))}
             </div>
@@ -305,27 +304,30 @@ class MultipleFilterSelect extends React.Component {
                     "gm-filter-select-disabled": this.props.disabled
                 })}
             >
-                <Flex wrap className="gm-filter-select-target">
-                    <Trigger
-                        component={<Flex flex/>}
+                <Flex wrap className="gm-filter-select-target-box">
+                    <Popover
+                        animName
                         popup={this.renderOverlay(filterList)}
                         disabled={disabled}
                     >
-                        <Flex wrap>
-                            {selected.length === 0 && <Flex alignStart className="gm-text-desc">{placeholder}</Flex>}
-                            {_.map(selected, (v, i) => (
-                                <Flex key={i + '_' + v.name} alignStart className="selected">
-                                    {(v && v.name)}
-                                    <button
-                                        disabled={this.props.disabled}
-                                        type="button"
-                                        className="close"
-                                        onClick={this.handleClose.bind(this, v)}
-                                    >&times;</button>
-                                </Flex>
-                            ))}
+                        <Flex flex className="gm-filter-select-target">
+                            <Flex wrap>
+                                {selected.length === 0 &&
+                                <Flex alignStart className="gm-text-desc">{placeholder}</Flex>}
+                                {_.map(selected, (v, i) => (
+                                    <Flex key={i + '_' + v.name} alignStart className="selected">
+                                        {(v && v.name)}
+                                        <button
+                                            disabled={this.props.disabled}
+                                            type="button"
+                                            className="close"
+                                            onClick={this.handleClose.bind(this, v)}
+                                        >&times;</button>
+                                    </Flex>
+                                ))}
+                            </Flex>
                         </Flex>
-                    </Trigger>
+                    </Popover>
                     <i className="gm-arrow-down"/>
                 </Flex>
             </div>

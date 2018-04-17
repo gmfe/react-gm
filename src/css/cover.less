@@ -2,6 +2,11 @@
 .form-control {
   box-shadow: none;
   transition: none;
+  height: 30px;
+
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 // modal 全局修改
@@ -26,53 +31,46 @@
   padding: 10px;
 }
 
-// pagination 全局修改
-.pagination > li > a {
-  color: inherit;
+.list-group {
+  .list-group-item {
+    background-color: white;
+
+    &.active {
+      color: @brand-primary;
+    }
+
+    &:hover {
+      background-color: @gm-list-group-hover-bg;
+    }
+  }
 }
 
 .table {
-  font-size: 12px;
-
-  th,
-  td {
-    text-align: center;
-
-    a {
-      cursor: pointer;
+  tr {
+    th,
+    td {
+      a {
+        cursor: pointer;
+      }
     }
   }
 
   thead {
     tr {
+      height: 40px;
+      background: #f2f3f8;
       border-bottom: 1px solid @gm-border-color;
     }
   }
 
   tbody {
     tr {
+      height: 60px;
       border-bottom: 1px solid @gm-border-color;
-
-      &:hover {
-        background-color: @table-bg-hover;
-      }
     }
   }
 
   thead > tr > th {
-    padding: 8px 2px;
-
-    &:not(.text-center) {
-      text-align: left;
-    }
-
-    &:first-child {
-      padding-left: 15px;
-    }
-  }
-
-  tbody > tr > td {
-    padding: 18px 2px;
     vertical-align: middle;
 
     &:not(.text-center) {
@@ -83,16 +81,29 @@
       padding-left: 15px;
     }
 
-    a {
-      color: @link-color;
+    &:last-child {
+      padding-right: 15px;
+    }
+  }
+
+  tbody > tr > td {
+    vertical-align: middle;
+
+    &:not(.text-center) {
+      text-align: left;
+    }
+
+    &:first-child {
+      padding-left: 15px;
+    }
+
+    &:last-child {
+      padding-right: 15px;
     }
   }
 
   &.table-bordered {
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom: 1px solid @gm-border-color;
+    border: 1px solid @gm-border-color;
 
     thead {
       tr {
@@ -100,6 +111,10 @@
           border: none;
           font-weight: normal;
           color: @gm-color-first;
+
+          &:last-child {
+            border-right: 1px solid @gm-border-color;
+          }
         }
       }
     }
@@ -108,27 +123,107 @@
       tr {
         td {
           border: none;
-          color: @gm-color-second;
+
+          &:last-child {
+            border-right: 1px solid @gm-border-color;
+          }
         }
       }
     }
   }
 
   &.table-striped {
+    tr:nth-of-type(even) {
+      background-color: #f5f5f7;
+    }
+
+    tr:nth-of-type(even):hover {
+      background-color: @table-bg-hover;
+    }
+  }
+}
+
+@media print {
+  .table {
     thead {
       tr {
-        background: @table-bg-accent;
+        height: inherit;
       }
     }
 
     tbody {
       tr {
-        background: white;
+        height: inherit;
       }
     }
   }
+}
 
-  .b-table-margin-left20 {
-    margin-left: 20%;
+// add
+.btn.btn-plain {
+  background-color: white;
+
+  &.btn-primary {
+    color: @brand-primary;
+
+    &:hover {
+      color: @btn-primary-color;
+      background-color: @btn-primary-bg;
+      border-color: @btn-primary-border;
+    }
+  }
+
+  &.btn-success {
+    color: @brand-success;
+
+    &:hover {
+      color: @btn-success-color;
+      background-color: @btn-success-bg;
+      border-color: @btn-success-border;
+    }
+  }
+
+  &.btn-info {
+    color: @brand-info;
+
+    &:hover {
+      color: @btn-info-color;
+      background-color: @btn-info-bg;
+      border-color: @btn-info-border;
+    }
+  }
+
+  &.btn-warning {
+    color: @brand-warning;
+
+    &:hover {
+      color: @btn-warning-color;
+      background-color: @btn-warning-bg;
+      border-color: @btn-warning-border;
+    }
+  }
+
+  &.btn-danger {
+    color: @brand-danger;
+
+    &:hover {
+      color: @btn-danger-color;
+      background-color: @btn-danger-bg;
+      border-color: @btn-danger-border;
+    }
+  }
+}
+
+.dropdown-menu {
+  min-width: 120px;
+
+  li.active a {
+    background: white;
+    color: @brand-primary;
+
+    &:hover {
+      background: @gm-back-body-bg;
+      color: @brand-primary;
+    }
   }
 }
