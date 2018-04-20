@@ -136,7 +136,7 @@ class DropSelect extends React.Component {
 
         return (
             <div
-                className={thisProps.className}
+                className={classNames('gm-dropselect', thisProps.className)}
                 ref={ref => this.refSelectPanel = ref}
                 onKeyDown={this.handleKeyDown.bind(this, list.length)}
             >

@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Flex from '../flex';
 
+function includeLink(clickItems, target) {
+    return _.find(clickItems, item => item.link === target.link);
+}
+
 class Nav extends React.Component {
     constructor(props) {
         super(props);
@@ -55,12 +59,12 @@ class Nav extends React.Component {
 
     handleMouseLeave = () => {
         // 认真看，略复杂
-        const {clickItems} = this.state;
+        let {clickItems} = this.state;
         const initState = this.getInitState();
 
         // getInitState 的 clickItems 只有一个
-        if (!clickItems.includes(initState.clickItems[0])) {
-            clickItems.push(initState.clickItems[0]);
+        if (includeLink(clickItems, initState.clickItems[0])) {
+            clickItems = [initState.clickItems[0]];
         }
         this.setState({
             twoItem: initState.twoItem,
@@ -95,7 +99,7 @@ class Nav extends React.Component {
                     <div className="gm-nav-one">
                         {_.map(data, (one, oneI) => (
                             <div key={oneI + one.link} className={classNames({
-                                'active': clickItems.includes(one)
+                                'active': includeLink(clickItems, one)
                             })} style={{width: widths[0]}}>
                                 <a
                                     href={one.link}
@@ -118,7 +122,7 @@ class Nav extends React.Component {
                         ))}
                         {_.map(jump, (one, oneI) => (
                             <div key={oneI + one.link} className={classNames({
-                                'active': clickItems.includes(one)
+                                'active': includeLink(clickItems, one)
                             })} style={{width: widths[0]}}>
                                 <a
                                     href={one.link}
