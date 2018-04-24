@@ -73,7 +73,7 @@ class FullTab extends React.Component {
                         ))}
                     </Flex>
                 </div>
-                <div className="gm-framework-full-tabs-content gm-padding-15">
+                <div className="gm-framework-full-tabs-content gm-padding-20">
                     {isStatic ? tabPanels : tabPanels[activeTab]}
                 </div>
             </div>

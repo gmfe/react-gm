@@ -47,7 +47,7 @@ class QuickPanel extends React.Component {
                         ) : undefined}
                     </Flex>
                     <Flex flex/>
-                    {right}
+                    <Flex column>{right}</Flex>
                 </Flex>
                 <Collapse in={this.state.in}>
                     <div>

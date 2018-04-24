@@ -4,72 +4,41 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Flex from '../flex';
 
-function includeLink(clickItems, target) {
-    return _.find(clickItems, item => item.link === target.link);
-}
-
 class Nav extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = this.getInitState();
     }
 
     getInitState = () => {
-        let twoItem = {};
-        let clickItems = [];
         const {data, selected} = this.props;
-        _.each(data, one => {
-            _.each(one.sub, two => {
-                if (selected.includes(two.link)) {
-                    twoItem = two;
-                    clickItems.push(one);
-                }
-            });
-        });
-
         return {
-            clickItems,
-            twoItem
+            oneSelected: _.find(data, one => selected.includes(one.link)),
+            isJump: false
         };
     };
 
     handleOne = (one, e) => {
         e.preventDefault();
+        clearTimeout(this.timer);
         this.setState({
-            clickItems: _.xor(this.state.clickItems, [one]),
-            twoItem: one.sub[0]
+            oneSelected: one,
+            isJump: false
         });
     };
 
     handleJumpOne = (one, e) => {
         e.preventDefault();
         this.setState({
-            clickItems: _.xor(this.state.clickItems, [one])
-        });
-    };
-
-    handleTwoClick = (two, e) => {
-        e.preventDefault();
-
-        this.setState({
-            twoItem: two
+            oneSelected: one,
+            isJump: true
         });
     };
 
     handleMouseLeave = () => {
-        // 认真看，略复杂
-        let {clickItems} = this.state;
-        const initState = this.getInitState();
-
-        // getInitState 的 clickItems 只有一个
-        if (includeLink(clickItems, initState.clickItems[0])) {
-            clickItems = [initState.clickItems[0]];
-        }
-        this.setState({
-            twoItem: initState.twoItem,
-            clickItems
-        });
+        this.timer = setTimeout(() => {
+            this.setState(this.getInitState());
+        }, 200);
     };
 
     render() {
@@ -84,7 +53,7 @@ class Nav extends React.Component {
             ...rest
         } = this.props;
 
-        const {clickItems, twoItem} = this.state;
+        const {oneSelected, isJump} = this.state;
 
         return (
             <Flex
@@ -99,72 +68,76 @@ class Nav extends React.Component {
                     <div className="gm-nav-one">
                         {_.map(data, (one, oneI) => (
                             <div key={oneI + one.link} className={classNames({
-                                'active': includeLink(clickItems, one)
+                                'active': oneSelected && (oneSelected.link === one.link)
                             })} style={{width: widths[0]}}>
                                 <a
                                     href={one.link}
                                     onClick={this.handleOne.bind(this, one)}
                                 >{one.name}</a>
-
-                                <div className="gm-nav-two">
-                                    {_.map(one.sub, (two, twoI) => (
-                                        <a
-                                            key={twoI + two.link}
-                                            className={classNames({
-                                                'active': twoItem.link === two.link
-                                            })}
-                                            href={two.link}
-                                            onClick={this.handleTwoClick.bind(this, two)}
-                                        >{two.name}</a>
-                                    ))}
-                                </div>
                             </div>
                         ))}
                         {_.map(jump, (one, oneI) => (
                             <div key={oneI + one.link} className={classNames({
-                                'active': includeLink(clickItems, one)
+                                'active': oneSelected && (oneSelected.link === one.link)
                             })} style={{width: widths[0]}}>
                                 <a
                                     href={one.link}
                                     onClick={this.handleJumpOne.bind(this, one)}
                                 >{one.name}</a>
-
-                                <div className="gm-nav-two">
-                                    {_.map(one.sub, (two, twoI) => (
-                                        <a
-                                            key={twoI + two.link}
-                                            className={classNames({
-                                                'active': twoItem.link === two.link
-                                            })}
-                                            target="_blank"
-                                            href={two.link}
-                                        >{two.name}</a>
-                                    ))}
-                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                {twoItem.sub && (
-                    <div>
-                        <div className="gm-nav-there gm-border-right" style={{
-                            width: widths[1]
-                        }}>
-                            {_.map(twoItem.sub, (v, i) => (
-                                <a
-                                    href={v.link}
-                                    key={i + v.link}
-                                    className={classNames({
-                                        'active': selected.includes(v.link.split('?')[0])
-                                    })}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        onSelect(v);
-                                    }}
-                                >{v.name}</a>
-                            ))}
-                        </div>
+                {oneSelected && oneSelected.sub && (
+                    <div className="gm-border-right gm-bg-white" style={{
+                        width: widths[1],
+                        paddingTop: '80px',
+                        height: '100vh'
+                    }}>
+                        {isJump ? (
+                            <div className="gm-nav-jump">
+                                {_.map(oneSelected.sub, (two, twoI) => (
+                                    <div key={two.link}>
+                                        <a
+                                            key={twoI + two.link}
+                                            href={two.link}
+                                            target="_blank"
+                                        >{two.name}</a>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="gm-nav-two">
+                                {_.map(oneSelected.sub, (two, twoI) => (
+                                    <div key={two.link}>
+                                        <a
+                                            key={twoI + two.link}
+                                            className={classNames({
+                                                'active': selected.includes(two.link)
+                                            })}
+                                            href={two.link}
+                                            onClick={e => e.preventDefault()}
+                                        >{two.name}</a>
+                                        <div className="gm-nav-there">
+                                            {_.map(two.sub, (v, i) => (
+                                                <a
+                                                    href={v.link}
+                                                    key={i + v.link}
+                                                    className={classNames({
+                                                        'active': selected.includes(v.link.split('?')[0])
+                                                    })}
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        onSelect(v);
+                                                    }}
+                                                >{v.name}</a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 )}
             </Flex>

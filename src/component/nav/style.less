@@ -8,38 +8,33 @@
     height: 80px;
   }
 
-  .gm-nav-two {
-    display: none;
-  }
-
-  .gm-nav-there {
-    padding-top: 80px;
-    background: white;
-    height: 100vh;
-  }
-
   .gm-nav-there > a {
     display: block;
     color: @gm-color-first;
     white-space: nowrap;
-    padding: 15px 15px 20px;
+    padding: 5px 15px;
     text-decoration: none;
   }
 
-  .gm-nav-two > a {
+  .gm-nav-two > div > a {
     display: block;
-    padding: 10px 10px 10px 33px;
-    color: white;
-    text-decoration: none;
-  }
-
-  .gm-nav-one > div.active > .gm-nav-two {
-    display: block;
-  }
-
-  .gm-nav-two > a.active {
-    background: white;
     color: @gm-color-first;
+    white-space: nowrap;
+    padding: 15px 15px;
+    text-decoration: none;
+    cursor: inherit;
+  }
+
+  .gm-nav-jump > div > a {
+    display: block;
+    color: @gm-color-first;
+    white-space: nowrap;
+    padding: 15px 15px;
+    text-decoration: none;
+  }
+
+  .gm-nav-two > div + div {
+    margin-top: 20px;
   }
 
   .gm-nav-one > div > a {
@@ -58,11 +53,8 @@
     color: @brand-primary;
   }
 
-  .gm-nav-two > a:hover {
-    background: #666;
-  }
-
-  .gm-nav-one > div > a:hover {
-    background: #666;
+  .gm-nav-one > div.active a {
+    background: white;
+    color: @gm-color-first;
   }
 }
