@@ -76,6 +76,9 @@ class Nav extends React.Component {
                                 >{one.name}</a>
                             </div>
                         ))}
+                        <div style={{
+                            margin: '30px 10px'
+                        }}/>
                         {_.map(jump, (one, oneI) => (
                             <div key={oneI + one.link} className={classNames({
                                 'active': oneSelected && (oneSelected.link === one.link)
