@@ -80,8 +80,8 @@ class DialogWrap extends React.Component {
             children: 'sssss',
             title: 'title',
             promptDefaultValue: '123',
-            onOK: () => {
-                console.log('ok');
+            onOK: (value) => {
+                console.log('ok', value);
                 return false; // return Promise.reject();
             }
         }).then(value => {

@@ -102,7 +102,7 @@ class Dialog extends React.Component {
     }
 
     handleOk() {
-        const result = this.props.onOK(this.props.type === 'prompt' ? this.refs.input.value : undefined);
+        const result = this.props.onOK(this.props.type === 'prompt' ? this.refInput.value : undefined);
         if (result === false) {
             return;
         }
@@ -153,7 +153,7 @@ class Dialog extends React.Component {
                             autoFocus
                             defaultValue={promptDefaultValue}
                             placeholder={promptPlaceholder}
-                            ref="input"
+                            ref={ref => this.refInput = ref}
                             type="text"
                             style={{display: 'block', width: '100%'}}
                             onKeyDown={this.handleEnter}

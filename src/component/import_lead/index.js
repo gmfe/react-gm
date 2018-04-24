@@ -97,9 +97,9 @@ class ImportLead extends React.Component {
                         </div>
                     )}
                 </div>
-                <div className="gm-import-lead-content" ref="content">
+                <div className="gm-import-lead-content" ref={ref => this.refContent = ref}>
                     {data ? (
-                        <table className="table table-condensed table-bordered" ref="table">
+                        <table className="table table-condensed table-bordered" ref={ref => this.refTable = ref}>
                             <thead>
                             <tr>
                                 {data.columns.map((col, i) => (
@@ -130,8 +130,8 @@ class ImportLead extends React.Component {
     }
 
     handleLine(index) {
-        let content = ReactDOM.findDOMNode(this.refs.content),
-            table = ReactDOM.findDOMNode(this.refs.table);
+        let content = ReactDOM.findDOMNode(this.refContent),
+            table = ReactDOM.findDOMNode(this.refTable);
         content.scrollTop = index / this.props.data.list.length * table.offsetHeight;
     }
 

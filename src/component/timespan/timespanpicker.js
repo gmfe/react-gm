@@ -9,14 +9,13 @@ import classNames from 'classnames';
 class TimeSpanPicker extends React.Component {
     constructor(props) {
         super(props);
-        this.timeSpanPicker = null;
         this.handleSelect = ::this.handleSelect;
     }
 
     handleSelect(date) {
         this.props.onChange(date);
         setTimeout(() => {
-            this.timeSpanPicker.click();
+            this.refTimeSpanPicker.click();
         }, 0);
     }
 
@@ -34,7 +33,7 @@ class TimeSpanPicker extends React.Component {
         );
         return (
             <div
-                ref={ref => this.timeSpanPicker = ref}
+                ref={ref => this.refTimeSpanPicker = ref}
                 className="gm-time-span-picker"
             >
                 <Popover popup={popup} animName>
@@ -42,7 +41,6 @@ class TimeSpanPicker extends React.Component {
                         <input
                             type="text"
                             className={classNames('gm-cursor form-control', inputClassName)}
-                            ref="target"
                             disabled={disabled}
                             value={render(date)}
                             onChange={_.noop}
