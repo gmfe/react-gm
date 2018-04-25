@@ -93,7 +93,7 @@ class Nav extends React.Component {
                 </div>
 
                 {oneSelected && oneSelected.sub && (
-                    <div className="gm-border-right gm-bg-white" style={{
+                    <div className="gm-border-right gm-bg-white gm-overflow-y" style={{
                         width: widths[1],
                         paddingTop: '80px',
                         height: '100vh'
