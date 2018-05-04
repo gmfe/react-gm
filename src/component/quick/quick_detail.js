@@ -24,7 +24,7 @@ class QuickDetail extends React.Component {
             first,
             second,
             operate,
-            money
+            third
         } = this.props;
         const {show} = this.state;
 
@@ -45,7 +45,7 @@ class QuickDetail extends React.Component {
                         {second}
                     </div>
                     <Flex flex column>
-                        {money}
+                        {third}
                     </Flex>
                 </Flex>
                 <Flex justifyCenter className="gm-padding-5">
@@ -68,7 +68,7 @@ QuickDetail.propTypes = {
     first: PropTypes.element.isRequired,
     second: PropTypes.element.isRequired,
     operate: PropTypes.element,
-    money: PropTypes.element
+    third: PropTypes.element
 };
 
 QuickDetail.childContextTypes = {
@@ -130,9 +130,9 @@ QuickDetailSecond.contextTypes = {
     show: PropTypes.bool
 };
 
-class QuickDetailMoney extends React.Component {
+class QuickDetailThird extends React.Component {
     render() {
-        const {result, process} = this.props;
+        const {result, process, unit} = this.props;
 
         return (
             <Flex>
@@ -140,7 +140,7 @@ class QuickDetailMoney extends React.Component {
                       style={{backgroundColor: '#f1f0f6', height: '78px'}}>
                     <div>{result.name}</div>
                     <div className="gm-font-20">{result.value}<span
-                        className="gm-font-12">元</span></div>
+                        className="gm-font-12">{unit}</span></div>
                 </Flex>
 
                 <Flex flex={process.length}>
@@ -149,7 +149,7 @@ class QuickDetailMoney extends React.Component {
                               style={{backgroundColor: '#f1f0f6', height: '78px'}}>
                             <div>{item.name}</div>
                             <div className="gm-font-20">{item.value}<span
-                                className="gm-font-12">元</span></div>
+                                className="gm-font-12">{unit}</span></div>
                         </Flex>
                     ))}
                 </Flex>
@@ -158,15 +158,16 @@ class QuickDetailMoney extends React.Component {
     }
 }
 
-QuickDetailMoney.propTypes = {
+QuickDetailThird.propTypes = {
     result: PropTypes.object.isRequired,
-    process: PropTypes.array.isRequired // [{name, value}]
+    process: PropTypes.array.isRequired, // [{name, value}]
+    unit: PropTypes.string.isRequired
 };
 
 Object.assign(QuickDetail, {
     QuickDetailFirst,
     QuickDetailSecond,
-    QuickDetailMoney
+    QuickDetailThird
 });
 
 export default QuickDetail;
