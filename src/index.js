@@ -85,7 +85,7 @@ Object.assign(Select, {
     Option
 });
 
-const {QuickDetailFirst, QuickDetailSecond, QuickDetailMoney} = QuickDetail;
+const {QuickDetailFirst, QuickDetailSecond, QuickDetailThird} = QuickDetail;
 
 export {
     Pagination,
@@ -130,7 +130,7 @@ export {
     DropDown, DropDownItems, DropDownItem,
     TreeSelect,
     QuickPanel, QuickFilter, QuickTab, QuickDesc,
-    QuickDetail, QuickDetailFirst, QuickDetailSecond, QuickDetailMoney,
+    QuickDetail, QuickDetailFirst, QuickDetailSecond, QuickDetailThird,
     Validator,
     Radio, RadioGroup,
     Checkbox, CheckboxGroup,
