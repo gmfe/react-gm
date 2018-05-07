@@ -137,6 +137,16 @@
   }
 }
 
+// 限制移动端最大宽度,防止隐藏close按钮
+@media (max-device-width: 766px) and (min-device-width: 0) {
+  .gm-modal {
+    .gm-modal-dialog {
+      max-width: 96vw;
+      overflow: auto !important;
+    }
+  }
+}
+
 @media (min-width: 992px) {
   .gm-modal {
     .gm-modal-lg {
