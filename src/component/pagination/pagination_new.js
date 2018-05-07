@@ -34,7 +34,7 @@ class WithCount extends React.Component {
             const currentIndex = _.findIndex(pages, page => page.number === pageClicked),
                 pagesNew = _.slice(pages, 0, currentIndex + 1),
                 currentPage = pages[currentIndex],
-                afterPageCount = Math.ceil(peek / limit); // 后面新增afterPageCount页
+                afterPageCount = Math.ceil(peek / limit) -1; // 后面新增afterPageCount页
             let i = 1;
 
             currentPage.page_obj = page_obj;
