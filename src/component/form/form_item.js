@@ -118,7 +118,7 @@ FormItem.propTypes = {
     // 以下先不要用， 由Form传过来的
     horizontal: PropTypes.bool, // 由Form传过来
     inline: PropTypes.bool, // 由Form传过来
-    labelWidth: PropTypes.string, // horizontal true 才有效， 可由Form传过来
+    labelWidth: PropTypes.string, // 可由Form传过来
     canValidate: PropTypes.bool,
 
     unLabelTop: PropTypes.bool

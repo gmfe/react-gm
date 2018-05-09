@@ -24,7 +24,8 @@ class FormBlock extends React.Component {
                     return (
                         <Flex flex={inline ? false : (block[i] || 1)} key={i}>
                             {child.type.displayName === 'FormItem' ? React.cloneElement(child, {
-                                ...rest
+                                ...rest,
+                                ...child.props
                             }) : child}
                         </Flex>
                     );
