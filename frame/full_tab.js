@@ -56,7 +56,7 @@ class FullTab extends React.Component {
                 {...rest}
                 className={classNames("gm-framework-full-tabs gm-back-bg gm-framework-content-full", this.props.className)}
             >
-                <div className="gm-framework-full-tabs-list-box">
+                { tabs.length > 1 && <div className="gm-framework-full-tabs-list-box">
                     <Flex className="gm-framework-full-tabs-list gm-bg" style={{
                         left: frameWorkLeftWidth
                     }}>
@@ -72,7 +72,7 @@ class FullTab extends React.Component {
                             </div>
                         ))}
                     </Flex>
-                </div>
+                </div> }
                 <div className="gm-framework-full-tabs-content gm-padding-20">
                     {isStatic ? tabPanels : tabPanels[activeTab]}
                 </div>
