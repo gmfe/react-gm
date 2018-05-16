@@ -35,7 +35,7 @@ class QuickPanel extends React.Component {
                 <Flex flex justifyBetween className="gm-quick-panel-title">
                     <Flex alignEnd className="gm-padding-bottom-15">
                         <span>{icon && <i className={`xfont xfont-${icon}`}
-                                          style={{color: iconColor, marginRight: '2px', verticalAlign: 'middle'}}/>}<sapn style={{verticalAlign: 'middle'}}>{title}</sapn></span>
+                                          style={{color: iconColor, marginRight: '2px', verticalAlign: 'middle'}}/>}<span style={{verticalAlign: 'middle'}}>{title}</span></span>
                         {collapse ? (
                             <a onClick={::this.handleCollapse} className="gm-margin-left-20 gm-font-12">
                                 {this.state.in ? "收拢明细" : "展现明细"}&nbsp;
