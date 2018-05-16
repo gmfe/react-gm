@@ -1,6 +1,7 @@
 import Pagination from './component/pagination/pagination';
 import PaginationNew from './component/pagination/pagination_new';
 import PaginationText from './component/pagination/pagination.text';
+import PaginationBox from './component/pagination/pagination_box';
 import Dropper from './component/dropper/index';
 import {Form, FormItem, FormButton, FormBlock} from './component/form';
 import ImportLead from './component/import_lead';
@@ -91,6 +92,7 @@ export {
     Pagination,
     PaginationNew,
     PaginationText,
+    PaginationBox,
     Form, FormItem, FormButton, FormBlock,
     Calendar,
     DatePicker,
