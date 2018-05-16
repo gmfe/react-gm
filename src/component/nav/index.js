@@ -65,7 +65,7 @@ class Nav extends React.Component {
                     <Flex alignCenter justifyCenter className="gm-nav-logo">
                         {logo}
                     </Flex>
-                    <div className="gm-nav-one">
+                    <div className="gm-margin-top-10 gm-nav-one">
                         {_.map(data, (one, oneI) => (
                             <div key={oneI + one.link} className={classNames({
                                 'active': oneSelected && (oneSelected.link === one.link)
