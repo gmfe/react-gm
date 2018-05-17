@@ -129,7 +129,6 @@ class Modal extends React.Component {
             }
         }
 
-
         const inner = (
             <div
                 key="modal-dialog"
@@ -144,7 +143,7 @@ class Modal extends React.Component {
                 {noCloseBtn || (
                     <button
                         type="button"
-                        className="close"
+                        className="close gm-modal-close"
                         onClick={this.handleClose}
                     >
                         <span>×</span>
