@@ -15,7 +15,8 @@ class Collapse extends React.Component {
                 style={Object.assign({
                     transition: isIn ? '0.5s ease all' : 'inherit',
                     height: isIn ? 'inherit' : '0',
-                    opacity: isIn ? 1 : 0
+                    opacity: isIn ? 1 : 0,
+                    overflow: isIn ? 'inherit' : 'hidden'
                 }, style)}
             >
                 {children}
