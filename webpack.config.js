@@ -22,6 +22,8 @@ config.module.rules.push({
     loader: 'happypack/loader?id=md'
 });
 
+config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/));
+
 config.plugins.push(new HappyPack({
     id: 'md',
     threadPool: happyThreadPool,

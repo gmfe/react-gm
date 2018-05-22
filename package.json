@@ -12,11 +12,22 @@
     "react-component"
   ],
   "scripts": {
-    "precommit": "eslint --fix ./src/ ./demo/; stylelint ./src/*.less ./src/css/*.less ./src/component/**/*.less !./src/less/**/*.less --fix --cache",
+    "precommit": "lint-staged",
     "clear": "rm -rf build && mkdir build;",
     "start": "NODE_ENV=development node ./node_modules/gm-webpack/start",
     "deploy": "npm install; NODE_ENV=production GIT_BRANCH=$BRANCH GIT_COMMIT=$COMMIT node ./node_modules/gm-webpack/deploy",
-    "docs": "rm -rf build; rm -rf docs; mkdir docs; npm run deploy; cp -r build docs; git add --all; git commit -m 'docs generate'; git push origin master:master;"
+    "docs": "rm -rf build; rm -rf docs; mkdir docs; npm run deploy; cp -r build docs; git add --all; git commit -m 'docs generate'; git push origin master:master;",
+    "jsinspect": "jsinspect ./src/ ./demo/"
+  },
+  "lint-staged": {
+    "./(src|demo)/**/*.js": [
+      "eslint --cache --fix",
+      "git add"
+    ],
+    "./src/{*.less,css/*.less,component/**/*.less}": [
+      "stylelint --cache --fix",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
