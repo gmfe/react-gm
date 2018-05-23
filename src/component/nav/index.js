@@ -65,7 +65,7 @@ class Nav extends React.Component {
                     <Flex alignCenter justifyCenter className="gm-nav-logo">
                         {logo}
                     </Flex>
-                    <div className="gm-margin-top-10 gm-nav-one">
+                    <div className="gm-margin-top-5 gm-nav-one">
                         {_.map(data, (one, oneI) => (
                             <div key={oneI + one.link} className={classNames({
                                 'active': oneSelected && (oneSelected.link === one.link)
@@ -95,7 +95,7 @@ class Nav extends React.Component {
                 {oneSelected && oneSelected.sub && (
                     <div className="gm-border-right gm-bg-white gm-overflow-y" style={{
                         width: widths[1],
-                        paddingTop: '80px',
+                        paddingTop: '50px',
                         height: '100vh'
                     }}>
                         {isJump ? (
