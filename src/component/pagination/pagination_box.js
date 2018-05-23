@@ -83,10 +83,11 @@ class PaginationBox extends React.Component {
                 currentIndex,
                 pageObjArr: newPageObjArr
             });
-        }).catch(() => {
+        }).catch((err) => {
             this.setState({
                 loading: false
             });
+            return Promise.reject(err);
         });
     };
 
