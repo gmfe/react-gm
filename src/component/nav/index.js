@@ -95,7 +95,7 @@ class Nav extends React.Component {
                 {oneSelected && oneSelected.sub && (
                     <div className="gm-border-right gm-bg-white gm-overflow-y" style={{
                         width: widths[1],
-                        paddingTop: '50px',
+                        paddingTop: '52px',
                         height: '100vh'
                     }}>
                         {isJump ? (
