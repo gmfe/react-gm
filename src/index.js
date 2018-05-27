@@ -1,7 +1,6 @@
 import Pagination from './component/pagination/pagination';
 import PaginationNew from './component/pagination/pagination_new';
 import PaginationText from './component/pagination/pagination.text';
-import PaginationBox from './component/pagination/pagination_box';
 import Dropper from './component/dropper/index';
 import {Form, FormItem, FormButton, FormBlock} from './component/form';
 import ImportLead from './component/import_lead';
@@ -51,6 +50,7 @@ import Popover from './component/popover';
 import ColorPicker from './component/color_picker';
 import Button from './component/button';
 import Affix from './component/affix';
+import Uploader from './component/uploader';
 
 import Validator from './validator';
 import Emitter from './emitter';
@@ -92,7 +92,6 @@ export {
     Pagination,
     PaginationNew,
     PaginationText,
-    PaginationBox,
     Form, FormItem, FormButton, FormBlock,
     Calendar,
     DatePicker,
@@ -146,6 +145,7 @@ export {
     ColorPicker,
     Button,
     Affix,
+    Uploader,
 
     Menu, Nav,
     Emitter,

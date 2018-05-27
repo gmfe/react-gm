@@ -3,7 +3,7 @@ imports:
     import {
         Form, FormItem, FormButton, FormBlock,
         Validator, 
-        Dropper, 
+        Uploader, 
         Radio, RadioGroup,
         Checkbox, CheckboxGroup,
         Switch
@@ -83,7 +83,7 @@ class FormWrap3 extends React.Component {
                     />
                 </FormItem>
                 <FormItem label="image">
-                    <Dropper/>
+                    <Uploader/>
                 </FormItem>
                 <FormButton>
                     <button className="btn btn-primary" type="submit">提交</button>
@@ -143,7 +143,7 @@ class FormItemWrap extends React.Component {
                 </FormItem>
                 <FormItem label="网址">
                     <div>
-                        <Dropper/> 其他东西
+                        <Uploader/> 其他东西
                     </div>
                 </FormItem>
                 <FormItem label="多选（行内排列）">
