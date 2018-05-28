@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {is} from 'gm-util';
+import classNames from 'classnames';
 
 class Uploader extends React.Component {
     handleUpload = (e) => {
@@ -26,12 +27,12 @@ class Uploader extends React.Component {
 
     render() {
         const {
-            className,
             children,
             accept,
             multiple
         } = this.props;
-        const cn = children ? 'gm-uploader-wrap' : (className ? className : 'gm-uploader-default');
+
+        const cn = classNames({'gm-uploader-warp': !!children ,'gm-uploader-default': !children });
         return (
             <div className="gm-uploader">   
                 <div 
@@ -40,8 +41,8 @@ class Uploader extends React.Component {
                 >{children}
                {
                    children ? ""
-                            : <div className="icon-wrap">
-                                <i id="upload-icon" className="iconfont icon-plus"></i>
+                            : <div className="gm-uploader-icon-wrap">
+                                <i className="gm-uploader-icon iconfont icon-plus"></i>
                               </div>
                             
                 }
@@ -66,8 +67,7 @@ Uploader.defaultProps = {
 Uploader.propTypes = {
     multiple: PropTypes.bool,
     onUpload: PropTypes.func.isRequired,
-    accept: PropTypes.string,
-    className: PropTypes.string
+    accept: PropTypes.string
 };
 
 export default Uploader;

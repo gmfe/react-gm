@@ -28,5 +28,4 @@ imports:
 - `multiple (bool)` 是否多选，默认false。 **Android微信**不支持多选，内部已经判断是微信就不开放多选功能
 - `accept (string)` 选择的类型，比如图片 `image/*`，excel `.xlsx`，具体见HTML5规范
 - `onUpload (func|isRequired)` 选择图片后触发函数
-- `classNames (string)` 如果不想用默认ui，传进来自定义
 - `children` 提供自定义选择图片的触发区域
