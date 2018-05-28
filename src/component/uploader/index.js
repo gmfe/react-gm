@@ -31,18 +31,21 @@ class Uploader extends React.Component {
             accept,
             multiple
         } = this.props;
+        const cn = children ? 'gm-uploader-wrap' : (className ? className : 'gm-uploader-default');
         return (
-            <div className="gm-uploader">
-                {
-                    
-                    children ? <div className={className} 
-                                    onClick={this.handleClick}
-                                >{children}</div>
-                             : <button className="btn btn-default"
-                                    onClick={this.handleClick}
-                               >上传文件</button>
+            <div className="gm-uploader">   
+                <div 
+                    className={cn} 
+                    onClick={this.handleClick}
+                >{children}
+               {
+                   children ? ""
+                            : <div className="icon-wrap">
+                                <i id="upload-icon" className="iconfont icon-plus"></i>
+                              </div>
+                            
                 }
-               
+                </div>
                 <input
                     type="file"
                     ref={ref => this.refInput = ref}

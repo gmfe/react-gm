@@ -17,8 +17,8 @@ imports:
 ::: demo 自定义样式
 ```jsx
 <div>
-    <Uploader onUpload={(datas, e) => console.log(datas, e)} className="gm-uploader-default" accept=".xlsx">
-        <span>点击区域上传，可以通过传入className自定义样式</span>
+    <Uploader onUpload={(datas, e) => console.log(datas, e)}  accept=".xlsx">
+        <button className="btn">自定义</button>
     </Uploader>
 </div>
 ```
