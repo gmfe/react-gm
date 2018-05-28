@@ -33,7 +33,7 @@ class Select extends React.Component {
         const target = e.target;
         const selectDOM = findDOMNode(this);
 
-        if (!contains(selectDOM, target)) {
+        if (this.state.show && !contains(selectDOM, target)) {
             this.setState({show: false});
         }
     }
