@@ -9,7 +9,7 @@ imports:
 ::: demo 默认样式
 ```jsx
 <div>
-    <Uploader accept="image/*" isDrop="true"/>
+    <Uploader onUpload={(datas, e) => console.log(datas, e)} accept="image/*" />
 
 </div>
 ```
@@ -17,7 +17,7 @@ imports:
 ::: demo 自定义样式
 ```jsx
 <div>
-    <Uploader className="gm-uploader-default" accept=".xlsx">
+    <Uploader onUpload={(datas, e) => console.log(datas, e)} className="gm-uploader-default" accept=".xlsx">
         <span>点击区域上传，可以通过传入className自定义样式</span>
     </Uploader>
 </div>
@@ -27,6 +27,6 @@ imports:
 ### Props
 - `multiple (bool)` 是否多选，默认false。 **Android微信**不支持多选，内部已经判断是微信就不开放多选功能
 - `accept (string)` 选择的类型，比如图片 `image/*`，excel `.xlsx`，具体见HTML5规范
-- `onDrop (func|isRequired)` 历史原因，名字就这样定了，选择图片后触发函数
+- `onUpload (func|isRequired)` 选择图片后触发函数
 - `classNames (string)` 如果不想用默认ui，传进来自定义
 - `children` 提供自定义选择图片的触发区域

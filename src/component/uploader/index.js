@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 import {is} from 'gm-util';
 
 class Uploader extends React.Component {
-    handleDrop = (e) => {
+    handleUpload = (e) => {
         e.preventDefault();
 
-        const {multiple} = this.props;
-        const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
-        const max = multiple ? droppedFiles.length : 1;
+        const {multiple, onUpload} = this.props;
+        const uploadedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
+        const max = multiple ? uploadedFiles.length : 1;
         let files = [];
         
         for (let i = 0; i < max; i++) {
-            const file = droppedFiles[i];
+            const file = uploadedFiles[i];
             file.preview = window.URL.createObjectURL(file);
             files.push(file);
         }
+        onUpload(files,e);
     };
 
     handleClick = () => {
@@ -48,7 +49,7 @@ class Uploader extends React.Component {
                     className="gm-uploader-input"
                     multiple={!is.weixin() && multiple}
                     accept={accept}
-                    onChange={this.handleDrop}
+                    onChange={this.handleUpload}
                 />
             </div>
         );
@@ -61,6 +62,7 @@ Uploader.defaultProps = {
 
 Uploader.propTypes = {
     multiple: PropTypes.bool,
+    onUpload: PropTypes.func.isRequired,
     accept: PropTypes.string,
     className: PropTypes.string
 };
