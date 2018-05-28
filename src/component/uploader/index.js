@@ -6,7 +6,7 @@ class Uploader extends React.Component {
     handleDrop = (e) => {
         e.preventDefault();
 
-        const {multiple, onDrop} = this.props;
+        const {multiple} = this.props;
         const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
         const max = multiple ? droppedFiles.length : 1;
         let files = [];
@@ -16,7 +16,6 @@ class Uploader extends React.Component {
             file.preview = window.URL.createObjectURL(file);
             files.push(file);
         }
-        onDrop(files, e);
     };
 
     handleClick = () => {
@@ -62,7 +61,6 @@ Uploader.defaultProps = {
 
 Uploader.propTypes = {
     multiple: PropTypes.bool,
-    onDrop: PropTypes.func.isRequired,
     accept: PropTypes.string,
     className: PropTypes.string
 };

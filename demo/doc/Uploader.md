@@ -9,7 +9,7 @@ imports:
 ::: demo 默认样式
 ```jsx
 <div>
-    <Uploader onDrop={(datas, e) => console.log(datas, e)} accept="image/*" isDrop="true"/>
+    <Uploader accept="image/*" isDrop="true"/>
 
 </div>
 ```
@@ -17,7 +17,7 @@ imports:
 ::: demo 自定义样式
 ```jsx
 <div>
-    <Uploader className="gm-uploader-default" onDrop={(datas, e) => console.log(datas, e)} accept=".xlsx">
+    <Uploader className="gm-uploader-default" accept=".xlsx">
         <span>点击区域上传，可以通过传入className自定义样式</span>
     </Uploader>
 </div>
