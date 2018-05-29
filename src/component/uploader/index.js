@@ -38,13 +38,12 @@ class Uploader extends React.Component {
                 <div 
                     className={cn} 
                     onClick={this.handleClick}
-                >{children}
+                >
                {
-                   children ? ""
+                   children ? children
                             : <div className="gm-uploader-icon-wrap">
-                                <i className="gm-uploader-icon iconfont icon-plus"></i>
-                              </div>
-                            
+                                <i className="gm-uploader-icon xfont xfont-plus"></i>
+                              </div>       
                 }
                 </div>
                 <input
