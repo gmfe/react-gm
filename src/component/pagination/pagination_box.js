@@ -157,7 +157,7 @@ class PaginationBox extends React.Component {
                 <div className="gm-pagination-box-list">
                     {_.isFunction(children) ? children({loading}) : children}
                 </div>
-                <div className="gm-pagination text-right">
+                <div className="gm-pagination text-center">
                     <ul className="pagination pagination-sm gm-margin-0">
                         <li className={classNames({
                             disabled: currentIndex === 0
