@@ -70,6 +70,7 @@ class Select extends React.Component {
             disabled,
             className,
             clean,
+            paddingLeftNone,
             ...rest
         } = this.props;
 
@@ -86,7 +87,9 @@ class Select extends React.Component {
                 })}
             >
                 <div
-                    className="gm-select-selection"
+                    className={classNames(className, `gm-select-selection`, {
+                        'gm-select-padding-left-0': paddingLeftNone
+                    })}
                     onClick={this.handleSelectionClick}
                 >
                     <div className="gm-select-selected">
@@ -120,7 +123,8 @@ Select.displayName = 'Select';
 Select.propTypes = {
     clean: PropTypes.bool,
     value: PropTypes.any.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    paddingLeftNone: PropTypes.bool
 };
 
 export default Select;
