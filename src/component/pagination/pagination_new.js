@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classNames from 'classnames';
+import {getLocale} from "../../locales";
 
 const initState = {
     pages: [{
@@ -104,14 +105,14 @@ class WithCount extends React.Component {
             <div className="gm-pagination">
                 <ul className="pagination pagination-sm" onClick={this.handlePage}>
                     <li className={classNames({ 'disabled': current === pages[0].number || pageClicked })}>
-                        <a href="javascript:;" data-page={current - 1}>上一页</a>
+                        <a href="javascript:;" data-page={current - 1}>{getLocale('pagination', 'previous')}</a>
                     </li>
 
                     {pages.map((page, i) => <li key={i} className={classNames({ 'disabled': current !== page.number && pageClicked, active: current === page.number })}>
                         <a href="javascript:;" data-page={page.number}>{page.number}</a></li>)}
 
                     <li className={classNames({ 'disabled': current === _.last(pages).number || pageClicked })}>
-                        <a href="javascript:;" data-page={current + 1}>下一页</a>
+                        <a href="javascript:;" data-page={current + 1}>{getLocale('pagination', 'next')}</a>
                     </li>
                 </ul>
             </div>
@@ -202,13 +203,13 @@ class WithoutCount extends React.Component {
                         <a
                             href="javascript:;"
                             onClick={this.handlePage.bind(this, true)}
-                        >上一页</a>
+                        >{getLocale('pagination', 'previous')}</a>
                     </li>
                     <li className={!reverse && !more ? 'disabled' : ''}>
                         <a
                             href="javascript:;"
                             onClick={this.handlePage.bind(this, false)}
-                        >下一页</a>
+                        >{getLocale('pagination', 'next')}</a>
                     </li>
                 </ul>
             </div>

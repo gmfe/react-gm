@@ -1,0 +1,67 @@
+{
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "show": "Show",
+    "total": "A total of",
+    "item": ""
+  },
+  "calendar": {
+    "weekDays": [
+      "Su",
+      "Mo",
+      "Tu",
+      "We",
+      "Th",
+      "Fr",
+      "Sa"
+    ],
+    "months": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ]
+  },
+  "dialog": {
+    "title": "Tips",
+    "cancelBtn": "Cancel",
+    "okBtn": "Ok"
+  },
+  "dropSelect": {
+    "operation": "Operation"
+  },
+  "importLead": {
+    "uploadBtn": "Upload xlsx",
+    "submit": "Submit",
+    "downLoadBtn": "Download the template"
+  },
+  "quickDetail": {
+    "showDetails": "Expand details",
+    "closeDetails": "Collapse details"
+  },
+  "sheet": {
+    "empty": "No data here"
+  },
+  "transfer": {
+    "selectAll": "Select all",
+    "itemsSource": "ItemsSource",
+    "search": "Search",
+    "target": "Target"
+  },
+  "tree": {
+    "selectAll": "Select all",
+    "search": "Search"
+  },
+  "treeSelect": {
+    "selectLabel": "Select all"
+  }
+}

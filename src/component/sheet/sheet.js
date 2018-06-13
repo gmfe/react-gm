@@ -11,6 +11,7 @@ import SheetSelect from './sheet_select';
 import SheetBatchAction from './sheet_batch_action';
 import Loading from '../loading';
 import Flex from '../flex';
+import {getLocale} from "../../locales";
 
 class Sheet extends React.Component {
     handleSelect(select, i, event) {
@@ -43,7 +44,7 @@ class Sheet extends React.Component {
             return (
                 <tr>
                     <td colSpan="99" className="text-center">
-                        {enableEmptyTip === true ? '没有数据' : enableEmptyTip}
+                        {enableEmptyTip === true ? getLocale('sheet', 'empty') : enableEmptyTip}
                     </td>
                 </tr>
             );

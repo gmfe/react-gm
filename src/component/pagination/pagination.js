@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {getLocale} from "../../locales";
 
 class WithCount extends React.Component {
     constructor(props) {
@@ -34,7 +35,7 @@ class WithCount extends React.Component {
             <div className="gm-pagination">
                 <ul className="pagination pagination-sm" onClick={this.handlePage}>
                     <li className={data.index === 1 ? 'disabled' : ''}>
-                        <a href="javascript:;" data-page={data.index - 1}>上一页</a>
+                        <a href="javascript:;" data-page={data.index - 1}>{getLocale('pagination', 'previous')}</a>
                     </li>
 
                     { begin >= 2 ? (<li><a href="javascript:;" data-page="1">1</a></li>) : undefined}
@@ -47,7 +48,7 @@ class WithCount extends React.Component {
                     { end <= all - 1 ? (<li><a href="javascript:;" data-page={all}>{all}</a></li>) : undefined}
 
                     <li className={(data.index === all || all === 0) ? 'disabled' : ''}>
-                        <a href="javascript:;" data-page={data.index + 1}>下一页</a>
+                        <a href="javascript:;" data-page={data.index + 1}>{getLocale('pagination', 'next')}</a>
                     </li>
                 </ul>
             </div>
@@ -104,13 +105,13 @@ class WithoutCount extends React.Component {
                         <a
                             href="javascript:;"
                             onClick={this.handlePage.bind(this, -1)}
-                        >上一页</a>
+                        >{getLocale('pagination', 'previous')}</a>
                     </li>
                     <li className={nextDisabled ? 'disabled' : ''}>
                         <a
                             href="javascript:;"
                             onClick={this.handlePage.bind(this, 1)}
-                        >下一页</a>
+                        >{getLocale('pagination', 'next')}</a>
                     </li>
                 </ul>
             </div>

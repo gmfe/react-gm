@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Flex from '../flex';
 import _ from 'lodash';
 import classNames from "classnames";
+import {getLocale} from "../../locales";
 
 class QuickDetail extends React.Component {
     state = {
@@ -51,7 +52,7 @@ class QuickDetail extends React.Component {
                 <Flex justifyCenter className="gm-padding-5">
                     {hasCollapse && (
                         <a href="javascript:;" className="gm-quick-filter-toggle" onClick={this.handleCollapse}>
-                            {show ? '收拢详细信息' : '展开详细信息'}&nbsp;
+                            {show ? getLocale('quickDetail', 'closeDetails') : getLocale('quickDetail', 'showDetails')}&nbsp;
                             <i className={classNames('xfont', {
                                 'xfont-down': !show,
                                 'xfont-up': show

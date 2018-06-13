@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {getLocale} from "../../locales";
 
 class WithCount extends React.Component {
     render() {
         const {data} =  this.props;
         return (
             <div className="gm-pagination-text">
-                显示 {data.offset + 1} ~ {data.offset + data.limit}，共 {data.count} 条记录
+                {getLocale('pagination', 'show')} {data.offset + 1} ~ {data.offset + data.limit}，{getLocale('pagination', 'total')} {data.count} {getLocale('pagination', 'item')}
             </div>
         );
     }
@@ -17,7 +18,7 @@ class WithoutCount extends React.Component {
         const {data} =  this.props;
         return (
             <div className="gm-pagination-text">
-                显示 {data.offset + 1} ~ {data.offset + data.limit} 条记录
+                {getLocale('pagination', 'show')} {data.offset + 1} ~ {data.offset + data.limit} {getLocale('pagination', 'item')}
             </div>
         );
     }
@@ -25,6 +26,7 @@ class WithoutCount extends React.Component {
 
 class PaginationText extends React.Component {
     render() {
+        console.warn('PaginationText 将会废弃,建议使用PaginationBox');
         if (this.props.data.count !== undefined) {
             return <WithCount {...this.props}/>;
         } else {

@@ -6,6 +6,7 @@ import {pinYinFilter} from "gm-util";
 import {getLeaf, filterGroupList} from './util';
 import _ from 'lodash';
 import classNames from 'classnames';
+import {getLocale} from "../../locales";
 
 class Tree extends React.Component {
     constructor(props) {
@@ -191,7 +192,7 @@ class Tree extends React.Component {
                             value={true}
                             checked={checkedAll}
                             onChange={() => this.handleSelectAll(!checkedAll)}
-                        >全选</Checkbox>
+                        >{getLocale('tree', 'selectAll')}</Checkbox>
                         <div className="gm-padding-lr-5 gm-text-desc">
                             {selectedValues.length}/{leafList.length}
                         </div>
@@ -229,7 +230,7 @@ Tree.defaultProps = {
         height: '350px'
     },
     withFilter: true,
-    placeholder: '搜索',
+    placeholder: getLocale('tree', 'search'),
     showGroupCheckbox: () => true
 };
 
