@@ -12,6 +12,5 @@ const getLocale = (component, text) => {
 
 export {
     setLocale,
-    getLocale,
-    react_gm_lng
+    getLocale
 };
