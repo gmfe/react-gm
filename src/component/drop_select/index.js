@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import {getLocale} from "../../locales";
 
 class DropSelect extends React.Component {
     constructor(props) {
@@ -149,7 +150,7 @@ class DropSelect extends React.Component {
                         <ul className="gm-dropselect-list">
                             <li className="gm-dropselect-item gm-dropselect-title">
                                 {coolTitle}
-                                {!!actions.length && <div>操作</div>}
+                                {!!actions.length && <div>{getLocale('dropSelect', 'operation')}</div>}
                             </li>
                             {coolList}
                         </ul>

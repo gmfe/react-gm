@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Flex from '../flex';
 import _ from 'lodash';
+import {getLocale} from "../../locales";
 
 class TreeSelect extends React.Component {
     constructor(props) {
@@ -250,7 +251,7 @@ TreeSelect.propTypes = {
 
 TreeSelect.defaultProps = {
     list: [],
-    label: '选择全部',
+    label: getLocale('treeSelect', 'selectLabel'),
     disabledSelected: false
 };
 

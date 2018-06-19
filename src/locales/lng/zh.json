@@ -1,0 +1,67 @@
+{
+  "pagination": {
+    "previous": "上一页",
+    "next": "下一页",
+    "show": "显示",
+    "total": "共",
+    "item": "条"
+  },
+  "calendar": {
+    "weekDays": [
+      "日",
+      "一",
+      "二",
+      "三",
+      "四",
+      "五",
+      "六"
+    ],
+    "months": [
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月"
+    ]
+  },
+  "dialog": {
+    "title": "提示",
+    "cancelBtn": "取消",
+    "okBtn": "确定"
+  },
+  "dropSelect": {
+    "operation": "操作"
+  },
+  "importLead": {
+    "uploadBtn": "上传xlsx",
+    "submit": "提交",
+    "downLoadBtn": "模板下载"
+  },
+  "quickDetail": {
+    "showDetails": "展开详细信息",
+    "closeDetails": "收拢详细信息"
+  },
+  "sheet": {
+    "empty": "没有数据"
+  },
+  "transfer": {
+    "selectAll": "全选",
+    "itemsSource": "待选择",
+    "search": "搜索",
+    "target": "已选择"
+  },
+  "tree": {
+    "selectAll": "全选",
+    "search": "搜索"
+  },
+  "treeSelect": {
+    "selectLabel": "选择全部"
+  }
+}

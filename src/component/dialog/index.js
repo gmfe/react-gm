@@ -5,6 +5,7 @@ import _ from 'lodash';
 import Emitter from '../../emitter';
 import classNames from 'classnames';
 import LayoutRoot from '../layout_root';
+import {getLocale} from "../../locales";
 
 let DialogStatics = {};
 DialogStatics = {
@@ -202,13 +203,13 @@ Dialog.propTypes = {
 };
 Dialog.defaultProps = {
     show: false,
-    title: '提示',
+    title: getLocale('dialog','title'),
     type: 'confirm',
     onCancel: _.noop,
     onOK: _.noop,
     size: 'md',
-    cancelBtn: '取消',
-    OKBtn: '确定',
+    cancelBtn: getLocale('dialog', 'cancelBtn'),
+    OKBtn: getLocale('dialog', 'okBtn'),
     disableMaskClose: false
 };
 

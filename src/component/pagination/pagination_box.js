@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import _ from 'lodash';
+import {getLocale} from "../../locales";
 
 // 预估过一个月后自己看不懂
 class PaginationBox extends React.Component {
@@ -165,7 +166,7 @@ class PaginationBox extends React.Component {
                             <a
                                 href="javascript:;"
                                 onClick={this.handlePre}
-                            >上一页</a>
+                            >{getLocale('pagination', 'previous')}</a>
                         </li>
 
                         {!disablePage && this.renderPeek()}
@@ -176,7 +177,7 @@ class PaginationBox extends React.Component {
                             <a
                                 href="javascript:;"
                                 onClick={this.handleNext}
-                            >下一页</a>
+                            >{getLocale('pagination', 'next')}</a>
                         </li>
                     </ul>
                 </div>

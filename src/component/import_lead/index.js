@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import Dropper from '../dropper/index.js';
+import {getLocale} from "../../locales";
 
 class ImportLead extends React.Component {
     constructor(props) {
@@ -76,17 +77,17 @@ class ImportLead extends React.Component {
                 <div>
                     <div>
                         <Dropper className="gm-dropper-wrap" onDrop={this.handleDrop} accept=".xlsx">
-                            <button className="btn btn-primary btn-sm">上传xlsx</button>
+                            <button className="btn btn-primary btn-sm">{getLocale('importLead', 'uploadBtn')}</button>
                         </Dropper>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         {!this.props.disableSubmit && (
                             <button disabled={!canSubmit} className="btn btn-primary btn-sm"
                                     onClick={this.handleSubmit}>
-                                提交
+                                {getLocale('importLead', 'submit')}
                             </button>
                         )}
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        {fileTempUrl ? (<a href={fileTempUrl} target="blank">模板下载</a>) : undefined}
+                        {fileTempUrl ? (<a href={fileTempUrl} target="blank">{getLocale('importLead', 'downLoadBtn')}</a>) : undefined}
                         <div>{filename}</div>
                     </div>
                     {!this.props.unLine && (

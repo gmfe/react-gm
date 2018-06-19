@@ -6,6 +6,7 @@ import Box from './box';
 import classNames from 'classnames';
 import {getLeaf, filterGroupList} from "../tree/util";
 import Tree from '../tree';
+import {getLocale} from "../../locales";
 
 class TransferGroup extends React.Component {
     constructor(props) {
@@ -148,13 +149,13 @@ TransferGroup.defaultProps = {
         height: '350px'
     },
 
-    leftTitle: '待选择',
+    leftTitle: getLocale('transfer', 'itemsSource'),
     leftWithFilter: true,
-    leftPlaceHolder: '搜索',
+    leftPlaceHolder: getLocale('transfer', 'search'),
 
-    rightTitle: '已选择',
+    rightTitle: getLocale('transfer', 'target'),
     rightWithFilter: true,
-    rightPlaceHolder: '搜索'
+    rightPlaceHolder: getLocale('transfer', 'search')
 };
 
 export default TransferGroup;

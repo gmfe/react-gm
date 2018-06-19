@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Flex from '../flex';
 import Collapse from '../collapse';
 import classNames from 'classnames';
+import {getLocale} from "../../locales";
 
 class QuickFilter extends React.Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class QuickFilter extends React.Component {
 
                     <Flex justifyCenter className="gm-padding-10">
                         <a href="javascript:;" className="gm-quick-filter-toggle" onClick={this.handleCollapse}>
-                            {show ? '收拢筛选条件' : '展开筛选条件'}&nbsp;
+                            {show ? getLocale('quickDetail', 'closeDetails') : getLocale('quickDetail', 'showDetails')}&nbsp;
                             <i className={classNames('xfont', {
                                 'xfont-down': !show,
                                 'xfont-up': show

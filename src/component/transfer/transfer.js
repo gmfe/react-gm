@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Flex from '../flex';
 import Box from './box';
 import classNames from "classnames";
+import {getLocale} from "../../locales";
 
 class Transfer extends React.Component {
     constructor(props) {
@@ -143,13 +144,13 @@ Transfer.defaultProps = {
         height: '350px'
     },
 
-    leftTitle: '待选择',
+    leftTitle: getLocale('transfer', 'itemsSource'),
     leftWithFilter: true,
-    leftPlaceHolder: '搜索',
+    leftPlaceHolder: getLocale('transfer', 'search'),
 
-    rightTitle: '已选择',
+    rightTitle: getLocale('transfer', 'target'),
     rightWithFilter: true,
-    rightPlaceHolder: '搜索'
+    rightPlaceHolder: getLocale('transfer', 'search')
 };
 
 export default Transfer;

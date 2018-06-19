@@ -4,6 +4,7 @@ import moment from 'moment';
 import classNames from 'classnames';
 import _ from 'lodash';
 import Flex from '../flex';
+import {getLocale} from "../../locales";
 
 const nowMountStart = +moment().startOf('day');
 
@@ -45,7 +46,7 @@ class Calendar extends React.Component {
             selected: selected ? selected : null, // 调用方的时间
             moment: selected ? moment(selected) : moment(), // 日历内的时间
             isSelectMonth: false,
-            weekDays: ['日', '一', '二', '三', '四', '五', '六']
+            weekDays: getLocale('calendar', 'weekDays')
         };
         this.handleSelectMonth = ::this.handleSelectMonth;
         this.handleSelectDay = ::this.handleSelectDay;
@@ -93,7 +94,7 @@ class Calendar extends React.Component {
                     <span
                         className="gm-calendar-head-month"
                         onClick={this.handleSelectMonth}
-                    >{month + 1}月</span>
+                    >{getLocale('calendar', 'months')[month]}</span>
                     <span>&nbsp;&nbsp;{m.year()}</span>
                 </Flex>
                 <a
@@ -128,7 +129,7 @@ class Calendar extends React.Component {
                     key={i}
                     className={cn}
                     onClick={this.handleChangeMonth.bind(this, i)}
-                >{i + 1}月</span>
+                >{getLocale('calendar', 'months')[i]}</span>
             );
         }
         return (

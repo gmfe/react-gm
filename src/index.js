@@ -57,6 +57,7 @@ import Validator from './validator';
 import Emitter from './emitter';
 
 import {Select, Option} from './component/select';
+import {setLocale} from "./locales";
 
 Object.assign(Sheet, {
     SheetColumn,
@@ -151,5 +152,6 @@ export {
 
     Menu, Nav,
     Emitter,
-    ImagePreview
+    ImagePreview,
+    setLocale
 };

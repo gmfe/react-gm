@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Flex from '../flex';
 import Collapse from '../collapse';
 import classNames from 'classnames';
+import {getLocale} from "../../locales";
 
 class QuickPanel extends React.Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class QuickPanel extends React.Component {
                                           style={{color: iconColor, marginRight: '2px', verticalAlign: 'middle'}}/>}<span style={{verticalAlign: 'middle'}}>{title}</span></span>
                         {collapse ? (
                             <a onClick={::this.handleCollapse} className="gm-margin-left-20 gm-font-12">
-                                {this.state.in ? "收拢明细" : "展现明细"}&nbsp;
+                                {this.state.in ? getLocale('quickDetail', 'closeDetails') : getLocale('quickDetail', 'showDetails')}&nbsp;
                                 <i className={classNames('xfont', {
                                     'xfont-down': !this.state.in,
                                     'xfont-up': this.state.in

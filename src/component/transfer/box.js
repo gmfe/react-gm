@@ -3,6 +3,7 @@ import Flex from '../flex';
 import {Checkbox, CheckboxGroup} from '../checkbox';
 import {pinYinFilter} from "gm-util";
 import _ from 'lodash';
+import {getLocale} from "../../locales";
 
 class Box extends React.Component {
     constructor(props) {
@@ -91,7 +92,7 @@ class Box extends React.Component {
                         value={[list.length !== 0 && list.length === selectedValues.length]}
                         onChange={this.handleSelectAll}
                     >
-                        <Checkbox value={true}>全选</Checkbox>
+                        <Checkbox value={true}>{getLocale('transfer', 'selectAll')}</Checkbox>
                     </CheckboxGroup>
                     <div className="gm-padding-lr-5 gm-text-desc">{selectedValues.length}/{list.length}</div>
                 </Flex>
