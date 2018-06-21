@@ -1,5 +1,5 @@
 import React from 'react';
-import {Flex, Emitter} from '../src/index';
+import {Flex, Emitter, Storage, setLocale} from '../src/index';
 import createHashHistory from 'history/createHashHistory';
 import NavConfigDoc from './doc.nav.config';
 import queryString from 'query-string';
@@ -16,6 +16,14 @@ class App extends React.Component {
         super(props);
         this.doScrollToAnchor = ::this.doScrollToAnchor;
         this.handleClickAnchor = ::this.handleClickAnchor;
+
+        this.state = {
+            lng: Storage.get('lng') || 'zh'
+        };
+
+        if (this.state.lng) {
+            setLocale(this.state.lng);
+        }
     }
 
     componentDidMount() {
@@ -111,7 +119,19 @@ class App extends React.Component {
                 leftWidth="230px"
                 rightTop={<RightTop
                     leftWidth="230px"
-                    info={<div className="gm-padding-lr-10">v{version}</div>}
+                    info={(
+                        <div className="gm-padding-lr-10">
+                            <select value={this.state.lng} onChange={e => {
+                                this.setState({lng: e.target.value});
+                                setLocale(e.target.value);
+                            }}>
+                                <option value="en">English</option>
+                                <option value="zh">中文</option>
+                            </select>
+                            &nbsp;
+                            v{version}
+                        </div>
+                    )}
                 />}
                 menu={this.renderMenu()}
             >

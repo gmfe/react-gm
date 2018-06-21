@@ -146,11 +146,11 @@ class Component2 extends React.Component {
 - `onSelect (func|isRequired)` 选择回调，参数和`selectedValues`一样
 - `listStyle (object)` 框的高宽，默认`{'{'}width: '250px', height: '350px'{'}'}`
 
-- `leftTitles (string)` 标题，默认 待选择 
+- `leftTitle (string)` 标题，默认 待选择 
 - `leftWithFilter (func|bool)` 过滤函数，默认 true 且集成拼音搜索。false 则不出过滤框，fun 则过滤逻辑业务控
 - `leftPlaceHolder (string)`
 
-- `rightTitles (string)` 标题，默认 待选择 
+- `rightTitle (string)` 标题，默认 待选择 
 - `rightWithFilter (func|bool)` 过滤函数，默认 true 且集成拼音搜索。false 则不出过滤框，fun 则过滤逻辑业务控
 - `rightPlaceHolder (string)`
 
