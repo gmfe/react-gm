@@ -14,12 +14,46 @@ import Flex from '../flex';
 import {getLocale} from "../../locales";
 
 class Sheet extends React.Component {
+    constructor(props) {
+        super(props);
+        this.checkboxOrRadioName = 'sheet_checkbox_radio_' + Math.random();
+    }
+
     handleSelect(select, i, event) {
-        select.props.onSelect(event.target.checked, i);
+        // 恩，很复杂
+        const {checked} = event.target;
+        if (select.props.onChange) {
+            const {list} = this.props;
+            if (select.props.isRadio) {
+                _.each(list, v => {
+                    if (!select.props.isDisabled(v)) {
+                        v._gm_select = false;
+                    }
+                });
+                list[i]._gm_select = true;
+            } else {
+                list[i]._gm_select = checked;
+            }
+            select.props.onChange(list);
+        } else {
+            select.props.onSelect(checked, i);
+        }
     }
 
     handleSelectAll(select, event) {
-        select.props.onSelectAll(event.target.checked);
+        // 恩，很复杂
+        const {checked} = event.target;
+        if (select.props.onChange) {
+            const {list} = this.props;
+            _.each(list, v => {
+                if (!select.props.isDisabled(v)) {
+                    v._gm_select = checked;
+                }
+            });
+            select.props.onChange(list);
+        } else {
+            select.props.onSelectAll(checked);
+        }
     }
 
     handleExpanded(index) {
@@ -67,7 +101,9 @@ class Sheet extends React.Component {
                 {select && (
                     <td>
                         <input
-                            type="checkbox"
+                            type={select.props.isRadio ? "radio" : "checkbox"}
+                            name={this.checkboxOrRadioName}
+                            className="gm-cursor"
                             checked={value._gm_select || false}
                             onChange={this.handleSelect.bind(this, select, index)}
                             disabled={select.props.isDisabled(value)}
@@ -142,7 +178,7 @@ class Sheet extends React.Component {
 
         if (select && list.length > 0) {
             // 存在有效行，且不存在未选中的行
-            isSelectAll = _.find(list, value => !select.props.isDisabled(value)) && !_.find(list, value => !select.props.isDisabled(value) && !value._gm_select);
+            isSelectAll = !_.find(list, value => !value._gm_select);
         }
 
         return (
@@ -161,11 +197,13 @@ class Sheet extends React.Component {
                             )}
                             {select && (
                                 <th className="gm-sheet-select">
-                                    <input
-                                        type="checkbox"
-                                        checked={isSelectAll}
-                                        onChange={this.handleSelectAll.bind(this, select)}
-                                    />
+                                    {!select.props.isRadio && (
+                                        <input
+                                            type="checkbox"
+                                            checked={isSelectAll}
+                                            onChange={this.handleSelectAll.bind(this, select)}
+                                        />
+                                    )}
                                 </th>
                             )}
                             {_.map(columns, (value, index) => {

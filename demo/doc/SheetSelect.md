@@ -35,6 +35,7 @@ class SheetWrap extends React.Component {
     handleSelect(checked, index){
         console.log('onSelect', checked, index);
         const list = [...this.state.list];
+        
         list[index]._gm_select = checked;
         this.setState({
             list
@@ -72,16 +73,67 @@ class SheetWrap extends React.Component {
         );
     }
 }
+
+class SheetWrap2 extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            list: [{
+                      id: 3,
+                      name: '小明',
+                      age: '10'
+                  }, {
+                      id: 4,
+                      name: '小红',
+                      age: '15',
+                      _gm_select: true
+                  }, {
+                     id: 5,
+                     name: '小蓝',
+                     age: '20'
+                  }]
+        };
+        
+        this.isDisabled = ::this.isDisabled;
+    }
+    
+    handleChange = (list) => {
+          this.setState({list});
+    };
+    
+    isDisabled(line){
+        return line.age > 18;
+    }
+    
+    render() {
+        return (
+           <Sheet list={this.state.list}>
+               <SheetColumn field="id" name="id"/>
+               <SheetColumn field="name" name="名字"/>
+               <SheetColumn field="age" name="年龄"/>
+               <SheetSelect 
+                   onChange={this.handleChange}
+                   isDisabled={this.isDisabled}
+                   isRadio
+               />
+           </Sheet>
+        );
+    }
+}
 ```
 ```jsx
 <SheetWrap/>
+<SheetWrap2/>
 ```
 :::
 
 ### Props
 - `onSelect (func|isRequired)`
-- `onSelectAll (func|isRequired)`
+- `onSelectAll (func)`
+- `onChange (func)` 如果提供，则 onSelect onSelectAll 无效。 参数是设置好gm_select的列表数据，直接用重新 render 即可。相对 onSelect onSelectAll 简单很多
 - `isDisabled (func)`
+- `isRadio (bool)`
 
 一但用到`SheetSelect`，就约定了数据eList中的`_gm_select`字段，`_gm_select`为bool是选中。
 `onSelect`当选择一行时触发，参数为是否选中`checked`，和当前索引`index`。
