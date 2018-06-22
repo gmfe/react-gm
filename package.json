@@ -48,7 +48,8 @@
     "query-string": "^5.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "gm-webpack": "^0.3.0"
   },
   "devDependencies": {
     "add-asset-html-webpack-plugin": "^2.1.2",
@@ -67,7 +68,7 @@
     "file-loader": "^1.1.4",
     "fs": "0.0.2",
     "gm-util": "^5.5.0",
-    "gm-webpack": "^0.2.0",
+    "gm-webpack": "^0.3.0",
     "gm-xfont": "^1.0.15",
     "happypack": "^4.0.1",
     "highlight.js": "^9.11.0",
