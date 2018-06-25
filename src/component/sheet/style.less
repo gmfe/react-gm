@@ -24,18 +24,23 @@
       background: @table-bg-accent;
 
       > td {
-        padding: 0 10px 0 0;
+        padding: 0;
 
-        .gm-sheet {
+        > .gm-sheet {
           .table {
             margin-bottom: 0;
-            border-bottom: none;
             background: @table-bg-accent;
+            border: 1px solid @brand-primary;
 
             thead,
             tbody {
               tr {
                 background: @table-bg-accent;
+
+                th:last-child,
+                td:last-child {
+                  border-right: 1px solid @brand-primary;
+                }
               }
             }
 

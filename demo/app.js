@@ -10,6 +10,7 @@ const history = createHashHistory();
 
 const version = __REACT_GM_VERSION__; //eslint-disable-line
 
+
 @withRouter
 class App extends React.Component {
     constructor(props) {
@@ -123,6 +124,7 @@ class App extends React.Component {
                         <div className="gm-padding-lr-10">
                             <select value={this.state.lng} onChange={e => {
                                 this.setState({lng: e.target.value});
+                                Storage.set('lng', e.target.value);
                                 setLocale(e.target.value);
                             }}>
                                 <option value="en">English</option>

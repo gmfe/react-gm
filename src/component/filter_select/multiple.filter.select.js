@@ -120,15 +120,16 @@ class MultipleFilterSelect extends React.Component {
             onSelect(_.concat(selected, value));
         }
 
-        // 置空
-        this.setState({
-            query: ''
-        });
+        // 多选不走后面的逻辑
+        // // 置空
+        // this.setState({
+        //     query: ''
+        // });
 
         // 让input获得焦点，响应键盘
         this.refInput && this.refInput.focus();
 
-        this.doChange('');
+        // this.doChange('');
     }
 
     handleChange(event) {

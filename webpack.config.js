@@ -21,10 +21,6 @@ config.module.rules.push({
     test: /\.md/,
     loader: 'happypack/loader?id=md'
 });
-config.module.rules.push({
-    test: /\.json$/,
-    loader: 'json-loader'
-});
 
 config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/));
 
