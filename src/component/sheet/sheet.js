@@ -138,7 +138,6 @@ class Sheet extends React.Component {
 
             if (expandedRowRender && value.__gm_expanded) {
                 trs.push(<tr className="gm-sheet-expanded-tr" key={index + '_expanded'}>
-                    <td/>
                     <td className="gm-sheet-expanded-td" colSpan="99">
                         {expandedRowRender(index)}
                     </td>
