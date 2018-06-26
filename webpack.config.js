@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const webpackConfig = require('gm-webpack/webpack.config.js');
 const HappyPack = require('happypack');
 const happyThreadPool = HappyPack.ThreadPool({size: 6});
-const {version} = require('./package.json');
 
 const config = webpackConfig({
     publicPath: '/react-gm/build/',
@@ -22,7 +21,7 @@ config.module.rules.push({
     loader: 'happypack/loader?id=md'
 });
 
-config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/));
+config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
 
 config.plugins.push(new HappyPack({
     id: 'md',
@@ -33,10 +32,6 @@ config.plugins.push(new HappyPack({
             cacheDirectory: true
         }
     }, 'markdown-it-react-loader']
-}));
-
-config.plugins.push(new webpack.DefinePlugin({
-    __REACT_GM_VERSION__: JSON.stringify(version)
 }));
 
 module.exports = config;

@@ -8,7 +8,7 @@ import {Framework, RightTop} from '../frame';
 
 const history = createHashHistory();
 
-const version = __REACT_GM_VERSION__; //eslint-disable-line
+const version = __VERSION__; //eslint-disable-line
 
 
 @withRouter

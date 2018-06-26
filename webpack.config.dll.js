@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const webpackConfigDll = require('gm-webpack/webpack.config.dll.js');
 
 const config = webpackConfigDll({
@@ -10,5 +11,7 @@ const config = webpackConfigDll({
         'lodash', 'moment'
     ]
 });
+
+config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
 
 module.exports = config;

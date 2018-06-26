@@ -8,6 +8,7 @@ import {
 import {importComponent, processReactRouterProps} from 'gm-util';
 import {Emitter} from '../src/index';
 import _ from 'lodash';
+import {hot} from 'react-hot-loader';
 
 import App from './app';
 
@@ -40,7 +41,7 @@ const RouteConfig = () => (
             <App {...processReactRouterProps(props)}>
                 <RRSwitch>
                     <Route exact path="/" render={() => <Redirect from="/" to="/doc/About"/>}/>
-                    <Route exact path="/demo" component={importComponent(() => import('./component/demo'))}/>
+                    <Route exact path="/demo" component={importComponent(() => import('./demo'))}/>
 
                     <Route exact path="/doc" render={() => <Redirect from="/" to="/doc/About"/>}/>
                     <Route exact path="/:path1/:path2" component={Page}/>
@@ -52,4 +53,4 @@ const RouteConfig = () => (
     </Router>
 );
 
-export default RouteConfig;
+export default hot(module)(RouteConfig);

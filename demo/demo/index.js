@@ -10,8 +10,6 @@ class Component extends React.Component {
 
         return (
             <div>
-
-                demo
                 <input type="text"/>
                 <DatePicker
                     date={new Date}
