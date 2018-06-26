@@ -4,11 +4,12 @@ import classNames from 'classnames';
 
 class DropDownItem extends React.Component {
     render() {
-        const {children, active, ...rest} = this.props;
+        const {children, active, className, ...rest} = this.props;
+
         return (
             <li {...rest} className={classNames({
                 active
-            }, classNames)}>
+            }, className)}>
                 <a href="javascript:;">{children}</a>
             </li>
         );
