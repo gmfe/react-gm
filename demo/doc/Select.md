@@ -60,6 +60,10 @@ class Component extends React.Component {
                 <Select value={value_2} onChange={this.handleChange.bind(this, 'value_2')} clean>
                     {_.map(list, v => <Option key={v.value} value={v.value}>{v.name}</Option>)}
                 </Select>
+                <div>paddingLeftNone</div>
+                <Select value={value_2} onChange={this.handleChange.bind(this, 'value_2')} paddingLeftNone>
+                    {_.map(list, v => <Option key={v.value} value={v.value}>{v.name}</Option>)}
+                </Select>
             </div>
         );
     }
