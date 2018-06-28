@@ -1,19 +1,19 @@
-import {EventEmitter} from 'gm-util';
+import { EventEmitter } from 'gm-util'
 
-const event_prefix = 'GM_EVENT_';
+const GMEVENT = 'GM_EVENT_'
 
-const Emitter = new EventEmitter();
+const Emitter = new EventEmitter()
 
 const TYPE = {
-    MODAL_SHOW: event_prefix + 'MODAL_SHOW',
-    MODAL_HIDE: event_prefix + 'MODAL_HIDE',
-    MODAL_SCROLL: event_prefix + 'MODAL_SCROLL',
-    BROWSER_SCROLL: event_prefix + 'BROWSER_SCROLL',
-    FULLLOADING_SHOW: event_prefix + 'FULLLOADING_SHOW',
-    FULLLOADING_HIDE: event_prefix + 'FULLLOADING_HIDE',
-    TITLE_CHANGE: event_prefix + 'TITLE_CHANGE'
-};
+  MODAL_SHOW: GMEVENT + 'MODAL_SHOW',
+  MODAL_HIDE: GMEVENT + 'MODAL_HIDE',
+  MODAL_SCROLL: GMEVENT + 'MODAL_SCROLL',
+  BROWSER_SCROLL: GMEVENT + 'BROWSER_SCROLL',
+  FULLLOADING_SHOW: GMEVENT + 'FULLLOADING_SHOW',
+  FULLLOADING_HIDE: GMEVENT + 'FULLLOADING_HIDE',
+  TITLE_CHANGE: GMEVENT + 'TITLE_CHANGE'
+}
 
-Emitter.TYPE = TYPE;
+Emitter.TYPE = TYPE
 
-export default Emitter;
+export default Emitter

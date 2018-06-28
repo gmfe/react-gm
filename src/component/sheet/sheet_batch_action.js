@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 class SheetBatchAction extends React.Component {
-    render() {
-        return <div>{this.props.children}</div>;
-    }
+  render () {
+    return <div>{this.props.children}</div>
+  }
 }
 
-SheetBatchAction.displayName = 'SheetBatchAction';
+SheetBatchAction.displayName = 'SheetBatchAction'
 
-export default SheetBatchAction;
+export default SheetBatchAction

@@ -1,72 +1,72 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
-import classNames from 'classnames';
-import {is} from 'gm-util';
+import React from 'react'
+import PropTypes from 'prop-types'
+import _ from 'lodash'
+import classNames from 'classnames'
+import { is } from 'gm-util'
 
 class Button extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleClick = ::this.handleClick;
-        this.state = {
-            isLoading: false
-        };
+  constructor (props) {
+    super(props)
+    this.handleClick = ::this.handleClick
+    this.state = {
+      isLoading: false
+    }
+  }
+
+  handleClick (event) {
+    event.preventDefault()
+    const {onClick} = this.props
+    const result = onClick(event)
+
+    if (!is.promise(result)) {
+      return
     }
 
-    handleClick(event) {
-        event.preventDefault();
-        const {onClick} = this.props;
-        const result = onClick(event);
+    this.setState({isLoading: true})
 
-        if (!is.promise(result)) {
-            return;
-        }
+    Promise.resolve(result).then(() => {
+      this.setState({
+        isLoading: false
+      })
+    }).catch(() => {
+      this.setState({
+        isLoading: false
+      })
+    })
+  }
 
-        this.setState({isLoading: true});
-
-        Promise.resolve(result).then(() => {
-            this.setState({
-                isLoading: false
-            });
-        }).catch(() => {
-            this.setState({
-                isLoading: false
-            });
-        });
-    }
-
-    render() {
-        const {
+  render () {
+    const {
             onClick, // eslint-disable-line
-            children,
-            className,
-            disabled,
-            ...rest
-        } = this.props;
+      children,
+      className,
+      disabled,
+      ...rest
+    } = this.props
 
-        const {isLoading} = this.state;
+    const {isLoading} = this.state
 
-        return (
-            <button
-                {...rest}
-                className={classNames('gm-button', className)}
-                disabled={isLoading || disabled}
-                onClick={this.handleClick}
-            >
-                {isLoading && <i className='xfont xfont-loading gm-button-loading'/>}
-                {children}
-            </button>
-        );
-    }
+    return (
+      <button
+        {...rest}
+        className={classNames('gm-button', className)}
+        disabled={isLoading || disabled}
+        onClick={this.handleClick}
+      >
+        {isLoading && <i className='xfont xfont-loading gm-button-loading'/>}
+        {children}
+      </button>
+    )
+  }
 }
 
 // 只封装了 loading
 Button.propTypes = {
-    onClick: PropTypes.func
-};
+  onClick: PropTypes.func
+}
 
 Button.defaultProps = {
-    onClick: _.noop
-};
+  onClick: _.noop
+}
 
-export default Button;
+export default Button

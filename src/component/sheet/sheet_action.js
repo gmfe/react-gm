@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 class SheetAction extends React.Component {
-    render() {
-        return <div>{this.props.children}</div>;
-    }
+  render () {
+    return <div>{this.props.children}</div>
+  }
 }
 
-SheetAction.displayName = 'SheetAction';
+SheetAction.displayName = 'SheetAction'
 
-export default SheetAction;
+export default SheetAction
