@@ -3,13 +3,20 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 class DropDownItem extends React.Component {
+  handleClick = () => {
+    if (this.props.disabled) {
+      return null
+    }
+    this.props.onClick()
+  }
+
   render () {
-    const {children, active, className, ...rest} = this.props
+    const {children, active, className, disabled, ...rest} = this.props
 
     return (
-      <li {...rest} className={classNames({
-        active
-      }, className)}>
+      <li {...rest} className={classNames(active, {
+        'disabled': disabled
+      }, className)} disabled={disabled} onClick={this.handleClick}>
         <a href='javascript:;'>{children}</a>
       </li>
     )
@@ -17,7 +24,9 @@ class DropDownItem extends React.Component {
 }
 
 DropDownItem.propTypes = {
-  active: PropTypes.bool
+  active: PropTypes.bool,
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func
 }
 
 export default DropDownItem
