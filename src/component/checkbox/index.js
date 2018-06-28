@@ -1,7 +1,7 @@
-import Checkbox from './checkbox';
-import CheckboxGroup from './checkbox_group';
+import Checkbox from './checkbox'
+import CheckboxGroup from './checkbox_group'
 
 export {
-    Checkbox,
-    CheckboxGroup
-};
+  Checkbox,
+  CheckboxGroup
+}

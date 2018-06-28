@@ -1,91 +1,91 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import _ from 'lodash';
+import React from 'react'
+import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
+import _ from 'lodash'
 
 class Affix extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor (props) {
+    super(props)
 
-        this.state = {
-            boxStyle: {},
-            style: {}
-        };
-
-        this.throttleHandleScroll = _.throttle(this.handleScroll, 500);
+    this.state = {
+      boxStyle: {},
+      style: {}
     }
 
-    componentDidMount() {
-        window.addEventListener('scroll', this.throttleHandleScroll);
-        this.dom = ReactDOM.findDOMNode(this);
-    }
+    this.throttleHandleScroll = _.throttle(this.handleScroll, 500)
+  }
 
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.throttleHandleScroll);
-    }
+  componentDidMount () {
+    window.addEventListener('scroll', this.throttleHandleScroll)
+    this.dom = ReactDOM.findDOMNode(this)
+  }
 
-    handleScroll = () => {
-        const rect = this.dom.getBoundingClientRect();
-        const {top, bottom, offset} = this.props;
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.throttleHandleScroll)
+  }
 
-        if (top && rect.top - offset <= 0) {
-            this.setState({
-                boxStyle: {
-                    width: rect.width,
-                    height: rect.height
-                },
-                style: {
-                    position: 'fixed',
-                    top: offset + 'px',
-                    left: rect.left,
-                    width: rect.width
-                }
-            });
-        } else if (bottom && rect.bottom + offset >= (window.innerHeight || window.document.documentElement.clientHeight)) {
-            this.setState({
-                boxStyle: {
-                    width: rect.width,
-                    height: rect.height
-                },
-                style: {
-                    position: 'fixed',
-                    bottom: offset + 'px',
-                    left: rect.left,
-                    width: rect.width
-                }
-            });
-        } else {
-            this.setState({
-                boxStyle: {},
-                style: {}
-            });
+  handleScroll = () => {
+    const rect = this.dom.getBoundingClientRect()
+    const {top, bottom, offset} = this.props
+
+    if (top && rect.top - offset <= 0) {
+      this.setState({
+        boxStyle: {
+          width: rect.width,
+          height: rect.height
+        },
+        style: {
+          position: 'fixed',
+          top: offset + 'px',
+          left: rect.left,
+          width: rect.width
         }
-    };
-
-    render() {
-        const {children} = this.props;
-        const {style, boxStyle} = this.state;
-
-        return (
-            <div style={boxStyle}>
-                <div style={style}>
-                    {children}
-                </div>
-            </div>
-        );
+      })
+    } else if (bottom && rect.bottom + offset >= (window.innerHeight || window.document.documentElement.clientHeight)) {
+      this.setState({
+        boxStyle: {
+          width: rect.width,
+          height: rect.height
+        },
+        style: {
+          position: 'fixed',
+          bottom: offset + 'px',
+          left: rect.left,
+          width: rect.width
+        }
+      })
+    } else {
+      this.setState({
+        boxStyle: {},
+        style: {}
+      })
     }
+  }
+
+  render () {
+    const {children} = this.props
+    const {style, boxStyle} = this.state
+
+    return (
+      <div style={boxStyle}>
+        <div style={style}>
+          {children}
+        </div>
+      </div>
+    )
+  }
 }
 
 Affix.propTypes = {
-    top: PropTypes.bool,
-    bottom: PropTypes.bool,
-    offset: PropTypes.number
-};
+  top: PropTypes.bool,
+  bottom: PropTypes.bool,
+  offset: PropTypes.number
+}
 
 Affix.defaultProps = {
-    top: false,
-    bottom: true,
-    offset: 0
-};
+  top: false,
+  bottom: true,
+  offset: 0
+}
 
-export default Affix;
+export default Affix

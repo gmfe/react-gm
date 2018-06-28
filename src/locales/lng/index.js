@@ -1,7 +1,7 @@
-import en from './en.json';
-import zh from './zh.json';
+import en from './en.json'
+import zh from './zh.json'
 
 export {
-    en,
-    zh
-};
+  en,
+  zh
+}
