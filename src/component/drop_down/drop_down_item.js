@@ -5,7 +5,7 @@ import classNames from 'classnames'
 class DropDownItem extends React.Component {
   handleClick = () => {
     if (this.props.disabled) {
-      return null
+      return
     }
     this.props.onClick()
   }
@@ -16,7 +16,7 @@ class DropDownItem extends React.Component {
     return (
       <li {...rest} className={classNames(active, {
         'disabled': disabled
-      }, className)} disabled={disabled} onClick={this.handleClick}>
+      }, className)} onClick={this.handleClick}>
         <a href='javascript:;'>{children}</a>
       </li>
     )
