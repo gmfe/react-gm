@@ -8,7 +8,7 @@ import { Framework, RightTop } from '../frame'
 
 const history = createHashHistory()
 
-const version = __VERSION__; //eslint-disable-line
+const version = __VERSION__ //eslint-disable-line
 
 @withRouter
 class App extends React.Component {
@@ -96,14 +96,8 @@ class App extends React.Component {
               />
             </svg>
             <span className='gm-gap-10'/>
-            <span>ReactGM</span>
+            <span>ReactGM v{version}</span>
             <span className='gm-gap-10'/>
-            <a
-              className='github-button'
-              href='https://github.com/gmfe/react-gm'
-              data-show-count='true'
-              aria-label='Star gmfe/react-gm on GitHub'
-            >Star</a>
           </Flex>
         </div>
         {nav}
@@ -121,16 +115,23 @@ class App extends React.Component {
           leftWidth='230px'
           info={(
             <div className='gm-padding-lr-10'>
+              <iframe
+                src='https://ghbtns.com/github-btn.html?user=twbs&repo=bootstrap&type=star&count=true'
+                frameBorder='0'
+                scrolling='0'
+                width='170px'
+                height='20px'
+                style={{verticalAlign: 'middle'}}
+              />
+              &nbsp;
               <select value={this.state.lng} onChange={e => {
                 this.setState({lng: e.target.value})
                 Storage.set('lng', e.target.value)
                 setLocale(e.target.value)
-              }}>
+              }} style={{verticalAlign: 'middle'}}>
                 <option value='en'>English</option>
                 <option value='zh'>中文</option>
               </select>
-                            &nbsp;
-                            v{version}
             </div>
           )}
         />}
