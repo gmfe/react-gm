@@ -116,7 +116,7 @@ class App extends React.Component {
           info={(
             <div className='gm-padding-lr-10'>
               <iframe
-                src='https://ghbtns.com/github-btn.html?user=twbs&repo=bootstrap&type=star&count=true'
+                src='https://ghbtns.com/github-btn.html?user=gmfe&repo=react-gm&type=star&count=true'
                 frameBorder='0'
                 scrolling='0'
                 width='170px'
