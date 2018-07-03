@@ -51,7 +51,7 @@ class ModalWrap extends React.Component {
 - `children` 抽屉内容
 - `opacityMask (bool)` 遮罩透明
 - `style (object)` drawer的样式
-- `animation (bool)` 是否使用动画
+- `animation (bool)` 是否使用动画, 默认为ture
 - `noContentPadding (bool)` content没有padding
 
 ### Static
