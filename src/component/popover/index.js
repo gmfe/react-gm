@@ -52,9 +52,11 @@ class Popover extends React.Component {
     this.getDisabled = ::this.getDisabled
     this.handleModalScroll = ::this.handleModalScroll
     this.handleBrowserScroll = ::this.handleBrowserScroll
+    this.handleDrawerScroll = ::this.handleDrawerScroll
 
     this.debounceHandleModalScroll = _.debounce(this.handleModalScroll, 200)
     this.debounceHandleBrowserScroll = _.debounce(this.handleBrowserScroll, 200)
+    this.debounceHandleDrawerScroll = _.debounce(this.handleDrawerScroll, 200)
 
     this.timer = null
 
@@ -72,6 +74,7 @@ class Popover extends React.Component {
     // 用 debounce
     Emitter.on(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
     Emitter.on(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
+    Emitter.on(Emitter.TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
   }
 
   componentWillUnmount () {
@@ -82,6 +85,11 @@ class Popover extends React.Component {
 
     Emitter.off(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
     Emitter.off(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
+    Emitter.off(Emitter.TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
+  }
+
+  handleDrawerScroll () {
+    this.setActive(this.state.active)
   }
 
   handleModalScroll () {

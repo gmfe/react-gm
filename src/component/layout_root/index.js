@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 const TYPE = {
+  DRAWER: 'drawer',
   _POPUP: '_popup',
   MODAL: 'modal',
   _TIP: '_tip',
@@ -19,7 +20,8 @@ class LayerRoot extends React.Component {
       modal: null,
       _tip: null,
       fullloading: null,
-      nprogress: null
+      nprogress: null,
+      drawer: null
     }
   }
 
@@ -37,6 +39,7 @@ class LayerRoot extends React.Component {
 
   render () {
     const {
+      drawer,
       _popup,
       modal,
       _tip,
@@ -54,6 +57,7 @@ class LayerRoot extends React.Component {
           </div>
         )}
 
+        {drawer && <div>{drawer}</div>}
         {modal && <div>{modal}</div>}
 
         {_tip && _tip.length > 0 && (

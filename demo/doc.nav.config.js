@@ -47,6 +47,7 @@ const data = [{
     {name: 'Dialog 对话框', path: '/doc/Dialog'},
     {name: 'Popover 浮层', path: '/doc/Popover'},
     {name: 'Modal 模态框', path: '/doc/Modal'},
+    {name: 'Drawer 抽屉', path: '/doc/Drawer'},
     {name: 'ImagePreview 图片预览', path: '/doc/ImagePreview'}
   ]
 }, {
@@ -97,6 +98,7 @@ class NavConfig extends React.Component {
     // doc 性能无须考虑太多，暂且每次render处理
     _.find(data, v => {
       selected = _.find(v.sub, s => s.path === pathname)
+      return selected
     })
 
     return (

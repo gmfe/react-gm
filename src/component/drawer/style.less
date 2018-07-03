@@ -1,0 +1,82 @@
+.gm-drawer-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1020;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  &.gm-drawer-mask-opacity {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+.gm-drawer {
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  outline: 0;
+
+  .gm-drawer-container {
+    position: relative;
+    background-color: white;
+    width: auto;
+    margin: 0 0 0 auto;
+    height: 100%;
+    overflow: hidden;
+
+    .gm-drawer-close {
+      font-size: 16px;
+      padding: 10px;
+      position: absolute;
+      top: 3px;
+      right: 5px;
+    }
+
+    .gm-drawer-title {
+      font-size: 16px;
+      padding: 10px 20px 10px 20px;
+      border-bottom: 1px solid @gm-border-color;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 15px;
+        top: 13px;
+        background: @brand-primary;
+        width: 3px;
+        height: 1em;
+      }
+    }
+
+    .gm-drawer-content {
+      padding: 10px;
+      height: 100%;
+    }
+  }
+
+  .gm-drawer-container-has-title {
+    .gm-drawer-content {
+      height: ~"calc(100% - 41px)";
+    }
+  }
+}
+
+// 限制移动端最大宽度,防止隐藏close按钮
+@media (max-device-width: 766px) and (min-device-width: 0) {
+  .gm-drawer {
+    .gm-drawer-container {
+      max-width: 96vw;
+      overflow: auto !important;
+    }
+  }
+}

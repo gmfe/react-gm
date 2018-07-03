@@ -11,6 +11,7 @@
 ### 浮层
 
 - mask 1000
+- drawer 1030 drawer_mask 1020
 - modal 1050 modal mask 1040
 - popup 2000
 - tip 7000
