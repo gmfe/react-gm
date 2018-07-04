@@ -1,0 +1,95 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import LayoutRoot from '../layout_root'
+import classNames from 'classnames'
+import { findDOMNode } from 'react-dom'
+import _ from 'lodash'
+import Emitter from '../../emitter'
+
+class Drawer extends React.Component {
+  constructor () {
+    super()
+    this.throttleDoScroll = _.throttle(this.doScroll, 200)
+  }
+
+  doScroll = () => {
+    Emitter.emit(Emitter.TYPE.DRAWER_SCROLL)
+  }
+
+  componentDidMount () {
+    window.document.body.addEventListener('keydown', this.handleKeyDown)
+
+    findDOMNode(this.refDrawer).addEventListener('scroll', this.throttleDoScroll)
+  }
+
+  componentWillUnmount () {
+    window.document.body.removeEventListener('keydown', this.handleKeyDown)
+
+    findDOMNode(this.refDrawer).removeEventListener('scroll', this.throttleDoScroll)
+  }
+
+  handleKeyDown = (event) => {
+    if (event.keyCode === 27) {
+      this.props.onHide()
+    }
+  }
+
+  handleMask = (e) => {
+    if (e.target.className.split(' ').indexOf('gm-drawer') > -1) {
+      this.props.onHide()
+    }
+  }
+
+  handleClose = () => {
+    this.props.onHide()
+  }
+
+  render () {
+    const {children, style, className, animation} = this.props
+
+    return (
+      <div>
+        <div className='gm-drawer-mask'/>
+        <div
+          ref={ref => (this.refDrawer = ref)}
+          className={classNames('gm-drawer', {
+            'gm-animated': animation,
+            'gm-animated-fade-in-right': animation
+          }, className)}
+          tabIndex='-1'
+          onClick={this.handleMask}
+        >
+          <div className='gm-drawer-content' style={style}>
+            {children}
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+Drawer.render = (props) => {
+  Emitter.emit(Emitter.TYPE.MODAL_SHOW)
+  LayoutRoot.setComponent(LayoutRoot.TYPE.DRAWER, (
+    <Drawer {...props}/>
+  ))
+}
+
+Drawer.hide = () => {
+  Emitter.emit(Emitter.TYPE.MODAL_HIDE)
+  LayoutRoot.setComponent(LayoutRoot.TYPE.DRAWER, null)
+}
+
+Drawer.propTypes = {
+  onHide: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  animation: PropTypes.bool
+}
+
+Drawer.defaultProps = {
+  onHide: _.noop,
+  animation: true
+}
+
+export default Drawer

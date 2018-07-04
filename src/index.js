@@ -52,6 +52,7 @@ import ColorPicker from './component/color_picker'
 import Button from './component/button'
 import Affix from './component/affix'
 import Uploader from './component/uploader'
+import Drawer from './component/drawer'
 
 import Validator from './validator'
 import Emitter from './emitter'
@@ -149,7 +150,7 @@ export {
   Button,
   Affix,
   Uploader,
-
+  Drawer,
   Menu, Nav,
   Emitter,
   ImagePreview,

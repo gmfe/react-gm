@@ -1,0 +1,39 @@
+.gm-drawer-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1020;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.gm-drawer {
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  outline: 0;
+
+  .gm-drawer-content {
+    background-color: white;
+    width: auto;
+    margin: 0 0 0 auto;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+// 限制移动端最大宽度,防止隐藏close按钮
+@media (max-device-width: 766px) and (min-device-width: 0) {
+  .gm-drawer {
+    .gm-drawer-content {
+      max-width: 70vw;
+      overflow: auto !important;
+    }
+  }
+}
