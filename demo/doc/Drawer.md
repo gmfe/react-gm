@@ -18,10 +18,6 @@ class ModalWrap extends React.Component {
         <div style={{height: '50px', backgroundColor: '#64DD17'}}>btn</div>
       </div>,
       onHide: Drawer.hide,
-      opacityMask: true,
-      noCloseBtn: false,
-      title: '示例',
-      noContentPadding: true,
       style: {width: '600px', height: '100%'}}
     );
   }
@@ -45,14 +41,10 @@ class ModalWrap extends React.Component {
 
 
 ### Props
-- `disableMaskClose (bool)` 是否启用点击mask关闭drawer
 - `onHide (func)` 隐藏触发回调
-- `title (string)` 标题
 - `children` 抽屉内容
-- `opacityMask (bool)` 遮罩透明
 - `style (object)` drawer的样式
 - `animation (bool)` 是否使用动画, 默认为ture
-- `noContentPadding (bool)` content没有padding
 
 ### Static
 - `render`

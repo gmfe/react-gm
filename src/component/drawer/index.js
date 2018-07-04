@@ -35,7 +35,7 @@ class Drawer extends React.Component {
   }
 
   handleMask = (e) => {
-    if (!this.props.disableMaskClose && e.target.className.split(' ').indexOf('gm-drawer') > -1) {
+    if (e.target.className.split(' ').indexOf('gm-drawer') > -1) {
       this.props.onHide()
     }
   }
@@ -45,13 +45,11 @@ class Drawer extends React.Component {
   }
 
   render () {
-    const {title, children, style, className, noCloseBtn, opacityMask, animation, noContentPadding} = this.props
+    const {children, style, className, animation} = this.props
 
     return (
       <div>
-        <div className={classNames('gm-drawer-mask', {
-          'gm-drawer-mask-opacity': opacityMask
-        })}/>
+        <div className='gm-drawer-mask'/>
         <div
           ref={ref => (this.refDrawer = ref)}
           className={classNames('gm-drawer', {
@@ -61,37 +59,8 @@ class Drawer extends React.Component {
           tabIndex='-1'
           onClick={this.handleMask}
         >
-          {/* 内容区 */}
-          <div
-            key='drawer-container'
-            className={classNames('gm-drawer-container', {
-              'gm-drawer-container-has-title': title,
-              'gm-border': opacityMask,
-              'gm-box-shadow-bottom': opacityMask
-            })}
-            style={style}
-          >
-            {noCloseBtn || (
-              <button
-                type='button'
-                className='close gm-drawer-close'
-                onClick={this.handleClose}
-              >
-                <span>×</span>
-              </button>
-            )}
-            {title && (
-              <div className='gm-drawer-title'>
-                {title}
-              </div>
-            )}
-            <div
-              className={classNames('gm-drawer-content', {
-                'gm-padding-0': noContentPadding
-              })}>
-              {children}
-            </div>
-
+          <div className='gm-drawer-content' style={style}>
+            {children}
           </div>
         </div>
       </div>
@@ -113,23 +82,14 @@ Drawer.hide = () => {
 
 Drawer.propTypes = {
   onHide: PropTypes.func,
-  disableMaskClose: PropTypes.bool,
-  opacityMask: PropTypes.bool,
-  title: PropTypes.string,
   className: PropTypes.string,
-  noCloseBtn: PropTypes.bool,
   style: PropTypes.object,
-  animation: PropTypes.bool,
-  noContentPadding: PropTypes.bool
+  animation: PropTypes.bool
 }
 
 Drawer.defaultProps = {
   onHide: _.noop,
-  disableMaskClose: false,
-  opacityMask: false,
-  noCloseBtn: false,
-  animation: true,
-  noContentPadding: false
+  animation: true
 }
 
 export default Drawer
