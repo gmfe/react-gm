@@ -20,19 +20,15 @@ class Form extends React.Component {
     let childList = _.isArray(children) ? children : [children]
 
     const formItems = []
-    _.each(childList, child => {
-      if (child !== null && child !== undefined) {
-        if (child.type.displayName === 'FormItem') {
-          formItems.push(child)
-        } else if (child.type.displayName === 'FormBlock') {
-          _.each(child.props.children, cChild => {
-            if (cChild !== null && cChild !== undefined) {
-              if (cChild.type.displayName === 'FormItem') {
-                formItems.push(cChild)
-              }
-            }
-          })
-        }
+    _.each(React.Children.toArray(childList), child => {
+      if (child.type.displayName === 'FormItem') {
+        formItems.push(child)
+      } else if (child.type.displayName === 'FormBlock') {
+        _.each(React.Children.toArray(child.props.children), cChild => {
+          if (cChild.type.displayName === 'FormItem') {
+            formItems.push(cChild)
+          }
+        })
       }
     })
 
@@ -92,8 +88,8 @@ class Form extends React.Component {
 
     let childList = _.isArray(children) ? children : [children]
 
-    childList = _.map(childList, (child, i) => {
-      return child !== null && child !== undefined && (child.type.displayName === 'FormItem' || child.type.displayName === 'FormBlock') ? React.cloneElement(child, Object.assign({
+    childList = _.map(React.Children.toArray(childList), (child, i) => {
+      return (child.type.displayName === 'FormItem' || child.type.displayName === 'FormBlock') ? React.cloneElement(child, Object.assign({
         key: i,
         horizontal,
         inline,

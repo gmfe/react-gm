@@ -17,10 +17,7 @@ class FormBlock extends React.Component {
       <Flex className={classNames('gm-form-block', {
         'gm-form-block-inline': inline
       })}>
-        {_.map(children, (child, i) => {
-          if (child === null || child === undefined) {
-            return null
-          }
+        {_.map(React.Children.toArray(children), (child, i) => {
           return (
             <Flex flex={inline ? false : (block[i] || 1)} key={i}>
               {child.type.displayName === 'FormItem' ? React.cloneElement(child, {
