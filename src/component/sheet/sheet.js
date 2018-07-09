@@ -184,7 +184,7 @@ class Sheet extends React.Component {
 
     if (select && list.length > 0) {
       // 存在有效行，且不存在未选中的行
-      isSelectAll = !_.find(list, value => !value._gm_select)
+      isSelectAll = _.find(list, value => !select.props.isDisabled(value)) && !_.find(list, value => !select.props.isDisabled(value) && !value._gm_select)
     }
 
     return (
