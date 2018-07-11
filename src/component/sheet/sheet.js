@@ -155,7 +155,7 @@ class Sheet extends React.Component {
     let isSelectAll = false
     let pagination
     let paginationText
-    const children = toString.call(this.props.children) === '[object Array]' ? this.props.children : [this.props.children]
+    const children = React.Children.toArray(this.props.children)
 
     let columns = []
     let actions = false
