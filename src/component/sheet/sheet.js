@@ -119,9 +119,9 @@ class Sheet extends React.Component {
             ...rest
           } = v.props
           if (typeof children === 'function') {
-            return <td key={i} {...rest}>{children(value[field], index)}</td>
+            return <td key={i} {...rest}>{children(value[field], index, value)}</td>
           } else if (typeof render === 'function') {
-            return <td key={i} {...rest}>{render(value[field], index)}</td>
+            return <td key={i} {...rest}>{render(value[field], index, value)}</td>
           } else {
             const tdV = value[field]
             if (placeholder !== undefined && (tdV === undefined || tdV === null)) {

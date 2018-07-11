@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 class SheetColumn extends React.Component {
   render () {
-    return <div/>
+    return null
   }
 }
 

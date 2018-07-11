@@ -30,6 +30,13 @@ const list= [{
 <Sheet list={list}>
     <SheetColumn field="id" name="id"/>
     <SheetColumn field="name" name="名字"/>
+    <SheetColumn field="name" name="名字">
+    {
+        (name, index, record) => {
+            return `我的名字叫${name}, 我的id是${record.id}`;
+        }
+    }
+    </SheetColumn>
     <SheetColumn field="age" name="年龄"/>
     <SheetColumn field="age" name={<div style={{background: 'red'}}>自定义head</div>}/>
 </Sheet>
