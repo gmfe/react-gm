@@ -28,8 +28,8 @@ const list= [{
 ```
 ```jsx
 <Sheet list={list}>
-    {false && <SheetColumn field="id" name="id"/>}
-    {true && <SheetColumn field="name" name="名字"/>}
+    <SheetColumn field="id" name="id"/>
+    <SheetColumn field="name" name="名字"/>
     <SheetColumn field="age" name="年龄"/>
     <SheetColumn field="age" name={<div style={{background: 'red'}}>自定义head</div>}/>
 </Sheet>
