@@ -25,7 +25,7 @@ class WithCount extends React.Component {
 
     if (all > (offset * 2 + 1)) {
       if (begin === 1) {
-        end += offset
+        end = offset * 2 + 1
       } else if (end === all) {
         begin = Math.max(begin - offset, 1)
       }
