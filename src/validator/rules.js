@@ -1,5 +1,6 @@
 import Validator from './validator'
 import TYPE from './type'
+import {getLocale} from '../locales'
 
 const pattern = {
   email: /^([a-z0-9_.-]+)@([\da-z.-]+)\.([a-z.]{2,6})$/,
@@ -10,40 +11,40 @@ const pattern = {
 }
 
 Validator.register(TYPE.required, [{
-  help: '请填写',
+  help: getLocale('validator', 'required'),
   required: true
 }])
 
 Validator.register(TYPE.email, [{
-  help: '请填写邮件地址',
+  help: getLocale('validator', 'email'),
   validate (value) {
     return pattern.email.test(value)
   }
 }])
 
 Validator.register(TYPE.url, [{
-  help: '请填写网址',
+  help: getLocale('validator', 'url'),
   validate (value) {
     return pattern.url.test(value)
   }
 }])
 
 Validator.register(TYPE.number, [{
-  help: '请填写数字',
+  help: getLocale('validator', 'number'),
   validate (value) {
     return pattern.number.test(value)
   }
 }])
 
 Validator.register(TYPE.number_positive, [{
-  help: '请填写正数',
+  help: getLocale('validator', 'numberPositive'),
   validate (value) {
     return pattern.number_positive.test(value)
   }
 }])
 
 Validator.register(TYPE.number_or_letter, [{
-  help: '请填写字母或数字',
+  help: getLocale('validator', 'numberOrLetter'),
   validate (value) {
     return pattern.number_or_letter.test(value)
   }

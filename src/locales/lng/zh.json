@@ -63,5 +63,13 @@
   },
   "treeSelect": {
     "selectLabel": "选择全部"
+  },
+  "validator": {
+    "required": "请填写",
+    "email": "请填写邮件地址",
+    "url": "请填写网址",
+    "number": "请填写数字",
+    "numberPositive": "请填写正数",
+    "numberOrLetter": "请填写字母或数字"
   }
 }

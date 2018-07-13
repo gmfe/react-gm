@@ -63,5 +63,13 @@
   },
   "treeSelect": {
     "selectLabel": "Select all"
+  },
+  "validator": {
+    "required": "Please enter",
+    "email": "Please enter email address",
+    "url": "Please enter URL",
+    "number": "Please enter number",
+    "numberPositive": "Please enter positive number",
+    "numberOrLetter": "Please enter number or letter"
   }
 }
