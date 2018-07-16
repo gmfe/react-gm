@@ -4,27 +4,28 @@ import classNames from 'classnames'
 import _ from 'lodash'
 
 class CheckboxGroup extends React.Component {
-  handleChange (v) {
-    const {onChange, value} = this.props
-    if (value.indexOf(v) > -1) {
-      onChange(_.without(value, v))
+  handleChange (checkboxValue) {
+    const { onChange, value } = this.props
+    if (value.indexOf(checkboxValue) > -1) {
+      onChange(_.without(value, checkboxValue))
     } else {
-      onChange([...value, v])
+      onChange([...value, checkboxValue])
     }
   }
 
   render () {
     const {
-            onChange, // eslint-disable-line
+      onChange,
       value,
       inline,
       className,
       children,
       name,
+      col,
       ...rest
     } = this.props
 
-    const childList = _.isArray(children) ? children : [children]
+    const childList = React.Children.toArray(children)
 
     return (
       <div {...rest} className={classNames('gm-checkbox-group checkbox', className)}>
@@ -35,7 +36,8 @@ class CheckboxGroup extends React.Component {
             checked: value.indexOf(child.props.value) > -1,
             inline,
             onChange: this.handleChange.bind(this, child.props.value),
-            name
+            name,
+            col
           })
         })}
       </div>
@@ -47,7 +49,8 @@ CheckboxGroup.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.array.isRequired,
   onChange: PropTypes.func,
-  inline: PropTypes.bool
+  inline: PropTypes.bool,
+  col: PropTypes.number
 }
 
 CheckboxGroup.defaultProps = {
