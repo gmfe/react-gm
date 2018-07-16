@@ -16,11 +16,10 @@ class Checkbox extends React.Component {
       disabled,
       col
     } = this.props
-    console.log(col)
     const inner = (
       <label
         style={{
-          width: _.isNumber(col) ? `${100 / col}%` : 'auto'
+          width: col ? `${100 / col}%` : 'auto'
         }}
         className={classNames('gm-checkbox', {
           'checkbox-inline': inline,
@@ -59,6 +58,7 @@ Checkbox.propTypes = {
 
   // 如果需要整行可点，则
   block: PropTypes.bool,
+  col: PropTypes.number,
 
   // 由CheckboxGroup 传下来
   name: PropTypes.string,
