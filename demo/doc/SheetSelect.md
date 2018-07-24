@@ -43,7 +43,6 @@ class SheetWrap extends React.Component {
     }
     
     handleSelectAll(checked, index){
-        console.log('onSelectAll', checked, index);
         const list = [...this.state.list];
         list.map(line => {
             if(!this.isDisabled(line))
@@ -68,6 +67,8 @@ class SheetWrap extends React.Component {
                    onSelect={this.handleSelect} 
                    onSelectAll={this.handleSelectAll}
                    isDisabled={this.isDisabled}
+                   hasSelectTip={true}
+                   selectAllTip="选中页面中所有list"
                />
            </Sheet>
         );
@@ -134,6 +135,8 @@ class SheetWrap2 extends React.Component {
 - `onChange (func)` 如果提供，则 onSelect onSelectAll 无效。 参数是设置好gm_select的列表数据，直接用重新 render 即可。相对 onSelect onSelectAll 简单很多
 - `isDisabled (func)`
 - `isRadio (bool)`
+- `hasSelectTip (bool)` 是否显示选择所有后的tip
+- `selectAllTip (string)` 选择所有后的tip文案
 
 一但用到`SheetSelect`，就约定了数据eList中的`_gm_select`字段，`_gm_select`为bool是选中。
 `onSelect`当选择一行时触发，参数为是否选中`checked`，和当前索引`index`。

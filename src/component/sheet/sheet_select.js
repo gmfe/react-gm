@@ -14,12 +14,16 @@ SheetSelect.propTypes = {
   onSelectAll: PropTypes.func,
   onChange: PropTypes.func,
   isDisabled: PropTypes.func,
-  isRadio: PropTypes.bool
+  isRadio: PropTypes.bool,
+  hasSelectTip: PropTypes.bool,
+  selectAllTip: PropTypes.string
 }
 SheetSelect.defaultProps = {
   onSelect: _.noop,
   isDisabled: () => false,
-  isRadio: false
+  isRadio: false,
+  hasSelectTip: false,
+  selectAllTip: '已选中所有'
 }
 
 export default SheetSelect
