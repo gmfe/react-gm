@@ -53,6 +53,7 @@ import Button from './component/button'
 import Affix from './component/affix'
 import Uploader from './component/uploader'
 import Drawer from './component/drawer'
+import EditableText from './component/editable_text'
 
 import Validator from './validator'
 import Emitter from './emitter'
@@ -154,5 +155,6 @@ export {
   Menu, Nav,
   Emitter,
   ImagePreview,
-  setLocale
+  setLocale,
+  EditableText
 }
