@@ -43,7 +43,7 @@
   "homepage": "https://github.com/gmfe/react-gm#readme",
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "gm-xfont": "^1.0.15",
+    "gm-xfont": "^1.0.39",
     "gm-util": "^5.5.0",
     "moment": "^2.18.1",
     "prop-types": "^15.6.0",
@@ -77,7 +77,7 @@
     "fs": "0.0.2",
     "gm-util": "^5.5.0",
     "gm-webpack": "^1.0.1",
-    "gm-xfont": "^1.0.15",
+    "gm-xfont": "^1.0.39",
     "happypack": "^5.0.0",
     "highlight.js": "^9.11.0",
     "history": "^4.7.2",
