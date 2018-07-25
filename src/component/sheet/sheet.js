@@ -17,6 +17,7 @@ class Sheet extends React.Component {
   constructor (props) {
     super(props)
     this.checkboxOrRadioName = 'sheet_checkbox_radio_' + Math.random()
+    this.handleExpandedAll = ::this.handleExpandedAll
   }
 
   handleSelect (select, i, event) {
@@ -59,6 +60,11 @@ class Sheet extends React.Component {
   handleExpanded (index) {
     const {onExpand} = this.props
     onExpand && onExpand(index)
+  }
+
+  handleExpandedAll () {
+    const {onExpandAll} = this.props
+    onExpandAll && onExpandAll()
   }
 
   renderTr (select, columns, actions) {
@@ -153,6 +159,7 @@ class Sheet extends React.Component {
     let {list = [], scrollX, expandedRowRender} = this.props
     let select = false
     let isSelectAll = false
+    let isHasContract = false
     let pagination
     let paginationText
     const children = React.Children.toArray(this.props.children)
@@ -186,6 +193,10 @@ class Sheet extends React.Component {
       // 存在有效行，且不存在未选中的行
       isSelectAll = _.find(list, value => !select.props.isDisabled(value)) && !_.find(list, value => !select.props.isDisabled(value) && !value._gm_select)
     }
+    // 检查是否有某一列收起
+    if (expandedRowRender && list.length) {
+      isHasContract = !!_.find(list, l => !l.__gm_expanded)
+    }
 
     return (
       <div className={classNames('gm-sheet', this.props.className)}>
@@ -199,17 +210,26 @@ class Sheet extends React.Component {
             <thead>
               <tr>
                 {expandedRowRender && (
-                  <th className='gm-sheet-th-expanded'/>
+                  <th className='gm-sheet-th-expanded'>
+                    <i
+                      className={classNames('gm-sheet-expanded-icon text-primary glyphicon', {
+                        'glyphicon-minus': !isHasContract,
+                        'glyphicon-plus': isHasContract
+                      })}
+                      onClick={this.handleExpandedAll}
+                    />
+                  </th>
                 )}
                 {select && (
                   <th className='gm-sheet-select'>
-                    {!select.props.isRadio && (
+                    {!select.props.isRadio && <div>
                       <input
                         type='checkbox'
                         checked={isSelectAll}
                         onChange={this.handleSelectAll.bind(this, select)}
                       />
-                    )}
+                      {isSelectAll && select.props.hasSelectTip && <div className='gm-sheet-select-all-tip'>{select.props.selectAllTip}</div>}
+                    </div>}
                   </th>
                 )}
                 {_.map(columns, (value, index) => {
@@ -254,7 +274,8 @@ Sheet.propTypes = {
   getTrProps: PropTypes.func,
   scrollX: PropTypes.bool,
   expandedRowRender: PropTypes.func,
-  onExpand: PropTypes.func
+  onExpand: PropTypes.func,
+  onExpandAll: PropTypes.func
 }
 
 Sheet.defaultProps = {

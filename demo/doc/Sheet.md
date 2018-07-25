@@ -130,6 +130,7 @@ class SheetInSheet extends React.Component {
 
         this.renderExpandedRowRender = ::this.renderExpandedRowRender;
         this.handleExpand = ::this.handleExpand;
+        this.handleExpandAll = ::this.handleExpandAll;
     }
 
     renderExpandedRowRender() {
@@ -149,6 +150,17 @@ class SheetInSheet extends React.Component {
         });
     }
 
+    handleExpandAll() {
+        const {data} = this.state;
+        const isHasContract = _.find(data, d => !d.__gm_expanded)
+
+        this.setState({
+            data: _.forEach(data, v => {
+                v.__gm_expanded = isHasContract
+            })
+        });
+    }
+
     render() {
         return (
             <div style={{width: '500px'}}>
@@ -156,6 +168,7 @@ class SheetInSheet extends React.Component {
                     list={this.state.data}
                     expandedRowRender={this.renderExpandedRowRender}
                     onExpand={this.handleExpand}
+                    onExpandAll={this.handleExpandAll}
                 >
                     <SheetColumn name="id" field="id"/>
                     <SheetColumn name="name" field="name"/>
@@ -232,6 +245,7 @@ class SheetWithTableDom extends React.Component {
 - `scrollX (bool)` 是否允许table横向滚动。 但是table是否具备横向滚动的条件要调用方保证
 - `expandedRowRender(func)` sheet in sheet，通过此方法渲染另外一个table
 - `onExpand(func)` 相应sheet in sheet的展开/收起。 直接操作数据的 __gm_expanded 字段，具体见demo
+- `onExpandAll(func)` 操作sheet in sheet所有的展开/收起
 - `className (string)`
 
 ### Static
