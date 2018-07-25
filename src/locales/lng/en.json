@@ -71,5 +71,9 @@
     "number": "Please enter number",
     "numberPositive": "Please enter positive number",
     "numberOrLetter": "Please enter number or letter"
+  },
+  "table": {
+    "noDataText": "No data found",
+    "loadingText": "Loading..."
   }
 }
