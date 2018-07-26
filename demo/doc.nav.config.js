@@ -24,7 +24,7 @@ const data = [{
   name: 'Data',
   sub: [
     {name: 'Calendar 日历', path: '/doc/Calendar'},
-    {name: 'Sheet 表格', path: '/doc/Sheet'},
+    {name: 'Table 表格', path: '/doc/Table'},
     {name: 'Pagination 页码', path: '/doc/Pagination'}
   ]
 }, {

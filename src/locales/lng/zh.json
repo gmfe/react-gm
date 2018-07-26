@@ -71,5 +71,9 @@
     "number": "请填写数字",
     "numberPositive": "请填写正数",
     "numberOrLetter": "请填写字母或数字"
+  },
+  "table": {
+    "noDataText": "没有数据",
+    "loadingText": "加载数据中..."
   }
 }

@@ -1,0 +1,76 @@
+@import "../src/less/variables.less";
+@import "../src/less/mixins.less";
+@import "../src/less/custom.less";
+@import "../src/css/variables.less";
+
+.gm-react-table.ReactTable {
+  .rt-tbody {
+    .rt-tr {
+      height: 60px;
+      align-items: center;
+    }
+
+    .rt-th,
+    .rt-td {
+      border-right: none;
+      padding: 8px;
+    }
+  }
+
+  .rt-thead {
+    .rt-tr {
+      height: 40px;
+      background: #f2f3f8;
+      text-align: left;
+    }
+
+    .rt-th,
+    .rt-td {
+      &:focus {
+        outline: none;
+      }
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8px;
+      border-right: none;
+    }
+  }
+
+  .rt-noData {
+    color: inherit;
+    background: white;
+    bottom: 0;
+    top: auto;
+    transform: translate(-50%);
+  }
+
+  &.-striped {
+    .rt-tr.-odd {
+      background-color: white;
+    }
+
+    .rt-tr.-even {
+      background-color: #f5f5f7;
+    }
+  }
+
+  &.-highlight {
+    .rt-tbody {
+      .rt-tr:hover {
+        background-color: #e7f5e8;
+      }
+    }
+  }
+}
+
+.gm-react-table-select {
+  .gm-react-table-select-all-tip {
+    position: absolute;
+    top: -15px;
+    padding: 5px 10px;
+    color: white;
+    background: @brand-primary;
+  }
+}
