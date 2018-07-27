@@ -4,6 +4,8 @@ imports:
 ---
 ## Table
 
+Table 对于无内容会自动填充 -
+
 ::: demo 数据
 ```js
 const data = [
