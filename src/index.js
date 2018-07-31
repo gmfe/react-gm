@@ -54,6 +54,7 @@ import Affix from './component/affix'
 import Uploader from './component/uploader'
 import Drawer from './component/drawer'
 import EditableText from './component/editable_text'
+import FlipNumber from './component/flip_number'
 
 import Validator from './validator'
 import Emitter from './emitter'
@@ -156,5 +157,6 @@ export {
   Emitter,
   ImagePreview,
   setLocale,
-  EditableText
+  EditableText,
+  FlipNumber
 }

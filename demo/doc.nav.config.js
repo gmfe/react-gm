@@ -74,7 +74,8 @@ const data = [{
   sub: [
     {name: 'NProgress 顶部请求进度条', path: '/doc/NProgress'},
     {name: 'Storage', path: '/doc/Storage'},
-    {name: 'EditableText', path: '/doc/EditableText'}
+    {name: 'EditableText', path: '/doc/EditableText'},
+    {name: 'FlipNumber', path: '/doc/FlipNumber'}
   ]
 }, {
   name: '废弃',
