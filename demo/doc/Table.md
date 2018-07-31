@@ -53,72 +53,6 @@ const data = [
     'date_time': '2018-07-25',
     'delta_money': 0,
     'settle_supplier_id': 'T9651'
-  }, {
-    'total_money': '691.60',
-    'id': 'T5991-JHD-2018-07-25-00023',
-    'sku_money': '694.30',
-    'supplier_customer_id': 'DY100',
-    'submit_time': '2018-07-25',
-    'status': 2,
-    'supplier_name': '黑市桥豆芽批发',
-    'date_time': '2018-07-25',
-    'delta_money': -270.0,
-    'settle_supplier_id': 'T16362'
-  }, {
-    'total_money': '60.00',
-    'id': 'T5991-JHD-2018-07-25-00022',
-    'sku_money': '60.00',
-    'supplier_customer_id': 'SC113',
-    'submit_time': '2018-07-25',
-    'status': 2,
-    'supplier_name': '黑市桥蔬菜批发',
-    'date_time': '2018-07-25',
-    'delta_money': 0,
-    'settle_supplier_id': 'T16195'
-  }, {
-    'total_money': '2332.74',
-    'id': 'T5991-JHD-2018-07-25-00021',
-    'sku_money': '2361.26',
-    'supplier_customer_id': 'sc215',
-    'submit_time': '2018-07-25',
-    'status': 2,
-    'supplier_name': '黑市桥蔬菜批发',
-    'date_time': '2018-07-25',
-    'delta_money': -2852.0,
-    'settle_supplier_id': 'T13324'
-  }, {
-    'total_money': '925.00',
-    'id': 'T5991-JHD-2018-07-25-00020',
-    'sku_money': '925.50',
-    'supplier_customer_id': 'SC003',
-    'submit_time': '2018-07-25',
-    'status': 2,
-    'supplier_name': '黑市桥蔬菜批发2号档口',
-    'date_time': '2018-07-25',
-    'delta_money': -50.0,
-    'settle_supplier_id': 'T9648'
-  }, {
-    'total_money': '145.00',
-    'id': 'T5991-JHD-2018-07-25-00019',
-    'sku_money': '145.00',
-    'supplier_customer_id': 'A2223333',
-    'submit_time': '2018-07-25',
-    'status': 2,
-    'supplier_name': '朱俊平',
-    'date_time': '2018-07-25',
-    'delta_money': 0,
-    'settle_supplier_id': 'T15120'
-  }, {
-    'total_money': '216.00',
-    'id': 'T5991-JHD-2018-07-25-00018',
-    'sku_money': '216.00',
-    'supplier_customer_id': 'SC012',
-    'submit_time': '2018-07-25',
-    'status': 2,
-    'supplier_name': '黑市桥蔬菜批发',
-    'date_time': '2018-07-25',
-    'delta_money': 0,
-    'settle_supplier_id': 'T12562'
   }
 ]
 ```
@@ -129,6 +63,7 @@ const data = [
 class TableWrap extends React.Component {
     render() {
         return (
+          <div>
             <Table
               data={data}
               columns={[{
@@ -148,6 +83,33 @@ class TableWrap extends React.Component {
                 accessor: 'status'
               }]}
             />
+            <div className='gm-padding-10'/>
+            <Table
+              data={data}
+              columns={[{
+                  Header: 'Group1',
+                  columns: [{
+                    Header: '建单时间',
+                    accessor: 'submit_time'
+                  }, {
+                    Header: '入库单号',
+                    accessor: 'id'
+                  }]
+                },{
+                Header: 'Group2',
+                columns: [{
+                  Header: '供应商信息',
+                  accessor: 'supplier_name'
+                }, {
+                  Header: '入库金额',
+                  accessor: 'total_money'
+                }, {
+                  Header: '单据状态',
+                  accessor: 'status'
+                }]
+              }]}
+            />
+          </div>
         );
     }
 }
