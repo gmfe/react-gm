@@ -36,10 +36,10 @@ class FilterSelect extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (this.state.activeIndex !== prevState.activeIndex && this.filterSelectList) {
-      const dom = this.filterSelectList.querySelector('.list-group-item.line-selected')
-      dom && dom.scrollIntoViewIfNeeded()
-    }
+    // if (this.state.activeIndex !== prevState.activeIndex && this.filterSelectList) {
+    //   const dom = this.filterSelectList.querySelector('.list-group-item.line-selected')
+    //   dom && dom.scrollIntoViewIfNeeded()
+    // }
   }
 
   componentWillUnmount () {
@@ -71,6 +71,17 @@ class FilterSelect extends React.Component {
     }
   }
 
+  doSetActiveIndex (activeIndex) {
+    this.setState({
+      activeIndex
+    }, () => {
+      if (this.filterSelectList) {
+        const dom = this.filterSelectList.querySelector(`.list-group-item:nth-of-type(${activeIndex})`)
+        dom && dom.scrollIntoViewIfNeeded(false)
+      }
+    })
+  }
+
   handleKeyDown (size, event) {
     const {keyCode} = event
 
@@ -95,16 +106,18 @@ class FilterSelect extends React.Component {
         activeIndex = 0
       }
 
-      this.setState({
-        activeIndex
-      })
+      this.doSetActiveIndex(activeIndex)
+      // this.setState({
+      //   activeIndex
+      // })
     }
   }
 
   handleItemMouseEnter (activeIndex) {
-    this.setState({
-      activeIndex
-    })
+    this.doSetActiveIndex(activeIndex)
+    // this.setState({
+    //   activeIndex
+    // })
   }
 
   handleSelect = (value, event) => {
