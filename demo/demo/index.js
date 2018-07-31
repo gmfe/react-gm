@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, ExpandTable } from '../../table'
+import { Table } from '../../table'
 import _ from 'lodash'
 
 const data = [
@@ -138,20 +138,23 @@ class Component extends React.Component {
         <Table
           data={data.slice(0, 3)}
           columns={[{
-            Header: '建单时间',
-            accessor: 'submit_time'
-          }, {
-            Header: '入库单号',
-            accessor: 'id'
-          }, {
-            Header: '供应商信息',
-            accessor: 'supplier_name'
-          }, {
-            Header: '入库金额',
-            accessor: 'total_money'
-          }, {
-            Header: '单据状态',
-            accessor: 'status'
+            Header: 'haha',
+            columns: [{
+              Header: '建单时间',
+              accessor: 'submit_time'
+            }, {
+              Header: '入库单号',
+              accessor: 'id'
+            }, {
+              Header: '供应商信息',
+              accessor: 'supplier_name'
+            }, {
+              Header: '入库金额',
+              accessor: 'total_money'
+            }, {
+              Header: '单据状态',
+              accessor: 'status'
+            }]
           }]}
         />
       </div>
@@ -161,7 +164,32 @@ class Component extends React.Component {
   render () {
     return (
       <div>
-        <ExpandTable
+        <Table
+          data={[]}
+          columns={[{
+            Header: 'haha',
+            columns: [{
+              Header: '建单时间',
+              accessor: 'submit_time'
+            }, {
+              Header: '入库单号',
+              accessor: 'id'
+            }, {
+              Header: '供应商信息',
+              accessor: 'supplier_name'
+            }, {
+              Header: '入库金额',
+              accessor: 'total_money'
+            }, {
+              Header: '单据状态',
+              accessor: 'status'
+            }]
+          }]}
+        />
+
+        <div className='gm-padding-10'/>
+
+        <Table
           data={[]}
           columns={[{
             Header: '建单时间',
@@ -179,7 +207,6 @@ class Component extends React.Component {
             Header: '单据状态',
             accessor: 'status'
           }]}
-          SubComponent={this.renderSubComponent}
         />
       </div>
     )

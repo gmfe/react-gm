@@ -24,10 +24,11 @@
   }
 
   .rt-thead {
+    box-shadow: none;
+
     .rt-tr {
       min-height: 40px;
       background: #f2f3f8;
-      text-align: left;
     }
 
     .rt-th,
@@ -39,7 +40,24 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border-right: none;
+    }
+
+    &.-header {
+      .rt-tr {
+        text-align: left;
+      }
+
+      .rt-th,
+      .rt-td {
+        border-right: none;
+      }
+    }
+
+    &.-headerGroups {
+      .rt-th,
+      .rt-td {
+        text-align: center;
+      }
     }
   }
 
