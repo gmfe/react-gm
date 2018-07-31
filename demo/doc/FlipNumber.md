@@ -12,19 +12,19 @@ class FlipNumberWrap extends React.Component {
     constructor (props) {
         super(props)
         this.state= {
-            to: 10086,
-            from: 34
+            to: 0,
+            from: 0
         }
     }
     
     componentDidMount() {
-        setTimeout(() => this.setState({to: 709394, from: 234.2343}), 5000)
+        setTimeout(() => this.setState({to: 709394, from: 234.2343}), 1300)
     }
     
     render() {
         return (
             <div>
-                <FlipNumber useGroup decimal={2} delay={1000} from={this.state.from} to={this.state.to} className='gm-text-red gm-font-20'/>
+                <FlipNumber useGroup delay={1000} decimal={2} from={this.state.from} to={this.state.to} className='gm-text-red gm-font-20'/>
             </div>
         );
     }
