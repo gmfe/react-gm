@@ -15,14 +15,32 @@ class BaseTable extends React.Component {
     } = this.props
 
     const newColumns = _.map(columns, v => {
-      let Cell = v.Cell
-      if (!Cell) {
-        Cell = row => (row.value === undefined || row.value === null) ? '-' : row.value
-      }
+      // groups 的形式
+      if (v.columns) {
+        v.columns = _.map(v.columns, vv => {
+          let Cell = vv.Cell
+          if (Cell) {
+            Cell = row => (row.value === undefined || row.value === null) ? <span
+              className='gm-text-desc'>-</span> : row.value
+          }
+          return {
+            ...vv,
+            minWidth: vv.minWidth && undefined,
+            Cell
+          }
+        })
+      } else {
+        let Cell = v.Cell
+        if (!Cell) {
+          Cell = row => (row.value === undefined || row.value === null) ? <span
+            className='gm-text-desc'>-</span> : row.value
+        }
 
-      return {
-        ...v,
-        Cell
+        return {
+          ...v,
+          minWidth: v.minWidth && undefined,
+          Cell
+        }
       }
     })
 
