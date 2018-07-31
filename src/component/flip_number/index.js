@@ -25,6 +25,8 @@ class FlipNumber extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.to !== this.props.to) {
+      window.cancelAnimationFrame(this.requestId)
+      clearTimeout(this.timeoutID)
       this.doInitData(nextProps)
       this.doInitView(nextProps)
     }
@@ -60,7 +62,7 @@ class FlipNumber extends React.Component {
       heightList: heightList
     })
 
-    delay ? setTimeout(() => this.flipTo(duration), delay) : this.flipTo(duration)
+    delay ? this.timeoutID = setTimeout(() => this.flipTo(duration), delay) : this.flipTo(duration)
   }
 
   /**
@@ -100,12 +102,12 @@ class FlipNumber extends React.Component {
     const tick = now => {
       let timeConsuming = now - startTime
       draw(timeConsuming / duration)
-      if (timeConsuming < duration) window.requestAnimationFrame(tick)
+      if (timeConsuming < duration) this.requestId = window.requestAnimationFrame(tick)
       else {
         draw(1)
       }
     }
-    window.requestAnimationFrame(tick)
+    this.requestId = window.requestAnimationFrame(tick)
   }
 
   renderDigitAxis = () => {
