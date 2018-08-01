@@ -32,9 +32,27 @@ class Tree extends React.Component {
     };
 
     handleQuery = (e) => {
+      const {list} = this.props
       this.setState({
         query: e.target.value
       })
+      if (e.target.value) {
+        const processList = this.filterWithQuery(list, e.target.value)
+        let newGroupSelected = []
+        if (processList.length === 0) return
+        const pushValue = (list) => {
+          if (list[0].children) {
+            _.forEach(list, (group) => {
+              newGroupSelected = _.xor(newGroupSelected, [group.value])
+              pushValue(group.children)
+            })
+          }
+        }
+        pushValue(processList)
+        this.setState({
+          groupSelected: newGroupSelected
+        })
+      }
     };
 
     handleGroup = (value) => {
@@ -55,6 +73,17 @@ class Tree extends React.Component {
         onClickCheckbox(group, isSelectGroup)
       }
     };
+
+    filterWithQuery = (list, query) => {
+      const {withFilter} = this.props
+      let processList
+      if (withFilter === true) {
+        processList = filterGroupList(list, v => pinYinFilter([v], query, v => v.name).length > 0)
+      } else if (withFilter) {
+        processList = withFilter(list, query)
+      }
+      return processList
+    }
 
     renderList (list) {
       const {selectedValues, onClickLeafName, showGroupCheckbox} = this.props
@@ -150,14 +179,7 @@ class Tree extends React.Component {
       const {
         query
       } = this.state
-
-      let processList
-
-      if (withFilter === true) {
-        processList = filterGroupList(list, v => pinYinFilter([v], query, v => v.name).length > 0)
-      } else if (withFilter) {
-        processList = withFilter(list, query)
-      }
+      const processList = this.filterWithQuery(list, query)
 
       const leafList = getLeaf(list)
 
