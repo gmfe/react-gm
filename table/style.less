@@ -30,6 +30,73 @@
   .rt-thead {
     box-shadow: none;
 
+    // 排序样式
+    .gm-react-table-sort-header {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        right: -8px;
+        bottom: 8px;
+        width: 0;
+        height: 0;
+        border-top: 3px solid transparent;
+        border-right: 3px solid transparent;
+        border-bottom: 5px solid #ccc;
+        border-left: 3px solid transparent;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: -8px;
+        bottom: -1px;
+        width: 0;
+        height: 0;
+        border-top: 5px solid #ccc;
+        border-right: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+        border-left: 3px solid transparent;
+      }
+
+      &.gm-react-table-sort-header-asc {
+        &::before {
+          border-bottom: 5px solid #999;
+        }
+      }
+
+      &.gm-react-table-sort-header-desc {
+        &::after {
+          border-top: 5px solid #999;
+        }
+      }
+    }
+
+    .rt-th {
+      &.-sort-asc {
+        // 去掉原生排序样式
+        box-shadow: none;
+
+        .gm-react-table-sort-header {
+          &::before {
+            border-bottom: 5px solid #999;
+          }
+        }
+      }
+
+      &.-sort-desc {
+        // 去掉原生排序样式
+        box-shadow: none;
+
+        .gm-react-table-sort-header {
+          &::after {
+            border-top: 5px solid #999;
+          }
+        }
+      }
+    }
+
     .rt-tr {
       min-height: 40px;
       background: #f2f3f8;
@@ -44,6 +111,11 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+
+    // 调整后不会溢出，所以不做 overflow，排序按钮就不会被 hidden 了
+    .rt-resizable-header-content {
+      overflow: initial;
     }
 
     &.-header {

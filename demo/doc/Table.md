@@ -1,7 +1,10 @@
 ---
 imports:
-    import {Table, SelectTable, ExpandTable} from '../../table';
+    import {Table, SelectTable, ExpandTable, TableUtil} from '../../table';
 ---
+
+封装 [react-table](https://github.com/react-tools/react-table)
+
 ## Table
 
 Table 对于无内容会自动填充 -
@@ -16,7 +19,7 @@ const data = [
     'supplier_customer_id': 'LDP20180117',
     'submit_time': '2018-07-25',
     'status': 2,
-    'supplier_name': '南苑路冷冻品',
+    'supplier_name': '',
     'date_time': '2018-07-25',
     'delta_money': 0,
     'settle_supplier_id': 'T10953'
@@ -83,7 +86,23 @@ class TableWrap extends React.Component {
                 accessor: 'status'
               }]}
             />
-            <div className='gm-padding-10'/>
+          </div>
+        );
+    }
+}
+```
+
+```jsx
+<TableWrap/>
+```
+:::
+
+::: demo Table Group
+```js
+class TableGroupWrap extends React.Component {
+    render() {
+        return (
+          <div>
             <Table
               data={data}
               columns={[{
@@ -116,7 +135,73 @@ class TableWrap extends React.Component {
 ```
 
 ```jsx
-<TableWrap/>
+<TableGroupWrap/>
+```
+:::
+
+::: demo 排序，默认表格内排序，自定义排序
+```js
+class TableSortWrap extends React.Component {
+  constructor(props){
+      super(props);
+      this.state = {
+        data: data.slice(),
+        supplierNameSortType: null
+      };
+  }
+  handleSort = () => {
+    console.log('sort')
+    const {data, supplierNameSortType} = this.state;
+    if(!supplierNameSortType || supplierNameSortType === 'desc'){
+      this.setState({
+        data: _.sortBy(data, 'supplier_name'),
+        supplierNameSortType: 'asc'
+      })
+    }else{
+      this.setState({
+        data: _.sortBy(data, 'supplier_name').reverse(),
+        supplierNameSortType: 'desc'
+      })
+    }
+  }
+  
+    render() {
+        return (
+          <div>
+            <Table
+              data={this.state.data}
+              columns={[{
+                Header: '建单时间',
+                accessor: 'submit_time'
+              }, {
+                Header: '入库单号',
+                accessor: 'id'
+              }, {
+                Header: <TableUtil.SortHeader onClick={this.handleSort} type={this.state.supplierNameSortType}>供应商信息</TableUtil.SortHeader>,
+                accessor: 'supplier_name'
+              }, {
+                Header: '入库金额',
+                accessor: 'total_money',
+                sortable: true
+              }, {
+                Header: '单据状态',
+                accessor: 'status'
+              }]}
+              onSortedChange={(newSorted, column, shiftKey) => {
+                console.log(newSorted, column, shiftKey);
+                this.setState({
+                supplierNameSortType: null
+                })
+              }}
+            />
+          </div>
+        );
+    }
+}
+```
+
+```jsx
+<TableSortWrap/>
 ```
 :::
 
@@ -124,6 +209,7 @@ class TableWrap extends React.Component {
 - `loading (bool)`
 - `data (array|required)`
 - `columns (array|required)`
+
 其他见 react-table 官方文档
 
 ---
@@ -220,6 +306,7 @@ class SelectTableWrap extends React.Component {
 - `onSelectTip (string)`
 - `keyField (string)` 默认 value
 - `selectType (string)` checkbox or radio
+
 其他见 react-table 官方文档
 
 ---
@@ -292,4 +379,5 @@ class ExpandTableWrap extends React.Component {
 - `data (array|required)`
 - `columns (array|required)`
 - `SubComponent (func|required)` 渲染展开的元素
+
 其他见 react-table 官方文档

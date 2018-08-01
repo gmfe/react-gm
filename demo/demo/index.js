@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from '../../table'
+import { Table, TableUtil } from '../../table'
 import _ from 'lodash'
 
 const data = [
@@ -10,7 +10,7 @@ const data = [
     'supplier_customer_id': 'LDP20180117',
     'submit_time': '2018-07-25',
     'status': 2,
-    'supplier_name': '赵伟（南苑路冷冻品）',
+    'supplier_name': '',
     'date_time': '2018-07-25',
     'delta_money': 0,
     'settle_supplier_id': 'T10953'
@@ -190,7 +190,7 @@ class Component extends React.Component {
         <div className='gm-padding-10'/>
 
         <Table
-          data={[]}
+          data={data}
           columns={[{
             Header: '建单时间',
             accessor: 'submit_time'
@@ -202,11 +202,17 @@ class Component extends React.Component {
             accessor: 'supplier_name'
           }, {
             Header: '入库金额',
-            accessor: 'total_money'
+            accessor: 'total_money',
+            sortable: true
           }, {
             Header: '单据状态',
             accessor: 'status'
+          }, {
+            Header: TableUtil.OperationHeader
           }]}
+          onSortedChange={(newSorted, column, shiftKey) => {
+            console.log(newSorted, column, shiftKey)
+          }}
         />
       </div>
     )

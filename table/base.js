@@ -3,8 +3,35 @@ import ReactTable from 'react-table'
 import classNames from 'classnames'
 import { getLocale } from '../src/locales'
 import _ from 'lodash'
+import { SortHeader } from './util'
 
 class BaseTable extends React.Component {
+  processItem = (item) => {
+    let Cell = item.Cell
+    if (!Cell) {
+      Cell = row => {
+        if (row.value === undefined || row.value === null || row.value === '') {
+          return <span className='gm-text-desc'>-</span>
+        }
+        return row.value
+      }
+    }
+
+    let Header = item.Header
+    if (_.isString(Header) && item.sortable) {
+      Header = <SortHeader>{Header}</SortHeader>
+    }
+
+    return {
+      ...item,
+      Header,
+      sortable: !!item.sortable,
+      // 有意义，如果是 undefined, 则赋值 undefined，覆盖默认值 100
+      minWidth: item.minWidth,
+      Cell
+    }
+  }
+
   render () {
     const {
       data, columns,
@@ -17,30 +44,14 @@ class BaseTable extends React.Component {
     const newColumns = _.map(columns, v => {
       // groups 的形式
       if (v.columns) {
-        v.columns = _.map(v.columns, vv => {
-          let Cell = vv.Cell
-          if (Cell) {
-            Cell = row => (row.value === undefined || row.value === null) ? <span
-              className='gm-text-desc'>-</span> : row.value
-          }
-          return {
-            ...vv,
-            minWidth: vv.minWidth && undefined,
-            Cell
-          }
-        })
-      } else {
-        let Cell = v.Cell
-        if (!Cell) {
-          Cell = row => (row.value === undefined || row.value === null) ? <span
-            className='gm-text-desc'>-</span> : row.value
-        }
+        const columns = _.map(v.columns, vv => this.processItem(vv))
 
         return {
           ...v,
-          minWidth: v.minWidth && undefined,
-          Cell
+          columns
         }
+      } else {
+        return this.processItem(v)
       }
     })
 
