@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Flex, Popover} from '../src/index'
 import _ from 'lodash'
+import {is} from 'gm-util'
 
 class Info extends React.Component {
   render () {
@@ -17,7 +18,7 @@ class Info extends React.Component {
             <Popover
               animName
               showArrow
-              type='hover'
+              type={is.mobile ? 'click' : 'hover'}
               right
               offset={-5}
               className='gm-framework-info-default-setting-popover'
