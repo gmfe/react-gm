@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, TableUtil } from '../../table'
+import { Table, ExpandSelectTable } from '../../table'
 import _ from 'lodash'
 
 const data = [
@@ -138,23 +138,20 @@ class Component extends React.Component {
         <Table
           data={data.slice(0, 3)}
           columns={[{
-            Header: 'haha',
-            columns: [{
-              Header: '建单时间',
-              accessor: 'submit_time'
-            }, {
-              Header: '入库单号',
-              accessor: 'id'
-            }, {
-              Header: '供应商信息',
-              accessor: 'supplier_name'
-            }, {
-              Header: '入库金额',
-              accessor: 'total_money'
-            }, {
-              Header: '单据状态',
-              accessor: 'status'
-            }]
+            Header: '建单时间',
+            accessor: 'submit_time'
+          }, {
+            Header: '入库单号',
+            accessor: 'id'
+          }, {
+            Header: '供应商信息',
+            accessor: 'supplier_name'
+          }, {
+            Header: '入库金额',
+            accessor: 'total_money'
+          }, {
+            Header: '单据状态',
+            accessor: 'status'
           }]}
         />
       </div>
@@ -164,32 +161,7 @@ class Component extends React.Component {
   render () {
     return (
       <div>
-        <Table
-          data={[]}
-          columns={[{
-            Header: 'haha',
-            columns: [{
-              Header: '建单时间',
-              accessor: 'submit_time'
-            }, {
-              Header: '入库单号',
-              accessor: 'id'
-            }, {
-              Header: '供应商信息',
-              accessor: 'supplier_name'
-            }, {
-              Header: '入库金额',
-              accessor: 'total_money'
-            }, {
-              Header: '单据状态',
-              accessor: 'status'
-            }]
-          }]}
-        />
-
-        <div className='gm-padding-10'/>
-
-        <Table
+        <ExpandSelectTable
           data={data}
           columns={[{
             Header: '建单时间',
@@ -202,17 +174,18 @@ class Component extends React.Component {
             accessor: 'supplier_name'
           }, {
             Header: '入库金额',
-            accessor: 'total_money',
-            sortable: true
+            accessor: 'total_money'
           }, {
             Header: '单据状态',
             accessor: 'status'
-          }, {
-            Header: TableUtil.OperationHeader
           }]}
-          onSortedChange={(newSorted, column, shiftKey) => {
-            console.log(newSorted, column, shiftKey)
-          }}
+          keyField='id'
+          selectAll={this.state.selectAll}
+          onSelectAll={this.handleToggleAll}
+          selectAllTip='选中所有数据啦'
+          selected={this.state.selected}
+          onSelect={this.handleSelect}
+          SubComponent={this.renderSubComponent}
         />
       </div>
     )
