@@ -33,7 +33,7 @@ class BaseTable extends React.Component {
   }
 
   render () {
-    const {
+    let {
       data, columns,
       defaultPageSize,
       showPagination,
@@ -61,7 +61,7 @@ class BaseTable extends React.Component {
         columns={newColumns}
         data={data}
         defaultPageSize={defaultPageSize}
-        pageSize={Math.min(defaultPageSize, Math.max(data.length, 1))}
+        pageSize={Math.max(data.length, 1)}
         className={classNames('gm-react-table -striped -highlight', className)}
         showPagination={showPagination}
       />
