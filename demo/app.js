@@ -136,6 +136,10 @@ class App extends React.Component {
           )}
         />}
         menu={this.renderMenu()}
+        task={{
+          name: '任务',
+          component: <div>1231231</div>
+        }}
       >
         <div onClick={this.handleClickAnchor}>
           {children}

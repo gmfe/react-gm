@@ -4,6 +4,7 @@ import { Flex, LayoutRoot, Emitter } from '../src/index'
 import classNames from 'classnames'
 import { setTitle } from 'gm-util'
 import _ from 'lodash'
+import RightSideModal from '../src/component/modal/right_side_modal'
 
 class Framework extends React.Component {
   constructor (props) {
@@ -13,6 +14,8 @@ class Framework extends React.Component {
       blur: false,
       overflowFlag: 0
     }
+
+    this.handleTaskListShow = ::this.handleTaskListShow
   }
 
   getChildContext () {
@@ -54,8 +57,19 @@ class Framework extends React.Component {
     Emitter.emit(Emitter.TYPE.BROWSER_SCROLL)
   }
 
+  handleTaskListShow () {
+    RightSideModal.render({
+      children: this.props.task.component,
+      onHide: RightSideModal.hide,
+      opacityMask: true,
+      style: {
+        width: '300px'
+      }
+    })
+  }
+
   render () {
-    let {showMobileMenu, menu, rightTop, leftWidth, children} = this.props
+    let {showMobileMenu, menu, rightTop, leftWidth, children, task} = this.props
 
     return (
       <div className={classNames('gm-framework', {
@@ -74,6 +88,7 @@ class Framework extends React.Component {
             </Flex>
           </div>
         </div>
+        {task && <div className="gm-framework-task gm-border gm-padding-5" onClick={this.handleTaskListShow}>{task.name}</div>}
         <LayoutRoot/>
       </div>
     )
@@ -88,7 +103,8 @@ Framework.propTypes = {
   showMobileMenu: PropTypes.bool,
   menu: PropTypes.element,
   rightTop: PropTypes.element,
-  leftWidth: PropTypes.string
+  leftWidth: PropTypes.string,
+  task: PropTypes.object,
 }
 
 Framework.childContextTypes = {
