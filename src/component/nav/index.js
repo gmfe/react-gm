@@ -71,7 +71,7 @@ class Nav extends React.Component {
                   'active': oneSelected && (oneSelected.link === one.link)
                 })} style={{width: widths[0]}}>
                   <a
-                    href={one.link}
+                    href={`/#${one.link}`}
                     onClick={this.handleOne.bind(this, one)}
                   >{one.name}</a>
                 </div>
@@ -125,7 +125,7 @@ class Nav extends React.Component {
                       <div className='gm-nav-there'>
                         {_.map(two.sub, (v, i) => (
                           <a
-                            href={v.link}
+                            href={`/#${v.link}`}
                             key={i + v.link}
                             className={classNames({
                               'active': selected.includes(v.link.split('?')[0])
