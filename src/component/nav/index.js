@@ -68,7 +68,7 @@ class Nav extends React.Component {
             </Flex>
             <div className='gm-margin-top-5 gm-nav-one'>
               {_.map(data, (one, oneI) => {
-                let link = !isBrowserRouter && /^\/[^#\/].*/.test(one.link) ? `/#${one.link}` : one.link
+                let link = !isBrowserRouter && /^\/[^#\/].*/.test(one.link) ? `#${one.link}` : one.link
                 return (
                   <div key={oneI + one.link} className={classNames({
                     'active': oneSelected && (oneSelected.link === one.link)
@@ -128,7 +128,7 @@ class Nav extends React.Component {
                       >{two.name}</a>
                       <div className='gm-nav-there'>
                         {_.map(two.sub, (v, i) => {
-                          let link = !isBrowserRouter && /^\/[^#\/].*/.test(v.link) ? `/#${v.link}` : v.link
+                          let link = !isBrowserRouter && /^\/[^#\/].*/.test(v.link) ? `#${v.link}` : v.link
                           return (
                             <a
                               href={link}
