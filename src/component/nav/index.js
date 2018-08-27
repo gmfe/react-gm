@@ -50,6 +50,7 @@ class Nav extends React.Component {
         className,
             logo, // eslint-disable-line
         widths,
+        isBrowserRouter,
         ...rest
       } = this.props
 
@@ -66,16 +67,19 @@ class Nav extends React.Component {
               {logo}
             </Flex>
             <div className='gm-margin-top-5 gm-nav-one'>
-              {_.map(data, (one, oneI) => (
-                <div key={oneI + one.link} className={classNames({
-                  'active': oneSelected && (oneSelected.link === one.link)
-                })} style={{width: widths[0]}}>
-                  <a
-                    href={one.link}
-                    onClick={this.handleOne.bind(this, one)}
-                  >{one.name}</a>
-                </div>
-              ))}
+              {_.map(data, (one, oneI) => {
+                let link = !isBrowserRouter && /^\/[^#\/].*/.test(one.link) ? `/#${one.link}` : one.link
+                return (
+                  <div key={oneI + one.link} className={classNames({
+                    'active': oneSelected && (oneSelected.link === one.link)
+                  })} style={{width: widths[0]}}>
+                    <a
+                      href={link}
+                      onClick={this.handleOne.bind(this, one)}
+                    >{one.name}</a>
+                  </div>
+                )
+              })}
               <div style={{
                 margin: '30px 10px'
               }}/>
@@ -123,19 +127,22 @@ class Nav extends React.Component {
                         onClick={e => e.preventDefault()}
                       >{two.name}</a>
                       <div className='gm-nav-there'>
-                        {_.map(two.sub, (v, i) => (
-                          <a
-                            href={v.link}
-                            key={i + v.link}
-                            className={classNames({
-                              'active': selected.includes(v.link.split('?')[0])
-                            })}
-                            onClick={(e) => {
-                              e.preventDefault()
-                              onSelect(v)
-                            }}
-                          >{v.name}</a>
-                        ))}
+                        {_.map(two.sub, (v, i) => {
+                          let link = !isBrowserRouter && /^\/[^#\/].*/.test(v.link) ? `/#${v.link}` : v.link
+                          return (
+                            <a
+                              href={link}
+                              key={i + v.link}
+                              className={classNames({
+                                'active': selected.includes(v.link.split('?')[0])
+                              })}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                onSelect(v)
+                              }}
+                            >{v.name}</a>
+                          )
+                        })}
                       </div>
                     </div>
                   ))}
@@ -155,7 +162,12 @@ Nav.propTypes = {
   jump: PropTypes.array,
   onSelect: PropTypes.func.isRequired,
   selected: PropTypes.string.isRequired,
+  isBrowserRouter: PropTypes.bool,
   widths: PropTypes.array.isRequired // ["120px", "150px"]
+}
+
+Nav.defaultProps = {
+  isBrowserRouter: false
 }
 
 export default Nav
