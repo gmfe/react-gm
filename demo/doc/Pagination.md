@@ -1,7 +1,63 @@
 ---
 imports:
-    import {Flex, Pagination,PaginationNew, PaginationText} from '../../src/index';
+    import {Flex, PaginationBox, Pagination, PaginationNew, PaginationText} from '../../src/index';
 ---
+
+## PaginationBox
+[最新规范 2018.08.29](https://doc.guanmai.cn/%E6%A8%A1%E5%9D%97%E6%96%87%E6%A1%A3/%E5%88%86%E9%A1%B5/)
+::: demo 最新分页规范
+```js
+class PaginationBoxDemo extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            list:{}
+        };
+    }
+    componentDidMount(){
+        this.pagination.doFirstRequest();
+    }
+    requestSomething = (pagination) => {
+        return new Promise((resolve) => {
+           setTimeout(()=>{
+                let json = {
+                data:['111','222'],
+                pagination:{
+                    page_obj:'xxx',
+                    peek: 55,
+                    more: true,
+                },
+            }
+            this.setState({list:json.data})
+            resolve(json)
+           },1000)
+        })
+    }
+    render(){
+        return (
+            <PaginationBox onRequest={this.requestSomething} ref={ref => (this.pagination = ref)} /* disablePage 不显示页码 */>
+                    <div>
+                        Some content
+                    </div>
+            </PaginationBox>
+        );
+    }
+}
+```
+```jsx
+<PaginationBoxDemo/>
+```
+:::
+
+### Props 
+- `onRequest (func|isRequired)`  用于发请求的function，接收pagination。要返回 promise，且 resolve json
+- `limit (number|isRequired)` 返回条数，默认10
+- `disablePage (bool)` 不显示页码，默认false
+- `children (element|func)` 页码上方区域
+
+
+
+
 ## Pagination【新规范】
 
 提前阅读[新分页规范](https://doc.guanmai.cn/%E5%88%86%E4%BA%AB%E5%9F%B9%E8%AE%AD/%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/%E5%88%86%E9%A1%B5%E8%A7%84%E8%8C%83/)
