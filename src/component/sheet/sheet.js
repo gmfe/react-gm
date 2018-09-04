@@ -20,10 +20,6 @@ class Sheet extends React.Component {
     this.handleExpandedAll = ::this.handleExpandedAll
   }
 
-  componentDidMount () {
-    console.warn('Sheet is deprecated. Use Table instead.')
-  }
-
   handleSelect (select, i, event) {
     // 恩，很复杂
     const {checked} = event.target
