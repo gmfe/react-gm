@@ -162,6 +162,9 @@ class Component extends React.Component {
     return (
       <div>
         <ExpandSelectTable
+          style={{
+            height: '200px'
+          }}
           data={data}
           columns={[{
             Header: '建单时间',

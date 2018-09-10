@@ -38,6 +38,7 @@ class BaseTable extends React.Component {
       defaultPageSize,
       showPagination,
       className,
+      style,
       ...rest
     } = this.props
 
@@ -55,6 +56,12 @@ class BaseTable extends React.Component {
       }
     })
 
+    const newStyle = Object.assign({}, style)
+
+    if (newStyle.height) {
+      newStyle.overflow = 'auto'
+    }
+
     return (
       <ReactTable
         {...rest}
@@ -63,6 +70,7 @@ class BaseTable extends React.Component {
         defaultPageSize={defaultPageSize}
         pageSize={Math.max(data.length, 1)}
         className={classNames('gm-react-table -striped -highlight', className)}
+        style={newStyle}
         showPagination={showPagination}
       />
     )

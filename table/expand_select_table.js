@@ -8,13 +8,13 @@ const HocSelectTable = hocSelectTable(ExpandTable)
 
 class ExpandSelectTable extends React.Component {
   isSelected = (key) => {
-    const {selected} = this.props
+    const { selected } = this.props
 
     return selected.includes(key)
   }
 
   handleToggleSelection = (key) => {
-    const {selected, onSelect, selectType} = this.props
+    const { selected, onSelect, selectType } = this.props
 
     if (selectType === 'radio') {
       onSelect([key])
@@ -31,12 +31,14 @@ class ExpandSelectTable extends React.Component {
       selectType,
       keyField,
       SubComponent,
-      noDataText, loadingText
+      noDataText, loadingText,
+      ...rest
     } = this.props
 
     return (
       <div className='gm-react-table-select'>
         <HocSelectTable
+          {...rest}
           ref={ref => (this.ref = ref)}
           loading={loading}
           data={data}
