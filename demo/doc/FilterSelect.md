@@ -333,6 +333,62 @@ class FilterSelect4 extends React.Component {
 :::
 
 
+::: demo 带搜索框的MultipleFilterSelect
+```js
+class FilterSelect5 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: filterSelectData,
+            list: filterSelectData
+        };
+        this.handleSelect = ::this.handleSelect;
+        this.handleSearch = ::this.handleSearch;
+    }
+
+    handleSelect(selected) {
+        console.log(selected);
+        this.setState({
+            selected
+        });
+    }
+
+    handleSearch(value) {
+        if(this.state.selected && value === this.state.selected.name){
+            this.setState({
+                list: filterSelectData
+            });
+        }else{
+            this.setState({
+                list: _.filter(filterSelectData, v => {
+                    return v.name.indexOf(value) > -1;
+                })
+            });
+        }
+    }
+
+    render() {
+        return (
+            <div style={{width: '500px'}}>
+                <MultipleFilterSelect
+                    id="ss"
+                    list={this.state.list}
+                    selected={this.state.selected}
+                    onSelect={this.handleSelect}
+                    placeholder="搜索"
+                    onSearch={this.handleSearch}
+                />
+            </div>
+        );
+    }
+}
+```
+```jsx
+<FilterSelect5/>
+```
+:::
+
+
 ### FilterSelect Props
 
 - `id (string|isRequired)`
