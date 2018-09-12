@@ -14,6 +14,4 @@ const config = webpackConfigDll({
   ]
 })
 
-config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
-
 module.exports = config
