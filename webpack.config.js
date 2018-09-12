@@ -21,8 +21,6 @@ config.module.rules.push({
   loader: 'happypack/loader?id=md'
 })
 
-config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
-
 config.plugins.push(new HappyPack({
   id: 'md',
   threadPool: happyThreadPool,
