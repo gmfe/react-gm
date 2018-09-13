@@ -26,7 +26,11 @@
       "eslint --cache --fix",
       "git add"
     ],
-    "./src/{*.less,css/*.less,component/**/*.less}": [
+    "./src/(component|css)/**/*.less": [
+      "stylelint --cache --fix",
+      "git add"
+    ],
+    "./table/**/*.less": [
       "stylelint --cache --fix",
       "git add"
     ]
