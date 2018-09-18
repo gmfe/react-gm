@@ -8,19 +8,18 @@ class Switch extends React.Component {
     super(props)
 
     this.state = {
-      left: 1,
-      checked: props.checked
+      checked: props.checked,
+      labelWidth: null,
+      onWidth: null
     }
-
-    this.refOn = null
-
     this.handleChange = ::this.handleChange
   }
 
   componentDidMount () {
-    // 初始化后开始计算on的宽度，方便做开关切换动画
+    // 初始化后开始计算on和off的宽度，取较大值作为switch开关的宽度
     this.setState({
-      left: this.refOn.offsetWidth + 4 + 24 - 17
+      labelWidth: this.refInputOff.offsetWidth >= this.refInputOn.offsetWidth ? this.refInputOff.offsetWidth + 6 : this.refInputOn.offsetWidth + 6,
+      onWidth: 0
     })
   }
 
@@ -50,38 +49,41 @@ class Switch extends React.Component {
 
   render () {
     const {
-      className,
-      checked, onChange, // eslint-disable-line
+      className, // checked, onChange, // eslint-disable-line
       type, disabled, on, off,
       ...rest
     } = this.props
 
-    const handleStyle = {}
-    if (this.state.checked) {
-      handleStyle.left = this.state.left
-    }
+    const inputStyle = {}
+    inputStyle.width = this.state.labelWidth
 
     return (
-      <label
-        {...rest}
-        className={classNames('gm-switch gm-switch-' + type, className, {
-          'gm-switch-disabled': disabled
-        })}
-      >
+      <span>
         <input
+          data-text={this.state.checked ? on : off}
+          ref={ref => (this.refInputOff = ref)}
+          style={inputStyle}
+          data-attr={this.state.labelWidth}
           disabled={disabled}
+          {...rest}
+          className={classNames('gm-switch gm-switch-' + type, className, {
+            'gm-switch-disabled': disabled
+          })}
           type='checkbox'
-          className='gm-switch-input'
           checked={this.state.checked}
           onChange={this.handleChange}
         />
-        <div className='gm-switch-label'>
-          <span>{this.state.checked ? on : off}</span>
-          {/* 只需算on的宽度 */}
-          <span className='gm-switch-label-on' ref={ref => (this.refOn = ref)}>{on}</span>
-        </div>
-        <div className='gm-switch-handle' style={handleStyle}/>
-      </label>
+
+        <input
+          data-text={on}
+          ref={ref => (this.refInputOn = ref)}
+          style={{visibility: 'hidden', width: this.state.onWidth}}
+          disabled={disabled}
+          className='gm-switch'
+          type='checkbox'
+        />
+
+      </span>
     )
   }
 }
