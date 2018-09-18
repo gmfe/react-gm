@@ -5,9 +5,7 @@ input[type="checkbox"]:focus {
 .gm-switch {
   position: relative;
   -webkit-appearance: none;
-  //white-space: nowrap;
   height: 22px;
-  //border: 1px solid @gm-border-color;
   border-radius: 11px;
   background-color: #dfdfdf;
 
@@ -18,16 +16,14 @@ input[type="checkbox"]:focus {
     left: 1px;
     width: 20px;
     height: 20px;
-    border-radius: 10px;
+    border-radius: 50%;
     background-color: #fff;
     transition: all 0.35s;
   }
 
   &::after {
-    //display: inline-block;
     content: attr(data-text);
     color: white;
-    //font-size: 12px;
     padding-left: 23px;
     line-height: 22px;
     transition: all 0.35s;
@@ -35,7 +31,6 @@ input[type="checkbox"]:focus {
 }
 
 .gm-switch:checked {
-  //border-color: @brand-primary;
   background-color: @brand-primary;
 
   &::before {
@@ -55,27 +50,22 @@ input[type="checkbox"]:focus {
 
   &.gm-switch-primary {
     background-color: @brand-primary;
-    //border: 1px solid @brand-primary;
   }
 
   &.gm-switch-success {
     background-color: @brand-success;
-    //border: 1px solid @brand-success;
   }
 
   &.gm-switch-info {
     background-color: @brand-info;
-    //border: 1px solid @brand-info;
   }
 
   &.gm-switch-warning {
     background-color: @brand-warning;
-    //border: 1px solid @brand-warning;
   }
 
   &.gm-switch-danger {
     background-color: @brand-danger;
-    //border: 1px solid @brand-danger;
   }
 }
 
