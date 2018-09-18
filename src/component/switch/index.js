@@ -10,7 +10,7 @@ class Switch extends React.Component {
     this.state = {
       checked: props.checked,
       labelWidth: null,
-      onWidth: null
+      isReady: false
     }
     this.handleChange = ::this.handleChange
   }
@@ -18,8 +18,8 @@ class Switch extends React.Component {
   componentDidMount () {
     // 初始化后开始计算on和off的宽度，取较大值作为switch开关的宽度
     this.setState({
-      labelWidth: this.refInputOff.offsetWidth >= this.refInputOn.offsetWidth ? this.refInputOff.offsetWidth + 6 : this.refInputOn.offsetWidth + 6,
-      onWidth: 0
+      labelWidth: this.refInputOff.offsetWidth >= this.refInputOn.offsetWidth ? this.refInputOff.offsetWidth + (this.state.checked ? 14 : 6) : this.refInputOn.offsetWidth + (this.state.checked ? 14 : 6),
+      isReady: true
     })
   }
 
@@ -73,16 +73,16 @@ class Switch extends React.Component {
           checked={this.state.checked}
           onChange={this.handleChange}
         />
-
-        <input
-          data-text={on}
-          ref={ref => (this.refInputOn = ref)}
-          style={{visibility: 'hidden', width: this.state.onWidth}}
-          disabled={disabled}
-          className='gm-switch'
-          type='checkbox'
-        />
-
+        {
+          !this.state.isReady &&
+          <input
+            data-text={on}
+            ref={ref => (this.refInputOn = ref)}
+            disabled={disabled}
+            className='gm-switch'
+            type='checkbox'
+          />
+        }
       </span>
     )
   }
