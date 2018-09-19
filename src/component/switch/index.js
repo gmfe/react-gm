@@ -78,7 +78,6 @@ class Switch extends React.Component {
           <input
             data-text={this.state.checked ? off : on}
             ref={ref => (this.refInputOn = ref)}
-            disabled={disabled}
             className='gm-switch'
             type='checkbox'
           />
