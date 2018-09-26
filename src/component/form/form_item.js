@@ -74,12 +74,6 @@ class FormItem extends React.Component {
       error = !!help
     }
 
-    if (!_.isArray(children)) {
-      if (children.type.displayName === 'Switch') {
-        unLabelTop = true
-      }
-    }
-
     return (
       <Flex column={!horizontal && !inline} {...rest} className={classNames('gm-form-group', className, {
         'has-error': error
