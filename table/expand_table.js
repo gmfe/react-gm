@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import BaseTable from './base'
 import _ from 'lodash'
-
+import diyTableHOC from './diy_table'
+@diyTableHOC
 class ExpandTable extends React.Component {
   constructor (props) {
     super(props)
@@ -38,8 +39,8 @@ class ExpandTable extends React.Component {
 
     return (
       <div className='gm-cursor' onClick={this.handleExpandAll.bind(this, isAllExpanded)}>
-        {isAllExpanded ? <i className='xfont xfont-minus'/> : <i
-          className='xfont xfont-plus'/>}
+        {isAllExpanded ? <i className='xfont xfont-minus' /> : <i
+          className='xfont xfont-plus' />}
       </div>
     )
   }

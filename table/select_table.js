@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import BaseTable from './base'
 import hocSelectTable from 'react-table/lib/hoc/selectTable'
 import _ from 'lodash'
+import diyTableHOC from './diy_table'
 
 const HocSelectTable = hocSelectTable(BaseTable)
-
+@diyTableHOC
 class SelectTable extends React.Component {
   isSelected = (key) => {
     const { selected } = this.props
