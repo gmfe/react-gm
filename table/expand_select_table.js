@@ -3,10 +3,15 @@ import PropTypes from 'prop-types'
 import ExpandTable from './expand_table'
 import hocSelectTable from 'react-table/lib/hoc/selectTable'
 import _ from 'lodash'
+import diyTableHOC from './diy_table'
 
 const HocSelectTable = hocSelectTable(ExpandTable)
-
+@diyTableHOC
 class ExpandSelectTable extends React.Component {
+  showDiySelector = bool => {
+    this.ref.showDiySelector(bool)
+  }
+
   isSelected = (key) => {
     const { selected } = this.props
 
