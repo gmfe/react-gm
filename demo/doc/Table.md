@@ -1,6 +1,7 @@
 ---
 imports:
-    import {Table, SelectTable, ExpandTable, TableUtil} from '../../table';
+    import {Table, SelectTable, ExpandTable, TableUtil, diyTableHOC} from '../../table';
+    const DiyTable = diyTableHOC(Table);
 ---
 
 封装 [react-table](https://github.com/react-tools/react-table)
@@ -169,6 +170,7 @@ class TableSortWrap extends React.Component {
         return (
           <div>
             <Table
+              ref={ref => (this.table = ref)}
               data={this.state.data}
               columns={[{
                 Header: '建单时间',
@@ -178,7 +180,8 @@ class TableSortWrap extends React.Component {
                 accessor: 'id'
               }, {
                 Header: <TableUtil.SortHeader onClick={this.handleSort} type={this.state.supplierNameSortType}>供应商信息</TableUtil.SortHeader>,
-                accessor: 'supplier_name'
+                accessor: 'supplier_name',
+                HeaderText: '供应商信息自定义'  // 自定义列表内展示的名字
               }, {
                 Header: '入库金额',
                 accessor: 'total_money',
@@ -260,6 +263,7 @@ class SelectTableWrap extends React.Component {
     return (
       <div>
         <SelectTable
+          ref={ref => (this.table = ref)}
           data={data}
           columns={[{
             Header: '建单时间',
@@ -318,7 +322,7 @@ class SelectTableWrap extends React.Component {
 class ExpandTableWrap extends React.Component {
     renderSubComponent () {
       return (
-        <div className='gm-padding-10'>
+        <div classnames='gm-padding-10'>
           <Table
             data={data.slice(0, 3)}
             columns={[{
@@ -344,14 +348,58 @@ class ExpandTableWrap extends React.Component {
     
     render() {
         return (
-            <ExpandTable
+          <div>
+              <ExpandTable
+                ref={ref => (this.table = ref)}
+                data={data}
+                columns={[{
+                  Header: '建单时间',
+                  accessor: 'submit_time'
+                }, {
+                  Header: '入库单号',
+                  accessor: 'id'
+                }, {
+                  Header: '供应商信息',
+                  accessor: 'supplier_name'
+                }, {
+                  Header: '入库金额',
+                  accessor: 'total_money'
+                }, {
+                  Header: '单据状态',
+                  accessor: 'status'
+                }]}
+                SubComponent={this.renderSubComponent}
+              />
+          </div>
+        );
+    }
+}
+```
+
+```jsx
+<ExpandTableWrap/>
+```
+:::
+
+::: demo 自定义表头
+```js
+class DiyTableWrap extends React.Component {
+    render() {
+        return (
+          <div>
+              <button className='gm-btn' onClick={() => this.table.apiToggleDiy()}>列表自定义</button>
+            <DiyTable
+              ref={ref => { this.table = ref }}
+              id='diy_table_wrap'  // 提供唯一id
               data={data}
               columns={[{
                 Header: '建单时间',
-                accessor: 'submit_time'
+                accessor: 'submit_time',
+                diyDisable: true  // diyDisable = true,使当前列不展示,并且不出现在自定义列表中
               }, {
                 Header: '入库单号',
-                accessor: 'id'
+                accessor: 'id',
+                show: false     // 初始化时不展示出来
               }, {
                 Header: '供应商信息',
                 accessor: 'supplier_name'
@@ -362,15 +410,15 @@ class ExpandTableWrap extends React.Component {
                 Header: '单据状态',
                 accessor: 'status'
               }]}
-              SubComponent={this.renderSubComponent}
             />
+          </div>
         );
     }
 }
 ```
 
 ```jsx
-<ExpandTableWrap/>
+<DiyTableWrap/>
 ```
 :::
 

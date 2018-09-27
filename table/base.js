@@ -1,12 +1,12 @@
 import React from 'react'
-import ReactTable from 'react-table'
 import classNames from 'classnames'
 import { getLocale } from '../src/locales'
 import _ from 'lodash'
 import { SortHeader } from './util'
+import ReactTable from 'react-table'
 
 class BaseTable extends React.Component {
-  processItem = (item) => {
+  processItem = item => {
     let Cell = item.Cell
     if (!Cell) {
       Cell = row => {
@@ -34,7 +34,8 @@ class BaseTable extends React.Component {
 
   render () {
     let {
-      data, columns,
+      data,
+      columns,
       defaultPageSize,
       showPagination,
       className,

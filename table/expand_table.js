@@ -38,8 +38,8 @@ class ExpandTable extends React.Component {
 
     return (
       <div className='gm-cursor' onClick={this.handleExpandAll.bind(this, isAllExpanded)}>
-        {isAllExpanded ? <i className='xfont xfont-minus'/> : <i
-          className='xfont xfont-plus'/>}
+        {isAllExpanded ? <i className='xfont xfont-minus' /> : <i
+          className='xfont xfont-plus' />}
       </div>
     )
   }

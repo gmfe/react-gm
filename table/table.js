@@ -4,15 +4,9 @@ import BaseTable from './base'
 
 class Table extends React.Component {
   render () {
-    const {
-      ...rest
-    } = this.props
+    const {...rest} = this.props
 
-    return (
-      <BaseTable
-        {...rest}
-      />
-    )
+    return <BaseTable {...rest}/>
   }
 }
 
