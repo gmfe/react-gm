@@ -54,21 +54,23 @@ class Switch extends React.Component {
       ...rest
     } = this.props
 
-    const inputStyle = {}
-    inputStyle.width = this.state.labelWidth
+    let inputStyle = {}
+    if (rest.style) {
+      inputStyle = Object.assign({}, {width: this.state.labelWidth}, rest.style)
+    } else inputStyle = {width: this.state.labelWidth}
 
     return (
-      <span>
+      <React.Fragment>
         <input
           data-text={this.state.checked ? on : off}
           ref={ref => (this.refInputOff = ref)}
-          style={inputStyle}
-          data-attr={this.state.labelWidth}
-          disabled={disabled}
           {...rest}
           className={classNames('gm-switch gm-switch-' + type, className, {
             'gm-switch-disabled': disabled
           })}
+          style={inputStyle}
+          data-attr={this.state.labelWidth}
+          disabled={disabled}
           type='checkbox'
           checked={this.state.checked}
           onChange={this.handleChange}
@@ -80,9 +82,10 @@ class Switch extends React.Component {
             ref={ref => (this.refInputOn = ref)}
             className='gm-switch'
             type='checkbox'
+            style={{position: 'fixed', visibility: 'hidden'}}
           />
         }
-      </span>
+      </React.Fragment>
     )
   }
 }
