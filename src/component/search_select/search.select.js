@@ -353,7 +353,6 @@ class SearchSelect extends React.Component {
               placeholder={this.props.placeholder}
             />
           </Trigger>
-          <i className='gm-arrow-down'/>
         </Flex>
       </div>
     )
