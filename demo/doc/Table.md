@@ -387,19 +387,20 @@ class DiyTableWrap extends React.Component {
     render() {
         return (
           <div>
-              <button className='gm-btn' onClick={() => this.table.apiToggleDiy()}>列表自定义</button>
+              <button className='gm-btn' onClick={() => this.table.apiToggleDiySelector()}>列表自定义</button>
             <DiyTable
               ref={ref => { this.table = ref }}
-              id='diy_table_wrap'  // 提供唯一id
+              id='diy_table_wrap'  // 提供唯一id,作为localStorage 的key
               data={data}
               columns={[{
                 Header: '建单时间',
                 accessor: 'submit_time',
-                diyDisable: true  // diyDisable = true,使当前列不展示,并且不出现在自定义列表中
+                diyEnable: false,  // 当 diyEnable = false 时,不出现在自定义checkbox列表中(默认diyEnable = true)
               }, {
                 Header: '入库单号',
                 accessor: 'id',
-                show: false     // 初始化时不展示出来
+                show: false     // 当使用diyTableHOC的时候, 这里的show值仅在diyTable第一次初始化的时候有用
+                                // 如果diyEnable = true(默认为true), 之后使用的是localStorage里保存的show值
               }, {
                 Header: '供应商信息',
                 accessor: 'supplier_name'
