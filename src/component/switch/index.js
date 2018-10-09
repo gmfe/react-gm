@@ -18,7 +18,7 @@ class Switch extends React.Component {
   componentDidMount () {
     // 初始化后开始计算on和off的宽度，取较大值作为switch开关的宽度
     this.setState({
-      labelWidth: this.refInputOff.offsetWidth >= this.refInputOn.offsetWidth ? this.refInputOff.offsetWidth + 6 : this.refInputOn.offsetWidth + 6,
+      labelWidth: this.refInputOff.offsetWidth >= this.refInputOn.offsetWidth ? this.refInputOff.offsetWidth + 7 : this.refInputOn.offsetWidth + 7,
       isReady: true
     })
   }
