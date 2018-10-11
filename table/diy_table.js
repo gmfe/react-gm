@@ -50,8 +50,8 @@ function diyTableHOC (Component) {
       }
     }
 
-    componentWillReceiveProps (nextProps, prevState) {
-      this.setState({columns: generateDiyColumns(nextProps.columns, prevState.columns)})
+    componentWillReceiveProps (nextProps) {
+      this.setState({columns: generateDiyColumns(nextProps.columns, this.state.columns)})
     }
 
     componentDidMount () {
