@@ -323,7 +323,6 @@ class FilterSelect extends React.Component {
               )}
             </Flex>
           </Popover>
-          <i className='gm-arrow-down'/>
         </Flex>
       </div>
     )
