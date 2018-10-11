@@ -7,40 +7,55 @@ import Flex from '../src/component/flex'
 import { contains } from 'gm-util'
 import { findDOMNode } from 'react-dom'
 
+/**
+ * 初始化columns, 当前columns 和 props的columns做糅合
+ * @param propsColumns 组件的props
+ * @param mixColumns 当前需要糅合的columns
+ * @return {Array} 糅合之后的columns
+ */
+function generateDiyColumns (propsColumns, mixColumns) {
+  return _.map(propsColumns, item => {
+    const {id, accessor, show = true, diyEnable = true} = item
+    const key = id || accessor
+
+    const mixItem = _.find(mixColumns, v => {
+      const localKey = v.id || v.accessor
+      return localKey === key
+    })
+
+    let newItem = {
+      ...item,
+      show,
+      diyEnable
+    }
+
+    // 只有启用diy的列才使用本地存储的show值
+    if (diyEnable && mixItem) {
+      newItem.show = mixItem.show
+    }
+    return newItem
+  })
+}
+
 function diyTableHOC (Component) {
   class DiyTable extends React.Component {
     constructor (props) {
-      super(props)
+      super()
+      // 从localStorage拿到columns
+      const localColumns = Storage.get(props.id) || []
+
       this.state = {
-        // 把没有查看权限的列去掉,查看权限默认为true
-        columns: _.filter(props.columns, ({diyDisable = false}) => !diyDisable),
-        isShow: false,
-        diyHeaderObj: {}
+        columns: generateDiyColumns(props.columns, localColumns),
+        isShow: false
       }
+    }
+
+    componentWillReceiveProps (nextProps, prevState) {
+      this.setState({columns: generateDiyColumns(nextProps.columns, prevState.columns)})
     }
 
     componentDidMount () {
       window.document.body.addEventListener('click', this.handleCloseDiySelector)
-      const {id: diyID} = this.props
-      const {columns} = this.state
-
-      // 组件挂载的时候,读取本地保存的diy配置
-      if (diyID) {
-        const diyHeaderObj = Storage.get(diyID) || {}
-
-        const newColumns = _.map(columns, item => {
-          const {id, accessor, show = true} = item
-          const key = id || accessor
-          // 优先使用localStorage的值,没有则使用column上的值
-          const itemShow = _.isBoolean(diyHeaderObj[key]) ? diyHeaderObj[key] : show
-
-          return {
-            ...item, show: itemShow
-          }
-        })
-
-        this.setState({columns: newColumns, diyHeaderObj})
-      }
     }
 
     componentWillUnmount () {
@@ -49,7 +64,7 @@ function diyTableHOC (Component) {
     }
 
     // 显示diy选择框  注:暴露给外部使用
-    apiToggleDiy = () => {
+    apiToggleDiySelector = () => {
       if (!this.__isUnmounted) {
         const {isShow} = this.state
         this.setState({isShow: !isShow})
@@ -67,21 +82,13 @@ function diyTableHOC (Component) {
 
     handleCheck (index) {
       const columns = this.state.columns.slice()
-      const {show = true} = columns[index]
+      const {show} = columns[index]
       columns[index].show = !show
       this.setState({columns})
 
-      const {id: diyID} = this.props
-      // 记录配置
-      if (diyID) {
-        const obj = _.clone(this.state.diyHeaderObj)
-        const {id, accessor} = columns[index]
-        const key = id || accessor
-        obj[key] = !show
-
-        this.setState({diyHeaderObj: obj})
-        Storage.set(diyID, obj)
-      }
+      const {id} = this.props
+      // 记录当前columns的数据到localStorage
+      Storage.set(id, columns)
     }
 
     render () {
@@ -94,12 +101,12 @@ function diyTableHOC (Component) {
         <Component {...props}/>
         {isShow && <Flex className='gm-react-table-diy-selector gm-box-shadow-bottom' wrap ref={ref => (this.diySelectorRef = ref)}>
           {_.map(columns, (item, index) => {
-            const {id, accessor, show: checked = true, Header, diyCheckboxText} = item
+            const {id, accessor, show: checked, Header, diyItemText, diyEnable} = item
             const key = id || accessor
-            const text = diyCheckboxText || Header
+            const text = diyItemText || Header
 
             // Header是字符串才展示自定义选择项
-            return _.isString(text) ? <div style={{width: '50%'}} key={key}>
+            return _.isString(text) && diyEnable ? <div style={{width: '50%'}} key={key}>
               <Checkbox
                 value={key}
                 checked={checked}
@@ -116,7 +123,6 @@ function diyTableHOC (Component) {
 
   DiyTable.propTypes = {
     id: PropTypes.string.isRequired,
-    loading: PropTypes.bool,
     data: PropTypes.array.isRequired,
     columns: PropTypes.array.isRequired
   }
