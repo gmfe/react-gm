@@ -336,7 +336,6 @@ class MultipleFilterSelect extends React.Component {
               </Flex>
             </Flex>
           </Popover>
-          <i className='gm-arrow-down'/>
         </Flex>
       </div>
     )
