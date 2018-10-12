@@ -60,6 +60,7 @@ class Switch extends React.Component {
     return (
       <React.Fragment>
         <input
+          id='gm-switch-input'
           data-text={this.state.checked ? on : off}
           ref={ref => (this.refInputOff = ref)}
           {...rest}
