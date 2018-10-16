@@ -54,10 +54,8 @@ class Switch extends React.Component {
       ...rest
     } = this.props
 
-    let inputStyle = {}
-    if (rest.style) {
-      inputStyle = Object.assign({}, {width: this.state.labelWidth}, rest.style)
-    } else inputStyle = {width: this.state.labelWidth}
+    let inputStyle = {width: this.state.labelWidth}
+    if (rest.style) inputStyle = Object.assign({}, inputStyle, rest.style)
 
     return (
       <React.Fragment>
