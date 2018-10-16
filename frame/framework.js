@@ -55,7 +55,7 @@ class Framework extends React.Component {
   }
 
   render () {
-    let {showMobileMenu, menu, rightTop, leftWidth, children} = this.props
+    let {showMobileMenu, isFullScreen, menu, rightTop, leftWidth, children} = this.props
 
     return (
       <div className={classNames('gm-framework', {
@@ -64,15 +64,17 @@ class Framework extends React.Component {
         <div className={classNames('gm-framework-inner', {
           'gm-filter-blur-transition': this.state.blur
         })}>
-          <div className="gm-framework-full-height">
-            <Flex className="gm-framework-container">
-              {menu && <div className="gm-framework-left">{menu}</div>}
-              <Flex flex column className="gm-framework-right" style={{width: `calc(100% - ${leftWidth})`}}>
-                {rightTop && <div className="gm-framework-right-top">{rightTop}</div>}
-                <div className="gm-framework-content">{children}</div>
+          { isFullScreen ? children
+            : <div className='gm-framework-full-height'>
+              <Flex className='gm-framework-container'>
+                {menu && <div className='gm-framework-left'>{menu}</div>}
+                <Flex flex column className='gm-framework-right' style={{width: `calc(100% - ${leftWidth})`}}>
+                  {rightTop && <div className='gm-framework-right-top'>{rightTop}</div>}
+                  <div className='gm-framework-content'>{children}</div>
+                </Flex>
               </Flex>
-            </Flex>
-          </div>
+            </div>
+          }
         </div>
         <LayoutRoot/>
       </div>
@@ -86,6 +88,7 @@ Framework.scrollTop = function () {
 
 Framework.propTypes = {
   showMobileMenu: PropTypes.bool,
+  isFullScreen: PropTypes.bool,
   menu: PropTypes.element,
   rightTop: PropTypes.element,
   leftWidth: PropTypes.string
