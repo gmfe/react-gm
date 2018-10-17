@@ -1,6 +1,8 @@
 ---
 imports:
     import {Table, SelectTable, ExpandTable, TableUtil, diyTableHOC} from '../../table';
+    import {Popover} from '../../src/index';
+
     const DiyTable = diyTableHOC(Table);
 ---
 
@@ -384,6 +386,15 @@ class ExpandTableWrap extends React.Component {
 ::: demo 自定义表头
 ```js
 class DiyTableWrap extends React.Component {
+    renderPopup() {
+    return (
+    <div style={{width: '200px', height: '200px'}}>
+    <div>啦啦啦啦啦啦啦啦啦啦啦</div>
+    <div>啦啦啦啦啦啦啦啦啦啦啦</div>
+    <div>啦啦啦</div>
+    </div>
+    );
+    }
     render() {
         return (
           <div>
@@ -392,24 +403,37 @@ class DiyTableWrap extends React.Component {
               ref={ref => { this.table = ref }}
               id='diy_table_wrap'  // 提供唯一id,作为localStorage 的key
               data={data}
-              columns={[{
+              columns={[
+              {
+              Header: '单据状态',width: 550,
+              id: 'status',
+              accessor: d =>   <Popover type="click" popup={this.renderPopup()}>
+              <button className="btn btn-default">click me</button>
+              </Popover>
+              },{
                 Header: '建单时间',
                 accessor: 'submit_time',
+                width: 550,
                 diyEnable: false,  // 当 diyEnable = false 时,不出现在自定义checkbox列表中(默认diyEnable = true)
               }, {
                 Header: '入库单号',
                 accessor: 'id',
+                width: 550,
                 show: false     // 当使用diyTableHOC的时候, 这里的show值仅在diyTable第一次初始化的时候有用
                                 // 如果diyEnable = true(默认为true), 之后使用的是localStorage里保存的show值
               }, {
                 Header: '供应商信息',
+                width: 550,
                 accessor: 'supplier_name'
               }, {
-                Header: '入库金额',
+                Header: '入库金额',width: 550,
                 accessor: 'total_money'
               }, {
-                Header: '单据状态',
-                accessor: 'status'
+                Header: '单据状态',width: 550,
+                id: 'status',
+                accessor: d =>   <Popover type="click" popup={this.renderPopup()}>
+                                  <button className="btn btn-default">click me</button>
+                                </Popover>
               }]}
             />
           </div>

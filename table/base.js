@@ -4,8 +4,27 @@ import { getLocale } from '../src/locales'
 import _ from 'lodash'
 import { SortHeader } from './util'
 import ReactTable from 'react-table'
+import { findDOMNode } from 'react-dom'
+import Emitter from '../src/emitter'
 
 class BaseTable extends React.Component {
+  constructor () {
+    super()
+    this.throttleDoScroll = _.throttle(this.doScroll, 200)
+  }
+
+  doScroll = () => {
+    Emitter.emit(Emitter.TYPE.TABLE_SCROLL)
+  }
+
+  componentDidMount () {
+    findDOMNode(this).getElementsByClassName('rt-table')[0].addEventListener('scroll', this.throttleDoScroll)
+  }
+
+  componentWillUnmount () {
+    findDOMNode(this).getElementsByClassName('rt-table')[0].removeEventListener('scroll', this.throttleDoScroll)
+  }
+
   processItem = item => {
     let Cell = item.Cell
     if (!Cell) {
@@ -73,6 +92,7 @@ class BaseTable extends React.Component {
         className={classNames('gm-react-table -striped -highlight', className)}
         style={newStyle}
         showPagination={showPagination}
+        ref={ref => (this.baseTable = ref)}
       />
     )
   }
