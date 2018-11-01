@@ -9,27 +9,9 @@ import classNames from 'classnames'
 import Emitter from '../../emitter'
 
 function getElementPositionWithScrollTop (element) {
-  let top = element.offsetTop
-  let left = element.offsetLeft
-  let current = element.offsetParent
-
-  if (!current && window.getComputedStyle(element, null).position === 'fixed') {
-    top += getScrollTop() - element.scrollTop
-    left += getScrollLeft() - element.scrollLeft
-  }
-
-  while (current !== null) {
-    top += current.offsetTop
-    left += current.offsetLeft
-
-    // 特殊逻辑，如果是 position: fixed
-    if (window.getComputedStyle(current, null).position === 'fixed') {
-      top += getScrollTop() - current.scrollTop
-      left += getScrollLeft() - current.scrollLeft
-    }
-
-    current = current.offsetParent
-  }
+  let {left, top} = element.getBoundingClientRect()
+  left += getScrollLeft()
+  top += getScrollTop()
 
   return {
     top,
@@ -53,10 +35,12 @@ class Popover extends React.Component {
     this.handleModalScroll = ::this.handleModalScroll
     this.handleBrowserScroll = ::this.handleBrowserScroll
     this.handleDrawerScroll = ::this.handleDrawerScroll
+    this.handleTableScroll = ::this.handleTableScroll
 
     this.debounceHandleModalScroll = _.debounce(this.handleModalScroll, 200)
     this.debounceHandleBrowserScroll = _.debounce(this.handleBrowserScroll, 200)
     this.debounceHandleDrawerScroll = _.debounce(this.handleDrawerScroll, 200)
+    this.debounceHandleTableScroll = _.debounce(this.handleTableScroll, 200)
 
     this.timer = null
 
@@ -75,6 +59,7 @@ class Popover extends React.Component {
     Emitter.on(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
     Emitter.on(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
     Emitter.on(Emitter.TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
+    Emitter.on(Emitter.TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
   }
 
   componentWillUnmount () {
@@ -86,6 +71,7 @@ class Popover extends React.Component {
     Emitter.off(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
     Emitter.off(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
     Emitter.off(Emitter.TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
+    Emitter.off(Emitter.TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
   }
 
   handleDrawerScroll () {
@@ -97,6 +83,10 @@ class Popover extends React.Component {
   }
 
   handleBrowserScroll () {
+    this.setActive(this.state.active)
+  }
+
+  handleTableScroll () {
     this.setActive(this.state.active)
   }
 
@@ -179,7 +169,6 @@ class Popover extends React.Component {
       }
       this.rect = rect
     }
-
     this.doRenderPopup(active)
   }
 
