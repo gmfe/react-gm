@@ -74,12 +74,8 @@ class FilterSelect extends React.Component {
   doSetActiveIndex (activeIndex) {
     this.setState({
       activeIndex
-    }, () => {
-      if (this.filterSelectList) {
-        const dom = this.filterSelectList.querySelector(`.list-group-item:nth-of-type(${activeIndex})`)
-        dom && dom.scrollIntoViewIfNeeded(false)
-      }
     })
+    // TODO 上下键滚动到可视区先去掉吧,有bug导致无法选中某一项.   日后优化
   }
 
   handleKeyDown (size, event) {
