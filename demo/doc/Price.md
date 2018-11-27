@@ -12,9 +12,11 @@ class PriceWrap extends React.Component {
         super(props);
         this.state= {
           valArr: [
+          0,
           10839,
           2345454545,
           1000,
+          12310,
           10000000,
           -10,
           -226,
@@ -24,7 +26,7 @@ class PriceWrap extends React.Component {
         }
 
         //初始化
-        Price.setCurrency('CNY')
+        Price.setCurrency('$')
     }
 
     priceArr = () => {
@@ -41,7 +43,7 @@ class PriceWrap extends React.Component {
         return (
             <div>
               {this.priceArr()}
-              <Price value={400022.82222} style={{fontSize:'28px',color:'red'}}/>
+              <Price value={400022.82222} currencyScale={.8} style={{fontSize:'28px',color:'red'}}/>
               <br/>
             </div>
         );
@@ -57,54 +59,14 @@ class PriceWrap extends React.Component {
 
 ### Props
 
-- `value` 传入的价格,单位是”分“
-- `precision` 保留几位小数，默认是2位
-- `useGrouping` 是否使用千分符。可能的值是true和false,默认值是true.
+- `value` 传入的价格,单位为 **分**
+- `precision` 保留几位小数，默认是**2**位
+- `useGrouping` 是否使用千分符。可能的值是**true**和**false**,默认值是**true**.
+- `currencyScale` 货币符号的缩放大小，可能的值是**0-1**，默认值是**1**
+- `keepZero` 是否保留小数点后无效的零，可能的值是**true**和**false**,默认值是**true**.
 - `...rest`
 
 ### 静态方法
 
-- `Price.setCurrency(currency)` 'currency'为ISO 4217的**字母代码**，如”CNY“（中国），货币符号是“￥”。
-
-### ISO 4217
-
-  <table border="1" width="800px">
-    <thead>
-        <td>字母代码</td>
-        <td>国家和地区</td>
-        <td>货币符号</td>
-    </thead>
-    <tr>
-        <td>CNY</td>
-        <td>中国</td>
-        <td>￥</td>
-    </tr>
-    <tr>
-        <td>EUR</td>
-        <td>欧盟</td>
-        <td>€</td>
-    </tr>
-    <tr>
-        <td>GBP</td>
-        <td>英国</td>
-        <td>£</td>
-    </tr>
-    <tr>
-        <td>USD</td>
-        <td>美国</td>
-        <td>$</td>
-    </tr>
-    <tr>
-        <td>INR</td>
-        <td> 印度、 不丹、 尼泊尔、 津巴布韦</td>
-        <td>₹</td>
-    </tr>
-    <tr>
-        <td>KRW</td>
-        <td>韩元</td>
-        <td>₩</td>
-    </tr>
-  </table>
-
--  更多货币代码请访问[维基百科ISO 4217](https://zh.wikipedia.org/wiki/ISO_4217)
+- `Price.setCurrency(currency)` 'currency'为**货币符号**，如“￥”。
 

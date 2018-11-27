@@ -2,33 +2,35 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Big from 'big.js'
 
-// _currency为国际标准化组织ISO 4217订定标准代号
-let _currency = 'CNY'
+// _currency 为货币符号
+let _currency = '￥'
 
 class Price extends React.Component {
+  formatValue = (value, precision, keepZero) => {
+    return keepZero ? Big(Math.abs(value)).div(100).toFixed(precision) : parseFloat(Big(Math.abs(value)).div(100).toFixed(precision))
+  }
+
+  // 增加千分符
+  addComma = (useGrouping, num) => {
+    if (!useGrouping) return num
+
+    return num && num.toString()
+      .replace(/^\d+/g, (m) => m.replace(/(?=(?!^)(\d{3})+$)/g, ','))
+  }
+
   render () {
     const {
       value,
       useGrouping,
       precision,
+      currencyScale,
+      keepZero,
       ...rest
     } = this.props
 
     return (
       <span {...rest}>
-        {
-          new Intl.NumberFormat('en', {
-            style: 'currency',
-            // 将‘CNY’的'CN￥'转换成‘￥’
-            currency: _currency === 'CNY' ? 'JPY' : _currency,
-            useGrouping,
-            currencyDisplay: 'symbol',
-            // 使用的小数位数的最大数目.
-            maximumFractionDigits: precision,
-            // 使用的小数位数的最小数目.
-            minimumFractionDigits: precision
-          }).format(Big(value).div(100))
-        }
+        {value < 0 ? '-' : ''}<span style={{fontSize: `${Big(currencyScale).times(100)}%`}}>{_currency}</span>{this.addComma(useGrouping, this.formatValue(value, precision, keepZero))}
       </span>
     )
   }
@@ -37,12 +39,17 @@ class Price extends React.Component {
 Price.propTypes = {
   value: PropTypes.number.isRequired,
   precision: PropTypes.number,
-  useGrouping: PropTypes.bool
+  useGrouping: PropTypes.bool,
+  currencyScale: PropTypes.number,
+  // 是否保留小数点后无效的零
+  keepZero: PropTypes.bool
 }
 
 Price.defaultProps = {
   precision: 2,
-  useGrouping: true
+  useGrouping: true,
+  currencyScale: 1,
+  keepZero: true
 }
 
 Price.setCurrency = currency => {
