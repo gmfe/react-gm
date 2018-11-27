@@ -1,5 +1,5 @@
 ---
-imports: import {Price} from '../../src/index';
+imports: import { Price } from '../../src/index';
 ---
 
 ## Price
