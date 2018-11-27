@@ -55,6 +55,7 @@ import Uploader from './component/uploader'
 import Drawer from './component/drawer'
 import EditableText from './component/editable_text'
 import FlipNumber from './component/flip_number'
+import Price from './component/price'
 
 import Validator from './validator'
 import Emitter from './emitter'
@@ -158,5 +159,6 @@ export {
   ImagePreview,
   setLocale,
   EditableText,
-  FlipNumber
+  FlipNumber,
+  Price
 }
