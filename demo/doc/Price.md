@@ -26,7 +26,7 @@ class PriceWrap extends React.Component {
         }
 
         //初始化
-        Price.setCurrency('$')
+        Price.setCurrency('￥')
     }
 
     priceArr = () => {
@@ -59,11 +59,11 @@ class PriceWrap extends React.Component {
 
 ### Props
 
-- `value` 传入的价格,单位为 **分**
-- `precision` 保留几位小数，默认是**2**位
-- `useGrouping` 是否使用千分符。可能的值是**true**和**false**,默认值是**true**.
-- `currencyScale` 货币符号的缩放大小，可能的值是**0-1**，默认值是**1**
-- `keepZero` 是否保留小数点后无效的零，可能的值是**true**和**false**,默认值是**true**.
+- `value(number|isRequired)` 传入的价格,单位为 **分**
+- `precision(number)` 保留几位小数，默认是**2**位
+- `useGrouping(boolean)` 是否使用千分符。默认值是**true**.
+- `currencyScale(number)` 货币符号的缩放大小，默认值是**1**
+- `keepZero(boolean)` 是否保留小数点后无效的零，默认值是**true**.
 - `...rest`
 
 ### 静态方法
