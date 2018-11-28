@@ -7,15 +7,15 @@ let _currency = '¥'
 
 class Price extends React.Component {
   formatValue = (value, precision, keepZero) => {
-    return keepZero ? Big(Math.abs(value)).div(100).toFixed(precision) : parseFloat(Big(Math.abs(value)).div(100).toFixed(precision))
+    const result = Big(Math.abs(value)).div(100).toFixed(precision)
+    return keepZero ? result : parseFloat(result)
   }
 
   // 增加千分符
   addComma = (useGrouping, num) => {
     if (!useGrouping) return num
 
-    return num && num.toString()
-      .replace(/^\d+/g, (m) => m.replace(/(?=(?!^)(\d{3})+$)/g, ','))
+    return num.toString().replace(/^\d+/g, (m) => m.replace(/(?=(?!^)(\d{3})+$)/g, ','))
   }
 
   render () {
