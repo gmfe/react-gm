@@ -52,8 +52,15 @@ Price.defaultProps = {
   keepZero: true
 }
 
+// 设置符号
 Price.setCurrency = currency => {
+  if (!currency) return
   _currency = currency
+}
+
+// 获得符号
+Price.getCurrency = () => {
+  return _currency
 }
 
 export default Price
