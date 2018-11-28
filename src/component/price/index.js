@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Big from 'big.js'
 
 // _currency 为货币符号
-let _currency = '￥'
+let _currency = '¥'
 
 class Price extends React.Component {
   formatValue = (value, precision, keepZero) => {
@@ -30,7 +30,9 @@ class Price extends React.Component {
 
     return (
       <span {...rest}>
-        {value < 0 ? '-' : ''}<span style={{fontSize: `${Big(currencyScale).times(100)}%`}}>{_currency}</span>{this.addComma(useGrouping, this.formatValue(value, precision, keepZero))}
+        {value < 0 ? '-' : ''}<span style={{
+          fontSize: `${currencyScale > 1 ? '1' : currencyScale}em`
+        }}>{_currency}</span>{this.addComma(useGrouping, this.formatValue(value, precision, keepZero))}
       </span>
     )
   }
@@ -48,7 +50,7 @@ Price.propTypes = {
 Price.defaultProps = {
   precision: 2,
   useGrouping: true,
-  currencyScale: 1,
+  currencyScale: 0.85,
   keepZero: true
 }
 
