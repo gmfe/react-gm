@@ -75,7 +75,8 @@ const data = [{
     {name: 'NProgress 顶部请求进度条', path: '/doc/NProgress'},
     {name: 'Storage', path: '/doc/Storage'},
     {name: 'EditableText', path: '/doc/EditableText'},
-    {name: 'FlipNumber', path: '/doc/FlipNumber'}
+    {name: 'FlipNumber', path: '/doc/FlipNumber'},
+    {name: 'Price 价格显示', path: '/doc/Price'}
   ]
 }, {
   name: '废弃',
