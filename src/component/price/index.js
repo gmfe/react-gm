@@ -4,6 +4,7 @@ import Big from 'big.js'
 
 // _currency 为货币符号
 let _currency = '¥'
+let _unit = '元'
 
 class Price extends React.Component {
   formatValue = (value, precision, keepZero) => {
@@ -63,6 +64,14 @@ Price.setCurrency = currency => {
 // 获得符号
 Price.getCurrency = () => {
   return _currency
+}
+Price.setUnit = unit => {
+  if (!unit) return
+  _unit = unit
+}
+
+Price.getUnit = () => {
+  return _unit
 }
 
 export default Price
