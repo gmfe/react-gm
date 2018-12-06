@@ -7,8 +7,8 @@ let _currency = '¥'
 let _unit = '元'
 
 class Price extends React.Component {
-  formatValue = (value, precision, keepZero) => {
-    const result = Big(Math.abs(value)).div(100).toFixed(precision)
+  formatValue = (value, precision, keepZero, divRatio) => {
+    const result = Big(Math.abs(value)).div(divRatio).toFixed(precision)
     return keepZero ? result : parseFloat(result)
   }
 
@@ -26,6 +26,7 @@ class Price extends React.Component {
       precision,
       currencyScale,
       keepZero,
+      divRatio,
       ...rest
     } = this.props
 
@@ -33,7 +34,7 @@ class Price extends React.Component {
       <span {...rest}>
         {value < 0 ? '-' : ''}<span style={{
           fontSize: `${currencyScale > 1 ? '1' : currencyScale}em`
-        }}>{_currency}</span>{this.addComma(useGrouping, this.formatValue(value, precision, keepZero))}
+        }}>{_currency}</span>{this.addComma(useGrouping, this.formatValue(value, precision, keepZero, divRatio))}
       </span>
     )
   }
@@ -45,14 +46,16 @@ Price.propTypes = {
   useGrouping: PropTypes.bool,
   currencyScale: PropTypes.number,
   // 是否保留小数点后无效的零
-  keepZero: PropTypes.bool
+  keepZero: PropTypes.bool,
+  divRatio: PropTypes.number
 }
 
 Price.defaultProps = {
   precision: 2,
   useGrouping: true,
   currencyScale: 0.85,
-  keepZero: true
+  keepZero: true,
+  divRatio: 1
 }
 
 // 设置符号
