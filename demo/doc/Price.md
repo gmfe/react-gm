@@ -43,7 +43,8 @@ class PriceWrap extends React.Component {
         return (
             <div>
               {this.priceArr()}
-              <Price value={400022.82222} currencyScale={.8} style={{fontSize:'28px',color:'red'}}/>
+              <Price isYuanUnit={false} value={1234} style={{fontSize:'28px',color:'red'}}/> <br/>
+              <Price value={40002288} currencyScale={.8} style={{fontSize:'28px',color:'red'}}/>
               <br/>
             </div>
         );
@@ -59,7 +60,8 @@ class PriceWrap extends React.Component {
 
 ### Props
 
-- `value(number|isRequired)` 传入的价格,单位为 **分**
+- `value(number|isRequired)` 传入的价格
+- `isYuanUnit(boolean)` value 是否以元为单位, false 为分，默认是**true**
 - `precision(number)` 保留几位小数，默认是**2**位
 - `useGrouping(boolean)` 是否使用千分符。默认值是**true**.
 - `currencyScale(number)` 货币符号的缩放大小,可能的值是**0-1**,默认值是**0.85**
