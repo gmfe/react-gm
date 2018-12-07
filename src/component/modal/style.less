@@ -37,7 +37,7 @@
       right: 5px;
     }
 
-    .gm-modal-title {
+    .gm-modal-title-wrap {
       font-size: 16px;
       padding: 10px 20px 10px 20px;
       border-bottom: 1px solid @gm-border-color;
@@ -45,14 +45,11 @@
       white-space: nowrap;
       text-overflow: ellipsis;
 
-      &::before {
-        content: "";
-        position: absolute;
-        left: 15px;
-        top: 13px;
-        background: @brand-primary;
-        width: 3px;
-        height: 1em;
+      .gm-modal-title {
+        border-left: 3px solid @brand-primary;
+        height: 18px;
+        line-height: 18px;
+        padding-left: 5px;
       }
     }
 

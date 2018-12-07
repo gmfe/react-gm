@@ -149,8 +149,10 @@ class Modal extends React.Component {
           </button>
         )}
         {title ? (
-          <div className='gm-modal-title'>
-            {title}
+          <div className='gm-modal-title-wrap'>
+            <div className='gm-modal-title'>
+              {title}
+            </div>
           </div>
         ) : null}
         <div
