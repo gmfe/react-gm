@@ -42,6 +42,7 @@ const RouteConfig = () => (
         <RRSwitch>
           <Route exact path='/' render={() => <Redirect from='/' to='/doc/About'/>}/>
           <Route exact path='/demo' component={importComponent(() => import('./demo'))}/>
+          <Route exact path='/demo/service_time' component={importComponent(() => import('./demo/service_time'))}/>
 
           <Route exact path='/doc' render={() => <Redirect from='/' to='/doc/About'/>}/>
           <Route exact path='/:path1/:path2' component={Page}/>

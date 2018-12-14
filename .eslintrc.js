@@ -5,6 +5,7 @@ module.exports = {
     'standard-jsx'
   ],
   'rules': {
-    'react/jsx-tag-spacing': ['error', {'beforeSelfClosing': 'never'}]
+    'react/jsx-tag-spacing': ['error', {'beforeSelfClosing': 'never'}],
+    'camelcase': 0
   }
 }
