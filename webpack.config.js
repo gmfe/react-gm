@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const webpackConfig = require('gm-webpack/webpack.config.js')
 const HappyPack = require('happypack')
 const happyThreadPool = HappyPack.ThreadPool({size: 6})
