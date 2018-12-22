@@ -81,7 +81,7 @@ class Cascader extends React.Component {
       const data = _.cloneDeep(nextProps.data)
       mapPath(data) // 给data生成_path数据
 
-      this.setState({data})
+      this.setState({ data })
     }
   }
 
@@ -128,14 +128,14 @@ class Cascader extends React.Component {
   handleClear (e) {
     e.stopPropagation()
 
-    this.setState({selected: []}, () => {
+    this.setState({ selected: [] }, () => {
       this.handleSelect()
     })
   }
 
   handleSelect () {
-    const {onlyChildSelectable} = this.props
-    const {selected, data} = this.state
+    const { onlyChildSelectable } = this.props
+    const { selected, data } = this.state
 
     const value = []
     if (selected.length > 0) {
@@ -149,10 +149,10 @@ class Cascader extends React.Component {
 
     // 如果选择有children的，则清空输入框
     if (onlyChildSelectable && value.length && value[value.length - 1].children) {
-      this.setState({filterInput: ''})
+      this.setState({ filterInput: '' })
       this.props.onChange([])
     } else {
-      this.setState({filterInput: null})
+      this.setState({ filterInput: null })
       this.props.onChange(selected)
     }
 
@@ -165,7 +165,7 @@ class Cascader extends React.Component {
   }
 
   handleMouseEnter (selected) {
-    this.setState({selected})
+    this.setState({ selected })
   }
 
   handleInputChange (e) {
@@ -180,7 +180,7 @@ class Cascader extends React.Component {
   }
 
   handleKeyDown (event) {
-    const {keyCode} = event
+    const { keyCode } = event
 
     // 键盘上下键控制最当前选中列
     if (keyCode === 38 || keyCode === 40) {
@@ -218,8 +218,8 @@ class Cascader extends React.Component {
   }
 
   inputValueRender () {
-    const {filterInput, data} = this.state
-    const {valueRender, filtrable} = this.props
+    const { filterInput, data } = this.state
+    const { valueRender, filtrable } = this.props
     const selected = this.props.value || this.state.selected
 
     let value = []
@@ -281,10 +281,10 @@ class Cascader extends React.Component {
   }
 
   renderChildren () {
-    const {disabled} = this.props
-    const {data} = this.state
+    const { disabled } = this.props
+    const { data } = this.state
     const inputValue = this.inputValueRender()
-    let {inputProps} = this.props
+    let { inputProps } = this.props
 
     const selected = this.props.value || this.state.selected
     let value = []
@@ -299,7 +299,7 @@ class Cascader extends React.Component {
 
     // disabled 的优先级比 inputProps的优先级高
     if (disabled) {
-      inputProps = Object.assign({}, inputProps, {disabled})
+      inputProps = Object.assign({}, inputProps, { disabled })
     }
 
     return (
@@ -323,7 +323,7 @@ class Cascader extends React.Component {
   }
 
   render () {
-    const {disabled, popoverStyle} = this.props
+    const { disabled, popoverStyle } = this.props
 
     return (
       <Popover

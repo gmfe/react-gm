@@ -79,7 +79,7 @@ class FilterSelect extends React.Component {
   }
 
   handleKeyDown (size, event) {
-    const {keyCode} = event
+    const { keyCode } = event
 
     if (keyCode === 13) { // 键盘 回车
       const dom = this.filterSelectList.querySelector('.list-group-item.line-selected')
@@ -90,7 +90,7 @@ class FilterSelect extends React.Component {
     }
 
     if (keyCode === 38 || keyCode === 40) {
-      let {activeIndex} = this.state
+      let { activeIndex } = this.state
       let diff = 1
       if (keyCode === 38) { // 键盘 上键
         diff = -1
@@ -177,7 +177,7 @@ class FilterSelect extends React.Component {
   }
 
   getListItemCount (list) {
-    const {isGroupList} = this.props
+    const { isGroupList } = this.props
 
     if (isGroupList) {
       return _.reduce(list, (count, group) => {
@@ -194,7 +194,7 @@ class FilterSelect extends React.Component {
   }
 
   renderGroupList (list) {
-    const {listMaxHeight, inputClassName, selected, renderItemName} = this.props
+    const { listMaxHeight, inputClassName, selected, renderItemName } = this.props
 
     const usefulList = _.filter(list, v => (v.children || []).length > 0)
 
@@ -203,7 +203,7 @@ class FilterSelect extends React.Component {
     return (
       <div
         className='list-group'
-        style={{maxHeight: listMaxHeight}}
+        style={{ maxHeight: listMaxHeight }}
         ref={ref => (this.filterSelectList = ref)}
       >
         {_.map(usefulList, (groupList, i) => {
@@ -235,12 +235,12 @@ class FilterSelect extends React.Component {
   }
 
   renderList (list) {
-    const {listMaxHeight, inputClassName, selected, renderItemName} = this.props
+    const { listMaxHeight, inputClassName, selected, renderItemName } = this.props
 
     return (
       <div
         className='list-group'
-        style={{maxHeight: listMaxHeight}}
+        style={{ maxHeight: listMaxHeight }}
         ref={ref => (this.filterSelectList = ref)}
       >
         {_.map(list, (value, i) => {
@@ -264,8 +264,8 @@ class FilterSelect extends React.Component {
   }
 
   renderOverlay (filterList) {
-    const {isGroupList, disableSearch} = this.props
-    const {query, loading} = this.state
+    const { isGroupList, disableSearch } = this.props
+    const { query, loading } = this.state
 
     return (
       <div className='gm-filter-select-popup'>
@@ -290,8 +290,8 @@ class FilterSelect extends React.Component {
   }
 
   render () {
-    const {id, list, withFilter, selected, placeholder, disabled} = this.props
-    const {query} = this.state
+    const { id, list, withFilter, selected, placeholder, disabled } = this.props
+    const { query } = this.state
     let filterList = list
     if (query) {
       filterList = withFilter(filterList, query)

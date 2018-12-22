@@ -71,7 +71,7 @@ class TipOverlay extends React.Component {
   }
 
   componentDidMount () {
-    const {time} = this.props
+    const { time } = this.props
     if (time) {
       this.timer = setTimeout(() => this.fadeOut(), time)
     }
@@ -93,7 +93,7 @@ class TipOverlay extends React.Component {
   }
 
   render () {
-    const {title, type, children} = this.props
+    const { title, type, children } = this.props
     return (
       <div className='gm-animated gm-animated-fade-in-right-100'>
         <Tip title={title}
@@ -123,7 +123,7 @@ class Tip extends React.Component {
     };
 
     render () {
-      const {title, type, children} = this.props
+      const { title, type, children } = this.props
       const iconClassName = {
         success: 'glyphicon glyphicon-ok-sign',
         info: 'glyphicon glyphicon-info-sign',

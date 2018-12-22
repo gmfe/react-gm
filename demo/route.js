@@ -5,30 +5,29 @@ import {
   Redirect,
   Switch as RRSwitch
 } from 'react-router-dom'
-import { importComponent, processReactRouterProps } from 'gm-util'
-import { Emitter } from '../src/index'
-import _ from 'lodash'
+import { processReactRouterProps } from 'gm-util'
 import { hot } from 'react-hot-loader'
+import Loadable from 'react-loadable'
 
 import App from './app'
 
+const Loading = ({ isLoading, error }) => {
+  if (isLoading) {
+    return <div className='text-center'>加载中...</div>
+  } else if (error) {
+    return <div className='text-center'>发生了错误！</div>
+  } else {
+    return null
+  }
+}
+
 class Page extends React.Component {
   render () {
-    const {path1, path2} = this.props.match.params
-    let load = _.noop
+    const { path2 } = this.props.match.params
 
-    if (path1 === 'doc') {
-      load = () => import(`./doc/${path2}.md`)
-    }
-
-    if (!load) {
-      return null
-    }
-
-    const Com = importComponent(load, {
-      onLoad: () => {
-        setTimeout(() => Emitter.emit('DEMO-PAGE-LOADED'), 500)
-      }
+    const Com = Loadable({
+      loader: () => import(`./doc/${path2}.md`),
+      loading: Loading
     })
 
     return <Com {...this.props}/>
@@ -41,11 +40,16 @@ const RouteConfig = () => (
       <App {...processReactRouterProps(props)}>
         <RRSwitch>
           <Route exact path='/' render={() => <Redirect from='/' to='/doc/About'/>}/>
-          <Route exact path='/demo' component={importComponent(() => import('./demo'))}/>
-          <Route exact path='/demo/service_time' component={importComponent(() => import('./demo/service_time'))}/>
-
+          <Route exact path='/demo' component={Loadable({
+            loader: () => import('./demo'),
+            loading: Loading
+          })}/>
+          <Route exact path='/demo/service_time' component={Loadable({
+            loader: () => import('./demo/service_time'),
+            loading: Loading
+          })}/>
           <Route exact path='/doc' render={() => <Redirect from='/' to='/doc/About'/>}/>
-          <Route exact path='/:path1/:path2' component={Page}/>
+          <Route exact path='/:path1/:path2' component={(props) => <Page {...props}/>}/>
 
           <Route exact render={() => <div>无法匹配</div>}/>
         </RRSwitch>

@@ -9,19 +9,19 @@ class ProgressBar extends React.Component {
   }
 
   getIconClass () {
-    const {status} = this.props
+    const { status } = this.props
     return status === 'success' ? 'xfont xfont-success-circle gm-progress-bar-success-icon' : 'xfont xfont-close-circle gm-progress-bar-exception-icon'
   }
 
   render () {
-    const {percentage, status, strokeWidth, text, textInside, showText, className, ...rest} = this.props
+    const { percentage, status, strokeWidth, text, textInside, showText, className, ...rest } = this.props
 
     return (
       <div className={classnames('gm-progress', className)} {...rest}>
         <div className='gm-progress-bar'>
           <div
             className='gm-progress-bar-outer'
-            style={{height: `${strokeWidth}px`}}
+            style={{ height: `${strokeWidth}px` }}
           >
             <div
               className={classnames('gm-progress-bar-inner',
@@ -29,7 +29,7 @@ class ProgressBar extends React.Component {
                   'gm-progress-bar-success': status === 'success',
                   'gm-progress-bar-exception': status === 'exception'
                 })}
-              style={{width: `${percentage}%`}}
+              style={{ width: `${percentage}%` }}
             >
               {
                 showText && textInside &&
@@ -45,7 +45,7 @@ class ProgressBar extends React.Component {
                     !textInside &&
                     <div
                       className='gm-progress-bar-text'
-                      style={{fontSize: `12px`}}
+                      style={{ fontSize: `12px` }}
                     >
                       {status ? <i className={this.getIconClass()}/> : text || `${percentage}%`}
                     </div>

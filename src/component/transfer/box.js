@@ -14,12 +14,12 @@ class Box extends React.Component {
   }
 
     handleChange = (selectedValues) => {
-      const {onSelect} = this.props
+      const { onSelect } = this.props
       onSelect(selectedValues)
     };
 
     handleSelectAll = (checked) => {
-      const {list, onSelect} = this.props
+      const { list, onSelect } = this.props
 
       onSelect(checked.length === 0 ? [] : _.map(list, v => v.value))
     };

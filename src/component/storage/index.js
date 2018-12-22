@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 const prefix = '_react-gm_'
-const {localStorage} = window
+const { localStorage } = window
 
 const StorageStatics = {
   set (key, value) {

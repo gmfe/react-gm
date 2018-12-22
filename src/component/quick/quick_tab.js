@@ -21,12 +21,12 @@ class QuickTab extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     if ('active' in nextProps) {
-      this.setState({active: nextProps.active})
+      this.setState({ active: nextProps.active })
     }
   }
 
   handleTab (i) {
-    const {onChange} = this.props
+    const { onChange } = this.props
     if ('active' in this.props) {
       onChange(i)
     } else {
@@ -51,7 +51,7 @@ class QuickTab extends React.Component {
 
     return (
       <div {...rest} className={classNames('gm-quick gm-quick-tabs', this.props.className)}>
-        {this.props.right ? React.cloneElement(this.props.right, {className: this.props.right.props.className + ' pull-right'}) : null}
+        {this.props.right ? React.cloneElement(this.props.right, { className: this.props.right.props.className + ' pull-right' }) : null}
         <ul className={classNames('nav nav-tabs gm-back-bg', {
           'nav-justified': justified
         })}>

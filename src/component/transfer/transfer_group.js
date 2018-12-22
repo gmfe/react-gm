@@ -30,8 +30,8 @@ class TransferGroup extends React.Component {
     };
 
     handleToClick = (isLeft) => {
-      const {onSelect, selectedValues} = this.props
-      const {leftSelectedValues, rightSelectedValues} = this.state
+      const { onSelect, selectedValues } = this.props
+      const { leftSelectedValues, rightSelectedValues } = this.state
 
       onSelect(_.xor(selectedValues, isLeft ? rightSelectedValues : leftSelectedValues))
 

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 class QuickDesc extends React.Component {
   render () {
-    const {left, right, leftFlex, rightFlex, children} = this.props
+    const { left, right, leftFlex, rightFlex, children } = this.props
 
     return (
       <div className={classNames('gm-quick gm-quick-desc', this.props.className)}>
@@ -13,7 +13,7 @@ class QuickDesc extends React.Component {
             {left}
           </Flex>
           <Flex flex={rightFlex || 10} alignCenter className='gm-padding-left-5'>
-            <div className='gm-border-left gm-padding-left-15' style={{height: '40px'}}/>
+            <div className='gm-border-left gm-padding-left-15' style={{ height: '40px' }}/>
             {right ? React.cloneElement(right, {
               className: 'gm-quick-desc-right-box gm-padding-tb-10 ' + (right.props.className || '')
             }) : null}

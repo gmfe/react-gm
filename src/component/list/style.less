@@ -1,0 +1,39 @@
+.gm-list {
+  border: 1px solid @gm-border-color;
+  background: white;
+
+  .gm-list-item {
+    cursor: pointer;
+    padding: 5px 10px;
+
+    &.active {
+      color: @brand-primary;
+    }
+
+    &.will-active {
+      background-color: @gm-list-group-hover-bg;
+    }
+
+    &:hover {
+      background-color: @gm-list-group-hover-bg;
+    }
+  }
+
+  &.gm-list-group {
+    .gm-list-group-item {
+      border-bottom: 1px solid @gm-border-color;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .gm-list-label {
+      padding: 5px 10px;
+    }
+
+    .gm-list-item {
+      padding: 5px 10px 5px 22px;
+    }
+  }
+}

@@ -15,14 +15,14 @@ class Button extends React.Component {
 
   handleClick (event) {
     event.preventDefault()
-    const {onClick} = this.props
+    const { onClick } = this.props
     const result = onClick(event)
 
     if (!is.promise(result)) {
       return
     }
 
-    this.setState({isLoading: true})
+    this.setState({ isLoading: true })
 
     Promise.resolve(result).then(() => {
       this.setState({
@@ -44,7 +44,7 @@ class Button extends React.Component {
       ...rest
     } = this.props
 
-    const {isLoading} = this.state
+    const { isLoading } = this.state
 
     return (
       <button

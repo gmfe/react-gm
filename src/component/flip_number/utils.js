@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {is} from 'gm-util'
+import { is } from 'gm-util'
 
 function formatNum (number, decimals, useGroup) {
   return number.toLocaleString(undefined, {
@@ -40,7 +40,7 @@ function getRawArray (numStr, length) {
   _.forEach(symbolList, (item) => {
     rawList.splice(item.position, 0, item.symbol)
   })
-  return {rawList, symbolList}
+  return { rawList, symbolList }
 }
 
 export {

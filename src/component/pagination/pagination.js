@@ -85,7 +85,7 @@ class WithoutCount extends React.Component {
   }
 
   handlePage (action) {
-    const {data, toPage} = this.props
+    const { data, toPage } = this.props
 
     if (action === -1) {
       if (data.offset === 0) {
@@ -104,7 +104,7 @@ class WithoutCount extends React.Component {
   }
 
   render () {
-    const {data, nextDisabled} = this.props
+    const { data, nextDisabled } = this.props
     return (
       <div className='gm-pagination'>
         <ul className='pagination pagination-sm'>

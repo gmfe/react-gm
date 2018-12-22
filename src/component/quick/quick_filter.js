@@ -23,9 +23,9 @@ class QuickFilter extends React.Component {
   }
 
   render () {
-    const {collapseRender, children} = this.props
+    const { collapseRender, children } = this.props
 
-    const {show} = this.state
+    const { show } = this.state
 
     return (
       <div

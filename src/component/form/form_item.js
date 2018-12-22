@@ -11,7 +11,7 @@ class FormControl extends React.Component {
       children
     } = this.props
 
-    const {className, inputClassName} = children.props
+    const { className, inputClassName } = children.props
 
     let child = children
 
@@ -82,7 +82,7 @@ class FormItem extends React.Component {
         <Flex justifyEnd={horizontal} width={labelWidth} className={classNames('gm-form-label control-label', {
           'gm-form-label-untop': unLabelTop
         })}>
-          {required ? <span style={{color: 'red'}}>*</span> : ''}
+          {required ? <span style={{ color: 'red' }}>*</span> : ''}
           {label}
         </Flex>}
         <Flex flex column>
@@ -90,7 +90,7 @@ class FormItem extends React.Component {
             {/* 理论上不支持children是数组，但也合理，兼容吧 */}
             {_.isArray(children) ? children : <FormControl>{children}</FormControl>}
             {error && help ? (
-              <div className={classNames({'help-block': error})}>{help}</div>
+              <div className={classNames({ 'help-block': error })}>{help}</div>
             ) : null}
           </div>
         </Flex>

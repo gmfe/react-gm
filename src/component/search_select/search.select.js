@@ -105,14 +105,14 @@ class SearchSelect extends React.Component {
   handleBlur (event) {
     // 慎用blur，在选择的之前会出发blur
     event.preventDefault()
-    const {multiple} = this.props
+    const { multiple } = this.props
 
     // 多选不处理
     if (!multiple) {
       // 延迟下，500s应该够了。另外selected应该在此时获取，才是最新的selected
       setTimeout(() => {
         if (!this.______isMounted) {
-          const {selected} = this.props
+          const { selected } = this.props
           this.doChange((selected && selected.name) || '')
         }
       }, 500)
@@ -125,7 +125,7 @@ class SearchSelect extends React.Component {
   }
 
   handleKeyDown (size, event) {
-    const {keyCode} = event
+    const { keyCode } = event
     let activeIndex = this.state.activeIndex
 
     if (keyCode !== 38 && keyCode !== 40) {
@@ -226,7 +226,7 @@ class SearchSelect extends React.Component {
   }
 
   getListItemCount () {
-    const {list, isGroupList} = this.props
+    const { list, isGroupList } = this.props
 
     if (isGroupList) {
       return _.reduce(list, (count, group) => {
@@ -238,7 +238,7 @@ class SearchSelect extends React.Component {
   }
 
   renderOverlay () {
-    const {list, listMaxHeight, inputClassName, isGroupList, renderListCell} = this.props
+    const { list, listMaxHeight, inputClassName, isGroupList, renderListCell } = this.props
 
     if (isGroupList) {
       // 不存在group数据
@@ -255,7 +255,7 @@ class SearchSelect extends React.Component {
       return (
         <div
           className='list-group'
-          style={{maxHeight: listMaxHeight}}
+          style={{ maxHeight: listMaxHeight }}
           ref={ref => (this.searchSelectList = ref)}
         >
           {_.map(list, (groupList, i) => {
@@ -292,7 +292,7 @@ class SearchSelect extends React.Component {
       return (
         <div
           className='list-group gm-search-select-list'
-          style={{maxHeight: listMaxHeight}}
+          style={{ maxHeight: listMaxHeight }}
           ref={ref => (this.searchSelectList = ref)}
         >
           {_.map(list, (value, i) => {

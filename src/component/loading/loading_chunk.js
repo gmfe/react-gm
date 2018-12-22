@@ -24,7 +24,7 @@ class LoadingChunk extends React.Component {
       <div {...rest} className={classNames(className, {
         'gm-loading-chunk': loading
       })}>
-        {children || <div style={{height: (size || 50) + 'px'}}/>}
+        {children || <div style={{ height: (size || 50) + 'px' }}/>}
         {loading && (
           <div className='gm-loading-mask'>
             <Loading style={s} text={text} size={size} className='gm-loading-position'/>

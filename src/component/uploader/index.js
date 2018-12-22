@@ -7,7 +7,7 @@ class Uploader extends React.Component {
   handleUpload = (e) => {
     e.preventDefault()
 
-    const {multiple, onUpload} = this.props
+    const { multiple, onUpload } = this.props
     const uploadedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files
     const max = multiple ? uploadedFiles.length : 1
     let files = []
@@ -32,7 +32,7 @@ class Uploader extends React.Component {
       multiple
     } = this.props
 
-    const cn = classNames({'gm-uploader-warp': !!children, 'gm-uploader-default': !children})
+    const cn = classNames({ 'gm-uploader-warp': !!children, 'gm-uploader-default': !children })
     return (
       <div className='gm-uploader'>
         <div

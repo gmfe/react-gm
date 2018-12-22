@@ -133,8 +133,8 @@ class Dialog extends React.Component {
   }
 
   render () {
-    const {isLoading} = this.state
-    const {size, title, children, type, promptDefaultValue, promptPlaceholder, cancelBtn, OKBtn, disableMaskClose} = this.props
+    const { isLoading } = this.state
+    const { size, title, children, type, promptDefaultValue, promptPlaceholder, cancelBtn, OKBtn, disableMaskClose } = this.props
     let modalProps = {
       show: this.state.show,
       onHide: this.handleCancel,
@@ -156,7 +156,7 @@ class Dialog extends React.Component {
               placeholder={promptPlaceholder}
               ref={ref => (this.refInput = ref)}
               type='text'
-              style={{display: 'block', width: '100%'}}
+              style={{ display: 'block', width: '100%' }}
               onKeyDown={this.handleEnter}
             />
           )}

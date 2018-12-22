@@ -22,9 +22,9 @@ class Sheet extends React.Component {
 
   handleSelect (select, i, event) {
     // 恩，很复杂
-    const {checked} = event.target
+    const { checked } = event.target
     if (select.props.onChange) {
-      const {list} = this.props
+      const { list } = this.props
       if (select.props.isRadio) {
         _.each(list, v => {
           if (!select.props.isDisabled(v)) {
@@ -43,9 +43,9 @@ class Sheet extends React.Component {
 
   handleSelectAll (select, event) {
     // 恩，很复杂
-    const {checked} = event.target
+    const { checked } = event.target
     if (select.props.onChange) {
-      const {list} = this.props
+      const { list } = this.props
       _.each(list, v => {
         if (!select.props.isDisabled(v)) {
           v._gm_select = checked
@@ -58,22 +58,22 @@ class Sheet extends React.Component {
   }
 
   handleExpanded (index) {
-    const {onExpand} = this.props
+    const { onExpand } = this.props
     onExpand && onExpand(index)
   }
 
   handleExpandedAll () {
-    const {onExpandAll} = this.props
+    const { onExpandAll } = this.props
     onExpandAll && onExpandAll()
   }
 
   renderTr (select, columns, actions) {
-    const {loading, list = [], enableEmptyTip, expandedRowRender} = this.props
+    const { loading, list = [], enableEmptyTip, expandedRowRender } = this.props
 
     if (loading) {
       return (
         <tr>
-          <td colSpan='99' className='text-center' style={{padding: '10px'}}>
+          <td colSpan='99' className='text-center' style={{ padding: '10px' }}>
             <Loading size={30}/>
           </td>
         </tr>
@@ -156,7 +156,7 @@ class Sheet extends React.Component {
   }
 
   render () {
-    let {list = [], scrollX, expandedRowRender} = this.props
+    let { list = [], scrollX, expandedRowRender } = this.props
     let select = false
     let isSelectAll = false
     let isHasContract = false
@@ -208,45 +208,46 @@ class Sheet extends React.Component {
         <div className={'gm-sheet-table' + (scrollX ? ' gm-sheet-table-scroll-x' : '')}>
           <table className='table table-striped table-hover table-bordered'>
             <thead>
-              <tr>
-                {expandedRowRender && (
-                  <th className='gm-sheet-th-expanded'>
-                    <i
-                      className={classNames('gm-sheet-expanded-icon text-primary glyphicon', {
-                        'glyphicon-minus': !isHasContract,
-                        'glyphicon-plus': isHasContract
-                      })}
-                      onClick={this.handleExpandedAll}
+            <tr>
+              {expandedRowRender && (
+                <th className='gm-sheet-th-expanded'>
+                  <i
+                    className={classNames('gm-sheet-expanded-icon text-primary glyphicon', {
+                      'glyphicon-minus': !isHasContract,
+                      'glyphicon-plus': isHasContract
+                    })}
+                    onClick={this.handleExpandedAll}
+                  />
+                </th>
+              )}
+              {select && (
+                <th className='gm-sheet-select'>
+                  {!select.props.isRadio && <div>
+                    <input
+                      type='checkbox'
+                      checked={isSelectAll}
+                      onChange={this.handleSelectAll.bind(this, select)}
                     />
-                  </th>
-                )}
-                {select && (
-                  <th className='gm-sheet-select'>
-                    {!select.props.isRadio && <div>
-                      <input
-                        type='checkbox'
-                        checked={isSelectAll}
-                        onChange={this.handleSelectAll.bind(this, select)}
-                      />
-                      {isSelectAll && select.props.hasSelectTip && <div className='gm-sheet-select-all-tip'>{select.props.selectAllTip}</div>}
-                    </div>}
-                  </th>
-                )}
-                {_.map(columns, (value, index) => {
-                  const {
+                    {isSelectAll && select.props.hasSelectTip &&
+                    <div className='gm-sheet-select-all-tip'>{select.props.selectAllTip}</div>}
+                  </div>}
+                </th>
+              )}
+              {_.map(columns, (value, index) => {
+                const {
                   children, field, name, placeholder, render,// eslint-disable-line
-                    ...rest
-                  } = value.props
-                  return <th key={index} {...rest}>{value.props.name}</th>
-                })}
-                {actions && (
-                  <th className='text-center'><i className='xfont xfont-fun' style={{color: '#13c19f'}}/>
-                  </th>
-                )}
-              </tr>
+                  ...rest
+                } = value.props
+                return <th key={index} {...rest}>{value.props.name}</th>
+              })}
+              {actions && (
+                <th className='text-center'><i className='xfont xfont-fun' style={{ color: '#13c19f' }}/>
+                </th>
+              )}
+            </tr>
             </thead>
             <tbody>
-              {this.renderTr(select, columns, actions)}
+            {this.renderTr(select, columns, actions)}
             </tbody>
           </table>
         </div>

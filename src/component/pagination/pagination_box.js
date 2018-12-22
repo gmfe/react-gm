@@ -30,7 +30,7 @@ class PaginationBox extends React.Component {
 
   // 暴露给外面用，首次请求或重新请求
   doFirstRequest (params) {
-    const {limit, offset, peek} = this.state
+    const { limit, offset, peek } = this.state
 
     this.setState({
       pageObj: null,
@@ -96,7 +96,7 @@ class PaginationBox extends React.Component {
   }
 
   getParams = (currentIndex) => {
-    const {pageObjArr, limit} = this.state
+    const { pageObjArr, limit } = this.state
 
     let i = currentIndex
     while (pageObjArr[i] === undefined && i > 0) {
@@ -110,12 +110,12 @@ class PaginationBox extends React.Component {
   }
 
   handlePre = () => {
-    const {currentIndex} = this.state
+    const { currentIndex } = this.state
     this.handleRequest(this.getParams(currentIndex - 1), currentIndex - 1)
   }
 
   handleNext = () => {
-    const {currentIndex} = this.state
+    const { currentIndex } = this.state
     this.handleRequest(this.getParams(currentIndex + 1), currentIndex + 1)
   }
 
@@ -124,7 +124,7 @@ class PaginationBox extends React.Component {
   }
 
   renderPeek () {
-    const {resPagination, currentIndex, limit} = this.state
+    const { resPagination, currentIndex, limit } = this.state
 
     if (!resPagination) {
       return null
@@ -152,13 +152,13 @@ class PaginationBox extends React.Component {
   }
 
   render () {
-    const {children, disablePage} = this.props
-    const {loading, resPagination, currentIndex} = this.state
+    const { children, disablePage } = this.props
+    const { loading, resPagination, currentIndex } = this.state
 
     return (
       <div className='gm-pagination-box'>
         <div className='gm-pagination-box-list'>
-          {_.isFunction(children) ? children({loading}) : children}
+          {_.isFunction(children) ? children({ loading }) : children}
         </div>
         <div className='gm-pagination text-center'>
           <ul className='pagination pagination-sm gm-margin-0'>

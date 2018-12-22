@@ -114,7 +114,7 @@ class CascaderSelect extends React.Component {
   }
 
   render () {
-    const {disabled, inputProps, valueRender, filtrable, onlyChildSelectable} = this.props
+    const { disabled, inputProps, valueRender, filtrable, onlyChildSelectable } = this.props
     return (
       <div className={classNames('gm-cascader-select gm-border gm-bg gm-position-relative', {
         'disabled': disabled,

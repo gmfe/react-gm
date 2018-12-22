@@ -3,7 +3,7 @@ import Flex from '../flex'
 
 class Divider extends React.Component {
   render () {
-    const {children} = this.props
+    const { children } = this.props
     return (
       <Flex className='gm-divider'>
         <Flex flex className='gm-divider-line'/>

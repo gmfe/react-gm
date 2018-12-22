@@ -26,14 +26,8 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount () {
-    Emitter.on('DEMO-PAGE-LOADED', () => {
-      this.doScrollToAnchor()
-    })
-  }
-
   doScrollToAnchor () {
-    const {anchor} = queryString.parse(this.props.location.search)
+    const { anchor } = queryString.parse(this.props.location.search)
     if (anchor) {
       const dom = window.document.getElementById(anchor)
       if (dom) {
@@ -44,8 +38,8 @@ class App extends React.Component {
   }
 
   handleClickAnchor (e) {
-    const {tagName, className} = e.target
-    const {search, pathname} = this.props.location
+    const { tagName, className } = e.target
+    const { search, pathname } = this.props.location
 
     const preAnchor = queryString.parse(search).anchor
 
@@ -56,14 +50,14 @@ class App extends React.Component {
       if (preAnchor !== anchor) {
         history.push({
           pathname,
-          search: queryString.stringify({anchor})
+          search: queryString.stringify({ anchor })
         })
       }
     }
   }
 
   renderMenu () {
-    const {location: {pathname}} = this.props
+    const { location: { pathname } } = this.props
     let nav = null
 
     if (pathname.startsWith('/doc')) {
@@ -74,7 +68,7 @@ class App extends React.Component {
       <div style={{
         width: '230px'
       }}>
-        <div style={{height: '40px'}} className='gm-cursor' onClick={() => (window.location.href = '/')}>
+        <div style={{ height: '40px' }} className='gm-cursor' onClick={() => (window.location.href = '/')}>
           <Flex alignCenter className='gm-border-bottom' style={{
             height: '40px',
             position: 'fixed',
@@ -106,7 +100,7 @@ class App extends React.Component {
   }
 
   render () {
-    const {children} = this.props
+    const { children } = this.props
 
     return (
       <Framework
@@ -121,14 +115,14 @@ class App extends React.Component {
                 scrolling='0'
                 width='170px'
                 height='20px'
-                style={{verticalAlign: 'middle'}}
+                style={{ verticalAlign: 'middle' }}
               />
               &nbsp;
               <select value={this.state.lng} onChange={e => {
-                this.setState({lng: e.target.value})
+                this.setState({ lng: e.target.value })
                 Storage.set('lng', e.target.value)
                 setLocale(e.target.value)
-              }} style={{verticalAlign: 'middle'}}>
+              }} style={{ verticalAlign: 'middle' }}>
                 <option value='en'>English</option>
                 <option value='zh'>中文</option>
               </select>

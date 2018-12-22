@@ -38,9 +38,9 @@ class QuickPanel extends React.Component {
             <span>
               {icon && <i
                 className={`xfont xfont-${icon}`}
-                style={{color: iconColor, marginRight: '2px', verticalAlign: 'middle'}}
+                style={{ color: iconColor, marginRight: '2px', verticalAlign: 'middle' }}
               />}
-              <span style={{verticalAlign: 'middle'}}>{title}</span>
+              <span style={{ verticalAlign: 'middle' }}>{title}</span>
             </span>
             {collapse ? (
               <a onClick={::this.handleCollapse} className='gm-margin-left-20 gm-font-12'>

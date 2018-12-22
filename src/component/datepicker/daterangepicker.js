@@ -18,7 +18,7 @@ class DateRangePicker extends React.Component {
   }
 
   handleSelectBegin (date) {
-    const {end, onChange} = this.props
+    const { end, onChange } = this.props
     onChange(date, date <= end ? end : date)
 
     setTimeout(() => {
@@ -27,7 +27,7 @@ class DateRangePicker extends React.Component {
   }
 
   handleSelectEnd (date) {
-    const {begin, onChange} = this.props
+    const { begin, onChange } = this.props
     onChange(begin <= date ? begin : date, date)
 
     setTimeout(() => {
@@ -36,12 +36,12 @@ class DateRangePicker extends React.Component {
   }
 
   handleClearEnd () {
-    const {begin, onChange} = this.props
+    const { begin, onChange } = this.props
     onChange(begin, null)
   }
 
   handleClearBegin () {
-    const {end, onChange} = this.props
+    const { end, onChange } = this.props
     onChange(null, end)
   }
 

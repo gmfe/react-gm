@@ -73,7 +73,7 @@ class Modal extends React.Component {
   }
 
   renderTypeModal () {
-    const {show, title, children, type, okBtnClassName, className} = this.props
+    const { show, title, children, type, okBtnClassName, className } = this.props
 
     return (
       <div>
@@ -112,7 +112,7 @@ class Modal extends React.Component {
   }
 
   render () {
-    const {show, title, size, children, type, style, noContentPadding, className, noCloseBtn, opacityMask, animName} = this.props
+    const { show, title, size, children, type, style, noContentPadding, className, noCloseBtn, opacityMask, animName } = this.props
     if (!show) {
       return null
     }

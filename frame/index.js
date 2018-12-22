@@ -7,11 +7,11 @@ import RightTop from './right_top'
 import FullTab from './full_tab'
 
 export {
-    Framework,
-    Left,
-    RightTop,
-    CopyRight,
-    Info,
-    Breadcrumb,
-    FullTab
+  Framework,
+  Left,
+  RightTop,
+  CopyRight,
+  Info,
+  Breadcrumb,
+  FullTab
 }

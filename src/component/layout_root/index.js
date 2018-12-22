@@ -93,9 +93,9 @@ const _setComponentArray = (type, id, com) => {
   if (setComponentFunc) {
     const index = _.findIndex(list, v => v.id === id)
     if (index === -1) {
-      list.push({id, com})
+      list.push({ id, com })
     } else {
-      list[index] = {id, com}
+      list[index] = { id, com }
     }
 
     setComponentFunc(type, list)

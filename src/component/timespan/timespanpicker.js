@@ -20,7 +20,7 @@ class TimeSpanPicker extends React.Component {
   }
 
   render () {
-    const {children, inputClassName, disabled, render, date, disabledSpan} = this.props
+    const { children, inputClassName, disabled, render, date, disabledSpan } = this.props
     const popup = (
       <TimeSpan
         min={this.props.min}
