@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import {isPathMatch, is} from 'gm-util'
-import {Emitter} from '../src/index'
+import { isPathMatch, is } from 'gm-util'
+import { Emitter } from '../src/index'
 
 class Breadcrumb extends React.Component {
   nav2BreadCrumb () {
-    const {breadcrumbs, pathname, navConfig} = this.props
+    const { breadcrumbs, pathname, navConfig } = this.props
     let result = []
     let title
 
@@ -28,9 +28,9 @@ class Breadcrumb extends React.Component {
     // https://code.guanmai.cn/front-end/think/issues/24
     _.forEach(breadcrumbs, v => {
       if (_.isString(v)) {
-        result.push({name: v})
+        result.push({ name: v })
       } else {
-        result.push({name: v.name, link: v.link || pathname})
+        result.push({ name: v.name, link: v.link || pathname })
       }
     })
 
@@ -41,7 +41,7 @@ class Breadcrumb extends React.Component {
 
   render () {
     const data = this.nav2BreadCrumb()
-    const {back} = this.props
+    const { back } = this.props
 
     if (!data || data.length === 0) {
       return <div className='gm-framework-breadcrumb-default'/>

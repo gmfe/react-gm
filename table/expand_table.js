@@ -12,7 +12,7 @@ class ExpandTable extends React.Component {
   }
 
   handleExpandAll = (isAllExpanded) => {
-    const {data} = this.props
+    const { data } = this.props
 
     if (isAllExpanded) {
       this.setState({
@@ -30,22 +30,22 @@ class ExpandTable extends React.Component {
   }
 
   renderHeader = () => {
-    const {data} = this.props
-    const {expanded} = this.state
+    const { data } = this.props
+    const { expanded } = this.state
 
     // 注意此逻辑
     const isAllExpanded = _.filter(expanded, v => v).length === data.length
 
     return (
       <div className='gm-cursor' onClick={this.handleExpandAll.bind(this, isAllExpanded)}>
-        {isAllExpanded ? <i className='xfont xfont-minus' /> : <i
-          className='xfont xfont-plus' />}
+        {isAllExpanded ? <i className='xfont xfont-minus'/> : <i
+          className='xfont xfont-plus'/>}
       </div>
     )
   }
 
-  renderExpander = ({index}) => {
-    const {expanded} = this.state
+  renderExpander = ({ index }) => {
+    const { expanded } = this.state
 
     return (
       <div>
@@ -65,7 +65,7 @@ class ExpandTable extends React.Component {
       columns,
       ...rest
     } = this.props
-    const {expanded} = this.state
+    const { expanded } = this.state
 
     return (
       <BaseTable

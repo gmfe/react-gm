@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import {is} from 'gm-util'
+import { is } from 'gm-util'
 import classNames from 'classnames'
-import {Flex} from '../src/index'
+import { Flex } from '../src/index'
 
 class FullTab extends React.Component {
   constructor (props) {
@@ -22,7 +22,7 @@ class FullTab extends React.Component {
   }
 
   handleTab (i) {
-    const {onChange} = this.props
+    const { onChange } = this.props
 
     if ('active' in this.props) {
       onChange(i)

@@ -26,7 +26,7 @@
     "parser": "babel-eslint"
   },
   "lint-staged": {
-    "./(src|demo)/**/*.js": [
+    "./(src|demo|frame|table)/**/*.js": [
       "eslint --cache --fix",
       "git add"
     ],

@@ -15,7 +15,7 @@ import { findDOMNode } from 'react-dom'
  */
 function generateDiyColumns (propsColumns, mixColumns) {
   return _.map(propsColumns, item => {
-    const {id, accessor, show = true, diyEnable = true} = item
+    const { id, accessor, show = true, diyEnable = true } = item
     const key = id || accessor
 
     const mixItem = _.find(mixColumns, v => {
@@ -51,7 +51,7 @@ function diyTableHOC (Component) {
     }
 
     componentWillReceiveProps (nextProps) {
-      this.setState({columns: generateDiyColumns(nextProps.columns, this.state.columns)})
+      this.setState({ columns: generateDiyColumns(nextProps.columns, this.state.columns) })
     }
 
     componentDidMount () {
@@ -66,33 +66,33 @@ function diyTableHOC (Component) {
     // 显示diy选择框  注:暴露给外部使用
     apiToggleDiySelector = () => {
       if (!this.__isUnmounted) {
-        const {isShow} = this.state
-        this.setState({isShow: !isShow})
+        const { isShow } = this.state
+        this.setState({ isShow: !isShow })
       }
     }
 
-    handleCloseDiySelector = ({target}) => {
-      const {isShow} = this.state
+    handleCloseDiySelector = ({ target }) => {
+      const { isShow } = this.state
 
       if (isShow && this.diySelectorRef && !contains(findDOMNode(this.diySelectorRef), target)) {
         // 延后执行,使得再次点击按钮关闭diy
-        setTimeout(() => this.setState({isShow: false}), 0)
+        setTimeout(() => this.setState({ isShow: false }), 0)
       }
     }
 
     handleCheck (index) {
       const columns = this.state.columns.slice()
-      const {show} = columns[index]
+      const { show } = columns[index]
       columns[index].show = !show
-      this.setState({columns})
+      this.setState({ columns })
 
-      const {id} = this.props
+      const { id } = this.props
       // 记录当前columns的数据到localStorage
       Storage.set(id, columns)
     }
 
     render () {
-      const {columns, isShow} = this.state
+      const { columns, isShow } = this.state
       const props = {
         ...this.props, columns
       }
@@ -101,12 +101,12 @@ function diyTableHOC (Component) {
         <Component {...props}/>
         {isShow && <Flex className='gm-react-table-diy-selector gm-box-shadow-bottom' wrap ref={ref => (this.diySelectorRef = ref)}>
           {_.map(columns, (item, index) => {
-            const {id, accessor, show: checked, Header, diyItemText, diyEnable} = item
+            const { id, accessor, show: checked, Header, diyItemText, diyEnable } = item
             const key = id || accessor
             const text = diyItemText || Header
 
             // Header是字符串才展示自定义选择项
-            return _.isString(text) && diyEnable ? <div style={{width: '50%'}} key={key}>
+            return _.isString(text) && diyEnable ? <div style={{ width: '50%' }} key={key}>
               <Checkbox
                 value={key}
                 checked={checked}

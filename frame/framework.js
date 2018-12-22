@@ -16,7 +16,7 @@ class Framework extends React.Component {
   }
 
   getChildContext () {
-    return {frameWorkLeftWidth: this.props.leftWidth}
+    return { frameWorkLeftWidth: this.props.leftWidth }
   }
 
   componentDidMount () {
@@ -35,16 +35,16 @@ class Framework extends React.Component {
   }
 
   addOverflowClass = () => {
-    const {overflowFlag} = this.state
-    this.setState({overflowFlag: overflowFlag + 1}, () => {
+    const { overflowFlag } = this.state
+    this.setState({ overflowFlag: overflowFlag + 1 }, () => {
       this.state.overflowFlag === 1 && window.document.body.classList.add('gm-overflow-hidden')
     })
     // this.setState({blur: true});
   }
 
   removeOverflowClass = () => {
-    const {overflowFlag} = this.state
-    this.setState({overflowFlag: overflowFlag - 1}, () => {
+    const { overflowFlag } = this.state
+    this.setState({ overflowFlag: overflowFlag - 1 }, () => {
       this.state.overflowFlag === 0 && window.document.body.classList.remove('gm-overflow-hidden')
     })
     // this.setState({blur: false});
@@ -55,7 +55,7 @@ class Framework extends React.Component {
   }
 
   render () {
-    let {showMobileMenu, isFullScreen, menu, rightTop, leftWidth, children} = this.props
+    let { showMobileMenu, isFullScreen, menu, rightTop, leftWidth, children } = this.props
 
     return (
       <div className={classNames('gm-framework', {
@@ -68,7 +68,7 @@ class Framework extends React.Component {
             : <div className='gm-framework-full-height'>
               <Flex className='gm-framework-container'>
                 {menu && <div className='gm-framework-left'>{menu}</div>}
-                <Flex flex column className='gm-framework-right' style={{width: `calc(100% - ${leftWidth})`}}>
+                <Flex flex column className='gm-framework-right' style={{ width: `calc(100% - ${leftWidth})` }}>
                   {rightTop && <div className='gm-framework-right-top'>{rightTop}</div>}
                   <div className='gm-framework-content'>{children}</div>
                 </Flex>

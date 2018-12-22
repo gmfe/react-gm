@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Flex, Popover} from '../src/index'
+import { Flex, Popover } from '../src/index'
 import _ from 'lodash'
-import {is} from 'gm-util'
+import { is } from 'gm-util'
 
 class Info extends React.Component {
   render () {
-    const {text, notification, settings} = this.props
+    const { text, notification, settings } = this.props
 
     return (
       <div className='gm-framework-info-default'>
