@@ -24,7 +24,7 @@ class FilterSearchSelect extends React.Component {
       ...rest
     } = this.props
 
-    const {query} = this.state
+    const { query } = this.state
     let filterList = list
     if (query) {
       filterList = onFilter(filterList, query)

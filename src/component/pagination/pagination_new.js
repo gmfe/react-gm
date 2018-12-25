@@ -22,15 +22,15 @@ class WithCount extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const {pages, pageClicked} = this.state
+    const { pages, pageClicked } = this.state
 
-    const {limit} = nextProps
+    const { limit } = nextProps
 
     const {peek, page_obj} = nextProps.pagination // eslint-disable-line
 
     if (this.props.pagination !== nextProps.pagination) {
       if (!nextProps.pagination.page_obj) {
-        this.setState({...initState})
+        this.setState({ ...initState })
         return
       }
 
@@ -61,15 +61,15 @@ class WithCount extends React.Component {
   }
 
   handlePage (event) {
-    const {pages} = this.state
+    const { pages } = this.state
 
-    const {onChange, limit} = this.props
+    const { onChange, limit } = this.props
 
     const pageClicked = ~~event.target.getAttribute('data-page')
 
     if (pageClicked < 1 || pageClicked > pages.length) return
 
-    this.setState({pageClicked})
+    this.setState({ pageClicked })
 
     const pageClickedIndex = _.findLastIndex(pages, page => page.number === pageClicked)
 
@@ -96,7 +96,7 @@ class WithCount extends React.Component {
   }
 
   render () {
-    const {current, pageClicked} = this.state
+    const { current, pageClicked } = this.state
 
     const len = this.state.pages.length
 
@@ -113,7 +113,7 @@ class WithCount extends React.Component {
     return (
       <div className='gm-pagination'>
         <ul className='pagination pagination-sm' onClick={this.handlePage}>
-          <li className={classNames({'disabled': current === pages[0].number || pageClicked})}>
+          <li className={classNames({ 'disabled': current === pages[0].number || pageClicked })}>
             <a href='javascript:;' data-page={current - 1}>{getLocale('pagination', 'previous')}</a>
           </li>
 
@@ -123,7 +123,7 @@ class WithCount extends React.Component {
           })}>
             <a href='javascript:;' data-page={page.number}>{page.number}</a></li>)}
 
-          <li className={classNames({'disabled': current === _.last(pages).number || pageClicked})}>
+          <li className={classNames({ 'disabled': current === _.last(pages).number || pageClicked })}>
             <a href='javascript:;' data-page={current + 1}>{getLocale('pagination', 'next')}</a>
           </li>
         </ul>
@@ -163,7 +163,7 @@ class WithoutCount extends React.Component {
   componentWillReceiveProps (nextProps) {
     if (this.props.pagination !== nextProps.pagination) {
       if (!nextProps.pagination.page_obj) {
-        this.setState({...initStateWithoutCount})
+        this.setState({ ...initStateWithoutCount })
         return
       }
 
@@ -183,7 +183,7 @@ class WithoutCount extends React.Component {
   }
 
   handlePage (reverse) {
-    const {onChange, limit} = this.props
+    const { onChange, limit } = this.props
 
     const {page_obj} = this.state  // eslint-disable-line
     let params = {}
@@ -205,11 +205,11 @@ class WithoutCount extends React.Component {
   }
 
   render () {
-    const {pagination} = this.props
+    const { pagination } = this.props
 
-    const {reverse, isFirstPage} = this.state
+    const { reverse, isFirstPage } = this.state
 
-    const {more} = pagination
+    const { more } = pagination
 
     return (
       <div className='gm-pagination'>

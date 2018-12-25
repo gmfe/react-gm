@@ -86,8 +86,8 @@ class DropSelect extends React.Component {
     const thisProps = this.props
 
     const show = thisProps.show
-    const {loading, list, columns, actions} = this.processData(this.props.data)
-    const {activeIndex} = this.state
+    const { loading, list, columns, actions } = this.processData(this.props.data)
+    const { activeIndex } = this.state
     let coolList
 
     const coolTitle = columns.map(col => {
@@ -110,7 +110,7 @@ class DropSelect extends React.Component {
             let val = col.render(value, rowData, rowIndex)
             return <div
               className='gm-ellipsis'
-              style={{flex: '1'}}
+              style={{ flex: '1' }}
               key={index}
             >
               {val}
@@ -146,7 +146,7 @@ class DropSelect extends React.Component {
         <div className='gm-dropselect-wrap'>
           <div
             className='gm-dropselect-list-wrap gm-box-shadow-bottom'
-            style={{display: show ? 'block' : 'none'}}
+            style={{ display: show ? 'block' : 'none' }}
           >
             <ul className='gm-dropselect-list'>
               <li className='gm-dropselect-item gm-dropselect-title'>

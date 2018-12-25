@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 class Collapse extends React.Component {
   render () {
-    const {children, className, 'in': isIn, style, ...rest} = this.props
+    const { children, className, 'in': isIn, style, ...rest } = this.props
     return (
       <div
         {...rest}

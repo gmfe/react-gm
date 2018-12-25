@@ -54,7 +54,7 @@ class Switch extends React.Component {
       ...rest
     } = this.props
 
-    let inputStyle = {width: this.state.labelWidth}
+    let inputStyle = { width: this.state.labelWidth }
     if (rest.style) inputStyle = Object.assign({}, inputStyle, rest.style)
 
     return (
@@ -80,7 +80,7 @@ class Switch extends React.Component {
             ref={ref => (this.refInputOn = ref)}
             className='gm-switch'
             type='checkbox'
-            style={{position: 'fixed', visibility: 'hidden'}}
+            style={{ position: 'fixed', visibility: 'hidden' }}
           />
         }
       </React.Fragment>

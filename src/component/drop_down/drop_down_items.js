@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 class DropDownItems extends React.Component {
   render () {
-    const {className, ...rest} = this.props
+    const { className, ...rest } = this.props
     return (
       <ul
         {...rest}

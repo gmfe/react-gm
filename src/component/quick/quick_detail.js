@@ -11,7 +11,7 @@ class QuickDetail extends React.Component {
     };
 
     getChildContext () {
-      return {show: this.state.show}
+      return { show: this.state.show }
     }
 
     handleCollapse = () => {
@@ -27,7 +27,7 @@ class QuickDetail extends React.Component {
         operate,
         third
       } = this.props
-      const {show} = this.state
+      const { show } = this.state
 
       const hasCollapse = second.props.data.length > 4
 
@@ -42,7 +42,7 @@ class QuickDetail extends React.Component {
             </div>
           </Flex>
           <Flex>
-            <div style={{marginRight: '40px', width: '200px'}}>
+            <div style={{ marginRight: '40px', width: '200px' }}>
               {second}
             </div>
             <Flex flex column>
@@ -103,16 +103,16 @@ QuickDetailFirst.propTypes = {
 
 class QuickDetailSecond extends React.Component {
   render () {
-    const {data, nameWidth} = this.props
-    const {show} = this.context
+    const { data, nameWidth } = this.props
+    const { show } = this.context
 
     const processData = show ? data : data.slice(0, 4)
 
     return (
-      <div style={{lineHeight: 1}}>
+      <div style={{ lineHeight: 1 }}>
         {_.map(processData, (item, i) => (
           <div key={i} className='gm-margin-bottom-10'>
-            <span className='gm-text-desc gm-inline-block' style={{width: nameWidth}}>{item.name}:</span>
+            <span className='gm-text-desc gm-inline-block' style={{ width: nameWidth }}>{item.name}:</span>
             <span>{item.value}</span>
           </div>
         ))}
@@ -132,12 +132,12 @@ QuickDetailSecond.contextTypes = {
 
 class QuickDetailThird extends React.Component {
   render () {
-    const {result, process, unit} = this.props
+    const { result, process, unit } = this.props
 
     return (
       <Flex>
         <Flex flex column alignCenter justifyCenter className='gm-padding-10 gm-margin-right-20'
-          style={{backgroundColor: '#f1f0f6', height: '78px'}}>
+              style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
           <div>{result.name}</div>
           <div className='gm-font-20'>{result.value}<span
             className='gm-font-12'>{unit}</span></div>
@@ -146,7 +146,7 @@ class QuickDetailThird extends React.Component {
         <Flex flex={process.length}>
           {_.map(process, (item, i) => (
             <Flex flex column alignCenter justifyCenter className='gm-padding-10' key={i}
-              style={{backgroundColor: '#f1f0f6', height: '78px'}}>
+                  style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
               <div>{item.name}</div>
               <div className='gm-font-20'>{item.value}<span
                 className='gm-font-12'>{unit}</span></div>

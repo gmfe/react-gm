@@ -19,7 +19,7 @@ const colorList = [
 
 class Color extends React.Component {
   render () {
-    const {color = '', onChange} = this.props
+    const { color = '', onChange } = this.props
 
     return (
       <Flex wrap className='gm-color-picker'>
@@ -34,7 +34,7 @@ class Color extends React.Component {
         ))}
         <div className='gm-color-picker-addon'>#</div>
         <input type='text' value={color.replace('#', '')} onChange={e => onChange('#' + e.target.value)}/>
-        <div className='gm-color-picker-value' style={{background: color}}/>
+        <div className='gm-color-picker-value' style={{ background: color }}/>
       </Flex>
     )
   }
@@ -42,7 +42,7 @@ class Color extends React.Component {
 
 class ColorPicker extends React.Component {
   render () {
-    const {color, onChange, children} = this.props
+    const { color, onChange, children } = this.props
 
     return (
       <Popover

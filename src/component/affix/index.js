@@ -26,7 +26,7 @@ class Affix extends React.Component {
 
   handleScroll = () => {
     const rect = this.dom.getBoundingClientRect()
-    const {top, bottom, offset} = this.props
+    const { top, bottom, offset } = this.props
 
     if (top && rect.top - offset <= 0) {
       this.setState({
@@ -63,8 +63,8 @@ class Affix extends React.Component {
   }
 
   render () {
-    const {children} = this.props
-    const {style, boxStyle} = this.state
+    const { children } = this.props
+    const { style, boxStyle } = this.state
 
     return (
       <div style={boxStyle}>

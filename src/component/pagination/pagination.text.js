@@ -4,7 +4,7 @@ import { getLocale } from '../../locales'
 
 class WithCount extends React.Component {
   render () {
-    const {data} = this.props
+    const { data } = this.props
     return (
       <div className='gm-pagination-text'>
         {getLocale('pagination', 'show')} {data.offset + 1} ~ {data.offset + data.limit}，{getLocale('pagination', 'total')} {data.count} {getLocale('pagination', 'item')}
@@ -15,7 +15,7 @@ class WithCount extends React.Component {
 
 class WithoutCount extends React.Component {
   render () {
-    const {data} = this.props
+    const { data } = this.props
     return (
       <div className='gm-pagination-text'>
         {getLocale('pagination', 'show')} {data.offset + 1} ~ {data.offset + data.limit} {getLocale('pagination', 'item')}

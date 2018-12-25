@@ -4,9 +4,9 @@ import { ImportLead } from '../../src/index'
 var gridData = {
   loading: false,
   columns: [
-    {field: 'id', name: 'id'},
-    {field: 'name', name: '名字'},
-    {field: 'age', name: '年龄'}
+    { field: 'id', name: 'id' },
+    { field: 'name', name: '名字' },
+    { field: 'age', name: '年龄' }
   ],
   list: [{
     id: 1,
@@ -212,11 +212,11 @@ var gridData = {
 }
 // var gridData = null;
 var tipsData = [
-  {'index': 1, 'msg': 'sdf', 'field': 'id'},
-  {'index': 3, 'msg': 'sdf', 'field': 'name'},
-  {'index': 7, 'msg': 'sdf', 'field': 'id'},
-  {'index': 4, 'msg': 'sdf', 'field': 'name'},
-  {'index': 0, 'msg': '这里不对啊', 'field': 'id'}
+  { 'index': 1, 'msg': 'sdf', 'field': 'id' },
+  { 'index': 3, 'msg': 'sdf', 'field': 'name' },
+  { 'index': 7, 'msg': 'sdf', 'field': 'id' },
+  { 'index': 4, 'msg': 'sdf', 'field': 'name' },
+  { 'index': 0, 'msg': '这里不对啊', 'field': 'id' }
 ]
 
 class ImportLeadWrap extends React.Component {
@@ -234,7 +234,7 @@ class ImportLeadWrap extends React.Component {
 
     // 外层容器需提供高度。 ImportLead 会撑满
     return (
-      <div style={{height: 600}}>
+      <div style={{ height: 600 }}>
         <ImportLead unline disableEdit data={data} tips={tips} fileTempUrl='http://www.baidu.com'
           onEdit={this.handleEdit}/>
       </div>

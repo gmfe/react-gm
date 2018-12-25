@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import classnames from 'classnames'
-import {getNumLength, formatNum, getRawArray, filterForNum} from './utils'
+import { getNumLength, formatNum, getRawArray, filterForNum } from './utils'
 
 class FlipNumber extends React.Component {
   constructor (props) {
@@ -33,7 +33,7 @@ class FlipNumber extends React.Component {
   }
 
   doInitData = (props) => {
-    const {from, to, decimal, useGroup} = props
+    const { from, to, decimal, useGroup } = props
     // 小数点 + useGroup
     this.fromStr = formatNum(from, decimal, useGroup)
     this.toStr = formatNum(to, decimal, useGroup)
@@ -47,7 +47,7 @@ class FlipNumber extends React.Component {
   }
 
   doInitView = (props) => {
-    const {delay, duration} = props
+    const { delay, duration } = props
     const fromNum = parseInt(filterForNum(this.fromStr.split('')).join(''), 10)
     const heightList = []
     _.forEach(this.toNumArr, (dom, index) => {
@@ -72,13 +72,13 @@ class FlipNumber extends React.Component {
    * @argument alter from 变成 to 每个数字轴需要改变的距离
    * @returns 返回数字轴应该移动的距离
    */
-  onDraw = ({from, percent, alter}) => {
+  onDraw = ({ from, percent, alter }) => {
     const expectNum = (percent * alter + from) % 10 // 表示需要滚动多少个数字，小数居多，整数表示刚好显示完全一个数字
     return -expectNum * this.height
   }
 
   flipTo = (duration) => {
-    const {easeFn, individually} = this.props
+    const { easeFn, individually } = this.props
     this.fromNumArr = filterForNum(this.fromRawArr.rawList).map(Number)
     const draw = percent => {
       let temp = 0
@@ -111,10 +111,10 @@ class FlipNumber extends React.Component {
   }
 
   renderDigitAxis = () => {
-    const {heightList} = this.state
+    const { heightList } = this.state
     const digitAxis = _.map(this.toNumArr, (item, index) => (
       <div
-        style={{transform: `translateY(${heightList[index]}px)`}}
+        style={{ transform: `translateY(${heightList[index]}px)` }}
         ref={(rel) => { this[`gm-flip-number-digit${index}`] = rel }}
         className='gm-inline-block gm-position-relative'
         key={`digitAxis${index}`}
@@ -146,11 +146,11 @@ class FlipNumber extends React.Component {
   }
 
   render () {
-    const {className, to} = this.props
+    const { className, to } = this.props
     return <div
       key={`${to}`}
       ref={(rel) => { this.wrap = rel }}
-      style={{height: `${this.height}px`}}
+      style={{ height: `${this.height}px` }}
       className={classnames('gm-position-relative gm-overflow-hidden', className)}
     >
       {this.renderDigitAxis()}

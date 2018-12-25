@@ -85,7 +85,7 @@ class MultipleFilterSelect extends React.Component {
   }
 
   handleKeyDown (size, event) {
-    const {keyCode} = event
+    const { keyCode } = event
 
     if (keyCode === 13) { // 键盘 回车
       const dom = this.filterSelectList.querySelector('.list-group-item.line-selected')
@@ -96,7 +96,7 @@ class MultipleFilterSelect extends React.Component {
     }
 
     if (keyCode === 38 || keyCode === 40) {
-      let {activeIndex} = this.state
+      let { activeIndex } = this.state
       let diff = 1
       if (keyCode === 38) { // 键盘 上键
         diff = -1
@@ -119,7 +119,7 @@ class MultipleFilterSelect extends React.Component {
   handleSelect (value, event) {
     event.preventDefault()
 
-    const {selected, onSelect} = this.props
+    const { selected, onSelect } = this.props
 
     if (_.includes(selected, value)) {
       onSelect(_.without(selected, value))
@@ -178,7 +178,7 @@ class MultipleFilterSelect extends React.Component {
   }
 
   getListItemCount (list) {
-    const {isGroupList} = this.props
+    const { isGroupList } = this.props
 
     if (isGroupList) {
       return _.reduce(list, (count, group) => {
@@ -191,7 +191,7 @@ class MultipleFilterSelect extends React.Component {
 
   handleClose (value, event) {
     event.preventDefault()
-    const {selected} = this.props
+    const { selected } = this.props
     this.props.onSelect(_.without(selected, value))
 
     // 让input获得焦点，才能响应键盘。 close的时候可能popup没渲染
@@ -199,7 +199,7 @@ class MultipleFilterSelect extends React.Component {
   }
 
   renderGroupList (list) {
-    const {listMaxHeight, inputClassName, selected, renderItemName} = this.props
+    const { listMaxHeight, inputClassName, selected, renderItemName } = this.props
 
     const usefulList = _.filter(list, v => (v.children || []).length > 0)
 
@@ -208,7 +208,7 @@ class MultipleFilterSelect extends React.Component {
     return (
       <div
         className='list-group'
-        style={{maxHeight: listMaxHeight}}
+        style={{ maxHeight: listMaxHeight }}
         ref={ref => (this.filterSelectList = ref)}
       >
         {_.map(usefulList, (groupList, i) => {
@@ -241,12 +241,12 @@ class MultipleFilterSelect extends React.Component {
   }
 
   renderList (list) {
-    const {listMaxHeight, inputClassName, selected, renderItemName} = this.props
+    const { listMaxHeight, inputClassName, selected, renderItemName } = this.props
 
     return (
       <div
         className='list-group'
-        style={{maxHeight: listMaxHeight}}
+        style={{ maxHeight: listMaxHeight }}
         ref={ref => (this.filterSelectList = ref)}
       >
         {_.map(list, (value, i) => {
@@ -270,8 +270,8 @@ class MultipleFilterSelect extends React.Component {
   }
 
   renderOverlay (filterList) {
-    const {isGroupList, disableSearch} = this.props
-    const {query, loading} = this.state
+    const { isGroupList, disableSearch } = this.props
+    const { query, loading } = this.state
 
     return (
       <div className='gm-filter-select-popup'>
@@ -297,8 +297,8 @@ class MultipleFilterSelect extends React.Component {
   }
 
   render () {
-    const {id, list, withFilter, selected, placeholder, disabled} = this.props
-    const {query} = this.state
+    const { id, list, withFilter, selected, placeholder, disabled } = this.props
+    const { query } = this.state
     let filterList = list
     if (query) {
       filterList = withFilter(filterList, query)

@@ -6,7 +6,7 @@ import classNames from 'classnames'
 
 class TimeSpan extends React.Component {
   getCells () {
-    const {min, max, span} = this.props
+    const { min, max, span } = this.props
     const dMax = max ? moment(max) : moment().endOf('day')
     let d = min ? moment(min) : moment().startOf('day')
     let cells = []
@@ -22,7 +22,7 @@ class TimeSpan extends React.Component {
   }
 
   render () {
-    const {selected, render, disabledSpan} = this.props
+    const { selected, render, disabledSpan } = this.props
     const cells = this.getCells()
 
     return (

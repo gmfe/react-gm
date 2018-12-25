@@ -6,7 +6,7 @@ class Dropper extends React.Component {
   handleDrop = (e) => {
     e.preventDefault()
 
-    const {multiple, onDrop} = this.props
+    const { multiple, onDrop } = this.props
 
     const droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files
     const max = multiple ? droppedFiles.length : 1

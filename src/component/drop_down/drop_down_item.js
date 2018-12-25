@@ -11,7 +11,7 @@ class DropDownItem extends React.Component {
   }
 
   render () {
-    const {children, active, className, disabled, ...rest} = this.props
+    const { children, active, className, disabled, ...rest } = this.props
 
     return (
       <li {...rest} className={classNames(active, {

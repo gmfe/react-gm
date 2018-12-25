@@ -59,7 +59,7 @@ class Popup extends React.Component {
       ...rest
     } = this.props
 
-    const {width, height} = this.state
+    const { width, height } = this.state
 
     const sStyle = {
       top: rect.top + rect.height + (showArrow ? 5 : 1),

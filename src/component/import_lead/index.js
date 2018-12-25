@@ -20,7 +20,7 @@ class ImportLead extends React.Component {
   }
 
   render () {
-    const data = _.extend({columns: [], list: []}, this.props.data)
+    const data = _.extend({ columns: [], list: [] }, this.props.data)
     const tips = this.props.tips || []
 
     let tipsMap = {}

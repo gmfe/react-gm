@@ -22,16 +22,16 @@ class PreviewModal extends React.Component {
   }
 
   handlePreview (previewImgIndex) {
-    this.setState({previewImgIndex})
+    this.setState({ previewImgIndex })
   }
 
   handlePrevious () {
-    const {thumbnails} = this.props
-    const {previewImgIndex} = this.state
+    const { thumbnails } = this.props
+    const { previewImgIndex } = this.state
 
     if (previewImgIndex !== 0) {
       const index = previewImgIndex - 1
-      this.setState({previewImgIndex: index})
+      this.setState({ previewImgIndex: index })
 
       if (thumbnails) {
         this.thumbnails.childNodes[index].scrollIntoViewIfNeeded()
@@ -40,12 +40,12 @@ class PreviewModal extends React.Component {
   }
 
   handleNext () {
-    const {images, thumbnails} = this.props
-    const {previewImgIndex} = this.state
+    const { images, thumbnails } = this.props
+    const { previewImgIndex } = this.state
 
     if (previewImgIndex !== images.length - 1) {
       const index = previewImgIndex + 1
-      this.setState({previewImgIndex: index})
+      this.setState({ previewImgIndex: index })
 
       if (thumbnails) {
         this.thumbnails.childNodes[index].scrollIntoViewIfNeeded()
@@ -55,7 +55,7 @@ class PreviewModal extends React.Component {
 
   handleScroll (direction) {
     const num = direction === 'left' ? 1 : -1
-    const {thumbnails} = this
+    const { thumbnails } = this
     const initScrollLeft = thumbnails.scrollLeft
     clearInterval(this.timer)
 
@@ -89,7 +89,7 @@ class PreviewModal extends React.Component {
   componentDidMount () {
     // 如果没有滚动条,不显示左右滚动按钮
     this.thumbnails && this.thumbnails.offsetWidth === this.thumbnails.scrollWidth &&
-    this.setState({showScrollBtn: false})
+    this.setState({ showScrollBtn: false })
 
     window.document.body.addEventListener('keydown', this.handleKeyDown)
   }
@@ -99,8 +99,8 @@ class PreviewModal extends React.Component {
   }
 
   render () {
-    const {thumbnails, images, onHide} = this.props
-    const {previewImgIndex, showScrollBtn} = this.state
+    const { thumbnails, images, onHide } = this.props
+    const { previewImgIndex, showScrollBtn } = this.state
 
     return (
       <Flex className='gm-image-preview-wrap'>
@@ -108,7 +108,7 @@ class PreviewModal extends React.Component {
 
         <Flex alignCenter className='gm-image-preview-btn-container'>
           <i
-            className={classNames('glyphicon glyphicon-menu-left gm-image-preview-btn', {'hidden': previewImgIndex === 0})}
+            className={classNames('glyphicon glyphicon-menu-left gm-image-preview-btn', { 'hidden': previewImgIndex === 0 })}
             onClick={this.handlePrevious}/>
         </Flex>
 
@@ -131,7 +131,7 @@ class PreviewModal extends React.Component {
                 {_.map(thumbnails, (img, index) => (
                   <img
                     key={index}
-                    className={classNames('gm-image-preview-img', {'gm-image-preview-focus': index === previewImgIndex})}
+                    className={classNames('gm-image-preview-img', { 'gm-image-preview-focus': index === previewImgIndex })}
                     src={img}
                     onClick={() => this.handlePreview(index)}
                   />
@@ -150,7 +150,7 @@ class PreviewModal extends React.Component {
 
         <Flex alignCenter className='gm-image-preview-btn-container'>
           <i
-            className={classNames('glyphicon glyphicon-menu-right gm-image-preview-btn', {'hidden': previewImgIndex === images.length - 1})}
+            className={classNames('glyphicon glyphicon-menu-right gm-image-preview-btn', { 'hidden': previewImgIndex === images.length - 1 })}
             onClick={this.handleNext}/>
         </Flex>
 

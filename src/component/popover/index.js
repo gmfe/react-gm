@@ -9,7 +9,7 @@ import classNames from 'classnames'
 import Emitter from '../../emitter'
 
 function getElementPositionWithScrollTop (element) {
-  let {left, top} = element.getBoundingClientRect()
+  let { left, top } = element.getBoundingClientRect()
   left += getScrollLeft()
   top += getScrollTop()
 
@@ -174,7 +174,7 @@ class Popover extends React.Component {
 
   handleBodyClick (event) {
     const target = event.target
-    const {active} = this.state
+    const { active } = this.state
 
     // 没激活就没有必要判断了
     if (!active) {
@@ -194,7 +194,7 @@ class Popover extends React.Component {
 
   handleClick () {
     // focus 也会进来
-    const {type} = this.props
+    const { type } = this.props
 
     if (type === 'click') {
       this.setActive(!this.state.active)
@@ -217,7 +217,7 @@ class Popover extends React.Component {
   }
 
   getDisabled () {
-    const {disabled, children} = this.props
+    const { disabled, children } = this.props
     return disabled || children.props.disabled
   }
 
@@ -227,7 +227,7 @@ class Popover extends React.Component {
       type
     } = this.props
 
-    const {active} = this.state
+    const { active } = this.state
 
     const child = React.Children.only(children)
 

@@ -56,6 +56,7 @@ import Drawer from './component/drawer'
 import EditableText from './component/editable_text'
 import FlipNumber from './component/flip_number'
 import Price from './component/price'
+import { List, ListGroup } from './component/list'
 
 import Validator from './validator'
 import Emitter from './emitter'
@@ -92,7 +93,7 @@ Object.assign(Select, {
   Option
 })
 
-const {QuickDetailFirst, QuickDetailSecond, QuickDetailThird} = QuickDetail
+const { QuickDetailFirst, QuickDetailSecond, QuickDetailThird } = QuickDetail
 
 export {
   Pagination,
@@ -160,5 +161,6 @@ export {
   setLocale,
   EditableText,
   FlipNumber,
-  Price
+  Price,
+  List, ListGroup
 }

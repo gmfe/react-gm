@@ -30,7 +30,7 @@ class NProgress extends React.Component {
 
   doInc () {
     this.timer = setTimeout(() => {
-      const {percent} = this.state
+      const { percent } = this.state
       this.setState({
         percent: percent + (100 - percent) * 0.2
       })
@@ -43,7 +43,7 @@ class NProgress extends React.Component {
   render () {
     const percent = 100 - this.state.percent
     return (
-      <div className='gm-nprogress' style={{transform: 'translate3d(-' + percent + '%, 0, 0)'}}>
+      <div className='gm-nprogress' style={{ transform: 'translate3d(-' + percent + '%, 0, 0)' }}>
         <div className='gm-nprogress-head'/>
       </div>
     )

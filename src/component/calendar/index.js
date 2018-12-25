@@ -15,7 +15,7 @@ class Day extends React.Component {
   }
 
   handleClick () {
-    const {disabled, onClick, value} = this.props
+    const { disabled, onClick, value } = this.props
 
     if (disabled) {
       return
@@ -24,7 +24,7 @@ class Day extends React.Component {
   }
 
   render () {
-    const {willSelect, value, selected, disabled} = this.props
+    const { willSelect, value, selected, disabled } = this.props
 
     const cn = classNames('gm-calendar-day', {
       'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
@@ -41,7 +41,7 @@ class Day extends React.Component {
 class Calendar extends React.Component {
   constructor (props) {
     super(props)
-    const {selected} = props
+    const { selected } = props
     this.state = {
       selected: selected || null, // 调用方的时间
       moment: selected ? moment(selected) : moment(), // 日历内的时间
@@ -140,7 +140,7 @@ class Calendar extends React.Component {
   }
 
   getDisabled (m) {
-    let {min, max, disabledDate} = this.props
+    let { min, max, disabledDate } = this.props
     min = min ? moment(min).startOf('day') : null
     max = max ? moment(max).startOf('day') : null
 
@@ -187,7 +187,7 @@ class Calendar extends React.Component {
 
   render () {
     const {
-            selected, onSelect, min, max, disabledDate, // eslint-disable-line
+      selected, onSelect, min, max, disabledDate, // eslint-disable-line
       className,
       ...rest
     } = this.props

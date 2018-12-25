@@ -29,7 +29,7 @@ class MenuItem extends React.Component {
   }
 
   handleTriggerMenu () {
-    const {collapse} = this.state
+    const { collapse } = this.state
 
     this.setState({
       collapse: !collapse
@@ -37,8 +37,8 @@ class MenuItem extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    const {collapse} = this.state
-    const {data, selected} = newProps
+    const { collapse } = this.state
+    const { data, selected } = newProps
     const menuItemDisabled = !!this.getMenuItemDisabled(data, selected)
 
     if (menuItemDisabled && collapse) {
@@ -49,8 +49,8 @@ class MenuItem extends React.Component {
   }
 
   render () {
-    const {data, selected, onSelect, allowCollapse} = this.props
-    const {collapse} = this.state
+    const { data, selected, onSelect, allowCollapse } = this.props
+    const { collapse } = this.state
     const menuItemDisabled = !!this.getMenuItemDisabled(data, selected)
 
     return (

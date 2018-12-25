@@ -30,7 +30,7 @@ class TreeSelect extends React.Component {
   }
 
   handleSelect (data, checked) {
-    const {list, selected} = this.props
+    const { list, selected } = this.props
 
     if (data.children) {
       if (checked) {
@@ -86,19 +86,19 @@ class TreeSelect extends React.Component {
   }
 
   handleShow (data) {
-    let {showList} = this.state
+    let { showList } = this.state
 
     if (_.includes(showList, data.value)) {
-      this.setState({showList: _.without(showList, data.value)})
+      this.setState({ showList: _.without(showList, data.value) })
       return
     }
 
     showList.push(data.value)
-    this.setState({showList})
+    this.setState({ showList })
   }
 
   renderNodeList (list, level = 0, panel = []) {
-    const {disabledSelected, selected} = this.props
+    const { disabledSelected, selected } = this.props
 
     _.each(list, (data) => {
       let childrenNode = this.findChildrenNodeByValue(list, data.value)
@@ -140,7 +140,7 @@ class TreeSelect extends React.Component {
   }
 
   render () {
-    const {list, label, disabledSelected, selected} = this.props
+    const { list, label, disabledSelected, selected } = this.props
 
     return (
       <div className='gm-tree-select'>
@@ -150,7 +150,7 @@ class TreeSelect extends React.Component {
         >
           {disabledSelected ? undefined : (
             <Flex flex className='gm-border-bottom gm-tree-select-title'>
-              <label className='gm-cursor gm-padding-lr-10 gm-padding-tb-5' style={{width: '30px'}}>
+              <label className='gm-cursor gm-padding-lr-10 gm-padding-tb-5' style={{ width: '30px' }}>
                 <input
                   type='checkbox'
                   checked={(selected.length !== 0 && this.findAllChildrenNode(list).length === selected.length)}
@@ -179,7 +179,7 @@ class TreeNode extends React.Component {
   }
 
   render () {
-    const {data, childrenNode, level, last, disabledSelected, selected, showList} = this.props
+    const { data, childrenNode, level, last, disabledSelected, selected, showList } = this.props
     let selectedFlag = false
 
     if (last) {
@@ -191,7 +191,7 @@ class TreeNode extends React.Component {
     return (
       <Flex flex className='gm-border-bottom gm-tree-select-trap'>
         {disabledSelected ? undefined : (
-          <label className='gm-padding-lr-10 gm-padding-tb-5 gm-cursor' style={{width: '30px'}}>
+          <label className='gm-padding-lr-10 gm-padding-tb-5 gm-cursor' style={{ width: '30px' }}>
             <input
               type='checkbox'
               checked={selectedFlag}
@@ -203,7 +203,7 @@ class TreeNode extends React.Component {
         <Flex className='gm-padding-lr-10 gm-padding-tb-5' flex alignCenter>
           <div
             className={data.children ? 'gm-tree-select-item' : ''}
-            style={{marginLeft: Number(level) * 10 + 'px'}}
+            style={{ marginLeft: Number(level) * 10 + 'px' }}
             onClick={this.handleShow.bind(this, data)}
           >
             {last ? <div className='gm-gap-10'/>

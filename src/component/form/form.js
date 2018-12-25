@@ -14,7 +14,7 @@ class Form extends React.Component {
   }
 
   validateAll () {
-    const {children} = this.props
+    const { children } = this.props
     const helpList = []
 
     let childList = _.isArray(children) ? children : [children]

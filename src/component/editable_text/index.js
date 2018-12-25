@@ -25,7 +25,7 @@ class EditableText extends React.Component {
   };
 
   handleOkClick = () => {
-    const {onOk} = this.props
+    const { onOk } = this.props
     onOk && onOk(this.state.value)
     this.setState({
       editable: false
@@ -33,7 +33,7 @@ class EditableText extends React.Component {
   };
 
   handleCancelClick = () => {
-    const {onCancel} = this.props
+    const { onCancel } = this.props
     onCancel && onCancel()
     this.setState({
       editable: false
@@ -46,8 +46,8 @@ class EditableText extends React.Component {
   }
 
   render () {
-    const {content, className} = this.props
-    const {editable} = this.state
+    const { content, className } = this.props
+    const { editable } = this.state
     return editable ? (
       <div className={classNames('gm-editable-text-input-wrap', className)}>
         <input onBlur={this.handleInputBlur} className='form-control input-sm' autoFocus defaultValue={content} onChange={e => this.handleInputChange(e)}/>

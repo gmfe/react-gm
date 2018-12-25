@@ -44,7 +44,7 @@ class Trigger extends React.Component {
   }
 
   handleClick (event) {
-    const {disabled, children, type} = this.props
+    const { disabled, children, type } = this.props
     // 优先获取props的disabled
     if (disabled === true) {
       return
@@ -70,7 +70,7 @@ class Trigger extends React.Component {
   }
 
   handleMouseEnter () {
-    const {disabled, children} = this.props
+    const { disabled, children } = this.props
     // 优先获取props的disabled
     if (disabled === true) {
       return
@@ -89,7 +89,7 @@ class Trigger extends React.Component {
   }
 
   handleMouseLeave () {
-    const {disabled, children} = this.props
+    const { disabled, children } = this.props
     // 优先获取props的disabled
     if (disabled === true) {
       return
@@ -115,7 +115,7 @@ class Trigger extends React.Component {
   renderTriggerArrow (showArrow, arrowBgColor, arrowBorderColor) {
     let arrowStyle = {}
     if (showArrow) {
-      const {right, top} = this.props
+      const { right, top } = this.props
       arrowStyle = {
         'borderRightColor': arrowBgColor,
         'borderBottomColor': arrowBgColor
@@ -145,7 +145,7 @@ class Trigger extends React.Component {
       showArrow, arrowBgColor, arrowBorderColor,
       animName
     } = this.props
-    const {active} = this.state
+    const { active } = this.state
 
     let animate = animName
 

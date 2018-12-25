@@ -34,13 +34,13 @@ class Select extends React.Component {
     const selectDOM = findDOMNode(this)
 
     if (this.state.show && !contains(selectDOM, target)) {
-      this.setState({show: false})
+      this.setState({ show: false })
     }
   }
 
   handleSelectionClick () {
-    const {disabled} = this.props
-    const {show} = this.state
+    const { disabled } = this.props
+    const { show } = this.state
 
     if (!disabled) {
       this.setState({
@@ -50,7 +50,7 @@ class Select extends React.Component {
   }
 
   handleOptionClick (elProps) {
-    const {onChange} = this.props
+    const { onChange } = this.props
     const {
       value: elPropsValue,
       disabled: elPropsDisabled
@@ -58,12 +58,12 @@ class Select extends React.Component {
 
     if (!elPropsDisabled) {
       onChange(elPropsValue)
-      this.setState({show: false})
+      this.setState({ show: false })
     }
   }
 
   render () {
-    const {show} = this.state
+    const { show } = this.state
     const {
       value,
       children,
