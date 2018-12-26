@@ -6,12 +6,7 @@ const config = webpackConfig({
   publicPath: '/react-gm/build/',
   port: 3000,
   projectShortName: 'index',
-  index: './demo/index.js',
-  commons: [
-    'gm-util',
-    'gm-xfont/iconfont.css',
-    'highlight.js/styles/default.css'
-  ]
+  index: './demo/index.js'
 })
 
 // 补 md
