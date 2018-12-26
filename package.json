@@ -11,7 +11,6 @@
     "react-component"
   ],
   "scripts": {
-    "clear": "rm -rf build && mkdir build;",
     "start": "node ./node_modules/gm-webpack/start",
     "deploy": "GIT_BRANCH=$BRANCH GIT_COMMIT=$COMMIT node ./node_modules/gm-webpack/deploy",
     "docs": "rm -rf build; rm -rf docs; mkdir docs; npm run deploy; cp -r build docs; git add --all; git commit -m 'docs generate'; git push origin master:master;",
