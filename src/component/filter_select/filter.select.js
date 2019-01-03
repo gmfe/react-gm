@@ -24,7 +24,7 @@ class FilterSelect extends React.Component {
     this.______isMounted = false
 
     this.handleFocus = ::this.handleFocus
-    this.handleClose = ::this.handleClose
+    this.handleClear = ::this.handleClear
     this.handleChange = ::this.handleChange
     this.getListItemCount = ::this.getListItemCount
     this.handleKeyDown = ::this.handleKeyDown
@@ -188,7 +188,7 @@ class FilterSelect extends React.Component {
     return list.length
   }
 
-  handleClose (event) {
+  handleClear (event) {
     event.preventDefault()
     this.props.onSelect(null)
   }
@@ -290,7 +290,7 @@ class FilterSelect extends React.Component {
   }
 
   render () {
-    const { id, list, withFilter, selected, placeholder, disabled } = this.props
+    const { id, list, withFilter, selected, placeholder, disabled, showClear } = this.props
     const { query } = this.state
     let filterList = list
     if (query) {
@@ -311,9 +311,13 @@ class FilterSelect extends React.Component {
             popup={this.renderOverlay(filterList)}
             disabled={disabled}
           >
-            <Flex flex className='gm-filter-select-target'>
+            <Flex flex className='gm-filter-select-target gm-position-relative'>
               {selected ? (
-                <Flex>{selected.name}</Flex>
+                <Flex>{selected.name}
+                  {
+                    showClear && <i onClick={this.handleClear} className='xfont xfont-close-circle gm-cursor gm-filter-select-clear-btn'/>
+                  }
+                </Flex>
               ) : (
                 <Flex className='gm-text-desc'>{placeholder}</Flex>
               )}
