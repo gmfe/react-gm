@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import Big from 'big.js'
 
 // _currency 为货币符号
-let _currency = '¥'
-let _unit = '元'
+let _currency = '¥'
+let _unit = '元'
 
 class Price extends React.Component {
   formatValue = (value, precision, keepZero, isYuanUnit) => {
