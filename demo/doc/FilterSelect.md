@@ -100,6 +100,7 @@ class FilterSelect1 extends React.Component {
                     onSearch={this.handleSearch}
                     onSelect={this.handleSelect}
                     placeholder="搜索"
+                    showClear
                 />
 
                 <div>disabled</div>
@@ -404,6 +405,7 @@ class FilterSelect5 extends React.Component {
 - `placeholder (string)`
 - `isScrollToSelected (bool)` focus后列表是否滚动到选择的位置
 - `disableSearch (bool)` 是否显示搜索框
+- `showClear (bool)` 是否显示清除选中按钮，默认 false 不显示
 - `renderItemName (func)` 默认 v => v.name
 
 ### MultipleFilterSelect Props
