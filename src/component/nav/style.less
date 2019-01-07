@@ -12,14 +12,14 @@
     display: block;
     color: @gm-color-first;
     white-space: nowrap;
-    padding: 10px 15px;
+    padding: 10px;
     text-decoration: none;
   }
 
   .gm-nav-two > div > a {
     display: block;
     white-space: nowrap;
-    padding: 15px 15px 5px;
+    padding: 10px 10px 5px;
     text-decoration: none;
     cursor: inherit;
     font-size: 12px;
@@ -30,7 +30,7 @@
     display: block;
     color: @gm-color-first;
     white-space: nowrap;
-    padding: 15px 15px;
+    padding: 10px;
     text-decoration: none;
   }
 
@@ -39,23 +39,25 @@
   }
 
   .gm-nav-one > div > a {
-    border-top: 1px solid @gm-nav-bg-second;
     display: block;
-    padding: 15px 10px;
+    padding: 10px;
     color: white;
     text-decoration: none;
   }
 
   .gm-nav-there > a.active {
-    color: @brand-primary;
+    background: lighten(@brand-primary, 40%);
   }
 
   .gm-nav-there > a:hover {
-    color: @brand-primary;
+    background: lighten(@brand-primary, 40%);
   }
 
   .gm-nav-one > div.active a {
-    background: white;
-    color: @gm-color-first;
+    background: @brand-primary;
+  }
+
+  .gm-nav-one > div:hover a {
+    background: lighten(@gm-nav-bg-second, 20%);
   }
 }

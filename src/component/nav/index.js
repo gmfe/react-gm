@@ -66,7 +66,7 @@ class Nav extends React.Component {
           <Flex alignCenter justifyCenter className='gm-nav-logo'>
             {logo}
           </Flex>
-          <div className='gm-margin-top-5 gm-nav-one'>
+          <div className='gm-nav-one'>
             {_.map(data, (one, oneI) => {
               let link = !isBrowserRouter && /^\/[^#\/].*/.test(one.link) ? `#${one.link}` : one.link // eslint-disable-line
               return (
@@ -99,7 +99,7 @@ class Nav extends React.Component {
         {oneSelected && oneSelected.sub && (
           <div className='gm-border-right gm-bg-white gm-overflow-y' style={{
             width: widths[1],
-            paddingTop: '52px',
+            paddingTop: '45px',
             height: '100vh'
           }}>
             {isJump ? (
