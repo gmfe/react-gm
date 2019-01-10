@@ -1,21 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { isNumber } from 'util';
 
 class Affix extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.style = {
-        position: 'sticky'
-    }
-  }
 
   render () {
-    const { children, offset, top, bottom } = this.props
-    top ? this.style.top = `${offset}px` : null
-    bottom ? this.style.bottom = `${offset}px` : null
+    const { children, top, bottom } = this.props
+    const style = {
+      position: 'sticky',
+      bottom: isNumber(bottom) ? `${bottom}px` : null,
+      top: isNumber(top) ? `${top}px` : null
+    }
+    
     return (
-      <div style={this.style}>
+      <div style={style}>
           {children}
       </div>
     )
@@ -23,15 +21,8 @@ class Affix extends React.Component {
 }
 
 Affix.propTypes = {
-  top: PropTypes.bool,
-  bottom: PropTypes.bool,
-  offset: PropTypes.number
-}
-
-Affix.defaultProps = {
-  top: false,
-  bottom: true,
-  offset: 0
+  top: PropTypes.number,
+  bottom: PropTypes.number
 }
 
 export default Affix
