@@ -48,8 +48,7 @@ const data = [{
     { name: 'Popover 浮层', path: '/doc/Popover' },
     { name: 'Modal 模态框', path: '/doc/Modal' },
     { name: 'Drawer 抽屉', path: '/doc/Drawer' },
-    { name: 'ImagePreview 图片预览', path: '/doc/ImagePreview' },
-    { name: 'Affix 粘性布局', path: '/doc/Affix' }
+    { name: 'ImagePreview 图片预览', path: '/doc/ImagePreview' }
   ]
 }, {
   name: 'Form',
