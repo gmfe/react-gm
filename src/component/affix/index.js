@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class Affix extends React.Component {
-
   render () {
     const { children, top, bottom } = this.props
     const style = {
@@ -10,10 +9,10 @@ class Affix extends React.Component {
       bottom: bottom !== undefined ? `${bottom}px` : null,
       top: top !== undefined ? `${top}px` : null
     }
-    
+
     return (
       <div style={style}>
-          {children}
+        {children}
       </div>
     )
   }
