@@ -12,7 +12,7 @@ class Affix extends React.Component {
 
     return (
       <div style={style}>
-        {children}
+          {children}
       </div>
     )
   }
