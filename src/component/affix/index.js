@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { isNumber } from 'util';
 
 class Affix extends React.Component {
 
@@ -8,8 +7,8 @@ class Affix extends React.Component {
     const { children, top, bottom } = this.props
     const style = {
       position: 'sticky',
-      bottom: isNumber(bottom) ? `${bottom}px` : null,
-      top: isNumber(top) ? `${top}px` : null
+      bottom: bottom !== undefined ? `${bottom}px` : null,
+      top: top !== undefined ? `${top}px` : null
     }
     
     return (

@@ -9,8 +9,8 @@ imports:
 class AffixWrap extends React.Component {
     render() {
         return (
-            <div style={{display:'flex',justifyContent:'space-between'}}>
-              <div>
+            <div style={{display:'flex'}}>
+              <div style={{marginRight:'50px'}}>
                 <div style={{width:'400px', height:'100px', background:'#ccc'}}></div>
                 <div style={{width:'400px', height:'100px', background:'#ccc'}}></div>
                 <div style={{width:'400px', height:'100px', background:'#ccc'}}></div>
