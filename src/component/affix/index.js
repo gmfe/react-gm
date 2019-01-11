@@ -8,8 +8,7 @@ class Affix extends React.Component {
     const style = {
       position: 'sticky',
       bottom: bottom !== undefined ? `${bottom}px` : null,
-      top: top !== undefined ? `${top}px` : null,
-      name: ''
+      top: top !== undefined ? `${top}px` : null
     }
     
     return (
