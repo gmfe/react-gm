@@ -26,11 +26,11 @@
   },
   "lint-staged": {
     "./(src|demo|frame|table)/**/*.js": [
-      "npx eslint --cache --fix",
+      "eslint --cache --fix",
       "git add"
     ],
     "./(src|demo|frame|table)/(component|css)/**/*.less": [
-      "npx stylelint --cache --fix",
+      "stylelint --cache --fix",
       "git add"
     ]
   },
