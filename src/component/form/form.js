@@ -16,11 +16,8 @@ class Form extends React.Component {
   validateAll () {
     const { children } = this.props
     const helpList = []
-
-    let childList = _.isArray(children) ? children : [children]
-
     const formItems = []
-    _.each(React.Children.toArray(childList), child => {
+    _.each(React.Children.toArray(children), child => {
       if (child.type.displayName === 'FormItem') {
         formItems.push(child)
       } else if (child.type.displayName === 'FormBlock') {
@@ -82,13 +79,11 @@ class Form extends React.Component {
       labelWidth,
       className,
       children,
-            onSubmitValidated, //eslint-disable-line
+      onSubmitValidated, //eslint-disable-line
       ...rest
     } = this.props
 
-    let childList = _.isArray(children) ? children : [children]
-
-    childList = _.map(React.Children.toArray(childList), (child, i) => {
+    const childList = _.map(React.Children.toArray(children), (child, i) => {
       return (child.type.displayName === 'FormItem' || child.type.displayName === 'FormBlock') ? React.cloneElement(child, Object.assign({
         key: i,
         horizontal,

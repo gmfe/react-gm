@@ -162,14 +162,13 @@ class Sheet extends React.Component {
     let isHasContract = false
     let pagination
     let paginationText
-    const children = React.Children.toArray(this.props.children)
 
     let columns = []
     let actions = false
     let batchs = false
     let others = []
 
-    _.each(children, value => {
+    _.each(React.Children.toArray(this.props.children), value => {
       if (value !== null && value !== undefined) {
         if (value.type.displayName === SheetColumn.displayName) {
           columns.push(value)

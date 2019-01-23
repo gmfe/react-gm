@@ -15,11 +15,9 @@ class RadioGroup extends React.Component {
       ...rest
     } = this.props
 
-    const childList = _.isArray(children) ? children : [children]
-
     return (
       <div {...rest} className={classNames('gm-radio-group radio', className)}>
-        {_.map(childList, (child, i) => {
+        {_.map(React.Children.toArray(children), (child, i) => {
           return React.cloneElement(child, {
             key: i,
             index: i,

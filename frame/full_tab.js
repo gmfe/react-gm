@@ -46,7 +46,7 @@ class FullTab extends React.Component {
     frameWorkLeftWidth = is.mobile ? '0' : frameWorkLeftWidth
 
     const activeTab = this.state.active
-    const tabPanels = _.map(children, (child, i) => (
+    const tabPanels = _.map(React.Children.toArray(children), (child, i) => (
       <div key={i} className={classNames({
         hidden: activeTab !== i
       })}>{child}</div>
