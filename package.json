@@ -59,10 +59,10 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.2.3",
-    "acorn": "^6.0.4",
+    "acorn": "^6.0.5",
     "add-asset-html-webpack-plugin": "^3.1.2",
     "assets-webpack-plugin": "^3.9.7",
-    "autoprefixer": "^9.4.3",
+    "autoprefixer": "^9.4.6",
     "babel-core": "^6.26.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^7.1.5",
@@ -83,11 +83,11 @@
     "eslint-plugin-standard": "^4.0.0",
     "file-loader": "^3.0.1",
     "fs": "0.0.2",
-    "gm-service": "^1.7.2",
-    "gm-util": "^5.6.8",
-    "gm-webpack": "^1.0.11",
-    "gm-xfont": "^1.0.63",
-    "happypack": "^5.0.0",
+    "gm-service": "^1.7.12",
+    "gm-util": "^5.8.1",
+    "gm-webpack": "^1.0.14",
+    "gm-xfont": "^1.0.75",
+    "happypack": "^5.0.1",
     "highlight.js": "^9.13.1",
     "history": "^4.7.2",
     "html-webpack-plugin": "^3.2.0",
@@ -96,7 +96,7 @@
     "less-loader": "^4.1.0",
     "lint-staged": "^8.1.0",
     "lodash": "^4.17.11",
-    "markdown-it-react-loader": "0.0.9",
+    "markdown-it-react-loader": "^1.0.0",
     "mini-css-extract-plugin": "^0.5.0",
     "moment": "^2.23.0",
     "path": "^0.12.7",
@@ -120,6 +120,6 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.28.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.11"
+    "webpack-dev-server": "^3.1.14"
   }
 }
