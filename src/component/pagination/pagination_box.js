@@ -47,6 +47,11 @@ class PaginationBox extends React.Component {
       this.handleRequest(params)
     })
   }
+  // 当前页刷新
+  doCurrentPageRequest () {
+    const { currentIndex } = this.state
+    this.handleRequest(this.getParams(currentIndex), currentIndex)
+  }
 
   handleRequest = (params, currentIndex) => {
     const {
