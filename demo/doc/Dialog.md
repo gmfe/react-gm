@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Dialog} from '../../src/index';
+    import {Dialog, Select, Option} from '../../src/index';
 ---
 ## Dialog
 
@@ -15,7 +15,8 @@ class DialogWrap extends React.Component {
             show: false,
             show2: false,
             show3: false,
-            size: 'sm'
+            size: 'sm',
+            selected: 1
         };
         this.handleAlert = ::this.handleAlert;
         this.handleConfirm = ::this.handleConfirm;
@@ -123,6 +124,21 @@ class DialogWrap extends React.Component {
             }, 1000);
         });
     }
+
+    handleOverflowDemo () {
+      Dialog.alert({
+            children: <Select value={this.state.selected} onChange={
+                  val => this.setState({selected: val})}>
+                  {Array(10).fill(true).map((v, i) => (
+                    <Option key={i} value={i}>{i}</Option>
+                  ))}
+                </Select>
+        }).then(() => {
+            console.log('resolve');
+        }, () => {
+            console.log('reject');
+        });
+    }
     
     render() {
         return (
@@ -155,6 +171,14 @@ class DialogWrap extends React.Component {
                         onClick={this.handleComponentSizeWithLoading.bind(this, 'md')}
                     >
                         toggle Component with loading state & disableMaskClose
+                    </button>
+                </div>
+                <div>
+                    <button
+                        className="btn btn-default"
+                        onClick={this.handleOverflowDemo.bind(this)}
+                    >
+                        Select的overflow示例
                     </button>
                 </div>
                 <Dialog

@@ -12,11 +12,11 @@ imports:
 class ModalWrap4 extends React.Component {
     handleModal(){
         CleanModal.render({
-            children: <div>啦啦啦啦阿里<br/>干净的modal</div> ,
+            children: <div>啦啦啦啦阿里<br/>干净的modal</div>,
             onHide: CleanModal.hide,
             style: {
                 width: 'auto',
-                background: 'black',
+                background: '#fff',
                 margin: '50px',
                 height: 'calc(100% - 100px)'
             }
@@ -45,18 +45,13 @@ class ModalWrap4 extends React.Component {
 class ModalWrap5 extends React.Component {
     handleModal(){
         RightSideModal.render({
-            children: 
-            <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
-                <div style={{flex: '1',  overflowY: 'auto'}}> 
-                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
-                示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
-             
-                </div>
-                <div style={{height: '50px', backgroundColor: '#64DD17'}}>btn</div>
+            children:
+            <div>
+                {Array(100).fill(<div>这是一行</div>)}
             </div>,
             title: '右侧弹出modal',
             onHide: RightSideModal.hide,
-            opacityMask: true,            
+            opacityMask: true,
             style: {
                 width: '600px'
             }

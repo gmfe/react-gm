@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Modal, RightSideModal, CleanModal, DatePicker} from '../../src/index';
+    import {Modal, RightSideModal, CleanModal, DatePicker, Select, Option} from '../../src/index';
 ---
 ## Modal
 
@@ -76,7 +76,8 @@ class ModalWrap2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false
+            show: false,
+            selected: 1
         };
     }
     
@@ -100,6 +101,22 @@ class ModalWrap2 extends React.Component {
                 <div style={{height: '400px', background: 'red'}}>我是内容</div>
                 </div>
             ),
+            size: 'md',
+            title: '我是标题',
+            onHide: Modal.hide
+        });
+    }
+
+    handleOverflowModal () {
+        Modal.render({
+            children: (
+                <Select value={this.state.selected} onChange={
+                  val => this.setState({selected: val})}>
+                  {Array(10).fill(true).map((v, i) => (
+                    <Option key={i} value={i}>{i}</Option>
+                  ))}
+                </Select>
+            ),
             title: '我是标题',
             onHide: Modal.hide
         });
@@ -108,26 +125,30 @@ class ModalWrap2 extends React.Component {
     render() {
         return (
             <div>
-                <button 
-                    className="btn btn-default" 
+                <button
+                    className="btn btn-default"
                     onClick={this.handleModal.bind(this, 'lg', {})}
                 >lg</button>
-                <button 
-                    className="btn btn-primary" 
+                <button
+                    className="btn btn-primary"
                     onClick={this.handleModal.bind(this, 'md', {})}
                 >默认 md</button>
-                <button 
-                    className="btn btn-default" 
+                <button
+                    className="btn btn-default"
                     onClick={this.handleModal.bind(this, 'sm', {})}
                 >sm</button>
                 <button
                     className="btn btn-default"
                     onClick={this.handleModal.bind(this, 'sm', {width: '750px'})}
                 >固定750宽</button>
-                <button 
-                    className="btn btn-default" 
+                <button
+                    className="btn btn-default"
                     onClick={this.handleBigModal}
                 >内容很大</button>
+                <button
+                    className="btn btn-default"
+                    onClick={this.handleOverflowModal.bind(this)}
+                >Select的overflow示例</button>
             </div>
         );
     }
