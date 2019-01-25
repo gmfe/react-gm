@@ -7,6 +7,7 @@
 - chunk loading 90
 - header 100
 - trigger popup 900
+- sticky 990
 
 ### 浮层
 
