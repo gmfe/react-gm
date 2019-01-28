@@ -57,6 +57,7 @@ import EditableText from './component/editable_text'
 import FlipNumber from './component/flip_number'
 import Price from './component/price'
 import { List, ListGroup } from './component/list'
+import LazyImg from './component/lazy_img'
 
 import Validator from './validator'
 import Emitter from './emitter'
@@ -162,5 +163,6 @@ export {
   EditableText,
   FlipNumber,
   Price,
-  List, ListGroup
+  List, ListGroup,
+  LazyImg
 }
