@@ -10,22 +10,20 @@ class QuickFilter extends React.Component {
     super(props)
 
     this.state = {
-      show: false
+      expand: props.expand
     }
-
-    this.handleCollapse = ::this.handleCollapse
   }
 
-  handleCollapse () {
+  handleCollapse = () => {
     this.setState({
-      show: !this.state.show
+      expand: !this.state.expand
     })
   }
 
   render () {
     const { collapseRender, children } = this.props
 
-    const { show } = this.state
+    const { expand } = this.state
 
     return (
       <div
@@ -33,18 +31,18 @@ class QuickFilter extends React.Component {
           'gm-padding-bottom-0': collapseRender
         })}>
         {collapseRender ? <div>
-          {show ? null : children}
+          {!expand && children}
 
-          <Collapse in={show}>
-            {show && collapseRender()}
+          <Collapse in={expand}>
+            {expand && collapseRender()}
           </Collapse>
 
           <Flex justifyCenter className='gm-padding-10'>
             <a href='javascript:;' className='gm-quick-filter-toggle' onClick={this.handleCollapse}>
-              {show ? getLocale('quickDetail', 'closeDetails') : getLocale('quickDetail', 'showDetails')}&nbsp;
+              {expand ? getLocale('quickDetail', 'closeDetails') : getLocale('quickDetail', 'showDetails')}&nbsp;
               <i className={classNames('xfont', {
-                'xfont-down': !show,
-                'xfont-up': show
+                'xfont-down': !expand,
+                'xfont-up': expand
               })}/>
             </a>
           </Flex>
@@ -55,7 +53,12 @@ class QuickFilter extends React.Component {
 }
 
 QuickFilter.propTypes = {
-  collapseRender: PropTypes.func
+  collapseRender: PropTypes.func,
+  expand: PropTypes.bool
+}
+
+QuickFilter.defaultProps = {
+  expand: false
 }
 
 export default QuickFilter

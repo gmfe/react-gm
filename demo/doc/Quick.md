@@ -139,7 +139,7 @@ class Tab extends React.Component{
         return (
             <QuickTab tabs={['按订单查看', '按商品查看']} className="gm-padding-15" isStatic={true}>
                 <QuickTab.QuickTabItem>
-                    <QuickFilter className="gm-border-top-0" collapseRender={this.renderCollapseFilter}>
+                    <QuickFilter className="gm-border-top-0" expand collapseRender={this.renderCollapseFilter}>
                         <form className="form-inline">
                             <select className="form-control gm-margin-right-10 gm-border-0">
                                 <option value="1">按周期</option>
