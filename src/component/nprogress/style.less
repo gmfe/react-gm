@@ -21,3 +21,28 @@
   opacity: 1;
   transform: rotate(3deg) translate(0, -4px);
 }
+
+.gm-nprogress-loading {
+  animation: gm-nprogress-loading 1s linear;
+  animation-fill-mode: forwards;
+}
+
+.gm-nprogress-completed {
+  transform: translateX(0);
+  visibility: hidden;
+}
+
+@keyframes gm-nprogress-loading {
+  0% {
+    transform: translateX(-100%)
+  }
+  20% {
+    transform: translateX(-50%)
+  }
+  50% {
+    transform: translateX(-20%)
+  }
+  100% {
+    transform: translateX(-10%)
+  }
+}
