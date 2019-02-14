@@ -58,7 +58,6 @@ class Form extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
-
     this.props.onSubmit(e)
 
     const err = this.validateAll()

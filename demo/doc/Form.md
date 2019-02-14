@@ -1,12 +1,13 @@
 ---
 imports:
     import {
-        Form, FormItem, FormButton, FormBlock,
-        Validator, 
-        Dropper, 
+        Form, FormItem, FormButton, FormBlock, FormGroup,
+        Validator,
+        Dropper,
         Radio, RadioGroup,
         Checkbox, CheckboxGroup,
-        Switch
+        Switch,
+        QuickPanel
     } from '../../src/index';
 ---
 ## Form
@@ -139,22 +140,22 @@ class FormItemWrap extends React.Component {
             city: null
         };
     }
-    
+
     handleChangeOther(field, value) {
         this.setState({
             [field]: value
         });
     }
-    
+
     render() {
         return (
             <Form onSubmit={this.handleSubmit}>
                 <FormItem label="姓名">
                     <input type="text"/>
                 </FormItem>
-                <FormItem 
-                    label="姓名" 
-                    error 
+                <FormItem
+                    label="姓名"
+                    error
                     help="错误啦"
                 >
                     <input type="text"/>
@@ -211,65 +212,65 @@ class FormItemWrap2 extends React.Component {
         };
         this.validateRepeatEmail = ::this.validateRepeatEmail;
     }
-    
+
     handleSubmit(e){
         console.log('submit');
     }
-    
+
     handleSubmitValidated(){
         console.log('handleSubmitValidated');
     }
-    
+
     validateRepeatEmail(value){
         if(value === this.state.email){
             return '';
         }
         return '两次邮件输入不一致';
     }
-    
+
     render() {
         return (
             <Form onSubmit={this.handleSubmit} onSubmitValidated={this.handleSubmitValidated}>
-                <FormItem 
-                    label="名字" 
+                <FormItem
+                    label="名字"
                     required
                     validate={Validator.create([], this.state.name)}
                 >
-                    <input 
-                        type="text" 
-                        value={this.state.name} 
+                    <input
+                        type="text"
+                        value={this.state.name}
                         onChange={e => this.setState({name: e.target.value})}
                     />
                 </FormItem>
-                <FormItem 
-                    label="网址" 
+                <FormItem
+                    label="网址"
                     validate={Validator.create(Validator.TYPE.url, this.state.url)}
                 >
-                    <input 
-                        type="text" 
-                        value={this.state.url} 
+                    <input
+                        type="text"
+                        value={this.state.url}
                         onChange={e => this.setState({url: e.target.value})}
                     />
                 </FormItem>
-                <FormItem 
-                    label="邮件" 
-                    required 
+                <FormItem
+                    label="邮件"
+                    required
                     validate={Validator.create([Validator.TYPE.email], this.state.email)}
                 >
-                    <input 
-                        type="text" 
-                        value={this.state.email} 
+                    <input
+                        type="text"
+                        value={this.state.email}
                         onChange={e => this.setState({email: e.target.value})}
                     />
                 </FormItem>
-                <FormItem 
-                    label="重复邮件" 
-                    required 
+                <FormItem
+                    label="重复邮件"
+                    required
                     validate={Validator.create([Validator.TYPE.email], this.state.repeat_email, this.validateRepeatEmail)}
                 >
-                    <input 
-                        type="text" 
-                        value={this.state.repeat_email} 
+                    <input
+                        type="text"
+                        value={this.state.repeat_email}
                         onChange={e => this.setState({repeat_email: e.target.value})}
                     />
                 </FormItem>
@@ -287,8 +288,8 @@ class FormItemWrap2 extends React.Component {
 :::
 
 ### Props
-- `required (bool)` label旁边的`*` 
-- `label (string)` 
+- `required (bool)` label旁边的`*`
+- `label (string)`
 - `validate (func)` 校验后返回错误帮助信息，且只有过提交过动作后才显示，onChange则会自动重新校验。存在validate，则`error` `help`无效。如果存在`required`，则先校验是否有值。
 - `error (bool)` 校验的状态，只有`true`时help才会显示
 - `help (string)` 错误帮助信息
@@ -361,3 +362,82 @@ class FormBlockWrap extends React.Component {
 
 ### Props
 - `block (array)` 提供children的比例，比如2:1是[2,1]。 不提供根据等分。
+
+## FormGroup
+
+::: demo FormGroup
+```js
+class FormGroupWrap extends React.Component {
+    constructor(props){
+        super(props);
+        this.form1 = React.createRef()
+        this.form2 = React.createRef()
+    }
+
+    handleCancel = () => {
+        console.log('cancel')
+    }
+    render() {
+        return (
+            <FormGroup formRefs={[this.form1, this.form2]} hasCancel onCancel={this.handleCancel}>
+                <QuickPanel icon='todo' iconColor='#4fb7de' title='基础信息'>
+                    <Form onSubmit={this.handleSubmit} ref={this.form1}>
+                        <FormBlock>
+                            <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
+                                <input type="text"/>
+                            </FormItem>
+                            <FormItem label="身高" inline>
+                                <input type="text"/>
+                            </FormItem>
+                        </FormBlock>
+                        <FormItem label="姓名" required validate={Validator.create([], '')}>
+                            <input type="text"/>
+                        </FormItem>
+                        <FormItem label="描述">
+                            <textarea type="text" name="desc"/>
+                        </FormItem>
+                    </Form>
+                </QuickPanel>
+
+                <QuickPanel icon='todo' iconColor='#4fb7de' title='销售信息' right={<div>右边</div>}>
+                    <Form onSubmit={this.handleSubmit} horizontal labelWidth="50px" ref={this.form2}>
+                        <FormBlock>
+                            <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
+                                <input type="text"/>
+                            </FormItem>
+                            <FormItem label="身高" inline>
+                                <input type="text"/>
+                            </FormItem>
+                        </FormBlock>
+                        <FormBlock block={[2, 1]}>
+                            <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
+                                <input type="text"/>
+                            </FormItem>
+                            <FormItem label="身高" inline>
+                                <input type="text"/>
+                            </FormItem>
+                        </FormBlock>
+                        <FormItem label="姓名" required validate={Validator.create([], '')}>
+                            <input type="text"/>
+                        </FormItem>
+                        <FormItem label="描述">
+                            <textarea type="text" name="desc"/>
+                        </FormItem>
+                    </Form>
+                </QuickPanel>
+            </FormGroup>
+        );
+    }
+}
+```
+```jsx
+<FormGroupWrap/>
+```
+:::
+
+### Props
+- `className (string)` className
+- `disabled (bool)` 是否可点击保存
+- `hasCancel (bool)` 是否有取消按钮
+- `onCancel (fun)` 取消function
+- `formRefs (array)` 所包含的`Form`组件ref

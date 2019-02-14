@@ -75,5 +75,9 @@
   "table": {
     "noDataText": "No data found",
     "loadingText": "Loading..."
+  },
+  "formGroup": {
+    "cancelBtn": "Cancel",
+    "saveBtn": "Save"
   }
 }
