@@ -28,9 +28,6 @@ imports:
 }
 ```
 
-### Props
-- `percent (number)` 进度
-
 ### Static
 - `start()` 开始跑进度条
 - `done()` 结束进度条
