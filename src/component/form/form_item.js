@@ -62,7 +62,7 @@ class FormItem extends React.Component {
       children,
       ...rest
     } = this.props
-
+    let hasLabelSwitchPaddingTop = false
     if (canValidate && validate !== undefined) {
       if (required) {
         help = validate(function (value) {
@@ -74,6 +74,12 @@ class FormItem extends React.Component {
       error = !!help
     }
 
+    if (!_.isArray(children)) {
+      if (children.type.displayName === 'Switch') {
+        hasLabelSwitchPaddingTop = true
+      }
+    }
+
     return (
       <Flex column={!horizontal && !inline} {...rest} className={classNames('gm-form-group', className, {
         'has-error': error
@@ -81,6 +87,9 @@ class FormItem extends React.Component {
         {label &&
         <Flex justifyEnd={horizontal} width={labelWidth} className={classNames('gm-form-label control-label', {
           'gm-form-label-untop': unLabelTop
+        },
+        {
+          'gm-form-label-switch-padding-top': hasLabelSwitchPaddingTop
         })}>
           {required ? <span style={{ color: 'red' }}>*</span> : ''}
           {label}
