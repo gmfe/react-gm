@@ -82,6 +82,24 @@ class FormWrap3 extends React.Component {
                         onChange={() => {}}
                     />
                 </FormItem>
+                <FormItem label="switch">
+                    <Switch
+                        type="primary"
+                        checked={true}
+                        onChange={() => {}}
+                        off='关闭'
+                        on='开启'
+                    />
+                </FormItem>
+                <FormItem label="switch">
+                    <Switch
+                        type="primary"
+                        checked={true}
+                        onChange={() => {}}
+                        off='否'
+                        on='是'
+                    />
+                </FormItem>
                 <FormItem label="image">
                     <Dropper/>
                 </FormItem>
@@ -284,7 +302,7 @@ class FormBlockWrap extends React.Component {
     render() {
         return (
             <div>
-                <Form onSubmit={this.handleSubmit}>
+                <Form horizontal onSubmit={this.handleSubmit}>
                     <FormBlock>
                         <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
                             <input type="text"/>
