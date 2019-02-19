@@ -120,9 +120,8 @@ class MultipleFilterSelect extends React.Component {
     event.preventDefault()
 
     const { selected, onSelect } = this.props
-
-    if (_.includes(selected, value)) {
-      onSelect(_.without(selected, value))
+    if (_.some(selected, v => _.isEqual(v, value))) {
+      onSelect(_.filter(selected, v => !_.isEqual(v, value)))
     } else {
       onSelect(_.concat(selected, value))
     }
@@ -223,7 +222,7 @@ class MultipleFilterSelect extends React.Component {
                     key={i}
                     alignCenter
                     className={classNames('list-group-item', inputClassName, {
-                      'active': _.includes(selected, value),
+                      'active': _.some(selected, v => _.isEqual(v, value)),
                       'line-selected': this.state.activeIndex === itemSequence
                     })}
                     onClick={this.handleSelect.bind(this, value)}
@@ -255,7 +254,7 @@ class MultipleFilterSelect extends React.Component {
               key={i}
               alignCenter
               className={classNames('list-group-item', inputClassName, {
-                'active': _.includes(selected, value),
+                'active': _.some(selected, v => _.isEqual(v, value)),
                 'line-selected': this.state.activeIndex === i
               })}
               onClick={this.handleSelect.bind(this, value)}
