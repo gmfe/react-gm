@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import { getLocale } from '../../locales'
 
 class SheetSelect extends React.Component {
   render () {
@@ -16,14 +17,20 @@ SheetSelect.propTypes = {
   isDisabled: PropTypes.func,
   isRadio: PropTypes.bool,
   hasSelectTip: PropTypes.bool,
-  selectAllTip: PropTypes.string
+  selectAllTip: PropTypes.string,
+  selectAllPageTip: PropTypes.string,
+  onSelectAllPage: PropTypes.func,
+  hasSelectAllPage: PropTypes.bool
 }
 SheetSelect.defaultProps = {
   onSelect: _.noop,
   isDisabled: () => false,
   isRadio: false,
   hasSelectTip: false,
-  selectAllTip: '已选中所有'
+  selectAllTip: getLocale('sheet', 'hasSelectedCurrentPage'),
+  selectAllPageTip: getLocale('sheet', 'hasSelectedAllPage'),
+  hasSelectAllPage: false,
+  onSelectAllPage: _.noop
 }
 
 export default SheetSelect

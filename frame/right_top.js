@@ -2,37 +2,33 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Flex } from '../src/index'
 import _ from 'lodash'
+import Context from './context'
 
-class RightTop extends React.Component {
-  render () {
-    const {
-      breadcrumb,
-      onMenuBtnClick,
-      info
-    } = this.props
+const RightTop = props => {
+  const { breadcrumb, onMenuBtnClick, info } = props
+  const { leftWidth } = React.useContext(Context)
 
-    const { frameWorkLeftWidth } = this.context
-
-    return (
-      <div className='gm-framework-right-top-default'>
+  return (
+    <div className='gm-framework-right-top-default'>
+      <Flex
+        style={{ left: leftWidth }}
+        className='gm-framework-right-top-default-inner'
+        alignCenter
+      >
         <Flex
-          style={{ left: frameWorkLeftWidth }}
-          className='gm-framework-right-top-default-inner'
           alignCenter
+          className='gm-framework-right-top-default-mobile-nav'
+          onClick={() => onMenuBtnClick()}
         >
-          <Flex
-            alignCenter
-            className='gm-framework-right-top-default-mobile-nav'
-            onClick={() => onMenuBtnClick()}
-          >
-            <i className='glyphicon glyphicon-menu-hamburger gm-padding-lr-10 gm-cursor'/>
-          </Flex>
-          <Flex flex className='gm-framework-breadcrumb'>{breadcrumb}</Flex>
-          <div className='gm-framework-info'>{info}</div>
+          <i className='glyphicon glyphicon-menu-hamburger gm-padding-lr-10 gm-cursor'/>
         </Flex>
-      </div>
-    )
-  }
+        <Flex flex className='gm-framework-breadcrumb'>
+          {breadcrumb}
+        </Flex>
+        <div className='gm-framework-info'>{info}</div>
+      </Flex>
+    </div>
+  )
 }
 
 RightTop.propTypes = {
@@ -43,10 +39,6 @@ RightTop.propTypes = {
 
 RightTop.defaultProps = {
   onMenuBtnClick: _.noop
-}
-
-RightTop.contextTypes = {
-  frameWorkLeftWidth: PropTypes.string
 }
 
 export default RightTop

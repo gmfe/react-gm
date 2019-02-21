@@ -1,7 +1,13 @@
-import React from 'react'
-import MoreSelect from '../../src/component/more_select'
-import _ from 'lodash'
+---
+imports:
+    import {MoreSelect} from '../../src/index';
+---
+## List
 
+现在列表各自实现，有点冗余，UI也不统一，估统一下
+
+::: demo
+```js
 const data = [{
   value: 1,
   text: '南山'
@@ -190,5 +196,12 @@ class Component extends React.Component {
     )
   }
 }
+```
+```jsx
+<Component/>
+```
+:::
 
-export default Component
+### Props
+
+TODO

@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { findDOMNode } from 'react-dom'
 import _ from 'lodash'
 import Flex from '../flex'
-import Emitter from '../../emitter'
+import EVENT_TYPE from '../../event_type'
 
 const iconClassName = {
   confirm: 'xfont xfont-question-circle',
@@ -41,7 +41,7 @@ class Modal extends React.Component {
   }
 
   doScroll = () => {
-    Emitter.emit(Emitter.TYPE.MODAL_SCROLL)
+    window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_SCROLL))
   }
 
   handleKeyDown (event) {
@@ -186,7 +186,7 @@ class Modal extends React.Component {
 }
 
 Modal.render = (props) => {
-  Emitter.emit(Emitter.TYPE.MODAL_SHOW)
+  window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_SHOW))
   LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, (
     <Modal show {...props}/>
   ))
@@ -225,7 +225,7 @@ Modal.warning = (props) => {
 }
 
 Modal.hide = () => {
-  Emitter.emit(Emitter.TYPE.MODAL_HIDE)
+  window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_HIDE))
   LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, null)
 }
 

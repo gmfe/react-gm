@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom'
 import Route from './route'
 
 const renderApp = () => {
-  ReactDOM.render(<Route/>, window.document.getElementById('appContainer'))
+  ReactDOM.render(<React.StrictMode><Route/></React.StrictMode>, window.document.getElementById('appContainer'))
 }
 
 renderApp()
