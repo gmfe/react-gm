@@ -1,63 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
 import { is } from 'gm-util'
+import Loading from '../loading'
 
-class Button extends React.Component {
-  constructor (props) {
-    super(props)
-    this.handleClick = ::this.handleClick
-    this.state = {
-      isLoading: false
-    }
-  }
+const Button = (props) => {
+  const [isLoading, setIsLoading] = useState(false)
 
-  handleClick (event) {
-    event.preventDefault()
-    const { onClick } = this.props
-    const result = onClick(event)
+  const handleClick = (e) => {
+    e.preventDefault()
+
+    const { onClick } = props
+    const result = onClick(e)
 
     if (!is.promise(result)) {
       return
     }
 
-    this.setState({ isLoading: true })
+    setIsLoading(true)
 
     Promise.resolve(result).then(() => {
-      this.setState({
-        isLoading: false
-      })
+      setIsLoading(false)
     }).catch(() => {
-      this.setState({
-        isLoading: false
-      })
+      setIsLoading(false)
     })
   }
 
-  render () {
-    const {
-            onClick, // eslint-disable-line
-      children,
-      className,
-      disabled,
-      ...rest
-    } = this.props
+  const {
+    onClick, // eslint-disable-line
+    children,
+    className,
+    disabled,
+    ...rest
+  } = props
 
-    const { isLoading } = this.state
-
-    return (
-      <button
-        {...rest}
-        className={classNames('gm-button', className)}
-        disabled={isLoading || disabled}
-        onClick={this.handleClick}
-      >
-        {isLoading && <i className='xfont xfont-loading gm-button-loading'/>}
-        {children}
-      </button>
-    )
-  }
+  return (
+    <button
+      {...rest}
+      className={classNames('gm-button', className)}
+      disabled={isLoading || disabled}
+      onClick={handleClick}
+    >
+      {isLoading && <Loading
+        className='gm-inline-block'
+        size={12}
+      />}
+      {children}
+    </button>
+  )
 }
 
 // 只封装了 loading

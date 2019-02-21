@@ -4,7 +4,7 @@ import LayoutRoot from '../layout_root'
 import classNames from 'classnames'
 import { findDOMNode } from 'react-dom'
 import _ from 'lodash'
-import Emitter from '../../emitter'
+import EVENT_TYPE from '../../event_type'
 
 class Drawer extends React.Component {
   constructor () {
@@ -13,7 +13,7 @@ class Drawer extends React.Component {
   }
 
   doScroll = () => {
-    Emitter.emit(Emitter.TYPE.DRAWER_SCROLL)
+    window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.DRAWER_SCROLL))
   }
 
   componentDidMount () {
@@ -74,14 +74,14 @@ class Drawer extends React.Component {
 }
 
 Drawer.render = (props) => {
-  Emitter.emit(Emitter.TYPE.MODAL_SHOW)
+  window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_SHOW))
   LayoutRoot.setComponent(LayoutRoot.TYPE.DRAWER, (
     <Drawer {...props}/>
   ))
 }
 
 Drawer.hide = () => {
-  Emitter.emit(Emitter.TYPE.MODAL_HIDE)
+  window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_HIDE))
   LayoutRoot.setComponent(LayoutRoot.TYPE.DRAWER, null)
 }
 

@@ -252,12 +252,11 @@ class SheetWithTableDom extends React.Component {
 
 - `findTableDOM (func)` 传 Sheet 的 ref 进去，返回 table 的 dom
 
-### Pagination PaginationText
+### Pagination
 
-如需页码传入`Pagination`或者`PaginationText`组件。
+如需页码传入`Pagination`组件。
 Sheet会自动安排在页码应该什么位置。一般只用Pagination就好。
 
 ```jsx
 <Pagination data={this.state.pagination} toPage={this.handlePage}/>
-<PaginationText data={this.state.pagination}/>
 ```

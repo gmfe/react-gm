@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { is } from 'gm-util'
 import classNames from 'classnames'
 import { Flex } from '../src/index'
+import Context from './context'
 
 class FullTab extends React.Component {
   constructor (props) {
@@ -35,49 +36,63 @@ class FullTab extends React.Component {
 
   render () {
     const {
-      tabs, children, isStatic,
+      tabs,
+      children,
+      isStatic,
       active, onChange, // eslint-disable-line
       ...rest
     } = this.props
 
-    let {
-      frameWorkLeftWidth
-    } = this.context
-    frameWorkLeftWidth = is.mobile ? '0' : frameWorkLeftWidth
-
     const activeTab = this.state.active
     const tabPanels = _.map(React.Children.toArray(children), (child, i) => (
-      <div key={i} className={classNames({
-        hidden: activeTab !== i
-      })}>{child}</div>
+      <div
+        key={i}
+        className={classNames({
+          hidden: activeTab !== i
+        })}
+      >
+        {child}
+      </div>
     ))
 
     return (
-      <div
-        {...rest}
-        className={classNames('gm-framework-full-tabs gm-back-bg gm-framework-content-full', this.props.className)}
-      >
-        { tabs.length > 1 && <div className='gm-framework-full-tabs-list-box'>
-          <Flex className='gm-framework-full-tabs-list gm-bg' style={{
-            left: frameWorkLeftWidth
-          }}>
-            {_.map(tabs, (tab, i) => (
-              <div
-                key={i}
-                className={classNames('gm-framework-full-tabs-item', {
-                  active: i === activeTab
-                })}
-                onClick={this.handleTab.bind(this, i)}
-              >
-                {tab}
+      <Context.Consumer>
+        {({ leftWidth }) => (
+          <div
+            {...rest}
+            className={classNames(
+              'gm-framework-full-tabs gm-back-bg gm-framework-content-full',
+              this.props.className
+            )}
+          >
+            {tabs.length > 1 && (
+              <div className='gm-framework-full-tabs-list-box'>
+                <Flex
+                  className='gm-framework-full-tabs-list gm-bg'
+                  style={{
+                    left: is.mobile ? '0' : leftWidth
+                  }}
+                >
+                  {_.map(tabs, (tab, i) => (
+                    <div
+                      key={i}
+                      className={classNames('gm-framework-full-tabs-item', {
+                        active: i === activeTab
+                      })}
+                      onClick={this.handleTab.bind(this, i)}
+                    >
+                      {tab}
+                    </div>
+                  ))}
+                </Flex>
               </div>
-            ))}
-          </Flex>
-        </div> }
-        <div className='gm-framework-full-tabs-content gm-padding-20'>
-          {isStatic ? tabPanels : tabPanels[activeTab]}
-        </div>
-      </div>
+            )}
+            <div className='gm-framework-full-tabs-content gm-padding-20'>
+              {isStatic ? tabPanels : tabPanels[activeTab]}
+            </div>
+          </div>
+        )}
+      </Context.Consumer>
     )
   }
 }
@@ -89,10 +104,15 @@ FullTab.propTypes = {
   active: PropTypes.number,
   isStatic: PropTypes.bool,
   children: (props, propName, componentName) => {
-    if (props.tabs && props.children && (props.tabs.length !== props.children.length)) {
+    if (
+      props.tabs &&
+      props.children &&
+      props.tabs.length !== props.children.length
+    ) {
       return new Error(
         'Invalid prop `children` supplied to' +
-        ' `' + componentName +
+        ' `' +
+        componentName +
         '`, prop `tabs` length is not match prop `children` length'
       )
     }
@@ -101,10 +121,6 @@ FullTab.propTypes = {
 
 FullTab.defaultProps = {
   isStatic: false
-}
-
-FullTab.contextTypes = {
-  frameWorkLeftWidth: PropTypes.string
 }
 
 export default FullTab

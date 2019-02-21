@@ -6,7 +6,7 @@ import LayoutRoot from '../layout_root'
 import Popup from './popup'
 import _ from 'lodash'
 import classNames from 'classnames'
-import Emitter from '../../emitter'
+import EVENT_TYPE from '../../event_type'
 
 function getElementPositionWithScrollTop (element) {
   let { left, top } = element.getBoundingClientRect()
@@ -25,17 +25,6 @@ class Popover extends React.Component {
     this.state = {
       active: false
     }
-    this.handleClick = ::this.handleClick
-    this.handleMouseEnter = ::this.handleMouseEnter
-    this.handleMouseLeave = ::this.handleMouseLeave
-
-    this.handleBodyClick = ::this.handleBodyClick
-    this.setActive = ::this.setActive
-    this.getDisabled = ::this.getDisabled
-    this.handleModalScroll = ::this.handleModalScroll
-    this.handleBrowserScroll = ::this.handleBrowserScroll
-    this.handleDrawerScroll = ::this.handleDrawerScroll
-    this.handleTableScroll = ::this.handleTableScroll
 
     this.debounceHandleModalScroll = _.debounce(this.handleModalScroll, 200)
     this.debounceHandleBrowserScroll = _.debounce(this.handleBrowserScroll, 200)
@@ -53,40 +42,46 @@ class Popover extends React.Component {
   componentDidMount () {
     if (this.props.type === 'click' || this.props.type === 'focus') {
       window.document.body.addEventListener('click', this.handleBodyClick)
+    } else if (this.props.type === 'realFocus') {
+      // 原生 blur 不能冒泡，focusout 才能冒泡
+      window.document.body.addEventListener('focusout', this.handleBodyFocusOut)
     }
 
     // 用 debounce
-    Emitter.on(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
-    Emitter.on(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
-    Emitter.on(Emitter.TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
-    Emitter.on(Emitter.TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
+    window.addEventListener(EVENT_TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
+    window.addEventListener(EVENT_TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
+    window.addEventListener(EVENT_TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
+    window.addEventListener(EVENT_TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
   }
 
   componentWillUnmount () {
     if (this.props.type === 'click' || this.props.type === 'focus') {
       window.document.body.removeEventListener('click', this.handleBodyClick)
+    } else if (this.props.type === 'realFocus') {
+      window.document.body.removeEventListener('focusout', this.handleBodyFocusOut)
     }
+
     LayoutRoot._removeComponentPopup(this.id)
 
-    Emitter.off(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
-    Emitter.off(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
-    Emitter.off(Emitter.TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
-    Emitter.off(Emitter.TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
+    window.removeEventListener(EVENT_TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
+    window.removeEventListener(EVENT_TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
+    window.removeEventListener(EVENT_TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
+    window.removeEventListener(EVENT_TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
   }
 
-  handleDrawerScroll () {
+  handleDrawerScroll = () => {
     this.setActive(this.state.active)
   }
 
-  handleModalScroll () {
+  handleModalScroll = () => {
     this.setActive(this.state.active)
   }
 
-  handleBrowserScroll () {
+  handleBrowserScroll = () => {
     this.setActive(this.state.active)
   }
 
-  handleTableScroll () {
+  handleTableScroll = () => {
     this.setActive(this.state.active)
   }
 
@@ -153,7 +148,7 @@ class Popover extends React.Component {
     }
   }
 
-  setActive (active) {
+  setActive = (active) => {
     this.setState({
       active
     })
@@ -172,12 +167,16 @@ class Popover extends React.Component {
     this.doRenderPopup(active)
   }
 
-  handleBodyClick (event) {
-    const target = event.target
+  doBodyClickAndFocusOut = (target) => {
     const { active } = this.state
 
     // 没激活就没有必要判断了
     if (!active) {
+      return
+    }
+
+    // type 为 focus 存在 由于时机问题，可能 refPopup 还没出来，此时啥也不做
+    if (!this.refPopup) {
       return
     }
 
@@ -192,7 +191,15 @@ class Popover extends React.Component {
     this.setActive(false)
   }
 
-  handleClick () {
+  handleBodyClick = (event) => {
+    this.doBodyClickAndFocusOut(event.target)
+  }
+
+  handleBodyFocusOut = (event) => {
+    this.doBodyClickAndFocusOut(event.relatedTarget)
+  }
+
+  handleClick = () => {
     // focus 也会进来
     const { type } = this.props
 
@@ -203,12 +210,16 @@ class Popover extends React.Component {
     }
   }
 
-  handleMouseEnter () {
+  handleFocus = () => {
+    this.setActive(true)
+  }
+
+  handleMouseEnter = () => {
     clearTimeout(this.timer)
     this.setActive(true)
   }
 
-  handleMouseLeave () {
+  handleMouseLeave = () => {
     clearTimeout(this.timer)
 
     this.timer = setTimeout(() => {
@@ -216,7 +227,7 @@ class Popover extends React.Component {
     }, 500)
   }
 
-  getDisabled () {
+  getDisabled = () => {
     const { disabled, children } = this.props
     return disabled || children.props.disabled
   }
@@ -233,8 +244,10 @@ class Popover extends React.Component {
 
     const p = {}
     if (!this.getDisabled()) {
-      if (type === 'focus' || type === 'click') {
+      if (type === 'click' || type === 'focus') {
         p.onClick = createChainedFunction(child.props.onClick, this.handleClick)
+      } else if (type === 'realFocus') {
+        p.onFocus = createChainedFunction(child.props.onFocus, this.handleFocus)
       } else if (type === 'hover') {
         p.onMouseEnter = createChainedFunction(child.props.onMouseEnter, this.handleMouseEnter)
         p.onMouseLeave = createChainedFunction(child.props.onMouseLeave, this.handleMouseLeave)
@@ -253,7 +266,9 @@ class Popover extends React.Component {
 
 // 注意 Popover 的 popup 不会随 render 更新
 Popover.propTypes = {
-  type: PropTypes.oneOf(['focus', 'click', 'hover']),
+  // 命名问题，focus 不是真正的 focus事件，和 click 类似，只不过 focus 不会因为二次点击而关掉。
+  // 想要 focus 事件的效果，请用 realFocus
+  type: PropTypes.oneOf(['focus', 'click', 'hover', 'realFocus']),
   popup: PropTypes.element.isRequired,
   children: PropTypes.element.isRequired,
   disabled: PropTypes.bool, // 也可以用children props disable

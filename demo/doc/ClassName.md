@@ -19,33 +19,51 @@
 
 `gm-text` 
 
-`gm-text-red` `gm-text-black` `gm-text-white`
+`gm-text-red` `gm-text-desc` `gm-text-black` `gm-text-white`
 
 `gm-text-helper`
 
+`gm-text-ellipsis` `gm-text-no-ellipsis`
+
 `gm-font-20` `gm-font-18` `gm-font-16` `gm-font-14` `gm-font-12`
+
+`gm-line-height-1`
+
+`gm-decoration-none`
+
+`gm-placeholder-text`
 
 ## distance
 
-0 5 10 15 20
+size 0 5 10 15 20
 
 `gm-gap-5`
 
-`gm-padding-0` `gm-padding-top-0` `gm-padding-bottom-0` `gm-padding-left-0` `gm-padding-right-0` `gm-padding-tb-0` `gm-padding-lr-0`
+`gm-padding-0` 
 
- `gm-margin-0` `gm-margin-top-0` `gm-margin-bottom-0` `gm-margin-left-0` `gm-margin-right-0` `gm-margin-tb-0` `gm-margin-lr-0`
+`gm-padding-top-0` `gm-padding-bottom-0` `gm-padding-left-0` `gm-padding-right-0` 
+
+`gm-padding-tb-0` `gm-padding-lr-0`
+
+ `gm-margin-0` 
+ 
+ `gm-margin-top-0` `gm-margin-bottom-0` `gm-margin-left-0` `gm-margin-right-0` 
+ 
+ `gm-margin-tb-0` `gm-margin-lr-0`
  
  ## bg
  
- `gm-back-bg` `gm-bg` `gm-hover-bg`
+ `gm-back-bg` `gm-bg` `gm-bg-white` `gm-hover-bg`
   
  `gm-bg-info` `gm-bg-invalid`
  
  `gm-bg-hover-primary` `gm-bg-focus-primary` `gm-bg-hover-focus-primary`
  
+ `gm-hover-bg`
+ 
  ## border
  
- `gm-border`
+ `gm-border` `gm-border-0`
  
  `gm-border-top` `gm-border-right` `gm-border-bottom` `gm-border-left`
  
