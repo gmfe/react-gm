@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Flex from '../flex'
+import Flex from '../../component/flex'
 import _ from 'lodash'
 import { getLocale } from '../../locales'
 

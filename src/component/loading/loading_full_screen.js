@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Loading from './index'
 import LayoutRoot from '../layout_root'
-import Emitter from '../../emitter'
+import EVENT_TYPE from '../../event_type'
 
 class LoadingFullScreen extends React.Component {
   render () {
@@ -29,7 +29,7 @@ class LoadingFullScreen extends React.Component {
 }
 
 LoadingFullScreen.render = (props) => {
-  Emitter.emit(Emitter.TYPE.FULLLOADING_SHOW)
+  window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.FULL_LOADING_SHOW))
   LayoutRoot.setComponent(LayoutRoot.TYPE.FULLLOADING, (
     <LoadingFullScreen {...props}/>
   ))
@@ -41,7 +41,7 @@ LoadingFullScreen.render = (props) => {
 }
 
 LoadingFullScreen.hide = () => {
-  Emitter.emit(Emitter.TYPE.FULLLOADING_HIDE)
+  window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.FULL_LOADING_HIDE))
   LayoutRoot.setComponent(LayoutRoot.TYPE.FULLLOADING, null)
 
   const documentBody = window.document.body

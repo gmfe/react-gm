@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { SortHeader } from './util'
 import ReactTable from 'react-table'
 import { findDOMNode } from 'react-dom'
-import Emitter from '../src/emitter'
+import EVENT_TYPE from '../src/event_type'
 
 class BaseTable extends React.Component {
   constructor () {
@@ -14,7 +14,7 @@ class BaseTable extends React.Component {
   }
 
   doScroll = () => {
-    Emitter.emit(Emitter.TYPE.TABLE_SCROLL)
+    window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
   }
 
   componentDidMount () {

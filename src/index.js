@@ -1,10 +1,18 @@
+// 废弃的
+import ImportLead from './deprecated/import_lead'
+import SearchSelect from './deprecated/search_select/search.select'
+import FilterSearchSelect from './deprecated/search_select/filter.search.select'
+import TreeSelect from './deprecated/tree_select'
+import Trigger from './deprecated/trigger'
+import PaginationText from './deprecated/pagination.text'
+// 废弃的结束
+
 import Pagination from './component/pagination/pagination'
 import PaginationNew from './component/pagination/pagination_new'
-import PaginationText from './component/pagination/pagination.text'
 import PaginationBox from './component/pagination/pagination_box'
 import Dropper from './component/dropper/index'
 import { Form, FormItem, FormButton, FormBlock, FormGroup } from './component/form'
-import ImportLead from './component/import_lead'
+
 import Storage from './component/storage'
 import Calendar from './component/calendar'
 import DatePicker from './component/datepicker/datepicker'
@@ -18,24 +26,22 @@ import Flex from './component/flex'
 import TimeSpan from './component/timespan/timespan'
 import TimeSpanPicker from './component/timespan/timespanpicker'
 import DropSelect from './component/drop_select'
-import SearchSelect from './component/search_select/search.select'
-import FilterSearchSelect from './component/search_select/filter.search.select'
 import Switch from './component/switch'
 import { Sheet, SheetColumn, SheetAction, SheetSelect, SheetBatchAction } from './component/sheet'
 import Cascader from './component/cascader/cascader'
 import CascaderSelect from './component/cascader/cascader.select'
-import Trigger from './component/trigger'
+
 import Loading from './component/loading'
 import LoadingChunk from './component/loading/loading_chunk'
 import LoadingFullScreen from './component/loading/loading_full_screen'
 import InputNumber from './component/input_number'
+import InputNumberV2 from './component/input_number/number'
 import LayoutRoot from './component/layout_root'
 import Modal from './component/modal'
 import RightSideModal from './component/modal/right_side_modal'
 import CleanModal from './component/modal/clean_modal'
 import Collapse from './component/collapse'
 import { DropDown, DropDownItem, DropDownItems } from './component/drop_down'
-import TreeSelect from './component/tree_select'
 import { QuickPanel, QuickFilter, QuickTab, QuickDesc, QuickDetail } from './component/quick'
 import { Radio, RadioGroup } from './component/radio'
 import { Checkbox, CheckboxGroup } from './component/checkbox'
@@ -60,7 +66,6 @@ import { List, ListGroup } from './component/list'
 import LazyImg from './component/lazy_img'
 
 import Validator from './validator'
-import Emitter from './emitter'
 
 import { Select, Option } from './component/select'
 import { setLocale } from './locales'
@@ -97,15 +102,22 @@ Object.assign(Select, {
 const { QuickDetailFirst, QuickDetailSecond, QuickDetailThird } = QuickDetail
 
 export {
+  // 废弃的
+  ImportLead,
+  SearchSelect,
+  FilterSearchSelect,
+  TreeSelect,
+  Trigger,
+  PaginationText,
+  // 废弃的结束
+
   Pagination,
   PaginationNew,
-  PaginationText,
   PaginationBox,
   Form, FormItem, FormButton, FormBlock, FormGroup,
   Calendar,
   DatePicker,
   DateRangePicker,
-  ImportLead,
   Dropper,
   Storage,
   Tip,
@@ -117,8 +129,6 @@ export {
   Flex,
   TimeSpanPicker,
   DropSelect,
-  SearchSelect,
-  FilterSearchSelect,
   Cascader,
   CascaderSelect,
   Switch,
@@ -127,18 +137,17 @@ export {
   SheetAction,
   SheetSelect,
   SheetBatchAction,
-  Trigger,
   Loading,
   LoadingFullScreen,
   LoadingChunk,
-  InputNumber,
+  InputNumber, InputNumberV2,
   LayoutRoot,
   Modal,
   RightSideModal,
   CleanModal,
   Collapse,
   DropDown, DropDownItems, DropDownItem,
-  TreeSelect,
+
   QuickPanel, QuickFilter, QuickTab, QuickDesc,
   QuickDetail, QuickDetailFirst, QuickDetailSecond, QuickDetailThird,
   Validator,
@@ -157,7 +166,6 @@ export {
   Uploader,
   Drawer,
   Menu, Nav,
-  Emitter,
   ImagePreview,
   setLocale,
   EditableText,

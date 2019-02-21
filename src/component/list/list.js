@@ -4,6 +4,29 @@ import _ from 'lodash'
 import classNames from 'classnames'
 
 class List extends React.Component {
+  refList = React.createRef()
+  _isMounted = false
+
+  doScrollToSelected = () => {
+    // 找第一个即可
+    if (!this._isMounted) {
+      const $active = this.refList.current.querySelector('.active')
+      if ($active) {
+        $active.scrollIntoViewIfNeeded()
+      }
+    }
+  }
+
+  componentWillUnmount () {
+    this._isMounted = true
+  }
+
+  componentDidMount () {
+    if (this.props.isScrollTo) {
+      this.doScrollToSelected()
+    }
+  }
+
   isActive = (value) => {
     const { multiple, selected } = this.props
     if (multiple) {
@@ -22,18 +45,11 @@ class List extends React.Component {
     }
   }
 
-  handleMouseEnter = (item) => {
-    const { onMouseEnter } = this.props
-
-    onMouseEnter(item.value)
-  }
-
   render () {
     const {
       data,
-      selected, multiple, onSelect, onMouseEnter, // eslint-disable-line
-      willSelected,
-      renderName,
+      selected, multiple, onSelect, isScrollTo, // eslint-disable-line
+      renderItem,
       className,
       ...rest
     } = this.props
@@ -42,18 +58,17 @@ class List extends React.Component {
       <div
         {...rest}
         className={classNames('gm-list', className)}
+        ref={this.refList}
       >
         {_.map(data, v => (
           <div
             key={v.value}
             className={classNames('gm-list-item', {
-              active: this.isActive(v.value),
-              'will-active': willSelected === v.value
+              active: this.isActive(v.value)
             })}
             onClick={this.handleSelect.bind(this, v)}
-            onMouseEnter={this.handleMouseEnter.bind(this, v)}
           >
-            {renderName(v)}
+            {renderItem(v)}
           </div>
         ))}
       </div>
@@ -62,20 +77,23 @@ class List extends React.Component {
 }
 
 List.propTypes = {
-  data: PropTypes.array.isRequired, // value name
+  // 基本属性
+  data: PropTypes.array.isRequired, // value text
   selected: PropTypes.any,
-  willSelected: PropTypes.any,
-  multiple: PropTypes.bool, // true，则 selected 是数组
   onSelect: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  renderName: PropTypes.func
+  multiple: PropTypes.bool, // true，则 selected 是数组
+
+  // 展示
+  renderItem: PropTypes.func,
+
+  // 滚动
+  isScrollTo: PropTypes.bool
 }
 
 List.defaultProps = {
   multiple: false,
   onSelect: _.noop,
-  onMouseEnter: _.noop,
-  renderName: v => v.name
+  renderItem: item => item.text
 }
 
 export default List

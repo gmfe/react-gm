@@ -1,0 +1,119 @@
+.gm-more-select {
+  height: 28px;
+  border: 1px solid @gm-border-color;
+  background-color: white;
+  cursor: pointer;
+  vertical-align: middle;
+  position: relative;
+
+  .gm-more-select-selected {
+    height: 28px;
+    padding: 5px 25px 5px 10px;
+  }
+
+  .gm-more-select-clear-btn {
+    position: absolute;
+    right: 2px;
+    top: 0;
+    display: block;
+    cursor: pointer;
+    padding: 5px;
+    color: @gm-color-third;
+  }
+
+  .gm-more-select-target-box {
+    overflow-x: auto;
+
+    .selected {
+      background-color: @list-group-hover-bg;
+      padding: 0 5px;
+      margin-right: 5px;
+      border-radius: 4px;
+
+      .close {
+        right: -5px;
+        line-height: 1;
+        font-size: 15px;
+        padding-left: 2px;
+      }
+    }
+
+    .gm-more-select-target {
+      position: static;
+      padding: 5px 10px;
+    }
+  }
+
+  &.gm-more-select-disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+
+    input {
+      cursor: not-allowed;
+    }
+
+    .gm-more-select-clear-btn {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.gm-more-select-popup {
+  background: white;
+
+  .gm-more-select-popup-input {
+    padding: 5px 10px;
+
+    input {
+      padding: 0 5px;
+      height: 28px;
+      box-shadow: none;
+      min-width: 50px;
+      width: 100%;
+      outline: none;
+    }
+  }
+
+  .list-group {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+    margin-bottom: 0;
+
+    .list-group-item {
+      cursor: pointer;
+      border: none;
+      padding: 5px 10px;
+
+      &.active {
+        z-index: inherit;
+        color: @brand-primary;
+      }
+
+      &:first-child {
+        border-top: none;
+      }
+
+      &.active.line-selected {
+        background-color: @gm-list-group-hover-bg;
+      }
+
+      &.line-selected {
+        background-color: @gm-list-group-hover-bg;
+      }
+    }
+
+    .list-group-label {
+      .list-group-label-item {
+        padding: 5px 10px;
+        border-top: 1px solid @gm-border-color;
+        color: @input-color-placeholder;
+      }
+
+      .list-group-item {
+        padding: 5px 22px;
+      }
+    }
+  }
+}

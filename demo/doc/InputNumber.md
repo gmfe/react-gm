@@ -1,7 +1,52 @@
 ---
 imports:
-    import {InputNumber} from '../../src/index';
+    import {InputNumber, InputNumberV2} from '../../src/index';
 ---
+## InputNumberV2 推荐使用
+
+InputNumber 输出的是 字符串，调用方还是要包一层去处理 数字和字符串的区别，累。
+
+所以才有了 InputNumberV2
+
+::: demo 数字输入，数字输出，没有值则是 null
+```js
+class Component2 extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            value: null
+        };
+    }
+    
+    render(){
+        return (
+            <div>
+                <InputNumberV2
+                  value={this.state.value}
+                  onChange={value => {
+                    console.log(value)
+                    this.setState({value})
+                  }}
+                />
+            </div>
+        );
+    }
+}
+```
+```jsx
+<Component2/>
+```
+:::
+
+### Props
+- `value (number|string)` 当前值
+- `max (number)` 最大值
+- `min (number)` 最小值
+- `precision (number)` 精确度，保留几位小数
+- `onChange (func|isRequired)` 数值变化回调
+- `placeholder (string)`: 默认值
+- `...rest`
+
 ## InputNumber
 
 ::: demo 数字输入框
@@ -62,6 +107,5 @@ class Component extends React.Component {
 - `precision (number)` 精确度，保留几位小数
 - `onChange (func|isRequired)` 数值变化回调
 - `placeholder (string)`: 默认值
-- `className (string)`
 - `minus (bool)` 是否支持输入负数
 - `...rest`

@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Modal from '../modal'
 import _ from 'lodash'
-import Emitter from '../../emitter'
 import classNames from 'classnames'
 import LayoutRoot from '../layout_root'
 import { getLocale } from '../../locales'
+import EVENT_TYPE from '../../event_type'
 
 let DialogStatics = {}
 DialogStatics = {
@@ -37,7 +37,8 @@ DialogStatics = {
         if (result && result.then) { // 简单判断是否promise
           return result.then(v => {
             LayoutRoot.removeComponent(LayoutRoot.TYPE.MODAL)
-            Emitter.emit(Emitter.TYPE.MODAL_HIDE)
+            window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_HIDE))
+
             return v
           })
         } else if (result !== false) {
@@ -46,7 +47,7 @@ DialogStatics = {
 
         if (result !== false) {
           LayoutRoot.removeComponent(LayoutRoot.TYPE.MODAL)
-          Emitter.emit(Emitter.TYPE.MODAL_HIDE)
+          window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_HIDE))
         }
 
         return result
@@ -55,11 +56,11 @@ DialogStatics = {
         reject(new Error('cancel'))
 
         LayoutRoot.removeComponent(LayoutRoot.TYPE.MODAL)
-        Emitter.emit(Emitter.TYPE.MODAL_HIDE)
+        window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_HIDE))
       }
 
       LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, <Dialog show {...options}/>)
-      Emitter.emit(Emitter.TYPE.MODAL_SHOW)
+      window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_SHOW))
     })
   }
 }

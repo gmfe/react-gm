@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Pagination from '../pagination/pagination.js'
-import PaginationText from '../pagination/pagination.text.js'
 import _ from 'lodash'
 import classNames from 'classnames'
 import SheetColumn from './sheet_column'
@@ -14,11 +13,7 @@ import Flex from '../flex'
 import { getLocale } from '../../locales'
 
 class Sheet extends React.Component {
-  constructor (props) {
-    super(props)
-    this.checkboxOrRadioName = 'sheet_checkbox_radio_' + Math.random()
-    this.handleExpandedAll = ::this.handleExpandedAll
-  }
+  checkboxOrRadioName = 'sheet_checkbox_radio_' + Math.random()
 
   handleSelect (select, i, event) {
     // 恩，很复杂
@@ -62,7 +57,7 @@ class Sheet extends React.Component {
     onExpand && onExpand(index)
   }
 
-  handleExpandedAll () {
+  handleExpandedAll = () => {
     const { onExpandAll } = this.props
     onExpandAll && onExpandAll()
   }
@@ -161,7 +156,6 @@ class Sheet extends React.Component {
     let isSelectAll = false
     let isHasContract = false
     let pagination
-    let paginationText
 
     let columns = []
     let actions = false
@@ -180,8 +174,6 @@ class Sheet extends React.Component {
           batchs = value
         } else if (value.type.displayName === Pagination.displayName) {
           pagination = value
-        } else if (value.type.displayName === PaginationText.displayName) {
-          paginationText = value
         } else {
           others.push(value)
         }
@@ -250,9 +242,8 @@ class Sheet extends React.Component {
             </tbody>
           </table>
         </div>
-        {(pagination || paginationText) && (
+        {(pagination) && (
           <Flex justifyCenter alignCenter>
-            {paginationText && <div>{paginationText}</div>}
             {pagination && <div>{pagination}</div>}
           </Flex>
         )}

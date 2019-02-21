@@ -1,9 +1,12 @@
 ---
 imports:
-    import {Flex, PaginationBox, Pagination, PaginationNew, PaginationText} from '../../src/index';
+    import {Flex, PaginationBox, Pagination, PaginationNew} from '../../src/index';
 ---
 
 ## PaginationBox
+
+封装 【新规范】 的容器
+
 [最新规范 2018.08.29](https://doc.guanmai.cn/%E6%A8%A1%E5%9D%97%E6%96%87%E6%A1%A3/%E5%88%86%E9%A1%B5/)
 ::: demo 最新分页规范
 ```js
@@ -179,7 +182,7 @@ class PaginationNewWithoutCount extends React.Component{
 
 ## Pagination【老规范】
 
-两种形式，Pagination PaginationText
+两种形式，Pagination
 
 提前阅读[分页规范](https://github.com/gmfe/react-gm/wiki/%E5%88%86%E9%A1%B5%E6%A0%BC%E5%BC%8F%E8%A7%84%E8%8C%83)
 
@@ -193,7 +196,6 @@ const pagination = {
 ```
 ```jsx
 <Flex alignCenter>
-    <PaginationText data={pagination}/>
     <Pagination data={pagination} toPage={data => console.log(data)}/>
 </Flex>
 ```
@@ -208,7 +210,6 @@ const pagination1 = {
 ```
 ```jsx
 <Flex column>
-    <PaginationText data={pagination1}/>
     <Pagination data={pagination1} toPage={data => console.log(data)}/>
 </Flex>
 ```
@@ -229,7 +230,3 @@ const pagination1 = {
     * `offset (number|isRequired)`
     * `limit (number|isRequired)`
 - `toPage (func|isRequired)` 提供 `offset` 和 `limit` 回去，直接用此数据请求后台即可
-
-# PaginationText
-
-同上，只是没有回调

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getLocale } from '../../locales'
+import { getLocale } from '../locales'
 
 class WithCount extends React.Component {
   render () {
@@ -26,7 +26,7 @@ class WithoutCount extends React.Component {
 
 class PaginationText extends React.Component {
   render () {
-    console.warn('PaginationText 将会废弃,建议使用PaginationBox')
+    console.warn('Deprecated. Use PaginationBox instead.')
     if (this.props.data.count !== undefined) {
       return <WithCount {...this.props}/>
     } else {

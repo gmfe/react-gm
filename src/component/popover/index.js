@@ -6,7 +6,7 @@ import LayoutRoot from '../layout_root'
 import Popup from './popup'
 import _ from 'lodash'
 import classNames from 'classnames'
-import Emitter from '../../emitter'
+import EVENT_TYPE from '../../event_type'
 
 function getElementPositionWithScrollTop (element) {
   let { left, top } = element.getBoundingClientRect()
@@ -56,10 +56,10 @@ class Popover extends React.Component {
     }
 
     // 用 debounce
-    Emitter.on(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
-    Emitter.on(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
-    Emitter.on(Emitter.TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
-    Emitter.on(Emitter.TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
+    window.addEventListener(EVENT_TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
+    window.addEventListener(EVENT_TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
+    window.addEventListener(EVENT_TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
+    window.addEventListener(EVENT_TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
   }
 
   componentWillUnmount () {
@@ -68,10 +68,10 @@ class Popover extends React.Component {
     }
     LayoutRoot._removeComponentPopup(this.id)
 
-    Emitter.off(Emitter.TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
-    Emitter.off(Emitter.TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
-    Emitter.off(Emitter.TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
-    Emitter.off(Emitter.TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
+    window.removeEventListener(EVENT_TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
+    window.removeEventListener(EVENT_TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
+    window.removeEventListener(EVENT_TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
+    window.removeEventListener(EVENT_TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
   }
 
   handleDrawerScroll () {

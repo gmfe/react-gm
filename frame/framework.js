@@ -1,85 +1,103 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Flex, LayoutRoot, Emitter } from '../src/index'
+import { Flex, LayoutRoot } from '../src/index'
 import classNames from 'classnames'
 import { setTitle } from 'gm-util'
 import _ from 'lodash'
+import EVENT_TYPE from '../src/event_type'
+import Context from './context'
 
-class Framework extends React.Component {
-  constructor (props) {
-    super(props)
+const Framework = props => {
+  let {
+    showMobileMenu,
+    isFullScreen,
+    menu,
+    rightTop,
+    leftWidth,
+    children
+  } = props
 
-    this.state = {
-      blur: false,
-      overflowFlag: 0
+  const [overflowFlag, setOverflowFlag] = useState(0)
+
+  const addOverflowClass = () => {
+    const newFlowFlag = overflowFlag + 1
+    setOverflowFlag(newFlowFlag)
+    newFlowFlag === 1 &&
+      window.document.body.classList.add('gm-overflow-hidden')
+  }
+
+  const removeOverflowClass = () => {
+    const newFlowFlag = overflowFlag - 1
+    setOverflowFlag(newFlowFlag)
+    newFlowFlag === 0 &&
+      window.document.body.classList.remove('gm-overflow-hidden')
+  }
+
+  const doSetTitle = e => {
+    setTitle(e.detail)
+  }
+
+  const doScroll = _.throttle(() => {
+    window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.BROWSER_SCROLL))
+  }, 200)
+
+  useEffect(() => {
+    window.addEventListener(EVENT_TYPE.MODAL_SHOW, addOverflowClass)
+    window.addEventListener(EVENT_TYPE.MODAL_HIDE, removeOverflowClass)
+
+    window.addEventListener(EVENT_TYPE.DRAWER_SHOW, addOverflowClass)
+    window.addEventListener(EVENT_TYPE.DRAWER_HIDE, removeOverflowClass)
+
+    window.addEventListener(EVENT_TYPE.TITLE_CHANGE, doSetTitle)
+
+    window.addEventListener('scroll', doScroll)
+
+    return () => {
+      window.removeEventListener(EVENT_TYPE.MODAL_SHOW, addOverflowClass)
+      window.removeEventListener(EVENT_TYPE.MODAL_HIDE, removeOverflowClass)
+
+      window.removeEventListener(EVENT_TYPE.DRAWER_SHOW, addOverflowClass)
+      window.removeEventListener(EVENT_TYPE.DRAWER_HIDE, removeOverflowClass)
+
+      window.removeEventListener(EVENT_TYPE.TITLE_CHANGE, doSetTitle)
+
+      window.removeEventListener('scroll', doScroll)
     }
-  }
+  })
 
-  getChildContext () {
-    return { frameWorkLeftWidth: this.props.leftWidth }
-  }
-
-  componentDidMount () {
-    // 关闭。 用处不大
-    Emitter.on(Emitter.TYPE.MODAL_SHOW, this.addOverflowClass)
-    Emitter.on(Emitter.TYPE.MODAL_HIDE, this.removeOverflowClass)
-
-    Emitter.on(Emitter.TYPE.DRAWER_SHOW, this.addOverflowClass)
-    Emitter.on(Emitter.TYPE.DRAWER_HIDE, this.removeOverflowClass)
-
-    Emitter.on(Emitter.TYPE.TITLE_CHANGE, (title) => {
-      setTitle(title)
-    })
-
-    window.addEventListener('scroll', _.throttle(this.doScroll, 200))
-  }
-
-  addOverflowClass = () => {
-    const { overflowFlag } = this.state
-    this.setState({ overflowFlag: overflowFlag + 1 }, () => {
-      this.state.overflowFlag === 1 && window.document.body.classList.add('gm-overflow-hidden')
-    })
-    // this.setState({blur: true});
-  }
-
-  removeOverflowClass = () => {
-    const { overflowFlag } = this.state
-    this.setState({ overflowFlag: overflowFlag - 1 }, () => {
-      this.state.overflowFlag === 0 && window.document.body.classList.remove('gm-overflow-hidden')
-    })
-    // this.setState({blur: false});
-  }
-
-  doScroll = () => {
-    Emitter.emit(Emitter.TYPE.BROWSER_SCROLL)
-  }
-
-  render () {
-    let { showMobileMenu, isFullScreen, menu, rightTop, leftWidth, children } = this.props
-
-    return (
-      <div className={classNames('gm-framework', {
+  return (
+    <div
+      className={classNames('gm-framework', {
         'gm-framework-mobile-menu': showMobileMenu
-      })}>
-        <div className={classNames('gm-framework-inner', {
-          'gm-filter-blur-transition': this.state.blur
-        })}>
-          { isFullScreen ? children
-            : <div className='gm-framework-full-height'>
+      })}
+    >
+      <Context.Provider value={{ leftWidth: leftWidth }}>
+        <div className='gm-framework-inner'>
+          {isFullScreen ? (
+            children
+          ) : (
+            <div className='gm-framework-full-height'>
               <Flex className='gm-framework-container'>
                 {menu && <div className='gm-framework-left'>{menu}</div>}
-                <Flex flex column className='gm-framework-right' style={{ width: `calc(100% - ${leftWidth})` }}>
-                  {rightTop && <div className='gm-framework-right-top'>{rightTop}</div>}
+                <Flex
+                  flex
+                  column
+                  className='gm-framework-right'
+                  style={{ width: `calc(100% - ${leftWidth})` }}
+                >
+                  {rightTop && (
+                    <div className='gm-framework-right-top'>{rightTop}</div>
+                  )}
                   <div className='gm-framework-content'>{children}</div>
                 </Flex>
               </Flex>
             </div>
-          }
+          )}
         </div>
-        <LayoutRoot/>
-      </div>
-    )
-  }
+      </Context.Provider>
+      <LayoutRoot/>
+    </div>
+  )
 }
 
 Framework.scrollTop = function () {
@@ -92,10 +110,6 @@ Framework.propTypes = {
   menu: PropTypes.element,
   rightTop: PropTypes.element,
   leftWidth: PropTypes.string
-}
-
-Framework.childContextTypes = {
-  frameWorkLeftWidth: PropTypes.string
 }
 
 export default Framework

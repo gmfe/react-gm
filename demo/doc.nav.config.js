@@ -3,7 +3,7 @@ import { Menu } from '../src/index'
 import { history } from './service'
 import { withRouter } from 'react-router-dom'
 import _ from 'lodash'
-import { Framework } from '../framework/index'
+import { Framework } from '../frame'
 
 const data = [{
   name: 'Guide',
@@ -34,7 +34,6 @@ const data = [{
     { name: 'Cascader 级联选择', path: '/doc/Cascader' },
     { name: 'DropSelect', path: '/doc/DropSelect' },
     { name: 'FilterSelect 搜索选择', path: '/doc/FilterSelect' },
-    { name: 'TreeSelect 树形选择', path: '/doc/TreeSelect' },
     { name: 'Transfer 穿梭框', path: '/doc/Transfer' },
     { name: 'Tree 树形选择', path: '/doc/Tree' },
     { name: 'DatePicker 日期选择', path: '/doc/DatePicker' },
@@ -78,13 +77,6 @@ const data = [{
     { name: 'EditableText', path: '/doc/EditableText' },
     { name: 'FlipNumber', path: '/doc/FlipNumber' },
     { name: 'Price 价格显示', path: '/doc/Price' }
-  ]
-}, {
-  name: '废弃',
-  sub: [
-    { name: 'SearchSelect 废弃', path: '/doc/SearchSelect' },
-    { name: 'FilterSearchSelect 搜索选择', path: '/doc/FilterSearchSelect' },
-    { name: 'ImportLead 导入指引', path: '/doc/ImportLead' }
   ]
 }]
 

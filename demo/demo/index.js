@@ -1,79 +1,128 @@
 import React from 'react'
-import { List, ListGroup } from '../../src/'
+import MoreSelect from '../../src/component/more_select'
+import _ from 'lodash'
+
+const data = [{
+  value: 1,
+  text: '南山'
+}, {
+  value: 2,
+  text: '福田'
+}, {
+  value: 3,
+  text: '罗湖'
+}, {
+  value: 4,
+  text: '宝安'
+}, {
+  value: 5,
+  text: '福永'
+}, {
+  value: 6,
+  text: '坪洲'
+}, {
+  value: 7,
+  text: '西乡'
+}, {
+  value: 8,
+  text: '西乡8'
+}, {
+  value: 9,
+  text: '西乡9'
+}, {
+  value: 10,
+  text: '西乡10'
+}, {
+  value: 11,
+  text: '西乡11'
+}]
 
 class Component extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      value: {
+        value: 3,
+        text: '罗湖'
+      },
+      data
+    }
+  }
+
   render () {
     return (
       <div>
-        <List
-          data={[
-            { value: '南山', name: '南山' },
-            { value: '福田', name: '福田' },
-            { value: '龙岗', name: '龙岗' },
-            { value: '罗湖', name: '罗湖' }
-          ]}
-          selected='南山'
-          onSelect={selected => console.log(selected)}
-          willSelected='龙岗'
+        <div>默认</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.value}
+          onSelect={value => {
+            this.setState({ value })
+          }}
         />
 
-        <List
-          multiple
-          data={[
-            { value: '南山', name: '南山' },
-            { value: '福田', name: '福田' },
-            { value: '龙岗', name: '龙岗' },
-            { value: '罗湖', name: '罗湖' }
-          ]}
-          selected={['南山', '罗湖']}
-          onSelect={selected => console.log(selected)}
+        <div>默认 带拼音搜索</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.value}
+          onSelect={value => {
+            this.setState({ value })
+          }}
+          renderListFilterType='pinyin'
         />
 
-        <div className='gm-padding-10'/>
-
-        <ListGroup
-          data={[
-            {
-              label: '南山',
-              children: [
-                { value: '深大', name: '深大' },
-                { value: '蛇口', name: '蛇口' },
-                { value: '西丽', name: '西丽' }
-              ]
-            },
-            {
-              label: '福田',
-              children: [
-                { value: '竹子林', name: '竹子林' },
-                { value: '下沙', name: '下沙' },
-                { value: '上沙', name: '上沙' }
-              ]
-            }
-          ]}
-          selected='竹子林'
+        <div>disabled</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.value}
+          onSelect={value => this.setState({ value })}
+          disabled
         />
 
-        <ListGroup
-          multiple
-          data={[
-            {
-              label: '南山',
-              children: [
-                { value: '深大', name: '深大' },
-                { value: '蛇口', name: '蛇口' },
-                { value: '西丽', name: '西丽' }
-              ]
-            },
-            {
-              label: '福田',
-              children: [
-                { value: '竹子林', name: '竹子林' },
-                { value: '下沙', name: '下沙' },
-                { value: '上沙', name: '上沙' }
-              ]
-            }
-          ]}
-          selected={['竹子林', '蛇口']}
+        <div>placeholder searchPlaceholder</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.value}
+          onSelect={value => this.setState({ value })}
+          placeholder='啊啊啊'
+          searchPlaceholder='啊啊啊a'
+        />
+
+        <div>自动滚到已选</div>
+        <MoreSelect
+          data={data}
+          selected={11}
+          onSelect={value => this.setState({ value })}
+        />
+
+        <div>搜索 同步数据</div>
+        <MoreSelect
+          data={this.state.data}
+          selected={this.state.value}
+          onSelect={value => this.setState({ value })}
+          onSearch={searchValue => {
+            // 同步直接改变 data
+            this.setState({
+              data: _.filter(data, item => item.text.includes(searchValue))
+            })
+          }}
+        />
+
+        <div>搜索 异步数据</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.value}
+          onSelect={value => this.setState({ value })}
+          onSearch={searchValue => {
+            // 同步直接改变 data
+
+            // 异步 返回 promise
+            return new Promise(resolve => {
+              setTimeout(() => {
+                resolve()
+              }, 1000)
+            })
+          }}
         />
       </div>
     )

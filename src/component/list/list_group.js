@@ -32,7 +32,7 @@ class ListGroup extends React.Component {
     const {
       data,
       selected, multiple, onSelect, onMouseEnter, // eslint-disable-line
-      renderName,
+      renderItem,
       className,
       ...rest
     } = this.props
@@ -54,7 +54,7 @@ class ListGroup extends React.Component {
                 onClick={this.handleSelect.bind(this, v)}
                 onMouseEnter={this.handleMouseEnter.bind(this, v)}
               >
-                {renderName(v)}
+                {renderItem(v)}
               </div>
             ))}
           </div>
@@ -65,19 +65,19 @@ class ListGroup extends React.Component {
 }
 
 ListGroup.propTypes = {
-  data: PropTypes.array.isRequired, // value name
+  data: PropTypes.array.isRequired, // value text
   selected: PropTypes.any,
   multiple: PropTypes.bool,
   onSelect: PropTypes.func,
   onMouseEnter: PropTypes.func,
-  renderName: PropTypes.func
+  renderItem: PropTypes.func
 }
 
 ListGroup.defaultProps = {
   multiple: false,
   onSelect: _.noop,
   onMouseEnter: _.noop,
-  renderName: v => v.name
+  renderItem: item => item.text
 }
 
 export default ListGroup

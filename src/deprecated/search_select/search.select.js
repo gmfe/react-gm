@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import Flex from '../flex'
+import Flex from '../../component/flex'
 import classNames from 'classnames'
 import Trigger from '../trigger'
 // 略复杂了，脱离初衷，应该把单选和多选版本分开，改代码请周知
@@ -49,7 +49,7 @@ class SearchSelect extends React.Component {
     this.getListItemCount = ::this.getListItemCount
 
     console.warn('请尽量提供key（暂时无法检测key是否有传，暴力提示）')
-    console.warn('SearchSelect(FilterSearchSelect) is deprecated. Use FilterSelect instead.')
+    console.warn('Deprecated. Use FilterSelect instead.')
   }
 
   componentWillReceiveProps (nextProps) {
