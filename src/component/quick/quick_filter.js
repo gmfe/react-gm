@@ -14,6 +14,14 @@ class QuickFilter extends React.Component {
     }
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.expand) {
+      this.setState({
+        expand: nextProps.expand
+      })
+    }
+  }
+
   handleCollapse = () => {
     this.setState({
       expand: !this.state.expand
