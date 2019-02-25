@@ -75,5 +75,9 @@
   "table": {
     "noDataText": "没有数据",
     "loadingText": "加载数据中..."
+  },
+  "formGroup": {
+    "cancelBtn": "取消",
+    "saveBtn": "保存"
   }
 }
