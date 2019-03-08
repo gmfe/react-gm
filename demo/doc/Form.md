@@ -372,6 +372,8 @@ class FormGroupWrap extends React.Component {
         super(props);
         this.form1 = React.createRef()
         this.form2 = React.createRef()
+
+        this.state = {name: '', name2: '', desc: '', desc2: ''}
     }
 
     handleCancel = () => {
@@ -379,49 +381,62 @@ class FormGroupWrap extends React.Component {
     }
     render() {
         return (
-            <FormGroup formRefs={[this.form1, this.form2]} hasCancel onCancel={this.handleCancel}>
+            <FormGroup
+                formRefs={[this.form1, this.form2]}
+                onCancel={this.handleCancel}
+                onSubmit={() => console.log('onSubmit')}
+                onSubmitValidated={() => console.log('onSubmitValidated')}
+            >
                 <QuickPanel icon='todo' iconColor='#4fb7de' title='基础信息'>
-                    <Form onSubmit={this.handleSubmit} ref={this.form1}>
-                        <FormBlock>
-                            <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
-                                <input type="text"/>
-                            </FormItem>
-                            <FormItem label="身高" inline>
-                                <input type="text"/>
-                            </FormItem>
-                        </FormBlock>
-                        <FormItem label="姓名" required validate={Validator.create([], '')}>
-                            <input type="text"/>
+                    <Form ref={this.form1} hasButtonInGroup>
+                        <FormItem
+                            label="名字"
+                            required
+                            validate={Validator.create([], this.state.name)}
+                        >
+                            <input
+                                type="text"
+                                value={this.state.name}
+                                onChange={e => this.setState({name: e.target.value})}
+                            />
                         </FormItem>
-                        <FormItem label="描述">
-                            <textarea type="text" name="desc"/>
+                        <FormItem
+                            label="描述"
+                            required
+                            validate={Validator.create([], this.state.desc)}
+                        >
+                            <input
+                                type="text"
+                                value={this.state.desc}
+                                onChange={e => this.setState({desc: e.target.value})}
+                            />
                         </FormItem>
                     </Form>
                 </QuickPanel>
 
                 <QuickPanel icon='todo' iconColor='#4fb7de' title='销售信息' right={<div>右边</div>}>
-                    <Form onSubmit={this.handleSubmit} horizontal labelWidth="50px" ref={this.form2}>
-                        <FormBlock>
-                            <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
-                                <input type="text"/>
-                            </FormItem>
-                            <FormItem label="身高" inline>
-                                <input type="text"/>
-                            </FormItem>
-                        </FormBlock>
-                        <FormBlock block={[2, 1]}>
-                            <FormItem label="姓名" required inline width="200px" validate={Validator.create([], '')}>
-                                <input type="text"/>
-                            </FormItem>
-                            <FormItem label="身高" inline>
-                                <input type="text"/>
-                            </FormItem>
-                        </FormBlock>
-                        <FormItem label="姓名" required validate={Validator.create([], '')}>
-                            <input type="text"/>
+                    <Form horizontal labelWidth="50px" ref={this.form2} hasButtonInGroup>
+                        <FormItem
+                            label="名字"
+                            required
+                            validate={Validator.create([], this.state.name2)}
+                        >
+                            <input
+                                type="text"
+                                value={this.state.name2}
+                                onChange={e => this.setState({name2: e.target.value})}
+                            />
                         </FormItem>
-                        <FormItem label="描述">
-                            <textarea type="text" name="desc"/>
+                        <FormItem
+                            label="描述"
+                            required
+                            validate={Validator.create([], this.state.desc2)}
+                        >
+                            <input
+                                type="text"
+                                value={this.state.desc2}
+                                onChange={e => this.setState({desc2: e.target.value})}
+                            />
                         </FormItem>
                     </Form>
                 </QuickPanel>
@@ -438,6 +453,9 @@ class FormGroupWrap extends React.Component {
 ### Props
 - `className (string)` className
 - `disabled (bool)` 是否可点击保存
-- `hasCancel (bool)` 是否有取消按钮
 - `onCancel (fun)` 取消function
 - `formRefs (array)` 所包含的`Form`组件ref
+- `onSubmit (fun)` 保存function
+- `onSubmitValidated (fun)` 保存function带校验
+
+**注意，Form 需要添加`hasButtonInGroup`，用于enter键触发保存**

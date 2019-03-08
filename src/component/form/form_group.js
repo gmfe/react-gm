@@ -1,28 +1,59 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Affix from '../affix'
-import _ from 'lodash'
 import { getLocale } from '../../locales'
+import _ from 'lodash'
 
 class FormGroup extends React.Component {
   handleSubmit = (e) => {
-    _.forEach(this.props.formRefs, f => {
-      f.current.handleSubmit(e)
+    e.preventDefault()
+
+    const { onSubmit, onSubmitValidated, formRefs } = this.props
+
+    onSubmit()
+
+    let isPass = true
+    _.each(formRefs, form => {
+      if (!form.current.apiValidate()) {
+        isPass = false
+      }
     })
+    if (isPass) {
+      onSubmitValidated()
+    }
   }
 
   render () {
-    const { className, disabled, hasCancel, onCancel, children } = this.props
+    const {
+      disabled,
+      onCancel,
+      children,
+      formRefs, onSubmit, onSubmitValidated, // eslint-disable-line
+      ...rest
+    } = this.props
+
     return (
-      <div className={className}>
+      <div
+        {...rest}
+        onSubmit={this.handleSubmit}
+      >
         {children}
         <Affix bottom={0}>
           <div className='text-center gm-padding-tb-5 gm-form-group-sticky-bottom'>
-            <button disabled={disabled} type='submit' className='btn btn-primary' onClick={this.handleSubmit}>{getLocale('formGroup', 'saveBtn')}</button>
-            {hasCancel && <React.Fragment>
+            {onCancel && <React.Fragment>
               <div className='gm-gap-20'/>
-              <button type='button' className='btn btn-default' onClick={onCancel}>{getLocale('formGroup', 'cancelBtn')}</button>
+              <button
+                type='button'
+                className='btn btn-default'
+                onClick={onCancel}
+              >{getLocale('formGroup', 'cancelBtn')}</button>
             </React.Fragment>}
+            <button
+              disabled={disabled}
+              type='button'
+              onClick={this.handleSubmit}
+              className='btn btn-primary'
+            >{getLocale('formGroup', 'saveBtn')}</button>
           </div>
         </Affix>
       </div>
@@ -31,11 +62,16 @@ class FormGroup extends React.Component {
 }
 
 FormGroup.propTypes = {
-  className: PropTypes.string,
   disabled: PropTypes.bool,
-  hasCancel: PropTypes.bool,
   onCancel: PropTypes.func,
-  formRefs: PropTypes.array
+  formRefs: PropTypes.array,
+  onSubmit: PropTypes.func,
+  onSubmitValidated: PropTypes.func
+}
+
+FormGroup.defaultProps = {
+  onSubmit: _.noop,
+  onSubmitValidated: _.noop
 }
 
 export default FormGroup

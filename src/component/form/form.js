@@ -13,6 +13,15 @@ class Form extends React.Component {
     }
   }
 
+  apiValidate = () => {
+    const err = this.validateAll()
+    // 有错误才打开错误提示，没有错误则不打开
+    this.setState({
+      canValidate: !!err
+    })
+    return !err
+  }
+
   validateAll () {
     const { children } = this.props
     const helpList = []
@@ -78,6 +87,7 @@ class Form extends React.Component {
       labelWidth,
       className,
       children,
+      hasButtonInGroup,
       onSubmitValidated, //eslint-disable-line
       ...rest
     } = this.props
@@ -102,6 +112,7 @@ class Form extends React.Component {
         onSubmit={this.handleSubmit}
       >
         {childList}
+        {hasButtonInGroup && <button type='submit' style={{ display: 'none' }}>button</button>}
       </form>
     )
   }
@@ -111,6 +122,7 @@ Form.propTypes = {
   inline: PropTypes.bool,
   horizontal: PropTypes.bool,
   labelWidth: PropTypes.string, // horizontal true 才有效
+  hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
   onSubmit: PropTypes.func, // 默认处理了 preventDefault,
   onSubmitValidated: PropTypes.func
 }
@@ -118,6 +130,7 @@ Form.propTypes = {
 Form.defaultProps = {
   inline: false,
   horizontal: false,
+  hasButtonInGroup: false,
   onSubmit: _.noop,
   onSubmitValidated: _.noop
 }
