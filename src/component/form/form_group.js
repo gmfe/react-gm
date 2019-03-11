@@ -41,12 +41,12 @@ class FormGroup extends React.Component {
         <Affix bottom={0}>
           <div className='text-center gm-padding-tb-5 gm-form-group-sticky-bottom'>
             {onCancel && <React.Fragment>
-              <div className='gm-gap-20'/>
               <button
                 type='button'
                 className='btn btn-default'
                 onClick={onCancel}
               >{getLocale('formGroup', 'cancelBtn')}</button>
+              <div className='gm-gap-20'/>
             </React.Fragment>}
             <button
               disabled={disabled}
