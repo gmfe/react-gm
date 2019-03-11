@@ -2,13 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class InputNumber extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.handleChange = :: this.handleChange
-  }
-
-  handleChange (e) {
+  handleChange = (e) => {
     const { max, min, precision, minus } = this.props
     let value = e.target.value.replace(/。/g, '.')
 
@@ -22,9 +16,12 @@ class InputNumber extends React.Component {
     }
 
     if (reg.test(figure) || figure === '' || /^0[1-9]/.test(value)) {
-      const num = Number(figure)
-
-      if (max !== undefined && num > max) { this.props.onChange(max) } else if (min !== undefined && num < min) { this.props.onChange(min) } else {
+      const currentValue = Number(value)
+      if (max !== undefined && currentValue > max) {
+        this.props.onChange(max)
+      } else if (min !== undefined && currentValue < min) {
+        this.props.onChange(min)
+      } else {
         // 如果第一个数字是0，第二个是1-9，则选取第二个数字
         this.props.onChange(/^0[1-9]/.test(value) ? value.slice(1) : value)
       }
