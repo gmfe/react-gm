@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Table, SelectTable, ExpandTable, TableUtil, diyTableHOC} from '../../table';
+    import {Table, SelectTable, ExpandTable, TableUtil, diyTableHOC, DndTable} from '../../table';
     import {Popover} from '../../src/index';
 
     const DiyTable = diyTableHOC(Table);
@@ -452,5 +452,93 @@ class DiyTableWrap extends React.Component {
 - `data (array|required)`
 - `columns (array|required)`
 - `SubComponent (func|required)` 渲染展开的元素
+
+其他见 react-table 官方文档
+
+---
+
+## DndTable
+
+可拖拽表格
+
+::: demo DndTable
+```js
+class DndTableWrap extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      data   
+    }
+  }
+
+  onDragEnd = result => {
+    console.log(result);
+
+    let data = this.state.data.slice();
+
+    let [removed] = data.splice(result.source.index, 1);
+    data.splice(result.destination.index, 0, removed);
+
+    this.setState({data})
+  }
+
+  render() {
+    return (
+      <DndTable
+        data={this.state.data}
+        getDraggableClass={(snapshot)=>{
+          if(snapshot.isDragging){
+            return 'doc-dragging'
+          }
+        }}
+        rowKey="id"
+        onDragEnd={this.onDragEnd}
+        columns={[{
+          Header: '建单时间',
+          accessor: 'submit_time'
+        }, {
+          Header: '入库单号',
+          accessor: 'id'
+        }, {
+          Header: '供应商信息',
+          accessor: 'supplier_name'
+        }, {
+          Header: '入库金额',
+          accessor: 'total_money'
+        }, {
+          Header: '单据状态',
+          accessor: 'status'
+        }]}
+      />
+    )
+  }
+}
+```
+
+```jsx
+<DndTableWrap/>
+```
+:::
+
+### Props
+- `rowKey (string|func|required)` 行键字段，可指定函数 `(rowInfo) => string`
+- `dndDisabled (bool)` 是否禁用拖拽，默认 false
+
+拖拽回调，见react-beautiful-dnd官方文档：
+
+- `onBeforeDragStart (func)` 
+- `onDragStart (func)` 
+- `onDragUpdate (func)`
+- `onDragEnd (func|required)`
+
+设置 react-beautiful-dnd `<Droppable>`、`<Draggable>` 的 props/style/class:
+
+- `getDraggableProps (func)` `(rowInfo) => object`
+- `getDroppableProps (func)` `(rowInfo) => object`
+- `getDraggableStyle (func)` `(snapshot) => object`
+- `getDroppableStyle (func)` `(snapshot) => object` 
+- `getDraggableClass (func)` `(snapshot) => string`
+- `getDroppableClass (func)` `(snapshot) => string` 
+
 
 其他见 react-table 官方文档

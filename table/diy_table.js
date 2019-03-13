@@ -37,6 +37,14 @@ function generateDiyColumns (propsColumns, mixColumns) {
   })
 }
 
+function filterStorageColumns (columns) {
+  // 过滤多余数据，避免复杂数据出现JSON循环引用报错问题
+  return _.map(columns, col => {
+    const { id, accessor, show, diyEnable } = col
+    return { id, accessor, show, diyEnable }
+  })
+}
+
 function diyTableHOC (Component) {
   class DiyTable extends React.Component {
     constructor (props) {
@@ -88,7 +96,7 @@ function diyTableHOC (Component) {
 
       const { id } = this.props
       // 记录当前columns的数据到localStorage
-      Storage.set(id, columns)
+      Storage.set(id, filterStorageColumns(columns))
     }
 
     render () {
