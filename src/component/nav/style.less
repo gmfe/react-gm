@@ -1,25 +1,26 @@
 @gm-nav-bg-second: #363d44;
+@gm-nav-there-active: #c3ecc4;
 
 .gm-nav {
   background: @gm-nav-bg-second;
   font-size: 14px;
 
   .gm-nav-logo {
-    height: 40px;
+    height: 50px;
   }
 
   .gm-nav-there > a {
     display: block;
     color: @gm-color-first;
     white-space: nowrap;
-    padding: 10px 15px;
+    padding: 7px 0px 7px 16px;
     text-decoration: none;
   }
 
   .gm-nav-two > div > a {
     display: block;
     white-space: nowrap;
-    padding: 15px 15px 5px;
+    padding: 9px 0px 8px 11px;
     text-decoration: none;
     cursor: inherit;
     font-size: 12px;
@@ -35,19 +36,19 @@
   }
 
   .gm-nav-two > div + div {
-    margin-top: 10px;
+    margin-top: 5px;
   }
 
   .gm-nav-one > div > a {
     border-top: 1px solid @gm-nav-bg-second;
     display: block;
-    padding: 15px 10px;
+    padding: 15px 0px 15px 11px;
     color: white;
     text-decoration: none;
   }
 
   .gm-nav-there > a.active {
-    color: @brand-primary;
+    background-color: @gm-nav-there-active;
   }
 
   .gm-nav-there > a:hover {
