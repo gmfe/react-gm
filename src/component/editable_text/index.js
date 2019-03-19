@@ -19,9 +19,11 @@ class EditableText extends React.Component {
   };
 
   handleEdit = () => {
-    this.setState({
-      editable: true
-    })
+    if (!this.props.disabled) {
+      this.setState({
+        editable: true
+      })
+    }
   };
 
   handleOkClick = () => {
@@ -45,12 +47,25 @@ class EditableText extends React.Component {
     setTimeout(this.handleCancelClick, 300)
   }
 
+  handleKeyUp = (e) => {
+    if (e.keyCode === 13) {
+      this.handleOkClick()
+    }
+  }
+
   render () {
-    const { content, className } = this.props
+    const { content, className, disabled, children } = this.props
     const { editable } = this.state
     return editable ? (
       <div className={classNames('gm-editable-text-input-wrap', className)}>
-        <input onBlur={this.handleInputBlur} className='form-control input-sm' autoFocus defaultValue={content} onChange={e => this.handleInputChange(e)}/>
+        <input
+          className='form-control input-sm'
+          autoFocus
+          defaultValue={content}
+          onBlur={this.handleInputBlur}
+          onChange={this.handleInputChange}
+          onKeyUp={this.handleKeyUp}
+        />
         <div className='gm-gap-5'/>
         <i className='xfont xfont-ok gm-cursor gm-editable-text-xfont-ok' onClick={this.handleOkClick}/>
         <div className='gm-gap-5'/>
@@ -60,11 +75,8 @@ class EditableText extends React.Component {
       <div
         className={classNames('gm-editable-text', className)}
       >
-        <span>{content || '-'}</span>
-        <i
-          className='xfont xfont-edit gm-margin-left-5 gm-cursor gm-editable-text-edit-pen'
-          onClick={this.handleEdit}
-        />
+        <span onClick={this.handleEdit}>{children || content || '-'}</span>
+        {!disabled && <i className='xfont xfont-edit gm-margin-left-5 gm-cursor gm-editable-text-edit-pen' onClick={this.handleEdit}/>}
       </div>
     )
   }
