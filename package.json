@@ -47,7 +47,7 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "gm-xfont": "^1.0.42",
-    "gm-util": "^5.6.3",
+    "gm-util": "^5.10.0",
     "moment": "^2.18.1",
     "prop-types": "^15.6.0",
     "query-string": "^6.1.0",
@@ -84,7 +84,7 @@
     "file-loader": "^3.0.1",
     "fs": "0.0.2",
     "gm-service": "^1.7.12",
-    "gm-util": "^5.8.1",
+    "gm-util": "^5.10.0",
     "gm-webpack": "^1.0.14",
     "gm-xfont": "^1.0.75",
     "happypack": "^5.0.1",
