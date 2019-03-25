@@ -14,7 +14,7 @@ class ProgressBar extends React.Component {
   }
 
   render () {
-    const { percentage, status, strokeWidth, text, textInside, textAlignInside, showText, className, ...rest } = this.props
+    const { percentage, status, strokeWidth, text, textInside, textInsideFix, showText, className, ...rest } = this.props
     return (
       <div className={classnames('gm-progress', className)} {...rest}>
         <div className='gm-progress-bar'>
@@ -28,18 +28,23 @@ class ProgressBar extends React.Component {
                   'gm-progress-bar-success': status === 'success',
                   'gm-progress-bar-exception': status === 'exception'
                 })}
-              style={{ 
-                width: `${percentage}%`,
-                textAlign: textAlignInside
-               }}
+              style={{ width: `${percentage}%` }}
             >
               {
-                showText && textInside &&
+                showText && textInside && !textInsideFix &&
                 <div className='gm-progress-bar-innerText'>
                   {text || `${percentage}%`}
                 </div>
               }
             </div>
+            {
+              showText && textInside && textInsideFix &&
+                <div
+                  className={classnames('gm-progress-bar-innerTextFix', 'gm-progress-bar-innerTextFix-' + textInsideFix)}
+                >
+                  {text || `${percentage}%`}
+                </div>
+            }
           </div>
         </div>
         {
@@ -63,13 +68,12 @@ ProgressBar.propTypes = {
   status: PropTypes.oneOf(['success', 'exception']),
   strokeWidth: PropTypes.number,
   textInside: PropTypes.bool,
-  textAlignInside: PropTypes.oneOf(['left', 'center', 'right']),
+  textInsideFix: PropTypes.oneOf(['left', 'right', 'center']),
   showText: PropTypes.bool
 }
 
 ProgressBar.defaultProps = {
   textInside: false,
-  textAlignInside: 'right',
   showText: true
 }
 
