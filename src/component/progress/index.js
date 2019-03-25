@@ -14,8 +14,7 @@ class ProgressBar extends React.Component {
   }
 
   render () {
-    const { percentage, status, strokeWidth, text, textInside, showText, className, ...rest } = this.props
-
+    const { percentage, status, strokeWidth, text, textInside, textAlignInside, showText, className, ...rest } = this.props
     return (
       <div className={classnames('gm-progress', className)} {...rest}>
         <div className='gm-progress-bar'>
@@ -29,7 +28,10 @@ class ProgressBar extends React.Component {
                   'gm-progress-bar-success': status === 'success',
                   'gm-progress-bar-exception': status === 'exception'
                 })}
-              style={{ width: `${percentage}%` }}
+              style={{ 
+                width: `${percentage}%`,
+                textAlign: textAlignInside
+               }}
             >
               {
                 showText && textInside &&
@@ -61,11 +63,13 @@ ProgressBar.propTypes = {
   status: PropTypes.oneOf(['success', 'exception']),
   strokeWidth: PropTypes.number,
   textInside: PropTypes.bool,
+  textAlignInside: PropTypes.oneOf(['left', 'center', 'right']),
   showText: PropTypes.bool
 }
 
 ProgressBar.defaultProps = {
   textInside: false,
+  textAlignInside: 'right',
   showText: true
 }
 
