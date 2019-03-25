@@ -16,7 +16,10 @@ imports:
   
     <Progress percentage={30}/>
     <Progress percentage={70} textInside strokeWidth={18}/>
-    <Progress percentage={70} textInside textAlignInside="center" strokeWidth={18}/>
+    <Progress percentage={0} textInside textInsideFix="center" strokeWidth={18}/>
+    <Progress percentage={70} textInside textInsideFix="center" strokeWidth={18}/>
+    <Progress percentage={70} textInside textInsideFix="left" strokeWidth={18}/>
+    <Progress percentage={70} textInside textInsideFix="right" strokeWidth={18}/>
     <Progress percentage={20} text="20斤/100斤" strokeWidth={18}/>
   
     <Progress percentage={100}/>
@@ -32,6 +35,6 @@ imports:
 - `status (string)` 进度条状态，值 `success` or `exception`
 - `strokeWidth (number)` 进度条宽度
 - `textInside（bool）` 文字位置是否嵌在里面，默认 `false`
-- `textAlignInside（string）` 内嵌文字位置，可指定为`left`/`right`/`center`，默认 `right`
+- `textInsideFix（string）` 固定内嵌文字位置，可指定为`left`/`right`/`center`
 - `showText（bool）` 是否显示文字，默认 `true`
 - `...rest`

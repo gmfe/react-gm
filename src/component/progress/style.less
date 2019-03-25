@@ -48,8 +48,24 @@
   color: #fff;
   display: inline-block;
   vertical-align: middle;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
   line-height: 1;
+}
+
+.gm-progress-bar-innerTextFix-wrapper {
+  height: 100%;
+  line-height: 1;
+  white-space: nowrap;
+  position: relative;
+  z-index: 0;
+
+  &::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
 }
 
 .gm-progress-bar-text {
