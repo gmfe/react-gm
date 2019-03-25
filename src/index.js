@@ -73,6 +73,8 @@ import Validator from './validator'
 import { Select, Option } from './component/select'
 import { setLocale } from './locales'
 
+import Carousel from './component/carousel/carousel'
+
 Object.assign(Sheet, {
   SheetColumn,
   SheetAction,
@@ -177,5 +179,6 @@ export {
   FlipNumber,
   Price,
   List,
-  LazyImg
+  LazyImg,
+  Carousel
 }
