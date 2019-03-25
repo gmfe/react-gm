@@ -20,7 +20,10 @@ class ProgressBar extends React.Component {
         <div className='gm-progress-bar'>
           <div
             className='gm-progress-bar-outer'
-            style={{ height: `${strokeWidth}px` }}
+            style={{
+              height: `${strokeWidth}px`,
+              textAlign: textInsideFix
+            }}
           >
             <div
               className={classnames('gm-progress-bar-inner',
@@ -39,11 +42,12 @@ class ProgressBar extends React.Component {
             </div>
             {
               showText && textInside && textInsideFix &&
-                <div
-                  className={classnames('gm-progress-bar-innerTextFix', 'gm-progress-bar-innerTextFix-' + textInsideFix)}
-                >
-                  {text || `${percentage}%`}
-                </div>
+              <div
+                className={classnames('gm-progress-bar-innerText')}
+                style={{ position: 'relative', zIndex: 0 }}
+              >
+                {text || `${percentage}%`}
+              </div>
             }
           </div>
         </div>
