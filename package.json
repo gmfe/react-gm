@@ -47,13 +47,13 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "gm-xfont": "^1.0.79",
-    "gm-util": "^5.10.0",
+    "gm-util": "^5.10.2",
     "moment": "^2.24.0",
-    "prop-types": "^15.6.0",
-    "query-string": "^6.1.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-table": "^6.8.6",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.4.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-table": "^6.9.2",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
@@ -103,7 +103,7 @@
     "precss": "^4.0.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.4.0",
-    "react": "^16.8.2",
+    "react": "^16.8.5",
     "react-beautiful-dnd": "^10.1.0",
     "react-dom": "^16.8.5",
     "react-hot-loader": "^4.8.0",
