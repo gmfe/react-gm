@@ -13,6 +13,7 @@ class Component extends React.Component {
             value: ''
         };
         this.handleChange = ::this.handleChange;
+        this.a = React.createRef()
     }
     
     render(){
@@ -29,7 +30,9 @@ class Component extends React.Component {
                     minus
                 />
                 <br/>
+                <button onClick={() => {this.a.current.focus()}}>focus</button>
                 <InputNumber
+                    ref={this.a}
                     value={this.state.value}
                     onChange={this.handleChange}
                     placeholder="最大0，最小0"

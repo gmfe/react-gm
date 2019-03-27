@@ -33,13 +33,15 @@ class InputNumber extends React.Component {
 
   render () {
     const {
-            precision, minus, // eslint-disable-line
+      precision, minus, // eslint-disable-line
+      forwardedRef,
       ...rest
     } = this.props
 
     return (
       <input
         {...rest}
+        ref={forwardedRef}
         type='text'
         onChange={this.handleChange}
       />
@@ -65,4 +67,4 @@ InputNumber.defaultProps = {
   minus: false
 }
 
-export default InputNumber
+export default React.forwardRef((props, ref) => <InputNumber {...props} forwardedRef={ref}/>)
