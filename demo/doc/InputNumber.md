@@ -16,18 +16,22 @@ class Component2 extends React.Component {
         this.state = {
             value: null
         };
+        this.refInput = React.createRef()
     }
     
     render(){
         return (
             <div>
                 <InputNumberV2
+                  ref={this.refInput}
                   value={this.state.value}
                   onChange={value => {
                     console.log(value)
                     this.setState({value})
                   }}
                 />
+                
+                <button onClick={() => {this.refInput.current.apiDoFocus()}}>focus</button>
             </div>
         );
     }

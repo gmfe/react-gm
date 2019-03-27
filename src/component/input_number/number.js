@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Big from 'big.js'
@@ -7,9 +8,25 @@ class InputNumberV2 extends React.Component {
   constructor (props) {
     super(props)
 
+    this.refInput = React.createRef()
+    this.__unmount = false
+
     this.state = {
       value: this.processValue(props.value)
     }
+  }
+
+  apiDoFocus () {
+    if (this.__unmount) {
+      return
+    }
+
+    const d = ReactDOM.findDOMNode(this.refInput.current)
+    d.focus()
+  }
+
+  componentWillUnmount () {
+    this.__unmount = true
   }
 
   processValue = (value) => {
@@ -95,6 +112,7 @@ class InputNumberV2 extends React.Component {
     return (
       <input
         {...rest}
+        ref={this.refInput}
         type='number'
         value={this.state.value}
         onChange={this.handleChange}
