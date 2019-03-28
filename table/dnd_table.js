@@ -4,6 +4,23 @@ import BaseTable from './base'
 import { ReactTableDefaults } from 'react-table'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
+const TrGroupInner = React.memo(function TrGroupInner (props) {
+  let { children, dragHandleProps } = props
+
+  return React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      let TdChildren = React.Children.map(child.props.children, (Td) => {
+        if (React.isValidElement(Td) && Td.props['_dragField']) {
+          Td = React.cloneElement(Td, dragHandleProps)
+        }
+        return Td
+      })
+      child = React.cloneElement(child, {}, ...TdChildren)
+    }
+    return child
+  })
+})
+
 function TbodyComponent ({
   getDroppableStyle,
   getDroppableClass,
@@ -41,6 +58,8 @@ function TrGroupComponent ({
   draggableProps,
   rowKey,
   rowInfo,
+  children,
+  isDragInnerField,
   ...rest
 }) {
   return (
@@ -50,20 +69,26 @@ function TrGroupComponent ({
       index={rowInfo ? rowInfo.index : 0}
       {...draggableProps}
     >
-      {(provided, snapshot) => (
-        <div
+      {(provided, snapshot) => {
+        return <div
           ref={provided.innerRef}
           {...provided.draggableProps}
-          {...provided.dragHandleProps}
+          {...(isDragInnerField ? {} : provided.dragHandleProps)}
           className={getDraggableClass(snapshot)}
           style={{
             ...getDraggableStyle(snapshot),
             ...provided.draggableProps.style
           }}
         >
-          <ReactTableDefaults.TrGroupComponent {...rest}/>
+          <ReactTableDefaults.TrGroupComponent {...rest} >
+            {
+              isDragInnerField
+                ? <TrGroupInner dragHandleProps={provided.dragHandleProps}>{children}</TrGroupInner>
+                : children
+            }
+          </ReactTableDefaults.TrGroupComponent>
         </div>
-      )}
+      }}
     </Draggable>
   )
 }
@@ -86,6 +111,7 @@ class DndTable extends React.Component {
       dndDisabled,
       getDraggableProps,
       getDroppableProps,
+      getTdProps,
       getTbodyProps,
       getTrGroupProps,
       getDraggableStyle,
@@ -94,6 +120,10 @@ class DndTable extends React.Component {
       getDroppableClass,
       ...rest
     } = this.props
+
+    let isDragInnerField = rest.columns && rest.columns.length && rest.columns.some((col) => {
+      return col.dragField
+    })
 
     return (
       <DragDropContext
@@ -105,6 +135,12 @@ class DndTable extends React.Component {
         <BaseTable
           TbodyComponent={TbodyComponent}
           TrGroupComponent={TrGroupComponent}
+          getTdProps={(state, rowInfo, column, instance) => {
+            return {
+              ...getTdProps(state, rowInfo, column, instance),
+              _dragField: !!column.dragField
+            }
+          }}
           getTbodyProps={(state, rowInfo, column, instance) => {
             return {
               ...getTbodyProps(state, rowInfo, column, instance),
@@ -128,7 +164,8 @@ class DndTable extends React.Component {
               rowKey: rowInfo
                 ? typeof rowKey === 'function' ? rowKey(rowInfo) : rowInfo.original[rowKey]
                 : '0',
-              rowInfo
+              rowInfo,
+              isDragInnerField
             }
           }}
           {...rest}
@@ -165,6 +202,7 @@ DndTable.defaultProps = {
   getDraggableClass: () => '',
   getDroppableClass: () => '',
   getTbodyProps: () => ({}),
+  getTdProps: () => ({}),
   getTrGroupProps: () => ({})
 }
 
