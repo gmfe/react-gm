@@ -9,7 +9,7 @@ class Nav extends React.Component {
     super(props)
     this.state = this.getInitState()
   }
-
+  // 匹配域名处理导航栏 active 显示
   getInitState = () => {
     const { data, selected } = this.props
     return {
@@ -51,28 +51,28 @@ class Nav extends React.Component {
       logo, // eslint-disable-line
       widths,
       isBrowserRouter,
+      renderExceptionNav,
       ...rest
     } = this.props
 
     const { oneSelected, isJump } = this.state
-
     return (
       <Flex
         {...rest}
         className={classNames('gm-nav', className)}
         onMouseLeave={this.handleMouseLeave}
       >
-        <div>
+        <div style={{ width: widths[0] }}>
           <Flex alignCenter justifyCenter className='gm-nav-logo'>
             {logo}
           </Flex>
-          <div className='gm-margin-top-5 gm-nav-one'>
+          <div className='gm-margin-top-5 gm-nav-one' >
             {_.map(data, (one, oneI) => {
               let link = !isBrowserRouter && /^\/[^#\/].*/.test(one.link) ? `#${one.link}` : one.link // eslint-disable-line
               return (
                 <div key={oneI + one.link} className={classNames({
                   'active': oneSelected && (oneSelected.link === one.link)
-                })} style={{ width: widths[0] }}>
+                })}>
                   <a
                     href={link}
                     onClick={this.handleOne.bind(this, one)}
@@ -86,16 +86,17 @@ class Nav extends React.Component {
             {_.map(jump, (one, oneI) => (
               <div key={oneI + one.link} className={classNames({
                 'active': oneSelected && (oneSelected.link === one.link)
-              })} style={{ width: widths[0] }}>
+              })}>
                 <a
                   href={one.link}
                   onClick={this.handleJumpOne.bind(this, one)}
                 >{one.name}</a>
               </div>
             ))}
+            {renderExceptionNav && renderExceptionNav(oneSelected)} {/* 传递当前选中项数据以外部判断是否点击态 */}
           </div>
         </div>
-
+        {/* 显示二级导航栏逻辑 */}
         {oneSelected && oneSelected.sub && (
           <div className='gm-border-right gm-bg-white gm-overflow-y' style={{
             width: widths[1],
@@ -128,7 +129,7 @@ class Nav extends React.Component {
                     >{two.name}</a>
                     <div className='gm-nav-there'>
                       {_.map(two.sub, (v, i) => {
-                        let link = !isBrowserRouter && /^\/[^#\/].*/.test(v.link) ? `#${v.link}` : v.link
+                        let link = !isBrowserRouter && /^\/[^#\/].*/.test(v.link) ? `#${v.link}` : v.link // eslint-disable-line
                         return (
                           <a
                             href={link}
@@ -163,7 +164,8 @@ Nav.propTypes = {
   onSelect: PropTypes.func.isRequired,
   selected: PropTypes.string.isRequired,
   isBrowserRouter: PropTypes.bool,
-  widths: PropTypes.array.isRequired // ["120px", "150px"]
+  widths: PropTypes.array.isRequired, // ["120px", "150px"]
+  renderExceptionNav: PropTypes.func
 }
 
 Nav.defaultProps = {
