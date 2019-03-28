@@ -121,9 +121,7 @@ class DndTable extends React.Component {
       ...rest
     } = this.props
 
-    let isDragInnerField = rest.columns && rest.columns.length && rest.columns.some((col) => {
-      return col.dragField
-    })
+    let isDragInnerField = rest.columns && rest.columns.length && rest.columns.some(col => col.dragField)
 
     return (
       <DragDropContext
