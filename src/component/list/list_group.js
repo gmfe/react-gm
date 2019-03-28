@@ -22,16 +22,10 @@ class ListGroup extends React.Component {
     }
   }
 
-  handleMouseEnter = (item) => {
-    const { onMouseEnter } = this.props
-
-    onMouseEnter(item.value)
-  }
-
   render () {
     const {
       data,
-      selected, multiple, onSelect, onMouseEnter, // eslint-disable-line
+      selected, multiple, onSelect, // eslint-disable-line
       renderItem,
       className,
       ...rest
@@ -52,7 +46,6 @@ class ListGroup extends React.Component {
                   active: this.isActive(v.value)
                 })}
                 onClick={this.handleSelect.bind(this, v)}
-                onMouseEnter={this.handleMouseEnter.bind(this, v)}
               >
                 {renderItem(v)}
               </div>
@@ -65,18 +58,19 @@ class ListGroup extends React.Component {
 }
 
 ListGroup.propTypes = {
-  data: PropTypes.array.isRequired, // value text
+  // 基本属性
+  data: PropTypes.array.isRequired, // label, children: [{ value text}]
   selected: PropTypes.any,
-  multiple: PropTypes.bool,
   onSelect: PropTypes.func,
-  onMouseEnter: PropTypes.func,
+  multiple: PropTypes.bool,
+
+  // 展示
   renderItem: PropTypes.func
 }
 
 ListGroup.defaultProps = {
   multiple: false,
   onSelect: _.noop,
-  onMouseEnter: _.noop,
   renderItem: item => item.text
 }
 
