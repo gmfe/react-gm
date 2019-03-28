@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getLocale } from '../locales'
+import { getLocale } from '../../locales'
 
 class WithCount extends React.Component {
   render () {
@@ -24,7 +24,7 @@ class WithoutCount extends React.Component {
   }
 }
 
-class PaginationText extends React.Component {
+class Pagination_text extends React.Component {
   render () {
     console.warn('Deprecated. Use PaginationBox instead.')
     if (this.props.data.count !== undefined) {
@@ -35,8 +35,8 @@ class PaginationText extends React.Component {
   }
 }
 
-PaginationText.displayName = 'PaginationText'
-PaginationText.propTypes = {
+Pagination_text.displayName = 'PaginationText'
+Pagination_text.propTypes = {
   data: PropTypes.shape({
     count: PropTypes.number,
     offset: PropTypes.number.isRequired,
@@ -44,4 +44,4 @@ PaginationText.propTypes = {
   })
 }
 
-export default PaginationText
+export default Pagination_text
