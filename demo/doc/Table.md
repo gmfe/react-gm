@@ -461,7 +461,7 @@ class DiyTableWrap extends React.Component {
 
 可拖拽表格
 
-::: demo DndTable
+::: demo 可拖拽表格
 ```js
 class DndTableWrap extends React.Component {
   constructor (props) {
@@ -520,9 +520,71 @@ class DndTableWrap extends React.Component {
 ```
 :::
 
+::: demo 可拖拽表格 点击部分列可拖拽
+```js
+class DndFieldTableWrap extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      data   
+    }
+  }
+
+  onDragEnd = result => {
+    console.log(result);
+
+    let data = this.state.data.slice();
+
+    let [removed] = data.splice(result.source.index, 1);
+    data.splice(result.destination.index, 0, removed);
+
+    this.setState({data})
+  }
+
+  render() {
+    return (
+      <DndTable
+        data={this.state.data}
+        getDraggableClass={(snapshot)=>{
+          if(snapshot.isDragging){
+            return 'doc-dragging'
+          }
+        }}
+        rowKey="id"
+        onDragEnd={this.onDragEnd}
+        columns={[{
+          Header: '建单时间',
+          accessor: 'submit_time'
+        }, {
+          Header: '可拖拽列',
+          dragField: true,
+          accessor: 'id'
+        }, {
+          Header: '供应商信息',
+          accessor: 'supplier_name'
+        }, {
+          Header: '入库金额',
+          accessor: 'total_money'
+        }, {
+          Header: '单据状态',
+          accessor: 'status'
+        }]}
+      />
+    )
+  }
+}
+```
+
+```jsx
+<DndFieldTableWrap/>
+```
+:::
+
 ### Props
 - `rowKey (string|func|required)` 行键字段，可指定函数 `(rowInfo) => string`
 - `dndDisabled (bool)` 是否禁用拖拽，默认 false
+- `columns (array|required)` 
+  + `dragField (bool)` 点击该列可拖拽。无任何列为 true 则默认点击整行都可拖拽。
 
 拖拽回调，见react-beautiful-dnd官方文档：
 
