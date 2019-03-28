@@ -93,7 +93,7 @@ class MoreSelect extends React.Component {
     const {
       data,
       selected,
-      renderItem,
+      renderListItem,
       renderListFilter,
       renderListFilterType,
       searchPlaceholder,
@@ -134,7 +134,7 @@ class MoreSelect extends React.Component {
             data={filterData}
             selected={selected.value}
             className='gm-border-0'
-            renderItem={renderItem}
+            renderItem={renderListItem}
             onSelect={this.handleSelected}
             isScrollTo
             style={{
@@ -203,40 +203,44 @@ MoreSelect.renderListFilterPinYin = renderListFilterPinYin
 MoreSelect.propTypes = {
   // 基本属性
   data: PropTypes.array.isRequired, // [{value, text}]
-  // item。 非 value，原因是想解耦 selected 和 data 的关系
-  selected: PropTypes.object,
-  onSelect: PropTypes.func.isRequired,
-
-  // isGroupList
+  selected: PropTypes.object, // item。 非 value，也非引用，原因是想解耦 selected 和 data 的关系。这样当
+  onSelect: PropTypes.func.isRequired, // 返回 item
 
   // 状态
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
 
   // 列表 搜索
-  onSearch: PropTypes.func, // query, data
+  onSearch: PropTypes.func, // searchValue, data
   delay: PropTypes.number,
   searchPlaceholder: PropTypes.string,
-  disabledSearch: PropTypes.bool,
-  renderListFilter: PropTypes.func,
-  renderListFilterType: PropTypes.oneOf(['default', 'pinyin']),
+  disabledSearch: PropTypes.bool, // 不需要搜索
+  renderListFilter: PropTypes.func, // 过滤，提供 searchValue 和 data
+  renderListFilterType: PropTypes.oneOf(['default', 'pinyin']), // 也可简单指定 默认的过滤类型
 
   // 展示
-  renderSelected: PropTypes.func,
-  renderItem: PropTypes.func,
+  renderSelected: PropTypes.func, // 定制已选的区域，提供 selected
+  renderListItem: PropTypes.func, // 定制列表
 
   // 样式
   listMaxHeight: PropTypes.string
+
+  // isGroupList
 }
 
 MoreSelect.defaultProps = {
   renderSelected: item => item.text,
 
   delay: 500,
-  renderItem: item => item.text,
+  renderListItem: item => item.text,
   listMaxHeight: '250px',
 
   renderListFilterType: 'default'
 }
+
+// 介绍 selected
+// 假设 selected 是 value，那么在搜索的时候 data 是一份新的数据，这份数据内不存在 已选的 values，那么 selected 怎么显示就束手无策了
+// 估用了 item
+// 由于引用方式诟病比较多，所以也改成了非引用方式。
 
 export default MoreSelect

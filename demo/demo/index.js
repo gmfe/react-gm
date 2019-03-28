@@ -41,7 +41,7 @@ class Component extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      value: {
+      selected: {
         value: 3,
         text: '罗湖'
       },
@@ -55,7 +55,7 @@ class Component extends React.Component {
         <div>默认</div>
         <MoreSelect
           data={data}
-          selected={this.state.value}
+          selected={this.state.selected}
           onSelect={value => {
             this.setState({ value })
           }}
@@ -64,7 +64,7 @@ class Component extends React.Component {
         <div>默认 带拼音搜索</div>
         <MoreSelect
           data={data}
-          selected={this.state.value}
+          selected={this.state.selected}
           onSelect={value => {
             this.setState({ value })
           }}
@@ -74,16 +74,16 @@ class Component extends React.Component {
         <div>disabled</div>
         <MoreSelect
           data={data}
-          selected={this.state.value}
-          onSelect={value => this.setState({ value })}
+          selected={this.state.selected}
+          onSelect={selected => this.setState({ selected })}
           disabled
         />
 
         <div>placeholder searchPlaceholder</div>
         <MoreSelect
           data={data}
-          selected={this.state.value}
-          onSelect={value => this.setState({ value })}
+          selected={this.state.selected}
+          onSelect={selected => this.setState({ selected })}
           placeholder='啊啊啊'
           searchPlaceholder='啊啊啊a'
         />
@@ -91,15 +91,15 @@ class Component extends React.Component {
         <div>自动滚到已选</div>
         <MoreSelect
           data={data}
-          selected={11}
-          onSelect={value => this.setState({ value })}
+          selected={{ value: 11, text: '西乡11' }}
+          onSelect={selected => this.setState({ selected })}
         />
 
         <div>搜索 同步数据</div>
         <MoreSelect
           data={this.state.data}
-          selected={this.state.value}
-          onSelect={value => this.setState({ value })}
+          selected={this.state.selected}
+          onSelect={selected => this.setState({ selected })}
           onSearch={searchValue => {
             // 同步直接改变 data
             this.setState({
@@ -111,8 +111,8 @@ class Component extends React.Component {
         <div>搜索 异步数据</div>
         <MoreSelect
           data={data}
-          selected={this.state.value}
-          onSelect={value => this.setState({ value })}
+          selected={this.state.selected}
+          onSelect={selected => this.setState({ selected })}
           onSearch={searchValue => {
             // 同步直接改变 data
 
