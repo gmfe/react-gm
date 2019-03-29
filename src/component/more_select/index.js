@@ -223,9 +223,10 @@ MoreSelect.propTypes = {
   renderListItem: PropTypes.func, // 定制列表
 
   // 样式
-  listMaxHeight: PropTypes.string
+  listMaxHeight: PropTypes.string,
 
   // isGroupList
+  isGroupList: PropTypes.bool
 }
 
 MoreSelect.defaultProps = {

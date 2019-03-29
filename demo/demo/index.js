@@ -37,6 +37,29 @@ const data = [{
   text: '西乡11'
 }]
 
+const dataGroup = [{
+  label: '南山',
+  children: [{
+    value: 1,
+    text: '科技园'
+  }, {
+    value: 2,
+    text: '大冲'
+  }, {
+    value: 3,
+    text: '大新'
+  }]
+}, {
+  label: '宝安',
+  children: [{
+    value: 2,
+    text: '西乡'
+  }, {
+    value: 21,
+    text: '固戍'
+  }]
+}]
+
 class Component extends React.Component {
   constructor (props) {
     super(props)
@@ -124,6 +147,17 @@ class Component extends React.Component {
             })
           }}
         />
+
+        <hr/>
+        <div>group</div>
+        {/* <MoreSelect */}
+        {/* isGroupList */}
+        {/* data={dataGroup} */}
+        {/* selected={this.state.selected} */}
+        {/* onSelect={value => { */}
+        {/* this.setState({ value }) */}
+        {/* }} */}
+        {/* /> */}
       </div>
     )
   }
