@@ -48,6 +48,7 @@ class Base extends React.Component {
     return (
       <div
         {...rest}
+        ref={this.refList}
         className={classNames('gm-list', {
           'gm-list-group': isGroupList
         }, className)}

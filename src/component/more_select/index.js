@@ -4,7 +4,7 @@ import _ from 'lodash'
 import classNames from 'classnames'
 import Popover from '../popover'
 import Flex from '../flex'
-import { List } from '../list'
+import List from '../list'
 import Loading from '../loading'
 import { pinYinFilter } from 'gm-util'
 
