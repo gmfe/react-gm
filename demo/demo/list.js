@@ -1,7 +1,12 @@
 import React from 'react'
-import { List, ListGroup } from '../../src/'
+import { List } from '../../src/'
 
 class Component extends React.Component {
+  state = {
+    selected: '南山',
+    multipleSelected: ['南山', '罗湖']
+  }
+
   render () {
     return (
       <div>
@@ -12,8 +17,8 @@ class Component extends React.Component {
             { value: '龙岗', text: '龙岗' },
             { value: '罗湖', text: '罗湖' }
           ]}
-          selected='南山'
-          onSelect={selected => console.log(selected)}
+          selected={this.state.selected}
+          onSelect={selected => this.setState({ selected })}
         />
 
         <List
@@ -24,55 +29,55 @@ class Component extends React.Component {
             { value: '龙岗', text: '龙岗' },
             { value: '罗湖', text: '罗湖' }
           ]}
-          selected={['南山', '罗湖']}
-          onSelect={selected => console.log(selected)}
+          selected={this.state.multipleSelected}
+          onSelect={selected => this.setState({ multipleSelected: selected })}
         />
 
         <div className='gm-padding-10'/>
 
-        <ListGroup
+        <List
           data={[
             {
-              label: '南山',
+              label: '分组二',
               children: [
-                { value: '深大', text: '深大' },
-                { value: '蛇口', text: '蛇口' },
-                { value: '西丽', text: '西丽' }
+                { value: '南山', text: '南山' },
+                { value: '福田', text: '福田' }
               ]
             },
             {
-              label: '福田',
+              label: '分组一',
               children: [
-                { value: '竹子林', text: '竹子林' },
-                { value: '下沙', text: '下沙' },
-                { value: '上沙', text: '上沙' }
+                { value: '龙岗', text: '龙岗' },
+                { value: '罗湖', text: '罗湖' }
               ]
             }
           ]}
-          selected='竹子林'
+          selected={this.state.selected}
+          onSelect={selected => this.setState({ selected })}
+          isGroupList
         />
 
-        <ListGroup
+        <List
           multiple
           data={[
             {
-              label: '南山',
+              label: '分组二',
               children: [
-                { value: '深大', text: '深大' },
-                { value: '蛇口', text: '蛇口' },
-                { value: '西丽', text: '西丽' }
+                { value: '南山', text: '南山' },
+                { value: '福田', text: '福田' }
               ]
             },
             {
-              label: '福田',
+              label: '分组一',
               children: [
-                { value: '竹子林', text: '竹子林' },
-                { value: '下沙', text: '下沙' },
-                { value: '上沙', text: '上沙' }
+                { value: '龙岗', text: '龙岗' },
+                { value: '罗湖', text: '罗湖' }
               ]
             }
           ]}
-          selected={['竹子林', '蛇口']}
+          isGroupList
+          selected={this.state.multipleSelected}
+          onSelect={selected => this.setState({ multipleSelected: selected })}
         />
       </div>
     )

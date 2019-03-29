@@ -27,27 +27,18 @@ class Base extends React.Component {
     }
   }
 
-  isActive = (value) => {
-    const { multiple, selected } = this.props
-    if (multiple) {
-      return selected.includes(value)
-    } else {
-      return selected === value
-    }
-  }
-
   handleSelect = (item) => {
     const { multiple, selected, onSelect } = this.props
     if (multiple) {
       onSelect(_.xor(selected, [item.value]))
     } else {
-      onSelect(item.value)
+      onSelect([item.value])
     }
   }
 
   render () {
     const {
-      data,
+      data, isGroupList,
       selected, multiple, onSelect, isScrollTo, // eslint-disable-line
       renderItem,
       className,
@@ -57,7 +48,9 @@ class Base extends React.Component {
     return (
       <div
         {...rest}
-        className={classNames('gm-list gm-list-group', className)}
+        className={classNames('gm-list', {
+          'gm-list-group': isGroupList
+        }, className)}
       >
         {_.map(data, group => (
           <div key={group.label} className='gm-list-group-item'>
@@ -66,7 +59,7 @@ class Base extends React.Component {
               <div
                 key={v.value}
                 className={classNames('gm-list-item', {
-                  active: this.isActive(v.value)
+                  active: selected.includes(v.value)
                 })}
                 onClick={this.handleSelect.bind(this, v)}
               >
@@ -91,7 +84,9 @@ Base.propTypes = {
   renderItem: PropTypes.func,
 
   // 滚动
-  isScrollTo: PropTypes.bool
+  isScrollTo: PropTypes.bool,
+
+  isGroupList: PropTypes.bool // 在这里仅仅表示数据的类型，对UI有影响而已
 }
 
 Base.defaultProps = {

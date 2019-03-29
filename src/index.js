@@ -63,7 +63,7 @@ import Drawer from './component/drawer'
 import EditableText from './component/editable_text'
 import FlipNumber from './component/flip_number'
 import Price from './component/price'
-import { List, ListGroup } from './component/list'
+import List from './component/list'
 import LazyImg from './component/lazy_img'
 
 import Validator from './validator'
@@ -172,6 +172,6 @@ export {
   EditableText,
   FlipNumber,
   Price,
-  List, ListGroup,
+  List,
   LazyImg
 }
