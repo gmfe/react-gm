@@ -21,29 +21,6 @@
     color: @gm-color-third;
   }
 
-  .gm-more-select-target-box {
-    overflow-x: auto;
-
-    .selected {
-      background-color: @list-group-hover-bg;
-      padding: 0 5px;
-      margin-right: 5px;
-      border-radius: 4px;
-
-      .close {
-        right: -5px;
-        line-height: 1;
-        font-size: 15px;
-        padding-left: 2px;
-      }
-    }
-
-    .gm-more-select-target {
-      position: static;
-      padding: 5px 10px;
-    }
-  }
-
   &.gm-more-select-disabled {
     cursor: not-allowed;
     opacity: 0.6;
@@ -54,6 +31,21 @@
 
     .gm-more-select-clear-btn {
       cursor: not-allowed;
+    }
+  }
+
+  &.gm-more-select-multiple {
+    .gm-more-select-selected-item {
+      position: relative;
+      padding: 0 16px 0 5px;
+      background-color: #edf3f9;
+      margin-right: 5px;
+      border-radius: 4px;
+
+      .gm-more-select-clear-btn {
+        padding: 0 2px;
+        right: 0;
+      }
     }
   }
 }

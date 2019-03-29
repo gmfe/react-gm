@@ -1,193 +1,55 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import classNames from 'classnames'
-import Popover from '../popover'
-import Flex from '../flex'
-import List from '../list'
-import Loading from '../loading'
 import { pinYinFilter } from 'gm-util'
+import Base from './base'
 
 class MoreSelect extends React.Component {
-  constructor (props) {
-    super(props)
+  handleSelect = (selected) => {
+    const { multiple, onSelect } = this.props
 
-    this.ref = React.createRef()
-
-    this.state = {
-      searchValue: '',
-      loading: false
-    }
-
-    this._isMounted = false
-
-    this.debounceDoSearch = _.debounce(this.doSearch, props.delay)
-  }
-
-  componentWillUnmount () {
-    this._isMounted = true
-  }
-
-  handleClear = () => {
-    const { onSelect } = this.props
-
-    onSelect(null)
-  }
-
-  handleChange = (e) => {
-    const searchValue = e.target.value
-
-    this.setState({
-      searchValue
-    })
-
-    this.debounceDoSearch(searchValue)
-  }
-
-  handleSelected = (value) => {
-    const { onSelect, data } = this.props
-
-    const item = _.find(data, item => item.value === value)
-    onSelect(item)
-
-    // 单选选后关闭
-    // 要异步
-    setTimeout(() => {
-      if (!this._isMounted) {
-        this.ref.current.click()
-      }
-    }, 0)
-  }
-
-  doSearch = (query) => {
-    const { onSearch, data } = this.props
-
-    if (!this._isMounted && onSearch) {
-      const result = onSearch(query, data)
-
-      if (!result) {
-        return
-      }
-
-      this.setState({
-        loading: true
-      })
-
-      Promise.resolve(result).then(() => {
-        if (!this._isMounted) {
-          this.setState({
-            loading: false
-          })
-        }
-      }).catch(() => {
-        if (!this._isMounted) {
-          this.setState({
-            isLoading: false
-          })
-        }
-      })
-    }
-  }
-
-  renderList () {
-    const {
-      data,
-      selected,
-      renderListItem,
-      renderListFilter,
-      renderListFilterType,
-      searchPlaceholder,
-      disabledSearch,
-      listMaxHeight
-    } = this.props
-
-    const { loading, searchValue } = this.state
-
-    let filterData = data
-    if (renderListFilter) {
-      filterData = renderListFilter(data, searchValue)
-    } else if (renderListFilterType === 'pinyin') {
-      filterData = renderListFilterPinYin(data, searchValue)
+    if (multiple) {
+      onSelect(selected)
     } else {
-      filterData = renderListFilterDefault(data, searchValue)
+      onSelect(selected[0])
     }
-
-    return (
-      <div className='gm-more-select-popup'>
-        {!disabledSearch && (
-          <div className='gm-more-select-popup-input'>
-            <input
-              autoFocus
-              className='form-control'
-              type='text'
-              value={searchValue}
-              onChange={this.handleChange}
-              placeholder={searchPlaceholder}
-            />
-          </div>
-        )}
-        {loading && <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'>
-          <Loading size={20}/>
-        </Flex>}
-        {!loading && (
-          <List
-            data={filterData}
-            selected={selected.value}
-            className='gm-border-0'
-            renderItem={renderListItem}
-            onSelect={this.handleSelected}
-            isScrollTo
-            style={{
-              maxHeight: listMaxHeight
-            }}
-          />
-        )}
-      </div>
-    )
   }
 
   render () {
     const {
-      disabled,
+      data,
       selected,
-
-      placeholder,
-
-      renderSelected,
-
-      className, style
+      multiple,
+      isGroupList,
+      ...rest
     } = this.props
 
+    let oData
+    if (isGroupList) {
+      oData = data
+    } else {
+      oData = [{
+        label: '',
+        children: data
+      }]
+    }
+
+    let oSelected
+    if (multiple) {
+      oSelected = selected
+    } else {
+      oSelected = selected ? [selected] : []
+    }
+
     return (
-      <div
-        ref={this.ref}
-        className={classNames('gm-more-select', {
-          'gm-more-select-disabled': disabled
-        }, className)}
-        style={style}
-      >
-        <Popover
-          animName
-          popup={this.renderList()}
-          disabled={disabled}
-        >
-          <div className='gm-more-select-selected'>
-            {selected ? (
-              <Flex>
-                <Flex flex column>
-                  {renderSelected(selected)}
-                </Flex>
-                <i
-                  onClick={disabled ? _.noop : this.handleClear}
-                  className='xfont xfont-close-circle gm-cursor gm-more-select-clear-btn'
-                />
-              </Flex>
-            ) : (
-              <div className='gm-text-desc'>{placeholder}</div>
-            )}
-          </div>
-        </Popover>
-      </div>
+      <Base
+        {...rest}
+        data={oData}
+        selected={oSelected}
+        onSelect={this.handleSelect}
+        multiple={multiple}
+        isGroupList={isGroupList}
+      />
     )
   }
 }
@@ -206,8 +68,12 @@ MoreSelect.renderListFilterPinYin = renderListFilterPinYin
 MoreSelect.propTypes = {
   // 基本属性
   data: PropTypes.array.isRequired, // [{value, text}]
-  selected: PropTypes.object, // item。 非 value，也非引用，原因是想解耦 selected 和 data 的关系。这样当
+  selected: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]), // item。 非 value，也非引用，原因是想解耦 selected 和 data 的关系。这样当
   onSelect: PropTypes.func.isRequired, // 返回 item
+  multiple: PropTypes.bool,
 
   // 状态
   disabled: PropTypes.bool,

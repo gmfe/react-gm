@@ -65,10 +65,17 @@ class Component extends React.Component {
     super(props)
     this.state = {
       selected: {
-        value: 3,
-        text: '罗湖'
+        value: 1,
+        text: '科技园'
       },
-      data
+      data,
+      multipleSelected: [{
+        value: 3,
+        text: '大新'
+      }, {
+        value: 2,
+        text: '大冲'
+      }]
     }
   }
 
@@ -79,8 +86,8 @@ class Component extends React.Component {
         <MoreSelect
           data={data}
           selected={this.state.selected}
-          onSelect={value => {
-            this.setState({ value })
+          onSelect={selected => {
+            this.setState({ selected })
           }}
         />
 
@@ -88,8 +95,8 @@ class Component extends React.Component {
         <MoreSelect
           data={data}
           selected={this.state.selected}
-          onSelect={value => {
-            this.setState({ value })
+          onSelect={selected => {
+            this.setState({ selected })
           }}
           renderListFilterType='pinyin'
         />
@@ -149,15 +156,36 @@ class Component extends React.Component {
         />
 
         <hr/>
+        <div>多选</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.multipleSelected}
+          onSelect={selected => {
+            this.setState({ multipleSelected: selected })
+          }}
+          multiple
+        />
+
+        <hr/>
         <div>group</div>
-        {/* <MoreSelect */}
-        {/* isGroupList */}
-        {/* data={dataGroup} */}
-        {/* selected={this.state.selected} */}
-        {/* onSelect={value => { */}
-        {/* this.setState({ value }) */}
-        {/* }} */}
-        {/* /> */}
+        <MoreSelect
+          isGroupList
+          data={dataGroup}
+          selected={this.state.selected}
+          onSelect={selected => {
+            this.setState({ selected })
+          }}
+        />
+        <MoreSelect
+          isGroupList
+          data={dataGroup}
+          selected={this.state.multipleSelected}
+          onSelect={selected => {
+            this.setState({ multipleSelected: selected })
+          }}
+          multiple
+          renderListFilterType='pinyin'
+        />
       </div>
     )
   }
