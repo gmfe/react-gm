@@ -97,7 +97,7 @@ class Component extends React.Component {
 :::
 
 ### Props
-#### Loading
+
 - `data (array|isRequired)` value text
 - `selected (any)`
 - `onSelected (func)`

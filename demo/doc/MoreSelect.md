@@ -1,6 +1,6 @@
 ---
 imports:
-    import {List} from '../../src/index';
+    import {MoreSelect} from '../../src/index';
 ---
 ## List
 
@@ -8,83 +8,189 @@ imports:
 
 ::: demo
 ```js
+const data = [{
+  value: 1,
+  text: '南山'
+}, {
+  value: 2,
+  text: '福田'
+}, {
+  value: 3,
+  text: '罗湖'
+}, {
+  value: 4,
+  text: '宝安'
+}, {
+  value: 5,
+  text: '福永'
+}, {
+  value: 6,
+  text: '坪洲'
+}, {
+  value: 7,
+  text: '西乡'
+}, {
+  value: 8,
+  text: '西乡8'
+}, {
+  value: 9,
+  text: '西乡9'
+}, {
+  value: 10,
+  text: '西乡10'
+}, {
+  value: 11,
+  text: '西乡11'
+}]
+
+const dataGroup = [{
+  label: '南山',
+  children: [{
+    value: 1,
+    text: '科技园'
+  }, {
+    value: 2,
+    text: '大冲'
+  }, {
+    value: 3,
+    text: '大新'
+  }]
+}, {
+  label: '宝安',
+  children: [{
+    value: 2,
+    text: '西乡'
+  }, {
+    value: 21,
+    text: '固戍'
+  }]
+}]
+
 class Component extends React.Component {
-  state = {
-    selected: '南山',
-    multipleSelected: ['南山', '罗湖']
+  constructor (props) {
+    super(props)
+    this.state = {
+      selected: {
+        value: 1,
+        text: '科技园'
+      },
+      data,
+      multipleSelected: [{
+        value: 3,
+        text: '大新'
+      }, {
+        value: 2,
+        text: '大冲'
+      }]
+    }
   }
 
   render () {
     return (
       <div>
-        <List
-          data={[
-            { value: '南山', text: '南山' },
-            { value: '福田', text: '福田' },
-            { value: '龙岗', text: '龙岗' },
-            { value: '罗湖', text: '罗湖' }
-          ]}
+        <div>默认</div>
+        <MoreSelect
+          data={data}
           selected={this.state.selected}
+          onSelect={selected => {
+            this.setState({ selected })
+          }}
+        />
+
+        <div>默认 带拼音搜索</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.selected}
+          onSelect={selected => {
+            this.setState({ selected })
+          }}
+          renderListFilterType='pinyin'
+        />
+
+        <div>disabled</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.selected}
+          onSelect={selected => this.setState({ selected })}
+          disabled
+        />
+
+        <div>placeholder searchPlaceholder</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.selected}
+          onSelect={selected => this.setState({ selected })}
+          placeholder='啊啊啊'
+          searchPlaceholder='啊啊啊a'
+        />
+
+        <div>自动滚到已选</div>
+        <MoreSelect
+          data={data}
+          selected={{ value: 11, text: '西乡11' }}
           onSelect={selected => this.setState({ selected })}
         />
 
-        <List
-          multiple
-          data={[
-            { value: '南山', text: '南山' },
-            { value: '福田', text: '福田' },
-            { value: '龙岗', text: '龙岗' },
-            { value: '罗湖', text: '罗湖' }
-          ]}
-          selected={this.state.multipleSelected}
-          onSelect={selected => this.setState({ multipleSelected: selected })}
-        />
-
-        <div className='gm-padding-10'/>
-
-        <List
-          data={[
-            {
-              label: '分组二',
-              children: [
-                { value: '南山', text: '南山' },
-                { value: '福田', text: '福田' }
-              ]
-            },
-            {
-              label: '分组一',
-              children: [
-                { value: '龙岗', text: '龙岗' },
-                { value: '罗湖', text: '罗湖' }
-              ]
-            }
-          ]}
+        <div>搜索 同步数据</div>
+        <MoreSelect
+          data={this.state.data}
           selected={this.state.selected}
           onSelect={selected => this.setState({ selected })}
-          isGroupList
+          onSearch={searchValue => {
+            // 同步直接改变 data
+            this.setState({
+              data: _.filter(data, item => item.text.includes(searchValue))
+            })
+          }}
         />
 
-        <List
-          multiple
-          data={[
-            {
-              label: '分组二',
-              children: [
-                { value: '南山', text: '南山' },
-                { value: '福田', text: '福田' }
-              ]
-            },
-            {
-              label: '分组一',
-              children: [
-                { value: '龙岗', text: '龙岗' },
-                { value: '罗湖', text: '罗湖' }
-              ]
-            }
-          ]}
-          isGroupList
+        <div>搜索 异步数据</div>
+        <MoreSelect
+          data={data}
+          selected={this.state.selected}
+          onSelect={selected => this.setState({ selected })}
+          onSearch={searchValue => {
+            // 同步直接改变 data
+
+            // 异步 返回 promise
+            return new Promise(resolve => {
+              setTimeout(() => {
+                resolve()
+              }, 1000)
+            })
+          }}
+        />
+
+        <hr/>
+        <div>多选</div>
+        <MoreSelect
+          data={data}
           selected={this.state.multipleSelected}
-          onSelect={selected => this.setState({ multipleSelected: selected })}
+          onSelect={selected => {
+            this.setState({ multipleSelected: selected })
+          }}
+          multiple
+        />
+
+        <hr/>
+        <div>group</div>
+        <MoreSelect
+          isGroupList
+          data={dataGroup}
+          selected={this.state.selected}
+          onSelect={selected => {
+            this.setState({ selected })
+          }}
+        />
+        <MoreSelect
+          isGroupList
+          data={dataGroup}
+          selected={this.state.multipleSelected}
+          onSelect={selected => {
+            this.setState({ multipleSelected: selected })
+          }}
+          multiple
+          renderListFilterType='pinyin'
         />
       </div>
     )
@@ -97,12 +203,5 @@ class Component extends React.Component {
 :::
 
 ### Props
-#### Loading
-- `data (array|isRequired)` value text
-- `selected (any)`
-- `onSelected (func)`
-- `multiple (bool)`
-- `renderItem (func)` 自定义渲染Item
-- `isScrollTo (bool)` 是否滚动到已选项
-- `isGroupList (bool)` true 则 data 的格式是 {'[{label, children: [{value, text}]}]'}
-- `...rest`
+
+TODO
