@@ -38,7 +38,8 @@ const data = [{
     { name: 'Tree 树形选择', path: '/doc/Tree' },
     { name: 'DatePicker 日期选择', path: '/doc/DatePicker' },
     { name: 'TimeSpan 时间点选择', path: '/doc/TimeSpan' },
-    { name: 'ColorPicker 颜色选择', path: '/doc/ColorPicker' }
+    { name: 'ColorPicker 颜色选择', path: '/doc/ColorPicker' },
+    { name: 'List 列表', path: '/doc/List' }
   ]
 }, {
   name: 'Layer',

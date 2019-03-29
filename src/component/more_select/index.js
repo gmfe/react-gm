@@ -153,7 +153,9 @@ class MoreSelect extends React.Component {
 
       placeholder,
 
-      renderSelected
+      renderSelected,
+
+      className, style
     } = this.props
 
     return (
@@ -161,7 +163,8 @@ class MoreSelect extends React.Component {
         ref={this.ref}
         className={classNames('gm-more-select', {
           'gm-more-select-disabled': disabled
-        })}
+        }, className)}
+        style={style}
       >
         <Popover
           animName
