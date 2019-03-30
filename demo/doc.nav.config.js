@@ -68,7 +68,8 @@ const data = [{
   name: 'Loading',
   sub: [
     { name: 'Loading 加载中', path: '/doc/Loading' },
-    { name: 'Progress 请求进度条', path: '/doc/Progress' }
+    { name: 'Progress 请求进度条', path: '/doc/Progress' },
+    { name: 'ProgressCircle 环形进度条', path: '/doc/ProgressCircle' }
   ]
 }, {
   name: 'Other',
