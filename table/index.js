@@ -2,7 +2,6 @@ import Table from './table'
 import SelectTable from './select_table'
 import ExpandTable from './expand_table'
 import diyTableHOC from './diy_table'
-import DndTable from './dnd_table'
 import ExpandSelectTable from './expand_select_table'
 import 'react-table/react-table.css'
 import './style.less'
@@ -18,6 +17,5 @@ export {
   ExpandSelectTable,
   SelectTable,
   TableUtil,
-  diyTableHOC,
-  DndTable
+  diyTableHOC
 }

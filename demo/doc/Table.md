@@ -1,6 +1,7 @@
 ---
 imports:
-    import {Table, SelectTable, ExpandTable, TableUtil, diyTableHOC, DndTable} from '../../table';
+    import {Table, SelectTable, ExpandTable, TableUtil, diyTableHOC} from '../../table';
+    import DndTable from '../../table/dnd_table';
     import {Popover} from '../../src/index';
 
     const DiyTable = diyTableHOC(Table);
