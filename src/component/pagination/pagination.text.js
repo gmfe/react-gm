@@ -26,7 +26,6 @@ class WithoutCount extends React.Component {
 
 class PaginationText extends React.Component {
   render () {
-    console.warn('PaginationText 将会废弃,建议使用PaginationBox')
     if (this.props.data.count !== undefined) {
       return <WithCount {...this.props}/>
     } else {
