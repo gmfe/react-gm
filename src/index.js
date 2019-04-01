@@ -12,6 +12,7 @@ import DateRangePicker from './component/datepicker/daterangepicker'
 import Tip from './component/tip'
 import NProgress from './component/nprogress'
 import Progress from './component/progress'
+import ProgressCircle from './component/progress_circle'
 import Divider from './component/divider'
 import Dialog from './component/dialog'
 import Flex from './component/flex'
@@ -110,6 +111,7 @@ export {
   Storage,
   Tip,
   Progress,
+  ProgressCircle,
   NProgress,
   Divider,
   Dialog,
