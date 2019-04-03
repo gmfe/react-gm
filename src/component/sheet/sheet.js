@@ -11,9 +11,15 @@ import SheetSelect from './sheet_select'
 import SheetBatchAction from './sheet_batch_action'
 import Loading from '../loading'
 import Flex from '../flex'
+import Popover from '../popover'
+import List from '../list'
 import { getLocale } from '../../locales'
 
 class Sheet extends React.Component {
+  state = {
+    selectAllPageType: 1
+  }
+
   checkboxOrRadioName = 'sheet_checkbox_radio_' + Math.random()
 
   handleSelect (select, i, event) {
@@ -151,7 +157,21 @@ class Sheet extends React.Component {
     return trs
   }
 
+  renderTip = (select) => {
+    const { selectAllPageType } = this.state
+    return selectAllPageType === 1
+      ? <div className='gm-sheet-select-all-tip'>{select.props.selectAllTip}</div>
+      : <div className='gm-sheet-select-all-tip'>{select.props.selectAllPageTip}</div>
+  }
+
+  handleSelectAllPageType (select, type) {
+    this.setState({ selectAllPageType: type })
+    const { onSelectAllPage } = select.props
+    onSelectAllPage && onSelectAllPage(type)
+  }
+
   render () {
+    const { selectAllPageType } = this.state
     let { list = [], scrollX, expandedRowRender } = this.props
     let select = false
     let isSelectAll = false
@@ -218,19 +238,32 @@ class Sheet extends React.Component {
                 {select && (
                   <th className='gm-sheet-select'>
                     {!select.props.isRadio && <div>
-                      <input
-                        type='checkbox'
-                        checked={isSelectAll}
-                        onChange={this.handleSelectAll.bind(this, select)}
-                      />
-                      {isSelectAll && select.props.hasSelectTip &&
-                      <div className='gm-sheet-select-all-tip'>{select.props.selectAllTip}</div>}
+                      <Flex>
+                        <input
+                          type='checkbox'
+                          checked={isSelectAll}
+                          onChange={this.handleSelectAll.bind(this, select)}
+                        />
+                        {select.props.hasSelectAllPage && <Popover type='click' popup={
+                          <List
+                            selected={selectAllPageType}
+                            data={[
+                              { value: 1, text: getLocale('sheet', 'currentPage') },
+                              { value: 2, text: getLocale('sheet', 'allPage') }
+                            ]}
+                            onSelect={this.handleSelectAllPageType.bind(this, select)}
+                          />
+                        }>
+                          <i className='xfont xfont-down-triangle gm-cursor gm-padding-left-5'/>
+                        </Popover>}
+                      </Flex>
+                      {isSelectAll && select.props.hasSelectTip && this.renderTip(select)}
                     </div>}
                   </th>
                 )}
                 {_.map(columns, (value, index) => {
                   const {
-                  children, field, name, placeholder, render,// eslint-disable-line
+                    children, field, name, placeholder, render,// eslint-disable-line
                     ...rest
                   } = value.props
                   return <th key={index} {...rest}>{value.props.name}</th>

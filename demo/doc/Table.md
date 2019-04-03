@@ -260,11 +260,19 @@ class SelectTableWrap extends React.Component {
       selected
     })
   }
+  
+  handleSelectAllType = (type) => {
+    console.log(type)
+  }
 
   render () {
     return (
       <div>
         <SelectTable
+          hasSelectAllPage
+          selectAllTip='已选中当前页数据'
+          selectAllPageTip='已选中所有页面数据'
+          onSelectAllPage={this.handleSelectAllType}
           ref={ref => (this.table = ref)}
           data={data}
           columns={[{
@@ -286,7 +294,6 @@ class SelectTableWrap extends React.Component {
           keyField='id'
           selectAll={this.state.selectAll}
           onSelectAll={this.handleToggleAll}
-          selectAllTip='选中所有数据啦'
           selected={this.state.selected}
           onSelect={this.handleSelect}
         />
@@ -312,6 +319,9 @@ class SelectTableWrap extends React.Component {
 - `onSelectTip (string)`
 - `keyField (string)` 默认 value
 - `selectType (string)` checkbox or radio
+- `selectAllPageTip(string)` 选择所有页的文案
+- `onSelectAllPage(func)` 选择 当前页(1)/所有页(2) 状态回调 ---- 函数入参: 1代表当前页，2代表所有页
+- `hasSelectAllPage(bool)` 是否显示 当前页/所有页 选择器
 
 其他见 react-table 官方文档
 
