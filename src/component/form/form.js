@@ -19,7 +19,7 @@ class Form extends React.Component {
     this.setState({
       canValidate: !!err
     })
-    return !err
+    return err
   }
 
   validateAll () {
@@ -67,17 +67,19 @@ class Form extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    this.props.onSubmit(e)
+    const { onSubmit, onSubmitValidated, apiDoValidate } = this.props
+    onSubmit(e)
 
     const err = this.validateAll()
-    if (!err) {
-      this.props.onSubmitValidated()
-    }
-
     // 有错误才打开错误提示，没有错误则不打开
     this.setState({
       canValidate: !!err
     })
+
+    if (err) {
+      return apiDoValidate && apiDoValidate(err)
+    }
+    onSubmitValidated()
   }
 
   render () {

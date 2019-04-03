@@ -8,19 +8,20 @@ class FormGroup extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    const { onSubmit, onSubmitValidated, formRefs } = this.props
+    const { onSubmit, onSubmitValidated, formRefs, apiDoValidate } = this.props
 
     onSubmit()
 
-    let isPass = true
+    let errList = []
     _.each(formRefs, form => {
-      if (!form.current.apiValidate()) {
-        isPass = false
-      }
+      const err = form.current.apiValidate()
+      if (err) { errList.push(err) }
     })
-    if (isPass) {
-      onSubmitValidated()
+
+    if (errList.length) {
+      return apiDoValidate && apiDoValidate(errList)
     }
+    onSubmitValidated()
   }
 
   render () {
@@ -28,7 +29,7 @@ class FormGroup extends React.Component {
       disabled,
       onCancel,
       children,
-      formRefs, onSubmit, onSubmitValidated, // eslint-disable-line
+      formRefs, onSubmit, onSubmitValidated, apiDoValidate, // eslint-disable-line
       ...rest
     } = this.props
 

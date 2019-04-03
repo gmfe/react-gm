@@ -230,7 +230,7 @@ class FormItemWrap2 extends React.Component {
 
     render() {
         return (
-            <Form onSubmit={this.handleSubmit} onSubmitValidated={this.handleSubmitValidated}>
+            <Form onSubmit={this.handleSubmit} onSubmitValidated={this.handleSubmitValidated} apiDoValidate={err => console.log(err)}>
                 <FormItem
                     label="名字"
                     required
@@ -292,6 +292,7 @@ class FormItemWrap2 extends React.Component {
 - `label (string)`
 - `validate (func)` 校验后返回错误帮助信息，且只有过提交过动作后才显示，onChange则会自动重新校验。存在validate，则`error` `help`无效。如果存在`required`，则先校验是否有值。
 - `error (bool)` 校验的状态，只有`true`时help才会显示
+- `apiDoValidate (fun)` 暴露校验后的 `err`
 - `help (string)` 错误帮助信息
 - `unLabelTop (bool)` 是否取消 label 的 padding-top: 7px。Switch 默认取消。
 
@@ -385,6 +386,7 @@ class FormGroupWrap extends React.Component {
                 formRefs={[this.form1, this.form2]}
                 onCancel={this.handleCancel}
                 onSubmit={() => console.log('onSubmit')}
+                apiDoValidate={err => console.log(err)}
                 onSubmitValidated={() => console.log('onSubmitValidated')}
             >
                 <QuickPanel icon='todo' iconColor='#4fb7de' title='基础信息'>
@@ -457,5 +459,6 @@ class FormGroupWrap extends React.Component {
 - `formRefs (array)` 所包含的`Form`组件ref
 - `onSubmit (fun)` 保存function
 - `onSubmitValidated (fun)` 保存function带校验
+- `apiDoValidate (fun)` 暴露校验后的 `errList`
 
 **注意，Form 需要添加`hasButtonInGroup`，用于enter键触发保存**
