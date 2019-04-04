@@ -314,7 +314,7 @@ class SelectTableWrap extends React.Component {
 - `columns (array|required)`
 - `selected (array|required)`
 - `onSelect (array|required)`
-- `selectAll (array|required)` 注意 全选是否勾上 可能代表当前可见列表勾上，也可能代表所有数据勾上，具体由调用方确定。 和 看到的列表是否全勾上 无关联
+- `selectAll (bool|required)` 注意 全选是否勾上 可能代表当前可见列表勾上，也可能代表所有数据勾上，具体由调用方确定。 和 看到的列表是否全勾上 无关联
 - `onSelectAll (array|required)`
 - `onSelectTip (string)`
 - `keyField (string)` 默认 value

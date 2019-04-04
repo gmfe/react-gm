@@ -220,6 +220,8 @@ class Sheet extends React.Component {
             {batchs.props.children}
           </div>
         ) : null}
+        {isSelectAll && select.props.hasSelectTip && this.renderTip(select)}
+
         <div className={'gm-sheet-table' + (scrollX ? ' gm-sheet-table-scroll-x' : '')}>
           <table className='table table-striped table-hover table-bordered'>
             <thead>
@@ -257,7 +259,6 @@ class Sheet extends React.Component {
                           <i className='xfont xfont-down-triangle gm-cursor gm-padding-left-5'/>
                         </Popover>}
                       </Flex>
-                      {isSelectAll && select.props.hasSelectTip && this.renderTip(select)}
                     </div>}
                   </th>
                 )}
