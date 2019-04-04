@@ -21,6 +21,10 @@ const TrGroupInner = React.memo(function TrGroupInner (props) {
   })
 })
 
+function TdComponent ({ _dragField, ...rest }) {
+  return <ReactTableDefaults.TdComponent {...rest}/>
+}
+
 function TbodyComponent ({
   getDroppableStyle,
   getDroppableClass,
@@ -131,6 +135,7 @@ class DndTable extends React.Component {
         onDragEnd={this.onDragEnd}
       >
         <BaseTable
+          TdComponent={TdComponent}
           TbodyComponent={TbodyComponent}
           TrGroupComponent={TrGroupComponent}
           getTdProps={(state, rowInfo, column, instance) => {
