@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import BaseTable from './base'
-import hocSelectTable from './hoc/select_table_hoc'
+import hocSelectTable from 'react-table/lib/hoc/selectTable'
 import _ from 'lodash'
 
 const HocSelectTable = hocSelectTable(BaseTable)
@@ -25,20 +25,37 @@ class SelectTable extends React.Component {
 
   render () {
     const {
-      onSelectAll,
+      loading, data, columns,
+      defaultPageSize,
+      selectAll, onSelectAll, selectAllTip,
+      selectType,
+      keyField,
+      noDataText, loadingText,
       ...rest
     } = this.props
 
     return (
-      <HocSelectTable
-        {...rest}
-        ref={ref => (this.ref = ref)}
-        className='-striped -highlight'
-        showPagination={false}
-        isSelected={this.isSelected}
-        toggleSelection={this.handleToggleSelection}
-        toggleAll={onSelectAll}
-      />
+      <div className='gm-react-table-select'>
+        <HocSelectTable
+          {...rest}
+          ref={ref => (this.ref = ref)}
+          loading={loading}
+          data={data}
+          columns={columns}
+          defaultPageSize={defaultPageSize}
+          className='-striped -highlight'
+          showPagination={false}
+          selectAll={selectAll}
+          isSelected={this.isSelected}
+          toggleSelection={this.handleToggleSelection}
+          toggleAll={onSelectAll}
+          selectType={selectType}
+          keyField={keyField}
+          noDataText={noDataText}
+          loadingText={loadingText}
+        />
+        {selectAllTip && selectAll && <div className='gm-react-table-select-all-tip'>{selectAllTip}</div>}
+      </div>
     )
   }
 }
@@ -51,17 +68,13 @@ SelectTable.propTypes = {
   onSelect: PropTypes.func.isRequired,
   selectAll: PropTypes.bool.isRequired,
   onSelectAll: PropTypes.func.isRequired,
-  selectAllTip: PropTypes.string,
+  selectAllTip: PropTypes.node,
   keyField: PropTypes.string,
-  selectType: PropTypes.oneOf(['checkbox', 'radio']), // 如果是 radio， selectAll  onSelectAll 没意义
-  selectAllPageTip: PropTypes.string, // 选择所有页提示
-  onSelectAllPage: PropTypes.func, // 选择 所有页/当前页 回调
-  hasSelectAllPage: PropTypes.bool // 是否存在 所有页/当前页 按钮
+  selectType: PropTypes.oneOf(['checkbox', 'radio']) // 如果是 radio， selectAll  onSelectAll 没意义
 }
 
 SelectTable.defaultProps = {
-  selectType: 'checkbox',
-  hasSelectAllPage: false
+  selectType: 'checkbox'
 }
 
 export default SelectTable

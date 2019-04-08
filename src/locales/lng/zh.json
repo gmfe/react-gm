@@ -49,11 +49,7 @@
     "closeDetails": "收拢详细信息"
   },
   "sheet": {
-    "empty": "没有数据",
-    "allPage": "选择所有页",
-    "currentPage": "选择当前页",
-    "hasSelectedCurrentPage": "已选中当前页面的条目",
-    "hasSelectedAllPage": "已选中所有页面的条目"
+    "empty": "没有数据"
   },
   "transfer": {
     "selectAll": "全选",
