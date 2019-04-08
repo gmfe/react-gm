@@ -220,9 +220,9 @@ class TableSortWrap extends React.Component {
 
 ---
 
-## SelectTable
+## SelectTable `(注意selectAll的使用)`
 
-::: demo SelectTable
+::: demo SelectTable 
 ```js
 class SelectTableWrap extends React.Component {
   constructor (props) {
@@ -261,19 +261,11 @@ class SelectTableWrap extends React.Component {
       selected
     })
   }
-  
-  handleSelectAllType = (type) => {
-    console.log(type)
-  }
 
   render () {
     return (
       <div>
         <SelectTable
-          hasSelectAllPage
-          selectAllTip='已选中当前页数据'
-          selectAllPageTip='已选中所有页面数据'
-          onSelectAllPage={this.handleSelectAllType}
           ref={ref => (this.table = ref)}
           data={data}
           columns={[{
@@ -295,6 +287,7 @@ class SelectTableWrap extends React.Component {
           keyField='id'
           selectAll={this.state.selectAll}
           onSelectAll={this.handleToggleAll}
+          selectAllTip={<div>全选是否勾上,可能代表<span className="gm-text-red">当前可见列表</span>勾上，也可能代表<span className="gm-text-red">所有页面数据</span>勾上，具体由调用方确定。</div>}
           selected={this.state.selected}
           onSelect={this.handleSelect}
         />
@@ -315,14 +308,11 @@ class SelectTableWrap extends React.Component {
 - `columns (array|required)`
 - `selected (array|required)`
 - `onSelect (array|required)`
-- `selectAll (bool|required)` 注意 全选是否勾上 可能代表当前可见列表勾上，也可能代表所有数据勾上，具体由调用方确定。 和 看到的列表是否全勾上 无关联
+- `selectAll (bool|required)` 注意❗️全选是否勾上 可能代表`当前可见列表`勾上，也可能代表`所有数据`勾上，具体由调用方确定。 和`可见的列表`是否 全勾上 无关联
 - `onSelectAll (array|required)`
-- `onSelectTip (string)`
+- `onSelectTip (node)`
 - `keyField (string)` 默认 value
 - `selectType (string)` checkbox or radio
-- `selectAllPageTip(string)` 选择所有页的文案
-- `onSelectAllPage(func)` 选择 当前页(1)/所有页(2) 状态回调 ---- 函数入参: 1代表当前页，2代表所有页
-- `hasSelectAllPage(bool)` 是否显示 当前页/所有页 选择器
 
 其他见 react-table 官方文档
 

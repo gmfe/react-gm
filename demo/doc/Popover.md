@@ -83,8 +83,8 @@ class PopoverWrap extends React.Component {
 
                 <div>加角标</div>
                 <div>
-                    <Popover showArrow popup={this.renderPopup()}>
-                        <button className="btn btn-default">showArrow</button>
+                    <Popover top showArrow popup={this.renderPopup()}>
+                        <button className="btn btn-default">showArrow toptoptoptop</button>
                     </Popover>
                     <Popover showArrow right popup={this.renderPopup()}>
                         <button className="btn btn-default">showArrow right</button>

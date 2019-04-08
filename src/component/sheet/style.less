@@ -3,12 +3,29 @@
 
   .gm-sheet-select-all-tip {
     position: absolute;
-    top: -15px;
+    top: -19px;
     white-space: nowrap;
-    left: 0;
-    background: @brand-primary;
+    left: 6px;
+    background: white;
     padding: 4px 10px;
-    color: white;
+
+    &-arrow {
+      position: absolute;
+      border: 5px solid transparent;
+      bottom: -5px;
+      border-bottom-width: 0;
+      border-top-color: hsla(0, 0%, 85%, 0.7);
+
+      &::after {
+        bottom: 1px;
+        content: " ";
+        position: absolute;
+        margin-left: -4px;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid white;
+      }
+    }
   }
 
   .gm-pagination-text {

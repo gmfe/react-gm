@@ -49,11 +49,7 @@
     "closeDetails": "Collapse details"
   },
   "sheet": {
-    "empty": "No data here",
-    "allPage": "Select all Page",
-    "currentPage": "Select current Page",
-    "hasSelectedCurrentPage": "Selected all items on current page",
-    "hasSelectedAllPage": "Selected all items on all page"
+    "empty": "No data here"
   },
   "transfer": {
     "selectAll": "Select all",
