@@ -20,7 +20,7 @@ class ProgressCircle extends React.Component {
     const { status, textPosition, percentage, size, lineWidth, progressColor } = this.props
     const { centerColor, bgColor, animate, animationDuration, roundedStroke } = {
       bgColor: '#e4e8f1',
-      centerColor: 'white',
+      centerColor: 'transparent',
       animate: false,
       animationDuration: '1s',
       roundedStroke: false
