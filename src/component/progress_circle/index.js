@@ -17,9 +17,8 @@ class ProgressCircle extends React.Component {
 
   render () {
     const { text } = this
-    const { status, textPosition, percentage, size, lineWidth, progressColor } = this.props
-    const { centerColor, bgColor, animate, animationDuration, roundedStroke } = {
-      bgColor: '#e4e8f1',
+    const { status, textPosition, percentage, size, lineWidth, progressColor, bgColor } = this.props
+    const { centerColor, animate, animationDuration, roundedStroke } = {
       centerColor: 'transparent',
       animate: false,
       animationDuration: '1s',
@@ -67,7 +66,8 @@ ProgressCircle.propTypes = {
   status: PropTypes.oneOf(['success', 'exception']),
   size: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
   lineWidth: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
-  progressColor: PropTypes.string
+  progressColor: PropTypes.string,
+  bgColor: PropTypes.string
 }
 
 ProgressCircle.defaultProps = {
@@ -76,7 +76,8 @@ ProgressCircle.defaultProps = {
   showText: true,
   textPosition: 'center',
   size: '40',
-  lineWidth: '60'
+  lineWidth: '60',
+  bgColor: '#e4e8f1'
 }
 
 export default ProgressCircle

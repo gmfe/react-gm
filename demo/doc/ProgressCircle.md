@@ -36,6 +36,9 @@ class ProgressCircleWrap extends React.Component {
                 <ProgressCircle percentage={this.state.percentage} size="100" lineWidth={20} />
 
                 <ProgressCircle percentage={this.state.percentage} size="100" lineWidth={20} progressColor="orange" />
+
+                <ProgressCircle percentage={this.state.percentage} size="100" lineWidth={20} progressColor="orange" bgColor="gray" />
+
             </div>
         );
     }
