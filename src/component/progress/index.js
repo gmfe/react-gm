@@ -14,13 +14,13 @@ class ProgressBar extends React.Component {
   }
 
   render () {
-    const { percentage, status, strokeWidth, text, textInside, textInsideFix, showText, className, ...rest } = this.props
+    const { percentage, status, strokeWidth, text, textInside, textInsideFix, showText, className, textColor, strokeColor, bgColor, ...rest } = this.props
     return (
       <div className={classnames('gm-progress', className)} {...rest}>
         <div className='gm-progress-bar'>
           <div
             className='gm-progress-bar-outer'
-            style={{ height: `${strokeWidth}px` }}
+            style={{ height: `${strokeWidth}px`, backgroundColor: bgColor }}
           >
             <div
               className={classnames('gm-progress-bar-inner',
@@ -28,11 +28,11 @@ class ProgressBar extends React.Component {
                   'gm-progress-bar-success': status === 'success',
                   'gm-progress-bar-exception': status === 'exception'
                 })}
-              style={{ width: `${percentage}%` }}
+              style={{ width: `${percentage}%`, backgroundColor: strokeColor }}
             >
               {
                 showText && textInside && !textInsideFix &&
-                <div className='gm-progress-bar-innerText'>
+                <div className='gm-progress-bar-innerText' style={{ color: textColor }}>
                   {text || `${percentage}%`}
                 </div>
               }
@@ -43,7 +43,7 @@ class ProgressBar extends React.Component {
                 className={classnames('gm-progress-bar-innerTextFix-wrapper')}
                 style={{ textAlign: textInsideFix }}
               >
-                <div className='gm-progress-bar-innerText'>
+                <div className='gm-progress-bar-innerText' style={{ color: textColor }}>
                   {text || `${percentage}%`}
                 </div>
               </div>
@@ -55,7 +55,7 @@ class ProgressBar extends React.Component {
                     !textInside &&
                     <div
                       className='gm-progress-bar-text'
-                      style={{ fontSize: `12px` }}
+                      style={{ fontSize: `12px`, color: textColor }}
                     >
                       {status ? <i className={this.getIconClass()}/> : text || `${percentage}%`}
                     </div>
