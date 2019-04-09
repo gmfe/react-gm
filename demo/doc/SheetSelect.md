@@ -136,7 +136,7 @@ class SheetWrap2 extends React.Component {
 - `isDisabled (func)`
 - `isRadio (bool)`
 - `hasSelectTip (bool)` 是否显示选择所有后的tip
-- `selectAllTip (string)` 选择所有后的tip文案
+- `selectAllTip (node)` 选择所有后的tip文案
 
 一但用到`SheetSelect`，就约定了数据eList中的`_gm_select`字段，`_gm_select`为bool是选中。
 `onSelect`当选择一行时触发，参数为是否选中`checked`，和当前索引`index`。
