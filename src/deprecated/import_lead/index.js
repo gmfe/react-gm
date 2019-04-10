@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
-import Dropper from '../dropper/index.js'
+import Dropper from '../../component/dropper/index.js'
 import { getLocale } from '../../locales'
 
 class ImportLead extends React.Component {

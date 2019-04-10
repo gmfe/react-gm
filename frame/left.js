@@ -1,34 +1,23 @@
 import React from 'react'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
+import Context from './context'
 
-class Left extends React.Component {
-  render () {
-    const {
-      style,
-      className,
-      children,
-      ...rest
-    } = this.props
+const Left = props => {
+  const { style, className, children, ...rest } = props
+  const { leftWidth } = React.useContext(Context)
 
-    return (
-      <div
-        {...rest}
-        style={Object.assign({
-          width: this.context.frameWorkLeftWidth
-        }, style)}
-        className={classNames('gm-framework-left-default', className)}
-      >
-        <div className='gm-framework-left-default-inner'>
-          {children}
-        </div>
-      </div>
-    )
-  }
-}
-
-Left.contextTypes = {
-  frameWorkLeftWidth: PropTypes.string
+  return (
+    <div
+      {...rest}
+      style={Object.assign(
+        { width: leftWidth },
+        style
+      )}
+      className={classNames('gm-framework-left-default', className)}
+    >
+      <div className='gm-framework-left-default-inner'>{children}</div>
+    </div>
+  )
 }
 
 export default Left

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Flex, Emitter, Storage, setLocale } from '../src/index'
-import createHashHistory from 'history/createHashHistory'
+import { Flex, Storage, setLocale } from '../src/index'
+import { createHashHistory } from 'history'
 import NavConfigDoc from './doc.nav.config'
 import queryString from 'query-string'
 import { withRouter } from 'react-router-dom'

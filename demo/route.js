@@ -6,7 +6,7 @@ import {
   Switch as RRSwitch
 } from 'react-router-dom'
 import { processReactRouterProps } from 'gm-util'
-import { hot } from 'react-hot-loader'
+import { hot } from 'react-hot-loader/root'
 import Loadable from 'react-loadable'
 
 import App from './app'
@@ -44,6 +44,10 @@ const RouteConfig = () => (
             loader: () => import('./demo'),
             loading: Loading
           })}/>
+          <Route exact path='/demo/list' component={Loadable({
+            loader: () => import('./demo/list'),
+            loading: Loading
+          })}/>
           <Route exact path='/demo/service_time' component={Loadable({
             loader: () => import('./demo/service_time'),
             loading: Loading
@@ -58,4 +62,4 @@ const RouteConfig = () => (
   </Router>
 )
 
-export default hot(module)(RouteConfig)
+export default hot(RouteConfig)
