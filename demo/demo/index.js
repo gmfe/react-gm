@@ -86,6 +86,7 @@ class Component extends React.Component {
         <div tabIndex='0'>afaf</div>
 
         <MoreSelect
+          popoverType={'realFocus'}
           data={data}
           selected={this.state.selected}
           onSelect={selected => {

@@ -95,7 +95,9 @@ MoreSelect.propTypes = {
   listMaxHeight: PropTypes.string,
 
   // isGroupList
-  isGroupList: PropTypes.bool
+  isGroupList: PropTypes.bool,
+
+  popoverType: PropTypes.oneOfType(['focus', 'realFocus'])
 }
 
 MoreSelect.defaultProps = {
@@ -105,7 +107,9 @@ MoreSelect.defaultProps = {
   renderListItem: item => item.text,
   listMaxHeight: '250px',
 
-  renderListFilterType: 'default'
+  renderListFilterType: 'default',
+
+  popoverType: 'focus'
 }
 
 // 介绍 selected

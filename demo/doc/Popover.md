@@ -20,7 +20,7 @@ class PopoverWrap extends React.Component {
     render() {
         return (
             <div>
-                <div>三种行为 focus click hover</div>
+                <div>四种行为 focus click hover realFocus</div>
                 <div>
                     <Popover popup={this.renderPopup()}>
                         <button className="btn btn-default">focus me default</button>
@@ -30,6 +30,9 @@ class PopoverWrap extends React.Component {
                     </Popover>
                     <Popover showArrow type="hover" popup={this.renderPopup()}>
                         <button className="btn btn-default">hover me</button>
+                    </Popover>
+                    <Popover showArrow type="realFocus" popup={this.renderPopup()}>
+                        <button className="btn btn-default">realFocus me</button>
                     </Popover>
                 </div>
                 <div>各种位置</div>

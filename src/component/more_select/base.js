@@ -177,7 +177,7 @@ class Base extends React.Component {
       renderSelected,
 
       className, style,
-
+      popoverType,
       children
     } = this.props
 
@@ -191,6 +191,7 @@ class Base extends React.Component {
         style={style}
       >
         <Popover
+          type={popoverType}
           animName
           popup={this.renderList()}
           disabled={disabled}
@@ -281,7 +282,9 @@ Base.propTypes = {
   listMaxHeight: PropTypes.string,
 
   // isGroupList
-  isGroupList: PropTypes.bool
+  isGroupList: PropTypes.bool,
+
+  popoverType: PropTypes.oneOfType(['focus', 'realFocus'])
 }
 
 Base.defaultProps = {
@@ -291,7 +294,9 @@ Base.defaultProps = {
   renderListItem: item => item.text,
   listMaxHeight: '250px',
 
-  renderListFilterType: 'default'
+  renderListFilterType: 'default',
+
+  popoverType: 'focus'
 }
 
 // 介绍 selected
