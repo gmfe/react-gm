@@ -1,4 +1,5 @@
 import React from 'react'
+import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
@@ -65,6 +66,14 @@ class Form extends React.Component {
     return helpList.length === 0 ? null : helpList
   }
 
+  doScrollToError = () => {
+    // 找第一个即可
+    setTimeout(() => {
+      const errorDom = findDOMNode(this).getElementsByClassName('has-error')[0]
+      errorDom && errorDom.scrollIntoViewIfNeeded()
+    }, 200)
+  }
+
   handleSubmit (e) {
     e.preventDefault()
     this.props.onSubmit(e)
@@ -78,6 +87,7 @@ class Form extends React.Component {
     this.setState({
       canValidate: !!err
     })
+    this.doScrollToError()
   }
 
   render () {

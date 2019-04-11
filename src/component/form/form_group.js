@@ -1,10 +1,19 @@
 import React from 'react'
+import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import Affix from '../affix'
 import { getLocale } from '../../locales'
 import _ from 'lodash'
 
 class FormGroup extends React.Component {
+  doScrollToError = () => {
+    // 找第一个即可
+    setTimeout(() => {
+      const errorDom = findDOMNode(this).getElementsByClassName('has-error')[0]
+      errorDom && errorDom.scrollIntoViewIfNeeded()
+    }, 200)
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
 
@@ -16,6 +25,7 @@ class FormGroup extends React.Component {
     _.each(formRefs, form => {
       if (!form.current.apiValidate()) {
         isPass = false
+        this.doScrollToError()
       }
     })
     if (isPass) {
