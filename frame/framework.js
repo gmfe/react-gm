@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Flex, LayoutRoot } from '../src/index'
 import classNames from 'classnames'
@@ -17,20 +17,23 @@ const Framework = props => {
     children
   } = props
 
-  const [overflowFlag, setOverflowFlag] = useState(0)
-
   const addOverflowClass = () => {
-    const newFlowFlag = overflowFlag + 1
-    setOverflowFlag(newFlowFlag)
-    newFlowFlag === 1 &&
+    let flag = window.document.body.dataset.overflowFlag || 0
+    flag++
+    window.document.body.dataset.overflowFlag = flag
+
+    if (flag === 1) {
       window.document.body.classList.add('gm-overflow-hidden')
+    }
   }
 
   const removeOverflowClass = () => {
-    const newFlowFlag = overflowFlag - 1
-    setOverflowFlag(newFlowFlag)
-    newFlowFlag === 0 &&
+    let flag = window.document.body.dataset.overflowFlag || 0
+    flag--
+    window.document.body.dataset.overflowFlag = flag
+    if (flag === 0) {
       window.document.body.classList.remove('gm-overflow-hidden')
+    }
   }
 
   const doSetTitle = e => {

@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Drawer} from '../../src/index';
+    import {Drawer, Dialog} from '../../src/index';
 
 ---
 ##  Drawer
@@ -15,7 +15,16 @@ class ModalWrap extends React.Component {
           示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
           示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
         </div>
-        <div style={{height: '50px', backgroundColor: '#64DD17'}}>btn</div>
+        <div style={{height: '50px', backgroundColor: '#64DD17'}} onClick={() => {
+          Dialog.confirm({
+          children: 'asdfasf'
+          }).then(() => {
+            Drawer.hide()
+          })
+        }}>btn</div>
+        
+        
+        
       </div>,
       onHide: Drawer.hide,
       opacityMask: true,
