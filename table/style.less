@@ -16,6 +16,10 @@
       cursor: pointer;
     }
   }
+  .rt-th:first-child,
+  .rt-td:first-child {
+    padding-left: 15px;
+  }
 
   .rt-table {
     overflow: visible;
@@ -178,10 +182,29 @@
   .gm-react-table-select-all-tip {
     z-index: 1;
     position: absolute;
-    top: -15px;
-    padding: 5px 10px;
-    color: white;
-    background: @brand-primary;
+    top: -19px;
+    white-space: nowrap;
+    left: 6px;
+    background: white;
+    padding: 4px 10px;
+
+    &-arrow {
+      position: absolute;
+      border: 5px solid transparent;
+      bottom: -5px;
+      border-bottom-width: 0;
+      border-top-color: hsla(0, 0%, 85%, 0.7);
+
+      &::after {
+        bottom: 1px;
+        content: " ";
+        position: absolute;
+        margin-left: -4px;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid white;
+      }
+    }
   }
 }
 

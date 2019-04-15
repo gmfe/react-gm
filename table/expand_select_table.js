@@ -56,7 +56,10 @@ class ExpandSelectTable extends React.Component {
           loadingText={loadingText}
           SubComponent={SubComponent}
         />
-        {selectAllTip && selectAll && <div className='gm-react-table-select-all-tip'>{selectAllTip}</div>}
+        {selectAllTip && selectAll && <div className='gm-box-shadow-bottom gm-react-table-select-all-tip'>
+          <span className='gm-react-table-select-all-tip-arrow'/>
+          {selectAllTip}
+        </div>}
       </div>
     )
   }
