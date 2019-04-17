@@ -1,4 +1,3 @@
-import './style.less'
 import _ from 'lodash'
 import Big from 'big.js'
 import React from 'react'
