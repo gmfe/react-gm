@@ -1,39 +1,37 @@
+import './style.less'
+import _ from 'lodash'
+import Big from 'big.js'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
-import Big from 'big.js'
 
 class InputNumberV2 extends React.Component {
   constructor (props) {
     super(props)
-
     this.refInput = React.createRef()
     this.__unmount = false
-
     this.state = {
-      value: this.processValue(props.value)
+      value: InputNumberV2.processValue(props.value)
     }
+  }
+
+  static processValue = (value) => {
+    if (value === null) {
+      return ''
+    }
+    return value + ''
   }
 
   apiDoFocus () {
     if (this.__unmount) {
       return
     }
-
     const d = ReactDOM.findDOMNode(this.refInput.current)
     d.focus()
   }
 
   componentWillUnmount () {
     this.__unmount = true
-  }
-
-  processValue = (value) => {
-    if (value === null) {
-      return ''
-    }
-    return value + ''
   }
 
   processOutValue = (value) => {
@@ -43,19 +41,17 @@ class InputNumberV2 extends React.Component {
     return parseFloat(value)
   }
 
-  componentWillReceiveProps (nextProps, nextState) {
-    if (nextProps.value === null) {
-      this.setState({
-        value: ''
-      })
-      return
+  // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#preferred-solutions
+  static getDerivedStateFromProps (props, state) {
+    if (props.value === null) {
+      return { value: '' }
     }
-
-    if (parseFloat(nextProps.value) !== parseFloat(this.state.value)) {
-      this.setState({
-        value: nextProps.value + ''
-      })
+    if (parseFloat(props.value) !== parseFloat(state.value)) {
+      return {
+        value: InputNumberV2.processValue(props.value)
+      }
     }
+    return null
   }
 
   checkValue = (value) => {
@@ -112,9 +108,10 @@ class InputNumberV2 extends React.Component {
     return (
       <input
         {...rest}
-        ref={this.refInput}
         type='number'
+        ref={this.refInput}
         value={this.state.value}
+        className='gm-input-number'
         onChange={this.handleChange}
       />
     )
@@ -122,11 +119,11 @@ class InputNumberV2 extends React.Component {
 }
 
 InputNumberV2.propTypes = {
-  value: PropTypes.number,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
   max: PropTypes.number,
   min: PropTypes.number,
+  value: PropTypes.number,
+  placeholder: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
   precision: PropTypes.number // 精确度，保留几位小数
 }
 
