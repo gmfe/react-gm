@@ -1,25 +1,13 @@
 .gm-nprogress {
   transition: all 200ms ease;
   height: 2px;
-  background: #29d;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  background: @brand-primary;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 9999;
-}
-
-.gm-nprogress-head {
-  display: block;
-  position: absolute;
-  right: 0;
-  width: 100px;
-  height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-  opacity: 1;
-  transform: rotate(3deg) translate(0, -4px);
 }
 
 .gm-nprogress-loading {
@@ -34,15 +22,18 @@
 
 @keyframes gm-nprogress-loading {
   0% {
-    transform: translateX(-100%)
+    transform: translateX(-100%);
   }
+
   20% {
-    transform: translateX(-50%)
+    transform: translateX(-50%);
   }
+
   50% {
-    transform: translateX(-20%)
+    transform: translateX(-20%);
   }
+
   100% {
-    transform: translateX(-10%)
+    transform: translateX(-10%);
   }
 }

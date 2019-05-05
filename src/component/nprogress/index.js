@@ -1,15 +1,9 @@
 import React from 'react'
 import LayoutRoot from '../layout_root'
 
-class NProgress extends React.Component {
-  render () {
-    return (
-      <div className={'gm-nprogress gm-nprogress-loading'}>
-        <div className='gm-nprogress-head'/>
-      </div>
-    )
-  }
-}
+const NProgress = () => (
+  <div className={'gm-nprogress gm-nprogress-loading'}/>
+)
 
 let timer = null
 let reqLength = 0
