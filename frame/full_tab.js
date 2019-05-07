@@ -70,7 +70,7 @@ class FullTab extends React.Component {
                 <Flex
                   className='gm-framework-full-tabs-list gm-bg'
                   style={{
-                    left: is.mobile ? '0' : leftWidth
+                    left: is.phone() ? '0' : leftWidth
                   }}
                 >
                   {_.map(tabs, (tab, i) => (

@@ -17,7 +17,7 @@ const Info = (props) => {
           <Popover
             animName
             showArrow
-            type={is.mobile ? 'click' : 'hover'}
+            type={is.phone() ? 'click' : 'hover'}
             right
             offset={-5}
             className='gm-framework-info-default-setting-popover'

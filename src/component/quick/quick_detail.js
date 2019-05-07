@@ -6,63 +6,63 @@ import classNames from 'classnames'
 import { getLocale } from '../../locales'
 
 class QuickDetail extends React.Component {
-    state = {
-      show: false
-    };
+  state = {
+    show: false
+  }
 
-    getChildContext () {
-      return { show: this.state.show }
-    }
+  getChildContext () {
+    return { show: this.state.show }
+  }
 
-    handleCollapse = () => {
-      this.setState({
-        show: !this.state.show
-      })
-    };
+  handleCollapse = () => {
+    this.setState({
+      show: !this.state.show
+    })
+  }
 
-    render () {
-      const {
-        first,
-        second,
-        operate,
-        third
-      } = this.props
-      const { show } = this.state
+  render () {
+    const {
+      first,
+      second,
+      operate,
+      third
+    } = this.props
+    const { show } = this.state
 
-      const hasCollapse = second.props.data.length > 4
+    const hasCollapse = second.props.data.length > 4
 
-      return (
-        <div className='gm-quick-detail gm-border gm-padding-20 gm-padding-bottom-0 gm-bg'>
-          <Flex className='gm-margin-bottom-20'>
-            <Flex flex column>
-              {first}
-            </Flex>
-            <div>
-              {operate}
-            </div>
+    return (
+      <div className='gm-quick-detail gm-border gm-padding-20 gm-padding-bottom-0 gm-bg'>
+        <Flex className='gm-margin-bottom-20'>
+          <Flex flex column>
+            {first}
           </Flex>
-          <Flex>
-            <div style={{ marginRight: '40px', width: '200px' }}>
-              {second}
-            </div>
-            <Flex flex column>
-              {third}
-            </Flex>
+          <div>
+            {operate}
+          </div>
+        </Flex>
+        <Flex>
+          <div style={{ marginRight: '40px', width: '200px' }}>
+            {second}
+          </div>
+          <Flex flex column>
+            {third}
           </Flex>
-          <Flex justifyCenter className='gm-padding-5'>
-            {hasCollapse && (
-              <a href='javascript:;' className='gm-quick-filter-toggle' onClick={this.handleCollapse}>
-                {show ? getLocale('quickDetail', 'closeDetails') : getLocale('quickDetail', 'showDetails')}&nbsp;
-                <i className={classNames('xfont', {
-                  'xfont-down': !show,
-                  'xfont-up': show
-                })}/>
-              </a>
-            )}
-          </Flex>
-        </div>
-      )
-    }
+        </Flex>
+        <Flex justifyCenter className='gm-padding-5'>
+          {hasCollapse && (
+            <a href='javascript:;' className='gm-quick-filter-toggle' onClick={this.handleCollapse}>
+              {show ? getLocale('quickDetail', 'closeDetails') : getLocale('quickDetail', 'showDetails')}&nbsp;
+              <i className={classNames('xfont', {
+                'xfont-down': !show,
+                'xfont-up': show
+              })}/>
+            </a>
+          )}
+        </Flex>
+      </div>
+    )
+  }
 }
 
 QuickDetail.propTypes = {
@@ -137,7 +137,7 @@ class QuickDetailThird extends React.Component {
     return (
       <Flex>
         <Flex flex column alignCenter justifyCenter className='gm-padding-10 gm-margin-right-20'
-              style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
+          style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
           <div>{result.name}</div>
           <div className='gm-font-20'>{result.value}<span
             className='gm-font-12'>{unit}</span></div>
@@ -146,7 +146,7 @@ class QuickDetailThird extends React.Component {
         <Flex flex={process.length}>
           {_.map(process, (item, i) => (
             <Flex flex column alignCenter justifyCenter className='gm-padding-10' key={i}
-                  style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
+              style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
               <div>{item.name}</div>
               <div className='gm-font-20'>{item.value}<span
                 className='gm-font-12'>{unit}</span></div>
