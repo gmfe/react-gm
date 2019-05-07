@@ -57,7 +57,7 @@ const Breadcrumb = props => {
           className='gm-framework-breadcrumb-default-back'
         >返回</a>
       </li>}
-      {!is.mobile && _.map(data.slice(0, -1), (v, i) => (
+      {!is.phone() && _.map(data.slice(0, -1), (v, i) => (
         <li key={i + '_' + v.link}>
           {v.name}
         </li>
