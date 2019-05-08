@@ -24,7 +24,7 @@ class FlipNumberWrap extends React.Component {
     render() {
         return (
             <div>
-                <FlipNumber useGroup delay={1000} decimal={2} from={this.state.from} to={this.state.to} className='gm-text-red gm-font-20'/>
+                <FlipNumber useGroup delay={1000} decimal={2} from={this.state.from} to={this.state.to} className='gm-text-red gm-text-20'/>
             </div>
         );
     }

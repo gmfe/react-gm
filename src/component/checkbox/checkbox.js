@@ -14,18 +14,23 @@ class Checkbox extends React.Component {
       inline,
       block,
       disabled,
-      col
+      col,
+      style,
+      className,
+      ...rest
     } = this.props
     const inner = (
       <label
+        {...rest}
         style={{
-          width: col ? `${100 / col}%` : 'auto'
+          width: col ? `${100 / col}%` : 'auto',
+          ...style
         }}
         className={classNames('gm-checkbox', {
           'checkbox-inline': inline,
           'gm-block': block,
           disabled
-        })}
+        }, className)}
       >
         <input
           type='checkbox'

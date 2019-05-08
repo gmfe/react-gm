@@ -25,7 +25,7 @@ const QuickPanel = (props) => {
 
   return (
     <div {...rest} className={classNames('gm-quick gm-quick-panel', className)}>
-      <Flex flex justifyBetween className='gm-quick-panel-title'>
+      <Flex flex justifyBetween className='gm-quick-panel-title gm-text-16'>
         <Flex alignEnd className='gm-padding-bottom-15'>
           <div>
             {icon && <i
@@ -35,7 +35,7 @@ const QuickPanel = (props) => {
             <span style={{ verticalAlign: 'middle' }}>{title}</span>
           </div>
           {collapse && (
-            <a onClick={handleCollapse} className='gm-margin-left-20 gm-font-12 gm-cursor gm-decoration-none'>
+            <a onClick={handleCollapse} className='gm-margin-left-20 gm-text-12 gm-cursor gm-decoration-none'>
               {isCollapse ? getLocale('quickDetail', 'closeDetails') : getLocale('quickDetail', 'showDetails')}&nbsp;
               <i className={classNames('xfont', {
                 'xfont-down': !isCollapse,

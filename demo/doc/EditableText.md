@@ -39,7 +39,7 @@ class EditableTextWrap extends React.Component {
                         top
                         component={<div/>}
                         type='hover'
-                        popup={<div className='gm-border gm-padding-5 gm-bg gm-font-12' style={{ width: '130px' }}>来源：{this.state.content}</div>}>
+                        popup={<div className='gm-border gm-padding-5 gm-bg gm-text-12' style={{ width: '130px' }}>来源：{this.state.content}</div>}>
                         <div className='gm-inline-block'>
                           {this.state.content}
                         </div>

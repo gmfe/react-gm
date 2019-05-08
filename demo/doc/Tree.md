@@ -17,7 +17,7 @@ const treeData = [{
         name: '叶菜',
         children: [{
             value: 111,
-            name: '皇帝菜'
+            name: '皇帝菜皇帝菜皇帝菜皇帝菜皇帝菜皇帝菜皇帝菜皇帝菜皇帝菜皇帝菜皇帝菜'
         }, {
             value: 112,
             name: '金不换'
