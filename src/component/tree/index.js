@@ -111,13 +111,14 @@ class Tree extends React.Component {
                     <Checkbox
                       value
                       checked={isSelectGroup}
+                      className='gm-padding-0'
                       onChange={() => {
                         this.handleSelectGroup(group, !isSelectGroup)
                       }}
                     />
                   )}
                   <Flex flex alignCenter onClick={() => this.handleGroup(group.value)}>
-                    {isOpen ? '-' : '+'}&nbsp;{group.name}
+                    <span style={{ width: '1em' }}>{isOpen ? '-' : '+'}</span>&nbsp;{group.name}
                   </Flex>
                 </Flex>
                 {isOpen && (
