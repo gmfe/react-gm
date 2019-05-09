@@ -87,7 +87,7 @@ class Cascader extends React.Component {
 
   componentDidUpdate () {
     _.each(this.listActiveRef, ref => {
-      ref && ReactDom.findDOMNode(ref).scrollIntoViewIfNeeded()
+      ref && ReactDom.findDOMNode(ref).scrollIntoViewIfNeeded() // eslint-disable-line
     })
   }
 
@@ -356,7 +356,9 @@ Cascader.propTypes = {
   filtrable: PropTypes.bool,
   // 只允许选择子节点，有children则清空输入框
   onlyChildSelectable: PropTypes.bool,
-  popoverStyle: PropTypes.object
+  popoverStyle: PropTypes.object,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Cascader.defaultProps = {

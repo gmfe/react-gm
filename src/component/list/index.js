@@ -67,7 +67,9 @@ List.propTypes = {
   // 滚动
   isScrollTo: PropTypes.bool,
 
-  isGroupList: PropTypes.bool
+  isGroupList: PropTypes.bool,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 List.defaultProps = {

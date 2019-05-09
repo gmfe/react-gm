@@ -7,18 +7,15 @@ import Flex from '../flex'
 import { getLocale } from '../../locales'
 
 const Day = props => {
+  const { disabled, onClick, value, oldSelect, selected } = props
+
   const nowMountStart = +moment().startOf('day')
-
   const handleClick = () => {
-    const { disabled, onClick, value } = props
-
     if (disabled) {
       return
     }
     onClick(value)
   }
-
-  const { oldSelect, value, selected, disabled } = props
 
   const cn = classNames('gm-calendar-day', {
     'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
@@ -29,6 +26,14 @@ const Day = props => {
   })
 
   return <span className={cn} onClick={handleClick}>{value.date()}</span>
+}
+
+Day.propTypes = {
+  disabled: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  value: PropTypes.object.isRequired,
+  oldSelect: PropTypes.object.isRequired,
+  selected: PropTypes.object.isRequired
 }
 
 const Head = (props) => {
@@ -87,6 +92,11 @@ const Head = (props) => {
   )
 }
 
+Head.propTypes = {
+  oldSelect: PropTypes.object.isRequired,
+  onChangeMonth: PropTypes.func.isRequired
+}
+
 const weekDays = getLocale('calendar', 'weekDays')
 const Week = () => {
   return (
@@ -124,6 +134,13 @@ const Content = (props) => {
       ))}
     </div>
   )
+}
+
+Content.propTypes = {
+  selected: PropTypes.object.isRequired,
+  oldSelect: PropTypes.object.isRequired,
+  onSelectDay: PropTypes.func.isRequired,
+  getDisabled: PropTypes.func.isRequired
 }
 
 class Calendar extends React.Component {
@@ -207,7 +224,9 @@ Calendar.propTypes = {
   onSelect: PropTypes.func,
   min: PropTypes.object,
   max: PropTypes.object,
-  disabledDate: PropTypes.func
+  disabledDate: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Calendar.defaultProps = {

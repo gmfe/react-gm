@@ -16,7 +16,7 @@ class EditableText extends React.Component {
     this.setState({
       value
     })
-  };
+  }
 
   handleEdit = () => {
     if (!this.props.disabled) {
@@ -24,7 +24,7 @@ class EditableText extends React.Component {
         editable: true
       })
     }
-  };
+  }
 
   handleOkClick = () => {
     const { onOk } = this.props
@@ -32,7 +32,7 @@ class EditableText extends React.Component {
     this.setState({
       editable: false
     })
-  };
+  }
 
   handleCancelClick = () => {
     const { onCancel } = this.props
@@ -40,7 +40,7 @@ class EditableText extends React.Component {
     this.setState({
       editable: false
     })
-  };
+  }
 
   handleInputBlur = () => {
     // 延迟 onBlur 来处理与 onClick 事件的冲突
@@ -76,7 +76,9 @@ class EditableText extends React.Component {
         className={classNames('gm-editable-text', className)}
       >
         <span onClick={this.handleEdit}>{children || content || '-'}</span>
-        {!disabled && <i className='xfont xfont-edit gm-margin-left-5 gm-cursor gm-editable-text-edit-pen' onClick={this.handleEdit}/>}
+        {!disabled && <i
+          className='xfont xfont-edit gm-margin-left-5 gm-cursor gm-editable-text-edit-pen'
+          onClick={this.handleEdit}/>}
       </div>
     )
   }
@@ -85,7 +87,10 @@ class EditableText extends React.Component {
 EditableText.propTypes = {
   content: PropTypes.string.isRequired, // 组件显示的内容
   onOk: PropTypes.func,
-  onCancel: PropTypes.func
+  onCancel: PropTypes.func,
+  disabled: PropTypes.bool,
+  children: PropTypes.element,
+  className: PropTypes.string
 }
 
 export default EditableText

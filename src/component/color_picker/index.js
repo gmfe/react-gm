@@ -40,6 +40,11 @@ class Color extends React.Component {
   }
 }
 
+Color.propTypes = {
+  color: PropTypes.string,
+  onChange: PropTypes.func.isRequired
+}
+
 class ColorPicker extends React.Component {
   render () {
     const { color, onChange, children } = this.props
@@ -59,7 +64,8 @@ class ColorPicker extends React.Component {
 
 ColorPicker.propTypes = {
   color: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  children: PropTypes.element.isRequired
 }
 
 ColorPicker.deaultProps = {

@@ -52,7 +52,9 @@ LoadingFullScreen.hide = () => {
 
 LoadingFullScreen.propTypes = {
   text: PropTypes.string,
-  size: PropTypes.number
+  size: PropTypes.number,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 LoadingFullScreen.defaultProps = {

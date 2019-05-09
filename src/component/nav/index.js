@@ -111,6 +111,7 @@ class Nav extends React.Component {
                       key={twoI + two.link}
                       href={two.link}
                       target='_blank'
+                      rel='noopener noreferrer'
                     >{two.name}</a>
                   </div>
                 ))}
@@ -165,7 +166,9 @@ Nav.propTypes = {
   selected: PropTypes.string.isRequired,
   isBrowserRouter: PropTypes.bool,
   widths: PropTypes.array.isRequired, // ["120px", "150px"]
-  renderExceptionNav: PropTypes.func
+  renderExceptionNav: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Nav.defaultProps = {

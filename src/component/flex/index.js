@@ -97,7 +97,10 @@ Flex.propTypes = {
   alignContentCenter: PropTypes.bool,
   alignContentBetween: PropTypes.bool,
   alignContentAround: PropTypes.bool,
-  alignContentStretch: PropTypes.bool
+  alignContentStretch: PropTypes.bool,
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default Flex

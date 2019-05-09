@@ -314,8 +314,9 @@ class FilterSelect extends React.Component {
             <Flex flex className='gm-filter-select-target gm-position-relative'>
               {selected ? (
                 <Flex>{selected.name}
-                  {
-                    showClear && <i onClick={this.handleClear} className='xfont xfont-close-circle gm-cursor gm-filter-select-clear-btn'/>
+                  {showClear && <i
+                    onClick={this.handleClear}
+                    className='xfont xfont-close-circle gm-cursor gm-filter-select-clear-btn'/>
                   }
                 </Flex>
               ) : (
@@ -344,7 +345,10 @@ FilterSelect.propTypes = {
   isScrollToSelected: PropTypes.bool,
   onInputFocus: PropTypes.func,
   disableSearch: PropTypes.bool,
-  renderItemName: PropTypes.func
+  renderItemName: PropTypes.func,
+  showClear: PropTypes.bool,
+  className: PropTypes.string,
+  inputClassName: PropTypes.string
 }
 
 FilterSelect.defaultProps = {

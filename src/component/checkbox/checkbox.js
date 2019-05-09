@@ -70,7 +70,11 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
   inline: PropTypes.bool,
 
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Checkbox.defaultProps = {

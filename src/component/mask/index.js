@@ -24,7 +24,9 @@ class Mask extends React.Component {
 }
 
 Mask.propTypes = {
-  opacity: PropTypes.number
+  opacity: PropTypes.number,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Mask.defaultProps = {

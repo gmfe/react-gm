@@ -141,7 +141,6 @@ DateRangePicker.propTypes = {
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   canClear: PropTypes.bool,
-  className: PropTypes.string,
 
   beginProps: PropTypes.shape({
     min: PropTypes.object,
@@ -154,7 +153,9 @@ DateRangePicker.propTypes = {
     max: PropTypes.object,
     disabledDate: PropTypes.func
   }),
-  endRenderInputValue: PropTypes.func
+  endRenderInputValue: PropTypes.func,
+
+  className: PropTypes.string
 }
 
 DateRangePicker.defaultProps = {

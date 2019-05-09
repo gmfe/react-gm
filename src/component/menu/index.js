@@ -128,7 +128,9 @@ Menu.propTypes = {
   data: PropTypes.array.isRequired,
   onSelect: PropTypes.func.isRequired,
   allowCollapse: PropTypes.bool,
-  selected: PropTypes.object
+  selected: PropTypes.object,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Menu.defaultProps = {
