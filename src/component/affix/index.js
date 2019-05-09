@@ -17,6 +17,7 @@ const Affix = ({ children, top, bottom }) => {
 }
 
 Affix.propTypes = {
+  children: PropTypes.element.isRequired,
   top: PropTypes.number,
   bottom: PropTypes.number
 }

@@ -53,6 +53,9 @@ const Button = (props) => {
 
 // 只封装了 loading
 Button.propTypes = {
+  children: PropTypes.element.isRequired,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
   onClick: PropTypes.func
 }
 
