@@ -93,7 +93,7 @@ class Popup extends React.Component {
 }
 
 Popup.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object,
   rect: PropTypes.object.isRequired,

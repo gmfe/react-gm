@@ -27,7 +27,7 @@ DropDownItem.propTypes = {
   active: PropTypes.bool,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }

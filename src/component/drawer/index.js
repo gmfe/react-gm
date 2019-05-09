@@ -91,7 +91,7 @@ Drawer.propTypes = {
   style: PropTypes.object,
   animation: PropTypes.bool,
   opacityMask: PropTypes.bool,
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 Drawer.defaultProps = {

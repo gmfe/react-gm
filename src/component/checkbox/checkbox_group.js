@@ -52,7 +52,7 @@ CheckboxGroup.propTypes = {
   inline: PropTypes.bool,
   col: PropTypes.number,
 
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }

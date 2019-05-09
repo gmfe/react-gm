@@ -47,7 +47,7 @@ class FormControl extends React.Component {
 }
 
 FormControl.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 class FormItem extends React.Component {
@@ -128,7 +128,7 @@ FormItem.propTypes = {
   canValidate: PropTypes.bool,
 
   unLabelTop: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }

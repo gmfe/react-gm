@@ -270,7 +270,7 @@ Popover.propTypes = {
   // 想要 focus 事件的效果，请用 realFocus
   type: PropTypes.oneOf(['focus', 'click', 'hover', 'realFocus']),
   popup: PropTypes.element.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.any.isRequired,
   disabled: PropTypes.bool, // 也可以用children props disable
 
   className: PropTypes.string,

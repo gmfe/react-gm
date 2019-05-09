@@ -286,7 +286,7 @@ Base.propTypes = {
 
   popoverType: PropTypes.oneOfType(['focus', 'realFocus']),
 
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }

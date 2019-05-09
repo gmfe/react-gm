@@ -62,7 +62,7 @@ TimeSpanPicker.propTypes = {
   onChange: PropTypes.func,
   inputClassName: PropTypes.string,
   disabled: PropTypes.bool,
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 TimeSpanPicker.defaultProps = {

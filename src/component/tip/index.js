@@ -111,7 +111,7 @@ TipOverlay.propTypes = {
   type: PropTypes.string,
   onClose: PropTypes.func,
   time: PropTypes.number,
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 TipOverlay.defaultProps = {
@@ -151,7 +151,7 @@ Tip.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string,
   onClose: PropTypes.func,
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 Tip.defaultProps = {

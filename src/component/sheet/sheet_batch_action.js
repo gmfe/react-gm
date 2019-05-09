@@ -8,7 +8,7 @@ class SheetBatchAction extends React.Component {
 }
 
 SheetBatchAction.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 SheetBatchAction.displayName = 'SheetBatchAction'

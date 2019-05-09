@@ -17,7 +17,7 @@ SheetSelect.propTypes = {
   isRadio: PropTypes.bool,
   hasSelectTip: PropTypes.bool,
   selectAllTip: PropTypes.node,
-  children: PropTypes.element
+  children: PropTypes.any
 }
 SheetSelect.defaultProps = {
   onSelect: _.noop,

@@ -83,7 +83,7 @@ DatePicker.propTypes = {
   disabledDate: PropTypes.func,
   inputValueRender: PropTypes.func,
 
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string
 }
 

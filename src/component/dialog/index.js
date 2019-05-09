@@ -202,7 +202,7 @@ Dialog.propTypes = {
     PropTypes.bool
   ]),
   disableMaskClose: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.any,
   _from: PropTypes.string
 }
 Dialog.defaultProps = {

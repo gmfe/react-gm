@@ -204,7 +204,7 @@ Trigger.propTypes = {
   type: PropTypes.oneOf(['focus', 'click', 'hover']),
   component: PropTypes.element.isRequired,
   popup: PropTypes.element, // 有可能是无
-  children: PropTypes.element,
+  children: PropTypes.any,
   right: PropTypes.bool,
   top: PropTypes.bool,
   disabled: PropTypes.bool,

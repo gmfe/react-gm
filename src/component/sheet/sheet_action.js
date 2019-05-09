@@ -8,7 +8,7 @@ class SheetAction extends React.Component {
 }
 
 SheetAction.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 SheetAction.displayName = 'SheetAction'

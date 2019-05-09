@@ -280,7 +280,7 @@ Sheet.propTypes = {
   expandedRowRender: PropTypes.func,
   onExpand: PropTypes.func,
   onExpandAll: PropTypes.func,
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 Sheet.defaultProps = {

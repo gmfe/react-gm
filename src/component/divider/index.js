@@ -18,7 +18,7 @@ class Divider extends React.Component {
 }
 
 Divider.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 export default Divider

@@ -137,7 +137,7 @@ const Content = (props) => {
 }
 
 Content.propTypes = {
-  selected: PropTypes.object.isRequired,
+  selected: PropTypes.object,
   oldSelect: PropTypes.object.isRequired,
   onSelectDay: PropTypes.func.isRequired,
   getDisabled: PropTypes.func.isRequired

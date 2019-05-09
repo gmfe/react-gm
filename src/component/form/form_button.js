@@ -12,7 +12,7 @@ class FormButton extends React.Component {
 }
 
 FormButton.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.any
 }
 
 export default FormButton

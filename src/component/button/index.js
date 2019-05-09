@@ -53,7 +53,7 @@ const Button = (props) => {
 
 // 只封装了 loading
 Button.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.any,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   className: PropTypes.string,

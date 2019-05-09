@@ -150,7 +150,7 @@ class PaginationBox extends React.Component {
     ))
 
     if (Math.ceil(resPagination.peek / limit) > 5) {
-      pages.push(<li className='disabled'><a href='javascript:;'>...</a></li>)
+      pages.push(<li key='...' className='disabled'><a href='javascript:;'>...</a></li>)
     }
 
     return pages

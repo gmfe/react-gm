@@ -350,7 +350,7 @@ Cascader.propTypes = {
   // 没有this.props.children时有效
   inputProps: PropTypes.object,
   valueRender: PropTypes.func,
-  children: PropTypes.element,
+  children: PropTypes.any,
   disabled: PropTypes.bool,
   // 是否可搜索
   filtrable: PropTypes.bool,

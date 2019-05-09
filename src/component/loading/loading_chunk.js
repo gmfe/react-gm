@@ -39,7 +39,7 @@ LoadingChunk.propTypes = {
   loading: PropTypes.bool,
   text: PropTypes.string,
   size: PropTypes.number,
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }

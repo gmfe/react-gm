@@ -89,7 +89,7 @@ EditableText.propTypes = {
   onOk: PropTypes.func,
   onCancel: PropTypes.func,
   disabled: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string
 }
 

@@ -98,7 +98,7 @@ Flex.propTypes = {
   alignContentBetween: PropTypes.bool,
   alignContentAround: PropTypes.bool,
   alignContentStretch: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }

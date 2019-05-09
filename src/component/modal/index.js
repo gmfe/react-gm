@@ -243,7 +243,7 @@ Modal.propTypes = {
   noCloseBtn: PropTypes.bool,
   style: PropTypes.object,
   animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom']),
-  children: PropTypes.element,
+  children: PropTypes.any,
   onCancel: PropTypes.func,
   onOk: PropTypes.func
 }

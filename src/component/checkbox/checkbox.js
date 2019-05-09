@@ -72,7 +72,7 @@ Checkbox.propTypes = {
 
   disabled: PropTypes.bool,
 
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }

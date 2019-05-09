@@ -39,7 +39,7 @@ RadioGroup.propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func,
   inline: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }
