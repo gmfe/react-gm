@@ -89,7 +89,9 @@ Base.propTypes = {
   // 滚动
   isScrollTo: PropTypes.bool,
 
-  isGroupList: PropTypes.bool // 在这里仅仅表示数据的类型，对UI有影响而已
+  isGroupList: PropTypes.bool, // 在这里仅仅表示数据的类型，对UI有影响而已
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Base.defaultProps = {

@@ -26,7 +26,11 @@ class Collapse extends React.Component {
 }
 
 Collapse.propTypes = {
-  in: PropTypes.bool.isRequired
+  in: PropTypes.bool.isRequired,
+
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default Collapse

@@ -356,7 +356,10 @@ MultipleFilterSelect.propTypes = {
   placeholder: PropTypes.string,
   isScrollToSelected: PropTypes.bool,
   onInputFocus: PropTypes.func,
-  disableSearch: PropTypes.bool
+  disableSearch: PropTypes.bool,
+  renderItemName: PropTypes.func,
+  className: PropTypes.string,
+  inputClassName: PropTypes.string
 }
 
 MultipleFilterSelect.defaultProps = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import classnames from 'classnames'
+import classNames from 'classnames'
 import { getNumLength, formatNum, getRawArray, filterForNum } from './utils'
 
 class FlipNumber extends React.Component {
@@ -151,7 +151,7 @@ class FlipNumber extends React.Component {
       key={`${to}`}
       ref={(rel) => { this.wrap = rel }}
       style={{ height: `${this.height}px` }}
-      className={classnames('gm-position-relative gm-overflow-hidden', className)}
+      className={classNames('gm-position-relative gm-overflow-hidden', className)}
     >
       {this.renderDigitAxis()}
     </div>
@@ -181,7 +181,8 @@ FlipNumber.propTypes = {
   easeFn: PropTypes.func, // 缓动函数，控制滚动的加速度，默认起末慢，中间快
   individually: PropTypes.bool, // 是否逐个数字滚动, 默认 true
   decimal: PropTypes.number, // 小数点个数，默认无小数点
-  useGroup: PropTypes.bool // 是否启用大数逗号分组
+  useGroup: PropTypes.bool, // 是否启用大数逗号分组
+  className: PropTypes.string
 }
 
 export default FlipNumber

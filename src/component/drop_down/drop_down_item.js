@@ -26,7 +26,10 @@ class DropDownItem extends React.Component {
 DropDownItem.propTypes = {
   active: PropTypes.bool,
   disabled: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default DropDownItem

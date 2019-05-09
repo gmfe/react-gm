@@ -36,7 +36,8 @@ FormBlock.displayName = 'FormBlock'
 
 FormBlock.propTypes = {
   block: PropTypes.array,
-  inline: PropTypes.bool
+  inline: PropTypes.bool,
+  children: PropTypes.element
 }
 
 FormBlock.defaultProps = {

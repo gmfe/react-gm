@@ -62,6 +62,7 @@ Dropper.propTypes = {
   multiple: PropTypes.bool,
   onDrop: PropTypes.func.isRequired,
   accept: PropTypes.string,
+  children: PropTypes.element,
   className: PropTypes.string
 }
 // TODO 重构

@@ -90,7 +90,10 @@ DropDown.propTypes = {
   popup: PropTypes.element.isRequired,
   split: PropTypes.bool,
   right: PropTypes.bool, // 非 split 有效
-  cartClassName: PropTypes.string // split true时有效
+  cartClassName: PropTypes.string, // split true时有效
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 DropDown.defaultProps = {

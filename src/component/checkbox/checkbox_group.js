@@ -50,7 +50,11 @@ CheckboxGroup.propTypes = {
   value: PropTypes.array.isRequired,
   onChange: PropTypes.func,
   inline: PropTypes.bool,
-  col: PropTypes.number
+  col: PropTypes.number,
+
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 CheckboxGroup.defaultProps = {

@@ -77,12 +77,14 @@ DatePicker.propTypes = {
   canClear: PropTypes.bool,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
-  className: PropTypes.string,
 
   min: PropTypes.object,
   max: PropTypes.object,
   disabledDate: PropTypes.func,
-  inputValueRender: PropTypes.func
+  inputValueRender: PropTypes.func,
+
+  children: PropTypes.element,
+  className: PropTypes.string
 }
 
 export default DatePicker

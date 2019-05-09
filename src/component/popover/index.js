@@ -273,8 +273,8 @@ Popover.propTypes = {
   children: PropTypes.element.isRequired,
   disabled: PropTypes.bool, // 也可以用children props disable
 
-  style: PropTypes.object,
   className: PropTypes.string,
+  style: PropTypes.object,
 
   right: PropTypes.bool,
   top: PropTypes.bool,

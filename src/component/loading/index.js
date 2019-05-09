@@ -30,7 +30,9 @@ class Loading extends React.Component {
 
 Loading.propTypes = {
   text: PropTypes.string,
-  size: PropTypes.number
+  size: PropTypes.number,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Loading.defaultProps = {

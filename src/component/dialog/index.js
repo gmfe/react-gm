@@ -187,6 +187,7 @@ Object.assign(Dialog, DialogStatics)
 Dialog.propTypes = {
   show: PropTypes.bool.isRequired,
   title: PropTypes.string,
+  type: PropTypes.string,
   onCancel: PropTypes.func,
   onOK: PropTypes.func,
   size: PropTypes.string,
@@ -200,7 +201,9 @@ Dialog.propTypes = {
     PropTypes.string,
     PropTypes.bool
   ]),
-  disableMaskClose: PropTypes.bool
+  disableMaskClose: PropTypes.bool,
+  children: PropTypes.element,
+  _from: PropTypes.string
 }
 Dialog.defaultProps = {
   show: false,

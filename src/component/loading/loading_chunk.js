@@ -38,7 +38,10 @@ class LoadingChunk extends React.Component {
 LoadingChunk.propTypes = {
   loading: PropTypes.bool,
   text: PropTypes.string,
-  size: PropTypes.number
+  size: PropTypes.number,
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 LoadingChunk.defaultProps = {

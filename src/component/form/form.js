@@ -124,7 +124,10 @@ Form.propTypes = {
   labelWidth: PropTypes.string, // horizontal true 才有效
   hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
   onSubmit: PropTypes.func, // 默认处理了 preventDefault,
-  onSubmitValidated: PropTypes.func
+  onSubmitValidated: PropTypes.func,
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Form.defaultProps = {

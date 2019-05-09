@@ -162,7 +162,8 @@ class PreviewModal extends React.Component {
 PreviewModal.propTypes = {
   images: PropTypes.array.isRequired,
   thumbnails: PropTypes.array,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  onHide: PropTypes.func
 }
 
 export default PreviewModal

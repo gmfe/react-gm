@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class FormButton extends React.Component {
   render () {
@@ -8,6 +9,10 @@ class FormButton extends React.Component {
       </div>
     )
   }
+}
+
+FormButton.propTypes = {
+  children: PropTypes.element
 }
 
 export default FormButton

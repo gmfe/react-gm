@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Flex from '../flex'
 
 class Divider extends React.Component {
@@ -14,6 +15,10 @@ class Divider extends React.Component {
       </Flex>
     )
   }
+}
+
+Divider.propTypes = {
+  children: PropTypes.element
 }
 
 export default Divider

@@ -46,6 +46,10 @@ class FormControl extends React.Component {
   }
 }
 
+FormControl.propTypes = {
+  children: PropTypes.element
+}
+
 class FormItem extends React.Component {
   render () {
     let {
@@ -123,7 +127,10 @@ FormItem.propTypes = {
   labelWidth: PropTypes.string, // 可由Form传过来
   canValidate: PropTypes.bool,
 
-  unLabelTop: PropTypes.bool
+  unLabelTop: PropTypes.bool,
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default FormItem
