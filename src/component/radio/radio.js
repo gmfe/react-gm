@@ -46,7 +46,8 @@ Radio.propTypes = {
   name: PropTypes.string,
   inline: PropTypes.bool,
 
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  children: PropTypes.element
 }
 
 Radio.defaultProps = {

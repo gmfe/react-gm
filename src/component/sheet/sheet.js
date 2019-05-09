@@ -279,7 +279,8 @@ Sheet.propTypes = {
   scrollX: PropTypes.bool,
   expandedRowRender: PropTypes.func,
   onExpand: PropTypes.func,
-  onExpandAll: PropTypes.func
+  onExpandAll: PropTypes.func,
+  children: PropTypes.element
 }
 
 Sheet.defaultProps = {

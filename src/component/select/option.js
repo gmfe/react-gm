@@ -26,7 +26,10 @@ Option.displayName = 'Option'
 
 Option.propTypes = {
   value: PropTypes.any.isRequired,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default Option

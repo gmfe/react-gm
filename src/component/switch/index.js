@@ -60,9 +60,9 @@ class Switch extends React.Component {
     return (
       <React.Fragment>
         <input
+          {...rest}
           data-text={this.state.checked ? on : off}
           ref={ref => (this.refInputOff = ref)}
-          {...rest}
           className={classNames('gm-switch gm-switch-' + type, className, {
             'gm-switch-disabled': disabled
           })}
@@ -96,7 +96,9 @@ Switch.propTypes = {
   disabled: PropTypes.bool,
   on: PropTypes.any, // 请保证 on off 的宽度一样
   off: PropTypes.any,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 Switch.defaultProps = {
   type: 'default',

@@ -52,13 +52,13 @@ class ProgressBar extends React.Component {
         </div>
         {
           showText &&
-                    !textInside &&
-                    <div
-                      className='gm-progress-bar-text'
-                      style={{ fontSize: `12px`, color: textColor }}
-                    >
-                      {status ? <i className={this.getIconClass()}/> : text || `${percentage}%`}
-                    </div>
+          !textInside &&
+          <div
+            className='gm-progress-bar-text'
+            style={{ fontSize: `12px`, color: textColor }}
+          >
+            {status ? <i className={this.getIconClass()}/> : text || `${percentage}%`}
+          </div>
         }
       </div>
     )
@@ -72,7 +72,11 @@ ProgressBar.propTypes = {
   strokeWidth: PropTypes.number,
   textInside: PropTypes.bool,
   textInsideFix: PropTypes.oneOf(['left', 'right', 'center']),
-  showText: PropTypes.bool
+  showText: PropTypes.bool,
+  className: PropTypes.string,
+  textColor: PropTypes.string,
+  strokeColor: PropTypes.string,
+  bgColor: PropTypes.string
 }
 
 ProgressBar.defaultProps = {

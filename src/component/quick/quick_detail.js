@@ -89,7 +89,7 @@ class QuickDetailFirst extends React.Component {
             marginRight: data.length - 1 === i ? '0px' : '40px'
           }}>
             <div>{item.name}:</div>
-            <div className='gm-font-20'>{item.value}</div>
+            <div className='gm-text-20'>{item.value}</div>
           </div>
         ))}
       </Flex>
@@ -139,8 +139,8 @@ class QuickDetailThird extends React.Component {
         <Flex flex column alignCenter justifyCenter className='gm-padding-10 gm-margin-right-20'
           style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
           <div>{result.name}</div>
-          <div className='gm-font-20'>{result.value}<span
-            className='gm-font-12'>{unit}</span></div>
+          <div className='gm-text-20'>{result.value}<span
+            className='gm-text-12'>{unit}</span></div>
         </Flex>
 
         <Flex flex={process.length}>
@@ -148,8 +148,8 @@ class QuickDetailThird extends React.Component {
             <Flex flex column alignCenter justifyCenter className='gm-padding-10' key={i}
               style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
               <div>{item.name}</div>
-              <div className='gm-font-20'>{item.value}<span
-                className='gm-font-12'>{unit}</span></div>
+              <div className='gm-text-20'>{item.value}<span
+                className='gm-text-12'>{unit}</span></div>
             </Flex>
           ))}
         </Flex>
