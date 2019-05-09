@@ -231,6 +231,7 @@ Modal.hide = () => {
 
 Modal.propTypes = {
   show: PropTypes.bool.isRequired,
+  type: PropTypes.string,
   onHide: PropTypes.func,
   disableMaskClose: PropTypes.bool,
   opacityMask: PropTypes.bool,
@@ -241,7 +242,10 @@ Modal.propTypes = {
   noContentPadding: PropTypes.bool,
   noCloseBtn: PropTypes.bool,
   style: PropTypes.object,
-  animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom'])
+  animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom']),
+  children: PropTypes.element,
+  onCancel: PropTypes.func,
+  onOk: PropTypes.func
 }
 
 Modal.defaultProps = {

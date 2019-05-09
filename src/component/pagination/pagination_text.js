@@ -13,6 +13,14 @@ class WithCount extends React.Component {
   }
 }
 
+WithCount.propTypes = {
+  data: PropTypes.shape({
+    count: PropTypes.number,
+    offset: PropTypes.number.isRequired,
+    limit: PropTypes.number.isRequired
+  })
+}
+
 class WithoutCount extends React.Component {
   render () {
     const { data } = this.props
@@ -22,6 +30,14 @@ class WithoutCount extends React.Component {
       </div>
     )
   }
+}
+
+WithoutCount.propTypes = {
+  data: PropTypes.shape({
+    count: PropTypes.number,
+    offset: PropTypes.number.isRequired,
+    limit: PropTypes.number.isRequired
+  })
 }
 
 class PaginationText extends React.Component {

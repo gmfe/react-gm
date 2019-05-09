@@ -110,7 +110,8 @@ TipOverlay.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string,
   onClose: PropTypes.func,
-  time: PropTypes.number
+  time: PropTypes.number,
+  children: PropTypes.element
 }
 
 TipOverlay.defaultProps = {
@@ -149,7 +150,8 @@ class Tip extends React.Component {
 Tip.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  children: PropTypes.element
 }
 
 Tip.defaultProps = {

@@ -17,114 +17,114 @@ class TransferGroup extends React.Component {
     }
   }
 
-    handleLeftChange = (leftSelectedValues) => {
-      this.setState({
-        leftSelectedValues
-      })
-    };
+  handleLeftChange = (leftSelectedValues) => {
+    this.setState({
+      leftSelectedValues
+    })
+  }
 
-    handleRightChange = (rightSelectedValues) => {
-      this.setState({
-        rightSelectedValues
-      })
-    };
+  handleRightChange = (rightSelectedValues) => {
+    this.setState({
+      rightSelectedValues
+    })
+  }
 
-    handleToClick = (isLeft) => {
-      const { onSelect, selectedValues } = this.props
-      const { leftSelectedValues, rightSelectedValues } = this.state
+  handleToClick = (isLeft) => {
+    const { onSelect, selectedValues } = this.props
+    const { leftSelectedValues, rightSelectedValues } = this.state
 
-      onSelect(_.xor(selectedValues, isLeft ? rightSelectedValues : leftSelectedValues))
+    onSelect(_.xor(selectedValues, isLeft ? rightSelectedValues : leftSelectedValues))
 
-      this.setState({
-        leftSelectedValues: [],
-        rightSelectedValues: []
-      })
-    };
+    this.setState({
+      leftSelectedValues: [],
+      rightSelectedValues: []
+    })
+  }
 
-    handleToRightClick = () => {
-      this.handleToClick(false)
-    };
+  handleToRightClick = () => {
+    this.handleToClick(false)
+  }
 
-    handleToLeftClick = () => {
-      this.handleToClick(true)
-    };
+  handleToLeftClick = () => {
+    this.handleToClick(true)
+  }
 
-    render () {
-      let {
-        list,
-        selectedValues,
-        listStyle,
+  render () {
+    let {
+      list,
+      selectedValues,
+      listStyle,
 
-        leftTitle, leftWithFilter, leftPlaceHolder,
+      leftTitle, leftWithFilter, leftPlaceHolder,
 
-        rightTitle, rightWithFilter, rightPlaceHolder,
+      rightTitle, rightWithFilter, rightPlaceHolder,
 
-            onSelect, // eslint-disable-line
-        className,
-        ...rest
-      } = this.props
+      onSelect, // eslint-disable-line
+      className,
+      ...rest
+    } = this.props
 
-      const {
-        leftSelectedValues,
-        rightSelectedValues
-      } = this.state
+    const {
+      leftSelectedValues,
+      rightSelectedValues
+    } = this.state
 
-      // 很复杂
-      const leafList = getLeaf(list)
+    // 很复杂
+    const leafList = getLeaf(list)
 
-      // 右边是个简单的array
-      let rightList = []
-      _.each(leafList, v => {
-        if (_.includes(selectedValues, v.value)) {
-          rightList.push(v)
-        }
-      })
+    // 右边是个简单的array
+    let rightList = []
+    _.each(leafList, v => {
+      if (_.includes(selectedValues, v.value)) {
+        rightList.push(v)
+      }
+    })
 
-      // 左边是group数据
-      let leftList = filterGroupList(list, v => {
-        return !_.includes(selectedValues, v.value)
-      })
+    // 左边是group数据
+    let leftList = filterGroupList(list, v => {
+      return !_.includes(selectedValues, v.value)
+    })
 
-      return (
-        <div {...rest} className={classNames('gm-transfer gm-transfer-group', className)}>
-          <Flex>
-            <Tree
-              title={leftTitle}
-              list={leftList}
-              selectedValues={leftSelectedValues}
-              onSelectValues={this.handleLeftChange}
-              withFilter={leftWithFilter}
-              placeholder={leftPlaceHolder}
-              style={listStyle}
-            />
-            <div className='gm-gap-5'/>
-            <Flex column justifyCenter alignCenter className='gm-transfer-operation'>
-              <button
-                disabled={leftSelectedValues.length === 0}
-                className='btn btn-default btn-block gm-margin-bottom-5'
-                onClick={this.handleToRightClick}
-              >&gt;</button>
-              <button
-                disabled={rightSelectedValues.length === 0}
-                className='btn btn-default btn-block'
-                onClick={this.handleToLeftClick}
-              >&lt;</button>
-            </Flex>
-            <div className='gm-gap-5'/>
-            <Box
-              list={rightList}
-              selectedValues={rightSelectedValues}
-              onSelect={this.handleRightChange}
-
-              title={rightTitle}
-              style={listStyle}
-              withFilter={rightWithFilter}
-              placeholder={rightPlaceHolder}
-            />
+    return (
+      <div {...rest} className={classNames('gm-transfer gm-transfer-group', className)}>
+        <Flex>
+          <Tree
+            title={leftTitle}
+            list={leftList}
+            selectedValues={leftSelectedValues}
+            onSelectValues={this.handleLeftChange}
+            withFilter={leftWithFilter}
+            placeholder={leftPlaceHolder}
+            style={listStyle}
+          />
+          <div className='gm-gap-5'/>
+          <Flex column justifyCenter alignCenter className='gm-transfer-operation'>
+            <button
+              disabled={leftSelectedValues.length === 0}
+              className='btn btn-default btn-block gm-margin-bottom-5'
+              onClick={this.handleToRightClick}
+            >&gt;</button>
+            <button
+              disabled={rightSelectedValues.length === 0}
+              className='btn btn-default btn-block'
+              onClick={this.handleToLeftClick}
+            >&lt;</button>
           </Flex>
-        </div>
-      )
-    }
+          <div className='gm-gap-5'/>
+          <Box
+            list={rightList}
+            selectedValues={rightSelectedValues}
+            onSelect={this.handleRightChange}
+
+            title={rightTitle}
+            style={listStyle}
+            withFilter={rightWithFilter}
+            placeholder={rightPlaceHolder}
+          />
+        </Flex>
+      </div>
+    )
+  }
 }
 
 TransferGroup.propTypes = {
@@ -140,7 +140,9 @@ TransferGroup.propTypes = {
 
   rightTitle: PropTypes.string,
   rightWithFilter: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  rightPlaceHolder: PropTypes.string
+  rightPlaceHolder: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 TransferGroup.defaultProps = {

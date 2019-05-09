@@ -79,11 +79,11 @@ class Select extends React.Component {
     return (
       <div
         {...rest}
-        className={classNames(className, `gm-select`, {
+        className={classNames(`gm-select`, {
           'gm-select-clean': clean,
           'gm-select-open': show,
           'disabled': disabled
-        })}
+        }, className)}
       >
         <div
           className='gm-select-selection'
@@ -120,7 +120,11 @@ Select.displayName = 'Select'
 Select.propTypes = {
   clean: PropTypes.bool,
   value: PropTypes.any.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default Select

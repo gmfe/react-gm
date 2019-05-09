@@ -78,6 +78,16 @@ class WithCount extends React.Component {
   }
 }
 
+WithCount.propTypes = {
+  data: PropTypes.shape({
+    count: PropTypes.number,
+    offset: PropTypes.number.isRequired,
+    limit: PropTypes.number.isRequired
+  }),
+  toPage: PropTypes.func.isRequired,
+  nextDisabled: PropTypes.bool
+}
+
 class WithoutCount extends React.Component {
   constructor (props) {
     super(props)
@@ -124,6 +134,16 @@ class WithoutCount extends React.Component {
       </div>
     )
   }
+}
+
+WithoutCount.propTypes = {
+  data: PropTypes.shape({
+    count: PropTypes.number,
+    offset: PropTypes.number.isRequired,
+    limit: PropTypes.number.isRequired
+  }),
+  toPage: PropTypes.func.isRequired,
+  nextDisabled: PropTypes.bool
 }
 
 class Pagination extends React.Component {

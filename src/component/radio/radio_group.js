@@ -38,7 +38,10 @@ RadioGroup.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.any,
   onChange: PropTypes.func,
-  inline: PropTypes.bool
+  inline: PropTypes.bool,
+  children: PropTypes.element,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 RadioGroup.defaultProps = {

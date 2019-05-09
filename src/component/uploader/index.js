@@ -65,7 +65,8 @@ Uploader.defaultProps = {
 Uploader.propTypes = {
   multiple: PropTypes.bool,
   onUpload: PropTypes.func.isRequired,
-  accept: PropTypes.string
+  accept: PropTypes.string,
+  children: PropTypes.element
 }
 
 export default Uploader
