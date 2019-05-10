@@ -67,6 +67,7 @@ import FlipNumber from './component/flip_number'
 import Price from './component/price'
 import List from './component/list'
 import LazyImg from './component/lazy_img'
+import ToolTip from './component/tool_tip'
 
 import Validator from './validator'
 
@@ -180,5 +181,6 @@ export {
   Price,
   List,
   LazyImg,
-  Carousel
+  Carousel,
+  ToolTip
 }
