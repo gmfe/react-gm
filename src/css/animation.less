@@ -34,6 +34,14 @@
   animation-timing-function: ease-out;
 }
 
+.gm-animated-zoom-in-bottom {
+  animation-name: zoom-in-bottom;
+  animation-duration: 0.3s;
+  //animation-timing-function: ease-out;
+
+  //animation-fill-mode: both;
+}
+
 @-webkit-keyframes fade-in-right {
   from {
     opacity: 0;
@@ -42,7 +50,7 @@
 
   to {
     opacity: 1;
-    transform: none;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -54,7 +62,7 @@
 
   to {
     opacity: 1;
-    transform: none;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -66,7 +74,7 @@
 
   to {
     opacity: 1;
-    transform: none;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -78,7 +86,7 @@
 
   to {
     opacity: 1;
-    transform: none;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -90,6 +98,18 @@
 
   to {
     opacity: 1;
-    transform: none;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes zoom-in-bottom {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

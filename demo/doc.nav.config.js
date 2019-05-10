@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Menu } from '../src/index'
 import { history } from './service'
 import { withRouter } from 'react-router-dom'
@@ -46,6 +47,7 @@ const data = [{
   name: 'Layer',
   sub: [
     { name: 'Tip 提示', path: '/doc/Tip' },
+    { name: 'ToolTip 提示', path: '/doc/ToolTip' },
     { name: 'Dialog 对话框', path: '/doc/Dialog' },
     { name: 'Popover 浮层', path: '/doc/Popover' },
     { name: 'Modal 模态框', path: '/doc/Modal' },
@@ -112,6 +114,10 @@ class NavConfig extends React.Component {
       />
     )
   }
+}
+
+NavConfig.propTypes = {
+  location: PropTypes.object.isRequired
 }
 
 export default NavConfig
