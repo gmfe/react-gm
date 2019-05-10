@@ -1,30 +1,46 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Popover from '../popover'
+import classNames from 'classnames'
 
 const ToolTip = (props) => {
-  const {
+  let {
     popup,
-    children
+    children,
+
+    right, top, center,
+
+    className,
+    ...rest
   } = props
 
   return (
     <Popover
       showArrow
       type='hover'
-      right
-      center
+      right={right}
+      top={top}
+      center={center}
       popup={popup}
-      animName='zoom-in-bottom'
+      animName={top ? 'zoom-in-top' : 'zoom-in-bottom'}
     >
-      {children !== undefined ? children : <i className='xfont xfont-info-circle-o gm-text-desc'/>}
+      {children !== undefined ? children : (
+        <i {...rest} className={classNames('xfont xfont-info-circle-o gm-text-desc', className)}/>
+      )}
     </Popover>
   )
 }
 
 ToolTip.propTypes = {
   children: PropTypes.element,
-  popup: PropTypes.element
+  popup: PropTypes.element,
+
+  right: PropTypes.bool,
+  top: PropTypes.bool,
+  center: PropTypes.bool,
+
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default ToolTip
