@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Flex from '../flex'
-import classnames from 'classnames'
+import classNames from 'classnames'
 
 const radius = 110 // 半径r
 const diameter = Math.round(Math.PI * radius * 2) // 周长(路径长度)
@@ -31,11 +31,11 @@ class ProgressCircle extends React.Component {
 
     return (
       <Flex alignCenter>
-        { text && textPosition === 'left' && <span className='gm-progress-circle-innerText-left'>{text}</span> }
+        {text && textPosition === 'left' && <span className='gm-progress-circle-innerText-left'>{text}</span>}
         <svg width={size} height={size} viewBox='0 0 300 300'>
           <circle stroke={bgColor} cx='150' cy='150' r={radius} strokeWidth={lineWidth} fill={centerColor}/>
           <circle
-            className={classnames(
+            className={classNames(
               {
                 'gm-progress-circle-success': status === 'success',
                 'gm-progress-circle-exception': status === 'exception'
@@ -50,9 +50,16 @@ class ProgressCircle extends React.Component {
             strokeLinecap={strokeLinecap}
             fill='none'
             style={{ strokeDashoffset, transition, stroke: progressColor }}/>
-          { text && textPosition === 'center' && <text fill='currentColor' fontSize='45' x='150' y='150' textAnchor='middle' dominantBaseline='central'>{text}</text> }
+          {text && textPosition === 'center' &&
+          <text
+            fill='currentColor'
+            fontSize='45'
+            x='150'
+            y='150'
+            textAnchor='middle'
+            dominantBaseline='central'>{text}</text>}
         </svg>
-        { text && textPosition === 'right' && <span className='gm-progress-circle-innerText-right'>{text}</span> }
+        {text && textPosition === 'right' && <span className='gm-progress-circle-innerText-right'>{text}</span>}
       </Flex>
     )
   }
@@ -64,8 +71,8 @@ ProgressCircle.propTypes = {
   showText: PropTypes.bool,
   textPosition: PropTypes.oneOf(['left', 'center', 'right']),
   status: PropTypes.oneOf(['success', 'exception']),
-  size: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
-  lineWidth: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  lineWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   progressColor: PropTypes.string,
   bgColor: PropTypes.string
 }

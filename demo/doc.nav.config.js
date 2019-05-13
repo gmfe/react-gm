@@ -117,7 +117,7 @@ class NavConfig extends React.Component {
 }
 
 NavConfig.propTypes = {
-  location: PropTypes.object.isRequired
+  location: PropTypes.object
 }
 
 export default NavConfig

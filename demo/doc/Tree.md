@@ -91,7 +91,6 @@ class Component extends React.Component {
                     onSelectValues={this.handleSelect}
                     onClickLeafName={this.handleClickLeafName}
                     onClickCheckbox={this.handleClickCheckbox}
-                    disableSelectAll
                     showGroupCheckbox={this.showGroupCheckbox}
                 />
             </div>
