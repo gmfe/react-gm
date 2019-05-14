@@ -18,6 +18,7 @@ import Storage from './component/storage'
 import Calendar from './component/calendar'
 import DatePicker from './component/datepicker/datepicker'
 import DateRangePicker from './component/datepicker/daterangepicker'
+import DateRangePickerV2 from './component/datepicker/daterangepicker_v2'
 import Tip from './component/tip'
 import NProgress from './component/nprogress'
 import Progress from './component/progress'
@@ -124,6 +125,7 @@ export {
   Calendar,
   DatePicker,
   DateRangePicker,
+  DateRangePickerV2,
   Dropper,
   Storage,
   Tip,

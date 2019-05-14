@@ -79,5 +79,26 @@
   "formGroup": {
     "cancelBtn": "Cancel",
     "saveBtn": "Save"
+  },
+  "dateRangePickerV2": {
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "error": "Start Time cannot be greater than End Time",
+    "ok": "Ok",
+    "dateList1": [
+      { "value": "today", "text": "Today" },
+      { "value": "thisWeek", "text": "This Week" },
+      { "value": "thisMonth", "text": "This Month" },
+      { "value": "last_7", "text": "Last 7 days" },
+      { "value": "last_30", "text": "Last 30 days" },
+      { "value": "last_90", "text": "Last 90 days" }
+    ],
+    "dateList2": [
+      { "value": "yesterday", "text": "Yesterday" },
+      { "value": "lastWeek", "text": "Last Week" },
+      { "value": "lastMonth", "text": "Last Month" },
+      { "value": "last_14", "text": "Last 14 days" },
+      { "value": "last_60", "text": "Last 60 days" }
+    ]
   }
 }

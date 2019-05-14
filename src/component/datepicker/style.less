@@ -15,7 +15,8 @@
 }
 
 .gm-datepicker-clear-btn,
-.gm-daterangepicker-clear-btn {
+.gm-daterangepicker-clear-btn,
+.gm-daterangepickerv2-clear-btn {
   position: absolute;
   right: 18px;
   top: 6px;
@@ -64,6 +65,41 @@
 
   &:hover {
     .gm-daterangepicker-clear-btn {
+      display: block;
+    }
+  }
+}
+
+.gm-daterangepickerv2 {
+  position: relative;
+  display: inline-block;
+
+  &.disabled {
+    color: @gm-color-second;
+    cursor: not-allowed;
+  }
+
+  .gm-daterangepickerv2-inner {
+    min-width: 208px;
+    height: 30px;
+    padding: 5px 32px 5px 10px;
+    border: 1px solid @gm-border-color;
+    background: white;
+    text-align: center;
+
+    .gm-daterangepickerv2-icon {
+      position: absolute;
+      right: 5px;
+      top: 9px;
+    }
+  }
+
+  .gm-daterangepickerv2-clear-btn {
+    display: none;
+  }
+
+  &:hover {
+    .gm-daterangepickerv2-clear-btn {
       display: block;
     }
   }

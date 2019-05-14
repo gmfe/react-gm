@@ -6,6 +6,7 @@ imports:
 ## DatePicker
 
 只能选择，不能编辑。日期段选择版本[DateRangePicker](#/doc/DateRangePicker)
+新版日期段选择版本[DateRangePickerV2](#/doc/DateRangePickerV2)
 
 ::: demo
 ```js

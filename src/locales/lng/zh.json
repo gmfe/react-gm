@@ -79,5 +79,26 @@
   "formGroup": {
     "cancelBtn": "取消",
     "saveBtn": "保存"
+  },
+  "dateRangePickerV2": {
+    "startTime": "开始日期",
+    "endTime": "结束日期",
+    "error": "开始日期 不能大于 结束日期",
+    "ok": "确定",
+    "dateList1": [
+      { "value": "today", "text": "今天" },
+      { "value": "thisWeek", "text": "本周" },
+      { "value": "thisMonth", "text": "本月" },
+      { "value": "last_7", "text": "过去7天" },
+      { "value": "last_30", "text": "过去30天" },
+      { "value": "last_90", "text": "过去90天" }
+    ],
+    "dateList2": [
+      { "value": "yesterday", "text": "昨天" },
+      { "value": "lastWeek", "text": "上周" },
+      { "value": "lastMonth", "text": "上月" },
+      { "value": "last_14", "text": "过去14天" },
+      { "value": "last_60", "text": "过去60天" }
+    ]
   }
 }
