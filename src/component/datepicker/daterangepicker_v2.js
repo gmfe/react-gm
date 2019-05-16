@@ -6,7 +6,6 @@ import classNames from 'classnames'
 import Calendar from '../calendar'
 import Flex from '../flex'
 import List from '../list'
-import Tip from '../tip'
 import Popover from '../popover'
 import _ from 'lodash'
 import { getLocale } from '../../locales'
@@ -123,14 +122,12 @@ const CalendarPanel = props => {
 
         <button
           onClick={() => {
-            if (moment(beginDate).isAfter(endDate)) {
-              Tip.warning(getLocale('dateRangePickerV2', 'error'))
-            } else {
-              onChange(beginDate, endDate)
-              window.document.body.click()
-            }
+            onChange(beginDate, endDate)
+            window.document.body.click()
           }}
           className='btn btn-primary btn-xs'
+          title={moment(beginDate).isAfter(endDate) && getLocale('dateRangePickerV2', 'error')}
+          disabled={moment(beginDate).isAfter(endDate)}
           style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
           {getLocale('dateRangePickerV2', 'ok')}
         </button>
