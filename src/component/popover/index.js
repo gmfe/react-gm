@@ -1,14 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
-import { createChainedFunction, contains, getScrollTop, getScrollLeft } from 'gm-util'
+import {
+  createChainedFunction,
+  contains,
+  getScrollTop,
+  getScrollLeft
+} from 'gm-util'
 import LayoutRoot from '../layout_root'
 import Popup from './popup'
 import _ from 'lodash'
 import classNames from 'classnames'
 import EVENT_TYPE from '../../event_type'
 
-function getElementPositionWithScrollTop (element) {
+function getElementPositionWithScrollTop(element) {
   let { left, top } = element.getBoundingClientRect()
   left += getScrollLeft()
   top += getScrollTop()
@@ -20,7 +25,7 @@ function getElementPositionWithScrollTop (element) {
 }
 
 class Popover extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       active: false
@@ -39,7 +44,7 @@ class Popover extends React.Component {
     this.id = +new Date() + '' + Math.random()
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.type === 'click' || this.props.type === 'focus') {
       window.document.body.addEventListener('click', this.handleBodyClick)
     } else if (this.props.type === 'realFocus') {
@@ -48,25 +53,59 @@ class Popover extends React.Component {
     }
 
     // 用 debounce
-    window.addEventListener(EVENT_TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
-    window.addEventListener(EVENT_TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
-    window.addEventListener(EVENT_TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
-    window.addEventListener(EVENT_TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
+    window.addEventListener(
+      EVENT_TYPE.MODAL_SCROLL,
+      this.debounceHandleModalScroll
+    )
+    window.addEventListener(
+      EVENT_TYPE.BROWSER_SCROLL,
+      this.debounceHandleBrowserScroll
+    )
+    window.addEventListener(
+      EVENT_TYPE.DRAWER_SCROLL,
+      this.debounceHandleDrawerScroll
+    )
+    window.addEventListener(
+      EVENT_TYPE.TABLE_SCROLL,
+      this.debounceHandleTableScroll
+    )
+
+    if (this.props.popRef) {
+      this.props.popRef({
+        close: () => this.setActive(false),
+        show: () => this.setActive(true)
+      })
+    }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.props.type === 'click' || this.props.type === 'focus') {
       window.document.body.removeEventListener('click', this.handleBodyClick)
     } else if (this.props.type === 'realFocus') {
-      window.document.body.removeEventListener('focusout', this.handleBodyFocusOut)
+      window.document.body.removeEventListener(
+        'focusout',
+        this.handleBodyFocusOut
+      )
     }
 
     LayoutRoot._removeComponentPopup(this.id)
 
-    window.removeEventListener(EVENT_TYPE.MODAL_SCROLL, this.debounceHandleModalScroll)
-    window.removeEventListener(EVENT_TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
-    window.removeEventListener(EVENT_TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
-    window.removeEventListener(EVENT_TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
+    window.removeEventListener(
+      EVENT_TYPE.MODAL_SCROLL,
+      this.debounceHandleModalScroll
+    )
+    window.removeEventListener(
+      EVENT_TYPE.BROWSER_SCROLL,
+      this.debounceHandleBrowserScroll
+    )
+    window.removeEventListener(
+      EVENT_TYPE.DRAWER_SCROLL,
+      this.debounceHandleDrawerScroll
+    )
+    window.removeEventListener(
+      EVENT_TYPE.TABLE_SCROLL,
+      this.debounceHandleTableScroll
+    )
   }
 
   handleDrawerScroll = () => {
@@ -85,16 +124,22 @@ class Popover extends React.Component {
     this.setActive(this.state.active)
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this.doRenderPopup(this.state.active)
   }
 
-  doRenderPopup (active) {
+  doRenderPopup(active) {
     const {
-      style, className,
-      popup, type,
-      top, right, center, offset,
-      showArrow, arrowLeft,
+      style,
+      className,
+      popup,
+      type,
+      top,
+      right,
+      center,
+      offset,
+      showArrow,
+      arrowLeft,
       animName
     } = this.props
 
@@ -123,13 +168,18 @@ class Popover extends React.Component {
     }
 
     if (active) {
-      LayoutRoot._setComponentPopup(this.id, (
+      LayoutRoot._setComponentPopup(
+        this.id,
         <Popup
           key='popup'
           style={style}
           ref={ref => (this.refPopup = ref)}
-          onMouseEnter={!disabled && type === 'hover' ? this.handleMouseEnter : _.noop}
-          onMouseLeave={!disabled && type === 'hover' ? this.handleMouseLeave : _.noop}
+          onMouseEnter={
+            !disabled && type === 'hover' ? this.handleMouseEnter : _.noop
+          }
+          onMouseLeave={
+            !disabled && type === 'hover' ? this.handleMouseLeave : _.noop
+          }
           rect={this.rect}
           top={top}
           right={right}
@@ -137,22 +187,23 @@ class Popover extends React.Component {
           offset={offset}
           showArrow={showArrow}
           arrowLeft={arrowLeft}
-          className={classNames({
-            'gm-animated': !!animate,
-            ['gm-animated-' + animate]: animate
-          }, className)}
-        >{popup}</Popup>
-      ))
+          className={classNames(
+            {
+              'gm-animated': !!animate,
+              ['gm-animated-' + animate]: animate
+            },
+            className
+          )}
+        >
+          {popup}
+        </Popup>
+      )
     } else {
       LayoutRoot._removeComponentPopup(this.id)
     }
   }
 
-  setActive = (active) => {
-    this.setState({
-      active
-    })
-
+  updateRect = active => {
     if (active) {
       const dom = findDOMNode(this)
       const pos = getElementPositionWithScrollTop(dom)
@@ -164,10 +215,17 @@ class Popover extends React.Component {
       }
       this.rect = rect
     }
+  }
+
+  setActive = active => {
+    this.setState({
+      active
+    })
+    this.updateRect(active)
     this.doRenderPopup(active)
   }
 
-  doBodyClickAndFocusOut = (target) => {
+  doBodyClickAndFocusOut = target => {
     const { active } = this.state
 
     // 没激活就没有必要判断了
@@ -191,11 +249,11 @@ class Popover extends React.Component {
     this.setActive(false)
   }
 
-  handleBodyClick = (event) => {
+  handleBodyClick = event => {
     this.doBodyClickAndFocusOut(event.target)
   }
 
-  handleBodyFocusOut = (event) => {
+  handleBodyFocusOut = event => {
     this.doBodyClickAndFocusOut(event.relatedTarget)
   }
 
@@ -232,11 +290,8 @@ class Popover extends React.Component {
     return disabled || children.props.disabled
   }
 
-  render () {
-    const {
-      children,
-      type
-    } = this.props
+  render() {
+    const { children, type } = this.props
 
     const { active } = this.state
 
@@ -249,8 +304,14 @@ class Popover extends React.Component {
       } else if (type === 'realFocus') {
         p.onFocus = createChainedFunction(child.props.onFocus, this.handleFocus)
       } else if (type === 'hover') {
-        p.onMouseEnter = createChainedFunction(child.props.onMouseEnter, this.handleMouseEnter)
-        p.onMouseLeave = createChainedFunction(child.props.onMouseLeave, this.handleMouseLeave)
+        p.onMouseEnter = createChainedFunction(
+          child.props.onMouseEnter,
+          this.handleMouseEnter
+        )
+        p.onMouseLeave = createChainedFunction(
+          child.props.onMouseLeave,
+          this.handleMouseLeave
+        )
       }
     }
 
@@ -284,7 +345,19 @@ Popover.propTypes = {
   showArrow: PropTypes.bool, // 是否显示三角标
   arrowLeft: PropTypes.string,
 
-  animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom', 'zoom-in', 'zoom-in-top', 'zoom-in-bottom'])
+  animName: PropTypes.oneOf([
+    false,
+    true,
+    'fade-in-right',
+    'fade-in-left',
+    'fade-in-top',
+    'fade-in-bottom',
+    'zoom-in',
+    'zoom-in-top',
+    'zoom-in-bottom'
+  ]),
+
+  popRef: PropTypes.func
 }
 
 Popover.defaultProps = {
