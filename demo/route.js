@@ -48,6 +48,10 @@ const RouteConfig = () => (
             loader: () => import('./demo/list'),
             loading: Loading
           })}/>
+          <Route exact path='/demo/record' component={Loadable({
+            loader: () => import('./demo/record'),
+            loading: Loading
+          })}/>
           <Route exact path='/demo/service_time' component={Loadable({
             loader: () => import('./demo/service_time'),
             loading: Loading
