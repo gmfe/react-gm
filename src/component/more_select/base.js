@@ -18,16 +18,94 @@ class Base extends React.Component {
 
     this.state = {
       searchValue: '',
-      loading: false
+      loading: false,
+      willActiveIndex: null
     }
 
-    this._isMounted = false
-
+    this._isUnMounted = false
+    this._popRef = null
     this.debounceDoSearch = _.debounce(this.doSearch, props.delay)
   }
 
   componentWillUnmount () {
-    this._isMounted = true
+    this._isUnMounted = true
+  }
+
+  /**
+   * 获取扁平化的数组
+   *
+   * @memberof Base
+   */
+  sequencedData = () => {
+    return !this.props.isGroupList
+      ? this.props.data
+      : this.props.data.reduce((a, b) => a.concat(b.children), [])
+  }
+
+  onInputKeyUp = (e) => {
+    if (this.props.onInputKeyUp) {
+      this.props.onInputKeyUp(e)
+    }
+  }
+
+  handleKeyDown = (e) => {
+    const {
+      selected,
+      multiple
+    } = this.props
+
+    const sequencedData = this.sequencedData()
+    if (!sequencedData.length) {
+      return
+    }
+    let willActiveIndex = this.state.willActiveIndex
+
+    switch (e.key) {
+      case 'ArrowDown': {
+        if (willActiveIndex === null) { willActiveIndex = -1 }
+        willActiveIndex++
+        break
+      }
+      case 'ArrowUp': {
+        if (willActiveIndex === null) { willActiveIndex = sequencedData.length }
+        willActiveIndex--
+        break
+      }
+      case 'Enter': {
+        if (willActiveIndex === null) { return }
+        const currentActiveItem = sequencedData[willActiveIndex]
+        if (currentActiveItem !== undefined) {
+          if (!multiple) {
+            this.doSelect([currentActiveItem])
+          } else {
+            this.handleSelected(
+              selected.map(s => s.value),
+              [currentActiveItem.value]
+            )
+            willActiveIndex++
+          }
+        }
+        break
+      }
+      case 'Tab': {
+        e.preventDefault()
+        break
+      }
+    }
+
+    const fixWillActiveIndex = () => {
+      if (willActiveIndex < 0) {
+        willActiveIndex = sequencedData.length - 1
+      }
+      if (willActiveIndex >= sequencedData.length) {
+        willActiveIndex = 0
+      }
+      return willActiveIndex
+    }
+
+    this.setState({
+      willActiveIndex: fixWillActiveIndex()
+    })
   }
 
   handleClear = (clearItem) => {
@@ -36,6 +114,8 @@ class Base extends React.Component {
     const willSelected = _.filter(selected, item => item.value !== clearItem.value)
 
     onSelect(willSelected)
+
+    this.setState({ willActiveIndex: null })
   }
 
   handleChange = (e) => {
@@ -49,8 +129,7 @@ class Base extends React.Component {
   }
 
   handleSelected = (values) => {
-    const { onSelect, data, multiple } = this.props
-
+    const { data } = this.props
     const items = []
     _.each(data, group => {
       _.each(group.children, item => {
@@ -59,25 +138,26 @@ class Base extends React.Component {
         }
       })
     })
+    this.doSelect(items)
+  }
 
-    onSelect(items)
-
-    if (!multiple) {
-      onSelect(items)
-      // 单选选后关闭
-      // 要异步
-      setTimeout(() => {
-        if (!this._isMounted) {
-          this.ref.current.click()
+  doSelect = (selected) => {
+    const { onSelect, multiple } = this.props
+    onSelect(selected)
+    this.setState({ searchValue: '' }, () => {
+      if (!multiple) {
+        // 单选选后关闭
+        if (this._popRef) {
+          this._popRef.close()
         }
-      }, 0)
-    }
+      }
+    })
   }
 
   doSearch = (query) => {
     const { onSearch, data } = this.props
 
-    if (!this._isMounted && onSearch) {
+    if (!this._isUnMounted && onSearch) {
       const result = onSearch(query, data)
 
       if (!result) {
@@ -89,13 +169,13 @@ class Base extends React.Component {
       })
 
       Promise.resolve(result).then(() => {
-        if (!this._isMounted) {
+        if (!this._isUnMounted) {
           this.setState({
             loading: false
           })
         }
       }).catch(() => {
-        if (!this._isMounted) {
+        if (!this._isUnMounted) {
           this.setState({
             isLoading: false
           })
@@ -104,21 +184,24 @@ class Base extends React.Component {
     }
   }
 
-  renderList () {
+  renderList = () => {
     const {
       data,
-      selected,
       multiple,
+      selected,
       isGroupList,
+      onInputKeyUp,
+      onInputFocus,
+      onInputKeyDown,
+      listMaxHeight,
       renderListItem,
-      renderListFilter,
-      renderListFilterType,
-      searchPlaceholder,
       disabledSearch,
-      listMaxHeight
+      renderListFilter,
+      searchPlaceholder,
+      renderListFilterType
     } = this.props
 
-    const { loading, searchValue } = this.state
+    const { loading, searchValue, willActiveIndex } = this.state
 
     let filterData = data
 
@@ -132,16 +215,19 @@ class Base extends React.Component {
     }
 
     return (
-      <div className='gm-more-select-popup'>
+      <div className='gm-more-select-popup' onKeyDown={this.handleKeyDown}>
         {!disabledSearch && (
           <div className='gm-more-select-popup-input'>
             <input
               autoFocus
-              className='form-control'
               type='text'
               value={searchValue}
+              className='form-control'
               onChange={this.handleChange}
               placeholder={searchPlaceholder}
+              onFocus={e => { onInputFocus && onInputFocus(e) }}
+              onKeyUp={e => { onInputKeyUp && onInputKeyUp(e) }}
+              onKeyDown={e => { onInputKeyDown && onInputKeyDown(e) }}
             />
           </div>
         )}
@@ -158,6 +244,7 @@ class Base extends React.Component {
             renderItem={renderListItem}
             onSelect={this.handleSelected}
             isScrollTo
+            willActiveIndex={willActiveIndex}
             style={{
               maxHeight: listMaxHeight
             }}
@@ -176,9 +263,10 @@ class Base extends React.Component {
 
       renderSelected,
 
-      className, style,
+      className, style, popoverClassName,
       popoverType,
-      children
+      children,
+      popRef
     } = this.props
 
     return (
@@ -191,10 +279,24 @@ class Base extends React.Component {
         style={style}
       >
         <Popover
-          type={popoverType}
           animName
-          popup={this.renderList()}
+          type={popoverType}
           disabled={disabled}
+          popup={this.renderList()}
+          className={classNames(popoverClassName)}
+          popRef={pop => {
+            this._popRef = pop
+            if (popRef) {
+              popRef({
+                ...pop,
+                show: () => {
+                  // popup弹出框renderList处于memorized状态，内部渲染没更新
+                  this.setState({ searchValue: '', willActiveIndex: null })
+                  pop.show()
+                }
+              })
+            }
+          }}
         >
           {children || (
             <Flex wrap className='gm-more-select-selected'>
@@ -284,11 +386,18 @@ Base.propTypes = {
   // isGroupList
   isGroupList: PropTypes.bool,
 
-  popoverType: PropTypes.oneOf(['focus', 'realFocus']),
+  popoverType: PropTypes.oneOf(['click', 'focus', 'realFocus']),
 
   children: PropTypes.any,
   className: PropTypes.string,
-  style: PropTypes.object
+  popoverClassName: PropTypes.string,
+  style: PropTypes.object,
+
+  popRef: PropTypes.func,
+  onInputKeyUp: PropTypes.func,
+  onInputFocus: PropTypes.func,
+  onInputKeyDown: PropTypes.func
+
 }
 
 Base.defaultProps = {

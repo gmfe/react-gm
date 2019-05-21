@@ -52,6 +52,13 @@ class Popover extends React.Component {
     window.addEventListener(EVENT_TYPE.BROWSER_SCROLL, this.debounceHandleBrowserScroll)
     window.addEventListener(EVENT_TYPE.DRAWER_SCROLL, this.debounceHandleDrawerScroll)
     window.addEventListener(EVENT_TYPE.TABLE_SCROLL, this.debounceHandleTableScroll)
+
+    if (this.props.popRef) {
+      this.props.popRef({
+        close: () => this.setActive(false),
+        show: () => this.setActive(true)
+      })
+    }
   }
 
   componentWillUnmount () {
@@ -148,11 +155,7 @@ class Popover extends React.Component {
     }
   }
 
-  setActive = (active) => {
-    this.setState({
-      active
-    })
-
+  updateRect = (active) => {
     if (active) {
       const dom = findDOMNode(this)
       const pos = getElementPositionWithScrollTop(dom)
@@ -164,6 +167,13 @@ class Popover extends React.Component {
       }
       this.rect = rect
     }
+  }
+
+  setActive = (active) => {
+    this.setState({
+      active
+    })
+    this.updateRect(active)
     this.doRenderPopup(active)
   }
 
@@ -284,13 +294,16 @@ Popover.propTypes = {
   showArrow: PropTypes.bool, // 是否显示三角标
   arrowLeft: PropTypes.string,
 
-  animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom', 'zoom-in', 'zoom-in-top', 'zoom-in-bottom'])
+  animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom', 'zoom-in', 'zoom-in-top', 'zoom-in-bottom']),
+
+  popRef: PropTypes.func
 }
 
 Popover.defaultProps = {
   type: 'focus',
   showArrow: false,
   animName: true
+
 }
 
 export default Popover
