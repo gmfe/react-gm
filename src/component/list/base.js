@@ -7,12 +7,12 @@ import classNames from 'classnames'
 
 class Base extends React.Component {
   refList = React.createRef()
-  _isMounted = false
+  _isUnMounted = false
 
-  doScrollToSelected = () => {
+  doScrollToSelected = selector => {
     // 找第一个即可
-    if (!this._isMounted) {
-      const $active = this.refList.current.querySelector('.active')
+    if (!this._isUnMounted) {
+      const $active = this.refList.current.querySelector(selector)
       if ($active) {
         $active.scrollIntoViewIfNeeded()
       }
@@ -20,12 +20,20 @@ class Base extends React.Component {
   }
 
   componentWillUnmount() {
-    this._isMounted = true
+    this._isUnMounted = true
   }
 
   componentDidMount() {
     if (this.props.isScrollTo) {
-      this.doScrollToSelected()
+      this.doScrollToSelected('.active')
+      // will-active more prefer
+      this.doScrollToSelected('.will-active')
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.isScrollTo) {
+      this.doScrollToSelected('.will-active')
     }
   }
 
@@ -42,11 +50,17 @@ class Base extends React.Component {
     const {
       data,
       isGroupList,
-      selected, multiple, onSelect, isScrollTo, // eslint-disable-line
+      selected,
+      multiple,
+      onSelect,
+      isScrollTo, // eslint-disable-line
       renderItem,
       className,
+      willActiveIndex,
       ...rest
     } = this.props
+
+    let sequenceDataIndex = -1
 
     return (
       <div
@@ -63,17 +77,21 @@ class Base extends React.Component {
         {_.map(data, group => (
           <div key={group.label} className='gm-list-group-item'>
             <div className='gm-text-desc gm-list-label'>{group.label}</div>
-            {_.map(group.children, v => (
-              <div
-                key={v.value}
-                className={classNames('gm-list-item', {
-                  active: selected.includes(v.value)
-                })}
-                onClick={this.handleSelect.bind(this, v)}
-              >
-                {renderItem(v)}
-              </div>
-            ))}
+            {_.map(group.children, v => {
+              sequenceDataIndex++
+              return (
+                <div
+                  key={v.value}
+                  className={classNames('gm-list-item', {
+                    active: selected.includes(v.value),
+                    'will-active': willActiveIndex === sequenceDataIndex
+                  })}
+                  onClick={this.handleSelect.bind(this, v)}
+                >
+                  {renderItem(v)}
+                </div>
+              )
+            })}
           </div>
         ))}
       </div>
@@ -90,6 +108,7 @@ Base.propTypes = {
 
   // 展示
   renderItem: PropTypes.func,
+  willActiveIndex: PropTypes.number,
 
   // 滚动
   isScrollTo: PropTypes.bool,
