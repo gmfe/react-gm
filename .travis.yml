@@ -7,4 +7,5 @@ install:
   - npm install
 
 script:
-  - npm run docs
+  - npm run docs-build
+  - git add --all; git commit -m '[ci skip] docs generate'; git push -f 'https://${GH_TOKEN}@${GH_REF}' master:master
