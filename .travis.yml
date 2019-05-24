@@ -3,13 +3,16 @@ language: node_js
 node_js:
   - 'lts/*'
 
-before_install:
-  - git config --global user.name 'chaoming56'
-  - git config --global user.email '1173306360@qq.com'
-
 install:
   - npm install
 
 script:
   - npm run docs-build
-  - git add --all; git commit -m '[ci skip] docs generate'; git push -f 'https://$GH_TOKEN@github.com/gmfe/react-gm.git' master:master
+  - git add --all; git commit -m '[ci skip] docs generate'; git push -f
+after_script:
+  - git init
+  - git config user.name 'chaoming56'
+  - git config user.email '1173306360@QQ.COM'
+  - git add .
+  - git commit -m '[ci skip] docs generate'
+  - git push -f 'https://${GH_TOKEN}@github.com/gmfe/react-gm.git' master:master
