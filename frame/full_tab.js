@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import { is } from 'gm-util'
 import classNames from 'classnames'
 import { Flex } from '../src/index'
 import Context from './context'
@@ -70,7 +69,7 @@ class FullTab extends React.Component {
                 <Flex
                   className='gm-framework-full-tabs-list gm-bg'
                   style={{
-                    left: is.phone() ? '0' : leftWidth
+                    left: leftWidth
                   }}
                 >
                   {_.map(tabs, (tab, i) => (
