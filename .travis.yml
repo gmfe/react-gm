@@ -8,7 +8,6 @@ install:
 
 script:
   - npm run docs-build
-  - git add --all; git commit -m '[ci skip] docs generate'; git push -f
 after_script:
   - git init
   - git config user.name 'chaoming56'
