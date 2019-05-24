@@ -284,7 +284,7 @@ Base.propTypes = {
   // isGroupList
   isGroupList: PropTypes.bool,
 
-  popoverType: PropTypes.oneOfType(['focus', 'realFocus']),
+  popoverType: PropTypes.oneOf(['focus', 'realFocus']),
 
   children: PropTypes.any,
   className: PropTypes.string,
