@@ -10,7 +10,8 @@
     white-space: normal;
     word-wrap: break-word;
     word-break: break-all;
-    overflow: visible;
+    // todo 观察用回react-table自带的overflow： auto会怎样
+    // overflow: visible;
 
     a {
       cursor: pointer;
@@ -22,7 +23,8 @@
   }
 
   .rt-tbody {
-    overflow: visible;
+    // todo overflow: visible造成不能固定表头。观察用回react-table自带的overflow： auto会怎样
+    // overflow: visible;
 
     .rt-tr {
       min-height: 60px;
