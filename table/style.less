@@ -10,8 +10,9 @@
     white-space: normal;
     word-wrap: break-word;
     word-break: break-all;
-    // todo 观察用回react-table自带的overflow： auto会怎样
-    // overflow: visible;
+    // 覆盖react-table的overflow: hidden
+    // 因为hidden会影响react-gm部分组件的ui，例如Select的选择列表就没有用Popover，没有飘出去
+    overflow: visible;
 
     a {
       cursor: pointer;
