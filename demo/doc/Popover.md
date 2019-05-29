@@ -116,7 +116,7 @@ class PopoverWrap extends React.Component {
 
 注意 Popover 的 popup 不会随 render 更新
 
-- `type (focus|click|hover)` 三种模式。 默认 `focus`。 focus 即获得焦点就显示 popup。click 即点击显示 popup 再点击关闭 popup。hover 即 hover 的时候关闭，其中 hover 关闭的时候会延迟 500ms（避免鼠标移到浮层时，在目标和浮层之间的空隙时触发关闭浮层）。
+- `type (focus|click|hover|realFocus)` 默认 `focus`。 focus 即获得焦点就显示 popup。click 即点击显示 popup 再点击关闭 popup。hover 即 hover 的时候关闭，其中 hover 关闭的时候会延迟 500ms（避免鼠标移到浮层时，在目标和浮层之间的空隙时触发关闭浮层）。realFocus 真正的 focus
 - `popup (node|isRequired)` 浮层，如果元素有 disabled，则不会触发浮层
 - `children (node|isRequired)` 必须单个元素，非string
 - `disabled` 不会触发浮层，优先级比`popup`的 disabled 高。 建议使用popup disabled属性，因为有disabled样式。
@@ -125,5 +125,5 @@ class PopoverWrap extends React.Component {
 - `top (bool)` 在目标的上方。 可和 right center 组合用。
 - `offset (number)` 出现位置的偏移量。可和 right center 组合用。
 - `showArrow`  是否显示trigger的三角标
-- `animName (false|true|fade-in-left|fade-in-right|fade-in-bottom|fade-in-top)` 默认 true，false 关闭动画
+- `animName (false|true|fade-in-left|fade-in-right|fade-in-bottom|fade-in-top|zoom-in|zoom-in-top|zoom-in-bottom)` 默认 true，false 关闭动画
 - `...rest`

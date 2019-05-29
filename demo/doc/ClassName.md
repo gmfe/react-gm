@@ -87,7 +87,7 @@ size 0 5 10 15 20
  
  ## animation
  
- `gm-animated` `gm-animated-fade-in-right` `gm-animated-fade-in-left` `gm-animated-fade-in-top` `gm-animated-fade-in-bottom`
+ `gm-animated` `gm-animated-fade-in-right` `gm-animated-fade-in-left` `gm-animated-fade-in-top` `gm-animated-fade-in-bottom` `gm-animated-zoom-in` `gm-animated-zoom-in-top` `gm-animated-zoom-in-bottom`
  
  ## arrow
  

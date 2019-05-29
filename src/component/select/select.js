@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { findDOMNode } from 'react-dom'
-import { contains } from 'gm-util'
 import _ from 'lodash'
+import Popover from '../popover'
 
 const findItemByValFromChildren = (children, val) => {
   children = React.Children.toArray(children)
@@ -11,43 +10,7 @@ const findItemByValFromChildren = (children, val) => {
 }
 
 class Select extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      show: false
-    }
-
-    this.handleBodyClick = ::this.handleBodyClick
-    this.handleSelectionClick = ::this.handleSelectionClick
-  }
-
-  componentDidMount () {
-    window.document.body.addEventListener('click', this.handleBodyClick)
-  }
-
-  componentWillUnmount () {
-    window.document.body.removeEventListener('click', this.handleBodyClick)
-  }
-
-  handleBodyClick (e) {
-    const target = e.target
-    const selectDOM = findDOMNode(this)
-
-    if (this.state.show && !contains(selectDOM, target)) {
-      this.setState({ show: false })
-    }
-  }
-
-  handleSelectionClick () {
-    const { disabled } = this.props
-    const { show } = this.state
-
-    if (!disabled) {
-      this.setState({
-        show: !show
-      })
-    }
-  }
+  ref = React.createRef()
 
   handleOptionClick (elProps) {
     const { onChange } = this.props
@@ -58,12 +21,14 @@ class Select extends React.Component {
 
     if (!elPropsDisabled) {
       onChange(elPropsValue)
-      this.setState({ show: false })
+
+      setTimeout(() => {
+        this.ref.current.click()
+      }, 0)
     }
   }
 
   render () {
-    const { show } = this.state
     const {
       value,
       children,
@@ -76,41 +41,39 @@ class Select extends React.Component {
     const selected = findItemByValFromChildren(children, value)
     const selectedChildren = selected && selected.props.children
 
+    const popup = (
+      <div className='gm-select-list gm-list'>
+        {React.Children.map(children, (el) => (
+          React.cloneElement(el, {
+            className: classNames(el.props.className, {
+              'active': el.props.value === value
+            }),
+            onClick: this.handleOptionClick.bind(this, el.props)
+          })
+        ))}
+      </div>
+    )
+
     return (
-      <div
-        {...rest}
-        className={classNames(`gm-select`, {
-          'gm-select-clean': clean,
-          'gm-select-open': show,
-          'disabled': disabled
-        }, className)}
+      <Popover
+        type='click'
+        popup={popup}
+        disabled={disabled}
       >
         <div
-          className='gm-select-selection'
-          onClick={this.handleSelectionClick}
+          {...rest}
+          ref={this.ref}
+          className={classNames(`gm-select`, {
+            'gm-select-clean': clean,
+            'disabled': disabled
+          }, className)}
         >
           <div className='gm-select-selected'>
             {selectedChildren !== undefined ? selectedChildren : <span>&nbsp;</span>}
           </div>
-          <i className={classNames({
-            'gm-arrow-up': show,
-            'gm-arrow-down': !show
-          })}/>
+          <i className='gm-select-arrow'/>
         </div>
-
-        {show && (
-          <div key='list' className='gm-select-list gm-animated gm-animated-fade-in-right'>
-            {React.Children.map(children, (el) => (
-              React.cloneElement(el, Object.assign({}, el.props, {
-                className: classNames(el.props.className, {
-                  'selected': el.props.value === value
-                }),
-                onClick: this.handleOptionClick.bind(this, el.props)
-              }))
-            ))}
-          </div>
-        )}
-      </div>
+      </Popover>
     )
   }
 }

@@ -35,6 +35,7 @@ const data = [{
   sub: [
     { name: 'Cascader 级联选择', path: '/doc/Cascader' },
     { name: 'DropSelect', path: '/doc/DropSelect' },
+    { name: 'MoreSelect 搜索选择', path: '/doc/MoreSelect' },
     { name: 'FilterSelect 搜索选择', path: '/doc/FilterSelect' },
     { name: 'Transfer 穿梭框', path: '/doc/Transfer' },
     { name: 'Tree 树形选择', path: '/doc/Tree' },
