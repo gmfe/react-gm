@@ -1,3 +1,5 @@
+// 注意注意
+// gm-list gm-list-item.active 被 Select 使用
 .gm-list {
   border: 1px solid @gm-border-color;
   background: white;
@@ -9,6 +11,11 @@
 
     &.active {
       color: @brand-primary;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      color: @gm-color-second;
     }
 
     &.will-active {

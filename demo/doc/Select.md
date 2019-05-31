@@ -19,14 +19,14 @@ const list = _.map(_.range(8), v => ({
 }));
 list.push({
 value: 21312,
-name: '你好啊，我们的阿斯顿发顺丰as'
+name: '你好啊'
 });
 class Component extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             list: list,
-            value_1: null, 
+            value_1: list[list.length - 1].value, 
             value_2: list[0].value
         };
     }

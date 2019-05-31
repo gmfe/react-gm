@@ -66,7 +66,7 @@ const Framework = props => {
 
       window.removeEventListener('scroll', doScroll)
     }
-  })
+  }, [])
 
   return (
     <div

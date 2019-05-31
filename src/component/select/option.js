@@ -14,7 +14,7 @@ class Option extends React.Component {
     return (
       <div
         {...rest}
-        className={classNames('gm-select-option', className, {
+        className={classNames('gm-list-item', className, {
           'disabled': disabled
         })}
       >{children}</div>

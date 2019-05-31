@@ -6,6 +6,9 @@
   background-color: #fff;
   user-select: none;
   cursor: pointer;
+  border: 1px solid @gm-border-color;
+  height: 30px;
+  padding: 5px 18px 5px 10px;
 
   &.disabled {
     cursor: not-allowed;
@@ -14,66 +17,34 @@
     color: @gm-color-second;
   }
 
-  .gm-select-selection {
-    position: relative;
-    border: 1px solid @gm-border-color;
-    height: 30px;
-    padding: 5px 18px 5px 10px;
-
-    .gm-select-selected {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
-
-  .gm-select-list {
-    display: none;
-    position: absolute;
-    z-index: 3000;
-    min-width: 80px;
-    max-height: 250px;
-    overflow-y: auto;
-    border: 1px solid @gm-border-color;
-    margin-top: 2px;
-    background: white;
-  }
-
-  .gm-select-option {
-    cursor: pointer;
-    padding: 5px 10px;
+  .gm-select-selected {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
 
-    &:hover {
-      background-color: @list-group-hover-bg;
-    }
+  &.gm-popover-active {
+    .gm-form-control-focus();
 
-    &.disabled {
-      cursor: not-allowed;
-      color: @gm-color-second;
-    }
-
-    &.selected {
-      color: @brand-primary;
+    .gm-select-arrow {
+      .gm-arrow-up();
     }
   }
 
-  &.gm-select-open {
-    .gm-select-selection {
-      .gm-form-control-focus();
-    }
-
-    .gm-select-list {
-      display: block;
+  &:not(.gm-popover-active) {
+    .gm-select-arrow {
+      .gm-arrow-down();
     }
   }
 
+  // 特殊用途，具体见业务
   &.gm-select-clean {
-    .gm-select-selection {
-      border: none;
-      padding: 6px 18px 6px 10px;
-    }
+    border: none;
+    padding: 6px 18px 6px 10px;
   }
+}
+
+.gm-select-list {
+  min-width: 80px;
+  max-height: 250px;
 }

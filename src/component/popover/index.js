@@ -105,19 +105,19 @@ class Popover extends React.Component {
     if (animName === true) {
       if (top) {
         if (right) {
-          animate = 'fade-in-left'
+          animate = 'zoom-in-top'
         } else if (center) {
-          animate = 'fade-in-top'
+          animate = 'zoom-in-top'
         } else {
-          animate = 'fade-in-right'
+          animate = 'zoom-in-top'
         }
       } else {
         if (right) {
-          animate = 'fade-in-left'
+          animate = 'zoom-in-bottom'
         } else if (center) {
-          animate = 'fade-in-bottom'
+          animate = 'zoom-in-bottom'
         } else {
-          animate = 'fade-in-right'
+          animate = 'zoom-in-bottom'
         }
       }
     }
@@ -284,7 +284,7 @@ Popover.propTypes = {
   showArrow: PropTypes.bool, // 是否显示三角标
   arrowLeft: PropTypes.string,
 
-  animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom'])
+  animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom', 'zoom-in', 'zoom-in-top', 'zoom-in-bottom'])
 }
 
 Popover.defaultProps = {
