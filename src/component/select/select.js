@@ -42,7 +42,7 @@ class Select extends React.Component {
     const selectedChildren = selected && selected.props.children
 
     const popup = (
-      <div className='gm-select-list gm-list'>
+      <div className='gm-select-list gm-list gm-border-0'>
         {React.Children.map(children, (el) => (
           React.cloneElement(el, {
             className: classNames(el.props.className, {

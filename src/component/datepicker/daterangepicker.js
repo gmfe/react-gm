@@ -71,6 +71,7 @@ class DateRangePicker extends React.Component {
               <Calendar
                 selected={begin}
                 onSelect={this.handleSelectBegin}
+                className='gm-border-0'
                 {...beginProps}
               />
             )}
@@ -102,6 +103,7 @@ class DateRangePicker extends React.Component {
               <Calendar
                 selected={end}
                 onSelect={this.handleSelectEnd}
+                className='gm-border-0'
                 {...Object.assign({
                   min: begin
                 }, endProps)}
