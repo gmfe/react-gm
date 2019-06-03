@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Flex, LayoutRoot } from '../src/index'
 import classNames from 'classnames'
-import { setTitle } from 'gm-util'
 import _ from 'lodash'
 import EVENT_TYPE from '../src/event_type'
 import Context from './context'
@@ -36,10 +35,6 @@ const Framework = props => {
     }
   }
 
-  const doSetTitle = e => {
-    setTitle(e.detail)
-  }
-
   const doScroll = _.throttle(() => {
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.BROWSER_SCROLL))
   }, 200)
@@ -51,8 +46,6 @@ const Framework = props => {
     window.addEventListener(EVENT_TYPE.DRAWER_SHOW, addOverflowClass)
     window.addEventListener(EVENT_TYPE.DRAWER_HIDE, removeOverflowClass)
 
-    window.addEventListener(EVENT_TYPE.TITLE_CHANGE, doSetTitle)
-
     window.addEventListener('scroll', doScroll)
 
     return () => {
@@ -61,8 +54,6 @@ const Framework = props => {
 
       window.removeEventListener(EVENT_TYPE.DRAWER_SHOW, addOverflowClass)
       window.removeEventListener(EVENT_TYPE.DRAWER_HIDE, removeOverflowClass)
-
-      window.removeEventListener(EVENT_TYPE.TITLE_CHANGE, doSetTitle)
 
       window.removeEventListener('scroll', doScroll)
     }

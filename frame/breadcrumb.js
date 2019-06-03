@@ -2,12 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import { isPathMatch, is } from 'gm-util'
-import EVENT_TYPE from '../src/event_type'
 
 function nav2BreadCrumb (props) {
   const { breadcrumbs, pathname, navConfig } = props
   let result = []
-  let title
 
   _.forEach(navConfig, value => {
     if (_.startsWith(pathname, value.link)) {
@@ -33,10 +31,6 @@ function nav2BreadCrumb (props) {
     }
   })
 
-  title = result.length ? result[result.length - 1].name : ''
-  window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TITLE_CHANGE, {
-    detail: title
-  }))
   return result
 }
 
