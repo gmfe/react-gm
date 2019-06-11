@@ -2,7 +2,7 @@
 imports:
     import {Table, SelectTable, ExpandTable, TableUtil, diyTableHOC} from '../../table';
     import DndTable from '../../table/dnd_table';
-    import {Popover} from '../../src/index';
+    import {Popover, Select, Option} from '../../src/index';
 
     const DiyTable = diyTableHOC(Table);
 ---
@@ -603,5 +603,79 @@ class DndFieldTableWrap extends React.Component {
 - `getDraggableClass (func)` `(snapshot) => string`
 - `getDroppableClass (func)` `(snapshot) => string` 
 
-
 其他见 react-table 官方文档
+
+
+## *以下是测试用例,用来覆盖一些比较特殊的场景*
+- `固定表头滚动`
+- `左右滚动`
+- `Popover能溢出table外,展示完全`
+- `Select能溢出table外,展示完全`
+
+::: demo 测试用例
+```js
+class Test extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      data,
+      list: Array(10).fill(1).map((x, n) => n),
+      selected: 0
+    }
+  }
+  
+  renderPopup = () => {
+    return (
+      <div style={{width: '200px', height: '200px'}}>
+          <div>浮层溢出table外,能展示完全</div>
+          <div>浮层溢出table外,能展示完全</div>
+          <div>浮层溢出table外,能展示完全</div>
+      </div>
+    );
+  }
+  
+  render() {
+    const { list, selected, data } = this.state
+    return (
+      <Table
+        style={{
+         height: "180px" // This will force the table body to overflow and scroll, since there is not enough room
+        }}
+        data={data}
+        columns={[{
+          Header: '建单时间',
+          id: 's',
+          width: 500,
+          accessor: () => <Popover type="click" popup={this.renderPopup()}>
+                              <button className="btn btn-default">弹出浮层</button>
+                          </Popover>
+        }, {
+          Header: '选择器',
+          width: 500,
+          id: 'a',
+          accessor: () => <Select value={selected} onChange={selected => this.setState({selected})}>
+                            {list.map(n => <Option key={n} value={n}>{n}</Option>)}
+                          </Select>
+        }, {
+          Header: '供应商信息',
+          width: 500,
+          accessor: 'supplier_name'
+        }, {
+          Header: '入库金额',
+          width: 500,
+          accessor: 'total_money'
+        }, {
+          Header: '单据状态',
+          width: 500,
+          accessor: 'status'
+        }]}
+      />
+    )
+  }
+}
+```
+
+```jsx
+<Test/>
+```
+:::
