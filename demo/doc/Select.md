@@ -5,7 +5,9 @@ imports:
 ---
 ## Select
 
-原生select在onChange的时候是字符串，经常要转换，累。
+背景: 原生select在onChange的时候是字符串，经常要转换，所以有了此组件,无须转换。
+同时原生select在 `window` 和 `mac` 的表现不一样,此组件在两个平台变现完全一致.
+
 
 同时隐藏了多选的特别处理逻辑
 

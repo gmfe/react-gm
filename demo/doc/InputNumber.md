@@ -51,6 +51,9 @@ class Component2 extends React.Component {
 - `placeholder (string)`: 默认值
 - `...rest`
 
+### 实例方法
+- `apiDoFocus` 此方法可以让input聚焦
+
 ## InputNumber
 
 ::: demo 数字输入框

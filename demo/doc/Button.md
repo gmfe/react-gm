@@ -3,8 +3,7 @@ imports:
     import {Button} from '../../src/index';
 ---
 ## Button
-
-Button Loading
+背景: `原生button`在处理异步事件的时候,容易造成重复点击. 使用`Button`有效解决该类问题,还带有loading哦
 
 ::: demo Button
 ```js

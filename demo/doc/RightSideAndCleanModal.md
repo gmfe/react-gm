@@ -40,7 +40,7 @@ class ModalWrap4 extends React.Component {
 ```
 :::
 
-::: demo 右侧的modal
+::: demo 右侧的modal(溢出可滚动)
 ```js
 class ModalWrap5 extends React.Component {
     handleModal(){

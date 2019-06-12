@@ -9,4 +9,4 @@ imports:
 - `validate` 校验。成功返回空字符串，校验不通过返回帮助信息
 - `create` 创建校验函数，配合`FormItem`使用。 参数types 可以是具体的校验类型，或者校验类型集合
 
-demo TODO
+demo 见[Form](#/doc/Form)

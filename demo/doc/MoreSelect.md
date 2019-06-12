@@ -2,9 +2,8 @@
 imports:
     import {MoreSelect} from '../../src/index';
 ---
-## List
-
-现在列表各自实现，有点冗余，UI也不统一，估统一下
+## MoreSelect
+最新的搜索选择组件`MoreSelect`推荐使用,替代SearchSelect, searchFilterSelect
 
 ::: demo
 ```js
@@ -204,4 +203,32 @@ class Component extends React.Component {
 
 ### Props
 
-TODO
+- `data(array | isRequired)` 候选数据
+- `selected(object or arrary)` 选中项: item。 非 value，也非引用，原因是想解耦 selected 和 data 的关系
+- `onSelect(func | isRequired)` 被选中时调用. Function(item: 被选中项)
+- `multiple(bool)` 是否多选
+---
+- `disable(bool)` 是否禁用
+- `placeholder(string)` 占位符
+---
+- `onSearch(func)` 列表搜索 Function(searchValue: 搜索文字, data: 原数据), 异步搜素请返回Promise
+- `delay(number)` 搜索去抖,默认500ms
+- `searchPlaceholder(string)` 搜索框占位符
+- `disabledSearch(bool)` 去掉搜索, 默认支持搜索
+- `renderListFilter(func)` 过滤候选数据 Function(data: 原数据, searchValue: 搜索文字)
+- `renderListFilterType('default' or 'pinyin')` 过滤类型, 'pinyin'拼音过滤
+---
+- `renderSelected(func)` 制定已选的区域, Function(selected)
+- `renderListItem(func)` 定制列表, Function(item)
+---
+- `listMaxHeight(string)` 列表高度上限, 默认 250px
+---
+- `isGroupList(bool)` 是否分组
+---
+- `popoverType('focus' or 'realFocus')` 弹出方式
+---
+- `children(any)`
+- `className(string)`
+- `style(object)`
+
+

@@ -3,6 +3,7 @@ imports: import { Price } from '../../src/index';
 ---
 
 ## Price
+使用场景: 价格处理所需的 `货币符号` 和 `货币单位` 都在这个组件中统一提供. 还有统一价格的UI展示
 
 ::: demo Price
 

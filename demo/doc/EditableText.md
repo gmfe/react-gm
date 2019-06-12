@@ -4,7 +4,7 @@ imports:
 ---
 ## EditableText
 
-EditableText
+`EditableText`在表格编辑中比较常用
 
 ::: demo
 ```js

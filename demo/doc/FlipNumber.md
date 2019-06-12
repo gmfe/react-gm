@@ -4,7 +4,7 @@ imports:
 ---
 ## FlipNumber
 
-FlipNumber
+数字滚动动画
 
 ::: demo
 ```js

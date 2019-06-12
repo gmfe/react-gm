@@ -4,6 +4,7 @@ imports:
 
 ---
 ##  Drawer
+背景: `Drawer`的出现,是为了在Drawer之上再次弹出浮层,例如Dialog
 
 ::: demo Drawer
 ```js
@@ -12,16 +13,15 @@ class ModalWrap extends React.Component {
     Drawer.render({
       children: <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
         <div style={{flex: '1', overflowY: 'auto'}}>
-          示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
-          示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的示例示例<br/>右侧右侧的
+          {Array(100).fill(<div>一行</div>)}
         </div>
         <div style={{height: '50px', backgroundColor: '#64DD17'}} onClick={() => {
           Dialog.confirm({
-          children: 'asdfasf'
+          children: '我是Dialog'
           }).then(() => {
             Drawer.hide()
           })
-        }}>btn</div>
+        }}>弹出Dialog</div>
         
         
         

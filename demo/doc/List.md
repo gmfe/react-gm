@@ -3,8 +3,7 @@ imports:
     import {List} from '../../src/index';
 ---
 ## List
-
-现在列表各自实现，有点冗余，UI也不统一，估统一下
+背景: 列表各自实现，有点冗余，UI也不统一，故统一一下
 
 ::: demo
 ```js
