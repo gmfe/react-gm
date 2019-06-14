@@ -7,7 +7,8 @@ imports:
         Radio, RadioGroup,
         Checkbox, CheckboxGroup,
         Switch,
-        QuickPanel
+        QuickPanel,
+        MoreSelect
     } from '../../src/index';
 ---
 ## Form
@@ -201,6 +202,40 @@ class FormItemWrap extends React.Component {
 
 ::: demo 校验。推荐用`Validator.TYPE`提供的校验类型校验，没有则注册
 ```js
+const list = [{
+  value: 1,
+  text: '南山'
+}, {
+  value: 2,
+  text: '福田'
+}, {
+  value: 3,
+  text: '罗湖'
+}, {
+  value: 4,
+  text: '宝安'
+}, {
+  value: 5,
+  text: '福永'
+}, {
+  value: 6,
+  text: '坪洲'
+}, {
+  value: 7,
+  text: '西乡'
+}, {
+  value: 8,
+  text: '西乡8'
+}, {
+  value: 9,
+  text: '西乡9'
+}, {
+  value: 10,
+  text: '西乡10'
+}, {
+  value: 11,
+  text: '西乡11'
+}]
 class FormItemWrap2 extends React.Component {
     constructor(props){
         super(props);
@@ -208,7 +243,8 @@ class FormItemWrap2 extends React.Component {
             email: '',
             repeat_email: '',
             url: '',
-            name: ''
+            name: '',
+            address: null
         };
         this.validateRepeatEmail = ::this.validateRepeatEmail;
     }
@@ -227,6 +263,7 @@ class FormItemWrap2 extends React.Component {
         }
         return '两次邮件输入不一致';
     }
+
 
     render() {
         return (
@@ -272,6 +309,17 @@ class FormItemWrap2 extends React.Component {
                         type="text"
                         value={this.state.repeat_email}
                         onChange={e => this.setState({repeat_email: e.target.value})}
+                    />
+                </FormItem>
+                <FormItem
+                    label="地址"
+                    required
+                    validate={Validator.create([], this.state.address)}
+                >
+                    <MoreSelect
+                        data={list}
+                        selected={this.state.address}
+                        onSelect={address => this.setState({ address })}
                     />
                 </FormItem>
                 <FormButton>

@@ -86,7 +86,8 @@ class FormItem extends React.Component {
 
     return (
       <Flex column={!horizontal && !inline} {...rest} className={classNames('gm-form-group', className, {
-        'has-error': error
+        'has-error': error,
+        'gm-has-error': error
       })}>
         {label &&
         <Flex justifyEnd={horizontal} width={labelWidth} className={classNames('gm-form-label control-label', {
