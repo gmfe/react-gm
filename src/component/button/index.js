@@ -5,6 +5,11 @@ import classNames from 'classnames'
 import { is } from 'gm-util'
 import Loading from '../loading'
 
+/**
+ * 原生 button 在处理异步事情的时候，容易造成重复点击。
+ *
+ * 使用 Button 可以方便解决该类问题，还有 loading UI。
+ * */
 const Button = props => {
   const [isLoading, setIsLoading] = useState(false)
 
@@ -52,9 +57,9 @@ const Button = props => {
 
 // 只封装了 loading
 Button.propTypes = {
-  children: PropTypes.any,
-  disabled: PropTypes.bool,
+  /** 返回 Promise 才有 loading */
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object
 }
