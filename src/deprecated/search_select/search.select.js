@@ -25,7 +25,7 @@ const getPropsSelected = props => {
 }
 
 class SearchSelect extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.timer = null
 
@@ -52,7 +52,7 @@ class SearchSelect extends React.Component {
     console.warn('Deprecated. Use FilterSelect instead.')
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.selected !== this.props.selected) {
       const state = {
         selected: getPropsSelected(nextProps)
@@ -66,29 +66,36 @@ class SearchSelect extends React.Component {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    if (this.state.activeIndex !== prevState.activeIndex && this.searchSelectList) {
-      const dom = this.searchSelectList.querySelector('.list-group-item.line-selected')
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.activeIndex !== prevState.activeIndex &&
+      this.searchSelectList
+    ) {
+      const dom = this.searchSelectList.querySelector(
+        '.list-group-item.line-selected'
+      )
       dom && dom.scrollIntoViewIfNeeded()
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.______isMounted = true
   }
 
-  doScroll () {
+  doScroll() {
     // 滚动到选择的地方。 不知道会发生什么，尽量来做容错
     if (this.searchSelectList) {
       // 选第一个
-      const activeDOM = this.searchSelectList.querySelectorAll('.list-group-item.active')[0]
+      const activeDOM = this.searchSelectList.querySelectorAll(
+        '.list-group-item.active'
+      )[0]
       if (activeDOM) {
         this.searchSelectList.scrollTop = activeDOM.offsetTop
       }
     }
   }
 
-  handleFocus (event) {
+  handleFocus(event) {
     event.target.select()
 
     this.props.onInputFocus()
@@ -102,7 +109,7 @@ class SearchSelect extends React.Component {
     }
   }
 
-  handleBlur (event) {
+  handleBlur(event) {
     // 慎用blur，在选择的之前会出发blur
     event.preventDefault()
     const { multiple } = this.props
@@ -124,7 +131,7 @@ class SearchSelect extends React.Component {
     })
   }
 
-  handleKeyDown (size, event) {
+  handleKeyDown(size, event) {
     const { keyCode } = event
     let activeIndex = this.state.activeIndex
 
@@ -135,8 +142,11 @@ class SearchSelect extends React.Component {
           selected.pop()
           this.doSelect(selected)
         }
-      } else if (keyCode === 13) { // 键盘 回车
-        const dom = this.searchSelectList && this.searchSelectList.querySelector('.list-group-item.line-selected')
+      } else if (keyCode === 13) {
+        // 键盘 回车
+        const dom =
+          this.searchSelectList &&
+          this.searchSelectList.querySelector('.list-group-item.line-selected')
         if (dom) {
           dom.click()
           !this.props.multiple && this.refInput.blur()
@@ -146,12 +156,18 @@ class SearchSelect extends React.Component {
       return
     }
 
-    if (keyCode === 38) { // 键盘 上键
-      if (activeIndex === null) { activeIndex = size }
+    if (keyCode === 38) {
+      // 键盘 上键
+      if (activeIndex === null) {
+        activeIndex = size
+      }
 
       activeIndex--
-    } else if (keyCode === 40) { // 键盘 下键
-      if (activeIndex === null) { activeIndex = -1 }
+    } else if (keyCode === 40) {
+      // 键盘 下键
+      if (activeIndex === null) {
+        activeIndex = -1
+      }
 
       activeIndex++
     }
@@ -161,19 +177,19 @@ class SearchSelect extends React.Component {
     })
   }
 
-  handleItemMouseEnter (activeIndex) {
+  handleItemMouseEnter(activeIndex) {
     this.setState({
       activeIndex
     })
   }
 
-  handleClose (value) {
+  handleClose(value) {
     const selected = _.filter(this.state.selected, v => v !== value)
     this.doSelect(selected)
   }
 
   // arr
-  doSelect (selected) {
+  doSelect(selected) {
     if (this.props.multiple) {
       this.props.onSelect(selected.length === 0 ? null : selected)
     } else {
@@ -182,7 +198,7 @@ class SearchSelect extends React.Component {
     this.props.onSearch('')
   }
 
-  handleSelect (value, event) {
+  handleSelect(value, event) {
     event.preventDefault()
     if (this.state.selected.indexOf(value) > -1) {
       this.doSelect(_.filter(this.state.selected, v => v !== value))
@@ -203,7 +219,7 @@ class SearchSelect extends React.Component {
     }
   }
 
-  doChange (value) {
+  doChange(value) {
     clearTimeout(this.timer)
     this.setState({
       value
@@ -221,24 +237,34 @@ class SearchSelect extends React.Component {
     }, this.props.delay)
   }
 
-  handleChange (event) {
+  handleChange(event) {
     this.doChange(event.target.value)
   }
 
-  getListItemCount () {
+  getListItemCount() {
     const { list, isGroupList } = this.props
 
     if (isGroupList) {
-      return _.reduce(list, (count, group) => {
-        return count + group.children.length
-      }, 0)
+      return _.reduce(
+        list,
+        (count, group) => {
+          return count + group.children.length
+        },
+        0
+      )
     }
 
     return list.length
   }
 
-  renderOverlay () {
-    const { list, listMaxHeight, inputClassName, isGroupList, renderListCell } = this.props
+  renderOverlay() {
+    const {
+      list,
+      listMaxHeight,
+      inputClassName,
+      isGroupList,
+      renderListCell
+    } = this.props
 
     if (isGroupList) {
       // 不存在group数据
@@ -270,11 +296,14 @@ class SearchSelect extends React.Component {
                       key={i}
                       alignCenter
                       className={classNames('list-group-item', inputClassName, {
-                        'active': this.state.selected.indexOf(value) > -1,
+                        active: this.state.selected.indexOf(value) > -1,
                         'line-selected': this.state.activeIndex === itemSequence
                       })}
                       onClick={this.handleSelect.bind(this, value)}
-                      onMouseEnter={this.handleItemMouseEnter.bind(this, itemSequence)}
+                      onMouseEnter={this.handleItemMouseEnter.bind(
+                        this,
+                        itemSequence
+                      )}
                     >
                       <Flex flex>{renderListCell(value)}</Flex>
                     </Flex>
@@ -301,7 +330,7 @@ class SearchSelect extends React.Component {
                 key={i}
                 alignCenter
                 className={classNames('list-group-item', inputClassName, {
-                  'active': this.state.selected.indexOf(value) > -1,
+                  active: this.state.selected.indexOf(value) > -1,
                   'line-selected': this.state.activeIndex === i
                 })}
                 onClick={this.handleSelect.bind(this, value)}
@@ -316,7 +345,7 @@ class SearchSelect extends React.Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <div
         ref={ref => (this.searchSelect = ref)}
@@ -325,20 +354,24 @@ class SearchSelect extends React.Component {
         })}
       >
         <Flex wrap className='gm-search-select-input'>
-          {this.props.multiple ? _.map(this.state.selected, (value, i) => (
-            <Flex key={i} alignStart className='selected'>
-              {value.name}
-              <button
-                disabled={this.props.disabled}
-                type='button'
-                className='close'
-                onClick={this.handleClose.bind(this, value)}
-              >&times;</button>
-            </Flex>
-          )) : undefined}
+          {this.props.multiple
+            ? _.map(this.state.selected, (value, i) => (
+                <Flex key={i} alignStart className='selected'>
+                  {value.name}
+                  <button
+                    disabled={this.props.disabled}
+                    type='button'
+                    className='close'
+                    onClick={this.handleClose.bind(this, value)}
+                  >
+                    &times;
+                  </button>
+                </Flex>
+              ))
+            : undefined}
           <Trigger
             animName
-            component={<Flex flex/>}
+            component={<Flex flex />}
             popup={this.renderOverlay()}
           >
             <input
@@ -373,7 +406,9 @@ SearchSelect.propTypes = {
   placeholder: PropTypes.string,
   isScrollToSelected: PropTypes.bool,
   onInputFocus: PropTypes.func,
-  isSelectedChangeValue: PropTypes.bool
+  isSelectedChangeValue: PropTypes.bool,
+  className: PropTypes.string,
+  inputClassName: PropTypes.string
 }
 
 SearchSelect.defaultProps = {

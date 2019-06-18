@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { getLocale } from '../../locales'
 
 class WithCount extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handlePage = ::this.handlePage
   }
 
-  render () {
+  render() {
     let data = Object.assign({}, this.props.data)
 
     data.index = data.offset / data.limit + 1
@@ -23,7 +23,7 @@ class WithCount extends React.Component {
 
     let end = Math.min(data.index + offset, all)
 
-    if (all > (offset * 2 + 1)) {
+    if (all > offset * 2 + 1) {
       if (begin === 1) {
         end = offset * 2 + 1
       } else if (end === all) {
@@ -39,27 +39,64 @@ class WithCount extends React.Component {
       <div className='gm-pagination'>
         <ul className='pagination pagination-sm' onClick={this.handlePage}>
           <li className={data.index === 1 ? 'disabled' : ''}>
-            <a href='javascript:;' data-page={data.index - 1}>{getLocale('pagination', 'previous')}</a>
+            <a href='javascript:;' data-page={data.index - 1}>
+              {getLocale('pagination', 'previous')}
+            </a>
           </li>
 
-          {begin >= 2 ? (<li><a href='javascript:;' data-page='1'>1</a></li>) : undefined}
-          {begin >= 3 ? (<li className='disabled'><a href='javascript:;'>...</a></li>) : undefined}
+          {begin >= 2 ? (
+            <li>
+              <a href='javascript:;' data-page='1'>
+                1
+              </a>
+            </li>
+          ) : (
+            undefined
+          )}
+          {begin >= 3 ? (
+            <li className='disabled'>
+              <a href='javascript:;'>...</a>
+            </li>
+          ) : (
+            undefined
+          )}
 
-          {pages.map((page, i) => <li key={i} className={data.index === page ? 'active' : ''}><a
-            href='javascript:;' data-page={page}>{page}</a></li>)}
+          {pages.map((page, i) => (
+            <li key={i} className={data.index === page ? 'active' : ''}>
+              <a href='javascript:;' data-page={page}>
+                {page}
+              </a>
+            </li>
+          ))}
 
-          {end <= all - 2 ? (<li className='disabled'><a href='javascript:;'>...</a></li>) : undefined}
-          {end <= all - 1 ? (<li><a href='javascript:;' data-page={all}>{all}</a></li>) : undefined}
+          {end <= all - 2 ? (
+            <li className='disabled'>
+              <a href='javascript:;'>...</a>
+            </li>
+          ) : (
+            undefined
+          )}
+          {end <= all - 1 ? (
+            <li>
+              <a href='javascript:;' data-page={all}>
+                {all}
+              </a>
+            </li>
+          ) : (
+            undefined
+          )}
 
-          <li className={(data.index === all || all === 0) ? 'disabled' : ''}>
-            <a href='javascript:;' data-page={data.index + 1}>{getLocale('pagination', 'next')}</a>
+          <li className={data.index === all || all === 0 ? 'disabled' : ''}>
+            <a href='javascript:;' data-page={data.index + 1}>
+              {getLocale('pagination', 'next')}
+            </a>
           </li>
         </ul>
       </div>
     )
   }
 
-  handlePage (event) {
+  handlePage(event) {
     const page = ~~event.target.getAttribute('data-page')
 
     const data = this.props.data
@@ -71,10 +108,13 @@ class WithCount extends React.Component {
       return
     }
 
-    toPage({
-      offset: (page - 1) * data.limit,
-      limit: data.limit
-    }, page)
+    toPage(
+      {
+        offset: (page - 1) * data.limit,
+        limit: data.limit
+      },
+      page
+    )
   }
 }
 
@@ -89,12 +129,12 @@ WithCount.propTypes = {
 }
 
 class WithoutCount extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handlePage = ::this.handlePage
   }
 
-  handlePage (action) {
+  handlePage(action) {
     const { data, toPage } = this.props
 
     if (action === -1) {
@@ -113,22 +153,20 @@ class WithoutCount extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { data, nextDisabled } = this.props
     return (
       <div className='gm-pagination'>
         <ul className='pagination pagination-sm'>
           <li className={data.offset === 0 ? 'disabled' : ''}>
-            <a
-              href='javascript:;'
-              onClick={this.handlePage.bind(this, -1)}
-            >{getLocale('pagination', 'previous')}</a>
+            <a href='javascript:;' onClick={this.handlePage.bind(this, -1)}>
+              {getLocale('pagination', 'previous')}
+            </a>
           </li>
           <li className={nextDisabled ? 'disabled' : ''}>
-            <a
-              href='javascript:;'
-              onClick={this.handlePage.bind(this, 1)}
-            >{getLocale('pagination', 'next')}</a>
+            <a href='javascript:;' onClick={this.handlePage.bind(this, 1)}>
+              {getLocale('pagination', 'next')}
+            </a>
           </li>
         </ul>
       </div>
@@ -147,11 +185,11 @@ WithoutCount.propTypes = {
 }
 
 class Pagination extends React.Component {
-  render () {
+  render() {
     if (this.props.data.count !== undefined) {
-      return <WithCount {...this.props}/>
+      return <WithCount {...this.props} />
     } else {
-      return <WithoutCount {...this.props}/>
+      return <WithoutCount {...this.props} />
     }
   }
 }

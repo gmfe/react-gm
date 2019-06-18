@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { getLocale } from '../../locales'
 
 class Transfer extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       leftSelectedValues: [],
@@ -15,23 +15,25 @@ class Transfer extends React.Component {
     }
   }
 
-  handleLeftChange = (leftSelectedValues) => {
+  handleLeftChange = leftSelectedValues => {
     this.setState({
       leftSelectedValues
     })
   }
 
-  handleRightChange = (rightSelectedValues) => {
+  handleRightChange = rightSelectedValues => {
     this.setState({
       rightSelectedValues
     })
   }
 
-  handleToClick = (isLeft) => {
+  handleToClick = isLeft => {
     const { onSelect, selectedValues } = this.props
     const { leftSelectedValues, rightSelectedValues } = this.state
 
-    onSelect(_.xor(selectedValues, isLeft ? rightSelectedValues : leftSelectedValues))
+    onSelect(
+      _.xor(selectedValues, isLeft ? rightSelectedValues : leftSelectedValues)
+    )
 
     this.setState({
       leftSelectedValues: [],
@@ -47,25 +49,26 @@ class Transfer extends React.Component {
     this.handleToClick(true)
   }
 
-  render () {
+  render() {
     let {
       list,
       selectedValues,
       listStyle,
 
-      leftTitle, leftWithFilter, leftPlaceHolder,
+      leftTitle,
+      leftWithFilter,
+      leftPlaceHolder,
 
-      rightTitle, rightWithFilter, rightPlaceHolder,
+      rightTitle,
+      rightWithFilter,
+      rightPlaceHolder,
 
       onSelect, // eslint-disable-line
       className,
       ...rest
     } = this.props
 
-    const {
-      leftSelectedValues,
-      rightSelectedValues
-    } = this.state
+    const { leftSelectedValues, rightSelectedValues } = this.state
 
     let leftList = []
     let rightList = []
@@ -84,33 +87,40 @@ class Transfer extends React.Component {
             list={leftList}
             selectedValues={leftSelectedValues}
             onSelect={this.handleLeftChange}
-
             title={leftTitle}
             style={listStyle}
             withFilter={leftWithFilter}
             placeholder={leftPlaceHolder}
           />
 
-          <div className='gm-gap-5'/>
-          <Flex column justifyCenter alignCenter className='gm-transfer-operation'>
+          <div className='gm-gap-5' />
+          <Flex
+            column
+            justifyCenter
+            alignCenter
+            className='gm-transfer-operation'
+          >
             <button
               disabled={leftSelectedValues.length === 0}
               className='btn btn-default btn-block gm-margin-bottom-5'
               onClick={this.handleToRightClick}
-            >&gt;</button>
+            >
+              &gt;
+            </button>
             <button
               disabled={rightSelectedValues.length === 0}
               className='btn btn-default btn-block'
               onClick={this.handleToLeftClick}
-            >&lt;</button>
+            >
+              &lt;
+            </button>
           </Flex>
-          <div className='gm-gap-5'/>
+          <div className='gm-gap-5' />
 
           <Box
             list={rightList}
             selectedValues={rightSelectedValues}
             onSelect={this.handleRightChange}
-
             title={rightTitle}
             style={listStyle}
             withFilter={rightWithFilter}

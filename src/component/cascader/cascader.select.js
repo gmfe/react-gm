@@ -7,7 +7,7 @@ import classNames from 'classnames'
 
 // TODO 后续考虑拆开单选，多选。 耦合起来太蛋疼。
 
-const getPropsSelected = (props) => {
+const getPropsSelected = props => {
   if (props.multiple) {
     if (props.selected) {
       return props.selected
@@ -24,7 +24,7 @@ const getPropsSelected = (props) => {
 }
 
 class CascaderSelect extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       selected: getPropsSelected(props),
@@ -34,13 +34,13 @@ class CascaderSelect extends React.Component {
     this.refCascaderSelect = null
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({
       selected: getPropsSelected(nextProps)
     })
   }
 
-  handleKeyDown (event) {
+  handleKeyDown(event) {
     if (event.key === 'Backspace') {
       if (this.state.cascaderValue.length > 0) {
         this.setState({
@@ -54,7 +54,7 @@ class CascaderSelect extends React.Component {
     }
   }
 
-  doSelect (selected) {
+  doSelect(selected) {
     if (this.props.multiple) {
       this.props.onSelect(selected.length === 0 ? null : selected)
     } else {
@@ -62,7 +62,7 @@ class CascaderSelect extends React.Component {
     }
   }
 
-  uniq (selected) {
+  uniq(selected) {
     let obj = {}
     let result = []
     _.each(selected, value => {
@@ -75,7 +75,7 @@ class CascaderSelect extends React.Component {
     return result
   }
 
-  handleChange (value) {
+  handleChange(value) {
     let result = []
     this.setState({
       cascaderValue: value
@@ -83,9 +83,12 @@ class CascaderSelect extends React.Component {
 
     if (value.length > 0) {
       _.each(value, (v, i) => {
-        const match = _.find(i === 0 ? this.props.data : result[i - 1].children, val => {
-          return v === val.value
-        })
+        const match = _.find(
+          i === 0 ? this.props.data : result[i - 1].children,
+          val => {
+            return v === val.value
+          }
+        )
         result.push(match)
       })
     }
@@ -108,28 +111,44 @@ class CascaderSelect extends React.Component {
     }
   }
 
-  handleClose (value) {
+  handleClose(value) {
     const selected = _.filter(this.state.selected, v => v !== value)
     this.doSelect(selected)
   }
 
-  render () {
-    const { disabled, inputProps, valueRender, filtrable, onlyChildSelectable } = this.props
+  render() {
+    const {
+      disabled,
+      inputProps,
+      valueRender,
+      filtrable,
+      onlyChildSelectable
+    } = this.props
     return (
-      <div className={classNames('gm-cascader-select gm-border gm-bg gm-position-relative', {
-        'disabled': disabled,
-        'gm-not-allowed': disabled
-      })} ref={ref => (this.refCascaderSelect = ref)}>
+      <div
+        className={classNames(
+          'gm-cascader-select gm-border gm-bg gm-position-relative',
+          {
+            disabled: disabled,
+            'gm-not-allowed': disabled
+          }
+        )}
+        ref={ref => (this.refCascaderSelect = ref)}
+      >
         <Flex className='gm-cascader-select-input'>
           {_.map(this.state.selected, (value, i) => (
             <Flex key={i} alignStart className='selected'>
-              {this.props.selectedRender ? this.props.selectedRender(value, i) : _.map(value, v => v.name).join(',')}
+              {this.props.selectedRender
+                ? this.props.selectedRender(value, i)
+                : _.map(value, v => v.name).join(',')}
               <button
                 disabled={disabled}
                 type='button'
                 className='close'
                 onClick={this.handleClose.bind(this, value)}
-              >{disabled ? null : <span>&times;</span>}</button>
+              >
+                {disabled ? null : <span>&times;</span>}
+              </button>
             </Flex>
           ))}
           <Flex flex column onKeyDown={::this.handleKeyDown}>

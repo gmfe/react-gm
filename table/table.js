@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import BaseTable from './base'
 
 class Table extends React.Component {
-  render () {
+  render() {
     const { ...rest } = this.props
 
-    return <BaseTable {...rest}/>
+    return <BaseTable {...rest} />
   }
 }
 

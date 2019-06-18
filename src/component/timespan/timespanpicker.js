@@ -7,20 +7,27 @@ import _ from 'lodash'
 import classNames from 'classnames'
 
 class TimeSpanPicker extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handleSelect = ::this.handleSelect
   }
 
-  handleSelect (date) {
+  handleSelect(date) {
     this.props.onChange(date)
     setTimeout(() => {
       this.refTimeSpanPicker.click()
     }, 0)
   }
 
-  render () {
-    const { children, inputClassName, disabled, render, date, disabledSpan } = this.props
+  render() {
+    const {
+      children,
+      inputClassName,
+      disabled,
+      render,
+      date,
+      disabledSpan
+    } = this.props
     const popup = (
       <TimeSpan
         min={this.props.min}

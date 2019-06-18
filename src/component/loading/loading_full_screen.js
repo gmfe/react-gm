@@ -6,33 +6,31 @@ import LayoutRoot from '../layout_root'
 import EVENT_TYPE from '../../event_type'
 
 class LoadingFullScreen extends React.Component {
-  render () {
-    let {
-      style,
-      size,
-      text,
-      className,
-      ...rest
-    } = this.props
+  render() {
+    let { style, size, text, className, ...rest } = this.props
 
     const s = Object.assign({}, style, {
-      'width': size + 'px',
-      'height': size + 'px'
+      width: size + 'px',
+      height: size + 'px'
     })
 
     return (
-      <div {...rest} className={classNames('gm-loading-full-screen', className)}>
-        <Loading style={s} text={text} className='gm-loading-spinner'/>
+      <div
+        {...rest}
+        className={classNames('gm-loading-full-screen', className)}
+      >
+        <Loading style={s} text={text} className='gm-loading-spinner' />
       </div>
     )
   }
 }
 
-LoadingFullScreen.render = (props) => {
+LoadingFullScreen.render = props => {
   window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.FULL_LOADING_SHOW))
-  LayoutRoot.setComponent(LayoutRoot.TYPE.FULLLOADING, (
-    <LoadingFullScreen {...props}/>
-  ))
+  LayoutRoot.setComponent(
+    LayoutRoot.TYPE.FULLLOADING,
+    <LoadingFullScreen {...props} />
+  )
 
   const documentBody = window.document.body
   if (documentBody) {

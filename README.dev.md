@@ -22,3 +22,10 @@
 待整理
 
 - drop_select 1000
+
+## 组件规范
+
+重要 props 放上面
+props children 不写
+尽量使用 docgen 描述组件
+

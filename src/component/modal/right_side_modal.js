@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 const RightSideModal = {}
 
-RightSideModal.render = (props) => {
+RightSideModal.render = props => {
   const rightSideProps = {
     ...props,
     animName: 'fade-in-left',

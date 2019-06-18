@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import Loading from './index'
 
 class LoadingChunk extends React.Component {
-  render () {
+  render() {
     let {
       loading,
       style,
@@ -16,18 +16,26 @@ class LoadingChunk extends React.Component {
     } = this.props
 
     const s = Object.assign({}, style, {
-      'width': size + 'px',
-      'height': size + 'px'
+      width: size + 'px',
+      height: size + 'px'
     })
 
     return (
-      <div {...rest} className={classNames(className, {
-        'gm-loading-chunk': loading
-      })}>
-        {children || <div style={{ height: (size || 50) + 'px' }}/>}
+      <div
+        {...rest}
+        className={classNames(className, {
+          'gm-loading-chunk': loading
+        })}
+      >
+        {children || <div style={{ height: (size || 50) + 'px' }} />}
         {loading && (
           <div className='gm-loading-mask'>
-            <Loading style={s} text={text} size={size} className='gm-loading-position'/>
+            <Loading
+              style={s}
+              text={text}
+              size={size}
+              className='gm-loading-position'
+            />
           </div>
         )}
       </div>

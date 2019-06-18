@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import Popover from '../popover'
 
 class DropDown extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.refTrigger = null
@@ -12,13 +12,13 @@ class DropDown extends React.Component {
     this.handlePopupClick = ::this.handlePopupClick
   }
 
-  handlePopupClick () {
+  handlePopupClick() {
     setTimeout(() => {
       this.refTrigger.click()
     }, 0)
   }
 
-  renderSplit () {
+  renderSplit() {
     const {
       children,
       className,
@@ -31,28 +31,41 @@ class DropDown extends React.Component {
     return (
       <div
         {...rest}
-        className={classNames('gm-dropdown btn-group gm-dropdown-split', className)}
+        className={classNames(
+          'gm-dropdown btn-group gm-dropdown-split',
+          className
+        )}
       >
         {children}
         <Popover
           animName
           type='click'
           right
-          popup={<div className='gm-dropdown-split-popup' onClick={this.handlePopupClick}>{popup}</div>}
+          popup={
+            <div
+              className='gm-dropdown-split-popup'
+              onClick={this.handlePopupClick}
+            >
+              {popup}
+            </div>
+          }
         >
           <button
             type='button'
             ref={ref => (this.refTrigger = ref)}
-            className={classNames('btn btn-default dropdown-toggle', cartClassName)}
+            className={classNames(
+              'btn btn-default dropdown-toggle',
+              cartClassName
+            )}
           >
-            <span className='caret'/>
+            <span className='caret' />
           </button>
         </Popover>
       </div>
     )
   }
 
-  render () {
+  render() {
     const {
       children,
       className,
@@ -72,7 +85,11 @@ class DropDown extends React.Component {
         animName='fade-in-bottom'
         type='click'
         right={right}
-        popup={<div className='gm-dropdown-popup' onClick={this.handlePopupClick}>{popup}</div>}
+        popup={
+          <div className='gm-dropdown-popup' onClick={this.handlePopupClick}>
+            {popup}
+          </div>
+        }
       >
         <div
           {...rest}

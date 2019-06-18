@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import Flex from '../flex'
 
 class Nav extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = this.getInitState()
   }
@@ -41,7 +41,7 @@ class Nav extends React.Component {
     }, 200)
   }
 
-  render () {
+  render() {
     const {
       onSelect,
       selected,
@@ -66,43 +66,53 @@ class Nav extends React.Component {
           <Flex alignCenter justifyCenter className='gm-nav-logo'>
             {logo}
           </Flex>
-          <div className='gm-margin-top-5 gm-nav-one' >
+          <div className='gm-margin-top-5 gm-nav-one'>
             {_.map(data, (one, oneI) => {
               let link = !isBrowserRouter && /^\/[^#\/].*/.test(one.link) ? `#${one.link}` : one.link // eslint-disable-line
               return (
-                <div key={oneI + one.link} className={classNames({
-                  'active': oneSelected && (oneSelected.link === one.link)
-                })}>
-                  <a
-                    href={link}
-                    onClick={this.handleOne.bind(this, one)}
-                  >{one.name}</a>
+                <div
+                  key={oneI + one.link}
+                  className={classNames({
+                    active: oneSelected && oneSelected.link === one.link
+                  })}
+                >
+                  <a href={link} onClick={this.handleOne.bind(this, one)}>
+                    {one.name}
+                  </a>
                 </div>
               )
             })}
-            <div style={{
-              margin: '30px 10px'
-            }}/>
+            <div
+              style={{
+                margin: '30px 10px'
+              }}
+            />
             {_.map(jump, (one, oneI) => (
-              <div key={oneI + one.link} className={classNames({
-                'active': oneSelected && (oneSelected.link === one.link)
-              })}>
-                <a
-                  href={one.link}
-                  onClick={this.handleJumpOne.bind(this, one)}
-                >{one.name}</a>
+              <div
+                key={oneI + one.link}
+                className={classNames({
+                  active: oneSelected && oneSelected.link === one.link
+                })}
+              >
+                <a href={one.link} onClick={this.handleJumpOne.bind(this, one)}>
+                  {one.name}
+                </a>
               </div>
             ))}
-            {renderExceptionNav && renderExceptionNav(oneSelected)} {/* 传递当前选中项数据以外部判断是否点击态 */}
+            {renderExceptionNav && renderExceptionNav(oneSelected)}{' '}
+            {/* 传递当前选中项数据以外部判断是否点击态 */}
           </div>
         </div>
         {/* 显示二级导航栏逻辑 */}
         {oneSelected && oneSelected.sub && (
-          <div className='gm-border-right gm-bg-white gm-overflow-y' style={{
-            width: widths[1],
-            paddingTop: '52px',
-            height: '100vh'
-          }}>
+          <div
+            className='gm-border-right gm-bg-white gm-overflow-y'
+            style={{
+              width: widths[1],
+              paddingTop: '52px',
+              height: '100vh'
+            }}
+          >
             {isJump ? (
               <div className='gm-nav-jump'>
                 {_.map(oneSelected.sub, (two, twoI) => (
@@ -112,7 +122,9 @@ class Nav extends React.Component {
                       href={two.link}
                       target='_blank'
                       rel='noopener noreferrer'
-                    >{two.name}</a>
+                    >
+                      {two.name}
+                    </a>
                   </div>
                 ))}
               </div>
@@ -123,11 +135,13 @@ class Nav extends React.Component {
                     <a
                       key={twoI + two.link}
                       className={classNames({
-                        'active': selected.includes(two.link)
+                        active: selected.includes(two.link)
                       })}
                       href={two.link}
                       onClick={e => e.preventDefault()}
-                    >{two.name}</a>
+                    >
+                      {two.name}
+                    </a>
                     <div className='gm-nav-there'>
                       {_.map(two.sub, (v, i) => {
                         let link = !isBrowserRouter && /^\/[^#\/].*/.test(v.link) ? `#${v.link}` : v.link // eslint-disable-line
@@ -136,13 +150,15 @@ class Nav extends React.Component {
                             href={link}
                             key={i + v.link}
                             className={classNames({
-                              'active': selected.includes(v.link.split('?')[0])
+                              active: selected.includes(v.link.split('?')[0])
                             })}
-                            onClick={(e) => {
+                            onClick={e => {
                               e.preventDefault()
                               onSelect(v)
                             }}
-                          >{v.name}</a>
+                          >
+                            {v.name}
+                          </a>
                         )
                       })}
                     </div>

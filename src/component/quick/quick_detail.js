@@ -10,7 +10,7 @@ class QuickDetail extends React.Component {
     show: false
   }
 
-  getChildContext () {
+  getChildContext() {
     return { show: this.state.show }
   }
 
@@ -20,13 +20,8 @@ class QuickDetail extends React.Component {
     })
   }
 
-  render () {
-    const {
-      first,
-      second,
-      operate,
-      third
-    } = this.props
+  render() {
+    const { first, second, operate, third } = this.props
     const { show } = this.state
 
     const hasCollapse = second.props.data.length > 4
@@ -37,26 +32,31 @@ class QuickDetail extends React.Component {
           <Flex flex column>
             {first}
           </Flex>
-          <div>
-            {operate}
-          </div>
+          <div>{operate}</div>
         </Flex>
         <Flex>
-          <div style={{ marginRight: '40px', width: '200px' }}>
-            {second}
-          </div>
+          <div style={{ marginRight: '40px', width: '200px' }}>{second}</div>
           <Flex flex column>
             {third}
           </Flex>
         </Flex>
         <Flex justifyCenter className='gm-padding-5'>
           {hasCollapse && (
-            <a href='javascript:;' className='gm-quick-filter-toggle' onClick={this.handleCollapse}>
-              {show ? getLocale('quickDetail', 'closeDetails') : getLocale('quickDetail', 'showDetails')}&nbsp;
-              <i className={classNames('xfont', {
-                'xfont-down': !show,
-                'xfont-up': show
-              })}/>
+            <a
+              href='javascript:;'
+              className='gm-quick-filter-toggle'
+              onClick={this.handleCollapse}
+            >
+              {show
+                ? getLocale('quickDetail', 'closeDetails')
+                : getLocale('quickDetail', 'showDetails')}
+              &nbsp;
+              <i
+                className={classNames('xfont', {
+                  'xfont-down': !show,
+                  'xfont-up': show
+                })}
+              />
             </a>
           )}
         </Flex>
@@ -77,17 +77,18 @@ QuickDetail.childContextTypes = {
 }
 
 class QuickDetailFirst extends React.Component {
-  render () {
-    const {
-      data
-    } = this.props
+  render() {
+    const { data } = this.props
 
     return (
       <Flex className='gm-quick-detail-first'>
         {_.map(data, (item, i) => (
-          <div key={i} style={{
-            marginRight: data.length - 1 === i ? '0px' : '40px'
-          }}>
+          <div
+            key={i}
+            style={{
+              marginRight: data.length - 1 === i ? '0px' : '40px'
+            }}
+          >
             <div>{item.name}:</div>
             <div className='gm-text-20'>{item.value}</div>
           </div>
@@ -102,7 +103,7 @@ QuickDetailFirst.propTypes = {
 }
 
 class QuickDetailSecond extends React.Component {
-  render () {
+  render() {
     const { data, nameWidth } = this.props
     const { show } = this.context
 
@@ -112,7 +113,12 @@ class QuickDetailSecond extends React.Component {
       <div style={{ lineHeight: 1 }}>
         {_.map(processData, (item, i) => (
           <div key={i} className='gm-margin-bottom-10'>
-            <span className='gm-text-desc gm-inline-block' style={{ width: nameWidth }}>{item.name}:</span>
+            <span
+              className='gm-text-desc gm-inline-block'
+              style={{ width: nameWidth }}
+            >
+              {item.name}:
+            </span>
             <span>{item.value}</span>
           </div>
         ))}
@@ -131,25 +137,42 @@ QuickDetailSecond.contextTypes = {
 }
 
 class QuickDetailThird extends React.Component {
-  render () {
+  render() {
     const { result, process, unit } = this.props
 
     return (
       <Flex>
-        <Flex flex column alignCenter justifyCenter className='gm-padding-10 gm-margin-right-20'
-          style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
+        <Flex
+          flex
+          column
+          alignCenter
+          justifyCenter
+          className='gm-padding-10 gm-margin-right-20'
+          style={{ backgroundColor: '#f1f0f6', height: '78px' }}
+        >
           <div>{result.name}</div>
-          <div className='gm-text-20'>{result.value}<span
-            className='gm-text-12'>{unit}</span></div>
+          <div className='gm-text-20'>
+            {result.value}
+            <span className='gm-text-12'>{unit}</span>
+          </div>
         </Flex>
 
         <Flex flex={process.length}>
           {_.map(process, (item, i) => (
-            <Flex flex column alignCenter justifyCenter className='gm-padding-10' key={i}
-              style={{ backgroundColor: '#f1f0f6', height: '78px' }}>
+            <Flex
+              flex
+              column
+              alignCenter
+              justifyCenter
+              className='gm-padding-10'
+              key={i}
+              style={{ backgroundColor: '#f1f0f6', height: '78px' }}
+            >
               <div>{item.name}</div>
-              <div className='gm-text-20'>{item.value}<span
-                className='gm-text-12'>{unit}</span></div>
+              <div className='gm-text-20'>
+                {item.value}
+                <span className='gm-text-12'>{unit}</span>
+              </div>
             </Flex>
           ))}
         </Flex>

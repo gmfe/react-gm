@@ -6,7 +6,7 @@ import Dropper from '../../component/dropper/index.js'
 import { getLocale } from '../../locales'
 
 class ImportLead extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       selectedFile: null
@@ -15,11 +15,11 @@ class ImportLead extends React.Component {
     this.handleDrop = ::this.handleDrop
   }
 
-  componentDidMount () {
+  componentDidMount() {
     console.warn('Deprecated. Use gm-service / ImportLead instead.')
   }
 
-  render () {
+  render() {
     const data = _.extend({ columns: [], list: [] }, this.props.data)
     const tips = this.props.tips || []
 
@@ -27,7 +27,7 @@ class ImportLead extends React.Component {
 
     let lineMap = _.map(data.list, () => false)
 
-    _.each(tips, function (tip, index) {
+    _.each(tips, function(tip, index) {
       tipsMap[tip.index] = tipsMap[tip.index] || {}
       tip._index = index
       tipsMap[tip.index][tip.field] = tip
@@ -39,35 +39,43 @@ class ImportLead extends React.Component {
 
     const tableBody = data.list.map((eList, index) => {
       const tds = data.columns.map((col, i) => {
-        if (col.render) { return <td key={i}>{col.render(eList[col.field], eList, index)}</td> }
+        if (col.render) {
+          return <td key={i}>{col.render(eList[col.field], eList, index)}</td>
+        }
 
         var tip = tipsMap[index] && tipsMap[index][col.field]
         return tip ? (
           <td key={i} className={tip.modifyed ? 'gm-bg-info' : 'gm-bg-invalid'}>
-            {this.props.disableEdit ? eList[col.field] : (
+            {this.props.disableEdit ? (
+              eList[col.field]
+            ) : (
               <input
                 type='text'
                 value={eList[col.field]}
-                onChange={this.handleEdit.bind(this, index, col.field, tip._index)}
+                onChange={this.handleEdit.bind(
+                  this,
+                  index,
+                  col.field,
+                  tip._index
+                )}
               />
             )}
-            <small className='gm-import-lead-tip badge'><i>{tip.msg}</i></small>
+            <small className='gm-import-lead-tip badge'>
+              <i>{tip.msg}</i>
+            </small>
           </td>
         ) : (
-          <td key={i}>
-            {eList[col.field]}
-          </td>
+          <td key={i}>{eList[col.field]}</td>
         )
       })
 
-      return (
-        <tr key={index}>{tds}</tr>
-      )
+      return <tr key={index}>{tds}</tr>
     })
 
-    var canSubmit = _.filter(tips, function (value) {
-      return value.modifyed === true
-    }).length === tips.length
+    var canSubmit =
+      _.filter(tips, function(value) {
+        return value.modifyed === true
+      }).length === tips.length
 
     var filename = this.state.selectedFile ? this.state.selectedFile.name : ''
 
@@ -77,13 +85,20 @@ class ImportLead extends React.Component {
       <div className='gm-import-lead'>
         <div>
           <div>
-            <Dropper className='gm-dropper-wrap' onDrop={this.handleDrop} accept='.xlsx'>
-              <button className='btn btn-primary btn-sm'>{getLocale('importLead', 'uploadBtn')}</button>
+            <Dropper
+              className='gm-dropper-wrap'
+              onDrop={this.handleDrop}
+              accept='.xlsx'
+            >
+              <button className='btn btn-primary btn-sm'>
+                {getLocale('importLead', 'uploadBtn')}
+              </button>
             </Dropper>
             &nbsp;&nbsp;&nbsp;&nbsp;
             {!this.props.disableSubmit && (
               <button
-                disabled={!canSubmit} className='btn btn-primary btn-sm'
+                disabled={!canSubmit}
+                className='btn btn-primary btn-sm'
                 onClick={this.handleSubmit}
               >
                 {getLocale('importLead', 'submit')}
@@ -91,20 +106,35 @@ class ImportLead extends React.Component {
             )}
             &nbsp;&nbsp;&nbsp;&nbsp;
             {fileTempUrl ? (
-              <a href={fileTempUrl} target='blank'>{getLocale('importLead', 'downLoadBtn')}</a>) : undefined}
+              <a href={fileTempUrl} target='blank'>
+                {getLocale('importLead', 'downLoadBtn')}
+              </a>
+            ) : (
+              undefined
+            )}
             <div>{filename}</div>
           </div>
           {!this.props.unLine && (
             <div className='gm-import-line clearfix'>
               {lineMap.map((v, i) => (
-                <div key={i} className={v ? 'tip' : ''} onClick={this.handleLine.bind(this, i)}/>)
-              )}
+                <div
+                  key={i}
+                  className={v ? 'tip' : ''}
+                  onClick={this.handleLine.bind(this, i)}
+                />
+              ))}
             </div>
           )}
         </div>
-        <div className='gm-import-lead-content' ref={ref => (this.refContent = ref)}>
+        <div
+          className='gm-import-lead-content'
+          ref={ref => (this.refContent = ref)}
+        >
           {data ? (
-            <table className='table table-condensed table-bordered' ref={ref => (this.refTable = ref)}>
+            <table
+              className='table table-condensed table-bordered'
+              ref={ref => (this.refTable = ref)}
+            >
               <thead>
                 <tr>
                   {data.columns.map((col, i) => (
@@ -112,36 +142,38 @@ class ImportLead extends React.Component {
                   ))}
                 </tr>
               </thead>
-              <tbody>
-                {tableBody}
-              </tbody>
-            </table>) : undefined}
+              <tbody>{tableBody}</tbody>
+            </table>
+          ) : (
+            undefined
+          )}
         </div>
       </div>
     )
   }
 
-  handleEdit (index, field, i, event) {
+  handleEdit(index, field, i, event) {
     if (this.props.onEdit) {
       this.props.onEdit(index, field, event.target.value, i)
     }
   }
 
-  handleSubmit (event) {
+  handleSubmit(event) {
     event.preventDefault()
     if (this.props.onSubmit) {
       this.props.onSubmit()
     }
   }
 
-  handleLine (index) {
+  handleLine(index) {
     let content = ReactDOM.findDOMNode(this.refContent)
 
     let table = ReactDOM.findDOMNode(this.refTable)
-    content.scrollTop = index / this.props.data.list.length * table.offsetHeight
+    content.scrollTop =
+      (index / this.props.data.list.length) * table.offsetHeight
   }
 
-  handleDrop (files) {
+  handleDrop(files) {
     this.setState({
       selectedFile: files[0]
     })

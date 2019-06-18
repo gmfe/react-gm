@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import _ from 'lodash'
 
 class Switch extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -15,15 +15,18 @@ class Switch extends React.Component {
     this.handleChange = ::this.handleChange
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // 初始化后开始计算on和off的宽度，取较大值作为switch开关的宽度
     this.setState({
-      labelWidth: this.refInputOff.offsetWidth >= this.refInputOn.offsetWidth ? this.refInputOff.offsetWidth + 7 : this.refInputOn.offsetWidth + 7,
+      labelWidth:
+        this.refInputOff.offsetWidth >= this.refInputOn.offsetWidth
+          ? this.refInputOff.offsetWidth + 7
+          : this.refInputOn.offsetWidth + 7,
       isReady: true
     })
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if ('checked' in nextProps) {
       this.setState({
         checked: !!nextProps.checked
@@ -31,7 +34,7 @@ class Switch extends React.Component {
     }
   }
 
-  setChecked (checked) {
+  setChecked(checked) {
     if (!('checked' in this.props)) {
       this.setState({
         checked
@@ -40,17 +43,20 @@ class Switch extends React.Component {
     this.props.onChange(checked)
   }
 
-  handleChange (e) {
+  handleChange(e) {
     if (this.props.disabled) {
       return
     }
     this.setChecked(e.target.checked)
   }
 
-  render () {
+  render() {
     const {
       className, // checked, onChange, // eslint-disable-line
-      type, disabled, on, off,
+      type,
+      disabled,
+      on,
+      off,
       ...rest
     } = this.props
 
@@ -73,8 +79,7 @@ class Switch extends React.Component {
           checked={this.state.checked}
           onChange={this.handleChange}
         />
-        {
-          !this.state.isReady &&
+        {!this.state.isReady && (
           <input
             data-text={this.state.checked ? off : on}
             ref={ref => (this.refInputOn = ref)}
@@ -82,7 +87,7 @@ class Switch extends React.Component {
             type='checkbox'
             style={{ position: 'fixed', visibility: 'hidden' }}
           />
-        }
+        )}
       </React.Fragment>
     )
   }

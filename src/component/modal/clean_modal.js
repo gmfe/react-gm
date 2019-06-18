@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 const CleanModal = {}
 
-CleanModal.render = (props) => {
+CleanModal.render = props => {
   const cleanProps = {
     ...props,
     className: 'gm-modal-clean'

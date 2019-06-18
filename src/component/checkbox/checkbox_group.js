@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import _ from 'lodash'
 
 class CheckboxGroup extends React.Component {
-  handleChange (checkboxValue) {
+  handleChange(checkboxValue) {
     const { onChange, value } = this.props
     if (value.indexOf(checkboxValue) > -1) {
       onChange(_.without(value, checkboxValue))
@@ -13,7 +13,7 @@ class CheckboxGroup extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const {
       onChange,
       value,
@@ -28,7 +28,10 @@ class CheckboxGroup extends React.Component {
     const childList = React.Children.toArray(children)
 
     return (
-      <div {...rest} className={classNames('gm-checkbox-group checkbox', className)}>
+      <div
+        {...rest}
+        className={classNames('gm-checkbox-group checkbox', className)}
+      >
         {_.map(childList, (child, i) => {
           return React.cloneElement(child, {
             index: i,

@@ -6,14 +6,14 @@ import { Flex } from '../src/index'
 import Context from './context'
 
 class FullTab extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       active: props.active || 0
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if ('active' in nextProps) {
       this.setState({
         active: nextProps.active
@@ -21,7 +21,7 @@ class FullTab extends React.Component {
     }
   }
 
-  handleTab (i) {
+  handleTab(i) {
     const { onChange } = this.props
 
     if ('active' in this.props) {
@@ -33,7 +33,7 @@ class FullTab extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const {
       tabs,
       children,
@@ -102,6 +102,7 @@ FullTab.propTypes = {
   onChange: PropTypes.func,
   active: PropTypes.number,
   isStatic: PropTypes.bool,
+  className: PropTypes.string,
   children: (props, propName, componentName) => {
     if (
       props.tabs &&
@@ -110,9 +111,9 @@ FullTab.propTypes = {
     ) {
       return new Error(
         'Invalid prop `children` supplied to' +
-        ' `' +
-        componentName +
-        '`, prop `tabs` length is not match prop `children` length'
+          ' `' +
+          componentName +
+          '`, prop `tabs` length is not match prop `children` length'
       )
     }
   }

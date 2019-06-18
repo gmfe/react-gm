@@ -4,14 +4,14 @@ import BaseTable from './base'
 import _ from 'lodash'
 
 class ExpandTable extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       expanded: {}
     }
   }
 
-  handleExpandAll = (isAllExpanded) => {
+  handleExpandAll = isAllExpanded => {
     const { data } = this.props
 
     if (isAllExpanded) {
@@ -37,9 +37,15 @@ class ExpandTable extends React.Component {
     const isAllExpanded = _.filter(expanded, v => v).length === data.length
 
     return (
-      <div className='gm-cursor' onClick={this.handleExpandAll.bind(this, isAllExpanded)}>
-        {isAllExpanded ? <i className='xfont xfont-minus'/> : <i
-          className='xfont xfont-plus'/>}
+      <div
+        className='gm-cursor'
+        onClick={this.handleExpandAll.bind(this, isAllExpanded)}
+      >
+        {isAllExpanded ? (
+          <i className='xfont xfont-minus' />
+        ) : (
+          <i className='xfont xfont-plus' />
+        )}
       </div>
     )
   }
@@ -49,32 +55,36 @@ class ExpandTable extends React.Component {
 
     return (
       <div>
-        {expanded[index] ? <i className='xfont xfont-minus'/> : <i className='xfont xfont-plus'/>}
+        {expanded[index] ? (
+          <i className='xfont xfont-minus' />
+        ) : (
+          <i className='xfont xfont-plus' />
+        )}
       </div>
     )
   }
 
-  handleExpandedChange = (expanded) => {
+  handleExpandedChange = expanded => {
     this.setState({
       expanded
     })
   }
 
-  render () {
-    const {
-      columns,
-      ...rest
-    } = this.props
+  render() {
+    const { columns, ...rest } = this.props
     const { expanded } = this.state
 
     return (
       <BaseTable
         {...rest}
-        columns={[{
-          expander: true,
-          Header: this.renderHeader,
-          Expander: this.renderExpander
-        }, ...columns]}
+        columns={[
+          {
+            expander: true,
+            Header: this.renderHeader,
+            Expander: this.renderExpander
+          },
+          ...columns
+        ]}
         expanded={expanded}
         onExpandedChange={this.handleExpandedChange}
       />

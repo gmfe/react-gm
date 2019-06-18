@@ -11,7 +11,7 @@ import { pinYinFilter } from 'gm-util'
 // 不要轻易改这个文件
 
 class Base extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.ref = React.createRef()
@@ -26,19 +26,22 @@ class Base extends React.Component {
     this.debounceDoSearch = _.debounce(this.doSearch, props.delay)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this._isMounted = true
   }
 
-  handleClear = (clearItem) => {
+  handleClear = clearItem => {
     const { onSelect, selected } = this.props
 
-    const willSelected = _.filter(selected, item => item.value !== clearItem.value)
+    const willSelected = _.filter(
+      selected,
+      item => item.value !== clearItem.value
+    )
 
     onSelect(willSelected)
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     const searchValue = e.target.value
 
     this.setState({
@@ -48,7 +51,7 @@ class Base extends React.Component {
     this.debounceDoSearch(searchValue)
   }
 
-  handleSelected = (values) => {
+  handleSelected = values => {
     const { onSelect, data, multiple } = this.props
 
     const items = []
@@ -74,7 +77,7 @@ class Base extends React.Component {
     }
   }
 
-  doSearch = (query) => {
+  doSearch = query => {
     const { onSearch, data } = this.props
 
     if (!this._isMounted && onSearch) {
@@ -88,23 +91,25 @@ class Base extends React.Component {
         loading: true
       })
 
-      Promise.resolve(result).then(() => {
-        if (!this._isMounted) {
-          this.setState({
-            loading: false
-          })
-        }
-      }).catch(() => {
-        if (!this._isMounted) {
-          this.setState({
-            isLoading: false
-          })
-        }
-      })
+      Promise.resolve(result)
+        .then(() => {
+          if (!this._isMounted) {
+            this.setState({
+              loading: false
+            })
+          }
+        })
+        .catch(() => {
+          if (!this._isMounted) {
+            this.setState({
+              isLoading: false
+            })
+          }
+        })
     }
   }
 
-  renderList () {
+  renderList() {
     const {
       data,
       selected,
@@ -145,9 +150,11 @@ class Base extends React.Component {
             />
           </div>
         )}
-        {loading && <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'>
-          <Loading size={20}/>
-        </Flex>}
+        {loading && (
+          <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'>
+            <Loading size={20} />
+          </Flex>
+        )}
         {!loading && (
           <ListBase
             data={filterData}
@@ -167,7 +174,7 @@ class Base extends React.Component {
     )
   }
 
-  render () {
+  render() {
     const {
       disabled,
       selected,
@@ -176,7 +183,8 @@ class Base extends React.Component {
 
       renderSelected,
 
-      className, style,
+      className,
+      style,
       popoverType,
       children
     } = this.props
@@ -184,10 +192,14 @@ class Base extends React.Component {
     return (
       <div
         ref={this.ref}
-        className={classNames('gm-more-select', {
-          'gm-more-select-disabled': disabled,
-          'gm-more-select-multiple': multiple
-        }, className)}
+        className={classNames(
+          'gm-more-select',
+          {
+            'gm-more-select-disabled': disabled,
+            'gm-more-select-multiple': multiple
+          },
+          className
+        )}
         style={style}
       >
         <Popover
@@ -198,20 +210,30 @@ class Base extends React.Component {
         >
           {children || (
             <Flex wrap className='gm-more-select-selected'>
-              {selected.length !== 0 ? (_.map(selected, item => (
-                <Flex key={item.value} className='gm-more-select-selected-item'>
-                  <Flex flex column>
-                    {renderSelected(item)}
+              {selected.length !== 0 ? (
+                _.map(selected, item => (
+                  <Flex
+                    key={item.value}
+                    className='gm-more-select-selected-item'
+                  >
+                    <Flex flex column>
+                      {renderSelected(item)}
+                    </Flex>
+                    <i
+                      onClick={
+                        disabled ? _.noop : this.handleClear.bind(this, item)
+                      }
+                      className={classNames(
+                        'xfont  gm-cursor gm-more-select-clear-btn',
+                        {
+                          'xfont-close-circle': !multiple,
+                          'xfont-remove': multiple
+                        }
+                      )}
+                    />
                   </Flex>
-                  <i
-                    onClick={disabled ? _.noop : this.handleClear.bind(this, item)}
-                    className={classNames('xfont  gm-cursor gm-more-select-clear-btn', {
-                      'xfont-close-circle': !multiple,
-                      'xfont-remove': multiple
-                    })}
-                  />
-                </Flex>
-              ))) : (
+                ))
+              ) : (
                 <div className='gm-text-desc'>{placeholder}</div>
               )}
             </Flex>
@@ -222,7 +244,7 @@ class Base extends React.Component {
   }
 }
 
-function renderListFilterDefault (data, query) {
+function renderListFilterDefault(data, query) {
   const result = []
   _.each(data, v => {
     const arr = _.filter(v.children, item => item.text.includes(query))
@@ -237,7 +259,7 @@ function renderListFilterDefault (data, query) {
   return result
 }
 
-function renderListFilterPinYin (data, query) {
+function renderListFilterPinYin(data, query) {
   const result = []
   _.each(data, v => {
     const arr = pinYinFilter(v.children, query, item => item.text)

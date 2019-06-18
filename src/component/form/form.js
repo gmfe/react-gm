@@ -5,7 +5,7 @@ import _ from 'lodash'
 import Validator from '../../validator'
 
 class Form extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handleSubmit = ::this.handleSubmit
     this.state = {
@@ -22,7 +22,7 @@ class Form extends React.Component {
     return !err
   }
 
-  validateAll () {
+  validateAll() {
     const { children } = this.props
     const helpList = []
     const formItems = []
@@ -47,7 +47,7 @@ class Form extends React.Component {
       } else if (item.props.validate) {
         let help = ''
         if (item.props.required) {
-          help = item.props.validate(function (value) {
+          help = item.props.validate(function(value) {
             return Validator.validate(Validator.TYPE.required, value)
           })
         } else {
@@ -65,7 +65,7 @@ class Form extends React.Component {
     return helpList.length === 0 ? null : helpList
   }
 
-  handleSubmit (e) {
+  handleSubmit(e) {
     e.preventDefault()
     this.props.onSubmit(e)
 
@@ -80,7 +80,7 @@ class Form extends React.Component {
     })
   }
 
-  render () {
+  render() {
     const {
       inline,
       horizontal,
@@ -93,26 +93,43 @@ class Form extends React.Component {
     } = this.props
 
     const childList = _.map(React.Children.toArray(children), (child, i) => {
-      return (child.type.displayName === 'FormItem' || child.type.displayName === 'FormBlock') ? React.cloneElement(child, Object.assign({
-        key: i,
-        horizontal,
-        inline,
-        labelWidth,
-        canValidate: this.state.canValidate
-      }, child.props)) : child
+      return child.type.displayName === 'FormItem' ||
+        child.type.displayName === 'FormBlock'
+        ? React.cloneElement(
+            child,
+            Object.assign(
+              {
+                key: i,
+                horizontal,
+                inline,
+                labelWidth,
+                canValidate: this.state.canValidate
+              },
+              child.props
+            )
+          )
+        : child
     })
 
     return (
       <form
         {...rest}
-        className={classNames('gm-form', {
-          'form-inline': inline,
-          'form-horizontal': horizontal
-        }, className)}
+        className={classNames(
+          'gm-form',
+          {
+            'form-inline': inline,
+            'form-horizontal': horizontal
+          },
+          className
+        )}
         onSubmit={this.handleSubmit}
       >
         {childList}
-        {hasButtonInGroup && <button type='submit' style={{ display: 'none' }}>button</button>}
+        {hasButtonInGroup && (
+          <button type='submit' style={{ display: 'none' }}>
+            button
+          </button>
+        )}
       </form>
     )
   }

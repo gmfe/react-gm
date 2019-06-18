@@ -20,7 +20,7 @@ const RightTop = props => {
           className='gm-framework-right-top-default-mobile-nav'
           onClick={() => onMenuBtnClick()}
         >
-          <i className='glyphicon glyphicon-menu-hamburger gm-padding-lr-10 gm-cursor'/>
+          <i className='glyphicon glyphicon-menu-hamburger gm-padding-lr-10 gm-cursor' />
         </Flex>
         <Flex flex className='gm-framework-breadcrumb'>
           {breadcrumb}

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 class Popup extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -13,7 +13,7 @@ class Popup extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const dom = findDOMNode(this.refPopup)
 
     this.setState({
@@ -22,11 +22,8 @@ class Popup extends React.Component {
     })
   }
 
-  renderTriggerArrow () {
-    const {
-      top, right, center,
-      arrowLeft
-    } = this.props
+  renderTriggerArrow() {
+    const { top, right, center, arrowLeft } = this.props
 
     const style = {}
     if (arrowLeft) {
@@ -47,9 +44,12 @@ class Popup extends React.Component {
     )
   }
 
-  render () {
+  render() {
     const {
-      top, right, center, offset,
+      top,
+      right,
+      center,
+      offset,
       showArrow,
       arrowLeft, // eslint-disable-line
       children,
@@ -67,15 +67,15 @@ class Popup extends React.Component {
     }
 
     if (center) {
-      sStyle.left = rect.left + rect.width / 2 - (width) / 2 + offset
+      sStyle.left = rect.left + rect.width / 2 - width / 2 + offset
     } else if (right) {
-      sStyle.left = rect.left + rect.width - (width) + offset
+      sStyle.left = rect.left + rect.width - width + offset
     }
 
     // TODO 考虑是否提供 sStyle width
 
     if (top) {
-      sStyle.top = rect.top - (height) - 5
+      sStyle.top = rect.top - height - 5
     }
 
     return (

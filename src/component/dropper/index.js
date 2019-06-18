@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { is } from 'gm-util'
 
 class Dropper extends React.Component {
-  handleDrop = (e) => {
+  handleDrop = e => {
     e.preventDefault()
 
     const { multiple, onDrop } = this.props
@@ -25,22 +25,15 @@ class Dropper extends React.Component {
     this.refInput.click()
   }
 
-  render () {
-    const {
-      className,
-      children,
-      accept,
-      multiple
-    } = this.props
+  render() {
+    const { className, children, accept, multiple } = this.props
     const cn = className || 'gm-dropper-default'
 
     return (
       <div className='gm-dropper'>
-        <div
-          className={cn}
-          onClick={this.handleClick}
-          onDrop={this.handleDrop}
-        >{children}</div>
+        <div className={cn} onClick={this.handleClick} onDrop={this.handleDrop}>
+          {children}
+        </div>
         <input
           type='file'
           ref={ref => (this.refInput = ref)}

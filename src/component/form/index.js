@@ -4,10 +4,4 @@ import FormButton from './form_button'
 import FormBlock from './form_block'
 import FormGroup from './form_group'
 
-export {
-  Form,
-  FormItem,
-  FormButton,
-  FormBlock,
-  FormGroup
-}
+export { Form, FormItem, FormButton, FormBlock, FormGroup }

@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
 // prams dom:被观察的dom container:容器dom
-function isElementOverViewport (dom, rectTargetDom) {
+function isElementOverViewport(dom, rectTargetDom) {
   const rect = dom.getBoundingClientRect()
   return rect.bottom > rectTargetDom.top && rect.top < rectTargetDom.bottom
 }
 
 class LazyImg extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       show: false
@@ -21,12 +21,12 @@ class LazyImg extends React.Component {
     this.debounceDoLazy = _.debounce(this.doLazy, props.delay)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.targetDom.addEventListener('scroll', this.debounceDoLazy)
     this.doLazy()
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.targetDom.removeEventListener('scroll', this.debounceDoLazy)
   }
 
@@ -39,29 +39,26 @@ class LazyImg extends React.Component {
     }
   }
 
-  render () {
-    const {
-      className,
-      src,
-      placeholder,
-      delay, targetId, // eslint-disable-line
-      ...rest
-    } = this.props
+  render() {
+    const { className, src, placeholder, delay, targetId, ...rest } = this.props
 
-    return <img
-      {...rest}
-      ref={this.refImg}
-      className={classNames('lazy-img', className)}
-      src={this.state.show && src ? src : placeholder}
-    />
+    return (
+      <img
+        {...rest}
+        ref={this.refImg}
+        className={classNames('lazy-img', className)}
+        src={this.state.show && src ? src : placeholder}
+      />
+    )
   }
 }
 
-LazyImg.propType = {
+LazyImg.propTypes = {
   src: PropTypes.string,
   placeholder: PropTypes.string,
   targetId: PropTypes.string.isRequired, // 指定监听滚动的dom id
-  delay: PropTypes.number
+  delay: PropTypes.number,
+  className: PropTypes.string
 }
 
 LazyImg.defaultProps = {

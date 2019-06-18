@@ -9,11 +9,7 @@ const Affix = ({ children, top, bottom }) => {
     zIndex: 950
   }
 
-  return (
-    <div style={style}>
-      {children}
-    </div>
-  )
+  return <div style={style}>{children}</div>
 }
 
 Affix.propTypes = {

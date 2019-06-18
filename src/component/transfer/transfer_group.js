@@ -9,7 +9,7 @@ import Tree from '../tree'
 import { getLocale } from '../../locales'
 
 class TransferGroup extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       leftSelectedValues: [],
@@ -17,23 +17,25 @@ class TransferGroup extends React.Component {
     }
   }
 
-  handleLeftChange = (leftSelectedValues) => {
+  handleLeftChange = leftSelectedValues => {
     this.setState({
       leftSelectedValues
     })
   }
 
-  handleRightChange = (rightSelectedValues) => {
+  handleRightChange = rightSelectedValues => {
     this.setState({
       rightSelectedValues
     })
   }
 
-  handleToClick = (isLeft) => {
+  handleToClick = isLeft => {
     const { onSelect, selectedValues } = this.props
     const { leftSelectedValues, rightSelectedValues } = this.state
 
-    onSelect(_.xor(selectedValues, isLeft ? rightSelectedValues : leftSelectedValues))
+    onSelect(
+      _.xor(selectedValues, isLeft ? rightSelectedValues : leftSelectedValues)
+    )
 
     this.setState({
       leftSelectedValues: [],
@@ -49,25 +51,26 @@ class TransferGroup extends React.Component {
     this.handleToClick(true)
   }
 
-  render () {
+  render() {
     let {
       list,
       selectedValues,
       listStyle,
 
-      leftTitle, leftWithFilter, leftPlaceHolder,
+      leftTitle,
+      leftWithFilter,
+      leftPlaceHolder,
 
-      rightTitle, rightWithFilter, rightPlaceHolder,
+      rightTitle,
+      rightWithFilter,
+      rightPlaceHolder,
 
       onSelect, // eslint-disable-line
       className,
       ...rest
     } = this.props
 
-    const {
-      leftSelectedValues,
-      rightSelectedValues
-    } = this.state
+    const { leftSelectedValues, rightSelectedValues } = this.state
 
     // 很复杂
     const leafList = getLeaf(list)
@@ -86,7 +89,10 @@ class TransferGroup extends React.Component {
     })
 
     return (
-      <div {...rest} className={classNames('gm-transfer gm-transfer-group', className)}>
+      <div
+        {...rest}
+        className={classNames('gm-transfer gm-transfer-group', className)}
+      >
         <Flex>
           <Tree
             title={leftTitle}
@@ -97,25 +103,33 @@ class TransferGroup extends React.Component {
             placeholder={leftPlaceHolder}
             style={listStyle}
           />
-          <div className='gm-gap-5'/>
-          <Flex column justifyCenter alignCenter className='gm-transfer-operation'>
+          <div className='gm-gap-5' />
+          <Flex
+            column
+            justifyCenter
+            alignCenter
+            className='gm-transfer-operation'
+          >
             <button
               disabled={leftSelectedValues.length === 0}
               className='btn btn-default btn-block gm-margin-bottom-5'
               onClick={this.handleToRightClick}
-            >&gt;</button>
+            >
+              &gt;
+            </button>
             <button
               disabled={rightSelectedValues.length === 0}
               className='btn btn-default btn-block'
               onClick={this.handleToLeftClick}
-            >&lt;</button>
+            >
+              &lt;
+            </button>
           </Flex>
-          <div className='gm-gap-5'/>
+          <div className='gm-gap-5' />
           <Box
             list={rightList}
             selectedValues={rightSelectedValues}
             onSelect={this.handleRightChange}
-
             title={rightTitle}
             style={listStyle}
             withFilter={rightWithFilter}

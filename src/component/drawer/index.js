@@ -7,7 +7,7 @@ import _ from 'lodash'
 import EVENT_TYPE from '../../event_type'
 
 class Drawer extends React.Component {
-  constructor () {
+  constructor() {
     super()
     this.throttleDoScroll = _.throttle(this.doScroll, 200)
   }
@@ -16,25 +16,31 @@ class Drawer extends React.Component {
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.DRAWER_SCROLL))
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.document.body.addEventListener('keydown', this.handleKeyDown)
 
-    findDOMNode(this.refDrawer).addEventListener('scroll', this.throttleDoScroll)
+    findDOMNode(this.refDrawer).addEventListener(
+      'scroll',
+      this.throttleDoScroll
+    )
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.document.body.removeEventListener('keydown', this.handleKeyDown)
 
-    findDOMNode(this.refDrawer).removeEventListener('scroll', this.throttleDoScroll)
+    findDOMNode(this.refDrawer).removeEventListener(
+      'scroll',
+      this.throttleDoScroll
+    )
   }
 
-  handleKeyDown = (event) => {
+  handleKeyDown = event => {
     if (event.keyCode === 27) {
       this.props.onHide()
     }
   }
 
-  handleMask = (e) => {
+  handleMask = e => {
     if (e.target.className.split(' ').indexOf('gm-drawer') > -1) {
       this.props.onHide()
     }
@@ -44,18 +50,26 @@ class Drawer extends React.Component {
     this.props.onHide()
   }
 
-  render () {
+  render() {
     const { children, style, className, animation, opacityMask } = this.props
 
     return (
       <div>
-        <div className={classNames('gm-drawer-mask', { 'gm-drawer-mask-opacity': opacityMask })}/>
+        <div
+          className={classNames('gm-drawer-mask', {
+            'gm-drawer-mask-opacity': opacityMask
+          })}
+        />
         <div
           ref={ref => (this.refDrawer = ref)}
-          className={classNames('gm-drawer', {
-            'gm-animated': animation,
-            'gm-animated-fade-in-right': animation
-          }, className)}
+          className={classNames(
+            'gm-drawer',
+            {
+              'gm-animated': animation,
+              'gm-animated-fade-in-right': animation
+            },
+            className
+          )}
           tabIndex='-1'
           onClick={this.handleMask}
         >
@@ -64,7 +78,8 @@ class Drawer extends React.Component {
               'gm-border': opacityMask,
               'gm-box-shadow-bottom': opacityMask
             })}
-            style={style}>
+            style={style}
+          >
             {children}
           </div>
         </div>
@@ -73,11 +88,9 @@ class Drawer extends React.Component {
   }
 }
 
-Drawer.render = (props) => {
+Drawer.render = props => {
   window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_SHOW))
-  LayoutRoot.setComponent(LayoutRoot.TYPE.DRAWER, (
-    <Drawer {...props}/>
-  ))
+  LayoutRoot.setComponent(LayoutRoot.TYPE.DRAWER, <Drawer {...props} />)
 }
 
 Drawer.hide = () => {

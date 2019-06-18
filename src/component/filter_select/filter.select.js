@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import Popover from '../popover'
 
 class FilterSelect extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.timer = null
     this.scrollTimer = null
@@ -35,29 +35,31 @@ class FilterSelect extends React.Component {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     // if (this.state.activeIndex !== prevState.activeIndex && this.filterSelectList) {
     //   const dom = this.filterSelectList.querySelector('.list-group-item.line-selected')
     //   dom && dom.scrollIntoViewIfNeeded()
     // }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.______isMounted = true
   }
 
-  doScroll () {
+  doScroll() {
     // 滚动到选择的地方。 不知道会发生什么，尽量来做容错
     if (this.filterSelectList) {
       // 选第一个
-      const activeDOM = this.filterSelectList.querySelectorAll('.list-group-item.active')[0]
+      const activeDOM = this.filterSelectList.querySelectorAll(
+        '.list-group-item.active'
+      )[0]
       if (activeDOM) {
         this.filterSelectList.scrollTop = activeDOM.offsetTop
       }
     }
   }
 
-  handleFocus (event) {
+  handleFocus(event) {
     event.target.select()
 
     this.props.onInputFocus()
@@ -71,18 +73,21 @@ class FilterSelect extends React.Component {
     }
   }
 
-  doSetActiveIndex (activeIndex) {
+  doSetActiveIndex(activeIndex) {
     this.setState({
       activeIndex
     })
     // TODO 上下键滚动到可视区先去掉吧,有bug导致无法选中某一项.   日后优化
   }
 
-  handleKeyDown (size, event) {
+  handleKeyDown(size, event) {
     const { keyCode } = event
 
-    if (keyCode === 13) { // 键盘 回车
-      const dom = this.filterSelectList.querySelector('.list-group-item.line-selected')
+    if (keyCode === 13) {
+      // 键盘 回车
+      const dom = this.filterSelectList.querySelector(
+        '.list-group-item.line-selected'
+      )
       if (dom) {
         dom.click()
       }
@@ -92,7 +97,8 @@ class FilterSelect extends React.Component {
     if (keyCode === 38 || keyCode === 40) {
       let { activeIndex } = this.state
       let diff = 1
-      if (keyCode === 38) { // 键盘 上键
+      if (keyCode === 38) {
+        // 键盘 上键
         diff = -1
       }
       activeIndex = activeIndex === null ? 0 : activeIndex + diff
@@ -109,7 +115,7 @@ class FilterSelect extends React.Component {
     }
   }
 
-  handleItemMouseEnter (activeIndex) {
+  handleItemMouseEnter(activeIndex) {
     this.doSetActiveIndex(activeIndex)
     // this.setState({
     //   activeIndex
@@ -138,7 +144,7 @@ class FilterSelect extends React.Component {
     this.doChange('')
   }
 
-  handleChange (event) {
+  handleChange(event) {
     const query = event.target.value
     clearTimeout(this.timer)
     this.setState({
@@ -152,7 +158,7 @@ class FilterSelect extends React.Component {
     }, this.props.delay)
   }
 
-  doChange (query) {
+  doChange(query) {
     if (!this.______isMounted) {
       const result = this.props.onSearch(query)
 
@@ -164,37 +170,48 @@ class FilterSelect extends React.Component {
         loading: true
       })
 
-      Promise.resolve(result).then(() => {
-        this.setState({
-          loading: false
+      Promise.resolve(result)
+        .then(() => {
+          this.setState({
+            loading: false
+          })
         })
-      }).catch(() => {
-        this.setState({
-          isLoading: false
+        .catch(() => {
+          this.setState({
+            isLoading: false
+          })
         })
-      })
     }
   }
 
-  getListItemCount (list) {
+  getListItemCount(list) {
     const { isGroupList } = this.props
 
     if (isGroupList) {
-      return _.reduce(list, (count, group) => {
-        return count + ((group.children && group.children.length) || 0)
-      }, 0)
+      return _.reduce(
+        list,
+        (count, group) => {
+          return count + ((group.children && group.children.length) || 0)
+        },
+        0
+      )
     }
 
     return list.length
   }
 
-  handleClear (event) {
+  handleClear(event) {
     event.preventDefault()
     this.props.onSelect(null)
   }
 
-  renderGroupList (list) {
-    const { listMaxHeight, inputClassName, selected, renderItemName } = this.props
+  renderGroupList(list) {
+    const {
+      listMaxHeight,
+      inputClassName,
+      selected,
+      renderItemName
+    } = this.props
 
     const usefulList = _.filter(list, v => (v.children || []).length > 0)
 
@@ -209,7 +226,9 @@ class FilterSelect extends React.Component {
         {_.map(usefulList, (groupList, i) => {
           return (
             <div key={i} className='list-group-label'>
-              <div className='list-group-label-item gm-text-desc'>{groupList.label}</div>
+              <div className='list-group-label-item gm-text-desc'>
+                {groupList.label}
+              </div>
               {_.map(groupList.children, (value, j) => {
                 itemSequence++
                 return (
@@ -217,11 +236,14 @@ class FilterSelect extends React.Component {
                     key={i + '_' + j}
                     alignCenter
                     className={classNames('list-group-item', inputClassName, {
-                      'active': selected === value,
+                      active: selected === value,
                       'line-selected': this.state.activeIndex === itemSequence
                     })}
                     onClick={this.handleSelect.bind(this, value)}
-                    onMouseEnter={this.handleItemMouseEnter.bind(this, itemSequence)}
+                    onMouseEnter={this.handleItemMouseEnter.bind(
+                      this,
+                      itemSequence
+                    )}
                   >
                     <Flex flex>{renderItemName(value)}</Flex>
                   </Flex>
@@ -234,8 +256,13 @@ class FilterSelect extends React.Component {
     )
   }
 
-  renderList (list) {
-    const { listMaxHeight, inputClassName, selected, renderItemName } = this.props
+  renderList(list) {
+    const {
+      listMaxHeight,
+      inputClassName,
+      selected,
+      renderItemName
+    } = this.props
 
     return (
       <div
@@ -249,7 +276,7 @@ class FilterSelect extends React.Component {
               key={i}
               alignCenter
               className={classNames('list-group-item', inputClassName, {
-                'active': selected === value,
+                active: selected === value,
                 'line-selected': this.state.activeIndex === i
               })}
               onClick={this.handleSelect.bind(this, value)}
@@ -263,7 +290,7 @@ class FilterSelect extends React.Component {
     )
   }
 
-  renderOverlay (filterList) {
+  renderOverlay(filterList) {
     const { isGroupList, disableSearch } = this.props
     const { query, loading } = this.state
 
@@ -278,19 +305,37 @@ class FilterSelect extends React.Component {
               value={query}
               onFocus={this.handleFocus}
               onChange={this.handleChange}
-              onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
+              onKeyDown={this.handleKeyDown.bind(
+                this,
+                this.getListItemCount(filterList)
+              )}
               placeholder={this.props.placeholder}
             />
           </div>
         )}
-        {loading && <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'><Loading size={20}/></Flex>}
-        {!loading && (isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList))}
+        {loading && (
+          <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'>
+            <Loading size={20} />
+          </Flex>
+        )}
+        {!loading &&
+          (isGroupList
+            ? this.renderGroupList(filterList)
+            : this.renderList(filterList))}
       </div>
     )
   }
 
-  render () {
-    const { id, list, withFilter, selected, placeholder, disabled, showClear } = this.props
+  render() {
+    const {
+      id,
+      list,
+      withFilter,
+      selected,
+      placeholder,
+      disabled,
+      showClear
+    } = this.props
     const { query } = this.state
     let filterList = list
     if (query) {
@@ -313,11 +358,14 @@ class FilterSelect extends React.Component {
           >
             <Flex flex className='gm-filter-select-target gm-position-relative'>
               {selected ? (
-                <Flex>{selected.name}
-                  {showClear && <i
-                    onClick={this.handleClear}
-                    className='xfont xfont-close-circle gm-cursor gm-filter-select-clear-btn'/>
-                  }
+                <Flex>
+                  {selected.name}
+                  {showClear && (
+                    <i
+                      onClick={this.handleClear}
+                      className='xfont xfont-close-circle gm-cursor gm-filter-select-clear-btn'
+                    />
+                  )}
                 </Flex>
               ) : (
                 <Flex className='gm-text-desc'>{placeholder}</Flex>

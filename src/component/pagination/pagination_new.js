@@ -5,23 +5,25 @@ import classNames from 'classnames'
 import { getLocale } from '../../locales'
 
 const initState = {
-  pages: [{
-    number: 1
-  }],
+  pages: [
+    {
+      number: 1
+    }
+  ],
   current: 1,
   pageClicked: 1 // 加了限制，点击页码未收到响应之前其他页码不可点
 }
 
 class WithCount extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = _.cloneDeep(initState)
 
-    this.handlePage = :: this.handlePage
+    this.handlePage = ::this.handlePage
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     const { pages, pageClicked } = this.state
 
     const { limit } = nextProps
@@ -34,7 +36,10 @@ class WithCount extends React.Component {
         return
       }
 
-      const currentIndex = _.findIndex(pages, page => page.number === pageClicked)
+      const currentIndex = _.findIndex(
+        pages,
+        page => page.number === pageClicked
+      )
 
       const pagesNew = _.slice(pages, 0, currentIndex + 1)
 
@@ -60,7 +65,7 @@ class WithCount extends React.Component {
     }
   }
 
-  handlePage (event) {
+  handlePage(event) {
     const { pages } = this.state
 
     const { onChange, limit } = this.props
@@ -71,9 +76,16 @@ class WithCount extends React.Component {
 
     this.setState({ pageClicked })
 
-    const pageClickedIndex = _.findLastIndex(pages, page => page.number === pageClicked)
+    const pageClickedIndex = _.findLastIndex(
+      pages,
+      page => page.number === pageClicked
+    )
 
-    const closestFromPageIndex = _.findLastIndex(pages, page => page.page_obj, pageClickedIndex - 1)
+    const closestFromPageIndex = _.findLastIndex(
+      pages,
+      page => page.page_obj,
+      pageClickedIndex - 1
+    )
 
     let params = {}
     if (pageClickedIndex === 0) {
@@ -95,7 +107,7 @@ class WithCount extends React.Component {
     onChange(params)
   }
 
-  render () {
+  render() {
     const { current, pageClicked } = this.state
 
     const len = this.state.pages.length
@@ -113,18 +125,38 @@ class WithCount extends React.Component {
     return (
       <div className='gm-pagination'>
         <ul className='pagination pagination-sm' onClick={this.handlePage}>
-          <li className={classNames({ 'disabled': current === pages[0].number || pageClicked })}>
-            <a href='javascript:;' data-page={current - 1}>{getLocale('pagination', 'previous')}</a>
+          <li
+            className={classNames({
+              disabled: current === pages[0].number || pageClicked
+            })}
+          >
+            <a href='javascript:;' data-page={current - 1}>
+              {getLocale('pagination', 'previous')}
+            </a>
           </li>
 
-          {pages.map((page, i) => <li key={i} className={classNames({
-            'disabled': current !== page.number && pageClicked,
-            active: current === page.number
-          })}>
-            <a href='javascript:;' data-page={page.number}>{page.number}</a></li>)}
+          {pages.map((page, i) => (
+            <li
+              key={i}
+              className={classNames({
+                disabled: current !== page.number && pageClicked,
+                active: current === page.number
+              })}
+            >
+              <a href='javascript:;' data-page={page.number}>
+                {page.number}
+              </a>
+            </li>
+          ))}
 
-          <li className={classNames({ 'disabled': current === _.last(pages).number || pageClicked })}>
-            <a href='javascript:;' data-page={current + 1}>{getLocale('pagination', 'next')}</a>
+          <li
+            className={classNames({
+              disabled: current === _.last(pages).number || pageClicked
+            })}
+          >
+            <a href='javascript:;' data-page={current + 1}>
+              {getLocale('pagination', 'next')}
+            </a>
           </li>
         </ul>
       </div>
@@ -152,15 +184,15 @@ const initStateWithoutCount = {
 }
 
 class WithoutCount extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = _.cloneDeep(initStateWithoutCount)
 
-    this.handlePage = :: this.handlePage
+    this.handlePage = ::this.handlePage
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (this.props.pagination !== nextProps.pagination) {
       if (!nextProps.pagination.page_obj) {
         this.setState({ ...initStateWithoutCount })
@@ -182,7 +214,7 @@ class WithoutCount extends React.Component {
     }
   }
 
-  handlePage (reverse) {
+  handlePage(reverse) {
     const { onChange, limit } = this.props
 
     const {page_obj} = this.state  // eslint-disable-line
@@ -204,7 +236,7 @@ class WithoutCount extends React.Component {
     window.document.activeElement.blur()
   }
 
-  render () {
+  render() {
     const { pagination } = this.props
 
     const { reverse, isFirstPage } = this.state
@@ -215,16 +247,14 @@ class WithoutCount extends React.Component {
       <div className='gm-pagination'>
         <ul className='pagination pagination-sm'>
           <li className={isFirstPage ? 'disabled' : ''}>
-            <a
-              href='javascript:;'
-              onClick={this.handlePage.bind(this, true)}
-            >{getLocale('pagination', 'previous')}</a>
+            <a href='javascript:;' onClick={this.handlePage.bind(this, true)}>
+              {getLocale('pagination', 'previous')}
+            </a>
           </li>
           <li className={!reverse && !more ? 'disabled' : ''}>
-            <a
-              href='javascript:;'
-              onClick={this.handlePage.bind(this, false)}
-            >{getLocale('pagination', 'next')}</a>
+            <a href='javascript:;' onClick={this.handlePage.bind(this, false)}>
+              {getLocale('pagination', 'next')}
+            </a>
           </li>
         </ul>
       </div>
@@ -246,11 +276,11 @@ WithoutCount.propTypes = {
 }
 
 class Pagination extends React.Component {
-  render () {
+  render() {
     if (this.props.showCount) {
-      return <WithCount {...this.props}/>
+      return <WithCount {...this.props} />
     } else {
-      return <WithoutCount {...this.props}/>
+      return <WithoutCount {...this.props} />
     }
   }
 }

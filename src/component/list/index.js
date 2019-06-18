@@ -5,7 +5,7 @@ import Base from './base'
 
 // 恶心的转换逻辑在这里做
 class List extends React.Component {
-  handleSelected = (selected) => {
+  handleSelected = selected => {
     const { multiple, onSelect } = this.props
 
     if (multiple) {
@@ -15,23 +15,19 @@ class List extends React.Component {
     }
   }
 
-  render () {
-    const {
-      data,
-      selected,
-      multiple,
-      isGroupList,
-      ...rest
-    } = this.props
+  render() {
+    const { data, selected, multiple, isGroupList, ...rest } = this.props
 
     let oData
     if (isGroupList) {
       oData = data
     } else {
-      oData = [{
-        label: '',
-        children: data
-      }]
+      oData = [
+        {
+          label: '',
+          children: data
+        }
+      ]
     }
 
     let oSelected

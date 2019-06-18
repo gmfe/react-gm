@@ -22,21 +22,31 @@ class List extends React.Component {
     const { onClickCheckbox, selectedValues, onSelectValues } = this.props
 
     const leafValues = _.map(getLeaf(group.children), item => item.value)
-    onSelectValues(isSelectGroup ? _.union(selectedValues, leafValues) : _.difference(selectedValues, leafValues))
+    onSelectValues(
+      isSelectGroup
+        ? _.union(selectedValues, leafValues)
+        : _.difference(selectedValues, leafValues)
+    )
 
     if (onClickCheckbox) {
       onClickCheckbox(group, isSelectGroup)
     }
   }
 
-  handleGroup = (group) => {
+  handleGroup = group => {
     const { groupSelected, onGroupSelect } = this.props
 
     onGroupSelect(_.xor(groupSelected, [group.value]))
   }
 
-  render () {
-    const { groupSelected, list, selectedValues, showGroupCheckbox, onClickLeafName } = this.props
+  render() {
+    const {
+      groupSelected,
+      list,
+      selectedValues,
+      showGroupCheckbox,
+      onClickLeafName
+    } = this.props
 
     if (list.length === 0) {
       return null
@@ -50,8 +60,13 @@ class List extends React.Component {
           {_.map(list, group => {
             const isOpen = _.includes(groupSelected, group.value)
 
-            const leafValues = _.map(getLeaf(group.children), item => item.value)
-            const isSelectGroup = _.filter(leafValues, value => _.includes(selectedValues, value)).length === leafValues.length
+            const leafValues = _.map(
+              getLeaf(group.children),
+              item => item.value
+            )
+            const isSelectGroup =
+              _.filter(leafValues, value => _.includes(selectedValues, value))
+                .length === leafValues.length
 
             return (
               <GroupItem
@@ -63,10 +78,7 @@ class List extends React.Component {
                 onChange={this.handleSelectGroup}
                 onGroup={this.handleGroup}
               >
-                <List
-                  {...this.props}
-                  list={group.children}
-                />
+                <List {...this.props} list={group.children} />
               </GroupItem>
             )
           })}

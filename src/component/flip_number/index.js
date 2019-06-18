@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { getNumLength, formatNum, getRawArray, filterForNum } from './utils'
 
 class FlipNumber extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       height: 0,
@@ -18,12 +18,13 @@ class FlipNumber extends React.Component {
     this.doInitData(props)
   }
 
-  componentDidMount () {
-    this.height = this['gm-flip-number-digit0'].clientHeight / (this.numberArray.length + 1)
+  componentDidMount() {
+    this.height =
+      this['gm-flip-number-digit0'].clientHeight / (this.numberArray.length + 1)
     this.doInitView(this.props)
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.to !== this.props.to) {
       window.cancelAnimationFrame(this.requestId)
       clearTimeout(this.timeoutID)
@@ -32,7 +33,7 @@ class FlipNumber extends React.Component {
     }
   }
 
-  doInitData = (props) => {
+  doInitData = props => {
     const { from, to, decimal, useGroup } = props
     // 小数点 + useGroup
     this.fromStr = formatNum(from, decimal, useGroup)
@@ -46,7 +47,7 @@ class FlipNumber extends React.Component {
     this.fromNumArr = _.map([...Array(this.digitLen)], _ => 0)
   }
 
-  doInitView = (props) => {
+  doInitView = props => {
     const { delay, duration } = props
     const fromNum = parseInt(filterForNum(this.fromStr.split('')).join(''), 10)
     const heightList = []
@@ -54,7 +55,7 @@ class FlipNumber extends React.Component {
       const height = this.onDraw({
         from: this.fromNumArr[index],
         percent: 1,
-        alter: Math.floor((fromNum / Math.pow(10, index)))
+        alter: Math.floor(fromNum / Math.pow(10, index))
       })
       heightList.unshift(height)
     })
@@ -62,7 +63,9 @@ class FlipNumber extends React.Component {
       heightList: heightList
     })
 
-    delay ? this.timeoutID = setTimeout(() => this.flipTo(duration), delay) : this.flipTo(duration)
+    delay
+      ? (this.timeoutID = setTimeout(() => this.flipTo(duration), delay))
+      : this.flipTo(duration)
   }
 
   /**
@@ -77,7 +80,7 @@ class FlipNumber extends React.Component {
     return -expectNum * this.height
   }
 
-  flipTo = (duration) => {
+  flipTo = duration => {
     const { easeFn, individually } = this.props
     this.fromNumArr = filterForNum(this.fromRawArr.rawList).map(Number)
     const draw = percent => {
@@ -102,7 +105,8 @@ class FlipNumber extends React.Component {
     const tick = now => {
       let timeConsuming = now - startTime
       draw(timeConsuming / duration)
-      if (timeConsuming < duration) this.requestId = window.requestAnimationFrame(tick)
+      if (timeConsuming < duration)
+        this.requestId = window.requestAnimationFrame(tick)
       else {
         draw(1)
       }
@@ -115,15 +119,15 @@ class FlipNumber extends React.Component {
     const digitAxis = _.map(this.toNumArr, (item, index) => (
       <div
         style={{ transform: `translateY(${heightList[index]}px)` }}
-        ref={(rel) => { this[`gm-flip-number-digit${index}`] = rel }}
+        ref={rel => {
+          this[`gm-flip-number-digit${index}`] = rel
+        }}
         className='gm-inline-block gm-position-relative'
         key={`digitAxis${index}`}
       >
-        {
-          _.map(this.numberArray, (i, d) => (
-            <div key={`digitChild${d}`}>{i}</div>
-          ))
-        }
+        {_.map(this.numberArray, (i, d) => (
+          <div key={`digitChild${d}`}>{i}</div>
+        ))}
         <div>{this.numberArray[0]}</div>
       </div>
     ))
@@ -131,11 +135,9 @@ class FlipNumber extends React.Component {
     _.forEach(this.toRawArr.symbolList, (item, index) => {
       const symbolAxis = (
         <div className='gm-inline-block' key={`symbolAxis${index}`}>
-          {
-            _.map(this.numberArray, (i, d) => (
-              <div key={`symbolChile${d}`}>{item.symbol}</div>
-            ))
-          }
+          {_.map(this.numberArray, (i, d) => (
+            <div key={`symbolChile${d}`}>{item.symbol}</div>
+          ))}
           <div>{item.symbol}</div>
         </div>
       )
@@ -145,16 +147,23 @@ class FlipNumber extends React.Component {
     return digitAxis
   }
 
-  render () {
+  render() {
     const { className, to } = this.props
-    return <div
-      key={`${to}`}
-      ref={(rel) => { this.wrap = rel }}
-      style={{ height: `${this.height}px` }}
-      className={classNames('gm-position-relative gm-overflow-hidden', className)}
-    >
-      {this.renderDigitAxis()}
-    </div>
+    return (
+      <div
+        key={`${to}`}
+        ref={rel => {
+          this.wrap = rel
+        }}
+        style={{ height: `${this.height}px` }}
+        className={classNames(
+          'gm-position-relative gm-overflow-hidden',
+          className
+        )}
+      >
+        {this.renderDigitAxis()}
+      </div>
+    )
   }
 }
 
@@ -168,9 +177,8 @@ FlipNumber.defaultProps = {
    * 缓动函数
    * @see https://github.com/danro/easing-js/blob/4f5e7edbde7f7200a1baf08e357377896c0d207e/easing.js#L39-L42
    */
-  easeFn: pos => (pos /= 0.5) < 1
-    ? 0.5 * Math.pow(pos, 3)
-    : 0.5 * (Math.pow((pos - 2), 3) + 2)
+  easeFn: pos =>
+    (pos /= 0.5) < 1 ? 0.5 * Math.pow(pos, 3) : 0.5 * (Math.pow(pos - 2, 3) + 2)
 }
 
 FlipNumber.propTypes = {

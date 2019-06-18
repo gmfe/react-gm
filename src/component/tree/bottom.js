@@ -4,21 +4,14 @@ import Flex from '../flex'
 import { Checkbox } from '../checkbox'
 import { getLocale } from '../../locales'
 
-const Bottom = (props) => {
-  const {
-    checkedAll,
-    onChange,
-    selectValuesLength,
-    leafListLength
-  } = props
+const Bottom = props => {
+  const { checkedAll, onChange, selectValuesLength, leafListLength } = props
 
   return (
     <Flex justifyBetween alignCenter className='gm-border-top gm-padding-5'>
-      <Checkbox
-        value
-        checked={checkedAll}
-        onChange={onChange}
-      >{getLocale('tree', 'selectAll')}</Checkbox>
+      <Checkbox value checked={checkedAll} onChange={onChange}>
+        {getLocale('tree', 'selectAll')}
+      </Checkbox>
       <div className='gm-padding-lr-5 gm-text-desc'>
         {selectValuesLength}/{leafListLength}
       </div>

@@ -4,7 +4,7 @@ import Flex from '../flex'
 import PropTypes from 'prop-types'
 
 class Carousel extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -14,13 +14,13 @@ class Carousel extends React.Component {
     this.timer = null
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (React.Children.count(this.props.children) > 0) {
       this.startCarousel()
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.timer)
   }
 
@@ -70,7 +70,8 @@ class Carousel extends React.Component {
     return React.Children.map(children, (thisArg, index) => {
       return React.cloneElement(thisArg, {
         style: Object.assign({}, thisArg.props.style, fadeTransitionStyle),
-        className: classNames('gm-carousel-fade-item',
+        className: classNames(
+          'gm-carousel-fade-item',
           { 'gm-carousel-fade-item-active': currentIndex === index },
           thisArg.props.className
         ),
@@ -83,26 +84,26 @@ class Carousel extends React.Component {
     const { children } = this.props
     const { currentIndex } = this.state
 
-    return <ul className={'gm-carousel-fade-footer'}>
-      {
-        React.Children.map(children, (value, index) => {
-          return <li
-            className={
-              classNames(
+    return (
+      <ul className={'gm-carousel-fade-footer'}>
+        {React.Children.map(children, (value, index) => {
+          return (
+            <li
+              className={classNames(
                 { 'gm-carousel-fade-footer-li-hover': currentIndex === index },
                 'gm-carousel-fade-footer-li'
-              )
-            }
-            key={index}
-            onMouseOver={this.handleSelect.bind(this, index)}
-            onMouseLeave={this.handleCancelSelect}
-          />
-        })
-      }
-    </ul>
+              )}
+              key={index}
+              onMouseOver={this.handleSelect.bind(this, index)}
+              onMouseLeave={this.handleCancelSelect}
+            />
+          )
+        })}
+      </ul>
+    )
   }
 
-  render () {
+  render() {
     const { className, transitionTime, defaultIndex, ...rest } = this.props
 
     return (
@@ -113,8 +114,8 @@ class Carousel extends React.Component {
         onMouseLeave={this.handleCancelSelect}
         {...rest}
       >
-        { this.renderChildren() }
-        { this.renderFooterController() }
+        {this.renderChildren()}
+        {this.renderFooterController()}
       </Flex>
     )
   }

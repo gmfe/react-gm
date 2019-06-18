@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import Popover from '../popover'
 
 class MultipleFilterSelect extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.timer = null
     this.scrollTimer = null
@@ -37,29 +37,31 @@ class MultipleFilterSelect extends React.Component {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     // if (this.state.activeIndex !== prevState.activeIndex && this.filterSelectList) {
     //   const dom = this.filterSelectList.querySelector('.list-group-item.line-selected')
     //   dom && dom.scrollIntoViewIfNeeded()
     // }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.______isMounted = true
   }
 
-  doScroll () {
+  doScroll() {
     // 滚动到选择的地方。 不知道会发生什么，尽量来做容错
     if (this.filterSelectList) {
       // 选第一个
-      const activeDOM = this.filterSelectList.querySelectorAll('.list-group-item.active')[0]
+      const activeDOM = this.filterSelectList.querySelectorAll(
+        '.list-group-item.active'
+      )[0]
       if (activeDOM) {
         this.filterSelectList.scrollTop = activeDOM.offsetTop
       }
     }
   }
 
-  handleFocus (event) {
+  handleFocus(event) {
     event.target.select()
 
     this.props.onInputFocus()
@@ -73,22 +75,30 @@ class MultipleFilterSelect extends React.Component {
     }
   }
 
-  doSetActiveIndex (activeIndex) {
-    this.setState({
-      activeIndex
-    }, () => {
-      if (this.filterSelectList) {
-        const dom = this.filterSelectList.querySelector(`.list-group-item:nth-of-type(${activeIndex})`)
-        dom && dom.scrollIntoViewIfNeeded(false)
+  doSetActiveIndex(activeIndex) {
+    this.setState(
+      {
+        activeIndex
+      },
+      () => {
+        if (this.filterSelectList) {
+          const dom = this.filterSelectList.querySelector(
+            `.list-group-item:nth-of-type(${activeIndex})`
+          )
+          dom && dom.scrollIntoViewIfNeeded(false)
+        }
       }
-    })
+    )
   }
 
-  handleKeyDown (size, event) {
+  handleKeyDown(size, event) {
     const { keyCode } = event
 
-    if (keyCode === 13) { // 键盘 回车
-      const dom = this.filterSelectList.querySelector('.list-group-item.line-selected')
+    if (keyCode === 13) {
+      // 键盘 回车
+      const dom = this.filterSelectList.querySelector(
+        '.list-group-item.line-selected'
+      )
       if (dom) {
         dom.click()
       }
@@ -98,7 +108,8 @@ class MultipleFilterSelect extends React.Component {
     if (keyCode === 38 || keyCode === 40) {
       let { activeIndex } = this.state
       let diff = 1
-      if (keyCode === 38) { // 键盘 上键
+      if (keyCode === 38) {
+        // 键盘 上键
         diff = -1
       }
       activeIndex = activeIndex === null ? 0 : activeIndex + diff
@@ -112,11 +123,11 @@ class MultipleFilterSelect extends React.Component {
     }
   }
 
-  handleItemMouseEnter (activeIndex) {
+  handleItemMouseEnter(activeIndex) {
     this.doSetActiveIndex(activeIndex)
   }
 
-  handleSelect (value, event) {
+  handleSelect(value, event) {
     event.preventDefault()
 
     const { selected, onSelect } = this.props
@@ -139,7 +150,7 @@ class MultipleFilterSelect extends React.Component {
     // this.doChange('');
   }
 
-  handleChange (event) {
+  handleChange(event) {
     const query = event.target.value
     clearTimeout(this.timer)
     this.setState({
@@ -153,7 +164,7 @@ class MultipleFilterSelect extends React.Component {
     }, this.props.delay)
   }
 
-  doChange (query) {
+  doChange(query) {
     if (!this.______isMounted) {
       const result = this.props.onSearch(query)
 
@@ -165,31 +176,37 @@ class MultipleFilterSelect extends React.Component {
         loading: true
       })
 
-      Promise.resolve(result).then(() => {
-        this.setState({
-          loading: false
+      Promise.resolve(result)
+        .then(() => {
+          this.setState({
+            loading: false
+          })
         })
-      }).catch(() => {
-        this.setState({
-          isLoading: false
+        .catch(() => {
+          this.setState({
+            isLoading: false
+          })
         })
-      })
     }
   }
 
-  getListItemCount (list) {
+  getListItemCount(list) {
     const { isGroupList } = this.props
 
     if (isGroupList) {
-      return _.reduce(list, (count, group) => {
-        return count + ((group.children && group.children.length) || 0)
-      }, 0)
+      return _.reduce(
+        list,
+        (count, group) => {
+          return count + ((group.children && group.children.length) || 0)
+        },
+        0
+      )
     }
 
     return list.length
   }
 
-  handleClose (value, event) {
+  handleClose(value, event) {
     event.preventDefault()
     const { selected } = this.props
     this.props.onSelect(_.without(selected, value))
@@ -198,8 +215,13 @@ class MultipleFilterSelect extends React.Component {
     this.refInput && this.refInput.focus()
   }
 
-  renderGroupList (list) {
-    const { listMaxHeight, inputClassName, selected, renderItemName } = this.props
+  renderGroupList(list) {
+    const {
+      listMaxHeight,
+      inputClassName,
+      selected,
+      renderItemName
+    } = this.props
 
     const usefulList = _.filter(list, v => (v.children || []).length > 0)
 
@@ -214,7 +236,9 @@ class MultipleFilterSelect extends React.Component {
         {_.map(usefulList, (groupList, i) => {
           return (
             <div key={i} className='list-group-label'>
-              <div className='list-group-label-item gm-text-desc'>{groupList.label}</div>
+              <div className='list-group-label-item gm-text-desc'>
+                {groupList.label}
+              </div>
               {_.map(groupList.children, (value, i) => {
                 itemSequence++
 
@@ -223,11 +247,14 @@ class MultipleFilterSelect extends React.Component {
                     key={i}
                     alignCenter
                     className={classNames('list-group-item', inputClassName, {
-                      'active': _.includes(selected, value),
+                      active: _.includes(selected, value),
                       'line-selected': this.state.activeIndex === itemSequence
                     })}
                     onClick={this.handleSelect.bind(this, value)}
-                    onMouseEnter={this.handleItemMouseEnter.bind(this, itemSequence)}
+                    onMouseEnter={this.handleItemMouseEnter.bind(
+                      this,
+                      itemSequence
+                    )}
                   >
                     <Flex flex>{renderItemName(value)}</Flex>
                   </Flex>
@@ -240,8 +267,13 @@ class MultipleFilterSelect extends React.Component {
     )
   }
 
-  renderList (list) {
-    const { listMaxHeight, inputClassName, selected, renderItemName } = this.props
+  renderList(list) {
+    const {
+      listMaxHeight,
+      inputClassName,
+      selected,
+      renderItemName
+    } = this.props
 
     return (
       <div
@@ -255,7 +287,7 @@ class MultipleFilterSelect extends React.Component {
               key={i}
               alignCenter
               className={classNames('list-group-item', inputClassName, {
-                'active': _.includes(selected, value),
+                active: _.includes(selected, value),
                 'line-selected': this.state.activeIndex === i
               })}
               onClick={this.handleSelect.bind(this, value)}
@@ -269,7 +301,7 @@ class MultipleFilterSelect extends React.Component {
     )
   }
 
-  renderOverlay (filterList) {
+  renderOverlay(filterList) {
     const { isGroupList, disableSearch } = this.props
     const { query, loading } = this.state
 
@@ -285,18 +317,28 @@ class MultipleFilterSelect extends React.Component {
               value={query}
               onFocus={this.handleFocus}
               onChange={this.handleChange}
-              onKeyDown={this.handleKeyDown.bind(this, this.getListItemCount(filterList))}
+              onKeyDown={this.handleKeyDown.bind(
+                this,
+                this.getListItemCount(filterList)
+              )}
               placeholder={this.props.placeholder}
             />
           </div>
         )}
-        {loading && <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'><Loading size={20}/></Flex>}
-        {!loading && (isGroupList ? this.renderGroupList(filterList) : this.renderList(filterList))}
+        {loading && (
+          <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'>
+            <Loading size={20} />
+          </Flex>
+        )}
+        {!loading &&
+          (isGroupList
+            ? this.renderGroupList(filterList)
+            : this.renderList(filterList))}
       </div>
     )
   }
 
-  render () {
+  render() {
     const { id, list, withFilter, selected, placeholder, disabled } = this.props
     const { query } = this.state
     let filterList = list
@@ -320,17 +362,22 @@ class MultipleFilterSelect extends React.Component {
           >
             <Flex flex className='gm-filter-select-target'>
               <Flex wrap>
-                {selected.length === 0 &&
-                <Flex alignStart className='gm-text-desc'>{placeholder}</Flex>}
+                {selected.length === 0 && (
+                  <Flex alignStart className='gm-text-desc'>
+                    {placeholder}
+                  </Flex>
+                )}
                 {_.map(selected, (v, i) => (
                   <Flex key={i + '_' + v.name} alignStart className='selected'>
-                    {(v && v.name)}
+                    {v && v.name}
                     <button
                       disabled={this.props.disabled}
                       type='button'
                       className='close'
                       onClick={this.handleClose.bind(this, v)}
-                    >&times;</button>
+                    >
+                      &times;
+                    </button>
                   </Flex>
                 ))}
               </Flex>

@@ -12,7 +12,10 @@ import List from './list'
 const filterWithQuery = (list, query, withFilter) => {
   let processList
   if (withFilter === true) {
-    processList = filterGroupList(list, v => pinYinFilter([v], query, v => v.name).length > 0)
+    processList = filterGroupList(
+      list,
+      v => pinYinFilter([v], query, v => v.name).length > 0
+    )
   } else if (withFilter) {
     processList = withFilter(list, query)
   }
@@ -20,7 +23,7 @@ const filterWithQuery = (list, query, withFilter) => {
 }
 
 class Tree extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       query: '',
@@ -28,12 +31,12 @@ class Tree extends React.Component {
     }
   }
 
-  handleSelectAll = (checked) => {
+  handleSelectAll = checked => {
     const { list, onSelectValues } = this.props
     onSelectValues(checked ? _.map(getLeaf(list), v => v.value) : [])
   }
 
-  handleQuery = (e) => {
+  handleQuery = e => {
     const { list, withFilter } = this.props
     this.setState({
       query: e.target.value
@@ -42,9 +45,9 @@ class Tree extends React.Component {
       const processList = filterWithQuery(list, e.target.value, withFilter)
       let newGroupSelected = []
       if (processList.length === 0) return
-      const pushValue = (list) => {
+      const pushValue = list => {
         if (list[0].children) {
-          _.forEach(list, (group) => {
+          _.forEach(list, group => {
             newGroupSelected = _.xor(newGroupSelected, [group.value])
             pushValue(group.children)
           })
@@ -57,13 +60,13 @@ class Tree extends React.Component {
     }
   }
 
-  handleGroupSelect = (groupSelected) => {
+  handleGroupSelect = groupSelected => {
     this.setState({
       groupSelected
     })
   }
 
-  render () {
+  render() {
     const {
       title,
       list,
@@ -73,23 +76,22 @@ class Tree extends React.Component {
       withFilter,
       disableSelectAll,
 
-      onClickLeafName, onClickCheckbox,
+      onClickLeafName,
+      onClickCheckbox,
       showGroupCheckbox,
 
       className,
       ...rest
     } = this.props
 
-    const {
-      query,
-      groupSelected
-    } = this.state
+    const { query, groupSelected } = this.state
 
     const processList = filterWithQuery(list, query, withFilter)
 
     const leafList = getLeaf(list)
 
-    const checkedAll = leafList.length !== 0 && leafList.length === selectedValues.length
+    const checkedAll =
+      leafList.length !== 0 && leafList.length === selectedValues.length
 
     return (
       <Flex
@@ -98,8 +100,9 @@ class Tree extends React.Component {
         className={classNames('gm-tree gm-border gm-bg', className)}
       >
         {title && (
-          <div
-            className='gm-padding-5 gm-back-bg text-center gm-border-bottom'>{title}</div>
+          <div className='gm-padding-5 gm-back-bg text-center gm-border-bottom'>
+            {title}
+          </div>
         )}
         {withFilter && (
           <div className='gm-tree-filter'>
@@ -110,7 +113,7 @@ class Tree extends React.Component {
               onChange={this.handleQuery}
               placeholder={placeholder}
             />
-            <i className='glyphicon glyphicon-search gm-text-desc'/>
+            <i className='glyphicon glyphicon-search gm-text-desc' />
           </div>
         )}
 

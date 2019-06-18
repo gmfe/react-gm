@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class SheetColumn extends React.Component {
-  render () {
+  render() {
     return null
   }
 }

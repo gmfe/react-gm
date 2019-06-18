@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 class SheetSelect extends React.Component {
-  render () {
+  render() {
     return <div>{this.props.children}</div>
   }
 }

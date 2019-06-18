@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import _ from 'lodash'
 
 class RadioGroup extends React.Component {
-  render () {
+  render() {
     const {
       onChange,
       value,

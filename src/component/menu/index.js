@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import Flex from '../flex'
 
 class MenuItem extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handleTriggerMenu = ::this.handleTriggerMenu
     this.getMenuItemDisabled = ::this.getMenuItemDisabled
@@ -15,11 +15,11 @@ class MenuItem extends React.Component {
     }
   }
 
-  getMenuItemDisabled (data, selected) {
+  getMenuItemDisabled(data, selected) {
     let menuItemDisabled = false
 
     if (selected && !_.isEmpty(selected)) {
-      _.find(data.sub, (v) => {
+      _.find(data.sub, v => {
         if (selected === v) {
           menuItemDisabled = true
         }
@@ -28,7 +28,7 @@ class MenuItem extends React.Component {
     return menuItemDisabled
   }
 
-  handleTriggerMenu () {
+  handleTriggerMenu() {
     const { collapse } = this.state
 
     this.setState({
@@ -36,7 +36,7 @@ class MenuItem extends React.Component {
     })
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     const { collapse } = this.state
     const { data, selected } = newProps
     const menuItemDisabled = !!this.getMenuItemDisabled(data, selected)
@@ -48,39 +48,48 @@ class MenuItem extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { data, selected, onSelect, allowCollapse } = this.props
     const { collapse } = this.state
     const menuItemDisabled = !!this.getMenuItemDisabled(data, selected)
 
     return (
       <div className='gm-menu'>
-        <Flex alignCenter justifyBetween
-          onClick={allowCollapse && !menuItemDisabled ? this.handleTriggerMenu : null}
+        <Flex
+          alignCenter
+          justifyBetween
+          onClick={
+            allowCollapse && !menuItemDisabled ? this.handleTriggerMenu : null
+          }
           className={classNames('gm-menu-title', {
             'gm-menu-title-disabled': !allowCollapse || menuItemDisabled
-          })}>
+          })}
+        >
           <span>{data.name}</span>
-          {
-            allowCollapse
-              ? <i className={classNames('gm-margin-right-15 xfont', {
+          {allowCollapse ? (
+            <i
+              className={classNames('gm-margin-right-15 xfont', {
                 'gm-disabled-arrow-color': menuItemDisabled,
                 'xfont-down-small': collapse,
                 'xfont-up-small': !collapse
-              })}/> : null
-          }
+              })}
+            />
+          ) : null}
         </Flex>
-        <div className={classNames('gm-menu-sub', {
-          'gm-menu-sub-opened': !collapse
-        })}>
+        <div
+          className={classNames('gm-menu-sub', {
+            'gm-menu-sub-opened': !collapse
+          })}
+        >
           {_.map(data.sub, (v, k) => (
             <span
               key={k}
               onClick={onSelect.bind(this, v)}
               className={selected === v ? 'active' : ''}
-            >{v.name}</span>
-          )
-          )}
+            >
+              {v.name}
+            </span>
+          ))}
         </div>
       </div>
     )
@@ -95,29 +104,38 @@ MenuItem.propTypes = {
 }
 
 class Menu extends React.Component {
-  render () {
+  render() {
     const {
-      data, onSelect, selected, id, allowCollapse,
+      data,
+      onSelect,
+      selected,
+      id,
+      allowCollapse,
       className,
       ...rest
     } = this.props
 
     if (!data) {
-      return <div/>
+      return <div />
     }
 
     return (
-      <ul key={id} {...rest} className={classNames('gm-menu-y gm-border', className)}>
+      <ul
+        key={id}
+        {...rest}
+        className={classNames('gm-menu-y gm-border', className)}
+      >
         {_.map(data, (value, i) => {
-          return <MenuItem
-            key={i}
-            data={value}
-            selected={selected}
-            onSelect={onSelect}
-            allowCollapse={allowCollapse}
-          />
-        }
-        )}
+          return (
+            <MenuItem
+              key={i}
+              data={value}
+              selected={selected}
+              onSelect={onSelect}
+              allowCollapse={allowCollapse}
+            />
+          )
+        })}
       </ul>
     )
   }

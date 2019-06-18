@@ -7,13 +7,13 @@ import _ from 'lodash'
 const HocSelectTable = hocSelectTable(BaseTable)
 
 class SelectTable extends React.Component {
-  isSelected = (key) => {
+  isSelected = key => {
     const { selected } = this.props
 
     return selected.includes(key)
   }
 
-  handleToggleSelection = (key) => {
+  handleToggleSelection = key => {
     const { selected, onSelect, selectType } = this.props
 
     if (selectType === 'radio') {
@@ -23,14 +23,19 @@ class SelectTable extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const {
-      loading, data, columns,
+      loading,
+      data,
+      columns,
       defaultPageSize,
-      selectAll, onSelectAll, selectAllTip,
+      selectAll,
+      onSelectAll,
+      selectAllTip,
       selectType,
       keyField,
-      noDataText, loadingText,
+      noDataText,
+      loadingText,
       ...rest
     } = this.props
 
@@ -54,10 +59,12 @@ class SelectTable extends React.Component {
           noDataText={noDataText}
           loadingText={loadingText}
         />
-        {selectAllTip && selectAll && <div className='gm-box-shadow-bottom gm-react-table-select-all-tip'>
-          <span className='gm-react-table-select-all-tip-arrow'/>
-          {selectAllTip}
-        </div>}
+        {selectAllTip && selectAll && (
+          <div className='gm-box-shadow-bottom gm-react-table-select-all-tip'>
+            <span className='gm-react-table-select-all-tip-arrow' />
+            {selectAllTip}
+          </div>
+        )}
       </div>
     )
   }

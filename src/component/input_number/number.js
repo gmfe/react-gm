@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 class InputNumberV2 extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.refInput = React.createRef()
     this.__unmount = false
@@ -14,14 +14,14 @@ class InputNumberV2 extends React.Component {
     }
   }
 
-  static processValue = (value) => {
+  static processValue = value => {
     if (value === null) {
       return ''
     }
     return value + ''
   }
 
-  apiDoFocus () {
+  apiDoFocus() {
     if (this.__unmount) {
       return
     }
@@ -29,11 +29,11 @@ class InputNumberV2 extends React.Component {
     d.focus()
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.__unmount = true
   }
 
-  processOutValue = (value) => {
+  processOutValue = value => {
     if (value === '') {
       return null
     }
@@ -41,7 +41,7 @@ class InputNumberV2 extends React.Component {
   }
 
   // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#preferred-solutions
-  static getDerivedStateFromProps (props, state) {
+  static getDerivedStateFromProps(props, state) {
     if (props.value === null) {
       return { value: '' }
     }
@@ -53,10 +53,8 @@ class InputNumberV2 extends React.Component {
     return null
   }
 
-  checkValue = (value) => {
-    const {
-      max, min, precision
-    } = this.props
+  checkValue = value => {
+    const { max, min, precision } = this.props
 
     const v = Number(value)
     if (max !== undefined && v > max) {
@@ -66,14 +64,17 @@ class InputNumberV2 extends React.Component {
       return false
     }
 
-    if (parseInt(Big(value).times(Math.pow(10, precision))) !== +Big(value).times(Math.pow(10, precision))) {
+    if (
+      parseInt(Big(value).times(Math.pow(10, precision))) !==
+      +Big(value).times(Math.pow(10, precision))
+    ) {
       return false
     }
 
     return true
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     // onInput 可以提供一个规范的数字
     let nV = e.target.value
 
@@ -97,12 +98,8 @@ class InputNumberV2 extends React.Component {
     onChange(this.processOutValue(nV))
   }
 
-  render () {
-    const {
-      value, onChange,
-      max, min, precision,
-      ...rest
-    } = this.props
+  render() {
+    const { value, onChange, max, min, precision, ...rest } = this.props
 
     return (
       <input
