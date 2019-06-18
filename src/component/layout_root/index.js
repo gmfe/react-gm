@@ -13,7 +13,7 @@ const TYPE = {
 let setComponentFunc = null
 
 class LayerRoot extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       _popup: null,
@@ -25,7 +25,7 @@ class LayerRoot extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     setComponentFunc = (type, component) => {
       const s = {}
       s[type] = component
@@ -33,27 +33,28 @@ class LayerRoot extends React.Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     setComponentFunc = null
   }
 
-  render () {
-    const {
-      drawer,
-      _popup,
-      modal,
-      _tip,
-      fullloading,
-      nprogress
-    } = this.state
+  render() {
+    const { drawer, _popup, modal, _tip, fullloading, nprogress } = this.state
     // 有层级关系
     return (
       <div>
         {_popup && _popup.length > 0 && (
           <div>
-            {_.map(_popup, v => React.cloneElement(v.com, Object.assign({
-              key: v.id
-            }, v.com.props)))}
+            {_.map(_popup, v =>
+              React.cloneElement(
+                v.com,
+                Object.assign(
+                  {
+                    key: v.id
+                  },
+                  v.com.props
+                )
+              )
+            )}
           </div>
         )}
 
@@ -62,9 +63,17 @@ class LayerRoot extends React.Component {
 
         {_tip && _tip.length > 0 && (
           <div className='gm-tips'>
-            {_.map(_tip, v => React.cloneElement(v.com, Object.assign({
-              key: v.id
-            }, v.com.props)))}
+            {_.map(_tip, v =>
+              React.cloneElement(
+                v.com,
+                Object.assign(
+                  {
+                    key: v.id
+                  },
+                  v.com.props
+                )
+              )
+            )}
           </div>
         )}
 
@@ -81,7 +90,7 @@ const componentListMap = {
   _tip: []
 }
 
-function getList (type) {
+function getList(type) {
   if (!componentListMap[type]) {
     componentListMap[type] = []
   }
@@ -118,7 +127,7 @@ LayerRoot._setComponentPopup = (id, com) => {
   _setComponentArray(LayerRoot.TYPE._POPUP, id, com)
 }
 
-LayerRoot._removeComponentPopup = (id) => {
+LayerRoot._removeComponentPopup = id => {
   _removeComponentArray(LayerRoot.TYPE._POPUP, id)
 }
 
@@ -126,7 +135,7 @@ LayerRoot._setComponentTip = (id, com) => {
   _setComponentArray(LayerRoot.TYPE._TIP, id, com)
 }
 
-LayerRoot._removeComponentTip = (id) => {
+LayerRoot._removeComponentTip = id => {
   _removeComponentArray(LayerRoot.TYPE._TIP, id)
 }
 
@@ -143,7 +152,7 @@ LayerRoot.setComponent = (type, com) => {
   }
 }
 
-LayerRoot.removeComponent = (type) => {
+LayerRoot.removeComponent = type => {
   if (setComponentFunc) {
     setComponentFunc(type, undefined)
   } else {

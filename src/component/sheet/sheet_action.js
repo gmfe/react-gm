@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class SheetAction extends React.Component {
-  render () {
+  render() {
     return <div>{this.props.children}</div>
   }
 }

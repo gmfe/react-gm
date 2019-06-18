@@ -6,20 +6,20 @@ const prefix = '_react-gm_'
 const { localStorage } = window
 
 const StorageStatics = {
-  set (key, value) {
+  set(key, value) {
     localStorage.setItem(prefix + key, JSON.stringify(value))
   },
-  get (key) {
+  get(key) {
     const v = localStorage.getItem(prefix + key)
     return v ? JSON.parse(v) : v
   },
-  remove (key) {
+  remove(key) {
     localStorage.removeItem(prefix + key)
   },
-  clear () {
+  clear() {
     localStorage.clear()
   },
-  getAll () {
+  getAll() {
     const result = {}
     _.each(_.range(localStorage.length), i => {
       let key = localStorage.key(i)
@@ -33,17 +33,17 @@ const StorageStatics = {
 }
 
 class Storage extends React.Component {
-  componentWillUpdate (nextProps) {
+  componentWillUpdate(nextProps) {
     if (this.props.autoSave) {
       StorageStatics.set(nextProps.name, nextProps.value)
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     StorageStatics.set(this.props.name, this.props.value)
   }
 
-  render () {
+  render() {
     return null
   }
 }

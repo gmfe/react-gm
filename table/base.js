@@ -8,7 +8,7 @@ import { findDOMNode } from 'react-dom'
 import EVENT_TYPE from '../src/event_type'
 
 class BaseTable extends React.Component {
-  constructor () {
+  constructor() {
     super()
     this.throttleDoScroll = _.throttle(this.doScroll, 200)
   }
@@ -17,12 +17,16 @@ class BaseTable extends React.Component {
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
   }
 
-  componentDidMount () {
-    findDOMNode(this).getElementsByClassName('rt-table')[0].addEventListener('scroll', this.throttleDoScroll)
+  componentDidMount() {
+    findDOMNode(this)
+      .getElementsByClassName('rt-table')[0]
+      .addEventListener('scroll', this.throttleDoScroll)
   }
 
-  componentWillUnmount () {
-    findDOMNode(this).getElementsByClassName('rt-table')[0].removeEventListener('scroll', this.throttleDoScroll)
+  componentWillUnmount() {
+    findDOMNode(this)
+      .getElementsByClassName('rt-table')[0]
+      .removeEventListener('scroll', this.throttleDoScroll)
   }
 
   processItem = item => {
@@ -51,7 +55,7 @@ class BaseTable extends React.Component {
     }
   }
 
-  render () {
+  render() {
     let {
       data,
       columns,

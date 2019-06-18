@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { createChainedFunction, contains } from 'gm-util'
 
 class Trigger extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       active: false
@@ -20,22 +20,22 @@ class Trigger extends React.Component {
     this.refPopup = null
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.document.body.addEventListener('click', this.handleBodyClick)
     console.warn('Trigger is deprecated. Use Popover instead.')
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.document.body.removeEventListener('click', this.handleBodyClick)
   }
 
-  setActive (active) {
+  setActive(active) {
     this.setState({
       active
     })
   }
 
-  handleBodyClick (event) {
+  handleBodyClick(event) {
     const target = event.target
     const root = findDOMNode(this)
     if (!contains(root, target)) {
@@ -43,7 +43,7 @@ class Trigger extends React.Component {
     }
   }
 
-  handleClick (event) {
+  handleClick(event) {
     const { disabled, children, type } = this.props
     // 优先获取props的disabled
     if (disabled === true) {
@@ -69,7 +69,7 @@ class Trigger extends React.Component {
     }
   }
 
-  handleMouseEnter () {
+  handleMouseEnter() {
     const { disabled, children } = this.props
     // 优先获取props的disabled
     if (disabled === true) {
@@ -88,7 +88,7 @@ class Trigger extends React.Component {
     }
   }
 
-  handleMouseLeave () {
+  handleMouseLeave() {
     const { disabled, children } = this.props
     // 优先获取props的disabled
     if (disabled === true) {
@@ -112,17 +112,17 @@ class Trigger extends React.Component {
   }
 
   // 添加浮层的三角标，三角标背景用border模拟，三角标的boder用box-shadow模拟
-  renderTriggerArrow (showArrow, arrowBgColor, arrowBorderColor) {
+  renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) {
     let arrowStyle = {}
     if (showArrow) {
       const { right, top } = this.props
       arrowStyle = {
-        'borderRightColor': arrowBgColor,
-        'borderBottomColor': arrowBgColor
+        borderRightColor: arrowBgColor,
+        borderBottomColor: arrowBgColor
       }
       if (arrowBorderColor) {
         arrowStyle = Object.assign({}, arrowStyle, {
-          'boxShadow': `1px 1px 0px ${arrowBorderColor}`
+          boxShadow: `1px 1px 0px ${arrowBorderColor}`
         })
       }
 
@@ -138,11 +138,17 @@ class Trigger extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const {
-      component, children, popup,
-      type, right, top,
-      showArrow, arrowBgColor, arrowBorderColor,
+      component,
+      children,
+      popup,
+      type,
+      right,
+      top,
+      showArrow,
+      arrowBgColor,
+      arrowBorderColor,
       animName
     } = this.props
     const { active } = this.state
@@ -169,34 +175,56 @@ class Trigger extends React.Component {
 
     const p = {}
     if (type === 'focus' || type === 'click') {
-      p.onClick = createChainedFunction(component.props.onClick, this.handleClick)
+      p.onClick = createChainedFunction(
+        component.props.onClick,
+        this.handleClick
+      )
     } else if (type === 'hover') {
-      p.onMouseEnter = createChainedFunction(component.props.onMouseEnter, this.handleMouseEnter)
-      p.onMouseLeave = createChainedFunction(component.props.onMouseLeave, this.handleMouseLeave)
+      p.onMouseEnter = createChainedFunction(
+        component.props.onMouseEnter,
+        this.handleMouseEnter
+      )
+      p.onMouseLeave = createChainedFunction(
+        component.props.onMouseLeave,
+        this.handleMouseLeave
+      )
     }
 
     const componentProps = Object.assign({}, component.props, p)
 
-    return React.cloneElement(component, Object.assign({}, componentProps, {
-      className: classNames(component.props.className, 'gm-trigger'),
-      children: [
-        child,
-        active ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor) : undefined,
-        active ? React.createElement('div', {
-          key: 'popup',
-          ref: ref => (this.refPopup = ref),
-          className: classNames('gm-trigger-popup gm-box-shadow-bottom', {
-            'gm-trigger-popup-right': right,
-            'gm-trigger-popup-top': top,
-            'gm-box-shadow-top': top,
-            'gm-trigger-popup-no-arrow': !showArrow,
-            'gm-animated': !!animate,
-            ['gm-animated-' + animate]: animate
-          }),
-          children: [popup]
-        }) : undefined
-      ]
-    }))
+    return React.cloneElement(
+      component,
+      Object.assign({}, componentProps, {
+        className: classNames(component.props.className, 'gm-trigger'),
+        children: [
+          child,
+          active
+            ? this.renderTriggerArrow(showArrow, arrowBgColor, arrowBorderColor)
+            : undefined,
+          active
+            ? React.createElement(
+                'div',
+                {
+                  key: 'popup',
+                  ref: ref => (this.refPopup = ref),
+                  className: classNames(
+                    'gm-trigger-popup gm-box-shadow-bottom',
+                    {
+                      'gm-trigger-popup-right': right,
+                      'gm-trigger-popup-top': top,
+                      'gm-box-shadow-top': top,
+                      'gm-trigger-popup-no-arrow': !showArrow,
+                      'gm-animated': !!animate,
+                      ['gm-animated-' + animate]: animate
+                    }
+                  )
+                },
+                popup
+              )
+            : undefined
+        ]
+      })
+    )
   }
 }
 
@@ -211,7 +239,14 @@ Trigger.propTypes = {
   showArrow: PropTypes.bool, // 是否显示三角标
   arrowBgColor: PropTypes.string, // 三角标的背景颜色
   arrowBorderColor: PropTypes.string, // 三角标的border颜色
-  animName: PropTypes.oneOf([false, true, 'fade-in-right', 'fade-in-left', 'fade-in-top', 'fade-in-bottom'])
+  animName: PropTypes.oneOf([
+    false,
+    true,
+    'fade-in-right',
+    'fade-in-left',
+    'fade-in-top',
+    'fade-in-bottom'
+  ])
 }
 
 Trigger.defaultProps = {

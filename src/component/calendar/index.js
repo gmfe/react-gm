@@ -25,7 +25,11 @@ const Day = props => {
     'gm-calendar-active': +selected.startOf('day') === +value.startOf('day')
   })
 
-  return <span className={cn} onClick={handleClick}>{value.date()}</span>
+  return (
+    <span className={cn} onClick={handleClick}>
+      {value.date()}
+    </span>
+  )
 }
 
 Day.propTypes = {
@@ -36,12 +40,12 @@ Day.propTypes = {
   selected: PropTypes.object.isRequired
 }
 
-const Head = (props) => {
+const Head = props => {
   const { oldSelect, onChangeMonth } = props
   const [isShow, setShow] = useState(false)
   const month = oldSelect.month()
 
-  const handleChangeMonth = (month) => {
+  const handleChangeMonth = month => {
     setShow(false)
     onChangeMonth(month)
   }
@@ -58,13 +62,12 @@ const Head = (props) => {
           className='gm-calendar-head-pre gm-decoration-none'
           onClick={() => handleChangeMonth(month - 1)}
         >
-          <i className='xfont xfont-left-small'/>
+          <i className='xfont xfont-left-small' />
         </a>
         <Flex flex justifyCenter className='gm-calendar-head-title text-center'>
-          <span
-            className='gm-calendar-head-month'
-            onClick={handleShowMonth}
-          >{getLocale('calendar', 'months')[month]}</span>
+          <span className='gm-calendar-head-month' onClick={handleShowMonth}>
+            {getLocale('calendar', 'months')[month]}
+          </span>
           <span>&nbsp;&nbsp;{oldSelect.year()}</span>
         </Flex>
         <a
@@ -72,7 +75,7 @@ const Head = (props) => {
           className='gm-calendar-head-next gm-decoration-none'
           onClick={() => handleChangeMonth(month + 1)}
         >
-          <i className='xfont xfont-right-small'/>
+          <i className='xfont xfont-right-small' />
         </a>
       </Flex>
       {isShow && (
@@ -84,7 +87,9 @@ const Head = (props) => {
                 'gm-calendar-active': i === month
               })}
               onClick={() => handleChangeMonth(i)}
-            >{getLocale('calendar', 'months')[i]}</span>
+            >
+              {getLocale('calendar', 'months')[i]}
+            </span>
           ))}
         </div>
       )}
@@ -102,16 +107,21 @@ const Week = () => {
   return (
     <div className='gm-calendar-week'>
       {_.map(weekDays, (v, i) => (
-        <span key={i} className='gm-calendar-day-name'>{v}</span>
+        <span key={i} className='gm-calendar-day-name'>
+          {v}
+        </span>
       ))}
     </div>
   )
 }
 
-const Content = (props) => {
+const Content = props => {
   const { selected, oldSelect, onSelectDay, getDisabled } = props
 
-  const m = moment(oldSelect).startOf('month').day(0).add(-1, 'day')
+  const m = moment(oldSelect)
+    .startOf('month')
+    .day(0)
+    .add(-1, 'day')
 
   return (
     <div className='gm-calendar-content'>
@@ -144,7 +154,7 @@ Content.propTypes = {
 }
 
 class Calendar extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     const { selected } = props
     this.state = {
@@ -153,7 +163,7 @@ class Calendar extends React.Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.selected) {
       this.setState({
         selected: nextProps.selected
@@ -161,17 +171,17 @@ class Calendar extends React.Component {
     }
   }
 
-  handleSelectDay = (m) => {
+  handleSelectDay = m => {
     this.props.onSelect(m.toDate())
   }
 
-  handleChangeMonth = (month) => {
+  handleChangeMonth = month => {
     this.setState({
       oldSelect: this.state.oldSelect.month(month)
     })
   }
 
-  getDisabled = (m) => {
+  getDisabled = m => {
     let { min, max, disabledDate } = this.props
     min = min ? moment(min).startOf('day') : null
     max = max ? moment(max).startOf('day') : null
@@ -191,23 +201,18 @@ class Calendar extends React.Component {
     return disabled
   }
 
-  render () {
+  render() {
     const {
       selected, onSelect, min, max, disabledDate, // eslint-disable-line
       className,
       ...rest
     } = this.props
-    const {
-      oldSelect
-    } = this.state
+    const { oldSelect } = this.state
 
     return (
       <div {...rest} className={classNames('gm-calendar', className)}>
-        <Head
-          oldSelect={oldSelect}
-          onChangeMonth={this.handleChangeMonth}
-        />
-        <Week/>
+        <Head oldSelect={oldSelect} onChangeMonth={this.handleChangeMonth} />
+        <Week />
         <Content
           selected={this.state.selected}
           oldSelect={oldSelect}

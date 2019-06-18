@@ -4,7 +4,7 @@ import { is } from 'gm-util'
 import classNames from 'classnames'
 
 class Uploader extends React.Component {
-  handleUpload = (e) => {
+  handleUpload = e => {
     e.preventDefault()
 
     const { multiple, onUpload } = this.props
@@ -25,25 +25,21 @@ class Uploader extends React.Component {
     this.refInput.click()
   }
 
-  render () {
-    const {
-      children,
-      accept,
-      multiple
-    } = this.props
+  render() {
+    const { children, accept, multiple } = this.props
 
-    const cn = classNames({ 'gm-uploader-warp': !!children, 'gm-uploader-default': !children })
+    const cn = classNames({
+      'gm-uploader-warp': !!children,
+      'gm-uploader-default': !children
+    })
     return (
       <div className='gm-uploader'>
-        <div
-          className={cn}
-          onClick={this.handleClick}
-        >
-          {
-            children || <div className='gm-uploader-icon-wrap'>
-              <i className='gm-uploader-icon xfont xfont-plus'/>
+        <div className={cn} onClick={this.handleClick}>
+          {children || (
+            <div className='gm-uploader-icon-wrap'>
+              <i className='gm-uploader-icon xfont xfont-plus' />
             </div>
-          }
+          )}
         </div>
         <input
           type='file'

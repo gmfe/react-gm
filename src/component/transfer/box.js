@@ -7,31 +7,31 @@ import _ from 'lodash'
 import { getLocale } from '../../locales'
 
 class Box extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       query: ''
     }
   }
 
-  handleChange = (selectedValues) => {
+  handleChange = selectedValues => {
     const { onSelect } = this.props
     onSelect(selectedValues)
   }
 
-  handleSelectAll = (checked) => {
+  handleSelectAll = checked => {
     const { list, onSelect } = this.props
 
     onSelect(checked.length === 0 ? [] : _.map(list, v => v.value))
   }
 
-  handleQuery = (e) => {
+  handleQuery = e => {
     this.setState({
       query: e.target.value
     })
   }
 
-  render () {
+  render() {
     let {
       list,
       selectedValues,
@@ -43,9 +43,7 @@ class Box extends React.Component {
       withFilter
     } = this.props
 
-    const {
-      query
-    } = this.state
+    const { query } = this.state
 
     let processList
     if (withFilter === true) {
@@ -57,8 +55,9 @@ class Box extends React.Component {
     return (
       <Flex column className='gm-transfer-box gm-border gm-bg' style={style}>
         {title && (
-          <div
-            className='gm-transfer-box-title gm-padding-5 gm-back-bg text-center gm-border-bottom'>{title}</div>
+          <div className='gm-transfer-box-title gm-padding-5 gm-back-bg text-center gm-border-bottom'>
+            {title}
+          </div>
         )}
 
         {withFilter ? (
@@ -70,7 +69,7 @@ class Box extends React.Component {
               onChange={this.handleQuery}
               placeholder={placeholder}
             />
-            <i className='glyphicon glyphicon-search gm-text-desc'/>
+            <i className='glyphicon glyphicon-search gm-text-desc' />
           </div>
         ) : null}
         <Flex flex column className='gm-bg gm-transfer-box-list gm-overflow-y'>
@@ -81,7 +80,14 @@ class Box extends React.Component {
             onChange={this.handleChange}
           >
             {_.map(processList, v => (
-              <Checkbox key={v.value} value={v.value} block className='gm-cursor'>{v.name}</Checkbox>
+              <Checkbox
+                key={v.value}
+                value={v.value}
+                block
+                className='gm-cursor'
+              >
+                {v.name}
+              </Checkbox>
             ))}
           </CheckboxGroup>
         </Flex>
@@ -95,7 +101,9 @@ class Box extends React.Component {
           >
             <Checkbox value>{getLocale('transfer', 'selectAll')}</Checkbox>
           </CheckboxGroup>
-          <div className='gm-padding-lr-5 gm-text-desc'>{selectedValues.length}/{list.length}</div>
+          <div className='gm-padding-lr-5 gm-text-desc'>
+            {selectedValues.length}/{list.length}
+          </div>
         </Flex>
       </Flex>
     )

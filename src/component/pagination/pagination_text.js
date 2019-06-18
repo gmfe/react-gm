@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import { getLocale } from '../../locales'
 
 class WithCount extends React.Component {
-  render () {
+  render() {
     const { data } = this.props
     return (
       <div className='gm-pagination-text'>
-        {getLocale('pagination', 'show')} {data.offset + 1} ~ {data.offset + data.limit}，{getLocale('pagination', 'total')} {data.count} {getLocale('pagination', 'item')}
+        {getLocale('pagination', 'show')} {data.offset + 1} ~{' '}
+        {data.offset + data.limit}，{getLocale('pagination', 'total')}{' '}
+        {data.count} {getLocale('pagination', 'item')}
       </div>
     )
   }
@@ -22,11 +24,12 @@ WithCount.propTypes = {
 }
 
 class WithoutCount extends React.Component {
-  render () {
+  render() {
     const { data } = this.props
     return (
       <div className='gm-pagination-text'>
-        {getLocale('pagination', 'show')} {data.offset + 1} ~ {data.offset + data.limit} {getLocale('pagination', 'item')}
+        {getLocale('pagination', 'show')} {data.offset + 1} ~{' '}
+        {data.offset + data.limit} {getLocale('pagination', 'item')}
       </div>
     )
   }
@@ -41,11 +44,11 @@ WithoutCount.propTypes = {
 }
 
 class PaginationText extends React.Component {
-  render () {
+  render() {
     if (this.props.data.count !== undefined) {
-      return <WithCount {...this.props}/>
+      return <WithCount {...this.props} />
     } else {
-      return <WithoutCount {...this.props}/>
+      return <WithoutCount {...this.props} />
     }
   }
 }

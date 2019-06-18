@@ -6,10 +6,8 @@ import _ from 'lodash'
 import Validator from '../../validator'
 
 class FormControl extends React.Component {
-  render () {
-    const {
-      children
-    } = this.props
+  render() {
+    const { children } = this.props
 
     const { className, inputClassName } = children.props
 
@@ -36,7 +34,10 @@ class FormControl extends React.Component {
       return React.cloneElement(child, {
         inputClassName: classNames('form-control', inputClassName)
       })
-    } else if (child.type.displayName === 'InputNumber' || child.type.displayName === 'Search') {
+    } else if (
+      child.type.displayName === 'InputNumber' ||
+      child.type.displayName === 'Search'
+    ) {
       return React.cloneElement(child, {
         className: classNames('form-control', className)
       })
@@ -51,11 +52,12 @@ FormControl.propTypes = {
 }
 
 class FormItem extends React.Component {
-  render () {
+  render() {
     let {
       label,
       labelWidth,
-      inline, horizontal,
+      inline,
+      horizontal,
       required,
       canValidate,
       validate,
@@ -69,7 +71,7 @@ class FormItem extends React.Component {
     let hasLabelSwitchPaddingTop = false
     if (canValidate && validate !== undefined) {
       if (required) {
-        help = validate(function (value) {
+        help = validate(function(value) {
           return Validator.validate(Validator.TYPE.required, value)
         })
       } else {
@@ -85,24 +87,40 @@ class FormItem extends React.Component {
     }
 
     return (
-      <Flex column={!horizontal && !inline} {...rest} className={classNames('gm-form-group', className, {
-        'has-error': error,
-        'gm-has-error': error
-      })}>
-        {label &&
-        <Flex justifyEnd={horizontal} width={labelWidth} className={classNames('gm-form-label control-label', {
-          'gm-form-label-untop': unLabelTop
-        },
-        {
-          'gm-form-label-switch-padding-top': hasLabelSwitchPaddingTop
-        })}>
-          {required ? <span style={{ color: 'red' }}>*</span> : ''}
-          {label}
-        </Flex>}
+      <Flex
+        column={!horizontal && !inline}
+        {...rest}
+        className={classNames('gm-form-group', className, {
+          'has-error': error,
+          'gm-has-error': error
+        })}
+      >
+        {label && (
+          <Flex
+            justifyEnd={horizontal}
+            width={labelWidth}
+            className={classNames(
+              'gm-form-label control-label',
+              {
+                'gm-form-label-untop': unLabelTop
+              },
+              {
+                'gm-form-label-switch-padding-top': hasLabelSwitchPaddingTop
+              }
+            )}
+          >
+            {required ? <span style={{ color: 'red' }}>*</span> : ''}
+            {label}
+          </Flex>
+        )}
         <Flex flex column>
           <div className='gm-form-field'>
             {/* 理论上不支持children是数组，但也合理，兼容吧 */}
-            {_.isArray(children) ? children : <FormControl>{children}</FormControl>}
+            {_.isArray(children) ? (
+              children
+            ) : (
+              <FormControl>{children}</FormControl>
+            )}
             {error && help ? (
               <div className={classNames({ 'help-block': error })}>{help}</div>
             ) : null}

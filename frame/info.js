@@ -4,13 +4,13 @@ import { Flex, Popover } from '../src/index'
 import _ from 'lodash'
 import { is } from 'gm-util'
 
-const Info = (props) => {
+const Info = props => {
   const { text, notification, settings } = props
 
   return (
     <div className='gm-framework-info-default'>
       <Flex className='gm-framework-info-default-inner'>
-        <Flex flex/>
+        <Flex flex />
         <Flex>{text}</Flex>
         {notification && <Flex>{notification}</Flex>}
         {settings && (
@@ -21,7 +21,7 @@ const Info = (props) => {
             right
             offset={-5}
             className='gm-framework-info-default-setting-popover'
-            popup={(
+            popup={
               <div className='list-group gm-margin-bottom-0'>
                 {_.map(settings, (v, i) => (
                   <a
@@ -29,12 +29,15 @@ const Info = (props) => {
                     href='javascript:;'
                     className='list-group-item text-center gm-padding-10 gm-margin-0 gm-border-top-0'
                     onClick={v.onClick}
-                  >{v.text}</a>
+                  >
+                    {v.text}
+                  </a>
                 ))}
               </div>
-            )}>
+            }
+          >
             <div className='gm-framework-info-default-settings gm-cursor'>
-              <i className='glyphicon glyphicon-cog gm-padding-lr-15'/>
+              <i className='glyphicon glyphicon-cog gm-padding-lr-15' />
             </div>
           </Popover>
         )}

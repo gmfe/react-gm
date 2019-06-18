@@ -19,17 +19,17 @@ class Base extends React.Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this._isMounted = true
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.isScrollTo) {
       this.doScrollToSelected()
     }
   }
 
-  handleSelect = (item) => {
+  handleSelect = item => {
     const { multiple, selected, onSelect } = this.props
     if (multiple) {
       onSelect(_.xor(selected, [item.value]))
@@ -38,9 +38,10 @@ class Base extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const {
-      data, isGroupList,
+      data,
+      isGroupList,
       selected, multiple, onSelect, isScrollTo, // eslint-disable-line
       renderItem,
       className,
@@ -51,9 +52,13 @@ class Base extends React.Component {
       <div
         {...rest}
         ref={this.refList}
-        className={classNames('gm-list', {
-          'gm-list-group': isGroupList
-        }, className)}
+        className={classNames(
+          'gm-list',
+          {
+            'gm-list-group': isGroupList
+          },
+          className
+        )}
       >
         {_.map(data, group => (
           <div key={group.label} className='gm-list-group-item'>

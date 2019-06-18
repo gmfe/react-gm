@@ -13,7 +13,7 @@ import { findDOMNode } from 'react-dom'
  * @param mixColumns 当前需要糅合的columns
  * @return {Array} 糅合之后的columns
  */
-function generateDiyColumns (propsColumns, mixColumns) {
+function generateDiyColumns(propsColumns, mixColumns) {
   return _.map(propsColumns, item => {
     const { id, accessor, show = true, diyEnable = true } = item
     const key = id || accessor
@@ -37,7 +37,7 @@ function generateDiyColumns (propsColumns, mixColumns) {
   })
 }
 
-function filterStorageColumns (columns) {
+function filterStorageColumns(columns) {
   // 过滤多余数据，避免复杂数据出现JSON循环引用报错问题
   return _.map(columns, col => {
     const { id, accessor, show, diyEnable } = col
@@ -45,9 +45,9 @@ function filterStorageColumns (columns) {
   })
 }
 
-function diyTableHOC (Component) {
+function diyTableHOC(Component) {
   class DiyTable extends React.Component {
-    constructor (props) {
+    constructor(props) {
       super()
       // 从localStorage拿到columns
       const localColumns = Storage.get(props.id) || []
@@ -58,16 +58,24 @@ function diyTableHOC (Component) {
       }
     }
 
-    componentWillReceiveProps (nextProps) {
-      this.setState({ columns: generateDiyColumns(nextProps.columns, this.state.columns) })
+    componentWillReceiveProps(nextProps) {
+      this.setState({
+        columns: generateDiyColumns(nextProps.columns, this.state.columns)
+      })
     }
 
-    componentDidMount () {
-      window.document.body.addEventListener('click', this.handleCloseDiySelector)
+    componentDidMount() {
+      window.document.body.addEventListener(
+        'click',
+        this.handleCloseDiySelector
+      )
     }
 
-    componentWillUnmount () {
-      window.document.body.removeEventListener('click', this.handleCloseDiySelector)
+    componentWillUnmount() {
+      window.document.body.removeEventListener(
+        'click',
+        this.handleCloseDiySelector
+      )
       this.__isUnmounted = true
     }
 
@@ -82,13 +90,17 @@ function diyTableHOC (Component) {
     handleCloseDiySelector = ({ target }) => {
       const { isShow } = this.state
 
-      if (isShow && this.diySelectorRef && !contains(findDOMNode(this.diySelectorRef), target)) {
+      if (
+        isShow &&
+        this.diySelectorRef &&
+        !contains(findDOMNode(this.diySelectorRef), target)
+      ) {
         // 延后执行,使得再次点击按钮关闭diy
         setTimeout(() => this.setState({ isShow: false }), 0)
       }
     }
 
-    handleCheck (index) {
+    handleCheck(index) {
       const columns = this.state.columns.slice()
       const { show } = columns[index]
       columns[index].show = !show
@@ -99,33 +111,51 @@ function diyTableHOC (Component) {
       Storage.set(id, filterStorageColumns(columns))
     }
 
-    render () {
+    render() {
       const { columns, isShow } = this.state
       const props = {
-        ...this.props, columns
+        ...this.props,
+        columns
       }
 
-      return (<div className='gm-react-table-diy'>
-        <Component {...props}/>
-        {isShow && <Flex className='gm-react-table-diy-selector gm-box-shadow-bottom' wrap ref={ref => (this.diySelectorRef = ref)}>
-          {_.map(columns, (item, index) => {
-            const { id, accessor, show: checked, Header, diyItemText, diyEnable } = item
-            const key = id || accessor
-            const text = diyItemText || Header
+      return (
+        <div className='gm-react-table-diy'>
+          <Component {...props} />
+          {isShow && (
+            <Flex
+              className='gm-react-table-diy-selector gm-box-shadow-bottom'
+              wrap
+              ref={ref => (this.diySelectorRef = ref)}
+            >
+              {_.map(columns, (item, index) => {
+                const {
+                  id,
+                  accessor,
+                  show: checked,
+                  Header,
+                  diyItemText,
+                  diyEnable
+                } = item
+                const key = id || accessor
+                const text = diyItemText || Header
 
-            // Header是字符串才展示自定义选择项
-            return _.isString(text) && diyEnable ? <div style={{ width: '50%' }} key={key}>
-              <Checkbox
-                value={key}
-                checked={checked}
-                onChange={this.handleCheck.bind(this, index)}
-              >
-                {text}
-              </Checkbox>
-            </div> : null
-          })}
-        </Flex>}
-      </div>)
+                // Header是字符串才展示自定义选择项
+                return _.isString(text) && diyEnable ? (
+                  <div style={{ width: '50%' }} key={key}>
+                    <Checkbox
+                      value={key}
+                      checked={checked}
+                      onChange={this.handleCheck.bind(this, index)}
+                    >
+                      {text}
+                    </Checkbox>
+                  </div>
+                ) : null
+              })}
+            </Flex>
+          )}
+        </div>
+      )
     }
   }
 

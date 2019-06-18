@@ -6,28 +6,36 @@ import classNames from 'classnames'
 import Popover from '../popover'
 
 class DatePicker extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.datepicker = null
     this.handleSelect = ::this.handleSelect
     this.handleClear = ::this.handleClear
   }
 
-  handleSelect (date) {
+  handleSelect(date) {
     this.props.onChange(date)
     setTimeout(() => {
       this.datepicker.click()
     }, 0)
   }
 
-  handleClear () {
+  handleClear() {
     this.props.onChange()
   }
 
-  render () {
+  render() {
     const {
-      date, min, max, disabledDate,
-      className, children, placeholder, disabled, inputValueRender, canClear
+      date,
+      min,
+      max,
+      disabledDate,
+      className,
+      children,
+      placeholder,
+      disabled,
+      inputValueRender,
+      canClear
     } = this.props
 
     const popup = (
@@ -44,15 +52,23 @@ class DatePicker extends React.Component {
     return (
       <div
         ref={ref => (this.datepicker = ref)}
-        className={classNames('gm-datepicker gm-inline-block gm-position-relative', {
-          'disabled': disabled,
-          'gm-datepicker-placeholder': !date
-        }, className)}
+        className={classNames(
+          'gm-datepicker gm-inline-block gm-position-relative',
+          {
+            disabled: disabled,
+            'gm-datepicker-placeholder': !date
+          },
+          className
+        )}
       >
         <Popover popup={popup} animName>
           {children || (
             <div disabled={disabled} className='gm-datepicker-inner gm-cursor'>
-              {date ? (inputValueRender ? inputValueRender(date) : moment(date).format('YYYY-MM-DD')) : placeholder}
+              {date
+                ? inputValueRender
+                  ? inputValueRender(date)
+                  : moment(date).format('YYYY-MM-DD')
+                : placeholder}
             </div>
           )}
         </Popover>
@@ -61,9 +77,11 @@ class DatePicker extends React.Component {
             type='button'
             className='gm-datepicker-clear-btn close'
             onClick={this.handleClear}
-          >&times;</button>
+          >
+            &times;
+          </button>
         )}
-        {!children && <i className='xfont xfont-calendar'/>}
+        {!children && <i className='xfont xfont-calendar' />}
       </div>
     )
   }

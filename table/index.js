@@ -8,7 +8,9 @@ import './style.less'
 import { OperationHeader, OperationCell, SortHeader } from './util'
 
 const TableUtil = {
-  OperationHeader, OperationCell, SortHeader
+  OperationHeader,
+  OperationCell,
+  SortHeader
 }
 
 export {

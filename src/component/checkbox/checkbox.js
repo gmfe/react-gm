@@ -4,7 +4,7 @@ import _ from 'lodash'
 import classNames from 'classnames'
 
 class Checkbox extends React.Component {
-  render () {
+  render() {
     const {
       value,
       checked,
@@ -26,11 +26,15 @@ class Checkbox extends React.Component {
           width: col ? `${100 / col}%` : 'auto',
           ...style
         }}
-        className={classNames('gm-checkbox', {
-          'checkbox-inline': inline,
-          'gm-block': block,
-          disabled
-        }, className)}
+        className={classNames(
+          'gm-checkbox',
+          {
+            'checkbox-inline': inline,
+            'gm-block': block,
+            disabled
+          },
+          className
+        )}
       >
         <input
           type='checkbox'
@@ -40,17 +44,13 @@ class Checkbox extends React.Component {
           onChange={onChange}
           disabled={disabled}
         />
-        <span/>
+        <span />
         {children}
       </label>
     )
 
     if (!inline) {
-      return (
-        <div>
-          {inner}
-        </div>
-      )
+      return <div>{inner}</div>
     }
 
     return inner

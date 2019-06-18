@@ -89,12 +89,12 @@ const Framework = props => {
           )}
         </div>
       </Context.Provider>
-      <LayoutRoot/>
+      <LayoutRoot />
     </div>
   )
 }
 
-Framework.scrollTop = function () {
+Framework.scrollTop = function() {
   window.scroll(0, 0)
 }
 

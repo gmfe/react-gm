@@ -5,10 +5,10 @@ import classNames from 'classnames'
 import { is } from 'gm-util'
 import Loading from '../loading'
 
-const Button = (props) => {
+const Button = props => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.preventDefault()
 
     const { onClick } = props
@@ -20,11 +20,13 @@ const Button = (props) => {
 
     setIsLoading(true)
 
-    Promise.resolve(result).then(() => {
-      setIsLoading(false)
-    }).catch(() => {
-      setIsLoading(false)
-    })
+    Promise.resolve(result)
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(() => {
+        setIsLoading(false)
+      })
   }
 
   const {
@@ -42,10 +44,7 @@ const Button = (props) => {
       disabled={isLoading || disabled}
       onClick={handleClick}
     >
-      {isLoading && <Loading
-        className='gm-inline-block'
-        size={12}
-      />}
+      {isLoading && <Loading className='gm-inline-block' size={12} />}
       {children}
     </button>
   )

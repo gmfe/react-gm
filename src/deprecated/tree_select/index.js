@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { getLocale } from '../../locales'
 
 class TreeSelect extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       showList: []
@@ -16,11 +16,11 @@ class TreeSelect extends React.Component {
     this.handleShow = ::this.handleShow
   }
 
-  componentDidMount () {
+  componentDidMount() {
     console.warn('TreeSelect is deprecated. Use Tree instead.')
   }
 
-  handleSelectAll (e) {
+  handleSelectAll(e) {
     if (e.target.checked) {
       let data = this.findAllChildrenNode(this.props.list)
       this.props.onSelect && this.props.onSelect(data)
@@ -29,16 +29,21 @@ class TreeSelect extends React.Component {
     this.props.onSelect && this.props.onSelect([])
   }
 
-  handleSelect (data, checked) {
+  handleSelect(data, checked) {
     const { list, selected } = this.props
 
     if (data.children) {
       if (checked) {
-        let selectData = this.findChildrenNodeByValue(list, data.value, selected)
+        let selectData = this.findChildrenNodeByValue(
+          list,
+          data.value,
+          selected
+        )
         this.props.onSelect && this.props.onSelect(selectData)
       } else {
         let selectData = this.findChildrenNodeByValue(list, data.value)
-        this.props.onSelect && this.props.onSelect(_.difference(selected, selectData))
+        this.props.onSelect &&
+          this.props.onSelect(_.difference(selected, selectData))
       }
     } else {
       if (checked) {
@@ -51,8 +56,8 @@ class TreeSelect extends React.Component {
     }
   }
 
-  findAllChildrenNode (list, childrenNodes = []) {
-    _.each(list, (data) => {
+  findAllChildrenNode(list, childrenNodes = []) {
+    _.each(list, data => {
       // 只有便利到最后一层时才加入节点value
       if (data.children) {
         this.findAllChildrenNode(data.children, childrenNodes)
@@ -65,8 +70,8 @@ class TreeSelect extends React.Component {
     return childrenNodes
   }
 
-  findChildrenNodeByValue (list, value, items = []) {
-    _.each(list, (data) => {
+  findChildrenNodeByValue(list, value, items = []) {
+    _.each(list, data => {
       if (data.value === value) {
         // 只有便利到最后一层时才加入节点value
         if (data.children) {
@@ -85,7 +90,7 @@ class TreeSelect extends React.Component {
     return items
   }
 
-  handleShow (data) {
+  handleShow(data) {
     let { showList } = this.state
 
     if (_.includes(showList, data.value)) {
@@ -97,10 +102,10 @@ class TreeSelect extends React.Component {
     this.setState({ showList })
   }
 
-  renderNodeList (list, level = 0, panel = []) {
+  renderNodeList(list, level = 0, panel = []) {
     const { disabledSelected, selected } = this.props
 
-    _.each(list, (data) => {
+    _.each(list, data => {
       let childrenNode = this.findChildrenNodeByValue(list, data.value)
       if (data.children) {
         panel.push(
@@ -139,25 +144,34 @@ class TreeSelect extends React.Component {
     return panel
   }
 
-  render () {
+  render() {
     const { list, label, disabledSelected, selected } = this.props
 
     return (
       <div className='gm-tree-select'>
-        <Flex
-          column
-          className='gm-tree-select-border'
-        >
-          {disabledSelected ? undefined : (
+        <Flex column className='gm-tree-select-border'>
+          {disabledSelected ? (
+            undefined
+          ) : (
             <Flex flex className='gm-border-bottom gm-tree-select-title'>
-              <label className='gm-cursor gm-padding-lr-10 gm-padding-tb-5' style={{ width: '30px' }}>
+              <label
+                className='gm-cursor gm-padding-lr-10 gm-padding-tb-5'
+                style={{ width: '30px' }}
+              >
                 <input
                   type='checkbox'
-                  checked={(selected.length !== 0 && this.findAllChildrenNode(list).length === selected.length)}
+                  checked={
+                    selected.length !== 0 &&
+                    this.findAllChildrenNode(list).length === selected.length
+                  }
                   onChange={this.handleSelectAll}
                 />
               </label>
-              <Flex className='gm-padding-lr-10 gm-padding-tb-5' flex alignCenter>
+              <Flex
+                className='gm-padding-lr-10 gm-padding-tb-5'
+                flex
+                alignCenter
+              >
                 {label}
               </Flex>
             </Flex>
@@ -170,28 +184,44 @@ class TreeSelect extends React.Component {
 }
 
 class TreeNode extends React.Component {
-  handleSelect (data, e) {
+  handleSelect(data, e) {
     this.props.handleSelect && this.props.handleSelect(data, e.target.checked)
   }
 
-  handleShow (data) {
+  handleShow(data) {
     this.props.handleShow && this.props.handleShow(data)
   }
 
-  render () {
-    const { data, childrenNode, level, last, disabledSelected, selected, showList } = this.props
+  render() {
+    const {
+      data,
+      childrenNode,
+      level,
+      last,
+      disabledSelected,
+      selected,
+      showList
+    } = this.props
     let selectedFlag = false
 
     if (last) {
       selectedFlag = _.includes(selected, data.value)
     } else {
-      selectedFlag = (childrenNode.length === 0) ? false : (_.difference(childrenNode, selected).length === 0)
+      selectedFlag =
+        childrenNode.length === 0
+          ? false
+          : _.difference(childrenNode, selected).length === 0
     }
 
     return (
       <Flex flex className='gm-border-bottom gm-tree-select-trap'>
-        {disabledSelected ? undefined : (
-          <label className='gm-padding-lr-10 gm-padding-tb-5 gm-cursor' style={{ width: '30px' }}>
+        {disabledSelected ? (
+          undefined
+        ) : (
+          <label
+            className='gm-padding-lr-10 gm-padding-tb-5 gm-cursor'
+            style={{ width: '30px' }}
+          >
             <input
               type='checkbox'
               checked={selectedFlag}
@@ -206,9 +236,17 @@ class TreeNode extends React.Component {
             style={{ marginLeft: Number(level) * 10 + 'px' }}
             onClick={this.handleShow.bind(this, data)}
           >
-            {last ? <div className='gm-gap-10'/>
-              : <span
-                className={(_.includes(showList, data.value)) ? 'glyphicon glyphicon-minus text-primary' : 'glyphicon glyphicon-plus text-primary'}/>}
+            {last ? (
+              <div className='gm-gap-10' />
+            ) : (
+              <span
+                className={
+                  _.includes(showList, data.value)
+                    ? 'glyphicon glyphicon-minus text-primary'
+                    : 'glyphicon glyphicon-plus text-primary'
+                }
+              />
+            )}
             <span className='gm-padding-lr-5'>
               {data.value}&nbsp;{data.name}
             </span>

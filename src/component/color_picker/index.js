@@ -18,7 +18,7 @@ const colorList = [
 ]
 
 class Color extends React.Component {
-  render () {
+  render() {
     const { color = '', onChange } = this.props
 
     return (
@@ -33,8 +33,12 @@ class Color extends React.Component {
           />
         ))}
         <div className='gm-color-picker-addon'>#</div>
-        <input type='text' value={color.replace('#', '')} onChange={e => onChange('#' + e.target.value)}/>
-        <div className='gm-color-picker-value' style={{ background: color }}/>
+        <input
+          type='text'
+          value={color.replace('#', '')}
+          onChange={e => onChange('#' + e.target.value)}
+        />
+        <div className='gm-color-picker-value' style={{ background: color }} />
       </Flex>
     )
   }
@@ -46,7 +50,7 @@ Color.propTypes = {
 }
 
 class ColorPicker extends React.Component {
-  render () {
+  render() {
     const { color, onChange, children } = this.props
 
     return (
@@ -54,7 +58,7 @@ class ColorPicker extends React.Component {
         animName
         type='hover'
         showArrow
-        popup={<Color color={color} onChange={onChange}/>}
+        popup={<Color color={color} onChange={onChange} />}
       >
         {children}
       </Popover>

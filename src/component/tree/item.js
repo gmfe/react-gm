@@ -3,13 +3,8 @@ import PropTypes from 'prop-types'
 import { Checkbox } from '../checkbox'
 import Flex from '../flex'
 
-const LeafItem = (props) => {
-  const {
-    leaf,
-    checked,
-    onChange,
-    onClickName
-  } = props
+const LeafItem = props => {
+  const { leaf, checked, onChange, onClickName } = props
 
   const handleChange = () => {
     onChange(leaf, !checked)
@@ -24,15 +19,8 @@ const LeafItem = (props) => {
   }
 
   return (
-    <Flex
-      alignCenter
-      className='gm-hover-bg gm-tree-group-list-item gm-cursor'
-    >
-      <Checkbox
-        value={leaf.value}
-        checked={checked}
-        onChange={handleChange}
-      />
+    <Flex alignCenter className='gm-hover-bg gm-tree-group-list-item gm-cursor'>
+      <Checkbox value={leaf.value} checked={checked} onChange={handleChange} />
       <Flex flex onClick={handleName}>
         {leaf.name}
       </Flex>
@@ -47,7 +35,7 @@ LeafItem.propTypes = {
   onClickName: PropTypes.func
 }
 
-const GroupItem = (props) => {
+const GroupItem = props => {
   const {
     group,
     isOpen,
@@ -78,14 +66,11 @@ const GroupItem = (props) => {
           />
         )}
         <Flex flex alignCenter onClick={handleGroup}>
-          <span style={{ width: '1em' }}>{isOpen ? '-' : '+'}</span>&nbsp;{group.name}
+          <span style={{ width: '1em' }}>{isOpen ? '-' : '+'}</span>&nbsp;
+          {group.name}
         </Flex>
       </Flex>
-      {isOpen && (
-        <div className='gm-tree-group-list'>
-          {children}
-        </div>
-      )}
+      {isOpen && <div className='gm-tree-group-list'>{children}</div>}
     </React.Fragment>
   )
 }
@@ -100,7 +85,4 @@ GroupItem.propTypes = {
   children: PropTypes.element.isRequired
 }
 
-export {
-  LeafItem,
-  GroupItem
-}
+export { LeafItem, GroupItem }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 class EditableText extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       editable: false,
@@ -47,13 +47,13 @@ class EditableText extends React.Component {
     setTimeout(this.handleCancelClick, 300)
   }
 
-  handleKeyUp = (e) => {
+  handleKeyUp = e => {
     if (e.keyCode === 13) {
       this.handleOkClick()
     }
   }
 
-  render () {
+  render() {
     const { content, className, disabled, children } = this.props
     const { editable } = this.state
     return editable ? (
@@ -66,19 +66,26 @@ class EditableText extends React.Component {
           onChange={this.handleInputChange}
           onKeyUp={this.handleKeyUp}
         />
-        <div className='gm-gap-5'/>
-        <i className='xfont xfont-ok gm-cursor gm-editable-text-xfont-ok' onClick={this.handleOkClick}/>
-        <div className='gm-gap-5'/>
-        <i className='xfont xfont-remove gm-cursor gm-editable-text-xfont-cancel' onClick={this.handleCancelClick}/>
+        <div className='gm-gap-5' />
+        <i
+          className='xfont xfont-ok gm-cursor gm-editable-text-xfont-ok'
+          onClick={this.handleOkClick}
+        />
+        <div className='gm-gap-5' />
+        <i
+          className='xfont xfont-remove gm-cursor gm-editable-text-xfont-cancel'
+          onClick={this.handleCancelClick}
+        />
       </div>
     ) : (
-      <div
-        className={classNames('gm-editable-text', className)}
-      >
+      <div className={classNames('gm-editable-text', className)}>
         <span onClick={this.handleEdit}>{children || content || '-'}</span>
-        {!disabled && <i
-          className='xfont xfont-edit gm-margin-left-5 gm-cursor gm-editable-text-edit-pen'
-          onClick={this.handleEdit}/>}
+        {!disabled && (
+          <i
+            className='xfont xfont-edit gm-margin-left-5 gm-cursor gm-editable-text-edit-pen'
+            onClick={this.handleEdit}
+          />
+        )}
       </div>
     )
   }

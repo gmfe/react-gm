@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 class Option extends React.Component {
-  render () {
+  render() {
     const {
       children,
       className,
@@ -15,9 +15,11 @@ class Option extends React.Component {
       <div
         {...rest}
         className={classNames('gm-list-item', className, {
-          'disabled': disabled
+          disabled: disabled
         })}
-      >{children}</div>
+      >
+        {children}
+      </div>
     )
   }
 }

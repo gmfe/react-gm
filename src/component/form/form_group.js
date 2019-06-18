@@ -5,7 +5,7 @@ import { getLocale } from '../../locales'
 import _ from 'lodash'
 
 class FormGroup extends React.Component {
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault()
 
     const { onSubmit, onSubmitValidated, formRefs } = this.props
@@ -23,7 +23,7 @@ class FormGroup extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const {
       disabled,
       onCancel,
@@ -33,27 +33,30 @@ class FormGroup extends React.Component {
     } = this.props
 
     return (
-      <div
-        {...rest}
-        onSubmit={this.handleSubmit}
-      >
+      <div {...rest} onSubmit={this.handleSubmit}>
         {children}
         <Affix bottom={0}>
           <div className='text-center gm-padding-tb-5 gm-form-group-sticky-bottom'>
-            {onCancel && <React.Fragment>
-              <button
-                type='button'
-                className='btn btn-default'
-                onClick={onCancel}
-              >{getLocale('formGroup', 'cancelBtn')}</button>
-              <div className='gm-gap-20'/>
-            </React.Fragment>}
+            {onCancel && (
+              <React.Fragment>
+                <button
+                  type='button'
+                  className='btn btn-default'
+                  onClick={onCancel}
+                >
+                  {getLocale('formGroup', 'cancelBtn')}
+                </button>
+                <div className='gm-gap-20' />
+              </React.Fragment>
+            )}
             <button
               disabled={disabled}
               type='button'
               onClick={this.handleSubmit}
               className='btn btn-primary'
-            >{getLocale('formGroup', 'saveBtn')}</button>
+            >
+              {getLocale('formGroup', 'saveBtn')}
+            </button>
           </div>
         </Affix>
       </div>

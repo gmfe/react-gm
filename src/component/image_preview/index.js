@@ -4,7 +4,7 @@ import CleanModal from '../modal/clean_modal'
 
 const ImagePreview = props => {
   CleanModal.render({
-    children: <PreviewModal {...props} onHide={CleanModal.hide}/>,
+    children: <PreviewModal {...props} onHide={CleanModal.hide} />,
     show: true,
     onHide: CleanModal.hide,
     disableMaskClose: true,

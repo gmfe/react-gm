@@ -9,7 +9,9 @@ let _unit = '元'
 class Price extends React.Component {
   formatValue = (value, precision, keepZero, isFenUnit) => {
     let divRatio = isFenUnit ? 100 : 1
-    const result = Big(Math.abs(value)).div(divRatio).toFixed(precision)
+    const result = Big(Math.abs(value))
+      .div(divRatio)
+      .toFixed(precision)
     return keepZero ? result : parseFloat(result)
   }
 
@@ -17,10 +19,12 @@ class Price extends React.Component {
   addComma = (useGrouping, num) => {
     if (!useGrouping) return num
 
-    return num.toString().replace(/^\d+/g, (m) => m.replace(/(?=(?!^)(\d{3})+$)/g, ','))
+    return num
+      .toString()
+      .replace(/^\d+/g, m => m.replace(/(?=(?!^)(\d{3})+$)/g, ','))
   }
 
-  render () {
+  render() {
     const {
       value,
       useGrouping,
@@ -33,9 +37,18 @@ class Price extends React.Component {
 
     return (
       <span {...rest}>
-        {value < 0 ? '-' : ''}<span style={{
-          fontSize: `${currencyScale > 1 ? '1' : currencyScale}em`
-        }}>{_currency}</span>{this.addComma(useGrouping, this.formatValue(value, precision, keepZero, isFenUnit))}
+        {value < 0 ? '-' : ''}
+        <span
+          style={{
+            fontSize: `${currencyScale > 1 ? '1' : currencyScale}em`
+          }}
+        >
+          {_currency}
+        </span>
+        {this.addComma(
+          useGrouping,
+          this.formatValue(value, precision, keepZero, isFenUnit)
+        )}
       </span>
     )
   }

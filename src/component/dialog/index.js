@@ -9,32 +9,36 @@ import EVENT_TYPE from '../../event_type'
 
 let DialogStatics = {}
 DialogStatics = {
-  alert (options) {
+  alert(options) {
     options.type = 'alert'
     options.size = options.size || 'sm'
     return DialogStatics.dialog(options)
   },
-  confirm (options) {
+  confirm(options) {
     options.type = 'confirm'
     options.size = options.size || 'sm'
     return DialogStatics.dialog(options)
   },
-  prompt (options) {
+  prompt(options) {
     options.type = 'prompt'
     options.size = options.size || 'sm'
     return DialogStatics.dialog(options)
   },
-  dialog (options) {
-    options = Object.assign({
-      _from: 'DialogStatics',
-      size: 'sm'
-    }, options)
+  dialog(options) {
+    options = Object.assign(
+      {
+        _from: 'DialogStatics',
+        size: 'sm'
+      },
+      options
+    )
     return new Promise((resolve, reject) => {
       const _OK = options.onOK
       options.onOK = value => {
         const result = _OK && _OK(value)
 
-        if (result && result.then) { // 简单判断是否promise
+        if (result && result.then) {
+          // 简单判断是否promise
           return result.then(v => {
             LayoutRoot.removeComponent(LayoutRoot.TYPE.MODAL)
             window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_HIDE))
@@ -59,14 +63,17 @@ DialogStatics = {
         window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_HIDE))
       }
 
-      LayoutRoot.setComponent(LayoutRoot.TYPE.MODAL, <Dialog show {...options}/>)
+      LayoutRoot.setComponent(
+        LayoutRoot.TYPE.MODAL,
+        <Dialog show {...options} />
+      )
       window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.MODAL_SHOW))
     })
   }
 }
 
 class Dialog extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       show: props.show,
@@ -78,7 +85,7 @@ class Dialog extends React.Component {
     this.______isMounted = false
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if ('show' in nextProps) {
       this.setState({
         show: nextProps.show
@@ -86,25 +93,27 @@ class Dialog extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props._from !== 'DialogStatics') {
       console.warn('Use Dialog Static instead of Component')
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.______isMounted = true
   }
 
-  handleCancel () {
+  handleCancel() {
     this.props.onCancel()
     this.setState({
       show: false
     })
   }
 
-  handleOk () {
-    const result = this.props.onOK(this.props.type === 'prompt' ? this.refInput.value : undefined)
+  handleOk() {
+    const result = this.props.onOK(
+      this.props.type === 'prompt' ? this.refInput.value : undefined
+    )
     if (result === false) {
       return
     }
@@ -113,29 +122,41 @@ class Dialog extends React.Component {
       isLoading: true
     })
 
-    Promise.resolve(result).then(() => {
-      if (!this.______isMounted) {
+    Promise.resolve(result)
+      .then(() => {
+        if (!this.______isMounted) {
+          this.setState({
+            show: false,
+            isLoading: false
+          })
+        }
+      })
+      .catch(() => {
         this.setState({
-          show: false,
           isLoading: false
         })
-      }
-    }).catch(() => {
-      this.setState({
-        isLoading: false
       })
-    })
   }
 
-  handleEnter (event) {
+  handleEnter(event) {
     if (event.keyCode === 13) {
       this.handleOk()
     }
   }
 
-  render () {
+  render() {
     const { isLoading } = this.state
-    const { size, title, children, type, promptDefaultValue, promptPlaceholder, cancelBtn, OKBtn, disableMaskClose } = this.props
+    const {
+      size,
+      title,
+      children,
+      type,
+      promptDefaultValue,
+      promptPlaceholder,
+      cancelBtn,
+      OKBtn,
+      disableMaskClose
+    } = this.props
     let modalProps = {
       show: this.state.show,
       onHide: this.handleCancel,
@@ -145,9 +166,14 @@ class Dialog extends React.Component {
       modalProps.size = size
     }
     return (
-      <Modal {...modalProps} className={classNames('gm-dialog', {
-        ['gm-dialog-' + type]: type
-      })} size={modalProps.size} title={title}>
+      <Modal
+        {...modalProps}
+        className={classNames('gm-dialog', {
+          ['gm-dialog-' + type]: type
+        })}
+        size={modalProps.size}
+        title={title}
+      >
         <div>
           {children}
           {type === 'prompt' && (
@@ -162,18 +188,25 @@ class Dialog extends React.Component {
             />
           )}
         </div>
-        <div className='gm-gap-10'/>
+        <div className='gm-gap-10' />
         <div className='text-right'>
-          {(type !== 'alert' && cancelBtn && !isLoading) && (
-            <button className='btn btn-default' onClick={this.handleCancel}>{cancelBtn}</button>
+          {type !== 'alert' && cancelBtn && !isLoading && (
+            <button className='btn btn-default' onClick={this.handleCancel}>
+              {cancelBtn}
+            </button>
           )}
-          <div className='gm-gap-10'/>
+          <div className='gm-gap-10' />
           {OKBtn && (
             <button
               className='btn btn-primary'
               disabled={isLoading}
-              onClick={!isLoading ? this.handleOk : null}>
-              {isLoading ? <i className='glyphicon glyphicon-refresh glyphicon-spin'/> : OKBtn}
+              onClick={!isLoading ? this.handleOk : null}
+            >
+              {isLoading ? (
+                <i className='glyphicon glyphicon-refresh glyphicon-spin' />
+              ) : (
+                OKBtn
+              )}
             </button>
           )}
         </div>
@@ -193,14 +226,8 @@ Dialog.propTypes = {
   size: PropTypes.string,
   promptDefaultValue: PropTypes.string,
   promptPlaceholder: PropTypes.string,
-  cancelBtn: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool
-  ]),
-  OKBtn: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  cancelBtn: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  OKBtn: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   disableMaskClose: PropTypes.bool,
   children: PropTypes.any,
   _from: PropTypes.string

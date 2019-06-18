@@ -4,7 +4,7 @@ import _ from 'lodash'
 import LayoutRoot from '../layout_root'
 
 const TipStatics = {
-  tip: function (options) {
+  tip: function(options) {
     const id = +new Date() + '' + Math.random()
     const _onClose = options.onClose
 
@@ -14,11 +14,11 @@ const TipStatics = {
         _onClose()
       }
     }
-    LayoutRoot._setComponentTip(id, <TipOverlay {...options}/>)
+    LayoutRoot._setComponentTip(id, <TipOverlay {...options} />)
 
     return id
   },
-  success: function (options) {
+  success: function(options) {
     if (typeof options === 'string') {
       options = {
         children: options
@@ -27,7 +27,7 @@ const TipStatics = {
     options.type = 'success'
     return TipStatics.tip(options)
   },
-  info: function (options) {
+  info: function(options) {
     if (typeof options === 'string') {
       options = {
         children: options
@@ -36,7 +36,7 @@ const TipStatics = {
     options.type = 'info'
     return TipStatics.tip(options)
   },
-  warning: function (options) {
+  warning: function(options) {
     if (typeof options === 'string') {
       options = {
         children: options
@@ -45,7 +45,7 @@ const TipStatics = {
     options.type = 'warning'
     return TipStatics.tip(options)
   },
-  danger: function (options) {
+  danger: function(options) {
     if (typeof options === 'string') {
       options = {
         children: options
@@ -54,51 +54,49 @@ const TipStatics = {
     options.type = 'danger'
     return TipStatics.tip(options)
   },
-  clear (id) {
+  clear(id) {
     LayoutRoot._removeComponentTip(id)
   },
-  clearAll () {
+  clearAll() {
     LayoutRoot._removeComponentTipAll()
   }
 }
 
 class TipOverlay extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.timer = null
     this.hasClosed = false
     this.handleClose = ::this.handleClose
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { time } = this.props
     if (time) {
       this.timer = setTimeout(() => this.fadeOut(), time)
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearTimeout(this.timer)
   }
 
-  handleClose () {
+  handleClose() {
     this.fadeOut()
   }
 
-  fadeOut () {
+  fadeOut() {
     if (!this.hasClosed) {
       this.hasClosed = true
       this.props.onClose()
     }
   }
 
-  render () {
+  render() {
     const { title, type, children } = this.props
     return (
       <div className='gm-animated gm-animated-fade-in-right-100'>
-        <Tip title={title}
-          type={type}
-          onClose={this.handleClose}>
+        <Tip title={title} type={type} onClose={this.handleClose}>
           {children}
         </Tip>
       </div>
@@ -119,32 +117,38 @@ TipOverlay.defaultProps = {
 }
 
 class Tip extends React.Component {
-    handleClose = () => {
-      this.props.onClose()
-    };
+  handleClose = () => {
+    this.props.onClose()
+  }
 
-    render () {
-      const { title, type, children } = this.props
-      const iconClassName = {
-        success: 'glyphicon glyphicon-ok-sign',
-        info: 'glyphicon glyphicon-info-sign',
-        warning: 'glyphicon glyphicon-exclamation-sign',
-        danger: 'glyphicon glyphicon-remove-sign'
-      }
-
-      return (
-        <div className='gm-tip panel panel-default gm-box-shadow-bottom'>
-          <button type='button' className='close' onClick={this.handleClose}>
-            <span>&times;</span>
-          </button>
-          <i className={'text-' + type + ' ' + iconClassName[type]}/>
-          <div className='panel-body'>
-            {title ? <div><strong>{title}</strong></div> : undefined}
-            {children}
-          </div>
-        </div>
-      )
+  render() {
+    const { title, type, children } = this.props
+    const iconClassName = {
+      success: 'glyphicon glyphicon-ok-sign',
+      info: 'glyphicon glyphicon-info-sign',
+      warning: 'glyphicon glyphicon-exclamation-sign',
+      danger: 'glyphicon glyphicon-remove-sign'
     }
+
+    return (
+      <div className='gm-tip panel panel-default gm-box-shadow-bottom'>
+        <button type='button' className='close' onClick={this.handleClose}>
+          <span>&times;</span>
+        </button>
+        <i className={'text-' + type + ' ' + iconClassName[type]} />
+        <div className='panel-body'>
+          {title ? (
+            <div>
+              <strong>{title}</strong>
+            </div>
+          ) : (
+            undefined
+          )}
+          {children}
+        </div>
+      </div>
+    )
+  }
 }
 
 Tip.propTypes = {

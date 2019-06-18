@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import SearchSelect from './search.select'
 
 class FilterSearchSelect extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       query: ''
@@ -11,18 +11,14 @@ class FilterSearchSelect extends React.Component {
     this.handleSearch = ::this.handleSearch
   }
 
-  handleSearch (query) {
+  handleSearch(query) {
     this.setState({
       query
     })
   }
 
-  render () {
-    const {
-      list,
-      onFilter,
-      ...rest
-    } = this.props
+  render() {
+    const { list, onFilter, ...rest } = this.props
 
     const { query } = this.state
     let filterList = list
@@ -30,11 +26,7 @@ class FilterSearchSelect extends React.Component {
       filterList = onFilter(filterList, query)
     }
     return (
-      <SearchSelect
-        {...rest}
-        list={filterList}
-        onSearch={this.handleSearch}
-      />
+      <SearchSelect {...rest} list={filterList} onSearch={this.handleSearch} />
     )
   }
 }

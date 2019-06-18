@@ -4,7 +4,7 @@ import _ from 'lodash'
 import classNames from 'classnames'
 
 class Radio extends React.Component {
-  render () {
+  render() {
     const {
       value,
       checked,
@@ -17,9 +17,11 @@ class Radio extends React.Component {
 
     return (
       <div className={inline ? 'radio-inline' : ''}>
-        <label className={classNames({
-          disabled
-        })}>
+        <label
+          className={classNames({
+            disabled
+          })}
+        >
           <input
             type='radio'
             className='gm-input-radio'
@@ -29,7 +31,7 @@ class Radio extends React.Component {
             onChange={onChange}
             disabled={disabled}
           />
-          <span/>
+          <span />
           {children}
         </label>
       </div>

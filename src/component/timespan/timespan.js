@@ -5,7 +5,7 @@ import _ from 'lodash'
 import classNames from 'classnames'
 
 class TimeSpan extends React.Component {
-  getCells () {
+  getCells() {
     const { min, max, span } = this.props
     const dMax = max ? moment(max) : moment().endOf('day')
     let d = min ? moment(min) : moment().startOf('day')
@@ -17,11 +17,11 @@ class TimeSpan extends React.Component {
     return cells
   }
 
-  handleSelect (value) {
+  handleSelect(value) {
     this.props.onSelect(value.toDate())
   }
 
-  render () {
+  render() {
     const { selected, render, disabledSpan } = this.props
     const cells = this.getCells()
 
@@ -57,8 +57,12 @@ TimeSpan.propTypes = {
   onSelect: PropTypes.func
 }
 TimeSpan.defaultProps = {
-  min: moment().startOf('day').toDate(),
-  max: moment().endOf('day').toDate(),
+  min: moment()
+    .startOf('day')
+    .toDate(),
+  max: moment()
+    .endOf('day')
+    .toDate(),
   span: 30 * 60 * 1000,
   render: value => moment(value).format('HH:mm'),
   onSelect: _.noop

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { getLocale } from '../../locales'
 
 class DropSelect extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       activeIndex: null
@@ -14,31 +14,34 @@ class DropSelect extends React.Component {
     this.onEscapeKeyUp = this.onEscapeKeyUp.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.document.addEventListener('click', this.documentClickHandler)
     window.document.addEventListener('keydown', this.onEscapeKeyUp)
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     const dom = this.refSelectPanel.querySelector('.gm-dropselect-list .active')
     dom && dom.scrollIntoViewIfNeeded() // scrollIntoView
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.document.removeEventListener('click', this.documentClickHandler)
     window.document.removeEventListener('keydown', this.onEscapeKeyUp)
   }
 
-  processData (data) {
-    return Object.assign({
-      loading: false,
-      actions: [],
-      list: [],
-      columns: []
-    }, data)
+  processData(data) {
+    return Object.assign(
+      {
+        loading: false,
+        actions: [],
+        list: [],
+        columns: []
+      },
+      data
+    )
   }
 
-  documentClickHandler (e) {
+  documentClickHandler(e) {
     if (!this.refSelectPanel.contains(e.target)) {
       this.setState({
         activeIndex: null
@@ -47,7 +50,7 @@ class DropSelect extends React.Component {
     }
   }
 
-  handleKeyDown (size, e) {
+  handleKeyDown(size, e) {
     // 列表为空
     if (!size) {
       return
@@ -57,15 +60,23 @@ class DropSelect extends React.Component {
 
     // 键盘 上键
     if (e.keyCode === 38) {
-      if (activeIndex === null) { activeIndex = size }
+      if (activeIndex === null) {
+        activeIndex = size
+      }
 
       activeIndex--
-    } else if (e.keyCode === 40) { // 键盘 下键
-      if (activeIndex === null) { activeIndex = -1 }
+    } else if (e.keyCode === 40) {
+      // 键盘 下键
+      if (activeIndex === null) {
+        activeIndex = -1
+      }
 
       activeIndex++
-    } else if (e.keyCode === 13) { // 键盘 回车
-      if (activeIndex === null) { return }
+    } else if (e.keyCode === 13) {
+      // 键盘 回车
+      if (activeIndex === null) {
+        return
+      }
       this.props.onEnter(activeIndex)
     } else {
       return
@@ -76,28 +87,37 @@ class DropSelect extends React.Component {
     })
   }
 
-  onEscapeKeyUp (e) {
+  onEscapeKeyUp(e) {
     if (e.keyCode === 27) {
       this.props.onHide()
     }
   }
 
-  render () {
+  render() {
     const thisProps = this.props
 
     const show = thisProps.show
-    const { loading, list, columns, actions } = this.processData(this.props.data)
+    const { loading, list, columns, actions } = this.processData(
+      this.props.data
+    )
     const { activeIndex } = this.state
     let coolList
 
     const coolTitle = columns.map(col => {
-      return <div className='gm-ellipsis' key={col.field}>{col.name}</div>
+      return (
+        <div className='gm-ellipsis' key={col.field}>
+          {col.name}
+        </div>
+      )
     })
 
     if (loading) {
-      coolList = <li className='gm-dropselect-item'>
-        <span>&nbsp;</span><i className='glyphicon glyphicon-refresh glyphicon-spin'/>
-      </li>
+      coolList = (
+        <li className='gm-dropselect-item'>
+          <span>&nbsp;</span>
+          <i className='glyphicon glyphicon-refresh glyphicon-spin' />
+        </li>
+      )
     } else {
       coolList = list.map((rowData, rowIndex) => {
         const cls = classNames('gm-dropselect-item', {
@@ -108,31 +128,41 @@ class DropSelect extends React.Component {
           const value = rowData[field]
           if (col.render) {
             let val = col.render(value, rowData, rowIndex)
-            return <div
-              className='gm-ellipsis'
-              style={{ flex: '1' }}
-              key={index}
-            >
-              {val}
-            </div>
+            return (
+              <div className='gm-ellipsis' style={{ flex: '1' }} key={index}>
+                {val}
+              </div>
+            )
           } else {
-            return <div className='gm-ellipsis' key={index}>{value}</div>
+            return (
+              <div className='gm-ellipsis' key={index}>
+                {value}
+              </div>
+            )
           }
         })
         const actionDom = actions.map((action, index) => {
-          const disabled = action.getDisabled ? action.getDisabled(rowData, rowIndex) : false
-          return <button
-            className={action.className}
-            onClick={action.onClick.bind(null, rowData)}
-            disabled={disabled}
-            key={index}
-          >{action.text}</button>
+          const disabled = action.getDisabled
+            ? action.getDisabled(rowData, rowIndex)
+            : false
+          return (
+            <button
+              className={action.className}
+              onClick={action.onClick.bind(null, rowData)}
+              disabled={disabled}
+              key={index}
+            >
+              {action.text}
+            </button>
+          )
         })
 
-        return <li className={cls} key={rowData.id}>
-          {row}
-          {actionDom.length ? <div>{actionDom}</div> : null}
-        </li>
+        return (
+          <li className={cls} key={rowData.id}>
+            {row}
+            {actionDom.length ? <div>{actionDom}</div> : null}
+          </li>
+        )
       })
     }
 
@@ -151,7 +181,9 @@ class DropSelect extends React.Component {
             <ul className='gm-dropselect-list'>
               <li className='gm-dropselect-item gm-dropselect-title'>
                 {coolTitle}
-                {!!actions.length && <div>{getLocale('dropSelect', 'operation')}</div>}
+                {!!actions.length && (
+                  <div>{getLocale('dropSelect', 'operation')}</div>
+                )}
               </li>
               {coolList}
             </ul>
@@ -170,7 +202,7 @@ DropSelect.propTypes = {
 }
 
 DropSelect.defaultProps = {
-  onEnter: (index) => {
+  onEnter: index => {
     console.log('onEnter index:', index)
   }
 }

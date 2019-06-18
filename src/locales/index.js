@@ -2,7 +2,7 @@ import * as lng from './lng'
 
 let _lng = 'zh'
 
-const setLocale = (lng) => {
+const setLocale = lng => {
   _lng = lng
 }
 
@@ -11,7 +11,4 @@ const getLocale = (component, text) => {
   return language[component][text]
 }
 
-export {
-  setLocale,
-  getLocale
-}
+export { setLocale, getLocale }

@@ -12,7 +12,13 @@ import PaginationText from './component/pagination/pagination_text'
 import PaginationNew from './component/pagination/pagination_new'
 import PaginationBox from './component/pagination/pagination_box'
 import Dropper from './component/dropper/index'
-import { Form, FormItem, FormButton, FormBlock, FormGroup } from './component/form'
+import {
+  Form,
+  FormItem,
+  FormButton,
+  FormBlock,
+  FormGroup
+} from './component/form'
 
 import Storage from './component/storage'
 import Calendar from './component/calendar'
@@ -29,7 +35,13 @@ import TimeSpan from './component/timespan/timespan'
 import TimeSpanPicker from './component/timespan/timespanpicker'
 import DropSelect from './component/drop_select'
 import Switch from './component/switch'
-import { Sheet, SheetColumn, SheetAction, SheetSelect, SheetBatchAction } from './component/sheet'
+import {
+  Sheet,
+  SheetColumn,
+  SheetAction,
+  SheetSelect,
+  SheetBatchAction
+} from './component/sheet'
 import Cascader from './component/cascader/cascader'
 import CascaderSelect from './component/cascader/cascader.select'
 
@@ -44,7 +56,13 @@ import RightSideModal from './component/modal/right_side_modal'
 import CleanModal from './component/modal/clean_modal'
 import Collapse from './component/collapse'
 import { DropDown, DropDownItem, DropDownItems } from './component/drop_down'
-import { QuickPanel, QuickFilter, QuickTab, QuickDesc, QuickDetail } from './component/quick'
+import {
+  QuickPanel,
+  QuickFilter,
+  QuickTab,
+  QuickDesc,
+  QuickDetail
+} from './component/quick'
 import { Radio, RadioGroup } from './component/radio'
 import { Checkbox, CheckboxGroup } from './component/checkbox'
 import FilterSelect from './component/filter_select/filter.select'
@@ -120,7 +138,11 @@ export {
   Pagination,
   PaginationNew,
   PaginationBox,
-  Form, FormItem, FormButton, FormBlock, FormGroup,
+  Form,
+  FormItem,
+  FormButton,
+  FormBlock,
+  FormGroup,
   Calendar,
   DatePicker,
   DateRangePicker,
@@ -147,21 +169,33 @@ export {
   Loading,
   LoadingFullScreen,
   LoadingChunk,
-  InputNumber, InputNumberV2,
+  InputNumber,
+  InputNumberV2,
   LayoutRoot,
   Modal,
   RightSideModal,
   CleanModal,
   Collapse,
-  DropDown, DropDownItems, DropDownItem,
-
-  QuickPanel, QuickFilter, QuickTab, QuickDesc,
-  QuickDetail, QuickDetailFirst, QuickDetailSecond, QuickDetailThird,
+  DropDown,
+  DropDownItems,
+  DropDownItem,
+  QuickPanel,
+  QuickFilter,
+  QuickTab,
+  QuickDesc,
+  QuickDetail,
+  QuickDetailFirst,
+  QuickDetailSecond,
+  QuickDetailThird,
   Validator,
-  Radio, RadioGroup,
-  Checkbox, CheckboxGroup,
-  Select, Option,
-  Transfer, TransferGroup,
+  Radio,
+  RadioGroup,
+  Checkbox,
+  CheckboxGroup,
+  Select,
+  Option,
+  Transfer,
+  TransferGroup,
   Tree,
   FilterSelect,
   MultipleFilterSelect,
@@ -173,7 +207,8 @@ export {
   Affix,
   Uploader,
   Drawer,
-  Menu, Nav,
+  Menu,
+  Nav,
   ImagePreview,
   setLocale,
   EditableText,

@@ -5,7 +5,7 @@ import { pinYinFilter } from 'gm-util'
 import Base from './base'
 
 class MoreSelect extends React.Component {
-  handleSelect = (selected) => {
+  handleSelect = selected => {
     const { multiple, onSelect } = this.props
 
     if (multiple) {
@@ -15,23 +15,19 @@ class MoreSelect extends React.Component {
     }
   }
 
-  render () {
-    const {
-      data,
-      selected,
-      multiple,
-      isGroupList,
-      ...rest
-    } = this.props
+  render() {
+    const { data, selected, multiple, isGroupList, ...rest } = this.props
 
     let oData
     if (isGroupList) {
       oData = data
     } else {
-      oData = [{
-        label: '',
-        children: data
-      }]
+      oData = [
+        {
+          label: '',
+          children: data
+        }
+      ]
     }
 
     let oSelected
@@ -54,11 +50,11 @@ class MoreSelect extends React.Component {
   }
 }
 
-function renderListFilterDefault (data, query) {
+function renderListFilterDefault(data, query) {
   return _.filter(data, item => item.text.includes(query))
 }
 
-function renderListFilterPinYin (data, query) {
+function renderListFilterPinYin(data, query) {
   return pinYinFilter(data, query, item => item.text)
 }
 
@@ -68,10 +64,7 @@ MoreSelect.renderListFilterPinYin = renderListFilterPinYin
 MoreSelect.propTypes = {
   // 基本属性
   data: PropTypes.array.isRequired, // [{value, text}]
-  selected: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array
-  ]), // item。 非 value，也非引用，原因是想解耦 selected 和 data 的关系。这样当
+  selected: PropTypes.oneOfType([PropTypes.object, PropTypes.array]), // item。 非 value，也非引用，原因是想解耦 selected 和 data 的关系。这样当
   onSelect: PropTypes.func.isRequired, // 返回 item
   multiple: PropTypes.bool,
 

@@ -2,13 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class InputNumber extends React.Component {
-  handleChange = (e) => {
+  handleChange = e => {
     const { max, min, precision, minus } = this.props
     let value = e.target.value.replace(/。/g, '.')
 
     let figure = value
 
-    const reg = new RegExp('(^[1-9]\\d*(\\.\\d{0,' + precision + '})?$)|(^0(\\.\\d{0,' + precision + '})?$)')
+    const reg = new RegExp(
+      '(^[1-9]\\d*(\\.\\d{0,' +
+        precision +
+        '})?$)|(^0(\\.\\d{0,' +
+        precision +
+        '})?$)'
+    )
 
     if (minus && value.indexOf('-') === 0) {
       // 去掉减号，然后去匹配正则
@@ -25,25 +31,22 @@ class InputNumber extends React.Component {
         // 如果第一个数字是0，第二个是1-9，则选取第二个数字
         this.props.onChange(/^0[1-9]/.test(value) ? value.slice(1) : value)
       }
-    } else if (value.length < this.props.value.toString().length && reg.test(value)) {
+    } else if (
+      value.length < this.props.value.toString().length &&
+      reg.test(value)
+    ) {
       // 有默认值，且不符合以上的规则，但是是一个删减字符的操作
       this.props.onChange(value)
     }
   }
 
-  render () {
+  render() {
     const {
             precision, minus, // eslint-disable-line
       ...rest
     } = this.props
 
-    return (
-      <input
-        {...rest}
-        type='text'
-        onChange={this.handleChange}
-      />
-    )
+    return <input {...rest} type='text' onChange={this.handleChange} />
   }
 }
 
