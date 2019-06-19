@@ -7,23 +7,22 @@ const ToolTip = props => {
   let {
     popup,
     children,
-
     right,
     top,
     center,
-
+    showArrow,
     className,
     ...rest
   } = props
 
   return (
     <Popover
-      showArrow
+      top={top}
       type='hover'
       right={right}
-      top={top}
-      center={center}
       popup={popup}
+      center={center}
+      showArrow={showArrow}
       animName={top ? 'zoom-in-top' : 'zoom-in-bottom'}
     >
       {children !== undefined ? (
@@ -49,8 +48,13 @@ ToolTip.propTypes = {
   top: PropTypes.bool,
   center: PropTypes.bool,
 
+  showArrow: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object
+}
+
+ToolTip.defaultProps = {
+  showArrow: true
 }
 
 export default ToolTip

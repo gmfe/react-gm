@@ -41,10 +41,10 @@ class MoreSelect extends React.Component {
       <Base
         {...rest}
         data={oData}
-        selected={oSelected}
-        onSelect={this.handleSelect}
         multiple={multiple}
+        selected={oSelected}
         isGroupList={isGroupList}
+        onSelect={this.handleSelect}
       />
     )
   }
@@ -90,7 +90,12 @@ MoreSelect.propTypes = {
   // isGroupList
   isGroupList: PropTypes.bool,
 
-  popoverType: PropTypes.oneOf(['focus', 'realFocus'])
+  popoverType: PropTypes.oneOf(['click', 'focus', 'realFocus']),
+
+  popRef: PropTypes.func,
+  onInputKeyUp: PropTypes.func,
+  onInputFocus: PropTypes.func,
+  onInputKeyDown: PropTypes.func
 }
 
 MoreSelect.defaultProps = {

@@ -69,6 +69,13 @@ class Popover extends React.Component {
       EVENT_TYPE.TABLE_SCROLL,
       this.debounceHandleTableScroll
     )
+
+    if (this.props.popRef) {
+      this.props.popRef({
+        close: () => this.setActive(false),
+        show: () => this.setActive(true)
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -196,11 +203,7 @@ class Popover extends React.Component {
     }
   }
 
-  setActive = active => {
-    this.setState({
-      active
-    })
-
+  updateRect = active => {
     if (active) {
       const dom = findDOMNode(this)
       const pos = getElementPositionWithScrollTop(dom)
@@ -212,6 +215,13 @@ class Popover extends React.Component {
       }
       this.rect = rect
     }
+  }
+
+  setActive = active => {
+    this.setState({
+      active
+    })
+    this.updateRect(active)
     this.doRenderPopup(active)
   }
 
@@ -345,7 +355,9 @@ Popover.propTypes = {
     'zoom-in',
     'zoom-in-top',
     'zoom-in-bottom'
-  ])
+  ]),
+
+  popRef: PropTypes.func
 }
 
 Popover.defaultProps = {

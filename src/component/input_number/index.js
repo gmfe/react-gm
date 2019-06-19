@@ -2,6 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class InputNumber extends React.Component {
+  constructor(props) {
+    super(props)
+    this._ref = null
+  }
+
   handleChange = e => {
     const { max, min, precision, minus } = this.props
     let value = e.target.value.replace(/。/g, '.')
@@ -40,13 +45,49 @@ class InputNumber extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.getInputRef) {
+      this.props.getInputRef({
+        focus: () => {
+          if (this._ref) this._ref.focus()
+        },
+        blur: () => {
+          if (this._ref) this._ref.blur()
+        }
+      })
+    }
+  }
+
   render() {
     const {
-            precision, minus, // eslint-disable-line
+      precision,
+      minus,
+      getInputRef, // eslint-disable-line
+      onInputKeyUp,
+      onInputFocus,
+      onInputKeyDown,
       ...rest
     } = this.props
 
-    return <input {...rest} type='text' onChange={this.handleChange} />
+    return (
+      <input
+        {...rest}
+        type='text'
+        ref={c => {
+          this._ref = c
+        }}
+        onChange={this.handleChange}
+        onKeyUp={e => {
+          onInputKeyUp && onInputKeyUp(e)
+        }}
+        onFocus={e => {
+          onInputFocus && onInputFocus(e)
+        }}
+        onKeyDown={e => {
+          onInputKeyDown && onInputKeyDown(e)
+        }}
+      />
+    )
   }
 }
 
@@ -61,7 +102,12 @@ InputNumber.propTypes = {
   placeholder: PropTypes.string,
   minus: PropTypes.bool, // 是否支持输入负数,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+
+  onInputKeyUp: PropTypes.func,
+  onInputFocus: PropTypes.func,
+  onInputKeyDown: PropTypes.func,
+  getInputRef: PropTypes.func
 }
 
 InputNumber.defaultProps = {
