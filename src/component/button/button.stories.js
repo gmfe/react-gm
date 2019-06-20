@@ -4,9 +4,9 @@ import Button from './index'
 import { observable } from 'mobx'
 
 const store = observable({
-  name: '123',
-  setName() {
-    this.name = '222'
+  count: 0,
+  addCount() {
+    this.count++
   }
 })
 
@@ -20,5 +20,5 @@ storiesOf('Button', module)
     </Button>
   ))
   .add('with mobx', () => (
-    <Button onClick={() => store.setName()}>aaa{store.name}</Button>
+    <Button onClick={() => store.addCount()}>aaa{store.count}</Button>
   ))
