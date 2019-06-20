@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
@@ -153,36 +153,37 @@ Content.propTypes = {
   getDisabled: PropTypes.func.isRequired
 }
 
-class Calendar extends React.Component {
-  constructor(props) {
-    super(props)
-    const { selected } = props
-    this.state = {
-      selected: selected || null, // 调用方的时间
-      oldSelect: selected ? moment(selected) : moment() // 日历内的时间
-    }
+const Calendar = props => {
+  const {
+    selected,
+    onSelect,
+    min,
+    max,
+    disabledDate,
+    className,
+    ...rest
+  } = props
+  const _oldSelect = selected ? moment(selected) : moment()
+
+  // daySelect: Date对象，用于处理选择哪一天
+  // oldselect: Date对象，用于处理选择哪个月
+  const [daySelect, setDaySelect] = useState(selected || null)
+  const [oldSelect, setOldSelect] = useState(_oldSelect)
+
+  useEffect(() => {
+    setDaySelect(props.selected)
+  }, [props.selected])
+
+  const handleSelectDay = m => {
+    props.onSelect(m.toDate())
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selected) {
-      this.setState({
-        selected: nextProps.selected
-      })
-    }
+  const handleChangeMonth = month => {
+    setOldSelect(moment(oldSelect.month(month)))
   }
 
-  handleSelectDay = m => {
-    this.props.onSelect(m.toDate())
-  }
-
-  handleChangeMonth = month => {
-    this.setState({
-      oldSelect: this.state.oldSelect.month(month)
-    })
-  }
-
-  getDisabled = m => {
-    let { min, max, disabledDate } = this.props
+  const getDisabled = m => {
+    let { min, max, disabledDate } = props
     min = min ? moment(min).startOf('day') : null
     max = max ? moment(max).startOf('day') : null
 
@@ -201,36 +202,34 @@ class Calendar extends React.Component {
     return disabled
   }
 
-  render() {
-    const {
-      selected, onSelect, min, max, disabledDate, // eslint-disable-line
-      className,
-      ...rest
-    } = this.props
-    const { oldSelect } = this.state
-
-    return (
-      <div {...rest} className={classNames('gm-calendar', className)}>
-        <Head oldSelect={oldSelect} onChangeMonth={this.handleChangeMonth} />
-        <Week />
-        <Content
-          selected={this.state.selected}
-          oldSelect={oldSelect}
-          onSelectDay={this.handleSelectDay}
-          getDisabled={this.getDisabled}
-        />
-      </div>
-    )
-  }
+  return (
+    <div {...rest} className={classNames('gm-calendar', className)}>
+      <Head oldSelect={oldSelect} onChangeMonth={e => handleChangeMonth(e)} />
+      <Week />
+      <Content
+        selected={daySelect}
+        oldSelect={oldSelect}
+        onSelectDay={e => handleSelectDay(e)}
+        getDisabled={e => getDisabled(e)}
+      />
+    </div>
+  )
 }
 
 Calendar.propTypes = {
+  /** Date对象，表示所选的日期 */
   selected: PropTypes.object,
+  /** 点击选择日期回调，传入参数为Date对象 */
   onSelect: PropTypes.func,
+  /** Date对象，表示可选的最小日期 */
   min: PropTypes.object,
+  /** Date对象，表示可选的最大日期 */
   max: PropTypes.object,
+  /** 自定义日期是否可选。传入参数为Date对象，返回true or false。 有此属性则min max无效。 */
   disabledDate: PropTypes.func,
+  /** 定义样式 */
   className: PropTypes.string,
+  /** 定义样式 */
   style: PropTypes.object
 }
 
