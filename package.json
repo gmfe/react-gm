@@ -111,6 +111,8 @@
     "lodash": "^4.17.11",
     "markdown-it-react-loader": "^1.0.0",
     "mini-css-extract-plugin": "^0.7.0",
+    "mobx": "^5.10.1",
+    "mobx-react": "^6.1.1",
     "moment": "^2.24.0",
     "path": "^0.12.7",
     "postcss-loader": "^3.0.0",

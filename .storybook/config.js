@@ -1,6 +1,8 @@
+import React from 'react'
 import { configure, addDecorator, addParameters } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
 import { withKnobs } from '@storybook/addon-knobs'
+import { Observer } from 'mobx-react'
 import './style.less'
 
 // 引入 react-gn 样式
@@ -38,6 +40,8 @@ addDecorator(withInfo({
 }))
 
 addDecorator(withKnobs)
+
+addDecorator(storeFn => <Observer>{() => storeFn()}</Observer>)
 
 configure(loadStories, module)
 
