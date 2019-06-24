@@ -184,6 +184,9 @@ WithoutCount.propTypes = {
   nextDisabled: PropTypes.bool
 }
 
+/**
+ * 如非必要，推荐使用「pagination_box」组件代替此分页组件
+ * */
 class Pagination extends React.Component {
   render() {
     if (this.props.data.count !== undefined) {
@@ -196,12 +199,17 @@ class Pagination extends React.Component {
 
 Pagination.displayName = 'Pagination'
 Pagination.propTypes = {
+  /** 出于性能考虑，有些接口不会返回「count」 */
   data: PropTypes.shape({
     count: PropTypes.number,
     offset: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired
   }),
+  /** 旧文档：提供 `offset` 和 `limit` 回去，直接用此数据请求后台即可
+   * 当前：组件返回的数据不含count，因此用此数据请求后台会变成无count形式，需要count的组件需要另外处理（如从后台获取）。
+   */
   toPage: PropTypes.func.isRequired,
+  /** 下一页按钮是否禁止(with count下组件会自行判断) */
   nextDisabled: PropTypes.bool
 }
 
