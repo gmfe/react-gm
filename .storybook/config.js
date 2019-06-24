@@ -5,7 +5,8 @@ import { withKnobs } from '@storybook/addon-knobs'
 import { Observer } from 'mobx-react'
 import './style.less'
 
-// 引入 react-gn 样式
+// 引入 react-gm 样式
+import 'gm-xfont/iconfont.css'
 import '../src/index.less'
 
 const req = require.context('../src', true, /\.stories\.js$/)

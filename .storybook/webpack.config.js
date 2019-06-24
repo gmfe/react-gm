@@ -24,6 +24,19 @@ module.exports = ({ config }) => {
   })
 
   config.module.rules.push({
+    test: /(iconfont)\.(woff|woff2|ttf|eot|svg)($|\?)/,
+    use: [
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 1024,
+          name: 'font/[name].[hash:8].[ext]'
+        }
+      }
+    ]
+  })
+
+  config.module.rules.push({
     test: /\.stories\.jsx?$/,
     loaders: [require.resolve('@storybook/addon-storysource/loader')],
     enforce: 'pre'
