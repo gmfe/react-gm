@@ -3,6 +3,7 @@ import { configure, addDecorator, addParameters } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
 import { withKnobs } from '@storybook/addon-knobs'
 import { Observer } from 'mobx-react'
+import { LayoutRoot } from '../src'
 import './style.less'
 
 // 引入 react-gm 样式
@@ -42,7 +43,12 @@ addDecorator(withInfo({
 
 addDecorator(withKnobs)
 
-addDecorator(storeFn => <Observer>{() => storeFn()}</Observer>)
+addDecorator(storeFn => (
+  <React.Fragment>
+    <Observer>{() => storeFn()}</Observer>
+    <LayoutRoot />
+  </React.Fragment>
+))
 
 configure(loadStories, module)
 
