@@ -63,6 +63,9 @@ class InputNumber extends React.Component {
       precision,
       minus,
       getInputRef, // eslint-disable-line
+      onKeyUp,
+      onFocus,
+      onKeyDown,
       onInputKeyUp,
       onInputFocus,
       onInputKeyDown,
@@ -78,12 +81,15 @@ class InputNumber extends React.Component {
         }}
         onChange={this.handleChange}
         onKeyUp={e => {
+          onKeyUp && onKeyUp(e)
           onInputKeyUp && onInputKeyUp(e)
         }}
         onFocus={e => {
+          onFocus && onFocus(e)
           onInputFocus && onInputFocus(e)
         }}
         onKeyDown={e => {
+          onKeyDown && onKeyDown(e)
           onInputKeyDown && onInputKeyDown(e)
         }}
       />
@@ -104,6 +110,10 @@ InputNumber.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
 
+  // onInputKeyUp、onInputFocus、onInputKeyDown为暂时兼容全键盘，后续移除
+  onKeyUp: PropTypes.func,
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
   onInputKeyUp: PropTypes.func,
   onInputFocus: PropTypes.func,
   onInputKeyDown: PropTypes.func,

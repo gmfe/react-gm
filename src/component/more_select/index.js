@@ -92,7 +92,11 @@ MoreSelect.propTypes = {
 
   popoverType: PropTypes.oneOf(['click', 'focus', 'realFocus']),
 
+  // onInputKeyUp、onInputFocus、onInputKeyDown为暂时兼容全键盘，后续移除
   popRef: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
   onInputKeyUp: PropTypes.func,
   onInputFocus: PropTypes.func,
   onInputKeyDown: PropTypes.func
