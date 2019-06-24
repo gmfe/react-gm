@@ -197,6 +197,9 @@ class Base extends React.Component {
       multiple,
       selected,
       isGroupList,
+      onFocus,
+      onKeyUp,
+      onKeyDown,
       onInputKeyUp,
       onInputFocus,
       onInputKeyDown,
@@ -233,12 +236,15 @@ class Base extends React.Component {
               onChange={this.handleChange}
               placeholder={searchPlaceholder}
               onFocus={e => {
+                onFocus && onFocus(e)
                 onInputFocus && onInputFocus(e)
               }}
               onKeyUp={e => {
+                onKeyUp && onKeyUp(e)
                 onInputKeyUp && onInputKeyUp(e)
               }}
               onKeyDown={e => {
+                onKeyDown && onKeyDown(e)
                 onInputKeyDown && onInputKeyDown(e)
               }}
             />
@@ -425,7 +431,11 @@ Base.propTypes = {
   showArrow: PropTypes.bool,
   style: PropTypes.object,
 
+  // onInputKeyUp、onInputFocus、onInputKeyDown为暂时兼容全键盘，后续移除
   popRef: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
   onInputKeyUp: PropTypes.func,
   onInputFocus: PropTypes.func,
   onInputKeyDown: PropTypes.func
