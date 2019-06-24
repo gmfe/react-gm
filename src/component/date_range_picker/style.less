@@ -1,0 +1,42 @@
+.gm-daterangepicker {
+  vertical-align: middle;
+
+  i {
+    position: absolute;
+    right: 5px;
+    top: 6px;
+  }
+
+  &.disabled {
+    color: @gm-color-second;
+    cursor: not-allowed;
+  }
+
+  .gm-daterangepicker-inner {
+    min-width: 120px;
+    height: 30px;
+    padding: 5px 30px 5px 10px;
+    border: 1px solid @gm-border-color;
+    background: white;
+
+    &.disabled {
+      color: @gm-color-second;
+      cursor: not-allowed;
+    }
+  }
+
+  .gm-daterangepicker-clear-btn {
+    display: none;
+    position: absolute;
+    right: 18px;
+    top: 6px;
+    font-size: 16px;
+    color: #555;
+  }
+
+  &:hover {
+    .gm-daterangepicker-clear-btn {
+      display: block;
+    }
+  }
+}
