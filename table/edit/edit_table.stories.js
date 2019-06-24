@@ -94,7 +94,7 @@ const selectData = [
   }
 ]
 
-storiesOf('Table/EditTable', module)
+storiesOf('表格|EditTable', module)
   .add(
     'default',
     () => {

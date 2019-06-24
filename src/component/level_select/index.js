@@ -17,6 +17,7 @@ class LevelSelect extends React.Component {
     }
 
     this.refInput = React.createRef()
+    this.popoverRef = React.createRef()
   }
 
   apiDoFocus = () => {
@@ -161,15 +162,23 @@ class LevelSelect extends React.Component {
     })
   }
 
+  handleSelect = selected => {
+    const { onSelect } = this.props
+
+    this.popoverRef.current.apiDoSetActive(false)
+
+    onSelect(selected)
+  }
+
   renderPopup = () => {
-    const { titles, data, selected, onSelect } = this.props
+    const { titles, data, selected } = this.props
     const { willActiveSelected } = this.state
     return (
       <LevelList
         titles={titles}
         data={data}
         selected={selected}
-        onSelect={onSelect}
+        onSelect={this.handleSelect}
         willActiveSelected={willActiveSelected}
         onWillActiveSelect={this.handleWillActiveSelect}
         className='gm-border-0'
@@ -217,6 +226,7 @@ class LevelSelect extends React.Component {
         disabled={disabled}
         popup={this.renderPopup()}
         type={popoverType}
+        ref={this.popoverRef}
       >
         {children !== undefined ? children : this.renderTarget()}
       </Popover>

@@ -292,7 +292,11 @@
           padding-left: 15px;
         }
 
-        & > input {
+        .gm-input {
+          .gm-react-edit-table-common-input();
+        }
+
+        .gm-input-number {
           .gm-react-edit-table-common-input();
         }
 
@@ -316,6 +320,12 @@
 
             padding-top: 0;
             padding-bottom: 0;
+          }
+        }
+
+        .gm-level-select {
+          input {
+            .gm-react-edit-table-common-input();
           }
         }
       }

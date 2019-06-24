@@ -5,6 +5,16 @@ import { pinYinFilter } from 'gm-util'
 import Base from './base'
 
 class MoreSelect extends React.Component {
+  ref = React.createRef()
+
+  apiDoFocus = () => {
+    this.ref.current.apiDoFocus()
+  }
+
+  apiDoSelectWillActive = () => {
+    this.ref.current.apiDoSelectWillActive()
+  }
+
   handleSelect = selected => {
     const { multiple, onSelect } = this.props
 
@@ -40,11 +50,12 @@ class MoreSelect extends React.Component {
     return (
       <Base
         {...rest}
+        ref={this.ref}
         data={oData}
-        multiple={multiple}
         selected={oSelected}
-        isGroupList={isGroupList}
         onSelect={this.handleSelect}
+        multiple={multiple}
+        isGroupList={isGroupList}
       />
     )
   }
@@ -62,44 +73,13 @@ MoreSelect.renderListFilterDefault = renderListFilterDefault
 MoreSelect.renderListFilterPinYin = renderListFilterPinYin
 
 MoreSelect.propTypes = {
+  // 其他来源于 Base
+  ...Base.propTypes,
+
   // 基本属性
   data: PropTypes.array.isRequired, // [{value, text}]
   selected: PropTypes.oneOfType([PropTypes.object, PropTypes.array]), // item。 非 value，也非引用，原因是想解耦 selected 和 data 的关系。这样当
-  onSelect: PropTypes.func.isRequired, // 返回 item
-  multiple: PropTypes.bool,
-
-  // 状态
-  disabled: PropTypes.bool,
-  placeholder: PropTypes.string,
-
-  // 列表 搜索
-  onSearch: PropTypes.func, // searchValue, data
-  delay: PropTypes.number,
-  searchPlaceholder: PropTypes.string,
-  disabledSearch: PropTypes.bool, // 不需要搜索
-  renderListFilter: PropTypes.func, // 过滤，提供 searchValue 和 data
-  renderListFilterType: PropTypes.oneOf(['default', 'pinyin']), // 也可简单指定 默认的过滤类型
-
-  // 展示
-  renderSelected: PropTypes.func, // 定制已选的区域，提供 selected
-  renderListItem: PropTypes.func, // 定制列表
-
-  // 样式
-  listMaxHeight: PropTypes.string,
-
-  // isGroupList
-  isGroupList: PropTypes.bool,
-
-  popoverType: PropTypes.oneOf(['click', 'focus', 'realFocus']),
-
-  // onInputKeyUp、onInputFocus、onInputKeyDown为暂时兼容全键盘，后续移除
-  popRef: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  onFocus: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onInputKeyUp: PropTypes.func,
-  onInputFocus: PropTypes.func,
-  onInputKeyDown: PropTypes.func
+  onSelect: PropTypes.func.isRequired // 返回 item
 }
 
 MoreSelect.defaultProps = {
@@ -111,7 +91,8 @@ MoreSelect.defaultProps = {
 
   renderListFilterType: 'default',
 
-  popoverType: 'focus'
+  popoverType: 'focus',
+  onKeyDown: _.noop
 }
 
 // 介绍 selected

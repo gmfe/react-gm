@@ -88,6 +88,7 @@ import LazyImg from './component/lazy_img'
 import ToolTip from './component/tool_tip'
 import LevelList from './component/level_list'
 import LevelSelect from './component/level_select'
+import Input from './component/input'
 
 import Validator from './validator'
 
@@ -221,5 +222,6 @@ export {
   Carousel,
   ToolTip,
   LevelList,
-  LevelSelect
+  LevelSelect,
+  Input
 }

@@ -69,7 +69,7 @@ const store = observable({
 const columns = [
   {
     Header: '序号',
-    Cell: row => row.index + 1
+    Cell: cellProps => cellProps.index + 1
   },
   // 常规用法
   {
@@ -92,15 +92,15 @@ const columns = [
   {
     Header: '入库金额',
     accessor: 'total_money',
-    Cell: row => (
+    Cell: cellProps => (
       <div>
-        {row.value} 或者 {row.original.total_money}
+        {cellProps.value} 或者 {cellProps.original.total_money}
       </div>
     )
   }
 ]
 
-storiesOf('Table/Table', module)
+storiesOf('表格|Table', module)
   .addParameters({
     info: {
       text: `
@@ -147,7 +147,7 @@ react-table 文档见 https://github.com/tannerlinsley/react-table/tree/v6
           columns: [
             {
               Header: '序号',
-              Cell: row => row.index + 1
+              Cell: cellProps => cellProps.index + 1
             },
             {
               Header: '建单时间',
@@ -171,9 +171,9 @@ react-table 文档见 https://github.com/tannerlinsley/react-table/tree/v6
             {
               Header: '入库金额',
               accessor: 'total_money',
-              Cell: row => (
+              Cell: cellProps => (
                 <div>
-                  {row.value} 或者 {row.original.total_money}
+                  {cellProps.value} 或者 {cellProps.original.total_money}
                 </div>
               )
             }
@@ -188,7 +188,7 @@ react-table 文档见 https://github.com/tannerlinsley/react-table/tree/v6
       columns={[
         {
           Header: '序号',
-          Cell: row => row.index + 1,
+          Cell: cellProps => cellProps.index + 1,
           sortable: true
         },
         {
