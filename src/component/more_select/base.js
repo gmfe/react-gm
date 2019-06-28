@@ -37,9 +37,12 @@ class Base extends React.Component {
    * @memberof Base
    */
   sequencedData = () => {
-    return !this.props.isGroupList
-      ? this.props.data
-      : this.props.data.reduce((a, b) => a.concat(b.children), [])
+    let arr = []
+    _.forEach(this.doFilterData(), a => {
+      arr = _.concat(arr, a.children)
+    })
+
+    return arr
   }
 
   onInputKeyUp = e => {
@@ -81,9 +84,9 @@ class Base extends React.Component {
           if (!multiple) {
             this.doSelect([currentActiveItem])
           } else {
-            this.handleSelected(selected.map(s => s.value), [
-              currentActiveItem.value
-            ])
+            this.handleSelected(
+              _.concat(selected.map(s => s.value), [currentActiveItem.value])
+            )
             willActiveIndex++
           }
         }
@@ -191,9 +194,25 @@ class Base extends React.Component {
     }
   }
 
+  doFilterData = () => {
+    const { data, renderListFilter, renderListFilterType } = this.props
+    const { searchValue } = this.state
+    let filterData = data
+
+    // 节省过滤时间
+    if (renderListFilter) {
+      filterData = renderListFilter(data, searchValue)
+    } else if (renderListFilterType === 'pinyin') {
+      filterData = renderListFilterPinYin(data, searchValue)
+    } else {
+      filterData = renderListFilterDefault(data, searchValue)
+    }
+
+    return filterData
+  }
+
   renderList = () => {
     const {
-      data,
       multiple,
       selected,
       isGroupList,
@@ -206,23 +225,12 @@ class Base extends React.Component {
       listMaxHeight,
       renderListItem,
       disabledSearch,
-      renderListFilter,
-      searchPlaceholder,
-      renderListFilterType
+      searchPlaceholder
     } = this.props
 
     const { loading, searchValue, willActiveIndex } = this.state
 
-    let filterData = data
-
-    // 节省过滤时间
-    if (renderListFilter) {
-      filterData = renderListFilter(data, searchValue)
-    } else if (renderListFilterType === 'pinyin') {
-      filterData = renderListFilterPinYin(data, searchValue)
-    } else {
-      filterData = renderListFilterDefault(data, searchValue)
-    }
+    let filterData = this.doFilterData()
 
     return (
       <div className='gm-more-select-popup' onKeyDown={this.handleKeyDown}>
