@@ -1,7 +1,7 @@
 module.exports = ({ config }) => {
   // 不知道正则怎么写，用 function 代替
   config.module.rules[0].exclude = function(filepath) {
-    if (filepath.includes('/node_modules/gm-util/')) {
+    if (filepath.includes('/node_modules/gm-util/') || filepath.includes('/node_modules/gm-svg/')) {
       return false
     }
 
