@@ -2,26 +2,28 @@ import _ from 'lodash'
 import Big from 'big.js'
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 class InputNumberV2 extends React.Component {
   constructor(props) {
     super(props)
-    this.__unmount = false
+    this.refInput = React.createRef()
+    this.__isUnmount = false
     this.state = {
       value: InputNumberV2.processValue(props.value)
     }
   }
 
   componentWillUnmount() {
-    this.__unmount = true
+    this.__isUnmount = true
   }
 
   apiDoFocus() {
-    if (this.__unmount) {
+    if (this.__isUnmount) {
       return
     }
 
-    this.refInput.focus()
+    this.refInput.current.focus()
   }
 
   static processValue = value => {
@@ -140,17 +142,23 @@ class InputNumberV2 extends React.Component {
   }
 
   render() {
-    const { value, onChange, max, min, precision, ...rest } = this.props
+    const {
+      value,
+      onChange,
+      max,
+      min,
+      precision,
+      className,
+      ...rest
+    } = this.props
 
     return (
       <input
         {...rest}
         type='text'
-        ref={ref => {
-          this.refInput = ref
-        }}
+        ref={this.refInput}
         value={this.state.value}
-        className='gm-input-number'
+        className={classNames('gm-input-number', className)}
         onChange={this.handleChange}
       />
     )
@@ -163,7 +171,9 @@ InputNumberV2.propTypes = {
   value: PropTypes.number,
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  precision: PropTypes.number // 精确度，保留几位小数
+  precision: PropTypes.number, // 精确度，保留几位小数
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 InputNumberV2.defaultProps = {
