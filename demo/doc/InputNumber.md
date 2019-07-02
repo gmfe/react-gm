@@ -43,7 +43,7 @@ class Component2 extends React.Component {
 :::
 
 ### Props
-- `value (number|string)` 当前值
+- `value (number)` 当前值
 - `max (number)` 最大值
 - `min (number)` 最小值
 - `precision (number)` 精确度，保留几位小数
