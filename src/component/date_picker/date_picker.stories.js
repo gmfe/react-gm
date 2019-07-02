@@ -16,6 +16,7 @@ const inputValueRenderStore = observable(datepickerStatus)
 const disabledStore1 = observable(datepickerStatus)
 const disabledStore2 = observable(datepickerStatus)
 const disabledStore3 = observable(datepickerStatus)
+const disabledStore4 = observable(datepickerStatus)
 const withNoInputStatus = observable(datepickerStatus)
 
 storiesOf('DatePicker', module)
@@ -66,6 +67,15 @@ storiesOf('DatePicker', module)
         onChange={date => disabledStore3.setDate(date)}
       />
     </div>
+  ))
+
+  .add('可清除所选日期', () => (
+    <DatePicker
+      date={disabledStore4.date}
+      placeholder='请选择日期'
+      onChange={date => disabledStore4.setDate(date)}
+      canClear
+    />
   ))
 
   .add('自定义 children', () => (
