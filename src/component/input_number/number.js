@@ -160,7 +160,7 @@ class InputNumberV2 extends React.Component {
 InputNumberV2.propTypes = {
   max: PropTypes.number,
   min: PropTypes.number,
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  value: PropTypes.number,
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   precision: PropTypes.number // 精确度，保留几位小数
