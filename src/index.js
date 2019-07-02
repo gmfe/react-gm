@@ -22,8 +22,8 @@ import {
 
 import Storage from './component/storage'
 import Calendar from './component/calendar'
-import DatePicker from './component/datepicker/datepicker'
-import DateRangePicker from './component/datepicker/daterangepicker'
+import DatePicker from './component/date_picker'
+import DateRangePicker from './component/date_range_picker'
 import Tip from './component/tip'
 import NProgress from './component/nprogress'
 import Progress from './component/progress'
