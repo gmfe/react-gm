@@ -1,21 +1,65 @@
 import _ from 'lodash'
-import Big from 'big.js'
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-class InputNumberV2 extends React.Component {
-  constructor(props) {
-    super(props)
-    this.refInput = React.createRef()
-    this.__isUnmount = false
-    this.state = {
-      value: InputNumberV2.processValue(props.value)
+function processPropsValue(value) {
+  if (value === null) {
+    return ''
+  }
+  return value + ''
+}
+
+function text2Number(value) {
+  if (value === '') {
+    return null
+  }
+  return _.isNaN(parseFloat(value)) ? null : parseFloat(value)
+}
+
+function checkValue(value, precision) {
+  // 正则说明：前置无限【1-9】的数字加小数点加精度个数字，前置为「0」加小数点加精度个数字
+  const reg = new RegExp(
+    '(^[1-9]\\d*(\\.\\d{0,' +
+      precision +
+      '})?$)|(^0(\\.\\d{0,' +
+      precision +
+      '})?$)'
+  )
+
+  if (value.startsWith('-')) {
+    value = value.slice(1)
+  }
+
+  if (value === '') {
+    return true
+  }
+
+  return reg.test(value)
+}
+
+function fixNumber(value, min, max) {
+  if (value !== null) {
+    if (max !== undefined && value > max) {
+      value = max
+    } else if (min !== undefined && value < min) {
+      value = min
     }
   }
 
-  componentWillUnmount() {
-    this.__isUnmount = true
+  return value
+}
+
+class InputNumberV2 extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.refInput = React.createRef()
+    this.__isUnmount = false
+
+    this.state = {
+      value: processPropsValue(props.value)
+    }
   }
 
   apiDoFocus() {
@@ -26,119 +70,47 @@ class InputNumberV2 extends React.Component {
     this.refInput.current.focus()
   }
 
-  static processValue = value => {
-    if (value === null) {
-      return ''
-    }
-    // Big把-0转换为'-0'，其余方式如-0+''，String(-0),都会转换为'0'
-    if (value === 0 && Big(value).valueOf() === '-0') {
-      return '-0'
-    }
-
-    return value + ''
+  componentWillUnmount() {
+    this.__isUnmount = true
   }
 
-  // 拦截onChange后props的变化影响state
-  // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#preferred-solutions
   static getDerivedStateFromProps(props, state) {
-    const pointReg = new RegExp('(^[1-9]\\d*(\\.))')
-
-    if (props.value === null) {
-      // 若当前值为props值为null时，不应修改state的值
-      // 判断当前state是否为'-'，保证不被onChange后为null的props.value改变
-      if (state.value === '-') {
-        return null
+    // 一旦不一致就应该改，要比较 number 形式
+    if (props.value !== text2Number(state.value)) {
+      return {
+        value: processPropsValue(props.value)
       }
-
-      return { value: '' }
-    } else if (pointReg.test(state.value)) {
-      // 当state的最后一位为小数点时，不被props影响
-      return null
     }
 
     return null
   }
 
-  // 返回特殊情况处理后的值，如最大最小
-  getHandleValue = value => {
-    const { max, min } = this.props
-    const compareValue = parseFloat(value)
-    let targetValue = value
-
-    if (max !== undefined && compareValue > max) {
-      targetValue = max
-    } else if (min !== undefined && compareValue < min) {
-      targetValue = min
-    }
-
-    return targetValue
-  }
-
-  // 返回可输出的数据
-  getOutputValue = value => {
-    console.log(value)
-    if (value === '') {
-      return null
-    }
-
-    // 将parseFloat()结果为NaN的转换成null
-    return _.isNaN(parseFloat(value)) ? null : parseFloat(value)
-  }
-
-  // 判断输入是否合法，不含最大最小
-  checkValue = value => {
-    const { precision } = this.props
-    const reg = new RegExp(
-      '(^[1-9]\\d*(\\.\\d{0,' +
-        precision +
-        '})?$)|(^0(\\.\\d{0,' +
-        precision +
-        '})?$)'
-    ) // 正则说明：前置无限【1-9】的数字加小数点加精度个数字，前置为「0」加小数点加精度个数字
-    let testValue = value
-
-    if (value.indexOf('-') === 0) {
-      testValue = value.slice(1)
-    }
-    // 防止清掉负号后判断为false，不另外做正则处理,且空值也为真
-    return testValue === '' || reg.test(testValue)
-  }
-
-  // 设置state和onChange的值
-  handleSetChange = (stateValue, propsValue) => {
-    const { onChange } = this.props
-
-    this.setState({
-      value: InputNumberV2.processValue(stateValue)
-    })
-
-    onChange(propsValue)
-  }
-
   handleChange = e => {
-    const changeValue = e.target.value
+    const { min, max, precision, onChange } = this.props
 
-    // 输入合法才改变输入的值，其他的不做操作
-    if (this.checkValue(changeValue)) {
-      const targetValue = this.getHandleValue(changeValue)
+    const eValue = e.target.value
 
-      // 处理开头为「-」的情况
-      if (changeValue === '-') {
-        this.handleSetChange(this.getHandleValue(changeValue), null)
-      } else if (changeValue.charAt(changeValue.length - 1) === '.') {
-        // 防止数字化处理时把小数点去掉
-        this.handleSetChange(
-          this.getHandleValue(changeValue),
-          this.getOutputValue(targetValue)
-        )
-      } else {
-        // 到此为正常的数据了
-        const validValue = this.getOutputValue(targetValue)
-
-        // props和state都需要处理的数据
-        this.handleSetChange(validValue, validValue)
-      }
+    // 检测是否合法输入
+    if (!checkValue(eValue, precision)) {
+      return
     }
+
+    const newValue = text2Number(eValue)
+
+    const newFixValue = fixNumber(newValue, min, max)
+
+    // 如果数据有被修正，则同步下修改的值到 state
+    if (newFixValue !== newValue) {
+      this.setState({
+        value: processPropsValue(newFixValue)
+      })
+    } else {
+      this.setState({
+        value: eValue
+      })
+    }
+
+    onChange(newValue)
   }
 
   render() {
