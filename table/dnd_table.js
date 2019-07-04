@@ -29,6 +29,7 @@ function TbodyComponent({
   getDroppableStyle,
   getDroppableClass,
   droppableProps,
+  children,
   ...rest
 }) {
   return (
@@ -43,8 +44,10 @@ function TbodyComponent({
             ...provided.droppableProps.style
           }}
         >
-          <ReactTableDefaults.TbodyComponent {...rest} />
-          {provided.placeholder}
+          <ReactTableDefaults.TbodyComponent {...rest}>
+            {children}
+            {provided.placeholder}
+          </ReactTableDefaults.TbodyComponent>
         </div>
       )}
     </Droppable>
