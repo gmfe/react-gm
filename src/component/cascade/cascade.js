@@ -54,7 +54,7 @@ function getMaxDeepPathOfMatchElement(list, searchText) {
   return maxLengthPath
 }
 
-class Cascader extends React.Component {
+class Cascade extends React.Component {
   constructor(props) {
     super(props)
 
@@ -64,7 +64,7 @@ class Cascader extends React.Component {
 
     this.state = {
       selected: props.value ? [...props.value] : [], // 选中状态
-      filterInput: null, // filtrable为true时，输入框的内容
+      filterInput: null, // filterable 为true时，输入框的内容
       data: data
     }
 
@@ -167,7 +167,7 @@ class Cascader extends React.Component {
       this.props.onChange(selected)
     }
 
-    // 选中后关闭cascader
+    // 选中后关闭cascade
     setTimeout(() => {
       window.document.body.click()
     }, 0)
@@ -182,7 +182,7 @@ class Cascader extends React.Component {
   handleInputChange(e) {
     const filterInput = e.target.value
 
-    if (this.props.filtrable) {
+    if (this.props.filterable) {
       this.setState({
         filterInput,
         selected: getMaxDeepPathOfMatchElement(this.state.data, filterInput)
@@ -234,7 +234,7 @@ class Cascader extends React.Component {
 
   inputValueRender() {
     const { filterInput, data } = this.state
-    const { valueRender, filtrable } = this.props
+    const { valueRender, filterable } = this.props
     const selected = this.props.value || this.state.selected
 
     let value = []
@@ -247,7 +247,7 @@ class Cascader extends React.Component {
       })
     }
 
-    if (!filtrable) {
+    if (!filterable) {
       return valueRender
         ? valueRender(value)
         : _.map(value, v => v.name).join(',')
@@ -269,7 +269,7 @@ class Cascader extends React.Component {
 
     return (
       <Flex
-        className={classNames('gm-cascader-list gm-bg', this.props.className)}
+        className={classNames('gm-cascade-list gm-bg', this.props.className)}
         style={this.props.style}
       >
         {_.map(list, (value, i) => (
@@ -333,8 +333,8 @@ class Cascader extends React.Component {
 
     return (
       <div
-        className={classNames('gm-cascader', {
-          'gm-cascader-close': inputValue
+        className={classNames('gm-cascade', {
+          'gm-cascade-close': inputValue
         })}
       >
         <input
@@ -348,7 +348,7 @@ class Cascader extends React.Component {
         {inputValue && (
           <i
             onClick={this.handleClear}
-            className='xfont xfont-close-circle gm-cursor gm-cascader-close-icon'
+            className='xfont xfont-close-circle gm-cursor gm-cascade-close-icon'
           />
         )}
         <i className='gm-arrow-down' />
@@ -373,7 +373,7 @@ class Cascader extends React.Component {
   }
 }
 
-Cascader.propTypes = {
+Cascade.propTypes = {
   // 格式 [{value: 1, name: '深圳', children: [{...}]}]
   data: PropTypes.array.isRequired,
   // [1,2,...]
@@ -388,7 +388,7 @@ Cascader.propTypes = {
   children: PropTypes.any,
   disabled: PropTypes.bool,
   // 是否可搜索
-  filtrable: PropTypes.bool,
+  filterable: PropTypes.bool,
   // 只允许选择子节点，有children则清空输入框
   onlyChildSelectable: PropTypes.bool,
   popoverStyle: PropTypes.object,
@@ -396,11 +396,11 @@ Cascader.propTypes = {
   style: PropTypes.object
 }
 
-Cascader.defaultProps = {
+Cascade.defaultProps = {
   onChange: _.noop,
   inputProps: {},
   disabled: false,
   onlyChildSelectable: false
 }
 
-export default Cascader
+export default Cascade

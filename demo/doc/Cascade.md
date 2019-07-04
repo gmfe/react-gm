@@ -1,15 +1,15 @@
 ---
 imports:
-    import {Cascader, Flex} from '../../src/index.js';
+    import {Cascade, Flex} from '../../src/index.js';
     import _ from 'lodash';
 ---
-## Cascader
+## Cascade
 
-多级选择器 (多选版本[CascaderSelect](#/doc/CascaderSelect))
+多级选择器 (多选版本[CascadeSelect](#/doc/CascadeSelect))
 
 ::: demo 以下example依赖的数据
 ```js
-const cascaderData = [{
+const cascadeData = [{
     value: '0',
     name: '广东',
     children: [{
@@ -88,19 +88,19 @@ const cascaderData = [{
 
 ::: demo 普通用法
 ```js
-class Cascader1 extends React.Component {
+class Cascade1 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             value: ['0', '01'],
-            data: cascaderData
+            data: cascadeData
         };
     }
     
     render() {
         return (
             <div style={{width: '200px'}}>
-                <Cascader
+                <Cascade
                     data={this.state.data}
                     value={this.state.value}
                     onChange={::this.handleChange}
@@ -119,27 +119,27 @@ class Cascader1 extends React.Component {
 ```
 
 ```jsx
-<Cascader1/>
+<Cascade1/>
 ```
 :::
 
 
-::: demo filtrable用法
+::: demo filterable用法
 ```js
-class CascaderFilter extends React.Component {
+class CascadeFilter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             value: ['0', '01'],
-            data: cascaderData
+            data: cascadeData
         };
     }
     
     render() {
         return (
             <div style={{width: '200px'}}>
-                <Cascader
-                    filtrable
+                <Cascade
+                    filterable
                     onlyChildSelectable
                     data={this.state.data}
                     value={this.state.value}
@@ -159,19 +159,19 @@ class CascaderFilter extends React.Component {
 ```
 
 ```jsx
-<CascaderFilter/>
+<CascadeFilter/>
 ```
 :::
 
 
 ::: demo 不提供value
 ```js
-class Cascader2 extends React.Component {
+class Cascade2 extends React.Component {
     render() {
         return (
             <div style={{width: '200px'}}>
-                <Cascader
-                    data={cascaderData}
+                <Cascade
+                    data={cascadeData}
                 />
             </div>
         );
@@ -179,25 +179,25 @@ class Cascader2 extends React.Component {
 }
 ```
 ```jsx
-<Cascader2/>
+<Cascade2/>
 ```
 :::
 
 ::: demo 自定义value的显示
 ```js
-class Cascader3 extends React.Component {
+class Cascade3 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             value: ['0', '01'],
-            data: cascaderData
+            data: cascadeData
         };
     }
     
     render() {
         return (
             <div style={{width: '200px'}}>
-                <Cascader
+                <Cascade
                     data={this.state.data}
                     value={this.state.value}
                     valueRender={(value) => (value && value.length > 0 ? value[value.length - 1].name : '')}
@@ -216,18 +216,18 @@ class Cascader3 extends React.Component {
 }
 ```
 ```jsx
-<Cascader3/>
+<Cascade3/>
 ```
 :::
 
 ::: demo 更改input样式（sm尺寸）
 ```js
-class Cascader4 extends React.Component {
+class Cascade4 extends React.Component {
     render() {
         return (
             <div style={{width: '200px'}}>
-                <Cascader
-                    data={cascaderData}
+                <Cascade
+                    data={cascadeData}
                     inputProps={{className: 'input-sm'}}
                 />
             </div>
@@ -236,18 +236,18 @@ class Cascader4 extends React.Component {
 }
 ```
 ```jsx
-<Cascader4/>
+<Cascade4/>
 ```
 :::
 
 ::: demo 自定义children
 ```js
-class Cascader5 extends React.Component {
+class Cascade5 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             value: ['0', '01'],
-            data: cascaderData
+            data: cascadeData
         };
     }
     
@@ -264,7 +264,7 @@ class Cascader5 extends React.Component {
         
         return (
             <div style={{width: '200px'}}>
-                <Cascader
+                <Cascade
                     data={this.state.data}
                     onChange={::this.handleChange}
                 >
@@ -272,7 +272,7 @@ class Cascader5 extends React.Component {
                         {_.map(value, v => v.name).join(',')}
                         <button className="btn btn-primary btn-xs">add +</button>
                     </div>
-                </Cascader>
+                </Cascade>
             </div>
         );
     }
@@ -286,25 +286,25 @@ class Cascader5 extends React.Component {
 }
 ```
 ```jsx
-<Cascader5/>
+<Cascade5/>
 ```
 :::
 
 ::: demo 禁止选择
 ```js
-class Cascader6 extends React.Component {
+class Cascade6 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             value: [],
-            data: cascaderData
+            data: cascadeData
         };
     }
     
     render() {
         return (
             <div style={{width: '200px'}}>
-                <Cascader
+                <Cascade
                     disabled
                     data={this.state.data}
                     value={this.state.value}
@@ -324,7 +324,7 @@ class Cascader6 extends React.Component {
 ```
 
 ```jsx
-<Cascader6/>
+<Cascade6/>
 ```
 :::
 
@@ -339,4 +339,4 @@ class Cascader6 extends React.Component {
 - `valueRender (func)` 自定义value的展现
 - `children` 自定义children的展现
 - `disabled` 禁止选择
-- `filtrable` 搜索，支持拼音模糊搜索
+- `filterable` 搜索，支持拼音模糊搜索

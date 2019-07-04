@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import Cascader from './cascader'
+import Cascade from './cascade'
 import Flex from '../flex'
 import classNames from 'classnames'
 
@@ -23,15 +23,15 @@ const getPropsSelected = props => {
   }
 }
 
-class CascaderSelect extends React.Component {
+class CascadeSelect extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       selected: getPropsSelected(props),
-      cascaderValue: []
+      cascadeValue: []
     }
 
-    this.refCascaderSelect = null
+    this.refCascadeSelect = null
   }
 
   componentWillReceiveProps(nextProps) {
@@ -42,9 +42,9 @@ class CascaderSelect extends React.Component {
 
   handleKeyDown(event) {
     if (event.key === 'Backspace') {
-      if (this.state.cascaderValue.length > 0) {
+      if (this.state.cascadeValue.length > 0) {
         this.setState({
-          cascaderValue: []
+          cascadeValue: []
         })
       } else if (event.target.value === '') {
         const selected = this.state.selected
@@ -78,7 +78,7 @@ class CascaderSelect extends React.Component {
   handleChange(value) {
     let result = []
     this.setState({
-      cascaderValue: value
+      cascadeValue: value
     })
 
     if (value.length > 0) {
@@ -102,11 +102,11 @@ class CascaderSelect extends React.Component {
 
       this.doSelect(n)
       this.setState({
-        cascaderValue: []
+        cascadeValue: []
       })
       // 单选完后就不继续出浮层
       if (!this.props.multiple) {
-        this.refCascaderSelect.click()
+        this.refCascadeSelect.click()
       }
     }
   }
@@ -121,21 +121,21 @@ class CascaderSelect extends React.Component {
       disabled,
       inputProps,
       valueRender,
-      filtrable,
+      filterable,
       onlyChildSelectable
     } = this.props
     return (
       <div
         className={classNames(
-          'gm-cascader-select gm-border gm-bg gm-position-relative',
+          'gm-cascade-select gm-border gm-bg gm-position-relative',
           {
             disabled: disabled,
             'gm-not-allowed': disabled
           }
         )}
-        ref={ref => (this.refCascaderSelect = ref)}
+        ref={ref => (this.refCascadeSelect = ref)}
       >
-        <Flex className='gm-cascader-select-input'>
+        <Flex className='gm-cascade-select-input'>
           {_.map(this.state.selected, (value, i) => (
             <Flex key={i} alignStart className='selected'>
               {this.props.selectedRender
@@ -152,17 +152,17 @@ class CascaderSelect extends React.Component {
             </Flex>
           ))}
           <Flex flex column onKeyDown={::this.handleKeyDown}>
-            <Cascader
+            <Cascade
               popoverStyle={{
                 marginTop: '5px'
               }}
               valueRender={valueRender}
-              filtrable={filtrable}
+              filterable={filterable}
               onlyChildSelectable={onlyChildSelectable}
               inputProps={inputProps}
               disabled={disabled}
               data={this.props.data}
-              value={this.state.cascaderValue}
+              value={this.state.cascadeValue}
               onChange={::this.handleChange}
             />
           </Flex>
@@ -172,7 +172,7 @@ class CascaderSelect extends React.Component {
   }
 }
 
-CascaderSelect.propTypes = {
+CascadeSelect.propTypes = {
   data: PropTypes.array.isRequired,
   selected: PropTypes.array,
   // 会提供整个value回去
@@ -182,14 +182,14 @@ CascaderSelect.propTypes = {
   inputProps: PropTypes.object,
   disabled: PropTypes.bool,
   valueRender: PropTypes.func,
-  filtrable: PropTypes.bool,
+  filterable: PropTypes.bool,
   onlyChildSelectable: PropTypes.bool
 }
-CascaderSelect.defaultProps = {
+CascadeSelect.defaultProps = {
   inputProps: {},
   disabled: false,
-  filtrable: false,
+  filterable: false,
   onlyChildSelectable: false
 }
 
-export default CascaderSelect
+export default CascadeSelect

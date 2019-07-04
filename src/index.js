@@ -42,8 +42,8 @@ import {
   SheetSelect,
   SheetBatchAction
 } from './component/sheet'
-import Cascader from './component/cascader/cascader'
-import CascaderSelect from './component/cascader/cascader.select'
+import Cascade from './component/cascade/cascade'
+import CascadeSelect from './component/cascade/cascade_select'
 
 import Loading from './component/loading'
 import LoadingChunk from './component/loading/loading_chunk'
@@ -158,8 +158,8 @@ export {
   Flex,
   TimeSpanPicker,
   DropSelect,
-  Cascader,
-  CascaderSelect,
+  Cascade,
+  CascadeSelect,
   Switch,
   Sheet,
   SheetColumn,

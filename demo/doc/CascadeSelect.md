@@ -1,14 +1,14 @@
 ---
 imports:
-    import {CascaderSelect} from '../../src/index';
+    import {CascadeSelect} from '../../src/index';
 ---
-## CascaderSelect
+## CascadeSelect
 
-Cascader 的多选版本。按delete可以删除选择。
+Cascade 的多选版本。按delete可以删除选择。
 
 ::: demo 以下example依赖的数据
 ```js
-const cascaderData = [{
+const cascadeData = [{
     value: '0',
     name: '广东',
     children: [{
@@ -46,13 +46,13 @@ const cascaderData = [{
 
 ::: demo 多选
 ```js
-class CascaderSelect1 extends React.Component {
+class CascadeSelect1 extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            selected: [[cascaderData[0], cascaderData[0].children[0]]],
-            data: cascaderData
+            selected: [[cascadeData[0], cascadeData[0].children[0]]],
+            data: cascadeData
         };
         this.handleSelect = ::this.handleSelect;
     }
@@ -66,7 +66,7 @@ class CascaderSelect1 extends React.Component {
     
     render() {
         return (
-            <CascaderSelect
+            <CascadeSelect
                 multiple
                 data={this.state.data}
                 selected={this.state.selected}
@@ -77,19 +77,19 @@ class CascaderSelect1 extends React.Component {
 }
 ```
 ```jsx
-<CascaderSelect1/>
+<CascadeSelect1/>
 ```
 :::
 
 ::: demo 多选带搜索
 ```js
-class CascaderSelectWithFilter1 extends React.Component {
+class CascadeSelectWithFilter1 extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            selected: [[cascaderData[0], cascaderData[0].children[0]]],
-            data: cascaderData
+            selected: [[cascadeData[0], cascadeData[0].children[0]]],
+            data: cascadeData
         };
         this.handleSelect = ::this.handleSelect;
     }
@@ -103,9 +103,9 @@ class CascaderSelectWithFilter1 extends React.Component {
     
     render() {
         return (
-            <CascaderSelect
+            <CascadeSelect
                 multiple
-                filtrable
+                filterable
                 data={this.state.data}
                 selected={this.state.selected}
                 onSelect={this.handleSelect}
@@ -115,18 +115,18 @@ class CascaderSelectWithFilter1 extends React.Component {
 }
 ```
 ```jsx
-<CascaderSelectWithFilter1/>
+<CascadeSelectWithFilter1/>
 ```
 :::
 
 ::: demo 单选
 ```js
-class CascaderSelect2 extends React.Component {
+class CascadeSelect2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selected: null,
-            data: cascaderData,
+            data: cascadeData,
         };
         this.handleSelect = ::this.handleSelect;
     }
@@ -140,7 +140,7 @@ class CascaderSelect2 extends React.Component {
     
     render() {
         return (
-            <CascaderSelect
+            <CascadeSelect
                 data={this.state.data}
                 selected={this.state.selected}
                 onSelect={this.handleSelect}
@@ -150,18 +150,18 @@ class CascaderSelect2 extends React.Component {
 }
 ```
 ```jsx
-<CascaderSelect2/>
+<CascadeSelect2/>
 ```
 :::
 
 ::: demo 单选带搜索
 ```js
-class CascaderSelectWithFilter2 extends React.Component {
+class CascadeSelectWithFilter2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selected: null,
-            data: cascaderData,
+            data: cascadeData,
         };
         this.handleSelect = ::this.handleSelect;
     }
@@ -175,8 +175,8 @@ class CascaderSelectWithFilter2 extends React.Component {
     
     render() {
         return (
-            <CascaderSelect
-                filtrable
+            <CascadeSelect
+                filterable
                 data={this.state.data}
                 selected={this.state.selected}
                 onSelect={this.handleSelect}
@@ -186,18 +186,18 @@ class CascaderSelectWithFilter2 extends React.Component {
 }
 ```
 ```jsx
-<CascaderSelectWithFilter2/>
+<CascadeSelectWithFilter2/>
 ```
 :::
 
 ::: demo 单选带搜索 & onlyChildSelectable
 ```js
-class CascaderSelectWithFilter3 extends React.Component {
+class CascadeSelectWithFilter3 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selected: null,
-            data: cascaderData,
+            data: cascadeData,
         };
         this.handleSelect = ::this.handleSelect;
     }
@@ -211,8 +211,8 @@ class CascaderSelectWithFilter3 extends React.Component {
     
     render() {
         return (
-            <CascaderSelect
-                filtrable
+            <CascadeSelect
+                filterable
                 onlyChildSelectable
                 data={this.state.data}
                 selected={this.state.selected}
@@ -223,19 +223,19 @@ class CascaderSelectWithFilter3 extends React.Component {
 }
 ```
 ```jsx
-<CascaderSelectWithFilter3/>
+<CascadeSelectWithFilter3/>
 ```
 :::
 
 
 ::: demo 自定义显示
 ```js
-class CascaderSelect3 extends React.Component {
+class CascadeSelect3 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: [[cascaderData[0], cascaderData[0].children[0]]],
-            data: cascaderData
+            selected: [[cascadeData[0], cascadeData[0].children[0]]],
+            data: cascadeData
         };
         this.handleSelect = ::this.handleSelect;
     }
@@ -254,7 +254,7 @@ class CascaderSelect3 extends React.Component {
     
     render() {
         return (
-            <CascaderSelect
+            <CascadeSelect
                 multiple
                 selectedRender={this.selectedRender}
                 data={this.state.data}
@@ -266,19 +266,19 @@ class CascaderSelect3 extends React.Component {
 }
 ```
 ```jsx
-<CascaderSelect3/>
+<CascadeSelect3/>
 ```
 :::
 
 ::: demo 禁止点击and选择
 ```js
-class CascaderSelect4 extends React.Component {
+class CascadeSelect4 extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            selected: [[cascaderData[0], cascaderData[0].children[0]]],
-            data: cascaderData
+            selected: [[cascadeData[0], cascadeData[0].children[0]]],
+            data: cascadeData
         };
         this.handleSelect = ::this.handleSelect;
     }
@@ -292,7 +292,7 @@ class CascaderSelect4 extends React.Component {
     
     render() {
         return (
-            <CascaderSelect
+            <CascadeSelect
                 disabled
                 multiple
                 data={this.state.data}
@@ -304,19 +304,19 @@ class CascaderSelect4 extends React.Component {
 }
 ```
 ```jsx
-<CascaderSelect4/>
+<CascadeSelect4/>
 ```
 :::
 
 ::: demo inputProps的使用
 ```js
-class CascaderSelect5 extends React.Component {
+class CascadeSelect5 extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            selected: [[cascaderData[0], cascaderData[0].children[0]]],
-            data: cascaderData
+            selected: [[cascadeData[0], cascadeData[0].children[0]]],
+            data: cascadeData
         };
         this.handleSelect = ::this.handleSelect;
     }
@@ -330,7 +330,7 @@ class CascaderSelect5 extends React.Component {
     
     render() {
         return (
-            <CascaderSelect
+            <CascadeSelect
                 inputProps={{
                     'placeholder': '请选择...'
                 }}
@@ -344,17 +344,17 @@ class CascaderSelect5 extends React.Component {
 }
 ```
 ```jsx
-<CascaderSelect5/>
+<CascadeSelect5/>
 ```
 :::
 
 ### Props
-- `data (array|isRequired)` 同Cascader的data
-- `selected (array)` Cascader的value的数组版本[Cascader.value]
+- `data (array|isRequired)` 同Cascade的data
+- `selected (array)` Cascade的value的数组版本[Cascade.value]
 - `onSelect (func|isRequired)` 提供和selected一样的数组
 - `multiple (bool)` 是否支持多选
 - `selectRender (func)` 自定义已选择渲染
 - `inputProps (object)` 定义里面input的props
-- `disabled (bool)` 禁用CascaderSelect
+- `disabled (bool)` 禁用CascadeSelect
 - `valueRender (func)` 自定义value的展现
-- `filtrable` 搜索，支持拼音模糊搜索
+- `filterable` 搜索，支持拼音模糊搜索
