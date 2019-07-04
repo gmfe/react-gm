@@ -1,0 +1,49 @@
+.gm-level-select {
+  position: relative;
+  vertical-align: middle;
+
+  input {
+    padding-right: 20px;
+  }
+
+  &.gm-level-select-close {
+    input {
+      padding-right: 35px;
+    }
+  }
+
+  .gm-level-select-close-icon {
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 14px;
+    line-height: 1;
+    top: 3px;
+    right: 22px;
+    bottom: 0;
+    color: @gm-color-third;
+    margin: auto 0;
+  }
+
+  .gm-arrow-up {
+    display: none;
+  }
+
+  &.gm-popover-active {
+    .gm-arrow-up {
+      display: block;
+    }
+
+    .gm-arrow-down {
+      display: none;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .gm-level-select-close-icon {
+      cursor: not-allowed;
+    }
+  }
+}

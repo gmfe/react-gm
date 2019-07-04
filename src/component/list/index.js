@@ -51,27 +51,19 @@ class List extends React.Component {
 }
 
 List.propTypes = {
+  ...Base.propTypes,
+
   // 基本属性
   data: PropTypes.array.isRequired, // value text
   selected: PropTypes.any,
-  onSelect: PropTypes.func,
-  multiple: PropTypes.bool, // true，则 selected 是数组
-
-  // 展示
-  renderItem: PropTypes.func,
-
-  // 滚动
-  isScrollTo: PropTypes.bool,
-
-  isGroupList: PropTypes.bool,
-  className: PropTypes.string,
-  style: PropTypes.object
+  onSelect: PropTypes.func
 }
 
 List.defaultProps = {
   multiple: false,
   onSelect: _.noop,
-  renderItem: item => item.text
+  renderItem: item => item.text,
+  getItemProps: () => ({})
 }
 
 export default List

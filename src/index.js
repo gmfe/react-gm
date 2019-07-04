@@ -86,6 +86,8 @@ import Price from './component/price'
 import List from './component/list'
 import LazyImg from './component/lazy_img'
 import ToolTip from './component/tool_tip'
+import LevelList from './component/level_list'
+import LevelSelect from './component/level_select'
 
 import Validator from './validator'
 
@@ -217,5 +219,7 @@ export {
   List,
   LazyImg,
   Carousel,
-  ToolTip
+  ToolTip,
+  LevelList,
+  LevelSelect
 }

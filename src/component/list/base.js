@@ -57,6 +57,7 @@ class Base extends React.Component {
       renderItem,
       className,
       willActiveIndex,
+      getItemProps,
       ...rest
     } = this.props
 
@@ -81,6 +82,7 @@ class Base extends React.Component {
               sequenceDataIndex++
               return (
                 <div
+                  {...getItemProps(v)}
                   key={v.value}
                   className={classNames('gm-list-item', {
                     active: selected.includes(v.value),
@@ -106,6 +108,9 @@ Base.propTypes = {
   onSelect: PropTypes.func, // 返回数组
   multiple: PropTypes.bool,
 
+  // 事件
+  getItemProps: PropTypes.func,
+
   // 展示
   renderItem: PropTypes.func,
   willActiveIndex: PropTypes.number,
@@ -116,12 +121,6 @@ Base.propTypes = {
   isGroupList: PropTypes.bool, // 在这里仅仅表示数据的类型，对UI有影响而已
   className: PropTypes.string,
   style: PropTypes.object
-}
-
-Base.defaultProps = {
-  multiple: false,
-  onSelect: _.noop,
-  renderItem: item => item.text
 }
 
 export default Base
