@@ -31,6 +31,7 @@ class Base extends React.Component {
     }
   }
 
+  // TODO 不合理
   componentDidUpdate() {
     if (this.props.isScrollTo) {
       this.doScrollToSelected('.will-active')
@@ -75,15 +76,15 @@ class Base extends React.Component {
           className
         )}
       >
-        {_.map(data, group => (
-          <div key={group.label} className='gm-list-group-item'>
+        {_.map(data, (group, gIndex) => (
+          <div key={gIndex + group.label} className='gm-list-group-item'>
             <div className='gm-text-desc gm-list-label'>{group.label}</div>
-            {_.map(group.children, v => {
+            {_.map(group.children, (v, index) => {
               sequenceDataIndex++
               return (
                 <div
+                  key={`${index}_${v.value}`}
                   {...getItemProps(v)}
-                  key={v.value}
                   className={classNames('gm-list-item', {
                     active: selected.includes(v.value),
                     'will-active': willActiveIndex === sequenceDataIndex
@@ -121,6 +122,14 @@ Base.propTypes = {
   isGroupList: PropTypes.bool, // 在这里仅仅表示数据的类型，对UI有影响而已
   className: PropTypes.string,
   style: PropTypes.object
+}
+
+// 有直接调用 Base 的地方，估需要 defaultProps
+Base.defaultProps = {
+  multiple: false,
+  onSelect: _.noop,
+  renderItem: item => item.text,
+  getItemProps: () => ({})
 }
 
 export default Base

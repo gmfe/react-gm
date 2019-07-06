@@ -15,10 +15,19 @@ class LevelSelect extends React.Component {
       willActiveSelected: props.selected,
       search: ''
     }
+
+    this.refInput = React.createRef()
+  }
+
+  apiDoFocus = () => {
+    this.refInput.current.focus()
   }
 
   apiDoSelectWillActive = () => {
-    // TODO
+    const { onSelect } = this.props
+    const { willActiveSelected } = this.state
+
+    onSelect(willActiveSelected)
   }
 
   getLevel = () => {
@@ -179,7 +188,8 @@ class LevelSelect extends React.Component {
         })}
       >
         <input
-          disabled
+          ref={this.refInput}
+          disabled={disabled}
           type='text'
           value={inputValue}
           onChange={this.handleInputChange}
@@ -199,10 +209,15 @@ class LevelSelect extends React.Component {
   }
 
   render() {
-    const { disabled, children } = this.props
+    const { disabled, children, popoverType } = this.props
 
     return (
-      <Popover animName disabled={disabled} popup={this.renderPopup()}>
+      <Popover
+        animName
+        disabled={disabled}
+        popup={this.renderPopup()}
+        type={popoverType}
+      >
         {children !== undefined ? children : this.renderTarget()}
       </Popover>
     )
@@ -222,6 +237,9 @@ LevelSelect.propTypes = {
 
   // 仅仅能选择叶子
   onlySelectLeaf: PropTypes.bool,
+
+  popoverType: PropTypes.oneOf(['focus', 'realFocus']),
+
   // 事件
   onKeyDown: PropTypes.func
 }
