@@ -9,11 +9,16 @@ import './style.less'
 // 引入 react-gm 样式
 import 'gm-xfont/iconfont.css'
 import '../src/index.less'
+// 引入 react-table 样式
+import 'react-table/react-table.css'
+import '../table/style.less'
 
 const req = require.context('../src', true, /\.stories\.js$/)
 
 function loadStories () {
   req.keys().forEach(filename => req(filename))
+
+  import('../table/table.stories.js')
 }
 
 addParameters({
@@ -26,7 +31,6 @@ addDecorator(withInfo({
   inline: true,
   header: false,
   styles: stylesheet => {
-    console.log(stylesheet)
     return {
       ...stylesheet,
       infoBody: {

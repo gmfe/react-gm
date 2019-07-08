@@ -98,6 +98,7 @@
     "file-loader": "^3.0.1",
     "fs": "0.0.2",
     "gm-service": "^1.7.14",
+    "gm-svg": "^0.3.17",
     "gm-util": "^5.10.4",
     "gm-webpack": "^1.0.14",
     "gm-xfont": "^1.0.79",

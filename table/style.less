@@ -2,6 +2,7 @@
 @import "../src/less/mixins.less";
 @import "../src/less/custom.less";
 @import "../src/css/variables.less";
+@import "./cell.less";
 
 .gm-react-table.ReactTable {
   .rt-resizer {
@@ -35,7 +36,11 @@
 
     .rt-tr {
       min-height: 60px;
-      align-items: center;
+      .rt-td {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
     }
 
     .rt-th,
@@ -167,18 +172,18 @@
   }
 
   &.-striped {
-    .rt-tr.-odd {
+    .rt-tr.-odd .rt-td {
       background-color: white;
     }
 
-    .rt-tr.-even {
+    .rt-tr.-even .rt-td {
       background-color: #f5f5f7;
     }
   }
 
   &.-highlight {
     .rt-tbody {
-      .rt-tr:hover {
+      .rt-tr:hover .rt-td {
         background-color: #e7f5e8;
       }
     }
@@ -228,5 +233,109 @@
     right: 1px;
     background: #fff;
     z-index: 20;
+  }
+}
+
+.gm-react-table-sticky {
+  .rt-thead {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+
+  .rt-tbody {
+    overflow: visible;
+    flex: 1 0 auto;
+  }
+
+  &-th-fixed,
+  &-td-fixed {
+    position: sticky !important;
+    z-index: 1;
+    &.-odd {
+      background-color: white;
+    }
+    &.-even {
+      background-color: #f5f5f7;
+    }
+
+    &-left {
+      left: 0;
+    }
+    &-right {
+      right: 0;
+    }
+  }
+
+  &-td-fixed-left {
+    border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+  &-td-fixed-right {
+    border-left: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+}
+
+.gm-react-edit-table.ReactTable {
+  &.-striped {
+    .rt-tbody {
+      .rt-tr .rt-td {
+        background-color: white;
+        .gm-react-edit-table-cell-padding();
+
+        &:first-child,
+        &:first-child {
+          padding-left: 15px;
+        }
+
+        & > input {
+          .gm-react-edit-table-common-input();
+        }
+
+        .gm-more-select {
+          .gm-more-select-selected {
+            .gm-react-edit-table-common-input();
+
+            padding-top: 0;
+            padding-bottom: 0;
+
+            .gm-more-select-clear-btn {
+              padding: 0;
+              right: 5px;
+            }
+          }
+        }
+
+        .gm-datepicker {
+          .gm-datepicker-inner {
+            .gm-react-edit-table-common-input();
+
+            padding-top: 0;
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  // action
+  .gm-react-edit-table-action-add {
+    width: 18px;
+    height: 18px;
+    color: rgba(106, 170, 70, 0.3);
+    margin-right: 18px;
+
+    &:hover {
+      color: rgba(106, 170, 70, 1);
+    }
+  }
+
+  .gm-react-edit-table-action-delete {
+    width: 18px;
+    height: 18px;
+    color: rgba(219, 0, 0, 0.3);
+
+    &:hover {
+      color: rgba(219, 0, 0, 1);
+    }
   }
 }
