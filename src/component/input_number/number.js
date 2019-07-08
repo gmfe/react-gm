@@ -110,7 +110,7 @@ class InputNumberV2 extends React.Component {
       })
     }
 
-    onChange(newValue)
+    onChange(newFixValue)
   }
 
   render() {
@@ -149,6 +149,7 @@ InputNumberV2.propTypes = {
 }
 
 InputNumberV2.defaultProps = {
+  value: null,
   precision: 2
 }
 
