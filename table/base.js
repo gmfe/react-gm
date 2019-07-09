@@ -8,25 +8,21 @@ import { findDOMNode } from 'react-dom'
 import EVENT_TYPE from '../src/event_type'
 
 class BaseTable extends React.Component {
-  constructor() {
-    super()
-    this.throttleDoScroll = _.throttle(this.doScroll, 200)
-  }
-
-  doScroll = () => {
+  refTable = React.createRef()
+  doScroll = _.throttle(() => {
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
-  }
+  }, 200)
 
   componentDidMount() {
     findDOMNode(this)
       .getElementsByClassName('rt-table')[0]
-      .addEventListener('scroll', this.throttleDoScroll)
+      .addEventListener('scroll', this.doScroll)
   }
 
   componentWillUnmount() {
     findDOMNode(this)
       .getElementsByClassName('rt-table')[0]
-      .removeEventListener('scroll', this.throttleDoScroll)
+      .removeEventListener('scroll', this.doScroll)
   }
 
   processItem = item => {
@@ -88,6 +84,7 @@ class BaseTable extends React.Component {
 
     return (
       <ReactTable
+        ref={this.refTable}
         {...rest}
         columns={newColumns}
         data={data}
@@ -96,18 +93,23 @@ class BaseTable extends React.Component {
         className={classNames('gm-react-table -striped -highlight', className)}
         style={newStyle}
         showPagination={showPagination}
-        ref={ref => (this.baseTable = ref)}
       />
     )
   }
 }
 
 BaseTable.defaultProps = {
+  /** 不使用自带的分页组件 */
   showPagination: false,
-  keyField: 'value',
+  /** 目前没有意义 */
   defaultPageSize: 10,
+  /** 没有数据的文案 */
   noDataText: getLocale('table', 'noDataText'),
-  loadingText: getLocale('table', 'loadingText')
+  /** 加载中的文案 */
+  loadingText: getLocale('table', 'loadingText'),
+
+  /** SelectTable 用 */
+  keyField: 'value'
 }
 
 export default BaseTable

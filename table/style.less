@@ -1,8 +1,8 @@
-@import "../src/less/variables.less";
-@import "../src/less/mixins.less";
-@import "../src/less/custom.less";
-@import "../src/css/variables.less";
-@import "./cell.less";
+@import '../src/less/variables.less';
+@import '../src/less/mixins.less';
+@import '../src/less/custom.less';
+@import '../src/css/variables.less';
+@import './cell.less';
 
 .gm-react-table.ReactTable {
   .rt-resizer {
@@ -34,18 +34,19 @@
     // todo overflow: visible造成不能固定表头。观察用回react-table自带的overflow： auto会怎样
     // overflow: visible;
 
+    .rt-th,
+    .rt-td {
+      border-right: none;
+    }
+
     .rt-tr {
       min-height: 60px;
+
       .rt-td {
         display: flex;
         justify-content: center;
         flex-direction: column;
       }
-    }
-
-    .rt-th,
-    .rt-td {
-      border-right: none;
     }
   }
 
@@ -58,7 +59,7 @@
       position: relative;
 
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         right: -8px;
         bottom: 8px;
@@ -71,7 +72,7 @@
       }
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         right: -8px;
         bottom: -1px;
@@ -124,10 +125,6 @@
       min-height: 40px;
     }
 
-    .rt-tr .rt-th {
-      background: #f2f3f8;
-    }
-
     .rt-th,
     .rt-td {
       &:focus {
@@ -137,6 +134,10 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+
+    .rt-tr .rt-th {
+      background: #f2f3f8;
     }
 
     // 调整后不会溢出，所以不做 overflow，排序按钮就不会被 hidden 了
@@ -211,7 +212,7 @@
 
       &::after {
         bottom: 1px;
-        content: " ";
+        content: ' ';
         position: absolute;
         margin-left: -4px;
         border-left: 4px solid transparent;
@@ -252,9 +253,11 @@
   &-td-fixed {
     position: sticky !important;
     z-index: 1;
+
     &.-odd {
       background-color: white;
     }
+
     &.-even {
       background-color: #f5f5f7;
     }
@@ -262,6 +265,7 @@
     &-left {
       left: 0;
     }
+
     &-right {
       right: 0;
     }
@@ -270,6 +274,7 @@
   &-td-fixed-left {
     border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
   }
+
   &-td-fixed-right {
     border-left: 1px solid rgba(0, 0, 0, 0.05) !important;
   }

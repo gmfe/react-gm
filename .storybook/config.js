@@ -14,11 +14,11 @@ import 'react-table/react-table.css'
 import '../table/style.less'
 
 const req = require.context('../src', true, /\.stories\.js$/)
+const reqTable = require.context('../table', true, /\.stories\.js$/)
 
-function loadStories () {
+function loadStories() {
   req.keys().forEach(filename => req(filename))
-
-  import('../table/table.stories.js')
+  reqTable.keys().forEach(filename => reqTable(filename))
 }
 
 addParameters({
@@ -27,23 +27,26 @@ addParameters({
   }
 })
 
-addDecorator(withInfo({
-  inline: true,
-  header: false,
-  styles: stylesheet => {
-    return {
-      ...stylesheet,
-      infoBody: {
-        ...stylesheet.infoBody,
-        padding: '10px'
-      },
-      source: {
-        ...stylesheet.source,
-        marginBottom: '10px'
+addDecorator(
+  withInfo({
+    inline: true,
+    header: false,
+    styles: stylesheet => {
+      return {
+        ...stylesheet,
+        infoBody: {
+          ...stylesheet.infoBody,
+          padding: '10px',
+          fontWeight: 'normal'
+        },
+        source: {
+          ...stylesheet.source,
+          marginBottom: '10px'
+        }
       }
     }
-  }
-}))
+  })
+)
 
 addDecorator(withKnobs)
 
@@ -55,4 +58,3 @@ addDecorator(storeFn => (
 ))
 
 configure(loadStories, module)
-

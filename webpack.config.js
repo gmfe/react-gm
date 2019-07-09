@@ -1,6 +1,6 @@
 const webpackConfig = require('gm-webpack/webpack.config.js')
 const HappyPack = require('happypack')
-const happyThreadPool = HappyPack.ThreadPool({size: 6})
+const happyThreadPool = HappyPack.ThreadPool({ size: 6 })
 
 const config = webpackConfig({
   publicPath: '/react-gm/build/',
@@ -15,15 +15,20 @@ config.module.rules.push({
   loader: 'happypack/loader?id=md'
 })
 
-config.plugins.push(new HappyPack({
-  id: 'md',
-  threadPool: happyThreadPool,
-  loaders: [{
-    path: 'babel-loader',
-    query: {
-      cacheDirectory: true
-    }
-  }, 'markdown-it-react-loader']
-}))
+config.plugins.push(
+  new HappyPack({
+    id: 'md',
+    threadPool: happyThreadPool,
+    loaders: [
+      {
+        path: 'babel-loader',
+        query: {
+          cacheDirectory: true
+        }
+      },
+      'markdown-it-react-loader'
+    ]
+  })
+)
 
 module.exports = config

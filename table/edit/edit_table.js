@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import Table from './table'
-import FixedColumnsTableHOC from './fixed_columns_table'
+import Table from '../table'
+import FixedColumnsTableHOC from '../hoc/fixed_columns_table'
 
 const FixedColumnsTable = FixedColumnsTableHOC(Table)
 
