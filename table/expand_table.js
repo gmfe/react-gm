@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BaseTable from './base'
+import BaseTable from './table/base'
 import _ from 'lodash'
+import Table from './table'
 
 class ExpandTable extends React.Component {
   constructor(props) {
@@ -11,8 +12,12 @@ class ExpandTable extends React.Component {
     }
   }
 
-  handleExpandAll = isAllExpanded => {
+  handleExpandAll = () => {
     const { data } = this.props
+    const { expanded } = this.state
+
+    // 注意此逻辑
+    const isAllExpanded = _.filter(expanded, v => v).length === data.length
 
     if (isAllExpanded) {
       this.setState({
@@ -37,10 +42,7 @@ class ExpandTable extends React.Component {
     const isAllExpanded = _.filter(expanded, v => v).length === data.length
 
     return (
-      <div
-        className='gm-cursor'
-        onClick={this.handleExpandAll.bind(this, isAllExpanded)}
-      >
+      <div className='gm-cursor' onClick={this.handleExpandAll}>
         {isAllExpanded ? (
           <i className='xfont xfont-minus' />
         ) : (
@@ -93,9 +95,7 @@ class ExpandTable extends React.Component {
 }
 
 ExpandTable.propTypes = {
-  loading: PropTypes.bool,
-  data: PropTypes.array.isRequired,
-  columns: PropTypes.array.isRequired,
+  ...Table.propTypes,
   SubComponent: PropTypes.func.isRequired
 }
 

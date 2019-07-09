@@ -1,12 +1,12 @@
 import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { getLocale } from '../src/locales'
+import { getLocale } from '../../src/locales'
 import _ from 'lodash'
-import { SortHeader } from './util'
+import { SortHeader } from '../util'
 import ReactTable from 'react-table'
 import { findDOMNode } from 'react-dom'
-import EVENT_TYPE from '../src/event_type'
+import EVENT_TYPE from '../../src/event_type'
 
 class BaseTable extends React.Component {
   refTable = React.createRef()
@@ -111,8 +111,8 @@ BaseTable.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   // 额外，忽略，不一一列了，参考 ReactTable
-  defaultPageSize: PropTypes.number,
-  showPagination: PropTypes.bool
+  showPagination: PropTypes.bool,
+  defaultPageSize: PropTypes.number
 }
 
 BaseTable.defaultProps = {
@@ -123,10 +123,7 @@ BaseTable.defaultProps = {
   /** 没有数据的文案 */
   noDataText: getLocale('table', 'noDataText'),
   /** 加载中的文案 */
-  loadingText: getLocale('table', 'loadingText'),
-
-  /** SelectTable 用 */
-  keyField: 'value'
+  loadingText: getLocale('table', 'loadingText')
 }
 
 export default BaseTable

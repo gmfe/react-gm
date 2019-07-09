@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Table, TableUtil } from './'
-import { observable } from 'mobx'
+import { Table, TableUtil } from '../index'
+import { observable } from 'mobx/lib/mobx'
 import _ from 'lodash'
 
 const { SortHeader } = TableUtil

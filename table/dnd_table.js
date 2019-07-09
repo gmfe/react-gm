@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BaseTable from './base'
+import BaseTable from './table/base'
 import { ReactTableDefaults } from 'react-table'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 

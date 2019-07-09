@@ -21,8 +21,11 @@ function fixedColumnsTableHOC(Component) {
       // 检测
       if (process.env.NODE_ENV !== 'production') {
         _.each(props.columns, column => {
-          if (column.fixed && !column.width && !column.minWidth) {
-            console.error(`column with fixed need width or minWidth`)
+          if (column.fixed && !column.width) {
+            console.error('column with fixed need width')
+          } else if (!column.width && !column.minWidth) {
+            // 这个警告即可
+            console.warn('other column need width or minWidth', column)
           }
         })
       }

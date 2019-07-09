@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Popover } from '../src'
 import { SvgShanchumorenHuaban, SvgTianjiamorenHuaban } from 'gm-svg'
+import _ from 'lodash'
 
 const OperationHeader = (
   <div className='text-center'>
@@ -45,6 +46,7 @@ SortHeader.propTypes = {
   className: PropTypes.string
 }
 
+// TODO
 const EditTableOperation = props => {
   return (
     <OperationCell>
@@ -71,8 +73,28 @@ const EditTableOperation = props => {
 }
 
 EditTableOperation.propTypes = {
-  onAddRow: PropTypes.func.isRequired,
-  onDeleteRow: PropTypes.func.isRequired
+  onAddRow: PropTypes.func,
+  onDeleteRow: PropTypes.func
 }
 
-export { OperationHeader, OperationCell, SortHeader, EditTableOperation }
+function getColumnKey(column) {
+  // 如果是字符串就取 accessor
+  if (_.isString(column.accessor)) {
+    return column.accessor
+  }
+  // 如果 accessor 是函数，则一定会提供 id，否则 react-table 会报错
+  else if (_.isFunction(column.accessor) && column.id) {
+    return column.id
+  }
+
+  // 其他情况没法获得 key
+  return null
+}
+
+export {
+  getColumnKey,
+  OperationHeader,
+  OperationCell,
+  SortHeader,
+  EditTableOperation
+}

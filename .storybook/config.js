@@ -11,7 +11,7 @@ import 'gm-xfont/iconfont.css'
 import '../src/index.less'
 // 引入 react-table 样式
 import 'react-table/react-table.css'
-import '../table/style.less'
+import '../table/table/style.less'
 
 const req = require.context('../src', true, /\.stories\.js$/)
 const reqTable = require.context('../table', true, /\.stories\.js$/)
