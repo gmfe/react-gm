@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 import { getLocale } from '../src/locales'
 import _ from 'lodash'
 import { SortHeader } from './util'
@@ -9,19 +10,31 @@ import EVENT_TYPE from '../src/event_type'
 
 class BaseTable extends React.Component {
   refTable = React.createRef()
-  doScroll = _.throttle(() => {
+
+  doScroll = _.debounce(() => {
+    console.log('scroll')
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
-  }, 200)
+  }, 500)
 
   componentDidMount() {
-    findDOMNode(this)
+    const dom = findDOMNode(this.refTable.current)
+    dom
       .getElementsByClassName('rt-table')[0]
+      .addEventListener('scroll', this.doScroll)
+
+    dom
+      .getElementsByClassName('rt-tbody')[0]
       .addEventListener('scroll', this.doScroll)
   }
 
   componentWillUnmount() {
-    findDOMNode(this)
+    const dom = findDOMNode(this.refTable.current)
+    dom
       .getElementsByClassName('rt-table')[0]
+      .removeEventListener('scroll', this.doScroll)
+
+    dom
+      .getElementsByClassName('rt-tbody')[0]
       .removeEventListener('scroll', this.doScroll)
   }
 
@@ -58,7 +71,6 @@ class BaseTable extends React.Component {
       defaultPageSize,
       showPagination,
       className,
-      style,
       ...rest
     } = this.props
 
@@ -76,12 +88,6 @@ class BaseTable extends React.Component {
       }
     })
 
-    const newStyle = Object.assign({}, style)
-
-    if (newStyle.height) {
-      newStyle.overflow = 'auto'
-    }
-
     return (
       <ReactTable
         ref={this.refTable}
@@ -89,13 +95,24 @@ class BaseTable extends React.Component {
         columns={newColumns}
         data={data}
         defaultPageSize={defaultPageSize}
-        pageSize={Math.max(data.length, 1)}
-        className={classNames('gm-react-table -striped -highlight', className)}
-        style={newStyle}
+        pageSize={Math.max(data.length, 1)} // 展示完整，传多少显示多少。避免被 pageSize 截断
         showPagination={showPagination}
+        className={classNames('gm-react-table -striped -highlight', className)}
       />
     )
   }
+}
+
+BaseTable.propTypes = {
+  // 主要
+  loading: PropTypes.bool,
+  data: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  // 额外，忽略，不一一列了，参考 ReactTable
+  defaultPageSize: PropTypes.number,
+  showPagination: PropTypes.bool
 }
 
 BaseTable.defaultProps = {

@@ -54,7 +54,7 @@ const store = observable({
       }
     }
   ],
-  sortTimeType: 'asc',
+  sortTimeType: null,
   sortTime() {
     this.data = _.sortBy(this.data, 'submit_time')
     if (this.sortTimeType === 'asc') {
@@ -186,6 +186,11 @@ react-table 文档见 https://github.com/tannerlinsley/react-table/tree/v6
     <Table
       data={store.data}
       columns={[
+        {
+          Header: '序号',
+          Cell: row => row.index + 1,
+          sortable: true
+        },
         {
           Header: (
             <SortHeader

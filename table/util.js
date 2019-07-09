@@ -16,6 +16,10 @@ const OperationCell = function(props) {
   )
 }
 
+OperationCell.propTypes = {
+  className: PropTypes.string
+}
+
 class SortHeader extends React.Component {
   render() {
     const { className, type, ...rest } = this.props
@@ -37,10 +41,11 @@ class SortHeader extends React.Component {
 }
 
 SortHeader.propTypes = {
-  type: PropTypes.oneOf(['asc', 'desc'])
+  type: PropTypes.oneOf(['asc', 'desc']),
+  className: PropTypes.string
 }
 
-const EditTableOperation = function(props) {
+const EditTableOperation = props => {
   return (
     <OperationCell>
       <Popover
@@ -63,6 +68,11 @@ const EditTableOperation = function(props) {
       </Popover>
     </OperationCell>
   )
+}
+
+EditTableOperation.propTypes = {
+  onAddRow: PropTypes.func.isRequired,
+  onDeleteRow: PropTypes.func.isRequired
 }
 
 export { OperationHeader, OperationCell, SortHeader, EditTableOperation }
