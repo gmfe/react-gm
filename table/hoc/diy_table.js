@@ -1,9 +1,9 @@
 import React from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
-import { Checkbox } from '../src/component/checkbox'
-import Storage from '../src/component/storage'
-import Flex from '../src/component/flex'
+import { Checkbox } from '../../src/component/checkbox'
+import Storage from '../../src/component/storage'
+import Flex from '../../src/component/flex'
 import { contains } from 'gm-util'
 import { findDOMNode } from 'react-dom'
 

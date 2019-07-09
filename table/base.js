@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 import { getLocale } from '../src/locales'
 import _ from 'lodash'
 import { SortHeader } from './util'
@@ -8,25 +9,33 @@ import { findDOMNode } from 'react-dom'
 import EVENT_TYPE from '../src/event_type'
 
 class BaseTable extends React.Component {
-  constructor() {
-    super()
-    this.throttleDoScroll = _.throttle(this.doScroll, 200)
-  }
+  refTable = React.createRef()
 
-  doScroll = () => {
+  doScroll = _.debounce(() => {
+    console.log('scroll')
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
-  }
+  }, 500)
 
   componentDidMount() {
-    findDOMNode(this)
+    const dom = findDOMNode(this.refTable.current)
+    dom
       .getElementsByClassName('rt-table')[0]
-      .addEventListener('scroll', this.throttleDoScroll)
+      .addEventListener('scroll', this.doScroll)
+
+    dom
+      .getElementsByClassName('rt-tbody')[0]
+      .addEventListener('scroll', this.doScroll)
   }
 
   componentWillUnmount() {
-    findDOMNode(this)
+    const dom = findDOMNode(this.refTable.current)
+    dom
       .getElementsByClassName('rt-table')[0]
-      .removeEventListener('scroll', this.throttleDoScroll)
+      .removeEventListener('scroll', this.doScroll)
+
+    dom
+      .getElementsByClassName('rt-tbody')[0]
+      .removeEventListener('scroll', this.doScroll)
   }
 
   processItem = item => {
@@ -62,7 +71,6 @@ class BaseTable extends React.Component {
       defaultPageSize,
       showPagination,
       className,
-      style,
       ...rest
     } = this.props
 
@@ -80,34 +88,45 @@ class BaseTable extends React.Component {
       }
     })
 
-    const newStyle = Object.assign({}, style)
-
-    if (newStyle.height) {
-      newStyle.overflow = 'auto'
-    }
-
     return (
       <ReactTable
+        ref={this.refTable}
         {...rest}
         columns={newColumns}
         data={data}
         defaultPageSize={defaultPageSize}
-        pageSize={Math.max(data.length, 1)}
-        className={classNames('gm-react-table -striped -highlight', className)}
-        style={newStyle}
+        pageSize={Math.max(data.length, 1)} // 展示完整，传多少显示多少。避免被 pageSize 截断
         showPagination={showPagination}
-        ref={ref => (this.baseTable = ref)}
+        className={classNames('gm-react-table -striped -highlight', className)}
       />
     )
   }
 }
 
+BaseTable.propTypes = {
+  // 主要
+  loading: PropTypes.bool,
+  data: PropTypes.array.isRequired,
+  columns: PropTypes.array.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  // 额外，忽略，不一一列了，参考 ReactTable
+  defaultPageSize: PropTypes.number,
+  showPagination: PropTypes.bool
+}
+
 BaseTable.defaultProps = {
+  /** 不使用自带的分页组件 */
   showPagination: false,
-  keyField: 'value',
+  /** 目前没有意义 */
   defaultPageSize: 10,
+  /** 没有数据的文案 */
   noDataText: getLocale('table', 'noDataText'),
-  loadingText: getLocale('table', 'loadingText')
+  /** 加载中的文案 */
+  loadingText: getLocale('table', 'loadingText'),
+
+  /** SelectTable 用 */
+  keyField: 'value'
 }
 
 export default BaseTable

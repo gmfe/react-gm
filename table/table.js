@@ -13,7 +13,9 @@ class Table extends React.Component {
 Table.propTypes = {
   loading: PropTypes.bool,
   data: PropTypes.array.isRequired,
-  columns: PropTypes.array.isRequired
+  columns: PropTypes.array.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.string
 }
 
 export default Table
