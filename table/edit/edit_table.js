@@ -1,23 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Table from '../table'
-import FixedColumnsTableHOC from '../hoc/fixed_columns_table'
-
-const FixedColumnsTable = FixedColumnsTableHOC(Table)
 
 const EditTable = props => {
   const { className, ...rest } = props
   return (
-    <FixedColumnsTable
-      {...rest}
-      className={classNames(className, 'gm-react-edit-table')}
-    />
+    <Table {...rest} className={classNames('gm-react-edit-table', className)} />
   )
 }
 
 EditTable.propTypes = {
-  className: PropTypes.string
+  ...Table.propTypes
 }
 
 export default EditTable

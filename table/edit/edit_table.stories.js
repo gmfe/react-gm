@@ -1,11 +1,19 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { EditTable, TableUtil } from '../index'
-import { DatePicker, InputNumberV2, MoreSelect } from '../../src'
+import {
+  EditTable,
+  TableUtil,
+  fixedColumnsTableHOC,
+  diyTableHOC
+} from '../index'
+import { InputNumberV2, MoreSelect } from '../../src'
 import { observable } from 'mobx/lib/mobx'
 import _ from 'lodash'
 
 const { OperationHeader, EditTableOperation } = TableUtil
+
+const FixColumnsEditTable = fixedColumnsTableHOC(EditTable)
+const DiyEditTable = diyTableHOC(EditTable)
 
 const store = observable({
   data: [
@@ -86,110 +94,140 @@ const selectData = [
   }
 ]
 
-storiesOf('Table/EditTable', module).add('edit Table', () => {
-  return (
-    <EditTable
-      data={store.data}
-      style={{ maxHeight: '400px' }}
-      columns={[
-        {
-          Header: '序号',
-          id: 'number',
-          fixed: 'left',
-          minWidth: 50,
-          Cell: ({ index }) => index + 1
-        },
-        {
-          Header: OperationHeader,
-          id: 'action',
-          fixed: 'left',
-          minWidth: 100,
-          Cell: ({ index }) => (
-            <EditTableOperation
-              onAddRow={() => console.log('增加一行', index)}
-              onDeleteRow={() => console.log('删除一行', index)}
-            />
-          )
-        },
-        {
-          Header: '建单时间',
-          id: 'submit_time',
-          minWidth: 140,
-          Cell: ({ index, original }) => (
-            <DatePicker
-              date={original.submit_time}
-              placeholder='请选择日期'
-              onChange={date => console.log(date, index)}
-            />
-          )
-        },
-        {
-          Header: '入库单号',
-          id: 'id',
-          minWidth: 180,
-          Cell: ({ index, original }) => (
-            <input
-              value={original.id}
-              onChange={value => console.log(value, index)}
-            />
-          )
-        },
-        {
-          Header: '地址',
-          id: 'address',
-          minWidth: 160,
-          Cell: ({ index, original }) => (
-            <MoreSelect
-              data={selectData}
-              selected={original.address}
-              onSelect={selected => console.log(selected, index)}
-            />
-          )
-        },
-        {
-          Header: '供应商信息',
-          accessor: 'supplier_name',
-          minWidth: 120
-        },
-        {
-          Header: '入库金额',
-          id: 'total_money',
-          minWidth: 160,
-          Cell: ({ index, original }) => (
-            <InputNumberV2
-              value={original.total_money}
-              onChange={value => console.log(value, index)}
-            />
-          )
-        },
-        {
-          Header: '单据状态',
-          accessor: 'status',
-          minWidth: 120
-        },
-        {
-          Header: 'sku_money',
-          id: 'sku_money',
-          minWidth: 120,
-          Cell: ({ index, original }) => (
-            <input
-              value={original.sku_money}
-              onChange={value => console.log(value, index)}
-            />
-          )
-        },
-        {
-          Header: 'supplier_customer_id',
-          accessor: 'supplier_customer_id',
-          minWidth: 120
-        },
-        {
-          Header: 'date_time',
-          accessor: 'date_time',
-          fixed: 'right',
-          minWidth: 120
-        }
-      ]}
-    />
+storiesOf('Table/EditTable', module)
+  .add(
+    'default',
+    () => {
+      return (
+        <FixColumnsEditTable
+          data={store.data}
+          columns={[
+            {
+              Header: '序号',
+              fixed: 'left',
+              minWidth: 50,
+              Cell: ({ index }) => index + 1
+            },
+            {
+              Header: OperationHeader,
+              fixed: 'left',
+              minWidth: 100,
+              Cell: (
+                { index } // eslint-disable-line
+              ) => (
+                <EditTableOperation
+                  onAddRow={() => console.log('增加一行', index)}
+                  onDeleteRow={() => console.log('删除一行', index)}
+                />
+              )
+            },
+            {
+              Header: '地址',
+              minWidth: 160,
+              Cell: (
+                { index, original } // eslint-disable-line
+              ) => (
+                <MoreSelect
+                  data={selectData}
+                  selected={original.address}
+                  onSelect={selected => console.log(selected, index)}
+                />
+              )
+            },
+            {
+              Header: '入库金额',
+              minWidth: 160,
+              Cell: (
+                { index, original } // eslint-disable-line
+              ) => (
+                <InputNumberV2
+                  value={original.total_money}
+                  onChange={value => console.log(value, index)}
+                />
+              )
+            },
+            {
+              Header: 'sku_money',
+              minWidth: 120,
+              Cell: (
+                { index, original } // eslint-disable-line
+              ) => (
+                <input
+                  value={original.sku_money}
+                  onChange={value => console.log(value, index)}
+                />
+              )
+            },
+            {
+              Header: 'supplier_customer_id',
+              accessor: 'supplier_customer_id',
+              minWidth: 120
+            },
+            {
+              Header: 'date_time',
+              accessor: 'date_time',
+              fixed: 'right',
+              minWidth: 120
+            }
+          ]}
+        />
+      )
+    },
+    {
+      info: {
+        text: `
+TODO 补充 文本显示不完整 案例
+`
+      }
+    }
   )
-})
+  .add('with diy', () => {
+    const ref = React.createRef()
+    return (
+      <div>
+        <button
+          className='btn  btn-primary'
+          onClick={() => ref.current.apiToggleDiySelector()}
+        >
+          列表自定义
+        </button>
+
+        <DiyEditTable
+          id={'diy-edit-table'}
+          ref={ref}
+          data={store.data}
+          columns={[
+            {
+              Header: '序号',
+              accessor: 'no',
+              Cell: ({ index }) => index + 1
+            },
+            {
+              Header: OperationHeader,
+              diyItemText: '操作',
+              accessor: 'operation',
+              Cell: (
+                { index } // eslint-disable-line
+              ) => (
+                <EditTableOperation
+                  onAddRow={() => console.log('增加一行', index)}
+                  onDeleteRow={() => console.log('删除一行', index)}
+                />
+              )
+            },
+            {
+              Header: 'sku_money',
+              Cell: (
+                { index, original } // eslint-disable-line
+              ) => (
+                <input
+                  value={original.sku_money}
+                  onChange={value => console.log(value, index)}
+                />
+              )
+            }
+          ]}
+        />
+      </div>
+    )
+  })

@@ -1,10 +1,19 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Table, fixedColumnsTableHOC } from '../index'
+import {
+  Table,
+  fixedColumnsTableHOC,
+  diyTableHOC,
+  selectTableHOC,
+  expandTableHOC
+} from '../index'
 import { observable } from 'mobx/lib/mobx'
 import _ from 'lodash'
 
 const FixedColumnsTable = fixedColumnsTableHOC(Table)
+const DiyTable = diyTableHOC(Table)
+const SelectTable = selectTableHOC(Table)
+const ExpandTable = expandTableHOC(Table)
 
 const store = observable({
   data: [
@@ -55,6 +64,8 @@ const store = observable({
     }
   ],
   sortTimeType: 'asc',
+  selectAll: false,
+  selected: [],
   sortTime() {
     this.data = _.sortBy(this.data, 'submit_time')
     if (this.sortTimeType === 'asc') {
@@ -63,73 +74,186 @@ const store = observable({
     } else {
       this.sortTimeType = 'asc'
     }
+  },
+  setSelect(selected) {
+    if (this.selectAll && selected.length !== this.data.length) {
+      this.selectAll = false
+    }
+
+    this.selected = selected
+  },
+  toggleSelectAll() {
+    if (this.selectAll) {
+      this.selected = []
+      this.selectAll = false
+    } else {
+      this.selected = _.map(this.data, v => v.id)
+      this.selectAll = true
+    }
   }
 })
 
-storiesOf('Table/Table HOC', module).add(
-  'fixed columns',
-  () => (
-    <FixedColumnsTable
+storiesOf('Table/Table HOC', module)
+  .add('优先级', () => null, {
+    info: {
+      text: `
+HOC 可以相互组合使用，但是请注意使用顺序
+- fixed columns。可能会改变 columns 的顺序。
+- diy。会改变原有 columns 的 show 熟悉，影响在 页面上的展现。一般最后才 hoc。
+- expand。会在最前面增加一个 column 用户 expand.
+`
+    }
+  })
+  .add(
+    'fixed columns',
+    () => (
+      <FixedColumnsTable
+        data={store.data}
+        columns={[
+          {
+            Header: '建单时间',
+            accessor: 'submit_time',
+            // 提供 fixed and width
+            fixed: 'left',
+            width: 100
+          },
+          {
+            Header: '入库单号',
+            accessor: 'id',
+            fixed: 'left',
+            // 其他任意，一般都提供 width or minWidth，否则没法滚动。 没意义
+            width: 120
+          },
+          {
+            Header: '供应商信息',
+            accessor: 'supplier_name',
+            minWidth: 200
+          },
+          {
+            Header: '入库金额',
+            accessor: 'total_money',
+            minWidth: 200
+          },
+          {
+            Header: '单据状态',
+            accessor: 'status',
+            minWidth: 200
+          },
+          {
+            Header: 'sku_money',
+            accessor: 'sku_money',
+            minWidth: 200
+          },
+          {
+            Header: 'supplier_customer_id',
+            accessor: 'supplier_customer_id',
+            minWidth: 200
+          },
+          {
+            Header: 'date_time',
+            accessor: 'date_time',
+            width: 120,
+            fixed: 'right'
+          }
+        ]}
+      />
+    ),
+    {
+      info: {
+        text: `
+使用
+\`const FixedColumnsTable = fixedColumnsTableHOC(Table)\`
+
+在需要 fixed 的 column 提供 fixed 和 width，其中 fixed 两个值 
+\`left\` \`right\`
+
+其他 column 最好提供 width or minWidth，否则会出现很诡异的被压缩问题或者没法滚动问题
+
+具体用法请查看 story 源码
+`
+      }
+    }
+  )
+  .add('diy', () => {
+    const ref = React.createRef()
+    return (
+      <div>
+        <button
+          className='btn  btn-primary'
+          onClick={() => ref.current.apiToggleDiySelector()}
+        >
+          列表自定义
+        </button>
+        <DiyTable
+          id='diy-table'
+          ref={ref}
+          data={store.data}
+          columns={[
+            {
+              Header: '建单时间',
+              accessor: 'submit_time'
+            },
+            {
+              Header: '入库单号',
+              accessor: 'id'
+            },
+            {
+              Header: '供应商信息',
+              accessor: 'supplier_name'
+            }
+          ]}
+        />
+      </div>
+    )
+  })
+  .add('select', () => (
+    <SelectTable
       data={store.data}
       columns={[
         {
           Header: '建单时间',
-          accessor: 'submit_time',
-          // 提供 fixed 和 minWidth or width
-          fixed: 'left',
-          minWidth: 100
+          accessor: 'submit_time'
         },
         {
           Header: '入库单号',
-          accessor: 'id',
-          fixed: 'left',
-          minWidth: 100
+          accessor: 'id'
         },
         {
           Header: '供应商信息',
-          accessor: 'supplier_name',
-          minWidth: 120
-        },
-        {
-          Header: '入库金额',
-          accessor: 'total_money',
-          minWidth: 120
-        },
-        {
-          Header: '单据状态',
-          accessor: 'status',
-          minWidth: 120
-        },
-        {
-          Header: 'sku_money',
-          accessor: 'sku_money',
-          minWidth: 120
-        },
-        {
-          Header: 'supplier_customer_id',
-          accessor: 'supplier_customer_id',
-          minWidth: 120
-        },
-        {
-          Header: 'date_time',
-          accessor: 'date_time',
-          minWidth: 120,
-          fixed: 'right'
+          accessor: 'supplier_name'
         }
       ]}
+      keyField='id'
+      selectAll={store.selectAll}
+      onSelectAll={() => store.toggleSelectAll()}
+      selectAllTip={
+        <div>
+          全选是否勾上,可能代表<span className='gm-text-red'>当前可见列表</span>
+          勾上，也可能代表<span className='gm-text-red'>所有页面数据</span>
+          勾上，具体由调用方确定。
+        </div>
+      }
+      selected={store.selected}
+      onSelect={selected => store.setSelect(selected)}
     />
-  ),
-  {
-    info: {
-      text: `
-使用
-\`const FixedColumnsTable = fixedColumnsTableHOC(Table)\`
-
-在需要 fixed 的 column 提供 fixed 和 width or minWidth，其中 fixed 两个值 
-\`left\` \`right\`
-
-具体用法请查看 story 源码
-`
-    }
-  }
-)
+  ))
+  .add('expand', () => (
+    <ExpandTable
+      data={store.data}
+      columns={[
+        {
+          Header: '建单时间',
+          accessor: 'submit_time'
+        },
+        {
+          Header: '入库单号',
+          accessor: 'id'
+        },
+        {
+          Header: '供应商信息',
+          accessor: 'supplier_name'
+        }
+      ]}
+      SubComponent={() => <div>SubComponent</div>}
+    />
+  ))
