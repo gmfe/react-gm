@@ -427,13 +427,17 @@ class FormGroupWrap extends React.Component {
     handleCancel = () => {
         console.log('cancel')
     }
+
+    handleFormGroupSubmit = () => {
+        console.log('onSubmitValidated')
+        return new Promise(resolve => setTimeout(() => resolve(), 2000))
+    }
     render() {
         return (
             <FormGroup
                 formRefs={[this.form1, this.form2]}
                 onCancel={this.handleCancel}
-                onSubmit={() => console.log('onSubmit')}
-                onSubmitValidated={() => console.log('onSubmitValidated')}
+                onSubmitValidated={this.handleFormGroupSubmit}
             >
                 <QuickPanel icon='todo' iconColor='#4fb7de' title='基础信息'>
                     <Form ref={this.form1} hasButtonInGroup>
