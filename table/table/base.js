@@ -12,7 +12,6 @@ class BaseTable extends React.Component {
   refTable = React.createRef()
 
   doScroll = _.debounce(() => {
-    console.log('scroll')
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
   }, 500)
 

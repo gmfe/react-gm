@@ -4,8 +4,12 @@ import LevelList from '../level_list'
 import Popover from '../popover'
 import classNames from 'classnames'
 import _ from 'lodash'
+import { getLevel } from '../level_list/util'
 
-// TODO search
+// TODO
+// search
+// onlySelectLeaf
+// selected array => any
 
 class LevelSelect extends React.Component {
   constructor(props) {
@@ -29,25 +33,6 @@ class LevelSelect extends React.Component {
     const { willActiveSelected } = this.state
 
     onSelect(willActiveSelected)
-  }
-
-  getLevel = () => {
-    const { data } = this.props
-    const { willActiveSelected } = this.state
-
-    const result = [data]
-
-    _.each(willActiveSelected, (item, i) => {
-      const match = _.find(result[i], v => v.value === item)
-
-      if (match) {
-        if (match.children) {
-          result.push(match.children)
-        }
-      }
-    })
-
-    return result
   }
 
   getSelectedItem = () => {
@@ -98,7 +83,7 @@ class LevelSelect extends React.Component {
 
     // 避免引用
     let newWill = willActiveSelected.slice()
-    const level = this.getLevel()
+    const level = getLevel(data, willActiveSelected)
 
     // 如果没法左和右了，则不拦截，抛出去
     if (
