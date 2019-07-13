@@ -27,7 +27,7 @@ class Option extends React.Component {
 Option.displayName = 'Option'
 
 Option.propTypes = {
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any,
   disabled: PropTypes.bool,
   children: PropTypes.any,
   className: PropTypes.string,
