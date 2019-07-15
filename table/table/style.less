@@ -343,8 +343,14 @@
     color: rgba(106, 170, 70, 0.3);
     margin-right: 18px;
 
-    &-available:hover {
+    &:hover {
       color: rgba(106, 170, 70, 1);
+      cursor: pointer;
+    }
+
+    &.disabled:hover {
+      color: rgba(106, 170, 70, 0.3);
+      cursor: default;
     }
   }
 
@@ -353,8 +359,14 @@
     height: 18px;
     color: rgba(219, 0, 0, 0.3);
 
-    &-available:hover {
+    &:hover {
       color: rgba(219, 0, 0, 1);
+      cursor: pointer;
+    }
+
+    &.disabled:hover {
+      color: rgba(219, 0, 0, 0.3);
+      cursor: default;
     }
   }
 }

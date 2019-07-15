@@ -7,7 +7,8 @@ import {
   KCInput,
   KCInputNumberV2,
   KCLevelSelect,
-  KCMoreSelect
+  KCMoreSelect,
+  KCTableSelect
 } from './'
 import {
   EditTable,
@@ -15,6 +16,7 @@ import {
   diyTableHOC,
   TableUtil
 } from '../table'
+import _ from 'lodash'
 
 const { OperationHeader, EditTableOperation } = TableUtil
 const KeyboardEditTable = diyTableHOC(
@@ -77,14 +79,81 @@ const areaData = [
   }
 ]
 
+const tableData = [
+  {
+    purchase_price_limit: null,
+    std_unit_name: '斤',
+    sale_ratio: 3,
+    category_id_1: 'A3978',
+    settle_supplier_name: '水果供应商',
+    spu_id: 'C874502',
+    sku_id: 'D13944575',
+    sale_unit_name: '包',
+    category_id_2: 'B19074',
+    category_id_2_name: '甘蓝类',
+    settle_supplier_id: 'T13251',
+    sku_name: '大白菜',
+    station_id: 'T7936',
+    category_id_1_name: '蔬菜',
+    max_stock_unit_price: null
+  },
+  {
+    purchase_price_limit: null,
+    std_unit_name: '斤',
+    sale_ratio: 1,
+    category_id_1: 'A3978',
+    settle_supplier_name: '水果供应商',
+    spu_id: 'C874502',
+    sku_id: 'D3628124',
+    sale_unit_name: '斤',
+    category_id_2: 'B19074',
+    category_id_2_name: '甘蓝类',
+    settle_supplier_id: 'T13251',
+    sku_name: '小白菜',
+    station_id: 'T7936',
+    category_id_1_name: '蔬菜',
+    max_stock_unit_price: null
+  }
+]
+
+const newTableData = _.map(tableData, v => ({
+  value: v.sku_id,
+  text: v.sku_name,
+  original: v
+}))
+
+const tableColumns = [
+  {
+    Header: 'id',
+    accessor: 'original.sku_id',
+    width: 100
+  },
+  {
+    Header: '名字',
+    accessor: 'original.sku_name',
+    width: 100
+  },
+  {
+    Header: '供应商',
+    accessor: 'original.settle_supplier_name',
+    width: 100
+  }
+]
+
 const store = observable({
   data: [
-    { position: null, name: '', age: null, area: [] },
-    { position: { value: 2, text: '福田' }, name: '', age: null, area: [] },
-    { position: null, name: '', age: null, area: [] }
+    { position: null, name: '', age: null, area: [], sku: null },
+    {
+      position: { value: 2, text: '福田' },
+      name: '',
+      age: null,
+      area: [],
+      sku: null
+    },
+    { position: null, name: '', age: null, area: [], sku: null }
   ],
   addList() {
-    this.data.push({ position: null, name: '', age: null })
+    this.data.push({ position: null, name: '', age: null, sku: null })
   },
   setPosition(index, position) {
     this.data[index].position = position
@@ -101,6 +170,9 @@ const store = observable({
   },
   setArea(index, area) {
     this.data[index].area = area
+  },
+  setSku(index, sku) {
+    this.data[index].sku = sku
   }
 })
 
@@ -172,6 +244,26 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
                     onChange={e =>
                       store.setName(cellProps.index, e.target.value)
                     }
+                  />
+                )}
+              </Observer>
+            )
+          },
+          {
+            Header: 'TableSelect',
+            accessor: 'sku',
+            isKeyboard: true,
+            minWidth: 150,
+            Cell: cellProps => (
+              <Observer>
+                {() => (
+                  <KCTableSelect
+                    data={newTableData}
+                    columns={tableColumns}
+                    selected={cellProps.original.sku}
+                    onSelect={selected => {
+                      return store.setSku(cellProps.index, selected)
+                    }}
                   />
                 )}
               </Observer>

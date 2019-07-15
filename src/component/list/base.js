@@ -91,7 +91,7 @@ class Base extends React.Component {
                   })}
                   onClick={this.handleSelect.bind(this, v)}
                 >
-                  {renderItem(v)}
+                  {renderItem(v, index)}
                 </div>
               )
             })}

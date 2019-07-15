@@ -4,6 +4,7 @@ import KCInput from './cell_input'
 import KCMoreSelect from './cell_more_select'
 import KCInputNumberV2 from './cell_input_number_v2'
 import KCLevelSelect from './cell_level_select'
+import KCTableSelect from './cell_table_select'
 
 export {
   keyboardTableHoc,
@@ -11,5 +12,6 @@ export {
   KCInput,
   KCInputNumberV2,
   KCMoreSelect,
-  KCLevelSelect
+  KCLevelSelect,
+  KCTableSelect
 }

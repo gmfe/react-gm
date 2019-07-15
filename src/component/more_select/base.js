@@ -222,7 +222,8 @@ class Base extends React.Component {
       isGroupList,
       renderListItem,
       searchPlaceholder,
-      listMaxHeight
+      listMaxHeight,
+      popupClassName
     } = this.props
 
     const { loading, searchValue, willActiveIndex } = this.state
@@ -230,7 +231,10 @@ class Base extends React.Component {
     let filterData = this.getFilterData()
 
     return (
-      <div className='gm-more-select-popup' onKeyDown={this.handlePopupKeyDown}>
+      <div
+        className={classNames('gm-more-select-popup', popupClassName)}
+        onKeyDown={this.handlePopupKeyDown}
+      >
         <div className='gm-more-select-popup-input'>
           <input
             autoFocus
@@ -246,7 +250,16 @@ class Base extends React.Component {
             <Loading size={20} />
           </Flex>
         )}
-        {!loading && (
+        {!loading && filterData.length === 0 && (
+          <Flex
+            alignCenter
+            justifyCenter
+            className='gm-bg gm-padding-5 gm-text-desc'
+          >
+            没有数据
+          </Flex>
+        )}
+        {!loading && filterData.length !== 0 && (
           <ListBase
             data={filterData}
             selected={_.map(selected, v => v.value)}
@@ -385,7 +398,6 @@ Base.propTypes = {
 
   // 状态
   disabled: PropTypes.bool,
-  placeholder: PropTypes.string,
 
   // 列表 搜索
   onSearch: PropTypes.func, // searchValue, data
@@ -395,6 +407,7 @@ Base.propTypes = {
   renderListFilterType: PropTypes.oneOf(['default', 'pinyin']), // 也可简单指定 默认的过滤类型
 
   // 展示
+  placeholder: PropTypes.string,
   renderSelected: PropTypes.func, // 定制已选的区域，提供 selected
   renderListItem: PropTypes.func, // 定制列表
 
@@ -408,6 +421,7 @@ Base.propTypes = {
 
   className: PropTypes.string,
   style: PropTypes.object,
+  popupClassName: PropTypes.string,
 
   /** 目前为了 keyboard */
   onKeyDown: PropTypes.func

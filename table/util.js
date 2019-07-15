@@ -55,10 +55,10 @@ const EditTableOperation = props => {
         type='hover'
         popup={<div className='gm-padding-5'>添加</div>}
       >
-        <span onClick={props.addAvailable ? props.onAddRow : _.noop}>
+        <span onClick={props.onAddRow}>
           <SvgTianjiamorenHuaban
             className={classNames('gm-react-edit-table-action-add', {
-              'gm-react-edit-table-action-add-available': props.addAvailable
+              disabled: !props.onAddRow
             })}
           />
         </span>
@@ -68,10 +68,10 @@ const EditTableOperation = props => {
         type='hover'
         popup={<div className='gm-padding-5'>删除</div>}
       >
-        <span onClick={props.delAvailable ? props.onDeleteRow : _.noop}>
+        <span onClick={props.onDeleteRow}>
           <SvgShanchumorenHuaban
             className={classNames('gm-react-edit-table-action-delete', {
-              'gm-react-edit-table-action-delete-available': props.delAvailable
+              disabled: !props.onDeleteRow
             })}
           />
         </span>
@@ -82,14 +82,7 @@ const EditTableOperation = props => {
 
 EditTableOperation.propTypes = {
   onAddRow: PropTypes.func,
-  onDeleteRow: PropTypes.func,
-  delAvailable: PropTypes.bool,
-  addAvailable: PropTypes.bool
-}
-
-EditTableOperation.defaultProps = {
-  delAvailable: true,
-  addAvailable: true
+  onDeleteRow: PropTypes.func
 }
 
 function getColumnKey(column) {

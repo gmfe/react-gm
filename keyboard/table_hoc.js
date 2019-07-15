@@ -61,8 +61,6 @@ function keyboardTableHOC(Component) {
       }
     })
 
-    console.log(columnKeys)
-
     return (
       <Wrap
         id={id}
