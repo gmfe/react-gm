@@ -2,11 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class InputNumber extends React.Component {
-  constructor(props) {
-    super(props)
-    this._ref = null
-  }
-
   handleChange = e => {
     const { max, min, precision, minus } = this.props
     let value = e.target.value.replace(/。/g, '.')
@@ -45,55 +40,14 @@ class InputNumber extends React.Component {
     }
   }
 
-  componentDidMount() {
-    if (this.props.getInputRef) {
-      this.props.getInputRef({
-        focus: () => {
-          if (this._ref) this._ref.focus()
-        },
-        blur: () => {
-          if (this._ref) this._ref.blur()
-        }
-      })
-    }
-  }
-
   render() {
     const {
       precision,
-      minus,
-      getInputRef, // eslint-disable-line
-      onKeyUp,
-      onFocus,
-      onKeyDown,
-      onInputKeyUp,
-      onInputFocus,
-      onInputKeyDown,
+      minus, // eslint-disable-line
       ...rest
     } = this.props
 
-    return (
-      <input
-        {...rest}
-        type='text'
-        ref={c => {
-          this._ref = c
-        }}
-        onChange={this.handleChange}
-        onKeyUp={e => {
-          onKeyUp && onKeyUp(e)
-          onInputKeyUp && onInputKeyUp(e)
-        }}
-        onFocus={e => {
-          onFocus && onFocus(e)
-          onInputFocus && onInputFocus(e)
-        }}
-        onKeyDown={e => {
-          onKeyDown && onKeyDown(e)
-          onInputKeyDown && onInputKeyDown(e)
-        }}
-      />
-    )
+    return <input {...rest} type='text' onChange={this.handleChange} />
   }
 }
 
@@ -108,16 +62,7 @@ InputNumber.propTypes = {
   placeholder: PropTypes.string,
   minus: PropTypes.bool, // 是否支持输入负数,
   className: PropTypes.string,
-  style: PropTypes.object,
-
-  // onInputKeyUp、onInputFocus、onInputKeyDown为暂时兼容全键盘，后续移除
-  onKeyUp: PropTypes.func,
-  onFocus: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onInputKeyUp: PropTypes.func,
-  onInputFocus: PropTypes.func,
-  onInputKeyDown: PropTypes.func,
-  getInputRef: PropTypes.func
+  style: PropTypes.object
 }
 
 InputNumber.defaultProps = {

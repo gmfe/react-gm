@@ -22,7 +22,7 @@ const Loading = ({ isLoading, error }) => {
 }
 
 class Page extends React.Component {
-  render () {
+  render() {
     const { path2 } = this.props.match.params
 
     const Com = Loadable({
@@ -30,39 +30,70 @@ class Page extends React.Component {
       loading: Loading
     })
 
-    return <Com {...this.props}/>
+    return <Com {...this.props} />
   }
 }
 
 const RouteConfig = () => (
   <Router>
-    <Route path='/' component={(props) => (
-      <App {...processReactRouterProps(props)}>
-        <RRSwitch>
-          <Route exact path='/' render={() => <Redirect from='/' to='/doc/About'/>}/>
-          <Route exact path='/demo' component={Loadable({
-            loader: () => import('./demo'),
-            loading: Loading
-          })}/>
-          <Route exact path='/demo/list' component={Loadable({
-            loader: () => import('./demo/list'),
-            loading: Loading
-          })}/>
-          <Route exact path='/demo/record' component={Loadable({
-            loader: () => import('./demo/record'),
-            loading: Loading
-          })}/>
-          <Route exact path='/demo/service_time' component={Loadable({
-            loader: () => import('./demo/service_time'),
-            loading: Loading
-          })}/>
-          <Route exact path='/doc' render={() => <Redirect from='/' to='/doc/About'/>}/>
-          <Route exact path='/:path1/:path2' component={(props) => <Page {...props}/>}/>
+    <Route
+      path='/'
+      component={props => (
+        <App {...processReactRouterProps(props)}>
+          <RRSwitch>
+            <Route
+              exact
+              path='/'
+              render={() => <Redirect from='/' to='/doc/About' />}
+            />
+            <Route
+              exact
+              path='/demo'
+              component={Loadable({
+                loader: () => import('./demo'),
+                loading: Loading
+              })}
+            />
+            <Route
+              exact
+              path='/demo/list'
+              component={Loadable({
+                loader: () => import('./demo/list'),
+                loading: Loading
+              })}
+            />
+            <Route
+              exact
+              path='/demo/record'
+              component={Loadable({
+                loader: () => import('./demo/record'),
+                loading: Loading
+              })}
+            />
+            <Route
+              exact
+              path='/demo/service_time'
+              component={Loadable({
+                loader: () => import('./demo/service_time'),
+                loading: Loading
+              })}
+            />
+            <Route
+              exact
+              path='/doc'
+              render={() => <Redirect from='/' to='/doc/About' />}
+            />
+            <Route
+              exact
+              path='/:path1/:path2'
+              component={props => <Page {...props} />}
+            />
 
-          <Route exact render={() => <div>无法匹配</div>}/>
-        </RRSwitch>
-      </App>
-    )}/>
+            <Route exact render={() => <div>无法匹配</div>} />
+          </RRSwitch>
+        </App>
+      )}
+    />
   </Router>
 )
 

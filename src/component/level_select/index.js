@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import LevelList from '../level_list'
 import Popover from '../popover'
-import classNames from 'classnames'
 import _ from 'lodash'
+import { getLevel } from '../level_list/util'
+import Selection from '../selection'
 
-// TODO search
+// TODO
+// onlySelectLeaf
 
 class LevelSelect extends React.Component {
   constructor(props) {
@@ -16,11 +18,12 @@ class LevelSelect extends React.Component {
       search: ''
     }
 
-    this.refInput = React.createRef()
+    this.refSelection = React.createRef()
+    this.popoverRef = React.createRef()
   }
 
   apiDoFocus = () => {
-    this.refInput.current.focus()
+    this.refSelection.current.apiDoFocus()
   }
 
   apiDoSelectWillActive = () => {
@@ -28,25 +31,6 @@ class LevelSelect extends React.Component {
     const { willActiveSelected } = this.state
 
     onSelect(willActiveSelected)
-  }
-
-  getLevel = () => {
-    const { data } = this.props
-    const { willActiveSelected } = this.state
-
-    const result = [data]
-
-    _.each(willActiveSelected, (item, i) => {
-      const match = _.find(result[i], v => v.value === item)
-
-      if (match) {
-        if (match.children) {
-          result.push(match.children)
-        }
-      }
-    })
-
-    return result
   }
 
   getSelectedItem = () => {
@@ -68,10 +52,6 @@ class LevelSelect extends React.Component {
     const { renderSelected } = this.props
     const items = this.getSelectedItem()
     return renderSelected(items)
-  }
-
-  handleInputChange = () => {
-    // TODO
   }
 
   handleKeyDown = event => {
@@ -97,7 +77,7 @@ class LevelSelect extends React.Component {
 
     // 避免引用
     let newWill = willActiveSelected.slice()
-    const level = this.getLevel()
+    const level = getLevel(data, willActiveSelected)
 
     // 如果没法左和右了，则不拦截，抛出去
     if (
@@ -150,26 +130,29 @@ class LevelSelect extends React.Component {
     })
   }
 
-  handleClear = () => {
-    const { onSelect } = this.props
-    onSelect([])
-  }
-
   handleWillActiveSelect = willActiveSelected => {
     this.setState({
       willActiveSelected
     })
   }
 
+  handleSelect = selected => {
+    const { onSelect } = this.props
+
+    this.popoverRef.current.apiDoSetActive(false)
+
+    onSelect(selected)
+  }
+
   renderPopup = () => {
-    const { titles, data, selected, onSelect } = this.props
+    const { titles, data, selected } = this.props
     const { willActiveSelected } = this.state
     return (
       <LevelList
         titles={titles}
         data={data}
         selected={selected}
-        onSelect={onSelect}
+        onSelect={this.handleSelect}
         willActiveSelected={willActiveSelected}
         onWillActiveSelect={this.handleWillActiveSelect}
         className='gm-border-0'
@@ -177,34 +160,24 @@ class LevelSelect extends React.Component {
     )
   }
 
+  handleSelectionSelect = selected => {
+    const { onSelect } = this.props
+    onSelect(selected === null ? [] : selected)
+  }
+
   renderTarget = () => {
-    const { disabled, inputProps } = this.props
-    const inputValue = this.getSelectItemText()
+    const { selected, disabled } = this.props
+
+    // 注意转换 selected onSelect renderSelected
     return (
-      <div
-        className={classNames('gm-level-select', {
-          'gm-level-select-close': inputValue,
-          disabled
-        })}
-      >
-        <input
-          ref={this.refInput}
-          disabled={disabled}
-          type='text'
-          value={inputValue}
-          onChange={this.handleInputChange}
-          onKeyDown={this.handleKeyDown}
-          className={classNames('form-control', inputProps.className)}
-        />
-        {inputValue && (
-          <i
-            onClick={!disabled && this.handleClear}
-            className='xfont xfont-close-circle gm-cursor gm-level-select-close-icon'
-          />
-        )}
-        <i className='gm-arrow-down' />
-        <i className='gm-arrow-up' />
-      </div>
+      <Selection
+        ref={this.refSelection}
+        selected={selected.length === 0 ? null : selected}
+        onSelect={this.handleSelectionSelect}
+        renderSelected={() => this.getSelectItemText()}
+        onKeyDown={this.handleKeyDown}
+        disabled={disabled}
+      />
     )
   }
 
@@ -217,6 +190,7 @@ class LevelSelect extends React.Component {
         disabled={disabled}
         popup={this.renderPopup()}
         type={popoverType}
+        ref={this.popoverRef}
       >
         {children !== undefined ? children : this.renderTarget()}
       </Popover>
@@ -233,7 +207,6 @@ LevelSelect.propTypes = {
   disabled: PropTypes.bool,
 
   renderSelected: PropTypes.func,
-  inputProps: PropTypes.object,
 
   // 仅仅能选择叶子
   onlySelectLeaf: PropTypes.bool,
@@ -245,8 +218,7 @@ LevelSelect.propTypes = {
 }
 
 LevelSelect.defaultProps = {
-  inputProps: {},
-  renderSelected: items => items.map(v => v.text).join(','),
+  renderSelected: item => item.map(v => v.text).join(','),
   onKeyDown: _.noop
 }
 

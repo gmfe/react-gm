@@ -1,18 +1,12 @@
-.gm-level-select {
+.gm-selection {
   position: relative;
   vertical-align: middle;
 
   input {
-    padding-right: 20px;
+    padding-right: 35px;
   }
 
-  &.gm-level-select-close {
-    input {
-      padding-right: 35px;
-    }
-  }
-
-  .gm-level-select-close-icon {
+  .gm-selection-close-icon {
     position: absolute;
     display: block;
     width: 10px;
@@ -29,6 +23,7 @@
     display: none;
   }
 
+  // popover 提供的
   &.gm-popover-active {
     .gm-arrow-up {
       display: block;
@@ -42,7 +37,7 @@
   &.disabled {
     cursor: not-allowed;
 
-    .gm-level-select-close-icon {
+    .gm-selection-close-icon {
       cursor: not-allowed;
     }
   }

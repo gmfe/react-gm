@@ -93,7 +93,7 @@ const store = observable({
   }
 })
 
-storiesOf('Table/Table HOC', module)
+storiesOf('表格|Table HOC', module)
   .add('优先级', () => null, {
     info: {
       text: `

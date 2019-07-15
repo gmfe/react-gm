@@ -44,6 +44,10 @@ class Popover extends React.Component {
     this.id = +new Date() + '' + Math.random()
   }
 
+  apiDoSetActive = active => {
+    this.setActive(active)
+  }
+
   componentDidMount() {
     if (this.props.type === 'click' || this.props.type === 'focus') {
       window.document.body.addEventListener('click', this.handleBodyClick)
@@ -69,13 +73,6 @@ class Popover extends React.Component {
       EVENT_TYPE.TABLE_SCROLL,
       this.debounceHandleTableScroll
     )
-
-    if (this.props.popRef) {
-      this.props.popRef({
-        close: () => this.setActive(false),
-        show: () => this.setActive(true)
-      })
-    }
   }
 
   componentWillUnmount() {
@@ -172,6 +169,7 @@ class Popover extends React.Component {
         this.id,
         <Popup
           key='popup'
+          tabIndex={0}
           style={style}
           ref={ref => (this.refPopup = ref)}
           onMouseEnter={
@@ -188,6 +186,7 @@ class Popover extends React.Component {
           showArrow={showArrow}
           arrowLeft={arrowLeft}
           className={classNames(
+            'gm-no-outline',
             {
               'gm-animated': !!animate,
               ['gm-animated-' + animate]: animate
@@ -203,7 +202,11 @@ class Popover extends React.Component {
     }
   }
 
-  updateRect = active => {
+  setActive = active => {
+    this.setState({
+      active
+    })
+
     if (active) {
       const dom = findDOMNode(this)
       const pos = getElementPositionWithScrollTop(dom)
@@ -215,13 +218,6 @@ class Popover extends React.Component {
       }
       this.rect = rect
     }
-  }
-
-  setActive = active => {
-    this.setState({
-      active
-    })
-    this.updateRect(active)
     this.doRenderPopup(active)
   }
 
@@ -316,7 +312,6 @@ class Popover extends React.Component {
     }
 
     return React.cloneElement(child, {
-      ...child.props,
       ...p,
       className: classNames(child.props.className, {
         'gm-popover-active': active
@@ -328,7 +323,7 @@ class Popover extends React.Component {
 // 注意 Popover 的 popup 不会随 render 更新
 Popover.propTypes = {
   // 命名问题，focus 不是真正的 focus事件，和 click 类似，只不过 focus 不会因为二次点击而关掉。
-  // 想要 focus 事件的效果，请用 realFocus
+  // 想要 focus 事件的效果，请用 realFocus，失焦会 hide
   type: PropTypes.oneOf(['focus', 'click', 'hover', 'realFocus']),
   popup: PropTypes.element.isRequired,
   children: PropTypes.any.isRequired,
@@ -355,9 +350,7 @@ Popover.propTypes = {
     'zoom-in',
     'zoom-in-top',
     'zoom-in-bottom'
-  ]),
-
-  popRef: PropTypes.func
+  ])
 }
 
 Popover.defaultProps = {

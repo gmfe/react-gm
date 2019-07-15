@@ -214,7 +214,6 @@ class Component extends React.Component {
 - `onSearch(func)` 列表搜索 Function(searchValue: 搜索文字, data: 原数据), 异步搜素请返回Promise
 - `delay(number)` 搜索去抖,默认500ms
 - `searchPlaceholder(string)` 搜索框占位符
-- `disabledSearch(bool)` 去掉搜索, 默认支持搜索
 - `renderListFilter(func)` 过滤候选数据 Function(data: 原数据, searchValue: 搜索文字)
 - `renderListFilterType('default' or 'pinyin')` 过滤类型, 'pinyin'拼音过滤
 ---

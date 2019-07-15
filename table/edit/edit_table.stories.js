@@ -94,7 +94,7 @@ const selectData = [
   }
 ]
 
-storiesOf('Table/EditTable', module)
+storiesOf('表格|EditTable', module)
   .add(
     'default',
     () => {
@@ -116,6 +116,7 @@ storiesOf('Table/EditTable', module)
                 { index } // eslint-disable-line
               ) => (
                 <EditTableOperation
+                  delAvailable={false} // 禁用删除
                   onAddRow={() => console.log('增加一行', index)}
                   onDeleteRow={() => console.log('删除一行', index)}
                 />

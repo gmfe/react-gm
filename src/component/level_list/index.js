@@ -4,25 +4,9 @@ import classNames from 'classnames'
 import _ from 'lodash'
 import Flex from '../flex'
 import LevelItem from './level_item'
+import { getLevel } from './util'
 
 class LevelList extends React.Component {
-  getLevel = () => {
-    const { data, willActiveSelected } = this.props
-    const result = [data]
-
-    _.each(willActiveSelected, (item, i) => {
-      const match = _.find(result[i], v => v.value === item)
-
-      if (match) {
-        if (match.children) {
-          result.push(match.children)
-        }
-      }
-    })
-
-    return result
-  }
-
   handleListItemMouseEnter = (index, listItem) => {
     let { willActiveSelected, onWillActiveSelect } = this.props
 
@@ -58,7 +42,7 @@ class LevelList extends React.Component {
       ...rest
     } = this.props
 
-    const level = this.getLevel(data)
+    const level = getLevel(data, willActiveSelected)
 
     return (
       <Flex
@@ -91,6 +75,7 @@ LevelList.propTypes = {
   // 没和
   willActiveSelected: PropTypes.array.isRequired,
   onWillActiveSelect: PropTypes.func.isRequired,
+  onlySelectLeaf: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object
 }

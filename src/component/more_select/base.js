@@ -7,6 +7,7 @@ import Flex from '../flex'
 import ListBase from '../list/base'
 import Loading from '../loading'
 import { pinYinFilter } from 'gm-util'
+import { findDOMNode } from 'react-dom'
 
 // 不要轻易改这个文件
 
@@ -15,102 +16,47 @@ class Base extends React.Component {
     super(props)
 
     this.ref = React.createRef()
+    this.popoverRef = React.createRef()
+    this.selectedRef = React.createRef()
+
+    this._isUnmounted = false
+
+    this.debounceDoSearch = _.debounce(this.doSearch, props.delay)
 
     this.state = {
       searchValue: '',
       loading: false,
-      willActiveIndex: null
+      willActiveIndex: null // null 代表没有做过键盘操作
     }
+  }
 
-    this._isUnMounted = false
-    this._popRef = null
-    this.debounceDoSearch = _.debounce(this.doSearch, props.delay)
+  apiDoFocus = () => {
+    // 唤起 popover，input autoFocus 会自动聚焦，但是这种方式本质是显示 UI
+    // this.popoverRef.current.apiDoSetActive(true)
+
+    // focus 更符合直觉
+    findDOMNode(this.selectedRef.current).focus()
+  }
+
+  apiDoSelectWillActive = () => {
+    // TODO 先考虑单选的情况
+    const { selected, onSelect, multiple } = this.props
+    let { willActiveIndex } = this.state
+    const flatList = this.getFlatFilterData()
+    // 没有做过键盘操作啥也不做
+    if (willActiveIndex !== null && willActiveIndex < flatList.length) {
+      if (multiple) {
+        onSelect(
+          _.uniqBy([...selected, flatList[willActiveIndex]], item => item.value)
+        )
+      } else {
+        onSelect([flatList[willActiveIndex]])
+      }
+    }
   }
 
   componentWillUnmount() {
-    this._isUnMounted = true
-  }
-
-  /**
-   * 获取扁平化的数组
-   *
-   * @memberof Base
-   */
-  sequencedData = () => {
-    let arr = []
-    _.forEach(this.doFilterData(), a => {
-      arr = _.concat(arr, a.children)
-    })
-
-    return arr
-  }
-
-  onInputKeyUp = e => {
-    if (this.props.onInputKeyUp) {
-      this.props.onInputKeyUp(e)
-    }
-  }
-
-  handleKeyDown = e => {
-    const { selected, multiple } = this.props
-
-    const sequencedData = this.sequencedData()
-    if (!sequencedData.length) {
-      return
-    }
-    let willActiveIndex = this.state.willActiveIndex
-
-    switch (e.key) {
-      case 'ArrowDown': {
-        if (willActiveIndex === null) {
-          willActiveIndex = -1
-        }
-        willActiveIndex++
-        break
-      }
-      case 'ArrowUp': {
-        if (willActiveIndex === null) {
-          willActiveIndex = sequencedData.length
-        }
-        willActiveIndex--
-        break
-      }
-      case 'Enter': {
-        if (willActiveIndex === null) {
-          return
-        }
-        const currentActiveItem = sequencedData[willActiveIndex]
-        if (currentActiveItem !== undefined) {
-          if (!multiple) {
-            this.doSelect([currentActiveItem])
-          } else {
-            this.handleSelected(
-              _.concat(selected.map(s => s.value), [currentActiveItem.value])
-            )
-            willActiveIndex++
-          }
-        }
-        break
-      }
-      case 'Tab': {
-        e.preventDefault()
-        break
-      }
-    }
-
-    const fixWillActiveIndex = () => {
-      if (willActiveIndex < 0) {
-        willActiveIndex = sequencedData.length - 1
-      }
-      if (willActiveIndex >= sequencedData.length) {
-        willActiveIndex = 0
-      }
-      return willActiveIndex
-    }
-
-    this.setState({
-      willActiveIndex: fixWillActiveIndex()
-    })
+    this._isUnmounted = true
   }
 
   handleClear = clearItem => {
@@ -122,8 +68,6 @@ class Base extends React.Component {
     )
 
     onSelect(willSelected)
-
-    this.setState({ willActiveIndex: null })
   }
 
   handleChange = e => {
@@ -137,7 +81,8 @@ class Base extends React.Component {
   }
 
   handleSelected = values => {
-    const { data } = this.props
+    const { onSelect, data, multiple } = this.props
+
     const items = []
     _.each(data, group => {
       _.each(group.children, item => {
@@ -146,26 +91,24 @@ class Base extends React.Component {
         }
       })
     })
-    this.doSelect(items)
-  }
 
-  doSelect = selected => {
-    const { onSelect, multiple } = this.props
-    onSelect(selected)
-    this.setState({ searchValue: '' }, () => {
-      if (!multiple) {
-        // 单选选后关闭
-        if (this._popRef) {
-          this._popRef.close()
+    onSelect(items)
+
+    if (!multiple) {
+      // 单选选后关闭
+      // 要异步
+      setTimeout(() => {
+        if (!this._isUnmounted) {
+          this.popoverRef.current.apiDoSetActive(false)
         }
-      }
-    })
+      }, 0)
+    }
   }
 
   doSearch = query => {
     const { onSearch, data } = this.props
 
-    if (!this._isUnMounted && onSearch) {
+    if (!this._isUnmounted && onSearch) {
       const result = onSearch(query, data)
 
       if (!result) {
@@ -178,14 +121,14 @@ class Base extends React.Component {
 
       Promise.resolve(result)
         .then(() => {
-          if (!this._isUnMounted) {
+          if (!this._isUnmounted) {
             this.setState({
               loading: false
             })
           }
         })
         .catch(() => {
-          if (!this._isUnMounted) {
+          if (!this._isUnmounted) {
             this.setState({
               isLoading: false
             })
@@ -194,11 +137,69 @@ class Base extends React.Component {
     }
   }
 
-  doFilterData = () => {
+  getFlatFilterData = () => {
+    return _.flatMap(this.filterData, v => v.children)
+  }
+
+  handlePopupKeyDown = event => {
+    const { onKeyDown, selected } = this.props
+    let { willActiveIndex } = this.state
+
+    // 不是上下方向键，不用拦截
+    if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') {
+      onKeyDown(event)
+      return
+    }
+
+    const flatList = this.getFlatFilterData()
+    // 没有过滤数据，不用拦截
+    if (flatList.length === 0) {
+      onKeyDown(event)
+      return
+    }
+
+    // 以下是需要拦截部分
+
+    // 如果为 null，代表没有做过键盘操作，如果有选择，默认到 selected 第一个的位置
+    if (willActiveIndex === null) {
+      if (selected.length > 1) {
+        willActiveIndex = _.findIndex(
+          flatList,
+          v => v.value === selected[0].value
+        )
+      }
+      // 否则去到第一个
+      else {
+        willActiveIndex = 0
+      }
+    }
+    // 非 null，则 ++ --
+    else {
+      // null -- ++ 后是 0
+      if (event.key === 'ArrowUp') {
+        willActiveIndex--
+      } else if (event.key === 'ArrowDown') {
+        willActiveIndex++
+      }
+    }
+
+    // 修正
+    if (willActiveIndex < 0) {
+      willActiveIndex = flatList.length - 1
+    } else if (willActiveIndex > flatList.length - 1) {
+      willActiveIndex = 0
+    }
+
+    this.setState({
+      willActiveIndex
+    })
+  }
+
+  getFilterData = () => {
     const { data, renderListFilter, renderListFilterType } = this.props
     const { searchValue } = this.state
-    let filterData = data
 
+    let filterData = data
     // 节省过滤时间
     if (renderListFilter) {
       filterData = renderListFilter(data, searchValue)
@@ -208,56 +209,38 @@ class Base extends React.Component {
       filterData = renderListFilterDefault(data, searchValue)
     }
 
+    // 存起来给上下键用
+    this.filterData = filterData
+
     return filterData
   }
 
-  renderList = () => {
+  renderList() {
     const {
-      multiple,
       selected,
+      multiple,
       isGroupList,
-      onFocus,
-      onKeyUp,
-      onKeyDown,
-      onInputKeyUp,
-      onInputFocus,
-      onInputKeyDown,
-      listMaxHeight,
       renderListItem,
-      disabledSearch,
-      searchPlaceholder
+      searchPlaceholder,
+      listMaxHeight
     } = this.props
 
     const { loading, searchValue, willActiveIndex } = this.state
 
-    let filterData = this.doFilterData()
+    let filterData = this.getFilterData()
 
     return (
-      <div className='gm-more-select-popup' onKeyDown={this.handleKeyDown}>
-        {!disabledSearch && (
-          <div className='gm-more-select-popup-input'>
-            <input
-              autoFocus
-              type='text'
-              value={searchValue}
-              className='form-control'
-              onChange={this.handleChange}
-              placeholder={searchPlaceholder}
-              onFocus={e => {
-                onFocus && onFocus(e)
-                onInputFocus && onInputFocus(e)
-              }}
-              onKeyUp={e => {
-                onKeyUp && onKeyUp(e)
-                onInputKeyUp && onInputKeyUp(e)
-              }}
-              onKeyDown={e => {
-                onKeyDown && onKeyDown(e)
-                onInputKeyDown && onInputKeyDown(e)
-              }}
-            />
-          </div>
-        )}
+      <div className='gm-more-select-popup' onKeyDown={this.handlePopupKeyDown}>
+        <div className='gm-more-select-popup-input'>
+          <input
+            autoFocus
+            className='form-control'
+            type='text'
+            value={searchValue}
+            onChange={this.handleChange}
+            placeholder={searchPlaceholder}
+          />
+        </div>
         {loading && (
           <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'>
             <Loading size={20} />
@@ -285,18 +268,17 @@ class Base extends React.Component {
 
   render() {
     const {
-      popRef,
       disabled,
       selected,
       multiple,
-      children,
-      showArrow,
       placeholder,
-      popoverType,
+
       renderSelected,
+
       className,
       style,
-      popoverClassName
+      popoverType,
+      children
     } = this.props
 
     return (
@@ -313,28 +295,19 @@ class Base extends React.Component {
         style={style}
       >
         <Popover
-          animName
-          showArrow={showArrow}
+          ref={this.popoverRef}
           type={popoverType}
-          disabled={disabled}
+          animName
           popup={this.renderList()}
-          className={classNames(popoverClassName)}
-          popRef={pop => {
-            this._popRef = pop
-            if (popRef) {
-              popRef({
-                ...pop,
-                show: () => {
-                  // popup弹出框renderList处于memorized状态，内部渲染没更新
-                  this.setState({ searchValue: '', willActiveIndex: null })
-                  pop.show()
-                }
-              })
-            }
-          }}
+          disabled={disabled}
         >
           {children || (
-            <Flex wrap className='gm-more-select-selected'>
+            <Flex
+              ref={this.selectedRef}
+              tabIndex={0}
+              wrap
+              className='gm-more-select-selected'
+            >
               {selected.length !== 0 ? (
                 _.map(selected, item => (
                   <Flex
@@ -359,7 +332,8 @@ class Base extends React.Component {
                   </Flex>
                 ))
               ) : (
-                <div className='gm-text-desc'>{placeholder}</div>
+                // 加多个 &nbsp; 避免对齐问题。 有文本才有对齐
+                <div className='gm-text-desc'>{placeholder}&nbsp;</div>
               )}
             </Flex>
           )}
@@ -417,7 +391,6 @@ Base.propTypes = {
   onSearch: PropTypes.func, // searchValue, data
   delay: PropTypes.number,
   searchPlaceholder: PropTypes.string,
-  disabledSearch: PropTypes.bool, // 不需要搜索
   renderListFilter: PropTypes.func, // 过滤，提供 searchValue 和 data
   renderListFilterType: PropTypes.oneOf(['default', 'pinyin']), // 也可简单指定 默认的过滤类型
 
@@ -431,39 +404,13 @@ Base.propTypes = {
   // isGroupList
   isGroupList: PropTypes.bool,
 
-  popoverType: PropTypes.oneOf(['click', 'focus', 'realFocus']),
+  popoverType: PropTypes.oneOf(['focus', 'realFocus']),
 
-  children: PropTypes.any,
   className: PropTypes.string,
-  popoverClassName: PropTypes.string,
-  showArrow: PropTypes.bool,
   style: PropTypes.object,
 
-  // onInputKeyUp、onInputFocus、onInputKeyDown为暂时兼容全键盘，后续移除
-  popRef: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  onFocus: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onInputKeyUp: PropTypes.func,
-  onInputFocus: PropTypes.func,
-  onInputKeyDown: PropTypes.func
+  /** 目前为了 keyboard */
+  onKeyDown: PropTypes.func
 }
-
-Base.defaultProps = {
-  renderSelected: item => item.text,
-
-  delay: 500,
-  renderListItem: item => item.text,
-  listMaxHeight: '250px',
-
-  renderListFilterType: 'default',
-
-  popoverType: 'focus'
-}
-
-// 介绍 selected
-// 假设 selected 是 value，那么在搜索的时候 data 是一份新的数据，这份数据内不存在 已选的 values，那么 selected 怎么显示就束手无策了
-// 估用了 item
-// 由于引用方式诟病比较多，所以也改成了非引用方式。
 
 export default Base

@@ -19,6 +19,8 @@ const reqTable = require.context('../table', true, /\.stories\.js$/)
 function loadStories() {
   req.keys().forEach(filename => req(filename))
   reqTable.keys().forEach(filename => reqTable(filename))
+
+  require('../keyboard/keyboard.stories.js')
 }
 
 addParameters({
