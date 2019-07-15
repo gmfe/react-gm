@@ -2,14 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import LevelList from '../level_list'
 import Popover from '../popover'
-import classNames from 'classnames'
 import _ from 'lodash'
 import { getLevel } from '../level_list/util'
+import Selection from '../selection'
 
 // TODO
-// search
 // onlySelectLeaf
-// selected array => any
 
 class LevelSelect extends React.Component {
   constructor(props) {
@@ -20,12 +18,12 @@ class LevelSelect extends React.Component {
       search: ''
     }
 
-    this.refInput = React.createRef()
+    this.refSelection = React.createRef()
     this.popoverRef = React.createRef()
   }
 
   apiDoFocus = () => {
-    this.refInput.current.focus()
+    this.refSelection.current.apiDoFocus()
   }
 
   apiDoSelectWillActive = () => {
@@ -54,10 +52,6 @@ class LevelSelect extends React.Component {
     const { renderSelected } = this.props
     const items = this.getSelectedItem()
     return renderSelected(items)
-  }
-
-  handleInputChange = () => {
-    // TODO
   }
 
   handleKeyDown = event => {
@@ -136,11 +130,6 @@ class LevelSelect extends React.Component {
     })
   }
 
-  handleClear = () => {
-    const { onSelect } = this.props
-    onSelect([])
-  }
-
   handleWillActiveSelect = willActiveSelected => {
     this.setState({
       willActiveSelected
@@ -171,34 +160,24 @@ class LevelSelect extends React.Component {
     )
   }
 
+  handleSelectionSelect = selected => {
+    const { onSelect } = this.props
+    onSelect(selected === null ? [] : selected)
+  }
+
   renderTarget = () => {
-    const { disabled, inputProps } = this.props
-    const inputValue = this.getSelectItemText()
+    const { selected, disabled } = this.props
+
+    // 注意转换 selected onSelect renderSelected
     return (
-      <div
-        className={classNames('gm-level-select', {
-          'gm-level-select-close': inputValue,
-          disabled
-        })}
-      >
-        <input
-          ref={this.refInput}
-          disabled={disabled}
-          type='text'
-          value={inputValue}
-          onChange={this.handleInputChange}
-          onKeyDown={this.handleKeyDown}
-          className={classNames('form-control', inputProps.className)}
-        />
-        {inputValue && (
-          <i
-            onClick={!disabled && this.handleClear}
-            className='xfont xfont-close-circle gm-cursor gm-level-select-close-icon'
-          />
-        )}
-        <i className='gm-arrow-down' />
-        <i className='gm-arrow-up' />
-      </div>
+      <Selection
+        ref={this.refSelection}
+        selected={selected.length === 0 ? null : selected}
+        onSelect={this.handleSelectionSelect}
+        renderSelected={() => this.getSelectItemText()}
+        onKeyDown={this.handleKeyDown}
+        disabled={disabled}
+      />
     )
   }
 
@@ -228,7 +207,6 @@ LevelSelect.propTypes = {
   disabled: PropTypes.bool,
 
   renderSelected: PropTypes.func,
-  inputProps: PropTypes.object,
 
   // 仅仅能选择叶子
   onlySelectLeaf: PropTypes.bool,
@@ -240,8 +218,7 @@ LevelSelect.propTypes = {
 }
 
 LevelSelect.defaultProps = {
-  inputProps: {},
-  renderSelected: items => items.map(v => v.text).join(','),
+  renderSelected: item => item.map(v => v.text).join(','),
   onKeyDown: _.noop
 }
 

@@ -178,6 +178,25 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
             )
           },
           {
+            Header: '区域',
+            accessor: 'area',
+            minWidth: 150,
+            isKeyboard: true,
+            Cell: cellProps => (
+              <Observer>
+                {() => (
+                  <KCLevelSelect
+                    data={areaData}
+                    selected={cellProps.original.area.slice()}
+                    onSelect={selected =>
+                      store.setArea(cellProps.index, selected)
+                    }
+                  />
+                )}
+              </Observer>
+            )
+          },
+          {
             Header: '无用',
             accessor: 'unuse',
             minWidth: 50,
@@ -198,25 +217,6 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
                   <KCInputNumberV2
                     value={cellProps.original.age}
                     onChange={value => store.setAge(cellProps.index, value)}
-                  />
-                )}
-              </Observer>
-            )
-          },
-          {
-            Header: '区域',
-            accessor: 'area',
-            minWidth: 150,
-            isKeyboard: true,
-            Cell: cellProps => (
-              <Observer>
-                {() => (
-                  <KCLevelSelect
-                    data={areaData}
-                    selected={cellProps.original.area}
-                    onSelect={selected =>
-                      store.setArea(cellProps.index, selected)
-                    }
                   />
                 )}
               </Observer>
