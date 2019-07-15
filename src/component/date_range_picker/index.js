@@ -75,16 +75,16 @@ const DateRangePicker = props => {
     <div
       ref={dateRangePickerRef}
       className={classNames(
-        'gm-daterangepicker gm-inline-block',
+        'gm-date-range-picker gm-inline-block',
         {
-          'gm-daterangepicker-can-clear': canClear,
+          'gm-date-range-picker-can-clear': canClear,
           disabled
         },
         className
       )}
     >
       {beginLabel && <span className='gm-padding-right-5'>{beginLabel}</span>}
-      <div className='gm-daterangepicker-item gm-inline-block gm-position-relative'>
+      <div className='gm-date-range-picker-item gm-inline-block gm-position-relative'>
         <Popover
           animName
           disabled={disabled || false}
@@ -98,11 +98,9 @@ const DateRangePicker = props => {
           }
         >
           <div
-            className={classNames(
-              'gm-daterangepicker-inner gm-cursor',
-              { disabled },
-              className
-            )}
+            className={classNames('gm-date-range-picker-inner gm-cursor', {
+              disabled
+            })}
           >
             {renderBeginInputValue()}
           </div>
@@ -110,7 +108,7 @@ const DateRangePicker = props => {
         {canClear && begin && (
           <button
             type='button'
-            className='gm-daterangepicker-clear-btn close'
+            className='gm-date-range-picker-clear-btn close'
             onClick={handleClearBeginDate}
           >
             &times;
@@ -120,7 +118,7 @@ const DateRangePicker = props => {
       </div>
       {!endLabel && <span> ~ </span>}
       {endLabel && <span className='gm-padding-lr-5'>{endLabel}</span>}
-      <div className='gm-daterangepicker-item gm-inline-block gm-position-relative'>
+      <div className='gm-date-range-picker-item gm-inline-block gm-position-relative'>
         <Popover
           animName
           disabled={disabled || false}
@@ -137,11 +135,9 @@ const DateRangePicker = props => {
         >
           <div
             ref={endDateRef}
-            className={classNames(
-              'gm-daterangepicker-inner gm-cursor',
-              { disabled },
-              className
-            )}
+            className={classNames('gm-date-range-picker-inner gm-cursor', {
+              disabled
+            })}
           >
             {renderEndInputValue()}
           </div>
@@ -149,7 +145,7 @@ const DateRangePicker = props => {
         {canClear && end && (
           <button
             type='button'
-            className='gm-daterangepicker-clear-btn close'
+            className='gm-date-range-picker-clear-btn close'
             onClick={handleClearEndDate}
           >
             &times;
