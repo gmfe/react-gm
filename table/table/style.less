@@ -41,11 +41,12 @@
 
     .rt-tr {
       min-height: 60px;
-
       .rt-td {
+        align-items: center;
         display: flex;
-        justify-content: center;
-        flex-direction: column;
+        .gm-react-table-td-content {
+          width: 100%;
+        }
       }
     }
   }
@@ -281,10 +282,11 @@
 }
 
 .gm-react-edit-table.ReactTable {
-  &.-striped {
-    .rt-tbody {
-      .rt-tr .rt-td {
-        background-color: white;
+  &.-striped .rt-tbody {
+    .rt-tr {
+      background-color: white;
+
+      .rt-td {
         .gm-react-edit-table-cell-padding();
 
         &:first-child,
@@ -326,6 +328,7 @@
         .gm-selection {
           input {
             .gm-react-edit-table-common-input();
+
             padding-right: 35px;
           }
         }
