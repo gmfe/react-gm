@@ -19,7 +19,7 @@ function generateDiyColumns(propsColumns, mixColumns) {
     const { show = true, diyEnable = true } = column
 
     const mixItem = _.find(mixColumns, v => {
-      const localKey = v.id || v.accessor
+      const localKey = getColumnKey(v)
       return localKey === key
     })
 
@@ -64,15 +64,8 @@ class Selector extends React.Component {
     return (
       <Flex className='gm-react-table-diy-selector gm-box-shadow-bottom' wrap>
         {_.map(columns, (item, index) => {
-          const {
-            id,
-            accessor,
-            show: checked,
-            Header,
-            diyItemText,
-            diyEnable
-          } = item
-          const key = id || accessor
+          const { show: checked, Header, diyItemText, diyEnable } = item
+          const key = getColumnKey(item)
           const text = diyItemText || Header
 
           // Header是字符串才展示自定义选择项
