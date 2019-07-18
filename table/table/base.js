@@ -38,13 +38,27 @@ class BaseTable extends React.Component {
   }
 
   processItem = item => {
-    let Cell = item.Cell
+    const Cell = item.Cell
+    let NewCell = (cell, column) => (
+      <div className='gm-react-table-td-content'>
+        {Cell
+          ? Cell instanceof Function
+            ? Cell(cell, column)
+            : Cell
+          : cell.value}
+      </div>
+    )
+
     if (!Cell) {
-      Cell = row => {
+      NewCell = row => {
         if (row.value === undefined || row.value === null || row.value === '') {
-          return <span className='gm-text-desc'>-</span>
+          return (
+            <div className='gm-react-table-td-content'>
+              <span className='gm-text-desc'>-</span>
+            </div>
+          )
         }
-        return row.value
+        return <div className='gm-react-table-td-content'>{row.value}</div>
       }
     }
 
@@ -59,7 +73,7 @@ class BaseTable extends React.Component {
       sortable: !!item.sortable,
       // 有意义，如果是 undefined, 则赋值 undefined，覆盖默认值 100
       minWidth: item.minWidth,
-      Cell
+      Cell: NewCell
     }
   }
 
