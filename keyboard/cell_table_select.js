@@ -2,7 +2,8 @@ import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
 import KeyboardCell from './cell'
 import { TableSelect } from '../src'
-import { isInputUnBoundary } from './util'
+import { isInputUnBoundary, scrollIntoViewFixedWidth } from './util'
+import ReactDOM from 'react-dom'
 
 const KeyboardCellMoreSelect = props => {
   const { onKeyDown, ...rest } = props
@@ -12,6 +13,13 @@ const KeyboardCellMoreSelect = props => {
 
   const handleFocus = () => {
     targetRef.current.apiDoFocus()
+  }
+
+  const handleScroll = fixedWidths => {
+    scrollIntoViewFixedWidth(
+      ReactDOM.findDOMNode(targetRef.current),
+      fixedWidths
+    )
   }
 
   const handleKeyDown = event => {
@@ -47,7 +55,7 @@ const KeyboardCellMoreSelect = props => {
   }
 
   return (
-    <KeyboardCell ref={cellRef} onFocus={handleFocus}>
+    <KeyboardCell ref={cellRef} onFocus={handleFocus} onScroll={handleScroll}>
       <TableSelect
         {...rest}
         ref={targetRef}

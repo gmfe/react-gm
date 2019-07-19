@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  IdContext,
+  WrapContext,
   CellKeyContext,
   KEYBOARD_ONFOCUS,
   KEYBOARD_DIRECTION,
@@ -19,10 +19,10 @@ import {
  * */
 class KeyboardCell extends React.Component {
   dispatch = (eventName, detail) => {
-    const { keyboardId, cellKey } = this.props
+    const { wrapData, cellKey } = this.props
 
     window.dispatchEvent(
-      new window.CustomEvent(eventName + keyboardId, {
+      new window.CustomEvent(eventName + wrapData.id, {
         detail: {
           ...detail,
           cellKey
@@ -48,23 +48,25 @@ class KeyboardCell extends React.Component {
   }
 
   handleFocus = event => {
-    const { onFocus, cellKey } = this.props
+    const { wrapData, onFocus, onScroll, cellKey } = this.props
 
     if (event.detail.cellKey !== cellKey) {
       return
     }
 
     onFocus()
+
+    onScroll(wrapData.fixedWidths)
   }
 
   componentDidMount() {
-    const { keyboardId } = this.props
-    window.addEventListener(KEYBOARD_ONFOCUS + keyboardId, this.handleFocus)
+    const { wrapData } = this.props
+    window.addEventListener(KEYBOARD_ONFOCUS + wrapData.id, this.handleFocus)
   }
 
   componentWillUnmount() {
-    const { keyboardId } = this.props
-    window.removeEventListener(KEYBOARD_ONFOCUS + keyboardId, this.handleFocus)
+    const { wrapData } = this.props
+    window.removeEventListener(KEYBOARD_ONFOCUS + wrapData.id, this.handleFocus)
   }
 
   render() {
@@ -77,37 +79,38 @@ class KeyboardCell extends React.Component {
 }
 
 KeyboardCell.propTypes = {
-  keyboardId: PropTypes.string.isRequired,
+  wrapData: PropTypes.object.isRequired,
   /** Cell 的身份表示，让 Wrap 方便找到 */
   cellKey: PropTypes.string.isRequired,
-  /** Wrap 要 focus 到单元格的时候会触发 onFocus，请实现此功能 */
-  onFocus: PropTypes.func.isRequired
+  /** Wrap 要 focus 到单元格的时候会触发 onFocus，请实现此功能。 */
+  onFocus: PropTypes.func.isRequired,
+  /** 表格多的时候需要滚到视窗, 提供 fixedWidths 信息给调用方，即 { leftFixedWidth, rightFixedWidth } */
+  onScroll: PropTypes.func.isRequired
 }
 
 const withIdAndCellKey = Component => {
   const WithContext = props => {
     const { forwardedRef, ...rest } = props
     return (
-      <IdContext.Consumer>
-        {id => (
+      <WrapContext.Consumer>
+        {wrap => (
           <CellKeyContext.Consumer>
             {cellKey => (
               <Component
                 ref={forwardedRef}
                 {...rest}
-                keyboardId={id}
+                wrapData={wrap}
                 cellKey={cellKey}
               />
             )}
           </CellKeyContext.Consumer>
         )}
-      </IdContext.Consumer>
+      </WrapContext.Consumer>
     )
   }
 
   WithContext.propTypes = {
-    forwardedRef: PropTypes.any,
-    onFocus: PropTypes.func.isRequired
+    forwardedRef: PropTypes.any
   }
 
   // 转发下 ref

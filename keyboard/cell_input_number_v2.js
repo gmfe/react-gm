@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
+import ReactDOM from 'react-dom'
 import KeyboardCell from './cell'
-import { isInputUnBoundary } from './util'
+import { isInputUnBoundary, scrollIntoViewFixedWidth } from './util'
 import { InputNumberV2 } from '../src'
 
 const KeyboardCellInput = props => {
@@ -12,6 +13,13 @@ const KeyboardCellInput = props => {
 
   const handleFocus = () => {
     targetRef.current.apiDoFocus()
+  }
+
+  const handleScroll = fixedWidths => {
+    scrollIntoViewFixedWidth(
+      ReactDOM.findDOMNode(targetRef.current),
+      fixedWidths
+    )
   }
 
   const handleKeyDown = event => {
@@ -45,7 +53,7 @@ const KeyboardCellInput = props => {
   }
 
   return (
-    <KeyboardCell ref={cellRef} onFocus={handleFocus}>
+    <KeyboardCell ref={cellRef} onFocus={handleFocus} onScroll={handleScroll}>
       <InputNumberV2 {...rest} ref={targetRef} onKeyDown={handleKeyDown} />
     </KeyboardCell>
   )

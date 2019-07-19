@@ -5,6 +5,13 @@ import KCMoreSelect from './cell_more_select'
 import KCInputNumberV2 from './cell_input_number_v2'
 import KCLevelSelect from './cell_level_select'
 import KCTableSelect from './cell_table_select'
+import { isInputUnBoundary, scrollIntoViewFixedWidth } from './util'
+
+// 只暴露写方法
+const KeyboardUtil = {
+  isInputUnBoundary,
+  scrollIntoViewFixedWidth
+}
 
 export {
   keyboardTableHoc,
@@ -13,5 +20,6 @@ export {
   KCInputNumberV2,
   KCMoreSelect,
   KCLevelSelect,
-  KCTableSelect
+  KCTableSelect,
+  KeyboardUtil
 }

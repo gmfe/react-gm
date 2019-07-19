@@ -36,7 +36,7 @@ function fixedColumnsTableHOC(Component) {
       for (let i = 0; i < index; i += 1) {
         const column = columns[i]
         if (column.show !== false) {
-          const width = column.width || column.minWidth
+          const width = column.width
           offset += width
         }
       }
@@ -49,7 +49,7 @@ function fixedColumnsTableHOC(Component) {
       for (let i = index + 1; i < columns.length; i += 1) {
         const column = columns[i]
         if (column.show !== false) {
-          const width = column.width || column.minWidth
+          const width = column.width
           offset += width
         }
       }

@@ -61,10 +61,27 @@ function keyboardTableHOC(Component) {
       }
     })
 
+    // fix hoc 带来的问题
+    let leftFixedWidth = 0
+    let rightFixedWidth = 0
+    _.each(columns, column => {
+      if (column.show !== false) {
+        if (column.fixed === 'left' && column.width) {
+          leftFixedWidth += column.width
+        } else if (column.fixed === 'right' && column.width) {
+          rightFixedWidth += column.width
+        }
+      }
+    })
+
     return (
       <Wrap
         id={id}
         columnKeys={columnKeys}
+        fixedWidths={{
+          leftFixedWidth,
+          rightFixedWidth
+        }}
         dataLength={data.length}
         onAddRow={onAddRow}
       >
