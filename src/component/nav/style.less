@@ -1,62 +1,59 @@
-@gm-nav-bg-second: #363d44;
-@gm-nav-there-active: #c3ecc4;
-
 .gm-nav {
-  background: @gm-nav-bg-second;
-  font-size: 14px;
+  width: 80px;
+  height: 100vh;
+  background: #263350;
+  z-index: 910;
 
-  .gm-nav-logo {
-    height: 50px;
-  }
-
-  .gm-nav-there > a {
+  .gm-nav-one {
     display: block;
-    color: @gm-color-first;
-    white-space: nowrap;
-    padding: 7px 0px 7px 16px;
     text-decoration: none;
-  }
-
-  .gm-nav-two > div > a {
-    display: block;
-    white-space: nowrap;
-    padding: 9px 0px 8px 11px;
-    text-decoration: none;
-    cursor: inherit;
-    font-size: 12px;
-    color: @gm-color-second;
-  }
-
-  .gm-nav-jump > div > a {
-    display: block;
-    color: @gm-color-first;
-    white-space: nowrap;
-    padding: 15px 15px;
-    text-decoration: none;
-  }
-
-  .gm-nav-two > div + div {
-    margin-top: 5px;
-  }
-
-  .gm-nav-one > div > a {
-    border-top: 1px solid @gm-nav-bg-second;
-    display: block;
-    padding: 15px 0px 15px 11px;
     color: white;
-    text-decoration: none;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 14px;
+
+    &.active {
+      background: #1c4f7a;
+    }
+
+    &:hover {
+      background: #0b75b8;
+    }
   }
 
-  .gm-nav-there > a.active {
-    background-color: @gm-nav-there-active;
-  }
-
-  .gm-nav-there > a:hover {
-    color: @brand-primary;
-  }
-
-  .gm-nav-one > div.active a {
-    background: white;
+  .gm-nav-popup {
+    display: none;
     color: @gm-color-first;
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 80px;
+    padding: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .gm-nav-one-box {
+    &:hover {
+      .gm-nav-popup {
+        display: block;
+      }
+    }
+  }
+
+  .gm-nav-two {
+    width: 100px;
+    margin: 5px;
+  }
+
+  .gm-nav-there {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: @gm-color-first;
+
+    &:hover {
+      color: #1c4f7a;
+      background-color: #f1f6fb;
+    }
   }
 }
