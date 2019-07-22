@@ -6,7 +6,7 @@ import { LevelSelect } from '../src'
 import { isInputUnBoundary, scrollIntoViewFixedWidth } from './util'
 
 const KeyboardCellLevelSelect = props => {
-  const { onKeyDown, ...rest } = props
+  const { disabled, onKeyDown, ...rest } = props
 
   const cellRef = useRef(null)
   const targetRef = useRef(null)
@@ -55,11 +55,17 @@ const KeyboardCellLevelSelect = props => {
   }
 
   return (
-    <KeyboardCell ref={cellRef} onFocus={handleFocus} onScroll={handleScroll}>
+    <KeyboardCell
+      ref={cellRef}
+      onFocus={handleFocus}
+      onScroll={handleScroll}
+      disabled={disabled}
+    >
       <LevelSelect
         {...rest}
         ref={targetRef}
         popoverType='realFocus'
+        disabled={disabled}
         onKeyDown={handleKeyDown}
       />
     </KeyboardCell>
@@ -68,6 +74,7 @@ const KeyboardCellLevelSelect = props => {
 
 KeyboardCellLevelSelect.propTypes = {
   ...LevelSelect.propTypes,
+  disabled: PropTypes.bool,
   onKeyDown: PropTypes.func
 }
 
