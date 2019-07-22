@@ -89,6 +89,7 @@ import ToolTip from './component/tool_tip'
 import LevelList from './component/level_list'
 import LevelSelect from './component/level_select'
 import Input from './component/input'
+import TableSelect from './component/table_select'
 
 import Validator from './validator'
 
@@ -223,5 +224,6 @@ export {
   ToolTip,
   LevelList,
   LevelSelect,
-  Input
+  Input,
+  TableSelect
 }

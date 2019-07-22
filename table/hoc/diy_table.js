@@ -110,7 +110,7 @@ function diyTableHOC(Component) {
       if (process.env.NODE_ENV !== 'production') {
         _.each(props.columns, column => {
           const key = getColumnKey(column)
-          if (key) {
+          if (key && column.diyEnable !== false) {
             if (!_.isString(column.Header) && !column.diyItemText) {
               console.error('column need diyItemText', column)
             }

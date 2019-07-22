@@ -1,21 +1,25 @@
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
 import KeyboardCell from './cell'
+import { TableSelect } from '../src'
 import { isInputUnBoundary, scrollIntoViewFixedWidth } from './util'
-import { Input } from '../src'
+import ReactDOM from 'react-dom'
 
-const KeyboardCellInput = props => {
+const KeyboardCellMoreSelect = props => {
   const { disabled, onKeyDown, ...rest } = props
 
   const cellRef = useRef(null)
   const targetRef = useRef(null)
 
   const handleFocus = () => {
-    targetRef.current.focus()
+    targetRef.current.apiDoFocus()
   }
 
   const handleScroll = fixedWidths => {
-    scrollIntoViewFixedWidth(targetRef.current, fixedWidths)
+    scrollIntoViewFixedWidth(
+      ReactDOM.findDOMNode(targetRef.current),
+      fixedWidths
+    )
   }
 
   const handleKeyDown = event => {
@@ -44,6 +48,8 @@ const KeyboardCellInput = props => {
     } else if (event.key === 'Enter') {
       // 要阻止默认的
       event.preventDefault()
+      // enter 要选择
+      targetRef.current.apiDoSelectWillActive()
       cellRef.current.apiDoEnter()
     }
   }
@@ -55,9 +61,10 @@ const KeyboardCellInput = props => {
       onScroll={handleScroll}
       disabled={disabled}
     >
-      <Input
-        ref={targetRef}
+      <TableSelect
         {...rest}
+        ref={targetRef}
+        popoverType='realFocus'
         disabled={disabled}
         onKeyDown={handleKeyDown}
       />
@@ -65,9 +72,10 @@ const KeyboardCellInput = props => {
   )
 }
 
-KeyboardCellInput.propTypes = {
-  disabled: PropTypes.bool.isRequired,
+KeyboardCellMoreSelect.propTypes = {
+  ...TableSelect.propTypes,
+  disabled: PropTypes.bool,
   onKeyDown: PropTypes.func
 }
 
-export default KeyboardCellInput
+export default KeyboardCellMoreSelect

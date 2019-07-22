@@ -116,9 +116,16 @@ storiesOf('表格|EditTable', module)
                 { index } // eslint-disable-line
               ) => (
                 <EditTableOperation
-                  delAvailable={false} // 禁用删除
-                  onAddRow={() => console.log('增加一行', index)}
-                  onDeleteRow={() => console.log('删除一行', index)}
+                  onAddRow={
+                    index === 2
+                      ? () => console.log('增加一行', index)
+                      : undefined
+                  }
+                  onDeleteRow={
+                    index === 1
+                      ? () => console.log('删除一行', index)
+                      : undefined
+                  }
                 />
               )
             },

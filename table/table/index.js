@@ -15,7 +15,7 @@ Table.propTypes = {
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
   className: PropTypes.string,
-  style: PropTypes.string
+  style: PropTypes.object
 }
 
 export default Table

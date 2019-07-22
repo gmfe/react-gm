@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IdContext = React.createContext(null)
+const WrapContext = React.createContext(null)
 const CellKeyContext = React.createContext(null)
 
 const KEYBOARD_ONFOCUS = 'KEYBOARD_ONFOCUS_'
@@ -41,12 +41,67 @@ const isInputUnBoundary = event => {
   return false
 }
 
+const getTd = dom => {
+  let parentDom = dom.parentNode
+
+  while (!parentDom.className.includes('rt-td')) {
+    parentDom = parentDom.parentNode
+    if (parentDom === document) {
+      return null
+    }
+  }
+
+  return parentDom
+}
+
+const getTable = dom => {
+  let parentDom = dom.parentNode
+
+  while (!parentDom.className.includes('rt-table')) {
+    parentDom = parentDom.parentNode
+    if (parentDom === document) {
+      return null
+    }
+  }
+
+  return parentDom
+}
+
+// 此 dom 一定是 td 内 的元素
+const scrollIntoViewFixedWidth = (dom, fixedWidth) => {
+  const td = getTd(dom)
+  if (!td) {
+    return
+  }
+
+  const table = getTable(dom)
+  if (!table) {
+    return
+  }
+
+  const { leftFixedWidth, rightFixedWidth } = fixedWidth
+  const { scrollLeft } = table
+  const { offsetLeft, offsetWidth } = td
+
+  // 要 if else
+  if (offsetLeft - leftFixedWidth < scrollLeft) {
+    table.scrollLeft = offsetLeft - leftFixedWidth
+  } else if (
+    offsetLeft + offsetWidth - (table.offsetWidth - rightFixedWidth) >
+    scrollLeft
+  ) {
+    table.scrollLeft =
+      offsetLeft + offsetWidth - (table.offsetWidth - rightFixedWidth)
+  }
+}
+
 export {
-  IdContext,
+  WrapContext,
   CellKeyContext,
   KEYBOARD_ONFOCUS,
   KEYBOARD_DIRECTION,
   KEYBOARD_ENTER,
   KEYBOARD_TAB,
-  isInputUnBoundary
+  isInputUnBoundary,
+  scrollIntoViewFixedWidth
 }

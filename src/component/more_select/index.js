@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import { pinYinFilter } from 'gm-util'
 import Base from './base'
 
 class MoreSelect extends React.Component {
@@ -60,17 +59,6 @@ class MoreSelect extends React.Component {
     )
   }
 }
-
-function renderListFilterDefault(data, query) {
-  return _.filter(data, item => item.text.includes(query))
-}
-
-function renderListFilterPinYin(data, query) {
-  return pinYinFilter(data, query, item => item.text)
-}
-
-MoreSelect.renderListFilterDefault = renderListFilterDefault
-MoreSelect.renderListFilterPinYin = renderListFilterPinYin
 
 MoreSelect.propTypes = {
   // 其他来源于 Base

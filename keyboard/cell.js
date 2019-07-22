@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  IdContext,
+  WrapContext,
   CellKeyContext,
   KEYBOARD_ONFOCUS,
   KEYBOARD_DIRECTION,
   KEYBOARD_ENTER,
   KEYBOARD_TAB
 } from './util'
+
+// {id: {cellName, detail}}
+// 存起来，方便cell不可用的时候把命令给下一个响应者
+const lastDispatch = {}
 
 /**
  * Cell 和 Wrap 配合使用，使单元格具有响应键盘能力
@@ -19,10 +23,15 @@ import {
  * */
 class KeyboardCell extends React.Component {
   dispatch = (eventName, detail) => {
-    const { keyboardId, cellKey } = this.props
+    const { wrapData, cellKey } = this.props
+
+    lastDispatch[wrapData.id] = {
+      eventName,
+      detail
+    }
 
     window.dispatchEvent(
-      new window.CustomEvent(eventName + keyboardId, {
+      new window.CustomEvent(eventName + wrapData.id, {
         detail: {
           ...detail,
           cellKey
@@ -48,23 +57,33 @@ class KeyboardCell extends React.Component {
   }
 
   handleFocus = event => {
-    const { onFocus, cellKey } = this.props
+    const { wrapData, onFocus, onScroll, cellKey, disabled } = this.props
 
     if (event.detail.cellKey !== cellKey) {
       return
     }
 
-    onFocus()
+    if (!disabled) {
+      onFocus()
+      onScroll(wrapData.fixedWidths)
+    }
+    // 不可响应，则抛给下一个响应者
+    else {
+      this.dispatch(
+        lastDispatch[wrapData.id].eventName,
+        lastDispatch[wrapData.id].detail
+      )
+    }
   }
 
   componentDidMount() {
-    const { keyboardId } = this.props
-    window.addEventListener(KEYBOARD_ONFOCUS + keyboardId, this.handleFocus)
+    const { wrapData } = this.props
+    window.addEventListener(KEYBOARD_ONFOCUS + wrapData.id, this.handleFocus)
   }
 
   componentWillUnmount() {
-    const { keyboardId } = this.props
-    window.removeEventListener(KEYBOARD_ONFOCUS + keyboardId, this.handleFocus)
+    const { wrapData } = this.props
+    window.removeEventListener(KEYBOARD_ONFOCUS + wrapData.id, this.handleFocus)
   }
 
   render() {
@@ -77,37 +96,40 @@ class KeyboardCell extends React.Component {
 }
 
 KeyboardCell.propTypes = {
-  keyboardId: PropTypes.string.isRequired,
+  wrapData: PropTypes.object.isRequired,
   /** Cell 的身份表示，让 Wrap 方便找到 */
   cellKey: PropTypes.string.isRequired,
-  /** Wrap 要 focus 到单元格的时候会触发 onFocus，请实现此功能 */
-  onFocus: PropTypes.func.isRequired
+  /** Wrap 要 focus 到单元格的时候会触发 onFocus，请实现此功能。 */
+  onFocus: PropTypes.func.isRequired,
+  /** 表格多的时候需要滚到视窗, 提供 fixedWidths 信息给调用方，即 { leftFixedWidth, rightFixedWidth } */
+  onScroll: PropTypes.func.isRequired,
+  /** 是否有响应能力 */
+  disabled: PropTypes.bool
 }
 
 const withIdAndCellKey = Component => {
   const WithContext = props => {
     const { forwardedRef, ...rest } = props
     return (
-      <IdContext.Consumer>
-        {id => (
+      <WrapContext.Consumer>
+        {wrap => (
           <CellKeyContext.Consumer>
             {cellKey => (
               <Component
                 ref={forwardedRef}
                 {...rest}
-                keyboardId={id}
+                wrapData={wrap}
                 cellKey={cellKey}
               />
             )}
           </CellKeyContext.Consumer>
         )}
-      </IdContext.Consumer>
+      </WrapContext.Consumer>
     )
   }
 
   WithContext.propTypes = {
-    forwardedRef: PropTypes.any,
-    onFocus: PropTypes.func.isRequired
+    forwardedRef: PropTypes.any
   }
 
   // 转发下 ref

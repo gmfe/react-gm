@@ -10,6 +10,7 @@ import fixedFirstColumnsTableHOC from './hoc/fixed_first_columns_table'
 import selectTableHOC from './hoc/select_table'
 import expandTableHOC from './hoc/expand_table'
 
+// 只暴露些方法
 import {
   OperationHeader,
   OperationCell,

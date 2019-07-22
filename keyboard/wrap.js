@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
-  IdContext,
+  WrapContext,
   KEYBOARD_DIRECTION,
   KEYBOARD_ONFOCUS,
   KEYBOARD_ENTER,
@@ -23,7 +23,7 @@ const getKey = cellKey => {
  * Wrap 做出动作，其中包括 focus 到 Cell
  * */
 const Wrap = props => {
-  const { id, children, onAddRow, columnKeys, dataLength } = props
+  const { id, children, onAddRow, columnKeys, dataLength, fixedWidths } = props
 
   // 处理 focus
   const doFocusWithColumnRowKey = (rowKey, columnKey) => {
@@ -156,7 +156,16 @@ const Wrap = props => {
     }
   }, [dataLength, columnKeys.length])
 
-  return <IdContext.Provider value={id}>{children}</IdContext.Provider>
+  return (
+    <WrapContext.Provider
+      value={{
+        id,
+        fixedWidths
+      }}
+    >
+      {children}
+    </WrapContext.Provider>
+  )
 }
 
 Wrap.propTypes = {
@@ -167,7 +176,8 @@ Wrap.propTypes = {
   /** Wrap 需要知道有多少行，以便能找到相应的单元格，同时必要时会触发 onAddRow 告知调用方需要增加一行数据 */
   dataLength: PropTypes.number.isRequired,
   /** 增加一行数据 */
-  onAddRow: PropTypes.func.isRequired
+  onAddRow: PropTypes.func.isRequired,
+  fixedWidths: PropTypes.object.isRequired
 }
 
 export default Wrap

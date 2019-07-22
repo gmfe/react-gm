@@ -14,8 +14,6 @@ const Button = props => {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleClick = e => {
-    e.preventDefault()
-
     const { onClick } = props
     const result = onClick(e)
 
