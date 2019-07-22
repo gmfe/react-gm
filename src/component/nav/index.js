@@ -4,191 +4,107 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Flex from '../flex'
 
-class Nav extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = this.getInitState()
-  }
-  // 匹配域名处理导航栏 active 显示
-  getInitState = () => {
-    const { data, selected } = this.props
-    return {
-      oneSelected: _.find(data, one => selected.includes(one.link)),
-      isJump: false
+function doFilter(data) {
+  return _.filter(data, v => {
+    if (v.show === false) {
+      return false
     }
-  }
 
-  handleOne = (one, e) => {
-    e.preventDefault()
-    clearTimeout(this.timer)
-    this.setState({
-      oneSelected: one,
-      isJump: false
-    })
-  }
+    if (v.sub) {
+      v.sub = doFilter(v.sub)
 
-  handleJumpOne = (one, e) => {
-    e.preventDefault()
-    this.setState({
-      oneSelected: one,
-      isJump: true
-    })
-  }
+      return v.sub.length !== 0
+    }
 
-  handleMouseLeave = () => {
-    this.timer = setTimeout(() => {
-      this.setState(this.getInitState())
-    }, 200)
-  }
+    return true
+  })
+}
 
-  render() {
-    const {
-      onSelect,
-      selected,
-      data,
-      jump,
-      className,
-      logo, // eslint-disable-line
-      widths,
-      isBrowserRouter,
-      renderExceptionNav,
-      ...rest
-    } = this.props
+const Popup = props => {
+  const { data } = props
 
-    const { oneSelected, isJump } = this.state
-    return (
-      <Flex
-        {...rest}
-        className={classNames('gm-nav', className)}
-        onMouseLeave={this.handleMouseLeave}
-      >
-        <div style={{ width: widths[0] }}>
-          <Flex alignCenter justifyCenter className='gm-nav-logo'>
-            {logo}
-          </Flex>
-          <div className='gm-margin-top-5 gm-nav-one'>
-            {_.map(data, (one, oneI) => {
-              let link = !isBrowserRouter && /^\/[^#\/].*/.test(one.link) ? `#${one.link}` : one.link // eslint-disable-line
-              return (
-                <div
-                  key={oneI + one.link}
-                  className={classNames({
-                    active: oneSelected && oneSelected.link === one.link
-                  })}
-                >
-                  <a href={link} onClick={this.handleOne.bind(this, one)}>
-                    {one.name}
-                  </a>
-                </div>
-              )
-            })}
-            <div
-              style={{
-                margin: '30px 10px'
-              }}
-            />
-            {_.map(jump, (one, oneI) => (
-              <div
-                key={oneI + one.link}
-                className={classNames({
-                  active: oneSelected && oneSelected.link === one.link
-                })}
-              >
-                <a href={one.link} onClick={this.handleJumpOne.bind(this, one)}>
-                  {one.name}
+  return (
+    <div className='gm-nav-popup'>
+      <Flex>
+        {_.map(data, (v, i) => (
+          <div key={i} className='gm-nav-two'>
+            <div className='gm-text-desc gm-padding-5'>{v.name}</div>
+            <div className='gm-border-bottom gm-margin-tb-5' />
+            <div>
+              {_.map(v.sub, (s, si) => (
+                <a key={si} href={s.link} className='gm-nav-there'>
+                  {s.name}
                 </a>
-              </div>
-            ))}
-            {renderExceptionNav && renderExceptionNav(oneSelected)}{' '}
-            {/* 传递当前选中项数据以外部判断是否点击态 */}
+              ))}
+            </div>
           </div>
-        </div>
-        {/* 显示二级导航栏逻辑 */}
-        {oneSelected && oneSelected.sub && (
-          <div
-            className='gm-border-right gm-bg-white gm-overflow-y'
-            style={{
-              width: widths[1],
-              paddingTop: '52px',
-              height: '100vh'
-            }}
-          >
-            {isJump ? (
-              <div className='gm-nav-jump'>
-                {_.map(oneSelected.sub, (two, twoI) => (
-                  <div key={two.link}>
-                    <a
-                      key={twoI + two.link}
-                      href={two.link}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      {two.name}
-                    </a>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className='gm-nav-two'>
-                {_.map(oneSelected.sub, (two, twoI) => (
-                  <div key={two.link}>
-                    <a
-                      key={twoI + two.link}
-                      className={classNames({
-                        active: selected.includes(two.link)
-                      })}
-                      href={two.link}
-                      onClick={e => e.preventDefault()}
-                    >
-                      {two.name}
-                    </a>
-                    <div className='gm-nav-there'>
-                      {_.map(two.sub, (v, i) => {
-                        let link = !isBrowserRouter && /^\/[^#\/].*/.test(v.link) ? `#${v.link}` : v.link // eslint-disable-line
-                        return (
-                          <a
-                            href={link}
-                            key={i + v.link}
-                            className={classNames({
-                              active: selected.includes(v.link.split('?')[0])
-                            })}
-                            onClick={e => {
-                              e.preventDefault()
-                              onSelect(v)
-                            }}
-                          >
-                            {v.name}
-                          </a>
-                        )
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+        ))}
       </Flex>
-    )
-  }
+    </div>
+  )
+}
+
+Popup.propTypes = {
+  data: PropTypes.array.isRequired
+}
+
+const Item = props => {
+  const {
+    data: { icon, name, link, sub }
+  } = props
+  return (
+    <div className='gm-nav-one-box gm-position-relative'>
+      <a href={link} className='gm-nav-one'>
+        <div className='text-center'>{icon}</div>
+        <div className='text-center'>{name}</div>
+      </a>
+      <Popup data={sub} />
+    </div>
+  )
+}
+
+Item.propTypes = {
+  data: PropTypes.object.isRequired
+}
+
+const Nav = props => {
+  const {
+    logo,
+    data,
+    selected,
+    onSelect,
+    other,
+    className,
+    style,
+    ...rest
+  } = props
+
+  const newData = doFilter(data)
+
+  return (
+    <div {...rest} className={classNames('gm-nav', className)}>
+      <Flex justifyCenter alignCenter className='gm-nav-logo'>
+        {logo}
+      </Flex>
+      {_.map(newData, (one, i) => (
+        <Item key={i} data={one} />
+      ))}
+      <div>{other}</div>
+    </div>
+  )
 }
 
 Nav.propTypes = {
   logo: PropTypes.element,
-  // 三级菜单 [{link, name, sub: [{link, name, sub: [{link, name}]}]}]
+  /** 三级菜单 [{link, name, icon, sub: [{link, name, sub: [{link, name}]}]}] */
   data: PropTypes.array.isRequired,
-  jump: PropTypes.array,
-  onSelect: PropTypes.func.isRequired,
+  /** pathname */
   selected: PropTypes.string.isRequired,
-  isBrowserRouter: PropTypes.bool,
-  widths: PropTypes.array.isRequired, // ["120px", "150px"]
-  renderExceptionNav: PropTypes.func,
+  onSelect: PropTypes.func.isRequired,
+
+  other: PropTypes.element,
   className: PropTypes.string,
   style: PropTypes.object
-}
-
-Nav.defaultProps = {
-  isBrowserRouter: false
 }
 
 export default Nav
