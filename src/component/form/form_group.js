@@ -1,7 +1,7 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Affix from '../affix'
-import { getLocale } from '../../locales'
 import _ from 'lodash'
 
 class FormGroup extends React.Component {
@@ -44,7 +44,7 @@ class FormGroup extends React.Component {
                   className='btn btn-default'
                   onClick={onCancel}
                 >
-                  {getLocale('formGroup', 'cancelBtn')}
+                  {getLocale('取消')}
                 </button>
                 <div className='gm-gap-20' />
               </React.Fragment>
@@ -55,7 +55,7 @@ class FormGroup extends React.Component {
               onClick={this.handleSubmit}
               className='btn btn-primary'
             >
-              {getLocale('formGroup', 'saveBtn')}
+              {getLocale('保存')}
             </button>
           </div>
         </Affix>

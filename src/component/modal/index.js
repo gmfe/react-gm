@@ -1,3 +1,4 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import LayoutRoot from '../layout_root'
@@ -114,7 +115,7 @@ class Modal extends React.Component {
                   className='btn btn-sm btn-default'
                   onClick={this.handleCancel}
                 >
-                  取消
+                  {getLocale('取消')}
                 </button>
               )}
               <div className='gm-gap-10' />
@@ -122,7 +123,7 @@ class Modal extends React.Component {
                 className={classNames('btn btn-sm btn-primary', okBtnClassName)}
                 onClick={this.handleOk}
               >
-                确认
+                {getLocale('确认')}
               </button>
             </Flex>
           </div>

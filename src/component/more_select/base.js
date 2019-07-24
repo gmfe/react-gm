@@ -1,3 +1,4 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
@@ -41,7 +42,7 @@ class Base extends React.Component {
   apiDoSelectWillActive = () => {
     // TODO 先考虑单选的情况
     const { selected, onSelect, multiple } = this.props
-    let { willActiveIndex } = this.state
+    const { willActiveIndex } = this.state
     const flatList = this.getFlatFilterData()
     // 没有做过键盘操作啥也不做
     if (willActiveIndex !== null && willActiveIndex < flatList.length) {
@@ -228,7 +229,7 @@ class Base extends React.Component {
 
     const { loading, searchValue, willActiveIndex } = this.state
 
-    let filterData = this.getFilterData()
+    const filterData = this.getFilterData()
 
     return (
       <div
@@ -256,7 +257,7 @@ class Base extends React.Component {
             justifyCenter
             className='gm-bg gm-padding-5 gm-text-desc'
           >
-            没有数据
+            {getLocale('没有数据')}
           </Flex>
         )}
         {!loading && filterData.length !== 0 && (

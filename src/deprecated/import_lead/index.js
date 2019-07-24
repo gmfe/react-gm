@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import Dropper from '../../component/dropper/index.js'
-import { getLocale } from '../../locales'
 
 class ImportLead extends React.Component {
   constructor(props) {
@@ -23,9 +22,9 @@ class ImportLead extends React.Component {
     const data = _.extend({ columns: [], list: [] }, this.props.data)
     const tips = this.props.tips || []
 
-    let tipsMap = {}
+    const tipsMap = {}
 
-    let lineMap = _.map(data.list, () => false)
+    const lineMap = _.map(data.list, () => false)
 
     _.each(tips, function(tip, index) {
       tipsMap[tip.index] = tipsMap[tip.index] || {}
@@ -90,9 +89,7 @@ class ImportLead extends React.Component {
               onDrop={this.handleDrop}
               accept='.xlsx'
             >
-              <button className='btn btn-primary btn-sm'>
-                {getLocale('importLead', 'uploadBtn')}
-              </button>
+              <button className='btn btn-primary btn-sm'>{'上传xlsx'}</button>
             </Dropper>
             &nbsp;&nbsp;&nbsp;&nbsp;
             {!this.props.disableSubmit && (
@@ -101,13 +98,13 @@ class ImportLead extends React.Component {
                 className='btn btn-primary btn-sm'
                 onClick={this.handleSubmit}
               >
-                {getLocale('importLead', 'submit')}
+                {'提交'}
               </button>
             )}
             &nbsp;&nbsp;&nbsp;&nbsp;
             {fileTempUrl ? (
               <a href={fileTempUrl} target='blank'>
-                {getLocale('importLead', 'downLoadBtn')}
+                {'模板下载'}
               </a>
             ) : (
               undefined
@@ -166,9 +163,9 @@ class ImportLead extends React.Component {
   }
 
   handleLine(index) {
-    let content = ReactDOM.findDOMNode(this.refContent)
+    const content = ReactDOM.findDOMNode(this.refContent)
 
-    let table = ReactDOM.findDOMNode(this.refTable)
+    const table = ReactDOM.findDOMNode(this.refTable)
     content.scrollTop =
       (index / this.props.data.list.length) * table.offsetHeight
   }

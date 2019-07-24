@@ -1,3 +1,4 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
@@ -6,7 +7,6 @@ import Box from './box'
 import classNames from 'classnames'
 import { getLeaf, filterGroupList } from '../tree/util'
 import Tree from '../tree'
-import { getLocale } from '../../locales'
 
 class TransferGroup extends React.Component {
   constructor(props) {
@@ -52,7 +52,7 @@ class TransferGroup extends React.Component {
   }
 
   render() {
-    let {
+    const {
       list,
       selectedValues,
       listStyle,
@@ -76,7 +76,7 @@ class TransferGroup extends React.Component {
     const leafList = getLeaf(list)
 
     // 右边是个简单的array
-    let rightList = []
+    const rightList = []
     _.each(leafList, v => {
       if (_.includes(selectedValues, v.value)) {
         rightList.push(v)
@@ -84,7 +84,7 @@ class TransferGroup extends React.Component {
     })
 
     // 左边是group数据
-    let leftList = filterGroupList(list, v => {
+    const leftList = filterGroupList(list, v => {
       return !_.includes(selectedValues, v.value)
     })
 
@@ -165,13 +165,13 @@ TransferGroup.defaultProps = {
     height: '350px'
   },
 
-  leftTitle: getLocale('transfer', 'itemsSource'),
+  leftTitle: getLocale('待选择'),
   leftWithFilter: true,
-  leftPlaceHolder: getLocale('transfer', 'search'),
+  leftPlaceHolder: getLocale('搜索'),
 
-  rightTitle: getLocale('transfer', 'target'),
+  rightTitle: getLocale('已选择'),
   rightWithFilter: true,
-  rightPlaceHolder: getLocale('transfer', 'search')
+  rightPlaceHolder: getLocale('搜索')
 }
 
 export default TransferGroup

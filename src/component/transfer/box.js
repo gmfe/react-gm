@@ -1,10 +1,10 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Flex from '../flex'
 import { Checkbox, CheckboxGroup } from '../checkbox'
 import { pinYinFilter } from 'gm-util'
 import _ from 'lodash'
-import { getLocale } from '../../locales'
 
 class Box extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Box extends React.Component {
   }
 
   render() {
-    let {
+    const {
       list,
       selectedValues,
 
@@ -99,7 +99,7 @@ class Box extends React.Component {
             value={[list.length !== 0 && list.length === selectedValues.length]}
             onChange={this.handleSelectAll}
           >
-            <Checkbox value>{getLocale('transfer', 'selectAll')}</Checkbox>
+            <Checkbox value>{getLocale('全选')}</Checkbox>
           </CheckboxGroup>
           <div className='gm-padding-lr-5 gm-text-desc'>
             {selectedValues.length}/{list.length}

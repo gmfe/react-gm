@@ -15,14 +15,14 @@ const pattern = {
 
 Validator.register(TYPE.required, [
   {
-    help: getLocale('validator', 'required'),
+    help: getLocale('请填写'),
     required: true
   }
 ])
 
 Validator.register(TYPE.email, [
   {
-    help: getLocale('validator', 'email'),
+    help: getLocale('请填写邮件地址'),
     validate(value) {
       return pattern.email.test(value)
     }
@@ -31,7 +31,7 @@ Validator.register(TYPE.email, [
 
 Validator.register(TYPE.url, [
   {
-    help: getLocale('validator', 'url'),
+    help: getLocale('请填写网址'),
     validate(value) {
       return pattern.url.test(value)
     }
@@ -40,7 +40,7 @@ Validator.register(TYPE.url, [
 
 Validator.register(TYPE.number, [
   {
-    help: getLocale('validator', 'number'),
+    help: getLocale('请填写数字'),
     validate(value) {
       return pattern.number.test(value)
     }
@@ -49,7 +49,7 @@ Validator.register(TYPE.number, [
 
 Validator.register(TYPE.number_positive, [
   {
-    help: getLocale('validator', 'numberPositive'),
+    help: getLocale('请填写正数'),
     validate(value) {
       return pattern.number_positive.test(value)
     }
@@ -58,7 +58,7 @@ Validator.register(TYPE.number_positive, [
 
 Validator.register(TYPE.number_or_letter, [
   {
-    help: getLocale('validator', 'numberOrLetter'),
+    help: getLocale('请填写字母或数字'),
     validate(value) {
       return pattern.number_or_letter.test(value)
     }

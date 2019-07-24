@@ -1,15 +1,14 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getLocale } from '../../locales'
 
 class WithCount extends React.Component {
   render() {
     const { data } = this.props
     return (
       <div className='gm-pagination-text'>
-        {getLocale('pagination', 'show')} {data.offset + 1} ~{' '}
-        {data.offset + data.limit}，{getLocale('pagination', 'total')}{' '}
-        {data.count} {getLocale('pagination', 'item')}
+        {getLocale('显示')} {data.offset + 1} ~ {data.offset + data.limit}，
+        {getLocale('共')} {data.count} {getLocale('条')}
       </div>
     )
   }
@@ -28,8 +27,8 @@ class WithoutCount extends React.Component {
     const { data } = this.props
     return (
       <div className='gm-pagination-text'>
-        {getLocale('pagination', 'show')} {data.offset + 1} ~{' '}
-        {data.offset + data.limit} {getLocale('pagination', 'item')}
+        {getLocale('显示')} {data.offset + 1} ~ {data.offset + data.limit}{' '}
+        {getLocale('条')}
       </div>
     )
   }

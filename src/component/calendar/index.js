@@ -1,10 +1,10 @@
+import { getLocale } from '../../locales'
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
 import _ from 'lodash'
 import Flex from '../flex'
-import { getLocale } from '../../locales'
 
 const Day = props => {
   const { disabled, onClick, value, oldSelect, selected } = props
@@ -40,6 +40,21 @@ Day.propTypes = {
   selected: PropTypes.object.isRequired
 }
 
+const months = [
+  getLocale('1月'),
+  getLocale('2月'),
+  getLocale('3月'),
+  getLocale('4月'),
+  getLocale('5月'),
+  getLocale('6月'),
+  getLocale('7月'),
+  getLocale('8月'),
+  getLocale('9月'),
+  getLocale('10月'),
+  getLocale('11月'),
+  getLocale('12月')
+]
+
 const Head = props => {
   const { oldSelect, onChangeMonth } = props
   const [isShow, setShow] = useState(false)
@@ -66,7 +81,7 @@ const Head = props => {
         </a>
         <Flex flex justifyCenter className='gm-calendar-head-title text-center'>
           <span className='gm-calendar-head-month' onClick={handleShowMonth}>
-            {getLocale('calendar', 'months')[month]}
+            {months[month]}
           </span>
           <span>&nbsp;&nbsp;{oldSelect.year()}</span>
         </Flex>
@@ -88,7 +103,7 @@ const Head = props => {
               })}
               onClick={() => handleChangeMonth(i)}
             >
-              {getLocale('calendar', 'months')[i]}
+              {months[i]}
             </span>
           ))}
         </div>
@@ -101,8 +116,15 @@ Head.propTypes = {
   oldSelect: PropTypes.object.isRequired,
   onChangeMonth: PropTypes.func.isRequired
 }
-
-const weekDays = getLocale('calendar', 'weekDays')
+const weekDays = [
+  getLocale('week__日'),
+  getLocale('week__一'),
+  getLocale('week__二'),
+  getLocale('week__三'),
+  getLocale('week__四'),
+  getLocale('week__五'),
+  getLocale('week__六')
+]
 const Week = () => {
   return (
     <div className='gm-calendar-week'>
