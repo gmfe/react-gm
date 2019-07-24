@@ -8,6 +8,13 @@ class Store {
    */
   @observable _dropdownNewWidth = 0
 
+  /**
+   * placement
+   * @type {string}
+   * @private
+   */
+  @observable _placement = 'bottomLeft'
+
   @action
   setDropdownNewWidth(e) {
     this._dropdownNewWidth = e
@@ -15,6 +22,15 @@ class Store {
 
   get dropdownNewWidth() {
     return this._dropdownNewWidth
+  }
+
+  @action
+  setPlacement(e) {
+    this._placement = e
+  }
+
+  get placement() {
+    return this._placement
   }
 }
 

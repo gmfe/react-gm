@@ -17,6 +17,8 @@ Nav 改了
 
 移除 .ifont- .xfont- 等功能性样式，替换为 .gm-svg-icon-
 
+Framework 不内嵌 LayoutRoot，调用方自行放 LayoutRoot 位置
+
 # 8.x
 
 ## breaking changes

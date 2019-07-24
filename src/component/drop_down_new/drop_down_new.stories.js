@@ -23,7 +23,7 @@ storiesOf('DropDownNew', module)
     return (
       <div style={{ height: '300px', textAlign: 'center', marginTop: '50px' }}>
         <DropDownNew
-          placement='bottomRight'
+          placement='bottomLeft'
           overlay={<DropDownNewMenu>{items}</DropDownNewMenu>}
         >
           <Button>如果item比包裹层短，会自动补宽</Button>
@@ -60,7 +60,7 @@ storiesOf('DropDownNew', module)
     )
   })
   .add('Placement', () => {
-    const buttons = [
+    const buttons1 = [
       'bottomLeft',
       'bottomCenter',
       'bottomRight',
@@ -68,20 +68,44 @@ storiesOf('DropDownNew', module)
       'topCenter',
       'topRight'
     ]
-    const [placement, changePlacement] = useState('bottomLeft')
+    const buttons2 = ['bottomLeft', 'bottomRight', 'topLeft', 'topRight']
+    const [placement1, changePlacement1] = useState('bottomLeft')
+    const [placement2, changePlacement2] = useState('bottomLeft')
     return (
       <div style={{ height: '300px', textAlign: 'center', marginTop: '50px' }}>
-        {_.map(buttons, (item, index) => {
+        一级位置：
+        {_.map(buttons1, (item, index) => {
           return (
-            <Button key={index} onClick={() => changePlacement(item)}>
+            <Button key={index} onClick={() => changePlacement1(item)}>
+              {item}
+            </Button>
+          )
+        })}
+        <br />
+        二级位置：
+        {_.map(buttons2, (item, index) => {
+          return (
+            <Button key={index} onClick={() => changePlacement2(item)}>
               {item}
             </Button>
           )
         })}
         <br />
         <DropDownNew
-          placement={placement}
-          overlay={<DropDownNewMenu>{items}</DropDownNewMenu>}
+          placement={placement1}
+          overlay={
+            <DropDownNewMenu>
+              <DropDownNewItem>No.1 Item</DropDownNewItem>
+              <DropDownNewSubMenu title='No.1 SubMenu' placement={placement2}>
+                <DropDownNewItem>No.2 Item</DropDownNewItem>
+                <DropDownNewItem disabled>No.3 Item</DropDownNewItem>
+              </DropDownNewSubMenu>
+              <DropDownNewItem disabled>No.4 Item</DropDownNewItem>
+              <DropDownNewSubMenu title='No.2 SubMenu' disabled>
+                <DropDownNewItem>No.5 Item</DropDownNewItem>
+              </DropDownNewSubMenu>
+            </DropDownNewMenu>
+          }
         >
           <Button>位置</Button>
         </DropDownNew>

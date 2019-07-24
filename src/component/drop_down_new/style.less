@@ -15,8 +15,16 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
     &-container {
+      position: relative;
+    }
+
+    &-triangle {
       position: absolute;
-      z-index: 9999;
+      width: 10px;
+      height: 10px;
+      transform: rotate(45deg);
+      background-color: #fff;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
     }
 
     &-submenu {
@@ -49,7 +57,7 @@
       position: relative;
 
       &:hover {
-        background-color: #e6f7ff;
+        background-color: #d7e8fc;
       }
 
       &-disabled {

@@ -8,9 +8,12 @@ class DropDownNew extends Component {
   constructor(props) {
     super(props)
     this.containerRef = createRef()
+    store.setPlacement(this.props.placement)
   }
 
-  componentDidMount() {}
+  componentDidUpdate() {
+    store.setPlacement(this.props.placement)
+  }
 
   /**
    * 当显示方式为click时
@@ -103,7 +106,9 @@ class DropDownNew extends Component {
     overlayWidth =
       dropdownNewWidth > overlayWidth ? dropdownNewWidth : overlayWidth
     const style = {}
-    style['top'] = `${vertical === 'top' ? top - overlayHeight : bottom}px`
+    style['top'] = `${
+      vertical === 'top' ? top - overlayHeight - 5 : bottom + 5
+    }px`
     switch (horizontal) {
       case 'left':
         style['left'] = `${left}px`

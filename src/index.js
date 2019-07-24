@@ -89,6 +89,12 @@ import LevelList from './component/level_list'
 import LevelSelect from './component/level_select'
 import Input from './component/input'
 import TableSelect from './component/table_select'
+import {
+  DropDownNew,
+  DropDownNewMenu,
+  DropDownNewSubMenu,
+  DropDownNewItem
+} from './component/drop_down_new'
 
 import Validator from './validator'
 
@@ -223,5 +229,9 @@ export {
   LevelList,
   LevelSelect,
   Input,
-  TableSelect
+  TableSelect,
+  DropDownNew,
+  DropDownNewMenu,
+  DropDownNewSubMenu,
+  DropDownNewItem
 }
