@@ -8,6 +8,8 @@ Framework 不内嵌 LayoutRoot，调用方自行放 LayoutRoot 位置
 Breadcrumb 改了
 Info 改了
 
+Framework 不内嵌 LayoutRoot，调用方自行放 LayoutRoot 位置
+
 # 8.x
 
 ## breaking changes
