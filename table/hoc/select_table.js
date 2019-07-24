@@ -18,9 +18,9 @@ function selectTableHOC(Component) {
     handleToggleSelection = key => {
       const { selected, onSelect, selectType } = this.props
 
-      // react-table@6.10.0
+      // 兼容 react-table@6.10.0
       let result = key
-      if (result.startsWith('select-')) {
+      if (_.isString(result) && result.startsWith('select-')) {
         result = result.slice(7)
       }
 
