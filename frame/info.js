@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Flex, Popover } from '../src/index'
 import _ from 'lodash'
 import { is } from 'gm-util'
+import SVGMore from '../svg/more.svg'
 
 const Info = props => {
   const { text, notification, settings } = props
@@ -37,7 +38,7 @@ const Info = props => {
             }
           >
             <div className='gm-framework-info-default-settings gm-cursor'>
-              <i className='glyphicon glyphicon-cog gm-padding-lr-15' />
+              <SVGMore className='gm-padding-lr-15' />
             </div>
           </Popover>
         )}
