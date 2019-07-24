@@ -4,24 +4,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Flex from '../flex'
 
-function doFilter(data) {
-  return _.filter(data, v => {
-    if (v.show === false) {
-      return false
-    }
-
-    if (v.sub) {
-      v.sub = doFilter(v.sub)
-
-      return v.sub.length !== 0
-    }
-
-    return true
-  })
-}
-
 const Popup = props => {
-  const { data } = props
+  const { data, selected, onSelect } = props
 
   return (
     <div className='gm-nav-popup'>
@@ -32,7 +16,17 @@ const Popup = props => {
             <div className='gm-border-bottom gm-margin-tb-5' />
             <div>
               {_.map(v.sub, (s, si) => (
-                <a key={si} href={s.link} className='gm-nav-there'>
+                <a
+                  key={si}
+                  href={s.link}
+                  className={classNames('gm-nav-there', {
+                    active: selected.startsWith(s.link)
+                  })}
+                  onClick={e => {
+                    e.preventDefault()
+                    onSelect(s)
+                  }}
+                >
                   {s.name}
                 </a>
               ))}
@@ -45,26 +39,49 @@ const Popup = props => {
 }
 
 Popup.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  selected: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired
 }
 
 const Item = props => {
   const {
-    data: { icon, name, link, sub }
+    data: { icon, name, link, sub },
+    selected,
+    onSelect
   } = props
+
+  const handleClick = e => {
+    e.preventDefault()
+
+    onSelect(props.data)
+  }
+
+  const handleSelect = data => {
+    onSelect(data)
+  }
+
   return (
-    <div className='gm-nav-one-box gm-position-relative'>
-      <a href={link} className='gm-nav-one'>
+    <div className='gm-nav-one-box'>
+      <a
+        href={link}
+        className={classNames('gm-nav-one', {
+          active: selected.startsWith(link)
+        })}
+        onClick={handleClick}
+      >
         <div className='text-center'>{icon}</div>
         <div className='text-center'>{name}</div>
       </a>
-      <Popup data={sub} />
+      <Popup data={sub} onSelect={handleSelect} selected={selected} />
     </div>
   )
 }
 
 Item.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  selected: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired
 }
 
 const Nav = props => {
@@ -79,15 +96,13 @@ const Nav = props => {
     ...rest
   } = props
 
-  const newData = doFilter(data)
-
   return (
     <div {...rest} className={classNames('gm-nav', className)}>
       <Flex justifyCenter alignCenter className='gm-nav-logo'>
         {logo}
       </Flex>
-      {_.map(newData, (one, i) => (
-        <Item key={i} data={one} />
+      {_.map(data, (one, i) => (
+        <Item key={i} data={one} onSelect={onSelect} selected={selected} />
       ))}
       <div>{other}</div>
     </div>
@@ -98,7 +113,6 @@ Nav.propTypes = {
   logo: PropTypes.element,
   /** 三级菜单 [{link, name, icon, sub: [{link, name, sub: [{link, name}]}]}] */
   data: PropTypes.array.isRequired,
-  /** pathname */
   selected: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
 
