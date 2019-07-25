@@ -31,9 +31,4 @@ config.plugins.push(
   })
 )
 
-config.module.rules.unshift({
-  test: /svg\/(\w|\W)+\.svg$/,
-  use: ['@svgr/webpack']
-})
-
 module.exports = config
