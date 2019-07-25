@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Flex from '../../component/flex'
 import _ from 'lodash'
-import { getLocale } from '../../locales'
 
 class TreeSelect extends React.Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class TreeSelect extends React.Component {
 
   handleSelectAll(e) {
     if (e.target.checked) {
-      let data = this.findAllChildrenNode(this.props.list)
+      const data = this.findAllChildrenNode(this.props.list)
       this.props.onSelect && this.props.onSelect(data)
       return
     }
@@ -34,14 +33,14 @@ class TreeSelect extends React.Component {
 
     if (data.children) {
       if (checked) {
-        let selectData = this.findChildrenNodeByValue(
+        const selectData = this.findChildrenNodeByValue(
           list,
           data.value,
           selected
         )
         this.props.onSelect && this.props.onSelect(selectData)
       } else {
-        let selectData = this.findChildrenNodeByValue(list, data.value)
+        const selectData = this.findChildrenNodeByValue(list, data.value)
         this.props.onSelect &&
           this.props.onSelect(_.difference(selected, selectData))
       }
@@ -50,7 +49,7 @@ class TreeSelect extends React.Component {
         selected.push(data.value)
         this.props.onSelect && this.props.onSelect(selected)
       } else {
-        let selectData = _.without(selected, data.value)
+        const selectData = _.without(selected, data.value)
         this.props.onSelect && this.props.onSelect(selectData)
       }
     }
@@ -91,7 +90,7 @@ class TreeSelect extends React.Component {
   }
 
   handleShow(data) {
-    let { showList } = this.state
+    const { showList } = this.state
 
     if (_.includes(showList, data.value)) {
       this.setState({ showList: _.without(showList, data.value) })
@@ -106,7 +105,7 @@ class TreeSelect extends React.Component {
     const { disabledSelected, selected } = this.props
 
     _.each(list, data => {
-      let childrenNode = this.findChildrenNodeByValue(list, data.value)
+      const childrenNode = this.findChildrenNodeByValue(list, data.value)
       if (data.children) {
         panel.push(
           <TreeNode
@@ -281,7 +280,7 @@ TreeSelect.propTypes = {
 
 TreeSelect.defaultProps = {
   list: [],
-  label: getLocale('treeSelect', 'selectLabel'),
+  label: '选择全部',
   disabledSelected: false
 }
 

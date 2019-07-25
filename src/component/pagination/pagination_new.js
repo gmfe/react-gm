@@ -1,8 +1,8 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
-import { getLocale } from '../../locales'
 
 const initState = {
   pages: [
@@ -131,7 +131,7 @@ class WithCount extends React.Component {
             })}
           >
             <a href='javascript:;' data-page={current - 1}>
-              {getLocale('pagination', 'previous')}
+              {getLocale('上一页')}
             </a>
           </li>
 
@@ -155,7 +155,7 @@ class WithCount extends React.Component {
             })}
           >
             <a href='javascript:;' data-page={current + 1}>
-              {getLocale('pagination', 'next')}
+              {getLocale('下一页')}
             </a>
           </li>
         </ul>
@@ -248,12 +248,12 @@ class WithoutCount extends React.Component {
         <ul className='pagination pagination-sm'>
           <li className={isFirstPage ? 'disabled' : ''}>
             <a href='javascript:;' onClick={this.handlePage.bind(this, true)}>
-              {getLocale('pagination', 'previous')}
+              {getLocale('上一页')}
             </a>
           </li>
           <li className={!reverse && !more ? 'disabled' : ''}>
             <a href='javascript:;' onClick={this.handlePage.bind(this, false)}>
-              {getLocale('pagination', 'next')}
+              {getLocale('下一页')}
             </a>
           </li>
         </ul>

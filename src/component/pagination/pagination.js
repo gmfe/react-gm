@@ -1,6 +1,6 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getLocale } from '../../locales'
 
 class WithCount extends React.Component {
   constructor(props) {
@@ -9,15 +9,15 @@ class WithCount extends React.Component {
   }
 
   render() {
-    let data = Object.assign({}, this.props.data)
+    const data = Object.assign({}, this.props.data)
 
     data.index = data.offset / data.limit + 1
 
-    let offset = 2
+    const offset = 2
 
-    let pages = []
+    const pages = []
 
-    let all = Math.ceil(data.count / data.limit)
+    const all = Math.ceil(data.count / data.limit)
 
     let begin = Math.max(data.index - offset, 1)
 
@@ -40,7 +40,7 @@ class WithCount extends React.Component {
         <ul className='pagination pagination-sm' onClick={this.handlePage}>
           <li className={data.index === 1 ? 'disabled' : ''}>
             <a href='javascript:;' data-page={data.index - 1}>
-              {getLocale('pagination', 'previous')}
+              {getLocale('上一页')}
             </a>
           </li>
 
@@ -88,7 +88,7 @@ class WithCount extends React.Component {
 
           <li className={data.index === all || all === 0 ? 'disabled' : ''}>
             <a href='javascript:;' data-page={data.index + 1}>
-              {getLocale('pagination', 'next')}
+              {getLocale('下一页')}
             </a>
           </li>
         </ul>
@@ -160,12 +160,12 @@ class WithoutCount extends React.Component {
         <ul className='pagination pagination-sm'>
           <li className={data.offset === 0 ? 'disabled' : ''}>
             <a href='javascript:;' onClick={this.handlePage.bind(this, -1)}>
-              {getLocale('pagination', 'previous')}
+              {getLocale('上一页')}
             </a>
           </li>
           <li className={nextDisabled ? 'disabled' : ''}>
             <a href='javascript:;' onClick={this.handlePage.bind(this, 1)}>
-              {getLocale('pagination', 'next')}
+              {getLocale('下一页')}
             </a>
           </li>
         </ul>

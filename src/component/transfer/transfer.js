@@ -1,10 +1,10 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Flex from '../flex'
 import Box from './box'
 import classNames from 'classnames'
-import { getLocale } from '../../locales'
 
 class Transfer extends React.Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class Transfer extends React.Component {
   }
 
   render() {
-    let {
+    const {
       list,
       selectedValues,
       listStyle,
@@ -70,8 +70,8 @@ class Transfer extends React.Component {
 
     const { leftSelectedValues, rightSelectedValues } = this.state
 
-    let leftList = []
-    let rightList = []
+    const leftList = []
+    const rightList = []
     _.each(list, v => {
       if (selectedValues.indexOf(v.value) > -1) {
         rightList.push(v)
@@ -157,13 +157,13 @@ Transfer.defaultProps = {
     height: '350px'
   },
 
-  leftTitle: getLocale('transfer', 'itemsSource'),
+  leftTitle: getLocale('待选择'),
   leftWithFilter: true,
-  leftPlaceHolder: getLocale('transfer', 'search'),
+  leftPlaceHolder: getLocale('搜索'),
 
-  rightTitle: getLocale('transfer', 'target'),
+  rightTitle: getLocale('已选择'),
   rightWithFilter: true,
-  rightPlaceHolder: getLocale('transfer', 'search')
+  rightPlaceHolder: getLocale('搜索')
 }
 
 export default Transfer

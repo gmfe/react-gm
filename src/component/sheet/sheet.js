@@ -1,3 +1,4 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
@@ -11,7 +12,6 @@ import SheetSelect from './sheet_select'
 import SheetBatchAction from './sheet_batch_action'
 import Loading from '../loading'
 import Flex from '../flex'
-import { getLocale } from '../../locales'
 
 class Sheet extends React.Component {
   constructor(props) {
@@ -84,9 +84,7 @@ class Sheet extends React.Component {
       return (
         <tr>
           <td colSpan='99' className='text-center'>
-            {enableEmptyTip === true
-              ? getLocale('sheet', 'empty')
-              : enableEmptyTip}
+            {enableEmptyTip === true ? getLocale('没有数据') : enableEmptyTip}
           </td>
         </tr>
       )
@@ -184,17 +182,17 @@ class Sheet extends React.Component {
   }
 
   render() {
-    let { list = [], scrollX, expandedRowRender } = this.props
+    const { list = [], scrollX, expandedRowRender } = this.props
     let select = false
     let isSelectAll = false
     let isHasContract = false
     let pagination
     let paginationText
 
-    let columns = []
+    const columns = []
     let actions = false
     let batchs = false
-    let others = []
+    const others = []
 
     _.each(React.Children.toArray(this.props.children), value => {
       if (value !== null && value !== undefined) {

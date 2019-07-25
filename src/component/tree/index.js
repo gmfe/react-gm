@@ -1,3 +1,4 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Flex from '../flex'
@@ -5,7 +6,6 @@ import { pinYinFilter } from 'gm-util'
 import { getLeaf, filterGroupList } from './util'
 import _ from 'lodash'
 import classNames from 'classnames'
-import { getLocale } from '../../locales'
 import Bottom from './bottom'
 import List from './list'
 
@@ -171,7 +171,7 @@ Tree.defaultProps = {
     height: '350px'
   },
   withFilter: true,
-  placeholder: getLocale('tree', 'search'),
+  placeholder: getLocale('搜索'),
   showGroupCheckbox: () => true
 }
 

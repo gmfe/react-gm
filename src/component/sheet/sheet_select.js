@@ -1,3 +1,4 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
@@ -24,7 +25,7 @@ SheetSelect.defaultProps = {
   isDisabled: () => false,
   isRadio: false,
   hasSelectTip: false,
-  selectAllTip: '已选中所有'
+  selectAllTip: getLocale('已选中所有')
 }
 
 export default SheetSelect

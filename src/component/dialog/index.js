@@ -1,10 +1,10 @@
+import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Modal from '../modal'
 import _ from 'lodash'
 import classNames from 'classnames'
 import LayoutRoot from '../layout_root'
-import { getLocale } from '../../locales'
 import EVENT_TYPE from '../../event_type'
 
 let DialogStatics = {}
@@ -157,7 +157,7 @@ class Dialog extends React.Component {
       OKBtn,
       disableMaskClose
     } = this.props
-    let modalProps = {
+    const modalProps = {
       show: this.state.show,
       onHide: this.handleCancel,
       disableMaskClose
@@ -234,13 +234,13 @@ Dialog.propTypes = {
 }
 Dialog.defaultProps = {
   show: false,
-  title: getLocale('dialog', 'title'),
+  title: getLocale('提示'),
   type: 'confirm',
   onCancel: _.noop,
   onOK: _.noop,
   size: 'md',
-  cancelBtn: getLocale('dialog', 'cancelBtn'),
-  OKBtn: getLocale('dialog', 'okBtn'),
+  cancelBtn: getLocale('取消'),
+  OKBtn: getLocale('确定'),
   disableMaskClose: false
 }
 
