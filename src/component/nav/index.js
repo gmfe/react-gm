@@ -9,11 +9,11 @@ const Popup = props => {
 
   return (
     <div className='gm-nav-popup'>
+      <div className='gm-nav-popup-triangle' />
       <Flex>
         {_.map(data, (v, i) => (
           <div key={i} className='gm-nav-two'>
-            <div className='gm-text-desc gm-padding-5'>{v.name}</div>
-            <div className='gm-border-bottom gm-margin-tb-5' />
+            <div className='gm-nav-two-title'>{v.name}</div>
             <div>
               {_.map(v.sub, (s, si) => (
                 <a
@@ -70,8 +70,8 @@ const Item = props => {
         })}
         onClick={handleClick}
       >
-        <div className='text-center'>{icon}</div>
-        <div className='text-center'>{name}</div>
+        <div className='gm-nav-one-icon'>{icon}</div>
+        <div className='gm-nav-one-text'>{name}</div>
       </a>
       <Popup data={sub} onSelect={handleSelect} selected={selected} />
     </div>
@@ -98,13 +98,11 @@ const Nav = props => {
 
   return (
     <div {...rest} className={classNames('gm-nav', className)}>
-      <Flex justifyCenter alignCenter className='gm-nav-logo'>
-        {logo}
-      </Flex>
+      <div className='gm-nav-logo'>{logo}</div>
       {_.map(data, (one, i) => (
         <Item key={i} data={one} onSelect={onSelect} selected={selected} />
       ))}
-      <div>{other}</div>
+      <div className='gm-nav-other'>{other}</div>
     </div>
   )
 }

@@ -5,7 +5,7 @@ class Component extends React.Component {
   render() {
     return (
       <div>
-        <SVGMore className='gm-padding-lr-15' />
+        <SVGMore />
       </div>
     )
   }
