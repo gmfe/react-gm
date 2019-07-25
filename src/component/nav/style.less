@@ -1,28 +1,56 @@
 .gm-nav {
   width: 80px;
   height: 100vh;
-  background: #263350;
+  background: #243351;
   z-index: 910;
 
   .gm-nav-logo {
-    height: 80px;
-  }
-
-  .gm-nav-one {
-    display: block;
-    text-decoration: none;
-    color: white;
-    margin-bottom: 10px;
+    text-align: center;
     padding: 5px;
-    font-size: 14px;
+    height: 60px;
 
     &.active {
-      background: #1c4f7a;
+      background: #17233d;
     }
 
     &:hover {
-      background: #0b75b8;
+      background: #17233d;
     }
+  }
+
+  .gm-nav-one {
+    height: 64px;
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    .gm-nav-one-icon {
+      font-size: 26px;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .gm-nav-one-text {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    &.active {
+      background: #2871bb;
+    }
+
+    &:hover {
+      background: rgba(40, 113, 187, 0.4);
+    }
+  }
+
+  .gm-nav-other {
+    margin-top: 128px;
   }
 
   .gm-nav-popup {
@@ -32,8 +60,17 @@
     position: absolute;
     top: 0;
     left: 80px;
-    padding: 5px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 5px 18px 0 rgba(38, 53, 83, 0.14);
+
+    .gm-nav-popup-triangle {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-right: 6px solid white;
+      top: 25px;
+      left: -12px;
+    }
   }
 
   .gm-nav-one-box {
@@ -47,24 +84,34 @@
   }
 
   .gm-nav-two {
-    width: 100px;
-    margin: 5px;
+    min-width: 110px;
+    max-width: 130px;
+    padding: 10px 10px 35px;
+
+    .gm-nav-two-title {
+      color: @gm-color-third;
+      padding: 0 0 10px;
+      border-bottom: 1px solid @gm-border-color;
+      margin: 5px 10px 15px;
+    }
   }
 
   .gm-nav-there {
     display: block;
-    padding: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
     text-decoration: none;
-    color: @gm-color-first;
+    color: #243351;
+    border-radius: 2px;
 
     &:hover {
-      color: #1c4f7a;
-      background-color: #f1f6fb;
+      color: @brand-primary;
+      background-color: rgba(208, 222, 236, 0.26);
     }
 
     &.active {
-      color: #1c4f7a;
-      background-color: #f1f6fb;
+      color: @brand-primary;
+      background-color: rgba(208, 222, 236, 0.26);
     }
   }
 }
