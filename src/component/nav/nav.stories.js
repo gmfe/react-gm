@@ -5,78 +5,77 @@ import { observable } from 'mobx'
 
 const data = [
   {
-    link: '/merchandise',
-    name: 'nav__商品',
+    link: 'merchandise',
+    name: '商品',
     sub: [
       {
-        name: 'nav__商品管理',
+        name: '商品管理',
         sub: [
           {
-            link: '#/merchandise/manage/sale',
-            name: 'nav__报价单管理'
+            link: 'merchandise/manage/sale',
+            name: '报价单管理'
           },
           {
-            link: '#/merchandise/manage/list',
-            name: 'nav__商品库',
-            show: false
+            link: 'merchandise/manage/list',
+            name: '商品库'
           },
           {
-            link: '#/merchandise/manage/spu_remark',
-            name: 'nav__商品备注'
+            link: 'merchandise/manage/spu_remark',
+            name: '商品备注'
           }
         ],
-        link: '#/merchandise/manage'
+        link: 'merchandise/manage'
       },
       {
-        name: 'nav__营销',
+        name: '营销',
         sub: [
           {
-            link: '#/merchandise/marketing_tool/price_rule',
-            name: 'nav__限时锁价'
+            link: 'merchandise/marketing_tool/price_rule',
+            name: '限时锁价'
           }
         ],
-        link: '#/merchandise/marketing_tool'
+        link: 'merchandise/marketing_tool'
       }
     ]
   },
   {
-    link: '#/supply_chain',
-    name: 'nav__供应链',
+    link: 'supply_chain',
+    name: '供应链',
     sub: [
       {
-        name: 'nav__订单',
+        name: '订单',
         sub: [
           {
-            link: '#/supply_chain/order/list',
-            name: 'nav__订单列表'
+            link: 'supply_chain/order/list',
+            name: '订单列表'
           }
         ],
-        link: '#/supply_chain/order'
+        link: 'supply_chain/order'
       },
       {
-        name: 'nav__分拣',
+        name: '分拣',
         sub: [
           {
-            link: '#/supply_chain/sorting/schedule',
-            name: 'nav__分拣进度'
+            link: 'supply_chain/sorting/schedule',
+            name: '分拣进度'
           },
           {
-            link: '#/supply_chain/sorting/detail',
-            name: 'nav__分拣明细'
+            link: 'supply_chain/sorting/detail',
+            name: '分拣明细'
           },
           {
-            link: '#/supply_chain/sorting/method',
-            name: 'nav__分拣方式'
+            link: 'supply_chain/sorting/method',
+            name: '分拣方式'
           }
         ],
-        link: '#/supply_chain/sorting'
+        link: 'supply_chain/sorting'
       }
     ]
   }
 ]
 
 const store = observable({
-  selected: '',
+  selected: 'supply_chain/order/list',
   setSelect(selected) {
     this.selected = selected
   }

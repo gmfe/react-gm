@@ -18,10 +18,16 @@ function selectTableHOC(Component) {
     handleToggleSelection = key => {
       const { selected, onSelect, selectType } = this.props
 
+      // react-table@6.10.0
+      let result = key
+      if (result.startsWith('select-')) {
+        result = result.slice(7)
+      }
+
       if (selectType === 'radio') {
-        onSelect([key])
+        onSelect([result])
       } else {
-        onSelect(_.xor(selected, [key]))
+        onSelect(_.xor(selected, [result]))
       }
     }
 

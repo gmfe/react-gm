@@ -5,7 +5,7 @@ import { isPathMatch, is } from 'gm-util'
 
 function nav2BreadCrumb(props) {
   const { breadcrumbs, pathname, navConfig } = props
-  let result = []
+  const result = []
 
   _.forEach(navConfig, value => {
     if (_.startsWith(pathname, value.link)) {
@@ -21,8 +21,6 @@ function nav2BreadCrumb(props) {
     }
   })
 
-  // 面包屑
-  // https://code.guanmai.cn/front-end/think/issues/24
   _.forEach(breadcrumbs, v => {
     if (_.isString(v)) {
       result.push({ name: v })
@@ -35,7 +33,6 @@ function nav2BreadCrumb(props) {
 }
 
 const Breadcrumb = props => {
-  const { back } = props
   const data = nav2BreadCrumb(props)
 
   if (!data || data.length === 0) {
@@ -43,33 +40,32 @@ const Breadcrumb = props => {
   }
 
   return (
-    <ol className='gm-framework-breadcrumb-default breadcrumb'>
-      {back && (
-        <li>
-          <a
-            href='javascript:;'
-            onClick={() => back()}
-            className='gm-framework-breadcrumb-default-back'
-          >
-            返回
-          </a>
-        </li>
-      )}
+    <ul className='gm-framework-breadcrumb-default breadcrumb'>
       {!is.phone() &&
         _.map(data.slice(0, -1), (v, i) => (
-          <li key={i + '_' + v.link}>{v.name}</li>
+          <li key={i + '_' + v.link}>
+            <a
+              href={v.link}
+              onClick={e => {
+                e.preventDefault()
+                props.onSelect(v)
+              }}
+              className='gm-decoration-none gm-text'
+            >
+              {v.name}
+            </a>
+          </li>
         ))}
       <li className='active'>{data.slice(-1)[0].name}</li>
-    </ol>
+    </ul>
   )
 }
 
 Breadcrumb.propTypes = {
-  breadcrumbs: PropTypes.array,
-  pathname: PropTypes.string,
-  navConfig: PropTypes.array,
-  name: PropTypes.string,
-  back: PropTypes.oneOfType([PropTypes.func, PropTypes.bool])
+  breadcrumbs: PropTypes.array.isRequired,
+  pathname: PropTypes.string.isRequired,
+  navConfig: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired
 }
 
 export default Breadcrumb

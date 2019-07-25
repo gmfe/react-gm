@@ -4,6 +4,10 @@
   background: #263350;
   z-index: 910;
 
+  .gm-nav-logo {
+    height: 80px;
+  }
+
   .gm-nav-one {
     display: block;
     text-decoration: none;
@@ -33,6 +37,8 @@
   }
 
   .gm-nav-one-box {
+    position: relative;
+
     &:hover {
       .gm-nav-popup {
         display: block;
@@ -52,6 +58,11 @@
     color: @gm-color-first;
 
     &:hover {
+      color: #1c4f7a;
+      background-color: #f1f6fb;
+    }
+
+    &.active {
       color: #1c4f7a;
       background-color: #f1f6fb;
     }
