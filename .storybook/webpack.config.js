@@ -16,7 +16,7 @@ module.exports = ({ config }) => {
   config.module.rules[3] = {
     test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani)(\?.*)?$/,
     loader:
-      '/Users/liyatang/gm/react-gm/node_modules/@storybook/core/node_modules/file-loader/dist/cjs.js',
+      './node_modules/@storybook/core/node_modules/file-loader/dist/cjs.js',
     query: { name: 'static/media/[name].[hash:8].[ext]' }
   }
 
