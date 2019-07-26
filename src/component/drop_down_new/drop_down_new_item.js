@@ -24,7 +24,10 @@ class DropDownNewItem extends Component {
     const { children, disabled, onClick } = this.props
     return (
       <li
-        className={className({ 'dropdown-new-menu-item': true })}
+        className={className({
+          'dropdown-new-menu-item': true,
+          'dropdown-new-menu-item-disabled': disabled
+        })}
         onClick={() => this._handleClick(disabled, onClick)}
       >
         {children}
