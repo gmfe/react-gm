@@ -15,7 +15,8 @@ import {
   OperationHeader,
   OperationCell,
   SortHeader,
-  EditTableOperation
+  EditTableOperation,
+  referOfWidth
 } from './util'
 
 // 向下兼容，保留，会逐步废弃
@@ -25,7 +26,8 @@ const TableUtil = {
   OperationHeader,
   OperationCell,
   SortHeader,
-  EditTableOperation
+  EditTableOperation,
+  referOfWidth
 }
 
 export {

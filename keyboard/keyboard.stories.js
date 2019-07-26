@@ -18,7 +18,7 @@ import {
 } from '../table'
 import _ from 'lodash'
 
-const { OperationHeader, EditTableOperation } = TableUtil
+const { OperationHeader, EditTableOperation, referOfWidth } = TableUtil
 const KeyboardEditTable = diyTableHOC(
   fixedColumnsTableHOC(keyboardTableHoc(EditTable))
 )
@@ -180,6 +180,28 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
   const ref = React.createRef()
   return (
     <div>
+      <div>
+        <h3>ui 规范</h3>
+        Cell
+        <ul>
+          <li>padding top left 固定为8px，left right 看浏览器大小</li>
+          1920x1080的尺寸是12px；1260x768的尺寸是8px；768x1024（ipad）尺寸是2px。
+          <li>序号列： {referOfWidth.noCell}</li>
+          <li>操作列： {referOfWidth.operationCell}</li>
+          <li>单位预留两个字符</li>
+        </ul>
+        输入框宽度:
+        <ul>
+          <li>商品搜索框：{referOfWidth.searchBox}</li>
+          <li>数字输入框：{referOfWidth.numberInputBox}</li>
+          <li>tableSelect输入框：{referOfWidth.tableSelectBox}</li>
+          <li>levelSelect输入框：{referOfWidth.levelSelectBox}</li>
+          <li>日期选择输入框： {referOfWidth.dateSelectBox}</li>
+        </ul>
+        上述都是建议宽度，具体根据实际业务场景各自调整。
+        具体用法看代码~
+      </div>
+      <div className='gm-block gm-gap-20'/>
       <button
         className='btn  btn-primary'
         onClick={() => ref.current.apiToggleDiySelector()}
@@ -197,12 +219,12 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
             Header: '序号',
             Cell: cellProps => cellProps.index + 1,
             fixed: 'left',
-            width: 56
+            width: referOfWidth.noCell
           },
           {
             Header: OperationHeader,
             fixed: 'left',
-            width: 100,
+            width: referOfWidth.operationCell,
             Cell: cellProps => (
               <EditTableOperation
                 onAddRow={() => console.log('增加一行', cellProps.index)}
@@ -213,13 +235,14 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
           {
             Header: '位置',
             accessor: 'position',
-            minWidth: 150,
+            minWidth: 170,
             isKeyboard: true,
             Cell: cellProps => (
               // 使用 Observer 包下，才能响应 store 数据
               <Observer>
                 {() => (
                   <KCMoreSelect
+                    style={{width: referOfWidth.searchBox}}
                     data={data}
                     selected={cellProps.original.position} // 不能用 row.value，因为并不是 store 的数据
                     onSelect={selected =>
@@ -253,11 +276,12 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
             Header: 'TableSelect',
             accessor: 'sku',
             isKeyboard: true,
-            minWidth: 150,
+            minWidth: 170,
             Cell: cellProps => (
               <Observer>
                 {() => (
                   <KCTableSelect
+                    style={{width: referOfWidth.tableSelectBox}}
                     data={newTableData}
                     columns={tableColumns}
                     selected={cellProps.original.sku}
@@ -272,12 +296,13 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
           {
             Header: '区域',
             accessor: 'area',
-            minWidth: 150,
+            minWidth: 170,
             isKeyboard: true,
             Cell: cellProps => (
               <Observer>
                 {() => (
                   <KCLevelSelect
+                    style={{width: referOfWidth.levelSelectBox}}
                     data={areaData}
                     selected={
                       cellProps.original.area
@@ -305,12 +330,13 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
           {
             Header: '年龄',
             accessor: 'age',
-            minWidth: 150,
+            minWidth: 100,
             isKeyboard: true,
             Cell: cellProps => (
               <Observer>
                 {() => (
                   <KCInputNumberV2
+                    style={{width: referOfWidth.numberInputBox}}
                     value={cellProps.original.age}
                     onChange={value => store.setAge(cellProps.index, value)}
                   />
