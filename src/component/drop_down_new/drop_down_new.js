@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import Popover from '../popover'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
@@ -7,11 +7,12 @@ import { store } from './store'
 class DropDownNew extends Component {
   constructor(props) {
     super(props)
-    this.currentRef = createRef()
+    this.currentRef = null
+    this._handleClickOverlay = ::this._handleClickOverlay
   }
 
   componentDidMount() {
-    store.setWidth(this.currentRef.current.offsetWidth)
+    store.setWidth(this.currentRef.offsetWidth)
   }
 
   /**
@@ -39,20 +40,31 @@ class DropDownNew extends Component {
     })
   }
 
+  _handleClickOverlay() {
+    this.currentRef.click()
+  }
+
   render() {
     const { children, overlay, placement, trigger, disabled } = this.props
     const cloneChildren = this._cloneChildren(children, disabled)
     const { right, center, top } = this._judgePlacement(placement)
     return (
       <Popover
-        popup={overlay}
+        popup={
+          <div
+            style={{ display: 'inline-block' }}
+            onClick={this._handleClickOverlay}
+          >
+            {overlay}
+          </div>
+        }
         disabled={disabled}
         right={right}
         center={center}
         top={top}
         type={trigger}
       >
-        <div className='dropdown-new' ref={this.currentRef}>
+        <div className='dropdown-new' ref={ref => (this.currentRef = ref)}>
           {cloneChildren}
         </div>
       </Popover>

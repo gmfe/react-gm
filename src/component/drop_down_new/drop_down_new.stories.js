@@ -5,23 +5,26 @@ import { ButtonGroup, Button } from '../button'
 import Icon from '../../../svg/down.svg'
 
 storiesOf('DropDownNew', module)
-  .add('Common', () => (
-    <DropDownNew
-      overlay={
-        <DropDownNewMenu>
-          <DropDownNewItem>123</DropDownNewItem>
-          <DropDownNewItem>234</DropDownNewItem>
-          <DropDownNewItem>345</DropDownNewItem>
-        </DropDownNewMenu>
-      }
-      trigger='click'
-    >
-      <Button>
-        Dropdown
-        <Icon />
-      </Button>
-    </DropDownNew>
-  ))
+  .add('Common', () => {
+    const print = () => console.log(123)
+    return (
+      <DropDownNew
+        overlay={
+          <DropDownNewMenu>
+            <DropDownNewItem onClick={print}>123</DropDownNewItem>
+            <DropDownNewItem>234</DropDownNewItem>
+            <DropDownNewItem>345</DropDownNewItem>
+          </DropDownNewMenu>
+        }
+        trigger='click'
+      >
+        <Button>
+          Dropdown
+          <Icon />
+        </Button>
+      </DropDownNew>
+    )
+  })
   .add('Button Group', () => (
     <ButtonGroup>
       <Button>DropDown</Button>
