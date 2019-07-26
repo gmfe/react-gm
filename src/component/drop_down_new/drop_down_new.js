@@ -1,9 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import Popover from '../popover'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import { store } from './store'
 
 class DropDownNew extends Component {
+  constructor(props) {
+    super(props)
+    this.currentRef = createRef()
+  }
+
+  componentDidMount() {
+    store.setWidth(this.currentRef.current.offsetWidth)
+  }
+
   /**
    * 由于Popover组件设计原因，需将传进来的placement属性进行转化
    * @param e string
@@ -42,7 +52,9 @@ class DropDownNew extends Component {
         top={top}
         type={trigger}
       >
-        {cloneChildren}
+        <div className='dropdown-new' ref={this.currentRef}>
+          {cloneChildren}
+        </div>
       </Popover>
     )
   }
