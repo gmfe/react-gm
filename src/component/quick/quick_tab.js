@@ -36,7 +36,11 @@ class QuickTab extends React.Component {
 
   render() {
     const {
-      tabs, children, active, onChange, isStatic, // eslint-disable-line
+      tabs,
+      children,
+      active,
+      onChange,
+      isStatic, // eslint-disable-line
       justified,
       ...rest
     } = this.props
@@ -96,20 +100,7 @@ QuickTab.propTypes = {
   isStatic: PropTypes.bool,
   justified: PropTypes.bool,
   className: PropTypes.string,
-  children: (props, propName, componentName) => {
-    if (
-      props.tabs &&
-      props.children &&
-      props.tabs.length !== props.children.length
-    ) {
-      return new Error(
-        'Invalid prop `children` supplied to' +
-          ' `' +
-          componentName +
-          '`, prop `tabs` length is not match prop `children` length'
-      )
-    }
-  }
+  style: PropTypes.object
 }
 
 QuickTab.defaultProps = {
