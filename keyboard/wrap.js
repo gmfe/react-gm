@@ -144,9 +144,23 @@ const Wrap = props => {
     const handleTab = event => {
       const { cellKey } = event.detail
       const { rowKey, columnKey } = getKey(cellKey)
+      const columnIndex = columnKeys.indexOf(columnKey)
 
-      // 目前和右一样，可这样简单处理
-      toDirectionRight(rowKey, columnKey)
+      // 如果不是最后一列
+      if (columnIndex < columnKeys.length - 1) {
+        doFocusWithColumnRowKey(rowKey, columnKeys[columnIndex + 1])
+      }
+      // 最后一列了
+      else if (columnIndex === columnKeys.length - 1) {
+        // 如果不是最后一行
+        if (rowKey < dataLength - 1) {
+          doFocusWithColumnRowKey(rowKey + 1, columnKeys[0])
+        }
+        // 最后一行了
+        else if (rowKey === dataLength - 1) {
+          doFocusWithColumnRowKey(0, columnKeys[0])
+        }
+      }
     }
 
     window.addEventListener(KEYBOARD_TAB + id, handleTab)

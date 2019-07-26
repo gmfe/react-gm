@@ -36,7 +36,7 @@ class LevelSelect extends React.Component {
   getSelectedItem = () => {
     const { data, selected } = this.props
 
-    let items = []
+    const items = []
     _.each(selected, (v, i) => {
       const match = _.find(
         i === 0 ? data : items[i - 1].children,
@@ -166,11 +166,12 @@ class LevelSelect extends React.Component {
   }
 
   renderTarget = () => {
-    const { selected, disabled } = this.props
+    const { selected, disabled, ...rest } = this.props
 
     // 注意转换 selected onSelect renderSelected
     return (
       <Selection
+        {...rest}
         ref={this.refSelection}
         selected={selected.length === 0 ? null : selected}
         onSelect={this.handleSelectionSelect}

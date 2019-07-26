@@ -103,10 +103,21 @@ function getColumnKey(column) {
   return null
 }
 
+const referOfWidth = {
+  noCell: 56,
+  operationCell: 100,
+  searchBox: 148,
+  numberInputBox: 80,
+  tableSelectBox: 148,
+  levelSelectBox: 148,
+  dateSelectBox: 110
+}
+
 export {
   getColumnKey,
   OperationHeader,
   OperationCell,
   SortHeader,
-  EditTableOperation
+  EditTableOperation,
+  referOfWidth
 }
