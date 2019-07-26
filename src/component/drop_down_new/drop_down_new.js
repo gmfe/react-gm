@@ -16,10 +16,22 @@ class DropDownNew extends Component {
     const center = placement[1] === 'center'
     return { top, right, center }
   }
-  // todo 添加disabled样式
+
+  /**
+   * 用于传入disabled时修改当前组件样式
+   * @param children element
+   * @param disabled boolean
+   * @private
+   */
+  _cloneChildren(children, disabled) {
+    return React.cloneElement(children, {
+      className: disabled ? 'dropdown-new-disabled' : ''
+    })
+  }
 
   render() {
     const { children, overlay, placement, trigger, disabled } = this.props
+    const cloneChildren = this._cloneChildren(children, disabled)
     const { right, center, top } = this._judgePlacement(placement)
     return (
       <Popover
@@ -30,7 +42,7 @@ class DropDownNew extends Component {
         top={top}
         type={trigger}
       >
-        {children}
+        {cloneChildren}
       </Popover>
     )
   }

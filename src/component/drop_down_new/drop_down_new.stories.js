@@ -15,6 +15,7 @@ storiesOf('DropDownNew', module).add('Common', () => (
         </ul>
       }
       trigger='hover'
+      disabled
     >
       <Button>...</Button>
     </DropDownNew>
