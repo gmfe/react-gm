@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { store } from './store'
+import { observer } from 'mobx-react'
 
+@observer
 class DropDownNew extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showMenu: false
-    }
-  }
-
   /**
    * 用于传入disabled时修改当前组件样式
    * @param children element
@@ -21,43 +17,59 @@ class DropDownNew extends Component {
     })
   }
 
-  _showMenu(flag) {
-    if (flag) {
-      clearTimeout(this.timer)
-    }
-    this.setState({
-      showMenu: true
-    })
-  }
-
-  _closeMenu(disabled) {
+  /**
+   * 当显示方式为click时
+   * @param disabled 是否禁用
+   * @param trigger 显示方式
+   * @private
+   */
+  _onClick(disabled, trigger) {
     if (disabled) {
       return
     }
-    this.timer = setTimeout(() => {
-      this.setState({
-        showMenu: false
-      })
-    }, 250)
+    if (trigger === 'click') {
+      const { showMenu } = store
+      store.setShowMenu(!showMenu)
+    }
+  }
+
+  /**
+   * 当显示方式为hover时
+   * @param disabled 是否禁用
+   * @param trigger 显示方式
+   * @private
+   */
+  _onMouseEnter(disabled, trigger) {
+    if (disabled) {
+      return
+    }
+    clearTimeout(this.timer) // 清除计时器
+    if (trigger === 'hover') {
+      store.setShowMenu(true)
+    }
+  }
+
+  /**
+   * 鼠标离开时，设定计时器关闭Submenu
+   * @private
+   */
+  _onMouseOut(disabled) {
+    if (disabled) {
+      return
+    }
+    this.timer = setTimeout(() => store.setShowMenu(false), 1000)
   }
 
   render() {
-    const { showMenu } = this.state
+    const { showMenu } = store
     const { children, overlay, trigger, disabled } = this.props
     const cloneChildren = this._cloneChildren(children, disabled)
     return (
       <div
         className='dropdown-new'
-        ref={ref => (this.currentRef = ref)}
-        onClick={
-          trigger === 'click' && !disabled ? () => this._showMenu() : undefined
-        }
-        onMouseEnter={
-          trigger === 'hover' && !disabled
-            ? () => this._showMenu(true)
-            : undefined
-        }
-        onMouseLeave={() => this._closeMenu(disabled)}
+        onClick={() => this._onClick(disabled, trigger)}
+        onMouseEnter={() => this._onMouseEnter(disabled, trigger)}
+        onMouseLeave={() => this._onMouseOut(disabled)}
       >
         {cloneChildren}
         {showMenu && (

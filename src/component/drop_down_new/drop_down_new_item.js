@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import className from 'classnames'
+import { store } from './store'
 
 class DropDownNewItem extends Component {
   constructor(props) {
@@ -12,15 +13,12 @@ class DropDownNewItem extends Component {
    * 点击事件，排除disabled以及未传onClick方法
    * @param disabled 是否disabled
    * @param onClick 传进来的onClick事件
-   * @param event 点击事件
    * @private
    */
-  _handleClick(disabled, onClick, event) {
-    if (disabled) {
-      event.stopPropagation()
-    }
+  _handleClick(disabled, onClick) {
     if (!disabled && onClick) {
       onClick()
+      store.setShowMenu(false)
     }
   }
 
@@ -32,7 +30,7 @@ class DropDownNewItem extends Component {
           'dropdown-new-menu-item': true,
           'dropdown-new-menu-item-disabled': disabled
         })}
-        onClick={event => this._handleClick(disabled, onClick, event)}
+        onClick={() => this._handleClick(disabled, onClick)}
       >
         {children}
       </li>

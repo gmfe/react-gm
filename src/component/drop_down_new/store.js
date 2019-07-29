@@ -2,19 +2,27 @@ import { observable, action } from 'mobx'
 
 class Store {
   /**
-   * DropdownNew包裹的children
-   * @type {element}
+   * 是否显示menu
+   * @type {boolean}
    * @private
    */
-  @observable _ref = null
+  @observable _showMenu = false
 
+  /**
+   * 设置menu
+   * @param e
+   */
   @action
-  setRef(e) {
-    this._ref = e
+  setShowMenu(e) {
+    this._showMenu = e
   }
 
-  get ref() {
-    return this._ref
+  /**
+   * 获取是否显示menu
+   * @returns {boolean}
+   */
+  get showMenu() {
+    return this._showMenu
   }
 }
 
