@@ -49,28 +49,30 @@ storiesOf('DropDownNew', module)
   .add('Sub menu', () => {
     const print = () => console.log(123)
     return (
-      <DropDownNew
-        trigger='click'
-        overlay={
-          <DropDownNewMenu>
-            <DropDownNewItem onClick={print}>
-              123123123123123123123123123123123
-            </DropDownNewItem>
-            <DropDownNewSubMenu title='234' disabled>
-              <DropDownNewItem onClick={print}>123123</DropDownNewItem>
-            </DropDownNewSubMenu>
-            <DropDownNewSubMenu title='111'>
-              <DropDownNewItem>234234</DropDownNewItem>
-              <DropDownNewItem disabled>111222</DropDownNewItem>
-              <DropDownNewItem>908012</DropDownNewItem>
-            </DropDownNewSubMenu>
-          </DropDownNewMenu>
-        }
-      >
-        <Button>
-          Dropdown
-          <Icon />
-        </Button>
-      </DropDownNew>
+      <div style={{ padding: '20px' }}>
+        <DropDownNew
+          trigger='click'
+          overlay={
+            <DropDownNewMenu>
+              <DropDownNewItem onClick={print}>
+                123123123123123123123123123123123
+              </DropDownNewItem>
+              <DropDownNewSubMenu title='234' disabled>
+                <DropDownNewItem onClick={print}>123123</DropDownNewItem>
+              </DropDownNewSubMenu>
+              <DropDownNewSubMenu title='111'>
+                <DropDownNewItem>234234</DropDownNewItem>
+                <DropDownNewItem disabled>111222</DropDownNewItem>
+                <DropDownNewItem>908012</DropDownNewItem>
+              </DropDownNewSubMenu>
+            </DropDownNewMenu>
+          }
+        >
+          <Button>
+            Dropdown
+            <Icon />
+          </Button>
+        </DropDownNew>
+      </div>
     )
   })
