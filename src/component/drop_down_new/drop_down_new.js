@@ -77,31 +77,32 @@ class DropDownNew extends Component {
    * @private
    */
   _changePlacement() {
-    const { placement: placementString } = this.props
-    const style = {}
-    const placement = _.kebabCase(placementString).split('-')
-    const {
-      current: { offsetWidth: DropdownNewWidth }
-    } = this.dropdownNew
-    switch (placement[1]) {
-      case 'center':
-        style['left'] = `-${DropdownNewWidth}px`
-        break
-      case 'right':
-        style['right'] = 0
-        break
-      default:
-    }
-    // 需要等模版加载完成才能获取container的属性
+    // 需要等模版加载完毕才能获取containerWidth，containerHeight
     setTimeout(() => {
-      const {
-        current: { offsetWidth: containerWidth, offsetHeight: containerHeight }
-      } = this.container
-      if (placement[0] === 'top') {
-        style['top'] = `-${containerHeight}px`
+      if (store.showMenu) {
+        const { placement: placementString } = this.props
+        const style = {}
+        const placement = _.kebabCase(placementString).split('-')
+        const {
+          current: { offsetWidth: DropdownNewWidth }
+        } = this.dropdownNew
+        const {
+          current: { offsetHeight: containerHeight }
+        } = this.container
+        if (placement[0] === 'top') {
+          style['top'] = `-${containerHeight}px`
+        }
+        switch (placement[1]) {
+          case 'center':
+            style['left'] = `-${DropdownNewWidth}px`
+            break
+          case 'right':
+            style['right'] = 0
+            break
+          default:
+        }
+        this.setState({ style })
       }
-      store.setMenuWidth(containerWidth)
-      this.setState({ style })
     })
   }
 
