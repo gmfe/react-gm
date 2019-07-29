@@ -12,7 +12,7 @@ const Popup = props => {
       <div className='gm-nav-popup-triangle' />
       <Flex>
         {_.map(data, (v, i) => (
-          <div key={i} className='gm-nav-two'>
+          <div key={i} className='gm-nav-two' style={v.style}>
             <div className='gm-nav-two-title'>{v.name}</div>
             <div>
               {_.map(v.sub, (s, si) => (
@@ -109,7 +109,10 @@ const Nav = props => {
 
 Nav.propTypes = {
   logo: PropTypes.element,
-  /** 三级菜单 [{link, name, icon, sub: [{link, name, sub: [{link, name}]}]}] */
+  /**
+   * 三级菜单，其中 2 级有个 style
+   * [{link, name, icon, sub: [{link, name, style, sub: [{link, name}]}]}]
+   * */
   data: PropTypes.array.isRequired,
   selected: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,

@@ -12,17 +12,13 @@
     &.active {
       background: #17233d;
     }
-
-    &:hover {
-      background: #17233d;
-    }
   }
 
   .gm-nav-one {
     height: 64px;
     padding: 5px;
     text-decoration: none;
-    color: white;
+    color: rgba(255, 255, 255, 80%);
     margin-top: 16px;
     display: flex;
     flex-direction: column;
@@ -36,15 +32,18 @@
     }
 
     .gm-nav-one-text {
+      font-weight: bold;
       text-align: center;
       font-size: 14px;
     }
 
     &.active {
-      background: #2871bb;
+      color: white;
+      background: rgba(40, 113, 187, 1);
     }
 
     &:hover {
+      color: white;
       background: rgba(40, 113, 187, 0.4);
     }
   }
@@ -85,13 +84,12 @@
 
   .gm-nav-two {
     min-width: 110px;
-    max-width: 130px;
     padding: 10px 10px 35px;
 
     .gm-nav-two-title {
       color: @gm-color-third;
       padding: 0 0 10px;
-      border-bottom: 1px solid @gm-border-color;
+      border-bottom: 1px solid #f0f1f3;
       margin: 5px 10px 15px;
     }
   }

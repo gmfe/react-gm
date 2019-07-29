@@ -38,7 +38,8 @@ class FullTab extends React.Component {
       tabs,
       children,
       isStatic,
-      active, onChange, // eslint-disable-line
+      active,
+      onChange, // eslint-disable-line
       ...rest
     } = this.props
 
@@ -60,14 +61,19 @@ class FullTab extends React.Component {
           <div
             {...rest}
             className={classNames(
-              'gm-framework-full-tabs gm-back-bg gm-framework-content-full',
+              'gm-framework-full-tabs gm-framework-content-full',
               this.props.className
             )}
           >
             {tabs.length > 1 && (
-              <div className='gm-framework-full-tabs-list-box'>
+              <Flex
+                column
+                justifyEnd
+                className='gm-framework-full-tabs-list-box'
+              >
                 <Flex
-                  className='gm-framework-full-tabs-list gm-bg'
+                  alignEnd
+                  className='gm-framework-full-tabs-list'
                   style={{
                     left: leftWidth
                   }}
@@ -84,9 +90,9 @@ class FullTab extends React.Component {
                     </div>
                   ))}
                 </Flex>
-              </div>
+              </Flex>
             )}
-            <div className='gm-framework-full-tabs-content gm-padding-20'>
+            <div className='gm-framework-full-tabs-content'>
               {isStatic ? tabPanels : tabPanels[activeTab]}
             </div>
           </div>
@@ -103,20 +109,7 @@ FullTab.propTypes = {
   active: PropTypes.number,
   isStatic: PropTypes.bool,
   className: PropTypes.string,
-  children: (props, propName, componentName) => {
-    if (
-      props.tabs &&
-      props.children &&
-      props.tabs.length !== props.children.length
-    ) {
-      return new Error(
-        'Invalid prop `children` supplied to' +
-          ' `' +
-          componentName +
-          '`, prop `tabs` length is not match prop `children` length'
-      )
-    }
-  }
+  style: PropTypes.object
 }
 
 FullTab.defaultProps = {
