@@ -103,16 +103,20 @@ class DropDownNew extends Component {
           top,
           bottom
         } = this.dropdownNew.current.getBoundingClientRect()
-        if (left + dropdownNewWidth < containerWidth) {
+        const {
+          offsetWidth: clientWidth,
+          offsetHeight: clientHeight
+        } = document.body
+        if (right < containerWidth) {
           placement[1] = 'left'
         }
-        if (right + dropdownNewWidth < containerWidth) {
+        if (clientWidth - left < containerWidth) {
           placement[1] = 'right'
         }
         if (top < containerHeight) {
           placement[0] = 'bottom'
         }
-        if (bottom < containerHeight) {
+        if (clientHeight - bottom < containerHeight) {
           placement[0] = 'top'
         }
         // 修复位置之后绑定样式
