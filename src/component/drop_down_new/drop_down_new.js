@@ -1,10 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import { store } from './store'
 import { observer } from 'mobx-react'
+import _ from 'lodash'
 
 @observer
 class DropDownNew extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      style: {}
+    }
+    this.dropdownNew = createRef()
+    this.container = createRef()
+  }
+
   /**
    * 用于传入disabled时修改当前组件样式
    * @param children element
@@ -30,6 +40,7 @@ class DropDownNew extends Component {
     if (trigger === 'click') {
       const { showMenu } = store
       store.setShowMenu(!showMenu)
+      this._changePlacement()
     }
   }
 
@@ -46,6 +57,7 @@ class DropDownNew extends Component {
     clearTimeout(this.timer) // 清除计时器
     if (trigger === 'hover') {
       store.setShowMenu(true)
+      this._changePlacement()
     }
   }
 
@@ -57,15 +69,50 @@ class DropDownNew extends Component {
     if (disabled) {
       return
     }
-    this.timer = setTimeout(() => store.setShowMenu(false), 250)
+    this.timer = setTimeout(() => store.setShowMenu(false), 500)
+  }
+
+  /**
+   * 改变位置
+   * @private
+   */
+  _changePlacement() {
+    const { placement: placementString } = this.props
+    const style = {}
+    const placement = _.kebabCase(placementString).split('-')
+    const {
+      current: { offsetWidth: DropdownNewWidth }
+    } = this.dropdownNew
+    switch (placement[1]) {
+      case 'center':
+        style['left'] = `-${DropdownNewWidth}px`
+        break
+      case 'right':
+        style['right'] = 0
+        break
+      default:
+    }
+    // 需要等模版加载完成才能获取container的属性
+    setTimeout(() => {
+      const {
+        current: { offsetWidth: containerWidth, offsetHeight: containerHeight }
+      } = this.container
+      if (placement[0] === 'top') {
+        style['top'] = `-${containerHeight}px`
+      }
+      store.setMenuWidth(containerWidth)
+      this.setState({ style })
+    })
   }
 
   render() {
     const { showMenu } = store
+    const { style } = this.state
     const { children, overlay, trigger, disabled } = this.props
     const cloneChildren = this._cloneChildren(children, disabled)
     return (
       <div
+        ref={this.dropdownNew}
         className='dropdown-new'
         onClick={() => this._onClick(disabled, trigger)}
         onMouseEnter={() => this._onMouseEnter(disabled, trigger)}
@@ -73,7 +120,13 @@ class DropDownNew extends Component {
       >
         {cloneChildren}
         {showMenu && (
-          <div className='dropdown-new-menu-container'>{overlay}</div>
+          <div
+            className='dropdown-new-menu-container'
+            style={style}
+            ref={this.container}
+          >
+            {overlay}
+          </div>
         )}
       </div>
     )

@@ -50,6 +50,7 @@ storiesOf('DropDownNew', module)
     const print = () => console.log(123)
     return (
       <DropDownNew
+        trigger='click'
         overlay={
           <DropDownNewMenu>
             <DropDownNewItem onClick={print}>
