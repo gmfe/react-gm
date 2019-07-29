@@ -2,19 +2,19 @@ import { observable, action } from 'mobx'
 
 class Store {
   /**
-   * DropdownNew组件包裹的内容的实际宽度，当该宽度长于下拉Menu的实际宽度时，用此宽度替代Menu的宽度
-   * @type {number}
+   * DropdownNew包裹的children
+   * @type {element}
    * @private
    */
-  @observable _width = 0
+  @observable _ref = null
 
   @action
-  setWidth(e) {
-    this._width = e
+  setRef(e) {
+    this._ref = e
   }
 
-  get width() {
-    return this._width
+  get ref() {
+    return this._ref
   }
 }
 

@@ -1,31 +1,12 @@
 import React, { Component } from 'react'
-import Popover from '../popover'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
-import { store } from './store'
 
 class DropDownNew extends Component {
   constructor(props) {
     super(props)
-    this.currentRef = null
-    this._handleClickOverlay = ::this._handleClickOverlay
-  }
-
-  componentDidMount() {
-    store.setWidth(this.currentRef.offsetWidth)
-  }
-
-  /**
-   * 由于Popover组件设计原因，需将传进来的placement属性进行转化
-   * @param e string
-   * @private
-   */
-  _judgePlacement(e) {
-    const placement = _.kebabCase(e).split('-')
-    const top = placement[0] === 'top'
-    const right = placement[1] === 'right'
-    const center = placement[1] === 'center'
-    return { top, right, center }
+    this.state = {
+      showMenu: false
+    }
   }
 
   /**
@@ -40,34 +21,49 @@ class DropDownNew extends Component {
     })
   }
 
-  _handleClickOverlay() {
-    this.currentRef.click()
+  _showMenu(flag) {
+    if (flag) {
+      clearTimeout(this.timer)
+    }
+    this.setState({
+      showMenu: true
+    })
+  }
+
+  _closeMenu(disabled) {
+    if (disabled) {
+      return
+    }
+    this.timer = setTimeout(() => {
+      this.setState({
+        showMenu: false
+      })
+    }, 250)
   }
 
   render() {
-    const { children, overlay, placement, trigger, disabled } = this.props
+    const { showMenu } = this.state
+    const { children, overlay, trigger, disabled } = this.props
     const cloneChildren = this._cloneChildren(children, disabled)
-    const { right, center, top } = this._judgePlacement(placement)
     return (
-      <Popover
-        popup={
-          <div
-            style={{ display: 'inline-block' }}
-            onClick={this._handleClickOverlay}
-          >
-            {overlay}
-          </div>
+      <div
+        className='dropdown-new'
+        ref={ref => (this.currentRef = ref)}
+        onClick={
+          trigger === 'click' && !disabled ? () => this._showMenu() : undefined
         }
-        disabled={disabled}
-        right={right}
-        center={center}
-        top={top}
-        type={trigger}
+        onMouseEnter={
+          trigger === 'hover' && !disabled
+            ? () => this._showMenu(true)
+            : undefined
+        }
+        onMouseLeave={() => this._closeMenu(disabled)}
       >
-        <div className='dropdown-new' ref={ref => (this.currentRef = ref)}>
-          {cloneChildren}
-        </div>
-      </Popover>
+        {cloneChildren}
+        {showMenu && (
+          <div className='dropdown-new-menu-container'>{overlay}</div>
+        )}
+      </div>
     )
   }
 }
@@ -82,7 +78,7 @@ DropDownNew.propTypes = {
     'bottomCenter',
     'bottomRight'
   ),
-  trigger: PropTypes.oneOf('focus', 'click', 'hover', 'realFocus'),
+  trigger: PropTypes.oneOf('click', 'hover'),
   disabled: PropTypes.bool
 }
 DropDownNew.defaultProps = {
