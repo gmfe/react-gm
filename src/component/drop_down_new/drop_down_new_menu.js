@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react'
+import { store } from './store'
 
 class DropDownNewMenu extends Component {
   constructor(props) {
@@ -9,6 +10,15 @@ class DropDownNewMenu extends Component {
         width: 0
       },
       flag: false
+    }
+  }
+
+  componentDidMount() {
+    if (store.dropdownNewWidth > this.currentRef.current.offsetWidth) {
+      const style = {
+        width: `${store.dropdownNewWidth}px`
+      }
+      this.setState({ style, flag: true })
     }
   }
 

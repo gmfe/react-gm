@@ -15,6 +15,10 @@ class DropDownNew extends Component {
     this.container = createRef()
   }
 
+  componentDidMount() {
+    store.setDropdownNewWidth(this.dropdownNew.current.offsetWidth)
+  }
+
   /**
    * 用于传入disabled时修改当前组件样式
    * @param children element
@@ -84,7 +88,7 @@ class DropDownNew extends Component {
         const style = {}
         const placement = _.kebabCase(placementString).split('-')
         const {
-          current: { offsetWidth: DropdownNewWidth }
+          current: { offsetWidth: dropdownNewWidth }
         } = this.dropdownNew
         const {
           current: { offsetHeight: containerHeight }
@@ -94,7 +98,7 @@ class DropDownNew extends Component {
         }
         switch (placement[1]) {
           case 'center':
-            style['left'] = `-${DropdownNewWidth}px`
+            style['left'] = `-${dropdownNewWidth}px`
             break
           case 'right':
             style['right'] = 0
