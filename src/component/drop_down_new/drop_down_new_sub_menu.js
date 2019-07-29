@@ -59,7 +59,7 @@ class DropDownNewSubMenu extends Component {
         this.setState({
           showSubmenu: false
         }),
-      500
+      250
     )
   }
 

@@ -53,8 +53,11 @@ storiesOf('DropDownNew', module)
         overlay={
           <DropDownNewMenu>
             <DropDownNewItem onClick={print}>123</DropDownNewItem>
-            <DropDownNewSubMenu title='234' disabled>
+            <DropDownNewSubMenu title='234'>
               <DropDownNewItem>123123</DropDownNewItem>
+            </DropDownNewSubMenu>
+            <DropDownNewSubMenu title='111'>
+              <DropDownNewItem>234234</DropDownNewItem>
             </DropDownNewSubMenu>
           </DropDownNewMenu>
         }
