@@ -16,7 +16,6 @@ storiesOf('DropDownNew', module)
             <DropDownNewItem>345</DropDownNewItem>
           </DropDownNewMenu>
         }
-        trigger='click'
       >
         <Button>
           Dropdown
