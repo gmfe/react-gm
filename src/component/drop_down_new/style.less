@@ -13,6 +13,22 @@
     outline: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
+    &-submenu {
+      position: absolute;
+      top: 0;
+      left: 103%;
+
+      &-title {
+        padding-right: 26px;
+      }
+
+      &-arrow {
+        position: absolute;
+        right: 8px;
+        font-size: 6px;
+      }
+    }
+
     &-item {
       clear: both;
       margin: 0;
@@ -25,6 +41,7 @@
       cursor: pointer;
       transition: all 0.3s;
       background: none;
+      position: relative;
 
       &:hover {
         background-color: #e6f7ff;

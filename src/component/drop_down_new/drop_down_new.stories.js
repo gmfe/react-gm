@@ -1,6 +1,11 @@
 import { storiesOf } from '@storybook/react'
 import React from 'react'
-import { DropDownNew, DropDownNewMenu, DropDownNewItem } from './index'
+import {
+  DropDownNew,
+  DropDownNewMenu,
+  DropDownNewItem,
+  DropDownNewSubMenu
+} from './index'
 import { ButtonGroup, Button } from '../button'
 import Icon from '../../../svg/down.svg'
 
@@ -41,3 +46,23 @@ storiesOf('DropDownNew', module)
       </DropDownNew>
     </ButtonGroup>
   ))
+  .add('Sub menu', () => {
+    const print = () => console.log(123)
+    return (
+      <DropDownNew
+        overlay={
+          <DropDownNewMenu>
+            <DropDownNewItem onClick={print}>123</DropDownNewItem>
+            <DropDownNewSubMenu title='234' disabled>
+              <DropDownNewItem>123123</DropDownNewItem>
+            </DropDownNewSubMenu>
+          </DropDownNewMenu>
+        }
+      >
+        <Button>
+          Dropdown
+          <Icon />
+        </Button>
+      </DropDownNew>
+    )
+  })
