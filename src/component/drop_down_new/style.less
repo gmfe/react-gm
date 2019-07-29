@@ -1,5 +1,6 @@
 .dropdown-new {
   display: inline-block;
+  position: relative;
 
   &-menu {
     position: relative;
@@ -12,6 +13,10 @@
     border-radius: 4px;
     outline: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    &-container {
+      position: absolute;
+    }
 
     &-submenu {
       position: absolute;
