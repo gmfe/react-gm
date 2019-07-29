@@ -80,7 +80,7 @@ DropDownNew.propTypes = {
 }
 DropDownNew.defaultProps = {
   placement: 'bottomLeft',
-  trigger: 'focus',
+  trigger: 'hover',
   disabled: false
 }
 
