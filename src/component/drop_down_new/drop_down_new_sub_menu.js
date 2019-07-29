@@ -19,7 +19,8 @@ class DropDownNewSubMenu extends Component {
    * @param trigger 显示方式
    * @private
    */
-  _onClick(disabled, trigger) {
+  _onClick(disabled, trigger, event) {
+    event.stopPropagation()
     if (disabled) {
       return
     }
@@ -116,7 +117,7 @@ class DropDownNewSubMenu extends Component {
           'dropdown-new-menu-item': true,
           'dropdown-new-menu-item-disabled': disabled
         })}
-        onClick={() => this._onClick(disabled, trigger)}
+        onClick={event => this._onClick(disabled, trigger, event)}
         onMouseEnter={() => this._onMouseEnter(disabled, trigger)}
         onMouseLeave={() => this._onMouseOut(disabled)}
       >
