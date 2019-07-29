@@ -91,8 +91,31 @@ class DropDownNew extends Component {
           current: { offsetWidth: dropdownNewWidth }
         } = this.dropdownNew
         const {
-          current: { offsetHeight: containerHeight }
+          current: {
+            offsetWidth: containerWidth,
+            offsetHeight: containerHeight
+          }
         } = this.container
+        const {
+          // 获取当前元素距离屏幕的边距自动修改位置
+          left,
+          right,
+          top,
+          bottom
+        } = this.dropdownNew.current.getBoundingClientRect()
+        if (left + dropdownNewWidth < containerWidth) {
+          placement[1] = 'left'
+        }
+        if (right + dropdownNewWidth < containerWidth) {
+          placement[1] = 'right'
+        }
+        if (top < containerHeight) {
+          placement[0] = 'bottom'
+        }
+        if (bottom < containerHeight) {
+          placement[0] = 'top'
+        }
+        // 修复位置之后绑定样式
         if (placement[0] === 'top') {
           style['top'] = `-${containerHeight}px`
         }
