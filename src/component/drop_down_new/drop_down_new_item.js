@@ -16,8 +16,10 @@ class DropDownNewItem extends Component {
    * @private
    */
   _handleClick(disabled, onClick) {
-    if (!disabled && onClick) {
-      onClick()
+    if (!disabled) {
+      if (onClick) {
+        onClick()
+      }
       store.setShowMenu(false)
     }
   }

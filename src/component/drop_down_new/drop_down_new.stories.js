@@ -55,11 +55,13 @@ storiesOf('DropDownNew', module)
             <DropDownNewItem onClick={print}>
               123123123123123123123123123123123
             </DropDownNewItem>
-            <DropDownNewSubMenu title='234'>
+            <DropDownNewSubMenu title='234' disabled>
               <DropDownNewItem onClick={print}>123123</DropDownNewItem>
             </DropDownNewSubMenu>
             <DropDownNewSubMenu title='111'>
               <DropDownNewItem>234234</DropDownNewItem>
+              <DropDownNewItem disabled>111222</DropDownNewItem>
+              <DropDownNewItem>908012</DropDownNewItem>
             </DropDownNewSubMenu>
           </DropDownNewMenu>
         }

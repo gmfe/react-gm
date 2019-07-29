@@ -57,7 +57,7 @@ class DropDownNew extends Component {
     if (disabled) {
       return
     }
-    this.timer = setTimeout(() => store.setShowMenu(false), 1000)
+    this.timer = setTimeout(() => store.setShowMenu(false), 250)
   }
 
   render() {
