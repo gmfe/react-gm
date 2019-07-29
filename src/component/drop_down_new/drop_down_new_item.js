@@ -15,7 +15,8 @@ class DropDownNewItem extends Component {
    * @param onClick 传进来的onClick事件
    * @private
    */
-  _handleClick(disabled, onClick) {
+  _handleClick(disabled, onClick, event) {
+    event.stopPropagation()
     if (!disabled) {
       if (onClick) {
         onClick()
@@ -32,7 +33,7 @@ class DropDownNewItem extends Component {
           'dropdown-new-menu-item': true,
           'dropdown-new-menu-item-disabled': disabled
         })}
-        onClick={() => this._handleClick(disabled, onClick)}
+        onClick={event => this._handleClick(disabled, onClick, event)}
       >
         {children}
       </li>
