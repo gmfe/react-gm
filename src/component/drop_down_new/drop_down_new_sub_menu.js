@@ -10,6 +10,7 @@ class DropDownNewSubMenu extends Component {
       showSubmenu: false, // 是否显示Submenu
       style: {}
     }
+    this.menuItem = createRef()
     this.submenu = createRef()
   }
 
@@ -78,7 +79,15 @@ class DropDownNewSubMenu extends Component {
       const {
         current: { offsetWidth: submenuWidth }
       } = this.submenu
-      const { placement } = this.props
+      const { left, right } = this.menuItem.current.getBoundingClientRect()
+      const { offsetWidth } = document.body
+      let { placement } = this.props
+      if (left < submenuWidth + 4) {
+        placement = 'right'
+      }
+      if (offsetWidth - right < submenuWidth + 4) {
+        placement = 'left'
+      }
       const style = {}
       if (placement === 'left') {
         style['left'] = `-${submenuWidth + 4}px`
@@ -117,6 +126,7 @@ class DropDownNewSubMenu extends Component {
           'dropdown-new-menu-item': true,
           'dropdown-new-menu-item-disabled': disabled
         })}
+        ref={this.menuItem}
         onClick={event => this._onClick(disabled, trigger, event)}
         onMouseEnter={() => this._onMouseEnter(disabled, trigger)}
         onMouseLeave={() => this._onMouseOut(disabled)}
