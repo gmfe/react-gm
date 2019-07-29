@@ -10,8 +10,9 @@ class DropDownNewItem extends Component {
 
   /**
    * 点击事件，排除disabled以及未传onClick方法
-   * @param disabled
-   * @param onClick
+   * @param disabled 是否disabled
+   * @param onClick 传进来的onClick事件
+   * @param event 点击事件
    * @private
    */
   _handleClick(disabled, onClick, event) {
