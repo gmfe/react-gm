@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 import _ from 'lodash'
 import { Overlay } from './../overlay'
+import { store } from './store'
 
 @observer
 class DropDownNew extends Component {
@@ -10,6 +11,8 @@ class DropDownNew extends Component {
     super(props)
     this.containerRef = createRef()
   }
+
+  componentDidMount() {}
 
   /**
    * 当显示方式为click时
@@ -70,6 +73,7 @@ class DropDownNew extends Component {
       const style = this._changePlacement(element)
       Overlay.update(overlay, style)
       this._clearTimer(element)
+      store.setDropdownNewWidth(this.containerRef.current.offsetWidth)
     })
   }
 
