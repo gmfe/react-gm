@@ -7,7 +7,7 @@ import _ from 'lodash'
 import Flex from '../flex'
 
 const Day = props => {
-  const { disabled, onClick, value, oldSelect, selected } = props
+  const { disabled, onClick, value, will, selected } = props
 
   const nowMountStart = +moment().startOf('day')
   const handleClick = () => {
@@ -18,9 +18,10 @@ const Day = props => {
   }
 
   const cn = classNames('gm-calendar-day', {
+    'gm-calendar-day-will': +will.startOf('day') === +value.startOf('day'),
     'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
-    'gm-calendar-day-old': oldSelect.month() > value.month(),
-    'gm-calendar-day-new': oldSelect.month() < value.month(),
+    'gm-calendar-day-old': will.month() > value.month(),
+    'gm-calendar-day-new': will.month() < value.month(),
     'gm-calendar-day-disabled': disabled,
     'gm-calendar-active': +selected.startOf('day') === +value.startOf('day')
   })
@@ -36,7 +37,7 @@ Day.propTypes = {
   disabled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   value: PropTypes.object.isRequired,
-  oldSelect: PropTypes.object.isRequired,
+  will: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired
 }
 
@@ -56,13 +57,13 @@ const months = [
 ]
 
 const Head = props => {
-  const { oldSelect, onChangeMonth } = props
+  const { will, onChange } = props
   const [isShow, setShow] = useState(false)
-  const month = oldSelect.month()
+  const month = will.month()
 
   const handleChangeMonth = month => {
     setShow(false)
-    onChangeMonth(month)
+    onChange(month)
   }
 
   const handleShowMonth = () => {
@@ -83,7 +84,7 @@ const Head = props => {
           <span className='gm-calendar-head-month' onClick={handleShowMonth}>
             {months[month]}
           </span>
-          <span>&nbsp;&nbsp;{oldSelect.year()}</span>
+          <span>&nbsp;&nbsp;{will.year()}</span>
         </Flex>
         <a
           href='javascript:;'
@@ -113,8 +114,8 @@ const Head = props => {
 }
 
 Head.propTypes = {
-  oldSelect: PropTypes.object.isRequired,
-  onChangeMonth: PropTypes.func.isRequired
+  will: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired
 }
 const weekDays = [
   getLocale('week__日'),
@@ -138,9 +139,9 @@ const Week = () => {
 }
 
 const Content = props => {
-  const { selected, oldSelect, onSelectDay, getDisabled } = props
+  const { selected, will, onSelectDay, getDisabled } = props
 
-  const m = moment(oldSelect)
+  const m = moment(will)
     .startOf('month')
     .day(0)
     .add(-1, 'day')
@@ -155,7 +156,7 @@ const Content = props => {
               <Day
                 key={index}
                 selected={moment(selected)}
-                oldSelect={oldSelect}
+                will={will}
                 value={mm}
                 onClick={onSelectDay}
                 disabled={getDisabled(mm)}
@@ -170,8 +171,8 @@ const Content = props => {
 
 Content.propTypes = {
   selected: PropTypes.object,
-  oldSelect: PropTypes.object.isRequired,
   onSelectDay: PropTypes.func.isRequired,
+  will: PropTypes.object.isRequired,
   getDisabled: PropTypes.func.isRequired
 }
 
@@ -179,29 +180,38 @@ const Calendar = props => {
   const {
     selected,
     onSelect,
+    willActiveSelected,
     min,
     max,
     disabledDate,
     className,
     ...rest
   } = props
-  const _oldSelect = selected ? moment(selected) : moment()
+
+  const _will = willActiveSelected
+    ? moment(willActiveSelected)
+    : selected
+    ? moment(selected)
+    : moment()
 
   // daySelect: Date对象，用于处理选择哪一天
   // oldselect: Date对象，用于处理选择哪个月
   const [daySelect, setDaySelect] = useState(selected || null)
-  const [oldSelect, setOldSelect] = useState(_oldSelect)
+  const [will, setWill] = useState(_will)
 
   useEffect(() => {
     setDaySelect(props.selected)
-  }, [props.selected])
+  }, [selected])
+  useEffect(() => {
+    setWill(_will)
+  }, [willActiveSelected])
 
   const handleSelectDay = m => {
     props.onSelect(m.toDate())
   }
 
-  const handleChangeMonth = month => {
-    setOldSelect(moment(oldSelect.month(month)))
+  const handleChangeWill = month => {
+    setWill(moment(will.month(month)))
   }
 
   const getDisabled = m => {
@@ -226,11 +236,11 @@ const Calendar = props => {
 
   return (
     <div {...rest} className={classNames('gm-calendar', className)}>
-      <Head oldSelect={oldSelect} onChangeMonth={e => handleChangeMonth(e)} />
+      <Head will={will} onChange={e => handleChangeWill(e)} />
       <Week />
       <Content
         selected={daySelect}
-        oldSelect={oldSelect}
+        will={will}
         onSelectDay={e => handleSelectDay(e)}
         getDisabled={e => getDisabled(e)}
       />
@@ -243,6 +253,7 @@ Calendar.propTypes = {
   selected: PropTypes.object,
   /** 点击选择日期回调，传入参数为Date对象 */
   onSelect: PropTypes.func,
+  willActiveSelected: PropTypes.object,
   /** Date对象，表示可选的最小日期 */
   min: PropTypes.object,
   /** Date对象，表示可选的最大日期 */
@@ -252,11 +263,15 @@ Calendar.propTypes = {
   /** 定义样式 */
   className: PropTypes.string,
   /** 定义样式 */
-  style: PropTypes.object
+  style: PropTypes.object,
+
+  /** 目前全键盘用 */
+  onKeyDown: PropTypes.func
 }
 
 Calendar.defaultProps = {
-  onSelect: _.noop
+  onSelect: _.noop,
+  onKeyDown: _.noop
 }
 
 export default Calendar

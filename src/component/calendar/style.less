@@ -87,6 +87,8 @@
   line-height: 24px;
   text-align: center;
   margin: 2px;
+  border: 1px solid transparent;
+  border-radius: 50%;
 }
 
 .gm-calendar-day:hover:not(.gm-calendar-day-disabled) {
@@ -95,8 +97,11 @@
   border-radius: 50%;
 }
 
+.gm-calendar-day-will {
+  border: 1px solid @gm-color-third;
+}
+
 .gm-calendar-day-now {
-  border-radius: 50%;
   border: 1px solid @brand-primary;
 }
 
@@ -110,7 +115,6 @@
 
 .gm-calendar-active {
   background-color: @brand-primary;
-  border-radius: 50%;
   color: white;
 }
 
