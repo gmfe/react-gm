@@ -1,34 +1,14 @@
 import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
-import { store } from './store'
 import { observer } from 'mobx-react'
 import _ from 'lodash'
+import { Overlay } from './../overlay'
 
 @observer
 class DropDownNew extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      style: {}
-    }
-    this.dropdownNew = createRef()
-    this.container = createRef()
-  }
-
-  componentDidMount() {
-    store.setDropdownNewWidth(this.dropdownNew.current.offsetWidth)
-  }
-
-  /**
-   * 用于传入disabled时修改当前组件样式
-   * @param children element
-   * @param disabled boolean
-   * @private
-   */
-  _cloneChildren(children, disabled) {
-    return React.cloneElement(children, {
-      className: disabled ? 'dropdown-new-disabled' : ''
-    })
+    this.containerRef = createRef()
   }
 
   /**
@@ -42,9 +22,7 @@ class DropDownNew extends Component {
       return
     }
     if (trigger === 'click') {
-      const { showMenu } = store
-      store.setShowMenu(!showMenu)
-      this._changePlacement()
+      this._createOverlay()
     }
   }
 
@@ -58,10 +36,9 @@ class DropDownNew extends Component {
     if (disabled) {
       return
     }
-    clearTimeout(this.timer) // 清除计时器
+    clearTimeout(this.timer)
     if (trigger === 'hover') {
-      store.setShowMenu(true)
-      this._changePlacement()
+      this._createOverlay()
     }
   }
 
@@ -73,90 +50,74 @@ class DropDownNew extends Component {
     if (disabled) {
       return
     }
-    this.timer = setTimeout(() => store.setShowMenu(false), 500)
+    this.timer = setTimeout(() => Overlay.close(), 500)
+  }
+
+  _clearTimer(element) {
+    element.addEventListener('mouseenter', () => {
+      clearTimeout(this.timer)
+    })
+    element.addEventListener('mouseleave', () => {
+      this.timer = setTimeout(() => Overlay.close(), 500)
+    })
+  }
+
+  _createOverlay() {
+    const { overlay } = this.props
+    Overlay.create({
+      content: overlay
+    }).then(element => {
+      const style = this._changePlacement(element)
+      Overlay.update(overlay, style)
+      this._clearTimer(element)
+    })
   }
 
   /**
    * 改变位置
    * @private
    */
-  _changePlacement() {
-    // 需要等模版加载完毕才能获取containerWidth，containerHeight
-    setTimeout(() => {
-      if (store.showMenu) {
-        const { placement: placementString } = this.props
-        const style = {}
-        const placement = _.kebabCase(placementString).split('-')
-        const {
-          current: { offsetWidth: dropdownNewWidth }
-        } = this.dropdownNew
-        const {
-          current: {
-            offsetWidth: containerWidth,
-            offsetHeight: containerHeight
-          }
-        } = this.container
-        const {
-          // 获取当前元素距离屏幕的边距自动修改位置
-          left,
-          right,
-          top,
-          bottom
-        } = this.dropdownNew.current.getBoundingClientRect()
-        const { offsetWidth, offsetHeight } = document.body
-        if (right < containerWidth) {
-          placement[1] = 'left'
-        }
-        if (offsetWidth - left < containerWidth) {
-          placement[1] = 'right'
-        }
-        if (top < containerHeight) {
-          placement[0] = 'bottom'
-        }
-        if (offsetHeight - bottom < containerHeight) {
-          placement[0] = 'top'
-        }
-        // 修复位置之后绑定样式
-        if (placement[0] === 'top') {
-          style['top'] = `-${containerHeight}px`
-        }
-        switch (placement[1]) {
-          case 'center':
-            style['left'] = `-${dropdownNewWidth}px`
-            break
-          case 'right':
-            style['right'] = 0
-            break
-          default:
-        }
-        this.setState({ style })
-      }
-    })
+  _changePlacement(element) {
+    const { placement } = this.props
+    const [vertical, horizontal] = _.kebabCase(placement).split('-')
+    const {
+      left,
+      right,
+      top,
+      bottom
+    } = this.containerRef.current.getBoundingClientRect()
+    const { offsetWidth: containerWidth } = this.containerRef.current
+    const { offsetWidth: overlayWidth, offsetHeight: overlayHeight } = element
+    const style = {}
+    style['top'] = `${vertical === 'top' ? top - overlayHeight : bottom}px`
+    switch (horizontal) {
+      case 'left':
+        style['left'] = `${left}px`
+        break
+      case 'center':
+        style['left'] = `${left - overlayWidth / 2 + containerWidth / 2}px`
+        break
+      case 'right':
+        style['left'] = `${right - overlayWidth}px`
+        break
+    }
+    return style
   }
 
   render() {
-    const { showMenu } = store
-    const { style } = this.state
-    const { children, overlay, trigger, disabled } = this.props
-    const cloneChildren = this._cloneChildren(children, disabled)
+    const { children, trigger, disabled } = this.props
+    const cloneChildren = React.cloneElement(children, {
+      className: disabled ? 'dropdown-new-disabled' : ''
+    })
     return (
       <div
-        ref={this.dropdownNew}
         className='dropdown-new'
+        ref={this.containerRef}
         onClick={() => this._onClick(disabled, trigger)}
         onMouseEnter={() => this._onMouseEnter(disabled, trigger)}
         onMouseLeave={() => this._onMouseOut(disabled)}
       >
         {cloneChildren}
-        {showMenu && (
-          <div
-            className='dropdown-new-menu-container'
-            style={style}
-            ref={this.container}
-          >
-            {overlay}
-          </div>
-        )}
       </div>
     )
   }
