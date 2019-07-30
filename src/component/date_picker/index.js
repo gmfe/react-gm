@@ -83,16 +83,18 @@ class DatePicker extends React.Component {
   render() {
     const {
       date,
+      onChange,
+      placeholder,
+      disabled,
       min,
       max,
       disabledDate,
       className,
-      children,
-      placeholder,
-      disabled,
       inputValueRender,
       popoverType,
-      onChange
+      onKeyDown,
+      children,
+      ...rest
     } = this.props
     const { willActiveSelected } = this.state
 
@@ -118,6 +120,7 @@ class DatePicker extends React.Component {
       >
         {children || (
           <Selected
+            {...rest}
             ref={this.selectedRef}
             selected={date}
             onSelect={onChange}

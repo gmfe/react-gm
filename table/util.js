@@ -106,7 +106,7 @@ function getColumnKey(column) {
 const referOfWidth = {
   noCell: 56,
   operationCell: 100,
-  searchBox: 148,
+  searchBox: 168,
   numberInputBox: 80,
   tableSelectBox: 148,
   levelSelectBox: 148,
