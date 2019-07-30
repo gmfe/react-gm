@@ -66,13 +66,13 @@ class DatePicker extends React.Component {
     }
 
     if (event.key === 'ArrowUp') {
-      will = moment(will).add(-1, 'weeks')
-    } else if (event.key === 'ArrowDown') {
-      will = moment(will).add(1, 'weeks')
-    } else if (event.key === 'ArrowLeft') {
       will = moment(will).add(-1, 'days')
-    } else if (event.key === 'ArrowRight') {
+    } else if (event.key === 'ArrowDown') {
       will = moment(will).add(1, 'days')
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      // 左右不做处理
+      this.props.onKeyDown(event)
+      return
     }
 
     this.setState({
