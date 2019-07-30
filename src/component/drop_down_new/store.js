@@ -1,36 +1,24 @@
-import { observable, action } from 'mobx'
+import { observable, action, autorun } from 'mobx'
 
 class Store {
-  /**
-   * 是否显示menu
-   * @type {boolean}
-   * @private
-   */
-  @observable _showMenu = false
-
   /**
    * menu的宽度
    * @type {number}
    * @private
    */
-  @observable _DropdownNewWidth = 0
-
-  @action
-  setShowMenu(e) {
-    this._showMenu = e
-  }
+  @observable _dropdownNewWidth = 0
 
   @action
   setDropdownNewWidth(e) {
-    this._DropdownNewWidth = e
-  }
-
-  get showMenu() {
-    return this._showMenu
+    this._dropdownNewWidth = e
   }
 
   get dropdownNewWidth() {
-    return this._DropdownNewWidth
+    return this._dropdownNewWidth
+  }
+
+  constructor() {
+    autorun(() => console.log(this._dropdownNewWidth))
   }
 }
 

@@ -14,12 +14,15 @@ class DropDownNewMenu extends Component {
   }
 
   componentDidMount() {
-    if (store.dropdownNewWidth > this.currentRef.current.offsetWidth) {
-      const style = {
-        width: `${store.dropdownNewWidth}px`
+    // 需要等待模版加载完成才能获取offsetWidth
+    setTimeout(() => {
+      if (store.dropdownNewWidth > this.currentRef.current.offsetWidth) {
+        const style = {
+          width: `${store.dropdownNewWidth}px`
+        }
+        this.setState({ style, flag: true })
       }
-      this.setState({ style, flag: true })
-    }
+    })
   }
 
   render() {
