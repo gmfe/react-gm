@@ -78,7 +78,7 @@ class BaseTable extends React.Component {
   }
 
   render() {
-    let {
+    const {
       data,
       columns,
       defaultPageSize,
@@ -134,9 +134,9 @@ BaseTable.defaultProps = {
   /** 目前没有意义 */
   defaultPageSize: 10,
   /** 没有数据的文案 */
-  noDataText: getLocale('table', 'noDataText'),
+  noDataText: getLocale('没有数据'),
   /** 加载中的文案 */
-  loadingText: getLocale('table', 'loadingText')
+  loadingText: getLocale('加载数据中...')
 }
 
 export default BaseTable
