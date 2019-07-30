@@ -8,7 +8,8 @@ import {
   KCInputNumberV2,
   KCLevelSelect,
   KCMoreSelect,
-  KCTableSelect
+  KCTableSelect,
+  KCDatePicker
 } from './'
 import {
   EditTable,
@@ -142,18 +143,25 @@ const tableColumns = [
 
 const store = observable({
   data: [
-    { position: null, name: '', age: null, area: [], sku: null },
+    { position: null, name: '', age: null, area: [], sku: null, date: null },
     {
       position: { value: 2, text: '福田' },
       name: '',
       age: null,
       area: [],
-      sku: null
+      sku: null,
+      date: null
     },
-    { position: null, name: '', age: null, area: [], sku: null }
+    { position: null, name: '', age: null, area: [], sku: null, date: null }
   ],
   addList() {
-    this.data.push({ position: null, name: '', age: null, sku: null })
+    this.data.push({
+      position: null,
+      name: '',
+      age: null,
+      sku: null,
+      date: null
+    })
   },
   setPosition(index, position) {
     this.data[index].position = position
@@ -173,6 +181,9 @@ const store = observable({
   },
   setSku(index, sku) {
     this.data[index].sku = sku
+  },
+  setDate(index, date) {
+    this.data[index].date = date
   }
 })
 
@@ -198,10 +209,9 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
           <li>levelSelect输入框：{referOfWidth.levelSelectBox}</li>
           <li>日期选择输入框： {referOfWidth.dateSelectBox}</li>
         </ul>
-        上述都是建议宽度，具体根据实际业务场景各自调整。
-        具体用法看代码~
+        上述都是建议宽度，具体根据实际业务场景各自调整。 具体用法看代码~
       </div>
-      <div className='gm-block gm-gap-20'/>
+      <div className='gm-block gm-gap-20' />
       <button
         className='btn  btn-primary'
         onClick={() => ref.current.apiToggleDiySelector()}
@@ -242,7 +252,7 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
               <Observer>
                 {() => (
                   <KCMoreSelect
-                    style={{width: referOfWidth.searchBox}}
+                    style={{ width: referOfWidth.searchBox }}
                     data={data}
                     selected={cellProps.original.position} // 不能用 row.value，因为并不是 store 的数据
                     onSelect={selected =>
@@ -281,7 +291,7 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
               <Observer>
                 {() => (
                   <KCTableSelect
-                    style={{width: referOfWidth.tableSelectBox}}
+                    style={{ width: referOfWidth.tableSelectBox }}
                     data={newTableData}
                     columns={tableColumns}
                     selected={cellProps.original.sku}
@@ -302,7 +312,7 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
               <Observer>
                 {() => (
                   <KCLevelSelect
-                    style={{width: referOfWidth.levelSelectBox}}
+                    style={{ width: referOfWidth.levelSelectBox }}
                     data={areaData}
                     selected={
                       cellProps.original.area
@@ -336,9 +346,25 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
               <Observer>
                 {() => (
                   <KCInputNumberV2
-                    style={{width: referOfWidth.numberInputBox}}
+                    style={{ width: referOfWidth.numberInputBox }}
                     value={cellProps.original.age}
                     onChange={value => store.setAge(cellProps.index, value)}
+                  />
+                )}
+              </Observer>
+            )
+          },
+          {
+            Header: '日期',
+            accessor: 'date',
+            minWidth: 200,
+            isKeyboard: true,
+            Cell: cellProps => (
+              <Observer>
+                {() => (
+                  <KCDatePicker
+                    date={cellProps.original.date}
+                    onChange={value => store.setDate(cellProps.index, value)}
                   />
                 )}
               </Observer>

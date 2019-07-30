@@ -5,6 +5,7 @@ import KCMoreSelect from './cell_more_select'
 import KCInputNumberV2 from './cell_input_number_v2'
 import KCLevelSelect from './cell_level_select'
 import KCTableSelect from './cell_table_select'
+import KCDatePicker from './cell_date_picker'
 import { isInputUnBoundary, scrollIntoViewFixedWidth } from './util'
 
 // 只暴露写方法
@@ -21,5 +22,6 @@ export {
   KCMoreSelect,
   KCLevelSelect,
   KCTableSelect,
+  KCDatePicker,
   KeyboardUtil
 }

@@ -21,7 +21,6 @@ storiesOf('Calendar', module)
       onSelect={e => store1.setSelected(e)}
     />
   ))
-
   .add('with minDate && maxDate', () => (
     <Calendar
       selected={store2.selected}
@@ -32,7 +31,6 @@ storiesOf('Calendar', module)
         .toDate()}
     />
   ))
-
   .add('custom disabledDate', () => (
     <Calendar
       selected={store3.selected}
