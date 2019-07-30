@@ -81,6 +81,7 @@ class DropDownNew extends Component {
       const style = this._changePlacement(element)
       Overlay.update(overlay, style)
       this._clearTimer(element)
+      store.setDropdownNewWidth(this.containerRef.current.offsetWidth)
     })
   }
 
