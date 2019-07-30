@@ -56,6 +56,11 @@ class DropDownNew extends Component {
     this.timer = setTimeout(() => Overlay.close(), 500)
   }
 
+  /**
+   * 清除计时器
+   * @param element
+   * @private
+   */
   _clearTimer(element) {
     element.addEventListener('mouseenter', () => {
       clearTimeout(this.timer)
@@ -65,6 +70,10 @@ class DropDownNew extends Component {
     })
   }
 
+  /**
+   * 创建overlay
+   * @private
+   */
   _createOverlay() {
     const { overlay } = this.props
     Overlay.create({

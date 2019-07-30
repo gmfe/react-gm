@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import className from 'classnames'
-import { store } from './store'
+import { Overlay } from '../overlay'
 
 class DropDownNewItem extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class DropDownNewItem extends Component {
       if (onClick) {
         onClick()
       }
-      store.setShowMenu(false)
+      Overlay.close()
     }
   }
 

@@ -1,4 +1,4 @@
-import { observable, action, autorun } from 'mobx'
+import { observable, action } from 'mobx'
 
 class Store {
   /**
@@ -15,10 +15,6 @@ class Store {
 
   get dropdownNewWidth() {
     return this._dropdownNewWidth
-  }
-
-  constructor() {
-    autorun(() => console.log(this._dropdownNewWidth))
   }
 }
 

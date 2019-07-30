@@ -53,15 +53,15 @@
     "@svgr/webpack": "^4.3.2",
     "big.js": "^5.2.2",
     "classnames": "^2.2.5",
-    "gm-xfont": "^1.0.79",
     "gm-util": "^5.11.0",
+    "gm-xfont": "^1.0.79",
+    "lodash": "^4.17.14",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
-    "react-table": "6.10.0",
-    "lodash": "^4.17.14"
+    "react-table": "6.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -98,7 +98,7 @@
     "file-loader": "^4.1.0",
     "fs": "0.0.2",
     "gm-service": "^1.7.14",
-    "gm-svg": "^0.3.17",
+    "gm-svg": "^0.3.23",
     "gm-util": "^5.11.0",
     "gm-webpack": "^2.2.1",
     "gm-xfont": "^1.0.79",
