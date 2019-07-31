@@ -1,4 +1,113 @@
-.gm-pagination .disabled {
-  color: @gm-color-second;
-  cursor: not-allowed;
+// default
+@pagination-color: @link-color;
+@pagination-bg: #fff;
+@pagination-border: #ddd;
+// hover
+@pagination-hover-color: @brand-primary;
+@pagination-hover-bg: #fff;
+@pagination-hover-border: @brand-primary;
+// active
+@pagination-active-color: #fff;
+@pagination-active-bg: @brand-primary;
+@pagination-active-border: @brand-primary;
+// disabled
+@pagination-disabled-color: #000;
+@pagination-disabled-bg: #eee;
+@pagination-disabled-border: #ddd;
+
+@gm-pagination-box-item-width: 30px;
+@gm-pagination-box-item-height: 30px;
+@gm-pagination-box-item-padding: 0 10px 0 0;
+
+.gm-pagination {
+  .disabled {
+    color: @gm-color-second;
+    cursor: not-allowed;
+  }
+}
+
+.gm-pagination-box {
+  &-ul {
+    display: flex;
+
+    > li {
+      float: left;
+      list-style: none;
+      padding: @gm-pagination-box-item-padding;
+
+      > a {
+        text-decoration: none;
+        line-height: 28px;
+        display: inline-block;
+        border: 1px solid @pagination-border;
+        color: @gray-dark;
+        background: @pagination-bg;
+        width: @gm-pagination-box-item-width;
+        height: @gm-pagination-box-item-height;
+
+        &:hover,
+        &:focus {
+          color: @pagination-hover-color;
+          background-color: @pagination-hover-bg;
+          border-color: @pagination-hover-border;
+        }
+      }
+    }
+  }
+
+  .active > a {
+    &,
+    &:hover,
+    &:focus {
+      color: @pagination-active-color;
+      background-color: @pagination-active-bg;
+      border-color: @pagination-active-border;
+      cursor: default;
+    }
+  }
+
+  .disabled {
+    color: @gm-color-second;
+    cursor: not-allowed;
+
+    > a,
+    > a:hover,
+    > a:focus {
+      color: @pagination-disabled-color;
+      background-color: @pagination-disabled-bg;
+      border-color: @pagination-disabled-border;
+      cursor: @cursor-disabled;
+      pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+    }
+  }
+
+  .block {
+    > a,
+    > a:hover,
+    > a:focus {
+      width: 15px;
+      border: none;
+      color: @pagination-disabled-color;
+      cursor: @cursor-disabled;
+      pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+    }
+  }
+
+  &-jump {
+    border: 1px solid @pagination-border;
+  }
+
+  &-input {
+    width: @gm-pagination-box-item-width;
+    height: @gm-pagination-box-item-height;
+    text-align: center;
+    border: none;
+  }
+
+  &-total-page {
+    background: #eee;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+  }
 }

@@ -1,13 +1,18 @@
 import { getLocale } from '../../locales'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
-import { Select, Option } from '../select'
+import { Select } from '../select'
 import Flex from '../flex'
+import InputNumberV2 from '../input_number/number'
 
 // 每页多少条数据
-const sizeArray = [10, 20, 50]
+const sizeArray = [
+  { value: 10, text: 10 },
+  { value: 20, text: 20 },
+  { value: 50, text: 50 }
+]
 
 const PageNumber = props => {
   const { resPagination } = props
@@ -50,7 +55,7 @@ const PageNumberWithCount = props => {
               {1}
             </a>
           </li>
-          <li className='disabled'>
+          <li className='block'>
             <a href='javascript:;'>...</a>
           </li>
         </React.Fragment>
@@ -71,7 +76,7 @@ const PageNumberWithCount = props => {
       ))}
 
       {end <= all - 2 ? (
-        <li className='disabled'>
+        <li className='block'>
           <a href='javascript:;'>...</a>
         </li>
       ) : null}
@@ -95,10 +100,10 @@ const PageNumberWithCount = props => {
 
 const PageNumberWithoutCount = props => {
   const { resPagination, currentIndex, limit, handlePage } = props
-  const begin = Math.max(0, currentIndex - 5)
+  const begin = Math.max(0, currentIndex - 4)
   const end = Math.min(
     Math.ceil(resPagination.peek / limit) + currentIndex,
-    currentIndex + 5
+    currentIndex + 4
   )
 
   const pages = _.map(_.range(begin, end), v => (
@@ -116,33 +121,11 @@ const PageNumberWithoutCount = props => {
 
   if (Math.ceil(resPagination.peek / limit) > 5) {
     pages.push(
-      <li key='...' className='disabled'>
+      <li key='...' className='block'>
         <a href='javascript:;'>...</a>
       </li>
     )
-
-    // if (resPagination.count) {
-    //   const lastIndex = resPagination.count / limit
-
-    //   pages.push(
-    //     <li
-    //       key={lastIndex}
-    //       className={classNames({
-    //         active: lastIndex === currentIndex
-    //       })}
-    //     >
-    //       <a
-    //         href='javascript:;'
-    //         onClick={handlePage.bind(this, lastIndex)}
-    //       >
-    //         {lastIndex}
-    //       </a>
-    //     </li>
-    //   )
-    // }
   }
-
-  // if()
 
   return pages
 }
@@ -153,22 +136,22 @@ const SizeSelect = props => {
   return (
     <React.Fragment>
       <span>{getLocale('每页')} </span>
-      <Select value={value} onChange={onSelect}>
-        {_.map(sizeArray, (v, index) => {
-          return (
-            <Option key={index + v} value={v}>
-              {v}
-            </Option>
-          )
-        })}
-      </Select>
+      <Select
+        data={sizeArray}
+        value={value}
+        listProps={{ style: { width: '60px', minWidth: '60px' } }}
+        onChange={onSelect}
+        isSameWidth
+        className='gm-margin-lr-5'
+        style={{ height: '30px', minWidth: '60px', width: '60px' }}
+      />
       <span>{getLocale('条')}</span>
     </React.Fragment>
   )
 }
 
 SizeSelect.propTypes = {
-  value: PropTypes.object.isRequired,
+  value: PropTypes.any.isRequired,
   onSelect: PropTypes.func.isRequired
 }
 
@@ -181,7 +164,7 @@ const TotalMsg = props => {
 }
 
 TotalMsg.propTypes = {
-  count: PropTypes.number.isRequired
+  count: PropTypes.number
 }
 
 const Previous = props => {
@@ -189,7 +172,7 @@ const Previous = props => {
 
   return (
     <li
-      className={classNames({
+      className={classNames('gm-pagination-box', {
         disabled: currentIndex === 0
       })}
     >
@@ -219,7 +202,7 @@ const Next = props => {
 
   return (
     <li
-      className={classNames({
+      className={classNames('gm-pagination-box', {
         disabled: isDisabled
       })}
     >
@@ -233,8 +216,52 @@ const Next = props => {
 Next.propTypes = {
   currentIndex: PropTypes.number.isRequired,
   limit: PropTypes.number.isRequired,
-  resPagination: PropTypes.object.isRequired,
+  resPagination: PropTypes.object,
   handleNext: PropTypes.func.isRequired
+}
+
+const JumpPage = props => {
+  const { all, currentIndex } = props
+  const [pageValue, setPageValue] = useState(currentIndex + 1)
+
+  const handleChangeValue = value => {
+    setPageValue(value)
+  }
+
+  useEffect(() => {
+    setPageValue(currentIndex + 1)
+  }, [currentIndex])
+
+  const handleBlurSetPage = value => {
+    let jumpValue = pageValue
+    if (all < pageValue) {
+      jumpValue = all
+    }
+
+    if (jumpValue) {
+      setPageValue(jumpValue)
+
+      props.jumpFunc(jumpValue - 1)
+    }
+  }
+  return (
+    <Flex className='gm-pagination-box-jump gm-margin-right-20'>
+      <InputNumberV2
+        precision={0}
+        value={pageValue}
+        className='gm-pagination-box-input'
+        onChange={handleChangeValue}
+        onBlur={handleBlurSetPage}
+      />
+      <span className='gm-pagination-box-total-page'>{`/${all}页`}</span>
+    </Flex>
+  )
+}
+
+JumpPage.propTypes = {
+  all: PropTypes.number.isRequired,
+  currentIndex: PropTypes.number.isRequired,
+  jumpFunc: PropTypes.func.isRequired
 }
 
 // 预估过一个月后自己看不懂
@@ -246,7 +273,7 @@ class PaginationBox extends React.Component {
       pageObj: null,
       limit: props.limit, // 不会变
       offset: 0, // 不会变
-      peek: props.disablePage ? null : 10 * props.limit, // 不会变 and 页面会显示5页，peek 6页，便于显示 ... 代表还有更多页码
+      peek: props.disablePage ? null : 6 * props.limit, // 不会变 and 页面会显示5页，peek 6页，便于显示 ... 代表还有更多页码
 
       // 返回的 pagination
       resPagination: null,
@@ -381,6 +408,10 @@ class PaginationBox extends React.Component {
     this.handleRequest(this.getParams(0), 0)
   }
 
+  handleJumpPage = pageNumber => {
+    this.handleRequest(this.getParams(pageNumber), pageNumber)
+  }
+
   render() {
     const { children, disablePage } = this.props
     const { loading, resPagination, currentIndex, limit } = this.state
@@ -388,17 +419,11 @@ class PaginationBox extends React.Component {
 
     return (
       <div className='gm-pagination-box'>
-        <div className='gm-pagination-box-list'>
-          {_.isFunction(children) ? children({ loading }) : children}
-        </div>
-        <Flex
-          justifyEnd
-          alignCenter
-          className='gm-pagination text-center gm-padding-top-15'
-        >
+        <div>{_.isFunction(children) ? children({ loading }) : children}</div>
+        <Flex justifyEnd alignCenter className='text-center gm-padding-top-15'>
           <TotalMsg count={count} />
           <SizeSelect value={limit} onSelect={this.handleSizeChange} />
-          <ul className='pagination pagination-sm gm-margin-0'>
+          <ul className='gm-pagination-box-ul gm-margin-0 gm-padding-left-20'>
             <Previous currentIndex={currentIndex} handlePre={this.handlePre} />
 
             {!disablePage && (
@@ -417,6 +442,13 @@ class PaginationBox extends React.Component {
               handleNext={this.handleNext}
             />
           </ul>
+          {count && (
+            <JumpPage
+              currentIndex={currentIndex}
+              all={Math.ceil(count / limit)}
+              jumpFunc={this.handleJumpPage}
+            />
+          )}
         </Flex>
       </div>
     )
@@ -425,16 +457,19 @@ class PaginationBox extends React.Component {
 
 PaginationBox.propTypes = {
   // 提供 page_obj，要返回 promise，且 resolve json
+  /** 用于发请求的function，接收pagination。要返回 promise，且 resolve json */
   onRequest: PropTypes.func.isRequired,
+  /** 页码上方区域 */
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-
+  /** 返回条数，默认10 */
   limit: PropTypes.number,
-
+  /** 隐藏页码，默认false */
   disablePage: PropTypes.bool
 }
 
 PaginationBox.defaultProps = {
   limit: 10,
+  onRequest: _.noop,
   disablePage: false
 }
 

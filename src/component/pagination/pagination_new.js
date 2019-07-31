@@ -48,7 +48,7 @@ class WithCount extends React.Component {
       const afterPageCount = Math.ceil(peek / limit) - 1 // 后面新增afterPageCount页
       let i = 1
 
-      currentPage.page_obj = page_obj  // eslint-disable-line
+      currentPage.page_obj = page_obj
 
       while (i <= afterPageCount) {
         pagesNew.push({
@@ -199,14 +199,14 @@ class WithoutCount extends React.Component {
         return
       }
 
-      const {page_obj, reverse} = this.state  // eslint-disable-line
+      const { page_obj, reverse } = this.state
 
       const stateNew = {
         page_obj: nextProps.pagination.page_obj
       }
 
       // 非第一次点击
-      if (page_obj) {  // eslint-disable-line
+      if (page_obj) {
         stateNew.isFirstPage = reverse ? !nextProps.pagination.more : false
       }
 
@@ -287,13 +287,22 @@ class Pagination extends React.Component {
 
 Pagination.displayName = 'Pagination'
 Pagination.propTypes = {
+  /** 返回数据条数，默认10 */
+  limit: PropTypes.number.isRequired,
+  /** page_obj: 起始页（不包含），默认第0页
+   * peek: 实际peek到的条数(with count)
+   * more: 是否还有下一页(without count)
+   */
   pagination: PropTypes.object.isRequired,
+  /** 返回 page_obj、limit、offset、reverse、peek，直接用此数据请求后台即可 */
   onChange: PropTypes.func.isRequired,
+  /** 是否显示页码 */
   showCount: PropTypes.bool
 }
 
 Pagination.defaultProps = {
-  showCount: true
+  showCount: true,
+  limit: 10
 }
 
 export default Pagination
