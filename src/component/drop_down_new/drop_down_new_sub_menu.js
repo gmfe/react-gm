@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Next from '../../../svg/next.svg'
+import _ from 'lodash'
 
 class DropDownNewSubMenu extends Component {
   constructor(props) {
@@ -77,19 +78,36 @@ class DropDownNewSubMenu extends Component {
     // 需要等模版加载完成才能获取
     setTimeout(() => {
       const {
-        current: { offsetWidth: submenuWidth }
+        current: { offsetWidth: submenuWidth, offsetHeight: submenuHeight }
       } = this.submenu
-      const { left, right } = this.menuItem.current.getBoundingClientRect()
-      const { offsetWidth } = document.body
-      let { placement } = this.props
+      const {
+        left,
+        right,
+        top,
+        bottom
+      } = this.menuItem.current.getBoundingClientRect()
+      const { offsetWidth, offsetHeight } = document.body
+      const { placement } = this.props
+      let [vertical, horizontal] = _.kebabCase(placement).split('-')
+      if (top < submenuHeight + 4) {
+        vertical = 'bottom'
+      }
+      if (offsetHeight - bottom < submenuHeight + 4) {
+        vertical = 'top'
+      }
       if (left < submenuWidth + 4) {
-        placement = 'right'
+        horizontal = 'right'
       }
       if (offsetWidth - right < submenuWidth + 4) {
-        placement = 'left'
+        horizontal = 'left'
       }
       const style = {}
-      if (placement === 'left') {
+      if (vertical === 'top') {
+        style['bottom'] = `-4px`
+      } else {
+        style['top'] = `0`
+      }
+      if (horizontal === 'left') {
         style['left'] = `-${submenuWidth + 4}px`
       } else {
         style['right'] = `-${submenuWidth + 4}px`
@@ -146,14 +164,19 @@ class DropDownNewSubMenu extends Component {
 DropDownNewSubMenu.propTypes = {
   disabled: PropTypes.bool,
   title: PropTypes.string,
-  trigger: PropTypes.oneOf('hover', 'click'),
-  placement: PropTypes.oneOf('left', 'right')
+  trigger: PropTypes.oneOf(['hover', 'click']),
+  placement: PropTypes.oneOf([
+    'topLeft',
+    'topRight',
+    'bottomLeft',
+    'bottomRight'
+  ])
 }
 
 DropDownNewSubMenu.defaultProps = {
   disabled: false,
   trigger: 'hover',
-  placement: 'right'
+  placement: 'bottomRight'
 }
 
 export default DropDownNewSubMenu

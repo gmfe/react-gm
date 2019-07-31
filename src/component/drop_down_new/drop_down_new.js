@@ -138,15 +138,15 @@ class DropDownNew extends Component {
 
 DropDownNew.propTypes = {
   overlay: PropTypes.element.isRequired,
-  placement: PropTypes.oneOf(
+  placement: PropTypes.oneOf([
     'leftTop',
     'leftCenter',
     'leftRight',
     'bottomLeft',
     'bottomCenter',
     'bottomRight'
-  ),
-  trigger: PropTypes.oneOf('click', 'hover'),
+  ]),
+  trigger: PropTypes.oneOf(['click', 'hover']),
   disabled: PropTypes.bool
 }
 DropDownNew.defaultProps = {
