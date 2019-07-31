@@ -1,11 +1,9 @@
 import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
-import { observer } from 'mobx-react'
 import _ from 'lodash'
 import { Overlay } from './../overlay'
 import { store } from './store'
 
-@observer
 class DropDownNew extends Component {
   constructor(props) {
     super(props)
@@ -79,10 +77,10 @@ class DropDownNew extends Component {
     Overlay.create({
       content: overlay
     }).then(element => {
+      store.setDropdownNewWidth(this.containerRef.current.offsetWidth)
       const style = this._changePlacement(element)
       Overlay.update(overlay, style)
       this._clearTimer(element)
-      store.setDropdownNewWidth(this.containerRef.current.offsetWidth)
     })
   }
 
@@ -100,7 +98,10 @@ class DropDownNew extends Component {
       bottom
     } = this.containerRef.current.getBoundingClientRect()
     const { offsetWidth: containerWidth } = this.containerRef.current
-    const { offsetWidth: overlayWidth, offsetHeight: overlayHeight } = element
+    let { offsetWidth: overlayWidth, offsetHeight: overlayHeight } = element
+    const { dropdownNewWidth } = store
+    overlayWidth =
+      dropdownNewWidth > overlayWidth ? dropdownNewWidth : overlayWidth
     const style = {}
     style['top'] = `${vertical === 'top' ? top - overlayHeight : bottom}px`
     switch (horizontal) {
@@ -139,9 +140,9 @@ class DropDownNew extends Component {
 DropDownNew.propTypes = {
   overlay: PropTypes.element.isRequired,
   placement: PropTypes.oneOf([
-    'leftTop',
-    'leftCenter',
-    'leftRight',
+    'topLeft',
+    'topCenter',
+    'topRight',
     'bottomLeft',
     'bottomCenter',
     'bottomRight'
