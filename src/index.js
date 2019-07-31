@@ -4,6 +4,8 @@ import SearchSelect from './deprecated/search_select/search.select'
 import FilterSearchSelect from './deprecated/search_select/filter.search.select'
 import TreeSelect from './deprecated/tree_select'
 import Trigger from './deprecated/trigger'
+import PaginationFuck from './deprecated/pagination_fuck/pagination_fuck'
+
 import {
   QuickPanel,
   QuickFilter,
@@ -15,8 +17,7 @@ import {
 
 import Pagination from './component/pagination/pagination'
 import PaginationText from './component/pagination/pagination_text'
-import PaginationNew from './component/pagination/pagination_new'
-import PaginationBox from './component/pagination/pagination_box'
+import PaginationBox from './component/pagination_box'
 import Dropper from './component/dropper/index'
 import {
   Form,
@@ -141,10 +142,10 @@ export {
   TreeSelect,
   Trigger,
   PaginationText,
+  PaginationFuck,
   // 废弃的结束
 
   Pagination,
-  PaginationNew,
   PaginationBox,
   Form,
   FormItem,

@@ -1,4 +1,43 @@
-.gm-pagination .disabled {
-  color: @gm-color-second;
-  cursor: not-allowed;
+.gm-pagination {
+  .gm-pagination-page {
+    margin-left: 10px;
+
+    .gm-pagination-page-item {
+      margin: 0 3px;
+      border: 1px solid @gm-border-color;
+      height: 30px;
+      line-height: 30px;
+      min-width: 30px;
+      text-align: center;
+      cursor: pointer;
+
+      &.disabled {
+        cursor: not-allowed;
+        background-color: #f0f1f3;
+      }
+
+      &.active {
+        background-color: @brand-primary;
+        color: white;
+      }
+    }
+
+    .gm-pagination-page-text {
+      color: @gm-color-third;
+    }
+  }
+
+  .gm-pagination-right {
+    margin-left: 10px;
+
+    .gm-pagination-right-total-page {
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      padding: 0 5px;
+      background-color: #f0f1f3;
+      border: 1px solid @gm-border-color;
+      border-left: none;
+    }
+  }
 }

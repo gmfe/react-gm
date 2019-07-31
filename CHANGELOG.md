@@ -14,7 +14,13 @@ Nav 改了
 
 移除 Menu
 
-DateRangePicker props 有变动
+DateRangePicker props 和 UI 有变动，请查阅
+
+Pagination toPage 移除第一个参数。（扫了station，没人用）
+
+PaginationNew => PaginationFuck
+
+PaginationBox limit => defaultLimit
 
 ### css
 

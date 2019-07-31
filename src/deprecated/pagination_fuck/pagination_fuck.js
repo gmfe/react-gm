@@ -1,8 +1,10 @@
-import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
+import Flex from '../../component/flex'
+import SVGLeftSmall from '../../../svg/left-small.svg'
+import SVGRightSmall from '../../../svg/right-small.svg'
 
 const initState = {
   pages: [
@@ -19,8 +21,6 @@ class WithCount extends React.Component {
     super(props)
 
     this.state = _.cloneDeep(initState)
-
-    this.handlePage = ::this.handlePage
   }
 
   componentWillReceiveProps(nextProps) {
@@ -28,7 +28,7 @@ class WithCount extends React.Component {
 
     const { limit } = nextProps
 
-    const {peek, page_obj} = nextProps.pagination // eslint-disable-line
+    const { peek, page_obj } = nextProps.pagination // eslint-disable-line
 
     if (this.props.pagination !== nextProps.pagination) {
       if (!nextProps.pagination.page_obj) {
@@ -48,7 +48,7 @@ class WithCount extends React.Component {
       const afterPageCount = Math.ceil(peek / limit) - 1 // 后面新增afterPageCount页
       let i = 1
 
-      currentPage.page_obj = page_obj  // eslint-disable-line
+      currentPage.page_obj = page_obj
 
       while (i <= afterPageCount) {
         pagesNew.push({
@@ -65,12 +65,12 @@ class WithCount extends React.Component {
     }
   }
 
-  handlePage(event) {
+  handleToPage = page => {
     const { pages } = this.state
 
     const { onChange, limit } = this.props
 
-    const pageClicked = ~~event.target.getAttribute('data-page')
+    const pageClicked = page
 
     if (pageClicked < 1 || pageClicked > pages.length) return
 
@@ -124,48 +124,40 @@ class WithCount extends React.Component {
 
     return (
       <div className='gm-pagination'>
-        <ul className='pagination pagination-sm' onClick={this.handlePage}>
-          <li
-            className={classNames({
+        <Flex alignCenter className='gm-pagination-page'>
+          <div
+            className={classNames('gm-pagination-page-item', {
               disabled: current === pages[0].number || pageClicked
             })}
+            onClick={() => this.handleToPage(current - 1)}
           >
-            <a href='javascript:;' data-page={current - 1}>
-              {getLocale('上一页')}
-            </a>
-          </li>
+            <SVGLeftSmall />
+          </div>
 
           {pages.map((page, i) => (
-            <li
+            <div
               key={i}
-              className={classNames({
-                disabled: current !== page.number && pageClicked,
+              className={classNames('gm-pagination-page-item', {
                 active: current === page.number
               })}
+              onClick={() => this.handleToPage(page.number)}
             >
-              <a href='javascript:;' data-page={page.number}>
-                {page.number}
-              </a>
-            </li>
+              {page.number}
+            </div>
           ))}
 
-          <li
-            className={classNames({
+          <div
+            className={classNames('gm-pagination-page-item', {
               disabled: current === _.last(pages).number || pageClicked
             })}
+            onClick={() => this.handleToPage(current + 1)}
           >
-            <a href='javascript:;' data-page={current + 1}>
-              {getLocale('下一页')}
-            </a>
-          </li>
-        </ul>
+            <SVGRightSmall />
+          </div>
+        </Flex>
       </div>
     )
   }
-}
-
-WithCount.defaultProps = {
-  limit: 10
 }
 
 WithCount.propTypes = {
@@ -188,8 +180,6 @@ class WithoutCount extends React.Component {
     super(props)
 
     this.state = _.cloneDeep(initStateWithoutCount)
-
-    this.handlePage = ::this.handlePage
   }
 
   componentWillReceiveProps(nextProps) {
@@ -199,14 +189,14 @@ class WithoutCount extends React.Component {
         return
       }
 
-      const {page_obj, reverse} = this.state  // eslint-disable-line
+      const { page_obj, reverse } = this.state
 
       const stateNew = {
         page_obj: nextProps.pagination.page_obj
       }
 
       // 非第一次点击
-      if (page_obj) {  // eslint-disable-line
+      if (page_obj) {
         stateNew.isFirstPage = reverse ? !nextProps.pagination.more : false
       }
 
@@ -214,10 +204,10 @@ class WithoutCount extends React.Component {
     }
   }
 
-  handlePage(reverse) {
+  handlePage = reverse => {
     const { onChange, limit } = this.props
 
-    const {page_obj} = this.state  // eslint-disable-line
+    const { page_obj } = this.state // eslint-disable-line
     let params = {}
 
     this.setState({
@@ -245,25 +235,27 @@ class WithoutCount extends React.Component {
 
     return (
       <div className='gm-pagination'>
-        <ul className='pagination pagination-sm'>
-          <li className={isFirstPage ? 'disabled' : ''}>
-            <a href='javascript:;' onClick={this.handlePage.bind(this, true)}>
-              {getLocale('上一页')}
-            </a>
-          </li>
-          <li className={!reverse && !more ? 'disabled' : ''}>
-            <a href='javascript:;' onClick={this.handlePage.bind(this, false)}>
-              {getLocale('下一页')}
-            </a>
-          </li>
-        </ul>
+        <Flex alignCenter className='gm-pagination-page'>
+          <div
+            className={classNames('gm-pagination-page-item', {
+              disabled: isFirstPage
+            })}
+            onClick={() => this.handlePage(true)}
+          >
+            <SVGLeftSmall />
+          </div>
+          <div
+            className={classNames('gm-pagination-page-item', {
+              disabled: !reverse && !more
+            })}
+            onClick={() => this.handlePage(false)}
+          >
+            <SVGRightSmall />
+          </div>
+        </Flex>
       </div>
     )
   }
-}
-
-WithoutCount.defaultProps = {
-  limit: 10
 }
 
 WithoutCount.propTypes = {
@@ -276,6 +268,12 @@ WithoutCount.propTypes = {
 }
 
 class Pagination extends React.Component {
+  componentDidMount() {
+    console.warn(
+      'PaginationFuck is deprecated. Use Pagination or PaginationBox instead.'
+    )
+  }
+
   render() {
     if (this.props.showCount) {
       return <WithCount {...this.props} />
@@ -287,13 +285,22 @@ class Pagination extends React.Component {
 
 Pagination.displayName = 'Pagination'
 Pagination.propTypes = {
+  /** 返回数据条数，默认10 */
+  limit: PropTypes.number.isRequired,
+  /** page_obj: 起始页（不包含），默认第0页
+   * peek: 实际peek到的条数(with count)
+   * more: 是否还有下一页(without count)
+   */
   pagination: PropTypes.object.isRequired,
+  /** 返回 page_obj、limit、offset、reverse、peek，直接用此数据请求后台即可 */
   onChange: PropTypes.func.isRequired,
+  /** 是否显示页码 */
   showCount: PropTypes.bool
 }
 
 Pagination.defaultProps = {
-  showCount: true
+  showCount: true,
+  limit: 10
 }
 
 export default Pagination
