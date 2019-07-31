@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Flex, PaginationBox, Pagination, PaginationNew} from '../../src/index';
+    import {Flex, PaginationBox, Pagination, PaginationFuck} from '../../src/index';
 ---
 
 ## PaginationBox
@@ -18,7 +18,6 @@ class PaginationBoxDemo extends React.Component{
         };
     }
     componentDidMount(){
-        console.log(this.pagination)
         this.pagination.doFirstRequest();
     }
     requestSomething = (pagination) => {
@@ -63,7 +62,7 @@ class PaginationBoxDemo extends React.Component{
 
 
 
-## Pagination【新规范】
+## PaginationFuck【新规范】(PaginationFuck已废弃)
 
 提前阅读[新分页规范](https://doc.guanmai.cn/%E5%88%86%E4%BA%AB%E5%9F%B9%E8%AE%AD/%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/%E5%88%86%E9%A1%B5%E8%A7%84%E8%8C%83/)
 
@@ -109,7 +108,7 @@ class PaginationNewComponent1 extends React.Component{
     render(){
         return (
             <Flex alignCenter column>
-                <PaginationNew nextVersion pagination={this.state.pagination} onChange={this.handlePageChange.bind(this)}/>
+                <PaginationFuck nextVersion pagination={this.state.pagination} onChange={this.handlePageChange.bind(this)}/>
             </Flex>
         );
     }
@@ -162,7 +161,7 @@ class PaginationNewWithoutCount extends React.Component{
     render(){
         return (
             <Flex alignCenter column>
-                <PaginationNew nextVersion pagination={this.state.pagination} onChange={this.handlePageChange.bind(this)} showCount={false}/>
+                <PaginationFuck nextVersion pagination={this.state.pagination} onChange={this.handlePageChange.bind(this)} showCount={false}/>
             </Flex>
         );
     }

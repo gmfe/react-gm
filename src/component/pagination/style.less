@@ -1,4 +1,116 @@
-.gm-pagination .disabled {
-  color: @gm-color-second;
-  cursor: not-allowed;
+// default
+@gm-pagination-color: @link-color;
+@gm-pagination-bg: #fff;
+@gm-pagination-border: #ddd;
+// hover
+@gm-pagination-hover-color: @brand-primary;
+@gm-pagination-hover-bg: #fff;
+@gm-pagination-hover-border: @brand-primary;
+// active
+@gm-pagination-active-color: #fff;
+@gm-pagination-active-bg: @brand-primary;
+@gm-pagination-active-border: @brand-primary;
+// disabled
+@gm-pagination-disabled-color: #000;
+@gm-pagination-disabled-bg: @gm-border-color; // todo 五级辅色
+@gm-pagination-disabled-border: #ddd;
+
+@gm-pagination-box-item-width: 30px;
+@gm-pagination-box-item-height: 30px;
+@gm-pagination-box-item-padding: 0 10px 0 0;
+
+@gm-disable-cursor: not-allowed;
+
+.gm-pagination {
+  .disabled {
+    color: @gm-color-second;
+    cursor: @gm-disable-cursor;
+  }
+}
+
+.gm-pagination-box {
+  &-ul {
+    display: flex;
+
+    > li {
+      float: left;
+      list-style: none;
+      padding: @gm-pagination-box-item-padding;
+
+      > a {
+        text-decoration: none;
+        line-height: 28px;
+        display: inline-block;
+        border: 1px solid @gm-pagination-border;
+        color: @gray-dark;
+        background: @gm-pagination-bg;
+        width: @gm-pagination-box-item-width;
+        height: @gm-pagination-box-item-height;
+
+        &:hover,
+        &:focus {
+          color: @gm-pagination-hover-color;
+          background-color: @gm-pagination-hover-bg;
+          border-color: @gm-pagination-hover-border;
+        }
+      }
+    }
+  }
+
+  .active > a {
+    &,
+    &:hover,
+    &:focus {
+      color: @gm-pagination-active-color;
+      background-color: @gm-pagination-active-bg;
+      border-color: @gm-pagination-active-border;
+      cursor: default;
+    }
+  }
+
+  .disabled {
+    color: @gm-color-second;
+    cursor: @gm-disable-cursor;
+
+    > a,
+    > a:hover,
+    > a:focus {
+      color: @gm-pagination-disabled-color;
+      background-color: @gm-pagination-disabled-bg;
+      border-color: @gm-pagination-disabled-border;
+      cursor: @gm-disable-cursor;
+      pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+    }
+  }
+
+  .block {
+    > a,
+    > a:hover,
+    > a:focus {
+      width: 15px;
+      border: none;
+      background-color: inherit;
+      color: @gm-pagination-disabled-color;
+      cursor: @gm-disable-cursor;
+      pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+    }
+  }
+
+  &-jump {
+    border: 1px solid @gm-pagination-border;
+  }
+
+  &-input {
+    width: @gm-pagination-box-item-width;
+    height: @gm-pagination-box-item-height;
+    text-align: center;
+    border: none;
+  }
+
+  &-total-page {
+    background: @gm-border-color;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+  }
 }
