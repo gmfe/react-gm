@@ -163,7 +163,7 @@ class DropDownNewSubMenu extends Component {
 
 DropDownNewSubMenu.propTypes = {
   disabled: PropTypes.bool,
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   trigger: PropTypes.oneOf(['hover', 'click']),
   placement: PropTypes.oneOf([
     'topLeft',
