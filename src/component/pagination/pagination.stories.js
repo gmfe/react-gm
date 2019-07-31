@@ -48,9 +48,7 @@ storiesOf('Pagination', module)
   .add('default(without count)', () => (
     <div>
       <h1>
-        <a href='https://github.com/gmfe/react-gm/wiki/%E5%88%86%E9%A1%B5%E6%A0%BC%E5%BC%8F%E8%A7%84%E8%8C%83'>
-          此分页规范详情
-        </a>
+        <a href='https://www.yuque.com/iyum9i/cudrs0/etfogz'>此分页规范详情</a>
       </h1>
       <Pagination
         data={store.withoutCountPagination}
@@ -62,7 +60,7 @@ storiesOf('Pagination', module)
     return (
       <div>
         <h1>
-          <a href='https://github.com/gmfe/react-gm/wiki/%E5%88%86%E9%A1%B5%E6%A0%BC%E5%BC%8F%E8%A7%84%E8%8C%83'>
+          <a href='https://www.yuque.com/iyum9i/cudrs0/etfogz'>
             此分页规范详情
           </a>
         </h1>
@@ -78,7 +76,7 @@ storiesOf('Pagination', module)
     return (
       <div>
         <h1>
-          <a href='https://github.com/gmfe/react-gm/wiki/%E5%88%86%E9%A1%B5%E6%A0%BC%E5%BC%8F%E8%A7%84%E8%8C%83'>
+          <a href='https://www.yuque.com/iyum9i/cudrs0/etfogz'>
             此分页规范详情
           </a>
         </h1>

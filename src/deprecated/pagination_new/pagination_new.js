@@ -23,6 +23,10 @@ class WithCount extends React.Component {
     this.handlePage = ::this.handlePage
   }
 
+  componentDidMount() {
+    console.warn('Trigger is deprecated. Use Popover instead.')
+  }
+
   componentWillReceiveProps(nextProps) {
     const { pages, pageClicked } = this.state
 

@@ -1,11 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { storiesOf } from '@storybook/react'
 import { withKnobs } from '@storybook/addon-knobs'
-// import { observable } from 'mobx'
 import PaginationBox from './pagination_box'
 
 const PaginationBoxWithCountDemo = props => {
-  // const [list, setList] = useState({})
   const pagination = useRef(null)
   useEffect(() => {
     pagination.current.doFirstRequest()
@@ -23,9 +21,8 @@ const PaginationBoxWithCountDemo = props => {
             count: 177
           }
         }
-        // setList(json.data)
         resolve(json)
-      }, 1000)
+      }, 500)
     })
   }
 
@@ -43,7 +40,6 @@ const PaginationBoxWithCountDemo = props => {
 }
 
 const PaginationBoxWithoutCountDemo = props => {
-  const [list, setList] = useState({})
   const pagination = useRef(null)
   useEffect(() => {
     pagination.current.doFirstRequest()
@@ -60,9 +56,8 @@ const PaginationBoxWithoutCountDemo = props => {
             more: true
           }
         }
-        setList(json.data)
         resolve(json)
-      }, 1000)
+      }, 500)
     })
   }
 
@@ -89,7 +84,7 @@ storiesOf('PaginationBox', module)
           <PaginationBox />
         </div>
         <h2>
-          <a href='https://doc.guanmai.cn/%E6%A8%A1%E5%9D%97%E6%96%87%E6%A1%A3/%E5%88%86%E9%A1%B5/'>
+          <a href='https://www.yuque.com/iyum9i/cudrs0/etfogz'>
             此分页规范详情
           </a>
         </h2>
@@ -98,7 +93,7 @@ storiesOf('PaginationBox', module)
       </div>
     )
   })
-  .add('default(with number)', () => {
+  .add('without count', () => {
     return (
       <div>
         <div style={{ display: 'none' }}>
@@ -106,7 +101,7 @@ storiesOf('PaginationBox', module)
           <PaginationBox />
         </div>
         <h2>
-          <a href='https://doc.guanmai.cn/%E6%A8%A1%E5%9D%97%E6%96%87%E6%A1%A3/%E5%88%86%E9%A1%B5/'>
+          <a href='https://www.yuque.com/iyum9i/cudrs0/etfogz'>
             此分页规范详情
           </a>
         </h2>

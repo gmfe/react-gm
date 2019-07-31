@@ -1,28 +1,30 @@
 // default
-@pagination-color: @link-color;
-@pagination-bg: #fff;
-@pagination-border: #ddd;
+@gm-pagination-color: @link-color;
+@gm-pagination-bg: #fff;
+@gm-pagination-border: #ddd;
 // hover
-@pagination-hover-color: @brand-primary;
-@pagination-hover-bg: #fff;
-@pagination-hover-border: @brand-primary;
+@gm-pagination-hover-color: @brand-primary;
+@gm-pagination-hover-bg: #fff;
+@gm-pagination-hover-border: @brand-primary;
 // active
-@pagination-active-color: #fff;
-@pagination-active-bg: @brand-primary;
-@pagination-active-border: @brand-primary;
+@gm-pagination-active-color: #fff;
+@gm-pagination-active-bg: @brand-primary;
+@gm-pagination-active-border: @brand-primary;
 // disabled
-@pagination-disabled-color: #000;
-@pagination-disabled-bg: #eee;
-@pagination-disabled-border: #ddd;
+@gm-pagination-disabled-color: #000;
+@gm-pagination-disabled-bg: @gm-border-color; // todo 五级辅色
+@gm-pagination-disabled-border: #ddd;
 
 @gm-pagination-box-item-width: 30px;
 @gm-pagination-box-item-height: 30px;
 @gm-pagination-box-item-padding: 0 10px 0 0;
 
+@gm-disable-cursor: not-allowed;
+
 .gm-pagination {
   .disabled {
     color: @gm-color-second;
-    cursor: not-allowed;
+    cursor: @gm-disable-cursor;
   }
 }
 
@@ -39,17 +41,17 @@
         text-decoration: none;
         line-height: 28px;
         display: inline-block;
-        border: 1px solid @pagination-border;
+        border: 1px solid @gm-pagination-border;
         color: @gray-dark;
-        background: @pagination-bg;
+        background: @gm-pagination-bg;
         width: @gm-pagination-box-item-width;
         height: @gm-pagination-box-item-height;
 
         &:hover,
         &:focus {
-          color: @pagination-hover-color;
-          background-color: @pagination-hover-bg;
-          border-color: @pagination-hover-border;
+          color: @gm-pagination-hover-color;
+          background-color: @gm-pagination-hover-bg;
+          border-color: @gm-pagination-hover-border;
         }
       }
     }
@@ -59,24 +61,24 @@
     &,
     &:hover,
     &:focus {
-      color: @pagination-active-color;
-      background-color: @pagination-active-bg;
-      border-color: @pagination-active-border;
+      color: @gm-pagination-active-color;
+      background-color: @gm-pagination-active-bg;
+      border-color: @gm-pagination-active-border;
       cursor: default;
     }
   }
 
   .disabled {
     color: @gm-color-second;
-    cursor: not-allowed;
+    cursor: @gm-disable-cursor;
 
     > a,
     > a:hover,
     > a:focus {
-      color: @pagination-disabled-color;
-      background-color: @pagination-disabled-bg;
-      border-color: @pagination-disabled-border;
-      cursor: @cursor-disabled;
+      color: @gm-pagination-disabled-color;
+      background-color: @gm-pagination-disabled-bg;
+      border-color: @gm-pagination-disabled-border;
+      cursor: @gm-disable-cursor;
       pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
     }
   }
@@ -87,14 +89,15 @@
     > a:focus {
       width: 15px;
       border: none;
-      color: @pagination-disabled-color;
-      cursor: @cursor-disabled;
+      background-color: inherit;
+      color: @gm-pagination-disabled-color;
+      cursor: @gm-disable-cursor;
       pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
     }
   }
 
   &-jump {
-    border: 1px solid @pagination-border;
+    border: 1px solid @gm-pagination-border;
   }
 
   &-input {
@@ -105,7 +108,7 @@
   }
 
   &-total-page {
-    background: #eee;
+    background: @gm-border-color;
     width: 50px;
     height: 30px;
     line-height: 30px;

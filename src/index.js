@@ -4,12 +4,12 @@ import SearchSelect from './deprecated/search_select/search.select'
 import FilterSearchSelect from './deprecated/search_select/filter.search.select'
 import TreeSelect from './deprecated/tree_select'
 import Trigger from './deprecated/trigger'
+import PaginationNew from './deprecated/pagination_new/pagination_new'
 
 // 废弃的结束
 
 import Pagination from './component/pagination/pagination'
 import PaginationText from './component/pagination/pagination_text'
-import PaginationNew from './component/pagination/pagination_new'
 import PaginationBox from './component/pagination/pagination_box'
 import Dropper from './component/dropper/index'
 import {

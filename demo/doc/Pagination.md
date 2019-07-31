@@ -18,7 +18,6 @@ class PaginationBoxDemo extends React.Component{
         };
     }
     componentDidMount(){
-        console.log(this.pagination)
         this.pagination.doFirstRequest();
     }
     requestSomething = (pagination) => {
