@@ -16,9 +16,7 @@ const QuickPanel = props => {
     title,
     collapse,
     right,
-    icon,
-    iconColor,
-    'in': isIn, // eslint-disable-line
+    in: isIn, // eslint-disable-line
     className,
     children,
     ...rest
@@ -29,16 +27,6 @@ const QuickPanel = props => {
       <Flex flex justifyBetween className='gm-quick-panel-title gm-text-16'>
         <Flex alignEnd className='gm-padding-bottom-15'>
           <div>
-            {icon && (
-              <i
-                className={`xfont xfont-${icon}`}
-                style={{
-                  color: iconColor,
-                  marginRight: '2px',
-                  verticalAlign: 'middle'
-                }}
-              />
-            )}
             <span style={{ verticalAlign: 'middle' }}>{title}</span>
           </div>
           {collapse && (
@@ -79,14 +67,11 @@ QuickPanel.propTypes = {
   collapse: PropTypes.bool,
   right: PropTypes.element,
   in: PropTypes.bool,
-  icon: PropTypes.string,
-  iconColor: PropTypes.string,
   className: PropTypes.string
 }
 
 QuickPanel.defaultProps = {
-  in: true,
-  iconColor: '#fd5271'
+  in: true
 }
 
 export default QuickPanel

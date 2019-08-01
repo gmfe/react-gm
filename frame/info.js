@@ -1,59 +1,49 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex, Popover } from '../src/index'
+import { Flex, Popover, List } from '../src/index'
 import _ from 'lodash'
-import { is } from 'gm-util'
+import SVGMore from '../svg/more.svg'
 
 const Info = props => {
-  const { text, notification, settings } = props
+  const { more, children } = props
+
+  const listData = _.map(more, (v, i) => ({ value: i, text: v.text }))
+
+  const handleSelect = value => {
+    more[value].onClick()
+  }
 
   return (
-    <div className='gm-framework-info-default'>
-      <Flex className='gm-framework-info-default-inner'>
-        <Flex flex />
-        <Flex>{text}</Flex>
-        {notification && <Flex>{notification}</Flex>}
-        {settings && (
-          <Popover
-            animName
-            showArrow
-            type={is.phone() ? 'click' : 'hover'}
-            right
-            offset={-5}
-            className='gm-framework-info-default-setting-popover'
-            popup={
-              <div className='list-group gm-margin-bottom-0'>
-                {_.map(settings, (v, i) => (
-                  <a
-                    key={i + '_' + v.text}
-                    href='javascript:;'
-                    className='list-group-item text-center gm-padding-10 gm-margin-0 gm-border-top-0'
-                    onClick={v.onClick}
-                  >
-                    {v.text}
-                  </a>
-                ))}
-              </div>
-            }
-          >
-            <div className='gm-framework-info-default-settings gm-cursor'>
-              <i className='glyphicon glyphicon-cog gm-padding-lr-15' />
-            </div>
-          </Popover>
-        )}
-      </Flex>
-    </div>
+    <Flex alignCenter className='gm-framework-info-default'>
+      <Flex flex />
+      <Flex>{children}</Flex>
+      {more && (
+        <Popover
+          animName
+          showArrow
+          type='click'
+          right
+          offset={4}
+          className='gm-framework-info-default-setting-popover'
+          popup={
+            <List
+              data={listData}
+              onSelect={handleSelect}
+              className='gm-border-0'
+            />
+          }
+        >
+          <div className='gm-framework-info-default-item'>
+            <SVGMore style={{ transform: 'rotate(90deg)' }} />
+          </div>
+        </Popover>
+      )}
+    </Flex>
   )
 }
 
 Info.propTypes = {
-  text: PropTypes.string,
-  notification: PropTypes.element,
-  settings: PropTypes.array // [{text, onClick}]
-}
-
-Info.defaultProps = {
-  notification: null
+  more: PropTypes.array // [{text, onClick}]
 }
 
 export default Info

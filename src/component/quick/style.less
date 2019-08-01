@@ -3,7 +3,7 @@
   background-color: white;
 
   & + .gm-quick {
-    margin-top: 20px;
+    border-top: 1px solid @gm-border-color;
   }
 
   .gm-quick-title {
@@ -23,19 +23,10 @@
   }
 
   &.gm-quick-panel {
-    background-color: white;
-    border: 1px solid @gm-border-color;
     padding: 20px;
-
-    & + & {
-      margin-top: -1px;
-      border-top: none;
-    }
   }
 
   &.gm-quick-filter {
-    border: 1px solid @gm-border-color;
-
     .gm-quick-filter-toggle {
       font-size: 12px;
       cursor: pointer;
@@ -46,10 +37,6 @@
         color: @link-color;
       }
     }
-  }
-
-  &.gm-quick-desc {
-    border: 1px solid @gm-border-color;
   }
 
   &.gm-quick-tabs {
