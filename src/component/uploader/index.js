@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { is } from 'gm-util'
 import classNames from 'classnames'
+import SVGPlus from '../../../svg/plus.svg'
 
 class Uploader extends React.Component {
   handleUpload = e => {
@@ -10,7 +11,7 @@ class Uploader extends React.Component {
     const { multiple, onUpload } = this.props
     const uploadedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files
     const max = multiple ? uploadedFiles.length : 1
-    let files = []
+    const files = []
 
     for (let i = 0; i < max; i++) {
       const file = uploadedFiles[i]
@@ -21,23 +22,40 @@ class Uploader extends React.Component {
   }
 
   handleClick = () => {
+    if (this.props.disabled) return
+
     this.refInput.value = null
     this.refInput.click()
   }
 
   render() {
-    const { children, accept, multiple } = this.props
+    const {
+      onUpload,
+      accept,
+      multiple,
+      className,
+      children,
+      disabled,
+      ...rest
+    } = this.props
 
-    const cn = classNames({
-      'gm-uploader-warp': !!children,
-      'gm-uploader-default': !children
-    })
     return (
       <div className='gm-uploader'>
-        <div className={cn} onClick={this.handleClick}>
+        <div
+          {...rest}
+          className={classNames(
+            {
+              'gm-uploader-wrap': !!children,
+              'gm-uploader-default': !children
+            },
+            className
+          )}
+          disabled={disabled}
+          onClick={this.handleClick}
+        >
           {children || (
             <div className='gm-uploader-icon-wrap'>
-              <i className='gm-uploader-icon xfont xfont-plus' />
+              <SVGPlus className='gm-uploader-icon' />
             </div>
           )}
         </div>
@@ -55,14 +73,18 @@ class Uploader extends React.Component {
 }
 
 Uploader.defaultProps = {
-  multiple: false
+  multiple: false,
+  disabled: false
 }
 
 Uploader.propTypes = {
   multiple: PropTypes.bool,
   onUpload: PropTypes.func.isRequired,
   accept: PropTypes.string,
-  children: PropTypes.any
+  children: PropTypes.any,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  disabled: PropTypes.bool
 }
 
 export default Uploader

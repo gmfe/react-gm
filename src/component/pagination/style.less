@@ -1,4 +1,52 @@
-.gm-pagination .disabled {
-  color: @gm-color-second;
-  cursor: not-allowed;
+.gm-pagination {
+  .gm-pagination-page {
+    margin-left: 20px;
+
+    .gm-pagination-page-item {
+      margin: 0 5px;
+      border: 1px solid @gm-border-color;
+      border-radius: @gm-border-radius;
+      height: 30px;
+      line-height: 30px;
+      min-width: 30px;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid @brand-primary;
+        color: @brand-primary;
+      }
+
+      &.active {
+        background-color: @brand-primary;
+        border: 1px solid @brand-primary;
+        color: white;
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+        background-color: #f0f1f3;
+        border: 1px solid @gm-border-color;
+        color: @gm-color-first;
+      }
+    }
+
+    .gm-pagination-page-text {
+      color: @gm-color-third;
+    }
+  }
+
+  .gm-pagination-right {
+    margin-left: 10px;
+
+    .gm-pagination-right-total-page {
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      padding: 0 5px;
+      background-color: #f0f1f3;
+      border: 1px solid @gm-border-color;
+      border-left: none;
+    }
+  }
 }

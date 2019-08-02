@@ -32,9 +32,7 @@ storiesOf('DatePicker', module)
       date={inputValueRenderStore.date}
       placeholder='请选择日期'
       onChange={date => inputValueRenderStore.setDate(date)}
-      inputValueRender={begin =>
-        `${begin.getMonth() + 1}月-${begin.getDate()}日`
-      }
+      renderDate={begin => `${begin.getMonth() + 1}月-${begin.getDate()}日`}
     />
   ))
 

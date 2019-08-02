@@ -192,6 +192,7 @@ class LevelSelect extends React.Component {
         popup={this.renderPopup()}
         type={popoverType}
         ref={this.popoverRef}
+        pureContainer
       >
         {children !== undefined ? children : this.renderTarget()}
       </Popover>

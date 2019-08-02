@@ -1,28 +1,16 @@
-@gm-form-field-top: 6px;
-
 .gm-form {
   .gm-form-group {
-    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    min-height: 40px;
   }
 
-  &.form-horizontal {
-    .gm-form-label {
-      padding-top: @gm-form-field-top;
-      padding-right: 10px;
+  .gm-form-label {
+    padding-top: 6px;
+    padding-right: 10px;
 
-      &.gm-form-label-untop {
-        padding-top: 0;
-      }
-
-      &.gm-form-label-switch-padding-top {
-        padding-top: 2px;
-      }
-    }
-
-    .gm-form-field {
-      &.gm-form-field-top {
-        margin-top: @gm-form-field-top;
-      }
+    &.gm-form-label-un-top {
+      padding-top: 0;
     }
   }
 
@@ -30,40 +18,48 @@
     display: flex;
     flex-wrap: wrap;
 
-    .gm-form-label {
-      padding-top: @gm-form-field-top;
-      padding-right: 5px;
-
-      &.gm-form-label-untop {
-        padding-top: 0;
-      }
-    }
-
     .gm-form-group {
-      margin-right: 20px;
-      margin-bottom: 0;
-    }
-  }
-
-  .gm-form-block {
-    &.gm-form-block-inline {
-      flex-wrap: wrap;
-
-      .gm-form-group {
-        margin-right: 20px;
-      }
+      padding-bottom: 0;
+      min-height: auto;
     }
   }
 
   .help-block {
     margin-bottom: 0;
   }
+
+  /* 只能作用 form-field 下面的 */
+  .gm-form-field {
+    position: relative;
+
+    & > .gm-radio-group {
+      margin: 4px 0 0;
+    }
+
+    & > .gm-checkbox-group {
+      margin: 4px 0 0;
+    }
+
+    & > .gm-switch {
+      margin-top: 4px;
+    }
+
+    & > .gm-select {
+      display: block;
+    }
+  }
+
+  .gm-form-toolTip {
+    position: absolute;
+    right: -28px;
+    top: 7px;
+  }
 }
 
 @media (max-width: 768px) {
   .gm-form {
     .gm-form-group {
-      margin-right: 0;
+      padding-right: 0;
       flex-direction: column;
 
       .gm-form-label {
@@ -76,26 +72,57 @@
       display: block;
 
       .gm-form-group {
-        margin-right: 0;
+        padding-right: 0;
         flex-direction: column;
       }
     }
 
     .gm-form-block {
       flex-direction: column;
-
-      &.gm-form-block-inline {
-        flex-wrap: wrap;
-
-        .gm-form-group {
-          margin-right: 0;
-          flex-direction: column;
-        }
-      }
     }
   }
 }
 
-.gm-form-group-sticky-bottom {
-  background-color: #d7efd8;
+.gm-form-group-sticky-box {
+  text-align: center;
+  padding: 5px 0;
+  background-color: white;
+  box-shadow: 0 -1px 5px rgba(36, 51, 81, 0.2);
+}
+
+.gm-form-panel {
+  padding: 10px 20px 0 20px;
+
+  &:first-child {
+    padding-top: 20px;
+  }
+
+  &-header {
+    &-tag {
+      width: 3px;
+      background: @brand-primary;
+      margin-bottom: 5px;
+      margin-top: 2px;
+    }
+
+    &-content {
+      margin-left: 5px;
+      border-bottom: 1px solid fadeout(@gm-frame-border-color, 50%);
+
+      &-title {
+        font-size: 14px;
+        margin-bottom: 2px;
+      }
+    }
+  }
+
+  &-content {
+    padding-top: 20px;
+
+    .gm-form {
+      .gm-form-group {
+        padding-bottom: 20px;
+      }
+    }
+  }
 }

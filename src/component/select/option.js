@@ -1,27 +1,12 @@
-import React from 'react'
+import { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
-class Option extends React.Component {
-  render() {
-    const {
-      children,
-      className,
-      disabled,
-            value, // eslint-disable-line
-      ...rest
-    } = this.props
-    return (
-      <div
-        {...rest}
-        className={classNames('gm-list-item', className, {
-          disabled: disabled
-        })}
-      >
-        {children}
-      </div>
-    )
-  }
+const Option = () => {
+  useEffect(() => {
+    console.warn('Deprecated. Use Select data instead.')
+  }, [])
+
+  return null
 }
 
 Option.displayName = 'Option'

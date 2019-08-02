@@ -2,17 +2,29 @@
   display: inline-block;
 
   .gm-uploader-default {
-    width: 100px;
-    height: 100px;
-    border: 2px dashed @gm-border-color;
+    width: 64px;
+    height: 64px;
+    border: 1px solid fadeout(@gm-frame-border-color, 50%);
     cursor: pointer;
+    border-radius: 2px;
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
   }
 
   .gm-uploader-wrap {
+    border: 1px solid fadeout(@gm-frame-border-color, 50%);
     display: inline-block;
+    cursor: pointer;
+    border-radius: 2px;
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
   }
 
-  .gm-uploader-input[type="file"] {
+  .gm-uploader-input[type='file'] {
     display: none;
   }
 
