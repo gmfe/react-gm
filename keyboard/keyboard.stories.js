@@ -11,12 +11,8 @@ import {
   KCTableSelect,
   KCDatePicker
 } from './'
-import {
-  EditTable,
-  fixedColumnsTableHOC,
-  diyTableHOC,
-  TableUtil
-} from '../table'
+import { EditTable, fixedColumnsTableHOC, TableUtil } from '../table'
+import diyTableHOC from '../table/hoc/diy_table'
 import _ from 'lodash'
 
 const { OperationHeader, EditTableOperation, referOfWidth } = TableUtil
@@ -184,15 +180,6 @@ const tableColumns = [
 
 const store = observable({
   data: [
-    { position: null, name: '', age: null, area: [], sku: null, date: null },
-    {
-      position: { value: 2, text: '福田' },
-      name: '',
-      age: null,
-      area: [],
-      sku: null,
-      date: null
-    },
     { position: null, name: '', age: null, area: [], sku: null, date: null }
   ],
   addList() {
@@ -286,7 +273,7 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
           {
             Header: '位置',
             accessor: 'position',
-            minWidth: 170,
+            minWidth: 200,
             isKeyboard: true,
             Cell: cellProps => (
               // 使用 Observer 包下，才能响应 store 数据

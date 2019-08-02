@@ -3,11 +3,14 @@
 .gm-list {
   border: 1px solid @gm-border-color;
   background: white;
+  // 注意，overflow-y 会被 FunctionSet 覆盖
   overflow-y: auto;
+  min-width: 80px;
 
   .gm-list-item {
     cursor: pointer;
     padding: 5px 10px;
+    background: #fff;
 
     &.active {
       color: @brand-primary;
@@ -15,15 +18,16 @@
 
     &.disabled {
       cursor: not-allowed;
-      color: @gm-color-second;
+      color: @gm-color-fourth;
     }
 
     &.will-active {
-      background-color: @gm-list-group-hover-bg;
+      background-color: @gm-list-bg-hover;
     }
 
     &:hover {
-      background-color: @gm-list-group-hover-bg;
+      background-color: @gm-list-bg-hover;
+      color: black;
     }
   }
 

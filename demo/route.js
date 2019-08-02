@@ -8,6 +8,7 @@ import {
 import { processReactRouterProps } from 'gm-util'
 import { hot } from 'react-hot-loader/root'
 import Loadable from 'react-loadable'
+import { LayoutRoot } from '../src'
 
 import App from './app'
 
@@ -94,6 +95,7 @@ const RouteConfig = () => (
         </App>
       )}
     />
+    <LayoutRoot />
   </Router>
 )
 
