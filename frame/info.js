@@ -23,7 +23,6 @@ const Info = props => {
           showArrow
           type='click'
           right
-          offset={4}
           className='gm-framework-info-default-setting-popover'
           popup={
             <List

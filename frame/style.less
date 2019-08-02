@@ -87,7 +87,18 @@
 
       &-setting-popover {
         min-width: 100px;
-        font-size: 12px;
+
+        .gm-list-item {
+          height: 30px;
+          font-size: 12px;
+          line-height: 20px;
+          color: @gm-color-fourth;
+          border-bottom: 1px solid @gm-border-color;
+
+          &:hover {
+            color: @gm-color-first;
+          }
+        }
       }
 
       &-mobile-nav {
