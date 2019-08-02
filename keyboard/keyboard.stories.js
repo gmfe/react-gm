@@ -11,12 +11,8 @@ import {
   KCTableSelect,
   KCDatePicker
 } from './'
-import {
-  EditTable,
-  fixedColumnsTableHOC,
-  diyTableHOC,
-  TableUtil
-} from '../table'
+import { EditTable, fixedColumnsTableHOC, TableUtil } from '../table'
+import diyTableHOC from '../table/hoc/diy_table'
 import _ from 'lodash'
 
 const { OperationHeader, EditTableOperation, referOfWidth } = TableUtil

@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Popover } from '../src'
+import { Popover, PopupContentConfirm } from '../src'
 import { SvgShanchumorenHuaban, SvgTianjiamorenHuaban } from 'gm-svg'
 import _ from 'lodash'
+import SVGDelete from '../svg/delete.svg'
+import SVGEdit from '../svg/edit.svg'
+import SVGCheckDetail from '../svg/check-detail.svg'
+import SVGEditBox from '../svg/edit-box.svg'
 
-const OperationHeader = (
-  <div className='text-center'>
-    <i className='xfont xfont-fun' style={{ color: 'rgb(19, 193, 159)' }} />
-  </div>
-)
+const OperationHeader = <div className='text-center'>操作</div>
 
 const OperationCell = function(props) {
   return (
@@ -18,7 +18,144 @@ const OperationCell = function(props) {
 }
 
 OperationCell.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  style: PropTypes.object
+}
+
+const OperationDetail = ({ href, open, onClick, className, ...rest }) => {
+  const handleClick = e => {
+    onClick && onClick(e)
+
+    if (href) {
+      if (open) {
+        window.open(href)
+      } else {
+        window.location.href = href
+      }
+    }
+  }
+
+  return (
+    <div
+      {...rest}
+      onClick={handleClick}
+      className={classNames(
+        'gm-inline-block gm-cursor gm-padding-5 gm-text-16 gm-text gm-text-hover-primary',
+        className
+      )}
+    >
+      <SVGCheckDetail />
+    </div>
+  )
+}
+
+OperationDetail.propTypes = {
+  /** 如果提供了 href */
+  href: PropTypes.string,
+  /** true就新开tab页面 */
+  open: PropTypes.bool,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object
+}
+
+const OperationDelete = props => {
+  const { title, onClick, className, children, ...rest } = props
+  const refPopover = React.createRef()
+
+  const handleDelete = () => {
+    refPopover.current.apiDoSetActive(false)
+    return Promise.resolve(onClick())
+  }
+
+  const handleCancel = () => {
+    refPopover.current.apiDoSetActive(false)
+  }
+
+  const popup = (
+    <PopupContentConfirm
+      type='delete'
+      title={title}
+      onDelete={handleDelete}
+      onCancel={handleCancel}
+    >
+      {children || '确定删除？'}
+    </PopupContentConfirm>
+  )
+
+  return (
+    <Popover ref={refPopover} right popup={popup} showArrow>
+      <div
+        {...rest}
+        className={classNames(
+          'gm-inline-block gm-cursor gm-padding-5 gm-text-16 gm-text gm-text-hover-primary',
+          className
+        )}
+      >
+        <SVGDelete />
+      </div>
+    </Popover>
+  )
+}
+
+OperationDelete.propTypes = {
+  title: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object
+}
+
+const EditBox = props => {
+  const { title, onClick, className, children, editContent, ...rest } = props
+  const refPopover = React.createRef()
+
+  const handleSave = () => {
+    refPopover.current.apiDoSetActive(false)
+    return Promise.resolve(onClick())
+  }
+
+  const handleCancel = () => {
+    refPopover.current.apiDoSetActive(false)
+  }
+  const popup = (
+    <PopupContentConfirm
+      type='save'
+      title={title}
+      onSave={handleSave}
+      onCancel={handleCancel}
+    >
+      {editContent}
+      <SVGEditBox
+        // fake icon,为了 鼠标焦点不在当前行的时候还能常驻显示
+        className='gm-cursor gm-text'
+        style={{ position: 'absolute', top: '-19px', right: 0 }}
+      />
+    </PopupContentConfirm>
+  )
+
+  return (
+    <Popover
+      ref={refPopover}
+      arrowLeft={308}
+      right
+      popup={popup}
+      showArrow
+      animName={false}
+    >
+      <div {...rest} className={classNames('gm-inline-block', className)}>
+        <span className='gm-padding-right-5'>{children}</span>
+        <SVGEditBox className='react-table-edit-box gm-cursor gm-text gm-text-hover-primary' />
+      </div>
+    </Popover>
+  )
+}
+
+EditBox.propTypes = {
+  title: PropTypes.string,
+  editContent: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 class SortHeader extends React.Component {
@@ -46,7 +183,6 @@ SortHeader.propTypes = {
   className: PropTypes.string
 }
 
-// TODO
 const EditTableOperation = props => {
   return (
     <OperationCell>
@@ -85,6 +221,54 @@ EditTableOperation.propTypes = {
   onDeleteRow: PropTypes.func
 }
 
+const OperationRowEdit = ({ children, onClick, onSave, onCancel }) => {
+  const [isEditing, setEditState] = useState(false)
+
+  const handleClick = () => {
+    onClick && onClick()
+    setEditState(true)
+  }
+
+  const handleSave = () => {
+    onSave && onSave()
+    setEditState(false)
+  }
+
+  const handleCancel = () => {
+    onCancel && onCancel()
+    setEditState(false)
+  }
+
+  return !isEditing ? (
+    <OperationCell>
+      <SVGEdit
+        className='gm-inline-block gm-cursor gm-text-12 gm-text gm-text-hover-primary'
+        onClick={handleClick}
+      />
+      {children}
+    </OperationCell>
+  ) : (
+    <OperationCell>
+      <span className='btn-link gm-inline-block gm-cursor' onClick={handleSave}>
+        确定
+      </span>
+      <span className='gm-padding-lr-5'>|</span>
+      <span
+        className='btn-link gm-inline-block gm-cursor'
+        onClick={handleCancel}
+      >
+        取消
+      </span>
+    </OperationCell>
+  )
+}
+
+OperationRowEdit.propTypes = {
+  onClick: PropTypes.func,
+  onSave: PropTypes.func,
+  onCancel: PropTypes.func
+}
+
 function getColumnKey(column) {
   // 如果是字符串就取 accessor
   if (_.isString(column.accessor)) {
@@ -116,8 +300,12 @@ const referOfWidth = {
 export {
   getColumnKey,
   OperationHeader,
+  OperationDelete,
+  OperationDetail,
   OperationCell,
+  OperationRowEdit,
   SortHeader,
   EditTableOperation,
+  EditBox,
   referOfWidth
 }

@@ -13,11 +13,14 @@ const timeSpanStatus = {
   }
 }
 
-const store1 = observable(timeSpanStatus)
+const store = observable(timeSpanStatus)
 const store2 = observable(timeSpanStatus)
 const store3 = observable(timeSpanStatus)
 
 storiesOf('TimeSpan', module)
+  .add('default', () => (
+    <TimeSpan selected={store.date} onSelect={date => store.setDate(date)} />
+  ))
   .add('不设置时间最大值 && 禁用某个时间段', () => (
     <TimeSpan
       max={null}
@@ -25,8 +28,8 @@ storiesOf('TimeSpan', module)
         spanMoment.isSameOrAfter(moment('11:00', 'HH:mm')) &&
         spanMoment.isSameOrBefore(moment('18:30', 'HH:mm'))
       }
-      selected={store1.date}
-      onSelect={date => store1.setDate(date)}
+      selected={store.date}
+      onSelect={date => store.setDate(date)}
     />
   ))
 

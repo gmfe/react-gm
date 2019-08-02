@@ -4,13 +4,20 @@ import SearchSelect from './deprecated/search_select/search.select'
 import FilterSearchSelect from './deprecated/search_select/filter.search.select'
 import TreeSelect from './deprecated/tree_select'
 import Trigger from './deprecated/trigger'
+import PaginationFuck from './deprecated/pagination_fuck/pagination_fuck'
 
+import {
+  QuickPanel,
+  QuickFilter,
+  QuickTab,
+  QuickDesc,
+  QuickDetail
+} from './deprecated/quick'
 // 废弃的结束
 
 import Pagination from './component/pagination/pagination'
 import PaginationText from './component/pagination/pagination_text'
-import PaginationNew from './component/pagination/pagination_new'
-import PaginationBox from './component/pagination/pagination_box'
+import PaginationV2 from './component/pagination/pagination_v2'
 import Dropper from './component/dropper/index'
 import {
   Form,
@@ -21,7 +28,7 @@ import {
 } from './component/form'
 
 import Storage from './component/storage'
-import Calendar from './component/calendar'
+import Calendar from './component/calendar/calendar'
 import DatePicker from './component/date_picker'
 import DateRangePicker from './component/date_range_picker'
 import Tip from './component/tip'
@@ -56,19 +63,11 @@ import RightSideModal from './component/modal/right_side_modal'
 import CleanModal from './component/modal/clean_modal'
 import Collapse from './component/collapse'
 import { DropDown, DropDownItem, DropDownItems } from './component/drop_down'
-import {
-  QuickPanel,
-  QuickFilter,
-  QuickTab,
-  QuickDesc,
-  QuickDetail
-} from './component/quick'
 import { Radio, RadioGroup } from './component/radio'
 import { Checkbox, CheckboxGroup } from './component/checkbox'
 import FilterSelect from './component/filter_select/filter.select'
 import MultipleFilterSelect from './component/filter_select/multiple.filter.select'
 import MoreSelect from './component/more_select'
-import Menu from './component/menu'
 import Nav from './component/nav'
 import { Transfer, TransferGroup } from './component/transfer'
 import Tree from './component/tree'
@@ -91,12 +90,25 @@ import LevelSelect from './component/level_select'
 import Input from './component/input'
 import TableSelect from './component/table_select'
 
+import FunctionSet from './component/function_set'
+
+import { PopupContentConfirm } from './component/popup'
+
 import Validator from './validator'
 
 import { Select, Option } from './component/select'
 import { setLocale } from './locales'
 
 import Carousel from './component/carousel/carousel'
+import { Box, BoxForm, BoxTable, BoxPanel } from './component/box'
+import ImgUploader from './component/img_uploader'
+
+import IconDownUp from './component/icon_down_up'
+
+import { Col, Row } from './component/grid'
+
+import ManagePagination from './business/manage_pagination'
+import ManagePaginationV2 from './business/manage_pagination/v2'
 
 Object.assign(Sheet, {
   SheetColumn,
@@ -137,11 +149,11 @@ export {
   TreeSelect,
   Trigger,
   PaginationText,
+  PaginationFuck,
   // 废弃的结束
 
   Pagination,
-  PaginationNew,
-  PaginationBox,
+  PaginationV2,
   Form,
   FormItem,
   FormButton,
@@ -211,7 +223,6 @@ export {
   Affix,
   Uploader,
   Drawer,
-  Menu,
   Nav,
   ImagePreview,
   setLocale,
@@ -225,5 +236,17 @@ export {
   LevelList,
   LevelSelect,
   Input,
-  TableSelect
+  TableSelect,
+  FunctionSet,
+  Box,
+  BoxForm,
+  BoxTable,
+  BoxPanel,
+  PopupContentConfirm,
+  ImgUploader,
+  IconDownUp,
+  Col,
+  Row,
+  ManagePagination,
+  ManagePaginationV2
 }

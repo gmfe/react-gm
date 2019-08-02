@@ -5,6 +5,7 @@ import Flex from '../flex'
 import Loading from '../loading'
 import classNames from 'classnames'
 import Popover from '../popover'
+import SVGCloseCircle from '../../../svg/close-circle.svg'
 
 class FilterSelect extends React.Component {
   constructor(props) {
@@ -361,9 +362,9 @@ class FilterSelect extends React.Component {
                 <Flex>
                   {selected.name}
                   {showClear && (
-                    <i
+                    <SVGCloseCircle
                       onClick={this.handleClear}
-                      className='xfont xfont-close-circle gm-cursor gm-filter-select-clear-btn'
+                      className='gm-filter-select-clear-btn'
                     />
                   )}
                 </Flex>

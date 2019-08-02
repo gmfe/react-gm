@@ -1,81 +1,93 @@
-@import "less/bootstrap.less";
-@import "css/variables";
-@import "css/cover.less";
-@import "css/font.less";
-@import "css/text";
-@import "css/distance";
-@import "css/bg";
-@import "css/border";
-@import "css/display";
-@import "css/cursor.less";
-@import "css/overflow.less";
-@import "css/position.less";
-@import "css/shadow.less";
-@import "css/arrow.less";
-@import "css/animation.less";
-@import "css/rotate.less";
-@import "css/error.less";
-@import "other.less";
-@import "component/dropper/style";
-@import "component/calendar/style";
-@import "component/date_range_picker/style";
-@import "component/tip/style";
-@import "component/nprogress/style";
-@import "component/divider/style";
-@import "component/flex/style";
-@import "component/time_span/style";
-@import "component/drop_select/style";
-@import "component/switch/style";
-@import "component/sheet/style";
-@import "component/filter_select/style";
-@import "component/more_select/style";
-@import "component/cascader/style";
-@import "component/loading/style";
-@import "component/modal/style";
-@import "component/drop_down/style";
-@import "component/quick/style";
-@import "component/transfer/style";
-@import "component/form/style";
-@import "component/menu/style";
-@import "component/nav/style";
-@import "component/radio/style";
-@import "component/checkbox/style";
-@import "component/image_preview/style";
-@import "component/input_number/style";
-@import "component/progress/style";
-@import "component/progress_circle/style";
-@import "component/mask/style";
-@import "component/popover/style";
-@import "component/color_picker/style";
-@import "component/button/style";
-@import "component/select/style";
-@import "component/tree/style";
-@import "component/list/style";
-@import "component/uploader/style";
-@import "component/drawer/style";
-@import "component/editable_text/style";
-@import "component/pagination/style";
-@import "component/level_list/style";
-@import "component/selection/style";
-@import "component/table_select/style";
-@import "component/selected/style";
+@import 'less/bootstrap.less';
+@import 'css/variables';
+@import 'css/cover.less';
+@import 'css/svg.less';
+@import 'css/text';
+@import 'css/distance';
+@import 'css/bg';
+@import 'css/border';
+@import 'css/display';
+@import 'css/cursor.less';
+@import 'css/overflow.less';
+@import 'css/position.less';
+@import 'css/shadow.less';
+@import 'css/arrow.less';
+@import 'css/animation.less';
+@import 'css/rotate.less';
+@import 'css/error.less';
+@import 'other.less';
 
 // 废弃的
-@import "deprecated/import_lead/style";
-@import "deprecated/search_select/style";
-@import "deprecated/tree_select/style";
-@import "deprecated/trigger/style";
-@import "component/carousel/style";
+@import 'deprecated/import_lead/style';
+@import 'deprecated/search_select/style';
+@import 'deprecated/tree_select/style';
+@import 'deprecated/trigger/style';
+@import 'deprecated/quick/style';
+
+// 工具
+@import 'component/selection/style';
+@import 'component/icon_down_up/style';
+
+// 使用的
+@import 'component/dropper/style';
+@import 'component/calendar/style';
+@import 'component/date_range_picker/style';
+@import 'component/tip/style';
+@import 'component/nprogress/style';
+@import 'component/divider/style';
+@import 'component/flex/style';
+@import 'component/time_span/style';
+@import 'component/drop_select/style';
+@import 'component/switch/style';
+@import 'component/sheet/style';
+@import 'component/filter_select/style';
+@import 'component/more_select/style';
+@import 'component/cascader/style';
+@import 'component/loading/style';
+@import 'component/modal/style';
+@import 'component/drop_down/style';
+@import 'component/transfer/style';
+@import 'component/form/style';
+@import 'component/nav/style';
+@import 'component/radio/style';
+@import 'component/checkbox/style';
+@import 'component/image_preview/style';
+@import 'component/input_number/style';
+@import 'component/progress/style';
+@import 'component/progress_circle/style';
+@import 'component/mask/style';
+@import 'component/popup/style';
+@import 'component/color_picker/style';
+@import 'component/button/style';
+@import 'component/tree/style';
+@import 'component/list/style';
+@import 'component/uploader/style';
+@import 'component/drawer/style';
+@import 'component/editable_text/style';
+@import 'component/pagination/style';
+@import 'component/level_list/style';
+@import 'component/table_select/style';
+@import 'component/carousel/style';
+@import 'component/box/style';
+@import 'component/grid/style';
+@import 'component/select/style';
+@import 'component/img_uploader/style';
 
 html,
 body {
-  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
+  font-family: 'Segoe UI', 'Lucida Grande', Helvetica, Arial, 'Microsoft YaHei',
+    FreeSans, Arimo, 'Droid Sans', 'wenquanyi micro hei', 'Hiragino Sans GB',
+    'Hiragino Sans GB W3', FontAwesome, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
-  line-height: 1.5;
+  line-height: 1.33;
+}
+
+.gm-svg-icon {
+  vertical-align: -0.125em;
 }
 
 ::-webkit-input-placeholder {
-  color: @gm-color-second;
+  color: @gm-color-fourth;
 }

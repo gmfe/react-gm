@@ -43,7 +43,7 @@ const Button = props => {
   return (
     <button
       {...rest}
-      className={classNames('gm-button', className)}
+      className={classNames('gm-button btn btn-default', className)}
       disabled={isLoading || disabled}
       onClick={handleClick}
     >

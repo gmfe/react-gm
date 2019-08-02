@@ -3,17 +3,32 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
 import Validator from '../../validator'
+import { WrapContext } from './util'
+import { devWarn } from '../../util'
 
 class Form extends React.Component {
   constructor(props) {
     super(props)
-    this.handleSubmit = ::this.handleSubmit
     this.state = {
       canValidate: false
     }
+
+    devWarn(() => {
+      let i = 0
+      props.onSubmit && i++
+      props.onSubmitValidated && i++
+      props.hasButtonInGroup && i++
+      if (i === 0) {
+        console.warn('请提供 onSubmit or onSubmitValidated or hasButtonInGroup')
+      } else if (i > 1) {
+        console.warn(
+          '请仅提供以下一项 onSubmit or onSubmitValidated or hasButtonInGroup'
+        )
+      }
+    })
   }
 
-  apiValidate = () => {
+  apiDoValidate = () => {
     const err = this.validateAll()
     // 有错误才打开错误提示，没有错误则不打开
     this.setState({
@@ -22,21 +37,22 @@ class Form extends React.Component {
     return !err
   }
 
+  getFormItemFields(children, formItems) {
+    _.each(React.Children.toArray(children), child => {
+      if (child.type && child.type.displayName === 'FormItem') {
+        formItems.push(child)
+      } else if (child.props && child.props.children) {
+        this.getFormItemFields(child.props.children, formItems)
+      }
+    })
+  }
+
   validateAll() {
     const { children } = this.props
     const helpList = []
     const formItems = []
-    _.each(React.Children.toArray(children), child => {
-      if (child.type.displayName === 'FormItem') {
-        formItems.push(child)
-      } else if (child.type.displayName === 'FormBlock') {
-        _.each(React.Children.toArray(child.props.children), cChild => {
-          if (cChild.type.displayName === 'FormItem') {
-            formItems.push(cChild)
-          }
-        })
-      }
-    })
+
+    this.getFormItemFields(children, formItems)
 
     _.each(formItems, item => {
       if (item.props.error) {
@@ -65,13 +81,15 @@ class Form extends React.Component {
     return helpList.length === 0 ? null : helpList
   }
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault()
-    this.props.onSubmit(e)
+    const { onSubmit, onSubmitValidated } = this.props
+
+    onSubmit && onSubmit(e)
 
     const err = this.validateAll()
     if (!err) {
-      this.props.onSubmitValidated()
+      onSubmitValidated && onSubmitValidated()
     }
 
     // 有错误才打开错误提示，没有错误则不打开
@@ -83,76 +101,68 @@ class Form extends React.Component {
   render() {
     const {
       inline,
-      horizontal,
       labelWidth,
+      disabledCol,
       className,
       children,
       hasButtonInGroup,
       onSubmitValidated, //eslint-disable-line
+      btnPosition,
+      colWidth,
       ...rest
     } = this.props
 
-    const childList = _.map(React.Children.toArray(children), (child, i) => {
-      return child.type.displayName === 'FormItem' ||
-        child.type.displayName === 'FormBlock'
-        ? React.cloneElement(
-            child,
-            Object.assign(
-              {
-                key: i,
-                horizontal,
-                inline,
-                labelWidth,
-                canValidate: this.state.canValidate
-              },
-              child.props
-            )
-          )
-        : child
-    })
-
     return (
-      <form
-        {...rest}
-        className={classNames(
-          'gm-form',
-          {
-            'form-inline': inline,
-            'form-horizontal': horizontal
-          },
-          className
-        )}
-        onSubmit={this.handleSubmit}
+      <WrapContext.Provider
+        value={{
+          labelWidth,
+          disabledCol,
+          inline,
+          btnPosition,
+          colWidth,
+          canValidate: this.state.canValidate
+        }}
       >
-        {childList}
-        {hasButtonInGroup && (
-          <button type='submit' style={{ display: 'none' }}>
-            button
-          </button>
-        )}
-      </form>
+        <form
+          {...rest}
+          className={classNames(
+            'gm-form',
+            {
+              'form-inline': inline
+            },
+            className
+          )}
+          onSubmit={this.handleSubmit}
+        >
+          {children}
+          {hasButtonInGroup && (
+            <button type='submit' style={{ display: 'none' }}>
+              button
+            </button>
+          )}
+        </form>
+      </WrapContext.Provider>
     )
   }
 }
 
 Form.propTypes = {
-  inline: PropTypes.bool,
-  horizontal: PropTypes.bool,
-  labelWidth: PropTypes.string, // horizontal true 才有效
-  hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
-  onSubmit: PropTypes.func, // 默认处理了 preventDefault,
+  /** 默认处理了 event.preventDefault，避免犯低级错误 */
+  onSubmit: PropTypes.func,
+  /** 如果 FormItem 定义了 validate，则此方法就在所有验证通过后才调用 */
   onSubmitValidated: PropTypes.func,
-  children: PropTypes.any,
+  /** 行内模式，一般用不到。目前在 BoxForm 内部自动使用 */
+  inline: PropTypes.bool,
+  /** FormItem 默认一栏，会限定宽度。有些场景是不能限定宽度的，比如宽撑满一页，如果是启用此项 */
+  disabledCol: PropTypes.bool,
+  /** 自定义列宽 */
+  colWidth: PropTypes.string,
+  labelWidth: PropTypes.string,
+  /** 只在 FormGroup 下用。用于添加一个隐藏的按钮，响应 enter */
+  hasButtonInGroup: PropTypes.bool,
   className: PropTypes.string,
-  style: PropTypes.object
-}
-
-Form.defaultProps = {
-  inline: false,
-  horizontal: false,
-  hasButtonInGroup: false,
-  onSubmit: _.noop,
-  onSubmitValidated: _.noop
+  style: PropTypes.object,
+  btnPosition: PropTypes.oneOf(['center', 'left', 'right'])
 }
 
 export default Form

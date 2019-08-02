@@ -1,0 +1,26 @@
+@import './mixin';
+
+.gm-grid-row {
+  position: relative;
+  height: auto;
+  .clearfix();
+}
+
+.gm-grid(); // 不设置size时
+.gm-grid(-sm); // 默认的
+
+@media (min-width: @gm-screen-sm-min) {
+  .gm-grid(-sm);
+}
+
+@media (min-width: @gm-screen-md-min) {
+  .gm-grid(-md);
+}
+
+@media (min-width: @gm-screen-lg-min) {
+  .gm-grid(-lg);
+}
+
+@media (min-width: @gm-screen-xl-min) {
+  .gm-grid(-xl);
+}
