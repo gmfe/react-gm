@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import Calendar from '../calendar'
+import Calendar from '../calendar/calendar'
 import classNames from 'classnames'
 import Popover from '../popover'
 import Selected from '../selected'
 import _ from 'lodash'
+import SVGCalendar from '../../../svg/calendar.svg'
 
 /**
  * DatePicker -- 日期选择
@@ -37,8 +38,8 @@ class DatePicker extends React.Component {
   }
 
   handleSelectDate = date => {
-    this.props.onChange(date)
     this.refPopup.current.apiDoSetActive(false)
+    this.props.onChange(date)
   }
 
   handleKeyDown = event => {
@@ -128,7 +129,7 @@ class DatePicker extends React.Component {
             renderText={inputValueRender}
             className={classNames('gm-datepicker', className)}
             placeholder={placeholder}
-            funIcon={<i className='xfont xfont-calendar' />}
+            funIcon={<SVGCalendar />}
             onKeyDown={this.handleKeyDown}
           />
         )}

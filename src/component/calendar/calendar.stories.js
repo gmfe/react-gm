@@ -1,30 +1,38 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import Calendar from './index'
-import moment from 'moment'
+import Calendar from './calendar'
+import RangeCalendar from './range_calendar'
 import { observable } from 'mobx'
+import moment from 'moment'
 
-const calendarStatus = {
+const store = observable({
   selected: null,
   setSelected(date) {
     this.selected = date
   }
-}
-const store1 = observable(calendarStatus)
-const store2 = observable(calendarStatus)
-const store3 = observable(calendarStatus)
+})
+
+const rangeStore = observable({
+  begin: null,
+  end: null,
+  setSelected(begin, end) {
+    console.log(begin, end)
+    this.begin = begin
+    this.end = end
+  }
+})
 
 storiesOf('Calendar', module)
-  .add('common form', () => (
+  .add('default', () => (
     <Calendar
-      selected={store1.selected}
-      onSelect={e => store1.setSelected(e)}
+      selected={store.selected}
+      onSelect={selected => store.setSelected(selected)}
     />
   ))
-  .add('with minDate && maxDate', () => (
+  .add('min max', () => (
     <Calendar
-      selected={store2.selected}
-      onSelect={e => store2.setSelected(e)}
+      selected={store.selected}
+      onSelect={selected => store.setSelected(selected)}
       min={moment().toDate()}
       max={moment()
         .add(10, 'd')
@@ -33,10 +41,17 @@ storiesOf('Calendar', module)
   ))
   .add('custom disabledDate', () => (
     <Calendar
-      selected={store3.selected}
-      onSelect={e => store3.setSelected(e)}
+      selected={store.selected}
+      onSelect={selected => store.setSelected(selected)}
       disabledDate={d => {
         return moment(d).get('day') === 5
       }}
+    />
+  ))
+  .add('RangeCalendar', () => (
+    <RangeCalendar
+      begin={rangeStore.begin}
+      end={rangeStore.end}
+      onSelect={(begin, end) => rangeStore.setSelected(begin, end)}
     />
   ))

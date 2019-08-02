@@ -1,208 +1,71 @@
-import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
+import PaginationBase from './base'
+import { warn, devWarnForHook } from '../../util'
 
-class WithCount extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handlePage = ::this.handlePage
+const Pagination = ({ data, onChange, toPage, nextDisabled, ...rest }) => {
+  // 新用法
+  if (onChange) {
+    return <PaginationBase {...rest} data={data} onChange={onChange} />
   }
 
-  render() {
-    const data = Object.assign({}, this.props.data)
+  devWarnForHook(() => {
+    warn('请使用新用法 data onChange，具体看文档')
+  })
 
-    data.index = data.offset / data.limit + 1
-
-    const offset = 2
-
-    const pages = []
-
-    const all = Math.ceil(data.count / data.limit)
-
-    let begin = Math.max(data.index - offset, 1)
-
-    let end = Math.min(data.index + offset, all)
-
-    if (all > offset * 2 + 1) {
-      if (begin === 1) {
-        end = offset * 2 + 1
-      } else if (end === all) {
-        begin = Math.max(begin - offset, 1)
-      }
-    }
-
-    for (let i = begin; i <= end; i++) {
-      pages.push(i)
-    }
-
+  if (data.count !== undefined) {
     return (
-      <div className='gm-pagination'>
-        <ul className='pagination pagination-sm' onClick={this.handlePage}>
-          <li className={data.index === 1 ? 'disabled' : ''}>
-            <a href='javascript:;' data-page={data.index - 1}>
-              {getLocale('上一页')}
-            </a>
-          </li>
-
-          {begin >= 2 ? (
-            <li>
-              <a href='javascript:;' data-page='1'>
-                1
-              </a>
-            </li>
-          ) : (
-            undefined
-          )}
-          {begin >= 3 ? (
-            <li className='disabled'>
-              <a href='javascript:;'>...</a>
-            </li>
-          ) : (
-            undefined
-          )}
-
-          {pages.map((page, i) => (
-            <li key={i} className={data.index === page ? 'active' : ''}>
-              <a href='javascript:;' data-page={page}>
-                {page}
-              </a>
-            </li>
-          ))}
-
-          {end <= all - 2 ? (
-            <li className='disabled'>
-              <a href='javascript:;'>...</a>
-            </li>
-          ) : (
-            undefined
-          )}
-          {end <= all - 1 ? (
-            <li>
-              <a href='javascript:;' data-page={all}>
-                {all}
-              </a>
-            </li>
-          ) : (
-            undefined
-          )}
-
-          <li className={data.index === all || all === 0 ? 'disabled' : ''}>
-            <a href='javascript:;' data-page={data.index + 1}>
-              {getLocale('下一页')}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <PaginationBase
+        {...rest}
+        data={data}
+        onChange={data => {
+          toPage(data)
+        }}
+      />
     )
-  }
-
-  handlePage(event) {
-    const page = ~~event.target.getAttribute('data-page')
-
-    const data = this.props.data
-
-    const count = Math.ceil(data.count / data.limit)
-
-    const toPage = this.props.toPage
-    if (!page || page === data.index || page < 1 || page > count) {
-      return
+  } else {
+    let count = data.offset + data.limit * 2
+    if (nextDisabled) {
+      count = data.offset + data.limit
     }
-
-    toPage(
-      {
-        offset: (page - 1) * data.limit,
-        limit: data.limit
-      },
-      page
-    )
-  }
-}
-
-WithCount.propTypes = {
-  data: PropTypes.shape({
-    count: PropTypes.number,
-    offset: PropTypes.number.isRequired,
-    limit: PropTypes.number.isRequired
-  }),
-  toPage: PropTypes.func.isRequired,
-  nextDisabled: PropTypes.bool
-}
-
-class WithoutCount extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handlePage = ::this.handlePage
-  }
-
-  handlePage(action) {
-    const { data, toPage } = this.props
-
-    if (action === -1) {
-      if (data.offset === 0) {
-        return
-      }
-      toPage({
-        offset: Math.max(data.offset - data.limit, 0),
-        limit: data.limit
-      })
-    } else {
-      toPage({
-        offset: data.offset + data.limit,
-        limit: data.limit
-      })
-    }
-  }
-
-  render() {
-    const { data, nextDisabled } = this.props
+    console.log(count, data)
     return (
-      <div className='gm-pagination'>
-        <ul className='pagination pagination-sm'>
-          <li className={data.offset === 0 ? 'disabled' : ''}>
-            <a href='javascript:;' onClick={this.handlePage.bind(this, -1)}>
-              {getLocale('上一页')}
-            </a>
-          </li>
-          <li className={nextDisabled ? 'disabled' : ''}>
-            <a href='javascript:;' onClick={this.handlePage.bind(this, 1)}>
-              {getLocale('下一页')}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <PaginationBase
+        {...rest}
+        data={{ ...data, count }}
+        onChange={data => {
+          toPage(data)
+        }}
+        disabledCount
+      />
     )
-  }
-}
-
-WithoutCount.propTypes = {
-  data: PropTypes.shape({
-    count: PropTypes.number,
-    offset: PropTypes.number.isRequired,
-    limit: PropTypes.number.isRequired
-  }),
-  toPage: PropTypes.func.isRequired,
-  nextDisabled: PropTypes.bool
-}
-
-class Pagination extends React.Component {
-  render() {
-    if (this.props.data.count !== undefined) {
-      return <WithCount {...this.props} />
-    } else {
-      return <WithoutCount {...this.props} />
-    }
   }
 }
 
 Pagination.displayName = 'Pagination'
 Pagination.propTypes = {
+  /** 出于性能考虑，有些接口不会返回「count」 */
   data: PropTypes.shape({
     count: PropTypes.number,
     offset: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired
   }),
+  /** 提供 {index, limit} */
+  onChange: PropTypes.func.isRequired,
+  /** 此 count 非 data.count。此只是用来控制不显示总数 */
+  disabledCount: PropTypes.bool,
+  /**
+   * 老用法，已废弃
+   * 参数 {offset, limit}, page。page 是页码。
+   * 直接用此数据请求后台即可
+   */
   toPage: PropTypes.func.isRequired,
-  nextDisabled: PropTypes.bool
+  /**
+   * 老用法，已废弃
+   * data without count 才有效 */
+  nextDisabled: PropTypes.bool,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default Pagination
