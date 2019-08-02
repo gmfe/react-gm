@@ -12,13 +12,14 @@ import SheetSelect from './sheet_select'
 import SheetBatchAction from './sheet_batch_action'
 import Loading from '../loading'
 import Flex from '../flex'
-import SVGFun from '../../../svg/fun.svg'
+import { warn } from '../../util'
 
 class Sheet extends React.Component {
   constructor(props) {
     super(props)
     this.checkboxOrRadioName = 'sheet_checkbox_radio_' + Math.random()
-    this.handleExpandedAll = ::this.handleExpandedAll
+
+    warn('Sheet Deprecated. Use Table instead.')
   }
 
   handleSelect(select, i, event) {
@@ -63,7 +64,7 @@ class Sheet extends React.Component {
     onExpand && onExpand(index)
   }
 
-  handleExpandedAll() {
+  handleExpandedAll = () => {
     const { onExpandAll } = this.props
     onExpandAll && onExpandAll()
   }
@@ -296,18 +297,14 @@ class Sheet extends React.Component {
                     </th>
                   )
                 })}
-                {actions && (
-                  <th className='text-center'>
-                    <SVGFun style={{ color: '#13c19f' }} />
-                  </th>
-                )}
+                {actions && <th className='text-center'>操作</th>}
               </tr>
             </thead>
             <tbody>{this.renderTr(select, columns, actions)}</tbody>
           </table>
         </div>
         {(pagination || paginationText) && (
-          <Flex justifyCenter alignCenter>
+          <Flex justifyEnd alignCenter className='gm-padding-20'>
             {paginationText && <div>{paginationText}</div>}
             {pagination && <div>{pagination}</div>}
           </Flex>

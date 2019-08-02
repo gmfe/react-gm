@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import Calendar from '../calendar'
+import Calendar from '../calendar/calendar'
 import classNames from 'classnames'
 import Popover from '../popover'
-import Selected from '../selected'
 import _ from 'lodash'
 import SVGCalendar from '../../../svg/calendar.svg'
+import Selection from '../selection'
 
 /**
  * DatePicker -- 日期选择
@@ -21,10 +21,10 @@ class DatePicker extends React.Component {
 
   refPopup = React.createRef()
 
-  selectedRef = React.createRef()
+  selectionRef = React.createRef()
 
   apiDoFocus = () => {
-    this.selectedRef.current.apiDoFocus()
+    this.selectionRef.current.apiDoFocus()
   }
 
   apiDoSelectWillActive = () => {
@@ -38,8 +38,8 @@ class DatePicker extends React.Component {
   }
 
   handleSelectDate = date => {
-    this.props.onChange(date)
     this.refPopup.current.apiDoSetActive(false)
+    this.props.onChange(date)
   }
 
   handleKeyDown = event => {
@@ -91,7 +91,7 @@ class DatePicker extends React.Component {
       max,
       disabledDate,
       className,
-      inputValueRender,
+      renderDate,
       popoverType,
       onKeyDown,
       children,
@@ -118,15 +118,18 @@ class DatePicker extends React.Component {
         animName
         disabled={disabled || false}
         type={popoverType}
+        style={{ minWidth: '200px' }}
       >
-        {children || (
-          <Selected
+        {children !== undefined ? (
+          children
+        ) : (
+          <Selection
+            ref={this.selectionRef}
             {...rest}
-            ref={this.selectedRef}
             selected={date}
             onSelect={onChange}
             disabled={disabled}
-            renderText={inputValueRender}
+            renderSelected={renderDate}
             className={classNames('gm-datepicker', className)}
             placeholder={placeholder}
             funIcon={<SVGCalendar />}
@@ -157,7 +160,7 @@ DatePicker.propTypes = {
   /** 定义不可选择的日期，传入参数为Date对象，返回true or false */
   disabledDate: PropTypes.func,
   /** 定义日期框内value的展示形式，传入参数为Date对象，返回展示格式，如定义value展示为 'xx月-xx日‘ */
-  inputValueRender: PropTypes.func,
+  renderDate: PropTypes.func,
 
   popoverType: PropTypes.oneOf(['focus', 'realFocus']),
 
@@ -167,7 +170,7 @@ DatePicker.propTypes = {
 }
 
 DatePicker.defaultProps = {
-  inputValueRender: date => (date ? moment(date).format('YYYY-MM-DD') : ''),
+  renderDate: date => (date ? moment(date).format('YYYY-MM-DD') : ''),
   onKeyDown: _.noop
 }
 

@@ -1,6 +1,7 @@
 import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
+import { warn } from '../../util'
 
 class WithCount extends React.Component {
   render() {
@@ -43,6 +44,12 @@ WithoutCount.propTypes = {
 }
 
 class PaginationText extends React.Component {
+  constructor(props) {
+    super(props)
+
+    warn('PaginationText 废弃')
+  }
+
   render() {
     if (this.props.data.count !== undefined) {
       return <WithCount {...this.props} />

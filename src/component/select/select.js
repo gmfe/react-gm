@@ -89,6 +89,7 @@ class Select extends React.Component {
       clean,
       className,
       popoverType,
+      isInPopup,
       ...rest
     } = this.props
     const { willActiveIndex } = this.state
@@ -139,6 +140,7 @@ class Select extends React.Component {
         type={popoverType}
         popup={popup}
         disabled={disabled}
+        isInPopup={isInPopup}
       >
         <Selection
           ref={this.refSelection}
@@ -171,6 +173,7 @@ Select.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
   popoverType: PropTypes.oneOf(['focus', 'realFocus']),
+  isInPopup: PropTypes.bool,
   style: PropTypes.object,
   onKeyDown: PropTypes.func
 }

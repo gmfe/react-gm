@@ -6,11 +6,12 @@ import _ from 'lodash'
 import { SortHeader } from '../util'
 import ReactTable from 'react-table'
 import { findDOMNode } from 'react-dom'
+import SVGEmpty from '../../svg/empty.svg'
+import Flex from '../../src/component/flex'
 import EVENT_TYPE from '../../src/event_type'
 
 class BaseTable extends React.Component {
   refTable = React.createRef()
-
   doScroll = _.debounce(() => {
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
   }, 500)
@@ -110,20 +111,47 @@ class BaseTable extends React.Component {
         defaultPageSize={defaultPageSize}
         pageSize={Math.max(data.length, 1)} // 展示完整，传多少显示多少。避免被 pageSize 截断
         showPagination={showPagination}
-        className={classNames('gm-react-table -striped -highlight', className)}
+        className={classNames(
+          'gm-react-table -striped -highlight',
+          {
+            'gm-react-table-no-data': data.length === 0
+          },
+          className
+        )}
       />
     )
   }
 }
 
+const NoDataCom = () => (
+  <Flex
+    alignCenter
+    justifyCenter
+    style={{ position: 'absolute', top: '58px', width: '100%' }}
+  >
+    <div>
+      <Flex justifyCenter>
+        <SVGEmpty style={{ width: '70px', height: '70px' }} />
+      </Flex>
+      <div
+        className='gm-text-fourth'
+        style={{ textAlign: 'center', opacity: '0.5' }}
+      >
+        {getLocale('没有更多数据了')}
+      </div>
+    </div>
+  </Flex>
+)
+
 BaseTable.propTypes = {
-  // 主要
   loading: PropTypes.bool,
+  /** 表格数据 */
   data: PropTypes.array.isRequired,
+  /** 列定义 */
   columns: PropTypes.array.isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
-  // 额外，忽略，不一一列了，参考 ReactTable
+  /** 额外，忽略，不一一列了，参考 ReactTable */
   showPagination: PropTypes.bool,
   defaultPageSize: PropTypes.number
 }
@@ -131,10 +159,8 @@ BaseTable.propTypes = {
 BaseTable.defaultProps = {
   /** 不使用自带的分页组件 */
   showPagination: false,
-  /** 目前没有意义 */
-  defaultPageSize: 10,
   /** 没有数据的文案 */
-  noDataText: getLocale('没有数据'),
+  NoDataComponent: NoDataCom,
   /** 加载中的文案 */
   loadingText: getLocale('加载数据中...')
 }

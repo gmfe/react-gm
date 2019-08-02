@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Table from '../table'
+import { referOfWidth } from '../util'
 import SVGExpand from '../../svg/expand.svg'
 import SVGCloseup from '../../svg/closeup.svg'
 
@@ -83,9 +84,11 @@ function expandTableHOC(Component) {
           {...rest}
           columns={[
             {
+              id: '__expander', // 不要随便更改
               expander: true,
               Header: this.renderHeader,
-              Expander: this.renderExpander
+              Expander: this.renderExpander,
+              width: referOfWidth.noCell
             },
             ...columns
           ]}
