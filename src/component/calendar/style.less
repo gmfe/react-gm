@@ -1,129 +1,82 @@
 .gm-calendar {
-  font-size: 12px;
   width: 199px;
   overflow: hidden;
   border: 1px solid @gm-border-color;
-  position: relative;
   background: white;
-}
-
-.gm-calendar-head {
   cursor: pointer;
-  background-color: #fafbfd;
-  border-bottom: 1px solid @gm-border-color;
-}
 
-.gm-calendar-head-title {
-  font-weight: bold;
-  line-height: 24px;
-}
+  .gm-calendar-head {
+    height: 28px;
 
-.gm-calendar-head-pre,
-.gm-calendar-head-next {
-  width: 26px;
-  height: 26px;
-  color: inherit;
-  cursor: pointer;
-  line-height: 26px;
-}
+    .gm-calendar-head-icon {
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      display: inline-block;
+    }
 
-.gm-calendar-head-pre:hover,
-.gm-calendar-head-next:hover {
-  background-color: @gray-lighter;
-  text-decoration: none;
-}
+    .gm-calendar-head-text {
+      font-weight: bold;
+      line-height: 28px;
+      height: 28px;
+      text-align: center;
+    }
+  }
 
-.gm-calendar-head-month {
-  cursor: pointer;
-}
+  .gm-calendar-week {
+    height: 24px;
+  }
 
-.gm-calendar-months {
-  position: absolute;
-  top: 24px;
-  border: 1px solid @gm-border-color;
-  right: 5px;
-  bottom: 5px;
-  left: 5px;
-  background: white;
-}
+  .gm-calendar-day {
+    color: black;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    margin: 2px;
+    border: 1px solid transparent;
 
-.gm-calendar-month {
-  width: 42px;
-  height: 42px;
-  line-height: 42px;
-  display: inline-block;
-  text-align: center;
-  margin: 2px;
-  cursor: pointer;
-}
+    &:hover:not(.gm-calendar-day-disabled):not(.active) {
+      background-color: @brand-primary;
+      color: white;
+    }
 
-.gm-calendar-month:hover {
-  background-color: @list-group-hover-bg;
-}
+    &.gm-calendar-day-old,
+    &.gm-calendar-day-new {
+      color: @gm-color-third;
+    }
 
-.gm-calendar-content {
-  cursor: pointer;
-}
+    &.gm-calendar-day-now {
+      border: 1px solid @brand-primary;
+      color: @brand-primary;
+    }
 
-.gm-calendar-week {
-  cursor: pointer;
-}
+    &.gm-calendar-day-will {
+      border: 1px solid @brand-primary;
+    }
 
-.gm-calendar-day-name {
-  color: black;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
-  text-align: center;
-  margin: 2px;
-}
+    &.active {
+      border: 1px solid #d7e8fc;
+      background-color: #d7e8fc;
+      color: black;
+      width: 28px;
+      margin: 2px 0;
+    }
 
-.gm-calendar-day {
-  color: black;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
-  text-align: center;
-  margin: 2px;
-  border: 1px solid transparent;
-  border-radius: 50%;
-}
+    &.gm-calendar-day-begin,
+    &.gm-calendar-day-end {
+      background-color: @brand-primary;
+      border: 1px solid @brand-primary;
+      color: white;
+      width: 24px;
+      margin: 2px;
+    }
 
-.gm-calendar-day:hover:not(.gm-calendar-day-disabled) {
-  background-color: @brand-primary;
-  color: white;
-  border-radius: 50%;
-}
-
-.gm-calendar-day-will {
-  border: 1px solid @gm-color-third;
-}
-
-.gm-calendar-day-now {
-  border: 1px solid @brand-primary;
-}
-
-.gm-calendar-day-old {
-  color: @gm-color-third;
-}
-
-.gm-calendar-day-new {
-  color: @gm-color-third;
-}
-
-.gm-calendar-active {
-  background-color: @brand-primary;
-  color: white;
-}
-
-.gm-calendar-active:hover {
-  background-color: @brand-primary;
-  color: white;
-}
-
-.gm-calendar-day-disabled {
-  color: @gm-color-second;
-  cursor: not-allowed;
+    &.gm-calendar-day-disabled {
+      color: @gm-color-third;
+      cursor: not-allowed;
+    }
+  }
 }

@@ -14,7 +14,6 @@
 - prop-types
 - classnames
 - gm-util
-- gm-xfont
 - lodash
 - moment
 - query-string

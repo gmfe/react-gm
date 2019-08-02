@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import SVGOK from '../../../svg/ok.svg'
+import SVGRemove from '../../../svg/remove.svg'
+import SVGEdit from '../../../svg/edit.svg'
 
 class EditableText extends React.Component {
   constructor(props) {
@@ -67,13 +70,13 @@ class EditableText extends React.Component {
           onKeyUp={this.handleKeyUp}
         />
         <div className='gm-gap-5' />
-        <i
-          className='xfont xfont-ok gm-cursor gm-editable-text-xfont-ok'
+        <SVGOK
+          className='gm-cursor gm-editable-text-icon-ok'
           onClick={this.handleOkClick}
         />
         <div className='gm-gap-5' />
-        <i
-          className='xfont xfont-remove gm-cursor gm-editable-text-xfont-cancel'
+        <SVGRemove
+          className='gm-cursor gm-editable-text-icon-cancel'
           onClick={this.handleCancelClick}
         />
       </div>
@@ -81,8 +84,8 @@ class EditableText extends React.Component {
       <div className={classNames('gm-editable-text', className)}>
         <span onClick={this.handleEdit}>{children || content || '-'}</span>
         {!disabled && (
-          <i
-            className='xfont xfont-edit gm-margin-left-5 gm-cursor gm-editable-text-edit-pen'
+          <SVGEdit
+            className='gm-margin-left-5 gm-cursor gm-editable-text-edit-pen'
             onClick={this.handleEdit}
           />
         )}

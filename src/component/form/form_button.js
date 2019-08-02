@@ -1,14 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-class FormButton extends React.Component {
-  render() {
-    return <div className='text-center'>{this.props.children}</div>
-  }
-}
-
-FormButton.propTypes = {
-  children: PropTypes.any
+/** 暂时没什么作用 */
+const FormButton = ({ children }) => {
+  return <div className='text-center'>{children}</div>
 }
 
 export default FormButton

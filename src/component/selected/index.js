@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
+import SVGCloseCircle from '../../../svg/close-circle.svg'
 
 // TODO multiple
 
@@ -56,8 +57,8 @@ class Selected extends React.Component {
           onKeyDown={onKeyDown}
         />
         {selected && (
-          <i
-            className='xfont xfont-close-circle gm-selected-icon gm-selected-clean'
+          <SVGCloseCircle
+            className='gm-selected-icon gm-selected-clean'
             onClick={disabled || this.handleClearDate}
           />
         )}

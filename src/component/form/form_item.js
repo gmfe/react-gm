@@ -2,73 +2,58 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Flex from '../flex'
-import _ from 'lodash'
 import Validator from '../../validator'
+import { withWrapContext, colWidth } from './util'
+import { warn, devWarnForHook } from '../../util'
 
-class FormControl extends React.Component {
-  render() {
-    const { children } = this.props
+const FormControl = ({ children }) => {
+  const { className } = children.props
 
-    const { className, inputClassName } = children.props
-
-    let child = children
-
-    // 文件类型特殊
-    if (child.type === 'input' && child.props.type !== 'file') {
-      return React.cloneElement(child, {
-        className: classNames('form-control', className)
-      })
-    } else if (child.type === 'textarea') {
-      return React.cloneElement(child, {
-        className: classNames('form-control', className)
-      })
-    } else if (child.type === 'select') {
-      return React.cloneElement(child, {
-        className: classNames('form-control', className)
-      })
-    } else if (child.type.displayName === 'DatePicker') {
-      return React.cloneElement(child, {
-        inputClassName: classNames('form-control', inputClassName)
-      })
-    } else if (child.type.displayName === 'DateRangePicker') {
-      return React.cloneElement(child, {
-        inputClassName: classNames('form-control', inputClassName)
-      })
-    } else if (
-      child.type.displayName === 'InputNumber' ||
-      child.type.displayName === 'Search'
-    ) {
-      return React.cloneElement(child, {
-        className: classNames('form-control', className)
-      })
-    }
-
-    return child
+  // 文件类型特殊
+  if (
+    (children.type === 'input' && children.props.type !== 'file') ||
+    children.type === 'textarea' ||
+    children.type === 'select' ||
+    children.type.displayName === 'InputNumber' ||
+    children.type.displayName === 'InputNumberV2'
+  ) {
+    return React.cloneElement(children, {
+      className: classNames('form-control', className)
+    })
   }
+
+  return children
 }
 
-FormControl.propTypes = {
-  children: PropTypes.any
-}
+// 这种方式才会 storybook 才会显示 props 文档
+const FormItem = withWrapContext(
+  ({
+    label,
+    labelWidth,
+    required,
+    canValidate,
+    validate,
+    error,
+    help,
+    unLabelTop,
+    className,
+    children,
+    col,
+    disabledCol,
+    style
+  }) => {
+    devWarnForHook(() => {
+      if (label === undefined) return
+      if (label.includes(':') || label.includes('：')) {
+        warn('label 包含了 : or ：。', label)
+      }
+    })
 
-class FormItem extends React.Component {
-  render() {
-    let {
-      label,
-      labelWidth,
-      inline,
-      horizontal,
-      required,
-      canValidate,
-      validate,
-      error,
-      help,
-      unLabelTop,
-      className,
-      children,
-      ...rest
-    } = this.props
-    let hasLabelSwitchPaddingTop = false
+    const _style = Object.assign(
+      {},
+      style,
+      disabledCol ? {} : { width: colWidth * col }
+    )
     if (canValidate && validate !== undefined) {
       if (required) {
         help = validate(function(value) {
@@ -80,76 +65,74 @@ class FormItem extends React.Component {
       error = !!help
     }
 
-    if (!_.isArray(children)) {
-      if (children.type.displayName === 'Switch') {
-        hasLabelSwitchPaddingTop = true
-      }
-    }
+    const childList = React.Children.toArray(children)
 
     return (
       <Flex
-        column={!horizontal && !inline}
-        {...rest}
+        style={_style}
         className={classNames('gm-form-group', className, {
           'has-error': error,
           'gm-has-error': error
         })}
       >
-        {label && (
+        {label !== undefined && (
           <Flex
-            justifyEnd={horizontal}
+            justifyEnd
             width={labelWidth}
-            className={classNames(
-              'gm-form-label control-label',
-              {
-                'gm-form-label-untop': unLabelTop
-              },
-              {
-                'gm-form-label-switch-padding-top': hasLabelSwitchPaddingTop
-              }
-            )}
+            className={classNames('gm-form-label control-label', {
+              'gm-form-label-un-top': unLabelTop
+            })}
           >
             {required ? <span style={{ color: 'red' }}>*</span> : ''}
             {label}
+            {label && ':'}
           </Flex>
         )}
         <Flex flex column>
           <div className='gm-form-field'>
-            {/* 理论上不支持children是数组，但也合理，兼容吧 */}
-            {_.isArray(children) ? (
-              children
-            ) : (
-              <FormControl>{children}</FormControl>
-            )}
-            {error && help ? (
+            <FormControl>{childList[0]}</FormControl>
+            {childList.slice(1)}
+            {!!(error && help) && (
               <div className={classNames({ 'help-block': error })}>{help}</div>
-            ) : null}
+            )}
           </div>
         </Flex>
       </Flex>
     )
   }
-}
+)
 
-FormItem.displayName = 'FormItem'
 FormItem.propTypes = {
-  required: PropTypes.bool,
+  /** 占用栏数 */
+  col: PropTypes.oneOf([1, 2, 3]),
+  /** 顾名思义。请不要包含:，此为组件控制 */
   label: PropTypes.string,
+  /** 是否必须 */
+  required: PropTypes.bool,
 
-  validate: PropTypes.func, // 有 validate, 则 error help无效
+  /** label 是有上边距的，为了和表单元素的文本对齐一条线。但是某些场景下是不需要的，比如非表单元素的时候 */
+  unLabelTop: PropTypes.bool,
+
+  /** 有 validate, 则 error help无效 */
+  validate: PropTypes.func,
+  /** 少用 */
   error: PropTypes.bool,
+  /** 少用 */
   help: PropTypes.string,
 
-  // 以下先不要用， 由Form传过来的
-  horizontal: PropTypes.bool, // 由Form传过来
-  inline: PropTypes.bool, // 由Form传过来
-  labelWidth: PropTypes.string, // 可由Form传过来
+  /** 一般由 Form 传下来，也可自定义 */
+  labelWidth: PropTypes.string,
+  /** Form 传下来，不要动 */
   canValidate: PropTypes.bool,
 
-  unLabelTop: PropTypes.bool,
-  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }
+
+FormItem.defaultProps = {
+  col: 1
+}
+
+FormItem.displayName = 'FormItem'
 
 export default FormItem
