@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { is } from 'gm-util'
 import classNames from 'classnames'
+import SVGPlus from '../../../svg/plus.svg'
 
 class Uploader extends React.Component {
   handleUpload = e => {
@@ -10,7 +11,7 @@ class Uploader extends React.Component {
     const { multiple, onUpload } = this.props
     const uploadedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files
     const max = multiple ? uploadedFiles.length : 1
-    let files = []
+    const files = []
 
     for (let i = 0; i < max; i++) {
       const file = uploadedFiles[i]
@@ -37,7 +38,7 @@ class Uploader extends React.Component {
         <div className={cn} onClick={this.handleClick}>
           {children || (
             <div className='gm-uploader-icon-wrap'>
-              <i className='gm-uploader-icon xfont xfont-plus' />
+              <SVGPlus className='gm-uploader-icon' />
             </div>
           )}
         </div>

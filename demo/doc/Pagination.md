@@ -18,6 +18,7 @@ class PaginationBoxDemo extends React.Component{
         };
     }
     componentDidMount(){
+        console.log(this.pagination)
         this.pagination.doFirstRequest();
     }
     requestSomething = (pagination) => {
@@ -29,6 +30,7 @@ class PaginationBoxDemo extends React.Component{
                     page_obj:'xxx',
                     peek: 55,
                     more: true,
+                    count: 173
                 },
             }
             this.setState({list:json.data})

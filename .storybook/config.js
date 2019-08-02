@@ -7,8 +7,9 @@ import { LayoutRoot } from '../src'
 import './style.less'
 
 // 引入 react-gm 样式
-import 'gm-xfont/iconfont.css'
 import '../src/index.less'
+// 引入 frame 样式
+import '../frame/style.less'
 // 引入 react-table 样式
 import 'react-table/react-table.css'
 import '../table/table/style.less'
@@ -20,7 +21,8 @@ function loadStories() {
   req.keys().forEach(filename => req(filename))
   reqTable.keys().forEach(filename => reqTable(filename))
 
-  require('../keyboard/keyboard.stories.js')
+  require('../keyboard/keyboard.stories')
+  require('../frame/framework.stories')
 }
 
 addParameters({

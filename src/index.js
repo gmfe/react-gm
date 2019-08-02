@@ -68,7 +68,6 @@ import { Checkbox, CheckboxGroup } from './component/checkbox'
 import FilterSelect from './component/filter_select/filter.select'
 import MultipleFilterSelect from './component/filter_select/multiple.filter.select'
 import MoreSelect from './component/more_select'
-import Menu from './component/menu'
 import Nav from './component/nav'
 import { Transfer, TransferGroup } from './component/transfer'
 import Tree from './component/tree'
@@ -76,7 +75,7 @@ import ImagePreview from './component/image_preview'
 import Mask from './component/mask'
 import Popover from './component/popover'
 import ColorPicker from './component/color_picker'
-import Button from './component/button'
+import { Button } from './component/button'
 import Affix from './component/affix'
 import Uploader from './component/uploader'
 import Drawer from './component/drawer'
@@ -211,7 +210,6 @@ export {
   Affix,
   Uploader,
   Drawer,
-  Menu,
   Nav,
   ImagePreview,
   setLocale,

@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
+import SVGCloseCircle from '../../../svg/close-circle.svg'
+import SVGDownSmall from '../../../svg/down.svg'
+import SVGUpSmall from '../../../svg/up.svg'
 
 // TODO multiple
 class Selection extends React.Component {
@@ -50,13 +53,13 @@ class Selection extends React.Component {
           className='form-control'
         />
         {selected && (
-          <i
+          <SVGCloseCircle
             onClick={!disabled && this.handleClear}
-            className='xfont xfont-close-circle gm-cursor gm-selection-close-icon'
+            className='gm-selection-icon gm-selection-close-icon'
           />
         )}
-        <i className='gm-arrow-down' />
-        <i className='gm-arrow-up' />
+        <SVGDownSmall className='gm-selection-icon gm-selection-down-small' />
+        <SVGUpSmall className='gm-selection-icon gm-selection-up-small' />
       </div>
     )
   }

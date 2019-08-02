@@ -9,6 +9,8 @@ import ListBase from '../list/base'
 import Loading from '../loading'
 import { pinYinFilter } from 'gm-util'
 import { findDOMNode } from 'react-dom'
+import SVGCloseCircle from '../../../svg/close-circle.svg'
+import SVGRemove from '../../../svg/remove.svg'
 
 // 不要轻易改这个文件
 
@@ -331,18 +333,21 @@ class Base extends React.Component {
                     <Flex flex column>
                       {renderSelected(item)}
                     </Flex>
-                    <i
-                      onClick={
-                        disabled ? _.noop : this.handleClear.bind(this, item)
-                      }
-                      className={classNames(
-                        'xfont  gm-cursor gm-more-select-clear-btn',
-                        {
-                          'xfont-close-circle': !multiple,
-                          'xfont-remove': multiple
+                    {multiple ? (
+                      <SVGRemove
+                        onClick={
+                          disabled ? _.noop : this.handleClear.bind(this, item)
                         }
-                      )}
-                    />
+                        className='gm-cursor gm-more-select-clear-btn'
+                      />
+                    ) : (
+                      <SVGCloseCircle
+                        onClick={
+                          disabled ? _.noop : this.handleClear.bind(this, item)
+                        }
+                        className='gm-cursor gm-more-select-clear-btn'
+                      />
+                    )}
                   </Flex>
                 ))
               ) : (

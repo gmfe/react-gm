@@ -3,7 +3,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Flex from '../flex'
 import _ from 'lodash'
-import classNames from 'classnames'
+import SVGDown from '../../../svg/down.svg'
+import SVGUp from '../../../svg/up.svg'
 
 class QuickDetail extends React.Component {
   state = {
@@ -49,12 +50,7 @@ class QuickDetail extends React.Component {
             >
               {show ? getLocale('收拢详细信息') : getLocale('展开详细信息')}
               &nbsp;
-              <i
-                className={classNames('xfont', {
-                  'xfont-down': !show,
-                  'xfont-up': show
-                })}
-              />
+              {show ? <SVGUp /> : <SVGDown />}
             </a>
           )}
         </Flex>

@@ -3,33 +3,42 @@
   vertical-align: middle;
 
   input {
-    padding-right: 35px;
+    padding-right: 32px;
   }
 
-  .gm-selection-close-icon {
+  .gm-selection-icon {
     position: absolute;
     display: block;
     width: 10px;
     height: 14px;
     line-height: 1;
     top: 3px;
-    right: 22px;
     bottom: 0;
     color: @gm-color-third;
     margin: auto 0;
+    cursor: pointer;
   }
 
-  .gm-arrow-up {
+  .gm-selection-close-icon {
+    right: 20px;
+  }
+
+  .gm-selection-up-small,
+  .gm-selection-down-small {
+    right: 5px;
+  }
+
+  .gm-selection-up-small {
     display: none;
   }
 
   // popover 提供的
   &.gm-popover-active {
-    .gm-arrow-up {
+    .gm-selection-up-small {
       display: block;
     }
 
-    .gm-arrow-down {
+    .gm-selection-down-small {
       display: none;
     }
   }
