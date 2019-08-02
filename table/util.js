@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Popover } from '../src'
+import { Popover, PopupContentConfirm } from '../src'
 import { SvgShanchumorenHuaban, SvgTianjiamorenHuaban } from 'gm-svg'
 import _ from 'lodash'
+import SVGDelete from '../svg/delete.svg'
+import SVGEdit from '../svg/edit.svg'
+import SVGCheckDetail from '../svg/check-detail.svg'
+import SVGEditPen from '../svg/edit-pen.svg'
 
-const OperationHeader = (
-  <div className='text-center'>
-    <i className='xfont xfont-fun' style={{ color: 'rgb(19, 193, 159)' }} />
-  </div>
-)
+const OperationHeader = <div className='text-center'>操作</div>
 
 const OperationCell = function(props) {
   return (
@@ -18,7 +18,91 @@ const OperationCell = function(props) {
 }
 
 OperationCell.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  style: PropTypes.object
+}
+
+const OperationDetail = ({ href, open, onClick, className, ...rest }) => {
+  const handleClick = e => {
+    onClick && onClick(e)
+
+    if (href) {
+      if (open) {
+        window.open(href)
+      } else {
+        window.location.href = href
+      }
+    }
+  }
+
+  return (
+    <div
+      {...rest}
+      onClick={handleClick}
+      className={classNames(
+        'gm-inline-block gm-cursor gm-padding-5 gm-text-16 gm-text gm-text-hover-primary',
+        className
+      )}
+    >
+      <SVGCheckDetail />
+    </div>
+  )
+}
+
+OperationDetail.propTypes = {
+  /** 如果提供了 href */
+  href: PropTypes.string,
+  /** true就新开tab页面 */
+  open: PropTypes.bool,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object
+}
+
+const OperationDelete = props => {
+  const { title, onClick, className, children, ...rest } = props
+  const refPopover = React.createRef()
+
+  const handleDelete = () => {
+    refPopover.current.apiDoSetActive(false)
+    return onClick()
+  }
+
+  const handleCancel = () => {
+    refPopover.current.apiDoSetActive(false)
+  }
+
+  const popup = (
+    <PopupContentConfirm
+      type='delete'
+      title={title}
+      onDelete={handleDelete}
+      onCancel={handleCancel}
+    >
+      {children || '确定删除？'}
+    </PopupContentConfirm>
+  )
+
+  return (
+    <Popover ref={refPopover} right popup={popup} showArrow>
+      <div
+        {...rest}
+        className={classNames(
+          'gm-inline-block gm-cursor gm-padding-5 gm-text-16 gm-text gm-text-hover-primary',
+          className
+        )}
+      >
+        <SVGDelete />
+      </div>
+    </Popover>
+  )
+}
+
+OperationDelete.propTypes = {
+  title: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 class SortHeader extends React.Component {
@@ -46,7 +130,6 @@ SortHeader.propTypes = {
   className: PropTypes.string
 }
 
-// TODO
 const EditTableOperation = props => {
   return (
     <OperationCell>
@@ -85,6 +168,56 @@ EditTableOperation.propTypes = {
   onDeleteRow: PropTypes.func
 }
 
+const OperationRowEdit = ({
+  children,
+  isEditing,
+  onClick,
+  onSave,
+  onCancel
+}) => {
+  const handleClick = () => {
+    onClick && onClick()
+  }
+
+  const handleSave = () => {
+    onSave && onSave()
+  }
+
+  const handleCancel = () => {
+    onCancel && onCancel()
+  }
+
+  return !isEditing ? (
+    <OperationCell>
+      <SVGEdit
+        className='gm-inline-block gm-cursor gm-text-12 gm-text gm-text-hover-primary'
+        onClick={handleClick}
+      />
+      {children}
+    </OperationCell>
+  ) : (
+    <OperationCell>
+      <span className='btn-link gm-inline-block gm-cursor' onClick={handleSave}>
+        确定
+      </span>
+      <span className='gm-padding-lr-5'>|</span>
+      <span
+        className='btn-link gm-inline-block gm-cursor'
+        onClick={handleCancel}
+      >
+        取消
+      </span>
+    </OperationCell>
+  )
+}
+
+OperationRowEdit.propTypes = {
+  isEditing: PropTypes.bool.isRequired,
+  onClick: PropTypes.func,
+  onSave: PropTypes.func,
+  onCancel: PropTypes.func
+}
+
 function getColumnKey(column) {
   // 如果是字符串就取 accessor
   if (_.isString(column.accessor)) {
@@ -103,6 +236,29 @@ function getColumnKey(column) {
   return null
 }
 
+const EditButton = props => {
+  const refPopover = useRef(null)
+  const closePopup = () => refPopover.current.apiDoSetActive(false)
+
+  return (
+    <Popover
+      ref={refPopover}
+      right
+      popup={props.popupRender(closePopup)}
+      showArrow
+      animName={false}
+    >
+      <span style={{ display: 'inline-block', width: '20px' }}>
+        <SVGEditPen className='react-table-edit-button gm-cursor gm-text gm-text-hover-primary' />
+      </span>
+    </Popover>
+  )
+}
+
+EditButton.propTypes = {
+  popupRender: PropTypes.func.isRequired
+}
+
 const referOfWidth = {
   noCell: 56,
   operationCell: 100,
@@ -117,8 +273,12 @@ const referOfWidth = {
 export {
   getColumnKey,
   OperationHeader,
+  OperationDelete,
+  OperationDetail,
   OperationCell,
+  OperationRowEdit,
   SortHeader,
   EditTableOperation,
+  EditButton,
   referOfWidth
 }

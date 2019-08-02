@@ -4,7 +4,18 @@
 @import '../src/css/variables.less';
 @import './cell.less';
 
+@react-table-even: #f7f8fa;
+@react-table-sub-bg: #f4f7ff;
+@react-table-sub-wrap-border: #56a3f2;
+@react-table-header: #e8eaf0;
+@react-table-tip-height: 50px;
+@react-table-tip-bg: @react-table-even;
+@react-table-lr-padding: 20px;
+
 .gm-react-table.ReactTable {
+  border: none;
+  border-bottom: 1px solid fadeout(@gm-frame-border-color, 50%);
+
   .rt-resizer {
     width: 1rem;
     right: -0.5rem;
@@ -27,7 +38,12 @@
 
   .rt-th:first-child,
   .rt-td:first-child {
-    padding-left: 15px;
+    padding-left: @react-table-lr-padding;
+  }
+
+  .rt-th:last-child,
+  .rt-td:last-child {
+    padding-right: @react-table-lr-padding;
   }
 
   .rt-tbody {
@@ -37,6 +53,10 @@
     .rt-th,
     .rt-td {
       border-right: none;
+    }
+
+    .rt-tr-group {
+      border: none;
     }
 
     .rt-tr {
@@ -123,7 +143,7 @@
     }
 
     .rt-tr {
-      min-height: 40px;
+      min-height: 46px;
     }
 
     .rt-th,
@@ -138,12 +158,14 @@
     }
 
     .rt-tr .rt-th {
-      background: #f2f3f8;
+      background: @react-table-header;
+      font-weight: bold;
     }
 
     // 调整后不会溢出，所以不做 overflow，排序按钮就不会被 hidden 了
     .rt-resizable-header-content {
       overflow: initial;
+      color: @gm-color-second;
     }
 
     &.-header {
@@ -179,7 +201,7 @@
     }
 
     .rt-tr.-even .rt-td {
-      background-color: #f5f5f7;
+      background-color: @gm-back-body-bg;
     }
   }
 
@@ -187,6 +209,14 @@
     .rt-tbody {
       .rt-tr:hover .rt-td {
         background-color: @table-bg-hover;
+
+        .react-table-expand {
+          color: @brand-primary;
+        }
+
+        .react-table-edit-button {
+          visibility: visible;
+        }
       }
     }
   }
@@ -196,45 +226,77 @@
   position: relative;
 
   .gm-react-table-select-all-tip {
-    z-index: 1;
     position: absolute;
-    top: -19px;
-    white-space: nowrap;
-    left: 6px;
-    background: white;
-    padding: 4px 10px;
-
-    &-arrow {
-      position: absolute;
-      border: 5px solid transparent;
-      bottom: -5px;
-      border-bottom-width: 0;
-      border-top-color: hsla(0, 0%, 85%, 0.7);
-
-      &::after {
-        bottom: 1px;
-        content: ' ';
-        position: absolute;
-        margin-left: -4px;
-        border-left: 4px solid transparent;
-        border-right: 4px solid transparent;
-        border-top: 4px solid white;
-      }
-    }
+    height: @react-table-tip-height;
+    top: -@react-table-tip-height;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    padding-left: 20px;
+    background: @react-table-tip-bg;
   }
 }
 
-.gm-react-table-diy {
-  position: relative;
+.gm-react-table-diy-modal {
+  .gm-react-table-diy-modal-title {
+    background-color: @gm-back-body-bg;
+  }
 
-  .gm-react-table-diy-selector {
-    position: absolute;
-    width: 340px;
-    padding: 10px;
-    top: 1px;
-    right: 1px;
-    background: #fff;
-    z-index: 20;
+  .gm-react-table-diy-modal-selector {
+    & > div {
+      padding: 10px;
+    }
+
+    width: 80%;
+    border-right: 1px solid @gm-border-color;
+  }
+
+  .gm-react-table-diy-modal-sort-list {
+    & > div {
+      padding: 10px;
+    }
+
+    width: 20%;
+
+    .gm-react-table-diy-modal-sort-list-ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 30px 0;
+      max-height: 400px;
+      overflow: auto;
+
+      .gm-react-table-diy-modal-sort-list-li {
+        position: relative;
+        user-select: none;
+        padding: 5px;
+
+        &:before {
+          content: '\2022'; //圆点
+          font-size: 16px;
+          margin-right: 2px;
+        }
+
+        .gm-react-table-diy-modal-sort-list-li-remove {
+          position: absolute;
+          top: 10px;
+          right: 15px;
+          width: 14px;
+          height: 14px;
+        }
+      }
+
+      .gm-react-table-diy-modal-sort-list-li.active {
+        background: #d7e8fc;
+      }
+
+      .gm-react-table-diy-modal-sort-list-li:hover {
+        background: #d7e8fc;
+      }
+    }
+  }
+
+  .gm-react-table-diy-modal-btn {
+    // TODO
   }
 }
 
@@ -260,7 +322,7 @@
     }
 
     &.-even {
-      background-color: #f5f5f7;
+      background-color: @react-table-even;
     }
 
     &-left {
@@ -282,6 +344,9 @@
 }
 
 .gm-react-edit-table.ReactTable {
+  border: none;
+  border-bottom: 1px solid fadeout(@gm-frame-border-color, 50%);
+
   &.-striped .rt-tbody {
     .rt-tr {
       background-color: white;
@@ -350,34 +415,96 @@
   .gm-react-edit-table-action-add {
     width: 18px;
     height: 18px;
-    color: rgba(106, 170, 70, 0.3);
+    color: @brand-primary;
     margin-right: 18px;
-
-    &:hover {
-      color: rgba(106, 170, 70, 1);
-      cursor: pointer;
-    }
-
-    &.disabled:hover {
-      color: rgba(106, 170, 70, 0.3);
-      cursor: default;
+    cursor: pointer;
+    &.disabled {
+      color: fadeout(@brand-primary, 50%);
+      cursor: not-allowed;
     }
   }
 
   .gm-react-edit-table-action-delete {
     width: 18px;
     height: 18px;
-    color: rgba(219, 0, 0, 0.3);
+    color: @brand-danger;
+    cursor: pointer;
+    &.disabled {
+      color: fadeout(@brand-danger, 50%);
+      cursor: not-allowed;
+    }
+  }
+}
 
-    &:hover {
-      color: rgba(219, 0, 0, 1);
-      cursor: pointer;
+.gm-react-sub-table.ReactTable {
+  border: 1px solid @react-table-sub-wrap-border;
+
+  .rt-tbody .rt-tr-group {
+    border-bottom: none;
+  }
+
+  .rt-thead {
+    .rt-tr .rt-th {
+      background: @react-table-sub-bg;
+      border-bottom: 1px solid @gm-border-color;
+
+      &:first-child {
+        border-bottom: 1px solid transparent;
+      }
+    }
+  }
+
+  &.-striped {
+    .rt-tr.-odd .rt-td {
+      background-color: @react-table-sub-bg;
+      border-bottom: 1px solid @gm-border-color;
+
+      &:first-child {
+        border-bottom: 1px solid transparent;
+      }
     }
 
-    &.disabled:hover {
-      color: rgba(219, 0, 0, 0.3);
-      cursor: default;
+    .rt-tr.-even .rt-td {
+      background-color: @react-table-sub-bg;
+      border-bottom: 1px solid @gm-border-color;
+
+      &:first-child {
+        border-bottom: 1px solid transparent;
+      }
     }
+  }
+
+  &.-highlight {
+    .rt-tbody {
+      .rt-tr:hover .rt-td {
+        background-color: @table-bg-hover;
+      }
+    }
+  }
+}
+
+.react-table-closeup {
+  &:hover,
+  &.active {
+    color: @brand-primary;
+  }
+}
+
+.react-table-expand {
+  &:hover,
+  &.active {
+    color: @brand-primary;
+  }
+}
+
+.react-table-edit-button {
+  visibility: hidden;
+}
+
+// 激活时,常驻显示
+.gm-popover-active {
+  .react-table-edit-button {
+    visibility: visible;
   }
 }
 

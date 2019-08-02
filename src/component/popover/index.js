@@ -1,17 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
-import {
-  createChainedFunction,
-  contains,
-  getScrollTop,
-  getScrollLeft
-} from 'gm-util'
+import { createChainedFunction, getScrollTop, getScrollLeft } from 'gm-util'
 import LayoutRoot from '../layout_root'
 import Popup from '../popup/popup'
 import _ from 'lodash'
 import classNames from 'classnames'
 import EVENT_TYPE from '../../event_type'
+
+function isContains(target, fun) {
+  let node = target
+  while (node) {
+    if (fun(node)) {
+      return true
+    }
+    node = node.parentNode
+  }
+
+  return false
+}
 
 function getElementPositionWithScrollTop(element) {
   let { left, top } = element.getBoundingClientRect()
@@ -148,7 +155,8 @@ class Popover extends React.Component {
       arrowLeft,
       animName,
       predictingHeight,
-      pureContainer
+      pureContainer,
+      isInPopup
     } = this.props
 
     const disabled = this.getDisabled()
@@ -157,7 +165,7 @@ class Popover extends React.Component {
       LayoutRoot._setComponentPopup(
         this.id,
         <Popup
-          key='popup'
+          key={'popup_' + this.id}
           ref={ref => (this.refPopup = ref)}
           onMouseEnter={
             !disabled && type === 'hover' ? this.handleMouseEnter : _.noop
@@ -175,7 +183,12 @@ class Popover extends React.Component {
           animName={animName}
           predictingHeight={predictingHeight}
           pureContainer={pureContainer}
-          className={className}
+          className={classNames(
+            {
+              'gm-popover-is-in-popup': isInPopup
+            },
+            className
+          )}
           style={style}
         >
           {_.isFunction(popup) ? popup() : popup}
@@ -219,11 +232,18 @@ class Popover extends React.Component {
       return
     }
 
-    if (contains(findDOMNode(this), target)) {
-      return
-    }
+    const $this = findDOMNode(this)
+    const $popup = findDOMNode(this.refPopup)
 
-    if (this.refPopup && contains(findDOMNode(this.refPopup), target)) {
+    if (
+      isContains(target, node => {
+        return (
+          node === $this ||
+          node === $popup ||
+          (node.className && node.className.includes('gm-popover-is-in-popup'))
+        )
+      })
+    ) {
       return
     }
 
@@ -327,6 +347,8 @@ Popover.propTypes = {
   arrowLeft: PropTypes.string,
   pureContainer: PropTypes.bool,
 
+  isInPopup: PropTypes.bool,
+
   animName: PropTypes.oneOf([
     false,
     true,
@@ -346,7 +368,8 @@ Popover.propTypes = {
 Popover.defaultProps = {
   type: 'focus',
   showArrow: false,
-  animName: true
+  animName: true,
+  isInPopup: false
 }
 
 export default Popover

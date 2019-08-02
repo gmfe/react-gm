@@ -17,11 +17,14 @@ class Switch extends React.Component {
 
   componentDidMount() {
     // 初始化后开始计算on和off的宽度，取较大值作为switch开关的宽度
+
+    const labelWidth =
+      this.refInputOff.offsetWidth >= this.refInputOn.offsetWidth
+        ? this.refInputOff.offsetWidth + 7
+        : this.refInputOn.offsetWidth + 7
+
     this.setState({
-      labelWidth:
-        this.refInputOff.offsetWidth >= this.refInputOn.offsetWidth
-          ? this.refInputOff.offsetWidth + 7
-          : this.refInputOn.offsetWidth + 7,
+      labelWidth: Math.max(labelWidth, 34),
       isReady: true
     })
   }
@@ -107,8 +110,8 @@ Switch.propTypes = {
 }
 Switch.defaultProps = {
   type: 'default',
-  on: 'ON',
-  off: 'OFF',
+  on: '',
+  off: '',
   onChange: _.noop
 }
 

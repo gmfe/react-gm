@@ -5,13 +5,13 @@ import Flex from '../flex'
 import _ from 'lodash'
 import { getColumnKey } from '../../../table/util'
 import classNames from 'classnames'
+import { devWarn } from '../../util'
 
 /** 和 MoreSelect 类似。多了 columns，和不能多选 */
 const TableSelect = React.forwardRef((props, ref) => {
   const { data, columns, className, ...rest } = props
 
-  // 检测
-  if (process.env.NODE_ENV !== 'production') {
+  devWarn(() => {
     useEffect(() => {
       _.each(columns, column => {
         if (!column.width) {
@@ -19,7 +19,7 @@ const TableSelect = React.forwardRef((props, ref) => {
         }
       })
     }, [])
-  }
+  })
 
   const Title = (
     <Flex>

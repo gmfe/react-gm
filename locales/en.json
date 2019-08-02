@@ -24,7 +24,7 @@
   "操作": "Operation",
   "保存": "Save",
   "确认": "OK",
-  "没有数据": "No data here",
+  "没有更多数据了": "No data here",
   "上一页": "Previous",
   "下一页": "Next",
   "显示": "Show",
@@ -42,5 +42,9 @@
   "请填写网址": "Please enter URL",
   "请填写数字": "Please enter number",
   "请填写正数": "Please enter positive number",
-  "请填写字母或数字": "Please enter number or letter"
+  "请填写字母或数字": "Please enter number or letter",
+  "表头设置": "Table header setting",
+  "勾选当前页内容": "Check the current page",
+  "勾选所有页内容": "Check all page content",
+  "项": "items"
 }
