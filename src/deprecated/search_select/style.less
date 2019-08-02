@@ -3,9 +3,11 @@
   position: relative;
   border: 1px solid @gm-border-color;
   background-color: white;
+  min-height: 30px;
+  border-radius: @gm-border-radius-base;
 
   .gm-search-select-input {
-    padding: 5px 10px;
+    padding: 6px 10px;
     overflow-x: auto;
 
     input {
@@ -56,11 +58,11 @@
             }
 
             &.active.line-selected {
-              background-color: @gm-list-group-hover-bg;
+              background-color: @gm-list-bg-hover;
             }
 
             &.line-selected {
-              background-color: @gm-list-group-hover-bg;
+              background-color: @gm-list-bg-hover;
             }
           }
 

@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Popover from '../popover'
 import classNames from 'classnames'
+import SVGQuestionCircle from '../../../svg/question-circle-o.svg'
 
 const ToolTip = props => {
-  let {
+  const {
     popup,
     children,
     right,
@@ -28,13 +29,9 @@ const ToolTip = props => {
       {children !== undefined ? (
         children
       ) : (
-        <i
-          {...rest}
-          className={classNames(
-            'xfont xfont-info-circle-o gm-text-desc',
-            className
-          )}
-        />
+        <span {...rest} className={classNames('gm-text-desc', className)}>
+          <SVGQuestionCircle />
+        </span>
       )}
     </Popover>
   )

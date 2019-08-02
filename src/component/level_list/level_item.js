@@ -3,16 +3,18 @@ import PropTypes from 'prop-types'
 import List from '../list'
 import classNames from 'classnames'
 import _ from 'lodash'
+import SVGRightSmall from '../../../svg/right-small.svg'
 
 const Item = props => {
   const {
     title,
     data,
     selected,
-    className,
+    onSelect,
     onListItemMouseEnter,
     willActiveSelected,
-    ...rest
+    className,
+    style
   } = props
 
   const renderItem = item => {
@@ -20,7 +22,7 @@ const Item = props => {
       <div className='gm-position-relative'>
         {item.text}
         {item.children && item.children.length && (
-          <i className='gm-arrow-right' />
+          <SVGRightSmall className='gm-level-list-item-right' />
         )}
       </div>
     )
@@ -33,14 +35,13 @@ const Item = props => {
   const willActiveIndex = _.findIndex(data, v => v.value === willActiveSelected)
 
   return (
-    <div className={classNames('gm-level-list-item ', className)}>
-      <div className='gm-text-desc gm-padding-5'>{title}</div>
+    <div className={classNames('gm-level-list-item ', className)} style={style}>
+      {title && <div className='gm-level-list-item-title'>{title}</div>}
       <List
-        {...rest}
         data={data}
         selected={selected}
+        onSelect={onSelect}
         renderItem={renderItem}
-        className='gm-border-0'
         getItemProps={getItemProps}
         willActiveIndex={willActiveIndex}
       />
@@ -52,9 +53,11 @@ Item.propTypes = {
   title: PropTypes.string,
   data: PropTypes.array.isRequired, // [{value, text, children}]
   selected: PropTypes.any,
-  className: PropTypes.string,
+  onSelect: PropTypes.func.isRequired,
   onListItemMouseEnter: PropTypes.func,
-  willActiveSelected: PropTypes.any
+  willActiveSelected: PropTypes.any,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default Item
