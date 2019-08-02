@@ -4,6 +4,7 @@ import _ from 'lodash'
 import Base from './base'
 
 // 恶心的转换逻辑在这里做
+// TODO disabled
 class List extends React.Component {
   handleSelected = selected => {
     const { multiple, onSelect } = this.props

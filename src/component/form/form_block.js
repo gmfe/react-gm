@@ -3,44 +3,50 @@ import PropTypes from 'prop-types'
 import Flex from '../flex'
 import _ from 'lodash'
 import classNames from 'classnames'
+import { withWrapContext, colWidth } from './util'
 
-class FormBlock extends React.Component {
-  render() {
-    let { children, block, inline, ...rest } = this.props
+const FormBlock = withWrapContext(
+  ({ children, disabledCol, inline, className, col, style }) => {
+    // 暂时
+    const _style = Object.assign(
+      {},
+      style,
+      disabledCol || inline ? {} : { width: colWidth * col }
+    )
 
     return (
       <Flex
-        className={classNames('gm-form-block', {
-          'gm-form-block-inline': inline
-        })}
+        wrap
+        style={_style}
+        className={classNames('gm-form-block', className)}
       >
         {_.map(React.Children.toArray(children), (child, i) => {
           return (
-            <Flex flex={inline ? false : block[i] || 1} key={i}>
-              {child.type.displayName === 'FormItem'
-                ? React.cloneElement(child, {
-                    ...rest,
-                    ...child.props
-                  })
-                : child}
+            <Flex key={i} column>
+              {child}
             </Flex>
           )
         })}
       </Flex>
     )
   }
-}
+)
 
 FormBlock.displayName = 'FormBlock'
 
 FormBlock.propTypes = {
-  block: PropTypes.array,
-  inline: PropTypes.bool,
-  children: PropTypes.any
+  col: PropTypes.oneOf([1, 2, 3]),
+  className: PropTypes.string,
+  style: PropTypes.object,
+
+  // 以下不要用， 由context传过来的
+  disabledCol: PropTypes.bool,
+  inline: PropTypes.bool
+  // 以上 由context传过来的
 }
 
 FormBlock.defaultProps = {
-  block: []
+  col: 3
 }
 
 export default FormBlock

@@ -6,6 +6,7 @@ import { contains } from 'gm-util'
 import { findDOMNode } from 'react-dom'
 import { getColumnKey } from '../util'
 import Table from '../table'
+import { devWarn } from '../../src/util'
 
 function generateDiyColumns(propsColumns, mixColumns) {
   return _.map(propsColumns, column => {
@@ -23,7 +24,7 @@ function generateDiyColumns(propsColumns, mixColumns) {
       return localKey === key
     })
 
-    let newColumn = {
+    const newColumn = {
       ...column,
       show,
       diyEnable
@@ -107,7 +108,7 @@ function diyTableHOC(Component) {
       this.diySelectorRef = React.createRef()
 
       // 检测
-      if (process.env.NODE_ENV !== 'production') {
+      devWarn(() => {
         _.each(props.columns, column => {
           const key = getColumnKey(column)
           if (key && column.diyEnable !== false) {
@@ -116,7 +117,7 @@ function diyTableHOC(Component) {
             }
           }
         })
-      }
+      })
     }
 
     // 显示diy选择框  注:暴露给外部使用

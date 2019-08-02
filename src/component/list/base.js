@@ -5,7 +5,6 @@ import _ from 'lodash'
 import classNames from 'classnames'
 
 // 不要轻易改这个文件
-
 class Base extends React.Component {
   refList = React.createRef()
 
@@ -45,6 +44,9 @@ class Base extends React.Component {
   }
 
   handleSelect = item => {
+    if (item.disabled) {
+      return
+    }
     const { multiple, selected, onSelect } = this.props
     if (multiple) {
       onSelect(_.xor(selected, [item.value]))
@@ -93,7 +95,8 @@ class Base extends React.Component {
                   {...getItemProps(v)}
                   className={classNames('gm-list-item', {
                     active: selected.includes(v.value),
-                    'will-active': willActiveIndex === sequenceDataIndex
+                    'will-active': willActiveIndex === sequenceDataIndex,
+                    disabled: v.disabled
                   })}
                   onClick={this.handleSelect.bind(this, v)}
                 >
@@ -110,7 +113,7 @@ class Base extends React.Component {
 
 Base.propTypes = {
   // 基本属性
-  data: PropTypes.array.isRequired, // label, children: [{ value text}]
+  data: PropTypes.array.isRequired, // label, children: [{ value text, disabled}]
   selected: PropTypes.array.isRequired,
   onSelect: PropTypes.func, // 返回数组
   multiple: PropTypes.bool,

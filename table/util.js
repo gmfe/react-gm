@@ -4,10 +4,11 @@ import classNames from 'classnames'
 import { Popover } from '../src'
 import { SvgShanchumorenHuaban, SvgTianjiamorenHuaban } from 'gm-svg'
 import _ from 'lodash'
+import SVGFun from '../svg/fun.svg'
 
 const OperationHeader = (
   <div className='text-center'>
-    <i className='xfont xfont-fun' style={{ color: 'rgb(19, 193, 159)' }} />
+    <SVGFun style={{ color: '#13c19f' }} />
   </div>
 )
 

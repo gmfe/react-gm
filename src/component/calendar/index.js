@@ -5,6 +5,8 @@ import moment from 'moment'
 import classNames from 'classnames'
 import _ from 'lodash'
 import Flex from '../flex'
+import SVGLeftSmall from '../../../svg/left-small.svg'
+import SVGRightSmall from '../../../svg/right-small.svg'
 
 const Day = props => {
   const { disabled, onClick, value, will, selected } = props
@@ -78,7 +80,7 @@ const Head = props => {
           className='gm-calendar-head-pre gm-decoration-none'
           onClick={() => handleChangeMonth(month - 1)}
         >
-          <i className='xfont xfont-left-small' />
+          <SVGLeftSmall />
         </a>
         <Flex flex justifyCenter className='gm-calendar-head-title text-center'>
           <span className='gm-calendar-head-month' onClick={handleShowMonth}>
@@ -91,7 +93,7 @@ const Head = props => {
           className='gm-calendar-head-next gm-decoration-none'
           onClick={() => handleChangeMonth(month + 1)}
         >
-          <i className='xfont xfont-right-small' />
+          <SVGRightSmall />
         </a>
       </Flex>
       {isShow && (
