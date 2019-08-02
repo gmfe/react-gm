@@ -1,0 +1,25 @@
+.gm-box {
+  background: white;
+
+  & + .gm-box {
+    border-top: 1px solid @gm-border-color;
+  }
+
+  &.gm-box-table {
+    .gm-box-table-header {
+      padding: 0 20px;
+      height: 70px;
+      background-color: @gm-back-body-bg;
+
+      .gm-box-table-info {
+        background-color: white;
+        border: 1px solid @gm-border-color;
+        padding: 8px 18px;
+      }
+    }
+  }
+
+  &.gm-box-form {
+    padding: 20px;
+  }
+}

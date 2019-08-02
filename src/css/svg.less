@@ -1,0 +1,51 @@
+.gm-svg-icon {
+  font-size: inherit;
+}
+
+.gm-svg-icon-spin {
+  animation: icon-spin 2s infinite linear;
+  display: inline-block;
+}
+
+.gm-svg-icon-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+}
+
+.gm-svg-icon-stack-1x,
+.gm-svg-icon-stack-2x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.gm-svg-icon-stack-1x {
+  line-height: inherit;
+}
+
+.gm-svg-icon-stack-2x {
+  font-size: 2em;
+}
+
+.gm-svg-icon-inverse {
+  color: white;
+}
+
+.glyphicon-spin {
+  animation: icon-spin 1000ms infinite linear;
+}
+
+@keyframes icon-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}

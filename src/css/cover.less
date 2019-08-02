@@ -1,6 +1,9 @@
-
 label {
   font-weight: normal;
+}
+
+.btn {
+  height: 30px;
 }
 
 .form-control {
@@ -13,28 +16,6 @@ label {
   }
 }
 
-// modal 全局修改
-.modal-backdrop.in {
-  opacity: 0.2;
-}
-
-.modal-content {
-  box-shadow: none;
-  border: 0;
-}
-
-.modal-header {
-  padding: 10px;
-}
-
-.modal-body {
-  padding: 10px;
-}
-
-.modal-footer {
-  padding: 10px;
-}
-
 .list-group {
   .list-group-item {
     background-color: white;
@@ -44,7 +25,7 @@ label {
     }
 
     &:hover {
-      background-color: @gm-list-group-hover-bg;
+      background-color: @gm-list-bg-hover;
     }
   }
 }
@@ -235,9 +216,9 @@ label {
 }
 
 // Focus for file, radio, and checkbox
-input[type="file"]:focus,
-input[type="radio"]:focus,
-input[type="checkbox"]:focus {
+input[type='file']:focus,
+input[type='radio']:focus,
+input[type='checkbox']:focus {
   outline: 0;
   outline-offset: 0;
 }

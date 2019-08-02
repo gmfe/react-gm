@@ -12,6 +12,8 @@ import expandTableHOC from './hoc/expand_table'
 // 只暴露些方法
 import {
   OperationHeader,
+  OperationDelete,
+  OperationDetail,
   OperationCell,
   SortHeader,
   EditTableOperation,
@@ -23,6 +25,8 @@ const SelectTable = selectTableHOC(Table)
 
 const TableUtil = {
   OperationHeader,
+  OperationDelete,
+  OperationDetail,
   OperationCell,
   SortHeader,
   EditTableOperation,

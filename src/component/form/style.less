@@ -1,28 +1,15 @@
-@gm-form-field-top: 6px;
-
 .gm-form {
   .gm-form-group {
-    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
   }
 
-  &.form-horizontal {
-    .gm-form-label {
-      padding-top: @gm-form-field-top;
-      padding-right: 10px;
+  .gm-form-label {
+    padding-top: 6px;
+    padding-right: 10px;
 
-      &.gm-form-label-untop {
-        padding-top: 0;
-      }
-
-      &.gm-form-label-switch-padding-top {
-        padding-top: 2px;
-      }
-    }
-
-    .gm-form-field {
-      &.gm-form-field-top {
-        margin-top: @gm-form-field-top;
-      }
+    &.gm-form-label-un-top {
+      padding-top: 0;
     }
   }
 
@@ -30,40 +17,39 @@
     display: flex;
     flex-wrap: wrap;
 
-    .gm-form-label {
-      padding-top: @gm-form-field-top;
-      padding-right: 5px;
-
-      &.gm-form-label-untop {
-        padding-top: 0;
-      }
-    }
-
     .gm-form-group {
-      margin-right: 20px;
-      margin-bottom: 0;
-    }
-  }
-
-  .gm-form-block {
-    &.gm-form-block-inline {
-      flex-wrap: wrap;
-
-      .gm-form-group {
-        margin-right: 20px;
-      }
+      padding-bottom: 0;
     }
   }
 
   .help-block {
     margin-bottom: 0;
   }
+
+  /* 只能作用 form-field 下面的 */
+  .gm-form-field {
+    & > .gm-radio-group {
+      margin: 4px 0 0;
+    }
+
+    & > .gm-checkbox-group {
+      margin: 4px 0 0;
+    }
+
+    & > .gm-switch {
+      margin-top: 4px;
+    }
+
+    & > .gm-select {
+      display: block;
+    }
+  }
 }
 
 @media (max-width: 768px) {
   .gm-form {
     .gm-form-group {
-      margin-right: 0;
+      padding-right: 0;
       flex-direction: column;
 
       .gm-form-label {
@@ -76,26 +62,20 @@
       display: block;
 
       .gm-form-group {
-        margin-right: 0;
+        padding-right: 0;
         flex-direction: column;
       }
     }
 
     .gm-form-block {
       flex-direction: column;
-
-      &.gm-form-block-inline {
-        flex-wrap: wrap;
-
-        .gm-form-group {
-          margin-right: 0;
-          flex-direction: column;
-        }
-      }
     }
   }
 }
 
 .gm-form-group-sticky-bottom {
-  background-color: #d7efd8;
+  text-align: center;
+  padding: 5px 0;
+  background-color: white;
+  //box-shadow: 0 -1px 6px rgba(36, 51, 81, 0.2);
 }
