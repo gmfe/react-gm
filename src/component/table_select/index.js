@@ -26,7 +26,9 @@ const TableSelect = React.forwardRef((props, ref) => {
       {_.map(columns, (column, i) => (
         <div
           key={`${i}_${getColumnKey(column)}`}
-          className='gm-flex-flex'
+          className={classNames('gm-flex-flex', {
+            'gm-flex-none': column.width
+          })}
           style={{
             width: `${column.width}px`
           }}
@@ -69,7 +71,9 @@ const TableSelect = React.forwardRef((props, ref) => {
           return (
             <div
               key={`${i}_${getColumnKey(column)}`}
-              className='gm-flex-flex'
+              className={classNames('gm-flex-flex', {
+                'gm-flex-none': column.width
+              })}
               style={{
                 width: `${column.width}px`
               }}
