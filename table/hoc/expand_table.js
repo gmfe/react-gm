@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Table from '../table'
+import { referOfWidth } from '../util'
+import SVGExpand from '../../svg/expand.svg'
+import SVGCloseup from '../../svg/closeup.svg'
 
 function expandTableHOC(Component) {
   class ExpandTable extends React.Component {
@@ -44,9 +47,9 @@ function expandTableHOC(Component) {
       return (
         <div className='gm-cursor' onClick={this.handleExpandAll}>
           {isAllExpanded ? (
-            <i className='xfont xfont-minus' />
+            <SVGCloseup className='react-table-closeup active' />
           ) : (
-            <i className='xfont xfont-plus' />
+            <SVGExpand className='react-table-expand' />
           )}
         </div>
       )
@@ -58,9 +61,9 @@ function expandTableHOC(Component) {
       return (
         <div>
           {expanded[index] ? (
-            <i className='xfont xfont-minus' />
+            <SVGCloseup className='react-table-closeup active' />
           ) : (
-            <i className='xfont xfont-plus' />
+            <SVGExpand className='react-table-expand' />
           )}
         </div>
       )
@@ -81,9 +84,11 @@ function expandTableHOC(Component) {
           {...rest}
           columns={[
             {
+              id: '__expander', // 不要随便更改
               expander: true,
               Header: this.renderHeader,
-              Expander: this.renderExpander
+              Expander: this.renderExpander,
+              width: referOfWidth.noCell
             },
             ...columns
           ]}
@@ -96,6 +101,7 @@ function expandTableHOC(Component) {
 
   ExpandTable.propTypes = {
     ...Table.propTypes,
+    /** 子Table */
     SubComponent: PropTypes.func.isRequired
   }
 

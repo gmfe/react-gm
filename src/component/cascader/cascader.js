@@ -6,6 +6,9 @@ import classNames from 'classnames'
 import Flex from '../flex'
 import Popover from '../popover'
 import { pinYinFilter, pinyin } from 'gm-util'
+import SVGCloseCircle from '../../../svg/close-circle.svg'
+import SVGDownSmall from '../../../svg/down.svg'
+import SVGUpSmall from '../../../svg/up.svg'
 
 // 给list中每个元素添加_path
 function mapPath(list, searchText, parentPath = []) {
@@ -237,7 +240,7 @@ class Cascader extends React.Component {
     const { valueRender, filtrable } = this.props
     const selected = this.props.value || this.state.selected
 
-    let value = []
+    const value = []
     if (selected.length > 0) {
       _.each(selected, (v, i) => {
         const match = _.find(i === 0 ? data : value[i - 1].children, val => {
@@ -316,7 +319,7 @@ class Cascader extends React.Component {
     let { inputProps } = this.props
 
     const selected = this.props.value || this.state.selected
-    let value = []
+    const value = []
     if (selected.length > 0) {
       _.each(selected, (v, i) => {
         const match = _.find(i === 0 ? data : value[i - 1].children, val => {
@@ -346,13 +349,13 @@ class Cascader extends React.Component {
           className={classNames('form-control', inputProps.className)}
         />
         {inputValue && (
-          <i
+          <SVGCloseCircle
             onClick={this.handleClear}
-            className='xfont xfont-close-circle gm-cursor gm-cascader-close-icon'
+            className='gm-cascader-icon gm-cascader-close-icon'
           />
         )}
-        <i className='gm-arrow-down' />
-        <i className='gm-arrow-up' />
+        <SVGDownSmall className='gm-cascader-icon gm-cascader-down-small' />
+        <SVGUpSmall className='gm-cascader-icon gm-cascader-up-small' />
       </div>
     )
   }

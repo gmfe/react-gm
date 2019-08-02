@@ -3,17 +3,25 @@ import { storiesOf } from '@storybook/react'
 import {
   Table,
   fixedColumnsTableHOC,
-  diyTableHOC,
-  selectTableHOC,
-  expandTableHOC
+  selectTableV2HOC,
+  expandTableHOC,
+  SubTable,
+  TableUtil
 } from '../index'
+import diyTableHOC from '../hoc/diy_table'
 import { observable } from 'mobx/lib/mobx'
+import { Observer } from 'mobx-react'
 import _ from 'lodash'
 
 const FixedColumnsTable = fixedColumnsTableHOC(Table)
 const DiyTable = diyTableHOC(Table)
-const SelectTable = selectTableHOC(Table)
+const SelectTable = selectTableV2HOC(Table)
 const ExpandTable = expandTableHOC(Table)
+
+const ExpandSelectTable = selectTableV2HOC(ExpandTable)
+const SelectSubTable = selectTableV2HOC(SubTable)
+
+const isDisable = ({ total_money }) => total_money === 111 // 不能选的行
 
 const store = observable({
   data: [
@@ -24,11 +32,12 @@ const store = observable({
       supplier_customer_id: 'LDP20180117',
       submit_time: '2018-07-25',
       status: 2,
-      supplier_name: '',
+      supplier_name: '222xxx',
       date_time: '2018-07-25',
       delta_money: 0,
       settle_supplier_id: 'T10953',
-      address: null
+      address: null,
+      subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
     },
     {
       total_money: 176,
@@ -44,7 +53,8 @@ const store = observable({
       address: {
         value: 9,
         text: '西乡9'
-      }
+      },
+      subTable: [{ id: '1', name: 'a' }, { id: '2', name: 2 }]
     },
     {
       total_money: 279,
@@ -60,11 +70,12 @@ const store = observable({
       address: {
         value: 4,
         text: '宝安'
-      }
+      },
+      subTable: [{ id: '3', name: 'a' }, { id: '4', name: 2 }]
     }
   ],
   sortTimeType: 'asc',
-  selectAll: false,
+  isSelectAllPage: false,
   selected: [],
   sortTime() {
     this.data = _.sortBy(this.data, 'submit_time')
@@ -75,20 +86,47 @@ const store = observable({
       this.sortTimeType = 'asc'
     }
   },
+  toggleIsSelectAllPage(bool) {
+    this.isSelectAllPage = bool
+    if (bool) {
+      this.selected = this.data.filter(v => !isDisable(v)).map(v => v.id)
+    }
+  },
   setSelect(selected) {
-    if (this.selectAll && selected.length !== this.data.length) {
-      this.selectAll = false
+    if (this.isSelectAllPage && selected.length !== this.data.length) {
+      this.isSelectAllPage = false
     }
 
     this.selected = selected
   },
-  toggleSelectAll() {
-    if (this.selectAll) {
-      this.selected = []
-      this.selectAll = false
+  toggleSelectAll(isSelectedAll) {
+    console.log(isSelectedAll)
+    if (isSelectedAll) {
+      this.selected = this.data.filter(v => !isDisable(v)).map(v => v.id)
     } else {
-      this.selected = _.map(this.data, v => v.id)
-      this.selectAll = true
+      this.selected.clear()
+    }
+  },
+  // 子表操作
+  subTableSelected: {},
+  toggleSubAll(index, isSelectedAll) {
+    const parent = this.data[index]
+    if (isSelectedAll) {
+      this.subTableSelected = {
+        ...this.subTableSelected,
+        [parent.id]: parent.subTable.map(o => o.id)
+      }
+    } else {
+      this.subTableSelected = {
+        ...this.subTableSelected,
+        [parent.id]: []
+      }
+    }
+  },
+  setSubSelect(parentId, selected) {
+    this.subTableSelected = {
+      ...this.subTableSelected,
+      [parentId]: selected
     }
   }
 })
@@ -97,10 +135,12 @@ storiesOf('表格|Table HOC', module)
   .add('优先级', () => null, {
     info: {
       text: `
-HOC 可以相互组合使用，但是请注意使用顺序
+HOC 可以相互组合使用，但是请注意使用顺序!
+调用顺序：diyTableHOC => expandTableHOC => selectTableV2HOC => fixedColumnsTableHOC
 - fixed columns。可能会改变 columns 的顺序。
-- diy。会改变原有 columns 的 show 熟悉，影响在 页面上的展现。一般最后才 hoc。
-- expand。会在最前面增加一个 column 用户 expand.
+- diy。   会在最前面增加一个【表头设置】column。 会改变原有 columns 的 show 熟悉，影响column的展现。
+- expand。会在最前面增加一个【expand】column。
+- select。会在最前面添加一个【CheckBox】column。
 `
     }
   })
@@ -175,31 +215,72 @@ HOC 可以相互组合使用，但是请注意使用顺序
     }
   )
   .add('diy', () => {
-    const ref = React.createRef()
     return (
       <div>
-        <button
-          className='btn  btn-primary'
-          onClick={() => ref.current.apiToggleDiySelector()}
-        >
-          列表自定义
-        </button>
         <DiyTable
           id='diy-table'
-          ref={ref}
           data={store.data}
+          diyGroupSorting={['基础字段', '时间和人员', '操作']} // 组的排序,必须diyGroupName一一对应
           columns={[
             {
-              Header: '建单时间',
-              accessor: 'submit_time'
+              Header: '入库单号',
+              accessor: 'id',
+              diySortNumber: 100, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+              diyEnable: false, // 是否可以自定义,不写的话默认为true
+              show: false, // 是否展示当前列,不写的话默认为true
+              diyGroupName: '基础字段' // 组名
             },
             {
-              Header: '入库单号',
-              accessor: 'id'
+              Header: '价格',
+              accessor: 'sku_money',
+              diySortNumber: 600, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+              diyEnable: false,
+              diyGroupName: '基础字段'
+            },
+            {
+              Header: '状态',
+              diySortNumber: 300, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+              accessor: 'status',
+              diyGroupName: '基础字段'
+            },
+            {
+              Header: '供应商户ID',
+              diySortNumber: 400, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+              accessor: 'supplier_customer_id',
+              diyGroupName: '基础字段'
             },
             {
               Header: '供应商信息',
-              accessor: 'supplier_name'
+              diySortNumber: 500, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+              accessor: 'supplier_name',
+              diyGroupName: '基础字段'
+            },
+            ..._.map(Array(5), (e, i) => ({
+              Header: '示例' + i,
+              accessor: 'date_time' + i,
+              diyEnable: true,
+              show: true,
+              diyGroupName: '时间和人员'
+            })),
+            {
+              Header: '建单时间',
+              diySortNumber: 200, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+              accessor: 'settle_supplier_id',
+              diyEnable: true,
+              diyGroupName: '时间和人员'
+            },
+            {
+              Header: TableUtil.OperationHeader,
+              diySortNumber: 700, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+              diyItemText: '操作', // 操作栏要提供diyItemName
+              id: 'action', // id作为唯一标识
+              diyGroupName: '操作',
+              diyEnable: false,
+              Cell: () => (
+                <TableUtil.OperationCell>
+                  <a href='#'>删除</a>
+                </TableUtil.OperationCell>
+              )
             }
           ]}
         />
@@ -208,6 +289,7 @@ HOC 可以相互组合使用，但是请注意使用顺序
   })
   .add('select', () => (
     <SelectTable
+      style={{ marginTop: '100px' }}
       data={store.data}
       columns={[
         {
@@ -224,17 +306,31 @@ HOC 可以相互组合使用，但是请注意使用顺序
         }
       ]}
       keyField='id'
-      selectAll={store.selectAll}
-      onSelectAll={() => store.toggleSelectAll()}
-      selectAllTip={
-        <div>
-          全选是否勾上,可能代表<span className='gm-text-red'>当前可见列表</span>
-          勾上，也可能代表<span className='gm-text-red'>所有页面数据</span>
-          勾上，具体由调用方确定。
-        </div>
+      isSelectorDisable={row => console.log(row) || isDisable(row)}
+      onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
+      batchActionBar={
+        <TableUtil.BatchActionBar
+          toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
+          batchActions={[
+            {
+              name: '批量删除',
+              show: false,
+              onClick: () => window.alert('批量删除' + store.selected.join(','))
+            },
+            {
+              name: '批量修改单价',
+              onClick: () =>
+                window.alert('批量修改这些' + store.selected.join(','))
+            }
+          ]}
+          count={store.isSelectAllPage ? 100 : store.selected.length}
+          isSelectAll={store.isSelectAllPage}
+        />
       }
       selected={store.selected}
-      onSelect={selected => store.setSelect(selected)}
+      onSelect={(selected, curKey) =>
+        console.log(curKey) || store.setSelect(selected)
+      }
     />
   ))
   .add('expand', () => (
@@ -254,6 +350,76 @@ HOC 可以相互组合使用，但是请注意使用顺序
           accessor: 'supplier_name'
         }
       ]}
-      SubComponent={() => <div>SubComponent</div>}
+      SubComponent={item => (
+        <SubTable
+          data={item.original.subTable}
+          columns={[
+            { Header: '序号', accessor: 'id' },
+            { Header: '名字', accessor: 'name' }
+          ]}
+        />
+      )}
+    />
+  ))
+  .add('expand_select组合', () => (
+    <ExpandSelectTable
+      data={store.data}
+      columns={[
+        {
+          Header: '建单时间',
+          accessor: 'submit_time'
+        },
+        {
+          Header: '入库单号',
+          accessor: 'id'
+        },
+        {
+          Header: '供应商信息',
+          accessor: 'supplier_name'
+        }
+      ]}
+      keyField='id'
+      isSelectorDisable={row => console.log(row) || isDisable(row)}
+      onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
+      batchActionBar={
+        <TableUtil.BatchActionBar
+          toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
+          batchActions={[
+            {
+              name: '批量删除',
+              onClick: () => window.alert('批量删除' + store.selected.join(','))
+            },
+            {
+              name: '批量修改单价',
+              onClick: () =>
+                window.alert('批量修改这些' + store.selected.join(','))
+            }
+          ]}
+          count={store.isSelectAllPage ? 100 : store.selected.length}
+          isSelectAll={store.isSelectAllPage}
+        />
+      }
+      selected={store.selected}
+      onSelect={selected => store.setSelect(selected)}
+      SubComponent={item => (
+        <Observer>
+          {() => {
+            const selected = store.subTableSelected[item.row.id] || []
+            return (
+              <SelectSubTable
+                data={item.original.subTable}
+                columns={[
+                  { Header: '序号', accessor: 'id' },
+                  { Header: '名字', accessor: 'name' }
+                ]}
+                keyField='id'
+                onSelectAll={store.toggleSubAll.bind(store, item.index)}
+                selected={selected.slice()}
+                onSelect={selected => store.setSubSelect(item.row.id, selected)}
+              />
+            )
+          }}
+        </Observer>
+      )}
     />
   ))

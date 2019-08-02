@@ -8,34 +8,50 @@
 
   &.gm-cascader-close {
     input {
-      padding-right: 35px;
+      padding-right: 32px;
     }
   }
 
-  .gm-cascader-close-icon {
+  .gm-cascader-icon {
     position: absolute;
     display: block;
     width: 10px;
     height: 14px;
     line-height: 1;
-    top: 3px;
-    right: 24px;
-    bottom: 0;
+    top: 8px;
     color: @gm-color-third;
     margin: auto 0;
+    cursor: pointer;
   }
 
-  .gm-arrow-up {
+  .gm-cascader-close-icon {
+    display: none;
+    right: 20px;
+  }
+
+  .gm-cascader-up-small,
+  .gm-cascader-down-small {
+    right: 5px;
     display: none;
   }
 
-  &.gm-popover-active {
-    .gm-arrow-up {
+  .gm-cascader-down-small {
+    display: block;
+  }
+
+  &:hover {
+    .gm-cascader-close-icon {
       display: block;
     }
+  }
 
-    .gm-arrow-down {
+  &.gm-popover-active {
+    .gm-cascader-down-small {
       display: none;
+    }
+
+    .gm-cascader-up-small {
+      display: block;
     }
   }
 }

@@ -1,20 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import classNames from 'classnames'
+import SVGSuccessCircle from '../../../svg/success-circle.svg'
+import SVGCloseCircle from '../../../svg/close-circle.svg'
 
 class ProgressBar extends React.Component {
-  constructor(props) {
-    super(props)
-    this.getIconClass = ::this.getIconClass
-  }
-
-  getIconClass() {
-    const { status } = this.props
-    return status === 'success'
-      ? 'xfont xfont-success-circle gm-progress-bar-success-icon'
-      : 'xfont xfont-close-circle gm-progress-bar-exception-icon'
-  }
-
   render() {
     const {
       percentage,
@@ -31,14 +21,14 @@ class ProgressBar extends React.Component {
       ...rest
     } = this.props
     return (
-      <div className={classnames('gm-progress', className)} {...rest}>
+      <div className={classNames('gm-progress', className)} {...rest}>
         <div className='gm-progress-bar'>
           <div
             className='gm-progress-bar-outer'
             style={{ height: `${strokeWidth}px`, backgroundColor: bgColor }}
           >
             <div
-              className={classnames('gm-progress-bar-inner', {
+              className={classNames('gm-progress-bar-inner', {
                 'gm-progress-bar-success': status === 'success',
                 'gm-progress-bar-exception': status === 'exception'
               })}
@@ -55,7 +45,7 @@ class ProgressBar extends React.Component {
             </div>
             {showText && textInside && textInsideFix && (
               <div
-                className={classnames('gm-progress-bar-innerTextFix-wrapper')}
+                className={classNames('gm-progress-bar-innerTextFix-wrapper')}
                 style={{ textAlign: textInsideFix }}
               >
                 <div
@@ -74,7 +64,11 @@ class ProgressBar extends React.Component {
             style={{ fontSize: `12px`, color: textColor }}
           >
             {status ? (
-              <i className={this.getIconClass()} />
+              status === 'success' ? (
+                <SVGSuccessCircle className='gm-progress-bar-success-icon' />
+              ) : (
+                <SVGCloseCircle className='gm-progress-bar-exception-icon' />
+              )
             ) : (
               text || `${percentage}%`
             )}

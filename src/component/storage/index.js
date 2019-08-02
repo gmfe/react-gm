@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
@@ -32,20 +32,12 @@ const StorageStatics = {
   }
 }
 
-class Storage extends React.Component {
-  componentWillUpdate(nextProps) {
-    if (this.props.autoSave) {
-      StorageStatics.set(nextProps.name, nextProps.value)
-    }
-  }
+const Storage = ({ name, value }) => {
+  useEffect(() => {
+    StorageStatics.set(name, value)
+  }, [value])
 
-  componentWillMount() {
-    StorageStatics.set(this.props.name, this.props.value)
-  }
-
-  render() {
-    return null
-  }
+  return null
 }
 
 Object.assign(Storage, StorageStatics)
@@ -56,12 +48,7 @@ Storage.propTypes = {
     PropTypes.string,
     PropTypes.object,
     PropTypes.array
-  ]),
-  autoSave: PropTypes.bool
-}
-Storage.defaultProps = {
-  useRaw: false,
-  autoSave: true
+  ])
 }
 
 export default Storage
