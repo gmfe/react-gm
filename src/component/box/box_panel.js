@@ -37,7 +37,7 @@ const BoxPanel = ({
             </a>
           )}
           <div className='gm-box-panel-title'>{title}</div>
-          {summary && (
+          {_.isArray(summary) ? (
             <div className='gm-box-panel-summary'>
               {_.map(summary, (s, i) => {
                 if (i < summary.length - 1)
@@ -45,6 +45,8 @@ const BoxPanel = ({
                 else return s.text + ': ' + s.value
               })}
             </div>
+          ) : (
+            <div className='gm-box-panel-summary'>{summary}</div>
           )}
         </Flex>
         <Flex flex />
@@ -63,8 +65,8 @@ BoxPanel.propTypes = {
   title: PropTypes.string.isRequired,
   /** undefined 就是没有此功能， false 默认收起 true 默认展开 */
   collapse: PropTypes.bool,
-  /** 汇总信息，数据格式为[{text, value}] */
-  summary: PropTypes.array,
+  /** 汇总信息，数组：数据格式为[{text, value}] or element */
+  summary: PropTypes.oneOfType(PropTypes.array, PropTypes.element),
   right: PropTypes.element,
   className: PropTypes.string,
   style: PropTypes.object

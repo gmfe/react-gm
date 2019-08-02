@@ -5,7 +5,7 @@
 
   .gm-selection-selected {
     display: block;
-    padding-right: 34px;
+    padding-right: 24px;
     cursor: pointer;
     line-height: 18px;
   }
@@ -16,13 +16,13 @@
     line-height: 1;
     top: 9px;
     right: 6px;
-    color: @gm-color-third;
+    color: @gm-color-fourth;
     cursor: pointer;
   }
 
   .gm-selection-close-icon {
     display: none;
-    right: 20px;
+    right: 6px;
   }
 
   .gm-selection-down-up {
@@ -33,6 +33,10 @@
     .gm-selection-close-icon {
       display: block;
     }
+
+    .gm-selection-fun-icon {
+      display: none;
+    }
   }
 
   &.disabled {
@@ -40,6 +44,7 @@
 
     .gm-selection-selected {
       cursor: not-allowed;
+      border: 1px solid @gm-border-color;
     }
 
     .gm-selection-close-icon {

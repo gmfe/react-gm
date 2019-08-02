@@ -19,11 +19,16 @@ Info.propTypes = {
 }
 
 const BoxTable = props => {
-  const { info, action, children, className, ...rest } = props
+  const { info, action, children, className, headerProps = {}, ...rest } = props
+  const { className: headerClassName } = headerProps
 
   return (
     <div {...rest} className={classNames('gm-box gm-box-table', className)}>
-      <Flex className='gm-box-table-header' alignCenter>
+      <Flex
+        {...headerProps}
+        className={classNames('gm-box-table-header', headerClassName)}
+        alignCenter
+      >
         <Flex>{info}</Flex>
         <Flex flex />
         <Flex>{action}</Flex>
@@ -39,7 +44,8 @@ BoxTable.propTypes = {
   info: PropTypes.element,
   action: PropTypes.element,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  headerProps: PropTypes.object
 }
 
 export default BoxTable

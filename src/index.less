@@ -1,6 +1,7 @@
 @import 'less/bootstrap.less';
 @import 'css/variables';
 @import 'css/cover.less';
+@import 'css/svg.less';
 @import 'css/text';
 @import 'css/distance';
 @import 'css/bg';
@@ -21,8 +22,7 @@
 @import 'deprecated/search_select/style';
 @import 'deprecated/tree_select/style';
 @import 'deprecated/trigger/style';
-@import 'component/quick/style';
-@import 'component/selected/style';
+@import 'deprecated/quick/style';
 
 // 工具
 @import 'component/selection/style';
@@ -76,13 +76,12 @@
 
 html,
 body {
-  font-family: 'Segoe UI', 'Lucida Grande', Helvetica, Arial, 'Microsoft YaHei',
-    FreeSans, Arimo, 'Droid Sans', 'wenquanyi micro hei', 'Hiragino Sans GB',
-    'Hiragino Sans GB W3', FontAwesome, sans-serif;
+  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;;
+  // font-family: Helvetica, STHeiti, 'Microsoft YaHei', Verdana, Arial, Tahoma, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
-  line-height: 1.5;
+  line-height: 1.33;
 }
 
 .gm-svg-icon {
@@ -90,7 +89,7 @@ body {
 }
 
 ::-webkit-input-placeholder {
-  color: @gm-color-second;
+  color: @gm-color-fourth;
 }
 
 .gm-disabled {

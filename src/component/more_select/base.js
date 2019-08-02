@@ -271,6 +271,7 @@ class Base extends React.Component {
 
   render() {
     const {
+      isInPopup,
       disabled,
       selected,
       multiple,
@@ -303,6 +304,7 @@ class Base extends React.Component {
           animName
           popup={() => this.renderList()}
           disabled={disabled}
+          isInPopup={isInPopup}
         >
           {children || (
             <Flex
@@ -415,6 +417,7 @@ Base.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   popupClassName: PropTypes.string,
+  isInPopup: PropTypes.bool,
 
   /** 目前为了 keyboard */
   onKeyDown: PropTypes.func
