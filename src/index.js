@@ -103,6 +103,7 @@ import { setLocale } from './locales'
 
 import Carousel from './component/carousel/carousel'
 import { Box, BoxForm, BoxTable } from './component/box'
+import ImgUploader from './component/img_uploader'
 
 Object.assign(Sheet, {
   SheetColumn,
@@ -238,5 +239,6 @@ export {
   Box,
   BoxForm,
   BoxTable,
-  PopupContentConfirmDelete
+  PopupContentConfirmDelete,
+  ImgUploader
 }

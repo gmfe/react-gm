@@ -27,15 +27,21 @@ class Uploader extends React.Component {
   }
 
   render() {
-    const { children, accept, multiple } = this.props
+    const { children, accept, multiple, className, ...rest } = this.props
 
-    const cn = classNames({
-      'gm-uploader-warp': !!children,
-      'gm-uploader-default': !children
-    })
     return (
       <div className='gm-uploader'>
-        <div className={cn} onClick={this.handleClick}>
+        <div
+          {...rest}
+          className={classNames(
+            {
+              'gm-uploader-warp': !!children,
+              'gm-uploader-default': !children
+            },
+            className
+          )}
+          onClick={this.handleClick}
+        >
           {children || (
             <div className='gm-uploader-icon-wrap'>
               <SVGPlus className='gm-uploader-icon' />
@@ -63,7 +69,9 @@ Uploader.propTypes = {
   multiple: PropTypes.bool,
   onUpload: PropTypes.func.isRequired,
   accept: PropTypes.string,
-  children: PropTypes.any
+  children: PropTypes.any,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default Uploader
