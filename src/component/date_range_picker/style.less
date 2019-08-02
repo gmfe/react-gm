@@ -1,42 +1,8 @@
-.gm-date-range-picker {
-  vertical-align: middle;
-
-  i {
-    position: absolute;
-    right: 5px;
-    top: 6px;
-  }
-
-  &.disabled {
-    color: @gm-color-second;
-    cursor: not-allowed;
-  }
-
-  .gm-date-range-picker-inner {
-    min-width: 120px;
-    height: 30px;
-    padding: 5px 30px 5px 10px;
-    border: 1px solid @gm-border-color;
-    background: white;
-
-    &.disabled {
-      color: @gm-color-second;
-      cursor: not-allowed;
-    }
-  }
-
-  .gm-date-range-picker-clear-btn {
-    display: none;
-    position: absolute;
-    right: 18px;
-    top: 6px;
-    font-size: 16px;
-    color: #555;
-  }
-
-  &:hover {
-    .gm-date-range-picker-clear-btn {
-      display: block;
+.gm-date-range-picker-overlay {
+  .gm-date-range-picker-overlay-second-calendar {
+    .gm-calendar-day-will {
+      // 要屏蔽 第二个日历的 will
+      border: 1px solid transparent;
     }
   }
 }

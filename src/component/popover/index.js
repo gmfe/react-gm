@@ -8,7 +8,7 @@ import {
   getScrollLeft
 } from 'gm-util'
 import LayoutRoot from '../layout_root'
-import Popup from './popup'
+import Popup from '../popup/popup'
 import _ from 'lodash'
 import classNames from 'classnames'
 import EVENT_TYPE from '../../event_type'
@@ -138,7 +138,8 @@ class Popover extends React.Component {
       showArrow,
       arrowLeft,
       animName,
-      predictingHeight
+      predictingHeight,
+      pureContainer
     } = this.props
 
     const disabled = this.getDisabled()
@@ -164,6 +165,7 @@ class Popover extends React.Component {
           arrowLeft={arrowLeft}
           animName={animName}
           predictingHeight={predictingHeight}
+          pureContainer={pureContainer}
           className={className}
           style={style}
         >
@@ -284,6 +286,7 @@ class Popover extends React.Component {
       }
     }
 
+    // 通过类名告知 target 做好 active 的应变
     return React.cloneElement(child, {
       ...p,
       className: classNames(child.props.className, {
@@ -312,6 +315,7 @@ Popover.propTypes = {
 
   showArrow: PropTypes.bool, // 是否显示三角标
   arrowLeft: PropTypes.string,
+  pureContainer: PropTypes.bool,
 
   animName: PropTypes.oneOf([
     false,

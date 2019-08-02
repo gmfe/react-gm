@@ -1,0 +1,48 @@
+.gm-grid-float-columns(@class) {
+  .col(@index) {
+    // initial
+    @item: ~'.gm-grid-col@{class}-@{index}';
+    .col((@index + 1), @item);
+  }
+  .col(@index, @list) when (@index =< @gm-grid-columns) {
+    // general
+    @item: ~'.gm-grid-col@{class}-@{index}';
+    .col((@index + 1), ~'@{list}, @{item}');
+  }
+  .col(@index, @list) when (@index > @gm-grid-columns) {
+    // terminal
+    @{list} {
+      flex: 0 0 auto;
+      float: left;
+    }
+  }
+  .col(1); // kickstart it
+}
+
+.gm-grid-loop-columns(@index, @class) when (@index > 0) {
+  .gm-grid-col@{class}-@{index} {
+    display: block;
+    box-sizing: border-box;
+    width: percentage((@index / @gm-grid-columns));
+  }
+
+  .gm-grid-col@{class}-offset-@{index} {
+    margin-left: percentage((@index / @gm-grid-columns));
+  }
+  .gm-grid-loop-columns((@index - 1), @class);
+}
+
+.gm-grid-loop-columns(@index, @class) when (@index = 0) {
+  .gm-grid-col@{class}-@{index} {
+    display: none;
+  }
+
+  .gm-grid-col@{class}-offset-@{index} {
+    margin-left: 0;
+  }
+}
+
+.gm-grid(@class: ~'') {
+  .gm-grid-float-columns(@class);
+  .gm-grid-loop-columns(@gm-grid-columns, @class);
+}

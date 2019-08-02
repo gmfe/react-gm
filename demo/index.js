@@ -1,4 +1,3 @@
-import 'gm-xfont/iconfont.css'
 import './index.less'
 import 'markdown-it-react-loader/index.css'
 import 'highlight.js/styles/default.css'
@@ -10,7 +9,7 @@ import ReactDOM from 'react-dom'
 import Route from './route'
 
 const renderApp = () => {
-  ReactDOM.render(<Route/>, window.document.getElementById('appContainer'))
+  ReactDOM.render(<Route />, window.document.getElementById('appContainer'))
 }
 
 renderApp()
