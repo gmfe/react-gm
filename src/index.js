@@ -88,12 +88,15 @@ import LevelList from './component/level_list'
 import LevelSelect from './component/level_select'
 import Input from './component/input'
 import TableSelect from './component/table_select'
+
 import {
-  DropDownNew,
-  DropDownNewMenu,
-  DropDownNewSubMenu,
-  DropDownNewItem
-} from './component/drop_down_new'
+  FunctionSet,
+  FunctionSetMenu,
+  FunctionSetItem,
+  FunctionSetSubmenu,
+  FunctionSetItemGroup
+} from './component/function_set'
+
 import { PopupContentConfirmDelete } from './component/popup'
 
 import Validator from './validator'
@@ -232,10 +235,11 @@ export {
   LevelSelect,
   Input,
   TableSelect,
-  DropDownNew,
-  DropDownNewMenu,
-  DropDownNewSubMenu,
-  DropDownNewItem,
+  FunctionSet,
+  FunctionSetMenu,
+  FunctionSetItem,
+  FunctionSetSubmenu,
+  FunctionSetItemGroup,
   Box,
   BoxForm,
   BoxTable,
