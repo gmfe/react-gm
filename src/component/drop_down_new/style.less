@@ -5,17 +5,27 @@
   &-menu {
     position: relative;
     margin: 0;
-    padding: 4px 0;
     text-align: left;
     list-style-type: none;
     background-color: #fff;
     background-clip: padding-box;
     border-radius: 4px;
     outline: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: 1px solid #f0f1f3;
 
     &-container {
       position: relative;
+    }
+
+    &-ul {
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      list-style-type: none;
+      position: relative;
+      z-index: 20;
+      background: #fff;
+      border-radius: 4px;
     }
 
     &-triangle {
@@ -24,7 +34,8 @@
       height: 10px;
       transform: rotate(45deg);
       background-color: #fff;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      border: 1px solid #f0f1f3;
     }
 
     &-submenu {
@@ -55,6 +66,11 @@
       transition: all 0.3s;
       background: none;
       position: relative;
+      border-bottom: 1px solid #f0f1f3;
+
+      &:last-child {
+        border: none;
+      }
 
       &:hover {
         background-color: #d7e8fc;

@@ -24,22 +24,12 @@ class DropDownNewMenu extends Component {
       const [vertical, horizontal] = _.kebabCase(placement).split('-')
       const style = {
         [`${dropdownNewWidth > offsetWidth && 'width'}`]: `${dropdownNewWidth >
-          offsetWidth && dropdownNewWidth}px`,
-        boxShadow: `${
-          vertical === 'top'
-            ? '0 -2px 8px rgba(0, 0, 0, 0.15)'
-            : '0 2px 8px rgba(0, 0, 0, 0.15)'
-        }`
+          offsetWidth && dropdownNewWidth}px`
       }
       const triangleStyle = {
         [`${vertical === 'top' ? 'bottom' : 'top'}`]: '-3px',
         [`${horizontal === 'right' ? 'right' : 'left'}`]: `${
           horizontal === 'center' ? `${(offsetWidth - 9) / 2}px` : '10px'
-        }`,
-        boxShadow: `${
-          vertical === 'top'
-            ? '0 2px 8px rgba(0, 0, 0, 0.15)'
-            : '0 -2px 8px rgba(0, 0, 0, 0.15)'
         }`
       }
       this.setState({ style, triangleStyle })
@@ -52,9 +42,15 @@ class DropDownNewMenu extends Component {
     return (
       <div className='dropdown-new-menu-container'>
         <div className='dropdown-new-menu-triangle' style={triangleStyle} />
-        <ul style={style} ref={this.currentRef} className='dropdown-new-menu'>
-          {children}
-        </ul>
+        <div className='dropdown-new-menu'>
+          <ul
+            style={style}
+            ref={this.currentRef}
+            className='dropdown-new-menu-ul'
+          >
+            {children}
+          </ul>
+        </div>
       </div>
     )
   }

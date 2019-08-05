@@ -113,7 +113,7 @@ class DropDownNewSubMenu extends Component {
         style['right'] = `-${submenuWidth + 4}px`
       }
       this.setState({ style })
-    })
+    }, 0)
   }
 
   /**
@@ -130,7 +130,9 @@ class DropDownNewSubMenu extends Component {
         className='dropdown-new-menu-submenu'
         ref={this.submenu}
       >
-        <ul className='dropdown-new-menu'>{children}</ul>
+        <div className='dropdown-new-menu'>
+          <ul className='dropdown-new-menu-ul'>{children}</ul>
+        </div>
       </div>
     )
   }
