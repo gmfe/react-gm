@@ -7,6 +7,7 @@ import SVGDownSmall from '../../../svg/down.svg'
 import SVGUpSmall from '../../../svg/up.svg'
 
 // TODO multiple
+/** 内部用 选择区域 */
 class Selection extends React.Component {
   refInput = React.createRef()
 
@@ -26,6 +27,7 @@ class Selection extends React.Component {
       onSelect,
       disabled,
       renderSelected,
+      placeholder,
       onKeyDown,
       className,
       ...rest
@@ -47,9 +49,14 @@ class Selection extends React.Component {
           ref={this.refInput}
           disabled={disabled}
           type='text'
-          value={renderSelected(selected)}
+          value={
+            selected !== null && selected !== undefined
+              ? renderSelected(selected)
+              : ''
+          }
           onChange={_.noop}
           onKeyDown={onKeyDown}
+          placeholder={placeholder}
           className='form-control'
         />
         {selected && (
@@ -71,6 +78,7 @@ Selection.propTypes = {
   onSelect: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   renderSelected: PropTypes.func,
+  placeholder: PropTypes.string,
   onKeyDown: PropTypes.func,
   className: PropTypes.string
 }

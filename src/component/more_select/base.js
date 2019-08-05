@@ -13,7 +13,8 @@ import SVGCloseCircle from '../../../svg/close-circle.svg'
 import SVGRemove from '../../../svg/remove.svg'
 
 // 不要轻易改这个文件
-
+// TODO keydown item disabled
+// 目前全键盘还没有这种场景，暂时不管
 class Base extends React.Component {
   constructor(props) {
     super(props)
