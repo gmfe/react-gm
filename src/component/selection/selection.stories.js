@@ -11,8 +11,24 @@ storiesOf('内部工具|Selection', module)
   ))
   .add('自定义选中项', () => (
     <Selection
-      selected={{ value: 0, text: '已选中' }}
+      selected={{ value: 0, text: '选中项' }}
       onSelect={selected => console.log(selected)}
       renderSelected={item => item.text + 'lalala'}
+    />
+  ))
+  .add('clean', () => (
+    <Selection
+      clean
+      selected={{ value: 0, text: '选中项' }}
+      onSelect={selected => console.log(selected)}
+      placeholder='请选择'
+    />
+  ))
+  .add('disabledClose', () => (
+    <Selection
+      disabledClose
+      selected={{ value: 0, text: '选中项' }}
+      onSelect={selected => console.log(selected)}
+      placeholder='请选择'
     />
   ))

@@ -29,10 +29,10 @@ class Select extends React.Component {
       onChange,
       children,
       disabled,
-      className,
-      style,
       listProps,
+      disabledClose,
       clean,
+      className,
       ...rest
     } = this.props
 
@@ -74,11 +74,6 @@ class Select extends React.Component {
       />
     )
 
-    const newStyle = { ...style }
-    if (clean) {
-      newStyle.border = '1px solid transparent'
-    }
-
     return (
       <Popover
         ref={this.refPopup}
@@ -91,8 +86,9 @@ class Select extends React.Component {
           selected={selected}
           onSelect={onChange}
           disabled={disabled}
+          disabledClose={disabledClose}
+          clean={clean}
           className={classNames(`gm-select`, className)}
-          style={newStyle}
         />
       </Popover>
     )
@@ -108,6 +104,7 @@ Select.propTypes = {
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   listProps: PropTypes.object,
+  disabledClose: PropTypes.bool,
   clean: PropTypes.bool,
   children: PropTypes.any,
   className: PropTypes.string,
