@@ -4,31 +4,23 @@ import Flex from '../flex'
 import _ from 'lodash'
 import classNames from 'classnames'
 
-class FormBlock extends React.Component {
-  render() {
-    let { children, block, inline, ...rest } = this.props
-
-    return (
-      <Flex
-        className={classNames('gm-form-block', {
-          'gm-form-block-inline': inline
-        })}
-      >
-        {_.map(React.Children.toArray(children), (child, i) => {
-          return (
-            <Flex flex={inline ? false : block[i] || 1} key={i}>
-              {child.type.displayName === 'FormItem'
-                ? React.cloneElement(child, {
-                    ...rest,
-                    ...child.props
-                  })
-                : child}
-            </Flex>
-          )
-        })}
-      </Flex>
-    )
-  }
+const FormBlock = ({ children, block, inline, ...rest }) => {
+  return (
+    <Flex
+      {...rest}
+      className={classNames('gm-form-block', {
+        'gm-form-block-inline': inline
+      })}
+    >
+      {_.map(React.Children.toArray(children), (child, i) => {
+        return (
+          <Flex flex={inline ? false : block[i] || 1} key={i}>
+            {child}
+          </Flex>
+        )
+      })}
+    </Flex>
+  )
 }
 
 FormBlock.displayName = 'FormBlock'

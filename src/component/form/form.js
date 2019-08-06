@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
 import Validator from '../../validator'
+import { WrapContext } from './util'
 
 class Form extends React.Component {
   constructor(props) {
@@ -22,22 +23,21 @@ class Form extends React.Component {
     return !err
   }
 
+  getFormItemFields(children, formItems) {
+    _.each(React.Children.toArray(children), child => {
+      if (child.type && child.type.displayName === 'FormItem') {
+        formItems.push(child)
+      } else if (child.props && child.props.children) {
+        this.getFormItemFields(child.props.children, formItems)
+      }
+    })
+  }
+
   validateAll() {
     const { children } = this.props
     const helpList = []
     const formItems = []
-    _.each(React.Children.toArray(children), child => {
-      if (child.type.displayName === 'FormItem') {
-        formItems.push(child)
-      } else if (child.type.displayName === 'FormBlock') {
-        _.each(React.Children.toArray(child.props.children), cChild => {
-          if (cChild.type.displayName === 'FormItem') {
-            formItems.push(cChild)
-          }
-        })
-      }
-    })
-
+    this.getFormItemFields(children, formItems)
     _.each(formItems, item => {
       if (item.props.error) {
         helpList.push({
@@ -92,45 +92,35 @@ class Form extends React.Component {
       ...rest
     } = this.props
 
-    const childList = _.map(React.Children.toArray(children), (child, i) => {
-      return child.type.displayName === 'FormItem' ||
-        child.type.displayName === 'FormBlock'
-        ? React.cloneElement(
-            child,
-            Object.assign(
-              {
-                key: i,
-                horizontal,
-                inline,
-                labelWidth,
-                canValidate: this.state.canValidate
-              },
-              child.props
-            )
-          )
-        : child
-    })
-
     return (
-      <form
-        {...rest}
-        className={classNames(
-          'gm-form',
-          {
-            'form-inline': inline,
-            'form-horizontal': horizontal
-          },
-          className
-        )}
-        onSubmit={this.handleSubmit}
+      <WrapContext.Provider
+        value={{
+          horizontal,
+          inline,
+          labelWidth,
+          canValidate: this.state.canValidate
+        }}
       >
-        {childList}
-        {hasButtonInGroup && (
-          <button type='submit' style={{ display: 'none' }}>
-            button
-          </button>
-        )}
-      </form>
+        <form
+          {...rest}
+          className={classNames(
+            'gm-form',
+            {
+              'form-inline': inline,
+              'form-horizontal': horizontal
+            },
+            className
+          )}
+          onSubmit={this.handleSubmit}
+        >
+          {children}
+          {hasButtonInGroup && (
+            <button type='submit' style={{ display: 'none' }}>
+              button
+            </button>
+          )}
+        </form>
+      </WrapContext.Provider>
     )
   }
 }
