@@ -60,7 +60,9 @@ class Base extends React.Component {
     this._isUnmounted = true
   }
 
-  handleClear = clearItem => {
+  handleClear = (clearItem, event) => {
+    event.stopPropagation()
+
     const { onSelect, selected } = this.props
 
     const willSelected = _.filter(
