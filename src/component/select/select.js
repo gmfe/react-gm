@@ -30,6 +30,7 @@ class Select extends React.Component {
       children,
       disabled,
       className,
+      listProps,
       clean,
       ...rest
     } = this.props
@@ -59,11 +60,13 @@ class Select extends React.Component {
 
     const popup = (
       <List
+        {...listProps}
         data={newData}
         selected={value}
         onSelect={this.handleChange}
         style={{
-          maxHeight: '250px'
+          maxHeight: '250px',
+          ...listProps.style
         }}
       />
     )
@@ -101,6 +104,7 @@ Select.propTypes = {
   value: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
+  listProps: PropTypes.object,
   clean: PropTypes.bool,
   children: PropTypes.any,
   className: PropTypes.string,
