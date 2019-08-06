@@ -58,6 +58,8 @@ class Select extends React.Component {
       selected = _.find(newData, v => v.value === value)
     }
 
+    const listStyle = listProps ? listProps.style : {}
+
     const popup = (
       <List
         {...listProps}
@@ -66,7 +68,7 @@ class Select extends React.Component {
         onSelect={this.handleChange}
         style={{
           maxHeight: '250px',
-          ...listProps.style
+          ...listStyle
         }}
       />
     )
