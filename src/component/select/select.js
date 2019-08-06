@@ -30,6 +30,7 @@ class Select extends React.Component {
       children,
       disabled,
       className,
+      style,
       listProps,
       clean,
       ...rest
@@ -73,9 +74,9 @@ class Select extends React.Component {
       />
     )
 
-    const style = {}
+    const newStyle = { ...style }
     if (clean) {
-      style.border = '1px solid transparent'
+      newStyle.border = '1px solid transparent'
     }
 
     return (
@@ -91,7 +92,7 @@ class Select extends React.Component {
           onSelect={onChange}
           disabled={disabled}
           className={classNames(`gm-select`, className)}
-          style={style}
+          style={newStyle}
         />
       </Popover>
     )
