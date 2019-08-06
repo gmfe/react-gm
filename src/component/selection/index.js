@@ -28,8 +28,10 @@ class Selection extends React.Component {
       disabled,
       renderSelected,
       placeholder,
-      onKeyDown,
+      clean,
+      disabledClose,
       className,
+      onKeyDown,
       ...rest
     } = this.props
 
@@ -39,8 +41,9 @@ class Selection extends React.Component {
         className={classNames(
           'gm-selection',
           {
-            'gm-selection-close': selected,
-            disabled
+            disabled,
+            'gm-selection-disabled-clean': clean,
+            'gm-selection-disabled-close': disabledClose
           },
           className
         )}
@@ -59,7 +62,7 @@ class Selection extends React.Component {
           placeholder={placeholder}
           className='form-control'
         />
-        {selected && (
+        {selected && !disabledClose && !clean && (
           <SVGCloseCircle
             onClick={!disabled && this.handleClear}
             className='gm-selection-icon gm-selection-close-icon'
@@ -79,8 +82,13 @@ Selection.propTypes = {
   disabled: PropTypes.bool,
   renderSelected: PropTypes.func,
   placeholder: PropTypes.string,
+  /** 干净模式 */
+  clean: PropTypes.bool,
+  /** 禁用 x 按钮 */
+  disabledClose: PropTypes.bool,
   onKeyDown: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Selection.defaultProps = {

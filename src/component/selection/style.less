@@ -24,7 +24,7 @@
 
   .gm-selection-up-small,
   .gm-selection-down-small {
-    right: 5px;
+    right: 3px;
   }
 
   .gm-selection-up-small {
@@ -47,6 +47,19 @@
 
     .gm-selection-close-icon {
       cursor: not-allowed;
+    }
+  }
+
+  &.gm-selection-disabled-close {
+    input {
+      padding-right: 16px;
+    }
+  }
+
+  &.gm-selection-disabled-clean {
+    input {
+      padding-right: 16px;
+      border: none;
     }
   }
 }
