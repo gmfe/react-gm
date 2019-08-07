@@ -4,7 +4,13 @@ import SearchSelect from './deprecated/search_select/search.select'
 import FilterSearchSelect from './deprecated/search_select/filter.search.select'
 import TreeSelect from './deprecated/tree_select'
 import Trigger from './deprecated/trigger'
-
+import {
+  QuickPanel,
+  QuickFilter,
+  QuickTab,
+  QuickDesc,
+  QuickDetail
+} from './deprecated/quick'
 // 废弃的结束
 
 import Pagination from './component/pagination/pagination'
@@ -56,13 +62,6 @@ import RightSideModal from './component/modal/right_side_modal'
 import CleanModal from './component/modal/clean_modal'
 import Collapse from './component/collapse'
 import { DropDown, DropDownItem, DropDownItems } from './component/drop_down'
-import {
-  QuickPanel,
-  QuickFilter,
-  QuickTab,
-  QuickDesc,
-  QuickDetail
-} from './component/quick'
 import { Radio, RadioGroup } from './component/radio'
 import { Checkbox, CheckboxGroup } from './component/checkbox'
 import FilterSelect from './component/filter_select/filter.select'
@@ -102,6 +101,7 @@ import { Select, Option } from './component/select'
 import { setLocale } from './locales'
 
 import Carousel from './component/carousel/carousel'
+import Box from './component/box'
 
 Object.assign(Sheet, {
   SheetColumn,
@@ -233,5 +233,6 @@ export {
   DropDownNew,
   DropDownNewMenu,
   DropDownNewSubMenu,
-  DropDownNewItem
+  DropDownNewItem,
+  Box
 }

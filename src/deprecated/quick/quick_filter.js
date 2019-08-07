@@ -1,11 +1,12 @@
 import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
-import Flex from '../flex'
-import Collapse from '../collapse'
+import Flex from '../../component/flex'
+import Collapse from '../../component/collapse'
 import classNames from 'classnames'
 import SVGUp from '../../../svg/up.svg'
 import SVGDown from '../../../svg/down.svg'
+import { withDeprecated } from '../../util'
 
 class QuickFilter extends React.Component {
   constructor(props) {
@@ -81,4 +82,4 @@ QuickFilter.defaultProps = {
   expand: false
 }
 
-export default QuickFilter
+export default withDeprecated(QuickFilter, 'Deprecated, use Block instead.')
