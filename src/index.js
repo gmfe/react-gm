@@ -4,7 +4,7 @@ import SearchSelect from './deprecated/search_select/search.select'
 import FilterSearchSelect from './deprecated/search_select/filter.search.select'
 import TreeSelect from './deprecated/tree_select'
 import Trigger from './deprecated/trigger'
-import PaginationV2 from './deprecated/pagination_v2/pagination_v2'
+import PaginationFuck from './deprecated/pagination_fuck/pagination_fuck'
 
 // 废弃的结束
 
@@ -142,7 +142,7 @@ export {
   TreeSelect,
   Trigger,
   PaginationText,
-  PaginationV2,
+  PaginationFuck,
   // 废弃的结束
 
   Pagination,

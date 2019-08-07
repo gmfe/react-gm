@@ -25,7 +25,7 @@ class WithCount extends React.Component {
 
   componentDidMount() {
     console.warn(
-      'pagination_v2 is deprecated. Use pagination or pagination_box instead.'
+      'pagination_fuck is deprecated. Use pagination or pagination_box instead.'
     )
   }
 

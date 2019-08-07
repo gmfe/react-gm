@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { observable } from 'mobx'
-import PaginationNew from './pagination_v2'
+import PaginationFuck from './pagination_fuck'
 
 const initWithCountPagination = {
   page_obj: null,
@@ -55,14 +55,14 @@ const store = observable({
   }
 })
 
-storiesOf('PaginationNew', module)
+storiesOf('PaginationFuck', module)
   .add('default(with number)', () => {
     return (
       <div>
         <h4>
           组件反馈的参数作为当前请求的参数，组件需要的pagination值以后台返回的为主
         </h4>
-        <PaginationNew
+        <PaginationFuck
           pagination={store.paginationWithNum}
           onChange={params => store.setPaginationWithNum(params)}
         />
@@ -78,7 +78,7 @@ storiesOf('PaginationNew', module)
         <h4>
           组件反馈的参数作为当前请求的参数，组件需要的pagination值以后台返回的为主
         </h4>
-        <PaginationNew
+        <PaginationFuck
           pagination={store.paginationWithoutNum}
           onChange={params => store.setPaginationWithoutNum(params)}
           showCount={false}
