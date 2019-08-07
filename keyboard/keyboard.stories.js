@@ -346,6 +346,7 @@ storiesOf('快速录入|Keyboard', module).add('hoc', () => {
               <Observer>
                 {() => (
                   <KCInputNumberV2
+                    onFocus={e => e.target.select()}
                     style={{ width: referOfWidth.numberInputBox }}
                     value={cellProps.original.age}
                     onChange={value => store.setAge(cellProps.index, value)}
