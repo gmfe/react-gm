@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { observable } from 'mobx'
-import PaginationNew from './pagination_new'
+import PaginationNew from './pagination_v2'
 
 const initWithCountPagination = {
   page_obj: null,

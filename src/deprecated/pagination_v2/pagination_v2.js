@@ -24,7 +24,9 @@ class WithCount extends React.Component {
   }
 
   componentDidMount() {
-    console.warn('Trigger is deprecated. Use Popover instead.')
+    console.warn(
+      'pagination_v2 is deprecated. Use pagination or pagination_box instead.'
+    )
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +34,7 @@ class WithCount extends React.Component {
 
     const { limit } = nextProps
 
-    const {peek, page_obj} = nextProps.pagination // eslint-disable-line
+    const { peek, page_obj } = nextProps.pagination // eslint-disable-line
 
     if (this.props.pagination !== nextProps.pagination) {
       if (!nextProps.pagination.page_obj) {
@@ -221,7 +223,7 @@ class WithoutCount extends React.Component {
   handlePage(reverse) {
     const { onChange, limit } = this.props
 
-    const {page_obj} = this.state  // eslint-disable-line
+    const { page_obj } = this.state // eslint-disable-line
     let params = {}
 
     this.setState({
