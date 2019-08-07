@@ -1,4 +1,5 @@
 import React from 'react'
+import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
@@ -7,6 +8,7 @@ import classNames from 'classnames'
 
 class Base extends React.Component {
   refList = React.createRef()
+
   _isUnMounted = false
 
   doScrollToSelected = selector => {
@@ -28,6 +30,10 @@ class Base extends React.Component {
       this.doScrollToSelected('.active')
       // will-active more prefer
       this.doScrollToSelected('.will-active')
+    }
+    if (this.props.isAllInTheView) {
+      const dom = findDOMNode(this.refList.current)
+      dom && dom.scrollIntoViewIfNeeded()
     }
   }
 
@@ -118,6 +124,7 @@ Base.propTypes = {
 
   // 滚动
   isScrollTo: PropTypes.bool,
+  isAllInTheView: PropTypes.bool,
 
   isGroupList: PropTypes.bool, // 在这里仅仅表示数据的类型，对UI有影响而已
   className: PropTypes.string,

@@ -272,6 +272,7 @@ class Base extends React.Component {
             renderItem={renderListItem}
             onSelect={this.handleSelected}
             isScrollTo
+            isAllInTheView
             willActiveIndex={willActiveIndex}
             style={{
               maxHeight: listMaxHeight
