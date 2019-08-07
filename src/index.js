@@ -56,13 +56,6 @@ import RightSideModal from './component/modal/right_side_modal'
 import CleanModal from './component/modal/clean_modal'
 import Collapse from './component/collapse'
 import { DropDown, DropDownItem, DropDownItems } from './component/drop_down'
-import {
-  QuickPanel,
-  QuickFilter,
-  QuickTab,
-  QuickDesc,
-  QuickDetail
-} from './component/quick'
 import { Radio, RadioGroup } from './component/radio'
 import { Checkbox, CheckboxGroup } from './component/checkbox'
 import FilterSelect from './component/filter_select/filter.select'
@@ -102,6 +95,7 @@ import { Select, Option } from './component/select'
 import { setLocale } from './locales'
 
 import Carousel from './component/carousel/carousel'
+import Box from './component/box'
 
 Object.assign(Sheet, {
   SheetColumn,
@@ -233,5 +227,6 @@ export {
   DropDownNew,
   DropDownNewMenu,
   DropDownNewSubMenu,
-  DropDownNewItem
+  DropDownNewItem,
+  Box
 }

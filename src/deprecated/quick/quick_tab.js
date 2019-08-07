@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
+import { withDeprecated } from '../../util'
 
 class QuickTabItem extends React.Component {
   render() {
@@ -112,4 +113,4 @@ Object.assign(QuickTab, {
   QuickTabItem
 })
 
-export default QuickTab
+export default withDeprecated(QuickTab, 'Deprecated,  Block instead.')

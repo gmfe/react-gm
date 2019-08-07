@@ -1,10 +1,11 @@
 import { getLocale } from '../../locales'
 import React from 'react'
 import PropTypes from 'prop-types'
-import Flex from '../flex'
+import Flex from '../../component/flex'
 import _ from 'lodash'
 import SVGDown from '../../../svg/down.svg'
 import SVGUp from '../../../svg/up.svg'
+import { withDeprecated } from '../../util'
 
 class QuickDetail extends React.Component {
   state = {
@@ -187,4 +188,4 @@ Object.assign(QuickDetail, {
   QuickDetailThird
 })
 
-export default QuickDetail
+export default withDeprecated(QuickDetail, 'Deprecated, use Block instead.')
