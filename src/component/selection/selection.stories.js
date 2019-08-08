@@ -9,6 +9,13 @@ storiesOf('内部工具|Selection', module)
       placeholder='请选择'
     />
   ))
+  .add('disabled', () => (
+    <Selection
+      disabled
+      onSelect={selected => console.log(selected)}
+      placeholder='请选择'
+    />
+  ))
   .add('自定义选中项', () => (
     <Selection
       selected={{ value: 0, text: '选中项' }}

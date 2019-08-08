@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
 import SVGCloseCircle from '../../../svg/close-circle.svg'
-import SVGDownSmall from '../../../svg/down.svg'
-import SVGUpSmall from '../../../svg/up.svg'
+import IconDownUp from '../icon_down_up'
 
 // TODO multiple
 /** 内部用 选择区域 */
@@ -68,8 +67,10 @@ class Selection extends React.Component {
             className='gm-selection-icon gm-selection-close-icon'
           />
         )}
-        <SVGDownSmall className='gm-selection-icon gm-selection-down-small' />
-        <SVGUpSmall className='gm-selection-icon gm-selection-up-small' />
+        <IconDownUp
+          active={className.includes('gm-popover-active')}
+          className='gm-selection-icon gm-selection-down-up'
+        />
       </div>
     )
   }
