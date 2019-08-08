@@ -2,6 +2,8 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Box from './box'
 import BoxTable from './box_table'
+import BoxForm from './box_form'
+import { Form, FormItem } from '../form'
 
 storiesOf('Box', module)
   .add('Box', () => (
@@ -19,5 +21,10 @@ storiesOf('Box', module)
       >
         <div>真正的内容</div>
       </BoxTable>
+    </div>
+  ))
+  .add('BoxForm', () => (
+    <div>
+      <BoxForm />
     </div>
   ))
