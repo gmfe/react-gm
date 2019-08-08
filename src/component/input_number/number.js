@@ -137,6 +137,8 @@ class InputNumberV2 extends React.Component {
   }
 }
 
+InputNumberV2.displayName = 'InputNumberV2'
+
 InputNumberV2.propTypes = {
   max: PropTypes.number,
   min: PropTypes.number,
