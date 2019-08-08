@@ -4,17 +4,12 @@ import Flex from '../flex'
 import _ from 'lodash'
 import classNames from 'classnames'
 
-const FormBlock = ({ children, block, inline, ...rest }) => {
+const FormBlock = ({ children, block, className, ...rest }) => {
   return (
-    <Flex
-      {...rest}
-      className={classNames('gm-form-block', {
-        'gm-form-block-inline': inline
-      })}
-    >
+    <Flex {...rest} className={classNames('gm-form-block', className)}>
       {_.map(React.Children.toArray(children), (child, i) => {
         return (
-          <Flex flex={inline ? false : block[i] || 1} key={i}>
+          <Flex flex={block[i] || 1} key={i}>
             {child}
           </Flex>
         )
@@ -27,8 +22,8 @@ FormBlock.displayName = 'FormBlock'
 
 FormBlock.propTypes = {
   block: PropTypes.array,
-  inline: PropTypes.bool,
-  children: PropTypes.any
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 FormBlock.defaultProps = {

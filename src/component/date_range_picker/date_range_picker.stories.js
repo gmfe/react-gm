@@ -33,7 +33,6 @@ storiesOf('DateRangePicker', module)
       begin={store1.begin}
       end={store1.end}
       onChange={(begin, end) => store1.changeDate(begin, end)}
-      inputClassName='input-sm'
       endProps={{
         min: store1.begin
       }}
@@ -45,7 +44,6 @@ storiesOf('DateRangePicker', module)
       begin={store3.begin}
       end={store3.end}
       onChange={(begin, end) => store3.changeDate(begin, end)}
-      inputClassName='input-sm'
       beginRenderInputValue={begin => begin.getFullYear() + '年'}
     />
   ))
@@ -56,7 +54,6 @@ storiesOf('DateRangePicker', module)
       end={store2.end}
       onChange={(begin, end) => store2.changeDate(begin, end)}
       disabled
-      inputClassName='input-sm'
     />
   ))
 
@@ -65,7 +62,6 @@ storiesOf('DateRangePicker', module)
       begin={dateRangePickerStatus2.begin}
       end={dateRangePickerStatus2.end}
       onChange={(begin, end) => dateRangePickerStatus2.changeDate(begin, end)}
-      inputClassName='input-sm'
     />
   ))
 
@@ -76,7 +72,6 @@ storiesOf('DateRangePicker', module)
       beginLabel='开始周期'
       endLabel='截止周期'
       onChange={(begin, end) => store4.changeDate(begin, end)}
-      inputClassName='input-sm'
     />
   ))
 
@@ -85,7 +80,6 @@ storiesOf('DateRangePicker', module)
       begin={store5.begin}
       end={store5.end}
       onChange={(begin, end) => store5.changeDate(begin, end)}
-      inputClassName='input-sm'
       endProps={{
         min: store5.begin
       }}

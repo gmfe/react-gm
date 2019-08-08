@@ -18,8 +18,10 @@ const FormGroup = ({
     onSubmit()
 
     let isPass = true
+
+    // TODO
     _.each(formRefs, form => {
-      if (!form.current.apiValidate()) {
+      if (!form.current.apiDoValidate()) {
         isPass = false
       }
     })

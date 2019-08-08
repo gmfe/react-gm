@@ -14,7 +14,7 @@ class Form extends React.Component {
     }
   }
 
-  apiValidate = () => {
+  apiDoValidate = () => {
     const err = this.validateAll()
     // 有错误才打开错误提示，没有错误则不打开
     this.setState({
@@ -37,6 +37,8 @@ class Form extends React.Component {
     const { children } = this.props
     const helpList = []
     const formItems = []
+
+    // TODO，要切成解耦的
     this.getFormItemFields(children, formItems)
     _.each(formItems, item => {
       if (item.props.error) {
@@ -83,7 +85,6 @@ class Form extends React.Component {
   render() {
     const {
       inline,
-      horizontal,
       labelWidth,
       className,
       children,
@@ -95,8 +96,6 @@ class Form extends React.Component {
     return (
       <WrapContext.Provider
         value={{
-          horizontal,
-          inline,
           labelWidth,
           canValidate: this.state.canValidate
         }}
@@ -106,8 +105,7 @@ class Form extends React.Component {
           className={classNames(
             'gm-form',
             {
-              'form-inline': inline,
-              'form-horizontal': horizontal
+              'form-inline': inline
             },
             className
           )}
@@ -126,21 +124,16 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-  inline: PropTypes.bool,
-  horizontal: PropTypes.bool,
-  labelWidth: PropTypes.string, // horizontal true 才有效
-  hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
   onSubmit: PropTypes.func, // 默认处理了 preventDefault,
   onSubmitValidated: PropTypes.func,
-  children: PropTypes.any,
+  inline: PropTypes.bool,
+  labelWidth: PropTypes.string,
+  hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
   className: PropTypes.string,
   style: PropTypes.object
 }
 
 Form.defaultProps = {
-  inline: false,
-  horizontal: false,
-  hasButtonInGroup: false,
   onSubmit: _.noop,
   onSubmitValidated: _.noop
 }

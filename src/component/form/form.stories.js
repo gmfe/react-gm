@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { Form, FormItem, FormButton, FormBlock, FormGroup } from './index'
 import Switch from '../switch/index'
 import Uploader from '../uploader/index'
-import { QuickPanel } from '../quick/index'
+import { QuickPanel } from '../../deprecated/quick'
 
 import Validator from '../../validator'
 import { observable } from 'mobx'
@@ -20,12 +20,8 @@ const store = observable({
 
 storiesOf('Form', module)
   .add('default', () => (
-    <Form
-      labelWidth='100px'
-      horizontal
-      onSubmit={() => console.log('onSubmit')}
-    >
-      <FormBlock inline style={{ width: 600 }}>
+    <Form labelWidth='100px' onSubmit={() => console.log('onSubmit')}>
+      <FormBlock style={{ width: 600 }}>
         <FormItem
           label='名字'
           required
@@ -218,3 +214,74 @@ storiesOf('Form', module)
       </FormGroup>
     )
   })
+  .add('other', () => (
+    <div>
+      <Form labelWidth='5em' onSubmit={() => console.log('onSubmit')}>
+        <FormItem
+          label='名字'
+          required
+          validate={Validator.create([], store.name)}
+        >
+          <input
+            type='text'
+            value={store.name}
+            onChange={e =>
+              store.setData({ key: 'name', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormItem
+          label='描述'
+          required
+          validate={Validator.create([], store.desc)}
+        >
+          <input
+            type='text'
+            value={store.desc}
+            onChange={e =>
+              store.setData({ key: 'desc', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormButton>
+          <button className='btn btn-primary' type='submit'>
+            提交
+          </button>
+        </FormButton>
+      </Form>
+      <hr />
+      <Form inline labelWidth='5em' onSubmit={() => console.log('onSubmit')}>
+        <FormItem
+          label='名字'
+          required
+          validate={Validator.create([], store.name)}
+        >
+          <input
+            type='text'
+            value={store.name}
+            onChange={e =>
+              store.setData({ key: 'name', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormItem
+          label='描述'
+          required
+          validate={Validator.create([], store.desc)}
+        >
+          <input
+            type='text'
+            value={store.desc}
+            onChange={e =>
+              store.setData({ key: 'desc', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormButton>
+          <button className='btn btn-primary' type='submit'>
+            提交
+          </button>
+        </FormButton>
+      </Form>
+    </div>
+  ))

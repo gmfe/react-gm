@@ -7,7 +7,7 @@ import Validator from '../../validator'
 import { WrapContext } from './util'
 
 const FormControl = ({ children }) => {
-  const { className, inputClassName } = children.props
+  const { className } = children.props
 
   const child = children
 
@@ -16,30 +16,17 @@ const FormControl = ({ children }) => {
     return React.cloneElement(child, {
       className: classNames('form-control', className)
     })
-  } else if (child.type === 'textarea') {
-    return React.cloneElement(child, {
-      className: classNames('form-control', className)
-    })
-  } else if (child.type === 'select') {
-    return React.cloneElement(child, {
-      className: classNames('form-control', className)
-    })
-  } else if (child.type.displayName === 'DatePicker') {
-    return React.cloneElement(child, {
-      inputClassName: classNames('form-control', inputClassName)
-    })
-  } else if (child.type.displayName === 'DateRangePicker') {
-    return React.cloneElement(child, {
-      inputClassName: classNames('form-control', inputClassName)
-    })
   } else if (
+    child.type.displayName === 'textarea' ||
+    child.type.displayName === 'select' ||
     child.type.displayName === 'InputNumber' ||
-    child.type.displayName === 'Search'
+    child.type.displayName === 'InputNumberV2'
   ) {
     return React.cloneElement(child, {
       className: classNames('form-control', className)
     })
   }
+
   return child
 }
 
@@ -50,8 +37,6 @@ FormControl.propTypes = {
 const FormItemInner = ({
   label,
   labelWidth,
-  inline,
-  horizontal,
   required,
   canValidate,
   validate,
@@ -82,7 +67,6 @@ const FormItemInner = ({
 
   return (
     <Flex
-      column={!horizontal && !inline}
       {...rest}
       className={classNames('gm-form-group', className, {
         'has-error': error,
@@ -91,12 +75,12 @@ const FormItemInner = ({
     >
       {label && (
         <Flex
-          justifyEnd={horizontal}
+          justifyEnd
           width={labelWidth}
           className={classNames(
             'gm-form-label control-label',
             {
-              'gm-form-label-untop': unLabelTop
+              'gm-form-label-un-top': unLabelTop
             },
             {
               'gm-form-label-switch-padding-top': hasLabelSwitchPaddingTop
@@ -105,19 +89,15 @@ const FormItemInner = ({
         >
           {required ? <span style={{ color: 'red' }}>*</span> : ''}
           {label}
+          {label && '：'}
         </Flex>
       )}
       <Flex flex column>
         <div className='gm-form-field'>
-          {/* 理论上不支持children是数组，但也合理，兼容吧 */}
-          {_.isArray(children) ? (
-            children
-          ) : (
-            <FormControl>{children}</FormControl>
-          )}
-          {error && help ? (
+          <FormControl>{children}</FormControl>
+          {!!(error && help) && (
             <div className={classNames({ 'help-block': error })}>{help}</div>
-          ) : null}
+          )}
         </div>
       </Flex>
     </Flex>
@@ -125,29 +105,26 @@ const FormItemInner = ({
 }
 
 FormItemInner.propTypes = {
-  required: PropTypes.bool,
   label: PropTypes.string,
+  required: PropTypes.bool,
+  unLabelTop: PropTypes.bool,
 
   validate: PropTypes.func, // 有 validate, 则 error help无效
   error: PropTypes.bool,
   help: PropTypes.string,
 
   // 以下不要用， 由context传过来的
-  horizontal: PropTypes.bool,
-  inline: PropTypes.bool,
   labelWidth: PropTypes.string,
   canValidate: PropTypes.bool,
   // 以上 由context传过来的
 
-  unLabelTop: PropTypes.bool,
-  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }
 
 const FormItem = props => {
   const consumer = useContext(WrapContext)
-  return <FormItemInner {...props} {...consumer} />
+  return <FormItemInner {...consumer} {...props} />
 }
 
 FormItem.displayName = 'FormItem'
