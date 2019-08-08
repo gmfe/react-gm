@@ -29,17 +29,23 @@ const Day = props => {
 
   let cn = null
   if (selected !== null && selected.length !== undefined) {
-    if (selected.length) {
+    const len = selected.length
+    if (len) {
       cn = classNames('gm-calendar-day', {
         'gm-calendar-day-select': beSelected,
         'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
         'gm-calendar-day-old': moment(selected[0]).month() > value.month(),
         'gm-calendar-day-new': moment(selected[0]).month() < value.month(),
-        'gm-calendar-day-disabled': disabled,
-        'gm-calendar-active': handleSelected()
+        // 'gm-calendar-day-disabled': disabled,
+        'gm-calendar-active': selected[len - 1] && handleSelected()
       })
     } else {
-      cn = 'gm-calendar-day'
+      cn = classNames('gm-calendar-day', {
+        'gm-calendar-day-select': beSelected,
+        'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
+        'gm-calendar-day-old': will.month() > value.month(),
+        'gm-calendar-day-new': will.month() < value.month()
+      })
     }
   } else {
     cn = classNames('gm-calendar-day', {
@@ -218,7 +224,7 @@ export const Content = props => {
 }
 
 Content.propTypes = {
-  selected: PropTypes.object,
+  selected: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   onSelectDay: PropTypes.func.isRequired,
   will: PropTypes.object.isRequired,
   getDisabled: PropTypes.func.isRequired,

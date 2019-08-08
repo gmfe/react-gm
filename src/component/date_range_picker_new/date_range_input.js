@@ -50,12 +50,17 @@ const DateRange = props => {
 }
 
 DateRange.propTypes = {
+  /** 禁止选择 */
   disabled: PropTypes.bool,
+  /** 选择的开始日期，Date()对象 */
   startDate: PropTypes.object,
+  /** 选择的结束日期，Date()对象 */
   endDate: PropTypes.object,
   /** 自定义渲染格式 */
   inputValueRender: PropTypes.func,
+  /** 清除日期 */
   canClear: PropTypes.bool,
+  /** 清除日期回调函数 */
   clearDate: PropTypes.func
 }
 

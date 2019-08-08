@@ -5,7 +5,7 @@ import { getLocale } from '../../locales'
 import CalendarV2 from '../calendar/calendarV2'
 import moment from 'moment'
 
-/** 左侧选择栏 */
+/** 左侧选择参数列表 */
 const list = [
   { name: 'today', text: getLocale('今天') },
   { name: 'last_7', text: getLocale('近7天') },
@@ -34,11 +34,11 @@ DateParamsList.propTypes = {
   selectDateParams: PropTypes.func
 }
 
+/** 日期选择 */
 // 记录每一次选择的日期, 元素形式{ date, type }
 // type: 1 左侧日历  2 右侧日历
 let hasSelectDay = []
 
-/** 日期选择 */
 const CalendarSelect = props => {
   const {
     dateStart,
@@ -73,35 +73,42 @@ const CalendarSelect = props => {
     setSelect2(select2)
   }
 
+  const SetleftSelect = () => {
+    let _select1 = select1.slice()
+    let _select2 = select2.slice()
+
+    const startMonth = moment(selectedList[0]).month()
+    const endMonth = moment(selectedList[1]).month()
+    const select1Month = moment(select1[0]).month()
+
+    if (startMonth === endMonth) {
+      select1.length && startMonth === select1Month
+        ? (_select1 = selectedList)
+        : (_select2 = selectedList)
+    } else {
+      _select1.push(selectedList[0])
+      _select2.push(selectedList[1])
+    }
+    setNewSelect(_select1, _select2)
+  }
+
   useEffect(() => {
-    // 已选择两个日期
+    // 已选择两个日期，更新
     if (hasSelectDay.length === 2) {
       const list1 = []
       const list2 = []
       _.each(hasSelectDay, item => {
         item.type === 1 ? list1.push(item.date) : list2.push(item.date)
       })
+      setNewSelect(list1, list2)
       // 清空已选择日期
       hasSelectDay = []
-      setNewSelect(list1, list2)
     }
   }, [begin, end])
   useEffect(() => {
-    // 选中左侧参数
+    // 选中左侧参数，更新日历
     if (selectedList.length) {
-      let _select1 = []
-      let _select2 = []
-      const startMonth = moment(selectedList[0]).month()
-      const endMonth = moment(selectedList[1]).month()
-      if (startMonth === endMonth) {
-        startMonth === moment(select1[0]).month()
-          ? (_select1 = selectedList)
-          : (_select2 = selectedList)
-      } else {
-        _select1.push(selectedList[0])
-        _select2.push(selectedList[1])
-      }
-      setNewSelect(_select1, _select2)
+      SetleftSelect()
     }
   }, [selectedList])
 
@@ -120,7 +127,7 @@ const CalendarSelect = props => {
     return _select
   }
 
-  // 选中日期
+  // 选择日期判断
   const changeDate = (type, date) => {
     if (hasSelectDay.length) {
       let _begin = null
@@ -139,12 +146,15 @@ const CalendarSelect = props => {
       handleSelectDay(_begin, _end)
     } else {
       hasSelectDay.push({ date, type })
+      const one = select1.slice()
+      const two = select2.slice()
       type === 1
-        ? setNewSelect([hasSelectDay[0].date], [])
-        : setNewSelect([], [hasSelectDay[0].date])
+        ? setNewSelect([hasSelectDay[0].date], two)
+        : setNewSelect(one, [hasSelectDay[0].date])
     }
   }
 
+  // 选择 年 / 月 / 日 更新日历
   const handleSelectDate = (calendar, type, date) => {
     if (type === 'day') {
       calendar === 'begin' ? changeDate(1, date) : changeDate(2, date)
@@ -163,19 +173,24 @@ const CalendarSelect = props => {
     handleSelectDate('end', type, date)
   }
 
-  const dateOne = dateEnd
-    ? moment(dateEnd).subtract(1, 'M')
-    : moment().subtract(1, 'M')
-
-  const dateTwo = dateStart ? moment(dateStart).add(1, 'M') : moment()
+  // dateOne, dateTwo 防止日历选择为空
+  const dateOne = select1.length
+    ? moment(select1[0])
+    : moment(select2[0]).subtract(1, 'M')
+  const dateTwo = select2.length
+    ? moment(select2[0])
+    : moment(select1[0]).add(1, 'M')
 
   if (select1.length) {
     const month1 = moment(select1[0]).month()
     const month2 = moment(select2[0]).month()
     const year1 = moment(select1[0]).year()
     const year2 = moment(select2[0]).year()
+
     showToggle = (month2 - month1 !== 1 && year2 === year1) || year2 !== year1
   }
+
+  console.log(select1, select2)
 
   return (
     <div className='date-range-select-right'>
@@ -207,11 +222,9 @@ CalendarSelect.propTypes = {
   dateEnd: PropTypes.object,
   begin: PropTypes.object,
   end: PropTypes.object,
-  selectStartDate: PropTypes.func,
-  selectEndDate: PropTypes.func,
   handleSelectDay: PropTypes.func,
-  selectedList: PropTypes.array,
-  selectDate: PropTypes.func
+  /** 被选中日期 */
+  selectedList: PropTypes.array
 }
 
 /** 底部展示与按钮 */
@@ -242,8 +255,11 @@ const Bottom = props => {
 }
 
 Bottom.propTypes = {
+  /** 选择的开始日期 */
   begin: PropTypes.object,
+  /** 选择的结束日期 */
   end: PropTypes.object,
+  /** 日期更新回调函数，参数: 开始日期 && 结束日期 */
   selectDate: PropTypes.func,
   onOk: PropTypes.func,
   onCancel: PropTypes.func

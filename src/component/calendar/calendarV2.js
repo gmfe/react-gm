@@ -29,19 +29,15 @@ const HeadNew = props => {
   const month = will.month()
   const year = will.year()
 
-  // type: 1 left  2 right  3 all --- 切换按钮的展示
+  // type: 1 left  2 right  3 all --- 月 / 年 切换展示
   const _type = type || 3
   let showLeft = true
   let showRight = true
   showLeft = _type === 1 ? true : showToggle
   showRight = _type === 1 ? showToggle : true
 
-  const handleChangeMonth = month => {
-    onChange('month', month)
-  }
-
-  const handleChangeYear = year => {
-    onChange('year', year)
+  const handleChange = (type, date) => {
+    onChange(type, date)
   }
 
   return (
@@ -51,14 +47,14 @@ const HeadNew = props => {
           <div>
             <a
               className='gm-calendar-head-pre gm-calendarV2-head-svg'
-              onClick={() => handleChangeYear(year - 1)}
+              onClick={() => handleChange('year', year - 1)}
             >
               <SVGLeftSmall />
             </a>
             <a
               href='javascript:;'
               className='gm-calendar-head-pre gm-calendarV2-head-svg'
-              onClick={() => handleChangeMonth(month - 1)}
+              onClick={() => handleChange('month', month - 1)}
             >
               <SVGLeftSmall />
             </a>
@@ -84,13 +80,13 @@ const HeadNew = props => {
             <a
               href='javascript:;'
               className='gm-calendar-head-pre gm-calendarV2-head-svg'
-              onClick={() => handleChangeMonth(month + 1)}
+              onClick={() => handleChange('month', month + 1)}
             >
               <SVGRightSmall />
             </a>
             <a
               className='gm-calendar-head-pre gm-calendarV2-head-svg'
-              onClick={() => handleChangeYear(year + 1)}
+              onClick={() => handleChange('year', year + 1)}
             >
               <SVGRightSmall />
             </a>
