@@ -21,7 +21,7 @@ const store = observable({
 storiesOf('Form', module)
   .add('default', () => (
     <Form labelWidth='100px' onSubmit={() => console.log('onSubmit')}>
-      <FormBlock style={{ width: 600 }}>
+      <FormBlock>
         <FormItem
           label='名字'
           required
