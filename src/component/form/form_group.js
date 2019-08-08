@@ -4,17 +4,24 @@ import PropTypes from 'prop-types'
 import Affix from '../affix'
 import _ from 'lodash'
 
-class FormGroup extends React.Component {
-  handleSubmit = e => {
+const FormGroup = ({
+  disabled,
+  onCancel,
+  children,
+  formRefs,
+  onSubmit,
+  onSubmitValidated,
+  ...rest
+}) => {
+  const handleSubmit = e => {
     e.preventDefault()
-
-    const { onSubmit, onSubmitValidated, formRefs } = this.props
-
     onSubmit()
 
     let isPass = true
+
+    // TODO
     _.each(formRefs, form => {
-      if (!form.current.apiValidate()) {
+      if (!form.current.apiDoValidate()) {
         isPass = false
       }
     })
@@ -23,45 +30,35 @@ class FormGroup extends React.Component {
     }
   }
 
-  render() {
-    const {
-      disabled,
-      onCancel,
-      children,
-      formRefs, onSubmit, onSubmitValidated, // eslint-disable-line
-      ...rest
-    } = this.props
-
-    return (
-      <div {...rest} onSubmit={this.handleSubmit}>
-        {children}
-        <Affix bottom={0}>
-          <div className='text-center gm-padding-tb-5 gm-form-group-sticky-bottom'>
-            {onCancel && (
-              <React.Fragment>
-                <button
-                  type='button'
-                  className='btn btn-default'
-                  onClick={onCancel}
-                >
-                  {getLocale('取消')}
-                </button>
-                <div className='gm-gap-20' />
-              </React.Fragment>
-            )}
-            <button
-              disabled={disabled}
-              type='button'
-              onClick={this.handleSubmit}
-              className='btn btn-primary'
-            >
-              {getLocale('保存')}
-            </button>
-          </div>
-        </Affix>
-      </div>
-    )
-  }
+  return (
+    <div {...rest} onSubmit={handleSubmit}>
+      {children}
+      <Affix bottom={0}>
+        <div className='text-center gm-padding-tb-5 gm-form-group-sticky-bottom'>
+          {onCancel && (
+            <React.Fragment>
+              <button
+                type='button'
+                className='btn btn-default'
+                onClick={onCancel}
+              >
+                {getLocale('取消')}
+              </button>
+              <div className='gm-gap-20' />
+            </React.Fragment>
+          )}
+          <button
+            disabled={disabled}
+            type='button'
+            onClick={handleSubmit}
+            className='btn btn-primary'
+          >
+            {getLocale('保存')}
+          </button>
+        </div>
+      </Affix>
+    </div>
+  )
 }
 
 FormGroup.propTypes = {

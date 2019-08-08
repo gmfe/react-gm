@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
 import Validator from '../../validator'
+import { WrapContext } from './util'
 
 class Form extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Form extends React.Component {
     }
   }
 
-  apiValidate = () => {
+  apiDoValidate = () => {
     const err = this.validateAll()
     // 有错误才打开错误提示，没有错误则不打开
     this.setState({
@@ -22,22 +23,23 @@ class Form extends React.Component {
     return !err
   }
 
+  getFormItemFields(children, formItems) {
+    _.each(React.Children.toArray(children), child => {
+      if (child.type && child.type.displayName === 'FormItem') {
+        formItems.push(child)
+      } else if (child.props && child.props.children) {
+        this.getFormItemFields(child.props.children, formItems)
+      }
+    })
+  }
+
   validateAll() {
     const { children } = this.props
     const helpList = []
     const formItems = []
-    _.each(React.Children.toArray(children), child => {
-      if (child.type.displayName === 'FormItem') {
-        formItems.push(child)
-      } else if (child.type.displayName === 'FormBlock') {
-        _.each(React.Children.toArray(child.props.children), cChild => {
-          if (cChild.type.displayName === 'FormItem') {
-            formItems.push(cChild)
-          }
-        })
-      }
-    })
 
+    // TODO，要切成解耦的
+    this.getFormItemFields(children, formItems)
     _.each(formItems, item => {
       if (item.props.error) {
         helpList.push({
@@ -83,7 +85,6 @@ class Form extends React.Component {
   render() {
     const {
       inline,
-      horizontal,
       labelWidth,
       className,
       children,
@@ -92,65 +93,47 @@ class Form extends React.Component {
       ...rest
     } = this.props
 
-    const childList = _.map(React.Children.toArray(children), (child, i) => {
-      return child.type.displayName === 'FormItem' ||
-        child.type.displayName === 'FormBlock'
-        ? React.cloneElement(
-            child,
-            Object.assign(
-              {
-                key: i,
-                horizontal,
-                inline,
-                labelWidth,
-                canValidate: this.state.canValidate
-              },
-              child.props
-            )
-          )
-        : child
-    })
-
     return (
-      <form
-        {...rest}
-        className={classNames(
-          'gm-form',
-          {
-            'form-inline': inline,
-            'form-horizontal': horizontal
-          },
-          className
-        )}
-        onSubmit={this.handleSubmit}
+      <WrapContext.Provider
+        value={{
+          labelWidth,
+          canValidate: this.state.canValidate
+        }}
       >
-        {childList}
-        {hasButtonInGroup && (
-          <button type='submit' style={{ display: 'none' }}>
-            button
-          </button>
-        )}
-      </form>
+        <form
+          {...rest}
+          className={classNames(
+            'gm-form',
+            {
+              'form-inline': inline
+            },
+            className
+          )}
+          onSubmit={this.handleSubmit}
+        >
+          {children}
+          {hasButtonInGroup && (
+            <button type='submit' style={{ display: 'none' }}>
+              button
+            </button>
+          )}
+        </form>
+      </WrapContext.Provider>
     )
   }
 }
 
 Form.propTypes = {
-  inline: PropTypes.bool,
-  horizontal: PropTypes.bool,
-  labelWidth: PropTypes.string, // horizontal true 才有效
-  hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
   onSubmit: PropTypes.func, // 默认处理了 preventDefault,
   onSubmitValidated: PropTypes.func,
-  children: PropTypes.any,
+  inline: PropTypes.bool,
+  labelWidth: PropTypes.string,
+  hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
   className: PropTypes.string,
   style: PropTypes.object
 }
 
 Form.defaultProps = {
-  inline: false,
-  horizontal: false,
-  hasButtonInGroup: false,
   onSubmit: _.noop,
   onSubmitValidated: _.noop
 }
