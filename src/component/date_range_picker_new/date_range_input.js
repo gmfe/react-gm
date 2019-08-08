@@ -10,7 +10,7 @@ const DateRange = props => {
     startDate,
     endDate,
     disabled,
-    inputValueRender,
+    renderInputValue,
     canClear,
     clearDate
   } = props
@@ -26,7 +26,7 @@ const DateRange = props => {
         className='date-input gm-cursor'
         type='text'
         placeholder='开始日期'
-        value={inputValueRender(startDate)}
+        value={renderInputValue(startDate)}
         disabled={disabled}
         readOnly
       />
@@ -35,7 +35,7 @@ const DateRange = props => {
         className='date-input gm-cursor'
         type='text'
         placeholder='结束日期'
-        value={inputValueRender(endDate)}
+        value={renderInputValue(endDate)}
         disabled={disabled}
         readOnly
       />
@@ -57,7 +57,7 @@ DateRange.propTypes = {
   /** 选择的结束日期，Date()对象 */
   endDate: PropTypes.object,
   /** 自定义渲染格式 */
-  inputValueRender: PropTypes.func,
+  renderInputValue: PropTypes.func,
   /** 清除日期 */
   canClear: PropTypes.bool,
   /** 清除日期回调函数 */
@@ -65,7 +65,7 @@ DateRange.propTypes = {
 }
 
 DateRange.defaultProps = {
-  inputValueRender: date => (date ? moment(date).format('YYYY-MM-DD') : '')
+  renderInputValue: date => (date ? moment(date).format('YYYY-MM-DD') : '')
 }
 
 export default DateRange

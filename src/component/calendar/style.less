@@ -101,6 +101,8 @@
 
 .gm-calendar-day-will {
   border: 1px solid @gm-color-third;
+  width: 24px;
+  margin: 2px;
 }
 
 .gm-calendar-day-now {
@@ -117,14 +119,14 @@
   color: @gm-color-third;
 }
 
-.gm-calendar-active {
+.gm-calendar-active:hover {
   background-color: @brand-primary;
   color: white;
   width: 24px;
   margin: 2px;
 }
 
-.gm-calendar-active:hover {
+.gm-calendar-active:not(.gm-calendar-day-new):not(.gm-calendar-day-old) {
   background-color: @brand-primary;
   color: white;
   width: 24px;
@@ -136,10 +138,10 @@
   cursor: not-allowed;
 }
 
-.gm-calendar-day-select:not(.gm-calendar-active) {
+.gm-calendar-day-select:not(.gm-calendar-active):not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
   background-color: #f1f0f3;
   color: #8b92a3;
-  border: none;
+  border: 1px solid #f1f0f3;
   border-radius: 0;
 }
 

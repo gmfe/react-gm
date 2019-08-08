@@ -9,7 +9,15 @@ import SVGLeftSmall from '../../../svg/left-small.svg'
 import SVGRightSmall from '../../../svg/right-small.svg'
 
 const Day = props => {
-  const { disabled, onClick, value, will, selected, beSelected } = props
+  const {
+    disabled,
+    onClick,
+    value,
+    will,
+    selected,
+    selectDates,
+    beSelected
+  } = props
 
   const nowMountStart = +moment().startOf('day')
   const handleClick = () => {
@@ -19,45 +27,28 @@ const Day = props => {
     onClick(value)
   }
 
-  const handleSelected = () => {
-    const res = _.filter(
-      selected,
-      item => +moment(item).startOf('day') === +value.startOf('day')
-    )
-    return res.length
+  const isDayActive = () => {
+    if (selectDates && selectDates.length) {
+      const res = _.filter(
+        selectDates,
+        item => +moment(item).startOf('day') === +value.startOf('day')
+      )
+      return Boolean(res.length)
+    } else {
+      return +moment(selected).startOf('day') === +value.startOf('day')
+    }
   }
 
-  let cn = null
-  if (selected !== null && selected.length !== undefined) {
-    const len = selected.length
-    if (len) {
-      cn = classNames('gm-calendar-day', {
-        'gm-calendar-day-select': beSelected,
-        'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
-        'gm-calendar-day-old': moment(selected[0]).month() > value.month(),
-        'gm-calendar-day-new': moment(selected[0]).month() < value.month(),
-        // 'gm-calendar-day-disabled': disabled,
-        'gm-calendar-active': selected[len - 1] && handleSelected()
-      })
-    } else {
-      cn = classNames('gm-calendar-day', {
-        'gm-calendar-day-select': beSelected,
-        'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
-        'gm-calendar-day-old': will.month() > value.month(),
-        'gm-calendar-day-new': will.month() < value.month()
-      })
-    }
-  } else {
-    cn = classNames('gm-calendar-day', {
-      'gm-calendar-day-will': +will.startOf('day') === +value.startOf('day'),
-      'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
-      'gm-calendar-day-old': will.month() > value.month(),
-      'gm-calendar-day-new': will.month() < value.month(),
-      'gm-calendar-day-disabled': disabled,
-      'gm-calendar-active':
-        selected && +moment(selected).startOf('day') === +value.startOf('day')
-    })
-  }
+  const cn = classNames('gm-calendar-day', {
+    'gm-calendar-day-will':
+      !selectDates && +moment(will).startOf('day') === +value.startOf('day'),
+    'gm-calendar-day-now': nowMountStart === +value.startOf('day'),
+    'gm-calendar-day-old': moment(will).month() > value.month(),
+    'gm-calendar-day-new': moment(will).month() < value.month(),
+    'gm-calendar-day-disabled': disabled,
+    'gm-calendar-active': isDayActive(),
+    'gm-calendar-day-select': beSelected
+  })
 
   return (
     <span className={cn} onClick={handleClick}>
@@ -71,7 +62,8 @@ Day.propTypes = {
   onClick: PropTypes.func.isRequired,
   value: PropTypes.object.isRequired,
   will: PropTypes.object.isRequired,
-  selected: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  selected: PropTypes.object.isRequired,
+  selectDates: PropTypes.array,
   beSelected: PropTypes.bool
 }
 
@@ -173,27 +165,25 @@ export const Week = () => {
 }
 
 export const Content = props => {
-  const { selected, will, onSelectDay, getDisabled, selectedList } = props
+  const {
+    selected,
+    will,
+    onSelectDay,
+    getDisabled,
+    selectDates,
+    dateRangeSelect
+  } = props
 
-  let month = null
-  if (selected !== null && selected.length) {
-    month = moment(selected[0])
-      .startOf('month')
-      .day(0)
-      .add(-1, 'day')
-  } else {
-    month = moment(will)
-      .startOf('month')
-      .day(0)
-      .add(-1, 'day')
-  }
+  const m = moment(will)
+    .startOf('month')
+    .day(0)
+    .add(-1, 'day')
 
-  const DayOfSelect = day => {
-    if (selectedList && selectedList.length) {
+  const isBeSelected = m => {
+    if (dateRangeSelect && dateRangeSelect.length) {
       const res =
-        (day.isAfter(selectedList[0]) && day.isBefore(selectedList[1])) ||
-        day.isSame(selectedList[0]) ||
-        day.isSame(selectedList[1])
+        moment(dateRangeSelect[0]).isSameOrBefore(m) &&
+        moment(dateRangeSelect[1]).isSameOrAfter(m)
       return res
     }
     return false
@@ -204,16 +194,17 @@ export const Content = props => {
       {_.map(_.groupBy(_.range(42), v => parseInt(v / 7)), (v, i) => (
         <div key={i} className='gm-calendar-content-div'>
           {_.map(v, (value, index) => {
-            const mm = moment(month.add(1, 'day'))
+            const mm = moment(m.add(1, 'day'))
             return (
               <Day
                 key={index}
-                selected={selected}
+                selected={moment(selected)}
                 will={will}
                 value={mm}
                 onClick={onSelectDay}
                 disabled={getDisabled(mm)}
-                beSelected={DayOfSelect(mm)}
+                selectDates={selectDates}
+                beSelected={isBeSelected(mm)}
               />
             )
           })}
@@ -224,11 +215,12 @@ export const Content = props => {
 }
 
 Content.propTypes = {
-  selected: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  selected: PropTypes.object,
   onSelectDay: PropTypes.func.isRequired,
   will: PropTypes.object.isRequired,
   getDisabled: PropTypes.func.isRequired,
-  selectedList: PropTypes.array
+  selectDates: PropTypes.array,
+  dateRangeSelect: PropTypes.array
 }
 
 const Calendar = props => {

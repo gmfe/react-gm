@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import DateRangePickerNew from './index'
 import { observable } from 'mobx'
+import moment from 'moment'
 
 const store = {
   begin: new Date(),
@@ -22,9 +23,24 @@ const store1 = observable({
 })
 
 const commonStore = observable(store)
+const disabledStore = observable(store)
 const canClearStore = observable(store)
+const customsStore = observable(store)
 
 storiesOf('DateRangePickerNew', module)
+  .add('说明', () => null, {
+    info: {
+      text: `
+        DateRangePickerNew -- 日期段选择
+        
+        主要功能：提供日期段选择
+        
+        - 区别于之前的组件，将两个日期揉合一起选择，一个日历可以同时选择 开始日期 && 结束日期
+        - 以点击的日期进行判断，作为选择的 开始日期 && 结束日期
+        - 提供日期选择，快速选择近一个月内的日期
+      `
+    }
+  })
   .add('一般形式', () => (
     <DateRangePickerNew
       dateStart={commonStore.begin}
@@ -38,6 +54,28 @@ storiesOf('DateRangePickerNew', module)
       dateStart={store1.begin}
       dateEnd={store1.end}
       onChange={(begin, end) => store1.changeDate(begin, end)}
+    />
+  ))
+
+  .add('自定义某段日期不可选', () => (
+    <DateRangePickerNew
+      dateStart={disabledStore.begin}
+      dateEnd={disabledStore.end}
+      onChange={(begin, end) => disabledStore.changeDate(begin, end)}
+      disabledDate={m => {
+        return moment(m).get('day') === 5
+      }}
+    />
+  ))
+
+  .add('自定义日期展示格式', () => (
+    <DateRangePickerNew
+      dateStart={customsStore.begin}
+      dateEnd={customsStore.end}
+      onChange={(begin, end) => customsStore.changeDate(begin, end)}
+      renderInputValue={m => {
+        return moment(m).format('MM-DD')
+      }}
     />
   ))
 

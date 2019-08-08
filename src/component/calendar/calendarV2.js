@@ -25,16 +25,19 @@ const months = [
 ]
 
 const HeadNew = props => {
-  const { will, onChange, type, showToggle } = props
-  const month = will.month()
-  const year = will.year()
+  const { dates, onChange, type, showDates } = props
+  const month = moment(dates).month()
+  const year = moment(dates).year()
 
   // type: 1 left  2 right  3 all --- 月 / 年 切换展示
   const _type = type || 3
-  let showLeft = true
-  let showRight = true
-  showLeft = _type === 1 ? true : showToggle
-  showRight = _type === 1 ? showToggle : true
+  const isNearMonth =
+    moment(showDates[1]).month() - moment(showDates[0]).month() === 1
+  const isSameYear = moment(showDates[1]).year() === moment(showDates[0]).year()
+  const showLeft =
+    type === 1 ? true : !isSameYear || (!isNearMonth && isSameYear)
+  const showRight =
+    type === 2 ? true : !isSameYear || (!isNearMonth && isSameYear)
 
   const handleChange = (type, date) => {
     onChange(type, date)
@@ -43,7 +46,7 @@ const HeadNew = props => {
   return (
     <React.Fragment>
       <Flex alignCenter className='gm-calendarV2-head clearfix'>
-        {showLeft && (
+        {(showLeft || type === 3) && (
           <div>
             <a
               className='gm-calendar-head-pre gm-calendarV2-head-svg'
@@ -75,7 +78,7 @@ const HeadNew = props => {
           </span>
           <span className='gm-calendar-head-month'>{months[month]}</span>
         </Flex>
-        {showRight && (
+        {(showRight || type === 3) && (
           <div>
             <a
               href='javascript:;'
@@ -98,54 +101,42 @@ const HeadNew = props => {
 }
 
 HeadNew.propTypes = {
-  will: PropTypes.object,
-  onChange: PropTypes.func.isRequired,
+  dates: PropTypes.object,
+  onChange: PropTypes.func,
   type: PropTypes.number,
-  showToggle: PropTypes.bool
+  showDates: PropTypes.array
 }
 
 /** 新 calendar */
 const CalendarV2 = props => {
   const {
-    selected, // 选中日期数组
-    onSelect,
-    min,
-    max,
+    showDates,
     disabledDate,
-    className,
     type,
-    selectedList,
-    showToggle,
-    date,
+    className,
+    selectDates,
+    changeYearOrMonth,
+    onSelect,
+    dateRangeSelect,
     ...rest
   } = props
 
-  const will = selected.length ? moment(selected[0]) : date
+  let dates = null
+  type === 1 ? (dates = showDates[0]) : (dates = showDates[1])
 
   const handleSelectDay = m => {
-    props.onSelect('day', m.toDate())
+    onSelect(type, m.toDate())
   }
 
-  const handleChangeHead = (type, date) => {
-    props.onSelect(type, date)
+  const handleChangeYearOrMonth = (changeType, date) => {
+    changeYearOrMonth(type, changeType, date)
   }
 
   const getDisabled = m => {
-    let { min, max, disabledDate } = props
-    min = min ? moment(min).startOf('day') : null
-    max = max ? moment(max).startOf('day') : null
-
     let disabled = false
 
     if (disabledDate) {
       disabled = disabledDate(m.toDate())
-    } else {
-      if (min && m < min) {
-        disabled = true
-      }
-      if (max && m > max) {
-        disabled = true
-      }
     }
     return disabled
   }
@@ -153,51 +144,37 @@ const CalendarV2 = props => {
   return (
     <div {...rest} className={classNames('gm-calendar', className)}>
       <HeadNew
-        will={will}
-        onChange={handleChangeHead}
+        dates={dates}
+        onChange={handleChangeYearOrMonth}
         type={type}
-        showToggle={showToggle}
+        showDates={showDates}
       />
       <Week />
       <Content
-        selected={selected}
-        will={date}
-        onSelectDay={e => handleSelectDay(e)}
+        will={dates}
+        selected={dates}
+        onSelectDay={handleSelectDay}
         getDisabled={e => getDisabled(e)}
-        selectedList={selectedList}
+        selectDates={selectDates}
+        dateRangeSelect={dateRangeSelect}
       />
     </div>
   )
 }
 
 CalendarV2.propTypes = {
-  /** Date对象，表示所选的日期 */
-  selected: PropTypes.array,
-  /** 点击选择日期回调，传入参数为Date对象 */
-  onSelect: PropTypes.func,
-  willActiveSelected: PropTypes.object,
-  /** Date对象，表示可选的最小日期 */
-  min: PropTypes.object,
-  /** Date对象，表示可选的最大日期 */
-  max: PropTypes.object,
-  /** 自定义日期是否可选。传入参数为Date对象，返回true or false。 有此属性则min max无效。 */
+  showDates: PropTypes.array,
   disabledDate: PropTypes.func,
-  /** 定义样式 */
-  className: PropTypes.string,
-  /** 定义样式 */
-  style: PropTypes.object,
   type: PropTypes.number,
-  selectedList: PropTypes.array,
-  showToggle: PropTypes.bool,
-  date: PropTypes.object,
-
-  /** 目前全键盘用 */
-  onKeyDown: PropTypes.func
+  className: PropTypes.string,
+  selectDates: PropTypes.array,
+  changeYearOrMonth: PropTypes.func,
+  onSelect: PropTypes.func,
+  dateRangeSelect: PropTypes.array
 }
 
 CalendarV2.defaultProps = {
-  onSelect: _.noop,
-  onKeyDown: _.noop
+  onSelect: _.noop
 }
 
 export default CalendarV2

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Popover from '../popover'
 import DateRangeSelect from './date_range_select'
 import DateRange from './date_range_input'
+import moment from 'moment'
 
 /**
  * DateRangePickerNew -- 日期段选择
@@ -22,19 +23,17 @@ const DateRangePickerNew = props => {
     disabled,
     onChange,
     renderInputValue,
-    canClear
+    canClear,
+    disabledDate
   } = props
 
-  const handleOk = () => {
+  const handleOk = (begin, end) => {
+    onChange(moment(begin), moment(end))
     dateRangePickerNewRef.current.click()
   }
 
   const handleCancel = () => {
     dateRangePickerNewRef.current.click()
-  }
-
-  const selectDate = (_begin, _end) => {
-    onChange(_begin, _end)
   }
 
   const clearDate = () => {
@@ -47,7 +46,7 @@ const DateRangePickerNew = props => {
       dateEnd={dateEnd}
       onOk={handleOk}
       onCancel={handleCancel}
-      selectDate={selectDate}
+      disabledDate={disabledDate}
     />
   )
 
@@ -83,7 +82,8 @@ DateRangePickerNew.propTypes = {
   /** 自定义日期的展示函数 */
   renderInputValue: PropTypes.func,
   /** 清除日期 */
-  canClear: PropTypes.bool
+  canClear: PropTypes.bool,
+  disabledDate: PropTypes.func
 }
 
 export default DateRangePickerNew
