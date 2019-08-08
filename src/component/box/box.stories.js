@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import Box from './box'
 import BoxTable from './box_table'
 import BoxForm from './box_form'
-import { Form, FormItem } from '../form'
+import { FormItem, FormBlock, FormButton } from '../form'
 
 storiesOf('Box', module)
   .add('Box', () => (
@@ -23,8 +23,57 @@ storiesOf('Box', module)
       </BoxTable>
     </div>
   ))
-  .add('BoxForm', () => (
-    <div>
-      <BoxForm />
-    </div>
-  ))
+  .add(
+    'BoxForm',
+    () => (
+      <div>
+        <BoxForm>
+          <FormBlock>
+            <FormItem label='商品'>
+              <input type='text' />
+            </FormItem>
+            <FormItem label='啦啦'>
+              <input type='text' />
+            </FormItem>
+          </FormBlock>
+          <BoxForm.More>
+            <FormBlock>
+              <FormItem label='商品'>
+                <input type='text' />
+              </FormItem>
+              <FormItem label='啦啦'>
+                <input type='text' />
+              </FormItem>
+            </FormBlock>
+            <FormBlock>
+              <FormItem label='商品'>
+                <input type='text' />
+              </FormItem>
+              <FormItem label='啦啦'>
+                <input type='text' />
+              </FormItem>
+            </FormBlock>
+            <FormBlock>
+              <FormItem label='商品'>
+                <input type='text' />
+              </FormItem>
+              <FormItem label='啦啦'>
+                <input type='text' />
+              </FormItem>
+            </FormBlock>
+          </BoxForm.More>
+          <FormButton>
+            <button className='btn btn-primary' type='submit'>
+              搜索
+            </button>
+            <button className='btn btn-link'>重置</button>
+          </FormButton>
+        </BoxForm>
+      </div>
+    ),
+    {
+      info: {
+        text: 'TODO'
+      }
+    }
+  )
