@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Flex from '../flex'
-import _ from 'lodash'
 import Validator from '../../validator'
 import { withWrapContext, colWidth } from './util'
 
@@ -42,7 +41,6 @@ const FormItem = withWrapContext(
     style,
     ...rest
   }) => {
-    let hasLabelSwitchPaddingTop = false
     const _style = Object.assign(
       {},
       style,
@@ -59,11 +57,7 @@ const FormItem = withWrapContext(
       error = !!help
     }
 
-    if (!_.isArray(children)) {
-      if (children.type.displayName === 'Switch') {
-        hasLabelSwitchPaddingTop = true
-      }
-    }
+    const childList = React.Children.toArray(children)
 
     return (
       <Flex
@@ -78,15 +72,9 @@ const FormItem = withWrapContext(
           <Flex
             justifyEnd
             width={labelWidth}
-            className={classNames(
-              'gm-form-label control-label',
-              {
-                'gm-form-label-un-top': unLabelTop
-              },
-              {
-                'gm-form-label-switch-padding-top': hasLabelSwitchPaddingTop
-              }
-            )}
+            className={classNames('gm-form-label control-label', {
+              'gm-form-label-un-top': unLabelTop
+            })}
           >
             {required ? <span style={{ color: 'red' }}>*</span> : ''}
             {label}
@@ -95,7 +83,8 @@ const FormItem = withWrapContext(
         )}
         <Flex flex column>
           <div className='gm-form-field'>
-            <FormControl>{children}</FormControl>
+            <FormControl>{childList[0]}</FormControl>
+            {childList.slice(1)}
             {!!(error && help) && (
               <div className={classNames({ 'help-block': error })}>{help}</div>
             )}
