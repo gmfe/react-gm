@@ -194,6 +194,18 @@ storiesOf('Form', module)
           onChange={e => store.setData({ key: 'name', value: e.target.value })}
         />
       </FormItem>
+      <FormItem
+        label='名字'
+        required
+        col={2}
+        validate={Validator.create([], store.name)}
+      >
+        <input
+          type='text'
+          value={store.name}
+          onChange={e => store.setData({ key: 'name', value: e.target.value })}
+        />
+      </FormItem>
       <FormButton>
         <button className='btn btn-primary' type='submit'>
           提交
