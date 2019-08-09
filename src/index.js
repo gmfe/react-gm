@@ -101,7 +101,7 @@ import { Select, Option } from './component/select'
 import { setLocale } from './locales'
 
 import Carousel from './component/carousel/carousel'
-import Box from './component/box'
+import { Box, BoxForm, BoxTable } from './component/box'
 
 Object.assign(Sheet, {
   SheetColumn,
@@ -234,5 +234,7 @@ export {
   DropDownNewMenu,
   DropDownNewSubMenu,
   DropDownNewItem,
-  Box
+  Box,
+  BoxForm,
+  BoxTable
 }
