@@ -30,10 +30,6 @@ const FormControl = ({ children }) => {
   return child
 }
 
-FormControl.propTypes = {
-  children: PropTypes.any
-}
-
 const FormItemInner = ({
   label,
   labelWidth,
