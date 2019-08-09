@@ -86,6 +86,7 @@ class Form extends React.Component {
     const {
       inline,
       labelWidth,
+      disabledCol,
       className,
       children,
       hasButtonInGroup,
@@ -97,6 +98,7 @@ class Form extends React.Component {
       <WrapContext.Provider
         value={{
           labelWidth,
+          disabledCol,
           canValidate: this.state.canValidate
         }}
       >
@@ -127,6 +129,7 @@ Form.propTypes = {
   onSubmit: PropTypes.func, // 默认处理了 preventDefault,
   onSubmitValidated: PropTypes.func,
   inline: PropTypes.bool,
+  disabledCol: PropTypes.bool,
   labelWidth: PropTypes.string,
   hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
   className: PropTypes.string,
