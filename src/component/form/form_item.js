@@ -43,7 +43,11 @@ const FormItem = withWrapContext(
     ...rest
   }) => {
     let hasLabelSwitchPaddingTop = false
-    const _style = Object.assign({}, style, { width: colWidth * col })
+    const _style = Object.assign(
+      {},
+      style,
+      col ? { width: colWidth * col } : {}
+    )
     if (canValidate && validate !== undefined) {
       if (required) {
         help = validate(function(value) {
@@ -119,10 +123,6 @@ FormItem.propTypes = {
 
   className: PropTypes.string,
   style: PropTypes.object
-}
-
-FormItem.defaultProps = {
-  col: 1
 }
 
 FormItem.displayName = 'FormItem'
