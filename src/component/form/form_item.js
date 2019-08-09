@@ -9,8 +9,6 @@ import { withWrapContext } from './util'
 const FormControl = ({ children }) => {
   const { className } = children.props
 
-  console.log(children)
-
   // 文件类型特殊
   if (
     (children.type === 'input' && children.props.type !== 'file') ||
