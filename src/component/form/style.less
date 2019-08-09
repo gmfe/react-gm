@@ -11,10 +11,6 @@
     &.gm-form-label-un-top {
       padding-top: 0;
     }
-
-    &.gm-form-label-switch-padding-top {
-      padding-top: 2px;
-    }
   }
 
   &.form-inline {
@@ -28,6 +24,17 @@
 
   .help-block {
     margin-bottom: 0;
+  }
+
+  /* 只能作用 form-field 下面的 */
+  .gm-form-field {
+    & > .gm-radio-group {
+      margin: 4px 0 0;
+    }
+
+    & > .gm-switch {
+      margin-top: 4px;
+    }
   }
 }
 
@@ -60,5 +67,5 @@
 
 .gm-form-group-sticky-bottom {
   background-color: white;
-  box-shadow: 0 -1px 6px rgba(36, 51, 81, 0.2);
+  //box-shadow: 0 -1px 6px rgba(36, 51, 81, 0.2);
 }

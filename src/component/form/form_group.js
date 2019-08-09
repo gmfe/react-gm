@@ -44,7 +44,7 @@ const FormGroup = ({
               >
                 {getLocale('取消')}
               </button>
-              <div className='gm-gap-20' />
+              <div className='gm-gap-10' />
             </React.Fragment>
           )}
           <button
