@@ -75,6 +75,114 @@ storiesOf('Form', module)
           />
         </FormItem>
       </FormBlock>
+      <FormBlock col={2}>
+        <FormItem
+          label='名字'
+          required
+          validate={Validator.create([], store.name)}
+        >
+          <input
+            type='text'
+            value={store.name}
+            onChange={e =>
+              store.setData({ key: 'name', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormItem
+          label='描述'
+          required
+          validate={Validator.create([], store.desc)}
+        >
+          <input
+            type='text'
+            value={store.desc}
+            onChange={e =>
+              store.setData({ key: 'desc', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormItem
+          label='描述'
+          required
+          validate={Validator.create([], store.desc)}
+        >
+          <input
+            type='text'
+            value={store.desc}
+            onChange={e =>
+              store.setData({ key: 'desc', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormItem
+          label='描述'
+          required
+          validate={Validator.create([], store.desc)}
+        >
+          <input
+            type='text'
+            value={store.desc}
+            onChange={e =>
+              store.setData({ key: 'desc', value: e.target.value })
+            }
+          />
+        </FormItem>
+      </FormBlock>
+      <FormBlock col={3}>
+        <FormItem
+          label='名字'
+          required
+          validate={Validator.create([], store.name)}
+        >
+          <input
+            type='text'
+            value={store.name}
+            onChange={e =>
+              store.setData({ key: 'name', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormItem
+          label='描述'
+          required
+          validate={Validator.create([], store.desc)}
+        >
+          <input
+            type='text'
+            value={store.desc}
+            onChange={e =>
+              store.setData({ key: 'desc', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormItem
+          label='描述'
+          required
+          validate={Validator.create([], store.desc)}
+        >
+          <input
+            type='text'
+            value={store.desc}
+            onChange={e =>
+              store.setData({ key: 'desc', value: e.target.value })
+            }
+          />
+        </FormItem>
+        <FormItem
+          label='描述'
+          required
+          validate={Validator.create([], store.desc)}
+        >
+          <input
+            type='text'
+            value={store.desc}
+            onChange={e =>
+              store.setData({ key: 'desc', value: e.target.value })
+            }
+          />
+        </FormItem>
+      </FormBlock>
       <FormItem
         label='名字'
         required
