@@ -125,6 +125,10 @@ FormItem.propTypes = {
   style: PropTypes.object
 }
 
+FormItem.defaultProps = {
+  col: 1
+}
+
 FormItem.displayName = 'FormItem'
 
 export default FormItem
