@@ -4,7 +4,7 @@ import Flex from '../flex'
 import _ from 'lodash'
 import classNames from 'classnames'
 
-const FormBlock = ({ children, block, className, col, style, ...rest }) => {
+const FormBlock = ({ children, className, col, style, ...rest }) => {
   // 暂时
   const colWidth = 270
   const _style = Object.assign({}, style, { width: colWidth * col })
@@ -16,11 +16,7 @@ const FormBlock = ({ children, block, className, col, style, ...rest }) => {
       className={classNames('gm-form-block', className)}
     >
       {_.map(React.Children.toArray(children), (child, i) => {
-        return (
-          <Flex flex={block[i] || false} key={i}>
-            {child}
-          </Flex>
-        )
+        return <Flex key={i}>{child}</Flex>
       })}
     </Flex>
   )
@@ -30,13 +26,11 @@ FormBlock.displayName = 'FormBlock'
 
 FormBlock.propTypes = {
   col: PropTypes.oneOf([1, 2, 3]),
-  block: PropTypes.array,
   className: PropTypes.string,
   style: PropTypes.object
 }
 
 FormBlock.defaultProps = {
-  block: [],
   col: 1
 }
 
