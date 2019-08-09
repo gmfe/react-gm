@@ -1,4 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 const WrapContext = React.createContext(null)
 
-export { WrapContext }
+const withWrapContext = Component => {
+  return props => {
+    const consumer = useContext(WrapContext)
+    return <Component {...consumer} {...props} />
+  }
+}
+
+export { WrapContext, withWrapContext }

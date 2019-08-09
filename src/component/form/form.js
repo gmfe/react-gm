@@ -38,8 +38,8 @@ class Form extends React.Component {
     const helpList = []
     const formItems = []
 
-    // TODO，要切成解耦的
     this.getFormItemFields(children, formItems)
+
     _.each(formItems, item => {
       if (item.props.error) {
         helpList.push({
