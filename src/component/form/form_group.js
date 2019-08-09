@@ -66,8 +66,7 @@ FormGroup.propTypes = {
   onCancel: PropTypes.func,
   formRefs: PropTypes.array,
   onSubmit: PropTypes.func,
-  onSubmitValidated: PropTypes.func,
-  children: PropTypes.any
+  onSubmitValidated: PropTypes.func
 }
 
 FormGroup.defaultProps = {
