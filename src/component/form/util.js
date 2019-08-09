@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 const WrapContext = React.createContext(null)
+// 暂定
+const colWidth = 270
 
 const withWrapContext = Component => {
   return props => {
@@ -8,4 +10,4 @@ const withWrapContext = Component => {
   }
 }
 
-export { WrapContext, withWrapContext }
+export { WrapContext, withWrapContext, colWidth }

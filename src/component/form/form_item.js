@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import Flex from '../flex'
 import _ from 'lodash'
 import Validator from '../../validator'
-import { withWrapContext } from './util'
+import { withWrapContext, colWidth } from './util'
 
 const FormControl = ({ children }) => {
   const { className } = children.props
@@ -38,9 +38,12 @@ const FormItem = withWrapContext(
     unLabelTop,
     className,
     children,
+    col,
+    style,
     ...rest
   }) => {
     let hasLabelSwitchPaddingTop = false
+    const _style = Object.assign({}, style, { width: colWidth * col })
     if (canValidate && validate !== undefined) {
       if (required) {
         help = validate(function(value) {
@@ -61,6 +64,7 @@ const FormItem = withWrapContext(
     return (
       <Flex
         {...rest}
+        style={_style}
         className={classNames('gm-form-group', className, {
           'has-error': error,
           'gm-has-error': error
@@ -99,6 +103,7 @@ const FormItem = withWrapContext(
 )
 
 FormItem.propTypes = {
+  col: PropTypes.oneOf([1, 2, 3]),
   label: PropTypes.string,
   required: PropTypes.bool,
   unLabelTop: PropTypes.bool,
@@ -114,6 +119,10 @@ FormItem.propTypes = {
 
   className: PropTypes.string,
   style: PropTypes.object
+}
+
+FormItem.defaultProps = {
+  col: 1
 }
 
 FormItem.displayName = 'FormItem'
