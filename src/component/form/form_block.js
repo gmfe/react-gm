@@ -6,9 +6,13 @@ import classNames from 'classnames'
 import { withWrapContext, colWidth } from './util'
 
 const FormBlock = withWrapContext(
-  ({ children, className, col, style, ...rest }) => {
+  ({ children, disabledCol, className, col, style, ...rest }) => {
     // 暂时
-    const _style = Object.assign({}, style, { width: colWidth * col })
+    const _style = Object.assign(
+      {},
+      style,
+      disabledCol ? {} : { width: colWidth * col }
+    )
 
     return (
       <Flex
