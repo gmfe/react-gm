@@ -99,6 +99,7 @@ class Form extends React.Component {
         value={{
           labelWidth,
           disabledCol,
+          inline,
           canValidate: this.state.canValidate
         }}
       >
