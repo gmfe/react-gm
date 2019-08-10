@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { withWrapContext, colWidth } from './util'
 
 const FormBlock = withWrapContext(
-  ({ children, disabledCol, inline, className, col, style, ...rest }) => {
+  ({ children, disabledCol, inline, className, col, style }) => {
     // 暂时
     const _style = Object.assign(
       {},
@@ -16,7 +16,6 @@ const FormBlock = withWrapContext(
 
     return (
       <Flex
-        {...rest}
         wrap
         style={_style}
         className={classNames('gm-form-block', className)}
