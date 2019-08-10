@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import classNames from 'classnames'
 import Table from '../table'
+import { devWarn } from '../../src/util'
 
 const isLeftFixed = column => _.includes([true, 'left'], column.fixed)
 const isRightFixed = column => column.fixed === 'right'
@@ -19,7 +20,7 @@ function fixedColumnsTableHOC(Component) {
       super(props)
 
       // 检测
-      if (process.env.NODE_ENV !== 'production') {
+      devWarn(() => {
         _.each(props.columns, column => {
           if (column.fixed && !column.width) {
             console.error('column with fixed need width')
@@ -28,7 +29,7 @@ function fixedColumnsTableHOC(Component) {
             console.warn('other column need width or minWidth', column)
           }
         })
-      }
+      })
     }
 
     getLeftOffsetColumns(columns, index) {

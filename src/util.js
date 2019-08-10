@@ -11,4 +11,10 @@ const withDeprecated = (Component, warnText) => {
   return Deprecated
 }
 
-export { withDeprecated }
+const devWarn = callback => {
+  if (process.env.NODE_ENV !== 'production') {
+    callback()
+  }
+}
+
+export { withDeprecated, devWarn }
