@@ -39,8 +39,7 @@ const FormItem = withWrapContext(
     children,
     col,
     disabledCol,
-    style,
-    ...rest
+    style
   }) => {
     const _style = Object.assign(
       {},
@@ -62,7 +61,6 @@ const FormItem = withWrapContext(
 
     return (
       <Flex
-        {...rest}
         style={_style}
         className={classNames('gm-form-group', className, {
           'has-error': error,
