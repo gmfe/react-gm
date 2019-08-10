@@ -89,6 +89,7 @@ class Select extends React.Component {
           disabledClose={disabledClose}
           clean={clean}
           className={classNames(`gm-select`, className)}
+          isForSelect
         />
       </Popover>
     )
