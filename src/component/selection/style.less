@@ -1,9 +1,11 @@
 .gm-selection {
   position: relative;
   vertical-align: middle;
+  height: 30px;
 
-  input {
+  .gm-selection-selected {
     padding-right: 32px;
+    cursor: pointer;
   }
 
   .gm-selection-icon {
@@ -19,11 +21,18 @@
   }
 
   .gm-selection-close-icon {
+    display: none;
     right: 20px;
   }
 
   .gm-selection-down-up {
-    right: 3px;
+    right: 6px;
+  }
+
+  &:hover {
+    .gm-selection-close-icon {
+      display: block;
+    }
   }
 
   &.disabled {
@@ -35,15 +44,15 @@
   }
 
   &.gm-selection-disabled-close {
-    input {
+    .gm-selection-selected {
       padding-right: 16px;
     }
   }
 
   &.gm-selection-disabled-clean {
-    input {
+    .gm-selection-selected {
       padding-right: 16px;
-      border: none;
+      border: 1px solid transparent;
     }
   }
 }
