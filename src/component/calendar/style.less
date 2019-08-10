@@ -101,7 +101,7 @@
   border: 1px solid @gm-color-third;
 }
 
-.gm-calendar-day-now {
+.gm-calendar-day-now:not(.gm-calendar-day-select) {
   border: 1px solid @brand-primary;
 }
 
@@ -113,12 +113,12 @@
   color: @gm-color-third;
 }
 
-.gm-calendar-active {
+.gm-calendar-active:hover {
   background-color: @brand-primary;
   color: white;
 }
 
-.gm-calendar-active:hover {
+.gm-calendar-active:not(.gm-calendar-day-new):not(.gm-calendar-day-old) {
   background-color: @brand-primary;
   color: white;
 }
@@ -126,4 +126,46 @@
 .gm-calendar-day-disabled {
   color: @gm-color-second;
   cursor: not-allowed;
+}
+
+.gm-calendar-day-select:not(.gm-calendar-active):not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
+  background-color: #f1f0f3;
+  color: #8b92a3;
+  border: 1px solid #f1f0f3;
+  border-radius: 0;
+  width: 28px;
+  margin: 2px 0;
+}
+
+.gm-calendarV2-head {
+  cursor: pointer;
+  height: 28px;
+}
+
+.gm-calendarV2-head-svg {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  display: inline-block;
+
+  svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.gm-calendarV2-head-text {
+  font-weight: bold;
+  line-height: 28px;
+  height: 28px;
+}
+
+.gm-text-left {
+  padding-left: 8px;
+}
+
+.gm-text-right {
+  padding-right: 8px;
 }

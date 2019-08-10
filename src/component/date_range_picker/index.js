@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import Calendar from '../calendar'
+import Calendar from '../calendar/calendar'
 import classNames from 'classnames'
 import Popover from '../popover'
 import _ from 'lodash'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import Calendar from './index'
+import Calendar from './calendar'
 import moment from 'moment'
 import { observable } from 'mobx'
 
