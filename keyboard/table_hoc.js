@@ -5,6 +5,7 @@ import Table from '../table/table'
 import _ from 'lodash'
 import Wrap from './wrap'
 import { CellKeyContext } from './util'
+import { devWarn } from '../src/util'
 
 // TODO columns Context
 
@@ -26,7 +27,7 @@ function keyboardTableHOC(Component) {
     // 检测下 columns
     // 需要提供能够 accessor or id
     // 用 isKeyboard 也必要会用到了 Cell
-    if (process.env.NODE_ENV !== 'production') {
+    devWarn(() => {
       useEffect(() => {
         _.each(keyboardColumns, column => {
           if (getColumnKey(column) === null) {
@@ -36,7 +37,7 @@ function keyboardTableHOC(Component) {
           }
         })
       }, [])
-    }
+    })
 
     const columnKeys = []
     const newColumns = _.map(columns, column => {

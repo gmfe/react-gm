@@ -67,7 +67,7 @@ const FormItem = withWrapContext(
           'gm-has-error': error
         })}
       >
-        {label && (
+        {label !== undefined && (
           <Flex
             justifyEnd
             width={labelWidth}

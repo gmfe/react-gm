@@ -4,14 +4,22 @@ import classNames from 'classnames'
 import _ from 'lodash'
 import Validator from '../../validator'
 import { WrapContext } from './util'
+import { devWarn } from '../../util'
 
 class Form extends React.Component {
   constructor(props) {
     super(props)
-    this.handleSubmit = ::this.handleSubmit
     this.state = {
       canValidate: false
     }
+
+    devWarn(() => {
+      if (
+        !(props.onSubmit || props.onSubmitValidated || props.hasButtonInGroup)
+      ) {
+        console.warn('请提供 onSubmit or onSubmitValidated or hasButtonInGroup')
+      }
+    })
   }
 
   apiDoValidate = () => {
@@ -67,7 +75,7 @@ class Form extends React.Component {
     return helpList.length === 0 ? null : helpList
   }
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault()
     this.props.onSubmit(e)
 
@@ -135,11 +143,6 @@ Form.propTypes = {
   hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
   className: PropTypes.string,
   style: PropTypes.object
-}
-
-Form.defaultProps = {
-  onSubmit: _.noop,
-  onSubmitValidated: _.noop
 }
 
 export default Form
