@@ -31,8 +31,14 @@ class Selection extends React.Component {
       disabledClose,
       className,
       onKeyDown,
+      isForSelect,
       ...rest
     } = this.props
+
+    const text =
+      selected !== null && selected !== undefined
+        ? renderSelected(selected)
+        : ''
 
     return (
       <div
@@ -47,20 +53,20 @@ class Selection extends React.Component {
           className
         )}
       >
-        <input
-          ref={this.refInput}
-          disabled={disabled}
-          type='text'
-          value={
-            selected !== null && selected !== undefined
-              ? renderSelected(selected)
-              : ''
-          }
-          onChange={_.noop}
-          onKeyDown={onKeyDown}
-          placeholder={placeholder}
-          className='form-control'
-        />
+        {isForSelect ? (
+          <div className='form-control gm-selection-selected'>{text}</div>
+        ) : (
+          <input
+            ref={this.refInput}
+            disabled={disabled}
+            type='text'
+            value={text}
+            onChange={_.noop}
+            onKeyDown={onKeyDown}
+            placeholder={placeholder}
+            className='form-control gm-selection-selected'
+          />
+        )}
         {selected && !disabledClose && !clean && (
           <SVGCloseCircle
             onClick={!disabled && this.handleClear}
@@ -68,7 +74,7 @@ class Selection extends React.Component {
           />
         )}
         <IconDownUp
-          active={className.includes('gm-popover-active')}
+          active={(className || '').includes('gm-popover-active')}
           className='gm-selection-icon gm-selection-down-up'
         />
       </div>
@@ -89,7 +95,9 @@ Selection.propTypes = {
   disabledClose: PropTypes.bool,
   onKeyDown: PropTypes.func,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  /** 给 Select 定制的 */
+  isForSelect: PropTypes.bool
 }
 
 Selection.defaultProps = {
