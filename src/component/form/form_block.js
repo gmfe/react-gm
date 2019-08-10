@@ -6,12 +6,12 @@ import classNames from 'classnames'
 import { withWrapContext, colWidth } from './util'
 
 const FormBlock = withWrapContext(
-  ({ children, disabledCol, className, col, style, ...rest }) => {
+  ({ children, disabledCol, inline, className, col, style, ...rest }) => {
     // 暂时
     const _style = Object.assign(
       {},
       style,
-      disabledCol ? {} : { width: colWidth * col }
+      disabledCol || inline ? {} : { width: colWidth * col }
     )
 
     return (
@@ -38,11 +38,16 @@ FormBlock.displayName = 'FormBlock'
 FormBlock.propTypes = {
   col: PropTypes.oneOf([1, 2, 3]),
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+
+  // 以下不要用， 由context传过来的
+  disabledCol: PropTypes.bool,
+  inline: PropTypes.bool
+  // 以上 由context传过来的
 }
 
 FormBlock.defaultProps = {
-  col: 1
+  col: 3
 }
 
 export default FormBlock
