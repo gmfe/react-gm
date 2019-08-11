@@ -37,7 +37,7 @@ storiesOf('DateRangePickerNew', module)
         
         - 区别于之前的组件，将两个日期揉合一起选择，一个日历可以同时选择 开始日期 && 结束日期
         - 以点击的日期进行判断，作为选择的 开始日期 && 结束日期
-        - 提供日期快速选择近一个月内的日期
+        - 提供快速选择近一个月内的日期
       `
     }
   })
@@ -89,8 +89,6 @@ storiesOf('DateRangePickerNew', module)
         onChange={(begin, end) => canClearStore.changeDate(begin, end)}
         canClear
       />
-      <div className='gm-text-20 gm-margin-top-15'>
-        Tip: 具体清除按钮交互未确定
-      </div>
+      <div className='gm-text-20 gm-margin-top-15'>Tip: 后续需更改</div>
     </div>
   ))
