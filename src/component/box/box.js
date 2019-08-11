@@ -6,7 +6,7 @@ const Box = props => {
   const { className, children, ...rest } = props
 
   return (
-    <div {...rest} className={classNames('gm-box')}>
+    <div {...rest} className={classNames('gm-box', className)}>
       {children}
     </div>
   )
