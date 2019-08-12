@@ -5,6 +5,7 @@ import _ from 'lodash'
 import classNames from 'classnames'
 import { withWrapContext, colWidth } from './util'
 
+/** 一堆同类表单元素的集 */
 const FormBlock = withWrapContext(
   ({ children, disabledCol, inline, className, col, style }) => {
     // 暂时
@@ -35,14 +36,16 @@ const FormBlock = withWrapContext(
 FormBlock.displayName = 'FormBlock'
 
 FormBlock.propTypes = {
+  /** 占用栏数 */
   col: PropTypes.oneOf([1, 2, 3]),
-  className: PropTypes.string,
-  style: PropTypes.object,
 
-  // 以下不要用， 由context传过来的
+  /** Form 传下来，不要动 */
   disabledCol: PropTypes.bool,
-  inline: PropTypes.bool
-  // 以上 由context传过来的
+  /** Form 传下来，不要动 */
+  inline: PropTypes.bool,
+
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 FormBlock.defaultProps = {

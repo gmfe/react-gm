@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import Flex from '../flex'
 import Validator from '../../validator'
 import { withWrapContext, colWidth } from './util'
+import { warn, devWarnForHook } from '../../util'
 
 const FormControl = ({ children }) => {
   const { className } = children.props
@@ -41,6 +42,12 @@ const FormItem = withWrapContext(
     disabledCol,
     style
   }) => {
+    devWarnForHook(() => {
+      if (label.includes(':') || label.includes('：')) {
+        warn('label 包含了 : or ：。', label)
+      }
+    })
+
     const _style = Object.assign(
       {},
       style,
@@ -95,19 +102,27 @@ const FormItem = withWrapContext(
 )
 
 FormItem.propTypes = {
+  /** 占用栏数 */
   col: PropTypes.oneOf([1, 2, 3]),
+  /** 顾名思义。请不要包含:，此为组件控制 */
   label: PropTypes.string,
+  /** 是否必须 */
   required: PropTypes.bool,
+
+  /** label 是有上边距的，为了和表单元素的文本对齐一条线。但是某些场景下是不需要的，比如非表单元素的时候 */
   unLabelTop: PropTypes.bool,
 
-  validate: PropTypes.func, // 有 validate, 则 error help无效
+  /** 有 validate, 则 error help无效 */
+  validate: PropTypes.func,
+  /** 少用 */
   error: PropTypes.bool,
+  /** 少用 */
   help: PropTypes.string,
 
-  // 以下不要用， 由context传过来的
+  /** 一般由 Form 传下来，也可自定义 */
   labelWidth: PropTypes.string,
+  /** Form 传下来，不要动 */
   canValidate: PropTypes.bool,
-  // 以上 由context传过来的
 
   className: PropTypes.string,
   style: PropTypes.object

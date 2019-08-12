@@ -3,7 +3,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Affix from '../affix'
 import _ from 'lodash'
+import { Button } from '../button'
+import { warn, devWarnForHook } from '../../util'
 
+/** 聚合多个表单，统一处理 submit */
 const FormGroup = ({
   disabled,
   onCancel,
@@ -13,9 +16,21 @@ const FormGroup = ({
   onSubmitValidated,
   ...rest
 }) => {
+  devWarnForHook(() => {
+    let i = 0
+    onSubmit && i++
+    onSubmitValidated && i++
+
+    if (i === 0) {
+      warn('请提供 onSubmit or onSubmitValidated')
+    } else if (i > 1) {
+      warn('请仅提供其一 onSubmit or onSubmitValidated')
+    }
+  })
+
   const handleSubmit = e => {
     e.preventDefault()
-    onSubmit()
+    onSubmit && onSubmit()
 
     let isPass = true
 
@@ -26,7 +41,7 @@ const FormGroup = ({
     })
 
     if (isPass) {
-      onSubmitValidated()
+      onSubmitValidated && onSubmitValidated()
     }
   }
 
@@ -34,27 +49,28 @@ const FormGroup = ({
     <div {...rest} onSubmit={handleSubmit}>
       {children}
       <Affix bottom={0}>
-        <div className='text-center gm-padding-tb-5 gm-form-group-sticky-bottom'>
+        <div className='gm-form-group-sticky-bottom'>
           {onCancel && (
             <React.Fragment>
-              <button
+              <Button
+                disabled={disabled}
                 type='button'
                 className='btn btn-default'
                 onClick={onCancel}
               >
                 {getLocale('取消')}
-              </button>
+              </Button>
               <div className='gm-gap-10' />
             </React.Fragment>
           )}
-          <button
+          <Button
             disabled={disabled}
             type='button'
             onClick={handleSubmit}
             className='btn btn-primary'
           >
             {getLocale('保存')}
-          </button>
+          </Button>
         </div>
       </Affix>
     </div>
@@ -62,16 +78,11 @@ const FormGroup = ({
 }
 
 FormGroup.propTypes = {
-  disabled: PropTypes.bool,
-  onCancel: PropTypes.func,
-  formRefs: PropTypes.array,
+  formRefs: PropTypes.array.isRequired,
   onSubmit: PropTypes.func,
-  onSubmitValidated: PropTypes.func
-}
-
-FormGroup.defaultProps = {
-  onSubmit: _.noop,
-  onSubmitValidated: _.noop
+  onSubmitValidated: PropTypes.func,
+  onCancel: PropTypes.func,
+  disabled: PropTypes.bool
 }
 
 export default FormGroup

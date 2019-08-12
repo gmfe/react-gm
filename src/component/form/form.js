@@ -14,10 +14,16 @@ class Form extends React.Component {
     }
 
     devWarn(() => {
-      if (
-        !(props.onSubmit || props.onSubmitValidated || props.hasButtonInGroup)
-      ) {
+      let i = 0
+      props.onSubmit && i++
+      props.onSubmitValidated && i++
+      props.hasButtonInGroup && i++
+      if (i === 0) {
         console.warn('请提供 onSubmit or onSubmitValidated or hasButtonInGroup')
+      } else if (i > 1) {
+        console.warn(
+          '请仅提供以下一项 onSubmit or onSubmitValidated or hasButtonInGroup'
+        )
       }
     })
   }
@@ -77,6 +83,7 @@ class Form extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+
     this.props.onSubmit(e)
 
     const err = this.validateAll()
@@ -135,12 +142,17 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-  onSubmit: PropTypes.func, // 默认处理了 preventDefault,
+  /** 默认处理了 event.preventDefault，避免犯低级错误 */
+  onSubmit: PropTypes.func,
+  /** 如果 FormItem 定义了 validate，则此方法就在所有验证通过后才调用 */
   onSubmitValidated: PropTypes.func,
+  /** 行内模式，一般用不到。目前在 BoxForm 内部自动使用 */
   inline: PropTypes.bool,
+  /** FormItem 默认一栏，会限定宽度。有些场景是不能限定宽度的，比如宽撑满一页，如果是启用此项 */
   disabledCol: PropTypes.bool,
   labelWidth: PropTypes.string,
-  hasButtonInGroup: PropTypes.bool, // 只在FormGroup下用。用于添加一个隐藏的按钮，为了触发FormGroup的submit
+  /** 只在 FormGroup 下用。用于添加一个隐藏的按钮，响应 enter */
+  hasButtonInGroup: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object
 }
