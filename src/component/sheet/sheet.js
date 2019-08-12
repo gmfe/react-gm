@@ -12,7 +12,6 @@ import SheetSelect from './sheet_select'
 import SheetBatchAction from './sheet_batch_action'
 import Loading from '../loading'
 import Flex from '../flex'
-import SVGFun from '../../../svg/fun.svg'
 
 class Sheet extends React.Component {
   constructor(props) {
@@ -297,11 +296,7 @@ class Sheet extends React.Component {
                     </th>
                   )
                 })}
-                {actions && (
-                  <th className='text-center'>
-                    <SVGFun style={{ color: '#13c19f' }} />
-                  </th>
-                )}
+                {actions && <th className='text-center'>操作</th>}
               </tr>
             </thead>
             <tbody>{this.renderTr(select, columns, actions)}</tbody>

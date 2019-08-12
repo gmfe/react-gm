@@ -8,7 +8,7 @@ import {
   getScrollLeft
 } from 'gm-util'
 import LayoutRoot from '../layout_root'
-import Popup from './popup'
+import Popup from '../popup/popup'
 import _ from 'lodash'
 import classNames from 'classnames'
 import EVENT_TYPE from '../../event_type'

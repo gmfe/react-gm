@@ -32,12 +32,12 @@ class Popup extends React.Component {
 
     return (
       <div
-        className={classNames('gm-popover-popup-arrow', {
-          'gm-popover-popup-arrow-top': top,
-          'gm-popover-popup-arrow-bottom': !top,
-          'gm-popover-popup-arrow-right': !center && right,
-          'gm-popover-popup-arrow-left': !center && !right,
-          'gm-popover-popup-arrow-center': center
+        className={classNames('gm-popup-arrow', {
+          'gm-popup-arrow-top': top,
+          'gm-popup-arrow-bottom': !top,
+          'gm-popup-arrow-right': !center && right,
+          'gm-popup-arrow-left': !center && !right,
+          'gm-popup-arrow-center': center
         })}
         style={style}
       />
@@ -83,7 +83,7 @@ class Popup extends React.Component {
         ref={ref => (this.refPopup = ref)}
         {...rest}
         style={Object.assign(sStyle, style)}
-        className={classNames('gm-popup  gm-box-shadow-bottom', className)}
+        className={classNames('gm-popup gm-box-shadow-bottom', className)}
       >
         {showArrow && this.renderTriggerArrow()}
         {children}

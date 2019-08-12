@@ -1,16 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Popover } from '../src'
+import { Popover, PopupContentConfirmDelete } from '../src'
 import { SvgShanchumorenHuaban, SvgTianjiamorenHuaban } from 'gm-svg'
 import _ from 'lodash'
-import SVGFun from '../svg/fun.svg'
+import SVGDelete from '../svg/delete.svg'
+import SVGCheckDetail from '../svg/check-detail.svg'
 
-const OperationHeader = (
-  <div className='text-center'>
-    <SVGFun style={{ color: '#13c19f' }} />
-  </div>
-)
+const OperationHeader = <div className='text-center'>操作</div>
 
 const OperationCell = function(props) {
   return (
@@ -19,7 +16,73 @@ const OperationCell = function(props) {
 }
 
 OperationCell.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  style: PropTypes.object
+}
+
+const OperationDetail = props => {
+  return (
+    <div
+      {...props}
+      className={classNames(
+        'gm-inline-block gm-cursor gm-padding-5 gm-text-16 gm-text gm-text-hover-primary',
+        props.className
+      )}
+    >
+      <SVGCheckDetail />
+    </div>
+  )
+}
+
+OperationDetail.propTypes = {
+  className: PropTypes.string,
+  style: PropTypes.object
+}
+
+const OperationDelete = props => {
+  const { title, onClick, className, children, ...rest } = props
+  const refPopover = React.createRef()
+
+  const handleDelete = () => {
+    return Promise.resolve(onClick()).then(() => {
+      refPopover.current.apiDoSetActive(false)
+    })
+  }
+
+  const handleCancel = () => {
+    refPopover.current.apiDoSetActive(false)
+  }
+
+  const popup = (
+    <PopupContentConfirmDelete
+      title={title}
+      onDelete={handleDelete}
+      onCancel={handleCancel}
+    >
+      {children}
+    </PopupContentConfirmDelete>
+  )
+
+  return (
+    <Popover ref={refPopover} right popup={popup} showArrow>
+      <div
+        {...rest}
+        className={classNames(
+          'gm-inline-block gm-cursor gm-padding-5 gm-text-16 gm-text gm-text-hover-primary',
+          props.className
+        )}
+      >
+        <SVGDelete />
+      </div>
+    </Popover>
+  )
+}
+
+OperationDelete.propTypes = {
+  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 class SortHeader extends React.Component {
@@ -47,7 +110,6 @@ SortHeader.propTypes = {
   className: PropTypes.string
 }
 
-// TODO
 const EditTableOperation = props => {
   return (
     <OperationCell>
@@ -117,6 +179,8 @@ const referOfWidth = {
 export {
   getColumnKey,
   OperationHeader,
+  OperationDelete,
+  OperationDetail,
   OperationCell,
   SortHeader,
   EditTableOperation,

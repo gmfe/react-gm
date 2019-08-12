@@ -94,6 +94,7 @@ import {
   DropDownNewSubMenu,
   DropDownNewItem
 } from './component/drop_down_new'
+import { PopupContentConfirmDelete } from './component/popup'
 
 import Validator from './validator'
 
@@ -236,5 +237,6 @@ export {
   DropDownNewItem,
   Box,
   BoxForm,
-  BoxTable
+  BoxTable,
+  PopupContentConfirmDelete
 }
