@@ -19,6 +19,15 @@ const store = observable({
 })
 
 storiesOf('Form', module)
+  .add('说明', () => <div />, {
+    info: {
+      text: `
+新UI的表单约束性更强，体现在
+- 栏数
+
+`
+    }
+  })
   .add('default', () => (
     <Form labelWidth='100px' onSubmit={() => console.log('onSubmit')}>
       <FormBlock>
