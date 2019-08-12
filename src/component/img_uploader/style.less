@@ -1,0 +1,60 @@
+.gm-picWall-container {
+  display: flex;
+  flex-direction: column;
+
+  .gm-picWall-box {
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+    padding: 0 14px;
+    align-items: flex-end;
+
+    .gm-picWall-imgbox {
+      margin-right: 2rem;
+      margin-top: 10px;
+      display: flex;
+      align-items: self-end;
+    }
+
+    img {
+      border: 1px solid #f0f1f3;
+    }
+
+    .gm-picWall-icon {
+      position: relative;
+      right: 8px;
+      top: -6px;
+    }
+
+    .gm-picWall-getImg {
+      width: 6rem;
+      height: 6rem;
+      border: 2px dashed #f0f1f3;
+      color: #56a3f2;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .gm-uploader {
+      width: 60px;
+      height: 60px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #56a3f2;
+      border: 2px dashed #f0f1f3;
+    }
+  }
+
+  .gm-picWall-state {
+    width: 100%;
+    overflow: hidden;
+
+    p {
+      padding: 0 14px;
+      color: #798294;
+      word-break: break-word;
+    }
+  }
+}
