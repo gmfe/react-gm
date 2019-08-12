@@ -1,7 +1,7 @@
-@import '../../src/less/variables.less';
-@import '../../src/less/mixins.less';
-@import '../../src/less/custom.less';
-@import '../../src/css/variables.less';
+@import '../src/less/variables.less';
+@import '../src/less/mixins.less';
+@import '../src/less/custom.less';
+@import '../src/css/variables.less';
 @import './cell.less';
 
 .gm-react-table.ReactTable {
@@ -186,7 +186,7 @@
   &.-highlight {
     .rt-tbody {
       .rt-tr:hover .rt-td {
-        background-color: #e7f5e8;
+        background-color: @table-bg-hover;
       }
     }
   }
