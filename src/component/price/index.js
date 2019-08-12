@@ -1,10 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Big from 'big.js'
+import _ from 'lodash'
 
-// _currency 为货币符号
-let _currency = '¥'
+// 默认 _symbol 为货币符号
+let _symbol = '¥'
 let _unit = '元'
+// [{ symbol: '￥', type: 'CNY', unit: '元' },...]
+let _currencyList = [] // 多币种列表
+
+const getCurrentFromType = type =>
+  _.find(_currencyList, item => item.type === type)
 
 class Price extends React.Component {
   formatValue = (value, precision, keepZero, isFenUnit) => {
@@ -32,8 +38,10 @@ class Price extends React.Component {
       currencyScale,
       keepZero,
       isFenUnit,
+      feeType,
       ...rest
     } = this.props
+    const current = getCurrentFromType(feeType)
 
     return (
       <span {...rest}>
@@ -43,7 +51,7 @@ class Price extends React.Component {
             fontSize: `${currencyScale > 1 ? '1' : currencyScale}em`
           }}
         >
-          {_currency}
+          {current ? current.symbol : _symbol}
         </span>
         {this.addComma(
           useGrouping,
@@ -61,7 +69,8 @@ Price.propTypes = {
   currencyScale: PropTypes.number,
   // 是否保留小数点后无效的零
   keepZero: PropTypes.bool,
-  isFenUnit: PropTypes.bool
+  isFenUnit: PropTypes.bool,
+  feeType: PropTypes.string // 多币种
 }
 
 Price.defaultProps = {
@@ -69,26 +78,35 @@ Price.defaultProps = {
   useGrouping: true,
   currencyScale: 0.85,
   keepZero: true,
-  isFenUnit: false
+  isFenUnit: false,
+  feeType: ''
+}
+
+Price.setCurrencyList = (list = []) => {
+  if (!list || !list.length) return
+  _currencyList = list
 }
 
 // 设置符号
-Price.setCurrency = currency => {
-  if (!currency) return
-  _currency = currency
+Price.setCurrency = symbol => {
+  if (!symbol) return
+  _symbol = symbol
 }
 
 // 获得符号
-Price.getCurrency = () => {
-  return _currency
+Price.getCurrency = (type = '') => {
+  let current = type ? getCurrentFromType(type) : null
+  return current ? current.symbol : _symbol
 }
+
 Price.setUnit = unit => {
   if (!unit) return
   _unit = unit
 }
 
-Price.getUnit = () => {
-  return _unit
+Price.getUnit = (type = '') => {
+  let current = type ? getCurrentFromType(type) : null
+  return current ? current.unit : _unit
 }
 
 export default Price
