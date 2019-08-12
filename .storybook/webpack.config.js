@@ -1,5 +1,4 @@
 module.exports = ({ config }) => {
-  // 写死，别喷
   // 不知道正则怎么写，用 function 代替
   config.module.rules[0].exclude = function(filepath) {
     if (
@@ -12,7 +11,6 @@ module.exports = ({ config }) => {
     return filepath.includes('/node_modules/')
   }
 
-  // 写死，别喷
   config.module.rules[3] = {
     test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani)(\?.*)?$/,
     loader:

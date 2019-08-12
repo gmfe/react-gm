@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
+/** 这是 Box */
 const Box = props => {
   const { className, children, ...rest } = props
 
