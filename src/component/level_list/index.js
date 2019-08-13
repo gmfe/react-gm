@@ -8,7 +8,7 @@ import { getLevel } from './util'
 
 class LevelList extends React.Component {
   handleListItemMouseEnter = (index, listItem) => {
-    let { willActiveSelected, onWillActiveSelect } = this.props
+    const { willActiveSelected, onWillActiveSelect } = this.props
 
     // 重要 slice 避免引用
     const newWill = willActiveSelected.slice(0, index + 1)
@@ -24,7 +24,7 @@ class LevelList extends React.Component {
 
   handleMouseLeave = () => {
     // 离开的时候要重置下 willActiveSelected 为 selected
-    let { selected, onWillActiveSelect } = this.props
+    const { selected, onWillActiveSelect } = this.props
 
     // slice 避免引用
     onWillActiveSelect(selected.slice())

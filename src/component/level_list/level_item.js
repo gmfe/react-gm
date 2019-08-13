@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import List from '../list'
 import classNames from 'classnames'
 import _ from 'lodash'
+import SVGRightSmall from '../../../svg/right-small.svg'
 
 const Item = props => {
   const {
@@ -20,7 +21,7 @@ const Item = props => {
       <div className='gm-position-relative'>
         {item.text}
         {item.children && item.children.length && (
-          <i className='gm-arrow-right' />
+          <SVGRightSmall className='gm-level-list-item-right' />
         )}
       </div>
     )
@@ -34,7 +35,7 @@ const Item = props => {
 
   return (
     <div className={classNames('gm-level-list-item ', className)}>
-      <div className='gm-text-desc gm-padding-5'>{title}</div>
+      {title && <div className='gm-text-desc gm-padding-5'>{title}</div>}
       <List
         {...rest}
         data={data}
