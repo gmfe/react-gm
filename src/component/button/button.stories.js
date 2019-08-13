@@ -1,38 +1,46 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Button from './button'
-import { observable } from 'mobx'
-import ButtonGroup from './button_group'
-
-const store = observable({
-  count: 0,
-  addCount() {
-    this.count++
-  }
-})
 
 storiesOf('Button', module)
   .add('default', () => (
+    <div>
+      默认
+      <div>
+        <Button className='btn btn-default'>默认</Button>
+        <Button className='btn btn-primary'>主色</Button>
+        <Button className='btn btn-success'>成功</Button>
+        <Button className='btn btn-danger'>危险</Button>
+      </div>
+      plain
+      <div>
+        <Button className='btn btn-default btn-plain'>默认</Button>
+        <Button className='btn btn-primary btn-plain'>主色</Button>
+        <Button className='btn btn-success btn-plain'>成功</Button>
+        <Button className='btn btn-danger btn-plain'>危险</Button>
+      </div>
+      disabled
+      <div>
+        <Button disabled className='btn btn-default'>
+          默认
+        </Button>
+        <Button disabled className='btn btn-primary'>
+          主色
+        </Button>
+        <Button disabled className='btn btn-success'>
+          成功
+        </Button>
+        <Button disabled className='btn btn-danger'>
+          危险
+        </Button>
+      </div>
+    </div>
+  ))
+  .add('loading', () => (
     <Button
       className='btn btn-default'
       onClick={() => new Promise(resolve => setTimeout(() => resolve(), 2000))}
     >
       点击显示 loading
     </Button>
-  ))
-  .add('with mobx', () => (
-    <Button onClick={() => store.addCount()}>aaa{store.count}</Button>
-  ))
-  .add('Button Group', () => (
-    <ButtonGroup>
-      <Button
-        className='btn btn-default'
-        onClick={() =>
-          new Promise(resolve => setTimeout(() => resolve(), 2000))
-        }
-      >
-        点击显示 loading
-      </Button>
-      <Button className='btn btn-default'>123123</Button>
-    </ButtonGroup>
   ))
