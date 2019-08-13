@@ -15,11 +15,20 @@ import moment from 'moment'
  * - 提供日期参数，进入近一个月内的日期选择
  * */
 
+// 新date_range_picker组件: DateRangePickerNew
+// props: begin -- object, 开始时间
+//        end -- object, 结束时间
+//        canClear -- bool, 删除日期
+//        renderInputValue -- 自定义日期展示格式
+//        disabled -- 禁用
+//        onChange -- func, 日期修改回调
+//        disabledDate -- func, 不可选择日期
+
 const DateRangePickerNew = props => {
   const dateRangePickerNewRef = useRef(null)
   const {
-    dateStart,
-    dateEnd,
+    begin,
+    end,
     disabled,
     onChange,
     renderInputValue,
@@ -42,8 +51,8 @@ const DateRangePickerNew = props => {
 
   const popup = (
     <DateRangeSelect
-      dateStart={dateStart}
-      dateEnd={dateEnd}
+      begin={begin}
+      end={end}
       onOk={handleOk}
       onCancel={handleCancel}
       disabledDate={disabledDate}
@@ -55,8 +64,8 @@ const DateRangePickerNew = props => {
       <Popover animName disabled={disabled || false} popup={popup}>
         <div>
           <DateRange
-            startDate={dateStart}
-            endDate={dateEnd}
+            begin={begin}
+            end={end}
             disabled={disabled || false}
             canClear={canClear || false}
             clearDate={clearDate}
@@ -71,18 +80,19 @@ const DateRangePickerNew = props => {
 DateRangePickerNew.displayName = 'DateRangePickerNew'
 
 DateRangePickerNew.propTypes = {
+  /** 开始日期, Date()对象 */
+  begin: PropTypes.object,
+  /** 结束日期, Date()对象 */
+  end: PropTypes.object,
   /** 禁止选择 */
   disabled: PropTypes.bool,
-  /** 开始日期, Date()对象 */
-  dateStart: PropTypes.object,
-  /** 结束日期, Date()对象 */
-  dateEnd: PropTypes.object,
   /** 日期更改回调函数，传入参数为: 开始日期 && 结束日期 */
   onChange: PropTypes.func,
   /** 自定义日期的展示函数 */
   renderInputValue: PropTypes.func,
   /** 清除日期 */
   canClear: PropTypes.bool,
+  /** 定义不可选择的日期，传入参数为Date对象，返回true or false */
   disabledDate: PropTypes.func
 }
 

@@ -6,14 +6,7 @@ import SVGCalendar from '../../../svg/calendar.svg'
 import SVGCloseCircle from '../../../svg/close-circle.svg'
 
 const DateRange = props => {
-  const {
-    startDate,
-    endDate,
-    disabled,
-    renderInputValue,
-    canClear,
-    clearDate
-  } = props
+  const { begin, end, disabled, renderInputValue, canClear, clearDate } = props
 
   return (
     <div
@@ -26,7 +19,7 @@ const DateRange = props => {
         className='date-input gm-cursor'
         type='text'
         placeholder='开始日期'
-        value={renderInputValue(startDate)}
+        value={renderInputValue(begin)}
         disabled={disabled}
         readOnly
       />
@@ -35,7 +28,7 @@ const DateRange = props => {
         className='date-input gm-cursor'
         type='text'
         placeholder='结束日期'
-        value={renderInputValue(endDate)}
+        value={renderInputValue(end)}
         disabled={disabled}
         readOnly
       />
@@ -53,9 +46,9 @@ DateRange.propTypes = {
   /** 禁止选择 */
   disabled: PropTypes.bool,
   /** 选择的开始日期，Date()对象 */
-  startDate: PropTypes.object,
+  begin: PropTypes.object,
   /** 选择的结束日期，Date()对象 */
-  endDate: PropTypes.object,
+  end: PropTypes.object,
   /** 自定义渲染格式 */
   renderInputValue: PropTypes.func,
   /** 清除日期 */

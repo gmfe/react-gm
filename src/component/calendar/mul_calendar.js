@@ -7,7 +7,7 @@ import _ from 'lodash'
 import Flex from '../flex'
 import SVGLeftSmall from '../../../svg/left-small.svg'
 import SVGRightSmall from '../../../svg/right-small.svg'
-import { Week, Content } from './index'
+import { Week, Content } from '../calendar/index'
 
 const months = [
   getLocale('01月'),
@@ -25,28 +25,20 @@ const months = [
 ]
 
 const HeadNew = props => {
-  const { dates, onChange, type, showDates } = props
+  const { dates, onChange, toggleYearAndMonth } = props
   const month = moment(dates).month()
   const year = moment(dates).year()
 
-  // type: 1 left  2 right  3 all --- 月 / 年 切换展示
-  const _type = type || 3
-  const isNearMonth =
-    moment(showDates[1]).month() - moment(showDates[0]).month() === 1
-  const isSameYear = moment(showDates[1]).year() === moment(showDates[0]).year()
-  const showLeft =
-    type === 1 ? true : !isSameYear || (!isNearMonth && isSameYear)
-  const showRight =
-    type === 2 ? true : !isSameYear || (!isNearMonth && isSameYear)
+  const _toggleYearAndMonth = toggleYearAndMonth.split('_')[0]
 
-  const handleChange = (type, date) => {
-    onChange(type, date)
+  const handleChange = (changType, date) => {
+    onChange(changType, date)
   }
 
   return (
     <React.Fragment>
       <Flex alignCenter className='gm-calendarV2-head clearfix'>
-        {(showLeft || type === 3) && (
+        {_toggleYearAndMonth !== 'right' && (
           <div>
             <a
               className='gm-calendar-head-pre gm-calendarV2-head-svg'
@@ -66,10 +58,10 @@ const HeadNew = props => {
         <Flex
           flex
           className={classNames('gm-calendarV2-head-text', {
-            'gm-flex-justify-start': _type === 1,
-            'gm-flex-justify-end': _type === 2,
-            'gm-text-left': _type === 1 || _type === 3,
-            'gm-text-right': _type === 2
+            'gm-flex-justify-start': _toggleYearAndMonth === 'left',
+            'gm-flex-justify-end': _toggleYearAndMonth === 'right',
+            'gm-text-left': _toggleYearAndMonth !== 'right',
+            'gm-text-right': _toggleYearAndMonth === 'right'
           })}
         >
           <span>
@@ -78,7 +70,7 @@ const HeadNew = props => {
           </span>
           <span className='gm-calendar-head-month'>{months[month]}</span>
         </Flex>
-        {(showRight || type === 3) && (
+        {_toggleYearAndMonth !== 'left' && (
           <div>
             <a
               href='javascript:;'
@@ -103,33 +95,31 @@ const HeadNew = props => {
 HeadNew.propTypes = {
   dates: PropTypes.object,
   onChange: PropTypes.func,
-  type: PropTypes.number,
-  showDates: PropTypes.array
+  toggleYearAndMonth: PropTypes.string
 }
 
 /** 新 calendar */
-const CalendarV2 = props => {
+const MulCalendar = props => {
   const {
-    showDates,
-    disabledDate,
-    type,
-    className,
-    selectDates,
-    changeYearOrMonth,
+    selected,
+    selectedBegin,
+    selectedEnd,
     onSelect,
-    dateRangeSelect,
+    disabledDate,
+    className,
+    toggleYearAndMonth,
+    onYearAndMonthChange,
     ...rest
   } = props
 
-  let dates = null
-  type === 1 ? (dates = showDates[0]) : (dates = showDates[1])
+  const calendarPosition = toggleYearAndMonth.split('_')[1]
 
   const handleSelectDay = m => {
-    onSelect(type, m.toDate())
+    onSelect(calendarPosition, m.toDate())
   }
 
   const handleChangeYearOrMonth = (changeType, date) => {
-    changeYearOrMonth(type, changeType, date)
+    onYearAndMonthChange(calendarPosition, changeType, date)
   }
 
   const getDisabled = m => {
@@ -144,37 +134,45 @@ const CalendarV2 = props => {
   return (
     <div {...rest} className={classNames('gm-calendar', className)}>
       <HeadNew
-        dates={dates}
+        dates={selected}
         onChange={handleChangeYearOrMonth}
-        type={type}
-        showDates={showDates}
+        toggleYearAndMonth={toggleYearAndMonth}
       />
       <Week />
       <Content
-        will={dates}
-        selected={dates}
+        will={selected}
+        selected={selected}
         onSelectDay={handleSelectDay}
         getDisabled={e => getDisabled(e)}
-        selectDates={selectDates}
-        dateRangeSelect={dateRangeSelect}
+        selectedBegin={selectedBegin}
+        selectedEnd={selectedEnd}
       />
     </div>
   )
 }
 
-CalendarV2.propTypes = {
-  showDates: PropTypes.array,
+MulCalendar.propTypes = {
+  /** 当前选中的日期，Date()对象 */
+  selected: PropTypes.object,
+  /** 开始日期，Date()对象 */
+  selectedBegin: PropTypes.object,
+  /** 结束日期, Date()对象 */
+  selectedEnd: PropTypes.object,
+  /** 自定义不可选日期回调函数 */
   disabledDate: PropTypes.func,
-  type: PropTypes.number,
-  className: PropTypes.string,
-  selectDates: PropTypes.array,
-  changeYearOrMonth: PropTypes.func,
+  /** 日期选中回调函数 */
   onSelect: PropTypes.func,
-  dateRangeSelect: PropTypes.array
+  /** 是否展示 年 / 月 切换按钮，只应用于日历组合 */
+  toggleYearAndMonth: PropTypes.string,
+  /** 年 / 月 切换回调函数，传入参数为：string(年 / 月)，日期值 */
+  onYearAndMonthChange: PropTypes.func,
+  className: PropTypes.string
 }
 
-CalendarV2.defaultProps = {
-  onSelect: _.noop
+MulCalendar.defaultProps = {
+  onSelect: _.noop,
+  toggleYearAndMonth: 'all',
+  onYearAndMonthChange: _.noop
 }
 
-export default CalendarV2
+export default MulCalendar

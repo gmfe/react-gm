@@ -43,24 +43,24 @@ storiesOf('DateRangePickerNew', module)
   })
   .add('一般形式', () => (
     <DateRangePickerNew
-      dateStart={commonStore.begin}
-      dateEnd={commonStore.end}
+      begin={commonStore.begin}
+      end={commonStore.end}
       onChange={(begin, end) => commonStore.changeDate(begin, end)}
     />
   ))
 
   .add('设置初始值为 null', () => (
     <DateRangePickerNew
-      dateStart={store1.begin}
-      dateEnd={store1.end}
+      begin={store1.begin}
+      end={store1.end}
       onChange={(begin, end) => store1.changeDate(begin, end)}
     />
   ))
 
   .add('自定义某段日期不可选', () => (
     <DateRangePickerNew
-      dateStart={disabledStore.begin}
-      dateEnd={disabledStore.end}
+      begin={disabledStore.begin}
+      end={disabledStore.end}
       onChange={(begin, end) => disabledStore.changeDate(begin, end)}
       disabledDate={m => {
         return moment(m).get('day') === 5
@@ -70,8 +70,8 @@ storiesOf('DateRangePickerNew', module)
 
   .add('自定义日期展示格式', () => (
     <DateRangePickerNew
-      dateStart={customsStore.begin}
-      dateEnd={customsStore.end}
+      begin={customsStore.begin}
+      end={customsStore.end}
       onChange={(begin, end) => customsStore.changeDate(begin, end)}
       renderInputValue={m => {
         return moment(m).format('MM-DD')
@@ -84,8 +84,8 @@ storiesOf('DateRangePickerNew', module)
   .add('可清除选择的日期', () => (
     <div>
       <DateRangePickerNew
-        dateStart={canClearStore.begin}
-        dateEnd={canClearStore.end}
+        begin={canClearStore.begin}
+        end={canClearStore.end}
         onChange={(begin, end) => canClearStore.changeDate(begin, end)}
         canClear
       />

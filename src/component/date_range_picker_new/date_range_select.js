@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { getLocale } from '../../locales'
-import CalendarV2 from '../calendar/calendarV2'
 import moment from 'moment'
+import MulCalendar from '../calendar/mul_calendar'
 
 /** 左侧选择参数列表 */
 const list = [
@@ -31,6 +31,7 @@ const DateParamsList = props => {
 }
 
 DateParamsList.propTypes = {
+  /** 选择回调函数 */
   selectDateParams: PropTypes.func
 }
 
@@ -50,13 +51,10 @@ const pickerValueShow = value => {
   }
 }
 
-// 出具体样式以及详细交互后 优化
 const RangeCalendar = props => {
-  const { selectDates, onSelectDay, dateRangeSelect, disabledDate } = props
+  const { selectDates, onSelectDay, disabledDate } = props
 
-  const paramDates = dateRangeSelect.length ? dateRangeSelect : selectDates
-  const _showDates = pickerValueShow(paramDates)
-
+  const _showDates = pickerValueShow(selectDates)
   // showDates 保存变化的日期值
   const [showDates, setShowDates] = useState(_showDates)
 
@@ -66,15 +64,9 @@ const RangeCalendar = props => {
       setShowDates(newDates)
     }
   }, [selectDates])
-  useEffect(() => {
-    if (dateRangeSelect.length) {
-      const newDates = pickerValueShow(dateRangeSelect)
-      setShowDates(newDates)
-    }
-  }, [dateRangeSelect])
 
-  const changeYearOrMonth = (type, changeType, date) => {
-    if (type === 1) {
+  const changeYearOrMonth = (position, changeType, date) => {
+    if (position === '1') {
       const newDate =
         changeType === 'month'
           ? moment(showDates[0]).month(date)
@@ -93,38 +85,46 @@ const RangeCalendar = props => {
     onSelectDay(type, date)
   }
 
+  const isNearMonth = () => {
+    const isNearMonth =
+      moment(showDates[1]).month() - moment(showDates[0]).month() === 1
+    const isSameYear =
+      moment(showDates[1]).year() === moment(showDates[0]).year()
+    return !isSameYear || (!isNearMonth && isSameYear)
+  }
+
   return (
     <div className='date-range-select-right'>
-      <CalendarV2
+      <MulCalendar
         className='gm-margin-right-10 gm-border-0'
-        type={1}
-        showDates={showDates}
-        selectDates={selectDates}
-        changeYearOrMonth={changeYearOrMonth}
+        selected={showDates[0]}
+        selectedBegin={selectDates[0]}
+        selectedEnd={selectDates[1]}
         onSelect={handleSelectDay}
-        dateRangeSelect={dateRangeSelect}
         disabledDate={disabledDate}
+        toggleYearAndMonth={isNearMonth() ? 'all_1' : 'left_1'}
+        onYearAndMonthChange={changeYearOrMonth}
       />
-      <CalendarV2
+      <MulCalendar
         className='gm-border-0'
-        type={2}
-        showDates={showDates}
-        selectDates={selectDates}
-        changeYearOrMonth={changeYearOrMonth}
+        selected={showDates[1]}
+        selectedBegin={selectDates[0]}
+        selectedEnd={selectDates[1]}
         onSelect={handleSelectDay}
-        dateRangeSelect={dateRangeSelect}
         disabledDate={disabledDate}
+        toggleYearAndMonth={isNearMonth() ? 'all_2' : 'right_2'}
+        onYearAndMonthChange={changeYearOrMonth}
       />
     </div>
   )
 }
 
 RangeCalendar.propTypes = {
-  /** 选中日期数组，数组元素为Date对象 */
+  // 选中日期数组，数组元素为Date对象
   selectDates: PropTypes.array,
-  /** 日期选择回调函数 */
+  // 日期选择回调函数
   onSelectDay: PropTypes.func,
-  /** 被选日期范围数组 */
+  // 被选日期范围数组
   dateRangeSelect: PropTypes.array,
   disabledDate: PropTypes.func
 }
@@ -173,16 +173,14 @@ Bottom.propTypes = {
 
 /** 日期段选择 */
 const DateRangeSelect = props => {
-  const { dateStart, dateEnd, onOk, onCancel, disabledDate } = props
+  const { begin, end, onOk, onCancel, disabledDate } = props
 
-  const begin = dateStart === null ? moment() : dateStart
-  const end = dateEnd === null ? moment() : dateEnd
-  const _selectDates = [begin, end]
+  const _begin = begin === null ? moment() : begin
+  const _end = end === null ? moment() : end
+  const _selectDates = [_begin, _end]
 
   // selectDate 选中的日期值
   const [selectDates, setSelectDates] = useState([])
-  // dateRangeSelect 左侧被选择状态
-  const [dateRangeSelect, setDateRangeSelect] = useState([])
 
   // 左侧选择确定日期范围
   const handleSelectDateParams = type => {
@@ -207,14 +205,12 @@ const DateRangeSelect = props => {
 
       dateList = [startDay, yesterday]
     }
-    setDateRangeSelect(dateList)
     setSelectDates(dateList)
   }
 
   const handleSelectDay = (type, date) => {
     if (!selectDates.length || selectDates.length === 2) {
       setSelectDates([date])
-      setDateRangeSelect([])
     } else {
       // 判断选择日期先后
       const isSame = moment(date).isSame(moment(selectDates[0]))
@@ -239,7 +235,6 @@ const DateRangeSelect = props => {
         <RangeCalendar
           selectDates={selectDates.length ? selectDates : _selectDates}
           onSelectDay={handleSelectDay}
-          dateRangeSelect={dateRangeSelect}
           disabledDate={disabledDate}
         />
       </div>
@@ -255,8 +250,8 @@ const DateRangeSelect = props => {
 DateRangeSelect.displayName = 'DateRangeSelect'
 
 DateRangeSelect.propTypes = {
-  dateStart: PropTypes.object,
-  dateEnd: PropTypes.object,
+  begin: PropTypes.object,
+  end: PropTypes.object,
   onOk: PropTypes.func,
   onCancel: PropTypes.func,
   disabledDate: PropTypes.func

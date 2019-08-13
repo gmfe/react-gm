@@ -27,7 +27,7 @@ import {
 } from './component/form'
 
 import Storage from './component/storage'
-import Calendar from './component/calendar'
+import Calendar from './component/calendar/calendar'
 import DatePicker from './component/date_picker'
 import DateRangePicker from './component/date_range_picker'
 import Tip from './component/tip'
