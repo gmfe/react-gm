@@ -24,7 +24,7 @@ const store = observable({
       supplier_customer_id: 'LDP20180117',
       submit_time: '2018-07-25',
       status: 2,
-      supplier_name: '',
+      supplier_name: '222xxx',
       date_time: '2018-07-25',
       delta_money: 0,
       settle_supplier_id: 'T10953',
@@ -175,31 +175,52 @@ HOC 可以相互组合使用，但是请注意使用顺序
     }
   )
   .add('diy', () => {
-    const ref = React.createRef()
     return (
       <div>
-        <button
-          className='btn  btn-primary'
-          onClick={() => ref.current.apiToggleDiySelector()}
-        >
-          列表自定义
-        </button>
         <DiyTable
           id='diy-table'
-          ref={ref}
           data={store.data}
           columns={[
             {
-              Header: '建单时间',
-              accessor: 'submit_time'
+              Header: '入库单号',
+              accessor: 'id',
+              diyEnable: false,
+              diyGroupName: '基础'
             },
             {
-              Header: '入库单号',
-              accessor: 'id'
+              Header: '价格',
+              accessor: 'sku_money',
+              diyEnable: false,
+              diyGroupName: '基础'
+            },
+            {
+              Header: '删除时间',
+              accessor: 'date_time',
+              diyEnable: true,
+              show: false,
+              diyGroupName: '时间'
+            },
+            {
+              Header: '建单时间',
+              accessor: 'settle_supplier_id',
+              diyEnable: true,
+              diyGroupName: '时间'
+            },
+            {
+              Header: '状态',
+              accessor: 'status',
+              // diyEnable 不写也可以,默认true,
+              diyGroupName: '其他'
+            },
+            {
+              Header: '供应商户ID',
+              accessor: 'supplier_customer_id',
+              diyGroupName: '商户'
             },
             {
               Header: '供应商信息',
-              accessor: 'supplier_name'
+              accessor: 'supplier_name',
+              diyGroupName: '商户'
             }
           ]}
         />

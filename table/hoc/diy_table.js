@@ -1,9 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
-import { Checkbox, Storage, Flex } from '../../src'
-import { contains } from 'gm-util'
-import { findDOMNode } from 'react-dom'
+import { Checkbox, Storage, Flex, Modal } from '../../src'
+import SVGSetting from '../../svg/success-circle-o.svg'
 import { getColumnKey } from '../util'
 import Table from '../table'
 import { devWarn } from '../../src/util'
@@ -46,50 +45,68 @@ function filterStorageColumns(columns) {
   })
 }
 
-class Selector extends React.Component {
-  handleCheck(index) {
-    const { onColumnsChange, columns } = this.props
+const Selector = props => {
+  const { onColumnsChange, operatorColumns } = props
 
-    const newColumns = columns.slice()
-    const { show } = newColumns[index]
-    newColumns[index].show = !show
-
-    onColumnsChange(newColumns)
+  const handleCheck = index => {
+    onColumnsChange()
   }
 
-  render() {
-    const { show, columns } = this.props
-    if (!show) {
-      return null
-    }
-    return (
-      <Flex className='gm-react-table-diy-selector gm-box-shadow-bottom' wrap>
-        {_.map(columns, (item, index) => {
-          const { show: checked, Header, diyItemText, diyEnable } = item
-          const key = getColumnKey(item)
-          const text = diyItemText || Header
+  const colGroup = _.groupBy(operatorColumns, 'diyGroupName')
 
-          // Header是字符串才展示自定义选择项
-          return _.isString(text) && diyEnable ? (
-            <div style={{ width: '50%' }} key={key}>
-              <Checkbox
-                value={key}
-                checked={checked}
-                onChange={this.handleCheck.bind(this, index)}
-              >
-                {text}
-              </Checkbox>
-            </div>
-          ) : null
-        })}
-      </Flex>
-    )
-  }
+  return (
+    <div>
+      {_.map(colGroup, (cols, groupName) => {
+        return (
+          <div>
+            <div>{groupName}</div>
+            <Flex>
+              {_.map(cols, item => {
+                const { show: checked, Header, diyItemText, diyEnable } = item
+                const key = getColumnKey(item)
+                const text = diyItemText || Header
+
+                return (
+                  _.isString(text) && (
+                    <div style={{ width: '25%' }} key={key}>
+                      <Checkbox
+                        value={key}
+                        disabled={!diyEnable} // 不能编辑的字段,disable
+                        checked={checked}
+                        onChange={() => {
+                          handleCheck(key)
+                        }}
+                      >
+                        {text}
+                      </Checkbox>
+                    </div>
+                  )
+                )
+              })}
+            </Flex>
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
-Selector.propTypes = {
-  show: PropTypes.bool,
-  columns: PropTypes.array.isRequired,
+const Operator = props => {
+  return (
+    <Flex className='gm-react-table-diy-operator'>
+      <div className='gm-react-table-diy-selector'>
+        <div>可选字段</div>
+        <Selector {...props} />
+      </div>
+      <div className='gm-react-table-diy-list'>
+        <div>当前选定的字段</div>
+      </div>
+    </Flex>
+  )
+}
+
+Operator.propTypes = {
+  operatorColumns: PropTypes.array.isRequired,
   onColumnsChange: PropTypes.func.isRequired
 }
 
@@ -102,10 +119,9 @@ function diyTableHOC(Component) {
 
       this.state = {
         columns: generateDiyColumns(props.columns, localColumns),
+        operatorColumns: [],
         show: false
       }
-
-      this.diySelectorRef = React.createRef()
 
       // 检测
       devWarn(() => {
@@ -115,80 +131,63 @@ function diyTableHOC(Component) {
             if (!_.isString(column.Header) && !column.diyItemText) {
               console.error('column need diyItemText', column)
             }
+            if (!column.diyGroupName) {
+              console.error('column need diyGroupName', column)
+            }
           }
         })
       })
     }
 
+    handleColumnsChange = selectorColumns => {
+      this.setState({ selectorColumns })
+    }
+
+    handleColumnsSave = () => {
+      const columns = _.cloneDeep(this.state.operatorColumns)
+      this.setState({ columns, show: false })
+    }
+
     // 显示diy选择框  注:暴露给外部使用
-    apiToggleDiySelector = () => {
-      if (!this.__isUnmounted) {
-        const { show } = this.state
-        this.setState({ show: !show })
-      }
-    }
-
-    componentWillReceiveProps(nextProps) {
-      this.setState({
-        columns: generateDiyColumns(nextProps.columns, this.state.columns)
-      })
-    }
-
-    componentDidMount() {
-      window.document.body.addEventListener(
-        'click',
-        this.handleCloseDiySelector
-      )
-    }
-
-    componentWillUnmount() {
-      window.document.body.removeEventListener(
-        'click',
-        this.handleCloseDiySelector
-      )
-      this.__isUnmounted = true
-    }
-
-    handleCloseDiySelector = ({ target }) => {
-      const { show } = this.state
-
-      if (
-        show &&
-        this.diySelectorRef.current &&
-        !contains(findDOMNode(this.diySelectorRef.current), target)
-      ) {
-        // 延后执行,使得再次点击按钮关闭diy
-        setTimeout(() => this.setState({ show: false }), 0)
-      }
-    }
-
-    handleColumnsChange = columns => {
-      const { id } = this.props
-      // 记录当前columns的数据到localStorage
-      Storage.set(id, filterStorageColumns(columns))
-
-      this.setState({
-        columns
-      })
+    handleModalShow = () => {
+      const operatorColumns = _.cloneDeep(this.state.columns)
+      this.setState({ operatorColumns, show: true })
     }
 
     render() {
-      const { columns, show } = this.state
-      const props = {
-        ...this.props,
-        columns
-      }
-
+      const { columns, operatorColumns, show } = this.state
       return (
-        <div className='gm-react-table-diy'>
-          <Component {...props} />
-          <Selector
-            ref={this.diySelectorRef}
-            show={show}
-            columns={columns}
-            onColumnsChange={this.handleColumnsChange}
+        <>
+          <Component
+            {...this.props}
+            columns={[
+              {
+                Header: () => (
+                  <SVGSetting
+                    style={{ cursor: 'pointer' }}
+                    onClick={this.handleModalShow}
+                  />
+                ),
+                maxWidth: 30,
+                accessor: '_setting', // 不重要,随便写
+                Cell: () => null
+              },
+              ...columns
+            ]}
           />
-        </div>
+          <Modal
+            title='表头设置'
+            noContentPadding
+            show={show}
+            onOK={this.handleColumnsSave}
+            size='lg'
+          >
+            <Operator
+              operatorColumns={operatorColumns}
+              onColumnsChange={this.handleColumnsChange}
+            />
+          </Modal>
+        </>
       )
     }
   }
