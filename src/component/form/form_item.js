@@ -43,6 +43,7 @@ const FormItem = withWrapContext(
     style
   }) => {
     devWarnForHook(() => {
+      if (label === undefined) return
       if (label.includes(':') || label.includes('：')) {
         warn('label 包含了 : or ：。', label)
       }
