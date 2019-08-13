@@ -16,6 +16,13 @@ const data = [
     }
   },
   {
+    text: '功能3(不可用)',
+    disabled: true,
+    onClick: () => {
+      window.alert('功能3')
+    }
+  },
+  {
     text: '新建',
     children: [
       {
