@@ -7,7 +7,7 @@ import {
   FunctionSetItemGroup,
   FunctionSetSubmenu
 } from './index'
-import { Button } from '../button'
+import Button from '../button'
 import _ from 'lodash'
 
 storiesOf('FunctionSet', module)
@@ -77,6 +77,7 @@ storiesOf('FunctionSet', module)
   .add('Cascading menu', () => (
     <div style={{ padding: '100px' }}>
       <FunctionSet
+        placement=''
         overlay={
           <FunctionSetMenu>
             <FunctionSetItem>Item.1 LOLOLOLOLOLOLOL</FunctionSetItem>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { store } from './store'
+// TODO 这是个方法，不应该大写
 import ClassNames from 'classnames'
 
 export default class FunctionSetItem extends Component {

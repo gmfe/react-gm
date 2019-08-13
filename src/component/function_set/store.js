@@ -1,3 +1,5 @@
+// TODO 不能依赖 任何数据流
+// 而且也只能单个用
 import { action, observable } from 'mobx'
 
 class Store {
