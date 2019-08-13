@@ -49,7 +49,7 @@ FormBlock.propTypes = {
 }
 
 FormBlock.defaultProps = {
-  col: 3
+  col: 1
 }
 
 export default FormBlock
