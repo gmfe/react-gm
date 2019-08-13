@@ -28,7 +28,7 @@ storiesOf('Box', module)
     () => (
       <div>
         <BoxForm>
-          <FormBlock>
+          <FormBlock col={3}>
             <FormItem label='商品'>
               <input type='text' />
             </FormItem>
@@ -37,23 +37,19 @@ storiesOf('Box', module)
             </FormItem>
           </FormBlock>
           <BoxForm.More>
-            <FormBlock>
+            <FormBlock col={3}>
               <FormItem label='商品'>
                 <input type='text' />
               </FormItem>
               <FormItem label='啦啦'>
                 <input type='text' />
               </FormItem>
-            </FormBlock>
-            <FormBlock>
               <FormItem label='商品'>
                 <input type='text' />
               </FormItem>
               <FormItem label='啦啦'>
                 <input type='text' />
               </FormItem>
-            </FormBlock>
-            <FormBlock>
               <FormItem label='商品'>
                 <input type='text' />
               </FormItem>

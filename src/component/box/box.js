@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-/** 这是 Box */
+/** Box，用来包裹一块内容 */
 const Box = props => {
   const { className, children, ...rest } = props
 
