@@ -22,6 +22,13 @@ PaginationNew => PaginationFuck
 
 PaginationBox limit => defaultLimit
 
+### Table
+
+* selectTableHOC  props 移除了 `selectAll` 和 `selectAllTip`,增加了 `batchActionBar`
+
+* diyTableHOC    移除了 `ref.apiToggleDiySelector`, props `columns` 要求增加多个参数, `diyGroupNameSorting`等
+
+
 ### css
 
 移除 .ifont- .xfont- 等功能性样式，替换为 .gm-svg-icon-

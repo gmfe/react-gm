@@ -192,50 +192,46 @@ TODO 补充 文本显示不完整 案例
   .add('with diy', () => {
     const ref = React.createRef()
     return (
-      <div>
-        <button
-          className='btn  btn-primary'
-          onClick={() => ref.current.apiToggleDiySelector()}
-        >
-          列表自定义
-        </button>
-
-        <DiyEditTable
-          id={'diy-edit-table'}
-          ref={ref}
-          data={store.data}
-          columns={[
-            {
-              Header: '序号',
-              accessor: 'no',
-              Cell: ({ index }) => index + 1
-            },
-            {
-              Header: OperationHeader,
-              diyItemText: '操作',
-              accessor: 'operation',
-              Cell: (
-                { index } // eslint-disable-line
-              ) => (
-                <EditTableOperation
-                  onAddRow={() => console.log('增加一行', index)}
-                  onDeleteRow={() => console.log('删除一行', index)}
-                />
-              )
-            },
-            {
-              Header: 'sku_money',
-              Cell: (
-                { index, original } // eslint-disable-line
-              ) => (
-                <input
-                  value={original.sku_money}
-                  onChange={value => console.log(value, index)}
-                />
-              )
-            }
-          ]}
-        />
-      </div>
+      <DiyEditTable
+        id={'diy-edit-table'}
+        ref={ref}
+        data={store.data}
+        diyGroupSorting={['基础']}
+        columns={[
+          {
+            Header: '序号',
+            accessor: 'no',
+            diyGroupName: '基础',
+            Cell: ({ index }) => index + 1
+          },
+          {
+            Header: OperationHeader,
+            diyItemText: '操作',
+            diyGroupName: '基础',
+            accessor: 'operation',
+            Cell: (
+              { index } // eslint-disable-line
+            ) => (
+              <EditTableOperation
+                onAddRow={() => console.log('增加一行', index)}
+                onDeleteRow={() => console.log('删除一行', index)}
+              />
+            )
+          },
+          {
+            Header: 'sku_money',
+            diyGroupName: '基础',
+            id: 'sku_money',
+            Cell: (
+              { index, original } // eslint-disable-line
+            ) => (
+              <input
+                value={original.sku_money}
+                onChange={value => console.log(value, index)}
+              />
+            )
+          }
+        ]}
+      />
     )
   })

@@ -117,13 +117,14 @@ class BaseTable extends React.Component {
 }
 
 BaseTable.propTypes = {
-  // 主要
   loading: PropTypes.bool,
+  /** 表格数据 */
   data: PropTypes.array.isRequired,
+  /** 列定义 */
   columns: PropTypes.array.isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
-  // 额外，忽略，不一一列了，参考 ReactTable
+  /** 额外，忽略，不一一列了，参考 ReactTable */
   showPagination: PropTypes.bool,
   defaultPageSize: PropTypes.number
 }
@@ -131,8 +132,6 @@ BaseTable.propTypes = {
 BaseTable.defaultProps = {
   /** 不使用自带的分页组件 */
   showPagination: false,
-  /** 目前没有意义 */
-  defaultPageSize: 10,
   /** 没有数据的文案 */
   noDataText: getLocale('没有数据'),
   /** 加载中的文案 */
