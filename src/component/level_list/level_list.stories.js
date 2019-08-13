@@ -37,13 +37,35 @@ const areaData = [
         ]
       }
     ]
+  },
+  {
+    value: '2',
+    text: '福田',
+    children: [
+      {
+        value: '21',
+        text: '竹子林',
+        children: [
+          {
+            value: '211',
+            text: '东区'
+          },
+          {
+            value: '212',
+            text: '西区'
+          }
+        ]
+      }
+    ]
   }
 ]
 
 const store = observable({
+  data: areaData,
   selected: ['1'],
   willActiveSelected: ['1'],
   setSelected(selected) {
+    console.log(selected)
     this.selected = selected
   },
   setWillActiveSelected(willActiveSelected) {
@@ -51,17 +73,53 @@ const store = observable({
   }
 })
 
-storiesOf('LevelList', module).add('default', () => (
-  <div className='gm-inline-block'>
-    <LevelList
-      data={areaData}
-      selected={store.selected}
-      onSelect={selected => store.setSelected(selected)}
-      willActiveSelected={store.willActiveSelected}
-      onWillActiveSelect={willActiveSelected => {
-        console.log(willActiveSelected)
-        store.setWillActiveSelected(willActiveSelected)
+storiesOf('LevelList', module)
+  .add('default', () => (
+    <div className='gm-inline-block'>
+      <LevelList
+        data={store.data.slice()}
+        selected={store.selected.slice()}
+        onSelect={selected => store.setSelected(selected)}
+        willActiveSelected={store.willActiveSelected.slice()}
+        onWillActiveSelect={willActiveSelected => {
+          console.log(willActiveSelected)
+          store.setWillActiveSelected(willActiveSelected)
+        }}
+      />
+    </div>
+  ))
+  .add('reverse', () => (
+    <div
+      style={{
+        position: 'absolute',
+        right: 0
       }}
-    />
-  </div>
-))
+    >
+      <LevelList
+        data={store.data.slice()}
+        selected={store.selected.slice()}
+        onSelect={selected => store.setSelected(selected)}
+        willActiveSelected={store.willActiveSelected.slice()}
+        onWillActiveSelect={willActiveSelected => {
+          console.log(willActiveSelected)
+          store.setWillActiveSelected(willActiveSelected)
+        }}
+        isReverse
+      />
+    </div>
+  ))
+  .add('专供 FunctionSet', () => (
+    <div className='gm-inline-block'>
+      <LevelList
+        data={store.data.slice()}
+        selected={store.selected.slice()}
+        onSelect={selected => store.setSelected(selected)}
+        willActiveSelected={store.willActiveSelected.slice()}
+        onWillActiveSelect={willActiveSelected => {
+          console.log(willActiveSelected)
+          store.setWillActiveSelected(willActiveSelected)
+        }}
+        isForFunctionSet
+      />
+    </div>
+  ))

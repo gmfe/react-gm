@@ -1,14 +1,42 @@
 .gm-level-list {
   height: 250px;
+  background-color: white;
 
   .gm-level-list-item {
     min-width: 120px;
     max-width: 250px;
+    border: 1px solid @gm-border-color;
+    margin-left: -1px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    .gm-level-list-item-title {
+      color: @gm-color-second;
+      padding: 5px;
+    }
+
+    .gm-list {
+      border: none;
+    }
 
     .gm-level-list-item-right {
       position: absolute;
       right: -6px;
       top: 2px;
+    }
+  }
+
+  &.gm-level-list-for-function-set {
+    height: auto;
+
+    .gm-level-list-item {
+      border: none;
+
+      .gm-list {
+        border: 1px solid @gm-border-color;
+      }
     }
   }
 }

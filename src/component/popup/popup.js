@@ -52,6 +52,7 @@ class Popup extends React.Component {
       offset,
       showArrow,
       arrowLeft, // eslint-disable-line
+      disabledBoxShadow,
       children,
       rect,
       style,
@@ -62,15 +63,20 @@ class Popup extends React.Component {
     const { width, height } = this.state
 
     const sStyle = {
-      top: rect.top + rect.height + (showArrow ? 5 : 1),
-      left: rect.left + offset
+      top: rect.top + rect.height + (showArrow ? 5 : 1)
     }
 
     if (center) {
       sStyle.left = rect.left + rect.width / 2 - width / 2 + offset
     } else if (right) {
-      sStyle.left = rect.left + rect.width - width + offset
+      // sStyle.left = rect.left + rect.width - width + offset
+      sStyle.right =
+        document.documentElement.clientWidth - rect.left - rect.width - offset
+    } else {
+      sStyle.left = rect.left + offset
     }
+
+    console.log(sStyle.left, sStyle.right)
 
     // TODO 考虑是否提供 sStyle width
 
@@ -83,7 +89,13 @@ class Popup extends React.Component {
         ref={ref => (this.refPopup = ref)}
         {...rest}
         style={Object.assign(sStyle, style)}
-        className={classNames('gm-popup gm-box-shadow-bottom', className)}
+        className={classNames(
+          'gm-popup',
+          {
+            'gm-box-shadow-bottom': !disabledBoxShadow
+          },
+          className
+        )}
       >
         {showArrow && this.renderTriggerArrow()}
         {children}
@@ -102,7 +114,8 @@ Popup.propTypes = {
   right: PropTypes.bool,
   offset: PropTypes.number,
   showArrow: PropTypes.bool, // 是否显示三角标
-  arrowLeft: PropTypes.string
+  arrowLeft: PropTypes.string,
+  disabledBoxShadow: PropTypes.bool
 }
 
 Popup.defaultProps = {

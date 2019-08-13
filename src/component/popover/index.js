@@ -137,6 +137,7 @@ class Popover extends React.Component {
       offset,
       showArrow,
       arrowLeft,
+      disabledBoxShadow,
       animName
     } = this.props
 
@@ -185,6 +186,7 @@ class Popover extends React.Component {
           offset={offset}
           showArrow={showArrow}
           arrowLeft={arrowLeft}
+          disabledBoxShadow={disabledBoxShadow}
           className={classNames(
             'gm-no-outline',
             {
@@ -339,6 +341,7 @@ Popover.propTypes = {
 
   showArrow: PropTypes.bool, // 是否显示三角标
   arrowLeft: PropTypes.string,
+  disabledBoxShadow: PropTypes.bool,
 
   animName: PropTypes.oneOf([
     false,

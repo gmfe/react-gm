@@ -38,46 +38,79 @@ class LevelList extends React.Component {
       onSelect,
       willActiveSelected,
       onWillActiveSelect,
+      isReverse,
       className,
+      isForFunctionSet,
       ...rest
     } = this.props
 
     const level = getLevel(data, willActiveSelected)
 
+    let gaps = []
+    if (isForFunctionSet) {
+      let indexs = _.map(willActiveSelected, (v, i) =>
+        _.findIndex(level[i], vv => vv.value === v)
+      )
+      indexs = [0, ...indexs]
+      let top = 0
+      gaps = _.map(indexs, v => {
+        top = v + top
+        return top
+      })
+    }
+
+    let items = _.map(level, (item, i) => (
+      <LevelItem
+        key={i}
+        title={titles[i]}
+        data={item}
+        selected={selected[i]}
+        onSelect={this.handleSelect}
+        willActiveSelected={willActiveSelected[i]}
+        onListItemMouseEnter={this.handleListItemMouseEnter.bind(this, i)}
+        style={{
+          paddingTop: gaps[i] ? gaps[i] * 25 : 0
+        }}
+      />
+    ))
+
+    if (isReverse) {
+      items = items.reverse()
+    }
+
     return (
       <Flex
         {...rest}
-        className={classNames('gm-level-list gm-bg gm-border', className)}
+        className={classNames(
+          'gm-level-list',
+          {
+            'gm-level-list-for-function-set': isForFunctionSet
+          },
+          className
+        )}
         onMouseLeave={this.handleMouseLeave}
       >
-        {_.map(level, (item, i) => (
-          <LevelItem
-            key={i}
-            title={titles[i]}
-            data={item}
-            selected={selected[i]}
-            onSelect={this.handleSelect}
-            willActiveSelected={willActiveSelected[i]}
-            onListItemMouseEnter={this.handleListItemMouseEnter.bind(this, i)}
-            className={i === 0 ? '' : 'gm-border-left'}
-          />
-        ))}
+        {items}
       </Flex>
     )
   }
 }
 
 LevelList.propTypes = {
-  titles: PropTypes.array,
   data: PropTypes.array.isRequired, // [{value, text, children}]
   selected: PropTypes.array.isRequired,
   onSelect: PropTypes.func.isRequired,
   // 没和
   willActiveSelected: PropTypes.array.isRequired,
   onWillActiveSelect: PropTypes.func.isRequired,
-  onlySelectLeaf: PropTypes.bool,
+  titles: PropTypes.array,
+  onlySelectLeaf: PropTypes.bool, // TODO
+  isReverse: PropTypes.bool,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+
+  /** 内部用，暂时这么处理 */
+  isForFunctionSet: PropTypes.bool
 }
 
 LevelList.defaultProps = {
