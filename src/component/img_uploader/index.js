@@ -77,15 +77,14 @@ ImgUploader.defaultProps = {
 }
 
 ImgUploader.propTypes = {
-  /** 上传图片的数据，以一个对象数组传进 */
+  /** [url, url] */
   data: PropTypes.array.isRequired,
-  /** 删除操作触发的事件 */
   onChange: PropTypes.func.isRequired,
-  /** 增加操作触发的事件 */
+  /** 上传按钮回调，参数是 files */
   onUpload: PropTypes.func.isRequired,
   /** 上传接受的图片类型 */
   accept: PropTypes.string.isRequired,
-  /** 是否可以多选 */
+  /** 上传选择是否可以多选 */
   multiple: PropTypes.bool,
   /** 图片的尺寸 */
   contentSize: PropTypes.shape({
