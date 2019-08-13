@@ -69,7 +69,7 @@ storiesOf('Box', module)
     ),
     {
       info: {
-        text: 'TODO'
+        text: '一定要用 FormBlock 包起来'
       }
     }
   )
