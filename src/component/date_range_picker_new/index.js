@@ -15,15 +15,6 @@ import moment from 'moment'
  * - 提供日期参数，进入近一个月内的日期选择
  * */
 
-// 新date_range_picker组件: DateRangePickerNew
-// props: begin -- object, 开始时间
-//        end -- object, 结束时间
-//        canClear -- bool, 删除日期
-//        renderInputValue -- 自定义日期展示格式
-//        disabled -- 禁用
-//        onChange -- func, 日期修改回调
-//        disabledDate -- func, 不可选择日期
-
 const DateRangePickerNew = props => {
   const dateRangePickerNewRef = useRef(null)
   const {

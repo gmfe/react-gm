@@ -55,13 +55,15 @@ const RangeCalendar = props => {
   const { selectDates, onSelectDay, disabledDate } = props
 
   const _showDates = pickerValueShow(selectDates)
-  // showDates 保存变化的日期值
-  const [showDates, setShowDates] = useState(_showDates)
+  // 左右日历当前选择日期
+  const [selectLeft, setSelectLeft] = useState(_showDates[0])
+  const [selectRight, setSelectRight] = useState(_showDates[1])
 
   useEffect(() => {
     if (selectDates.length === 2) {
       const newDates = pickerValueShow(selectDates)
-      setShowDates(newDates)
+      setSelectLeft(newDates[0])
+      setSelectRight(newDates[1])
     }
   }, [selectDates])
 
@@ -69,15 +71,15 @@ const RangeCalendar = props => {
     if (position === '1') {
       const newDate =
         changeType === 'month'
-          ? moment(showDates[0]).month(date)
-          : moment(showDates[0]).year(date)
-      setShowDates([newDate, showDates[1]])
+          ? moment(selectLeft).month(date)
+          : moment(selectLeft).year(date)
+      setSelectLeft(newDate)
     } else {
       const newDate =
         changeType === 'month'
-          ? moment(showDates[1]).month(date)
-          : moment(showDates[1]).year(date)
-      setShowDates([showDates[0], newDate])
+          ? moment(selectRight).month(date)
+          : moment(selectRight).year(date)
+      setSelectRight(newDate)
     }
   }
 
@@ -87,9 +89,8 @@ const RangeCalendar = props => {
 
   const isNearMonth = () => {
     const isNearMonth =
-      moment(showDates[1]).month() - moment(showDates[0]).month() === 1
-    const isSameYear =
-      moment(showDates[1]).year() === moment(showDates[0]).year()
+      moment(selectRight).month() - moment(selectLeft).month() === 1
+    const isSameYear = moment(selectRight).year() === moment(selectLeft).year()
     return !isSameYear || (!isNearMonth && isSameYear)
   }
 
@@ -97,7 +98,7 @@ const RangeCalendar = props => {
     <div className='date-range-select-right'>
       <MulCalendar
         className='gm-margin-right-10 gm-border-0'
-        selected={showDates[0]}
+        select={selectLeft}
         selectedBegin={selectDates[0]}
         selectedEnd={selectDates[1]}
         onSelect={handleSelectDay}
@@ -107,7 +108,7 @@ const RangeCalendar = props => {
       />
       <MulCalendar
         className='gm-border-0'
-        selected={showDates[1]}
+        select={selectRight}
         selectedBegin={selectDates[0]}
         selectedEnd={selectDates[1]}
         onSelect={handleSelectDay}

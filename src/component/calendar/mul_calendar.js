@@ -101,7 +101,7 @@ HeadNew.propTypes = {
 /** 新 calendar */
 const MulCalendar = props => {
   const {
-    selected,
+    select,
     selectedBegin,
     selectedEnd,
     onSelect,
@@ -134,14 +134,14 @@ const MulCalendar = props => {
   return (
     <div {...rest} className={classNames('gm-calendar', className)}>
       <HeadNew
-        dates={selected}
+        dates={select}
         onChange={handleChangeYearOrMonth}
         toggleYearAndMonth={toggleYearAndMonth}
       />
       <Week />
       <Content
-        will={selected}
-        selected={selected}
+        will={select}
+        selected={select}
         onSelectDay={handleSelectDay}
         getDisabled={e => getDisabled(e)}
         selectedBegin={selectedBegin}
@@ -153,7 +153,7 @@ const MulCalendar = props => {
 
 MulCalendar.propTypes = {
   /** 当前选中的日期，Date()对象 */
-  selected: PropTypes.object,
+  select: PropTypes.object,
   /** 开始日期，Date()对象 */
   selectedBegin: PropTypes.object,
   /** 结束日期, Date()对象 */
