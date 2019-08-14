@@ -1,36 +1,26 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import ImgUploader from './index'
-import { observable } from 'mobx'
 
-const store = observable({
-  data: [
-    'https://js.guanmai.cn/static_storage/json/common/logo/default/logo.pure.png'
-  ],
-  setData(newData) {
-    this.data = newData
-  }
-})
+const statement =
+  '图片尺寸720*720像素，大小小于1M，大小小于1M，大小小于1M，大小小于1M，大小小于1M，大小小于1M，大小小于1M，大小小于1M，大小小于1M，大小小于1M，大小小于1M，大小小于1M，大小小于1M'
 
-const handleUpload = files => {
-  console.log(files)
-
-  // 调用方做突破尺寸和文件大小判断
-
-  // 假数据
-  store.setData([
-    'https://js.guanmai.cn/static_storage/json/common/logo/default/logo.pure.png',
-    'https://js.guanmai.cn/static_storage/json/common/logo/default/logo.pure.png'
-  ])
-}
+const data = [
+  'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  'https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/home/img/qrcode/zbios_09b6296.png',
+  'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  'https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/home/img/qrcode/zbios_09b6296.png',
+  'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+]
 
 storiesOf('ImgUploader', module).add('default', () => (
   <ImgUploader
-    data={store.data}
-    onUpload={handleUpload}
-    onChange={data => store.setData(data)}
+    data={data}
+    onUploader={i => console.log('onUpload\n', i)}
+    onChange={(i, e) => console.log('onChange\n', i, e)}
     accept={'image/*'}
-    desc='图片尺寸720*720像素，大小小于1M'
+    statement={statement}
     multiple
   />
 ))
