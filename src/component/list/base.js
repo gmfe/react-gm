@@ -117,11 +117,9 @@ Base.propTypes = {
   selected: PropTypes.array.isRequired,
   onSelect: PropTypes.func, // 返回数组
   multiple: PropTypes.bool,
+  isGroupList: PropTypes.bool, // 在这里仅仅表示数据的类型，对UI有影响而已
 
-  // 事件
-  getItemProps: PropTypes.func,
-
-  // 展示
+  /** 自定义 item，参数 item, index */
   renderItem: PropTypes.func,
   willActiveIndex: PropTypes.number,
 
@@ -129,7 +127,9 @@ Base.propTypes = {
   isScrollTo: PropTypes.bool,
   isAllInTheView: PropTypes.bool,
 
-  isGroupList: PropTypes.bool, // 在这里仅仅表示数据的类型，对UI有影响而已
+  /** 少用。给与更多 Item 的响应 */
+  getItemProps: PropTypes.func,
+
   className: PropTypes.string,
   style: PropTypes.object
 }
