@@ -6,16 +6,35 @@ import Overlay from './overlay'
 import IconDownUp from '../icon_down_up'
 
 const Default = props => {
-  const { disabled, className } = props
+  const { disabled, active } = props
   return (
     <Button disabled={disabled}>
       更多功能 &nbsp;&nbsp;
-      <IconDownUp active={(className || '').includes('gm-popover-active')} />
+      <IconDownUp active={active} />
     </Button>
   )
 }
 
 Default.propTypes = {
+  disabled: PropTypes.bool,
+  active: PropTypes.bool
+}
+
+const Inner = props => {
+  const { disabled, className, children, ...rest } = props
+  return (
+    <div {...rest} className='gm-inline-block'>
+      {children || (
+        <Default
+          active={(className || '').includes('gm-popover-active')}
+          disabled={disabled}
+        />
+      )}
+    </div>
+  )
+}
+
+Inner.propTypes = {
   disabled: PropTypes.bool,
   className: PropTypes.string
 }
@@ -42,9 +61,7 @@ const FunctionSet = props => {
       disabled={disabled}
       disabledBoxShadow
     >
-      <div className='gm-inline-block'>
-        {children || <Default disabled={disabled} />}
-      </div>
+      <Inner disabled={disabled}>{children}</Inner>
     </Popover>
   )
 }
