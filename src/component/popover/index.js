@@ -137,40 +137,17 @@ class Popover extends React.Component {
       offset,
       showArrow,
       arrowLeft,
-      animName
+      animName,
+      predictingHeight
     } = this.props
 
     const disabled = this.getDisabled()
-
-    let animate = animName
-
-    if (animName === true) {
-      if (top) {
-        if (right) {
-          animate = 'zoom-in-top'
-        } else if (center) {
-          animate = 'zoom-in-top'
-        } else {
-          animate = 'zoom-in-top'
-        }
-      } else {
-        if (right) {
-          animate = 'zoom-in-bottom'
-        } else if (center) {
-          animate = 'zoom-in-bottom'
-        } else {
-          animate = 'zoom-in-bottom'
-        }
-      }
-    }
 
     if (active) {
       LayoutRoot._setComponentPopup(
         this.id,
         <Popup
           key='popup'
-          tabIndex={0}
-          style={style}
           ref={ref => (this.refPopup = ref)}
           onMouseEnter={
             !disabled && type === 'hover' ? this.handleMouseEnter : _.noop
@@ -185,14 +162,10 @@ class Popover extends React.Component {
           offset={offset}
           showArrow={showArrow}
           arrowLeft={arrowLeft}
-          className={classNames(
-            'gm-no-outline',
-            {
-              'gm-animated': !!animate,
-              ['gm-animated-' + animate]: animate
-            },
-            className
-          )}
+          animName={animName}
+          predictingHeight={predictingHeight}
+          className={className}
+          style={style}
         >
           {popup}
         </Popup>
@@ -350,7 +323,10 @@ Popover.propTypes = {
     'zoom-in',
     'zoom-in-top',
     'zoom-in-bottom'
-  ])
+  ]),
+
+  /** 预判高度。因为 popup 的宽高会是可变的，所以没法判断视窗内是否能放得下，于是有此。 */
+  predictingHeight: PropTypes.number
 }
 
 Popover.defaultProps = {

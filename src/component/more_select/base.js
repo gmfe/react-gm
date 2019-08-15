@@ -272,7 +272,6 @@ class Base extends React.Component {
             renderItem={renderListItem}
             onSelect={this.handleSelected}
             isScrollTo
-            isAllInTheView
             willActiveIndex={willActiveIndex}
             style={{
               maxHeight: listMaxHeight
@@ -295,6 +294,7 @@ class Base extends React.Component {
       className,
       style,
       popoverType,
+      predictingHeight,
       children
     } = this.props
 
@@ -317,6 +317,7 @@ class Base extends React.Component {
           animName
           popup={this.renderList()}
           disabled={disabled}
+          predictingHeight={predictingHeight}
         >
           {children || (
             <Flex
@@ -426,6 +427,9 @@ Base.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   popupClassName: PropTypes.string,
+
+  /** 预判高度。因为 popup 的宽高会是可变的，所以没法判断视窗内是否能放得下，于是有此。 */
+  predictingHeight: PropTypes.number,
 
   /** 目前为了 keyboard */
   onKeyDown: PropTypes.func

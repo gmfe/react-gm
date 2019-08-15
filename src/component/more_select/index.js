@@ -75,12 +75,14 @@ MoreSelect.defaultProps = {
 
   delay: 500,
   renderListItem: item => item.text,
-  listMaxHeight: '250px',
+  listMaxHeight: '180px',
 
   renderListFilterType: 'default',
 
   popoverType: 'focus',
-  onKeyDown: _.noop
+  onKeyDown: _.noop,
+
+  predictingHeight: 220
 }
 
 // 介绍 selected

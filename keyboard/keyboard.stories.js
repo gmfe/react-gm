@@ -40,6 +40,30 @@ const data = [
   {
     value: 4,
     text: '宝安'
+  },
+  {
+    value: 5,
+    text: '宝安'
+  },
+  {
+    value: 6,
+    text: '宝安'
+  },
+  {
+    value: 7,
+    text: '宝安'
+  },
+  {
+    value: 8,
+    text: '宝安'
+  },
+  {
+    value: 9,
+    text: '宝安'
+  },
+  {
+    value: 10,
+    text: '宝安'
   }
 ]
 
@@ -94,6 +118,23 @@ const tableData = [
     category_id_2_name: '甘蓝类',
     settle_supplier_id: 'T13251',
     sku_name: '大白菜',
+    station_id: 'T7936',
+    category_id_1_name: '蔬菜',
+    max_stock_unit_price: null
+  },
+  {
+    purchase_price_limit: null,
+    std_unit_name: '斤',
+    sale_ratio: 1,
+    category_id_1: 'A3978',
+    settle_supplier_name: '水果供应商',
+    spu_id: 'C874502',
+    sku_id: 'D3628124',
+    sale_unit_name: '斤',
+    category_id_2: 'B19074',
+    category_id_2_name: '甘蓝类',
+    settle_supplier_id: 'T13251',
+    sku_name: '小白菜',
     station_id: 'T7936',
     category_id_1_name: '蔬菜',
     max_stock_unit_price: null
