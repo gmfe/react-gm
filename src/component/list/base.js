@@ -84,7 +84,7 @@ class Base extends React.Component {
       >
         {_.map(data, (group, gIndex) => (
           <div key={gIndex + group.label} className='gm-list-group-item'>
-            <div className='gm-text-desc gm-list-label'>{group.label}</div>
+            <div className='gm-list-label'>{group.label}</div>
             {_.map(group.children, (v, index) => {
               sequenceDataIndex++
               return (

@@ -56,6 +56,15 @@ const columns = [
     Header: '供应商',
     accessor: 'original.settle_supplier_name',
     width: 100
+  },
+  {
+    Header: '加粗',
+    accessor: 'original.sku_name',
+    width: 100,
+    Cell: cellProps => {
+      console.log(cellProps)
+      return <strong>{cellProps.original.original.sku_name}</strong>
+    }
   }
 ]
 

@@ -56,7 +56,7 @@ const TableSelect = React.forwardRef((props, ref) => {
           let content = null
           if (column.Cell) {
             content = column.Cell({
-              item,
+              original: item,
               index
             })
           } else if (_.isFunction(column.accessor)) {
