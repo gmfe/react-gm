@@ -91,7 +91,7 @@ import TableSelect from './component/table_select'
 
 import FunctionSet from './component/function_set'
 
-import { PopupContentConfirmDelete } from './component/popup'
+import { PopupContentConfirm } from './component/popup'
 
 import Validator from './validator'
 
@@ -233,6 +233,6 @@ export {
   Box,
   BoxForm,
   BoxTable,
-  PopupContentConfirmDelete,
+  PopupContentConfirm,
   ImgUploader
 }

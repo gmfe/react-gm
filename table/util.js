@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Popover, PopupContentConfirmDelete } from '../src'
+import { Popover, PopupContentConfirm } from '../src'
 import { SvgShanchumorenHuaban, SvgTianjiamorenHuaban } from 'gm-svg'
 import _ from 'lodash'
 import SVGDelete from '../svg/delete.svg'
@@ -54,13 +54,14 @@ const OperationDelete = props => {
   }
 
   const popup = (
-    <PopupContentConfirmDelete
+    <PopupContentConfirm
+      type='delete'
       title={title}
       onDelete={handleDelete}
       onCancel={handleCancel}
     >
       {children}
-    </PopupContentConfirmDelete>
+    </PopupContentConfirm>
   )
 
   return (

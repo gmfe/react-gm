@@ -1,4 +1,4 @@
 import Popup from './popup'
-import PopupContentConfirmDelete from './popup_content_confirm_delete'
+import PopupContentConfirm from './popup_content_confirm_delete'
 
-export { Popup, PopupContentConfirmDelete }
+export { Popup, PopupContentConfirm }
