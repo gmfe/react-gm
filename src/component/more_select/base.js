@@ -225,7 +225,7 @@ class Base extends React.Component {
       isGroupList,
       renderListItem,
       searchPlaceholder,
-      listMaxHeight,
+      listHeight,
       popupClassName
     } = this.props
 
@@ -248,36 +248,38 @@ class Base extends React.Component {
             placeholder={searchPlaceholder}
           />
         </div>
-        {loading && (
-          <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'>
-            <Loading size={20} />
-          </Flex>
-        )}
-        {!loading && filterData.length === 0 && (
-          <Flex
-            alignCenter
-            justifyCenter
-            className='gm-bg gm-padding-5 gm-text-desc'
-          >
-            {getLocale('没有数据')}
-          </Flex>
-        )}
-        {!loading && filterData.length !== 0 && (
-          <ListBase
-            data={filterData}
-            selected={_.map(selected, v => v.value)}
-            multiple={multiple}
-            isGroupList={isGroupList}
-            className='gm-border-0'
-            renderItem={renderListItem}
-            onSelect={this.handleSelected}
-            isScrollTo
-            willActiveIndex={willActiveIndex}
-            style={{
-              maxHeight: listMaxHeight
-            }}
-          />
-        )}
+        <div style={{ height: listHeight }}>
+          {loading && (
+            <Flex alignCenter justifyCenter className='gm-bg gm-padding-5'>
+              <Loading size={20} />
+            </Flex>
+          )}
+          {!loading && filterData.length === 0 && (
+            <Flex
+              alignCenter
+              justifyCenter
+              className='gm-bg gm-padding-5 gm-text-desc'
+            >
+              {getLocale('没有数据')}
+            </Flex>
+          )}
+          {!loading && filterData.length !== 0 && (
+            <ListBase
+              data={filterData}
+              selected={_.map(selected, v => v.value)}
+              multiple={multiple}
+              isGroupList={isGroupList}
+              className='gm-border-0'
+              renderItem={renderListItem}
+              onSelect={this.handleSelected}
+              isScrollTo
+              willActiveIndex={willActiveIndex}
+              style={{
+                height: listHeight
+              }}
+            />
+          )}
+        </div>
       </div>
     )
   }
@@ -294,7 +296,6 @@ class Base extends React.Component {
       className,
       style,
       popoverType,
-      predictingHeight,
       children
     } = this.props
 
@@ -317,7 +318,6 @@ class Base extends React.Component {
           animName
           popup={this.renderList()}
           disabled={disabled}
-          predictingHeight={predictingHeight}
         >
           {children || (
             <Flex
@@ -417,7 +417,7 @@ Base.propTypes = {
   renderListItem: PropTypes.func, // 定制列表
 
   // 样式
-  listMaxHeight: PropTypes.string,
+  listHeight: PropTypes.string,
 
   // isGroupList
   isGroupList: PropTypes.bool,
@@ -427,9 +427,6 @@ Base.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   popupClassName: PropTypes.string,
-
-  /** 预判高度。因为 popup 的宽高会是可变的，所以没法判断视窗内是否能放得下，于是有此。 */
-  predictingHeight: PropTypes.number,
 
   /** 目前为了 keyboard */
   onKeyDown: PropTypes.func

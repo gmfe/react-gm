@@ -122,7 +122,7 @@ TableSelect.propTypes = {
   renderSelected: PropTypes.func, // 定制已选的区域，提供 selected
 
   // 样式
-  listMaxHeight: PropTypes.string,
+  listHeight: PropTypes.string,
 
   popoverType: PropTypes.oneOf(['focus', 'realFocus']),
 
