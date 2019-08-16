@@ -3,7 +3,7 @@ import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { getLocale } from '../../locales'
 import moment from 'moment'
-import MulCalendar from '../calendar/mul_calendar'
+import MulCalendar from '../calendar/range_calendar'
 
 /** 左侧选择参数列表 */
 const list = [

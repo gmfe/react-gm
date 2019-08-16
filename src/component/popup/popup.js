@@ -104,8 +104,6 @@ class Popup extends React.Component {
       sStyle.left = rect.left + offset
     }
 
-    console.log(sStyle.left, sStyle.right)
-
     if (this.state.top) {
       sStyle.top = rect.top - height - 5
     }

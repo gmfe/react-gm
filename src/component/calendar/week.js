@@ -1,6 +1,7 @@
 import { getLocale } from '../../locales'
 import React from 'react'
 import _ from 'lodash'
+import Flex from '../flex'
 
 const weekDays = [
   getLocale('week__日'),
@@ -13,13 +14,13 @@ const weekDays = [
 ]
 const Week = () => {
   return (
-    <div className='gm-calendar-week'>
+    <Flex className='gm-calendar-week'>
       {_.map(weekDays, (v, i) => (
-        <span key={i} className='gm-calendar-day-name'>
+        <Flex key={i} flex alignCenter justifyCenter>
           {v}
-        </span>
+        </Flex>
       ))}
-    </div>
+    </Flex>
   )
 }
 

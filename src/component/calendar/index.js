@@ -1,4 +1,4 @@
 import Calendar from './calendar'
-import MulCalendar from './mul_calendar'
+import RangeCalendar from './range_calendar'
 
-export { Calendar, MulCalendar }
+export { Calendar, RangeCalendar }
