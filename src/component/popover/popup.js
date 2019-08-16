@@ -10,10 +10,12 @@ function isElementInViewport(dom, predictingHeight) {
   const height = window.innerHeight || document.documentElement.clientHeight
 
   if (predictingHeight) {
-    return rect.top + predictingHeight <= height
+    // 会差那么一丢丢，所以给个阈值
+    return rect.top + predictingHeight <= height - 10
   }
 
-  return rect.bottom <= height
+  // 会差那么一丢丢，所以给个阈值
+  return rect.bottom <= height - 10
 }
 
 class Popup extends React.Component {
