@@ -4,8 +4,8 @@ import SVGRemove from '../../../svg/remove.svg'
 import Button from '../button'
 import classNames from 'classnames'
 
-const PopupContentConfirmDelete = props => {
-  const { title, onDelete, onCancel, className, children, ...rest } = props
+const PopupContentConfirm = props => {
+  const { type, title, onCancel, className, children, ...rest } = props
 
   return (
     <div
@@ -27,21 +27,33 @@ const PopupContentConfirmDelete = props => {
           >
             取消
           </button>
-          <Button className='btn btn-danger' onClick={onDelete}>
-            删除
-          </Button>
+          {type === 'delete' ? (
+            <Button className='btn btn-danger' onClick={props.onDelete}>
+              删除
+            </Button>
+          ) : (
+            <Button className='btn btn-primary' onClick={props.onSave}>
+              保存
+            </Button>
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-PopupContentConfirmDelete.propTypes = {
+PopupContentConfirm.propTypes = {
+  type: PropTypes.oneOf(['save', 'delete']),
   title: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
+  onSave: PropTypes.func,
   className: PropTypes.string,
   style: PropTypes.object
 }
 
-export default PopupContentConfirmDelete
+PopupContentConfirm.defaultProps = {
+  type: 'save'
+}
+
+export default PopupContentConfirm

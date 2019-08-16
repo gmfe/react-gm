@@ -45,7 +45,7 @@ label {
   thead {
     tr {
       height: 40px;
-      background: #f2f3f8;
+      background: @gm-table-bg-accent;
       border-bottom: 1px solid @gm-border-color;
     }
   }
@@ -192,11 +192,10 @@ label {
 
   &.btn-danger {
     color: @brand-danger;
+    border-color: @brand-danger;
 
     &:hover {
-      color: @btn-danger-color;
-      background-color: @btn-danger-bg;
-      border-color: @btn-danger-border;
+      color: @brand-danger-hover;
     }
   }
 }
