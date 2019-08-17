@@ -25,8 +25,8 @@ const months = [
 const Head = props => {
   const { value, onChange, disabledYearAndMonth } = props
 
-  const handleChange = (type, diff) => {
-    onChange(moment(value).add(type, diff))
+  const handleChange = (diff, type) => {
+    onChange(moment(value).add(diff, type))
   }
 
   return (
@@ -37,7 +37,7 @@ const Head = props => {
             className={classNames('gm-calendar-head-icon', {
               'gm-hidden': disabledYearAndMonth === 'left'
             })}
-            onClick={() => handleChange('year', -1)}
+            onClick={() => handleChange(-1, 'year')}
           >
             <SVGLeftSmall />
           </span>
@@ -45,7 +45,7 @@ const Head = props => {
             className={classNames('gm-calendar-head-icon', {
               'gm-hidden': disabledYearAndMonth === 'left'
             })}
-            onClick={() => handleChange('month', -1)}
+            onClick={() => handleChange(-1, 'month')}
           >
             <SVGLeftSmall />
           </span>
@@ -62,7 +62,7 @@ const Head = props => {
               className={classNames('gm-calendar-head-icon', {
                 'gm-hidden': disabledYearAndMonth === 'right'
               })}
-              onClick={() => handleChange('month', 1)}
+              onClick={() => handleChange(1, 'month')}
             >
               <SVGRightSmall />
             </span>
@@ -71,7 +71,7 @@ const Head = props => {
             className={classNames('gm-calendar-head-icon', {
               'gm-hidden': disabledYearAndMonth === 'right'
             })}
-            onClick={() => handleChange('year', 1)}
+            onClick={() => handleChange(1, 'year')}
           >
             <SVGRightSmall />
           </span>

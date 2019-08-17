@@ -153,7 +153,17 @@ Popup.propTypes = {
   offset: PropTypes.number,
   showArrow: PropTypes.bool, // 是否显示三角标
   arrowLeft: PropTypes.string,
-  animName: PropTypes.string,
+  animName: PropTypes.oneOf([
+    false,
+    true,
+    'fade-in-right',
+    'fade-in-left',
+    'fade-in-top',
+    'fade-in-bottom',
+    'zoom-in',
+    'zoom-in-top',
+    'zoom-in-bottom'
+  ]),
   /** 预判高度。因为 popup 的宽高会是可变的，所以没法判断视窗内是否能放得下，于是有此。 */
   predictingHeight: PropTypes.number,
   disabledBoxShadow: PropTypes.bool

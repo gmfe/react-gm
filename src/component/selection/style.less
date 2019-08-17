@@ -12,11 +12,9 @@
   .gm-selection-icon {
     position: absolute;
     display: block;
-    width: 10px;
-    height: 14px;
     line-height: 1;
-    top: 8px;
-    bottom: 0;
+    top: 9px;
+    right: 6px;
     color: @gm-color-fourth;
     cursor: pointer;
   }
@@ -38,6 +36,10 @@
 
   &.disabled {
     cursor: not-allowed;
+
+    .gm-selection-selected {
+      cursor: not-allowed;
+    }
 
     .gm-selection-close-icon {
       cursor: not-allowed;

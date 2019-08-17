@@ -27,6 +27,7 @@ class Selection extends React.Component {
       disabled,
       renderSelected,
       placeholder,
+      funIcon,
       clean,
       disabledClose,
       className,
@@ -54,7 +55,9 @@ class Selection extends React.Component {
         )}
       >
         {isForSelect ? (
-          <div className='form-control gm-selection-selected'>{text}</div>
+          <div className='form-control gm-selection-selected'>
+            {text || placeholder}
+          </div>
         ) : (
           <input
             ref={this.refInput}
@@ -73,10 +76,16 @@ class Selection extends React.Component {
             className='gm-selection-icon gm-selection-close-icon'
           />
         )}
-        <IconDownUp
-          active={(className || '').includes('gm-popover-active')}
-          className='gm-selection-icon gm-selection-down-up'
-        />
+        {funIcon ? (
+          React.cloneElement(funIcon, {
+            className: classNames('gm-selection-icon', funIcon.props.className)
+          })
+        ) : (
+          <IconDownUp
+            active={(className || '').includes('gm-popover-active')}
+            className='gm-selection-icon gm-selection-down-up'
+          />
+        )}
       </div>
     )
   }
@@ -89,10 +98,13 @@ Selection.propTypes = {
   disabled: PropTypes.bool,
   renderSelected: PropTypes.func,
   placeholder: PropTypes.string,
+  /** 代替默认的 icon */
+  funIcon: PropTypes.element,
   /** 干净模式 */
   clean: PropTypes.bool,
   /** 禁用 x 按钮 */
   disabledClose: PropTypes.bool,
+  /** 键盘用 */
   onKeyDown: PropTypes.func,
   className: PropTypes.string,
   style: PropTypes.object,

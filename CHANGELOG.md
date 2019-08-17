@@ -3,6 +3,7 @@
 ## breaking changes
 
 ### component
+
 Framework 不内嵌 LayoutRoot，调用方自行放 LayoutRoot 位置
 Breadcrumb 改了
 Info 改了
@@ -12,6 +13,8 @@ Framework 不内嵌 LayoutRoot，调用方自行放 LayoutRoot 位置
 Nav 改了
 
 移除 Menu
+
+DateRangePicker props 有变动
 
 ### css
 
