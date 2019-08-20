@@ -52,12 +52,23 @@ storiesOf('DateRangePicker', module)
   ))
   .add('disabled', () => <DateRangePicker disabled />)
   .add('canClear', () => (
-    <div>
-      <DateRangePicker
-        begin={store.begin}
-        end={store.end}
-        onChange={(begin, end) => store.changeDate(begin, end)}
-        canClear
-      />
-    </div>
+    <DateRangePicker
+      begin={store.begin}
+      end={store.end}
+      onChange={(begin, end) => store.changeDate(begin, end)}
+      canClear
+    />
+  ))
+  .add('children 自定义', () => (
+    <DateRangePicker
+      begin={storeNull.begin}
+      end={storeNull.end}
+      onChange={(begin, end) => storeNull.changeDate(begin, end)}
+    >
+      <div>
+        开始
+        {storeNull.begin ? moment(storeNull.begin).format('YYYY-MM-DD') : ''}
+        结束{storeNull.end ? moment(storeNull.end).format('YYYY-MM-DD') : ''}
+      </div>
+    </DateRangePicker>
   ))

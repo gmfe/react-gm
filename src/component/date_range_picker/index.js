@@ -49,6 +49,7 @@ class DateRangePicker extends React.Component {
       disabledDate,
       canClear,
       className,
+      children,
       ...rest
     } = this.props
 
@@ -83,19 +84,23 @@ class DateRangePicker extends React.Component {
 
     return (
       <Popover ref={this.refPopover} animName disabled={disabled} popup={popup}>
-        <Selection
-          ref={this.selectedRef}
-          {...rest}
-          selected={{ begin, end }}
-          onSelect={this.handleSelect}
-          disabled={disabled}
-          renderSelected={renderSelected}
-          placeholder=''
-          disabledClose={!canClear}
-          className={classNames('gm-range-range-picker', className)}
-          funIcon={<SVGCalendar />}
-          isForSelect
-        />
+        {children !== undefined ? (
+          children
+        ) : (
+          <Selection
+            ref={this.selectedRef}
+            {...rest}
+            selected={{ begin, end }}
+            onSelect={this.handleSelect}
+            disabled={disabled}
+            renderSelected={renderSelected}
+            placeholder=''
+            disabledClose={!canClear}
+            className={classNames('gm-range-range-picker', className)}
+            funIcon={<SVGCalendar />}
+            isForSelect
+          />
+        )}
       </Popover>
     )
   }
