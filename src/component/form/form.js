@@ -83,12 +83,13 @@ class Form extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    const { onSubmit, onSubmitValidated } = this.props
 
-    this.props.onSubmit(e)
+    onSubmit && onSubmit(e)
 
     const err = this.validateAll()
     if (!err) {
-      this.props.onSubmitValidated()
+      onSubmitValidated && onSubmitValidated()
     }
 
     // 有错误才打开错误提示，没有错误则不打开
