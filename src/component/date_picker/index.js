@@ -38,8 +38,8 @@ class DatePicker extends React.Component {
   }
 
   handleSelectDate = date => {
-    this.props.onChange(date)
     this.refPopup.current.apiDoSetActive(false)
+    this.props.onChange(date)
   }
 
   handleKeyDown = event => {

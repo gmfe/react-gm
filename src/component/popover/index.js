@@ -44,6 +44,7 @@ class Popover extends React.Component {
     this.id = +new Date() + '' + Math.random()
   }
 
+  /** 注意，先调用这个，再处理业务的 onXXX。比如 date_picker */
   apiDoSetActive = active => {
     this.setActive(active)
   }
