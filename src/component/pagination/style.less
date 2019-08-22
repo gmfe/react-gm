@@ -1,9 +1,11 @@
 .gm-pagination {
+  margin-right: 20px;
+
   .gm-pagination-page {
-    margin-left: 10px;
+    margin-left: 20px;
 
     .gm-pagination-page-item {
-      margin: 0 3px;
+      margin: 0 5px;
       border: 1px solid @gm-border-color;
       height: 30px;
       line-height: 30px;
@@ -14,11 +16,27 @@
       &.disabled {
         cursor: not-allowed;
         background-color: #f0f1f3;
+
+        &:hover {
+          border: 1px solid @gm-border-color;
+          color: black;
+        }
       }
 
       &.active {
         background-color: @brand-primary;
+        border: 1px solid @brand-primary;
         color: white;
+
+        &:hover {
+          border: 1px solid @brand-primary;
+          color: white;
+        }
+      }
+
+      &:hover {
+        border: 1px solid @brand-primary;
+        color: @brand-primary;
       }
     }
 
