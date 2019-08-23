@@ -50,7 +50,7 @@ Pagination.propTypes = {
     offset: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired
   }),
-  /** 提供 {index, limit} */
+  /** 提供 {offset, limit} */
   onChange: PropTypes.func.isRequired,
   /** 此 count 非 data.count。此只是用来控制不显示总数 */
   disabledCount: PropTypes.bool,
@@ -59,7 +59,7 @@ Pagination.propTypes = {
    * 参数 {offset, limit}, page。page 是页码。
    * 直接用此数据请求后台即可
    */
-  toPage: PropTypes.func.isRequired,
+  toPage: PropTypes.func,
   /**
    * 老用法，已废弃
    * data without count 才有效 */
