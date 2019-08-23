@@ -83,13 +83,18 @@ storiesOf('Pagination', module)
   })
 
 storiesOf('PaginationV2', module)
+  .addParameters({
+    info: {
+      text: '**一般不会直接用到，而是用 PaginationBox**'
+    }
+  })
   .add('分页规范', () => (
     <a href='https://www.yuque.com/iyum9i/cudrs0/etfogz'>此分页规范详情</a>
   ))
-  .add('default(without count)', () => (
+  .add('default', () => (
     <PaginationV2 data={store.data} onChange={data => store.setData(data)} />
   ))
-  .add('showCount(with count)', () => (
+  .add('showCount', () => (
     <PaginationV2
       data={store.data}
       onChange={data => store.setData(data)}
