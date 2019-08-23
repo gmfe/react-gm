@@ -44,24 +44,30 @@ const Pagination = ({ data, onChange, toPage, nextDisabled, ...rest }) => {
 
 Pagination.displayName = 'Pagination'
 Pagination.propTypes = {
-  /** 出于性能考虑，有些接口不会返回「count」 */
+  /**
+   * 新用法 count 是必须的，不传会有 warn。老用法 count 不是必须的。
+   *
+   * count 仅当前有多少条数据，非传统意义上的一共多少条数据。注意是当前。
+   * */
   data: PropTypes.shape({
     count: PropTypes.number,
     offset: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired
   }),
+
   /** 提供 {offset, limit} */
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   /** 此 count 非 data.count。此只是用来控制不显示总数 */
   disabledCount: PropTypes.bool,
+
   /**
-   * 老用法，已废弃
+   * 老用法
    * 参数 {offset, limit}, page。page 是页码。
    * 直接用此数据请求后台即可
    */
   toPage: PropTypes.func,
   /**
-   * 老用法，已废弃
+   * 老用法
    * data without count 才有效 */
   nextDisabled: PropTypes.bool,
   className: PropTypes.string,

@@ -66,13 +66,21 @@ storiesOf('Pagination', module)
       disabledCount
     />
   ))
-  .add('给 PaginationBox 定制', () => (
-    <Pagination
-      data={store.data}
-      onChange={data => store.setData(data)}
-      _isForBoxDiff={3}
-    />
-  ))
+  .add(
+    '给 PaginationBox 定制',
+    () => (
+      <Pagination
+        data={store.data}
+        onChange={data => store.setData(data)}
+        _isForBoxDiff={3}
+      />
+    ),
+    {
+      info: {
+        text: '仅内部演示，一般不会用到'
+      }
+    }
+  )
   .add('旧用法 with count', () => (
     <Pagination data={store.data} toPage={data => store.setData(data)} />
   ))
