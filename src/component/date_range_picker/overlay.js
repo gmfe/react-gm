@@ -10,7 +10,7 @@ import Two from './two'
 const quickList = [
   { range: [[0, 'day'], [0, 'day']], text: getLocale('今天') },
   { range: [[-7, 'day'], [0, 'day']], text: getLocale('近7天') },
-  { name: [[-1, 'month'], [0, 'day']], text: getLocale('近一个月') }
+  { range: [[-1, 'month'], [0, 'day']], text: getLocale('近一个月') }
 ]
 
 const Left = props => {
@@ -81,7 +81,11 @@ const Bottom = props => {
           取消
         </button>
         <span className='gm-gap-10' />
-        <button className='btn btn-default' onClick={onOK}>
+        <button
+          className='btn btn-default'
+          onClick={onOK}
+          disabled={!(begin && end)}
+        >
           确定
         </button>
       </div>
