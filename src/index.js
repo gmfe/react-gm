@@ -18,6 +18,7 @@ import {
 import Pagination from './component/pagination/pagination'
 import PaginationText from './component/pagination/pagination_text'
 import PaginationBox from './component/pagination_box'
+import PaginationV2 from './component/pagination/pagination_v2'
 import Dropper from './component/dropper/index'
 import {
   Form,
@@ -146,6 +147,7 @@ export {
   // 废弃的结束
 
   Pagination,
+  PaginationV2,
   PaginationBox,
   Form,
   FormItem,
