@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import Pagination from './pagination'
-import { withKnobs } from '@storybook/addon-knobs'
+import PaginationV2 from './pagination_v2'
 import { observable } from 'mobx'
 import PaginationFuck from '../../deprecated/pagination_fuck/pagination_fuck'
 
@@ -52,39 +52,13 @@ const fuckStore = observable({
 // }, 200)
 
 storiesOf('Pagination', module)
-  .addDecorator(withKnobs)
   .add('分页规范', () => (
     <a href='https://www.yuque.com/iyum9i/cudrs0/etfogz'>此分页规范详情</a>
   ))
-  .add('default', () => (
-    <Pagination data={store.data} onChange={data => store.setData(data)} />
-  ))
-  .add('disabledCount', () => (
-    <Pagination
-      data={store.data}
-      onChange={data => store.setData(data)}
-      disabledCount
-    />
-  ))
-  .add(
-    '给 PaginationBox 定制',
-    () => (
-      <Pagination
-        data={store.data}
-        onChange={data => store.setData(data)}
-        _isForBoxDiff={3}
-      />
-    ),
-    {
-      info: {
-        text: '仅内部演示，一般不会用到'
-      }
-    }
-  )
-  .add('旧用法 with count', () => (
+  .add('with count', () => (
     <Pagination data={store.data} toPage={data => store.setData(data)} />
   ))
-  .add('旧用法 without count', () => (
+  .add('without count', () => (
     <Pagination
       data={store.noCountData}
       toPage={data => store.setNoCountData(data)}
@@ -107,3 +81,36 @@ storiesOf('Pagination', module)
       </div>
     )
   })
+
+storiesOf('PaginationV2', module)
+  .add('分页规范', () => (
+    <a href='https://www.yuque.com/iyum9i/cudrs0/etfogz'>此分页规范详情</a>
+  ))
+  .add('default(without count)', () => (
+    <PaginationV2 data={store.data} onChange={data => store.setData(data)} />
+  ))
+  .add('showCount(with count)', () => (
+    <PaginationV2
+      data={store.data}
+      onChange={data => store.setData(data)}
+      showCount
+    />
+  ))
+  .add(
+    '给 PaginationBox 定制',
+    () => (
+      <PaginationV2
+        data={store.data}
+        onChange={data => store.setData(data)}
+        _peekInfo={{
+          peek: 60,
+          more: true
+        }}
+      />
+    ),
+    {
+      info: {
+        text: '仅内部演示，一般不会用到'
+      }
+    }
+  )

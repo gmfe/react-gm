@@ -49,7 +49,7 @@ const Left = ({ data, onChange, showCount }) => {
 Left.propTypes = {
   data: PropTypes.object,
   onChange: PropTypes.func.isRequired,
-  showCount: PropTypes.bool.isRequired
+  showCount: PropTypes.bool
 }
 
 export default Left

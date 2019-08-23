@@ -28,7 +28,7 @@ const PaginationBase = props => {
 }
 
 PaginationBase.propTypes = {
-  /** 非传统意义上的 分页信息。 仅此组件需要的数据而已。count 仅当前有多少条数据，非传统意义上的一共多少条数据。注意是当前。 */
+  /** 非传统意义上的 分页信息。 仅此组件需要的数据而已。count 仅当前有多少条数据，非传统意义上的一共多少条数据，注意是当前。 */
   data: PropTypes.shape({
     count: PropTypes.number.isRequired,
     offset: PropTypes.number.isRequired,
