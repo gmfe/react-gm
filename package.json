@@ -13,9 +13,9 @@
   "scripts": {
     "demo": "node ./node_modules/gm-webpack/start",
     "start": "start-storybook",
-    "deploy": "GIT_BRANCH=$BRANCH GIT_COMMIT=$COMMIT node ./node_modules/gm-webpack/deploy",
-    "docs-build": "rm -rf build; rm -rf docs; mkdir docs; npm run deploy; cp -r build docs",
-    "docs": "npm run docs-build; git add --all; git commit -m 'docs generate'; git push origin master:master;"
+    "build": "build-storybook -c .storybook -o docs",
+    "prebuild": "rm -rf docs; mkdir docs;",
+    "postbuild": "cp -r docs ../react-gm-docs/docs; cd ../react-gm-docs; npm run build;"
   },
   "husky": {
     "hooks": {
