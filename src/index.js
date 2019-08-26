@@ -104,6 +104,8 @@ import Carousel from './component/carousel/carousel'
 import { Box, BoxForm, BoxTable } from './component/box'
 import ImgUploader from './component/img_uploader'
 
+import IconDownUp from './component/icon_down_up'
+
 Object.assign(Sheet, {
   SheetColumn,
   SheetAction,
@@ -237,5 +239,6 @@ export {
   BoxForm,
   BoxTable,
   PopupContentConfirm,
-  ImgUploader
+  ImgUploader,
+  IconDownUp
 }
