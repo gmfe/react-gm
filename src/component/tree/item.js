@@ -4,7 +4,7 @@ import { Checkbox } from '../checkbox'
 import Flex from '../flex'
 
 const LeafItem = props => {
-  const { leaf, checked, onChange, onClickName } = props
+  const { leaf, checked, onChange, onClickName, renderLeafItem } = props
 
   const handleChange = () => {
     onChange(leaf, !checked)
@@ -19,10 +19,10 @@ const LeafItem = props => {
   }
 
   return (
-    <Flex alignCenter className='gm-hover-bg gm-tree-group-list-item gm-cursor'>
+    <Flex className='gm-hover-bg gm-tree-group-list-item gm-cursor'>
       <Checkbox value={leaf.value} checked={checked} onChange={handleChange} />
       <Flex flex onClick={handleName}>
-        {leaf.name}
+        {renderLeafItem(leaf)}
       </Flex>
     </Flex>
   )
@@ -32,7 +32,14 @@ LeafItem.propTypes = {
   leaf: PropTypes.object.isRequired,
   checked: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
-  onClickName: PropTypes.func
+  onClickName: PropTypes.func,
+
+  // 自定义 leaf 渲染格式
+  renderLeafItem: PropTypes.func
+}
+
+LeafItem.defaultProps = {
+  renderLeafItem: leaf => leaf.name
 }
 
 const GroupItem = props => {

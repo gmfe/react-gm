@@ -45,7 +45,8 @@ class List extends React.Component {
       list,
       selectedValues,
       showGroupCheckbox,
-      onClickLeafName
+      onClickLeafName,
+      renderLeafItem
     } = this.props
 
     if (list.length === 0) {
@@ -95,6 +96,7 @@ class List extends React.Component {
             checked={_.includes(selectedValues, v.value)}
             onChange={this.handleChange}
             onClickName={onClickLeafName ? this.handleClickLeafName : undefined}
+            renderLeafItem={renderLeafItem}
           />
         ))}
       </React.Fragment>
@@ -112,7 +114,10 @@ List.propTypes = {
   showGroupCheckbox: PropTypes.func.isRequired,
 
   onClickLeafName: PropTypes.func,
-  onClickCheckbox: PropTypes.func
+  onClickCheckbox: PropTypes.func,
+
+  // 自定义 leaf 渲染格式
+  renderLeafItem: PropTypes.func
 }
 
 export default List
