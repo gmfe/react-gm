@@ -80,6 +80,8 @@ class Tree extends React.Component {
       onClickCheckbox,
       showGroupCheckbox,
 
+      renderLeafItem,
+
       className,
       ...rest
     } = this.props
@@ -127,6 +129,7 @@ class Tree extends React.Component {
             showGroupCheckbox={showGroupCheckbox}
             onClickLeafName={onClickLeafName}
             onClickCheckbox={onClickCheckbox}
+            renderLeafItem={renderLeafItem}
           />
         </Flex>
 
@@ -162,7 +165,10 @@ Tree.propTypes = {
   showGroupCheckbox: PropTypes.func,
 
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+
+  // 自定义 leaf 渲染格式
+  renderLeafItem: PropTypes.func
 }
 
 Tree.defaultProps = {
