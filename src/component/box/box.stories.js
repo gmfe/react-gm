@@ -11,7 +11,7 @@ storiesOf('Box', module)
     <div>
       <Box>这是一块内容</Box>
       <Box>这是一块内容，内容直接会有 border </Box>
-      <Box>这是一块内容</Box>
+      <Box hasGap>这是一块内容，切有内边距</Box>
     </div>
   ))
   .add('BoxTable', () => (

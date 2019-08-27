@@ -4,16 +4,26 @@ import classNames from 'classnames'
 
 /** Box，用来包裹一块内容 */
 const Box = props => {
-  const { className, children, ...rest } = props
+  const { hasGap, className, children, ...rest } = props
 
   return (
-    <div {...rest} className={classNames('gm-box', className)}>
+    <div
+      {...rest}
+      className={classNames(
+        'gm-box',
+        {
+          'gm-padding-20': hasGap
+        },
+        className
+      )}
+    >
       {children}
     </div>
   )
 }
 
 Box.propTypes = {
+  hasGap: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object
 }

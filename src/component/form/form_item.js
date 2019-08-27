@@ -13,7 +13,7 @@ const FormControl = ({ children }) => {
   if (
     (children.type === 'input' && children.props.type !== 'file') ||
     children.type === 'textarea' ||
-    children.type.displayName === 'select' ||
+    children.type === 'select' ||
     children.type.displayName === 'InputNumber' ||
     children.type.displayName === 'InputNumberV2'
   ) {
