@@ -54,4 +54,4 @@ QuickDesc.propTypes = {
   className: PropTypes.string
 }
 
-export default withDeprecated(QuickDesc, 'Deprecated, use Box instead.')
+export default withDeprecated(QuickDesc, 'Quick deprecated, use Box instead.')

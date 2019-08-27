@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react'
 import Box from './box'
 import BoxTable from './box_table'
 import BoxForm from './box_form'
+import BoxPanel from './box_panel'
 import { FormItem, FormBlock, FormButton } from '../form'
 
 storiesOf('Box', module)
@@ -73,3 +74,9 @@ storiesOf('Box', module)
       }
     }
   )
+  .add('BoxPanel', () => <BoxPanel title='这是标题'>lalala</BoxPanel>)
+  .add('BoxPanel with collapse', () => (
+    <BoxPanel title='这是标题' collapse>
+      lalala
+    </BoxPanel>
+  ))

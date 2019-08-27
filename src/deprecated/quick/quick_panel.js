@@ -72,4 +72,4 @@ QuickPanel.defaultProps = {
   in: true
 }
 
-export default withDeprecated(QuickPanel, 'Deprecated, use Box instead.')
+export default withDeprecated(QuickPanel, 'Quick deprecated, use Box instead.')

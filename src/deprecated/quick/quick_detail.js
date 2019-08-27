@@ -188,4 +188,4 @@ Object.assign(QuickDetail, {
   QuickDetailThird
 })
 
-export default withDeprecated(QuickDetail, 'Deprecated, use Box instead.')
+export default withDeprecated(QuickDetail, 'Quick deprecated, use Box instead.')

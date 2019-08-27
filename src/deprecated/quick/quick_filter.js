@@ -82,4 +82,4 @@ QuickFilter.defaultProps = {
   expand: false
 }
 
-export default withDeprecated(QuickFilter, 'Deprecated, use Box instead.')
+export default withDeprecated(QuickFilter, 'Quick deprecated, use Box instead.')

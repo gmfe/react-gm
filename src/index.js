@@ -101,10 +101,12 @@ import { Select, Option } from './component/select'
 import { setLocale } from './locales'
 
 import Carousel from './component/carousel/carousel'
-import { Box, BoxForm, BoxTable } from './component/box'
+import { Box, BoxForm, BoxTable, BoxPanel } from './component/box'
 import ImgUploader from './component/img_uploader'
 
 import IconDownUp from './component/icon_down_up'
+
+import { Col, Row } from './component/grid'
 
 Object.assign(Sheet, {
   SheetColumn,
@@ -238,7 +240,10 @@ export {
   Box,
   BoxForm,
   BoxTable,
+  BoxPanel,
   PopupContentConfirm,
   ImgUploader,
-  IconDownUp
+  IconDownUp,
+  Col,
+  Row
 }
