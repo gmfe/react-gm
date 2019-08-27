@@ -52,12 +52,12 @@ storiesOf('Select', module)
       disabled
     />
   ))
-  .add('disabledClose', () => (
+  .add('canShowClose', () => (
     <Select
       data={list}
       value={store.value}
       onChange={value => store.setValue(value)}
-      disabledClose
+      canShowClose
     />
   ))
   .add('clean 模式', () => (

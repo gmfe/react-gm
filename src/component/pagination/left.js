@@ -16,7 +16,6 @@ const Limit = ({ value, onChange }) => {
       data={limitData}
       value={value}
       onChange={onChange}
-      disabledClose
       style={{ width: '60px' }}
     />
   )

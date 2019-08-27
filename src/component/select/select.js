@@ -30,7 +30,7 @@ class Select extends React.Component {
       children,
       disabled,
       listProps,
-      disabledClose,
+      canShowClose,
       clean,
       className,
       ...rest
@@ -86,7 +86,7 @@ class Select extends React.Component {
           selected={selected}
           onSelect={onChange}
           disabled={disabled}
-          disabledClose={disabledClose}
+          disabledClose={!canShowClose}
           clean={clean}
           className={classNames(`gm-select`, className)}
           isForSelect
@@ -105,11 +105,15 @@ Select.propTypes = {
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   listProps: PropTypes.object,
-  disabledClose: PropTypes.bool,
+  canShowClose: PropTypes.bool,
   clean: PropTypes.bool,
   children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
+}
+
+Select.defaultProps = {
+  canShowClose: false
 }
 
 export default Select
