@@ -105,13 +105,13 @@ storiesOf('表格|EditTable', module)
             {
               Header: '序号',
               fixed: 'left',
-              minWidth: 50,
+              width: 50,
               Cell: ({ index }) => index + 1
             },
             {
               Header: OperationHeader,
               fixed: 'left',
-              minWidth: 100,
+              width: 100,
               Cell: (
                 { index } // eslint-disable-line
               ) => (
