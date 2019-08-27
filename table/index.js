@@ -1,5 +1,3 @@
-import 'react-table/react-table.css'
-
 import Table from './table'
 import EditTable from './edit/edit_table'
 
