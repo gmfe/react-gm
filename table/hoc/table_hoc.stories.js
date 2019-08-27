@@ -3,12 +3,12 @@ import { storiesOf } from '@storybook/react'
 import {
   Table,
   fixedColumnsTableHOC,
-  diyTableHOC,
   selectTableHOC,
   expandTableHOC,
   SubTable,
   TableUtil
 } from '../index'
+import diyTableHOC from '../hoc/diy_table'
 import { observable } from 'mobx/lib/mobx'
 import { Observer } from 'mobx-react'
 import _ from 'lodash'
