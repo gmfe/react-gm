@@ -20,11 +20,11 @@ const BoxPanel = ({ title, collapse, right, className, children, ...rest }) => {
     <div {...rest} className={classNames('gm-box gm-box-panel', className)}>
       <Flex flex justifyBetween alignCenter className='gm-box-panel-header'>
         <Flex alignCenter>
-          <div className='gm-box-panel-title gm-text-16'>{title}</div>
+          <div className='gm-box-panel-title'>{title}</div>
           {hasCollapse && (
             <a
               onClick={handleCollapse}
-              className='gm-margin-left-20 gm-text-12 gm-cursor gm-decoration-none'
+              className='gm-margin-left-20 gm-cursor gm-decoration-none'
             >
               {isCollapse
                 ? getLocale('收拢详细信息')

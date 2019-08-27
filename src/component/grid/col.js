@@ -45,10 +45,10 @@ Col.propTypes = {
   className: PropTypes.string,
   span: PropTypes.number, // 栅格占位格数，为 0 时相当于 display: none
   offset: PropTypes.number, // 栅格左侧的间隔格数,
-  sm: PropTypes.object, // 768px，响应式栅格，可为栅格数或一个包含其他属性的对象
-  md: PropTypes.object, // 992px，响应式栅格，可为栅格数或一个包含其他属性的对象
-  lg: PropTypes.object, // 1200px, 响应式栅格，可为栅格数或一个包含其他属性的对象
-  xl: PropTypes.object // 1920px, 响应式栅格，可为栅格数或一个包含其他属性的对象
+  sm: PropTypes.oneOfType([PropTypes.object, PropTypes.number]), // 768px，响应式栅格，可为栅格数或一个包含其他属性的对象
+  md: PropTypes.oneOfType([PropTypes.object, PropTypes.number]), // 992px，响应式栅格，可为栅格数或一个包含其他属性的对象
+  lg: PropTypes.oneOfType([PropTypes.object, PropTypes.number]), // 1200px, 响应式栅格，可为栅格数或一个包含其他属性的对象
+  xl: PropTypes.oneOfType([PropTypes.object, PropTypes.number]) // 1920px, 响应式栅格，可为栅格数或一个包含其他属性的对象
 }
 
 export default Col
