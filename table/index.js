@@ -1,6 +1,7 @@
 import 'react-table/react-table.css'
 
 import Table from './table'
+import SubTable from './table/subTable'
 import EditTable from './edit/edit_table'
 
 import diyTableHOC from './hoc/diy_table'
@@ -8,6 +9,8 @@ import fixedColumnsTableHOC from './hoc/fixed_columns_table'
 import fixedFirstColumnsTableHOC from './hoc/fixed_first_columns_table'
 import selectTableHOC from './hoc/select_table'
 import expandTableHOC from './hoc/expand_table'
+
+import BatchActionBar from './hoc/select_table/batch_action_bar'
 
 // 只暴露些方法
 import {
@@ -30,12 +33,14 @@ const TableUtil = {
   OperationCell,
   SortHeader,
   EditTableOperation,
-  referOfWidth
+  referOfWidth,
+  BatchActionBar
 }
 
 export {
   Table,
   EditTable,
+  SubTable,
   SelectTable,
   diyTableHOC,
   fixedColumnsTableHOC,
