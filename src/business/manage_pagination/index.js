@@ -99,7 +99,7 @@ class ManagePagination extends React.Component {
     return (
       <div {...rest}>
         <div>{_.isFunction(children) ? children({ loading }) : children}</div>
-        <Flex justifyEnd className='gm-padding-right-20 gm-padding-bottom-20'>
+        <Flex justifyEnd className='gm-padding-20'>
           <Pagination
             data={{
               limit,

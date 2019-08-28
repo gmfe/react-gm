@@ -25,6 +25,7 @@
   }
 
   .gm-cascader-close-icon {
+    display: none;
     right: 20px;
   }
 
@@ -36,6 +37,12 @@
 
   .gm-cascader-down-small {
     display: block;
+  }
+
+  &:hover {
+    .gm-cascader-close-icon {
+      display: block;
+    }
   }
 
   &.gm-popover-active {

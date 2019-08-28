@@ -171,7 +171,7 @@ class ManagePaginationV2 extends React.Component {
         <div className='gm-manage-pagination-list'>
           {_.isFunction(children) ? children({ loading }) : children}
         </div>
-        <Flex justifyEnd className='gm-padding-right-20 gm-padding-bottom-20'>
+        <Flex justifyEnd className='gm-padding-20'>
           <Transform
             count={resPagination && resPagination.count}
             limit={limit}
