@@ -44,5 +44,16 @@ Wrap.propTypes = {
 }
 
 storiesOf('业务组件|ManagePaginationV2', module)
+  .addParameters({
+    info: {
+      text: `
+因为页码的管理逻辑复杂，估抽象一个组件，让调用方无需关心 页码相关逻辑。
+调用方关心
+- 响应请求动作 onRequest，用提供的参数去请求
+- 请求数据 this.ref.current.doFirstRequest。顾名思义，想要重新请求数据也应该调用这个方法。比如搜索按钮点击。
+- 如果想刷新当前页，this.ref.current.doCurrentRequest。
+`
+    }
+  })
   .add('default without count', () => <Wrap />)
   .add('with count', () => <Wrap count={177} />)

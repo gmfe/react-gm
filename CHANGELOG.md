@@ -20,7 +20,10 @@ Pagination toPage 移除第一个参数。（扫了 station，没人用）
 
 PaginationNew => PaginationFuck
 
-PaginationBox => ManagePaginationV2 且 limit => defaultLimit
+PaginationBox
+- => ManagePaginationV2
+- doCurrentPageRequest => doCurrentRequest
+- limit => defaultLimit
 
 ### Table
 

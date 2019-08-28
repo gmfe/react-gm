@@ -55,7 +55,7 @@ class ManagePaginationV2 extends React.Component {
   }
 
   // 当前页刷新
-  doCurrentPageRequest() {
+  doCurrentRequest = () => {
     const { currentIndex } = this.state
     this.handleRequest(this.getParams(currentIndex), { currentIndex })
   }
@@ -174,9 +174,11 @@ class ManagePaginationV2 extends React.Component {
 ManagePaginationV2.propTypes = {
   /** 请提供唯一id。目前用来记忆 limit */
   id: PropTypes.string.isRequired,
+  /** 参数 (pagination)。发请求所需的页码信息，调用方不用关系，只需assign到请求上即可 */
   onRequest: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
 
+  /** 默认 10，想要改变则传此参数 */
   defaultLimit: PropTypes.number,
   disablePage: PropTypes.bool, // TODO
 
