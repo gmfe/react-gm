@@ -10,7 +10,7 @@ const store = observable({
   }
 })
 
-storiesOf('内部工具|IconDownUp', module).add('default', () => (
+storiesOf('IconDownUp', module).add('default', () => (
   <div>
     <IconDownUp active={store.active} />
     <button onClick={() => store.toggle()}>click</button>

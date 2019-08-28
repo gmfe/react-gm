@@ -1,11 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import {
-  EditTable,
-  TableUtil,
-  fixedColumnsTableHOC,
-  diyTableHOC
-} from '../index'
+import { EditTable, TableUtil, fixedColumnsTableHOC } from '../index'
+import diyTableHOC from '../hoc/diy_table'
 import { InputNumberV2, MoreSelect } from '../../src'
 import { observable } from 'mobx/lib/mobx'
 import _ from 'lodash'

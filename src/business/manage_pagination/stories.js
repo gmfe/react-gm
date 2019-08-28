@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
-import PaginationBox from './'
+import ManagePagination from './'
 
 const Wrap = ({ count }) => {
   const pagination = useRef(null)
@@ -29,13 +29,13 @@ const Wrap = ({ count }) => {
   }
 
   return (
-    <PaginationBox
+    <ManagePagination
       ref={pagination}
-      id={'demo_pagination_box'}
+      id={'demo_manage_pagination'}
       onRequest={requestSomething}
     >
       {({ loading }) => <div>Some content {loading && '加载中...'}</div>}
-    </PaginationBox>
+    </ManagePagination>
   )
 }
 
@@ -43,6 +43,6 @@ Wrap.propTypes = {
   count: PropTypes.number
 }
 
-storiesOf('PaginationBox', module)
+storiesOf('业务组件|ManagePagination', module)
   .add('default without count', () => <Wrap />)
   .add('with count', () => <Wrap count={177} />)

@@ -16,18 +16,17 @@ Nav 改了
 
 DateRangePicker props 和 UI 有变动，请查阅
 
-Pagination toPage 移除第一个参数。（扫了station，没人用）
+Pagination toPage 移除第一个参数。（扫了 station，没人用）
 
 PaginationNew => PaginationFuck
 
-PaginationBox limit => defaultLimit
+PaginationBox => ManagePagination 且 limit => defaultLimit
 
 ### Table
 
-* selectTableHOC  props 移除了 `selectAll` 和 `selectAllTip`,增加了 `batchActionBar`
+- selectTableHOC props 移除了 `selectAll` 和 `selectAllTip`,增加了 `batchActionBar`
 
-* diyTableHOC    移除了 `ref.apiToggleDiySelector`, props `columns` 要求增加多个参数, `diyGroupNameSorting`等
-
+- diyTableHOC 移除了 `ref.apiToggleDiySelector`, props `columns` 要求增加多个参数, `diyGroupNameSorting`等
 
 ### css
 

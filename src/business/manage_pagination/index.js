@@ -2,16 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
-import Storage from '../storage'
+import Storage from '../../component/storage'
 import Transform from './transform'
-import Flex from '../flex'
+import Flex from '../../component/flex'
 
-class PaginationBox extends React.Component {
+class ManagePagination extends React.Component {
   constructor(props) {
     super(props)
 
     const limit =
-      (props.id && Storage.get('pagination_box_' + props.id)) ||
+      (props.id && Storage.get('manage_pagination_' + props.id)) ||
       props.defaultLimit
 
     this.state = {
@@ -130,7 +130,7 @@ class PaginationBox extends React.Component {
   }
 
   handleChange = ({ currentIndex, limit }) => {
-    Storage.set('pagination_box_' + this.props.id, limit)
+    Storage.set('manage_pagination_' + this.props.id, limit)
 
     this.handleRequest(this.getParams(currentIndex), {
       currentIndex,
@@ -152,8 +152,8 @@ class PaginationBox extends React.Component {
     const { limit, loading, resPagination, currentIndex } = this.state
 
     return (
-      <div {...rest} className={classNames('gm-pagination-box', className)}>
-        <div className='gm-pagination-box-list'>
+      <div {...rest} className={classNames('gm-manage-pagination', className)}>
+        <div className='gm-manage-pagination-list'>
           {_.isFunction(children) ? children({ loading }) : children}
         </div>
         <Flex justifyEnd className='gm-margin-right-20'>
@@ -171,7 +171,7 @@ class PaginationBox extends React.Component {
   }
 }
 
-PaginationBox.propTypes = {
+ManagePagination.propTypes = {
   /** 请提供唯一id。目前用来记忆 limit */
   id: PropTypes.string.isRequired,
   onRequest: PropTypes.func.isRequired,
@@ -184,9 +184,9 @@ PaginationBox.propTypes = {
   style: PropTypes.object
 }
 
-PaginationBox.defaultProps = {
+ManagePagination.defaultProps = {
   defaultLimit: 10,
   disablePage: false
 }
 
-export default PaginationBox
+export default ManagePagination

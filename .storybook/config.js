@@ -14,8 +14,8 @@ import '../frame/style.less'
 import 'react-table/react-table.css'
 import '../table/style.less'
 
-const req = require.context('../src', true, /\.stories\.js$/)
-const reqTable = require.context('../table', true, /\.stories\.js$/)
+const req = require.context('../src', true, /stories\.js$/)
+const reqTable = require.context('../table', true, /stories\.js$/)
 
 function loadStories() {
   req.keys().forEach(filename => req(filename))

@@ -17,7 +17,6 @@ import {
 
 import Pagination from './component/pagination/pagination'
 import PaginationText from './component/pagination/pagination_text'
-import PaginationBox from './component/pagination_box'
 import PaginationV2 from './component/pagination/pagination_v2'
 import Dropper from './component/dropper/index'
 import {
@@ -108,6 +107,8 @@ import IconDownUp from './component/icon_down_up'
 
 import { Col, Row } from './component/grid'
 
+import ManagePagination from './business/manage_pagination'
+
 Object.assign(Sheet, {
   SheetColumn,
   SheetAction,
@@ -152,7 +153,6 @@ export {
 
   Pagination,
   PaginationV2,
-  PaginationBox,
   Form,
   FormItem,
   FormButton,
@@ -245,5 +245,6 @@ export {
   ImgUploader,
   IconDownUp,
   Col,
-  Row
+  Row,
+  ManagePagination
 }

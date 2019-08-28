@@ -1,4 +1,4 @@
-import PaginationBase from '../pagination/base'
+import PaginationBase from '../../component/pagination/base'
 import PropTypes from 'prop-types'
 import React from 'react'
 
