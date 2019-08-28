@@ -9,6 +9,7 @@ import Two from './two'
 /** 左侧选择参数列表 */
 const quickList = [
   { range: [[0, 'day'], [0, 'day']], text: getLocale('今天') },
+  { range: [[-1, 'day'], [-1, 'day']], text: getLocale('昨天') },
   { range: [[-7, 'day'], [0, 'day']], text: getLocale('近7天') },
   { range: [[-1, 'month'], [0, 'day']], text: getLocale('近一个月') }
 ]
@@ -57,11 +58,11 @@ const Bottom = props => {
   let e = <span className='gm-text-desc'>结束日期</span>
 
   if (begin) {
-    b = moment(begin).format('YYYY-MM-DD')
+    b = moment(begin).format('YYYY/MM/DD')
   }
 
   if (end) {
-    e = moment(end).format('YYYY-MM-DD')
+    e = moment(end).format('YYYY/MM/DD')
   }
 
   return (
@@ -73,7 +74,7 @@ const Bottom = props => {
         padding: ' 10px 10px 10px 70px'
       }}
     >
-      <span>
+      <span className='gm-text-bold gm-date-range-picker-bottom-text'>
         {b} - {e}
       </span>
       <div>
@@ -82,7 +83,7 @@ const Bottom = props => {
         </button>
         <span className='gm-gap-10' />
         <button
-          className='btn btn-default'
+          className='btn btn-primary'
           onClick={onOK}
           disabled={!(begin && end)}
         >
