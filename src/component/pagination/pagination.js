@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import PaginationBase from './base'
 
 const Pagination = ({ data, toPage, nextDisabled, ...rest }) => {
-  if (data.count !== undefined) {
+  if (data.count !== undefined && data.count !== null) {
     return (
       <PaginationBase
         {...rest}

@@ -5,13 +5,14 @@ import _ from 'lodash'
 import Storage from '../../component/storage'
 import Transform from './transform'
 import Flex from '../../component/flex'
+import { warn } from '../../util'
 
 class ManagePaginationV2 extends React.Component {
   constructor(props) {
     super(props)
 
     const limit =
-      (props.id && Storage.get('manage_pagination_' + props.id)) ||
+      (props.id && Storage.get('manage_pagination_v2_' + props.id)) ||
       props.defaultLimit
 
     this.state = {
@@ -31,8 +32,20 @@ class ManagePaginationV2 extends React.Component {
     }
   }
 
-  // 暴露给外面用，首次请求或重新请求
+  // 保留旧用法
   doFirstRequest = params => {
+    warn('请使用 apiDoFirstRequest')
+    return this.apiDoFirstRequest(params)
+  }
+
+  // 保留旧用法
+  doCurrentRequest = () => {
+    warn('请使用 apiDoCurrentRequest')
+    return this.apiDoCurrentRequest()
+  }
+
+  // 暴露给外面用，首次请求或重新请求
+  apiDoFirstRequest = params => {
     const { limit, offset, peek } = this.state
 
     this.setState(
@@ -55,7 +68,7 @@ class ManagePaginationV2 extends React.Component {
   }
 
   // 当前页刷新
-  doCurrentRequest = () => {
+  apiDoCurrentRequest = () => {
     const { currentIndex } = this.state
     this.handleRequest(this.getParams(currentIndex), { currentIndex })
   }
@@ -74,9 +87,7 @@ class ManagePaginationV2 extends React.Component {
     limit = limit === undefined ? this.state.limit : limit
 
     this.setState({
-      loading: true,
-      currentIndex,
-      limit
+      loading: true
     })
 
     const result = this.props.onRequest(
@@ -102,6 +113,8 @@ class ManagePaginationV2 extends React.Component {
 
           resPagination: json.pagination,
 
+          currentIndex,
+          limit,
           loading: false,
           pageObjArr: newPageObjArr
         })
@@ -130,7 +143,9 @@ class ManagePaginationV2 extends React.Component {
   }
 
   handleChange = ({ currentIndex, limit }) => {
-    Storage.set('manage_pagination_' + this.props.id, limit)
+    if (this.props.id) {
+      Storage.set('manage_pagination_v2_' + this.props.id, limit)
+    }
 
     this.handleRequest(this.getParams(currentIndex), {
       currentIndex,
@@ -156,7 +171,7 @@ class ManagePaginationV2 extends React.Component {
         <div className='gm-manage-pagination-list'>
           {_.isFunction(children) ? children({ loading }) : children}
         </div>
-        <Flex justifyEnd className='gm-margin-right-20'>
+        <Flex justifyEnd className='gm-padding-right-20 gm-padding-bottom-20'>
           <Transform
             count={resPagination && resPagination.count}
             limit={limit}
@@ -173,8 +188,11 @@ class ManagePaginationV2 extends React.Component {
 
 ManagePaginationV2.propTypes = {
   /** 请提供唯一id。目前用来记忆 limit */
-  id: PropTypes.string.isRequired,
-  /** 参数 (pagination)。发请求所需的页码信息，调用方不用关系，只需assign到请求上即可 */
+  id: PropTypes.string,
+  /**
+   * 参数 (pagination)。发请求所需的页码信息，调用方不用关系，只需assign到请求上即可
+   * 要求返回 promise
+   * */
   onRequest: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
 

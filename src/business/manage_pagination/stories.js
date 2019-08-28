@@ -2,12 +2,52 @@ import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import ManagePaginationV2 from './v2'
+import ManagePagination from './'
 
 const Wrap = ({ count }) => {
   const pagination = useRef(null)
 
   useEffect(() => {
-    pagination.current.doFirstRequest()
+    pagination.current.apiDoFirstRequest()
+  }, [])
+
+  const requestSomething = pagination => {
+    console.log(pagination)
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const json = {
+          data: ['111', '222'],
+          pagination: {
+            offset: 10,
+            limit: 10,
+            count
+          }
+        }
+        resolve(json)
+      }, 1000)
+    })
+  }
+
+  return (
+    <ManagePagination
+      id='ManagePagination'
+      ref={pagination}
+      onRequest={requestSomething}
+    >
+      {({ loading }) => <div>Some content {loading && '加载中...'}</div>}
+    </ManagePagination>
+  )
+}
+
+Wrap.propTypes = {
+  count: PropTypes.number
+}
+
+const Wrap2 = ({ count }) => {
+  const pagination = useRef(null)
+
+  useEffect(() => {
+    pagination.current.apiDoFirstRequest()
   }, [])
 
   const requestSomething = pagination => {
@@ -39,9 +79,11 @@ const Wrap = ({ count }) => {
   )
 }
 
-Wrap.propTypes = {
+Wrap2.propTypes = {
   count: PropTypes.number
 }
+
+storiesOf('业务组件|ManagePagination', module).add('default', () => <Wrap />)
 
 storiesOf('业务组件|ManagePaginationV2', module)
   .addParameters({
@@ -55,5 +97,5 @@ storiesOf('业务组件|ManagePaginationV2', module)
 `
     }
   })
-  .add('default without count', () => <Wrap />)
-  .add('with count', () => <Wrap count={177} />)
+  .add('default without count', () => <Wrap2 />)
+  .add('with count', () => <Wrap2 count={177} />)
