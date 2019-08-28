@@ -132,10 +132,12 @@ storiesOf('表格|Table HOC', module)
   .add('优先级', () => null, {
     info: {
       text: `
-HOC 可以相互组合使用，但是请注意使用顺序
+HOC 可以相互组合使用，但是请注意使用顺序!
+调用顺序：diyTableHOC => expandTableHOC => selectTableHOC => fixedColumnsTableHOC
 - fixed columns。可能会改变 columns 的顺序。
-- diy。会改变原有 columns 的 show 熟悉，影响在 页面上的展现。一般最后才 hoc。
-- expand。会在最前面增加一个 column 用户 expand.
+- diy。   会在最前面增加一个【表头设置】column。 会改变原有 columns 的 show 熟悉，影响column的展现。
+- expand。会在最前面增加一个【expand】column。
+- select。会在最前面添加一个【CheckBox】column。
 `
     }
   })
