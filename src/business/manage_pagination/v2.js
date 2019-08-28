@@ -6,7 +6,7 @@ import Storage from '../../component/storage'
 import Transform from './transform'
 import Flex from '../../component/flex'
 
-class ManagePagination extends React.Component {
+class ManagePaginationV2 extends React.Component {
   constructor(props) {
     super(props)
 
@@ -171,7 +171,7 @@ class ManagePagination extends React.Component {
   }
 }
 
-ManagePagination.propTypes = {
+ManagePaginationV2.propTypes = {
   /** 请提供唯一id。目前用来记忆 limit */
   id: PropTypes.string.isRequired,
   onRequest: PropTypes.func.isRequired,
@@ -184,9 +184,9 @@ ManagePagination.propTypes = {
   style: PropTypes.object
 }
 
-ManagePagination.defaultProps = {
+ManagePaginationV2.defaultProps = {
   defaultLimit: 10,
   disablePage: false
 }
 
-export default ManagePagination
+export default ManagePaginationV2

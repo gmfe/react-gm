@@ -107,7 +107,7 @@ import IconDownUp from './component/icon_down_up'
 
 import { Col, Row } from './component/grid'
 
-import ManagePagination from './business/manage_pagination'
+import ManagePaginationV2 from './business/manage_pagination/v2'
 
 Object.assign(Sheet, {
   SheetColumn,
@@ -246,5 +246,5 @@ export {
   IconDownUp,
   Col,
   Row,
-  ManagePagination
+  ManagePaginationV2
 }
