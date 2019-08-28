@@ -222,27 +222,23 @@ HOC 可以相互组合使用，但是请注意使用顺序
               accessor: 'id',
               diyEnable: false, // 是否可以自定义,不写的话默认为true
               show: false, // 是否展示当前列,不写的话默认为true
-              diyGroupName: '基础字段', // 组名
-              diySortNumber: 400 // 列初始顺序,序号约定从100开始, 100, 200, 300, ...如此类推
+              diyGroupName: '基础字段' // 组名
             },
             {
               Header: '价格',
               accessor: 'sku_money',
               diyEnable: false,
-              diyGroupName: '基础字段',
-              diySortNumber: 100
+              diyGroupName: '基础字段'
             },
             {
               Header: '状态',
               accessor: 'status',
-              diyGroupName: '基础字段',
-              diySortNumber: 300
+              diyGroupName: '基础字段'
             },
             {
               Header: '供应商户ID',
               accessor: 'supplier_customer_id',
-              diyGroupName: '基础字段',
-              diySortNumber: 200
+              diyGroupName: '基础字段'
             },
             {
               Header: '供应商信息',

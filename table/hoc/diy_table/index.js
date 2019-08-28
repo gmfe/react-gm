@@ -119,7 +119,7 @@ function diyTableHOC(Component) {
                   />
                 </Popover>
               ),
-              maxWidth: referOfWidth.noCell,
+              width: referOfWidth.noCell,
               accessor: '_setting', // 不重要,随便写
               Cell: () => null // 只是用来占据空间
             },

@@ -8,6 +8,7 @@ import fixedColumnsTableHOC from './hoc/fixed_columns_table'
 import fixedFirstColumnsTableHOC from './hoc/fixed_first_columns_table'
 import selectTableHOC from './hoc/select_table'
 import expandTableHOC from './hoc/expand_table'
+import diyTableHOC from './hoc/diy_table'
 
 import BatchActionBar from './hoc/select_table/batch_action_bar'
 
@@ -41,6 +42,7 @@ export {
   EditTable,
   SubTable,
   SelectTable,
+  diyTableHOC,
   fixedColumnsTableHOC,
   fixedFirstColumnsTableHOC,
   selectTableHOC,

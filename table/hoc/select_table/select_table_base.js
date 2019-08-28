@@ -51,10 +51,12 @@ export default (Component, options) => {
       const checked =
         selected.length === data.filter(row => !isSelectorDisable(row)).length
       const key = 'select-all'
+      const disabled = data.length === 0
 
       return (
         <Checkbox
           value={key}
+          disabled={disabled}
           checked={checked}
           onChange={this.handleToggleAll.bind(this, checked)}
         />
