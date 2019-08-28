@@ -83,7 +83,9 @@ Wrap2.propTypes = {
   count: PropTypes.number
 }
 
-storiesOf('业务组件|ManagePagination', module).add('default', () => <Wrap />)
+storiesOf('业务组件|ManagePagination', module)
+  .add('default without count', () => <Wrap />)
+  .add('with count', () => <Wrap count={100} />)
 
 storiesOf('业务组件|ManagePaginationV2', module)
   .addParameters({
