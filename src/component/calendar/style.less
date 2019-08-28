@@ -37,12 +37,10 @@
     text-align: center;
     margin: 2px;
     border: 1px solid transparent;
-    border-radius: 50%;
 
     &:hover:not(.gm-calendar-day-disabled):not(.active) {
       background-color: @brand-primary;
       color: white;
-      border-radius: 50%;
     }
 
     &.gm-calendar-day-old,
@@ -52,16 +50,28 @@
 
     &.gm-calendar-day-now {
       border: 1px solid @brand-primary;
+      color: @brand-primary;
     }
 
     &.gm-calendar-day-will {
-      border: 1px solid @gm-color-fourth;
+      border: 1px solid @brand-primary;
     }
 
     &.active {
-      border: 1px solid @brand-primary;
+      border: 1px solid #d7e8fc;
+      background-color: #d7e8fc;
+      color: black;
+      width: 28px;
+      margin: 2px 0;
+    }
+
+    &.gm-calendar-day-begin,
+    &.gm-calendar-day-end {
       background-color: @brand-primary;
+      border: 1px solid @brand-primary;
       color: white;
+      width: 24px;
+      margin: 2px;
     }
 
     &.gm-calendar-day-disabled {
