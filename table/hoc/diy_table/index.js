@@ -9,8 +9,17 @@ import Table from '../../table'
 import { devWarn } from '../../../src/util'
 import DiyTableModal from './diy_table_modal'
 
-function generateDiyColumns(propsColumns, mixColumns) {
-  return _.map(propsColumns, column => {
+/**
+ * 生成新的columns
+ * @param initColumns 初始columns
+ * @param mixColumns 需要混合的columns(优先取值)
+ * @returns {Array}
+ */
+function generateDiyColumns(initColumns, mixColumns) {
+  // 把checkbox, selector, expander 提出来,不参与diy
+  const [notDiyCols, diyCols] = splitColumns(initColumns)
+
+  const diyColumns = _.map(diyCols, column => {
     const key = getColumnKey(column)
     // 能获取 key 才可能使用 diy
     if (key === null) {
@@ -35,6 +44,8 @@ function generateDiyColumns(propsColumns, mixColumns) {
     }
     return newColumn
   })
+
+  return [notDiyCols, diyColumns]
 }
 
 function getStorageColumns(columns) {
@@ -45,6 +56,19 @@ function getStorageColumns(columns) {
   })
 }
 
+function splitColumns(columns) {
+  const notDiyCols = []
+  const diyCols = []
+  for (const item of columns) {
+    if (['__checkbox', '__expander'].includes(item.id)) {
+      notDiyCols.push(item)
+    } else {
+      diyCols.push(item)
+    }
+  }
+  return [notDiyCols, diyCols]
+}
+
 function diyTableHOC(Component) {
   class DiyTable extends React.Component {
     constructor(props) {
@@ -52,8 +76,14 @@ function diyTableHOC(Component) {
       // 从localStorage拿到columns
       const localColumns = Storage.get(props.id) || []
 
+      const [notDiyCols, diyCols] = generateDiyColumns(
+        props.columns,
+        localColumns
+      )
+
+      this.notDiyCols = notDiyCols
       this.state = {
-        columns: generateDiyColumns(props.columns, localColumns)
+        columns: diyCols
       }
 
       // 检测,如果不符合,警告调用方
@@ -72,12 +102,17 @@ function diyTableHOC(Component) {
       })
     }
 
+    static getDerivedStateFromProps(props, state) {
+      return {
+        columns: generateDiyColumns(props.columns, state.columns)[1]
+      }
+    }
+
     handleColumnsSave = newColumns => {
       this.setState({ columns: newColumns })
       Storage.set(this.props.id, getStorageColumns(newColumns))
     }
 
-    // 显示diy选择框  注:暴露给外部使用
     handleModalShow = () => {
       Modal.render({
         disableMaskClose: true,
@@ -121,8 +156,10 @@ function diyTableHOC(Component) {
               ),
               width: referOfWidth.noCell,
               accessor: '_setting', // 不重要,随便写
+              id: '__setting', // 不重要,随便写
               Cell: () => null // 只是用来占据空间
             },
+            ...this.notDiyCols,
             ..._.sortBy(columns, 'diySortNumber')
           ]}
         />

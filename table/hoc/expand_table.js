@@ -84,6 +84,7 @@ function expandTableHOC(Component) {
           {...rest}
           columns={[
             {
+              id: '__expander', // 不要随便更改
               expander: true,
               Header: this.renderHeader,
               Expander: this.renderExpander,

@@ -84,7 +84,7 @@ export default (Component, options) => {
         ...rest
       } = this.props
       const select = {
-        id: '_selector',
+        id: '__checkbox', // 不要随便更改
         accessor: () => 'x', // this value is not important
         Header: this.headSelector.bind(this),
         Cell: ci => {
