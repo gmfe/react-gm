@@ -304,11 +304,7 @@ class Sheet extends React.Component {
           </table>
         </div>
         {(pagination || paginationText) && (
-          <Flex
-            justifyEnd
-            alignCenter
-            className='gm-padding-bottom-20 gm-padding-right-20'
-          >
+          <Flex justifyEnd alignCenter className='gm-padding-20'>
             {paginationText && <div>{paginationText}</div>}
             {pagination && <div>{pagination}</div>}
           </Flex>

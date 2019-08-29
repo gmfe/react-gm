@@ -44,7 +44,7 @@ const PopupContentConfirm = props => {
 
 PopupContentConfirm.propTypes = {
   type: PropTypes.oneOf(['save', 'delete']),
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
   onSave: PropTypes.func,

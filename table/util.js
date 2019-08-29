@@ -77,7 +77,7 @@ const OperationDelete = props => {
       onDelete={handleDelete}
       onCancel={handleCancel}
     >
-      {children}
+      {children || '确定删除？'}
     </PopupContentConfirm>
   )
 
@@ -97,7 +97,7 @@ const OperationDelete = props => {
 }
 
 OperationDelete.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string,
   style: PropTypes.object
