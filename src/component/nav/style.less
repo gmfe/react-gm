@@ -8,6 +8,7 @@
 
   .gm-nav-logo {
     text-align: center;
+    margin-bottom: 10px;
     height: 60px;
     display: flex;
     align-content: center;
@@ -44,8 +45,6 @@
   }
 
   .gm-nav-other {
-    margin-top: 100px;
-
     a.gm-nav-one {
       &.active,
       &:hover {
@@ -65,7 +64,7 @@
   }
 
   .gm-nav-one-box {
-    margin-top: 10px;
+    padding-bottom: 10px;
     position: relative;
 
     .gm-nav-one-triangle {
@@ -77,6 +76,10 @@
       border-right: 6px solid white;
       top: 25px;
       right: -1px;
+    }
+
+    &:nth-last-of-type(2) {
+      padding-bottom: 100px;
     }
 
     &:hover {
