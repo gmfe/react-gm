@@ -13,7 +13,7 @@ const DiyTableModal = ({ columns, onSave, diyGroupSorting }) => {
 
   const onColsChange = (key, curShow) => {
     const index = _.findIndex(diyCols, o => o.key === key)
-    const _diyCols = _.cloneDeep(diyCols)
+    const _diyCols = diyCols.slice()
 
     const curItem = _diyCols[index]
     curItem.show = !curShow
@@ -25,7 +25,7 @@ const DiyTableModal = ({ columns, onSave, diyGroupSorting }) => {
       setShowCols([...showCols, curItem])
     } else {
       // 把当前项从排序列表去掉
-      const _showCols = _.cloneDeep(showCols)
+      const _showCols = showCols.slice()
       _.remove(_showCols, item => item.key === key)
       setShowCols(_showCols)
     }
@@ -36,12 +36,12 @@ const DiyTableModal = ({ columns, onSave, diyGroupSorting }) => {
   }
 
   const onColsRemove = key => {
-    const _showCols = _.cloneDeep(showCols)
+    const _showCols = showCols.slice()
     _.remove(_showCols, o => o.key === key)
     setShowCols(_showCols)
 
     const index = _.findIndex(diyCols, o => o.key === key)
-    const _diyCols = _.cloneDeep(diyCols)
+    const _diyCols = diyCols.slice()
     _diyCols[index].show = false
     setDiyCols(_diyCols)
   }
