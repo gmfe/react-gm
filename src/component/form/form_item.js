@@ -85,7 +85,7 @@ const FormItem = withWrapContext(
           >
             {required ? <span style={{ color: 'red' }}>*</span> : ''}
             {label}
-            {label && '：'}
+            {label && ':'}
           </Flex>
         )}
         <Flex flex column>

@@ -20,13 +20,26 @@ OperationCell.propTypes = {
   style: PropTypes.object
 }
 
-const OperationDetail = props => {
+const OperationDetail = ({ href, open, onClick, className, ...rest }) => {
+  const handleClick = e => {
+    onClick && onClick(e)
+
+    if (href) {
+      if (open) {
+        window.open(href)
+      } else {
+        window.location.href = href
+      }
+    }
+  }
+
   return (
     <div
-      {...props}
+      {...rest}
+      onClick={handleClick}
       className={classNames(
         'gm-inline-block gm-cursor gm-padding-5 gm-text-16 gm-text gm-text-hover-primary',
-        props.className
+        className
       )}
     >
       <SVGCheckDetail />
@@ -35,6 +48,10 @@ const OperationDetail = props => {
 }
 
 OperationDetail.propTypes = {
+  /** 如果提供了 href */
+  href: PropTypes.string.isRequired,
+  open: PropTypes.bool,
+  onClick: PropTypes.func,
   className: PropTypes.string,
   style: PropTypes.object
 }
