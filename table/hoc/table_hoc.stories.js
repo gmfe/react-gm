@@ -222,6 +222,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
             {
               Header: '入库单号',
               accessor: 'id',
+              diySortNumber: 100, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
               diyEnable: false, // 是否可以自定义,不写的话默认为true
               show: false, // 是否展示当前列,不写的话默认为true
               diyGroupName: '基础字段' // 组名
@@ -229,21 +230,25 @@ HOC 可以相互组合使用，但是请注意使用顺序!
             {
               Header: '价格',
               accessor: 'sku_money',
+              diySortNumber: 600, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
               diyEnable: false,
               diyGroupName: '基础字段'
             },
             {
               Header: '状态',
+              diySortNumber: 300, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
               accessor: 'status',
               diyGroupName: '基础字段'
             },
             {
               Header: '供应商户ID',
+              diySortNumber: 400, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
               accessor: 'supplier_customer_id',
               diyGroupName: '基础字段'
             },
             {
               Header: '供应商信息',
+              diySortNumber: 500, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
               accessor: 'supplier_name',
               diyGroupName: '基础字段'
             },
@@ -256,12 +261,14 @@ HOC 可以相互组合使用，但是请注意使用顺序!
             })),
             {
               Header: '建单时间',
+              diySortNumber: 200, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
               accessor: 'settle_supplier_id',
               diyEnable: true,
               diyGroupName: '时间和人员'
             },
             {
               Header: TableUtil.OperationHeader,
+              diySortNumber: 700, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
               diyItemText: '操作', // 操作栏要提供diyItemName
               id: 'action', // id作为唯一标识
               diyGroupName: '操作',

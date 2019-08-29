@@ -20,9 +20,11 @@ const DiyTableModal = ({ columns, onSave, diyGroupSorting }) => {
 
     setDiyCols(_diyCols)
 
+    // 如果是增加操作
     if (curItem.show) {
+      // TODO 如果做排序,就curItem就push到最后
       // 把当前项增加到排序列表中
-      setShowCols([...showCols, curItem])
+      setShowCols(_.sortBy(_diyCols.filter(o => o.show), 'diySortNumber'))
     } else {
       // 把当前项从排序列表去掉
       const _showCols = showCols.slice()
@@ -52,8 +54,9 @@ const DiyTableModal = ({ columns, onSave, diyGroupSorting }) => {
       const diySortNumber = _.findIndex(showCols, v => v.key === col.key)
       return {
         ...col,
-        show: diySortNumber > -1, // 大于-1才会显示
-        diySortNumber: (diySortNumber + 1) * 100 // 从100开始,100, 200, 300, ...如此类推
+        show: diySortNumber > -1 // 大于-1才会显示
+        // TODO 排序先去掉,后面再做!
+        // diySortNumber: (diySortNumber + 1) * 100 // 从100开始,100, 200, 300, ...如此类推
       }
     })
 
