@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Flex from '../flex'
 
 const Popup = props => {
-  const { data, selected, onSelect } = props
+  const { data, selected, onSelect, show, setShow } = props
 
   return (
-    <div className='gm-nav-popup'>
+    <div className='gm-nav-popup' style={{ display: show ? 'block' : 'none' }}>
       <Flex>
         {_.map(data, (v, i) => (
           <div key={i} className='gm-nav-two' style={v.style}>
@@ -24,6 +24,7 @@ const Popup = props => {
                   onClick={e => {
                     e.preventDefault()
                     onSelect(s)
+                    setShow()
                   }}
                 >
                   {s.name}
@@ -50,6 +51,8 @@ const Item = props => {
     onSelect
   } = props
 
+  const [show, setShow] = useState(false)
+
   const handleClick = e => {
     e.preventDefault()
 
@@ -60,18 +63,34 @@ const Item = props => {
     onSelect(data)
   }
 
+  const handleMouseOver = () => {
+    setShow(true)
+  }
+
+  const handleMouseLeave = () => {
+    setShow(false)
+  }
+
   return (
     <div
       className={classNames('gm-nav-one-box', {
         active: selected.startsWith(link)
       })}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
     >
       <a href={link} className='gm-nav-one' onClick={handleClick}>
         <div className='gm-nav-one-icon'>{icon}</div>
         <div className='gm-nav-one-text'>{name}</div>
       </a>
       <div className='gm-nav-one-triangle' />
-      <Popup data={sub} onSelect={handleSelect} selected={selected} />
+      <Popup
+        data={sub}
+        onSelect={handleSelect}
+        selected={selected}
+        show={show}
+        setShow={handleMouseLeave}
+      />
     </div>
   )
 }

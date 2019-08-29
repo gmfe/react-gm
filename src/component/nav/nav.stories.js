@@ -77,7 +77,7 @@ const data = [
 const store = observable({
   selected: 'supply_chain/order/list',
   setSelect(selected) {
-    this.selected = selected
+    this.selected = selected.link
   }
 })
 
@@ -94,7 +94,7 @@ storiesOf('Nav', module).add('default', () => (
     }
     data={data}
     selected={store.selected}
-    onSelect={store.setSelect}
+    onSelect={store.setSelect.bind(store)}
   >
     点击显示 loading
   </Nav>
