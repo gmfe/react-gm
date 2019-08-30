@@ -2,10 +2,27 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Big from 'big.js'
 import _ from 'lodash'
+import storage from '../storage'
+
+const eventBus = {
+  add(eventName, handler) {
+    window.addEventListener(eventName, handler)
+  },
+  dispatch(eventName, detail) {
+    window.dispatchEvent(new window.CustomEvent(eventName, { detail }))
+  },
+  remove(eventName, handler) {
+    window.removeEventListener(eventName, handler)
+  }
+}
 
 // 默认 _symbol 为货币符号
-let _symbol = '¥'
-let _unit = '元'
+const symbolKey = 'Price#symbol'
+const unitKey = 'Price#unit'
+
+// 默认 _symbol 为货币符号
+let _symbol = storage.get(symbolKey) || '¥'
+let _unit = storage.get(unitKey) || '元'
 // [{ symbol: '￥', type: 'CNY', unit: '元' },...]
 let _currencyList = [] // 多币种列表
 
@@ -13,8 +30,20 @@ const getCurrentFromType = type =>
   _.find(_currencyList, item => item.type === type)
 
 class Price extends React.Component {
+  rerender = () => {
+    this.forceUpdate()
+  }
+
+  componentDidMount() {
+    eventBus.add('REACT_GM_UPDATE_PRICE', this.rerender)
+  }
+
+  componentWillUnmount() {
+    eventBus.remove('REACT_GM_UPDATE_PRICE', this.rerender)
+  }
+
   formatValue = (value, precision, keepZero, isFenUnit) => {
-    let divRatio = isFenUnit ? 100 : 1
+    const divRatio = isFenUnit ? 100 : 1
     const result = Big(Math.abs(value))
       .div(divRatio)
       .toFixed(precision)
@@ -89,23 +118,26 @@ Price.setCurrencyList = (list = []) => {
 
 // 设置符号
 Price.setCurrency = symbol => {
-  if (!symbol) return
+  if (!symbol || symbol === _symbol) return
   _symbol = symbol
+  storage.set(symbolKey, symbol)
+  eventBus.dispatch('REACT_GM_UPDATE_PRICE')
 }
 
 // 获得符号
 Price.getCurrency = (type = '') => {
-  let current = type ? getCurrentFromType(type) : null
+  const current = type ? getCurrentFromType(type) : null
   return current ? current.symbol : _symbol
 }
 
 Price.setUnit = unit => {
-  if (!unit) return
+  if (!unit || unit === _unit) return
   _unit = unit
+  storage.set(unitKey, unit)
 }
 
 Price.getUnit = (type = '') => {
-  let current = type ? getCurrentFromType(type) : null
+  const current = type ? getCurrentFromType(type) : null
   return current ? current.unit : _unit
 }
 
