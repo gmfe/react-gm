@@ -63,7 +63,9 @@ storiesOf('Box', module)
             <button className='btn btn-primary' type='submit'>
               搜索
             </button>
-            <button className='btn btn-link'>重置</button>
+            <BoxForm.More>
+              <button className='btn btn-link'>重置</button>
+            </BoxForm.More>
           </FormButton>
         </BoxForm>
       </div>
