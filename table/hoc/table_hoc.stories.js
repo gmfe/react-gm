@@ -253,7 +253,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
               diyGroupName: '基础字段'
             },
             ..._.map(Array(5), (e, i) => ({
-              Header: '删除项目' + i,
+              Header: '示例' + i,
               accessor: 'date_time' + i,
               diyEnable: true,
               show: true,

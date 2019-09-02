@@ -8,6 +8,7 @@
 @react-table-sub: #f4f7ff;
 @react-table-tip-height: 70px;
 @react-table-tip-bg: rgba(229, 235, 242, 0.4);
+@react-table-lr-padding: 20px;
 
 .gm-react-table.ReactTable {
   .rt-resizer {
@@ -32,7 +33,12 @@
 
   .rt-th:first-child,
   .rt-td:first-child {
-    padding-left: 40px;
+    padding-left: @react-table-lr-padding;
+  }
+
+  .rt-th:last-child,
+  .rt-td:last-child {
+    padding-right: @react-table-lr-padding;
   }
 
   .rt-tbody {
@@ -144,6 +150,7 @@
 
     .rt-tr .rt-th {
       background: @react-table-even;
+      font-weight: bold;
     }
 
     // 调整后不会溢出，所以不做 overflow，排序按钮就不会被 hidden 了

@@ -9,6 +9,7 @@ const {
   OperationDelete,
   OperationDetail,
   OperationCell,
+  OperationRowEdit,
   SortHeader,
   referOfWidth,
   EditTableOperation,
@@ -263,6 +264,39 @@ storiesOf('表格|TableUtil', module)
             >
               {d.sku_money}
             </EditBox>
+          )
+        }
+      ]}
+    />
+  ))
+  .add('OperationRowEdit', () => (
+    <Table
+      data={store.data}
+      columns={[
+        {
+          Header: '序号',
+          Cell: cellProps => cellProps.index + 1
+        },
+        {
+          Header: 'ID',
+          accessor: 'id'
+        },
+        {
+          Header: OperationHeader,
+          width: referOfWidth.operationCell,
+          Cell: cellProps => (
+            <OperationRowEdit
+              onClick={() => console.log('去编辑')}
+              onSave={() => console.log('保存')}
+              onCancel={() => console.log('取消')}
+            >
+              <OperationDelete
+                title='确认删除'
+                onClick={() => store.deleteItemByID(cellProps.original.id)}
+              >
+                删除这个很危险! 确定?
+              </OperationDelete>
+            </OperationRowEdit>
           )
         }
       ]}

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Popover, PopupContentConfirm } from '../src'
 import { SvgShanchumorenHuaban, SvgTianjiamorenHuaban } from 'gm-svg'
 import _ from 'lodash'
 import SVGDelete from '../svg/delete.svg'
+import SVGEdit from '../svg/edit.svg'
 import SVGCheckDetail from '../svg/check-detail.svg'
 import SVGEditBox from '../svg/edit-box.svg'
 
@@ -220,6 +221,54 @@ EditTableOperation.propTypes = {
   onDeleteRow: PropTypes.func
 }
 
+const OperationRowEdit = ({ children, onClick, onSave, onCancel }) => {
+  const [isEditing, setEditState] = useState(false)
+
+  const handleClick = () => {
+    onClick && onClick()
+    setEditState(true)
+  }
+
+  const handleSave = () => {
+    onSave && onSave()
+    setEditState(false)
+  }
+
+  const handleCancel = () => {
+    onCancel && onCancel()
+    setEditState(false)
+  }
+
+  return !isEditing ? (
+    <OperationCell>
+      <SVGEdit
+        className='gm-inline-block gm-cursor gm-text-16 gm-text gm-text-hover-primary'
+        onClick={handleClick}
+      />
+      {children}
+    </OperationCell>
+  ) : (
+    <OperationCell>
+      <span className='btn-link gm-inline-block gm-cursor' onClick={handleSave}>
+        确定
+      </span>
+      <span className='gm-padding-lr-5'>|</span>
+      <span
+        className='btn-link gm-inline-block gm-cursor'
+        onClick={handleCancel}
+      >
+        取消
+      </span>
+    </OperationCell>
+  )
+}
+
+OperationRowEdit.propTypes = {
+  onClick: PropTypes.func,
+  onSave: PropTypes.func,
+  onCancel: PropTypes.func
+}
+
 function getColumnKey(column) {
   // 如果是字符串就取 accessor
   if (_.isString(column.accessor)) {
@@ -254,6 +303,7 @@ export {
   OperationDelete,
   OperationDetail,
   OperationCell,
+  OperationRowEdit,
   SortHeader,
   EditTableOperation,
   EditBox,
