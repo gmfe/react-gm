@@ -58,11 +58,11 @@ const Bottom = props => {
   let e = <span className='gm-text-desc'>结束日期</span>
 
   if (begin) {
-    b = moment(begin).format('YYYY/MM/DD')
+    b = moment(begin).format('YYYY-MM-DD')
   }
 
   if (end) {
-    e = moment(end).format('YYYY/MM/DD')
+    e = moment(end).format('YYYY-MM-DD')
   }
 
   return (
@@ -75,7 +75,7 @@ const Bottom = props => {
       }}
     >
       <span className='gm-text-bold gm-date-range-picker-bottom-text'>
-        {b} - {e}
+        {b} ~ {e}
       </span>
       <div>
         <button className='btn btn-default' onClick={onCancel}>

@@ -86,7 +86,7 @@ class DateRangePicker extends React.Component {
 
       return (
         <React.Fragment>
-          {b}&nbsp;-&nbsp;{e}
+          {b}&nbsp;~&nbsp;{e}
         </React.Fragment>
       )
     }

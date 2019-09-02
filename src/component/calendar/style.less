@@ -38,7 +38,7 @@
     margin: 2px;
     border: 1px solid transparent;
 
-    &:hover:not(.gm-calendar-day-disabled):not(.active) {
+    &:hover:not(.gm-calendar-day-disabled):not(.active):not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
       background-color: @brand-primary;
       color: white;
     }
@@ -57,7 +57,7 @@
       border: 1px solid @brand-primary;
     }
 
-    &.active {
+    &.active:not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
       border: 1px solid #d7e8fc;
       background-color: #d7e8fc;
       color: black;
@@ -65,8 +65,8 @@
       margin: 2px 0;
     }
 
-    &.gm-calendar-day-begin,
-    &.gm-calendar-day-end {
+    &.gm-calendar-day-begin:not(.gm-calendar-day-old):not(.gm-calendar-day-new),
+    &.gm-calendar-day-end:not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
       background-color: @brand-primary;
       border: 1px solid @brand-primary;
       color: white;
