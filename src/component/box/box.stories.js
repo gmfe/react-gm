@@ -28,7 +28,7 @@ storiesOf('Box', module)
     'BoxForm',
     () => (
       <div>
-        <BoxForm>
+        <BoxForm btnPosition='left'>
           <FormBlock col={3}>
             <FormItem label='商品'>
               <input type='text' />

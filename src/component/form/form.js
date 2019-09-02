@@ -107,6 +107,7 @@ class Form extends React.Component {
       children,
       hasButtonInGroup,
       onSubmitValidated, //eslint-disable-line
+      btnPosition,
       ...rest
     } = this.props
 
@@ -116,6 +117,7 @@ class Form extends React.Component {
           labelWidth,
           disabledCol,
           inline,
+          btnPosition,
           canValidate: this.state.canValidate
         }}
       >
@@ -155,7 +157,8 @@ Form.propTypes = {
   /** 只在 FormGroup 下用。用于添加一个隐藏的按钮，响应 enter */
   hasButtonInGroup: PropTypes.bool,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  btnPosition: PropTypes.oneOf(['center', 'left', 'right'])
 }
 
 export default Form
