@@ -18,7 +18,13 @@ const Row = props => {
 }
 
 Row.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  /** 栅格间隔，可以写成像素值或支持响应式的对象写法 { xs: 8, sm: 16, md: 24}， 默认为10 */
+  gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number])
+}
+
+Row.defaultProps = {
+  gutter: 10
 }
 
 export default Row
