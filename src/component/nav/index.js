@@ -5,10 +5,10 @@ import classNames from 'classnames'
 import Flex from '../flex'
 
 const Popup = props => {
-  const { data, selected, onSelect, show, setShow } = props
+  const { data, selected, onSelect } = props
 
   return (
-    <div className='gm-nav-popup' style={{ display: show ? 'block' : 'none' }}>
+    <div className='gm-nav-popup'>
       <Flex>
         {_.map(data, (v, i) => (
           <div key={i} className='gm-nav-two' style={v.style}>
@@ -24,7 +24,6 @@ const Popup = props => {
                   onClick={e => {
                     e.preventDefault()
                     onSelect(s)
-                    setShow()
                   }}
                 >
                   {s.name}
@@ -61,6 +60,7 @@ const Item = props => {
 
   const handleSelect = data => {
     onSelect(data)
+    handleMouseLeave()
   }
 
   const handleMouseOver = () => {
@@ -84,13 +84,7 @@ const Item = props => {
         <div className='gm-nav-one-text'>{name}</div>
       </a>
       <div className='gm-nav-one-triangle' />
-      <Popup
-        data={sub}
-        onSelect={handleSelect}
-        selected={selected}
-        show={show}
-        setShow={handleMouseLeave}
-      />
+      {show && <Popup data={sub} onSelect={handleSelect} selected={selected} />}
     </div>
   )
 }

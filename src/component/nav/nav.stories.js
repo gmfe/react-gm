@@ -76,7 +76,7 @@ const data = [
 
 const store = observable({
   selected: 'supply_chain/order/list',
-  setSelect(selected) {
+  setSelect (selected) {
     this.selected = selected.link
   }
 })
@@ -90,6 +90,7 @@ storiesOf('Nav', module).add('default', () => (
           maxHeight: '35px',
           maxWidth: '80px'
         }}
+        alt=''
       />
     }
     data={data}
