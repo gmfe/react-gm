@@ -91,7 +91,8 @@ class Popup extends React.Component {
     const { isInit, width, height } = this.state
 
     const sStyle = {
-      top: rect.top + rect.height + (showArrow ? 5 : 1)
+      top: rect.top + rect.height + (showArrow ? 5 : 1),
+      width: Math.max(rect.width, width)
     }
 
     if (center) {
@@ -166,7 +167,7 @@ Popup.propTypes = {
   ]),
   /** 预判高度。因为 popup 的宽高会是可变的，所以没法判断视窗内是否能放得下，于是有此。 */
   predictingHeight: PropTypes.number,
-  /** 纯粹的，目前没有背景色，没有阴影 */
+  /** 纯粹的，目前是没有背景色，没有阴影 */
   pureContainer: PropTypes.bool
 }
 
