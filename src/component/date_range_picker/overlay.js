@@ -71,10 +71,10 @@ const Bottom = props => {
       justifyBetween
       className='gm-border-top'
       style={{
-        padding: ' 10px 10px 10px 70px'
+        padding: ' 5px 10px 5px 70px'
       }}
     >
-      <span className='gm-text-bold gm-date-range-picker-bottom-text'>
+      <span className='gm-text-bold gm-date-range-picker-overlay-bottom-text'>
         {b} ~ {e}
       </span>
       <div>

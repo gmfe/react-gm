@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import Calendar from '../calendar/calendar'
+import OverLay from './overlay'
 import classNames from 'classnames'
 import Popover from '../popover'
 import Selected from '../selected'
@@ -15,8 +15,12 @@ import SVGCalendar from '../../../svg/calendar.svg'
  * */
 
 class DatePicker extends React.Component {
-  state = {
-    willActiveSelected: null
+  constructor(props) {
+    super(props)
+    this.state = {
+      willActiveSelected: null,
+      selected: props.date
+    }
   }
 
   refPopup = React.createRef()
@@ -38,8 +42,9 @@ class DatePicker extends React.Component {
   }
 
   handleSelectDate = date => {
-    this.refPopup.current.apiDoSetActive(false)
-    this.props.onChange(date)
+    this.setState({
+      selected: date
+    })
   }
 
   handleKeyDown = event => {
@@ -81,6 +86,17 @@ class DatePicker extends React.Component {
     })
   }
 
+  handleCancel = () => {
+    this.handleSelectDate(this.props.date)
+    this.refPopup.current.apiDoSetActive(false)
+  }
+
+  handleOK = date => {
+    this.handleSelectDate(date)
+    this.refPopup.current.apiDoSetActive(false)
+    this.props.onChange(date)
+  }
+
   render() {
     const {
       date,
@@ -100,14 +116,15 @@ class DatePicker extends React.Component {
     const { willActiveSelected } = this.state
 
     const popup = (
-      <Calendar
-        className='gm-border-0'
-        selected={date}
-        onSelect={this.handleSelectDate}
+      <OverLay
+        date={this.state.selected}
+        onSelectDate={this.handleSelectDate}
         willActiveSelected={willActiveSelected}
         min={min}
         max={max}
         disabledDate={disabledDate}
+        onCancel={this.handleCancel}
+        onOK={this.handleOK}
       />
     )
 

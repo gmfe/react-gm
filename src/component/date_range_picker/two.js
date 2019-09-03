@@ -64,7 +64,7 @@ const Two = props => {
         disabledDate={disabledDate}
         disabledYearAndMonth={disabledYearOrMonth() ? 'right' : undefined}
       />
-      <div className='gm-gap-10' />
+      <div className='gm-date-range-picker-overlay-calendar-gap gm-border-bottom' />
       <RangeCalendar
         className='gm-border-0 gm-date-range-picker-overlay-second-calendar'
         begin={begin}

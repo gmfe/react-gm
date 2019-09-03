@@ -6,7 +6,8 @@
   cursor: pointer;
 
   .gm-calendar-head {
-    height: 28px;
+    height: 32px;
+    padding: 2px 0;
 
     .gm-calendar-head-icon {
       width: 28px;
@@ -57,7 +58,8 @@
       border: 1px solid @brand-primary;
     }
 
-    &.active:not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
+    &.active:not(.gm-calendar-day-old):not(.gm-calendar-day-new),
+    &.gm-calendar-day-hover {
       border: 1px solid #d7e8fc;
       background-color: #d7e8fc;
       color: black;
@@ -66,7 +68,8 @@
     }
 
     &.gm-calendar-day-begin:not(.gm-calendar-day-old):not(.gm-calendar-day-new),
-    &.gm-calendar-day-end:not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
+    &.gm-calendar-day-end:not(.gm-calendar-day-old):not(.gm-calendar-day-new),
+    &.gm-calendar-day-hover-end:not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
       background-color: @brand-primary;
       border: 1px solid @brand-primary;
       color: white;
