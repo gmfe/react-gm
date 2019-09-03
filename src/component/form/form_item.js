@@ -52,7 +52,7 @@ const FormItem = withWrapContext(
     const _style = Object.assign(
       {},
       style,
-      disabledCol ? {} : { maxWidth: colWidth * col }
+      disabledCol ? {} : { width: colWidth * col }
     )
     if (canValidate && validate !== undefined) {
       if (required) {
