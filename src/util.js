@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import hoistStatics from 'hoist-non-react-statics'
 
 const withDeprecated = warnText => {
   return Component => {
@@ -9,7 +10,7 @@ const withDeprecated = warnText => {
       return <Component {...props} />
     }
 
-    return Deprecated
+    return hoistStatics(Deprecated, Component)
   }
 }
 
