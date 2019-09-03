@@ -92,7 +92,7 @@ class Popup extends React.Component {
 
     const sStyle = {
       top: rect.top + rect.height + (showArrow ? 5 : 1),
-      width: Math.max(rect.width, width)
+      minWidth: Math.max(rect.width, width)
     }
 
     if (center) {
