@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { is } from 'gm-util'
 
 const Info = props => {
-  const { text, notification, settings } = props
+  const { text, notification, settings, readme } = props
 
   return (
     <div className='gm-framework-info-default'>
@@ -13,6 +13,7 @@ const Info = props => {
         <Flex flex />
         <Flex>{text}</Flex>
         {notification && <Flex>{notification}</Flex>}
+        {readme && <Flex>{readme}</Flex>}
         {settings && (
           <Popover
             animName
@@ -37,7 +38,7 @@ const Info = props => {
             }
           >
             <div className='gm-framework-info-default-settings gm-cursor'>
-              <i className='glyphicon glyphicon-cog gm-padding-lr-15' />
+              <i className='glyphicon glyphicon-cog gm-padding-left-10 gm-padding-right-15' />
             </div>
           </Popover>
         )}
@@ -49,7 +50,8 @@ const Info = props => {
 Info.propTypes = {
   text: PropTypes.string,
   notification: PropTypes.element,
-  settings: PropTypes.array // [{text, onClick}]
+  settings: PropTypes.array, // [{text, onClick}]
+  readme: PropTypes.element
 }
 
 Info.defaultProps = {
