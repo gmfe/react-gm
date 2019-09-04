@@ -27,7 +27,7 @@ class Base extends React.Component {
     this.state = {
       searchValue: '',
       loading: false,
-      willActiveIndex: null // null 代表没有做过键盘操作
+      willActiveIndex: 0 // 默认第一个位置
     }
   }
 
@@ -40,7 +40,6 @@ class Base extends React.Component {
   }
 
   apiDoSelectWillActive = () => {
-    // TODO 先考虑单选的情况
     const { selected, onSelect, multiple } = this.props
     const { willActiveIndex } = this.state
     const flatList = this.getFlatFilterData()
@@ -145,7 +144,7 @@ class Base extends React.Component {
   }
 
   handlePopupKeyDown = event => {
-    const { onKeyDown, selected } = this.props
+    const { onKeyDown } = this.props
     let { willActiveIndex } = this.state
 
     // 不是上下方向键，不用拦截
@@ -163,27 +162,10 @@ class Base extends React.Component {
 
     // 以下是需要拦截部分
 
-    // 如果为 null，代表没有做过键盘操作，如果有选择，默认到 selected 第一个的位置
-    if (willActiveIndex === null) {
-      if (selected.length > 1) {
-        willActiveIndex = _.findIndex(
-          flatList,
-          v => v.value === selected[0].value
-        )
-      }
-      // 否则去到第一个
-      else {
-        willActiveIndex = 0
-      }
-    }
-    // 非 null，则 ++ --
-    else {
-      // null -- ++ 后是 0
-      if (event.key === 'ArrowUp') {
-        willActiveIndex--
-      } else if (event.key === 'ArrowDown') {
-        willActiveIndex++
-      }
+    if (event.key === 'ArrowUp') {
+      willActiveIndex--
+    } else if (event.key === 'ArrowDown') {
+      willActiveIndex++
     }
 
     // 修正
