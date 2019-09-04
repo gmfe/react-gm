@@ -8,8 +8,16 @@ import { getIndex } from '../pagination/util'
 import _ from 'lodash'
 
 const PagePeek = props => {
-  const { data, _peekInfo, onChange } = props
+  let { data, _peekInfo, onChange } = props
   const index = getIndex(data)
+
+  // peek 存在没有的情况，做个假peek
+  if (!_peekInfo.peek) {
+    _peekInfo = {
+      ..._peekInfo,
+      peek: data.limit
+    }
+  }
 
   // 往前显示4个页码
   const begin = Math.max(1, index - 4)
@@ -81,6 +89,7 @@ PagePeek.propTypes = {
     offset: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired
   }),
+  /** 老的接口可能没有 peek，需要兼容下 */
   _peekInfo: PropTypes.shape({
     more: PropTypes.bool,
     peek: PropTypes.number

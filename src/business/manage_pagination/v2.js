@@ -198,7 +198,7 @@ ManagePaginationV2.propTypes = {
 
   /** 默认 10，想要改变则传此参数 */
   defaultLimit: PropTypes.number,
-  disablePage: PropTypes.bool, // TODO
+  disablePage: PropTypes.bool,
 
   className: PropTypes.string,
   style: PropTypes.object

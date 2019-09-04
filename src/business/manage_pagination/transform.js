@@ -19,13 +19,12 @@ const Transform = ({ count, limit, currentIndex, peek, more, onChange }) => {
     }
   }
 
-  const _peekInfo =
-    !count && peek
-      ? {
-          peek,
-          more
-        }
-      : undefined
+  const _peekInfo = !count
+    ? {
+        peek,
+        more
+      }
+    : undefined
 
   return (
     <PaginationBase
