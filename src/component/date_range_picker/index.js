@@ -92,7 +92,13 @@ class DateRangePicker extends React.Component {
     }
 
     return (
-      <Popover ref={this.refPopover} animName disabled={disabled} popup={popup}>
+      <Popover
+        ref={this.refPopover}
+        animName
+        disabled={disabled}
+        popup={popup}
+        style={{ minWidth: '500px' }}
+      >
         {children !== undefined ? (
           children
         ) : (
@@ -105,7 +111,10 @@ class DateRangePicker extends React.Component {
             renderSelected={renderSelected}
             placeholder=''
             disabledClose={!canClear}
-            className={classNames('gm-range-range-picker', className)}
+            className={classNames(
+              'gm-range-range-picker text-center',
+              className
+            )}
             funIcon={<SVGCalendar />}
             isForSelect
           />
