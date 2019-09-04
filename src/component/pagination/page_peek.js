@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { getIndex } from '../pagination/util'
 import _ from 'lodash'
 
-const PageBox = props => {
+const PagePeek = props => {
   const { data, _peekInfo, onChange } = props
   const index = getIndex(data)
 
@@ -75,7 +75,7 @@ const PageBox = props => {
   )
 }
 
-PageBox.propTypes = {
+PagePeek.propTypes = {
   data: PropTypes.shape({
     count: PropTypes.number.isRequired,
     offset: PropTypes.number.isRequired,
@@ -89,4 +89,4 @@ PageBox.propTypes = {
   onChange: PropTypes.func.isRequired
 }
 
-export default PageBox
+export default PagePeek
