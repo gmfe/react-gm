@@ -118,6 +118,7 @@ class DatePicker extends React.Component {
         animName
         disabled={disabled || false}
         type={popoverType}
+        style={{ minWidth: '200px' }}
       >
         {children || (
           <Selected
