@@ -30,16 +30,19 @@ const BatchActionBar = props => {
         </div>
       )}
       {batchActions.length && <div className='gm-margin-left-20'>|</div>}
-      {batchActions.map(o => (
-        <div
-          onClick={o.onClick}
-          className='gm-text-hover-primary gm-cursor gm-text-bold'
-          style={{ marginLeft: '30px' }}
-          key={o.name}
-        >
-          {o.name}
-        </div>
-      ))}
+      {batchActions.map(
+        o =>
+          o.show !== false && (
+            <div
+              onClick={o.onClick}
+              className='gm-text-hover-primary gm-cursor gm-text-bold'
+              style={{ marginLeft: '30px' }}
+              key={o.name}
+            >
+              {o.name}
+            </div>
+          )
+      )}
     </Flex>
   )
 }

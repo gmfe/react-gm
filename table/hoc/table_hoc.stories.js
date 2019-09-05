@@ -314,6 +314,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
           batchActions={[
             {
               name: '批量删除',
+              show: false,
               onClick: () => window.alert('批量删除' + store.selected.join(','))
             },
             {
