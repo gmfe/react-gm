@@ -88,6 +88,9 @@ const store = observable({
   },
   toggleIsSelectAllPage(bool) {
     this.isSelectAllPage = bool
+    if (bool) {
+      this.selected = this.data.filter(v => !isDisable(v)).map(v => v.id)
+    }
   },
   setSelect(selected) {
     if (this.isSelectAllPage && selected.length !== this.data.length) {
