@@ -32,8 +32,10 @@ class Tree extends React.Component {
   }
 
   handleSelectAll = checked => {
-    const { list, onSelectValues } = this.props
-    onSelectValues(checked ? _.map(getLeaf(list), v => v.value) : [])
+    const { list, onSelectValues, withFilter } = this.props
+    const { query } = this.state
+    const processList = filterWithQuery(list, query, withFilter)
+    onSelectValues(checked ? _.map(getLeaf(processList), v => v.value) : [])
   }
 
   handleQuery = e => {
@@ -90,7 +92,7 @@ class Tree extends React.Component {
 
     const processList = filterWithQuery(list, query, withFilter)
 
-    const leafList = getLeaf(list)
+    const leafList = getLeaf(processList)
 
     const checkedAll =
       leafList.length !== 0 && leafList.length === selectedValues.length
