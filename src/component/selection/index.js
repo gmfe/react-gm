@@ -55,7 +55,10 @@ class Selection extends React.Component {
         )}
       >
         {isForSelect ? (
-          <div className='form-control gm-selection-selected'>
+          <div
+            className={classNames('form-control gm-selection-selected')}
+            disabled={disabled}
+          >
             {text || placeholder}
           </div>
         ) : (

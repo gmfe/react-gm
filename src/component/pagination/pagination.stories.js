@@ -7,7 +7,7 @@ import PaginationFuck from '../../deprecated/pagination_fuck/pagination_fuck'
 
 const store = observable({
   data: {
-    count: 159,
+    count: 0,
     offset: 0,
     limit: 10
   },
@@ -62,6 +62,7 @@ storiesOf('Pagination', module)
     <Pagination
       data={store.noCountData}
       toPage={data => store.setNoCountData(data)}
+      nextDisabled
     />
   ))
   .add('废弃 PaginationFuck', () => {

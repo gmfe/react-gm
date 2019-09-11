@@ -11,7 +11,7 @@ function getInfo(data) {
   const all = Math.ceil(data.count / data.limit)
 
   const diff = 2
-  const pages = []
+  let pages = []
 
   let begin = Math.max(index - diff, 1)
 
@@ -27,6 +27,11 @@ function getInfo(data) {
 
   for (let i = begin; i <= end; i++) {
     pages.push(i)
+  }
+
+  // 如果总数为0，还是要给个页码1
+  if (data.count === 0) {
+    pages = [1]
   }
 
   return {
