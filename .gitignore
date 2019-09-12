@@ -1,11 +1,9 @@
 .idea
-.happypack
 .DS_Store
 /npm-debug.log
 /build
-/webpack-assets.js
 node_modules/
 package-lock.json
-logs
-/.stylelintcache
+yarn.lock
+.stylelintcache
 .eslintcache
