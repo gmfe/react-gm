@@ -34,6 +34,10 @@ storiesOf('Button', module)
           危险
         </Button>
       </div>
+      link
+      <div>
+        <Button className='btn btn-link'>链接</Button>
+      </div>
     </div>
   ))
   .add('loading', () => (

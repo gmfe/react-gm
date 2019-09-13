@@ -51,7 +51,6 @@ const Wrap2 = ({ count }) => {
   }, [])
 
   const requestSomething = pagination => {
-    console.log(pagination)
     return new Promise(resolve => {
       setTimeout(() => {
         const json = {
