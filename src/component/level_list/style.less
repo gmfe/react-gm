@@ -4,9 +4,41 @@
   .gm-level-list-item {
     min-width: 120px;
     max-width: 250px;
+    border: 1px solid @gm-border-color;
+    margin-left: -1px;
+    background: white;
 
-    .gm-arrow-right {
+    &:first-child {
+      margin-left: 0;
+    }
+
+    .gm-level-list-item-title {
+      color: @gm-color-second;
+      padding: 5px;
+    }
+
+    .gm-list {
+      border: none;
+    }
+
+    .gm-level-list-item-right {
+      position: absolute;
       right: -6px;
+      top: 2px;
+    }
+  }
+
+  &.gm-level-list-for-function-set {
+    height: auto;
+    background-color: transparent;
+
+    .gm-level-list-item {
+      border: none;
+      max-width: none;
+
+      .gm-list {
+        border: 1px solid @gm-border-color;
+      }
     }
   }
 }

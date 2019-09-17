@@ -316,6 +316,17 @@
           }
         }
 
+        .gm-select {
+          display: block;
+
+          .gm-selection-selected {
+            .gm-react-edit-table-common-input();
+
+            line-height: 22px;
+            padding-right: 32px;
+          }
+        }
+
         .gm-selected {
           input {
             .gm-react-edit-table-common-input();
@@ -367,5 +378,14 @@
       color: rgba(219, 0, 0, 0.3);
       cursor: default;
     }
+  }
+}
+
+// 性能相关
+// stylelint-disable-next-line
+.gm-react-table.ReactTable {
+  // stylelint-disable-next-line
+  .rt-tr {
+    transform: translateZ(0);
   }
 }

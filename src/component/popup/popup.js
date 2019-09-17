@@ -58,12 +58,12 @@ class Popup extends React.Component {
 
     return (
       <div
-        className={classNames('gm-popover-popup-arrow', {
-          'gm-popover-popup-arrow-top': top,
-          'gm-popover-popup-arrow-bottom': !top,
-          'gm-popover-popup-arrow-right': !center && right,
-          'gm-popover-popup-arrow-left': !center && !right,
-          'gm-popover-popup-arrow-center': center
+        className={classNames('gm-popup-arrow', {
+          'gm-popup-arrow-top': top,
+          'gm-popup-arrow-bottom': !top,
+          'gm-popup-arrow-right': !center && right,
+          'gm-popup-arrow-left': !center && !right,
+          'gm-popup-arrow-center': center
         })}
         style={style}
       />
@@ -78,6 +78,7 @@ class Popup extends React.Component {
       offset,
       showArrow,
       arrowLeft,
+      pureContainer,
       children,
       rect,
       animName,
@@ -91,13 +92,17 @@ class Popup extends React.Component {
 
     const sStyle = {
       top: rect.top + rect.height + (showArrow ? 5 : 1),
-      left: rect.left + offset
+      minWidth: Math.max(rect.width, width)
     }
 
     if (center) {
       sStyle.left = rect.left + rect.width / 2 - width / 2 + offset
     } else if (right) {
-      sStyle.left = rect.left + rect.width - width + offset
+      // sStyle.left = rect.left + rect.width - width + offset
+      sStyle.right =
+        document.documentElement.clientWidth - rect.left - rect.width - offset
+    } else {
+      sStyle.left = rect.left + offset
     }
 
     if (this.state.top) {
@@ -121,8 +126,9 @@ class Popup extends React.Component {
         {...rest}
         style={Object.assign(sStyle, style)}
         className={classNames(
-          'gm-popup  gm-box-shadow-bottom gm-no-outline',
+          'gm-popup',
           {
+            'gm-popup-pure': pureContainer,
             // 在计算的时候不能出现动画，否则会偏差
             'gm-animated': isInit && animate,
             [`gm-animated-${animate}`]: isInit && animate
@@ -148,9 +154,21 @@ Popup.propTypes = {
   offset: PropTypes.number,
   showArrow: PropTypes.bool, // 是否显示三角标
   arrowLeft: PropTypes.string,
-  animName: PropTypes.string,
+  animName: PropTypes.oneOf([
+    false,
+    true,
+    'fade-in-right',
+    'fade-in-left',
+    'fade-in-top',
+    'fade-in-bottom',
+    'zoom-in',
+    'zoom-in-top',
+    'zoom-in-bottom'
+  ]),
   /** 预判高度。因为 popup 的宽高会是可变的，所以没法判断视窗内是否能放得下，于是有此。 */
-  predictingHeight: PropTypes.number
+  predictingHeight: PropTypes.number,
+  /** 纯粹的，目前是没有背景色，没有阴影 */
+  pureContainer: PropTypes.bool
 }
 
 Popup.defaultProps = {

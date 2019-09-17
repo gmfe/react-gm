@@ -108,6 +108,7 @@ const referOfWidth = {
   operationCell: 100,
   searchBox: 168,
   numberInputBox: 80,
+  selectBox: 148,
   tableSelectBox: 148,
   levelSelectBox: 148,
   dateSelectBox: 110
