@@ -16,10 +16,10 @@ import moment from 'moment'
 class DateRangePicker extends React.Component {
   refPopover = React.createRef()
 
-  selectedRef = React.createRef()
+  selectionRef = React.createRef()
 
   apiDoFocus = () => {
-    this.selectedRef.current.apiDoFocus()
+    this.selectionRef.current.apiDoFocus()
   }
 
   handleOK = (begin, end) => {
@@ -103,7 +103,7 @@ class DateRangePicker extends React.Component {
           children
         ) : (
           <Selection
-            ref={this.selectedRef}
+            ref={this.selectionRef}
             {...rest}
             selected={{ begin, end }}
             onSelect={this.handleSelect}
