@@ -106,19 +106,27 @@ class Popover extends React.Component {
   }
 
   handleDrawerScroll = () => {
-    this.setActive(this.state.active)
+    if (this.state.active) {
+      this.setActive(this.state.active)
+    }
   }
 
   handleModalScroll = () => {
-    this.setActive(this.state.active)
+    if (this.state.active) {
+      this.setActive(this.state.active)
+    }
   }
 
   handleBrowserScroll = () => {
-    this.setActive(this.state.active)
+    if (this.state.active) {
+      this.setActive(this.state.active)
+    }
   }
 
   handleTableScroll = () => {
-    this.setActive(this.state.active)
+    if (this.state.active) {
+      this.setActive(this.state.active)
+    }
   }
 
   componentDidUpdate() {
