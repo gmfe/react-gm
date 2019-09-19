@@ -1,5 +1,5 @@
 import Table from './table'
-import SubTable from './table/subTable'
+import SubTable from './table/sub_table'
 import EditTable from './edit/edit_table'
 
 import fixedColumnsTableHOC from './hoc/fixed_columns_table'

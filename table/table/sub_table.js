@@ -1,5 +1,5 @@
 import React from 'react'
-import classnames from 'classnames'
+import classNames from 'classnames'
 import Table from './base'
 import { referOfWidth } from '../util'
 
@@ -20,7 +20,7 @@ const SubTable = props => {
         },
         ...columns
       ]}
-      className={classnames('gm-react-sub-table', className)}
+      className={classNames('gm-react-sub-table', className)}
     />
   )
 }
