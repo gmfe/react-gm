@@ -3,33 +3,7 @@ import PropTypes from 'prop-types'
 import Flex from '../flex'
 import IconDownUp from '../icon_down_up'
 
-const FormPanelContext = React.createContext({
-  open: false
-})
-
 const More = props => {
-  return (
-    <FormPanelContext.Consumer>
-      {({ open, onToggle }) => {
-        return (
-          <>
-            <div className='gm-form-panel-collapse'>
-              <button
-                className='btn btn-link gm-padding-right-0'
-                onClick={onToggle}
-              >
-                {open ? '收起' : '展开'}更多设置 <IconDownUp active={open} />
-              </button>
-            </div>
-            {open ? props.children : null}
-          </>
-        )
-      }}
-    </FormPanelContext.Consumer>
-  )
-}
-
-const FormPanel = ({ title, right, children, ...rest }) => {
   const [open, setOpen] = useState(false)
 
   const handleToggle = e => {
@@ -37,6 +11,28 @@ const FormPanel = ({ title, right, children, ...rest }) => {
     setOpen(!open)
   }
 
+  return (
+    <>
+      <div
+        style={{
+          marginTop: '-10px',
+          paddingBottom: open ? '10px' : '20px'
+        }}
+      >
+        <button
+          type='button'
+          className='btn-link gm-padding-right-0'
+          onClick={handleToggle}
+        >
+          {open ? '收起' : '展开'}更多设置 <IconDownUp active={open} />
+        </button>
+      </div>
+      {open ? props.children : null}
+    </>
+  )
+}
+
+const FormPanel = ({ title, right, children, ...rest }) => {
   return (
     <div {...rest} className='gm-form-panel'>
       <Flex flex className='gm-form-panel-header'>
@@ -54,16 +50,7 @@ const FormPanel = ({ title, right, children, ...rest }) => {
           </Flex>
         </Flex>
       </Flex>
-      <div className='gm-form-panel-content'>
-        <FormPanelContext.Provider
-          value={{
-            open,
-            onToggle: handleToggle
-          }}
-        >
-          {children}
-        </FormPanelContext.Provider>
-      </div>
+      <div className='gm-form-panel-content'>{children}</div>
     </div>
   )
 }
