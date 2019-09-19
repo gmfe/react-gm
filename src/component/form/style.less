@@ -30,6 +30,8 @@
 
   /* 只能作用 form-field 下面的 */
   .gm-form-field {
+    position: relative;
+
     & > .gm-radio-group {
       margin: 4px 0 0;
     }
@@ -45,6 +47,12 @@
     & > .gm-select {
       display: block;
     }
+  }
+
+  .gm-form-toolTip {
+    position: absolute;
+    right: -28px;
+    top: 7px;
   }
 }
 
@@ -79,5 +87,42 @@
   text-align: center;
   padding: 5px 0;
   background-color: white;
-  //box-shadow: 0 -1px 6px rgba(36, 51, 81, 0.2);
+  box-shadow: 0 -1px 5px rgba(36, 51, 81, 0.2);
+}
+
+.gm-form-panel {
+  padding: 10px 20px 20px 20px;
+
+  &-collapse {
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+
+  &-header {
+    &-tag {
+      width: 3px;
+      background: @brand-primary;
+      margin-bottom: 3px;
+    }
+
+    &-content {
+      margin-left: 5px;
+      border-bottom: 1px solid fadeout(@gm-frame-border-color, 50%);
+
+      &-title {
+        font-size: 14px;
+        margin-bottom: 2px;
+      }
+    }
+  }
+
+  &-content {
+    padding: 20px 0;
+
+    .gm-form {
+      .gm-form-group {
+        padding-bottom: 20px;
+      }
+    }
+  }
 }

@@ -1,6 +1,13 @@
 import React, { useRef } from 'react'
 import { storiesOf } from '@storybook/react'
-import { Form, FormItem, FormButton, FormBlock, FormGroup } from './index'
+import {
+  Form,
+  FormItem,
+  FormButton,
+  FormBlock,
+  FormGroup,
+  FormPanel
+} from './index'
 import {
   Select,
   Switch,
@@ -9,7 +16,8 @@ import {
   Radio,
   CheckboxGroup,
   Checkbox,
-  InputNumberV2
+  InputNumberV2,
+  Flex
 } from '../../index'
 import { observable } from 'mobx'
 
@@ -63,7 +71,7 @@ storiesOf('Form', module)
 
 新UI表单约束较多
 - 栏数。有 1栏(默认) 2栏 3栏。其中搜索区域 3栏，常规表单区域 1栏 和 2栏
-- 栏宽。一个表单内是固定的，具体宽度待定，暂定 300
+- 栏宽。一个表单内是固定的，宽度默认 320， FormPanel特殊一栏默认是 400，具体情况可自定义
 - Item 内自然撑开
 - Item宽度。一般占一栏，可能占两栏，可能占三栏
 - Item高度。一般占一行，其他看具体情况自然往下撑开
@@ -290,6 +298,13 @@ FormItem 包住表单元素
                 onChange={e => store.setData('desc', e.target.value)}
               />
             </FormItem>
+            <FormItem label='名字' required>
+              <input
+                type='text'
+                value={store.name}
+                onChange={e => store.setData('name', e.target.value)}
+              />
+            </FormItem>
           </Form>
         </FormGroup>
       )
@@ -302,3 +317,204 @@ FormItem 包住表单元素
       }
     }
   )
+  .add('form panel', () => {
+    const form3 = useRef(null)
+    const form4 = useRef(null)
+    return (
+      <FormGroup
+        formRefs={[form3, form4]}
+        onCancel={() => console.log('Cancel')}
+        onSubmit={() => console.log('onSubmit')}
+      >
+        <FormPanel
+          title='店铺设置'
+          right={<span onClick={() => console.log('删除')}>删除</span>}
+        >
+          <Form
+            colWidth='400px'
+            ref={form3}
+            labelWidth='160px'
+            hasButtonInGroup
+          >
+            <FormItem label='名字' colWidth='700px' required>
+              <input
+                type='text'
+                className='form-control'
+                value={store.name}
+                onChange={e => store.setData('name', e.target.value)}
+              />
+            </FormItem>
+            <FormItem label='邀请码' required>
+              <input
+                type='text'
+                value={store.name}
+                onChange={e => store.setData('name', e.target.value)}
+              />
+              <div className='gm-text-desc gm-margin-top-5'>
+                可以允许商户在规定时间内自主修改已提交订单内容
+              </div>
+            </FormItem>
+
+            <FormBlock col={2}>
+              <FormItem
+                label='名字'
+                required
+                toolTip={
+                  <div
+                    className='gm-padding-10 gm-bg'
+                    style={{ width: '455px' }}
+                  >
+                    <p style={{ marginBottom: '4px', fontSize: '12px' }}>
+                      23333333333333333
+                    </p>
+                    <p style={{ marginBottom: 0, fontSize: '12px' }}>
+                      4555555555555555
+                    </p>
+                  </div>
+                }
+              >
+                <Flex alignCenter>
+                  <input
+                    type='text'
+                    className='form-control'
+                    value={store.name}
+                    onChange={e => store.setData('name', e.target.value)}
+                  />
+                </Flex>
+              </FormItem>
+              <FormItem label='地区'>
+                <Select
+                  data={area}
+                  value={store.area}
+                  onChange={value => store.setData('area', value)}
+                />
+              </FormItem>
+              <FormItem
+                label='描述'
+                required
+                validate={Validator.create([], store.desc)}
+              >
+                <textarea
+                  value={store.desc}
+                  onChange={e => store.setData('desc', e.target.value)}
+                />
+              </FormItem>
+              <FormItem label='兴趣'>
+                <CheckboxGroup
+                  style={{ width: '400px' }}
+                  name='taste'
+                  inline
+                  value={store.taste}
+                  onChange={value => store.setData('taste', value)}
+                >
+                  <Checkbox value={0}>阅读</Checkbox>
+                  <Checkbox value={1}>打篮球</Checkbox>
+                  <Checkbox value={2}>美食</Checkbox>
+                  <Checkbox value={0}>阅读</Checkbox>
+                  <Checkbox value={1}>打篮球</Checkbox>
+                  <Checkbox value={2}>美食</Checkbox>
+                </CheckboxGroup>
+              </FormItem>
+            </FormBlock>
+            <FormPanel.More>
+              <FormBlock col={2}>
+                <FormItem label='邀请码' required>
+                  <input
+                    type='text'
+                    value={store.name}
+                    onChange={e => store.setData('name', e.target.value)}
+                  />
+                  <div className='gm-text-desc gm-margin-top-5'>
+                    可以允许商户在规定时间内自主修改已提交订单内容
+                  </div>
+                </FormItem>
+                <FormItem label='名字' required>
+                  <input
+                    type='text'
+                    value={store.name}
+                    onChange={e => store.setData('name', e.target.value)}
+                  />
+                </FormItem>
+                <FormItem label='地区地区地区'>
+                  <Select
+                    data={area}
+                    value={store.area}
+                    onChange={value => store.setData('area', value)}
+                  />
+                </FormItem>
+                <FormItem label='是否工作' required>
+                  <Switch
+                    checked={store.isWork}
+                    onChange={checked => store.setData('isWork', checked)}
+                  />
+                </FormItem>
+              </FormBlock>
+            </FormPanel.More>
+          </Form>
+        </FormPanel>
+
+        <FormPanel
+          title='店铺设置'
+          right={<span onClick={() => console.log('删除')}>删除</span>}
+        >
+          <Form
+            colWidth='400px'
+            ref={form4}
+            labelWidth='160px'
+            hasButtonInGroup
+          >
+            <FormItem label='名字' required>
+              <input
+                type='text'
+                value={store.name}
+                onChange={e => store.setData('name', e.target.value)}
+              />
+            </FormItem>
+
+            <FormBlock col={2}>
+              <FormItem label='邀请码' required>
+                <input
+                  type='text'
+                  value={store.name}
+                  onChange={e => store.setData('name', e.target.value)}
+                />
+                <div className='gm-text-desc gm-margin-top-5'>
+                  可以允许商户在规定时间内自主修改已提交订单内容
+                </div>
+              </FormItem>
+              <FormItem label='名字' required>
+                <input
+                  type='text'
+                  value={store.name}
+                  onChange={e => store.setData('name', e.target.value)}
+                />
+              </FormItem>
+              <FormItem label='地区地区地区'>
+                <Select
+                  data={area}
+                  value={store.area}
+                  onChange={value => store.setData('area', value)}
+                />
+              </FormItem>
+              <FormItem label='是否工作' required>
+                <Switch
+                  checked={store.isWork}
+                  onChange={checked => store.setData('isWork', checked)}
+                />
+              </FormItem>
+            </FormBlock>
+            <FormItem
+              label='描述'
+              required
+              validate={Validator.create([], store.desc)}
+            >
+              <textarea
+                value={store.desc}
+                onChange={e => store.setData('desc', e.target.value)}
+              />
+            </FormItem>
+          </Form>
+        </FormPanel>
+      </FormGroup>
+    )
+  })

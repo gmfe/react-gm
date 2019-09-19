@@ -24,7 +24,8 @@ import {
   FormItem,
   FormButton,
   FormBlock,
-  FormGroup
+  FormGroup,
+  FormPanel
 } from './component/form'
 
 import Storage from './component/storage'
@@ -159,6 +160,7 @@ export {
   FormButton,
   FormBlock,
   FormGroup,
+  FormPanel,
   Calendar,
   DatePicker,
   DateRangePicker,

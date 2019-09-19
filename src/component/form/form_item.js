@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Flex from '../flex'
+import ToolTip from '../tool_tip'
 import Validator from '../../validator'
 import { withWrapContext, colWidthDefault } from './util'
 import { warn, devWarnForHook } from '../../util'
@@ -41,7 +42,8 @@ const FormItem = withWrapContext(
     col,
     disabledCol,
     colWidth,
-    style
+    style,
+    toolTip
   }) => {
     devWarnForHook(() => {
       if (label === undefined) return
@@ -99,6 +101,12 @@ const FormItem = withWrapContext(
             {!!(error && help) && (
               <div className={classNames({ 'help-block': error })}>{help}</div>
             )}
+            {toolTip ? (
+              <ToolTip
+                popup={toolTip}
+                className='gm-text-14 gm-padding-lr-5 gm-form-toolTip'
+              />
+            ) : null}
           </div>
         </Flex>
       </Flex>
@@ -111,6 +119,8 @@ FormItem.propTypes = {
   col: PropTypes.oneOf([1, 2, 3]),
   /** 顾名思义。请不要包含:，此为组件控制 */
   label: PropTypes.string,
+  /** 提示信息 */
+  toolTip: PropTypes.element,
   /** 是否必须 */
   required: PropTypes.bool,
 
@@ -126,6 +136,10 @@ FormItem.propTypes = {
 
   /** 一般由 Form 传下来，也可自定义 */
   labelWidth: PropTypes.string,
+
+  /** 一般由 Form 传下来，也可自定义 */
+  colWidth: PropTypes.string,
+
   /** Form 传下来，不要动 */
   canValidate: PropTypes.bool,
 
