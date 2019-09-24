@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import Table from '../table'
 import classNames from 'classnames'
 import { referOfWidth } from '../util'
 
 const subTableHOC = Component => {
-  const SubTable = props => {
+  const SubTable = forwardRef((props, ref) => {
     const { columns, className, ...rest } = props
     return (
       <Component
+        ref={ref}
         {...rest}
         columns={[
           {
@@ -24,7 +25,7 @@ const subTableHOC = Component => {
         className={classNames('gm-react-sub-table', className)}
       />
     )
-  }
+  })
 
   SubTable.propTypes = {
     ...Table.propTypes

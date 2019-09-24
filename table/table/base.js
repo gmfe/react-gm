@@ -10,7 +10,6 @@ import EVENT_TYPE from '../../src/event_type'
 
 class BaseTable extends React.Component {
   refTable = React.createRef()
-
   doScroll = _.debounce(() => {
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
   }, 500)
