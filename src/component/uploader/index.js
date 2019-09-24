@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { is } from 'gm-util'
 import classNames from 'classnames'
 import SVGPlus from '../../../svg/plus.svg'
+import Flex from '../flex'
 
-class Uploader extends React.Component {
-  handleUpload = e => {
+const Uploader = ({
+  onUpload,
+  accept,
+  multiple,
+  className,
+  children,
+  disabled,
+  ...rest
+}) => {
+  const refInput = useRef(null)
+  const handleUpload = e => {
     e.preventDefault()
 
-    const { multiple, onUpload } = this.props
     const uploadedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files
+
     const max = multiple ? uploadedFiles.length : 1
     const files = []
 
@@ -21,70 +31,78 @@ class Uploader extends React.Component {
     onUpload(files, e)
   }
 
-  handleClick = () => {
-    if (this.props.disabled) return
+  const handleClick = () => {
+    if (disabled) return
 
-    this.refInput.value = null
-    this.refInput.click()
+    refInput.current.value = null
+    refInput.current.click()
   }
 
-  render() {
-    const {
-      onUpload,
-      accept,
-      multiple,
-      className,
-      children,
-      disabled,
-      ...rest
-    } = this.props
-
-    return (
-      <div className='gm-uploader'>
-        <div
-          {...rest}
-          className={classNames(
-            {
-              'gm-uploader-wrap': !!children,
-              'gm-uploader-default': !children
-            },
-            className
-          )}
-          disabled={disabled}
-          onClick={this.handleClick}
-        >
-          {children || (
-            <div className='gm-uploader-icon-wrap'>
-              <SVGPlus className='gm-uploader-icon' />
-            </div>
-          )}
-        </div>
-        <input
-          type='file'
-          ref={ref => (this.refInput = ref)}
-          className='gm-uploader-input'
-          multiple={!is.weixin() && multiple}
-          accept={accept}
-          onChange={this.handleUpload}
-        />
-      </div>
-    )
-  }
+  return (
+    <div
+      {...rest}
+      className={classNames(
+        'gm-uploader',
+        {
+          disabled
+        },
+        className
+      )}
+      onClick={handleClick}
+    >
+      {children || <Default />}
+      <input
+        ref={refInput}
+        type='file'
+        className='gm-uploader-input'
+        multiple={!is.weixin() && multiple}
+        accept={accept}
+        onChange={handleUpload}
+      />
+    </div>
+  )
 }
 
-Uploader.defaultProps = {
-  multiple: false,
-  disabled: false
+const Default = ({ className, children, ...rest }) => {
+  return (
+    <Flex
+      {...rest}
+      alignCenter
+      justifyCenter
+      className={classNames('gm-uploader-default gm-text-primary', className)}
+    >
+      {children || <SVGPlus />}
+    </Flex>
+  )
 }
+
+Default.propTypes = {
+  className: PropTypes.string
+}
+
+const DefaultImage = ({ className, children, ...rest }) => {
+  return (
+    <Default {...rest} className={classNames('gm-text-12', className)}>
+      {children || '+ 加图'}
+    </Default>
+  )
+}
+
+DefaultImage.propTypes = {
+  className: PropTypes.string
+}
+
+Uploader.Default = Default
+Uploader.DefaultImage = DefaultImage
 
 Uploader.propTypes = {
-  multiple: PropTypes.bool,
   onUpload: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
   accept: PropTypes.string,
-  children: PropTypes.any,
+  multiple: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,
-  disabled: PropTypes.bool
+  children: PropTypes.any
 }
 
 export default Uploader
