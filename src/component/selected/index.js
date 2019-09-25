@@ -55,12 +55,6 @@ class Selected extends React.Component {
           placeholder={placeholder}
           onKeyDown={onKeyDown}
         />
-        {selected && (
-          <i
-            className='xfont xfont-close-circle gm-selected-icon gm-selected-clean'
-            onClick={disabled || this.handleClearDate}
-          />
-        )}
         {React.cloneElement(funIcon, {
           className: classNames('gm-selected-icon', funIcon.props.className)
         })}
