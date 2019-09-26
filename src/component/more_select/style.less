@@ -27,7 +27,10 @@
 
   &.gm-more-select-disabled {
     cursor: not-allowed;
-    opacity: 0.6;
+
+    .gm-more-select-selected {
+      .gm-disabled();
+    }
 
     input {
       cursor: not-allowed;
