@@ -1,10 +1,6 @@
 .gm-uploader {
   display: inline-block;
 
-  &.disabled {
-    cursor: not-allowed;
-  }
-
   .gm-uploader-input[type='file'] {
     display: none;
   }
@@ -16,5 +12,13 @@
     border: 1px dashed fadeout(@gm-frame-border-color, 50%);
     border-radius: 4px;
     cursor: pointer;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .gm-uploader-default {
+      .gm-disabled();
+    }
   }
 }

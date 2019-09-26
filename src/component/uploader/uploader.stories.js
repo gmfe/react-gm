@@ -17,6 +17,13 @@ storiesOf('Uploader', module)
   .add('default', () => (
     <Uploader onUpload={(files, e) => console.log(files, e)} accept='image/*' />
   ))
+  .add('disabled', () => (
+    <Uploader
+      disabled
+      onUpload={(files, e) => console.log(files, e)}
+      accept='image/*'
+    />
+  ))
   .add('自定义', () => (
     <Uploader onUpload={(files, e) => console.log(files, e)} accept='.xlsx'>
       <button className='btn btn-default'>自定义</button>

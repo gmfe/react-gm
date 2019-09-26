@@ -13,6 +13,7 @@ function ImgUploader(props) {
     data,
     onChange,
     onUpload,
+    disabled,
     accept,
     multiple,
     contentSize,
@@ -56,6 +57,7 @@ function ImgUploader(props) {
           <Uploader
             key={index}
             accept={accept}
+            disabled={disabled}
             onUpload={files => handleReplace(files, index)}
             className='gm-img-uploader-item'
             style={{
@@ -73,13 +75,20 @@ function ImgUploader(props) {
                 }}
               />
             </DefaultImage>
-            <SvgCloseCircle
-              className='gm-img-uploader-close'
-              onClick={e => handleRemove(e, index)}
-            />
+            {!disabled && (
+              <SvgCloseCircle
+                className='gm-img-uploader-close'
+                onClick={e => handleRemove(e, index)}
+              />
+            )}
           </Uploader>
         ))}
-        <Uploader accept={accept} onUpload={handleUploader} multiple={multiple}>
+        <Uploader
+          disabled={disabled}
+          accept={accept}
+          onUpload={handleUploader}
+          multiple={multiple}
+        >
           <DefaultImage
             style={{
               width: contentSize.width,
@@ -100,8 +109,9 @@ ImgUploader.propTypes = {
   onChange: PropTypes.func.isRequired,
   /** 上传按钮回调，参数是 files，返回 promise resolve 回 [url] */
   onUpload: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
   /** 上传接受的图片类型 */
-  accept: PropTypes.string.isRequired,
+  accept: PropTypes.string,
   /** 注意，这是添加按钮选择单图还是多图 */
   multiple: PropTypes.bool,
   /** 图片的尺寸 */

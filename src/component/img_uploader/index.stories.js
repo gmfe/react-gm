@@ -21,16 +21,31 @@ const handleUpload = files => {
   ])
 }
 
-storiesOf('ImgUploader', module).add('default', () => (
-  <div>
-    <div style={{ height: '100px' }} />
-    <ImgUploader
-      data={store.data}
-      onUpload={handleUpload}
-      onChange={data => store.setData(data)}
-      accept='image/*'
-      desc='图片尺寸720*720像素，大小小于1M'
-      multiple
-    />
-  </div>
-))
+storiesOf('ImgUploader', module)
+  .add('default', () => (
+    <div>
+      <div style={{ height: '100px' }} />
+      <ImgUploader
+        data={store.data}
+        onUpload={handleUpload}
+        onChange={data => store.setData(data)}
+        accept='image/*'
+        desc='图片尺寸720*720像素，大小小于1M'
+        multiple
+      />
+    </div>
+  ))
+  .add('disabled', () => (
+    <div>
+      <div style={{ height: '100px' }} />
+      <ImgUploader
+        disabled
+        data={store.data}
+        onUpload={handleUpload}
+        onChange={data => store.setData(data)}
+        accept='image/*'
+        desc='图片尺寸720*720像素，大小小于1M'
+        multiple
+      />
+    </div>
+  ))
