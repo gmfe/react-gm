@@ -157,7 +157,7 @@ class Popover extends React.Component {
       LayoutRoot._setComponentPopup(
         this.id,
         <Popup
-          key='popup'
+          key={'popup_' + this.id}
           ref={ref => (this.refPopup = ref)}
           onMouseEnter={
             !disabled && type === 'hover' ? this.handleMouseEnter : _.noop

@@ -5,7 +5,7 @@ import {
   fixedColumnsTableHOC,
   selectTableV2HOC,
   expandTableHOC,
-  SubTable,
+  subTableHOC,
   TableUtil
 } from '../index'
 import diyTableHOC from '../hoc/diy_table'
@@ -19,7 +19,8 @@ const SelectTable = selectTableV2HOC(Table)
 const ExpandTable = expandTableHOC(Table)
 
 const ExpandSelectTable = selectTableV2HOC(ExpandTable)
-const SelectSubTable = selectTableV2HOC(SubTable)
+const SelectSubTable = selectTableV2HOC(subTableHOC(Table))
+const SubTable = subTableHOC(Table)
 
 const isDisable = ({ total_money }) => total_money === 111 // 不能选的行
 
