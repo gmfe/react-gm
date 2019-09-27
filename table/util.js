@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Popover, PopupContentConfirm } from '../src'
@@ -168,22 +168,23 @@ EditTableOperation.propTypes = {
   onDeleteRow: PropTypes.func
 }
 
-const OperationRowEdit = ({ children, onClick, onSave, onCancel }) => {
-  const [isEditing, setEditState] = useState(false)
-
+const OperationRowEdit = ({
+  children,
+  isEditing,
+  onClick,
+  onSave,
+  onCancel
+}) => {
   const handleClick = () => {
     onClick && onClick()
-    setEditState(true)
   }
 
   const handleSave = () => {
     onSave && onSave()
-    setEditState(false)
   }
 
   const handleCancel = () => {
     onCancel && onCancel()
-    setEditState(false)
   }
 
   return !isEditing ? (
@@ -211,6 +212,7 @@ const OperationRowEdit = ({ children, onClick, onSave, onCancel }) => {
 }
 
 OperationRowEdit.propTypes = {
+  isEditing: PropTypes.bool.isRequired,
   onClick: PropTypes.func,
   onSave: PropTypes.func,
   onCancel: PropTypes.func

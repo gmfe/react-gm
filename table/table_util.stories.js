@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { Table, TableUtil } from './index'
 import { observable } from 'mobx'
+import { Observer } from 'mobx-react'
 import _ from 'lodash'
 import { PopupContentConfirm } from '../src/component/popup'
 
@@ -128,6 +129,34 @@ const store = observable({
   setItemByIndex(index, key, value) {
     const list = this.data.slice()
     list[index][key] = value
+
+    this.data = list
+  },
+  itemToEdit(index, isEditing) {
+    const list = this.data.slice()
+    if (isEditing) {
+      // 复制一份数据到编辑对象中
+      list[index].__editObj = {
+        id: list[index].id
+      }
+      list[index].__isEditing = true
+
+      this.data = list
+    } else {
+      list[index].__isEditing = false
+      this.data = list
+    }
+  },
+  setEditObjByIndex(index, key, value) {
+    const list = this.data.slice()
+    list[index].__editObj[key] = value
+
+    this.data = list
+  },
+  saveItem(index) {
+    const list = this.data.slice()
+    list[index].__isEditing = false
+    list[index].id = list[index].__editObj.id
 
     this.data = list
   }
@@ -315,7 +344,29 @@ storiesOf('表格|TableUtil', module)
         },
         {
           Header: 'ID',
-          accessor: 'id'
+          id: 'id',
+          Cell: cellProps => (
+            <Observer>
+              {() => {
+                const { __isEditing, id, __editObj } = cellProps.original
+                return __isEditing ? (
+                  <input
+                    type='text'
+                    value={__editObj.id}
+                    onChange={e =>
+                      store.setEditObjByIndex(
+                        cellProps.index,
+                        'id',
+                        e.target.value
+                      )
+                    }
+                  />
+                ) : (
+                  id
+                )
+              }}
+            </Observer>
+          )
         },
         {
           Header: OperationHeader,
@@ -324,9 +375,10 @@ storiesOf('表格|TableUtil', module)
           className: 'gm-border-left',
           Cell: cellProps => (
             <OperationRowEdit
-              onClick={() => console.log('去编辑')}
-              onSave={() => console.log('保存')}
-              onCancel={() => console.log('取消')}
+              isEditing={cellProps.original.__isEditing}
+              onClick={() => store.itemToEdit(cellProps.index, true)}
+              onSave={() => store.saveItem(cellProps.index)}
+              onCancel={() => store.itemToEdit(cellProps.index, false)}
             >
               <OperationDelete
                 title='确认删除'
