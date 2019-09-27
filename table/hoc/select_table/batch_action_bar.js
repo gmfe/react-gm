@@ -3,11 +3,13 @@ import _ from 'lodash'
 import { Flex } from '../../../src'
 import { getLocale } from '../../../locales'
 import PropTypes from 'prop-types'
+import SVGRemove from '../../../svg/remove.svg'
 
 const BatchActionBar = props => {
-  const { isSelectAll, count, batchActions, toggleSelectAll } = props
+  const { isSelectAll, count, batchActions, toggleSelectAll, onClose } = props
   return (
     <Flex alignCenter>
+      <SVGRemove onClick={onClose} className='gm-cursor' />
       {isSelectAll ? (
         <button
           className='btn btn-primary gm-margin-left-20'
@@ -23,11 +25,17 @@ const BatchActionBar = props => {
           {getLocale('勾选所有页内容')}
         </button>
       )}
-      {_.isNumber(count) && (
+      {_.isNumber(count) ? (
         <div className='gm-text-bold gm-margin-left-20'>
           {getLocale('已选择')}
           <span className='text-primary'>{count}</span>
           {getLocale('项')}
+        </div>
+      ) : (
+        <div className='gm-text-bold gm-margin-left-20'>
+          {getLocale('已选择')}
+          <span className='text-primary'>{getLocale('所有')}</span>
+          {getLocale('页')}
         </div>
       )}
       {batchActions.length && <div className='gm-margin-left-20'>|</div>}
@@ -35,7 +43,7 @@ const BatchActionBar = props => {
         o =>
           o.show !== false && (
             <div
-              onClick={o.onClick}
+              onClick={o.onClick} // eslint-disable-line
               className='gm-text-hover-primary gm-cursor gm-text-bold'
               style={{ marginLeft: '30px' }}
               key={o.name}
@@ -56,7 +64,9 @@ BatchActionBar.propTypes = {
   /** 批量操作按钮 */
   batchActions: PropTypes.array,
   /** 所有页/当前页 切换函数 */
-  toggleSelectAll: PropTypes.func
+  toggleSelectAll: PropTypes.func,
+  /** 点击关闭BatchActionBar的回调函数 */
+  onClose: PropTypes.func.isRequired
 }
 
 BatchActionBar.defaultProps = {

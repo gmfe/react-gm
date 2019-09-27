@@ -284,6 +284,8 @@ storiesOf('表格|TableUtil', module)
         {
           Header: OperationHeader,
           width: referOfWidth.operationCell,
+          headerClassName: 'gm-border-left',
+          className: 'gm-border-left',
           Cell: cellProps => (
             <OperationRowEdit
               onClick={() => console.log('去编辑')}
