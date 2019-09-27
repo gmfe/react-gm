@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Popover, PopupContentConfirm } from '../src'
@@ -7,7 +7,7 @@ import _ from 'lodash'
 import SVGDelete from '../svg/delete.svg'
 import SVGEdit from '../svg/edit.svg'
 import SVGCheckDetail from '../svg/check-detail.svg'
-import SVGEditBox from '../svg/edit-box.svg'
+import SVGEditPen from '../svg/edit-pen.svg'
 
 const OperationHeader = <div className='text-center'>操作</div>
 
@@ -105,59 +105,6 @@ OperationDelete.propTypes = {
   style: PropTypes.object
 }
 
-const EditBox = props => {
-  const { title, onClick, className, children, editContent, ...rest } = props
-  const refPopover = React.createRef()
-
-  const handleSave = () => {
-    refPopover.current.apiDoSetActive(false)
-    return Promise.resolve(onClick())
-  }
-
-  const handleCancel = () => {
-    refPopover.current.apiDoSetActive(false)
-  }
-  const popup = (
-    <PopupContentConfirm
-      type='save'
-      title={title}
-      onSave={handleSave}
-      onCancel={handleCancel}
-    >
-      {editContent}
-      <SVGEditBox
-        // fake icon,为了 鼠标焦点不在当前行的时候还能常驻显示
-        className='gm-cursor gm-text'
-        style={{ position: 'absolute', top: '-19px', right: 0 }}
-      />
-    </PopupContentConfirm>
-  )
-
-  return (
-    <Popover
-      ref={refPopover}
-      arrowLeft={308}
-      right
-      popup={popup}
-      showArrow
-      animName={false}
-    >
-      <div {...rest} className={classNames('gm-inline-block', className)}>
-        <span className='gm-padding-right-5'>{children}</span>
-        <SVGEditBox className='react-table-edit-box gm-cursor gm-text gm-text-hover-primary' />
-      </div>
-    </Popover>
-  )
-}
-
-EditBox.propTypes = {
-  title: PropTypes.string,
-  editContent: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
-  className: PropTypes.string,
-  style: PropTypes.object
-}
-
 class SortHeader extends React.Component {
   render() {
     const { className, type, ...rest } = this.props
@@ -221,22 +168,23 @@ EditTableOperation.propTypes = {
   onDeleteRow: PropTypes.func
 }
 
-const OperationRowEdit = ({ children, onClick, onSave, onCancel }) => {
-  const [isEditing, setEditState] = useState(false)
-
+const OperationRowEdit = ({
+  children,
+  isEditing,
+  onClick,
+  onSave,
+  onCancel
+}) => {
   const handleClick = () => {
     onClick && onClick()
-    setEditState(true)
   }
 
   const handleSave = () => {
     onSave && onSave()
-    setEditState(false)
   }
 
   const handleCancel = () => {
     onCancel && onCancel()
-    setEditState(false)
   }
 
   return !isEditing ? (
@@ -264,6 +212,7 @@ const OperationRowEdit = ({ children, onClick, onSave, onCancel }) => {
 }
 
 OperationRowEdit.propTypes = {
+  isEditing: PropTypes.bool.isRequired,
   onClick: PropTypes.func,
   onSave: PropTypes.func,
   onCancel: PropTypes.func
@@ -287,6 +236,29 @@ function getColumnKey(column) {
   return null
 }
 
+const EditButton = props => {
+  const refPopover = useRef(null)
+  const closePopup = () => refPopover.current.apiDoSetActive(false)
+
+  return (
+    <Popover
+      ref={refPopover}
+      right
+      popup={props.popupRender(closePopup)}
+      showArrow
+      animName={false}
+    >
+      <span style={{ display: 'inline-block', width: '20px' }}>
+        <SVGEditPen className='react-table-edit-button gm-cursor gm-text gm-text-hover-primary' />
+      </span>
+    </Popover>
+  )
+}
+
+EditButton.propTypes = {
+  popupRender: PropTypes.func.isRequired
+}
+
 const referOfWidth = {
   noCell: 56,
   operationCell: 100,
@@ -306,6 +278,6 @@ export {
   OperationRowEdit,
   SortHeader,
   EditTableOperation,
-  EditBox,
+  EditButton,
   referOfWidth
 }

@@ -23,7 +23,7 @@ import {
   SortHeader,
   EditTableOperation,
   referOfWidth,
-  EditBox
+  EditButton
 } from './util'
 
 // 向下兼容，保留，会逐步废弃
@@ -37,7 +37,7 @@ const TableUtil = {
   OperationRowEdit,
   SortHeader,
   EditTableOperation,
-  EditBox,
+  EditButton,
   referOfWidth,
   BatchActionBar
 }

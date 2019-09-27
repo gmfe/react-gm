@@ -72,7 +72,12 @@ const store = observable({
         value: 4,
         text: '宝安'
       },
-      subTable: [{ id: '3', name: 'a' }, { id: '4', name: 2 }]
+      subTable: [
+        { id: '3', name: 'a' },
+        { id: '4', name: 2 },
+        { id: '8', name: 2 },
+        { id: '9', name: 2 }
+      ]
     }
   ],
   sortTimeType: 'asc',
@@ -99,6 +104,16 @@ const store = observable({
     }
 
     this.selected = selected
+
+    // SelectSubTable才有的逻辑 ⚠️遍历母表改变子表选中项
+    this.data.forEach(parent => {
+      const isChildSelected = selected.includes(parent.id)
+      if (isChildSelected) {
+        this.subTableSelected[parent.id] = parent.subTable.map(({ id }) => id)
+      } else {
+        this.subTableSelected[parent.id] = []
+      }
+    })
   },
   toggleSelectAll(isSelectedAll) {
     console.log(isSelectedAll)
@@ -106,6 +121,9 @@ const store = observable({
       this.selected = this.data.filter(v => !isDisable(v)).map(v => v.id)
     } else {
       this.selected.clear()
+
+      // SelectSubTable才有的逻辑 ⚠️去掉所有选项
+      this.subTableSelected = {}
     }
   },
   // 子表操作
@@ -117,11 +135,15 @@ const store = observable({
         ...this.subTableSelected,
         [parent.id]: parent.subTable.map(o => o.id)
       }
+
+      this.selected.push(parent.id)
     } else {
       this.subTableSelected = {
         ...this.subTableSelected,
         [parent.id]: []
       }
+
+      this.selected = this.selected.filter(d => d !== parent.id)
     }
   },
   setSubSelect(parentId, selected) {
@@ -129,22 +151,40 @@ const store = observable({
       ...this.subTableSelected,
       [parentId]: selected
     }
+
+    const parent = this.data.find(d => d.id === parentId)
+    if (parent.subTable.length === selected.length) {
+      this.selected.push(parentId)
+    } else {
+      this.selected = this.selected.filter(d => d !== parentId)
+    }
   }
 })
 
 storiesOf('表格|Table HOC', module)
-  .add('优先级', () => null, {
-    info: {
-      text: `
+  .add(
+    '优先级',
+    () => (
+      <div>
+        组合调用例子:
+        <code>
+          fixedColumnsTableHOC(selectTableV2HOC(expandTableHOC(diyTableHOC(Table))))
+        </code>
+      </div>
+    ),
+    {
+      info: {
+        text: `
 HOC 可以相互组合使用，但是请注意使用顺序!
-调用顺序：diyTableHOC => expandTableHOC => selectTableV2HOC => fixedColumnsTableHOC
+从里到外：diyTableHOC => subTableHOC => expandTableHOC => selectTableV2HOC => fixedColumnsTableHOC
 - fixed columns。可能会改变 columns 的顺序。
 - diy。   会在最前面增加一个【表头设置】column。 会改变原有 columns 的 show 熟悉，影响column的展现。
 - expand。会在最前面增加一个【expand】column。
 - select。会在最前面添加一个【CheckBox】column。
 `
+      }
     }
-  })
+  )
   .add(
     'fixed columns',
     () => (
@@ -205,7 +245,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
 使用
 \`const FixedColumnsTable = fixedColumnsTableHOC(Table)\`
 
-在需要 fixed 的 column 提供 fixed 和 width，其中 fixed 两个值 
+在需要 fixed 的 column 提供 fixed 和 width，其中 fixed 两个值
 \`left\` \`right\`
 
 其他 column 最好提供 width or minWidth，否则会出现很诡异的被压缩问题或者没法滚动问题
@@ -310,23 +350,27 @@ HOC 可以相互组合使用，但是请注意使用顺序!
       isSelectorDisable={row => console.log(row) || isDisable(row)}
       onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
       batchActionBar={
-        <TableUtil.BatchActionBar
-          toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
-          batchActions={[
-            {
-              name: '批量删除',
-              show: false,
-              onClick: () => window.alert('批量删除' + store.selected.join(','))
-            },
-            {
-              name: '批量修改单价',
-              onClick: () =>
-                window.alert('批量修改这些' + store.selected.join(','))
-            }
-          ]}
-          count={store.isSelectAllPage ? 100 : store.selected.length}
-          isSelectAll={store.isSelectAllPage}
-        />
+        store.selected.length && (
+          <TableUtil.BatchActionBar
+            onClose={() => store.toggleSelectAll(false)}
+            toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
+            batchActions={[
+              {
+                name: '批量删除',
+                show: false,
+                onClick: () =>
+                  window.alert('批量删除' + store.selected.join(','))
+              },
+              {
+                name: '批量修改单价',
+                onClick: () =>
+                  window.alert('批量修改这些' + store.selected.join(','))
+              }
+            ]}
+            count={store.isSelectAllPage ? null : store.selected.length}
+            isSelectAll={store.isSelectAllPage}
+          />
+        )
       }
       selected={store.selected}
       onSelect={(selected, curKey) =>
@@ -364,6 +408,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
   ))
   .add('expand_select组合', () => (
     <ExpandSelectTable
+      style={{ marginTop: '100px' }}
       data={store.data}
       columns={[
         {
@@ -380,28 +425,32 @@ HOC 可以相互组合使用，但是请注意使用顺序!
         }
       ]}
       keyField='id'
-      isSelectorDisable={row => console.log(row) || isDisable(row)}
-      onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
-      batchActionBar={
-        <TableUtil.BatchActionBar
-          toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
-          batchActions={[
-            {
-              name: '批量删除',
-              onClick: () => window.alert('批量删除' + store.selected.join(','))
-            },
-            {
-              name: '批量修改单价',
-              onClick: () =>
-                window.alert('批量修改这些' + store.selected.join(','))
-            }
-          ]}
-          count={store.isSelectAllPage ? 100 : store.selected.length}
-          isSelectAll={store.isSelectAllPage}
-        />
-      }
       selected={store.selected}
       onSelect={selected => store.setSelect(selected)}
+      isSelectorDisable={row => isDisable(row)}
+      onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
+      batchActionBar={
+        Object.values(store.subTableSelected).some(d => d.length) && (
+          <TableUtil.BatchActionBar
+            onClose={() => store.toggleSelectAll(false)}
+            toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
+            batchActions={[
+              {
+                name: '批量删除',
+                onClick: () =>
+                  window.alert('批量删除' + store.selected.join(','))
+              },
+              {
+                name: '批量修改单价',
+                onClick: () =>
+                  window.alert('批量修改这些' + store.selected.join(','))
+              }
+            ]}
+            count={store.isSelectAllPage ? 100 : store.selected.length}
+            isSelectAll={store.isSelectAllPage}
+          />
+        )
+      }
       SubComponent={item => (
         <Observer>
           {() => {

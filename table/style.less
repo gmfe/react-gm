@@ -5,7 +5,8 @@
 @import './cell.less';
 
 @react-table-even: #f7f8fa;
-@react-table-sub: #f4f7ff;
+@react-table-sub-bg: #f4f7ff;
+@react-table-sub-wrap-border: #56a3f2;
 @react-table-header: #e8eaf0;
 @react-table-tip-height: 50px;
 @react-table-tip-bg: @react-table-even;
@@ -213,8 +214,8 @@
           color: @brand-primary;
         }
 
-        .react-table-edit-box {
-          display: inline-block;
+        .react-table-edit-button {
+          visibility: visible;
         }
       }
     }
@@ -425,7 +426,7 @@
 }
 
 .gm-react-sub-table.ReactTable {
-  border: none;
+  border: 1px solid @react-table-sub-wrap-border;
 
   .rt-tbody .rt-tr-group {
     border-bottom: none;
@@ -433,7 +434,7 @@
 
   .rt-thead {
     .rt-tr .rt-th {
-      background: @react-table-sub;
+      background: @react-table-sub-bg;
       border-bottom: 1px solid @gm-border-color;
 
       &:first-child {
@@ -444,7 +445,7 @@
 
   &.-striped {
     .rt-tr.-odd .rt-td {
-      background-color: @react-table-sub;
+      background-color: @react-table-sub-bg;
       border-bottom: 1px solid @gm-border-color;
 
       &:first-child {
@@ -453,7 +454,12 @@
     }
 
     .rt-tr.-even .rt-td {
-      background-color: @react-table-sub;
+      background-color: @react-table-sub-bg;
+      border-bottom: 1px solid @gm-border-color;
+
+      &:first-child {
+        border-bottom: 1px solid transparent;
+      }
     }
   }
 
@@ -480,6 +486,13 @@
   }
 }
 
-.react-table-edit-box {
-  display: none;
+.react-table-edit-button {
+  visibility: hidden;
+}
+
+// 激活时,常驻显示
+.gm-popover-active {
+  .react-table-edit-button {
+    visibility: visible;
+  }
 }

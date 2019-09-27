@@ -64,15 +64,6 @@ export default (Component, options) => {
       )
     }
 
-    // this is so we can expose the underlying ReactTable to get at the sortedData for selectAll
-    getWrappedInstance() {
-      if (!this.wrappedInstance)
-        console.warn('RTSelectTable - No wrapped instance')
-      if (this.wrappedInstance.getWrappedInstance)
-        return this.wrappedInstance.getWrappedInstance()
-      else return this.wrappedInstance
-    }
-
     render() {
       const {
         columns: originalCols,
@@ -104,9 +95,7 @@ export default (Component, options) => {
       const extra = {
         columns
       }
-      return (
-        <Component {...rest} {...extra} ref={r => (this.wrappedInstance = r)} />
-      )
+      return <Component {...rest} {...extra} />
     }
   }
 
