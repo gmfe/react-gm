@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { Table, TableUtil } from './index'
 import { observable } from 'mobx'
 import _ from 'lodash'
+import { PopupContentConfirm } from '../src/component/popup'
 
 const {
   OperationHeader,
@@ -13,8 +14,33 @@ const {
   SortHeader,
   referOfWidth,
   EditTableOperation,
-  EditBox
+  EditButton
 } = TableUtil
+
+// eslint-disable-next-line
+const EditContentDemo = ({ closePopup, initialVal, saveData }) => {
+  const [val, setVal] = useState(initialVal)
+
+  const handleSave = () => {
+    saveData(val)
+    closePopup()
+  }
+
+  const handleCancel = () => {
+    closePopup()
+  }
+
+  return (
+    <PopupContentConfirm
+      type='save'
+      title='修改字段'
+      onSave={handleSave}
+      onCancel={handleCancel}
+    >
+      <input type='text' value={val} onChange={e => setVal(e.target.value)} />
+    </PopupContentConfirm>
+  )
+}
 
 const store = observable({
   data: [
@@ -99,18 +125,11 @@ const store = observable({
   addItem() {
     this.data = [...this.data, { id: Math.random() }]
   },
-  setItemById(id, key) {
-    const value = document.getElementById(key).value
-    const index = this.data.findIndex(o => o.id === id)
+  setItemByIndex(index, key, value) {
     const list = this.data.slice()
     list[index][key] = value
 
     this.data = list
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(222)
-      }, 1000)
-    })
   }
 })
 
@@ -224,7 +243,7 @@ storiesOf('表格|TableUtil', module)
       ]}
     />
   ))
-  .add('EditBox', () => (
+  .add('EditButton', () => (
     <Table
       data={store.data}
       columns={[
@@ -235,35 +254,52 @@ storiesOf('表格|TableUtil', module)
         {
           Header: 'settle_supplier_id',
           id: 'settle_supplier_id',
-          accessor: d => (
-            <EditBox
-              title='编辑字段'
-              editContent={
-                <input
-                  type='text'
-                  defaultValue={d.settle_supplier_id}
-                  id='settle_supplier_id'
-                />
-              }
-              onClick={() => store.setItemById(d.id, 'settle_supplier_id')}
-            >
-              {d.settle_supplier_id}
-            </EditBox>
+          Cell: d => (
+            <div>
+              <span className='gm-padding-right-5'>
+                {d.original.settle_supplier_id}
+              </span>
+              <EditButton
+                popupRender={closePopup => {
+                  console.log(d)
+                  return (
+                    <EditContentDemo
+                      closePopup={closePopup}
+                      initialVal={d.original.settle_supplier_id}
+                      saveData={value =>
+                        store.setItemByIndex(
+                          d.index,
+                          'settle_supplier_id',
+                          value
+                        )
+                      }
+                    />
+                  )
+                }}
+              />
+            </div>
           )
         },
         {
           Header: 'sku_money',
           id: 'sku_money',
-          accessor: d => (
-            <EditBox
-              editContent={
-                <input type='text' defaultValue={d.sku_money} id='sku_money' />
-              }
-              onClick={() => store.setItemById(d.id, 'sku_money')}
-              title='设置钱包'
-            >
-              {d.sku_money}
-            </EditBox>
+          Cell: d => (
+            <div>
+              <span className='gm-padding-right-5'>{d.original.sku_money}</span>
+              <EditButton
+                popupRender={closePopup => {
+                  return (
+                    <EditContentDemo
+                      closePopup={closePopup}
+                      initialVal={d.original.sku_money}
+                      saveData={value =>
+                        store.setItemByIndex(d.index, 'sku_money', value)
+                      }
+                    />
+                  )
+                }}
+              />
+            </div>
           )
         }
       ]}

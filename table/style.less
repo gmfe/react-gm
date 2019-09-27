@@ -214,8 +214,8 @@
           color: @brand-primary;
         }
 
-        .react-table-edit-box {
-          display: inline-block;
+        .react-table-edit-button {
+          visibility: visible;
         }
       }
     }
@@ -486,6 +486,13 @@
   }
 }
 
-.react-table-edit-box {
-  display: none;
+.react-table-edit-button {
+  visibility: hidden;
+}
+
+// 激活时,常驻显示
+.gm-popover-active {
+  .react-table-edit-button {
+    visibility: visible;
+  }
 }
