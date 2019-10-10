@@ -53,7 +53,7 @@ const FormGroup = ({
     () => (
       <div className='gm-form-group-sticky-box'>
         {onCancel && (
-          <React.Fragment>
+          <>
             <Button
               disabled={disabled}
               type='button'
@@ -63,7 +63,7 @@ const FormGroup = ({
               {getLocale('取消')}
             </Button>
             <div className='gm-gap-10' />
-          </React.Fragment>
+          </>
         )}
         <Button
           disabled={disabled}
@@ -79,9 +79,8 @@ const FormGroup = ({
   )
 
   useEffect(() => {
-    const { availHeight } = window.screen
     const contentHeight = formGroupRef.current.offsetHeight
-    if (contentHeight > availHeight) {
+    if (contentHeight > window.innerHeight) {
       setAffix(true)
     }
   }, [])
