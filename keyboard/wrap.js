@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import {
   WrapContext,
@@ -24,6 +24,7 @@ const getKey = cellKey => {
  * */
 const Wrap = props => {
   const { id, children, onAddRow, columnKeys, dataLength, fixedWidths } = props
+  const timer = useRef(null)
 
   // 处理 focus
   const doFocusWithColumnRowKey = (rowKey, columnKey) => {
@@ -47,7 +48,10 @@ const Wrap = props => {
       doFocusWithColumnRowKey(rowKey, columnKeys[columnIndex + 1])
     }
   }
+
   const doDirectionDown = (rowKey, columnKey) => {
+    clearTimeout(timer.current)
+
     // 往下一个
     if (rowKey < dataLength - 1) {
       doFocusWithColumnRowKey(rowKey + 1, columnKey)
@@ -55,8 +59,7 @@ const Wrap = props => {
     // 最后一行
     else if (rowKey === dataLength - 1) {
       onAddRow()
-      // TODO 界面 render 后要 focus，不知道怎么搞，先 setTimeout
-      setTimeout(() => {
+      timer.current = setTimeout(() => {
         // 去到第一列
         doFocusWithColumnRowKey(rowKey + 1, columnKeys[0])
       }, 10)
@@ -107,6 +110,8 @@ const Wrap = props => {
   // 处理 Enter 依赖 dataLength 的变动
   useEffect(() => {
     const handleEnter = event => {
+      clearTimeout(timer.current)
+
       const { cellKey } = event.detail
       const { rowKey, columnKey } = getKey(cellKey)
       const columnIndex = columnKeys.indexOf(columnKey)
@@ -124,8 +129,7 @@ const Wrap = props => {
         // 最后一行了
         else if (rowKey === dataLength - 1) {
           onAddRow()
-          // TODO 界面 render 后要 focus，不知道怎么搞，先 setTimeout
-          setTimeout(() => {
+          timer.current = setTimeout(() => {
             // 去到第一列
             doFocusWithColumnRowKey(rowKey + 1, columnKeys[0])
           }, 10)
@@ -172,10 +176,10 @@ const Wrap = props => {
 
   return (
     <WrapContext.Provider
-      value={{
+      value={JSON.stringify({
         id,
         fixedWidths
-      }}
+      })}
     >
       {children}
     </WrapContext.Provider>

@@ -298,7 +298,7 @@ class Base extends React.Component {
           ref={this.popoverRef}
           type={popoverType}
           animName
-          popup={this.renderList()}
+          popup={() => this.renderList()}
           disabled={disabled}
         >
           {children || (

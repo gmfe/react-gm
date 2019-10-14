@@ -1,44 +1,61 @@
 .gm-selection {
   position: relative;
   vertical-align: middle;
+  height: 30px;
 
-  input {
-    padding-right: 35px;
+  .gm-selection-selected {
+    padding-right: 34px;
+    cursor: pointer;
+    line-height: 18px;
+  }
+
+  .gm-selection-icon {
+    position: absolute;
+    display: block;
+    line-height: 1;
+    top: 9px;
+    right: 6px;
+    color: @gm-color-third;
+    cursor: pointer;
   }
 
   .gm-selection-close-icon {
-    position: absolute;
-    display: block;
-    width: 10px;
-    height: 14px;
-    line-height: 1;
-    top: 3px;
-    right: 22px;
-    bottom: 0;
-    color: @gm-color-third;
-    margin: auto 0;
-  }
-
-  .gm-arrow-up {
     display: none;
+    right: 20px;
   }
 
-  // popover 提供的
-  &.gm-popover-active {
-    .gm-arrow-up {
-      display: block;
-    }
+  .gm-selection-down-up {
+    right: 6px;
+  }
 
-    .gm-arrow-down {
-      display: none;
+  &:hover {
+    .gm-selection-close-icon {
+      display: block;
     }
   }
 
   &.disabled {
     cursor: not-allowed;
 
+    .gm-selection-selected {
+      cursor: not-allowed;
+    }
+
     .gm-selection-close-icon {
       cursor: not-allowed;
+    }
+  }
+
+  &.gm-selection-disabled-close {
+    .gm-selection-selected {
+      padding-right: 20px;
+    }
+  }
+
+  &.gm-selection-disabled-clean {
+    .gm-selection-selected {
+      padding-right: 20px;
+      border: 1px solid transparent;
     }
   }
 }

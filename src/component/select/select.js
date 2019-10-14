@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
 import Popover from '../popover'
+import Selection from '../selection'
+import List from '../list'
 
 const findItemByValFromChildren = (children, val) => {
   children = React.Children.toArray(children)
@@ -10,63 +12,146 @@ const findItemByValFromChildren = (children, val) => {
 }
 
 class Select extends React.Component {
-  ref = React.createRef()
+  state = {
+    willActiveIndex: 0
+  }
 
-  handleOptionClick(elProps) {
-    const { onChange } = this.props
-    const { value: elPropsValue, disabled: elPropsDisabled } = elProps
+  refPopup = React.createRef()
 
-    if (!elPropsDisabled) {
-      onChange(elPropsValue)
+  refSelection = React.createRef()
 
-      setTimeout(() => {
-        this.ref.current.click()
-      }, 0)
+  apiDoFocus = () => {
+    this.refSelection.current.apiDoFocus()
+  }
+
+  apiDoSelectWillActive = () => {
+    const { data, onChange } = this.props
+    const { willActiveIndex } = this.state
+
+    if (data[willActiveIndex]) {
+      onChange(data[willActiveIndex].value)
     }
   }
 
-  render() {
-    const { value, children, disabled, className, clean, ...rest } = this.props
+  handleChange = value => {
+    const { onChange } = this.props
 
-    const selected = findItemByValFromChildren(children, value)
-    const selectedChildren = selected && selected.props.children
+    this.refPopup.current.apiDoSetActive(false)
+
+    onChange(value)
+  }
+
+  handleKeyDown = event => {
+    const { data, onKeyDown } = this.props
+    let { willActiveIndex } = this.state
+
+    if (!(event.key === 'ArrowUp' || event.key === 'ArrowDown')) {
+      onKeyDown(event)
+      return
+    }
+
+    // 没有数据，不用拦截
+    if (data.length === 0) {
+      onKeyDown(event)
+      return
+    }
+
+    // 以下是需要拦截部分
+    event.preventDefault()
+
+    if (event.key === 'ArrowUp') {
+      willActiveIndex--
+    } else if (event.key === 'ArrowDown') {
+      willActiveIndex++
+    }
+
+    // 修正
+    if (willActiveIndex < 0) {
+      willActiveIndex = data.length - 1
+    } else if (willActiveIndex > data.length - 1) {
+      willActiveIndex = 0
+    }
+
+    this.setState({
+      willActiveIndex
+    })
+  }
+
+  render() {
+    const {
+      data,
+      value,
+      onChange,
+      children,
+      disabled,
+      listProps,
+      canShowClose,
+      clean,
+      className,
+      popoverType,
+      ...rest
+    } = this.props
+    const { willActiveIndex } = this.state
+
+    let selected
+    let newData
+
+    // 兼容之前的用法
+    if (children) {
+      const option = findItemByValFromChildren(children, value)
+      if (option) {
+        selected = {
+          value: option.props.value,
+          text: option.props.children
+        }
+      }
+
+      newData = React.Children.map(children, child => ({
+        value: child.props.value,
+        text: child.props.children,
+        disabled: child.props.disabled
+      }))
+    } else {
+      newData = data
+      selected = _.find(newData, v => v.value === value)
+    }
+
+    const listStyle = listProps ? listProps.style : {}
 
     const popup = (
-      <div className='gm-select-list gm-list gm-border-0'>
-        {React.Children.map(children, el =>
-          React.cloneElement(el, {
-            className: classNames(el.props.className, {
-              active: el.props.value === value
-            }),
-            onClick: this.handleOptionClick.bind(this, el.props)
-          })
-        )}
-      </div>
+      <List
+        {...listProps}
+        data={newData}
+        selected={value}
+        onSelect={this.handleChange}
+        willActiveIndex={willActiveIndex}
+        className={'gm-border-0'}
+        style={{
+          maxHeight: '250px',
+          ...listStyle
+        }}
+      />
     )
 
     return (
-      <Popover type='click' popup={popup} disabled={disabled}>
-        <div
+      <Popover
+        ref={this.refPopup}
+        type={popoverType}
+        popup={popup}
+        disabled={disabled}
+      >
+        <Selection
+          ref={this.refSelection}
           {...rest}
-          ref={this.ref}
-          className={classNames(
-            `gm-select`,
-            {
-              'gm-select-clean': clean,
-              disabled: disabled
-            },
-            className
-          )}
-        >
-          <div className='gm-select-selected'>
-            {selectedChildren !== undefined ? (
-              selectedChildren
-            ) : (
-              <span>&nbsp;</span>
-            )}
-          </div>
-          <i className='gm-select-arrow' />
-        </div>
+          selected={selected}
+          onSelect={onChange}
+          disabled={disabled}
+          disabledClose={!canShowClose}
+          clean={clean}
+          className={classNames(`gm-select`, className)}
+          isForSelect
+          onKeyDown={this.handleKeyDown}
+        />
       </Popover>
     )
   }
@@ -75,13 +160,24 @@ class Select extends React.Component {
 Select.displayName = 'Select'
 
 Select.propTypes = {
-  clean: PropTypes.bool,
+  /** [{text, value, disabled}, {text, value}] */
+  data: PropTypes.array.isRequired,
   value: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
+  listProps: PropTypes.object,
+  canShowClose: PropTypes.bool,
+  clean: PropTypes.bool,
   children: PropTypes.any,
   className: PropTypes.string,
-  style: PropTypes.object
+  popoverType: PropTypes.oneOf(['focus', 'realFocus']),
+  style: PropTypes.object,
+  onKeyDown: PropTypes.func
+}
+
+Select.defaultProps = {
+  canShowClose: false,
+  onKeyDown: _.noop
 }
 
 export default Select

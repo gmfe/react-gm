@@ -166,7 +166,14 @@ class LevelSelect extends React.Component {
   }
 
   renderTarget = () => {
-    const { selected, disabled, ...rest } = this.props
+    const {
+      titles,
+      data,
+      selected,
+      disabled,
+      popoverType,
+      ...rest
+    } = this.props
 
     // 注意转换 selected onSelect renderSelected
     return (
@@ -192,6 +199,7 @@ class LevelSelect extends React.Component {
         popup={this.renderPopup()}
         type={popoverType}
         ref={this.popoverRef}
+        pureContainer
       >
         {children !== undefined ? children : this.renderTarget()}
       </Popover>

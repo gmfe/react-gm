@@ -112,13 +112,13 @@ const withIdAndCellKey = Component => {
     const { forwardedRef, ...rest } = props
     return (
       <WrapContext.Consumer>
-        {wrap => (
+        {wrapJSON => (
           <CellKeyContext.Consumer>
             {cellKey => (
               <Component
                 ref={forwardedRef}
                 {...rest}
-                wrapData={wrap}
+                wrapData={JSON.parse(wrapJSON)}
                 cellKey={cellKey}
               />
             )}
