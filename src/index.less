@@ -60,7 +60,7 @@
 @import 'component/table_select/style';
 @import 'component/selected/style';
 @import 'component/icon_down_up/style';
-
+@import 'component/img_uploader/style';
 // 废弃的
 @import 'deprecated/import_lead/style';
 @import 'deprecated/search_select/style';
@@ -85,4 +85,10 @@ body {
 
 ::-webkit-input-placeholder {
   color: @gm-color-second;
+}
+
+.gm-disabled {
+  cursor: not-allowed;
+  color: @gm-color-third;
+  background: @gm-color-disabled;
 }

@@ -1,31 +1,24 @@
 .gm-uploader {
   display: inline-block;
 
-  .gm-uploader-default {
-    width: 100px;
-    height: 100px;
-    border: 2px dashed @gm-border-color;
-    cursor: pointer;
-  }
-
-  .gm-uploader-wrap {
-    display: inline-block;
-  }
-
-  .gm-uploader-input[type="file"] {
+  .gm-uploader-input[type='file'] {
     display: none;
   }
 
-  .gm-uploader-icon-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    color: @gm-border-color;
+  .gm-uploader-default {
+    width: 64px;
+    height: 64px;
+    font-size: 30px;
+    border: 1px dashed fadeout(@gm-frame-border-color, 50%);
+    border-radius: 4px;
+    cursor: pointer;
   }
 
-  .gm-uploader-icon {
-    font-size: 2.5em;
+  &.disabled {
+    cursor: not-allowed;
+
+    .gm-uploader-default {
+      .gm-disabled();
+    }
   }
 }

@@ -1,0 +1,22 @@
+.gm-img-uploader {
+  display: inline-block;
+
+  .gm-img-uploader-item {
+    position: relative;
+    margin-right: 10px;
+
+    .gm-img-uploader-close {
+      position: absolute;
+      cursor: pointer;
+      display: none;
+      right: -0.5em;
+      top: -0.5em;
+    }
+
+    &:hover {
+      .gm-img-uploader-close {
+        display: block;
+      }
+    }
+  }
+}
