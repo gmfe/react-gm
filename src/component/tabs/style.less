@@ -1,0 +1,28 @@
+.gm-tabs-container {
+  overflow-x: auto;
+
+  .gm-tabs {
+    white-space: nowrap;
+    border-bottom: 1px solid @gm-frame-border-color;
+    height: 40px;
+
+    .gm-tab {
+      display: inline-block;
+      border-radius: 4px 4px 0 0;
+      height: 40px;
+      border: 1px solid @gm-frame-border-color;
+      margin-right: 1px;
+      background-color: #e8eaf0;
+      cursor: pointer;
+      padding: 10px 15px;
+      transition: background-color 0.4s;
+
+      &.active {
+        color: @brand-primary;
+        font-weight: 500;
+        background-color: #fff;
+        border-bottom: none;
+      }
+    }
+  }
+}
