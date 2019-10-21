@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import { Table, TableUtil } from './index'
+import { selectTableV2HOC, Table, TableUtil } from './index'
 import { observable } from 'mobx'
 import { Observer } from 'mobx-react'
 import _ from 'lodash'
 import { PopupContentConfirm } from '../src/component/popup'
+const SelectTable = selectTableV2HOC(Table)
 
 const {
   OperationHeader,
@@ -159,6 +160,24 @@ const store = observable({
     list[index].id = list[index].__editObj.id
 
     this.data = list
+  },
+  selected: [],
+  isSelectAllPage: false,
+  setSelect(selected) {
+    this.selected = selected
+  },
+  toggleSelectAll(isSelectedAll) {
+    if (isSelectedAll) {
+      this.selected = this.data.map(v => v.id)
+    } else {
+      this.selected.clear()
+    }
+  },
+  toggleIsSelectAllPage(bool) {
+    this.isSelectAllPage = bool
+    if (bool) {
+      this.selected = this.data.map(v => v.id)
+    }
   }
 })
 
@@ -392,4 +411,98 @@ storiesOf('表格|TableUtil', module)
       ]}
     />
   ))
-  .add('BatchActionBar', () => <div>见SelectTable的使用</div>)
+  .add('BatchActionBar', () => (
+    <div>
+      <h3>当前页批量操作</h3>
+      <SelectTable
+        style={{ marginTop: '50px' }}
+        data={store.data}
+        columns={[
+          {
+            Header: '建单时间',
+            accessor: 'submit_time'
+          },
+          {
+            Header: '入库单号',
+            accessor: 'id'
+          },
+          {
+            Header: '供应商信息',
+            accessor: 'supplier_name'
+          }
+        ]}
+        keyField='id'
+        selected={store.selected}
+        onSelect={selected => store.setSelect(selected)}
+        onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
+        batchActionBar={
+          store.selected.length && (
+            <TableUtil.BatchActionBar
+              pure
+              onClose={() => store.toggleSelectAll(false)}
+              batchActions={[
+                {
+                  name: '批量删除',
+                  show: false,
+                  onClick: () =>
+                    window.alert('批量删除' + store.selected.join(','))
+                },
+                {
+                  name: '批量修改单价',
+                  onClick: () =>
+                    window.alert('批量修改这些' + store.selected.join(','))
+                }
+              ]}
+              count={store.selected.length}
+            />
+          )
+        }
+      />
+      <h3>当前页和所有页批量操作</h3>
+      <SelectTable
+        style={{ marginTop: '50px' }}
+        data={store.data}
+        columns={[
+          {
+            Header: '建单时间',
+            accessor: 'submit_time'
+          },
+          {
+            Header: '入库单号',
+            accessor: 'id'
+          },
+          {
+            Header: '供应商信息',
+            accessor: 'supplier_name'
+          }
+        ]}
+        keyField='id'
+        selected={store.selected}
+        onSelect={selected => store.setSelect(selected)}
+        onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
+        batchActionBar={
+          store.selected.length && (
+            <TableUtil.BatchActionBar
+              count={store.isSelectAllPage ? null : store.selected.length}
+              isSelectAll={store.isSelectAllPage}
+              toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
+              onClose={() => store.toggleSelectAll(false)}
+              batchActions={[
+                {
+                  name: '批量删除',
+                  show: false,
+                  onClick: () =>
+                    window.alert('批量删除' + store.selected.join(','))
+                },
+                {
+                  name: '批量修改单价',
+                  onClick: () =>
+                    window.alert('批量修改这些' + store.selected.join(','))
+                }
+              ]}
+            />
+          )
+        }
+      />
+    </div>
+  ))
