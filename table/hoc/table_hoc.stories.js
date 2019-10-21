@@ -347,7 +347,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
         }
       ]}
       keyField='id'
-      isSelectorDisable={row => console.log(row) || isDisable(row)}
+      isSelectorDisable={row => isDisable(row)}
       onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
       batchActionBar={
         store.selected.length && (
@@ -373,9 +373,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
         )
       }
       selected={store.selected}
-      onSelect={(selected, curKey) =>
-        console.log(curKey) || store.setSelect(selected)
-      }
+      onSelect={selected => store.setSelect(selected)}
     />
   ))
   .add('expand', () => (

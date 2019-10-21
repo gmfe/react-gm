@@ -89,7 +89,7 @@ const DiyTableModal = ({ columns, onSave, diyGroupSorting }) => {
         </div>
       </Flex>
       <Flex justifyEnd className='gm-padding-10'>
-        <button className='btn btn-default btn-sm' onClick={() => Modal.hide}>
+        <button className='btn btn-default btn-sm' onClick={() => Modal.hide()}>
           取消
         </button>
         <div className='gm-gap-10' />

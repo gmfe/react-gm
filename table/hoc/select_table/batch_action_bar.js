@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { Flex } from '../../../src'
+import { Flex, Popover } from '../../../src'
 import { getLocale } from '../../../locales'
 import PropTypes from 'prop-types'
 import SVGRemove from '../../../svg/remove.svg'
@@ -9,7 +9,18 @@ const BatchActionBar = props => {
   const { isSelectAll, count, batchActions, toggleSelectAll, onClose } = props
   return (
     <Flex alignCenter>
-      <SVGRemove onClick={onClose} className='gm-cursor' />
+      <Popover
+        type='hover'
+        popup={<div className='gm-padding-5'>{getLocale('取消批量勾选')}</div>}
+        bottom
+        left
+        offset={-8}
+        showArrow
+      >
+        <span style={{ display: 'block', width: '12px' }} className='gm-cursor'>
+          <SVGRemove onClick={onClose} />
+        </span>
+      </Popover>
       {isSelectAll ? (
         <button
           className='btn btn-primary gm-margin-left-20'
