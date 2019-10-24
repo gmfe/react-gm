@@ -21,6 +21,7 @@ function loadStories() {
   reqTable.keys().forEach(filename => reqTable(filename))
 
   require('../keyboard/keyboard.stories.js')
+  require('../sortable/sortable.stories.js')
 }
 
 addParameters({

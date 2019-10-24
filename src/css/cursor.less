@@ -1,4 +1,3 @@
-
 .gm-cursor {
   cursor: pointer;
 
@@ -9,4 +8,12 @@
 
 .gm-not-allowed {
   cursor: not-allowed;
+}
+
+.gm-cursor-grab {
+  cursor: grab;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
 }
