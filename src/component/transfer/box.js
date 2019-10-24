@@ -40,6 +40,7 @@ class Box extends React.Component {
 
       title,
       placeholder,
+      disabled,
       withFilter
     } = this.props
 
@@ -66,6 +67,7 @@ class Box extends React.Component {
               type='text'
               className='form-control'
               value={query}
+              disabled={disabled}
               onChange={this.handleQuery}
               placeholder={placeholder}
             />
@@ -83,6 +85,7 @@ class Box extends React.Component {
               <Checkbox
                 key={v.value}
                 value={v.value}
+                disabled={disabled}
                 block
                 className='gm-cursor'
               >
@@ -99,7 +102,9 @@ class Box extends React.Component {
             value={[list.length !== 0 && list.length === selectedValues.length]}
             onChange={this.handleSelectAll}
           >
-            <Checkbox value>{getLocale('全选')}</Checkbox>
+            <Checkbox value disabled={disabled}>
+              {getLocale('全选')}
+            </Checkbox>
           </CheckboxGroup>
           <div className='gm-padding-lr-5 gm-text-desc'>
             {selectedValues.length}/{list.length}
@@ -117,7 +122,8 @@ Box.propTypes = {
   title: PropTypes.string,
   placeholder: PropTypes.string,
   withFilter: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-  style: PropTypes.object
+  style: PropTypes.object,
+  disabled: PropTypes.bool
 }
 
 export default Box

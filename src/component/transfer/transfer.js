@@ -65,6 +65,7 @@ class Transfer extends React.Component {
 
       onSelect, // eslint-disable-line
       className,
+      disabled,
       ...rest
     } = this.props
 
@@ -91,6 +92,7 @@ class Transfer extends React.Component {
             style={listStyle}
             withFilter={leftWithFilter}
             placeholder={leftPlaceHolder}
+            disabled={disabled}
           />
 
           <div className='gm-gap-5' />
@@ -101,14 +103,14 @@ class Transfer extends React.Component {
             className='gm-transfer-operation'
           >
             <button
-              disabled={leftSelectedValues.length === 0}
+              disabled={disabled || leftSelectedValues.length === 0}
               className='btn btn-default btn-block gm-margin-bottom-5'
               onClick={this.handleToRightClick}
             >
               &gt;
             </button>
             <button
-              disabled={rightSelectedValues.length === 0}
+              disabled={disabled || rightSelectedValues.length === 0}
               className='btn btn-default btn-block'
               onClick={this.handleToLeftClick}
             >
@@ -125,6 +127,7 @@ class Transfer extends React.Component {
             style={listStyle}
             withFilter={rightWithFilter}
             placeholder={rightPlaceHolder}
+            disabled={disabled}
           />
         </Flex>
       </div>
@@ -148,7 +151,8 @@ Transfer.propTypes = {
   rightPlaceHolder: PropTypes.string,
 
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  disabled: PropTypes.bool
 }
 
 Transfer.defaultProps = {
