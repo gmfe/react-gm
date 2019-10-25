@@ -2,9 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Checkbox } from '../checkbox'
 import Flex from '../flex'
+import classNames from 'classnames'
+import SVGPlus from '../../../svg/plus.svg'
+import SVGMinus from '../../../svg/minus.svg'
 
 const LeafItem = props => {
-  const { leaf, checked, onChange, onClickName, renderLeafItem } = props
+  const {
+    leaf,
+    checked,
+    onChange,
+    onClickName,
+    renderLeafItem,
+    disabled,
+    _level
+  } = props
 
   const handleChange = () => {
     onChange(leaf, !checked)
@@ -19,10 +30,25 @@ const LeafItem = props => {
   }
 
   return (
-    <Flex className='gm-hover-bg gm-tree-group-list-item gm-cursor'>
-      <Checkbox value={leaf.value} checked={checked} onChange={handleChange} />
-      <Flex flex onClick={handleName}>
-        {renderLeafItem(leaf)}
+    <Flex
+      className={classNames(
+        'gm-hover-bg gm-tree-list-item gm-cursor ',
+        `gm-level-${_level}`,
+        {
+          disabled
+        }
+      )}
+      data-level={_level}
+    >
+      <Checkbox
+        value={leaf.value}
+        checked={checked}
+        onChange={handleChange}
+        className='gm-padding-0'
+        disabled={disabled}
+      />
+      <Flex flex column onClick={handleName}>
+        {renderLeafItem(leaf, handleChange)}
       </Flex>
     </Flex>
   )
@@ -33,9 +59,10 @@ LeafItem.propTypes = {
   checked: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
   onClickName: PropTypes.func,
-
+  disabled: PropTypes.bool,
   // 自定义 leaf 渲染格式
-  renderLeafItem: PropTypes.func
+  renderLeafItem: PropTypes.func,
+  _level: PropTypes.number
 }
 
 LeafItem.defaultProps = {
@@ -50,7 +77,11 @@ const GroupItem = props => {
     checked,
     onChange,
     onGroup,
-    children
+    renderGroupItem,
+    onClickName,
+    children,
+    disabled,
+    _level
   } = props
 
   const handleChange = () => {
@@ -61,24 +92,44 @@ const GroupItem = props => {
     onGroup(group)
   }
 
+  const handleName = () => {
+    if (onClickName) {
+      onClickName(group)
+    } else {
+      handleGroup()
+    }
+  }
+
   return (
-    <React.Fragment>
-      <Flex className='gm-tree-group-name gm-cursor gm-hover-bg'>
+    <>
+      <Flex
+        className={classNames(
+          'gm-tree-group-item gm-cursor gm-hover-bg',
+          `gm-level-${_level}`,
+          {
+            disabled
+          }
+        )}
+        data-level={_level}
+      >
+        <div className='gm-tree-group-item-expand' onClick={handleGroup}>
+          {isOpen ? <SVGMinus /> : <SVGPlus />}
+        </div>
         {hasCheckbox && (
           <Checkbox
             value
             checked={checked}
             className='gm-padding-0'
             onChange={handleChange}
+            disabled={disabled}
           />
         )}
-        <Flex flex alignCenter onClick={handleGroup}>
-          <span style={{ width: '1em' }}>{isOpen ? '-' : '+'}</span>&nbsp;
-          {group.name}
+        <Flex flex column onClick={handleName}>
+          {renderGroupItem(group, handleGroup)}
         </Flex>
       </Flex>
       {isOpen && <div className='gm-tree-group-list'>{children}</div>}
-    </React.Fragment>
+    </>
   )
 }
 
@@ -89,7 +140,15 @@ GroupItem.propTypes = {
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onGroup: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  renderGroupItem: PropTypes.func,
+  onClickName: PropTypes.func,
+  disabled: PropTypes.bool,
+  _level: PropTypes.number
+}
+
+GroupItem.defaultProps = {
+  renderGroupItem: item => item.name
 }
 
 export { LeafItem, GroupItem }

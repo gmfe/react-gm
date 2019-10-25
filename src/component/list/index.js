@@ -2,9 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Base from './base'
+import { warn, devWarn } from '../../util'
 
-// 恶心的转换逻辑在这里做
+/** 列表组件 */
 class List extends React.Component {
+  constructor(props) {
+    super(props)
+
+    devWarn(() => {
+      if (props.multiple && !_.isArray(props.selected)) {
+        warn('多选情况下 selected 请传数组')
+      }
+    })
+  }
+
   handleSelected = selected => {
     const { multiple, onSelect } = this.props
 
@@ -32,9 +43,10 @@ class List extends React.Component {
 
     let oSelected
     if (multiple) {
-      oSelected = selected
+      // 如果 selected 为 null，需要转成 []
+      oSelected = selected || []
     } else {
-      oSelected = selected ? [selected] : []
+      oSelected = _.isNil(selected) ? [] : [selected]
     }
 
     return (
@@ -53,9 +65,14 @@ class List extends React.Component {
 List.propTypes = {
   ...Base.propTypes,
 
-  // 基本属性
+  /**
+   * [{value, text, disabled}]
+   * group [{label, children: [{value, text, disabled}]}]
+   * */
   data: PropTypes.array.isRequired, // value text
+  /** 单选 value，多选 [value, value]。多选请务必提供数组 */
   selected: PropTypes.any,
+  /** 单选 value，多选 [value, value] */
   onSelect: PropTypes.func
 }
 

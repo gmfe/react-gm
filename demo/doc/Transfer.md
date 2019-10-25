@@ -50,6 +50,7 @@ class Component extends React.Component {
         const {list, selectedValues} = this.state;
         return (
             <Transfer
+disabled
                 list={list}
                 selectedValues={selectedValues}
                 onSelect={this.handleSelect}

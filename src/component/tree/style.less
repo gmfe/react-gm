@@ -1,5 +1,6 @@
-
 .gm-tree {
+  border: 1px solid @gm-border-color;
+
   .gm-tree-filter {
     position: relative;
 
@@ -19,17 +20,128 @@
     }
   }
 
-  .gm-tree-group {
-    .gm-tree-group-name {
-      padding: 3px 6px;
+  .gm-tree-group-item {
+    padding: 3px 6px;
+
+    .gm-tree-group-item-expand {
+      width: 2em;
+      margin-left: -0.5em;
+      padding-left: 0.5em;
     }
 
-    .gm-tree-group-list {
-      padding: 3px 6px;
+    &.disabled {
+      cursor: not-allowed;
+      color: @gm-color-second;
+    }
+  }
 
-      .gm-tree-group-list-item {
-        padding: 3px 6px;
-      }
+  .gm-tree-list-item {
+    padding: 3px 6px;
+
+    &.disabled {
+      cursor: not-allowed;
+      color: @gm-color-second;
+    }
+  }
+
+  .gm-tree-group-item {
+    &.gm-level-1 {
+      padding-left: 2em;
+    }
+
+    &.gm-level-2 {
+      padding-left: 4em;
+    }
+
+    &.gm-level-3 {
+      padding-left: 6em;
+    }
+
+    &.gm-level-4 {
+      padding-left: 8em;
+    }
+
+    &.gm-level-5 {
+      padding-left: 10em;
+    }
+  }
+
+  .gm-tree-list-item {
+    &.gm-level-1 {
+      padding-left: 3em;
+    }
+
+    &.gm-level-2 {
+      padding-left: 5em;
+    }
+
+    &.gm-level-3 {
+      padding-left: 7em;
+    }
+
+    &.gm-level-4 {
+      padding-left: 9em;
+    }
+
+    &.gm-level-5 {
+      padding-left: 11em;
+    }
+  }
+}
+
+.gm-tree.gm-tree-is-for-manage {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+
+  .gm-tree-group-item {
+    padding: 10px;
+    border-top: 1px solid @gm-border-color;
+    align-items: center;
+
+    .gm-tree-group-item-expand {
+      margin-right: 5px;
+    }
+
+    .gm-checkbox {
+      margin-right: 5px;
+    }
+  }
+
+  .gm-tree-list-item {
+    padding: 10px;
+    align-items: center;
+    border-top: 1px solid @gm-border-color;
+  }
+
+  .gm-tree-group-list {
+    padding: 0;
+
+    .gm-tree-list-item {
+      margin-left: 0;
+    }
+  }
+
+  .gm-tree-group-item,
+  .gm-tree-list-item {
+    &.gm-level-1 {
+      padding-left: 4em;
+    }
+
+    &.gm-level-2 {
+      padding-left: 8em;
+    }
+
+    &.gm-level-3 {
+      padding-left: 12em;
+    }
+
+    &.gm-level-4 {
+      padding-left: 16em;
+    }
+
+    &.gm-level-5 {
+      padding-left: 20em;
     }
   }
 }
