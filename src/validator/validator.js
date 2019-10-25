@@ -39,10 +39,6 @@ const Validator = {
         return true
       }
 
-      if (!hasValue(value)) {
-        return true
-      }
-
       if (rule.validate) {
         const rt = rule.validate(value, rule)
         if (!rt) {
