@@ -5,10 +5,6 @@ import { getLeaf } from './util'
 import { GroupItem, LeafItem } from './item'
 
 class List extends React.Component {
-  handleClickLeafName = (leaf, checked) => {
-    this.props.onClickLeafName(leaf, checked)
-  }
-
   handleChange = (leaf, checked) => {
     const { onSelectValues, selectedValues, onClickCheckbox } = this.props
     onSelectValues(_.xor([leaf.value], selectedValues))
@@ -34,19 +30,28 @@ class List extends React.Component {
   }
 
   handleGroup = group => {
-    const { groupSelected, onGroupSelect } = this.props
+    const { groupSelected, onGroupSelect, onClickExpand } = this.props
 
     onGroupSelect(_.xor(groupSelected, [group.value]))
+
+    if (onClickExpand) {
+      onClickExpand(group, !groupSelected.includes(group.value))
+    }
   }
 
   render() {
     const {
+      disabled,
       groupSelected,
       list,
       selectedValues,
       showGroupCheckbox,
       onClickLeafName,
-      renderLeafItem
+      onClickGroupName,
+      renderLeafItem,
+      renderGroupItem,
+
+      _level
     } = this.props
 
     if (list.length === 0) {
@@ -78,8 +83,16 @@ class List extends React.Component {
                 checked={isSelectGroup}
                 onChange={this.handleSelectGroup}
                 onGroup={this.handleGroup}
+                onClickName={onClickGroupName}
+                renderGroupItem={renderGroupItem}
+                disabled={disabled}
+                _level={_level}
               >
-                <List {...this.props} list={group.children} />
+                <List
+                  {...this.props}
+                  list={group.children}
+                  _level={_level + 1}
+                />
               </GroupItem>
             )
           })}
@@ -88,23 +101,26 @@ class List extends React.Component {
     }
 
     return (
-      <React.Fragment>
+      <>
         {_.map(list, v => (
           <LeafItem
             key={v.value}
             leaf={v}
             checked={_.includes(selectedValues, v.value)}
             onChange={this.handleChange}
-            onClickName={onClickLeafName ? this.handleClickLeafName : undefined}
+            onClickName={onClickLeafName}
             renderLeafItem={renderLeafItem}
+            disabled={disabled}
+            _level={_level}
           />
         ))}
-      </React.Fragment>
+      </>
     )
   }
 }
 
 List.propTypes = {
+  disabled: PropTypes.bool,
   groupSelected: PropTypes.array.isRequired,
   onGroupSelect: PropTypes.func.isRequired,
 
@@ -114,10 +130,19 @@ List.propTypes = {
   showGroupCheckbox: PropTypes.func.isRequired,
 
   onClickLeafName: PropTypes.func,
+  onClickGroupName: PropTypes.func,
   onClickCheckbox: PropTypes.func,
+  onClickExpand: PropTypes.func,
 
   // 自定义 leaf 渲染格式
-  renderLeafItem: PropTypes.func
+  renderLeafItem: PropTypes.func,
+  renderGroupItem: PropTypes.func,
+
+  _level: PropTypes.number
+}
+
+List.defaultProps = {
+  _level: 0
 }
 
 export default List

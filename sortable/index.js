@@ -1,3 +1,4 @@
-import SortTableList from './list'
+import Sortable from './sortable'
+import SortableBase from './base'
 
-export { SortTableList }
+export { Sortable, SortableBase }

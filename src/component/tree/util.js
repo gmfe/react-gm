@@ -21,11 +21,11 @@ function getUnLeafValues(list, result = []) {
   return result
 }
 
-// 反正是写出来了，我也不知道啊
-function filterGroupListModify(list, what) {
+// 过滤叶子
+function filterGroupListLeaf(list, what) {
   return _.filter(list, function(d) {
     if (d.children) {
-      d.children = filterGroupListModify(d.children, what)
+      d.children = filterGroupListLeaf(d.children, what)
     }
 
     if (d.children) {
@@ -37,7 +37,7 @@ function filterGroupListModify(list, what) {
 }
 
 function filterGroupList(list, what) {
-  return filterGroupListModify(_.cloneDeep(list), what)
+  return filterGroupListLeaf(_.cloneDeep(list), what)
 }
 
 export { getLeaf, getUnLeafValues, filterGroupList }

@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Sortable from 'react-sortablejs'
+import SortableBase from './base'
 import _ from 'lodash'
 import classNames from 'classnames'
 
-const SortTableList = ({
+const Sortable = ({
   data,
   onChange,
   renderItem,
@@ -13,14 +13,15 @@ const SortTableList = ({
   ...rest
 }) => {
   const handleChange = order => {
-    const newData = _.sortBy(data.slice(), v => order.indexOf(v.value + ''))
+    order = _.map(order, v => JSON.parse(v))
+    const newData = _.sortBy(data.slice(), v => order.indexOf(v.value))
     onChange(newData)
   }
 
   const items = _.map(data, (v, index) => (
     <div
       key={v.value}
-      data-id={v.value}
+      data-id={JSON.stringify(v.value)}
       className={classNames({
         'gm-cursor-grab': !options.handle
       })}
@@ -30,7 +31,7 @@ const SortTableList = ({
   ))
 
   return (
-    <Sortable
+    <SortableBase
       {...rest}
       tag={tag}
       options={{
@@ -40,26 +41,22 @@ const SortTableList = ({
       onChange={handleChange}
     >
       {items}
-    </Sortable>
+    </SortableBase>
   )
 }
 
-SortTableList.propTypes = {
-  // 注意 value 是字符串
-  // [{value, text, ...}, {value, text, ...}]
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired
-    })
-  ),
+Sortable.propTypes = {
+  /** [{value, text, ...}, {value, text, ...}] */
+  data: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   renderItem: PropTypes.func,
-  tag: PropTypes.elements,
+  /** 支持 ref */
+  tag: PropTypes.element,
   options: PropTypes.object
 }
 
-SortTableList.defaultProps = {
+Sortable.defaultProps = {
   renderItem: item => item.text
 }
 
-export default SortTableList
+export default Sortable

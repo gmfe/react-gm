@@ -11,11 +11,11 @@
     "react-component"
   ],
   "scripts": {
-    "start": "node ./node_modules/gm-webpack/start",
-    "storybook": "start-storybook",
-    "deploy": "GIT_BRANCH=$BRANCH GIT_COMMIT=$COMMIT node ./node_modules/gm-webpack/deploy",
-    "docs-build": "rm -rf build; rm -rf docs; mkdir docs; npm run deploy; cp -r build docs",
-    "docs": "npm run docs-build; git add --all; git commit -m 'docs generate'; git push origin master:master;"
+    "demo": "node ./node_modules/gm-webpack/start",
+    "start": "start-storybook",
+    "build": "build-storybook -c .storybook -o docs",
+    "prebuild": "rm -rf docs; mkdir docs;",
+    "postbuild": "cp -r docs ../react-gm-docs/docs; cd ../react-gm-docs; npm run build;"
   },
   "husky": {
     "hooks": {
@@ -51,14 +51,7 @@
   ],
   "peerDependencies": {
     "@svgr/webpack": "^4.3.2",
-    "big.js": "^5.2.2",
-    "classnames": "^2.2.5",
-    "gm-util": "^5.11.0",
     "gm-xfont": "^1.0.79",
-    "lodash": "^4.17.14",
-    "moment": "^2.24.0",
-    "prop-types": "^15.7.2",
-    "query-string": "^6.8.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-table": "6.8.6"
@@ -80,9 +73,7 @@
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "babel-preset-gmfe": "^0.0.3",
-    "big.js": "^5.2.2",
     "bundle-loader": "^0.5.5",
-    "classnames": "^2.2.5",
     "css-loader": "^3.1.0",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.0.0",
@@ -101,7 +92,6 @@
     "fs": "0.0.2",
     "gm-service": "^1.7.14",
     "gm-svg": "^0.3.17",
-    "gm-util": "^5.11.0",
     "gm-webpack": "^2.1.0",
     "gm-xfont": "^1.0.79",
     "happypack": "^5.0.1",
@@ -112,18 +102,14 @@
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "lint-staged": "^9.2.0",
-    "lodash": "^4.17.15",
     "markdown-it-react-loader": "^1.0.0",
     "mini-css-extract-plugin": "^0.8.0",
     "mobx": "^5.11.0",
     "mobx-react": "^6.1.1",
-    "moment": "^2.24.0",
     "path": "^0.12.7",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
     "prettier": "^1.18.2",
-    "prop-types": "^15.7.2",
-    "query-string": "^6.8.1",
     "react": "^16.8.5",
     "react-beautiful-dnd": "^10.1.0",
     "react-dom": "^16.8.5",
@@ -131,7 +117,6 @@
     "react-loadable": "^5.5.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "react-sortablejs": "^1.5.1",
     "react-table": "6.8.6",
     "recordrtc": "^5.5.8",
     "shelljs": "^0.8.3",
@@ -146,5 +131,15 @@
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "^3.3.0",
+    "big.js": "^5.2.2",
+    "classnames": "^2.2.5",
+    "gm-util": "^5.11.0",
+    "lodash": "^4.17.14",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.8.1"
   }
 }
