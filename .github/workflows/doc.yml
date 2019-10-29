@@ -1,4 +1,4 @@
-name: Actions doc
+name: doc
 
 # event type（此处我们选择 push，且仅当 push 到 master 分支触发）
 on:
