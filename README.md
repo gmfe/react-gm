@@ -1,8 +1,6 @@
-[![npm](https://img.shields.io/npm/v/react-gm.svg)](https://www.npmjs.com/package/react-gm)
+[![npm](https://img.shields.io/npm/v/react-gm.svg)](https://www.npmjs.com/package/react-gm) [![Actions Status](https://github.com/gmfe/react-gm/workflows/doc/badge.svg)](https://github.com/{owner}/{repo}/actions)
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
-
-[![Actions Status](https://github.com/gmfe/react-gm/workflows/doc/badge.svg)](https://github.com/{owner}/{repo}/actions)
 
 ## About react-gm
 
