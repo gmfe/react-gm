@@ -102,6 +102,10 @@ import Carousel from './component/carousel/carousel'
 
 import ImgUploader from './component/img_uploader'
 
+import IconDownUp from './component/icon_down_up'
+
+import { Col, Row } from './component/grid'
+
 Object.assign(Sheet, {
   SheetColumn,
   SheetAction,
@@ -231,5 +235,8 @@ export {
   Input,
   TableSelect,
   FunctionSet,
-  ImgUploader
+  ImgUploader,
+  IconDownUp,
+  Col,
+  Row
 }
