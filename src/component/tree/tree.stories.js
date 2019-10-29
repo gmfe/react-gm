@@ -75,6 +75,7 @@ const store = observable({
   ],
   selectedValues: [],
   setSelectedValues(values) {
+    console.log(values)
     this.selectedValues = values
   }
 })

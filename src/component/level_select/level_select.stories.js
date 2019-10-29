@@ -46,10 +46,19 @@ const store = observable({
   }
 })
 
-storiesOf('LevelSelect', module).add('common', () => (
-  <LevelSelect
-    selected={store.selected}
-    data={data}
-    onSelect={value => store.changeSelect(value)}
-  />
-))
+storiesOf('LevelSelect', module)
+  .add('common', () => (
+    <LevelSelect
+      selected={store.selected}
+      data={data}
+      onSelect={value => store.changeSelect(value)}
+    />
+  ))
+  .add('right', () => (
+    <LevelSelect
+      selected={store.selected}
+      data={data}
+      onSelect={value => store.changeSelect(value)}
+      right
+    />
+  ))

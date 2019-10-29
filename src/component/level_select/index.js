@@ -5,6 +5,7 @@ import Popover from '../popover'
 import _ from 'lodash'
 import { getLevel } from '../level_list/util'
 import Selection from '../selection'
+import Flex from '../flex'
 
 // TODO
 // onlySelectLeaf
@@ -145,18 +146,21 @@ class LevelSelect extends React.Component {
   }
 
   renderPopup = () => {
-    const { titles, data, selected } = this.props
+    const { titles, data, selected, right } = this.props
     const { willActiveSelected } = this.state
     return (
-      <LevelList
-        titles={titles}
-        data={data}
-        selected={selected}
-        onSelect={this.handleSelect}
-        willActiveSelected={willActiveSelected}
-        onWillActiveSelect={this.handleWillActiveSelect}
-        className='gm-border-0'
-      />
+      <Flex justifyEnd={right}>
+        <LevelList
+          isReverse={right}
+          titles={titles}
+          data={data}
+          selected={selected}
+          onSelect={this.handleSelect}
+          willActiveSelected={willActiveSelected}
+          onWillActiveSelect={this.handleWillActiveSelect}
+          className='gm-border-0'
+        />
+      </Flex>
     )
   }
 
@@ -190,15 +194,16 @@ class LevelSelect extends React.Component {
   }
 
   render() {
-    const { disabled, children, popoverType } = this.props
+    const { disabled, children, popoverType, right } = this.props
 
     return (
       <Popover
+        ref={this.popoverRef}
         animName
+        right={right}
         disabled={disabled}
         popup={this.renderPopup()}
         type={popoverType}
-        ref={this.popoverRef}
         pureContainer
       >
         {children !== undefined ? children : this.renderTarget()}
@@ -221,7 +226,7 @@ LevelSelect.propTypes = {
   onlySelectLeaf: PropTypes.bool,
 
   popoverType: PropTypes.oneOf(['focus', 'realFocus']),
-
+  right: PropTypes.bool,
   // 事件
   onKeyDown: PropTypes.func
 }
