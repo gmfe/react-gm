@@ -8,6 +8,16 @@ const KEYBOARD_DIRECTION = 'KEYBOARD_DIRECTION_'
 const KEYBOARD_ENTER = 'KEYBOARD_ENTER_'
 const KEYBOARD_TAB = 'KEYBOARD_TAB_'
 
+// 键盘行为
+const keyboardActionsType = {
+  ENTER: 'enter',
+  TAB: 'tab',
+  UP: 'up',
+  DOWN: 'down',
+  LEFT: 'left',
+  RIGHT: 'right'
+}
+
 // 请在 keydown 事件内用此方法
 // type text 才有 selectionStart selectionEnd，why?
 const isInputUnBoundary = event => {
@@ -103,5 +113,6 @@ export {
   KEYBOARD_ENTER,
   KEYBOARD_TAB,
   isInputUnBoundary,
-  scrollIntoViewFixedWidth
+  scrollIntoViewFixedWidth,
+  keyboardActionsType
 }
