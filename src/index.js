@@ -91,6 +91,8 @@ import LevelSelect from './component/level_select'
 import Input from './component/input'
 import TableSelect from './component/table_select'
 
+import FunctionSet from './component/function_set'
+
 import Validator from './validator'
 
 import { Select, Option } from './component/select'
@@ -99,6 +101,10 @@ import { setLocale } from './locales'
 import Carousel from './component/carousel/carousel'
 
 import ImgUploader from './component/img_uploader'
+
+import IconDownUp from './component/icon_down_up'
+
+import { Col, Row } from './component/grid'
 
 Object.assign(Sheet, {
   SheetColumn,
@@ -228,5 +234,9 @@ export {
   LevelSelect,
   Input,
   TableSelect,
-  ImgUploader
+  FunctionSet,
+  ImgUploader,
+  IconDownUp,
+  Col,
+  Row
 }

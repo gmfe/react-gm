@@ -3,23 +3,21 @@
 
 @gm-border-color: #eee;
 
-// TODO 考虑是否干掉
-@gm-list-group-hover-bg: #d6d6d6;
-
-// disabled
-@gm-color-disabled: #eeeeee;
-
 // 规范颜色变量
 @gm-color-first: @gray-dark; //左侧导航、panel标题、页面正文文字
 @gm-color-second: #848586; // lighten(#333, 40%);
 @gm-color-third: #acadae; // lighten(#333, 60%);
 @gm-frame-border-color: #d8dee7;
 
-// TODO 是否需要
+@gm-list-group-hover-bg: #d6d6d6;
+
 @gm-table-bg-accent: @table-bg-accent; //表头背景
 
 @gm-color-white-first: #fff;
 @gm-color-white-second: darken(@gm-color-white-first, 40%);
+
+// disabled
+@gm-color-disabled: #eeeeee;
 
 // error
 @gm-error-border: #a94442;
@@ -29,3 +27,20 @@
 .gm-form-control-focus() {
   border-color: @brand-primary;
 }
+
+@gm-screen-sm: 768px;
+@gm-screen-md: 992px;
+@gm-screen-lg: 1200px;
+@gm-screen-xl: 1920px;
+
+@gm-screen-sm-min: @gm-screen-sm;
+@gm-screen-md-min: @gm-screen-md;
+@gm-screen-lg-min: @gm-screen-lg;
+@gm-screen-xl-min: @gm-screen-xl;
+
+@gm-screen-sm-max: @gm-screen-md - 1px;
+@gm-screen-md-max: @gm-screen-lg - 1px;
+@gm-screen-lg-max: @gm-screen-xl - 1px;
+
+// grid
+@gm-grid-columns: 24;

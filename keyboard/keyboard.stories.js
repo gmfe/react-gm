@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import { observable } from 'mobx'
-import { Observer, observer } from 'mobx-react'
+import { Observer } from 'mobx-react'
 import {
   keyboardTableHoc,
   KCInput,
@@ -26,50 +26,48 @@ const KeyboardEditTable = diyTableHOC(
   fixedColumnsTableHOC(keyboardTableHoc(EditTable))
 )
 
-const data = true
-  ? []
-  : [
-      {
-        value: 1,
-        text: '南山'
-      },
-      {
-        value: 2,
-        text: '福田'
-      },
-      {
-        value: 3,
-        text: '罗湖'
-      },
-      {
-        value: 4,
-        text: '宝安'
-      },
-      {
-        value: 5,
-        text: '宝安'
-      },
-      {
-        value: 6,
-        text: '宝安'
-      },
-      {
-        value: 7,
-        text: '宝安'
-      },
-      {
-        value: 8,
-        text: '宝安'
-      },
-      {
-        value: 9,
-        text: '宝安'
-      },
-      {
-        value: 10,
-        text: '宝安'
-      }
-    ]
+const data = [
+  {
+    value: 1,
+    text: '南山'
+  },
+  {
+    value: 2,
+    text: '福田'
+  },
+  {
+    value: 3,
+    text: '罗湖'
+  },
+  {
+    value: 4,
+    text: '宝安'
+  },
+  {
+    value: 5,
+    text: '宝安'
+  },
+  {
+    value: 6,
+    text: '宝安'
+  },
+  {
+    value: 7,
+    text: '宝安'
+  },
+  {
+    value: 8,
+    text: '宝安'
+  },
+  {
+    value: 9,
+    text: '宝安'
+  },
+  {
+    value: 10,
+    text: '宝安'
+  }
+]
 
 const selectData = [
   { value: '', text: '请选择' },

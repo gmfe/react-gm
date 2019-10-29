@@ -24,6 +24,8 @@ jobs:
 
       # 代码拉取
       - uses: actions/checkout@master
+        with:
+          ref: master
 
       # 环境
       - run: |
@@ -31,4 +33,12 @@ jobs:
           node -v
           yarn -v
 
+      - run: |
+          git branch
+          git checkout master
+          yarn
+          npm run build
+          git push 'https://liyatang%40qq.com:${{secrets.PASSWORD}}@github.com/gmfe/react-gm.git' master:master
 
+        env:
+          PASSWORD: ${{secrets.PASSWORD}}
