@@ -176,6 +176,7 @@ class LevelSelect extends React.Component {
       selected,
       disabled,
       popoverType,
+      right,
       ...rest
     } = this.props
 

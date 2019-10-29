@@ -311,7 +311,7 @@ Popover.propTypes = {
   // 命名问题，focus 不是真正的 focus事件，和 click 类似，只不过 focus 不会因为二次点击而关掉。
   // 想要 focus 事件的效果，请用 realFocus，失焦会 hide
   type: PropTypes.oneOf(['focus', 'click', 'hover', 'realFocus']),
-  popup: PropTypes.oneOf([PropTypes.element, PropTypes.func]).isRequired,
+  popup: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
   children: PropTypes.any.isRequired,
   disabled: PropTypes.bool, // 也可以用children props disable
 
