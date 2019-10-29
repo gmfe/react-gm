@@ -38,6 +38,8 @@ jobs:
           git checkout master
           yarn
           npm run build
+          git add docs
+          git commit -m 'build docs'
           git push 'https://liyatang%40qq.com:${{secrets.PASSWORD}}@github.com/gmfe/react-gm.git' master:master
 
         env:
