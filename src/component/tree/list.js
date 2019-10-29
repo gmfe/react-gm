@@ -70,9 +70,12 @@ class List extends React.Component {
               getLeaf(group.children),
               item => item.value
             )
-            const isSelectGroup =
-              _.filter(leafValues, value => _.includes(selectedValues, value))
-                .length === leafValues.length
+            let isSelectGroup = false
+            if (leafValues.length > 0) {
+              isSelectGroup =
+                _.filter(leafValues, value => _.includes(selectedValues, value))
+                  .length === leafValues.length
+            }
 
             return (
               <GroupItem
