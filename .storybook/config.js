@@ -13,16 +13,17 @@ import '../src/index.less'
 import 'react-table/react-table.css'
 import '../table/style.less'
 
-const req = require.context('../src', true, /stories\.js$/)
-const reqTable = require.context('../table', true, /stories\.js$/)
+const reqs = [
+  require.context('../src', true, /stories\.js$/),
+  require.context('../table', true, /stories\.js$/),
+  require.context('../keyboard', true, /stories\.js$/),
+  require.context('../sortable', true, /stories\.js$/)
+]
 
 function loadStories() {
-  req.keys().forEach(filename => req(filename))
-  reqTable.keys().forEach(filename => reqTable(filename))
-
-  require('../keyboard/keyboard.stories.js')
-  require('../sortable/sortable.stories.js')
-  require('../sortable/js.stories.js')
+  reqs.forEach(req => {
+    req.keys().forEach(filename => req(filename))
+  })
 }
 
 addParameters({

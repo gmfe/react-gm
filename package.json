@@ -14,8 +14,7 @@
     "demo": "node ./node_modules/gm-webpack/start",
     "start": "start-storybook",
     "build": "build-storybook -c .storybook -o docs",
-    "prebuild": "rm -rf docs; mkdir docs;",
-    "postbuild": "cp -r docs ../react-gm-docs/docs; cd ../react-gm-docs; npm run build;"
+    "prebuild": "rm -rf docs; mkdir docs;"
   },
   "husky": {
     "hooks": {
