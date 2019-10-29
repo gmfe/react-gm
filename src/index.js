@@ -91,6 +91,8 @@ import LevelSelect from './component/level_select'
 import Input from './component/input'
 import TableSelect from './component/table_select'
 
+import FunctionSet from './component/function_set'
+
 import Validator from './validator'
 
 import { Select, Option } from './component/select'
@@ -228,5 +230,6 @@ export {
   LevelSelect,
   Input,
   TableSelect,
+  FunctionSet,
   ImgUploader
 }
