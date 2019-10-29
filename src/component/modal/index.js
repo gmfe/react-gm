@@ -57,8 +57,12 @@ class Modal extends React.Component {
   }
 
   handleMask(e) {
+    /* 由于 svg 的 target.className 类型不是字符串，是一个对象;
+       按原来的逻辑判断会报错
+    */
     if (
       !this.props.disableMaskClose &&
+      _.isString(e.target.className) &&
       e.target.className.split(' ').indexOf('gm-modal') > -1
     ) {
       this.props.onHide()
