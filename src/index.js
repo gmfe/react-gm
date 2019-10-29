@@ -98,6 +98,8 @@ import { setLocale } from './locales'
 
 import Carousel from './component/carousel/carousel'
 
+import ImgUploader from './component/img_uploader'
+
 Object.assign(Sheet, {
   SheetColumn,
   SheetAction,
@@ -225,5 +227,6 @@ export {
   LevelList,
   LevelSelect,
   Input,
-  TableSelect
+  TableSelect,
+  ImgUploader
 }
