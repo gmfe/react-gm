@@ -7,7 +7,7 @@ import EVENT_TYPE from '../../event_type'
 
 class LoadingFullScreen extends React.Component {
   render() {
-    let { style, size, text, className, ...rest } = this.props
+    const { style, size, text, className, ...rest } = this.props
 
     const s = Object.assign({}, style, {
       width: size + 'px',

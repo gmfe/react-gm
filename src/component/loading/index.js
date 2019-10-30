@@ -4,16 +4,19 @@ import classNames from 'classnames'
 
 class Loading extends React.Component {
   render() {
-    let { style, size, text, className, ...rest } = this.props
-
-    const s = Object.assign({}, style, {
-      width: size + 'px',
-      height: size + 'px'
-    })
+    const { style, size, text, className, ...rest } = this.props
 
     return (
       <div {...rest} className={classNames('gm-loading', className)}>
-        <svg className='gm-loading-circular' style={s} viewBox='0 0 50 50'>
+        <svg
+          className='gm-loading-circular'
+          style={{
+            ...style,
+            width: size + 'px',
+            height: size + 'px'
+          }}
+          viewBox='0 0 50 50'
+        >
           <circle
             className='gm-loading-path'
             cx='25'
