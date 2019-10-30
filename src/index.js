@@ -99,7 +99,7 @@ import { Select, Option } from './component/select'
 import { setLocale } from './locales'
 
 import Carousel from './component/carousel/carousel'
-
+import { Box, BoxForm, BoxTable, BoxPanel } from './component/box'
 import ImgUploader from './component/img_uploader'
 
 import IconDownUp from './component/icon_down_up'
@@ -235,6 +235,10 @@ export {
   Input,
   TableSelect,
   FunctionSet,
+  Box,
+  BoxForm,
+  BoxTable,
+  BoxPanel,
   ImgUploader,
   IconDownUp,
   Col,

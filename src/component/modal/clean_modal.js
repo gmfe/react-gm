@@ -32,4 +32,5 @@ CleanModal.defaultProps = {
   disableMaskClose: false,
   noContentPadding: false
 }
+
 export default CleanModal

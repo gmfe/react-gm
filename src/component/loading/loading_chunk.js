@@ -5,7 +5,7 @@ import Loading from './index'
 
 class LoadingChunk extends React.Component {
   render() {
-    let {
+    const {
       loading,
       style,
       size,
@@ -14,11 +14,6 @@ class LoadingChunk extends React.Component {
       children,
       ...rest
     } = this.props
-
-    const s = Object.assign({}, style, {
-      width: size + 'px',
-      height: size + 'px'
-    })
 
     return (
       <div
@@ -31,7 +26,11 @@ class LoadingChunk extends React.Component {
         {loading && (
           <div className='gm-loading-mask'>
             <Loading
-              style={s}
+              style={{
+                ...style,
+                width: size + 'px',
+                height: size + 'px'
+              }}
               text={text}
               size={size}
               className='gm-loading-position'

@@ -44,12 +44,12 @@ class Carousel extends React.Component {
     this.timer = setInterval(this.setCurrentIndex, delay)
   }
 
-  stopCarousel = () => {
+  handleStopCarousel = () => {
     clearInterval(this.timer)
   }
 
   handleSelect = index => {
-    this.stopCarousel()
+    this.handleStopCarousel()
 
     this.setState({
       currentIndex: index
@@ -85,7 +85,7 @@ class Carousel extends React.Component {
     const { currentIndex } = this.state
 
     return (
-      <ul className={'gm-carousel-fade-footer'}>
+      <ul className='gm-carousel-fade-footer'>
         {React.Children.map(children, (value, index) => {
           return (
             <li
@@ -110,7 +110,7 @@ class Carousel extends React.Component {
       <Flex
         justifyCenter
         className={classNames('gm-carousel-fade', className)}
-        onMouseOver={this.stopCarousel}
+        onMouseOver={this.handleStopCarousel}
         onMouseLeave={this.handleCancelSelect}
         {...rest}
       >
