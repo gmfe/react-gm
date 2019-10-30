@@ -5,23 +5,31 @@
     position: relative;
     border: 1px solid @gm-border-color;
     background-color: white;
-    height: 28px;
+    height: 30px;
     padding: 5px 25px 5px 10px;
   }
 
   .gm-more-select-clear-btn {
+    display: none;
     position: absolute;
-    right: 2px;
-    top: 0;
-    display: block;
+    right: 5px;
+    top: 7px;
     cursor: pointer;
-    padding: 5px;
     color: @gm-color-third;
+  }
+
+  &:hover {
+    .gm-more-select-clear-btn {
+      display: block;
+    }
   }
 
   &.gm-more-select-disabled {
     cursor: not-allowed;
-    opacity: 0.6;
+
+    .gm-more-select-selected {
+      .gm-disabled();
+    }
 
     input {
       cursor: not-allowed;
@@ -41,7 +49,7 @@
       border-radius: 4px;
 
       .gm-more-select-clear-btn {
-        padding: 0 2px;
+        top: 2px;
         right: 0;
       }
     }

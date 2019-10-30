@@ -12,6 +12,7 @@ import SheetSelect from './sheet_select'
 import SheetBatchAction from './sheet_batch_action'
 import Loading from '../loading'
 import Flex from '../flex'
+import SVGFun from '../../../svg/fun.svg'
 
 class Sheet extends React.Component {
   constructor(props) {
@@ -123,7 +124,9 @@ class Sheet extends React.Component {
           )}
           {_.map(columns, (v, i) => {
             const {
-            children, field, name, // eslint-disable-line
+              children,
+              field,
+              name, // eslint-disable-line
               placeholder,
               render,
               ...rest
@@ -280,7 +283,11 @@ class Sheet extends React.Component {
                 )}
                 {_.map(columns, (value, index) => {
                   const {
-                  children, field, name, placeholder, render,// eslint-disable-line
+                    children,
+                    field,
+                    name,
+                    placeholder,
+                    render, // eslint-disable-line
                     ...rest
                   } = value.props
                   return (
@@ -291,10 +298,7 @@ class Sheet extends React.Component {
                 })}
                 {actions && (
                   <th className='text-center'>
-                    <i
-                      className='xfont xfont-fun'
-                      style={{ color: '#13c19f' }}
-                    />
+                    <SVGFun style={{ color: '#13c19f' }} />
                   </th>
                 )}
               </tr>

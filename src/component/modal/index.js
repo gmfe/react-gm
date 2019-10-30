@@ -8,13 +8,6 @@ import _ from 'lodash'
 import Flex from '../flex'
 import EVENT_TYPE from '../../event_type'
 
-const iconClassName = {
-  confirm: 'xfont xfont-question-circle',
-  success: 'xfont xfont-success-circle',
-  info: 'xfont xfont-info-circle',
-  warning: 'xfont xfont-warning-circle'
-}
-
 class Modal extends React.Component {
   constructor(props) {
     super(props)
@@ -108,7 +101,6 @@ class Modal extends React.Component {
             })}
           >
             <Flex justifyCenter alignCenter className='gm-modal-type-title'>
-              <i className={iconClassName[type]} />
               {title}
             </Flex>
             <div className='gm-text-desc gm-padding-tb-15'>{children}</div>
