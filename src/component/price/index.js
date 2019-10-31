@@ -93,10 +93,13 @@ class Price extends React.Component {
 
 Price.propTypes = {
   value: PropTypes.number.isRequired,
+  /** 保留几位小数，默认是 2 位 */
   precision: PropTypes.number,
+  /** 是否使用千分符 */
   useGrouping: PropTypes.bool,
+  /** 货币符号的缩放大小 */
   currencyScale: PropTypes.number,
-  // 是否保留小数点后无效的零
+  /** 是否保留小数点后无效的零 */
   keepZero: PropTypes.bool,
   isFenUnit: PropTypes.bool,
   feeType: PropTypes.string // 多币种
