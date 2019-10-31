@@ -8,6 +8,15 @@ const KEYBOARD_DIRECTION = 'KEYBOARD_DIRECTION_'
 const KEYBOARD_ENTER = 'KEYBOARD_ENTER_'
 const KEYBOARD_TAB = 'KEYBOARD_TAB_'
 
+const KeyboardActionsName = {
+  ENTER: 'enter',
+  TAB: 'tab',
+  UP: 'up',
+  DOWN: 'down',
+  LEFT: 'left',
+  RIGHT: 'right'
+}
+
 // 请在 keydown 事件内用此方法
 // type text 才有 selectionStart selectionEnd，why?
 const isInputUnBoundary = event => {
@@ -95,6 +104,16 @@ const scrollIntoViewFixedWidth = (dom, fixedWidth) => {
   }
 }
 
+const doFocus = (id, rowKey, columnKey) => {
+  window.dispatchEvent(
+    new window.CustomEvent(KEYBOARD_ONFOCUS + id, {
+      detail: {
+        cellKey: `${rowKey}_${columnKey}`
+      }
+    })
+  )
+}
+
 export {
   WrapContext,
   CellKeyContext,
@@ -102,6 +121,8 @@ export {
   KEYBOARD_DIRECTION,
   KEYBOARD_ENTER,
   KEYBOARD_TAB,
+  KeyboardActionsName,
   isInputUnBoundary,
-  scrollIntoViewFixedWidth
+  scrollIntoViewFixedWidth,
+  doFocus
 }
