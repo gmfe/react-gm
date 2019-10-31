@@ -30,8 +30,8 @@ const Head = props => {
   }
 
   return (
-    <React.Fragment>
-      <Flex alignCenter className='gm-calendar-head clearfix'>
+    <>
+      <Flex alignCenter className='gm-calendar-head gm-border-bottom clearfix'>
         <div>
           <span
             className={classNames('gm-calendar-head-icon', {
@@ -83,7 +83,7 @@ const Head = props => {
           </span>
         </div>
       </Flex>
-    </React.Fragment>
+    </>
   )
 }
 

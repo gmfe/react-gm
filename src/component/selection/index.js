@@ -84,12 +84,20 @@ class Selection extends React.Component {
         )}
         {funIcon ? (
           React.cloneElement(funIcon, {
-            className: classNames('gm-selection-icon', funIcon.props.className)
+            className: classNames(
+              'gm-selection-icon',
+              {
+                'gm-selection-fun-icon': selected && !disabledClose && !clean
+              },
+              funIcon.props.className
+            )
           })
         ) : (
           <IconDownUp
             active={(className || '').includes('gm-popover-active')}
-            className='gm-selection-icon gm-selection-down-up'
+            className={classNames('gm-selection-icon gm-selection-down-up', {
+              'gm-selection-fun-icon': selected && !disabledClose && !clean
+            })}
           />
         )}
       </div>

@@ -21,6 +21,9 @@ const RangeCalendar = props => {
 
     disabledYearAndMonth,
 
+    hoverDay,
+    onHoverDay,
+
     className,
     ...rest
   } = props
@@ -44,9 +47,9 @@ const RangeCalendar = props => {
     if (begin && end) {
       onSelect(m.toDate(), null)
     } else if (begin) {
-      // 如果相等，啥也不做
+      // 如果相等，选中同一天
       if (+begin === +m) {
-        return
+        onSelect(m.toDate(), m.toDate())
       }
 
       // 根据大小调整 begin end
@@ -56,9 +59,10 @@ const RangeCalendar = props => {
         onSelect(m.toDate(), begin)
       }
     } else if (end) {
-      // 如果相等，啥也不做
+      // 如果相等，选中同一天
       if (+end === +m) {
-        return
+        onSelect(m.toDate(), m.toDate())
+        // return
       }
 
       // 根据大小调整 begin end
@@ -96,6 +100,8 @@ const RangeCalendar = props => {
         min={min}
         max={max}
         disabledDate={disabledDate}
+        hoverDay={hoverDay}
+        onHoverDay={onHoverDay}
       />
     </div>
   )
@@ -125,6 +131,11 @@ RangeCalendar.propTypes = {
 
   className: PropTypes.string,
   style: PropTypes.object,
+
+  /** 当前鼠标hover日期，Date对象 */
+  hoverDay: PropTypes.object,
+  /** 鼠标hover回调, 参数 hoverDay */
+  onHoverDay: PropTypes.func,
 
   /** 目前全键盘用 */
   onKeyDown: PropTypes.func

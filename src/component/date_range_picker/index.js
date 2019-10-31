@@ -68,9 +68,7 @@ class DateRangePicker extends React.Component {
 
     const renderSelected = item => {
       if (renderDate && item.begin && item.end) {
-        return (
-          <React.Fragment>{renderDate(item.begin, item.end)}</React.Fragment>
-        )
+        return <>{renderDate(item.begin, item.end)}</>
       }
 
       let b = <span className='gm-text-desc'>开始日期</span>
@@ -85,9 +83,9 @@ class DateRangePicker extends React.Component {
       }
 
       return (
-        <React.Fragment>
+        <>
           {b}&nbsp;~&nbsp;{e}
-        </React.Fragment>
+        </>
       )
     }
 

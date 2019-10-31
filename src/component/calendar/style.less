@@ -4,9 +4,10 @@
   border: 1px solid @gm-border-color;
   background: white;
   cursor: pointer;
+  user-select: none;
 
   .gm-calendar-head {
-    height: 30px;
+    height: 32px;
 
     .gm-calendar-head-icon {
       width: 30px;
@@ -37,12 +38,12 @@
   .gm-calendar-day {
     color: black;
     display: inline-block;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
     text-align: center;
-    margin: 2px;
-    border: 1px solid transparent;
+    line-height: 24px;
+    width: 28px;
+    height: 27px;
+    margin: 1px 0;
+    border: 2px solid white;
 
     &:hover:not(.gm-calendar-day-disabled):not(.active):not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
       background-color: @brand-primary;
@@ -55,29 +56,37 @@
     }
 
     &.gm-calendar-day-now:not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
-      border: 1px solid @brand-primary;
       color: @brand-primary;
+      outline: 1px solid @brand-primary;
+      outline-offset: -3px;
     }
 
-    &.gm-calendar-day-will {
-      border: 1px solid @brand-primary;
+    &.gm-calendar-day-will:not(.active) {
+      outline: 1px solid @brand-primary;
+      outline-offset: -3px;
     }
 
     &.active:not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
-      border: 1px solid #d7e8fc;
       background-color: #d7e8fc;
       color: black;
-      width: 28px;
-      margin: 2px 0;
+      border-left: none;
+      border-right: none;
+    }
+
+    &.gm-calendar-day-hover:not(.gm-calendar-day-old):not(.gm-calendar-day-new):not(.gm-calendar-day-disabled) {
+      background-color: #d7e8fc;
+      color: black;
+      border-left: none;
+      border-right: none;
+      transition: background-color 0.2s ease;
     }
 
     &.gm-calendar-day-begin:not(.gm-calendar-day-old):not(.gm-calendar-day-new),
-    &.gm-calendar-day-end:not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
+    &.gm-calendar-day-end:not(.gm-calendar-day-old):not(.gm-calendar-day-new),
+    &.gm-calendar-day-hover-end:not(.gm-calendar-day-old):not(.gm-calendar-day-new) {
       background-color: @brand-primary;
-      border: 1px solid @brand-primary;
       color: white;
-      width: 24px;
-      margin: 2px;
+      border: 2px solid white;
     }
 
     &.gm-calendar-day-disabled {

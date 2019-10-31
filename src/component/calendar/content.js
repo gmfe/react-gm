@@ -5,7 +5,7 @@ import _ from 'lodash'
 import Day from './day'
 
 const Content = props => {
-  const { begin, end, onSelect, will } = props
+  const { begin, end, onSelect, will, hoverDay, onHoverDay } = props
 
   const day = moment(will)
     .startOf('month')
@@ -52,6 +52,8 @@ const Content = props => {
                 disabled={getDisabled(mm)}
                 onClick={onSelect}
                 will={will}
+                hoverDay={hoverDay}
+                onHoverDay={onHoverDay}
               />
             )
           })}
@@ -76,7 +78,12 @@ Content.propTypes = {
   /** Date对象，表示可选的最大日期 */
   max: PropTypes.object,
   /** 自定义日期是否可选。传入参数为Date对象，返回true or false。 有此属性则min max无效。 */
-  disabledDate: PropTypes.func
+  disabledDate: PropTypes.func,
+
+  /** 当前鼠标hover日期 */
+  hoverDay: PropTypes.object,
+  /** 鼠标hover日期修改函数 */
+  onHoverDay: PropTypes.func
 }
 
 export default Content

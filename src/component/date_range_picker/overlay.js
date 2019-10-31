@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { getLocale } from '../../locales'
+// import classNames from 'classnames'
 import moment from 'moment'
 import Flex from '../flex'
 import Two from './two'
@@ -11,7 +12,7 @@ const quickList = [
   { range: [[0, 'day'], [0, 'day']], text: getLocale('今天') },
   { range: [[-1, 'day'], [-1, 'day']], text: getLocale('昨天') },
   { range: [[-6, 'day'], [0, 'day']], text: getLocale('近7天') },
-  { range: [[-30, 'day'], [0, 'day']], text: getLocale('近一个月') }
+  { range: [[-30, 'day'], [0, 'day']], text: getLocale('近30天') }
 ]
 
 const Left = props => {
@@ -37,7 +38,7 @@ const Left = props => {
       {_.map(quickList, item => (
         <div
           key={item.text}
-          className='gm-text-hover-primary gm-padding-10 gm-cursor'
+          className='gm-text-hover-primary gm-padding-lr-10 gm-cursor gm-date-range-picker-left-item'
           onClick={() => handleClick(item)}
         >
           {item.text}
@@ -52,7 +53,7 @@ Left.propTypes = {
 }
 
 const Bottom = props => {
-  const { begin, end, onOK, onCancel } = props
+  const { begin, end } = props
 
   let b = <span className='gm-text-desc'>开始日期</span>
   let e = <span className='gm-text-desc'>结束日期</span>
@@ -77,28 +78,13 @@ const Bottom = props => {
       <span className='gm-text-bold gm-date-range-picker-bottom-text'>
         {b} ~ {e}
       </span>
-      <div>
-        <button className='btn btn-default' onClick={onCancel}>
-          取消
-        </button>
-        <span className='gm-gap-10' />
-        <button
-          className='btn btn-primary'
-          onClick={onOK}
-          disabled={!(begin && end)}
-        >
-          确定
-        </button>
-      </div>
     </Flex>
   )
 }
 
 Bottom.propTypes = {
   begin: PropTypes.object,
-  end: PropTypes.object,
-  onOK: PropTypes.func,
-  onCancel: PropTypes.func
+  end: PropTypes.object
 }
 
 /**
@@ -106,7 +92,7 @@ Bottom.propTypes = {
  * 形态上不支持全键盘，所以不做相关逻辑
  * */
 const Overlay = props => {
-  const { begin, end, onOK, onCancel, min, max, disabledDate } = props
+  const { begin, end, onOK, min, max, disabledDate } = props
 
   const [_begin, setBegin] = useState(begin)
   const [_end, setEnd] = useState(end)
@@ -114,10 +100,11 @@ const Overlay = props => {
   const handleSelect = (begin, end) => {
     setBegin(begin)
     setEnd(end)
-  }
 
-  const handleOk = () => {
-    onOK(_begin, _end)
+    // 已选择 begin && end
+    if (begin && end) {
+      onOK(begin, end)
+    }
   }
 
   return (
@@ -133,7 +120,7 @@ const Overlay = props => {
           disabledDate={disabledDate}
         />
       </Flex>
-      <Bottom begin={_begin} end={_end} onOK={handleOk} onCancel={onCancel} />
+      <Bottom begin={_begin} end={_end} />
     </div>
   )
 }

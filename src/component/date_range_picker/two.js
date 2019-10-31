@@ -28,6 +28,8 @@ const Two = props => {
   const [will, setWill] = useState(_will)
   // 告诉 日历2 应该显示的月份
   const [will_end, setWillEnd] = useState(_will_end)
+  // 告诉 此时hover的日期
+  const [hoverDay, setHoverDay] = useState(null)
 
   const handleWillChange = date => {
     setWill(date)
@@ -40,18 +42,18 @@ const Two = props => {
   const disabledYearOrMonth = () => {
     // 两个日历显示为 同年相邻月份，disabled相应的 年 / 月 切换按钮
     const _begin = moment(will)
-      .startOf('day')
+      .startOf('month')
       .add(1, 'month')
       .toDate()
     const _end = moment(will_end)
-      .startOf('day')
+      .startOf('month')
       .toDate()
 
     return +_begin === +_end
   }
 
   return (
-    <Flex className='gm-padding-10'>
+    <Flex className='gm-padding-lr-10 gm-padding-tb-5'>
       <RangeCalendar
         className='gm-border-0'
         begin={begin}
@@ -63,8 +65,10 @@ const Two = props => {
         max={max}
         disabledDate={disabledDate}
         disabledYearAndMonth={disabledYearOrMonth() ? 'right' : undefined}
+        hoverDay={hoverDay}
+        onHoverDay={setHoverDay}
       />
-      <div className='gm-gap-10' />
+      <div className='gm-date-range-picker-gap gm-border-bottom' />
       <RangeCalendar
         className='gm-border-0 gm-date-range-picker-overlay-second-calendar'
         begin={begin}
@@ -76,6 +80,8 @@ const Two = props => {
         max={max}
         disabledDate={disabledDate}
         disabledYearAndMonth={disabledYearOrMonth() ? 'left' : undefined}
+        hoverDay={hoverDay}
+        onHoverDay={setHoverDay}
       />
     </Flex>
   )
