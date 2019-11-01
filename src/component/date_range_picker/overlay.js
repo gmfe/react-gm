@@ -10,8 +10,8 @@ import Two from './two'
 const quickList = [
   { range: [[0, 'day'], [0, 'day']], text: getLocale('今天') },
   { range: [[-1, 'day'], [-1, 'day']], text: getLocale('昨天') },
-  { range: [[-7, 'day'], [0, 'day']], text: getLocale('近7天') },
-  { range: [[-1, 'month'], [0, 'day']], text: getLocale('近一个月') }
+  { range: [[-6, 'day'], [0, 'day']], text: getLocale('近7天') },
+  { range: [[-30, 'day'], [0, 'day']], text: getLocale('近一个月') }
 ]
 
 const Left = props => {
