@@ -1,13 +1,17 @@
+// init lng
+const lng = Storage.get('lng') || 'zh'
+console.log('lng', lng)
+setLocale(lng)
+
 import React from 'react'
 import { configure, addDecorator, addParameters } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
 import { withKnobs } from '@storybook/addon-knobs'
 import { Observer } from 'mobx-react'
-import { LayoutRoot } from '../src'
+import { LayoutRoot, setLocale, Storage } from '../src'
 import './style.less'
 
 // 引入 react-gm 样式
-import 'gm-xfont/iconfont.css'
 import '../src/index.less'
 // 引入 react-table 样式
 import 'react-table/react-table.css'
@@ -17,7 +21,8 @@ const reqs = [
   require.context('../src', true, /stories\.js$/),
   require.context('../table', true, /stories\.js$/),
   require.context('../keyboard', true, /stories\.js$/),
-  require.context('../sortable', true, /stories\.js$/)
+  require.context('../sortable', true, /stories\.js$/),
+  require.context('../locales', true, /stories\.js$/)
 ]
 
 function loadStories() {

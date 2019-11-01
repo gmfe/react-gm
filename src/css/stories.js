@@ -13,14 +13,6 @@ storiesOf('className', module).add('default', () => <div />, {
 
 ## Variables
 
-## ifont
-
-\`.ifont-spin\` 
-
-\`ifont-stack\` \`ifont-stack-1x\` \`ifont-stack-2x\` 
-
-\`ifont-inverse\`
-
 ## text
 
 \`gm-text\` 

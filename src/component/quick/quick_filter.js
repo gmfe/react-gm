@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Flex from '../flex'
 import Collapse from '../collapse'
 import classNames from 'classnames'
+import IconDownUp from '../icon_down_up'
 
 class QuickFilter extends React.Component {
   constructor(props) {
@@ -57,12 +58,7 @@ class QuickFilter extends React.Component {
               >
                 {expand ? getLocale('收拢详细信息') : getLocale('展开详细信息')}
                 &nbsp;
-                <i
-                  className={classNames('xfont', {
-                    'xfont-down': !expand,
-                    'xfont-up': expand
-                  })}
-                />
+                <IconDownUp active={expand} />
               </a>
             </Flex>
           </div>

@@ -20,4 +20,3 @@
 - react 
 - react-dom
 - @svgr/webpack
-- gm-xfont

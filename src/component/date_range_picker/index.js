@@ -5,6 +5,7 @@ import Calendar from '../calendar'
 import classNames from 'classnames'
 import Popover from '../popover'
 import _ from 'lodash'
+import SVGCalendar from '../../../svg/calendar.svg'
 
 /**
  * DateRangePicker -- 日期段选择
@@ -114,7 +115,7 @@ const DateRangePicker = props => {
             &times;
           </button>
         )}
-        <i className='xfont xfont-calendar' />
+        <SVGCalendar />
       </div>
       {!endLabel && <span> ~ </span>}
       {endLabel && <span className='gm-padding-lr-5'>{endLabel}</span>}
@@ -151,7 +152,7 @@ const DateRangePicker = props => {
             &times;
           </button>
         )}
-        <i className='xfont xfont-calendar' />
+        <SVGCalendar />
       </div>
     </div>
   )
