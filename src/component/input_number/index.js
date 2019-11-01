@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 class InputNumber extends React.Component {
   handleChange = e => {
     const { max, min, precision, minus } = this.props
-    let value = e.target.value.replace(/。/g, '.')
+    const value = e.target.value.replace(/。/g, '.')
 
     let figure = value
 
