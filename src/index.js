@@ -68,7 +68,6 @@ import { Checkbox, CheckboxGroup } from './component/checkbox'
 import FilterSelect from './component/filter_select/filter.select'
 import MultipleFilterSelect from './component/filter_select/multiple.filter.select'
 import MoreSelect from './component/more_select'
-import Menu from './component/menu'
 import Nav from './component/nav'
 import { Transfer, TransferGroup } from './component/transfer'
 import Tree from './component/tree'
@@ -219,7 +218,6 @@ export {
   Affix,
   Uploader,
   Drawer,
-  Menu,
   Nav,
   ImagePreview,
   setLocale,

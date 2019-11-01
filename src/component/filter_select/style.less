@@ -4,6 +4,7 @@
   border: 1px solid @gm-border-color;
   background-color: white;
   cursor: pointer;
+  min-height: 30px;
 
   &.gm-filter-select-disabled {
     background-color: @gray-lighter;
@@ -22,10 +23,11 @@
   .gm-filter-select-clear-btn {
     display: block;
     position: absolute;
+    top: 7px;
     right: 8px;
     color: @gm-border-color;
+    cursor: pointer;
   }
-
 
   .gm-filter-select-target-box {
     overflow-x: auto;
@@ -35,6 +37,8 @@
       padding: 0 5px;
       margin-right: 5px;
       border-radius: 4px;
+      height: 20px;
+      line-height: 20px;
 
       .close {
         right: -5px;

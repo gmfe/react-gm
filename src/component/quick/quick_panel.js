@@ -4,6 +4,20 @@ import PropTypes from 'prop-types'
 import Flex from '../flex'
 import Collapse from '../collapse'
 import classNames from 'classnames'
+import IconDownUp from '../icon_down_up'
+import SVGBill from '../../../svg/bill.svg'
+import SVGWhole from '../../../svg/whole.svg'
+import SVGNetwork from '../../../svg/network.svg'
+import SVGSquare from '../../../svg/square.svg'
+import SVGTodo from '../../../svg/todo.svg'
+
+const iconMap = {
+  bill: SVGBill,
+  whole: SVGWhole,
+  network: SVGNetwork,
+  square: SVGSquare,
+  todo: SVGTodo
+}
 
 const QuickPanel = props => {
   const [isCollapse, setIsCollapse] = useState(props.in)
@@ -18,11 +32,13 @@ const QuickPanel = props => {
     right,
     icon,
     iconColor,
-    'in': isIn, // eslint-disable-line
+    in: isIn, // eslint-disable-line
     className,
     children,
     ...rest
   } = props
+
+  const Icon = iconMap[icon]
 
   return (
     <div {...rest} className={classNames('gm-quick gm-quick-panel', className)}>
@@ -30,8 +46,7 @@ const QuickPanel = props => {
         <Flex alignEnd className='gm-padding-bottom-15'>
           <div>
             {icon && (
-              <i
-                className={`xfont xfont-${icon}`}
+              <Icon
                 style={{
                   color: iconColor,
                   marginRight: '2px',
@@ -50,12 +65,7 @@ const QuickPanel = props => {
                 ? getLocale('收拢详细信息')
                 : getLocale('展开详细信息')}
               &nbsp;
-              <i
-                className={classNames('xfont', {
-                  'xfont-down': !isCollapse,
-                  'xfont-up': isCollapse
-                })}
-              />
+              <IconDownUp active={isCollapse} />
             </a>
           )}
         </Flex>
