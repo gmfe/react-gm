@@ -54,18 +54,3 @@ storiesOf('Checkbox', module)
       ))}
     </CheckboxGroup>
   ))
-  .add('col', () => (
-    <CheckboxGroup
-      name='city'
-      inline
-      value={store.value}
-      onChange={value => store.setValue(value)}
-      col={2}
-    >
-      {store.data.map(v => (
-        <Checkbox key={v.value} value={v.value} disabled={v.disabled}>
-          {v.text}
-        </Checkbox>
-      ))}
-    </CheckboxGroup>
-  ))

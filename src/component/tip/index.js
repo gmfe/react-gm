@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import LayoutRoot from '../layout_root'
+import Flex from '../flex'
 
 const TipStatics = {
   tip: function(options) {
@@ -95,11 +96,11 @@ class TipOverlay extends React.Component {
   render() {
     const { title, type, children } = this.props
     return (
-      <div className='gm-animated gm-animated-fade-in-right-100'>
+      <Flex justifyEnd className='gm-animated gm-animated-fade-in-right-100'>
         <Tip title={title} type={type} onClose={this.handleClose}>
           {children}
         </Tip>
-      </div>
+      </Flex>
     )
   }
 }

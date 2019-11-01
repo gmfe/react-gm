@@ -5,22 +5,13 @@ import Popover from '../popover'
 import Overlay from './overlay'
 import IconDownUp from '../icon_down_up'
 import _ from 'lodash'
-import Flex from '../flex'
 
 const Default = props => {
   const { disabled, active } = props
   return (
-    <Button disabled={disabled}>
-      <Flex
-        justifyBetween
-        alignCenter
-        style={{
-          width: '98px'
-        }}
-      >
-        更多功能 &nbsp;&nbsp;
-        <IconDownUp active={active} />
-      </Flex>
+    <Button className='btn-primary btn-plain' disabled={disabled}>
+      更多功能 &nbsp;
+      <IconDownUp active={active} />
     </Button>
   )
 }
