@@ -32,13 +32,10 @@ const StorageStatics = {
   }
 }
 
-const Storage = ({ autoSave, name, value }) => {
-  useEffect(
-    () => {
-      StorageStatics.set(name, value)
-    },
-    autoSave ? [value] : []
-  )
+const Storage = ({ name, value }) => {
+  useEffect(() => {
+    StorageStatics.set(name, value)
+  }, [value])
 
   return null
 }
@@ -51,12 +48,7 @@ Storage.propTypes = {
     PropTypes.string,
     PropTypes.object,
     PropTypes.array
-  ]),
-  autoSave: PropTypes.bool
-}
-Storage.defaultProps = {
-  useRaw: false,
-  autoSave: true
+  ])
 }
 
 export default Storage
