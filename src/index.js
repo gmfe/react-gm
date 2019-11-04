@@ -104,6 +104,7 @@ import ImgUploader from './component/img_uploader'
 import IconDownUp from './component/icon_down_up'
 
 import { Col, Row } from './component/grid'
+import Tabs from './component/tabs/tabs'
 
 Object.assign(Sheet, {
   SheetColumn,
@@ -240,5 +241,6 @@ export {
   ImgUploader,
   IconDownUp,
   Col,
-  Row
+  Row,
+  Tabs
 }
