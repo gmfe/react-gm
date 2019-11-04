@@ -99,8 +99,6 @@ import { setLocale } from './locales'
 
 import Carousel from './component/carousel/carousel'
 import { Box, BoxForm, BoxTable, BoxPanel } from './component/box'
-
-import Tabs from './component/tabs/tabs'
 import ImgUploader from './component/img_uploader'
 
 import IconDownUp from './component/icon_down_up'
@@ -234,13 +232,12 @@ export {
   LevelSelect,
   Input,
   TableSelect,
-  Tabs,
-  ImgUploader,
   FunctionSet,
   Box,
   BoxForm,
   BoxTable,
   BoxPanel,
+  ImgUploader,
   IconDownUp,
   Col,
   Row
