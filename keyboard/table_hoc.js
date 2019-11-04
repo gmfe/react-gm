@@ -14,7 +14,7 @@ function keyboardTableHOC(Component) {
    * and column 需要标志 isKeyboard，同时需要 accessor or id
    * */
   const KeyboardTableHOC = props => {
-    const { id, onAddRow, ...tableProps } = props
+    const { id, onAddRow, onBeforeDispatch, ...tableProps } = props
     const { data, columns } = tableProps
 
     // 不显示的也不能生产 key
@@ -84,6 +84,7 @@ function keyboardTableHOC(Component) {
         }}
         dataLength={data.length}
         onAddRow={onAddRow}
+        onBeforeDispatch={onBeforeDispatch}
       >
         <Component {...tableProps} columns={newColumns} />
       </Wrap>
@@ -95,7 +96,8 @@ function keyboardTableHOC(Component) {
     /** 通过 id 来确定本单元格内通信，避免多表格时候混了。请确保 id 唯一 */
     id: PropTypes.string.isRequired,
     /** 增加一行数据 */
-    onAddRow: PropTypes.func.isRequired
+    onAddRow: PropTypes.func.isRequired,
+    onBeforeDispatch: PropTypes.func
   }
 
   return KeyboardTableHOC

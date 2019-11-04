@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import {
   WrapContext,
   KEYBOARD_DIRECTION,
-  KEYBOARD_ONFOCUS,
   KEYBOARD_ENTER,
-  KEYBOARD_TAB
+  KEYBOARD_TAB,
+  KeyboardActionsName,
+  doFocus
 } from './util'
+import _ from 'lodash'
 
 const getKey = cellKey => {
   const index = cellKey.indexOf('_')
@@ -23,63 +25,104 @@ const getKey = cellKey => {
  * Wrap 做出动作，其中包括 focus 到 Cell
  * */
 const Wrap = props => {
-  const { id, children, onAddRow, columnKeys, dataLength, fixedWidths } = props
+  const {
+    id,
+    children,
+    onAddRow,
+    columnKeys,
+    dataLength,
+    fixedWidths,
+    onBeforeDispatch
+  } = props
+
   const timer = useRef(null)
 
   // 处理 focus
-  const doFocusWithColumnRowKey = (rowKey, columnKey) => {
-    doFocus(`${rowKey}_${columnKey}`)
-  }
-  const doFocus = key => {
-    window.dispatchEvent(
-      new window.CustomEvent(KEYBOARD_ONFOCUS + id, {
-        detail: {
-          cellKey: key
-        }
-      })
-    )
+  const doFocusWithColumnRowKey = (actionName, rowKey, columnKey, cellKey) => {
+    const result = onBeforeDispatch({
+      actionName,
+      to: { rowKey, columnKey },
+      from: getKey(cellKey)
+    })
+
+    // 返回 false 阻止默认行为
+    if (result === false) {
+      return
+    }
+
+    doFocus(id, rowKey, columnKey)
   }
 
   // 处理方向
-  const toDirectionRight = (rowKey, columnKey) => {
+  const toDirectionRight = (rowKey, columnKey, cellKey) => {
     const columnIndex = columnKeys.indexOf(columnKey)
     // 如果不是最后一列
     if (columnIndex < columnKeys.length - 1) {
-      doFocusWithColumnRowKey(rowKey, columnKeys[columnIndex + 1])
+      doFocusWithColumnRowKey(
+        KeyboardActionsName.RIGHT,
+        rowKey,
+        columnKeys[columnIndex + 1],
+        cellKey
+      )
     }
   }
 
-  const doDirectionDown = (rowKey, columnKey) => {
+  const doDirectionDown = (rowKey, columnKey, cellKey) => {
     clearTimeout(timer.current)
 
     // 往下一个
     if (rowKey < dataLength - 1) {
-      doFocusWithColumnRowKey(rowKey + 1, columnKey)
+      doFocusWithColumnRowKey(
+        KeyboardActionsName.DOWN,
+        rowKey + 1,
+        columnKey,
+        cellKey
+      )
     }
     // 最后一行
     else if (rowKey === dataLength - 1) {
       onAddRow()
       timer.current = setTimeout(() => {
         // 去到第一列
-        doFocusWithColumnRowKey(rowKey + 1, columnKeys[0])
+        doFocusWithColumnRowKey(
+          KeyboardActionsName.DOWN,
+          rowKey + 1,
+          columnKeys[0],
+          cellKey
+        )
       }, 10)
     }
   }
-  const doDirectionLeft = (rowKey, columnKey) => {
+  const doDirectionLeft = (rowKey, columnKey, cellKey) => {
     const columnIndex = columnKeys.indexOf(columnKey)
     // 如果不是第一列
     if (columnIndex > 0) {
-      doFocusWithColumnRowKey(rowKey, columnKeys[columnIndex - 1])
+      doFocusWithColumnRowKey(
+        KeyboardActionsName.LEFT,
+        rowKey,
+        columnKeys[columnIndex - 1],
+        cellKey
+      )
     }
   }
-  const doDirectionUp = (rowKey, columnKey) => {
+  const doDirectionUp = (rowKey, columnKey, cellKey) => {
     // 往上一个
     if (rowKey > 0) {
-      doFocusWithColumnRowKey(rowKey - 1, columnKey)
+      doFocusWithColumnRowKey(
+        KeyboardActionsName.UP,
+        rowKey - 1,
+        columnKey,
+        cellKey
+      )
     }
     // 循环到最后一个
     else if (rowKey === 0) {
-      doFocusWithColumnRowKey(dataLength - 1, columnKey)
+      doFocusWithColumnRowKey(
+        KeyboardActionsName.UP,
+        dataLength - 1,
+        columnKey,
+        cellKey
+      )
     }
   }
 
@@ -90,13 +133,13 @@ const Wrap = props => {
       const { rowKey, columnKey } = getKey(cellKey)
 
       if (direction === 'right') {
-        toDirectionRight(rowKey, columnKey)
+        toDirectionRight(rowKey, columnKey, cellKey)
       } else if (direction === 'down') {
-        doDirectionDown(rowKey, columnKey)
+        doDirectionDown(rowKey, columnKey, cellKey)
       } else if (direction === 'left') {
-        doDirectionLeft(rowKey, columnKey)
+        doDirectionLeft(rowKey, columnKey, cellKey)
       } else if (direction === 'up') {
-        doDirectionUp(rowKey, columnKey)
+        doDirectionUp(rowKey, columnKey, cellKey)
       }
     }
 
@@ -118,20 +161,35 @@ const Wrap = props => {
 
       // 如果不是最后一列
       if (columnIndex < columnKeys.length - 1) {
-        doFocusWithColumnRowKey(rowKey, columnKeys[columnIndex + 1])
+        doFocusWithColumnRowKey(
+          KeyboardActionsName.ENTER,
+          rowKey,
+          columnKeys[columnIndex + 1],
+          cellKey
+        )
       }
       // 最后一列了
       else if (columnIndex === columnKeys.length - 1) {
         // 如果不是最后一行
         if (rowKey < dataLength - 1) {
-          doFocusWithColumnRowKey(rowKey + 1, columnKeys[0])
+          doFocusWithColumnRowKey(
+            KeyboardActionsName.ENTER,
+            rowKey + 1,
+            columnKeys[0],
+            cellKey
+          )
         }
         // 最后一行了
         else if (rowKey === dataLength - 1) {
           onAddRow()
           timer.current = setTimeout(() => {
             // 去到第一列
-            doFocusWithColumnRowKey(rowKey + 1, columnKeys[0])
+            doFocusWithColumnRowKey(
+              KeyboardActionsName.ENTER,
+              rowKey + 1,
+              columnKeys[0],
+              cellKey
+            )
           }, 10)
         }
       }
@@ -152,17 +210,32 @@ const Wrap = props => {
 
       // 如果不是最后一列
       if (columnIndex < columnKeys.length - 1) {
-        doFocusWithColumnRowKey(rowKey, columnKeys[columnIndex + 1])
+        doFocusWithColumnRowKey(
+          KeyboardActionsName.TAB,
+          rowKey,
+          columnKeys[columnIndex + 1],
+          cellKey
+        )
       }
       // 最后一列了
       else if (columnIndex === columnKeys.length - 1) {
         // 如果不是最后一行
         if (rowKey < dataLength - 1) {
-          doFocusWithColumnRowKey(rowKey + 1, columnKeys[0])
+          doFocusWithColumnRowKey(
+            KeyboardActionsName.TAB,
+            rowKey + 1,
+            columnKeys[0],
+            cellKey
+          )
         }
         // 最后一行了
         else if (rowKey === dataLength - 1) {
-          doFocusWithColumnRowKey(0, columnKeys[0])
+          doFocusWithColumnRowKey(
+            KeyboardActionsName.TAB,
+            0,
+            columnKeys[0],
+            cellKey
+          )
         }
       }
     }
@@ -189,13 +262,20 @@ const Wrap = props => {
 Wrap.propTypes = {
   /** 通过 id 来确定本单元格内通信，避免多表格时候混了。请确保 id 唯一 */
   id: PropTypes.string.isRequired,
+  /** 增加一行数据 */
+  onAddRow: PropTypes.func.isRequired,
+  /** (actionName, to, from) */
+  onBeforeDispatch: PropTypes.func,
+
   /** Wrap 需要知道字段集合，以便能找到相应的单元格。请确保表格的顺序一样 */
   columnKeys: PropTypes.array.isRequired,
   /** Wrap 需要知道有多少行，以便能找到相应的单元格，同时必要时会触发 onAddRow 告知调用方需要增加一行数据 */
   dataLength: PropTypes.number.isRequired,
-  /** 增加一行数据 */
-  onAddRow: PropTypes.func.isRequired,
   fixedWidths: PropTypes.object.isRequired
+}
+
+Wrap.defaultProps = {
+  onBeforeDispatch: _.noop
 }
 
 export default Wrap
