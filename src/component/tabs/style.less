@@ -1,0 +1,33 @@
+.gm-tabs-container {
+  overflow-x: auto;
+
+  .gm-tabs {
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(216, 222, 231, 0.5); // todo 四级辅色 #d8dee7 50%
+    height: 40px;
+
+    .gm-tab {
+      display: inline-block;
+      border-radius: 4px 4px 0 0;
+      height: 40px;
+      font-size: 14px;
+      color: #798294; // todo 四级文字
+      border: 1px solid rgba(216, 222, 231, 0.5); // todo 四级辅色 #d8dee7 50%
+      margin-right: 1px;
+      background-color: #e8eaf0;
+      cursor: pointer;
+      padding: 8px 12px;
+      transition: background-color 0.4s;
+
+      &:hover {
+        color: #243351; //todo 一级文字
+      }
+
+      &.active {
+        color: #243351; //todo 一级文字
+        background-color: #fff;
+        border-bottom: 1px solid transparent;
+      }
+    }
+  }
+}
