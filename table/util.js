@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Popover } from '../src'
-import { SvgShanchumorenHuaban, SvgTianjiamorenHuaban } from 'gm-svg'
 import _ from 'lodash'
+import SVGMinusSquare from '../svg/minus-square.svg'
+import SVGPlusSquare from '../svg/plus-square.svg'
 import SVGFun from '../svg/fun.svg'
 
 const OperationHeader = (
@@ -57,7 +58,7 @@ const EditTableOperation = props => {
         popup={<div className='gm-padding-5'>添加</div>}
       >
         <span onClick={props.onAddRow}>
-          <SvgTianjiamorenHuaban
+          <SVGPlusSquare
             className={classNames('gm-react-edit-table-action-add', {
               disabled: !props.onAddRow
             })}
@@ -70,7 +71,7 @@ const EditTableOperation = props => {
         popup={<div className='gm-padding-5'>删除</div>}
       >
         <span onClick={props.onDeleteRow}>
-          <SvgShanchumorenHuaban
+          <SVGMinusSquare
             className={classNames('gm-react-edit-table-action-delete', {
               disabled: !props.onDeleteRow
             })}
