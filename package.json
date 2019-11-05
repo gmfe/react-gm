@@ -80,7 +80,6 @@
     "eslint-plugin-standard": "^4.0.0",
     "file-loader": "^4.2.0",
     "gm-service": "^1.7.14",
-    "gm-svg": "^0.3.17",
     "husky": "^3.0.1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",

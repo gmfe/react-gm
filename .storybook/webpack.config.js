@@ -21,10 +21,7 @@ module.exports = ({ config }) => {
     ],
     include: [path.resolve('./')],
     exclude: function(filepath) {
-      if (
-        filepath.includes('/node_modules/gm-util/') ||
-        filepath.includes('/node_modules/gm-svg/')
-      ) {
+      if (filepath.includes('/node_modules/gm-util/')) {
         return false
       }
 

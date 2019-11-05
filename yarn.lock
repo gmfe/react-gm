@@ -5267,11 +5267,6 @@ gm-service@^1.7.14:
   dependencies:
     semver "^6.0.0"
 
-gm-svg@^0.3.17:
-  version "0.3.23"
-  resolved "https://registry.npmjs.org/gm-svg/-/gm-svg-0.3.23.tgz#052e0c32d08a106e361b7b7ef89afc0c1276646d"
-  integrity sha512-njmYX5K5pNpcxWqSkDMXQ8mPnriQAhNpTxvcdA/yrDrW/MQDxPvVYL/c+wV+H6bqk/5xhdWA1xJu595aR5UNPg==
-
 gm-util@^5.11.0:
   version "5.11.3"
   resolved "https://registry.npmjs.org/gm-util/-/gm-util-5.11.3.tgz#f24703731111b17befb510c8f6f29d648c6286d9"
