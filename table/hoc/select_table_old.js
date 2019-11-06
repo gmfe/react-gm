@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import baseSelectTableHoc from 'react-table/lib/hoc/selectTable'
+import baseSelectTableHoc from 'react-table-v6/lib/hoc/selectTable'
 import _ from 'lodash'
 import Table from '../table'
 

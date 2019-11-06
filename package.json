@@ -51,7 +51,8 @@
     "@svgr/webpack": "^4.3.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
-    "react-table": "6.8.6"
+    "react-table": "7.0.0-beta.12",
+    "react-table-v6": "6.8.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
@@ -59,7 +60,6 @@
     "@babel/preset-env": "^7.5.4",
     "@babel/runtime": "^7.5.5",
     "@storybook/addon-info": "^5.2.1",
-    "@storybook/addon-knobs": "^5.2.1",
     "@storybook/addon-notes": "^5.2.1",
     "@storybook/addon-storysource": "^5.2.1",
     "@storybook/react": "^5.2.1",
@@ -98,7 +98,8 @@
     "react-loadable": "^5.5.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "react-table": "6.8.6",
+    "react-table": "7.0.0-beta.12",
+    "react-table-6": "6.8.6",
     "sortablejs": "^1.10.1",
     "standard": "^13.0.2",
     "stylelint": "^10.1.0",

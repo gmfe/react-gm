@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import BaseTable from './table/base'
-import { ReactTableDefaults } from 'react-table'
+import { ReactTableDefaults } from 'react-table-v6'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 const TrGroupInner = React.memo(function TrGroupInner(props) {
-  let { children, dragHandleProps } = props
+  const { children, dragHandleProps } = props
 
   return React.Children.map(children, child => {
     if (React.isValidElement(child)) {
-      let TdChildren = React.Children.map(child.props.children, Td => {
-        if (React.isValidElement(Td) && Td.props['_dragField']) {
+      const TdChildren = React.Children.map(child.props.children, Td => {
+        if (React.isValidElement(Td) && Td.props._dragField) {
           Td = React.cloneElement(Td, dragHandleProps)
         }
         return Td
@@ -127,7 +127,7 @@ class DndTable extends React.Component {
       ...rest
     } = this.props
 
-    let isDragInnerField =
+    const isDragInnerField =
       rest.columns &&
       rest.columns.length &&
       rest.columns.some(col => col.dragField)

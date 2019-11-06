@@ -90,7 +90,7 @@ const selectData = [
   }
 ]
 
-storiesOf('表格|EditTable', module)
+storiesOf('Table|EditTable', module)
   .add(
     'default',
     () => {
@@ -189,7 +189,7 @@ TODO 补充 文本显示不完整 案例
     const ref = React.createRef()
     return (
       <DiyEditTable
-        id={'diy-edit-table'}
+        id='diy-edit-table'
         ref={ref}
         data={store.data}
         diyGroupSorting={['基础']}

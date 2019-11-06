@@ -6,6 +6,6 @@ yarn.lock
 /docs
 .stylelintcache
 .eslintcache
-
+yarn-error.log
 
 
