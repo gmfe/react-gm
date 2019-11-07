@@ -122,7 +122,7 @@ SortableBase.propTypes = {
   options: PropTypes.object,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  tag: PropTypes.element,
+  tag: PropTypes.node,
   style: PropTypes.object
 }
 
