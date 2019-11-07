@@ -51,7 +51,7 @@ Sortable.propTypes = {
   onChange: PropTypes.func.isRequired,
   renderItem: PropTypes.func,
   /** 支持 ref */
-  tag: PropTypes.element,
+  tag: PropTypes.node,
   options: PropTypes.object
 }
 
