@@ -103,6 +103,7 @@ class Transfer extends React.Component {
             className='gm-transfer-operation'
           >
             <button
+              type='button'
               disabled={disabled || leftSelectedValues.length === 0}
               className='btn btn-default btn-block gm-margin-bottom-5'
               onClick={this.handleToRightClick}
@@ -110,6 +111,7 @@ class Transfer extends React.Component {
               &gt;
             </button>
             <button
+              type='button'
               disabled={disabled || rightSelectedValues.length === 0}
               className='btn btn-default btn-block'
               onClick={this.handleToLeftClick}
