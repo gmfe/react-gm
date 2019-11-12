@@ -1,9 +1,6 @@
 .idea
 .DS_Store
-/npm-debug.log
-/build
+npm-debug.log
 node_modules/
-package-lock.json
 .stylelintcache
 .eslintcache
-yarn.lock
