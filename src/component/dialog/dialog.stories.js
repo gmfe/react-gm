@@ -47,9 +47,9 @@ storiesOf('Dialog', module).add('default', () => (
           size: 'md',
           children: <div>something</div>,
           onOK: () => {
-            return new Promise(resove => {
+            return new Promise(resolve => {
               setTimeout(() => {
-                resove('a')
+                resolve('a')
               }, 1000)
             })
           }
