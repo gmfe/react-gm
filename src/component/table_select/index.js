@@ -22,7 +22,13 @@ const TableSelect = React.forwardRef((props, ref) => {
   })
 
   const Title = (
-    <Flex>
+    <Flex
+      alignCenter
+      justifyCenter
+      style={{
+        minHeight: '40px'
+      }}
+    >
       {_.map(columns, (column, i) => (
         <div
           key={`${i}_${getColumnKey(column)}`}
@@ -51,7 +57,15 @@ const TableSelect = React.forwardRef((props, ref) => {
 
   const renderListItem = (item, index) => {
     return (
-      <Flex key={item.value}>
+      <Flex
+        key={item.value}
+        alignCenter
+        justifyCenter
+        style={{
+          minHeight: '40px',
+          position: 'relative'
+        }}
+      >
         {_.map(columns, (column, i) => {
           let content = null
           if (column.Cell) {
