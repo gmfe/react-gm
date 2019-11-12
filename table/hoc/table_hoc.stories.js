@@ -53,12 +53,78 @@ const store = observable({
           subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
         }
       ]
+    },
+    {
+      total_money: 176,
+      id: 'T5991-JHD-2018-07-25-00026',
+      sku_money: '176.00',
+      supplier_customer_id: 'A2926',
+      submit_time: '2018-07-26',
+      status: 2,
+      supplier_name: '段虎',
+      date_time: '2018-07-25',
+      delta_money: 0,
+      settle_supplier_id: 'T14319',
+      address: {
+        value: 9,
+        text: '西乡9'
+      },
+      subTable: [
+        {
+          id: '1',
+          name: 'a',
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        },
+        {
+          id: '2',
+          name: 2,
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        }
+      ]
+    },
+    {
+      total_money: 279,
+      id: 'T5991-JHD-2018-07-25-00025',
+      sku_money: '279.02',
+      supplier_customer_id: 'sc215',
+      submit_time: '2018-07-27',
+      status: 2,
+      supplier_name: '黑市桥蔬菜批发',
+      date_time: '2018-07-25',
+      delta_money: -2.0,
+      settle_supplier_id: 'T13324',
+      address: {
+        value: 4,
+        text: '宝安'
+      },
+      subTable: [
+        {
+          id: '3',
+          name: 'a',
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        },
+        {
+          id: '4',
+          name: 2,
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        },
+        {
+          id: '8',
+          name: 2,
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        },
+        {
+          id: '9',
+          name: 2,
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        }
+      ]
     }
   ],
   sortTimeType: 'asc',
   isSelectAllPage: false,
   selected: [],
-  expanded: ['LDP20180117'],
+  expanded: ['T5991-JHD-2018-07-25-00026'],
   sortTime() {
     this.data = _.sortBy(this.data, 'submit_time')
     if (this.sortTimeType === 'asc') {
@@ -357,7 +423,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
   ))
   .add('expand', () => (
     <ExpandTable
-      keyField='supplier_customer_id'
+      keyField='id'
       data={store.data}
       columns={[
         {
@@ -382,6 +448,15 @@ HOC 可以相互组合使用，但是请注意使用顺序!
             { Header: '序号', accessor: 'id' },
             { Header: '名字', accessor: 'name' }
           ]}
+          SubComponent={item => (
+            <SubTable
+              data={item.original.subTable}
+              columns={[
+                { Header: '序号22', accessor: 'id' },
+                { Header: '名字22', accessor: 'name' }
+              ]}
+            />
+          )}
         />
       )}
     />
