@@ -4,6 +4,14 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Flex from '../flex'
 
+const A = ({ href, ...rest }) => {
+  return <a {...rest} href={`#${href}`} />
+}
+
+A.propTypes = {
+  href: PropTypes.string.isRequired
+}
+
 const Popup = props => {
   const { data, selected, onSelect } = props
 
@@ -15,7 +23,7 @@ const Popup = props => {
             <div className='gm-nav-two-title'>{v.name}</div>
             <div>
               {_.map(v.sub, (s, si) => (
-                <a
+                <A
                   key={si}
                   href={s.link}
                   className={classNames('gm-nav-there', {
@@ -27,7 +35,7 @@ const Popup = props => {
                   }}
                 >
                   {s.name}
-                </a>
+                </A>
               ))}
             </div>
           </div>
@@ -79,10 +87,10 @@ const Item = props => {
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     >
-      <a href={link} className='gm-nav-one' onClick={handleClick}>
+      <A href={link} className='gm-nav-one' onClick={handleClick}>
         <div className='gm-nav-one-icon'>{icon}</div>
         <div className='gm-nav-one-text'>{name}</div>
-      </a>
+      </A>
       <div className='gm-nav-one-triangle' />
       {show && <Popup data={sub} onSelect={handleSelect} selected={selected} />}
     </div>

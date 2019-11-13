@@ -4,9 +4,8 @@ console.log('lng', lng)
 setLocale(lng)
 
 import React from 'react'
-import { configure, addDecorator, addParameters } from '@storybook/react'
+import { configure, addDecorator } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
-import { withKnobs } from '@storybook/addon-knobs'
 import { Observer } from 'mobx-react'
 import { LayoutRoot, setLocale, Storage } from '../src'
 import './style.less'
@@ -16,12 +15,15 @@ import '../src/index.less'
 // 引入 frame 样式
 import '../frame/style.less'
 // 引入 react-table 样式
-import 'react-table/react-table.css'
+import 'react-table-v6/react-table.css'
 import '../table/style.less'
+// tablex
+import '../table_x/style.less'
 
 const reqs = [
   require.context('../src', true, /stories\.js$/),
   require.context('../table', true, /stories\.js$/),
+  require.context('../table_x', true, /stories\.js$/),
   require.context('../keyboard', true, /stories\.js$/),
   require.context('../sortable', true, /stories\.js$/),
   require.context('../frame', true, /stories\.js$/),
@@ -33,12 +35,6 @@ function loadStories() {
     req.keys().forEach(filename => req(filename))
   })
 }
-
-addParameters({
-  options: {
-    panelPosition: 'right'
-  }
-})
 
 addDecorator(
   withInfo({
@@ -60,8 +56,6 @@ addDecorator(
     }
   })
 )
-
-addDecorator(withKnobs)
 
 addDecorator(storeFn => (
   <React.Fragment>

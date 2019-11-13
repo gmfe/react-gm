@@ -58,27 +58,21 @@ class Checkbox extends React.Component {
 }
 
 Checkbox.propTypes = {
-  value: PropTypes.any,
+  checked: PropTypes.bool,
   onChange: PropTypes.func,
-
+  value: PropTypes.any,
+  name: PropTypes.string,
+  inline: PropTypes.bool,
+  disabled: PropTypes.bool,
+  children: PropTypes.any,
   // 如果需要整行可点，则
   block: PropTypes.bool,
   col: PropTypes.number,
-
-  // 由CheckboxGroup 传下来
-  name: PropTypes.string,
-  checked: PropTypes.bool,
-  inline: PropTypes.bool,
-
-  disabled: PropTypes.bool,
-
-  children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }
 
 Checkbox.defaultProps = {
-  checked: false,
   onChange: _.noop
 }
 

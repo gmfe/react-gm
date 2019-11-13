@@ -15,13 +15,14 @@ class CheckboxGroup extends React.Component {
 
   render() {
     const {
-      onChange,
+      name,
       value,
+      onChange,
       inline,
+      block,
+      col,
       className,
       children,
-      name,
-      col,
       ...rest
     } = this.props
 
@@ -40,6 +41,7 @@ class CheckboxGroup extends React.Component {
             inline,
             onChange: this.handleChange.bind(this, child.props.value),
             name,
+            block,
             col
           })
         })}
@@ -53,15 +55,14 @@ CheckboxGroup.propTypes = {
   value: PropTypes.array.isRequired,
   onChange: PropTypes.func,
   inline: PropTypes.bool,
+  block: PropTypes.bool,
   col: PropTypes.number,
-
   children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object
 }
 
 CheckboxGroup.defaultProps = {
-  inline: false,
   value: [],
   onChange: _.noop
 }

@@ -1,10 +1,10 @@
 //cover bootstrap.style for radio
-.gm-radio-group label {
+.gm-radio {
+  cursor: pointer;
   padding-left: 0 !important;
-}
+  margin-bottom: 0;
 
-.gm-radio-group {
-  .radio-inline {
+  &.radio-inline {
     padding-top: 0;
     padding-left: 0;
   }
@@ -41,7 +41,7 @@
     transition: opacity 0.2s linear;
   }
 
-  .disabled {
+  &.disabled {
     input + span {
       border: 1px solid @gm-border-color;
       background: #f5f5f5;

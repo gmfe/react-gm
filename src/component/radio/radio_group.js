@@ -45,7 +45,6 @@ RadioGroup.propTypes = {
 }
 
 RadioGroup.defaultProps = {
-  inline: false,
   onChange: _.noop
 }
 

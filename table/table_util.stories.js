@@ -181,7 +181,7 @@ const store = observable({
   }
 })
 
-storiesOf('表格|TableUtil', module)
+storiesOf('Table|TableUtil', module)
   .addParameters({
     info: {
       text: `

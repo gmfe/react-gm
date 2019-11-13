@@ -100,7 +100,7 @@ const columns = [
   }
 ]
 
-storiesOf('表格|Table', module)
+storiesOf('Table|Table', module)
   .addParameters({
     info: {
       text: `

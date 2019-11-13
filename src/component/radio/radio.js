@@ -9,52 +9,56 @@ class Radio extends React.Component {
       value,
       checked,
       onChange,
+      onClick,
       children,
       inline,
       name,
       disabled
     } = this.props
 
-    return (
-      <div className={inline ? 'radio-inline' : ''}>
-        <label
-          className={classNames({
-            disabled
-          })}
-        >
-          <input
-            type='radio'
-            className='gm-input-radio'
-            name={name}
-            value={value}
-            checked={checked}
-            onChange={onChange}
-            disabled={disabled}
-          />
-          <span />
-          {children}
-        </label>
-      </div>
+    const inner = (
+      <label
+        className={classNames('gm-radio', {
+          'radio-inline': inline,
+          disabled
+        })}
+      >
+        <input
+          type='radio'
+          className='gm-input-radio'
+          name={name}
+          value={value}
+          checked={checked}
+          onChange={onChange}
+          onClick={onClick}
+          disabled={disabled}
+        />
+        <span />
+        {children}
+      </label>
     )
+
+    if (!inline) {
+      return <div>{inner}</div>
+    }
+    return inner
   }
 }
 
 Radio.propTypes = {
-  value: PropTypes.any,
-  onChange: PropTypes.func,
-
-  // 由RadioGroup 传下来
   checked: PropTypes.bool,
+  onChange: PropTypes.func,
+  value: PropTypes.any,
   name: PropTypes.string,
   inline: PropTypes.bool,
-
   disabled: PropTypes.bool,
-  children: PropTypes.any
+  children: PropTypes.any,
+  onClick: PropTypes.func
 }
 
 Radio.defaultProps = {
-  checked: false,
-  onChange: _.noop
+  onChange: _.noop,
+  onClick: _.noop
 }
 
 export default Radio
