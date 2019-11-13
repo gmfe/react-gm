@@ -52,7 +52,8 @@
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-table": "7.0.0-beta.12",
-    "react-table-v6": "6.8.6"
+    "react-table-v6": "6.8.6",
+    "react-window": "^1.8.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
@@ -100,6 +101,7 @@
     "react-router-dom": "^5.0.1",
     "react-table": "7.0.0-beta.12",
     "react-table-v6": "6.8.6",
+    "react-window": "^1.8.5",
     "sortablejs": "^1.10.1",
     "standard": "^13.0.2",
     "stylelint": "^10.1.0",

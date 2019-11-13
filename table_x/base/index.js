@@ -1,11 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  useTable,
-  useSortBy,
-  useResizeColumns,
-  useAbsoluteLayout
-} from 'react-table'
+import { useTable, useSortBy, useResizeColumns } from 'react-table'
 import {
   Empty,
   Loading,
@@ -15,6 +10,7 @@ import {
   afterScroll
 } from '../util'
 import classNames from 'classnames'
+import _ from 'lodash'
 
 // 覆盖默认 按下 shift 多选
 const handleIsMultiSortEvent = () => true
@@ -122,7 +118,7 @@ Td.propTypes = {
   totalWidth: PropTypes.number.isRequired
 }
 
-const Tr = ({ row, SubComponent }) => {
+const Tr = ({ row, SubComponent, keyField, style }) => {
   const gp = row.getRowProps()
   const props = {
     ...gp,
@@ -135,8 +131,11 @@ const Tr = ({ row, SubComponent }) => {
     totalWidth = last.totalLeft + last.totalWidth
   }
 
+  // 目前视为了 srotable 用。值可能是 undefined，keyField 没作用的情况
+  const dataId = row.original[keyField]
+
   return (
-    <div className='gm-table-tr-group'>
+    <div className='gm-tablex-tr-group' data-id={dataId} style={style}>
       <div {...props}>
         {row.cells.map((cell, cellIndex) => (
           <Td key={cellIndex} cell={cell} totalWidth={totalWidth} />
@@ -149,16 +148,19 @@ const Tr = ({ row, SubComponent }) => {
 
 Tr.propTypes = {
   row: PropTypes.object.isRequired,
-  SubComponent: PropTypes.func
+  SubComponent: PropTypes.func,
+  keyField: PropTypes.string.isRequired,
+  style: PropTypes.object.isRequired
 }
 
 const TBody = ({
   data,
-  loading,
   SubComponent,
   rows,
   prepareRow,
-  getTableBodyProps
+  getTableBodyProps,
+  keyField,
+  RowsContainerComponent
 }) => {
   const gtbp = getTableBodyProps()
   const props = {
@@ -166,27 +168,36 @@ const TBody = ({
     className: 'gm-tablex-tbody'
   }
 
+  // eslint-disable-next-line
+  const RenderRow = ({ index, style }) => {
+    const row = rows[index]
+    prepareRow(row)
+    return (
+      <Tr
+        key={row.index}
+        row={row}
+        SubComponent={SubComponent}
+        keyField={keyField}
+        style={style}
+      />
+    )
+  }
+
   return (
     <div {...props}>
-      {loading && <Loading />}
-      {!loading && data.length === 0 && <Empty />}
-      {!loading &&
-        data.length > 0 &&
-        rows.map(row => {
-          prepareRow(row)
-          return <Tr key={row.index} row={row} SubComponent={SubComponent} />
-        })}
+      <RowsContainerComponent rows={rows}>{RenderRow}</RowsContainerComponent>
     </div>
   )
 }
 
 TBody.propTypes = {
   data: PropTypes.array.isRequired,
-  loading: PropTypes.bool,
   SubComponent: PropTypes.func,
   rows: PropTypes.array.isRequired,
   prepareRow: PropTypes.func.isRequired,
-  getTableBodyProps: PropTypes.func.isRequired
+  getTableBodyProps: PropTypes.func.isRequired,
+  keyField: PropTypes.string.isRequired,
+  RowsContainerComponent: PropTypes.func.isRequired
 }
 
 const TableX = ({
@@ -196,8 +207,10 @@ const TableX = ({
   disableSorting,
   disableMultiSort,
   SubComponent,
+  RowsContainerComponent,
+  keyField,
   className,
-  style
+  ...rest
 }) => {
   const {
     getTableProps,
@@ -230,21 +243,30 @@ const TableX = ({
 
   return (
     <div
-      className={classNames('gm-tablex', className)}
-      style={style}
+      {...rest}
+      className={classNames(
+        'gm-tablex',
+        {
+          'gm-tablex-empty': data.length === 0
+        },
+        className
+      )}
       onScroll={handleScroll}
     >
       <div {...tableProps}>
         <THead headers={headers} />
         <TBody
           data={data}
-          loading={loading}
           SubComponent={SubComponent}
           rows={rows}
           prepareRow={prepareRow}
           getTableBodyProps={getTableBodyProps}
+          keyField={keyField}
+          RowsContainerComponent={RowsContainerComponent}
         />
       </div>
+      {loading && <Loading />}
+      {!loading && data.length === 0 && <Empty />}
     </div>
   )
 }
@@ -253,16 +275,32 @@ TableX.propTypes = {
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
   loading: PropTypes.bool,
+  /** 默认禁用，如需提供 false， */
   disableSorting: PropTypes.bool,
   disableMultiSort: PropTypes.bool,
   SubComponent: PropTypes.func,
+  /** 为了接入虚拟列表 */
+  RowsContainerComponent: PropTypes.func,
+  /* 由其他 hoc 传下来 */
+  keyField: PropTypes.string,
   className: PropTypes.string,
-
   style: PropTypes.object
 }
 
 TableX.defaultProps = {
-  disableSorting: true
+  keyField: 'value',
+  disableSorting: true,
+  // eslint-disable-next-line
+  RowsContainerComponent: ({ rows, children }) => (
+    <>
+      {_.map(rows, (row, index) =>
+        children({
+          index,
+          style: {}
+        })
+      )}
+    </>
+  )
 }
 
 export default TableX

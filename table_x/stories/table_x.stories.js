@@ -1,9 +1,9 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { TableX } from './index'
+import { TableX } from '../index'
 import { observable } from 'mobx/lib/mobx'
 import moment from 'moment'
-import { SortHeader } from './util'
+import { SortHeader } from '../util'
 
 const sortDateTime = (a, b) => {
   const mA = moment(a.submit_time)
@@ -217,7 +217,9 @@ Table 切 TableX 关注点：
 - fixedColumn column 不需要提供 width
 
 DONE
+- limit width height
 - select 字符串问题。=》不存在
+- select BatchActionBar
 - 左右拖动
 - 滚动，上下和左右
 - 滚动事件
@@ -225,17 +227,16 @@ DONE
 - loading 
 - empty
 - 固定列
+- 拖拽排序
+- 虚拟列表
 
 TODO
-- BatchActionBar
-- 虚拟列表
-- 拖拽排序
-- Edit
+- Edit referOfWidth
 - Keyboard
 - diy
 - edit row
 - hoc sub table
-- referOfWidth
+- util
 - ...
 
 `
@@ -268,96 +269,12 @@ react-table@v7支持多重排序，通过 shift 来完成。但不方便，所�
   .add('后台排序', () => (
     <TableX data={store.data} columns={sortColumnsBackEnd} />
   ))
-// .add('limit height width & scroll', () => (
-//   <Table
-//     style={{
-//       height: '200px',
-//       width: '300px'
-//     }}
-//     data={store.data}
-//     columns={[
-//       {
-//         Header: '建单时间',
-//         accessor: 'submit_time',
-//         width: 400
-//       },
-//       {
-//         Header: '地址',
-//         accessor: 'address.text',
-//         width: 200
-//       }
-//     ]}
-//   />
-// ))
-// .add('group', () => (
-//   <Table
-//     data={store.data}
-//     columns={[
-//       {
-//         Header: 'Group1',
-//         columns: [
-//           {
-//             Header: '序号',
-//             Cell: cellProps => cellProps.index + 1
-//           },
-//           {
-//             Header: '建单时间',
-//             accessor: 'submit_time'
-//           },
-//           {
-//             Header: '地址',
-//             accessor: 'address.text',
-//             width: 200
-//           }
-//         ]
-//       },
-//       {
-//         Header: 'Group2',
-//         columns: [
-//           {
-//             Header: '供应商信息',
-//             id: 'supplier_name',
-//             accessor: data => data.supplier_name
-//           },
-//           {
-//             Header: '入库金额',
-//             accessor: 'total_money',
-//             Cell: cellProps => (
-//               <div>
-//                 {cellProps.value} 或者 {cellProps.original.total_money}
-//               </div>
-//             )
-//           }
-//         ]
-//       }
-//     ]}
-//   />
-// ))
-// .add('sort', () => (
-//   <Table
-//     data={store.data}
-//     columns={[
-//       {
-//         Header: '序号',
-//         Cell: cellProps => cellProps.index + 1,
-//         sortable: true
-//       },
-//       {
-//         Header: (
-//           <SortHeader
-//             onClick={() => store.sortTime()}
-//             type={store.sortTimeType}
-//           >
-//             建单时间
-//           </SortHeader>
-//         ),
-//         accessor: 'submit_time'
-//       },
-//       {
-//         Header: '地址',
-//         accessor: 'address.text',
-//         width: 200
-//       }
-//     ]}
-//   />
-// ))
+  .add('limit height', () => (
+    <TableX
+      data={store.data}
+      columns={columns}
+      style={{
+        height: '200px'
+      }}
+    />
+  ))

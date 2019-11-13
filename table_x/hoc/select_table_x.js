@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import TableX from '../base'
-import { COLUMN_WIDTH, TABLEX_SELECT_ID } from '../util'
+import { TABLEX_COLUMN_WIDTH, TABLEX_SELECT_ID } from '../util'
 import { Checkbox, Radio, Flex } from '../../src'
 import _ from 'lodash'
 
@@ -34,8 +34,8 @@ function selectTableXHOC(Component) {
     const newColumns = [
       {
         id: TABLEX_SELECT_ID,
-        width: COLUMN_WIDTH.FUN_WIDTH,
-        maxWidth: COLUMN_WIDTH.FUN_WIDTH,
+        width: TABLEX_COLUMN_WIDTH.FUN_WIDTH,
+        maxWidth: TABLEX_COLUMN_WIDTH.FUN_WIDTH,
         fixed: fixedSelect ? 'left' : null,
         Header: () =>
           selectType === 'checkbox' ? (

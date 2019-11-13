@@ -10,33 +10,57 @@ import BatchActionBar from '../table/hoc/select_table/batch_action_bar'
 
 const TABLEX_SELECT_ID = 'tablex_select_id'
 const TABLEX_EXPAND_ID = 'tablex_expand_id'
-
-const COLUMN_WIDTH = {
+const TABLEX_TR_HEIGHT = 60
+const TABLEX_COLUMN_WIDTH = {
   // 功能区的宽度，刚好和header头部一样。eg select expand
   FUN_WIDTH: 46
 }
 
-const Empty = () => {
-  return (
-    <Flex column alignCenter justifyCenter style={{ height: '120px' }}>
-      <SVGEmpty style={{ width: '70px', height: '70px' }} />
-      <div className='gm-text-desc'>{getLocale('没有数据了')}</div>
-    </Flex>
-  )
-}
-
-const Loading = () => {
+const Mask = ({ style, children }) => {
   return (
     <Flex
       column
       alignCenter
       justifyCenter
       style={{
-        height: '120px'
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        paddingTop: '46px',
+        ...style
+      }}
+    >
+      {children}
+    </Flex>
+  )
+}
+
+Mask.propTypes = {
+  style: PropTypes.object
+}
+
+const Empty = () => {
+  return (
+    <Mask>
+      <div style={{ padding: '10px' }}>
+        <SVGEmpty style={{ width: '70px', height: '70px' }} />
+        <div className='gm-text-desc'>{getLocale('没有数据了')}</div>
+      </div>
+    </Mask>
+  )
+}
+
+const Loading = () => {
+  return (
+    <Mask
+      style={{
+        backgroundColor: 'rgba(255,255,255,0.8)'
       }}
     >
       {getLocale('加载数据中...')}
-    </Flex>
+    </Mask>
   )
 }
 
@@ -120,7 +144,8 @@ const afterScroll = _.debounce(() => {
 }, 500)
 
 export {
-  COLUMN_WIDTH,
+  TABLEX_TR_HEIGHT,
+  TABLEX_COLUMN_WIDTH,
   TABLEX_SELECT_ID,
   TABLEX_EXPAND_ID,
   Empty,

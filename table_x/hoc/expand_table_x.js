@@ -4,7 +4,7 @@ import TableX from '../base'
 import _ from 'lodash'
 import SVGCloseup from '../../svg/closeup.svg'
 import SVGExpand from '../../svg/expand.svg'
-import { COLUMN_WIDTH, TABLEX_EXPAND_ID } from '../util'
+import { TABLEX_COLUMN_WIDTH, TABLEX_EXPAND_ID } from '../util'
 
 const Expand = ({ active, onChange }) => {
   return (
@@ -32,8 +32,8 @@ function expandTableXHOC(Component) {
     const newColumns = [
       {
         id: TABLEX_EXPAND_ID,
-        width: COLUMN_WIDTH.FUN_WIDTH,
-        maxWidth: COLUMN_WIDTH.FUN_WIDTH,
+        width: TABLEX_COLUMN_WIDTH.FUN_WIDTH,
+        maxWidth: TABLEX_COLUMN_WIDTH.FUN_WIDTH,
         fixed: fixedExpand ? 'left' : null,
         Header: () => {
           const isAllExpanded =

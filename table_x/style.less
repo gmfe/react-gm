@@ -12,6 +12,7 @@
 .gm-tablex {
   border: 1px solid @gm-border-color;
   overflow: auto;
+  position: relative;
 
   .gm-tablex-table {
     // 性能考虑
@@ -20,6 +21,7 @@
 
     .gm-tablex-tr {
       display: flex;
+      min-height: 60px;
       // 性能考虑
       transform: translateZ(0);
 
@@ -54,13 +56,17 @@
     }
 
     .gm-tablex-thead {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+
       .gm-tablex-tr {
         min-height: 46px;
       }
     }
 
     .gm-tablex-tbody {
-      .gm-table-tr-group {
+      .gm-tablex-tr-group {
         &:nth-child(even) {
           .gm-tablex-td {
             background: @gm-back-body-bg;
@@ -73,15 +79,22 @@
           }
         }
 
-        &:hover {
+        &.sortable-chosen {
           .gm-tablex-td {
             background-color: @table-bg-hover;
           }
         }
       }
 
-      .gm-tablex-tr {
-        min-height: 60px;
+      // 拖拽的时候没有hover效果
+      &:not(.gm-tablex-sortable-active) {
+        .gm-tablex-tr-group {
+          &:hover {
+            .gm-tablex-td {
+              background-color: @table-bg-hover;
+            }
+          }
+        }
       }
     }
 
@@ -172,6 +185,10 @@
       }
     }
   }
+
+  &.gm-tablex-empty {
+    min-height: 166px;
+  }
 }
 
 /* hoc 相关 */
@@ -195,7 +212,7 @@
 // stylelint-disable-next-line
 .gm-tablex {
   // select 样式
-  .gm-tablex-select {
+  .gm-tablex-select:not(.disabled) {
     span {
       border-color: @gm-tablex-select-color;
     }
