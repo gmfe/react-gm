@@ -37,9 +37,9 @@ export default (Component, options) => {
       }
 
       return selectType === 'checkbox' ? (
-        <Checkbox {...inputProps} className='gm-react-table-special-checkbox' />
+        <Checkbox {...inputProps} className='gm-react-table-special-select' />
       ) : (
-        <Radio {...inputProps} className='gm-react-table-special-checkbox' />
+        <Radio {...inputProps} className='gm-react-table-special-select' />
       )
     }
 
@@ -56,7 +56,7 @@ export default (Component, options) => {
 
       return (
         <Checkbox
-          className='gm-react-table-special-checkbox'
+          className='gm-react-table-special-select'
           value={key}
           disabled={disabled}
           checked={checked}

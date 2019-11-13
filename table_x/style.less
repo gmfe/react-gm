@@ -6,6 +6,8 @@
 @gm-tablex-header-bg: #e8eaf0;
 @gm-tablex-sort-color: #ccc;
 @gm-tablex-sort-active-color: #999;
+@gm-tablex-select-color: rgba(36, 51, 81, 0.8);
+@gm-tablex-select-action-bar-height: 50px;
 
 .gm-tablex {
   border: 1px solid @gm-border-color;
@@ -53,17 +55,21 @@
 
     .gm-tablex-thead {
       .gm-tablex-tr {
-        min-height: 40px;
+        min-height: 46px;
       }
     }
 
     .gm-tablex-tbody {
-      .gm-tablex-tr {
-        min-height: 60px;
-
+      .gm-table-tr-group {
         &:nth-child(even) {
           .gm-tablex-td {
             background: @gm-back-body-bg;
+          }
+        }
+
+        &:nth-child(odd) {
+          .gm-tablex-td {
+            background: white;
           }
         }
 
@@ -73,8 +79,13 @@
           }
         }
       }
+
+      .gm-tablex-tr {
+        min-height: 60px;
+      }
     }
 
+    /* sort */
     // 排序样式
     .gm-tablex-sort-header {
       position: relative;
@@ -119,7 +130,9 @@
       }
     }
 
-    // resizer
+    /* sort end */
+
+    /* resizer */
     .gm-tablex-resizer {
       position: absolute;
       width: 10px;
@@ -129,12 +142,62 @@
       z-index: 1;
     }
     // 最后一个需要去掉
+    // stylelint-disable-next-line
     .gm-tablex-th {
+      // stylelint-disable-next-line
       &:last-child {
         .gm-tablex-resizer {
           display: none;
         }
       }
+    }
+
+    /* resizer end */
+
+    /* fixed */
+    .gm-tablex-th,
+    .gm-tablex-td {
+      &.gm-tablex-fixed-left,
+      &.gm-tablex-fixed-right {
+        position: sticky !important;
+        z-index: 1;
+      }
+
+      &.gm-tablex-fixed-left {
+        border-right: 1px solid @gm-border-color !important;
+      }
+
+      &.gm-tablex-fixed-right {
+        border-left: 1px solid @gm-border-color !important;
+      }
+    }
+  }
+}
+
+/* hoc 相关 */
+.gm-tablex-select-batch-action-bar-container {
+  position: relative;
+
+  .gm-tablex-select-batch-action-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    padding-left: 20px;
+    background: @gm-back-body-bg;
+    height: @gm-tablex-select-action-bar-height;
+  }
+}
+
+/* 耦合其他组件 */
+
+// stylelint-disable-next-line
+.gm-tablex {
+  // select 样式
+  .gm-tablex-select {
+    span {
+      border-color: @gm-tablex-select-color;
     }
   }
 }

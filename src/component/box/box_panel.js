@@ -66,7 +66,7 @@ BoxPanel.propTypes = {
   /** undefined 就是没有此功能， false 默认收起 true 默认展开 */
   collapse: PropTypes.bool,
   /** 汇总信息，数组：数据格式为[{text, value}] or element */
-  summary: PropTypes.oneOfType(PropTypes.array, PropTypes.element),
+  summary: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
   right: PropTypes.element,
   className: PropTypes.string,
   style: PropTypes.object

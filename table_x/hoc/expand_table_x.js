@@ -4,16 +4,12 @@ import TableX from '../base'
 import _ from 'lodash'
 import SVGCloseup from '../../svg/closeup.svg'
 import SVGExpand from '../../svg/expand.svg'
-import { TABLEX_EXPAND_ID } from '../util'
+import { COLUMN_WIDTH, TABLEX_EXPAND_ID } from '../util'
 
 const Expand = ({ active, onChange }) => {
   return (
     <div className='gm-cursor' onClick={onChange}>
-      {active ? (
-        <SVGCloseup className='react-table-closeup active' />
-      ) : (
-        <SVGExpand className='react-table-expand' />
-      )}
+      {active ? <SVGCloseup className='gm-text-primary' /> : <SVGExpand />}
     </div>
   )
 }
@@ -24,12 +20,21 @@ Expand.propTypes = {
 }
 
 function expandTableXHOC(Component) {
-  const ExpandTableX = ({ columns, data, SubComponent, ...rest }) => {
+  const ExpandTableX = ({
+    columns,
+    data,
+    SubComponent,
+    fixedExpand,
+    ...rest
+  }) => {
     const [expanded, setExpanded] = useState({})
 
     const newColumns = [
       {
         id: TABLEX_EXPAND_ID,
+        width: COLUMN_WIDTH.FUN_WIDTH,
+        maxWidth: COLUMN_WIDTH.FUN_WIDTH,
+        fixed: fixedExpand ? 'left' : null,
         Header: () => {
           const isAllExpanded =
             _.filter(expanded, v => v).length === data.length
@@ -89,7 +94,7 @@ function expandTableXHOC(Component) {
 
   ExpandTableX.propTypes = {
     ...TableX.propTypes,
-
+    fixedExpand: PropTypes.bool,
     SubComponent: PropTypes.func.isRequired
   }
 

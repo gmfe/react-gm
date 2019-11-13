@@ -22,20 +22,29 @@ const handleIsMultiSortEvent = () => true
 const defaultColumn = {
   minWidth: 50,
   // 不能动 useResizeColumns 貌似默认了 150
-  // width: 150,
+  width: 150,
   maxWidth: 500
 }
 
-const Th = ({ column }) => {
+const Th = ({ column, totalWidth }) => {
   const hp = column.getHeaderProps()
 
   const thProps = {
     ...hp,
-    className: classNames('gm-tablex-th', hp.className),
+    className: classNames('gm-tablex-th', hp.className, {
+      'gm-tablex-fixed-left': column.fixed === 'left',
+      'gm-tablex-fixed-right': column.fixed === 'right'
+    }),
     style: {
       ...hp.style,
       ...getColumnStyle(column)
     }
+  }
+
+  if (column.fixed === 'left') {
+    thProps.style.left = column.totalLeft
+  } else if (column.fixed === 'right') {
+    thProps.style.right = totalWidth - column.totalLeft - column.totalWidth
   }
 
   return (
@@ -57,15 +66,22 @@ const Th = ({ column }) => {
 }
 
 Th.propTypes = {
-  column: PropTypes.object.isRequired
+  column: PropTypes.object.isRequired,
+  totalWidth: PropTypes.number.isRequired
 }
 
 const THead = ({ headers }) => {
+  let totalWidth = 0
+  if (headers.length > 0) {
+    const last = headers[headers.length - 1]
+    totalWidth = last.totalLeft + last.totalWidth
+  }
+
   return (
     <div className='gm-tablex-thead'>
       <div className='gm-tablex-tr'>
         {headers.map(column => (
-          <Th key={column.index} column={column} />
+          <Th key={column.index} column={column} totalWidth={totalWidth} />
         ))}
       </div>
     </div>
@@ -76,42 +92,64 @@ THead.propTypes = {
   headers: PropTypes.array.isRequired
 }
 
-const Td = ({ cell }) => {
+const Td = ({ cell, totalWidth }) => {
   const cp = cell.getCellProps()
   const tdProps = {
     ...cp,
-    className: 'gm-tablex-td',
+    className: classNames('gm-tablex-td', {
+      'gm-tablex-fixed-left': cell.column.fixed === 'left',
+      'gm-tablex-fixed-right': cell.column.fixed === 'right'
+    }),
     style: {
       ...cp.style,
       ...getColumnStyle(cell.column)
     }
   }
 
+  if (cell.column.fixed === 'left') {
+    // 用到 fixed，可以利用 totalLeft
+    tdProps.style.left = cell.column.totalLeft
+  } else if (cell.column.fixed === 'right') {
+    tdProps.style.right =
+      totalWidth - cell.column.totalLeft - cell.column.totalWidth
+  }
+
   return <div {...tdProps}>{cell.render('Cell')}</div>
 }
 
 Td.propTypes = {
-  cell: PropTypes.object.isRequired
+  cell: PropTypes.object.isRequired,
+  totalWidth: PropTypes.number.isRequired
 }
 
-const Tr = ({ row }) => {
+const Tr = ({ row, SubComponent }) => {
   const gp = row.getRowProps()
   const props = {
     ...gp,
     className: 'gm-tablex-tr'
   }
 
+  let totalWidth = 0
+  if (row.cells.length > 0) {
+    const last = row.cells[row.cells.length - 1].column
+    totalWidth = last.totalLeft + last.totalWidth
+  }
+
   return (
-    <div {...props}>
-      {row.cells.map((cell, cellIndex) => (
-        <Td key={cellIndex} cell={cell} />
-      ))}
+    <div className='gm-table-tr-group'>
+      <div {...props}>
+        {row.cells.map((cell, cellIndex) => (
+          <Td key={cellIndex} cell={cell} totalWidth={totalWidth} />
+        ))}
+      </div>
+      {SubComponent && <div className='gm-tablex-sub'>{SubComponent(row)}</div>}
     </div>
   )
 }
 
 Tr.propTypes = {
-  row: PropTypes.object.isRequired
+  row: PropTypes.object.isRequired,
+  SubComponent: PropTypes.func
 }
 
 const TBody = ({
@@ -136,14 +174,7 @@ const TBody = ({
         data.length > 0 &&
         rows.map(row => {
           prepareRow(row)
-          return (
-            <React.Fragment key={row.index}>
-              <Tr row={row} />
-              {SubComponent && (
-                <div className='gm-tablex-sub'>{SubComponent(row)}</div>
-              )}
-            </React.Fragment>
-          )
+          return <Tr key={row.index} row={row} SubComponent={SubComponent} />
         })}
     </div>
   )

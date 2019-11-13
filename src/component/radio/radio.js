@@ -13,15 +13,22 @@ class Radio extends React.Component {
       children,
       inline,
       name,
-      disabled
+      disabled,
+      className,
+      ...rest
     } = this.props
 
     const inner = (
       <label
-        className={classNames('gm-radio', {
-          'radio-inline': inline,
-          disabled
-        })}
+        {...rest}
+        className={classNames(
+          'gm-radio',
+          {
+            'radio-inline': inline,
+            disabled
+          },
+          className
+        )}
       >
         <input
           type='radio'
@@ -53,7 +60,9 @@ Radio.propTypes = {
   inline: PropTypes.bool,
   disabled: PropTypes.bool,
   children: PropTypes.any,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 Radio.defaultProps = {

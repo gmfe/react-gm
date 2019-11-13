@@ -22,15 +22,9 @@ function fixedColumnsTableHOC(Component) {
       // 检测
       devWarn(() => {
         _.each(props.columns, column => {
-          if (column.fixed && !column.width && !column.minWidth) {
+          if (column.fixed && !column.width) {
             console.error(
               'this column with fixed need width',
-              JSON.stringify(column)
-            )
-          } else if (!column.width && !column.minWidth) {
-            // 这个警告即可
-            console.warn(
-              'other column need width or minWidth',
               JSON.stringify(column)
             )
           }

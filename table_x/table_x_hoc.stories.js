@@ -1,7 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { observable } from 'mobx'
-import { selectTableXHOC, expandTableXHOC, TableX } from './index'
+import {
+  selectTableXHOC,
+  expandTableXHOC,
+  fixedColumnsTableXHOC,
+  TableX
+} from './index'
 
 const initData = [
   {
@@ -102,6 +107,45 @@ const columns = [
   }
 ]
 
+const fixedColumns = [
+  // 获取索引
+  {
+    Header: '序号',
+    accessor: 'index',
+    fixed: 'left',
+    width: 100,
+    Cell: ({ row }) => row.index + 1
+  },
+  // 常规用法
+  {
+    Header: '建单时间',
+    accessor: 'submit_time',
+    fixed: 'left'
+  },
+  // accessor 有点用法
+  {
+    Header: '地址',
+    accessor: 'address.text',
+    width: 200 // 定宽
+  },
+  // accessor 是 func，需要提供 id
+  {
+    Header: '供应商信息',
+    accessor: data => data.supplier_name,
+    id: 'supplier_name'
+  },
+  // 自定义整个单元格
+  {
+    Header: '入库金额',
+    accessor: 'total_money',
+    fixed: 'right',
+    Cell: cellProps => {
+      const { row } = cellProps
+      return <div>{row.original.total_money}</div>
+    }
+  }
+]
+
 const store = observable({
   data: initData.slice(),
   selected: [],
@@ -117,17 +161,45 @@ const store = observable({
 
 const SelectTableX = selectTableXHOC(TableX)
 const ExpandTableX = expandTableXHOC(TableX)
+const SelectExpandTableX = selectTableXHOC(expandTableXHOC(TableX))
+const FixedColumnTableX = fixedColumnsTableXHOC(TableX)
 
 storiesOf('TableX|TableX HOC', module)
   .add('select', () => (
     <SelectTableX
       data={store.data}
       columns={columns}
-      keyField={'id'}
+      keyField='id'
       selected={store.selected}
       onSelect={selected => store.setSelected(selected)}
       selectAll={store.selectAll}
       onSelectAll={checked => store.setSelectAll(checked)}
+    />
+  ))
+  .add('select batchActionBar', () => (
+    <div style={{ paddingTop: '100px' }}>
+      <SelectTableX
+        data={store.data}
+        columns={columns}
+        keyField='id'
+        selected={store.selected}
+        onSelect={selected => store.setSelected(selected)}
+        selectAll={store.selectAll}
+        onSelectAll={checked => store.setSelectAll(checked)}
+        batchActionBar={<div>BatchActionBar</div>}
+      />
+    </div>
+  ))
+  .add('fixed select', () => (
+    <SelectTableX
+      data={store.data}
+      columns={columns}
+      keyField='id'
+      selected={store.selected}
+      onSelect={selected => store.setSelected(selected)}
+      selectAll={store.selectAll}
+      onSelectAll={checked => store.setSelectAll(checked)}
+      fixedSelect
     />
   ))
   .add('select radio', () => (
@@ -135,7 +207,7 @@ storiesOf('TableX|TableX HOC', module)
       selectType='radio'
       data={store.data}
       columns={columns}
-      keyField={'id'}
+      keyField='id'
       selected={store.selected}
       onSelect={selected => store.setSelected(selected)}
       selectAll={store.selectAll}
@@ -150,4 +222,31 @@ storiesOf('TableX|TableX HOC', module)
         return <div>adsfa</div>
       }}
     />
+  ))
+  .add('fixed expand', () => (
+    <ExpandTableX
+      data={store.data}
+      columns={columns}
+      SubComponent={() => {
+        return <div>adsfa</div>
+      }}
+      fixedExpand
+    />
+  ))
+  .add('expand select', () => (
+    <SelectExpandTableX
+      data={store.data}
+      columns={columns}
+      keyField='id'
+      selected={store.selected}
+      onSelect={selected => store.setSelected(selected)}
+      selectAll={store.selectAll}
+      onSelectAll={checked => store.setSelectAll(checked)}
+      SubComponent={() => {
+        return <div>adsfa</div>
+      }}
+    />
+  ))
+  .add('fixed column', () => (
+    <FixedColumnTableX data={store.data} columns={fixedColumns} />
   ))

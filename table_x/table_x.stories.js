@@ -210,10 +210,11 @@ react-table 文档见 https://github.com/tannerlinsley/react-table
 
 较 Table 新增
 - 支持多列排序
+- hoc select 增加 fixedSelect, hoc expand fixedExpand 用来固定
 
 Table 切 TableX 关注点：
 - 取消单元格没内容显示 -
-
+- fixedColumn column 不需要提供 width
 
 DONE
 - select 字符串问题。=》不存在
@@ -221,15 +222,20 @@ DONE
 - 滚动，上下和左右
 - 滚动事件
 - 换行，对齐，截断
+- loading 
+- empty
+- 固定列
 
 TODO
-- 固定列
+- BatchActionBar
 - 虚拟列表
 - 拖拽排序
 - Edit
 - Keyboard
 - diy
 - edit row
+- hoc sub table
+- referOfWidth
 - ...
 
 `
