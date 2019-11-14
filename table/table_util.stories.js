@@ -436,7 +436,7 @@ storiesOf('Table|TableUtil', module)
         onSelect={selected => store.setSelect(selected)}
         onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
         batchActionBar={
-          store.selected.length && (
+          store.selected.length ? (
             <TableUtil.BatchActionBar
               pure
               onClose={() => store.toggleSelectAll(false)}
@@ -455,7 +455,7 @@ storiesOf('Table|TableUtil', module)
               ]}
               count={store.selected.length}
             />
-          )
+          ) : null
         }
       />
       <h3>当前页和所有页批量操作</h3>
@@ -481,7 +481,7 @@ storiesOf('Table|TableUtil', module)
         onSelect={selected => store.setSelect(selected)}
         onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
         batchActionBar={
-          store.selected.length && (
+          store.selected.length ? (
             <TableUtil.BatchActionBar
               count={store.isSelectAllPage ? null : store.selected.length}
               isSelectAll={store.isSelectAllPage}
@@ -501,7 +501,7 @@ storiesOf('Table|TableUtil', module)
                 }
               ]}
             />
-          )
+          ) : null
         }
       />
     </div>
