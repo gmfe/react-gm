@@ -129,25 +129,39 @@ const store = observable({
   }
 })
 
-const virtualizedData = _.times(10000, index => ({
-  id: index,
-  name: 'lalalla'
-}))
-
-const virtualizedColumn = [
-  {
-    Header: '序号',
-    accessor: 'id'
-  },
-  {
-    Header: 'name',
-    accessor: 'name'
-  }
-]
-
 const FixedColumnTableX = fixedColumnsTableXHOC(TableX)
 const SortableTableX = sortableTableX(TableX)
 const VirtualizedTableX = virtualizedTableX(TableX)
+
+// storybook 有问题，所以提出来这里
+const VirtualWrap = () => {
+  const virtualizedData = React.useMemo(() =>
+    _.times(100000, index => ({
+      id: index,
+      name: 'lalalla'
+    }))
+  )
+
+  const virtualizedColumn = [
+    {
+      Header: '序号',
+      accessor: 'id'
+    },
+    {
+      Header: 'name',
+      accessor: 'name'
+    }
+  ]
+
+  return (
+    <VirtualizedTableX
+      data={virtualizedData}
+      columns={virtualizedColumn}
+      virtualizedHeight={300}
+      virtualizedItemSize={TableXUtil.TABLEX_TR_HEIGHT}
+    />
+  )
+}
 
 storiesOf('TableX|HOC', module)
   .add('fixed column', () => (
@@ -164,11 +178,4 @@ storiesOf('TableX|HOC', module)
       }}
     />
   ))
-  .add('virtualized', () => (
-    <VirtualizedTableX
-      data={virtualizedData}
-      columns={virtualizedColumn}
-      virtualizedHeight={300}
-      virtualizedItemSize={TableXUtil.TABLEX_TR_HEIGHT}
-    />
-  ))
+  .add('virtualized', () => <VirtualWrap />)

@@ -172,6 +172,7 @@ const TBody = ({
   const RenderRow = ({ index, style }) => {
     const row = rows[index]
     prepareRow(row)
+
     return (
       <Tr
         key={row.index}
