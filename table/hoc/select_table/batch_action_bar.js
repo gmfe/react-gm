@@ -36,7 +36,7 @@ const BatchActionBar = props => {
   }
 
   return (
-    <Flex alignCenter>
+    <Flex className='gm-react-table-select-batch-action-bar' alignCenter>
       <Popover
         type='hover'
         popup={<div className='gm-padding-5'>{getLocale('取消批量勾选')}</div>}
@@ -89,7 +89,7 @@ BatchActionBar.propTypes = {
   /** 选中多少项 */
   count: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   /** 批量操作按钮 */
-  batchActions: PropTypes.array,
+  batchActions: PropTypes.array.isRequired,
   /** 所有页/当前页 切换函数 */
   toggleSelectAll: PropTypes.func,
   /** 点击关闭BatchActionBar的回调函数 */

@@ -5,7 +5,7 @@ import { referOfWidth } from '../../util'
 import Table from '../../table/base'
 import PropTypes from 'prop-types'
 
-export default (Component, options) => {
+export default Component => {
   const wrapper = class RTSelectTable extends React.Component {
     handleToggleSelection = result => {
       const { selected, onSelect, selectType } = this.props
@@ -66,23 +66,13 @@ export default (Component, options) => {
     }
 
     render() {
-      const {
-        columns: originalCols,
-        isSelected,
-        toggleSelection,
-        toggleAll,
-        keyField,
-        selectType,
-        selectWidth,
-        ...rest
-      } = this.props
+      const { columns: originalCols, selectWidth, ...rest } = this.props
+
       const select = {
         id: '__selector', // 不要随便更改
         accessor: () => 'x', // this value is not important
         Header: this.headSelector.bind(this),
-        Cell: ci => {
-          return this.rowSelector.bind(this)(ci.original)
-        },
+        Cell: ci => this.rowSelector.bind(this)(ci.original),
         width: selectWidth || referOfWidth.noCell,
         fixed: 'left', // 如果是fixed_columns_table,默认固定复选框
         filterable: false,
@@ -90,14 +80,7 @@ export default (Component, options) => {
         resizable: false
       }
 
-      const columns =
-        options !== undefined && options.floatingLeft === true
-          ? [...originalCols, select]
-          : [select, ...originalCols]
-      const extra = {
-        columns
-      }
-      return <Component {...rest} {...extra} />
+      return <Component {...rest} columns={[select, ...originalCols]} />
     }
   }
 
@@ -122,13 +105,7 @@ export default (Component, options) => {
   wrapper.defaultProps = {
     keyField: 'value',
     selectType: 'checkbox',
-    isSelectorDisable: row => false,
-    onSelect: key => {
-      console.log('No toggleSelection handler provided:', { key })
-    },
-    onSelectAll: () => {
-      console.log('No toggleAll handler provided.')
-    }
+    isSelectorDisable: row => false
   }
 
   return wrapper

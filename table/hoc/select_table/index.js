@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import baseSelectTableHoc from './select_table_base'
 import Table from '../../table'
-import { Flex } from '../../../src'
 
 function selectTableV2HOC(Component) {
   // 先包一层 hocSelectTable
@@ -28,11 +27,7 @@ function selectTableV2HOC(Component) {
             onSelect={this.handleSelect}
             onSelectAll={this.handleSelectAll}
           />
-          {batchActionBar && (
-            <Flex className='gm-react-table-select-all-tip' alignCenter>
-              {batchActionBar}
-            </Flex>
-          )}
+          {batchActionBar}
         </div>
       )
     }
@@ -49,10 +44,10 @@ function selectTableV2HOC(Component) {
     onSelect: PropTypes.func.isRequired,
     /** 选中所有行的回调 */
     onSelectAll: PropTypes.func.isRequired,
-    /** 每一行的CheckBox的disable设置行数 */
+    /** 每一行的 checkBox 或 radio 的disable设置函数 */
     isSelectorDisable: PropTypes.func,
     /** 自定义批量操作栏 */
-    batchActionBar: PropTypes.node,
+    batchActionBar: PropTypes.element,
     /** 自定义被选中项的id */
     keyField: PropTypes.string
   }

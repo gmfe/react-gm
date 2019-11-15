@@ -8985,7 +8985,7 @@ react-syntax-highlighter@^8.0.1:
 
 react-table-v6@6.8.6:
   version "6.8.6"
-  resolved "https://registry.npmjs.org/react-table-v6/-/react-table-v6-6.8.6.tgz#8362230caa16f8d6abefeedb2d95dd1adb2741e5"
+  resolved "https://registry.yarnpkg.com/react-table-v6/-/react-table-v6-6.8.6.tgz#8362230caa16f8d6abefeedb2d95dd1adb2741e5"
   integrity sha512-jxo20BTIU/tQxToOZFnfr0V123VSQ2kNdxR+JbA7V4Zfj1jNtBaiFW/lYgVwejnbnUOuj96pV8Dd+yXXMdAMDA==
   dependencies:
     classnames "^2.2.5"

@@ -21,6 +21,9 @@ const ExpandTable = expandTableHOC(Table)
 const ExpandSelectTable = selectTableV2HOC(ExpandTable)
 const SelectSubTable = selectTableV2HOC(subTableHOC(Table))
 const SubTable = subTableHOC(Table)
+const DiyFixedSelectTable = selectTableV2HOC(
+  fixedColumnsTableHOC(diyTableHOC(Table))
+)
 
 const isDisable = ({ total_money }) => total_money === 111 // 不能选的行
 
@@ -351,7 +354,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
       isSelectorDisable={row => isDisable(row)}
       onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
       batchActionBar={
-        store.selected.length && (
+        store.selected.length ? (
           <TableUtil.BatchActionBar
             onClose={() => store.toggleSelectAll(false)}
             toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
@@ -371,7 +374,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
             count={store.isSelectAllPage ? null : store.selected.length}
             isSelectAll={store.isSelectAllPage}
           />
-        )
+        ) : null
       }
       selected={store.selected}
       onSelect={selected => store.setSelect(selected)}
@@ -429,7 +432,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
       isSelectorDisable={row => isDisable(row)}
       onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
       batchActionBar={
-        Object.values(store.subTableSelected).some(d => d.length) && (
+        Object.values(store.subTableSelected).some(d => d.length) ? (
           <TableUtil.BatchActionBar
             onClose={() => store.toggleSelectAll(false)}
             toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
@@ -448,7 +451,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
             count={store.isSelectAllPage ? 100 : store.selected.length}
             isSelectAll={store.isSelectAllPage}
           />
-        )
+        ) : null
       }
       SubComponent={item => (
         <Observer>
@@ -470,5 +473,140 @@ HOC 可以相互组合使用，但是请注意使用顺序!
           }}
         </Observer>
       )}
+    />
+  ))
+  .add('diy_fix_select组合', () => (
+    <DiyFixedSelectTable
+      id='diy_fix_select'
+      keyField='id'
+      selectType='checkbox' // checkbox: 复选框(默认,可不填) radio: 单选框
+      style={{ marginTop: '100px' }}
+      data={store.data}
+      isSelectorDisable={row => isDisable(row)}
+      onSelectAll={isSelectedAll => store.toggleSelectAll(isSelectedAll)}
+      batchActionBar={
+        store.selected.length ? (
+          <TableUtil.BatchActionBar
+            onClose={() => store.toggleSelectAll(false)}
+            toggleSelectAll={bool => store.toggleIsSelectAllPage(bool)}
+            batchActions={[
+              {
+                name: '批量删除',
+                show: false,
+                onClick: () =>
+                  window.alert('批量删除' + store.selected.join(','))
+              },
+              {
+                name: '批量修改单价',
+                onClick: () =>
+                  window.alert('批量修改这些' + store.selected.join(','))
+              }
+            ]}
+            count={store.isSelectAllPage ? null : store.selected.length}
+            isSelectAll={store.isSelectAllPage}
+          />
+        ) : null
+      }
+      selected={store.selected}
+      onSelect={selected => store.setSelect(selected)}
+      diyGroupSorting={['基础字段', '时间和人员', '操作']} // 组的排序,必须diyGroupName一一对应
+      columns={[
+        {
+          Header: '入库单号',
+          accessor: 'id',
+          // 提供 fixed and width
+          minWidth: 200,
+          diySortNumber: 100, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          diyEnable: false, // 是否可以自定义,不写的话默认为true
+          show: false, // 是否展示当前列,不写的话默认为true
+          diyGroupName: '基础字段' // 组名
+        },
+        {
+          Header: '价格',
+          accessor: 'sku_money',
+          minWidth: 200,
+          diySortNumber: 600, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          diyEnable: false,
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: '状态',
+          minWidth: 200,
+          diySortNumber: 300, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          accessor: 'status',
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: '供应商户ID',
+          minWidth: 200,
+          diySortNumber: 400, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          accessor: 'supplier_customer_id',
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: '供应商信息',
+          minWidth: 200,
+          diySortNumber: 500, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          accessor: 'supplier_name',
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: '供应商户ID',
+          minWidth: 200,
+          diySortNumber: 400, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          accessor: 'supplier_customer_id',
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: '供应商信息',
+          minWidth: 200,
+          diySortNumber: 500, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          accessor: 'supplier_name',
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: '供应商户ID',
+          minWidth: 200,
+          diySortNumber: 400, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          accessor: 'supplier_customer_id',
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: '供应商信息',
+          minWidth: 200,
+          diySortNumber: 500, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          accessor: 'supplier_name',
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: '供应商户ID',
+          minWidth: 200,
+          diySortNumber: 400, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          accessor: 'supplier_customer_id',
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: '供应商信息',
+          minWidth: 200,
+          diySortNumber: 500, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          accessor: 'supplier_name',
+          diyGroupName: '基础字段'
+        },
+        {
+          Header: TableUtil.OperationHeader,
+          diySortNumber: 700, // 列表的排序根据sortNumber来排: 100, 200, 300, 如此类推
+          diyItemText: '操作', // 操作栏要提供diyItemName
+          id: 'action', // id作为唯一标识
+          diyGroupName: '操作',
+          width: 180,
+          fixed: 'right',
+          diyEnable: false,
+          Cell: () => (
+            <TableUtil.OperationCell>
+              <a href='#'>删除</a>
+            </TableUtil.OperationCell>
+          )
+        }
+      ]}
     />
   ))
