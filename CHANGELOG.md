@@ -7,12 +7,7 @@
 Framework 不内嵌 LayoutRoot，调用方自行放 LayoutRoot 位置
 Breadcrumb 改了
 Info 改了
-
-Framework 不内嵌 LayoutRoot，调用方自行放 LayoutRoot 位置
-
-
 FullTab 改了
-Info 改了
 
 移除 Menu
 
@@ -33,15 +28,17 @@ PaginationBox
 
 ### Table
 
+引用库 react-table 6.x 切到 react-table-v6。
+
 - selectTableV2HOC props 移除了 `selectAll` 和 `selectAllTip`,增加了 `batchActionBar`
 
 - diyTableHOC 移除了 `ref.apiToggleDiySelector`, props `columns` 要求增加多个参数, `diyGroupNameSorting`等
 
+- selectTableHOC SelectTable 移除
+
 ### css
 
-移除 .ifont- .xfont- 等功能性样式，替换为 .gm-svg-icon-
-
-Framework 不内嵌 LayoutRoot，调用方自行放 LayoutRoot 位置
+移除 .ifont- .xfont- 等功能性样式，替换为 .gm-svg-icon
 
 # 8.x
 
