@@ -46,6 +46,19 @@ class Base extends React.Component {
       )
       this.state.willActiveIndex = index
     }
+
+    // 要后于 this.state 执行，因为 getFilterData 用到 searchValue
+
+    // 有选择才有意义
+    if (props.selected.length > 0) {
+      this.getFilterData()
+      const flatList = this.getFlatFilterData()
+      const index = _.findIndex(
+        flatList,
+        v => v.value === props.selected[0].value
+      )
+      this.state.willActiveIndex = index
+    }
   }
 
   apiDoFocus = () => {
