@@ -30,7 +30,21 @@ class Base extends React.Component {
     this.state = {
       searchValue: '',
       loading: false,
-      willActiveIndex: 0 // 默认第一个位置
+      // keyboard 默认第一个位置
+      willActiveIndex: props.isKeyboard ? 0 : null
+    }
+
+    // 要后于 this.state 执行，因为 getFilterData 用到 searchValue
+
+    // 有选择才有意义
+    if (props.selected.length > 0) {
+      this.getFilterData()
+      const flatList = this.getFlatFilterData()
+      const index = _.findIndex(
+        flatList,
+        v => v.value === props.selected[0].value
+      )
+      this.state.willActiveIndex = index
     }
   }
 
@@ -417,6 +431,7 @@ Base.propTypes = {
   popupClassName: PropTypes.string,
 
   /** 目前为了 keyboard */
+  isKeyboard: PropTypes.bool,
   onKeyDown: PropTypes.func
 }
 

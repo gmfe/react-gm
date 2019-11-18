@@ -31,7 +31,6 @@ class Base extends React.Component {
     }
   }
 
-  // TODO 不合理
   componentDidUpdate() {
     if (this.props.isScrollTo) {
       this.doScrollToSelected('.will-active')

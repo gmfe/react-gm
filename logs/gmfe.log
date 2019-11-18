@@ -1,0 +1,10 @@
+[2019-11-22T17:59:09.035] [INFO] default - 执行命令 git rev-parse --git-dir
+[2019-11-22T17:59:09.104] [INFO] default - .git
+
+[2019-11-22T17:59:09.105] [INFO] default - 切换目录 /Users/laamginghong/WebstormProjects/react-gm
+[2019-11-22T17:59:09.107] [INFO] default - 
+[2019-11-22T17:59:09.107] [INFO] default - 执行命令 git diff
+[2019-11-22T17:59:09.177] [INFO] default - 
+[2019-11-22T17:59:09.178] [INFO] default - 执行命令 git branch | sed -n '/\* /s///p'
+[2019-11-22T17:59:09.243] [INFO] default - feature-8.x
+

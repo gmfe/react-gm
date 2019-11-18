@@ -32,7 +32,8 @@ const store = observable({
     },
     {
       value: 7,
-      text: '西乡'
+      text:
+        '西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡'
     },
     {
       value: 8,
@@ -112,6 +113,21 @@ storiesOf('MoreSelect', module)
         store.setSelected(selected)
       }}
     />
+  ))
+  .add('内容多的时候', () => (
+    <div style={{ width: '200px' }}>
+      <MoreSelect
+        data={store.data}
+        selected={{
+          value: 7,
+          text:
+            '西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡西乡'
+        }}
+        onSelect={selected => {
+          store.setSelected(selected)
+        }}
+      />
+    </div>
   ))
   .add('renderListFilterType', () => (
     <MoreSelect
