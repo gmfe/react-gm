@@ -1,11 +1,11 @@
-import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
-import KeyboardCell from './cell'
-import { Select } from '../src'
+import React, { useRef } from 'react'
 import ReactDOM from 'react-dom'
-import { scrollIntoViewFixedWidth } from './util'
+import KeyboardCell from '../core/cell'
+import { LevelSelect } from '../../src'
+import { isInputUnBoundary, scrollIntoViewFixedWidth } from '../core/util'
 
-const KeyboardCellSelect = props => {
+const KeyboardCellLevelSelect = props => {
   const { disabled, onKeyDown, ...rest } = props
 
   const cellRef = useRef(null)
@@ -25,6 +25,10 @@ const KeyboardCellSelect = props => {
   const handleKeyDown = event => {
     if (onKeyDown) {
       onKeyDown(event)
+    }
+
+    if (isInputUnBoundary(event)) {
+      return
     }
 
     if (
@@ -57,7 +61,7 @@ const KeyboardCellSelect = props => {
       onScroll={handleScroll}
       disabled={disabled}
     >
-      <Select
+      <LevelSelect
         {...rest}
         ref={targetRef}
         popoverType='realFocus'
@@ -68,10 +72,10 @@ const KeyboardCellSelect = props => {
   )
 }
 
-KeyboardCellSelect.propTypes = {
-  ...Select.propTypes,
+KeyboardCellLevelSelect.propTypes = {
+  ...LevelSelect.propTypes,
   disabled: PropTypes.bool,
   onKeyDown: PropTypes.func
 }
 
-export default KeyboardCellSelect
+export default KeyboardCellLevelSelect

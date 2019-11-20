@@ -422,11 +422,16 @@
 
   // action
   .gm-react-edit-table-action-add {
-    width: 20px;
-    height: 20px;
-    color: @brand-primary;
+    display: inline-block;
     margin-right: 18px;
     cursor: pointer;
+    color: @brand-primary;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
     &.disabled {
       color: fadeout(@brand-primary, 50%);
       cursor: not-allowed;
@@ -434,10 +439,14 @@
   }
 
   .gm-react-edit-table-action-delete {
-    width: 20px;
-    height: 20px;
+    display: inline-block;
     color: @brand-danger;
     cursor: pointer;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
 
     &.disabled {
       color: fadeout(@brand-danger, 50%);

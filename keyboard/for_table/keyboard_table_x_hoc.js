@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { getColumnKey } from '../table/util'
-import Table from '../table/table'
+import { getColumnKey } from '../../table_x/util'
+import TableX from '../../table_x/base'
 import _ from 'lodash'
-import Wrap from './wrap'
-import { CellKeyContext } from './util'
-import { devWarn } from '../src/util'
+import Wrap from '../core/wrap'
+import { CellKeyContext } from '../core/util'
+import { devWarn } from '../../src/util'
 
-// TODO columns Context
-
-function keyboardTableHOC(Component) {
+function keyboardTableXHOC(Component) {
   /**
    * 要求 props 是 id 和 onAddRow。
    * and column 需要标志 isKeyboard，同时需要 accessor or id
    * */
-  const KeyboardTableHOC = props => {
+  const KeyboardTableXHOC = props => {
     const { id, onAddRow, onBeforeDispatch, ...tableProps } = props
     const { data, columns } = tableProps
 
@@ -55,7 +53,9 @@ function keyboardTableHOC(Component) {
       return {
         ...column,
         Cell: cellProps => (
-          <CellKeyContext.Provider value={`${cellProps.index}_${columnKey}`}>
+          <CellKeyContext.Provider
+            value={`${cellProps.row.index}_${columnKey}`}
+          >
             {oldCell(cellProps)}
           </CellKeyContext.Provider>
         )
@@ -92,8 +92,8 @@ function keyboardTableHOC(Component) {
     )
   }
 
-  KeyboardTableHOC.propTypes = {
-    ...Table.propTypes,
+  KeyboardTableXHOC.propTypes = {
+    ...TableX.propTypes,
     /** 通过 id 来确定本单元格内通信，避免多表格时候混了。请确保 id 唯一 */
     id: PropTypes.string.isRequired,
     /** 增加一行数据 */
@@ -101,7 +101,7 @@ function keyboardTableHOC(Component) {
     onBeforeDispatch: PropTypes.func
   }
 
-  return KeyboardTableHOC
+  return KeyboardTableXHOC
 }
 
-export default keyboardTableHOC
+export default keyboardTableXHOC

@@ -1,9 +1,10 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { TableX } from '../index'
+import { TableX, TableXUtil } from '../index'
 import { observable } from 'mobx/lib/mobx'
 import moment from 'moment'
-import { SortHeader } from '../util'
+
+const { SortHeader, EditButton } = TableXUtil
 
 const sortDateTime = (a, b) => {
   const mA = moment(a.submit_time)
@@ -141,6 +142,29 @@ const columns = [
   }
 ]
 
+const editColumns = [
+  {
+    id: 'name',
+    Header: '名字',
+    Cell: () => (
+      <div>
+        <input type='text' />
+        <EditButton popupRender={() => <div>lalala</div>} />
+      </div>
+    )
+  },
+  {
+    id: 'age',
+    Header: '年龄',
+    Cell: () => (
+      <div>
+        <input type='text' />
+        <EditButton popupRender={() => <div>lalala</div>} />
+      </div>
+    )
+  }
+]
+
 const sortColumns = [
   // 默认有排序，
   {
@@ -213,32 +237,17 @@ react-table 文档见 https://github.com/tannerlinsley/react-table
 - hoc select 增加 fixedSelect, hoc expand fixedExpand 用来固定
 
 Table 切 TableX 关注点：
+- Cell 不提供 index original，即 Cell: ({index, original}) => () 不 work，用 Cell: ({ row }) => (row.index row.original)
 - 取消单元格没内容显示 -
 - fixedColumn column 不需要提供 width
-
-DONE
-- limit width height
-- select 字符串问题。=》不存在
-- select BatchActionBar
-- 左右拖动
-- 滚动，上下和左右
-- 滚动事件
-- 换行，对齐，截断
-- loading 
-- empty
-- 固定列
-- 拖拽排序
-- 虚拟列表
+- selectTable 废弃 onSelectAll ，因为没有意义
+- OperationHeader 是一个组件
+- EditTableOperation 换成  EditOperation
+- 宽度常亮收归到 TableUtil.TABLE_X
 
 TODO
-- Edit referOfWidth
-- Keyboard
 - diy
-- edit row
-- hoc sub table
-- util
 - ...
-
 `
     }
   })
@@ -278,3 +287,4 @@ react-table@v7支持多重排序，通过 shift 来完成。但不方便，所�
       }}
     />
   ))
+  .add('edit button', () => <TableX data={store.data} columns={editColumns} />)

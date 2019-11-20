@@ -1,7 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { observable } from 'mobx'
-import { selectTableXHOC, expandTableXHOC, TableX } from '../index'
+import {
+  selectTableXHOC,
+  expandTableXHOC,
+  TableX,
+  subTableXHOC
+} from '../index'
 
 const initData = [
   {
@@ -108,16 +113,13 @@ const store = observable({
   setSelected(selected) {
     console.log(selected)
     this.selected = selected
-  },
-  selectAll: false,
-  setSelectAll(checked) {
-    this.selectAll = checked
   }
 })
 
 const SelectTableX = selectTableXHOC(TableX)
 const ExpandTableX = expandTableXHOC(TableX)
 const SelectExpandTableX = selectTableXHOC(expandTableXHOC(TableX))
+const SubSelectTableTableX = selectTableXHOC(subTableXHOC(TableX))
 
 storiesOf('TableX|HOC select expand', module)
   .add('select', () => (
@@ -127,8 +129,6 @@ storiesOf('TableX|HOC select expand', module)
       keyField='id'
       selected={store.selected}
       onSelect={selected => store.setSelected(selected)}
-      selectAll={store.selectAll}
-      onSelectAll={checked => store.setSelectAll(checked)}
     />
   ))
   .add('select batchActionBar', () => (
@@ -139,8 +139,6 @@ storiesOf('TableX|HOC select expand', module)
         keyField='id'
         selected={store.selected}
         onSelect={selected => store.setSelected(selected)}
-        selectAll={store.selectAll}
-        onSelectAll={checked => store.setSelectAll(checked)}
         batchActionBar={<div>BatchActionBar</div>}
       />
     </div>
@@ -152,8 +150,6 @@ storiesOf('TableX|HOC select expand', module)
       keyField='id'
       selected={store.selected}
       onSelect={selected => store.setSelected(selected)}
-      selectAll={store.selectAll}
-      onSelectAll={checked => store.setSelectAll(checked)}
       fixedSelect
     />
   ))
@@ -165,8 +161,6 @@ storiesOf('TableX|HOC select expand', module)
       keyField='id'
       selected={store.selected}
       onSelect={selected => store.setSelected(selected)}
-      selectAll={store.selectAll}
-      onSelectAll={checked => store.setSelectAll(checked)}
     />
   ))
   .add('select isSelectorDisable', () => (
@@ -176,8 +170,6 @@ storiesOf('TableX|HOC select expand', module)
       keyField='id'
       selected={store.selected}
       onSelect={selected => store.setSelected(selected)}
-      selectAll={store.selectAll}
-      onSelectAll={checked => store.setSelectAll(checked)}
       isSelectorDisable={item => item.index === 1}
     />
   ))
@@ -207,10 +199,28 @@ storiesOf('TableX|HOC select expand', module)
       keyField='id'
       selected={store.selected}
       onSelect={selected => store.setSelected(selected)}
-      selectAll={store.selectAll}
-      onSelectAll={checked => store.setSelectAll(checked)}
       SubComponent={() => {
         return <div>adsfa</div>
+      }}
+    />
+  ))
+  .add('expand select sub table', () => (
+    <SelectExpandTableX
+      data={store.data}
+      columns={columns}
+      keyField='id'
+      selected={store.selected}
+      onSelect={selected => store.setSelected(selected)}
+      SubComponent={() => {
+        return (
+          <SubSelectTableTableX
+            data={store.data}
+            columns={columns}
+            keyField='id'
+            selected={store.selected}
+            onSelect={selected => store.setSelected(selected)}
+          />
+        )
       }}
     />
   ))

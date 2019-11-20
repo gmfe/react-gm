@@ -1,39 +1,30 @@
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
-import KeyboardCell from './cell'
-import { isInputUnBoundary, scrollIntoViewFixedWidth } from './util'
-import { Input } from '../src'
+import KeyboardCell from '../core/cell'
+import { scrollIntoViewFixedWidth } from '../core/util'
+import { DatePicker } from '../../src'
+import ReactDOM from 'react-dom'
 
-const KeyboardCellInput = props => {
-  const { disabled, onKeyDown, onFocus, ...rest } = props
+const KeyboardDatePicker = props => {
+  const { disabled, onKeyDown, ...rest } = props
 
   const cellRef = useRef(null)
   const targetRef = useRef(null)
 
   const handleFocus = () => {
-    targetRef.current.focus()
-  }
-
-  const handleInputFocus = e => {
-    if (onFocus) {
-      onFocus(e)
-      return
-    }
-
-    e.target && e.target.select()
+    targetRef.current.apiDoFocus()
   }
 
   const handleScroll = fixedWidths => {
-    scrollIntoViewFixedWidth(targetRef.current, fixedWidths)
+    scrollIntoViewFixedWidth(
+      ReactDOM.findDOMNode(targetRef.current),
+      fixedWidths
+    )
   }
 
   const handleKeyDown = event => {
     if (onKeyDown) {
       onKeyDown(event)
-    }
-
-    if (isInputUnBoundary(event)) {
-      return
     }
 
     if (
@@ -53,6 +44,8 @@ const KeyboardCellInput = props => {
     } else if (event.key === 'Enter') {
       // 要阻止默认的
       event.preventDefault()
+      // enter 要选择
+      targetRef.current.apiDoSelectWillActive()
       cellRef.current.apiDoEnter()
     }
   }
@@ -64,10 +57,10 @@ const KeyboardCellInput = props => {
       onScroll={handleScroll}
       disabled={disabled}
     >
-      <Input
+      <DatePicker
         ref={targetRef}
         {...rest}
-        onFocus={handleInputFocus}
+        popoverType='realFocus'
         disabled={disabled}
         onKeyDown={handleKeyDown}
       />
@@ -75,10 +68,9 @@ const KeyboardCellInput = props => {
   )
 }
 
-KeyboardCellInput.propTypes = {
+KeyboardDatePicker.propTypes = {
   disabled: PropTypes.bool,
-  onKeyDown: PropTypes.func,
-  onFocus: PropTypes.func
+  onKeyDown: PropTypes.func
 }
 
-export default KeyboardCellInput
+export default KeyboardDatePicker

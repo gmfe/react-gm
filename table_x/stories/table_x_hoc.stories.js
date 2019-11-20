@@ -1,14 +1,19 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { observable } from 'mobx'
+import { observer } from 'mobx-react'
 import {
   fixedColumnsTableXHOC,
-  sortableTableX,
-  virtualizedTableX,
+  sortableTableXHOC,
+  virtualizedTableXHOC,
+  editTableXHOC,
   TableX,
   TableXUtil
 } from '../index'
 import _ from 'lodash'
+import { InputNumberV2, MoreSelect } from '../../src'
+
+const { TABLE_X, OperationHeader, EditOperation } = TableXUtil
 
 const initData = [
   {
@@ -74,19 +79,38 @@ const initData = [
   }
 ]
 
+const selectData = [
+  {
+    value: 1,
+    text: '南山'
+  },
+  {
+    value: 2,
+    text: '福田'
+  },
+  {
+    value: 3,
+    text: '罗湖'
+  },
+  {
+    value: 4,
+    text: '宝安'
+  }
+]
+
 const columns = [
   // 获取索引
   {
     Header: '序号',
     accessor: 'index',
     fixed: 'left',
-    width: 100,
+    width: TABLE_X.WIDTH_NO,
     Cell: ({ row }) => row.index + 1
   },
   // 常规用法
   {
-    Header: '建单时间',
-    accessor: 'submit_time',
+    Header: 'id',
+    accessor: 'id',
     fixed: 'left'
   },
   // accessor 有点用法
@@ -113,6 +137,71 @@ const columns = [
   }
 ]
 
+const editColumns = [
+  {
+    id: 'no',
+    Header: '序号',
+    fixed: 'left',
+    width: TABLE_X.WIDTH_NO,
+    maxWidth: TABLE_X.WIDTH_NO,
+    Cell: ({ row }) => row.index + 1
+  },
+  {
+    id: 'operation',
+    Header: () => <OperationHeader />,
+    fixed: 'left',
+    width: TABLE_X.WIDTH_OPERATION,
+    maxWidth: TABLE_X.WIDTH_OPERATION,
+    Cell: (
+      { row: { index } } // eslint-disable-line
+    ) => (
+      <EditOperation
+        onAddRow={
+          index !== 2 ? () => console.log('增加一行', index) : undefined
+        }
+        onDeleteRow={
+          index !== 1 ? () => console.log('删除一行', index) : undefined
+        }
+      />
+    )
+  },
+  {
+    Header: '地址',
+    width: TABLE_X.WIDTH_SEARCH,
+    minWidth: TABLE_X.WIDTH_SEARCH,
+    Cell: ({ row: { index, original } }) => (
+      <MoreSelect
+        data={selectData}
+        selected={original.address}
+        onSelect={selected => console.log(selected, index)}
+      />
+    )
+  },
+  {
+    Header: '入库金额',
+    width: TABLE_X.WIDTH_NUMBER,
+    minWidth: TABLE_X.WIDTH_NUMBER,
+    Cell: ({ row: { index, original } }) => (
+      <InputNumberV2
+        value={original.total_money}
+        onChange={value => console.log(value, index)}
+      />
+    )
+  },
+  {
+    Header: 'sku_money',
+    width: TABLE_X.WIDTH_NUMBER,
+    minWidth: TABLE_X.WIDTH_NUMBER,
+    Cell: ({ row: { index, original } }) => (
+      <input
+        className='gm-input'
+        value={original.sku_money}
+        onChange={value => console.log(value, index)}
+      />
+    )
+  }
+]
+
 const store = observable({
   data: initData.slice(),
   setData(data) {
@@ -130,38 +219,55 @@ const store = observable({
 })
 
 const FixedColumnTableX = fixedColumnsTableXHOC(TableX)
-const SortableTableX = sortableTableX(TableX)
-const VirtualizedTableX = virtualizedTableX(TableX)
+const SortableTableX = sortableTableXHOC(TableX)
+const VirtualizedTableX = virtualizedTableXHOC(TableX)
+const EditTableX = editTableXHOC(TableX)
 
+const virtualizedStore = observable({
+  data: _.times(1, index => ({
+    id: index,
+    name: 'lalalla'
+  })),
+  addData() {
+    this.data.push({
+      id: this.data.length,
+      name: 'lalala'
+    })
+  }
+})
+
+const virtualizedColumn = [
+  {
+    Header: '序号',
+    accessor: 'id'
+  },
+  {
+    Header: 'name',
+    accessor: 'name'
+  }
+]
 // storybook 有问题，所以提出来这里
-const VirtualWrap = () => {
-  const virtualizedData = React.useMemo(() =>
-    _.times(100000, index => ({
-      id: index,
-      name: 'lalalla'
-    }))
-  )
+const VirtualWrap = observer(() => {
+  console.log(virtualizedStore.data)
 
-  const virtualizedColumn = [
-    {
-      Header: '序号',
-      accessor: 'id'
-    },
-    {
-      Header: 'name',
-      accessor: 'name'
-    }
-  ]
+  const limit = 5
+  const height = TABLE_X.HEIGHT_HEAD_TR + limit * TABLE_X.HEIGHT_TR
 
   return (
-    <VirtualizedTableX
-      data={virtualizedData}
-      columns={virtualizedColumn}
-      virtualizedHeight={300}
-      virtualizedItemSize={TableXUtil.TABLEX_TR_HEIGHT}
-    />
+    <div>
+      <div>
+        <button onClick={() => virtualizedStore.addData()}>+1 data</button>
+      </div>
+      <VirtualizedTableX
+        data={virtualizedStore.data.slice()}
+        columns={virtualizedColumn}
+        virtualizedDisabled={virtualizedStore.data.length < limit}
+        virtualizedHeight={height}
+        virtualizedItemSize={TableXUtil.TABLE_X.HEIGHT_TR}
+      />
+    </div>
   )
-}
+})
 
 storiesOf('TableX|HOC', module)
   .add('fixed column', () => (
@@ -169,13 +275,14 @@ storiesOf('TableX|HOC', module)
   ))
   .add('sortable', () => (
     <SortableTableX
-      data={store.data}
+      data={store.data.slice()}
       columns={columns}
       keyField='id'
       onSortChange={newData => {
-        console.log(newData)
+        console.log(newData.map(v => v.id))
         store.setData(newData)
       }}
     />
   ))
   .add('virtualized', () => <VirtualWrap />)
+  .add('edit', () => <EditTableX data={store.data} columns={editColumns} />)

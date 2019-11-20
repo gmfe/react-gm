@@ -138,26 +138,30 @@ const EditTableOperation = props => {
         showArrow
         type='hover'
         popup={<div className='gm-padding-5'>添加</div>}
+        disabled={!props.onAddRow}
       >
-        <span onClick={props.onAddRow}>
-          <SVGPlusSquare
-            className={classNames('gm-react-edit-table-action-add', {
-              disabled: !props.onAddRow
-            })}
-          />
+        <span
+          onClick={props.onAddRow}
+          className={classNames('gm-react-edit-table-action-add', {
+            disabled: !props.onAddRow
+          })}
+        >
+          <SVGPlusSquare />
         </span>
       </Popover>
       <Popover
         showArrow
         type='hover'
         popup={<div className='gm-padding-5'>删除</div>}
+        disabled={!props.onDeleteRow}
       >
-        <span onClick={props.onDeleteRow}>
-          <SVGMinusSquare
-            className={classNames('gm-react-edit-table-action-delete', {
-              disabled: !props.onDeleteRow
-            })}
-          />
+        <span
+          onClick={props.onDeleteRow}
+          className={classNames('gm-react-edit-table-action-delete', {
+            disabled: !props.onDeleteRow
+          })}
+        >
+          <SVGMinusSquare />
         </span>
       </Popover>
     </OperationCell>
