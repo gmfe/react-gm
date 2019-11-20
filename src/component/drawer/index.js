@@ -41,7 +41,7 @@ class Drawer extends React.Component {
   }
 
   handleMask = e => {
-    if (e.target.className.split(' ').indexOf('gm-drawer') > -1) {
+    if (e.target.classList.contains('gm-drawer')) {
       this.props.onHide()
     }
   }
