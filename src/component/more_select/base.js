@@ -30,7 +30,8 @@ class Base extends React.Component {
     this.state = {
       searchValue: '',
       loading: false,
-      willActiveIndex: 0 // 默认第一个位置
+      // keyboard 默认第一个位置
+      willActiveIndex: props.isKeyboard ? 0 : null
     }
 
     // 要后于 this.state 执行，因为 getFilterData 用到 searchValue
@@ -430,6 +431,7 @@ Base.propTypes = {
   popupClassName: PropTypes.string,
 
   /** 目前为了 keyboard */
+  isKeyboard: PropTypes.bool,
   onKeyDown: PropTypes.func
 }
 
