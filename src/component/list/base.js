@@ -31,6 +31,12 @@ class Base extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.isScrollTo) {
+      this.doScrollToSelected('.will-active')
+    }
+  }
+
   handleSelect = item => {
     if (item.disabled) {
       return
