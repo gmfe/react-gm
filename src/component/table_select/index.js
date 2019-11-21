@@ -131,6 +131,7 @@ TableSelect.propTypes = {
   popupClassName: PropTypes.string,
 
   /** 目前为了 keyboard */
+  isKeyboard: PropTypes.bool,
   onKeyDown: PropTypes.func
 }
 
