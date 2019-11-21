@@ -67,6 +67,7 @@ const KeyboardCellMoreSelect = props => {
         popoverType='realFocus'
         disabled={disabled}
         onKeyDown={handleKeyDown}
+        isKeyboard
       />
     </KeyboardCell>
   )
