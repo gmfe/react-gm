@@ -52,7 +52,7 @@ class Modal extends React.Component {
   handleMask(e) {
     if (
       !this.props.disableMaskClose &&
-      e.target.className.contains('gm-modal')
+      e.target.classList.contains('gm-modal')
     ) {
       this.props.onHide()
     }
