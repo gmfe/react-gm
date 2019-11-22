@@ -240,7 +240,7 @@ class Popover extends React.Component {
         return (
           node === $this ||
           node === $popup ||
-          (node.className && node.className.includes('gm-popover-is-in-popup'))
+          (node.classList && node.classList.contains('gm-popover-is-in-popup'))
         )
       })
     ) {
