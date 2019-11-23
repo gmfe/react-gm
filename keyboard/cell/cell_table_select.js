@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
-import KeyboardCell from './cell'
-import { scrollIntoViewFixedWidth } from './util'
-import { DatePicker } from '../src'
+import KeyboardCell from '../core/cell'
+import { TableSelect } from '../../src'
+import { isInputUnBoundary, scrollIntoViewFixedWidth } from '../core/util'
 import ReactDOM from 'react-dom'
 
-const KeyboardDatePicker = props => {
+const KeyboardCellMoreSelect = props => {
   const { disabled, onKeyDown, ...rest } = props
 
   const cellRef = useRef(null)
@@ -25,6 +25,10 @@ const KeyboardDatePicker = props => {
   const handleKeyDown = event => {
     if (onKeyDown) {
       onKeyDown(event)
+    }
+
+    if (isInputUnBoundary(event)) {
+      return
     }
 
     if (
@@ -57,20 +61,22 @@ const KeyboardDatePicker = props => {
       onScroll={handleScroll}
       disabled={disabled}
     >
-      <DatePicker
-        ref={targetRef}
+      <TableSelect
         {...rest}
+        ref={targetRef}
         popoverType='realFocus'
         disabled={disabled}
         onKeyDown={handleKeyDown}
+        isKeyboard
       />
     </KeyboardCell>
   )
 }
 
-KeyboardDatePicker.propTypes = {
+KeyboardCellMoreSelect.propTypes = {
+  ...TableSelect.propTypes,
   disabled: PropTypes.bool,
   onKeyDown: PropTypes.func
 }
 
-export default KeyboardDatePicker
+export default KeyboardCellMoreSelect

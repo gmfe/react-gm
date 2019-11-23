@@ -15,13 +15,10 @@ import {
   KeyboardUtil
 } from './'
 import { EditTable, fixedColumnsTableHOC, TableUtil } from '../table'
-import diyTableHOC from '../table/hoc/diy_table'
 import _ from 'lodash'
 
 const { OperationHeader, EditTableOperation, referOfWidth } = TableUtil
-const KeyboardEditTable = diyTableHOC(
-  fixedColumnsTableHOC(keyboardTableHoc(EditTable))
-)
+const KeyboardEditTable = fixedColumnsTableHOC(keyboardTableHoc(EditTable))
 
 const data = [
   {
@@ -286,43 +283,24 @@ CellName.propTypes = {
 }
 
 storiesOf('快速录入|Keyboard', module)
+  .add('说明', () => <div />, {
+    info: {
+      text: `
+各单元格宽度 具体见 TableUtil.referOfWidth
+
+上述都是建议宽度，具体根据实际业务场景各自调整。 具体用法看代码。
+      `
+    }
+  })
   .add('hoc', () => {
     const ref = React.createRef()
     return (
       <div>
-        <div>
-          <h3>ui 规范</h3>
-          Cell
-          <ul>
-            <li>padding top left 固定为8px，left right 看浏览器大小</li>
-            1920x1080的尺寸是12px；1260x768的尺寸是8px；768x1024（ipad）尺寸是2px。
-            <li>序号列： {referOfWidth.noCell}</li>
-            <li>操作列： {referOfWidth.operationCell}</li>
-            <li>单位预留两个字符</li>
-          </ul>
-          输入框宽度:
-          <ul>
-            <li>商品搜索框：{referOfWidth.searchBox}</li>
-            <li>数字输入框：{referOfWidth.numberInputBox}</li>
-            <li>tableSelect输入框：{referOfWidth.tableSelectBox}</li>
-            <li>levelSelect输入框：{referOfWidth.levelSelectBox}</li>
-            <li>日期选择输入框： {referOfWidth.dateSelectBox}</li>
-          </ul>
-          上述都是建议宽度，具体根据实际业务场景各自调整。 具体用法看代码~
-        </div>
-        <div className='gm-block gm-gap-20' />
-        <button
-          className='btn  btn-primary'
-          onClick={() => ref.current.apiToggleDiySelector()}
-        >
-          列表自定义
-        </button>
-        <div>{store.data.length}</div>
         <KeyboardEditTable
           id='test'
           ref={ref}
           onAddRow={() => store.addList()}
-          data={store.data} // 记得 slice 下，否则增加数据不会 刷新
+          data={store.data.slice()} // 记得 slice 下，否则增加数据不会 刷新
           columns={[
             {
               Header: '序号',

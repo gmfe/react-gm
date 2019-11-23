@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
-import KeyboardCell from './cell'
-import { MoreSelect } from '../src'
-import { isInputUnBoundary, scrollIntoViewFixedWidth } from './util'
+import KeyboardCell from '../core/cell'
+import { MoreSelect } from '../../src'
+import { isInputUnBoundary, scrollIntoViewFixedWidth } from '../core/util'
 import ReactDOM from 'react-dom'
 
 const KeyboardCellMoreSelect = props => {

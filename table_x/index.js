@@ -2,14 +2,38 @@ import TableX from './base'
 import selectTableXHOC from './hoc/select_table_x'
 import expandTableXHOC from './hoc/expand_table_x'
 import fixedColumnsTableXHOC from './hoc/fixed_columns_table_x'
-import sortableTableX from './hoc/sortable_table_x'
-import virtualizedTableX from './hoc/virtualized_table_x'
-import { TABLEX_TR_HEIGHT, TABLEX_COLUMN_WIDTH, BatchActionBar } from './util'
+import sortableTableXHOC from './hoc/sortable_table_x'
+import virtualizedTableXHOC from './hoc/virtualized_table_x'
+import subTableXHOC from './hoc/sub_table_x'
+import editTableXHOC from './hoc/edit_table_x'
+
+import {
+  TABLE_X,
+  BatchActionBar,
+  OperationHeader,
+  OperationDelete,
+  OperationDetail,
+  OperationCell,
+  OperationRowEdit,
+  EditButton,
+  EditOperation,
+  SortHeader
+} from './util'
 
 const TableXUtil = {
-  TABLEX_TR_HEIGHT,
-  TABLEX_COLUMN_WIDTH,
-  BatchActionBar
+  TABLE_X,
+
+  BatchActionBar,
+  SortHeader,
+
+  OperationHeader,
+  OperationDelete,
+  OperationDetail,
+  OperationCell,
+  OperationRowEdit,
+
+  EditButton,
+  EditOperation
 }
 
 export {
@@ -18,6 +42,8 @@ export {
   selectTableXHOC,
   expandTableXHOC,
   fixedColumnsTableXHOC,
-  sortableTableX,
-  virtualizedTableX
+  subTableXHOC,
+  editTableXHOC,
+  sortableTableXHOC,
+  virtualizedTableXHOC
 }

@@ -1,6 +1,6 @@
 {
   "name": "react-gm",
-  "version": "9.1.8",
+  "version": "9.2.0-beta1",
   "description": "",
   "main": "src/index.js",
   "module": "src/index.js",
@@ -24,11 +24,11 @@
     "parser": "babel-eslint"
   },
   "lint-staged": {
-    "./(src|demo|frame|table)/**/*.js": [
+    "./(src|demo|frame|table|table_x)/**/*.js": [
       "eslint --cache --fix",
       "git add"
     ],
-    "./(src|demo|frame|table)/(component|css)/**/*.less": [
+    "./(src|demo|frame|table|table_x)/(component|css)/**/*.less": [
       "stylelint --cache --fix",
       "git add"
     ]

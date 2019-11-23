@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import TableX from '../base'
-import { TABLEX_COLUMN_WIDTH, TABLEX_SELECT_ID } from '../util'
+import { TABLE_X, TABLE_X_SELECT_ID } from '../util'
 import { Checkbox, Radio, Flex } from '../../src'
 import _ from 'lodash'
 
@@ -9,7 +9,6 @@ function selectTableXHOC(Component) {
   const SelectTableX = ({
     selected,
     onSelect,
-    onSelectAll,
     batchActionBar,
     isSelectorDisable,
     selectType,
@@ -27,20 +26,19 @@ function selectTableXHOC(Component) {
     }
 
     const handleSelectAll = () => {
-      onSelectAll(!selectAll)
       onSelect(!selectAll ? _.map(canSelectData, v => v[keyField]) : [])
     }
 
     const newColumns = [
       {
-        id: TABLEX_SELECT_ID,
-        width: TABLEX_COLUMN_WIDTH.FUN_WIDTH,
-        maxWidth: TABLEX_COLUMN_WIDTH.FUN_WIDTH,
+        id: TABLE_X_SELECT_ID,
+        width: TABLE_X.WIDTH_FUN,
+        maxWidth: TABLE_X.WIDTH_FUN,
         fixed: fixedSelect ? 'left' : null,
         Header: () =>
           selectType === 'checkbox' ? (
             <Checkbox
-              className='gm-tablex-select'
+              className='gm-table-x-select'
               disabled={data.length === 0} // eslint-disable-line
               checked={selectAll}
               onChange={handleSelectAll}
@@ -54,7 +52,7 @@ function selectTableXHOC(Component) {
           if (selectType === 'checkbox') {
             return (
               <Checkbox
-                className='gm-tablex-select'
+                className='gm-table-x-select'
                 disabled={disabled}
                 checked={isChecked}
                 onChange={() => {
@@ -65,7 +63,7 @@ function selectTableXHOC(Component) {
           } else {
             return (
               <Radio
-                className='gm-tablex-select'
+                className='gm-table-x-select'
                 disabled={disabled}
                 checked={isChecked}
                 onClick={() => {
@@ -79,13 +77,13 @@ function selectTableXHOC(Component) {
     ].concat(columns)
 
     return (
-      <div className='gm-tablex-select-container'>
+      <div className='gm-table-x-select-container'>
         {batchActionBar && (
-          <div className='gm-tablex-select-batch-action-bar-container'>
+          <div className='gm-table-x-select-batch-action-bar-container'>
             <Flex
               column
               justifyCenter
-              className='gm-tablex-select-batch-action-bar'
+              className='gm-table-x-select-batch-action-bar'
             >
               {batchActionBar}
             </Flex>
@@ -102,7 +100,6 @@ function selectTableXHOC(Component) {
     // select 专有
     selected: PropTypes.array.isRequired,
     onSelect: PropTypes.func.isRequired,
-    onSelectAll: PropTypes.func.isRequired,
     batchActionBar: PropTypes.element,
     isSelectorDisable: PropTypes.func,
     selectType: PropTypes.oneOf(['checkbox', 'radio']),

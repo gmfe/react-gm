@@ -19,7 +19,7 @@ const defaultColumn = {
   minWidth: 50,
   // 不能动 useResizeColumns 貌似默认了 150
   width: 150,
-  maxWidth: 500
+  maxWidth: 1000
 }
 
 const Th = ({ column, totalWidth }) => {
@@ -27,9 +27,9 @@ const Th = ({ column, totalWidth }) => {
 
   const thProps = {
     ...hp,
-    className: classNames('gm-tablex-th', hp.className, {
-      'gm-tablex-fixed-left': column.fixed === 'left',
-      'gm-tablex-fixed-right': column.fixed === 'right'
+    className: classNames('gm-table-x-th', hp.className, {
+      'gm-table-x-fixed-left': column.fixed === 'left',
+      'gm-table-x-fixed-right': column.fixed === 'right'
     }),
     style: {
       ...hp.style,
@@ -74,8 +74,8 @@ const THead = ({ headers }) => {
   }
 
   return (
-    <div className='gm-tablex-thead'>
-      <div className='gm-tablex-tr'>
+    <div className='gm-table-x-thead'>
+      <div className='gm-table-x-tr'>
         {headers.map(column => (
           <Th key={column.index} column={column} totalWidth={totalWidth} />
         ))}
@@ -92,9 +92,9 @@ const Td = ({ cell, totalWidth }) => {
   const cp = cell.getCellProps()
   const tdProps = {
     ...cp,
-    className: classNames('gm-tablex-td', {
-      'gm-tablex-fixed-left': cell.column.fixed === 'left',
-      'gm-tablex-fixed-right': cell.column.fixed === 'right'
+    className: classNames('gm-table-x-td', {
+      'gm-table-x-fixed-left': cell.column.fixed === 'left',
+      'gm-table-x-fixed-right': cell.column.fixed === 'right'
     }),
     style: {
       ...cp.style,
@@ -118,30 +118,26 @@ Td.propTypes = {
   totalWidth: PropTypes.number.isRequired
 }
 
-const Tr = ({ row, SubComponent, keyField, style }) => {
+const Tr = ({ row, SubComponent, keyField, style, totalWidth }) => {
   const gp = row.getRowProps()
   const props = {
     ...gp,
-    className: 'gm-tablex-tr'
-  }
-
-  let totalWidth = 0
-  if (row.cells.length > 0) {
-    const last = row.cells[row.cells.length - 1].column
-    totalWidth = last.totalLeft + last.totalWidth
+    className: 'gm-table-x-tr'
   }
 
   // 目前视为了 srotable 用。值可能是 undefined，keyField 没作用的情况
   const dataId = row.original[keyField]
 
   return (
-    <div className='gm-tablex-tr-group' data-id={dataId} style={style}>
+    <div className='gm-table-x-tr-group' data-id={dataId} style={style}>
       <div {...props}>
         {row.cells.map((cell, cellIndex) => (
           <Td key={cellIndex} cell={cell} totalWidth={totalWidth} />
         ))}
       </div>
-      {SubComponent && <div className='gm-tablex-sub'>{SubComponent(row)}</div>}
+      {SubComponent && (
+        <div className='gm-table-x-sub'>{SubComponent(row)}</div>
+      )}
     </div>
   )
 }
@@ -150,55 +146,8 @@ Tr.propTypes = {
   row: PropTypes.object.isRequired,
   SubComponent: PropTypes.func,
   keyField: PropTypes.string.isRequired,
-  style: PropTypes.object.isRequired
-}
-
-const TBody = ({
-  data,
-  SubComponent,
-  rows,
-  prepareRow,
-  getTableBodyProps,
-  keyField,
-  RowsContainerComponent
-}) => {
-  const gtbp = getTableBodyProps()
-  const props = {
-    ...gtbp,
-    className: 'gm-tablex-tbody'
-  }
-
-  // eslint-disable-next-line
-  const RenderRow = ({ index, style }) => {
-    const row = rows[index]
-    prepareRow(row)
-
-    return (
-      <Tr
-        key={row.index}
-        row={row}
-        SubComponent={SubComponent}
-        keyField={keyField}
-        style={style}
-      />
-    )
-  }
-
-  return (
-    <div {...props}>
-      <RowsContainerComponent rows={rows}>{RenderRow}</RowsContainerComponent>
-    </div>
-  )
-}
-
-TBody.propTypes = {
-  data: PropTypes.array.isRequired,
-  SubComponent: PropTypes.func,
-  rows: PropTypes.array.isRequired,
-  prepareRow: PropTypes.func.isRequired,
-  getTableBodyProps: PropTypes.func.isRequired,
-  keyField: PropTypes.string.isRequired,
-  RowsContainerComponent: PropTypes.func.isRequired
+  style: PropTypes.object.isRequired,
+  totalWidth: PropTypes.number.isRequired
 }
 
 const TableX = ({
@@ -208,7 +157,7 @@ const TableX = ({
   disableSorting,
   disableMultiSort,
   SubComponent,
-  RowsContainerComponent,
+  ContainerComponent,
   keyField,
   className,
   ...rest
@@ -232,40 +181,66 @@ const TableX = ({
     useResizeColumns
   )
 
-  const rtp = getTableProps()
+  const gtp = getTableProps()
   const tableProps = {
-    ...rtp,
-    className: classNames('gm-tablex-table', rtp.className)
+    ...gtp,
+    className: classNames('gm-table-x-table', gtp.className)
+  }
+
+  const gtbp = getTableBodyProps()
+  const tableBodyProps = {
+    ...gtbp,
+    className: 'gm-table-x-tbody'
+  }
+
+  let totalWidth = null
+  if (rows[0] && rows[0].cells.length > 0) {
+    prepareRow(rows[0])
+    const last = rows[0].cells[rows[0].cells.length - 1].column
+    totalWidth = last.totalLeft + last.totalWidth
   }
 
   const handleScroll = () => {
     afterScroll()
   }
 
+  // eslint-disable-next-line
+  const RenderRow = ({ index, style }) => {
+    const row = rows[index]
+    prepareRow(row)
+
+    return (
+      <Tr
+        key={row.index}
+        row={row}
+        SubComponent={SubComponent}
+        keyField={keyField}
+        style={style}
+        totalWidth={totalWidth}
+      />
+    )
+  }
+
+  const Wrap = React.forwardRef(({ children, ...rest }, ref) => (
+    <div ref={ref} {...tableProps} {...rest}>
+      <THead headers={headers} />
+      <div {...tableBodyProps}>{children}</div>
+    </div>
+  ))
+
   return (
     <div
       {...rest}
       className={classNames(
-        'gm-tablex',
+        'gm-table-x',
         {
-          'gm-tablex-empty': data.length === 0
+          'gm-table-x-empty': data.length === 0
         },
         className
       )}
       onScroll={handleScroll}
     >
-      <div {...tableProps}>
-        <THead headers={headers} />
-        <TBody
-          data={data}
-          SubComponent={SubComponent}
-          rows={rows}
-          prepareRow={prepareRow}
-          getTableBodyProps={getTableBodyProps}
-          keyField={keyField}
-          RowsContainerComponent={RowsContainerComponent}
-        />
-      </div>
+      <ContainerComponent rows={rows} Wrap={Wrap} RenderRow={RenderRow} />
       {loading && <Loading />}
       {!loading && data.length === 0 && <Empty />}
     </div>
@@ -280,28 +255,30 @@ TableX.propTypes = {
   disableSorting: PropTypes.bool,
   disableMultiSort: PropTypes.bool,
   SubComponent: PropTypes.func,
-  /** 为了接入虚拟列表 */
-  RowsContainerComponent: PropTypes.func,
-  /* 由其他 hoc 传下来 */
+  /** 为了接入虚拟列表，抽象 container 层 */
+  ContainerComponent: PropTypes.func,
+  /** 由其他 hoc 传下来 */
   keyField: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object
 }
 
+// eslint-disable-next-line
+const ContainerComponent = ({ rows, Wrap, RenderRow }) => (
+  <Wrap>
+    {_.map(rows, row =>
+      RenderRow({
+        index: row.index,
+        style: {}
+      })
+    )}
+  </Wrap>
+)
+
 TableX.defaultProps = {
   keyField: 'value',
   disableSorting: true,
-  // eslint-disable-next-line
-  RowsContainerComponent: ({ rows, children }) => (
-    <>
-      {_.map(rows, (row, index) =>
-        children({
-          index,
-          style: {}
-        })
-      )}
-    </>
-  )
+  ContainerComponent
 }
 
 export default TableX

@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
-import ReactDOM from 'react-dom'
-import KeyboardCell from './cell'
-import { isInputUnBoundary, scrollIntoViewFixedWidth } from './util'
-import { InputNumberV2 } from '../src'
+import KeyboardCell from '../core/cell'
+import { isInputUnBoundary, scrollIntoViewFixedWidth } from '../core/util'
+import { Input } from '../../src'
 
 const KeyboardCellInput = props => {
   const { disabled, onKeyDown, onFocus, ...rest } = props
@@ -12,7 +11,7 @@ const KeyboardCellInput = props => {
   const targetRef = useRef(null)
 
   const handleFocus = () => {
-    targetRef.current.apiDoFocus()
+    targetRef.current.focus()
   }
 
   const handleInputFocus = e => {
@@ -25,10 +24,7 @@ const KeyboardCellInput = props => {
   }
 
   const handleScroll = fixedWidths => {
-    scrollIntoViewFixedWidth(
-      ReactDOM.findDOMNode(targetRef.current),
-      fixedWidths
-    )
+    scrollIntoViewFixedWidth(targetRef.current, fixedWidths)
   }
 
   const handleKeyDown = event => {
@@ -68,10 +64,10 @@ const KeyboardCellInput = props => {
       onScroll={handleScroll}
       disabled={disabled}
     >
-      <InputNumberV2
+      <Input
+        ref={targetRef}
         {...rest}
         onFocus={handleInputFocus}
-        ref={targetRef}
         disabled={disabled}
         onKeyDown={handleKeyDown}
       />
@@ -80,7 +76,6 @@ const KeyboardCellInput = props => {
 }
 
 KeyboardCellInput.propTypes = {
-  ...InputNumberV2.propTypes,
   disabled: PropTypes.bool,
   onKeyDown: PropTypes.func,
   onFocus: PropTypes.func

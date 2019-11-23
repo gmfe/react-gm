@@ -1,13 +1,18 @@
-import keyboardTableHoc from './table_hoc'
-import KC from './cell'
-import KCInput from './cell_input'
-import KCMoreSelect from './cell_more_select'
-import KCInputNumberV2 from './cell_input_number_v2'
-import KCLevelSelect from './cell_level_select'
-import KCTableSelect from './cell_table_select'
-import KCDatePicker from './cell_date_picker'
-import KCSelect from './cell_select'
-import { isInputUnBoundary, scrollIntoViewFixedWidth, doFocus } from './util'
+import keyboardTableHoc from './for_table/keyboard_table_hoc'
+import keyboardTableXHOC from './for_table/keyboard_table_x_hoc'
+import KC from './core/cell'
+import KCInput from './cell/cell_input'
+import KCMoreSelect from './cell/cell_more_select'
+import KCInputNumberV2 from './cell/cell_input_number_v2'
+import KCLevelSelect from './cell/cell_level_select'
+import KCTableSelect from './cell/cell_table_select'
+import KCDatePicker from './cell/cell_date_picker'
+import KCSelect from './cell/cell_select'
+import {
+  isInputUnBoundary,
+  scrollIntoViewFixedWidth,
+  doFocus
+} from './core/util'
 
 // 只暴露写方法
 const KeyboardUtil = {
@@ -18,6 +23,7 @@ const KeyboardUtil = {
 
 export {
   keyboardTableHoc,
+  keyboardTableXHOC,
   KC,
   KCInput,
   KCInputNumberV2,
