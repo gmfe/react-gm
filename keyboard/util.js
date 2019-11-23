@@ -53,7 +53,7 @@ const isInputUnBoundary = event => {
 const getTd = dom => {
   let parentDom = dom.parentNode
 
-  while (!parentDom.className.includes('rt-td')) {
+  while (!parentDom.classList.contains('rt-td')) {
     parentDom = parentDom.parentNode
     if (parentDom === document) {
       return null
@@ -66,7 +66,7 @@ const getTd = dom => {
 const getTable = dom => {
   let parentDom = dom.parentNode
 
-  while (!parentDom.className.includes('rt-table')) {
+  while (!parentDom.classList.contains('rt-table')) {
     parentDom = parentDom.parentNode
     if (parentDom === document) {
       return null

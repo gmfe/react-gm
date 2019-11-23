@@ -3,19 +3,26 @@ import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-// 只判断 下
-function isElementInViewport(dom, predictingHeight) {
+// 复杂了，请debug看dom位置。
+function elementInViewport(top, dom, targetHeight, predictingHeight) {
+  const buf = 5
+
   const rect = dom.getBoundingClientRect()
+  const windowHeight =
+    window.innerHeight || document.documentElement.clientHeight
+  const domHeight = predictingHeight || rect.height
 
-  const height = window.innerHeight || document.documentElement.clientHeight
-
-  if (predictingHeight) {
-    // 会差那么一丢丢，所以给个阈值
-    return rect.top + predictingHeight <= height - 10
+  if (top) {
+    return {
+      topInViewport: rect.top - domHeight - buf >= 0,
+      bottomInViewport: null // top 情况不用算，用不到
+    }
   }
 
-  // 会差那么一丢丢，所以给个阈值
-  return rect.bottom <= height - 10
+  return {
+    topInViewport: rect.top - targetHeight - domHeight - buf >= 0,
+    bottomInViewport: rect.top + domHeight + buf <= windowHeight
+  }
 }
 
 class Popup extends React.Component {
@@ -35,8 +42,19 @@ class Popup extends React.Component {
 
     let top = this.state.top
 
-    // 如果是 bottom，且不够位置的时候，就强制 top
-    if (!top && !isElementInViewport(dom, this.props.predictingHeight)) {
+    const { topInViewport, bottomInViewport } = elementInViewport(
+      top,
+      dom,
+      this.props.rect.height,
+      this.props.predictingHeight
+    )
+
+    // 如果在上 且不够位置 就强制 bottom
+    if (top && !topInViewport) {
+      top = false
+    }
+    // 如果在下 且下不够位置 且上位置足够 就强制上
+    else if (!top && !bottomInViewport && topInViewport) {
       top = true
     }
 
@@ -106,7 +124,7 @@ class Popup extends React.Component {
     }
 
     if (this.state.top) {
-      sStyle.top = rect.top - height - 5
+      sStyle.top = rect.top - height - 2
     }
 
     let animate = animName
