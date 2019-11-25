@@ -1,0 +1,39 @@
+@gm-icon-diameter: 18px;
+
+.gm-steps {
+  .gm-steps-step {
+    &:first-child {
+      margin-top: 0 !important;
+    }
+
+    // 线条
+    .gm-steps-step-tag {
+      width: 1px;
+      height: 25px;
+      background: @brand-primary;
+    }
+
+    &:last-child .gm-steps-step-tag {
+      display: none;
+    }
+
+    .gm-steps-step-icon {
+      border: 1px @brand-primary solid;
+      border-radius: 50%;
+      line-height: @gm-icon-diameter;
+      text-align: center;
+      width: @gm-icon-diameter;
+      height: @gm-icon-diameter;
+      color: @brand-primary;
+    }
+
+    .gm-steps-step-title {
+      height: @gm-icon-diameter + 2; // 加上icon边框宽度
+      line-height: @gm-icon-diameter + 2; // 加上icon边框宽度
+    }
+
+    .gm-steps-step-description {
+      color: @gm-color-fourth;
+    }
+  }
+}

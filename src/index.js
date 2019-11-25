@@ -112,6 +112,8 @@ import Tabs from './component/tabs/tabs'
 import ManagePagination from './business/manage_pagination'
 import ManagePaginationV2 from './business/manage_pagination/v2'
 
+import Steps from './component/steps'
+
 Object.assign(Sheet, {
   SheetColumn,
   SheetAction,
@@ -252,5 +254,6 @@ export {
   Row,
   Tabs,
   ManagePagination,
-  ManagePaginationV2
+  ManagePaginationV2,
+  Steps
 }
