@@ -5,13 +5,12 @@ on:
   push:
     branches:
       - master
+      - feature-actions
 
 # 任务列表
 jobs:
-
   # 任务名称
   release:
-
     # 在何种平台执行，可选 windows-latest/ubuntu-latest/macOS-latest 等
     runs-on: ubuntu-latest
 
@@ -21,12 +20,6 @@ jobs:
 
     # 这里定义了任务运行过程中的各个步骤
     steps:
-
-      # 代码拉取
-      - uses: actions/checkout@master
-        with:
-          ref: master
-
       # 环境
       - run: |
           npm -v
@@ -36,14 +29,15 @@ jobs:
           git config --global user.name "actions"
 
       - run: |
-          git checkout master
+          pwd
+          git clone https://github.com/gmfe/react-gm.git
+          cd react-gm
+
           yarn
           npm run build
-          git add docs
+          ls -a | grep -v docs | xargs rm -rf
+          git add  --all
           git commit -m 'build docs'
 
-      - run: |
-          git push 'https://liyatang%40qq.com:${{secrets.PASSWORD}}@github.com/gmfe/react-gm.git' master:master
-
-        env:
-          PASSWORD: ${{secrets.PASSWORD}}
+          pwd
+          git push 'https://liyatang%40qq.com:${{secrets.PASSWORD}}@github.com/gmfe/react-gm-docs.git' master:master -f
