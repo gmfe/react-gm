@@ -35,7 +35,8 @@ jobs:
 
           yarn
           npm run build
-          ls -a | grep -v docs | xargs rm -rf
+          ls | grep -v docs | xargs rm -rf
+          rm -rf .github && rm -rf .storybook
           git add  --all
           git commit -m 'build docs'
 
