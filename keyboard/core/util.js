@@ -1,4 +1,5 @@
 import React from 'react'
+import { TABLE_X } from '../../table_x/util'
 
 const WrapContext = React.createContext(null)
 const CellKeyContext = React.createContext(null)
@@ -74,7 +75,7 @@ const getTable = dom => {
   while (
     !(
       parentDom.classList.contains('rt-table') ||
-      parentDom.classList.contains('gm-table-x')
+      parentDom.classList.contains('gm-table-x-table')
     )
   ) {
     parentDom = parentDom.parentNode
@@ -85,6 +86,10 @@ const getTable = dom => {
 
   return parentDom
 }
+
+// const getTop = (element, target) => {
+//   const top =
+// }
 
 // 此 dom 一定是 td 内 的元素
 const scrollIntoViewFixedWidth = (dom, fixedWidth) => {
@@ -97,6 +102,9 @@ const scrollIntoViewFixedWidth = (dom, fixedWidth) => {
   if (!table) {
     return
   }
+
+  const tableRect = table.getBoundingClientRect()
+  const tdRect = td.getBoundingClientRect()
 
   const { leftFixedWidth, rightFixedWidth } = fixedWidth
   const { scrollLeft } = table
@@ -111,6 +119,15 @@ const scrollIntoViewFixedWidth = (dom, fixedWidth) => {
   ) {
     table.scrollLeft =
       offsetLeft + offsetWidth - (table.offsetWidth - rightFixedWidth)
+  }
+
+  // 只 tablex 生效
+  if (table.classList.contains('gm-table-x-table')) {
+    // 如果被遮挡
+    if (tdRect.top - tableRect.top < TABLE_X.HEIGHT_HEAD_TR) {
+      // 则滚一个 tr 距离
+      table.scrollTop = table.scrollTop - TABLE_X.HEIGHT_TR
+    }
   }
 }
 

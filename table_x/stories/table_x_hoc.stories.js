@@ -99,6 +99,65 @@ const selectData = [
   }
 ]
 
+const fixedColumns = [
+  {
+    Header: '序号',
+    accessor: 'index',
+    fixed: 'left',
+    width: 150,
+    Cell: ({ row }) => row.index + 1
+  },
+  {
+    Header: 'id',
+    accessor: 'id',
+    width: 100,
+    fixed: 'left'
+  },
+  {
+    Header: '地址',
+    accessor: 'address.text',
+    fixed: 'left',
+    width: 100 // 定宽
+  },
+  {
+    Header: 'sku_money',
+    width: 200,
+    accessor: 'sku_money'
+  },
+  {
+    Header: 'supplier_customer_id',
+    width: 200,
+    accessor: 'supplier_customer_id'
+  },
+  {
+    Header: 'submit_time',
+    minWidth: 100,
+    accessor: 'submit_time'
+  },
+  {
+    Header: 'delta_money',
+    width: 100,
+    accessor: 'delta_money'
+  },
+  {
+    Header: '供应商信息',
+    width: 100,
+    fixed: 'right',
+    accessor: data => data.supplier_name,
+    id: 'supplier_name'
+  },
+  {
+    Header: '入库金额',
+    accessor: 'total_money',
+    width: 100,
+    fixed: 'right',
+    Cell: cellProps => {
+      const { row } = cellProps
+      return <div>{row.original.total_money}</div>
+    }
+  }
+]
+
 const columns = [
   // 获取索引
   {
@@ -269,7 +328,7 @@ const EditTableX = editTableXHOC(TableX)
 const DiyTableX = diyTableXHOC(TableX)
 
 const virtualizedStore = observable({
-  data: _.times(1, index => ({
+  data: _.times(100, index => ({
     id: index,
     name: 'lalalla'
   })),
@@ -293,8 +352,6 @@ const virtualizedColumn = [
 ]
 // storybook 有问题，所以提出来这里
 const VirtualWrap = observer(() => {
-  console.log(virtualizedStore.data)
-
   const limit = 5
   const height = TABLE_X.HEIGHT_HEAD_TR + limit * TABLE_X.HEIGHT_TR
 
@@ -316,7 +373,7 @@ const VirtualWrap = observer(() => {
 
 storiesOf('TableX|HOC', module)
   .add('fixed column', () => (
-    <FixedColumnTableX data={store.data} columns={columns} />
+    <FixedColumnTableX data={store.data} columns={fixedColumns} />
   ))
   .add('sortable', () => (
     <SortableTableX

@@ -39,6 +39,13 @@ const TABLE_X = {
   WIDTH_DATE: 110
 }
 
+// 私有。这些默认值都不会被tableX真正使用到，所以就这么定义了。
+const __DEFAULT_COLUMN = {
+  minWidth: 7.77,
+  width: 17.77,
+  maxWidth: 1777.77
+}
+
 const Mask = ({ style, children }) => {
   return (
     <Flex
@@ -100,28 +107,42 @@ Resizer.propTypes = {
 
 const CellEmpty = () => <span className='gm-text-desc'>-</span>
 
-const getColumnStyle = column => {
-  // width 200
-  // flex: 200 0 auto; width: 200px; max-width: 200px;
-  // maxWidth 300
-  // flex: 100 0 auto; width: 100px; max-width: 300px;
-  // minWidth 200
-  // flex: 200 0 auto; width: 200px;
-  // minWidth 50 width 100
-  // flex: 100 0 auto; width: 100px; max-width: 100px;
-  const style = {
-    flex: `${column.width} 0 auto`,
-    width: `${column.width || column.minWidth}px`,
-    maxWidth: (column.maxWidth || column.width) + 'px'
-  }
-
-  return style
+const asPx = value => {
+  value = Number(value)
+  return Number.isNaN(value) ? null : `${value}px`
 }
 
-const afterScroll = _.debounce(() => {
-  console.log('afterScroll')
+const getFirstDefined = (a, b) => {
+  // 如果取的是默认值
+  if (
+    a === __DEFAULT_COLUMN.width &&
+    (b === __DEFAULT_COLUMN.minWidth || b === __DEFAULT_COLUMN.maxWidth)
+  ) {
+    return undefined
+  } else if (a !== __DEFAULT_COLUMN.width) {
+    return a
+  } else {
+    return b
+  }
+}
+
+// width 200  =>👉  flex: 200 0 auto; width: 200px; max-width: 200px;
+// maxWidth 300  =>👉  max-width: 300px;
+// minWidth 200  =>👉  flex: 200 0 auto; width: 200px;
+// minWidth 50 width 100  =>👉  flex: 100 0 auto; width: 100px; max-width: 100px;
+const getColumnStyle = ({ width, minWidth, maxWidth }) => {
+  const _width = getFirstDefined(width, minWidth)
+  const _maxWidth = getFirstDefined(width, maxWidth)
+  return {
+    flex: `${_width} 0 auto`,
+    width: asPx(_width),
+    maxWidth: asPx(_maxWidth)
+  }
+}
+
+const afterScroll = () => {
   window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
-}, 500)
+}
 
 function getColumnKey(column) {
   // 如果是字符串就取 accessor
@@ -147,6 +168,7 @@ export {
   TABLE_X_EXPAND_ID,
   TABLE_X_DIY_ID,
   TABLE_X_SUB_TABLE_ID,
+  __DEFAULT_COLUMN,
   Empty,
   Loading,
   SortHeader,

@@ -125,12 +125,14 @@ function diyTableXHOC(Component) {
     return (
       <Component
         {...rest}
+        id={id}
         columns={[
           {
             id: TABLE_X_DIY_ID,
             width: TABLE_X.WIDTH_FUN,
             maxWidth: TABLE_X.WIDTH_FUN,
             accessor: TABLE_X_DIY_ID,
+            fixed: 'left',
             Cell: () => null, // 只是用来占据空间
             Header: () => (
               <Popover

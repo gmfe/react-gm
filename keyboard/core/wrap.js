@@ -264,7 +264,7 @@ Wrap.propTypes = {
   id: PropTypes.string.isRequired,
   /** 增加一行数据 */
   onAddRow: PropTypes.func.isRequired,
-  /** (actionName, to, from) */
+  /** ({actionName, to, from}) */
   onBeforeDispatch: PropTypes.func,
 
   /** Wrap 需要知道字段集合，以便能找到相应的单元格。请确保表格的顺序一样 */

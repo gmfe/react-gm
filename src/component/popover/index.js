@@ -20,7 +20,7 @@ function isContains(target, fun) {
   return false
 }
 
-function getElementPositionWithScrollTop(element) {
+function getElementPositionWithScroll(element) {
   let { left, top } = element.getBoundingClientRect()
   left += getScrollLeft()
   top += getScrollTop()
@@ -200,13 +200,9 @@ class Popover extends React.Component {
   }
 
   setActive = active => {
-    this.setState({
-      active
-    })
-
     if (active) {
       const dom = findDOMNode(this)
-      const pos = getElementPositionWithScrollTop(dom)
+      const pos = getElementPositionWithScroll(dom)
       const rect = {
         left: pos.left,
         top: pos.top,
@@ -215,6 +211,11 @@ class Popover extends React.Component {
       }
       this.rect = rect
     }
+
+    this.setState({
+      active
+    })
+
     // 不需要，重复了，didUpdate 会做了
     // this.doRenderPopup(active)
   }

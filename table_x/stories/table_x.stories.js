@@ -7,8 +7,8 @@ import moment from 'moment'
 const { SortHeader, EditButton } = TableXUtil
 
 const sortDateTime = (a, b) => {
-  const mA = moment(a.submit_time)
-  const mB = moment(b.submit_time)
+  const mA = moment(a)
+  const mB = moment(b)
 
   if (mA > mB) {
     return 1
@@ -96,7 +96,7 @@ const store = observable({
     }
 
     let newData = this.data.sort((a, b) => {
-      return sortDateTime(a, b)
+      return sortDateTime(a.submit_time, b.submit_time)
     })
 
     if (type === 'desc') {
@@ -112,18 +112,21 @@ const columns = [
   {
     Header: '序号',
     accessor: 'index',
-    Cell: ({ row }) => row.index + 1
+    Cell: ({ row }) => row.index + 1,
+    width: 50
   },
   // 常规用法
   {
     Header: '建单时间',
-    accessor: 'submit_time'
+    accessor: 'submit_time',
+    show: false
   },
   // accessor 有点用法
   {
     Header: '地址',
     accessor: 'address.text',
-    width: 200 // 定宽
+    width: 200, // 定宽
+    maxWidth: 200
   },
   // accessor 是 func，需要提供 id
   {
@@ -173,7 +176,7 @@ const sortColumns = [
     // 指定排序方式
     sortType: (rowA, rowB, columnID) => {
       console.log(rowA, rowB, columnID)
-      return sortDateTime(rowA.original, rowB.original)
+      return sortDateTime(rowA.original.submit_time, rowB.original.submit_time)
     }
   },
   // 如果不需要 disableSorting true
@@ -193,6 +196,56 @@ const sortColumns = [
   }
 ]
 
+const groupColumns = [
+  {
+    Header: '序号',
+    columns: [
+      {
+        Header: '序号',
+        accessor: 'index',
+        Cell: ({ row }) => row.index + 1
+      }
+    ]
+  },
+  {
+    Header: '其他信息',
+    columns: [
+      {
+        Header: '建单时间',
+        accessor: 'submit_time',
+        show: false
+      },
+      // accessor 有点用法
+
+      // 自定义整个单元格
+      {
+        Header: '入库金额',
+        accessor: 'total_money',
+        Cell: cellProps => {
+          const { row } = cellProps
+          return <div>{row.original.total_money}</div>
+        }
+      }
+    ]
+  },
+  {
+    Header: '供应商信息',
+    columns: [
+      {
+        Header: '地址',
+        accessor: 'address.text',
+        width: 200 // 定宽
+      },
+      // accessor 是 func，需要提供 id
+      {
+        Header: '供应商信息',
+        accessor: data => data.supplier_name,
+        id: 'supplier_name'
+      }
+    ]
+  }
+]
+
 const sortColumnsBackEnd = [
   {
     Header: () => (
@@ -205,13 +258,13 @@ const sortColumnsBackEnd = [
       </div>
     ),
     accessor: 'submit_time',
-    disableSorting: true
+    disableSortBy: true
   },
   {
     Header: '供应商信息',
     accessor: data => data.supplier_name,
     id: 'supplier_name',
-    disableSorting: true
+    disableSortBy: true
   },
   {
     Header: '入库金额',
@@ -220,7 +273,7 @@ const sortColumnsBackEnd = [
       const { row } = cellProps
       return <div>{row.original.total_money}</div>
     },
-    disableSorting: true
+    disableSortBy: true
   }
 ]
 
@@ -245,13 +298,11 @@ Table 切 TableX 关注点：
 - EditTableOperation 换成  EditOperation
 - 宽度常亮收归到 TableUtil.TABLE_X
 
-TODO
-- diy
-- ...
 `
     }
   })
   .add('default', () => <TableX data={store.data} columns={columns} />)
+  .add('group', () => <TableX data={store.data} columns={groupColumns} />)
   .add('loading & nodata & tiled', () => (
     <div>
       <TableX loading data={store.data} columns={columns} />
@@ -262,7 +313,11 @@ TODO
   .add(
     'sorting',
     () => (
-      <TableX disableSorting={false} data={store.data} columns={sortColumns} />
+      <TableX
+        disableSortBy={false}
+        data={store.data.slice()}
+        columns={sortColumns}
+      />
     ),
     {
       info: {
@@ -289,3 +344,10 @@ react-table@v7支持多重排序，通过 shift 来完成。但不方便，所�
     />
   ))
   .add('edit button', () => <TableX data={store.data} columns={editColumns} />)
+  .add('isTrDisable', () => (
+    <TableX
+      data={store.data}
+      columns={columns}
+      isTrDisable={(item, index) => index % 2 === 0}
+    />
+  ))
