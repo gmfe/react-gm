@@ -12,7 +12,7 @@
 @gm-table-x-select-action-bar-height: 50px;
 
 .gm-table-x {
-  border: 1px solid @gm-table-x-border-color;
+  border-bottom: 1px solid @gm-table-x-border-color;
   overflow: auto;
   position: relative;
 
@@ -194,6 +194,11 @@
 
   &.gm-table-x-empty {
     min-height: 166px;
+  }
+
+  &.gm-table-x-has-border {
+    border-left: 1px solid @gm-table-x-border-color;
+    border-right: 1px solid @gm-table-x-border-color;
   }
 
   // edit button 和 gm-table-x-edit 没有关系，只是名字相近
