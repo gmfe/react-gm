@@ -160,7 +160,6 @@ const TableX = ({
   ContainerComponent,
   keyField,
   className,
-  hasBorder,
   ...rest
 }) => {
   const {
@@ -235,8 +234,7 @@ const TableX = ({
       className={classNames(
         'gm-table-x',
         {
-          'gm-table-x-empty': data.length === 0,
-          'gm-table-x-has-border': hasBorder
+          'gm-table-x-empty': data.length === 0
         },
         className
       )}
@@ -262,9 +260,7 @@ TableX.propTypes = {
   /** 由其他 hoc 传下来 */
   keyField: PropTypes.string,
   className: PropTypes.string,
-  style: PropTypes.object,
-  /** table是否有两边的border */
-  hasBorder: PropTypes.bool
+  style: PropTypes.object
 }
 
 // eslint-disable-next-line
@@ -282,7 +278,6 @@ const ContainerComponent = ({ rows, Wrap, RenderRow }) => (
 TableX.defaultProps = {
   keyField: 'value',
   disableSorting: true,
-  hasBorder: false,
   ContainerComponent
 }
 
