@@ -252,11 +252,11 @@ TODO
     }
   })
   .add('default', () => <TableX data={store.data} columns={columns} />)
-  .add('loading & nodata & hasBorder', () => (
+  .add('loading & nodata & tiled', () => (
     <div>
       <TableX loading data={store.data} columns={columns} />
       <TableX data={[]} columns={columns} />
-      <TableX data={[]} columns={columns} className='gm-margin-10' hasBorder />
+      <TableX data={[]} columns={columns} className='gm-margin-10' tiled />
     </div>
   ))
   .add(

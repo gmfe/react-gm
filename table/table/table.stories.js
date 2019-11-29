@@ -111,11 +111,11 @@ react-table 文档见 https://github.com/tannerlinsley/react-table/tree/v6
     }
   })
   .add('default', () => <Table data={store.data} columns={columns} />)
-  .add('loading & nodata & hasBorder', () => (
+  .add('loading & nodata & tiled', () => (
     <div>
       <Table loading data={store.data} columns={columns} />
-      <Table data={[]} columns={columns} className='gm-margin-20 gm-border' />
-      <Table data={[]} columns={columns} hasBorder className='gm-margin-20' />
+      <Table data={[]} columns={columns} className='gm-margin-20' />
+      <Table data={[]} columns={columns} tiled className='gm-margin-20' />
     </div>
   ))
   .add('limit height width & scroll', () => (

@@ -85,7 +85,7 @@ class BaseTable extends React.Component {
       defaultPageSize,
       showPagination,
       className,
-      hasBorder,
+      tiled,
       ...rest
     } = this.props
 
@@ -116,7 +116,7 @@ class BaseTable extends React.Component {
           'gm-react-table -striped -highlight',
           {
             'gm-react-table-no-data': data.length === 0,
-            'gm-react-table-has-border': hasBorder
+            'gm-react-table-tiled': tiled
           },
           className
         )}
@@ -153,16 +153,15 @@ BaseTable.propTypes = {
   columns: PropTypes.array.isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
-  /** table是否有两边的border */
-  hasBorder: PropTypes.bool,
+  /** table是否平铺 */
+  tiled: PropTypes.bool,
   /** 额外，忽略，不一一列了，参考 ReactTable */
   showPagination: PropTypes.bool,
   defaultPageSize: PropTypes.number
 }
 
 BaseTable.defaultProps = {
-  /** 默认没有有两边的border */
-  hasBorder: false,
+  tiled: false,
   /** 不使用自带的分页组件 */
   showPagination: false,
   /** 没有数据的文案 */
