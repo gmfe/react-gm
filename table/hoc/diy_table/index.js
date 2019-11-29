@@ -73,6 +73,11 @@ function diyTableHOC(Component) {
   class DiyTable extends React.Component {
     constructor(props) {
       super(props)
+      // 没有id强制报错
+      devWarn(() => {
+        if (props.id === undefined) throw Error('diy 必须要有id!')
+      })
+
       // 从localStorage拿到columns
       const localColumns = Storage.get(props.id) || []
 
