@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Flex } from '../src/index'
 import _ from 'lodash'
 import Context from './context'
+import { is } from 'gm-util'
 
 const RightTop = props => {
   const { breadcrumb, onMenuBtnClick, info } = props
@@ -13,7 +14,8 @@ const RightTop = props => {
       <Flex
         style={{ left: leftWidth }}
         className='gm-framework-right-top-default-inner'
-        alignCenter
+        // 随便兼容一下 后期老ui会废弃
+        alignCenter={!is.phone()}
       >
         <Flex
           alignCenter
