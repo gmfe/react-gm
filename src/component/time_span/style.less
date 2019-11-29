@@ -1,10 +1,39 @@
 .gm-time-span {
-  width: 297px;
+  width: 390px;
   overflow: hidden;
-  display: block;
   border: 1px solid @gm-border-color;
   background: white;
-  position: relative;
+  padding: 10px 0;
+
+  .gm-time-span-list {
+    width: 130px;
+    padding: 0 5px;
+
+    .gm-time-span-list-cell {
+      color: black;
+      text-align: center;
+      cursor: pointer;
+      height: 22px;
+      margin: 2px 5px;
+      line-height: 22px;
+      border: 1px solid transparent;
+
+      &:hover {
+        background-color: @brand-primary;
+        color: white;
+      }
+
+      &.active {
+        border: 1px solid @brand-primary;
+      }
+
+      &.disabled {
+        background: white;
+        color: @gm-color-second;
+        cursor: not-allowed;
+      }
+    }
+  }
 }
 
 .gm-time-span-picker {
@@ -14,32 +43,4 @@
   .gm-time-span {
     border: none;
   }
-}
-
-.gm-time-span-cell {
-  color: black;
-  text-align: center;
-  cursor: pointer;
-  display: inline-block;
-  height: 25px;
-  border-radius: 13px;
-  border: 1px solid transparent;
-  width: 45px;
-  line-height: 25px;
-  margin: 2px;
-}
-
-.gm-time-span-cell:hover {
-  background-color: @brand-primary;
-  color: white;
-}
-
-.gm-time-span-cell.active {
-  border: 1px solid @brand-primary;
-}
-
-.gm-time-span-cell.disabled {
-  background: white;
-  color: @gm-color-second;
-  cursor: not-allowed;
 }

@@ -1,7 +1,7 @@
 .gm-date-range-picker-overlay {
-  .gm-date-range-picker-overlay-second-calendar {
+  .gm-date-range-picker-overlay-calendar {
     .gm-calendar-day-will:not(.active) {
-      // 要屏蔽 第二个日历的 will
+      // 要屏蔽 will
       outline: none;
     }
   }
@@ -10,6 +10,20 @@
 .gm-date-range-picker-bottom-text {
   color: @brand-primary;
   text-align: center;
+}
+
+.gm-date-range-picker-bottom-time {
+  width: 60px;
+  height: 24px;
+  margin-left: 5px;
+  align-content: center;
+  border: 1px solid @gm-border-color;
+  color: @brand-primary;
+  outline: none;
+
+  &:focus {
+    border: 1px solid @brand-primary;
+  }
 }
 
 .gm-date-range-picker-gap {

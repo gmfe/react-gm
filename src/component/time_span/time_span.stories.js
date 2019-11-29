@@ -49,7 +49,7 @@ storiesOf('TimeSpan', module)
         .hour(23)
         .minute(0)}
       span={60 * 60 * 1000}
-      render={value => moment(value).format('HH')}
+      renderItem={value => moment(value).format('HH')}
       selected={store3.date}
       onSelect={date => store3.setDate(date)}
     />
