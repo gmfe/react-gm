@@ -21,6 +21,7 @@ const ToolTip = props => {
       top={top}
       type='hover'
       right={right}
+      offset={-8}
       popup={popup}
       center={center}
       showArrow={showArrow}
