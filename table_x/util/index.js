@@ -19,6 +19,7 @@ import { EditButton, EditOperation } from './edit'
 
 const TABLE_X_SELECT_ID = 'table_x_select_id'
 const TABLE_X_EXPAND_ID = 'table_x_expand_id'
+const TABLE_X_DIY_ID = 'table_x_diy_id'
 const TABLE_X_SUB_TABLE_ID = 'table_x_sub_table_id'
 const TABLE_X = {
   HEIGHT_HEAD_TR: 46,
@@ -144,6 +145,7 @@ export {
   TABLE_X,
   TABLE_X_SELECT_ID,
   TABLE_X_EXPAND_ID,
+  TABLE_X_DIY_ID,
   TABLE_X_SUB_TABLE_ID,
   Empty,
   Loading,

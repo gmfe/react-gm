@@ -7,6 +7,7 @@ import {
   sortableTableXHOC,
   virtualizedTableXHOC,
   editTableXHOC,
+  diyTableXHOC,
   TableX,
   TableXUtil
 } from '../index'
@@ -202,6 +203,49 @@ const editColumns = [
   }
 ]
 
+const diyColumns = [
+  // 常规用法，column默认diy开启
+  {
+    Header: '序号',
+    accessor: 'index',
+    diyGroupName: '基础',
+    Cell: ({ row }) => row.index + 1
+  },
+  // 常规用法
+  {
+    Header: 'id',
+    accessor: 'id',
+    diyEnable: true,
+    diyGroupName: '基础'
+  },
+  // 该column不允许diy
+  {
+    Header: '地址',
+    accessor: 'address.text',
+    diyEnable: false,
+    diyGroupName: '基础'
+  },
+  // 其他diyGroup
+  {
+    Header: '供应商信息',
+    accessor: data => data.supplier_name,
+    id: 'supplier_name',
+    diyGroupName: '其他'
+  },
+  // 初始花的时候不显示该column
+  {
+    show: false,
+    diyGroupName: '其他',
+    diyEnable: true,
+    Header: '入库金额',
+    accessor: 'total_money',
+    Cell: cellProps => {
+      const { row } = cellProps
+      return <div>{row.original.total_money}</div>
+    }
+  }
+]
+
 const store = observable({
   data: initData.slice(),
   setData(data) {
@@ -222,6 +266,7 @@ const FixedColumnTableX = fixedColumnsTableXHOC(TableX)
 const SortableTableX = sortableTableXHOC(TableX)
 const VirtualizedTableX = virtualizedTableXHOC(TableX)
 const EditTableX = editTableXHOC(TableX)
+const DiyTableX = diyTableXHOC(TableX)
 
 const virtualizedStore = observable({
   data: _.times(1, index => ({
@@ -286,3 +331,12 @@ storiesOf('TableX|HOC', module)
   ))
   .add('virtualized', () => <VirtualWrap />)
   .add('edit', () => <EditTableX data={store.data} columns={editColumns} />)
+  .add('diy', () => (
+    <DiyTableX
+      className='gm-margin-top-20'
+      id='diy_must_have_id'
+      diyGroupSorting={['基础', '其他']}
+      data={store.data}
+      columns={diyColumns}
+    />
+  ))

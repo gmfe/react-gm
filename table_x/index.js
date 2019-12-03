@@ -6,6 +6,7 @@ import sortableTableXHOC from './hoc/sortable_table_x'
 import virtualizedTableXHOC from './hoc/virtualized_table_x'
 import subTableXHOC from './hoc/sub_table_x'
 import editTableXHOC from './hoc/edit_table_x'
+import diyTableXHOC from './hoc/diy_table_x'
 
 import {
   TABLE_X,
@@ -44,6 +45,7 @@ export {
   fixedColumnsTableXHOC,
   subTableXHOC,
   editTableXHOC,
+  diyTableXHOC,
   sortableTableXHOC,
   virtualizedTableXHOC
 }
