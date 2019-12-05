@@ -38,29 +38,35 @@ function keyboardTableXHOC(Component) {
     })
 
     const columnKeys = []
-    const newColumns = _.map(columns, column => {
-      if (!(column.isKeyboard && column.show !== false)) {
-        return column
-      }
+    const newColumns = React.useMemo(
+      () =>
+        _.map(columns, column => {
+          if (!(column.isKeyboard && column.show !== false)) {
+            return column
+          }
 
-      const columnKey = getColumnKey(column)
-      columnKeys.push(columnKey)
+          const columnKey = getColumnKey(column)
+          columnKeys.push(columnKey)
 
-      const oldCell = column.Cell
+          const ColumnCell = column.Cell
 
-      // Cell 是个方法
-      // 用 <Cell {...cellProps}/>  会导致重新渲染组件，不知道为什么
-      return {
-        ...column,
-        Cell: cellProps => (
-          <CellKeyContext.Provider
-            value={`${cellProps.row.index}_${columnKey}`}
-          >
-            {oldCell(cellProps)}
-          </CellKeyContext.Provider>
-        )
-      }
-    })
+          const Cell = cellProps => {
+            return (
+              <CellKeyContext.Provider
+                value={`${cellProps.row.index}_${columnKey}`}
+              >
+                {ColumnCell(cellProps)}
+              </CellKeyContext.Provider>
+            )
+          }
+
+          return {
+            ...column,
+            Cell
+          }
+        }),
+      []
+    )
 
     // fix hoc 带来的问题
     let leftFixedWidth = 0

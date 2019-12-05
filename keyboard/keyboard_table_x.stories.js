@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import { observable } from 'mobx'
-import { Observer } from 'mobx-react'
+import { Observer, observer } from 'mobx-react'
 import { keyboardTableXHOC, KCInput, KCMoreSelect } from './'
 import {
   TableX,
@@ -14,7 +14,7 @@ import {
 import _ from 'lodash'
 
 const { OperationHeader, EditOperation, TABLE_X } = TableXUtil
-const KeyboardTable = keyboardTableXHOC(
+const KeyboardTable = (
   virtualizedTableXHOC(fixedColumnsTableXHOC(editTableXHOC(TableX)))
 )
 
@@ -62,7 +62,7 @@ const data = [
 ]
 
 const store = observable({
-  data: _.times(10000, () => ({
+  data: _.times(1, () => ({
     position: null,
     name: '',
     age: null,
@@ -114,32 +114,41 @@ const store = observable({
 //   // store.data = [{ name: '123123' }]
 // }, 5000)
 
-const Name = React.memo(({ name, index }) => {
-  return (
-    <KCInput
-      type='text'
-      value={name}
-      onChange={e => store.setName(index, e.target.value)}
-    />
-  )
-})
-
-const CellName = React.memo(({ index }) => {
+const CellName = ({ row: { index } }) => {
   return (
     <Observer>
       {() => {
         const item = store.data[index]
-        return <Name name={item.name} index={index} />
+        return (
+          <KCInput
+            type='text'
+            value={item.name}
+            onChange={e => store.setName(index, e.target.value)}
+          />
+        )
       }}
     </Observer>
   )
-})
-
-CellName.propTypes = {
-  index: PropTypes.number.isRequired
 }
 
-const Wrap = () => {
+CellName.propTypes = {
+  row: PropTypes.object.isRequired
+}
+
+const Wrap = observer(() => {
+  const columns = React.useMemo(() => {
+    console.log('memo')
+    return [
+      {
+        Header: '名字',
+        accessor: 'name',
+        minWidth: 150,
+        isKeyboard: true,
+        Cell: CellName
+      }
+    ]
+  }, [])
+
   return (
     <KeyboardTable
       id='test_tablex'
@@ -147,98 +156,10 @@ const Wrap = () => {
       virtualizedHeight={400}
       virtualizedItemSize={TableXUtil.TABLE_X.HEIGHT_TR}
       data={store.data.slice()} // 记得 slice 下，否则增加数据不会 刷新
-      columns={[
-        {
-          id: 'no',
-          Header: '序号',
-          fixed: 'left',
-          width: TABLE_X.WIDTH_NO,
-          Cell: ({ row }) => <div>{row.index + 1}</div>
-        },
-        {
-          id: 'operation',
-          Header: OperationHeader,
-          fixed: 'left',
-          width: TABLE_X.WIDTH_OPERATION,
-          Cell: ({ row }) => (
-            <EditOperation
-              onAddRow={() => console.log('增加一行', row.index)}
-              onDeleteRow={() => console.log('删除一行', row.index)}
-            />
-          )
-        },
-        {
-          Header: '位置',
-          accessor: 'position',
-          width: TABLE_X.WIDTH_SEARCH + 16,
-          isKeyboard: true,
-          Cell: ({ row }) => (
-            // 使用 Observer 包下，才能响应 store 数据
-            <Observer>
-              {() => (
-                <KCMoreSelect
-                  style={{ width: TABLE_X.WIDTH_SEARCH }}
-                  data={data}
-                  selected={row.original.position} // 不能用 row.value，因为并不是 store 的数据
-                  onSelect={selected => store.setPosition(row.index, selected)}
-                />
-              )}
-            </Observer>
-          )
-        },
-        {
-          Header: '名字',
-          accessor: 'name',
-          minWidth: 150,
-          isKeyboard: true,
-          Cell: ({ row }) => <CellName index={row.index} />
-        },
-        {
-          Header: '名字',
-          accessor: 'name1',
-          minWidth: 150,
-          isKeyboard: true,
-          Cell: ({ row }) => <CellName index={row.index} />
-        },
-        {
-          Header: '名字',
-          accessor: 'name2',
-          minWidth: 150,
-          isKeyboard: true,
-          Cell: ({ row }) => <CellName index={row.index} />
-        },
-        {
-          Header: '名字',
-          accessor: 'name3',
-          minWidth: 150,
-          isKeyboard: true,
-          Cell: ({ row }) => <CellName index={row.index} />
-        },
-        {
-          Header: '名字',
-          accessor: 'name4',
-          minWidth: 150,
-          isKeyboard: true,
-          Cell: ({ row }) => <CellName index={row.index} />
-        },
-        {
-          Header: '名字',
-          accessor: 'name5',
-          minWidth: 150,
-          isKeyboard: true,
-          Cell: ({ row }) => <CellName index={row.index} />
-        },
-        {
-          Header: '名字',
-          accessor: 'name6',
-          minWidth: 150,
-          isKeyboard: true,
-          Cell: ({ row }) => <CellName index={row.index} />
-        }
-      ]}
+      columns={columns}
     />
   )
-}
+})
 
 storiesOf('快速录入|Keyboard TableX', module)
   .add('说明', () => <div />, {

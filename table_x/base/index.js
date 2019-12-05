@@ -110,7 +110,13 @@ const Td = ({ cell, totalWidth }) => {
       totalWidth - cell.column.totalLeft - cell.column.totalWidth
   }
 
-  return <div {...tdProps}>{cell.render('Cell')}</div>
+  return (
+    <div {...tdProps}>
+      {cell.column.Cell({
+        row: { index: 0 }
+      })}
+    </div>
+  )
 }
 
 Td.propTypes = {
@@ -222,13 +228,6 @@ const TableX = ({
     )
   }
 
-  const Wrap = React.forwardRef(({ children, ...rest }, ref) => (
-    <div ref={ref} {...tableProps} {...rest}>
-      <THead headers={headers} />
-      <div {...tableBodyProps}>{children}</div>
-    </div>
-  ))
-
   return (
     <div
       {...rest}
@@ -242,12 +241,48 @@ const TableX = ({
       )}
       onScroll={handleScroll}
     >
-      <ContainerComponent rows={rows} Wrap={Wrap} RenderRow={RenderRow} />
+      <ContainerComponent
+        Wrap={Wrap}
+        wrapProps={{
+          tableProps,
+          headers,
+          tableBodyProps
+        }}
+        rows={rows}
+        RenderRow={RenderRow}
+      />
       {loading && <Loading />}
       {!loading && data.length === 0 && <Empty />}
     </div>
   )
 }
+
+const Wrap = React.forwardRef(
+  ({ tableProps, headers, tableBodyProps, children, ...rest }, ref) => (
+    <div ref={ref} {...tableProps} {...rest}>
+      <THead headers={headers} />
+      <div {...tableBodyProps}>{children}</div>
+    </div>
+  )
+)
+
+Wrap.propTypes = {
+  tableProps: PropTypes.object.isRequired,
+  tableBodyProps: PropTypes.object.isRequired,
+  headers: PropTypes.array.isRequired
+}
+
+// eslint-disable-next-line
+const ContainerComponent = ({ Wrap, wrapProps, rows, RenderRow }) => (
+  <Wrap {...wrapProps}>
+    {_.map(rows, row =>
+      RenderRow({
+        index: row.index,
+        style: {}
+      })
+    )}
+  </Wrap>
+)
 
 TableX.propTypes = {
   columns: PropTypes.array.isRequired,
@@ -266,18 +301,6 @@ TableX.propTypes = {
   /** table是否平铺 */
   tiled: PropTypes.bool
 }
-
-// eslint-disable-next-line
-const ContainerComponent = ({ rows, Wrap, RenderRow }) => (
-  <Wrap>
-    {_.map(rows, row =>
-      RenderRow({
-        index: row.index,
-        style: {}
-      })
-    )}
-  </Wrap>
-)
 
 TableX.defaultProps = {
   keyField: 'value',

@@ -78,12 +78,12 @@ class KeyboardCell extends React.Component {
 
   componentDidMount() {
     const { wrapData } = this.props
-    window.addEventListener(KEYBOARD_ONFOCUS + wrapData.id, this.handleFocus)
+    // window.addEventListener(KEYBOARD_ONFOCUS + wrapData.id, this.handleFocus)
   }
 
   componentWillUnmount() {
     const { wrapData } = this.props
-    window.removeEventListener(KEYBOARD_ONFOCUS + wrapData.id, this.handleFocus)
+    // window.removeEventListener(KEYBOARD_ONFOCUS + wrapData.id, this.handleFocus)
   }
 
   render() {
