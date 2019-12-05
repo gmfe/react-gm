@@ -87,7 +87,7 @@ function keyboardTableHOC(Component) {
         onAddRow={onAddRow}
         onBeforeDispatch={onBeforeDispatch}
       >
-        <Component {...tableProps} columns={newColumns} />
+        <Component {...tableProps} id={id} columns={newColumns} />
       </Wrap>
     )
   }
