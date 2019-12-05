@@ -20,6 +20,7 @@ const TimeSpanPicker = props => {
     renderItem,
     onChange,
     className,
+    isInPopup,
     ...rest
   } = props
 
@@ -41,13 +42,14 @@ const TimeSpanPicker = props => {
       selected={date}
       onSelect={handleSelectTime}
       disabledSpan={disabledSpan}
+      renderItem={renderItem}
     />
   )
 
   const selected = date ? { value: date, text: renderItem(date) } : null
 
   return (
-    <Popover ref={refPopover} popup={popup} animName>
+    <Popover ref={refPopover} popup={popup} isInPopup={isInPopup} animName>
       {children !== undefined ? (
         children
       ) : (
@@ -82,12 +84,14 @@ TimeSpanPicker.propTypes = {
   renderItem: PropTypes.func,
   className: PropTypes.string,
   style: PropTypes.object,
-  children: PropTypes.any
+  children: PropTypes.any,
+  isInPopup: PropTypes.bool
 }
 
 TimeSpanPicker.defaultProps = {
   renderItem: value => moment(value).format('HH:mm'),
-  onChange: _.noop
+  onChange: _.noop,
+  isInPopup: false
 }
 
 export default TimeSpanPicker

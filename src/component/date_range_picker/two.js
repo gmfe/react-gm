@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import Flex from '../flex'
 import RangeCalendar from '../calendar/range_calendar'
 
 const Two = props => {
-  const { begin, end, onSelect, min, max, disabledDate } = props
+  const {
+    begin,
+    end,
+    onSelect,
+    min,
+    max,
+    disabledDate,
+    enabledTimeSelect
+  } = props
 
   const _will = begin || moment().toDate()
   let _will_end = null
@@ -31,6 +39,28 @@ const Two = props => {
   // 告诉 此时hover的日期
   const [hoverDay, setHoverDay] = useState(null)
 
+  // 可以选择时间时，针对快速选择日期项需要更新日历
+  useEffect(() => {
+    const beginMonth = moment(begin).month()
+    const endMonth = moment(end).month()
+
+    if (enabledTimeSelect && begin && end) {
+      // begin && end 同月份
+      if (beginMonth === endMonth) {
+        const willMonth = moment(will).month()
+        const willEndMonth = moment(will_end).month()
+        // 当前选择月份不在展示中 -- 针对快速选择
+        if (beginMonth !== willMonth && beginMonth !== willEndMonth) {
+          setWill(begin)
+          setWillEnd(moment(begin).add(1, 'month'))
+        }
+      } else {
+        setWill(begin)
+        setWillEnd(end)
+      }
+    }
+  }, [begin, end])
+
   const handleWillChange = date => {
     setWill(date)
   }
@@ -55,7 +85,7 @@ const Two = props => {
   return (
     <Flex className='gm-padding-lr-10 gm-padding-tb-5'>
       <RangeCalendar
-        className='gm-border-0'
+        className='gm-border-0 gm-date-range-picker-overlay-calendar'
         begin={begin}
         end={end}
         willActiveSelected={will}
@@ -70,7 +100,7 @@ const Two = props => {
       />
       <div className='gm-date-range-picker-gap gm-border-bottom' />
       <RangeCalendar
-        className='gm-border-0 gm-date-range-picker-overlay-second-calendar'
+        className='gm-border-0 gm-date-range-picker-overlay-calendar'
         begin={begin}
         end={end}
         willActiveSelected={will_end}
@@ -93,7 +123,8 @@ Two.propTypes = {
   onSelect: PropTypes.func.isRequired,
   min: PropTypes.object,
   max: PropTypes.object,
-  disabledDate: PropTypes.func
+  disabledDate: PropTypes.func,
+  enabledTimeSelect: PropTypes.bool
 }
 
 export default Two

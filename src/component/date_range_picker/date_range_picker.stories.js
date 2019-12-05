@@ -8,21 +8,39 @@ const store = observable({
   begin: new Date(),
   end: new Date(),
   changeDate(begin, end) {
-    console.log(begin, end)
     this.begin = begin
     this.end = end
   }
 })
 
-const storeNull = observable({
+const _store = {
   begin: null,
   end: null,
   changeDate(begin, end) {
-    console.log(begin, end)
+    this.begin = begin
+    this.end = end
+  }
+}
+
+const storeNull = observable(_store)
+const store1 = observable(_store)
+
+const store3 = observable({
+  begin: moment()
+    .hour(14)
+    .minute(0),
+  end: moment()
+    .hour(18)
+    .minute(0),
+  changeDate(begin, end) {
     this.begin = begin
     this.end = end
   }
 })
+
+const disabledBegin = date => {
+  return moment(date).isSameOrBefore(moment(date).hour(11))
+}
 
 storiesOf('DateRangePicker', module)
   .add('default', () => (
@@ -107,3 +125,33 @@ storiesOf('DateRangePicker', module)
       }
     />
   ))
+  .add('增加时间选择', () => {
+    return (
+      <DateRangePicker
+        begin={store1.begin}
+        end={store1.end}
+        onChange={(begin, end) => store1.changeDate(begin, end)}
+        enabledTimeSelect
+      />
+    )
+  })
+  .add('增加时间选择(1小时间隔)', () => {
+    return (
+      <DateRangePicker
+        begin={store3.begin}
+        end={store3.end}
+        onChange={(begin, end) => store3.changeDate(begin, end)}
+        enabledTimeSelect
+        beginTimeSelect={{
+          defaultTime: moment()
+            .startOf('day')
+            .hour(12),
+          disabledSpan: disabledBegin
+        }}
+        endTimeSelect={{
+          disabledSpan: disabledBegin
+        }}
+        timeSpan={60 * 60 * 1000}
+      />
+    )
+  })
