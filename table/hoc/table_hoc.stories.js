@@ -41,7 +41,18 @@ const store = observable({
       delta_money: 0,
       settle_supplier_id: 'T10953',
       address: null,
-      subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+      subTable: [
+        {
+          id: '5',
+          name: 'a222',
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        },
+        {
+          id: '6',
+          name: 2222,
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        }
+      ]
     },
     {
       total_money: 176,
@@ -58,7 +69,18 @@ const store = observable({
         value: 9,
         text: '西乡9'
       },
-      subTable: [{ id: '1', name: 'a' }, { id: '2', name: 2 }]
+      subTable: [
+        {
+          id: '1',
+          name: 'a',
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        },
+        {
+          id: '2',
+          name: 2,
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        }
+      ]
     },
     {
       total_money: 279,
@@ -76,16 +98,33 @@ const store = observable({
         text: '宝安'
       },
       subTable: [
-        { id: '3', name: 'a' },
-        { id: '4', name: 2 },
-        { id: '8', name: 2 },
-        { id: '9', name: 2 }
+        {
+          id: '3',
+          name: 'a',
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        },
+        {
+          id: '4',
+          name: 2,
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        },
+        {
+          id: '8',
+          name: 2,
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        },
+        {
+          id: '9',
+          name: 2,
+          subTable: [{ id: '5', name: 'a222' }, { id: '6', name: 2222 }]
+        }
       ]
     }
   ],
   sortTimeType: 'asc',
   isSelectAllPage: false,
   selected: [],
+  expanded: ['T5991-JHD-2018-07-25-00026'],
   sortTime() {
     this.data = _.sortBy(this.data, 'submit_time')
     if (this.sortTimeType === 'asc') {
@@ -94,6 +133,9 @@ const store = observable({
     } else {
       this.sortTimeType = 'asc'
     }
+  },
+  setExpanded(expanded) {
+    this.expanded = expanded
   },
   toggleIsSelectAllPage(bool) {
     this.isSelectAllPage = bool
@@ -119,7 +161,6 @@ const store = observable({
     })
   },
   toggleSelectAll(isSelectedAll) {
-    console.log(isSelectedAll)
     if (isSelectedAll) {
       this.selected = this.data.filter(v => !isDisable(v)).map(v => v.id)
     } else {
@@ -382,6 +423,7 @@ HOC 可以相互组合使用，但是请注意使用顺序!
   ))
   .add('expand', () => (
     <ExpandTable
+      keyField='id'
       data={store.data}
       columns={[
         {
@@ -397,6 +439,8 @@ HOC 可以相互组合使用，但是请注意使用顺序!
           accessor: 'supplier_name'
         }
       ]}
+      expanded={store.expanded}
+      onExpand={expand => store.setExpanded(expand)}
       SubComponent={item => (
         <SubTable
           data={item.original.subTable}
@@ -404,6 +448,15 @@ HOC 可以相互组合使用，但是请注意使用顺序!
             { Header: '序号', accessor: 'id' },
             { Header: '名字', accessor: 'name' }
           ]}
+          SubComponent={item => (
+            <SubTable
+              data={item.original.subTable}
+              columns={[
+                { Header: '序号22', accessor: 'id' },
+                { Header: '名字22', accessor: 'name' }
+              ]}
+            />
+          )}
         />
       )}
     />
