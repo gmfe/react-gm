@@ -20,6 +20,8 @@ import {
   OperationRowEdit,
   SortHeader,
   EditTableOperation,
+  EditContentInputNumber,
+  EditContentInput,
   referOfWidth,
   EditButton
 } from './util'
@@ -32,6 +34,8 @@ const TableUtil = {
   OperationRowEdit,
   SortHeader,
   EditTableOperation,
+  EditContentInputNumber,
+  EditContentInput,
   EditButton,
   referOfWidth,
   BatchActionBar

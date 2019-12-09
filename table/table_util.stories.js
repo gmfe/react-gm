@@ -16,7 +16,9 @@ const {
   SortHeader,
   referOfWidth,
   EditTableOperation,
-  EditButton
+  EditButton,
+  EditContentInput,
+  EditContentInputNumber
 } = TableUtil
 
 // eslint-disable-next-line
@@ -291,7 +293,7 @@ storiesOf('Table|TableUtil', module)
       ]}
     />
   ))
-  .add('EditButton', () => (
+  .add('EditButton & EditContentInput & EditContentInputNumber', () => (
     <Table
       data={store.data}
       columns={[
@@ -337,11 +339,35 @@ storiesOf('Table|TableUtil', module)
               <EditButton
                 popupRender={closePopup => {
                   return (
-                    <EditContentDemo
+                    <EditContentInputNumber
                       closePopup={closePopup}
                       initialVal={d.original.sku_money}
-                      saveData={value =>
+                      onSave={value =>
                         store.setItemByIndex(d.index, 'sku_money', value)
+                      }
+                    />
+                  )
+                }}
+              />
+            </div>
+          )
+        },
+        {
+          Header: 'supplier_name',
+          id: 'supplier_name',
+          Cell: d => (
+            <div>
+              <span className='gm-padding-right-5'>
+                {d.original.supplier_name}
+              </span>
+              <EditButton
+                popupRender={closePopup => {
+                  return (
+                    <EditContentInput
+                      closePopup={closePopup}
+                      initialVal={d.original.supplier_name}
+                      onSave={value =>
+                        store.setItemByIndex(d.index, 'supplier_name', value)
                       }
                     />
                   )
