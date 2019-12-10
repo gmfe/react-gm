@@ -1,8 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Popover, PopupContentConfirm } from '../src'
+import { Popover, PopupContentConfirm, Flex, InputNumberV2 } from '../src'
 import _ from 'lodash'
+import { getLocale } from '../locales'
 import SVGMinusSquare from '../svg/minus-square.svg'
 import SVGPlusSquare from '../svg/plus-square.svg'
 import SVGDelete from '../svg/delete.svg'
@@ -266,6 +267,164 @@ EditButton.propTypes = {
   popupRender: PropTypes.func.isRequired
 }
 
+const EditContentInput = ({
+  closePopup,
+  initialVal,
+  onSave,
+  suffixText,
+  ...rest
+}) => {
+  const [val, setVal] = useState(initialVal)
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    inputRef.current && inputRef.current.focus()
+  }, [])
+
+  const handleSave = () => {
+    onSave(val)
+    closePopup()
+  }
+
+  const handleCancel = () => {
+    closePopup()
+  }
+
+  const handleInputFocus = e => {
+    e.target && e.target.select()
+  }
+
+  const handleInputKeyDown = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+
+      onSave(val)
+      closePopup()
+    }
+  }
+
+  return (
+    <Flex alignCenter className='gm-padding-tb-10 gm-padding-lr-5'>
+      <Flex alignCenter style={{ width: '64%' }}>
+        <input
+          {...rest}
+          ref={inputRef}
+          className='form-control'
+          type='text'
+          value={val}
+          onFocus={handleInputFocus}
+          onKeyDown={handleInputKeyDown}
+          onChange={e => setVal(e.target.value)}
+        />
+        <div className='gm-gap-5' />
+        {suffixText}
+      </Flex>
+      <span
+        className='gm-text-primary gm-margin-left-10 gm-cursor'
+        onClick={handleCancel}
+      >
+        {getLocale('取消')}
+      </span>
+      <span className='gm-padding-lr-10 gm-text-desc'>|</span>
+      <span className='gm-text-primary gm-cursor' onClick={handleSave}>
+        {getLocale('保存')}
+      </span>
+    </Flex>
+  )
+}
+
+EditContentInput.propTypes = {
+  closePopup: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  suffixText: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  initialVal: PropTypes.string
+}
+
+EditContentInput.defaultProps = {
+  initialVal: ''
+}
+
+const EditContentInputNumber = ({
+  closePopup,
+  initialVal,
+  onSave,
+  suffixText,
+  ...rest
+}) => {
+  const [val, setVal] = useState(initialVal)
+  const inputNumberRef = useRef(null)
+
+  useEffect(() => {
+    inputNumberRef.current && inputNumberRef.current.apiDoFocus()
+  }, [])
+
+  const handleSave = () => {
+    onSave(val)
+    closePopup()
+  }
+
+  const handleCancel = () => {
+    closePopup()
+  }
+
+  const handleInputFocus = e => {
+    e.target && e.target.select()
+  }
+
+  const handleInputKeyDown = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+
+      onSave(val)
+      closePopup()
+    }
+  }
+
+  const handleChange = value => {
+    setVal(value)
+  }
+
+  return (
+    <Flex alignCenter className='gm-padding-tb-5 gm-padding-lr-10'>
+      <Flex alignCenter>
+        <InputNumberV2
+          {...rest}
+          ref={inputNumberRef}
+          style={{ width: '150px' }}
+          value={val}
+          className='form-control'
+          onFocus={handleInputFocus}
+          onKeyDown={handleInputKeyDown}
+          onChange={handleChange}
+        />
+        <div className='gm-gap-5' />
+        {suffixText}
+      </Flex>
+      <span
+        className='gm-text-primary gm-margin-left-10 gm-cursor'
+        onClick={handleCancel}
+      >
+        {getLocale('取消')}
+      </span>
+      <span className='gm-padding-lr-10 gm-text-desc'>|</span>
+      <span className='gm-text-primary gm-cursor' onClick={handleSave}>
+        {getLocale('保存')}
+      </span>
+    </Flex>
+  )
+}
+
+EditContentInputNumber.propTypes = {
+  onSave: PropTypes.func.isRequired,
+  closePopup: PropTypes.func.isRequired,
+  initialVal: PropTypes.number,
+  suffixText: PropTypes.string
+}
+
+EditContentInputNumber.defaultProps = {
+  initialVal: null
+}
+
 const referOfWidth = {
   noCell: 56,
   operationCell: 100,
@@ -287,5 +446,7 @@ export {
   SortHeader,
   EditTableOperation,
   EditButton,
+  EditContentInput,
+  EditContentInputNumber,
   referOfWidth
 }
