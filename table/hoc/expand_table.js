@@ -32,7 +32,7 @@ function expandTableHOC(Component) {
     constructor(props) {
       super(props)
       this.state = {
-        hasExpandState: !!props.expanded, // 外部控制expanded
+        hasExpandState: !!props.expanded.length, // 外部控制expanded
         innerExpanded: {}
       }
     }
