@@ -32,7 +32,7 @@ function expandTableHOC(Component) {
     constructor(props) {
       super(props)
       this.state = {
-        hasExpandState: !!props.expanded.length, // 外部控制expanded
+        hasExpandState: !!props.expanded, // 外部控制expanded
         innerExpanded: {}
       }
     }
@@ -106,14 +106,14 @@ function expandTableHOC(Component) {
       )
     }
 
-    renderExpander = ({ row, index }) => {
+    renderExpander = ({ original, index }) => {
       const { expanded, keyField } = this.props
       const { hasExpandState, innerExpanded } = this.state
 
       // 注意此逻辑
       let isExpanded = false
       if (hasExpandState) {
-        isExpanded = _.includes(expanded, row[keyField])
+        isExpanded = _.includes(expanded, original[keyField])
       } else {
         isExpanded = innerExpanded[index]
       }
@@ -184,12 +184,6 @@ function expandTableHOC(Component) {
     /** 展开项数组[keyField]，传了此值则必须传keyField和onExpand */
     expanded: PropTypes.array,
     onExpand: PropTypes.func
-  }
-
-  ExpandTable.defaultProps = {
-    keyField: 'value',
-    expanded: [],
-    onExpand: _.noop()
   }
 
   return ExpandTable
