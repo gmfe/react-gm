@@ -5,6 +5,7 @@
   background: white;
   cursor: pointer;
   user-select: none;
+  position: relative;
 
   .gm-calendar-head {
     height: 32px;
@@ -23,12 +24,50 @@
       line-height: 30px;
       height: 30px;
       text-align: center;
+
+      &:hover {
+        color: @brand-primary;
+      }
     }
 
     .gm-calendar-head-year-icon {
       width: 10px;
       height: 10px;
     }
+  }
+
+  .gm-calendar-yaers-or-months {
+    position: absolute;
+    color: black;
+    top: 37px;
+    bottom: 5px;
+    background-color: white;
+  }
+
+  .gm-calendar-year-or-month {
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    margin: 9px 7px;
+    cursor: pointer;
+    border: 1px solid white;
+
+    &.active {
+      border: 1px solid @brand-primary;
+      background-color: white;
+      color: @brand-primary;
+    }
+
+    &:hover {
+      background-color: @brand-primary;
+      color: white;
+    }
+  }
+
+  .gm-calendar-year-or-month-change {
+    color: @gm-color-third;
   }
 
   .gm-calendar-week {
