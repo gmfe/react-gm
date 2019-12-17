@@ -89,7 +89,9 @@ class ManagePagination extends React.Component {
       Storage.set('manage_pagination_' + this.props.id, data.limit)
     }
 
-    this.handleRequest(data)
+    this.setState({ limit: data.limit }, () => {
+      this.handleRequest(data)
+    })
   }
 
   render() {
