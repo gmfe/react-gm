@@ -31,7 +31,7 @@ function ImgUploader(props) {
 
   const handleUploader = files => {
     const result = onUpload(files)
-    if (result.then) {
+    if (result && result.then) {
       result.then(urls => {
         onChange(data.concat(urls))
       })
@@ -40,7 +40,7 @@ function ImgUploader(props) {
 
   const handleReplace = (files, index) => {
     const result = onUpload(files)
-    if (result.then) {
+    if (result && result.then) {
       result.then(urls => {
         const newData = [...data]
         newData[index] = urls[0]

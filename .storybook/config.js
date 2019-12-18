@@ -19,6 +19,8 @@ import 'react-table-v6/react-table.css'
 import '../table/style.less'
 // tablex
 import '../table_x/style.less'
+// image
+import '../cropper/style.less'
 
 if (process.env.NODE_ENV !== 'production') {
   const whyDidYouRender = require('@welldone-software/why-did-you-render')
@@ -31,15 +33,10 @@ const reqs = [
   require.context('../table_x', true, /stories\.js$/),
   require.context('../keyboard', true, /stories\.js$/),
   require.context('../sortable', true, /stories\.js$/),
+  require.context('../cropper', true, /stories\.js$/),
   require.context('../frame', true, /stories\.js$/),
   require.context('../locales', true, /stories\.js$/)
 ]
-
-function loadStories() {
-  reqs.forEach(req => {
-    req.keys().forEach(filename => req(filename))
-  })
-}
 
 addDecorator(
   withInfo({
@@ -69,4 +66,4 @@ addDecorator(storeFn => (
   </React.Fragment>
 ))
 
-configure(loadStories, module)
+configure(reqs, module)
