@@ -8,6 +8,7 @@ import _ from 'lodash'
 import classNames from 'classnames'
 import Bottom from './bottom'
 import List from './list'
+import { warnHook } from '../../util'
 
 const filterWithQuery = (list, query, withFilter) => {
   let processList
@@ -48,6 +49,8 @@ const Tree = ({
   isForManage,
   ...rest
 }) => {
+  warnHook('Deprecated. Use TreeV2 instead.')
+
   const [query, setQuery] = useState('')
   const [filterList, setFilterList] = useState(list)
   // 区分正常的 展开收起 和 搜索导致的展开收起

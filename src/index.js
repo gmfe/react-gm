@@ -72,6 +72,7 @@ import MoreSelect from './component/more_select'
 import Nav from './component/nav'
 import { Transfer, TransferGroup } from './component/transfer'
 import Tree from './component/tree'
+import TreeV2 from './component/tree_v2'
 import ImagePreview from './component/image_preview'
 import Mask from './component/mask'
 import Popover from './component/popover'
@@ -218,6 +219,7 @@ export {
   Transfer,
   TransferGroup,
   Tree,
+  TreeV2,
   FilterSelect,
   MultipleFilterSelect,
   MoreSelect,

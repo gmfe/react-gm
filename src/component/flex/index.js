@@ -37,6 +37,8 @@ class Flex extends React.Component {
       alignContentAround,
       alignContentStretch,
 
+      block,
+
       className,
       style,
 
@@ -73,12 +75,14 @@ class Flex extends React.Component {
         'gm-flex-align-content-center': alignContentCenter,
         'gm-flex-align-content-between': alignContentBetween,
         'gm-flex-align-content-around': alignContentAround,
-        'gm-flex-align-content-stretch': alignContentStretch
+        'gm-flex-align-content-stretch': alignContentStretch,
+
+        'gm-block': block
       },
       className
     )
 
-    let s = Object.assign({}, style)
+    const s = Object.assign({}, style)
     if (flex) {
       s.flex = typeof flex === 'boolean' ? 1 : flex
       s.WebKitFlex = typeof flex === 'boolean' ? 1 : flex
@@ -124,6 +128,7 @@ Flex.propTypes = {
   alignContentBetween: PropTypes.bool,
   alignContentAround: PropTypes.bool,
   alignContentStretch: PropTypes.bool,
+  block: PropTypes.bool,
   children: PropTypes.any,
   className: PropTypes.string,
   style: PropTypes.object

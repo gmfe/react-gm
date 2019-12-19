@@ -15,10 +15,15 @@ const withDeprecated = warnText => {
 }
 
 const warn = function() {
-  if (process.env.NODE_ENV === 'production') {
-    return
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn.apply(this, ['[react-gm warn] ', ...arguments])
   }
-  console.warn.apply(this, ['[react-gm warn] ', ...arguments])
+}
+
+const warnHook = function() {
+  useEffect(() => {
+    warn.apply(this, arguments)
+  }, [])
 }
 
 const devWarnForHook = callback => {
@@ -35,4 +40,4 @@ const devWarn = callback => {
   }
 }
 
-export { withDeprecated, warn, devWarn, devWarnForHook }
+export { withDeprecated, warn, warnHook, devWarn, devWarnForHook }
