@@ -24,8 +24,6 @@
     .gm-table-x-tr {
       display: flex;
       min-height: 60px;
-      // 性能考虑
-      transform: translateZ(0);
 
       .gm-table-x-th {
         background: @gm-table-x-header-bg;
@@ -44,8 +42,11 @@
 
       .gm-table-x-th,
       .gm-table-x-td {
-        flex: 1 0 auto;
+        flex: 1 0;
         padding: 8px;
+        white-space: normal;
+        word-wrap: break-word;
+        word-break: break-all;
 
         &:first-child {
           padding-left: 20px;
@@ -69,13 +70,13 @@
 
     .gm-table-x-tbody {
       .gm-table-x-tr-group {
-        &:nth-child(even) {
+        .gm-table-x-tr-even {
           .gm-table-x-td {
             background: @gm-back-body-bg;
           }
         }
 
-        &:nth-child(odd) {
+        .gm-table-x-tr-odd {
           .gm-table-x-td {
             background: white;
           }
@@ -87,6 +88,13 @@
               background-color: @table-bg-hover;
             }
           }
+        }
+      }
+
+      // disable
+      .gm-table-x-tr-disable.gm-table-x-tr {
+        .gm-table-x-td {
+          background-color: @gm-color-disabled;
         }
       }
 
@@ -326,7 +334,7 @@
         .gm-table-x-edit-table-common-input();
 
         line-height: 22px;
-        padding-right: 32px;
+        padding-right: 20px;
       }
     }
 
@@ -334,7 +342,7 @@
       input {
         .gm-table-x-edit-table-common-input();
 
-        padding-right: 32px;
+        padding-right: 20px;
       }
     }
 
@@ -342,7 +350,7 @@
       input {
         .gm-table-x-edit-table-common-input();
 
-        padding-right: 32px;
+        padding-right: 20px;
       }
     }
   }

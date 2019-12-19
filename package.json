@@ -1,6 +1,6 @@
 {
   "name": "react-gm",
-  "version": "9.2.17",
+  "version": "9.3.0",
   "description": "",
   "main": "src/index.js",
   "module": "src/index.js",
@@ -99,7 +99,7 @@
     "react-loadable": "^5.5.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "react-table": "7.0.0-beta.12",
+    "react-table": "v7.0.0-rc.11",
     "react-table-v6": "6.8.6",
     "react-window": "^1.8.5",
     "sortablejs": "^1.10.1",
@@ -116,6 +116,7 @@
     "lodash": "^4.17.14",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
+    "react-window": "^1.8.5",
     "query-string": "^6.8.1"
   }
 }

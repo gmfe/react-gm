@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTable, useSortBy, useResizeColumns } from 'react-table'
+import { useTable, useSortBy } from 'react-table'
 import {
   Empty,
   Loading,
   SortHeader,
-  Resizer,
   getColumnStyle,
-  afterScroll
+  afterScroll,
+  __DEFAULT_COLUMN
 } from '../util'
 import classNames from 'classnames'
 import _ from 'lodash'
@@ -15,12 +15,8 @@ import _ from 'lodash'
 // 覆盖默认 按下 shift 多选
 const handleIsMultiSortEvent = () => true
 
-const defaultColumn = {
-  minWidth: 50,
-  // 不能动 useResizeColumns 貌似默认了 150
-  width: 150,
-  maxWidth: 1000
-}
+// 给定初始值，交由getColumnStyle控制。width逻辑保持跟react-table（v6）的用法一致。
+const defaultColumn = __DEFAULT_COLUMN
 
 const Th = ({ column, totalWidth }) => {
   const hp = column.getHeaderProps()
@@ -56,7 +52,6 @@ const Th = ({ column, totalWidth }) => {
           />
         )}
       </div>
-      <Resizer {...column.getResizerProps()} />
     </div>
   )
 }
@@ -66,26 +61,23 @@ Th.propTypes = {
   totalWidth: PropTypes.number.isRequired
 }
 
-const THead = ({ headers }) => {
-  let totalWidth = 0
-  if (headers.length > 0) {
-    const last = headers[headers.length - 1]
-    totalWidth = last.totalLeft + last.totalWidth
-  }
-
+const THead = ({ headerGroups, totalWidth }) => {
   return (
     <div className='gm-table-x-thead'>
-      <div className='gm-table-x-tr'>
-        {headers.map(column => (
-          <Th key={column.index} column={column} totalWidth={totalWidth} />
-        ))}
-      </div>
+      {headerGroups.map((headerGroup, i) => (
+        <div key={i} className='gm-table-x-tr'>
+          {headerGroup.headers.map((column, i) => (
+            <Th key={i} column={column} totalWidth={totalWidth} />
+          ))}
+        </div>
+      ))}
     </div>
   )
 }
 
 THead.propTypes = {
-  headers: PropTypes.array.isRequired
+  headerGroups: PropTypes.array.isRequired,
+  totalWidth: PropTypes.number.isRequired
 }
 
 const Td = ({ cell, totalWidth }) => {
@@ -118,11 +110,23 @@ Td.propTypes = {
   totalWidth: PropTypes.number.isRequired
 }
 
-const Tr = ({ row, SubComponent, keyField, style, totalWidth }) => {
+const Tr = ({
+  row,
+  SubComponent,
+  keyField,
+  style,
+  totalWidth,
+  isTrDisable
+}) => {
   const gp = row.getRowProps()
+
   const props = {
     ...gp,
-    className: 'gm-table-x-tr'
+    className: classNames('gm-table-x-tr', {
+      'gm-table-x-tr-disable': isTrDisable(row.original, row.index),
+      'gm-table-x-tr-odd': row.index % 2 === 0,
+      'gm-table-x-tr-even': row.index % 2 !== 0
+    })
   }
 
   // 目前视为了 srotable 用。值可能是 undefined，keyField 没作用的情况
@@ -147,25 +151,33 @@ Tr.propTypes = {
   SubComponent: PropTypes.func,
   keyField: PropTypes.string.isRequired,
   style: PropTypes.object.isRequired,
-  totalWidth: PropTypes.number.isRequired
+  totalWidth: PropTypes.number.isRequired,
+  isTrDisable: PropTypes.func
 }
 
 const TableX = ({
   columns,
   data,
   loading,
-  disableSorting,
+  disableSortBy,
   disableMultiSort,
   SubComponent,
   ContainerComponent,
   keyField,
   className,
   tiled,
+  onScroll,
+  isTrDisable,
   ...rest
 }) => {
+  // diy fixed(最新rc12不支持column.show,自己实现)
+  columns = React.useMemo(() => columns.filter(c => c.show !== false), [
+    columns
+  ])
+
   const {
     getTableProps,
-    headers,
+    headerGroups,
     getTableBodyProps,
     rows,
     prepareRow
@@ -173,13 +185,12 @@ const TableX = ({
     {
       columns,
       data,
-      disableSorting,
+      disableSortBy,
       disableMultiSort,
       isMultiSortEvent: handleIsMultiSortEvent,
       defaultColumn
     },
-    useSortBy,
-    useResizeColumns
+    useSortBy
   )
 
   const gtp = getTableProps()
@@ -201,7 +212,8 @@ const TableX = ({
     totalWidth = last.totalLeft + last.totalWidth
   }
 
-  const handleScroll = () => {
+  const handleScroll = e => {
+    onScroll && onScroll(e)
     afterScroll()
   }
 
@@ -218,13 +230,14 @@ const TableX = ({
         keyField={keyField}
         style={style}
         totalWidth={totalWidth}
+        isTrDisable={isTrDisable}
       />
     )
   }
 
   const Wrap = React.forwardRef(({ children, ...rest }, ref) => (
-    <div ref={ref} {...tableProps} {...rest}>
-      <THead headers={headers} />
+    <div ref={ref} {...rest} {...tableProps}>
+      <THead headerGroups={headerGroups} totalWidth={totalWidth} />
       <div {...tableBodyProps}>{children}</div>
     </div>
   ))
@@ -254,7 +267,7 @@ TableX.propTypes = {
   data: PropTypes.array.isRequired,
   loading: PropTypes.bool,
   /** 默认禁用，如需提供 false， */
-  disableSorting: PropTypes.bool,
+  disableSortBy: PropTypes.bool,
   disableMultiSort: PropTypes.bool,
   SubComponent: PropTypes.func,
   /** 为了接入虚拟列表，抽象 container 层 */
@@ -264,7 +277,10 @@ TableX.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   /** table是否平铺 */
-  tiled: PropTypes.bool
+  tiled: PropTypes.bool,
+  onScroll: PropTypes.func,
+  /** 当前行是否disable */
+  isTrDisable: PropTypes.func
 }
 
 // eslint-disable-next-line
@@ -281,8 +297,9 @@ const ContainerComponent = ({ rows, Wrap, RenderRow }) => (
 
 TableX.defaultProps = {
   keyField: 'value',
-  disableSorting: true,
+  disableSortBy: true,
   tiled: false,
+  isTrDisable: () => false,
   ContainerComponent
 }
 

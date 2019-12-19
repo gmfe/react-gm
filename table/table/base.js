@@ -9,9 +9,16 @@ import { findDOMNode } from 'react-dom'
 import SVGEmpty from '../../svg/empty.svg'
 import Flex from '../../src/component/flex'
 import EVENT_TYPE from '../../src/event_type'
+import { warn } from '../../src/util'
 
 class BaseTable extends React.Component {
   refTable = React.createRef()
+
+  constructor(props) {
+    super(props)
+    warn('Table deprecated, use TableX instead.')
+  }
+
   doScroll = _.debounce(() => {
     window.dispatchEvent(new window.CustomEvent(EVENT_TYPE.TABLE_SCROLL))
   }, 500)

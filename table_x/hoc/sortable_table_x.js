@@ -5,8 +5,8 @@ import SortableJS from 'sortablejs'
 import _ from 'lodash'
 
 function sortableTableX(Component) {
-  const SortableTableX = ({ data, onSortChange, keyField, ...rest }) => {
-    const id = 'id' + +new Date() + '' + String(Math.random()).slice(2)
+  const SortableTableX = ({ id, data, onSortChange, keyField, ...rest }) => {
+    id = id || 'id' + +new Date() + '' + String(Math.random()).slice(2)
 
     useEffect(() => {
       const target = document.querySelector(`#${id} .gm-table-x-tbody`)

@@ -5,12 +5,13 @@ import { VariableSizeList } from 'react-window'
 import { TABLE_X } from '../util'
 import _ from 'lodash'
 
-function virtualizedTableX(Component) {
+function virtualizedTableXHOC(Component) {
   const VirtualizedTableX = ({
     virtualizedHeight,
     virtualizedItemSize,
     virtualizedDisabled,
     refVirtualized,
+    initialScrollOffset,
     ...rest
   }) => {
     const ContainerComponent = ({ rows, Wrap, RenderRow }) => {
@@ -51,7 +52,8 @@ function virtualizedTableX(Component) {
           height={virtualizedHeight}
           itemCount={rows.length + 1}
           itemSize={itemSize}
-          innerElementType={Container}
+          outerElementType={Container}
+          initialScrollOffset={initialScrollOffset}
         >
           {Row}
         </VariableSizeList>
@@ -82,10 +84,11 @@ function virtualizedTableX(Component) {
     virtualizedItemSize: PropTypes.oneOfType([PropTypes.number, PropTypes.func])
       .isRequired,
     virtualizedDisabled: PropTypes.bool,
-    refVirtualized: PropTypes.object
+    refVirtualized: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    initialScrollOffset: PropTypes.number
   }
 
   return VirtualizedTableX
 }
 
-export default virtualizedTableX
+export default virtualizedTableXHOC

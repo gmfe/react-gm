@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { getColumnKey } from '../../table_x/util'
 import TableX from '../../table_x/base'
@@ -13,25 +13,30 @@ function keyboardTableXHOC(Component) {
    * and column 需要标志 isKeyboard，同时需要 accessor or id
    * */
   const KeyboardTableXHOC = props => {
-    const { id, onAddRow, onBeforeDispatch, ...tableProps } = props
+    const { id, onAddRow, onBeforeDispatch, onScroll, ...tableProps } = props
     const { data, columns } = tableProps
 
-    // 不显示的也不能生产 key
-    const keyboardColumns = _.filter(
-      columns,
-      column => column.isKeyboard && column.show !== false
-    )
+    const refVirtualized = useRef(null)
+    // 使用 useRef 不至于渲染次数多
+    // 默认 undefined，只有发现 refVirtualized 的时候才会有真正的值
+    const refInitialScrollOffset = useRef(null)
 
     // 检测下 columns
     // 需要提供能够 accessor or id
     // 用 isKeyboard 也必要会用到了 Cell
     devWarn(() => {
       useEffect(() => {
-        _.each(keyboardColumns, column => {
-          if (getColumnKey(column) === null) {
-            console.error('column need accessor or id', column)
-          } else if (!column.Cell) {
-            console.error('column need Cell', column)
+        _.each(columns, column => {
+          if (column.isKeyboard && column.show !== false) {
+            if (getColumnKey(column) === null) {
+              console.error('column need accessor or id', column)
+            } else if (!column.Cell) {
+              console.error('column need Cell', column)
+            }
+          }
+
+          if (column.fixed && !column.width) {
+            console.error('column fixed need width', column)
           }
         })
       }, [])
@@ -75,6 +80,14 @@ function keyboardTableXHOC(Component) {
       }
     })
 
+    const handleScroll = e => {
+      onScroll && onScroll(e)
+      // 如果存在，证明用了虚拟列表
+      if (refVirtualized.current) {
+        refInitialScrollOffset.current = e.target.scrollTop
+      }
+    }
+
     return (
       <Wrap
         id={id}
@@ -87,7 +100,19 @@ function keyboardTableXHOC(Component) {
         onAddRow={onAddRow}
         onBeforeDispatch={onBeforeDispatch}
       >
-        <Component {...tableProps} columns={newColumns} />
+        <Component
+          {...tableProps}
+          id={id}
+          columns={newColumns}
+          onScroll={handleScroll}
+          refVirtualized={ref => {
+            refVirtualized.current = ref
+            if (tableProps.refVirtualized) {
+              refVirtualized.refVirtualized.current = ref
+            }
+          }}
+          initialScrollOffset={refInitialScrollOffset.current}
+        />
       </Wrap>
     )
   }
