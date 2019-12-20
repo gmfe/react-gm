@@ -116,7 +116,6 @@
     "lodash": "^4.17.14",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "react-window": "^1.8.5",
     "query-string": "^6.8.1"
   }
 }
