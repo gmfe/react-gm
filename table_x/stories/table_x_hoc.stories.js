@@ -328,7 +328,7 @@ const EditTableX = editTableXHOC(TableX)
 const DiyTableX = diyTableXHOC(TableX)
 
 const virtualizedStore = observable({
-  data: _.times(100, index => ({
+  data: _.times(10, index => ({
     id: index,
     name: 'lalalla'
   })),

@@ -6,3 +6,6 @@
 - 使用 useResizeColumns 后，无法兼容到v6的minWidth，width，maxWidth的实现，所以去掉了 useResizeColumns
 - 斑马线，不能用css的 `:even` 和 `:odd` 实现。因为在使用虚拟列表的时候有坑。
 - 使用.gm-table-x-td 定义 background 是有原因的，比如 使用 fixedColumnHOC 时候的背景穿透问题
+
+- 改动需要考虑 keyboard 那边
+- keyboard 测试 向上下左右是否有问题，特别是不在显示区域的

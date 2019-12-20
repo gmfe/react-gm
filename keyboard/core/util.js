@@ -75,7 +75,7 @@ const getTable = dom => {
   while (
     !(
       parentDom.classList.contains('rt-table') ||
-      parentDom.classList.contains('gm-table-x-table')
+      parentDom.classList.contains('gm-table-x-virtualized')
     )
   ) {
     parentDom = parentDom.parentNode
@@ -122,7 +122,7 @@ const scrollIntoViewFixedWidth = (dom, fixedWidth) => {
   }
 
   // 只 tablex 生效
-  if (table.classList.contains('gm-table-x-table')) {
+  if (table.classList.contains('gm-table-x-virtualized')) {
     // 如果被遮挡
     if (tdRect.top - tableRect.top < TABLE_X.HEIGHT_HEAD_TR) {
       // 则滚一个 tr 距离

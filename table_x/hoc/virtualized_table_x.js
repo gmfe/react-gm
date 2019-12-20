@@ -25,7 +25,7 @@ function virtualizedTableXHOC(Component) {
 
       const Row = ({ index, style }) => {
         if (index === 0) {
-          return null
+          return <div style={style} />
         }
         return RenderRow({
           index: index - 1,
@@ -52,8 +52,9 @@ function virtualizedTableXHOC(Component) {
           height={virtualizedHeight}
           itemCount={rows.length + 1}
           itemSize={itemSize}
-          outerElementType={Container}
+          innerElementType={Container}
           initialScrollOffset={initialScrollOffset}
+          className='gm-table-x-virtualized'
         >
           {Row}
         </VariableSizeList>
