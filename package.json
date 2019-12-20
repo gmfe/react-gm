@@ -51,7 +51,7 @@
     "@svgr/webpack": "^4.3.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
-    "react-table": "7.0.0-beta.12",
+    "react-table": "7.0.0-rc.11",
     "react-table-v6": "6.8.6",
     "react-window": "^1.8.5"
   },
@@ -99,7 +99,7 @@
     "react-loadable": "^5.5.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "react-table": "v7.0.0-rc.11",
+    "react-table": "7.0.0-rc.11",
     "react-table-v6": "6.8.6",
     "react-window": "^1.8.5",
     "sortablejs": "^1.10.1",
