@@ -5,17 +5,16 @@ import { observable } from 'mobx'
 import { Observer, observer } from 'mobx-react'
 import { keyboardTableXHOC, KCInput, KCMoreSelect } from './'
 import {
-  TableX,
+  TableXVirtualized,
   editTableXHOC,
   fixedColumnsTableXHOC,
-  virtualizedTableXHOC,
   TableXUtil
 } from '../table_x'
 import _ from 'lodash'
 
 const { OperationHeader, EditOperation, TABLE_X } = TableXUtil
 const KeyboardTable = keyboardTableXHOC(
-  virtualizedTableXHOC(fixedColumnsTableXHOC(editTableXHOC(TableX)))
+  fixedColumnsTableXHOC(editTableXHOC(TableXVirtualized))
 )
 
 const data = [
@@ -62,7 +61,7 @@ const data = [
 ]
 
 const store = observable({
-  data: _.times(16, () => ({
+  data: _.times(2, () => ({
     position: null,
     name: '',
     age: null,
@@ -127,10 +126,34 @@ CellName.propTypes = {
   index: PropTypes.number.isRequired
 }
 
+const CellPosition = React.memo(({ index }) => {
+  console.log('CellPosition', index)
+  return (
+    <Observer>
+      {() => {
+        const item = store.data[index]
+        return (
+          <KCMoreSelect
+            style={{ width: TABLE_X.WIDTH_SEARCH }}
+            data={data}
+            selected={item.position} // 不能用 row.value，因为并不是 store 的数据
+            onSelect={selected => store.setPosition(index, selected)}
+          />
+        )
+      }}
+    </Observer>
+  )
+})
+
+CellPosition.propTypes = {
+  index: PropTypes.number.isRequired
+}
+
 const Wrap = observer(() => {
   // useMemo 提高性能
-  const columns = React.useMemo(
-    () => [
+  const columns = React.useMemo(() => {
+    console.log('Wrap useMemo')
+    return [
       {
         id: 'no',
         Header: '序号',
@@ -145,7 +168,7 @@ const Wrap = observer(() => {
         width: TABLE_X.WIDTH_OPERATION,
         Cell: ({ row }) => (
           <EditOperation
-            onAddRow={() => console.log('增加一行', row.index)}
+            onAddRow={() => store.addList()}
             onDeleteRow={() => console.log('删除一行', row.index)}
           />
         )
@@ -155,54 +178,30 @@ const Wrap = observer(() => {
         accessor: 'position',
         width: TABLE_X.WIDTH_SEARCH + 16,
         isKeyboard: true,
-        Cell: ({ row }) => (
-          // 使用 Observer 包下，才能响应 store 数据
-          <Observer>
-            {() => (
-              <KCMoreSelect
-                style={{ width: TABLE_X.WIDTH_SEARCH }}
-                data={data}
-                selected={row.original.position} // 不能用 row.value，因为并不是 store 的数据
-                onSelect={selected => store.setPosition(row.index, selected)}
-              />
-            )}
-          </Observer>
-        )
+        Cell: ({ row }) => <CellPosition index={row.index} />
       },
       {
         Header: '名字',
-        accessor: 'name1',
-        minWidth: 250,
-        isKeyboard: true,
-        Cell: ({ row }) => <CellName index={row.index} />
-      },
-      {
-        Header: '名字',
-        accessor: 'name2',
-        minWidth: 250,
-        isKeyboard: true,
-        Cell: ({ row }) => <CellName index={row.index} />
-      },
-      {
-        Header: '名字',
-        accessor: 'name3',
+        accessor: 'name',
         minWidth: 250,
         isKeyboard: true,
         Cell: ({ row }) => <CellName index={row.index} />
       }
-    ],
-    []
-  )
+    ]
+  }, [])
 
   return (
-    <KeyboardTable
-      id='test_tablex'
-      onAddRow={() => store.addList()}
-      virtualizedHeight={300}
-      virtualizedItemSize={TableXUtil.TABLE_X.HEIGHT_TR}
-      data={store.data.slice()} // 记得 slice 下，否则增加数据不会 刷新
-      columns={columns}
-    />
+    <div>
+      <div>{store.data.slice().length}</div>
+      <KeyboardTable
+        id='test_tablex'
+        onAddRow={() => store.addList()}
+        virtualizedHeight={300}
+        virtualizedItemSize={TableXUtil.TABLE_X.HEIGHT_TR}
+        data={store.data.slice()} // 记得 slice 下，否则增加数据不会 刷新
+        columns={columns}
+      />
+    </div>
   )
 })
 
