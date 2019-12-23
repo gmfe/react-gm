@@ -288,16 +288,17 @@ react-table 文档见 https://github.com/tannerlinsley/react-table
 较 Table 新增
 - 支持多列排序
 - hoc select 增加 fixedSelect, hoc expand fixedExpand 用来固定
+- 其他 hoc， sortableTableXHOC
+- TableXVirtualized
 
 Table 切 TableX 关注点：
 - Cell 不提供 index original，即 Cell: ({index, original}) => () 不 work，用 Cell: ({ row }) => (row.index row.original)
 - 取消单元格没内容显示 -
-- fixedColumn column 不需要提供 width
+- fixedColumn column 可以不提供 width
 - selectTable 废弃 onSelectAll ，因为没有意义
 - OperationHeader 是一个组件
 - EditTableOperation 换成  EditOperation
-- 宽度常亮收归到 TableUtil.TABLE_X
-
+- 宽度常量收归到 TableUtil.TABLE_X
 `
     }
   })

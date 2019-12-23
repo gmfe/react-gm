@@ -5,10 +5,10 @@ import { observer } from 'mobx-react'
 import {
   fixedColumnsTableXHOC,
   sortableTableXHOC,
-  virtualizedTableXHOC,
   editTableXHOC,
   diyTableXHOC,
   TableX,
+  TableXVirtualized,
   TableXUtil
 } from '../index'
 import _ from 'lodash'
@@ -323,12 +323,11 @@ const store = observable({
 
 const FixedColumnTableX = fixedColumnsTableXHOC(TableX)
 const SortableTableX = sortableTableXHOC(TableX)
-const VirtualizedTableX = virtualizedTableXHOC(TableX)
 const EditTableX = editTableXHOC(TableX)
 const DiyTableX = diyTableXHOC(TableX)
 
 const virtualizedStore = observable({
-  data: _.times(10, index => ({
+  data: _.times(2, index => ({
     id: index,
     name: 'lalalla'
   })),
@@ -353,17 +352,18 @@ const virtualizedColumn = [
 // storybook 有问题，所以提出来这里
 const VirtualWrap = observer(() => {
   const limit = 5
-  const height = TABLE_X.HEIGHT_HEAD_TR + limit * TABLE_X.HEIGHT_TR
+  const height =
+    TABLE_X.HEIGHT_HEAD_TR +
+    Math.min(limit, virtualizedStore.data.length) * TABLE_X.HEIGHT_TR
 
   return (
     <div>
       <div>
         <button onClick={() => virtualizedStore.addData()}>+1 data</button>
       </div>
-      <VirtualizedTableX
+      <TableXVirtualized
         data={virtualizedStore.data.slice()}
         columns={virtualizedColumn}
-        virtualizedDisabled={virtualizedStore.data.length < limit}
         virtualizedHeight={height}
         virtualizedItemSize={TableXUtil.TABLE_X.HEIGHT_TR}
       />
