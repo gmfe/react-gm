@@ -49,6 +49,8 @@ class Popover extends React.Component {
     this.refPopup = null
 
     this.id = +new Date() + '' + Math.random()
+
+    this._isUnmounted = false
   }
 
   /** 注意，先调用这个，再处理业务的 onXXX。比如 date_picker */
@@ -84,6 +86,8 @@ class Popover extends React.Component {
   }
 
   componentWillUnmount() {
+    this._isUnmounted = true
+
     if (this.props.type === 'click' || this.props.type === 'focus') {
       window.document.body.removeEventListener('click', this.handleBodyClick)
     } else if (this.props.type === 'realFocus') {
@@ -200,6 +204,10 @@ class Popover extends React.Component {
   }
 
   setActive = active => {
+    if (this._isUnmounted) {
+      return
+    }
+
     if (active) {
       const dom = findDOMNode(this)
       const pos = getElementPositionWithScroll(dom)
