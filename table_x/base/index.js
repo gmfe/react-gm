@@ -205,7 +205,7 @@ const TableX = ({
     className: 'gm-table-x-tbody'
   }
 
-  let totalWidth = null
+  let totalWidth = 0
   if (rows[0] && rows[0].cells.length > 0) {
     prepareRow(rows[0])
     const last = rows[0].cells[rows[0].cells.length - 1].column
