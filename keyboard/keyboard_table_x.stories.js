@@ -61,7 +61,7 @@ const data = [
 ]
 
 const store = observable({
-  data: _.times(2, () => ({
+  data: _.times(10, () => ({
     position: null,
     name: '',
     age: null,
@@ -103,13 +103,26 @@ const store = observable({
   }
 })
 
+const CellEditOperation = React.memo(({ index }) => {
+  return (
+    <EditOperation
+      onAddRow={() => store.addList()}
+      onDeleteRow={() => console.log('删除一行', index)}
+    />
+  )
+})
+
+CellEditOperation.propTypes = {
+  index: PropTypes.number.isRequired
+}
+
 // 有必要用 React.memo 提供更友好的渲染性能
 // 且 props 尽量简单不变，比如 index
 const CellName = React.memo(({ index }) => {
+  const item = store.data[index]
   return (
     <Observer>
       {() => {
-        const item = store.data[index]
         return (
           <KCInput
             type='text'
@@ -128,10 +141,11 @@ CellName.propTypes = {
 
 const CellPosition = React.memo(({ index }) => {
   console.log('CellPosition', index)
+  const item = store.data[index]
   return (
     <Observer>
       {() => {
-        const item = store.data[index]
+        console.log('CellPosition observer', index)
         return (
           <KCMoreSelect
             style={{ width: TABLE_X.WIDTH_SEARCH }}
@@ -166,12 +180,7 @@ const Wrap = observer(() => {
         Header: OperationHeader,
         fixed: 'left',
         width: TABLE_X.WIDTH_OPERATION,
-        Cell: ({ row }) => (
-          <EditOperation
-            onAddRow={() => store.addList()}
-            onDeleteRow={() => console.log('删除一行', row.index)}
-          />
-        )
+        Cell: ({ row }) => <CellEditOperation index={row.index} />
       },
       {
         Header: '位置',
@@ -180,6 +189,48 @@ const Wrap = observer(() => {
         isKeyboard: true,
         Cell: ({ row }) => <CellPosition index={row.index} />
       },
+      // {
+      //   Header: '位置',
+      //   accessor: 'position1',
+      //   width: TABLE_X.WIDTH_SEARCH + 16,
+      //   isKeyboard: true,
+      //   Cell: ({ row }) => <CellPosition index={row.index} />
+      // },
+      // {
+      //   Header: '位置',
+      //   accessor: 'position2',
+      //   width: TABLE_X.WIDTH_SEARCH + 16,
+      //   isKeyboard: true,
+      //   Cell: ({ row }) => <CellPosition index={row.index} />
+      // },
+      // {
+      //   Header: '位置',
+      //   accessor: 'position3',
+      //   width: TABLE_X.WIDTH_SEARCH + 16,
+      //   isKeyboard: true,
+      //   Cell: ({ row }) => <CellPosition index={row.index} />
+      // },
+      // {
+      //   Header: '位置',
+      //   accessor: 'position4',
+      //   width: TABLE_X.WIDTH_SEARCH + 16,
+      //   isKeyboard: true,
+      //   Cell: ({ row }) => <CellPosition index={row.index} />
+      // },
+      // {
+      //   Header: '位置',
+      //   accessor: 'position5',
+      //   width: TABLE_X.WIDTH_SEARCH + 16,
+      //   isKeyboard: true,
+      //   Cell: ({ row }) => <CellPosition index={row.index} />
+      // },
+      // {
+      //   Header: '位置',
+      //   accessor: 'position6',
+      //   width: TABLE_X.WIDTH_SEARCH + 16,
+      //   isKeyboard: true,
+      //   Cell: ({ row }) => <CellPosition index={row.index} />
+      // },
       {
         Header: '名字',
         accessor: 'name',

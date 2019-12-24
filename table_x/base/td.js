@@ -28,9 +28,11 @@ const Td = ({ cell, totalWidth }) => {
   return <div {...tdProps}>{cell.render('Cell')}</div>
 }
 
+Td.whyDidYouRender = true
+
 Td.propTypes = {
   cell: PropTypes.object.isRequired,
   totalWidth: PropTypes.number.isRequired
 }
 
-export default Td
+export default React.memo(Td)

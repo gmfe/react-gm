@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTable, useSortBy } from 'react-table'
+import { useTable } from 'react-table'
 import { Empty, Loading, afterScroll, __DEFAULT_COLUMN, TABLE_X } from '../util'
 import classNames from 'classnames'
 import _ from 'lodash'
@@ -50,9 +50,6 @@ RenderRow.propTypes = {
   style: PropTypes.object.isRequired
 }
 
-// 覆盖默认 按下 shift 多选
-const handleIsMultiSortEvent = () => true
-
 // 给定初始值，交由getColumnStyle控制。width逻辑保持跟react-table（v6）的用法一致。
 const defaultColumn = __DEFAULT_COLUMN
 
@@ -60,8 +57,6 @@ const TableXVirtualized = ({
   columns,
   data,
   loading,
-  disableSortBy,
-  disableMultiSort,
   SubComponent,
   keyField,
   className,
@@ -87,17 +82,11 @@ const TableXVirtualized = ({
     getTableBodyProps,
     rows,
     prepareRow
-  } = useTable(
-    {
-      columns,
-      data,
-      disableSortBy,
-      disableMultiSort,
-      isMultiSortEvent: handleIsMultiSortEvent,
-      defaultColumn
-    },
-    useSortBy
-  )
+  } = useTable({
+    columns,
+    data,
+    defaultColumn
+  })
 
   const gtp = getTableProps()
   const tableProps = {
@@ -191,9 +180,6 @@ TableXVirtualized.propTypes = {
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
   loading: PropTypes.bool,
-  /** 默认禁用，如需提供 false， */
-  disableSortBy: PropTypes.bool,
-  disableMultiSort: PropTypes.bool,
   SubComponent: PropTypes.func,
   /** 由其他 hoc 传下来 */
   keyField: PropTypes.string,
@@ -217,7 +203,6 @@ TableXVirtualized.propTypes = {
 
 TableXVirtualized.defaultProps = {
   keyField: 'value',
-  disableSortBy: true,
   tiled: false,
   isTrDisable: () => false
 }

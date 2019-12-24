@@ -16,9 +16,11 @@ const THead = ({ headerGroups, totalWidth }) => {
   )
 }
 
+THead.whyDidYouRender = true
+
 THead.propTypes = {
   headerGroups: PropTypes.array.isRequired,
   totalWidth: PropTypes.number.isRequired
 }
 
-export default THead
+export default React.memo(THead)

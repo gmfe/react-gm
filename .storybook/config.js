@@ -20,6 +20,11 @@ import '../table/style.less'
 // tablex
 import '../table_x/style.less'
 
+if (process.env.NODE_ENV !== 'production') {
+  const whyDidYouRender = require('@welldone-software/why-did-you-render')
+  whyDidYouRender(React)
+}
+
 const reqs = [
   require.context('../src', true, /stories\.js$/),
   require.context('../table', true, /stories\.js$/),

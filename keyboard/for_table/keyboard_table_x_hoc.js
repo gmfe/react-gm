@@ -41,7 +41,7 @@ function keyboardTableXHOC(Component) {
     // 使用 useRef 不至于渲染次数多
     // 默认 null，只有发现 refVirtualized 的时候才会有真正的值
     const refVirtualized = useRef(null)
-    const refInitialScrollOffset = useRef(null)
+    const refInitialScrollOffset = useRef(0)
 
     // Cell 会产生 新组件，所以需要 useMemo
     const { newColumns, columnKeys } = useMemo(() => {

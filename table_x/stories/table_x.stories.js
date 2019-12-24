@@ -168,34 +168,6 @@ const editColumns = [
   }
 ]
 
-const sortColumns = [
-  // 默认有排序，
-  {
-    Header: '建单时间',
-    accessor: 'submit_time',
-    // 指定排序方式
-    sortType: (rowA, rowB, columnID) => {
-      console.log(rowA, rowB, columnID)
-      return sortDateTime(rowA.original.submit_time, rowB.original.submit_time)
-    }
-  },
-  // 如果不需要 disableSorting true
-  {
-    Header: '供应商信息',
-    accessor: data => data.supplier_name,
-    id: 'supplier_name',
-    disableSorting: true
-  },
-  {
-    Header: '入库金额',
-    accessor: 'total_money',
-    Cell: cellProps => {
-      const { row } = cellProps
-      return <div>{row.original.total_money}</div>
-    }
-  }
-]
-
 const groupColumns = [
   {
     Header: '序号',
@@ -286,7 +258,6 @@ react-table 文档见 https://github.com/tannerlinsley/react-table
 用法见 story 源码，不要用 story 之外的，如果有，联系我补充 story。
 
 较 Table 新增
-- 支持多列排序
 - hoc select 增加 fixedSelect, hoc expand fixedExpand 用来固定
 - 其他 hoc， sortableTableXHOC
 - TableXVirtualized
@@ -311,27 +282,6 @@ Table 切 TableX 关注点：
       <TableX data={[]} columns={columns} className='gm-margin-10' tiled />
     </div>
   ))
-  .add(
-    'sorting',
-    () => (
-      <TableX
-        disableSortBy={false}
-        data={store.data.slice()}
-        columns={sortColumns}
-      />
-    ),
-    {
-      info: {
-        text: `
-排序状态，不启用、升序、降序，点排序在这几个状态切换。
-
-特点：
-react-table@v7支持多重排序，通过 shift 来完成。但不方便，所以直接点就可以达到多重排序，如果不需要，就点排序切换到取消排序即可。
-
-`
-      }
-    }
-  )
   .add('后台排序', () => (
     <TableX data={store.data} columns={sortColumnsBackEnd} />
   ))

@@ -22,7 +22,7 @@ const Tr = ({
     })
   }
 
-  // 目前视为了 srotable 用。值可能是 undefined，keyField 没作用的情况
+  // 目前视为了 sortable 用。值可能是 undefined，keyField 没作用的情况
   const dataId = row.original[keyField]
 
   return (
@@ -39,6 +39,8 @@ const Tr = ({
   )
 }
 
+Tr.whyDidYouRender = true
+
 Tr.propTypes = {
   row: PropTypes.object.isRequired,
   SubComponent: PropTypes.func,
@@ -48,4 +50,4 @@ Tr.propTypes = {
   isTrDisable: PropTypes.func
 }
 
-export default Tr
+export default React.memo(Tr)

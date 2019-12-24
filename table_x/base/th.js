@@ -41,9 +41,11 @@ const Th = ({ column, totalWidth }) => {
   )
 }
 
+Th.whyDidYouRender = true
+
 Th.propTypes = {
   column: PropTypes.object.isRequired,
   totalWidth: PropTypes.number.isRequired
 }
 
-export default Th
+export default React.memo(Th)

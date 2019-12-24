@@ -257,28 +257,61 @@ const store = observable({
 //   // store.data = [{ name: '123123' }]
 // }, 5000)
 
-const Name = React.memo(({ name, index }) => {
+const CellEditOperation = React.memo(({ index }) => {
   return (
-    <KCInput
-      type='text'
-      value={name}
-      onChange={e => store.setName(index, e.target.value)}
+    <EditTableOperation
+      onAddRow={() => store.addList()}
+      onDeleteRow={() => console.log('删除一行', index)}
     />
   )
 })
 
+CellEditOperation.propTypes = {
+  index: PropTypes.number.isRequired
+}
+
 const CellName = React.memo(({ index }) => {
+  const item = store.data[index]
   return (
     <Observer>
       {() => {
-        const item = store.data[index]
-        return <Name name={item.name} index={index} />
+        return (
+          <KCInput
+            type='text'
+            value={item.name}
+            onChange={e => store.setName(index, e.target.value)}
+          />
+        )
       }}
     </Observer>
   )
 })
 
 CellName.propTypes = {
+  index: PropTypes.number.isRequired
+}
+
+const CellPosition = React.memo(({ index }) => {
+  console.log('CellPosition', index)
+  const item = store.data[index]
+  return (
+    <Observer>
+      {() => {
+        console.log('CellPosition observer', index)
+        return (
+          <KCMoreSelect
+            style={{ width: referOfWidth.searchBox }}
+            data={data}
+            selected={item.position} // 不能用 row.value，因为并不是 store 的数据
+            onSelect={selected => store.setPosition(index, selected)}
+          />
+        )
+      }}
+    </Observer>
+  )
+})
+
+CellPosition.propTypes = {
   index: PropTypes.number.isRequired
 }
 
@@ -312,12 +345,7 @@ storiesOf('快速录入|Keyboard', module)
               Header: OperationHeader,
               fixed: 'left',
               width: referOfWidth.operationCell,
-              Cell: cellProps => (
-                <EditTableOperation
-                  onAddRow={() => console.log('增加一行', cellProps.index)}
-                  onDeleteRow={() => console.log('删除一行', cellProps.index)}
-                />
-              )
+              Cell: cellProps => <CellEditOperation index={cellProps.index} />
             },
             {
               Header: '位置',
@@ -326,18 +354,7 @@ storiesOf('快速录入|Keyboard', module)
               isKeyboard: true,
               Cell: cellProps => (
                 // 使用 Observer 包下，才能响应 store 数据
-                <Observer>
-                  {() => (
-                    <KCMoreSelect
-                      style={{ width: referOfWidth.searchBox }}
-                      data={data}
-                      selected={cellProps.original.position} // 不能用 row.value，因为并不是 store 的数据
-                      onSelect={selected =>
-                        store.setPosition(cellProps.index, selected)
-                      }
-                    />
-                  )}
-                </Observer>
+                <CellPosition index={cellProps.index} />
               )
             },
             {
@@ -346,114 +363,6 @@ storiesOf('快速录入|Keyboard', module)
               minWidth: 150,
               isKeyboard: true,
               Cell: cellProps => <CellName index={cellProps.index} />
-            },
-            {
-              Header: 'TableSelect',
-              accessor: 'sku',
-              isKeyboard: true,
-              minWidth: 170,
-              Cell: cellProps => (
-                <Observer>
-                  {() => (
-                    <KCTableSelect
-                      style={{ width: referOfWidth.tableSelectBox }}
-                      data={newTableData}
-                      columns={tableColumns}
-                      selected={cellProps.original.sku}
-                      onSelect={selected => {
-                        return store.setSku(cellProps.index, selected)
-                      }}
-                    />
-                  )}
-                </Observer>
-              )
-            },
-            {
-              Header: '区域',
-              accessor: 'area',
-              minWidth: 170,
-              isKeyboard: true,
-              Cell: cellProps => (
-                <Observer>
-                  {() => (
-                    <KCLevelSelect
-                      style={{ width: referOfWidth.levelSelectBox }}
-                      data={areaData}
-                      selected={
-                        cellProps.original.area
-                          ? cellProps.original.area.slice()
-                          : []
-                      }
-                      onSelect={selected =>
-                        store.setArea(cellProps.index, selected)
-                      }
-                    />
-                  )}
-                </Observer>
-              )
-            },
-            {
-              Header: '无用',
-              accessor: 'unuse',
-              minWidth: 50,
-              Cell: cellProps => (
-                <Observer>
-                  {() => `${cellProps.original.name} ${cellProps.original.age}`}
-                </Observer>
-              )
-            },
-            {
-              Header: '年龄',
-              accessor: 'age',
-              minWidth: 100,
-              isKeyboard: true,
-              Cell: cellProps => (
-                <Observer>
-                  {() => (
-                    <KCInputNumberV2
-                      onFocus={e => e.target.select()}
-                      style={{ width: referOfWidth.numberInputBox }}
-                      value={cellProps.original.age}
-                      onChange={value => store.setAge(cellProps.index, value)}
-                    />
-                  )}
-                </Observer>
-              )
-            },
-            {
-              Header: '日期',
-              accessor: 'date',
-              minWidth: 200,
-              isKeyboard: true,
-              Cell: cellProps => (
-                <Observer>
-                  {() => (
-                    <KCDatePicker
-                      date={cellProps.original.date}
-                      onChange={value => store.setDate(cellProps.index, value)}
-                    />
-                  )}
-                </Observer>
-              )
-            },
-            {
-              Header: '性别',
-              accessor: 'gender',
-              minWidth: 100,
-              isKeyboard: true,
-              Cell: cellProps => (
-                <Observer>
-                  {() => (
-                    <KCSelect
-                      data={selectData}
-                      value={cellProps.original.gender}
-                      onChange={value =>
-                        store.setGender(cellProps.index, value)
-                      }
-                    />
-                  )}
-                </Observer>
-              )
             }
           ]}
         />
