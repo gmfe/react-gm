@@ -29,52 +29,64 @@ function selectTableXHOC(Component) {
       onSelect(!selectAll ? _.map(canSelectData, v => v[keyField]) : [])
     }
 
-    const newColumns = [
-      {
-        id: TABLE_X_SELECT_ID,
-        width: TABLE_X.WIDTH_FUN,
-        maxWidth: TABLE_X.WIDTH_FUN,
-        fixed: fixedSelect ? 'left' : null,
-        Header: () =>
-          selectType === 'checkbox' ? (
-            <Checkbox
-              className='gm-table-x-select'
-              disabled={data.length === 0} // eslint-disable-line
-              checked={selectAll}
-              onChange={handleSelectAll}
-            />
-          ) : null,
-        Cell: ({ row }) => {
-          const value = row.original[keyField]
-          const isChecked = selected.includes(value)
-          const disabled = isSelectorDisable(row)
+    const newColumns = React.useMemo(
+      () =>
+        [
+          {
+            id: TABLE_X_SELECT_ID,
+            width: TABLE_X.WIDTH_FUN,
+            maxWidth: TABLE_X.WIDTH_FUN,
+            fixed: fixedSelect ? 'left' : null,
+            Header: () =>
+              selectType === 'checkbox' ? (
+                <Checkbox
+                  className='gm-table-x-select'
+                  disabled={data.length === 0} // eslint-disable-line
+                  checked={selectAll}
+                  onChange={handleSelectAll}
+                />
+              ) : null,
+            Cell: ({ row }) => {
+              const value = row.original[keyField]
+              const isChecked = selected.includes(value)
+              const disabled = isSelectorDisable(row)
 
-          if (selectType === 'checkbox') {
-            return (
-              <Checkbox
-                className='gm-table-x-select'
-                disabled={disabled}
-                checked={isChecked}
-                onChange={() => {
-                  onSelect(_.xor(selected, [value]))
-                }}
-              />
-            )
-          } else {
-            return (
-              <Radio
-                className='gm-table-x-select'
-                disabled={disabled}
-                checked={isChecked}
-                onClick={() => {
-                  onSelect(isChecked ? [] : [value])
-                }}
-              />
-            )
+              if (selectType === 'checkbox') {
+                return (
+                  <Checkbox
+                    className='gm-table-x-select'
+                    disabled={disabled}
+                    checked={isChecked}
+                    onChange={() => {
+                      onSelect(_.xor(selected, [value]))
+                    }}
+                  />
+                )
+              } else {
+                return (
+                  <Radio
+                    className='gm-table-x-select'
+                    disabled={disabled}
+                    checked={isChecked}
+                    onClick={() => {
+                      onSelect(isChecked ? [] : [value])
+                    }}
+                  />
+                )
+              }
+            }
           }
-        }
-      }
-    ].concat(columns)
+        ].concat(columns),
+      [
+        columns,
+        selectType,
+        selected,
+        fixedSelect,
+        selectAll,
+        keyField,
+        isSelectorDisable
+      ]
+    )
 
     return (
       <div className='gm-table-x-select-container'>

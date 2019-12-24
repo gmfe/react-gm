@@ -29,49 +29,53 @@ function expandTableXHOC(Component) {
   }) => {
     const [expanded, setExpanded] = useState({})
 
-    const newColumns = [
-      {
-        id: TABLE_X_EXPAND_ID,
-        width: TABLE_X.WIDTH_FUN,
-        maxWidth: TABLE_X.WIDTH_FUN,
-        fixed: fixedExpand ? 'left' : null,
-        Header: () => {
-          const isAllExpanded =
-            _.filter(expanded, v => v).length === data.length
-          return (
-            <Expand
-              active={isAllExpanded}
-              onChange={() => {
-                if (isAllExpanded) {
-                  setExpanded({})
-                } else {
-                  const newExpanded = {}
-                  _.each(data, (v, i) => {
-                    newExpanded[i] = {}
-                  })
-                  setExpanded(newExpanded)
-                }
-              }}
-            />
-          )
-        },
-        Cell: ({ row }) => {
-          const isExpanded = !!expanded[row.index]
+    const newColumns = React.useMemo(
+      () =>
+        [
+          {
+            id: TABLE_X_EXPAND_ID,
+            width: TABLE_X.WIDTH_FUN,
+            maxWidth: TABLE_X.WIDTH_FUN,
+            fixed: fixedExpand ? 'left' : null,
+            Header: () => {
+              const isAllExpanded =
+                _.filter(expanded, v => v).length === data.length
+              return (
+                <Expand
+                  active={isAllExpanded}
+                  onChange={() => {
+                    if (isAllExpanded) {
+                      setExpanded({})
+                    } else {
+                      const newExpanded = {}
+                      _.each(data, (v, i) => {
+                        newExpanded[i] = {}
+                      })
+                      setExpanded(newExpanded)
+                    }
+                  }}
+                />
+              )
+            },
+            Cell: ({ row }) => {
+              const isExpanded = !!expanded[row.index]
 
-          return (
-            <Expand
-              active={isExpanded}
-              onChange={() => {
-                setExpanded({
-                  ...expanded,
-                  [row.index]: !isExpanded
-                })
-              }}
-            />
-          )
-        }
-      }
-    ].concat(columns)
+              return (
+                <Expand
+                  active={isExpanded}
+                  onChange={() => {
+                    setExpanded({
+                      ...expanded,
+                      [row.index]: !isExpanded
+                    })
+                  }}
+                />
+              )
+            }
+          }
+        ].concat(columns),
+      [columns, fixedExpand, expanded]
+    )
 
     const handleSubComponent = row => {
       const isExpanded = !!expanded[row.index]

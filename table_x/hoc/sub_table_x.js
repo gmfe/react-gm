@@ -5,20 +5,28 @@ import TableX from '../base'
 import { TABLE_X, TABLE_X_SUB_TABLE_ID } from '../util'
 
 const subTableXHOC = Component => {
-  const SubTable = ({ subTableIndent, columns, className, ...rest }) => (
-    <Component
-      {...rest}
-      columns={[
-        {
-          id: TABLE_X_SUB_TABLE_ID,
-          width: subTableIndent,
-          maxWidth: subTableIndent,
-          Header: ''
-        }
-      ].concat(columns)}
-      className={classNames('gm-table-x-sub-table', className)}
-    />
-  )
+  const SubTable = ({ subTableIndent, columns, className, ...rest }) => {
+    const _columns = React.useMemo(
+      () =>
+        [
+          {
+            id: TABLE_X_SUB_TABLE_ID,
+            width: subTableIndent,
+            maxWidth: subTableIndent,
+            Header: ''
+          }
+        ].concat(columns),
+      [columns, subTableIndent]
+    )
+
+    return (
+      <Component
+        {...rest}
+        columns={_columns}
+        className={classNames('gm-table-x-sub-table', className)}
+      />
+    )
+  }
 
   SubTable.propTypes = {
     ...TableX.propTypes,

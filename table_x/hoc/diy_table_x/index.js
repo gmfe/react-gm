@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { getLocale } from '../../../locales'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
@@ -92,7 +92,10 @@ function diyTableXHOC(Component) {
     })
 
     const localCols = Storage.get(id) || []
-    const [notDiyCols, initDiyCols] = generateDiyColumns(columns, localCols)
+    const [notDiyCols, initDiyCols] = useMemo(
+      () => generateDiyColumns(columns, localCols),
+      [columns, localCols]
+    )
 
     const [diyCols, setDiyCols] = useState(initDiyCols)
 
@@ -122,42 +125,41 @@ function diyTableXHOC(Component) {
       })
     }
 
-    return (
-      <Component
-        {...rest}
-        id={id}
-        columns={[
-          {
-            id: TABLE_X_DIY_ID,
-            width: TABLE_X.WIDTH_FUN,
-            maxWidth: TABLE_X.WIDTH_FUN,
-            accessor: TABLE_X_DIY_ID,
-            fixed: 'left',
-            Cell: () => null, // 只是用来占据空间
-            Header: () => (
-              <Popover
-                top
-                arrowLeft='2px'
-                popup={
-                  <div className='gm-padding-5'>{getLocale('表头设置')}</div>
-                }
-                showArrow
-                type='hover'
-              >
-                <div>
-                  <SVGSetting
-                    className='gm-cursor gm-text-hover-primary'
-                    onClick={handleModalShow}
-                  />
-                </div>
-              </Popover>
-            )
-          },
-          ...notDiyCols,
-          ...diyCols
-        ]}
-      />
+    const _columns = useMemo(
+      () => [
+        {
+          id: TABLE_X_DIY_ID,
+          width: TABLE_X.WIDTH_FUN,
+          maxWidth: TABLE_X.WIDTH_FUN,
+          accessor: TABLE_X_DIY_ID,
+          fixed: 'left',
+          Cell: () => null, // 只是用来占据空间
+          Header: () => (
+            <Popover
+              top
+              arrowLeft='2px'
+              popup={
+                <div className='gm-padding-5'>{getLocale('表头设置')}</div>
+              }
+              showArrow
+              type='hover'
+            >
+              <div>
+                <SVGSetting
+                  className='gm-cursor gm-text-hover-primary'
+                  onClick={handleModalShow}
+                />
+              </div>
+            </Popover>
+          )
+        },
+        ...notDiyCols,
+        ...diyCols
+      ],
+      [notDiyCols, diyCols]
     )
+
+    return <Component {...rest} id={id} columns={_columns} />
   }
 
   DiyTableX.propTypes = {
