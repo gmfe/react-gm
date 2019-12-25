@@ -318,7 +318,8 @@ const store = observable({
   selectAll: false,
   setSelectAll(checked) {
     this.selectAll = checked
-  }
+  },
+  diyColumns: diyColumns
 })
 
 const FixedColumnTableX = fixedColumnsTableXHOC(TableX)
@@ -388,12 +389,30 @@ storiesOf('TableX|HOC', module)
   ))
   .add('virtualized', () => <VirtualWrap />)
   .add('edit', () => <EditTableX data={store.data} columns={editColumns} />)
-  .add('diy', () => (
-    <DiyTableX
-      className='gm-margin-top-20'
-      id='diy_must_have_id'
-      diyGroupSorting={['基础', '其他']}
-      data={store.data}
-      columns={diyColumns}
-    />
-  ))
+  .add('diy', () => {
+    return (
+      <div>
+        <button
+          onClick={() =>
+            (store.diyColumns = store.diyColumns.concat([
+              {
+                Header: 'supplier_customer_id',
+                accessor: 'supplier_customer_id',
+                diyEnable: true,
+                diyGroupName: '基础'
+              }
+            ]))
+          }
+        >
+          改变组件的columns
+        </button>
+        <DiyTableX
+          className='gm-margin-top-20'
+          id='diy_must_have_id'
+          diyGroupSorting={['基础', '其他']}
+          data={store.data}
+          columns={store.diyColumns}
+        />
+      </div>
+    )
+  })

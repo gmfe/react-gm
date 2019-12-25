@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { getLocale } from '../../../locales'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
@@ -91,17 +91,25 @@ function diyTableXHOC(Component) {
       }
     })
 
-    const localCols = Storage.get(id) || []
-    const [notDiyCols, initDiyCols] = useMemo(
-      () => generateDiyColumns(columns, localCols),
-      [columns, localCols]
-    )
+    // 不需要参与diy的cols(包括table_x_select_id, table_x_expand_id等等)
+    let notDiyCols = []
 
-    const [diyCols, setDiyCols] = useState(initDiyCols)
+    // 初始化diyCols，只需要执行第一遍就可以了，使用函数
+    const [diyCols, setDiyCols] = useState(() => {
+      const [_notDiyCols, initDiyCols] = generateDiyColumns(
+        columns,
+        Storage.get(id) || []
+      )
+      notDiyCols = _notDiyCols
+      return initDiyCols
+    })
 
-    useEffect(() => {
+    // getDerivedStateFromProps 在hooks上的实现。具体请看：https://zh-hans.reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
+    const [prevColumns, setPrevColumns] = useState(columns)
+    if (columns !== prevColumns) {
       setDiyCols(generateDiyColumns(columns, diyCols)[1])
-    }, [columns])
+      setPrevColumns(columns)
+    }
 
     const handleDiyColumnsSave = newColumns => {
       setDiyCols(newColumns)
