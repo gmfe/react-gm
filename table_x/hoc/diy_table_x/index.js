@@ -91,50 +91,19 @@ function diyTableXHOC(Component) {
       }
     })
 
-    // 不需要参与diy的cols(包括table_x_select_id, table_x_expand_id等等)
-    let notDiyCols = []
+    // 只需要执行第一遍就可以了，使用函数
+    const [diyCols, setDiyCols] = useState(
+      () => generateDiyColumns(columns, Storage.get(id) || [])[1]
+    )
 
-    // 初始化diyCols，只需要执行第一遍就可以了，使用函数
-    const [diyCols, setDiyCols] = useState(() => {
-      const [_notDiyCols, initDiyCols] = generateDiyColumns(
-        columns,
-        Storage.get(id) || []
-      )
-      notDiyCols = _notDiyCols
-      return initDiyCols
-    })
-
-    // getDerivedStateFromProps 在hooks上的实现。具体请看：https://zh-hans.reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
-    const [prevColumns, setPrevColumns] = useState(columns)
-    if (columns !== prevColumns) {
-      setDiyCols(generateDiyColumns(columns, diyCols)[1])
-      setPrevColumns(columns)
+    const handleDiyColumnsSave = cols => {
+      setDiyCols(cols)
+      Storage.set(id, getStorageColumns(cols))
     }
 
-    const handleDiyColumnsSave = newColumns => {
-      setDiyCols(newColumns)
-      Storage.set(id, getStorageColumns(newColumns))
-    }
-
-    const handleModalShow = () => {
-      Modal.render({
-        disableMaskClose: true,
-        title: getLocale('表头设置'),
-        noContentPadding: true,
-        size: 'lg',
-        onHide: Modal.hide,
-        children: (
-          <DiyTableXModal
-            diyGroupSorting={diyGroupSorting}
-            columns={diyCols}
-            onSave={handleDiyColumnsSave}
-          />
-        )
-      })
-    }
-
-    const _columns = useMemo(
-      () => [
+    const _columns = useMemo(() => {
+      const [notDiyCols, cols] = generateDiyColumns(columns, diyCols)
+      return [
         {
           id: TABLE_X_DIY_ID,
           width: TABLE_X.WIDTH_FUN,
@@ -155,17 +124,31 @@ function diyTableXHOC(Component) {
               <div>
                 <SVGSetting
                   className='gm-cursor gm-text-hover-primary'
-                  onClick={handleModalShow}
+                  onClick={() => {
+                    Modal.render({
+                      disableMaskClose: true,
+                      title: getLocale('表头设置'),
+                      noContentPadding: true,
+                      size: 'lg',
+                      onHide: Modal.hide,
+                      children: (
+                        <DiyTableXModal
+                          diyGroupSorting={diyGroupSorting}
+                          columns={diyCols}
+                          onSave={handleDiyColumnsSave}
+                        />
+                      )
+                    })
+                  }}
                 />
               </div>
             </Popover>
           )
         },
         ...notDiyCols,
-        ...diyCols
-      ],
-      [notDiyCols, diyCols]
-    )
+        ...cols
+      ]
+    }, [columns, diyCols])
 
     return <Component {...rest} id={id} columns={_columns} />
   }
