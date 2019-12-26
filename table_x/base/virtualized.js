@@ -112,7 +112,7 @@ const TableXVirtualized = ({
     afterScroll()
   }
 
-  // 响应 columns 变化应该够了
+  // 必须响应 columns totalWidth！！！
   const Container = React.useMemo(() => {
     return React.forwardRef(({ children, style, ...rest }, ref) => {
       return (
@@ -127,7 +127,7 @@ const TableXVirtualized = ({
         </div>
       )
     })
-  }, [columns])
+  }, [columns, totalWidth])
 
   const itemSize = index => {
     if (index === 0) {
