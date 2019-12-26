@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import MoreSelect from '../more_select'
 import Flex from '../flex'
 import _ from 'lodash'
-import { getColumnKey } from '../../../table/util'
+import { getColumnKey } from './util'
 import classNames from 'classnames'
 import { devWarn } from '../../util'
 
