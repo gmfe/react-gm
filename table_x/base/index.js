@@ -39,9 +39,17 @@ const TableX = ({
     defaultColumn
   })
 
+  let totalWidth = 0
+  if (rows[0] && rows[0].cells.length > 0) {
+    prepareRow(rows[0])
+    const last = rows[0].cells[rows[0].cells.length - 1].column
+    totalWidth = last.totalLeft + last.totalWidth
+  }
+
   const gtp = getTableProps()
   const tableProps = {
     ...gtp,
+    style: { minWidth: totalWidth + 'px' },
     className: classNames('gm-table-x-table', gtp.className)
   }
 
@@ -49,13 +57,6 @@ const TableX = ({
   const tableBodyProps = {
     ...gtbp,
     className: 'gm-table-x-tbody'
-  }
-
-  let totalWidth = 0
-  if (rows[0] && rows[0].cells.length > 0) {
-    prepareRow(rows[0])
-    const last = rows[0].cells[rows[0].cells.length - 1].column
-    totalWidth = last.totalLeft + last.totalWidth
   }
 
   const handleScroll = e => {

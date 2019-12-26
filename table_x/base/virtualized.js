@@ -88,6 +88,13 @@ const TableXVirtualized = ({
     defaultColumn
   })
 
+  let totalWidth = 0
+  if (rows[0] && rows[0].cells.length > 0) {
+    prepareRow(rows[0])
+    const last = rows[0].cells[rows[0].cells.length - 1].column
+    totalWidth = last.totalLeft + last.totalWidth
+  }
+
   const gtp = getTableProps()
   const tableProps = {
     ...gtp,
@@ -100,13 +107,6 @@ const TableXVirtualized = ({
     className: 'gm-table-x-tbody'
   }
 
-  let totalWidth = 0
-  if (rows[0] && rows[0].cells.length > 0) {
-    prepareRow(rows[0])
-    const last = rows[0].cells[rows[0].cells.length - 1].column
-    totalWidth = last.totalLeft + last.totalWidth
-  }
-
   const handleScroll = e => {
     onScroll && onScroll(e)
     afterScroll()
@@ -114,9 +114,14 @@ const TableXVirtualized = ({
 
   // 响应 columns 变化应该够了
   const Container = React.useMemo(() => {
-    return React.forwardRef(({ children, ...rest }, ref) => {
+    return React.forwardRef(({ children, style, ...rest }, ref) => {
       return (
-        <div ref={ref} {...rest} {...tableProps}>
+        <div
+          ref={ref}
+          {...rest}
+          {...tableProps}
+          style={{ ...style, minWidth: totalWidth + 'px' }}
+        >
           <THead headerGroups={headerGroups} totalWidth={totalWidth} />
           <div {...tableBodyProps}>{children}</div>
         </div>
