@@ -4,6 +4,7 @@ import TableX from '../base'
 import { TABLE_X, TABLE_X_SELECT_ID } from '../util'
 import { Checkbox, Radio, Flex } from '../../src'
 import _ from 'lodash'
+import { devWarn } from '../../src/util'
 
 function selectTableXHOC(Component) {
   const SelectTableX = ({
@@ -15,9 +16,16 @@ function selectTableXHOC(Component) {
     keyField,
     fixedSelect,
     columns,
+    onSelectAll,
     data,
     ...rest
   }) => {
+    devWarn(() => {
+      if (onSelectAll) {
+        throw Error('onSelectAll已经废弃，使用onSelect即可！')
+      }
+    })
+
     const canSelectData = data.filter(row => !isSelectorDisable(row))
 
     let selectAll = false
@@ -25,9 +33,9 @@ function selectTableXHOC(Component) {
       selectAll = selected.length === canSelectData.length
     }
 
-    const handleSelectAll = () => {
+    const handleSelectAll = React.useCallback(() => {
       onSelect(!selectAll ? _.map(canSelectData, v => v[keyField]) : [])
-    }
+    }, [canSelectData, selectAll])
 
     const newColumns = React.useMemo(
       () =>
@@ -84,7 +92,9 @@ function selectTableXHOC(Component) {
         fixedSelect,
         selectAll,
         keyField,
-        isSelectorDisable
+        isSelectorDisable,
+        handleSelectAll,
+        onSelect
       ]
     )
 

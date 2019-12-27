@@ -74,7 +74,7 @@ function expandTableXHOC(Component) {
             }
           }
         ].concat(columns),
-      [columns, fixedExpand, expanded]
+      [columns, fixedExpand, expanded, data, setExpanded]
     )
 
     const handleSubComponent = row => {
