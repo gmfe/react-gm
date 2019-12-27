@@ -26,7 +26,7 @@ const filterWithQuery = (list, query, withFilter) => {
 
 const TreeV2 = ({
   title,
-  list,
+  list = [],
   selectedValues,
   onSelectValues,
   placeholder,
@@ -41,7 +41,8 @@ const TreeV2 = ({
 
   useEffect(() => {
     setListHeight(refList.current.offsetHeight)
-  }, [])
+    setFilterList(list)
+  }, [list])
 
   // 区分正常的 展开收起 和 搜索导致的展开收起
   const [queryGroupSelected, setQueryGroupSelected] = useState([])

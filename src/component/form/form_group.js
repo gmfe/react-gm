@@ -119,8 +119,7 @@ FormGroup.propTypes = {
 }
 
 FormGroup.defaultProps = {
-  saveText: getLocale('保存'),
-  btnAffix: false
+  saveText: getLocale('保存')
 }
 
 export default FormGroup

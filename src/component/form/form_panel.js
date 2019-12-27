@@ -54,7 +54,7 @@ const FormPanel = ({ title, right, children, ...rest }) => {
 FormPanel.More = More
 
 FormPanel.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.node,
   right: PropTypes.element
 }
 
