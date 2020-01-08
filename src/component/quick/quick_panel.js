@@ -10,13 +10,21 @@ import SVGWhole from '../../../svg/whole.svg'
 import SVGNetwork from '../../../svg/network.svg'
 import SVGSquare from '../../../svg/square.svg'
 import SVGTodo from '../../../svg/todo.svg'
+import SVGAccount from '../../../svg/account.svg'
+import SVGSettlement from '../../../svg/settlement.svg'
+import SVGShop from '../../../svg/shop.svg'
+import SVGPie from '../../../svg/pie.svg'
 
 const iconMap = {
   bill: SVGBill,
   whole: SVGWhole,
   network: SVGNetwork,
   square: SVGSquare,
-  todo: SVGTodo
+  todo: SVGTodo,
+  account: SVGAccount,
+  settlement: SVGSettlement,
+  restaurant: SVGShop,
+  pie: SVGPie
 }
 
 const QuickPanel = props => {
