@@ -1,6 +1,6 @@
 {
   "name": "react-gm",
-  "version": "8.13.10",
+  "version": "8.14.0-beta",
   "description": "",
   "main": "src/index.js",
   "module": "src/index.js",

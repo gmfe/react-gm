@@ -15,7 +15,7 @@ function expandTableHOC(Component) {
     }
 
     handleExpandAll = () => {
-      const { data } = this.props
+      const { data, setExpandStatus } = this.props
       const { expanded } = this.state
 
       // 注意此逻辑
@@ -34,6 +34,7 @@ function expandTableHOC(Component) {
           expanded: newExpanded
         })
       }
+      setExpandStatus && setExpandStatus(!isAllExpanded)
     }
 
     renderHeader = () => {
@@ -72,6 +73,9 @@ function expandTableHOC(Component) {
       this.setState({
         expanded
       })
+      const { setExpandStatus, data } = this.props
+      const isAllExpanded = _.filter(expanded, v => v).length === data.length
+      isAllExpanded && setExpandStatus && setExpandStatus(isAllExpanded)
     }
 
     render() {
@@ -99,7 +103,9 @@ function expandTableHOC(Component) {
   ExpandTable.propTypes = {
     ...Table.propTypes,
     /** 子Table */
-    SubComponent: PropTypes.func.isRequired
+    SubComponent: PropTypes.func.isRequired,
+    // 设置全部展开状态
+    setExpandStatus: PropTypes.func
   }
 
   return ExpandTable
