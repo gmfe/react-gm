@@ -2,28 +2,75 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Table from '../table'
+import { referOfWidth } from '../util'
 import SVGExpand from '../../svg/expand.svg'
 import SVGCloseup from '../../svg/closeup.svg'
+
+const convertGMToRT = (data, expanded, keyField) => {
+  const rtExpanded = {}
+  _.forEach(data, (value, index) => {
+    if (_.includes(expanded, value[keyField])) {
+      rtExpanded[index] = true
+    }
+  })
+
+  return rtExpanded
+}
+
+const convertRTToGM = (data, expanded, keyField) => {
+  const gmExpanded = []
+  _.forEach(expanded, (value, index) => {
+    if (value) {
+      gmExpanded.push(data[index][keyField])
+    }
+  })
+  return gmExpanded
+}
 
 function expandTableHOC(Component) {
   class ExpandTable extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        expanded: {}
+        hasExpandState: !!props.expanded, // 外部控制expanded
+        innerExpanded: {}
+      }
+    }
+
+    componentDidMount() {
+      const { keyField, onExpand } = this.props
+      if (this.state.hasExpandState && (!keyField || !onExpand)) {
+        console.error('传了expanded，则必须传keyField和onExpand')
       }
     }
 
     handleExpandAll = () => {
-      const { data, setExpandStatus } = this.props
-      const { expanded } = this.state
+      const { data, expanded, onExpand, keyField } = this.props
+      const { innerExpanded, hasExpandState } = this.state
+
+      if (hasExpandState) {
+        // 注意此逻辑
+        const isAllExpanded = expanded.length === data.length
+
+        if (isAllExpanded) {
+          onExpand([])
+        } else {
+          const newExpanded = []
+          _.each(data, v => {
+            newExpanded.push(v[keyField])
+          })
+          onExpand(newExpanded)
+        }
+        return
+      }
 
       // 注意此逻辑
-      const isAllExpanded = _.filter(expanded, v => v).length === data.length
+      const isAllExpanded =
+        _.filter(innerExpanded, v => v).length === data.length
 
       if (isAllExpanded) {
         this.setState({
-          expanded: {}
+          innerExpanded: {}
         })
       } else {
         const newExpanded = {}
@@ -31,18 +78,22 @@ function expandTableHOC(Component) {
           newExpanded[i] = {}
         })
         this.setState({
-          expanded: newExpanded
+          innerExpanded: newExpanded
         })
       }
-      setExpandStatus && setExpandStatus(!isAllExpanded)
     }
 
     renderHeader = () => {
-      const { data } = this.props
-      const { expanded } = this.state
+      const { data, expanded } = this.props
+      const { innerExpanded, hasExpandState } = this.state
 
       // 注意此逻辑
-      const isAllExpanded = _.filter(expanded, v => v).length === data.length
+      let isAllExpanded = false
+      if (hasExpandState) {
+        isAllExpanded = expanded.length === data.length
+      } else {
+        isAllExpanded = _.filter(innerExpanded, v => v).length === data.length
+      }
 
       return (
         <div className='gm-cursor' onClick={this.handleExpandAll}>
@@ -55,12 +106,21 @@ function expandTableHOC(Component) {
       )
     }
 
-    renderExpander = ({ index }) => {
-      const { expanded } = this.state
+    renderExpander = ({ original, index }) => {
+      const { expanded, keyField } = this.props
+      const { hasExpandState, innerExpanded } = this.state
+
+      // 注意此逻辑
+      let isExpanded = false
+      if (hasExpandState) {
+        isExpanded = _.includes(expanded, original[keyField])
+      } else {
+        isExpanded = innerExpanded[index]
+      }
 
       return (
         <div>
-          {expanded[index] ? (
+          {isExpanded ? (
             <SVGCloseup className='react-table-closeup active' />
           ) : (
             <SVGExpand className='react-table-expand' />
@@ -70,30 +130,45 @@ function expandTableHOC(Component) {
     }
 
     handleExpandedChange = expanded => {
+      const { data, onExpand, keyField } = this.props
+
+      if (this.state.hasExpandState) {
+        onExpand(convertRTToGM(data, expanded, keyField))
+        return
+      }
+
       this.setState({
-        expanded
+        innerExpanded: expanded
       })
-      const { setExpandStatus, data } = this.props
-      const isAllExpanded = _.filter(expanded, v => v).length === data.length
-      isAllExpanded && setExpandStatus && setExpandStatus(isAllExpanded)
     }
 
     render() {
-      const { columns, ...rest } = this.props
-      const { expanded } = this.state
+      const { columns, expanded, data, keyField, ...rest } = this.props
+      const { hasExpandState, innerExpanded } = this.state
+      let rtExpanded = {}
+      if (hasExpandState) {
+        // react-table 的expanded只接受obj,需要转一下
+        rtExpanded = convertGMToRT(data, expanded, keyField)
+      } else {
+        rtExpanded = innerExpanded
+      }
 
       return (
         <Component
           {...rest}
+          data={data}
+          keyField={keyField}
           columns={[
             {
+              id: '__expander', // 不要随便更改
               expander: true,
               Header: this.renderHeader,
-              Expander: this.renderExpander
+              Expander: this.renderExpander,
+              width: referOfWidth.noCell
             },
             ...columns
           ]}
-          expanded={expanded}
+          expanded={rtExpanded}
           onExpandedChange={this.handleExpandedChange}
         />
       )
@@ -104,8 +179,11 @@ function expandTableHOC(Component) {
     ...Table.propTypes,
     /** 子Table */
     SubComponent: PropTypes.func.isRequired,
-    // 设置全部展开状态
-    setExpandStatus: PropTypes.func
+    /** 自定义展开项的id */
+    keyField: PropTypes.string.isRequired,
+    /** 展开项数组[keyField]，传了此值则必须传keyField和onExpand */
+    expanded: PropTypes.array,
+    onExpand: PropTypes.func
   }
 
   return ExpandTable
