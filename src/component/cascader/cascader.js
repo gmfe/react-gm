@@ -1,5 +1,4 @@
-import React from 'react'
-import ReactDom from 'react-dom'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import classNames from 'classnames'
@@ -57,6 +56,70 @@ function getMaxDeepPathOfMatchElement(list, searchText) {
   return maxLengthPath
 }
 
+const Overlay = ({
+  className,
+  style,
+  selected,
+  list,
+  handleSelect,
+  handleMouseEnter
+}) => {
+  useEffect(() => {
+    _.each(selected, id => {
+      const $dom = document.getElementById(id)
+      $dom && $dom.scrollIntoViewIfNeeded()
+    })
+  }, [])
+
+  return (
+    <Flex
+      className={classNames('gm-cascader-list gm-bg', className)}
+      style={style}
+    >
+      {_.map(list, (value, i) => (
+        <Flex
+          column
+          key={i}
+          className={classNames(
+            'list-group gm-block gm-margin-0 gm-border-0 gm-overflow-y',
+            {
+              'gm-border-right': i !== list.length - 1
+            }
+          )}
+        >
+          {_.map(value, v => (
+            <Flex
+              key={v.value}
+              title={v.name}
+              justifyBetween
+              onClick={handleSelect}
+              onMouseEnter={() => handleMouseEnter(v._path)}
+              className={classNames('list-group-item', {
+                active: v.value === selected[i]
+              })}
+              id={v.value}
+            >
+              {v.name}&nbsp;
+              {v.children && v.children.length && (
+                <i className={classNames('gm-arrow-right')} />
+              )}
+            </Flex>
+          ))}
+        </Flex>
+      ))}
+    </Flex>
+  )
+}
+
+Overlay.propTypes = {
+  className: PropTypes.string,
+  style: PropTypes.object,
+  handleSelect: PropTypes.func.isRequired,
+  handleMouseEnter: PropTypes.func.isRequired,
+  list: PropTypes.array.isRequired,
+  selected: PropTypes.array.isRequired
+}
+
 class Cascader extends React.Component {
   constructor(props) {
     super(props)
@@ -71,16 +134,13 @@ class Cascader extends React.Component {
       data: data
     }
 
-    this.listActiveRef = []
-
-    this.handleSelect = ::this.handleSelect
     this.handleClear = ::this.handleClear
     this.handleInputChange = ::this.handleInputChange
     this.handleKeyDown = ::this.handleKeyDown
     this.inputValueRender = ::this.inputValueRender
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
       this.setState({
         selected: nextProps.value ? [...nextProps.value] : []
@@ -93,12 +153,6 @@ class Cascader extends React.Component {
 
       this.setState({ data })
     }
-  }
-
-  componentDidUpdate() {
-    _.each(this.listActiveRef, ref => {
-      ref && ReactDom.findDOMNode(ref).scrollIntoViewIfNeeded() // eslint-disable-line
-    })
   }
 
   getList() {
@@ -143,7 +197,7 @@ class Cascader extends React.Component {
     })
   }
 
-  handleSelect() {
+  handleSelect = () => {
     const { onlyChildSelectable } = this.props
     const { selected, data } = this.state
 
@@ -178,7 +232,7 @@ class Cascader extends React.Component {
     window.document.activeElement.blur() // blur input
   }
 
-  handleMouseEnter(selected) {
+  handleMouseEnter = selected => {
     this.setState({ selected })
   }
 
@@ -263,55 +317,6 @@ class Cascader extends React.Component {
       : filterInput
   }
 
-  renderOverlay() {
-    const selected = this.state.selected
-
-    this.listActiveRef = []
-
-    const list = this.getList()
-
-    return (
-      <Flex
-        className={classNames('gm-cascader-list gm-bg', this.props.className)}
-        style={this.props.style}
-      >
-        {_.map(list, (value, i) => (
-          <Flex
-            column
-            key={i}
-            className={classNames(
-              'list-group gm-block gm-margin-0 gm-border-0 gm-overflow-y',
-              {
-                'gm-border-right': i !== list.length - 1
-              }
-            )}
-          >
-            {_.map(value, v => (
-              <Flex
-                key={v.value}
-                title={v.name}
-                justifyBetween
-                onClick={this.handleSelect}
-                onMouseEnter={this.handleMouseEnter.bind(this, v._path)}
-                className={classNames('list-group-item', {
-                  active: v.value === selected[i]
-                })}
-                ref={ref => {
-                  if (v.value === selected[i]) this.listActiveRef[i] = ref
-                }}
-              >
-                {v.name}&nbsp;
-                {v.children && v.children.length && (
-                  <i className={classNames('gm-arrow-right')} />
-                )}
-              </Flex>
-            ))}
-          </Flex>
-        ))}
-      </Flex>
-    )
-  }
-
   renderChildren() {
     const { disabled } = this.props
     const { data } = this.state
@@ -361,14 +366,23 @@ class Cascader extends React.Component {
   }
 
   render() {
-    const { disabled, popoverStyle } = this.props
+    const { disabled, popoverStyle, value, style, className } = this.props
 
     return (
       <Popover
         animName
         style={popoverStyle}
         disabled={disabled}
-        popup={this.renderOverlay()}
+        popup={
+          <Overlay
+            handleMouseEnter={this.handleMouseEnter}
+            handleSelect={this.handleSelect}
+            list={this.getList()}
+            selected={value.slice()}
+            style={style}
+            className={className}
+          />
+        }
       >
         {this.props.children ? this.props.children : this.renderChildren()}
       </Popover>
