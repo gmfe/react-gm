@@ -10,7 +10,7 @@ import SVGDownSmall from '../../../svg/down.svg'
 import SVGUpSmall from '../../../svg/up.svg'
 
 // 给list中每个元素添加_path
-function mapPath (list, searchText, parentPath = []) {
+function mapPath(list, searchText, parentPath = []) {
   _.each(list, item => {
     if (item._path === undefined) {
       item._path = [...parentPath, item.value]
@@ -23,10 +23,10 @@ function mapPath (list, searchText, parentPath = []) {
 }
 
 // 找出list树下匹配searchText的最深元素的路径
-function getMaxDeepPathOfMatchElement (list, searchText) {
+function getMaxDeepPathOfMatchElement(list, searchText) {
   let maxLengthPath = []
 
-  function findMaxLengthPath (list, searchText) {
+  function findMaxLengthPath(list, searchText) {
     _.each(list, item => {
       // 匹配首字母
       const firstLetter = _.map(
@@ -121,7 +121,7 @@ Overlay.propTypes = {
 }
 
 class Cascader extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     // deep clone data,然后给data生成_path数据
@@ -140,7 +140,7 @@ class Cascader extends React.Component {
     this.inputValueRender = ::this.inputValueRender
   }
 
-  UNSAFE_componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
       this.setState({
         selected: nextProps.value ? [...nextProps.value] : []
@@ -155,7 +155,7 @@ class Cascader extends React.Component {
     }
   }
 
-  getList () {
+  getList() {
     const selected = this.state.selected
     const result = [this.state.data]
 
@@ -171,7 +171,7 @@ class Cascader extends React.Component {
     return result
   }
 
-  getFilterList (list, searchText) {
+  getFilterList(list, searchText) {
     return _.filter(list, item => {
       if (item.children) {
         item.children = this.getFilterList(item.children, searchText)
@@ -189,7 +189,7 @@ class Cascader extends React.Component {
     })
   }
 
-  handleClear (e) {
+  handleClear(e) {
     e.stopPropagation()
 
     this.setState({ selected: [] }, () => {
@@ -236,7 +236,7 @@ class Cascader extends React.Component {
     this.setState({ selected })
   }
 
-  handleInputChange (e) {
+  handleInputChange(e) {
     const filterInput = e.target.value
 
     if (this.props.filtrable) {
@@ -247,7 +247,7 @@ class Cascader extends React.Component {
     }
   }
 
-  handleKeyDown (event) {
+  handleKeyDown(event) {
     const { keyCode } = event
 
     // 键盘上下键控制最当前选中列
@@ -289,7 +289,7 @@ class Cascader extends React.Component {
     }
   }
 
-  inputValueRender () {
+  inputValueRender() {
     const { filterInput, data } = this.state
     const { valueRender, filtrable } = this.props
     const selected = this.props.value || this.state.selected
@@ -317,7 +317,7 @@ class Cascader extends React.Component {
       : filterInput
   }
 
-  renderChildren () {
+  renderChildren() {
     const { disabled } = this.props
     const { data } = this.state
     const inputValue = this.inputValueRender()
@@ -365,7 +365,7 @@ class Cascader extends React.Component {
     )
   }
 
-  render () {
+  render() {
     const { disabled, popoverStyle, value = [], style, className } = this.props
 
     return (
