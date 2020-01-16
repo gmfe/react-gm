@@ -366,7 +366,7 @@ class Cascader extends React.Component {
   }
 
   render() {
-    const { disabled, popoverStyle, value, style, className } = this.props
+    const { disabled, popoverStyle, value = [], style, className } = this.props
 
     return (
       <Popover
