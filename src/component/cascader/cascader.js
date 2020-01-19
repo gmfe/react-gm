@@ -62,7 +62,8 @@ const Overlay = ({
   selected,
   list,
   handleSelect,
-  handleMouseEnter
+  handleMouseEnter,
+  filterLastResultID
 }) => {
   useEffect(() => {
     _.each(selected, id => {
@@ -70,6 +71,13 @@ const Overlay = ({
       $dom && $dom.scrollIntoViewIfNeeded()
     })
   }, [])
+
+  useEffect(() => {
+    if (filterLastResultID) {
+      const $dom = document.getElementById(filterLastResultID)
+      $dom && $dom.scrollIntoViewIfNeeded()
+    }
+  }, [filterLastResultID])
 
   return (
     <Flex
@@ -95,7 +103,8 @@ const Overlay = ({
               onClick={handleSelect}
               onMouseEnter={() => handleMouseEnter(v._path)}
               className={classNames('list-group-item', {
-                active: v.value === selected[i]
+                active: v.value === selected[i],
+                hover: v.value === filterLastResultID
               })}
               id={v.value}
             >
@@ -117,7 +126,8 @@ Overlay.propTypes = {
   handleSelect: PropTypes.func.isRequired,
   handleMouseEnter: PropTypes.func.isRequired,
   list: PropTypes.array.isRequired,
-  selected: PropTypes.array.isRequired
+  selected: PropTypes.array.isRequired,
+  filterLastResultID: PropTypes.string.isRequired
 }
 
 class Cascader extends React.Component {
@@ -131,13 +141,19 @@ class Cascader extends React.Component {
     this.state = {
       selected: props.value ? [...props.value] : [], // 选中状态
       filterInput: null, // filtrable为true时，输入框的内容
-      data: data
+      data: data,
+      filterLastResultID: ''
     }
 
     this.handleClear = ::this.handleClear
     this.handleInputChange = ::this.handleInputChange
     this.handleKeyDown = ::this.handleKeyDown
     this.inputValueRender = ::this.inputValueRender
+    this.setHoverStatus = _.debounce(selected => {
+      this.setState({
+        filterLastResultID: selected
+      })
+    }, 500)
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -233,17 +249,20 @@ class Cascader extends React.Component {
   }
 
   handleMouseEnter = selected => {
-    this.setState({ selected })
+    this.setState({ selected, filterLastResultID: '' })
   }
 
   handleInputChange(e) {
     const filterInput = e.target.value
 
     if (this.props.filtrable) {
+      const { data } = this.state
+      const selected = getMaxDeepPathOfMatchElement(data, filterInput)
       this.setState({
         filterInput,
-        selected: getMaxDeepPathOfMatchElement(this.state.data, filterInput)
+        selected
       })
+      this.setHoverStatus(selected.slice().reverse()[0])
     }
   }
 
@@ -378,9 +397,10 @@ class Cascader extends React.Component {
             handleMouseEnter={this.handleMouseEnter}
             handleSelect={this.handleSelect}
             list={this.getList()}
-            selected={value.slice()}
+            selected={value}
             style={style}
             className={className}
+            filterLastResultID={this.state.filterLastResultID}
           />
         }
       >
