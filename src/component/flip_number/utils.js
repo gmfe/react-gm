@@ -1,12 +1,16 @@
 import _ from 'lodash'
 import { is } from 'gm-util'
+import Big from 'big.js'
 
+// 不能用Number.toLocaleString, 在oppo微信会报错!!
 function formatNum(number, decimals, useGroup) {
-  return number.toLocaleString(undefined, {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-    useGrouping: useGroup
-  })
+  const num = Big(number).toFixed(decimals)
+
+  return useGroup
+    ? num
+        .toString()
+        .replace(/^\d+/g, m => m.replace(/(?=(?!^)(\d{3})+$)/g, ','))
+    : num
 }
 
 function getNumLength(str1, str2) {
